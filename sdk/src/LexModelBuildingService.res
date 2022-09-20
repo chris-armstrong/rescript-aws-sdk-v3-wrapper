@@ -789,16 +789,9 @@ module StartMigration = {
   }
   @module("@aws-sdk/client-lex") @new external new: request => t = "StartMigrationCommand"
   let make = (~migrationStrategy, ~v2BotRole, ~v2BotName, ~v1BotVersion, ~v1BotName, ()) =>
-    new({
-      migrationStrategy: migrationStrategy,
-      v2BotRole: v2BotRole,
-      v2BotName: v2BotName,
-      v1BotVersion: v1BotVersion,
-      v1BotName: v1BotName,
-    })
+    new({migrationStrategy, v2BotRole, v2BotName, v1BotVersion, v1BotName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetExport = {
   type t
   type request = {
@@ -840,10 +833,9 @@ module GetExport = {
   }
   @module("@aws-sdk/client-lex") @new external new: request => t = "GetExportCommand"
   let make = (~exportType, ~resourceType, ~version, ~name, ()) =>
-    new({exportType: exportType, resourceType: resourceType, version: version, name: name})
+    new({exportType, resourceType, version, name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteUtterances = {
   type t
   type request = {
@@ -855,10 +847,9 @@ module DeleteUtterances = {
   }
   type response = {.}
   @module("@aws-sdk/client-lex") @new external new: request => t = "DeleteUtterancesCommand"
-  let make = (~userId, ~botName, ()) => new({userId: userId, botName: botName})
+  let make = (~userId, ~botName, ()) => new({userId, botName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteBotChannelAssociation = {
   type t
   type request = {
@@ -872,11 +863,9 @@ module DeleteBotChannelAssociation = {
   type response = {.}
   @module("@aws-sdk/client-lex") @new
   external new: request => t = "DeleteBotChannelAssociationCommand"
-  let make = (~botAlias, ~botName, ~name, ()) =>
-    new({botAlias: botAlias, botName: botName, name: name})
+  let make = (~botAlias, ~botName, ~name, ()) => new({botAlias, botName, name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module UntagResource = {
   type t
   type request = {
@@ -889,10 +878,9 @@ module UntagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-lex") @new external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
+  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys, resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module GetImport = {
   type t
   type request = {
@@ -920,7 +908,6 @@ module GetImport = {
   let make = (~importId, ()) => new({importId: importId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetBotChannelAssociation = {
   type t
   type request = {
@@ -975,11 +962,9 @@ module GetBotChannelAssociation = {
     name: option<botChannelName>,
   }
   @module("@aws-sdk/client-lex") @new external new: request => t = "GetBotChannelAssociationCommand"
-  let make = (~botAlias, ~botName, ~name, ()) =>
-    new({botAlias: botAlias, botName: botName, name: name})
+  let make = (~botAlias, ~botName, ~name, ()) => new({botAlias, botName, name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteSlotTypeVersion = {
   type t
   type request = {
@@ -992,10 +977,9 @@ module DeleteSlotTypeVersion = {
   }
   type response = {.}
   @module("@aws-sdk/client-lex") @new external new: request => t = "DeleteSlotTypeVersionCommand"
-  let make = (~version, ~name, ()) => new({version: version, name: name})
+  let make = (~version, ~name, ()) => new({version, name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteSlotType = {
   type t
   type request = {
@@ -1006,7 +990,6 @@ module DeleteSlotType = {
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteIntentVersion = {
   type t
   type request = {
@@ -1019,10 +1002,9 @@ module DeleteIntentVersion = {
   }
   type response = {.}
   @module("@aws-sdk/client-lex") @new external new: request => t = "DeleteIntentVersionCommand"
-  let make = (~version, ~name, ()) => new({version: version, name: name})
+  let make = (~version, ~name, ()) => new({version, name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteIntent = {
   type t
   type request = {
@@ -1033,7 +1015,6 @@ module DeleteIntent = {
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteBotVersion = {
   type t
   type request = {
@@ -1046,10 +1027,9 @@ module DeleteBotVersion = {
   }
   type response = {.}
   @module("@aws-sdk/client-lex") @new external new: request => t = "DeleteBotVersionCommand"
-  let make = (~version, ~name, ()) => new({version: version, name: name})
+  let make = (~version, ~name, ()) => new({version, name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteBotAlias = {
   type t
   type request = {
@@ -1060,10 +1040,9 @@ module DeleteBotAlias = {
   }
   type response = {.}
   @module("@aws-sdk/client-lex") @new external new: request => t = "DeleteBotAliasCommand"
-  let make = (~botName, ~name, ()) => new({botName: botName, name: name})
+  let make = (~botName, ~name, ()) => new({botName, name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteBot = {
   type t
   type request = {
@@ -1074,7 +1053,6 @@ module DeleteBot = {
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module TagResource = {
   type t
   type request = {
@@ -1087,10 +1065,9 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-lex") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
+  let make = (~tags, ~resourceArn, ()) => new({tags, resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module StartImport = {
   type t
   type request = {
@@ -1147,10 +1124,9 @@ module StartImport = {
   }
   @module("@aws-sdk/client-lex") @new external new: request => t = "StartImportCommand"
   let make = (~mergeStrategy, ~resourceType, ~payload, ~tags=?, ()) =>
-    new({tags: tags, mergeStrategy: mergeStrategy, resourceType: resourceType, payload: payload})
+    new({tags, mergeStrategy, resourceType, payload})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListTagsForResource = {
   type t
   type request = {
@@ -1163,7 +1139,6 @@ module ListTagsForResource = {
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetSlotTypes = {
   type t
   type request = {
@@ -1192,10 +1167,9 @@ module GetSlotTypes = {
   }
   @module("@aws-sdk/client-lex") @new external new: request => t = "GetSlotTypesCommand"
   let make = (~nameContains=?, ~maxResults=?, ~nextToken=?, ()) =>
-    new({nameContains: nameContains, maxResults: maxResults, nextToken: nextToken})
+    new({nameContains, maxResults, nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetSlotTypeVersions = {
   type t
   type request = {
@@ -1223,11 +1197,9 @@ module GetSlotTypeVersions = {
     slotTypes: option<slotTypeMetadataList>,
   }
   @module("@aws-sdk/client-lex") @new external new: request => t = "GetSlotTypeVersionsCommand"
-  let make = (~name, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, name: name})
+  let make = (~name, ~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken, name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetMigrations = {
   type t
   type request = {
@@ -1272,16 +1244,15 @@ module GetMigrations = {
     (),
   ) =>
     new({
-      nextToken: nextToken,
-      maxResults: maxResults,
-      migrationStatusEquals: migrationStatusEquals,
-      v1BotNameContains: v1BotNameContains,
-      sortByOrder: sortByOrder,
-      sortByAttribute: sortByAttribute,
+      nextToken,
+      maxResults,
+      migrationStatusEquals,
+      v1BotNameContains,
+      sortByOrder,
+      sortByAttribute,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetIntents = {
   type t
   type request = {
@@ -1309,10 +1280,9 @@ module GetIntents = {
   }
   @module("@aws-sdk/client-lex") @new external new: request => t = "GetIntentsCommand"
   let make = (~nameContains=?, ~maxResults=?, ~nextToken=?, ()) =>
-    new({nameContains: nameContains, maxResults: maxResults, nextToken: nextToken})
+    new({nameContains, maxResults, nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetIntentVersions = {
   type t
   type request = {
@@ -1340,11 +1310,9 @@ module GetIntentVersions = {
     intents: option<intentMetadataList>,
   }
   @module("@aws-sdk/client-lex") @new external new: request => t = "GetIntentVersionsCommand"
-  let make = (~name, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, name: name})
+  let make = (~name, ~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken, name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetBuiltinIntent = {
   type t
   type request = {
@@ -1366,7 +1334,6 @@ module GetBuiltinIntent = {
   let make = (~signature, ()) => new({signature: signature})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetBots = {
   type t
   type request = {
@@ -1394,10 +1361,9 @@ module GetBots = {
   }
   @module("@aws-sdk/client-lex") @new external new: request => t = "GetBotsCommand"
   let make = (~nameContains=?, ~maxResults=?, ~nextToken=?, ()) =>
-    new({nameContains: nameContains, maxResults: maxResults, nextToken: nextToken})
+    new({nameContains, maxResults, nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetBotVersions = {
   type t
   type request = {
@@ -1425,11 +1391,9 @@ module GetBotVersions = {
     bots: option<botMetadataList>,
   }
   @module("@aws-sdk/client-lex") @new external new: request => t = "GetBotVersionsCommand"
-  let make = (~name, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, name: name})
+  let make = (~name, ~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken, name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module PutSlotType = {
   type t
   type request = {
@@ -1548,18 +1512,17 @@ module PutSlotType = {
     (),
   ) =>
     new({
-      slotTypeConfigurations: slotTypeConfigurations,
-      parentSlotTypeSignature: parentSlotTypeSignature,
-      createVersion: createVersion,
-      valueSelectionStrategy: valueSelectionStrategy,
-      checksum: checksum,
-      enumerationValues: enumerationValues,
-      description: description,
-      name: name,
+      slotTypeConfigurations,
+      parentSlotTypeSignature,
+      createVersion,
+      valueSelectionStrategy,
+      checksum,
+      enumerationValues,
+      description,
+      name,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module PutBotAlias = {
   type t
   type request = {
@@ -1617,19 +1580,9 @@ module PutBotAlias = {
     ~checksum=?,
     ~description=?,
     (),
-  ) =>
-    new({
-      tags: tags,
-      conversationLogs: conversationLogs,
-      checksum: checksum,
-      botName: botName,
-      botVersion: botVersion,
-      description: description,
-      name: name,
-    })
+  ) => new({tags, conversationLogs, checksum, botName, botVersion, description, name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module PutBot = {
   type t
   type request = {
@@ -1982,26 +1935,25 @@ module PutBot = {
     (),
   ) =>
     new({
-      tags: tags,
-      createVersion: createVersion,
-      detectSentiment: detectSentiment,
-      childDirected: childDirected,
-      locale: locale,
-      processBehavior: processBehavior,
-      checksum: checksum,
-      voiceId: voiceId,
-      idleSessionTTLInSeconds: idleSessionTTLInSeconds,
-      abortStatement: abortStatement,
-      clarificationPrompt: clarificationPrompt,
-      nluIntentConfidenceThreshold: nluIntentConfidenceThreshold,
-      enableModelImprovements: enableModelImprovements,
-      intents: intents,
-      description: description,
-      name: name,
+      tags,
+      createVersion,
+      detectSentiment,
+      childDirected,
+      locale,
+      processBehavior,
+      checksum,
+      voiceId,
+      idleSessionTTLInSeconds,
+      abortStatement,
+      clarificationPrompt,
+      nluIntentConfidenceThreshold,
+      enableModelImprovements,
+      intents,
+      description,
+      name,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetSlotType = {
   type t
   type request = {
@@ -2032,10 +1984,9 @@ module GetSlotType = {
     @ocaml.doc("<p>The name of the slot type.</p>") name: option<slotTypeName>,
   }
   @module("@aws-sdk/client-lex") @new external new: request => t = "GetSlotTypeCommand"
-  let make = (~version, ~name, ()) => new({version: version, name: name})
+  let make = (~version, ~name, ()) => new({version, name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetMigration = {
   type t
   type request = {
@@ -2093,7 +2044,6 @@ module GetMigration = {
   let make = (~migrationId, ()) => new({migrationId: migrationId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetBuiltinSlotTypes = {
   type t
   type request = {
@@ -2122,15 +2072,9 @@ module GetBuiltinSlotTypes = {
   }
   @module("@aws-sdk/client-lex") @new external new: request => t = "GetBuiltinSlotTypesCommand"
   let make = (~maxResults=?, ~nextToken=?, ~signatureContains=?, ~locale=?, ()) =>
-    new({
-      maxResults: maxResults,
-      nextToken: nextToken,
-      signatureContains: signatureContains,
-      locale: locale,
-    })
+    new({maxResults, nextToken, signatureContains, locale})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetBuiltinIntents = {
   type t
   type request = {
@@ -2162,15 +2106,9 @@ module GetBuiltinIntents = {
   }
   @module("@aws-sdk/client-lex") @new external new: request => t = "GetBuiltinIntentsCommand"
   let make = (~maxResults=?, ~nextToken=?, ~signatureContains=?, ~locale=?, ()) =>
-    new({
-      maxResults: maxResults,
-      nextToken: nextToken,
-      signatureContains: signatureContains,
-      locale: locale,
-    })
+    new({maxResults, nextToken, signatureContains, locale})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetBotChannelAssociations = {
   type t
   type request = {
@@ -2207,16 +2145,9 @@ module GetBotChannelAssociations = {
   @module("@aws-sdk/client-lex") @new
   external new: request => t = "GetBotChannelAssociationsCommand"
   let make = (~botAlias, ~botName, ~nameContains=?, ~maxResults=?, ~nextToken=?, ()) =>
-    new({
-      nameContains: nameContains,
-      maxResults: maxResults,
-      nextToken: nextToken,
-      botAlias: botAlias,
-      botName: botName,
-    })
+    new({nameContains, maxResults, nextToken, botAlias, botName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetBotAlias = {
   type t
   type request = {
@@ -2240,10 +2171,9 @@ module GetBotAlias = {
     @ocaml.doc("<p>The name of the bot alias.</p>") name: option<aliasName>,
   }
   @module("@aws-sdk/client-lex") @new external new: request => t = "GetBotAliasCommand"
-  let make = (~botName, ~name, ()) => new({botName: botName, name: name})
+  let make = (~botName, ~name, ()) => new({botName, name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetBot = {
   type t
   type request = {
@@ -2341,10 +2271,9 @@ module GetBot = {
     @ocaml.doc("<p>The name of the bot.</p>") name: option<botName>,
   }
   @module("@aws-sdk/client-lex") @new external new: request => t = "GetBotCommand"
-  let make = (~versionOrAlias, ~name, ()) => new({versionOrAlias: versionOrAlias, name: name})
+  let make = (~versionOrAlias, ~name, ()) => new({versionOrAlias, name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateSlotTypeVersion = {
   type t
   type request = {
@@ -2384,10 +2313,9 @@ module CreateSlotTypeVersion = {
     @ocaml.doc("<p>The name of the slot type.</p>") name: option<slotTypeName>,
   }
   @module("@aws-sdk/client-lex") @new external new: request => t = "CreateSlotTypeVersionCommand"
-  let make = (~name, ~checksum=?, ()) => new({checksum: checksum, name: name})
+  let make = (~name, ~checksum=?, ()) => new({checksum, name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateBotVersion = {
   type t
   type request = {
@@ -2475,10 +2403,9 @@ module CreateBotVersion = {
     @ocaml.doc("<p>The name of the bot.</p>") name: option<botName>,
   }
   @module("@aws-sdk/client-lex") @new external new: request => t = "CreateBotVersionCommand"
-  let make = (~name, ~checksum=?, ()) => new({checksum: checksum, name: name})
+  let make = (~name, ~checksum=?, ()) => new({checksum, name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetUtterancesView = {
   type t
   type request = {
@@ -2506,11 +2433,9 @@ module GetUtterancesView = {
     botName: option<botName>,
   }
   @module("@aws-sdk/client-lex") @new external new: request => t = "GetUtterancesViewCommand"
-  let make = (~statusType, ~botVersions, ~botName, ()) =>
-    new({statusType: statusType, botVersions: botVersions, botName: botName})
+  let make = (~statusType, ~botVersions, ~botName, ()) => new({statusType, botVersions, botName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module PutIntent = {
   type t
   type request = {
@@ -2729,26 +2654,25 @@ module PutIntent = {
     (),
   ) =>
     new({
-      outputContexts: outputContexts,
-      inputContexts: inputContexts,
-      kendraConfiguration: kendraConfiguration,
-      createVersion: createVersion,
-      checksum: checksum,
-      parentIntentSignature: parentIntentSignature,
-      fulfillmentActivity: fulfillmentActivity,
-      dialogCodeHook: dialogCodeHook,
-      conclusionStatement: conclusionStatement,
-      followUpPrompt: followUpPrompt,
-      rejectionStatement: rejectionStatement,
-      confirmationPrompt: confirmationPrompt,
-      sampleUtterances: sampleUtterances,
-      slots: slots,
-      description: description,
-      name: name,
+      outputContexts,
+      inputContexts,
+      kendraConfiguration,
+      createVersion,
+      checksum,
+      parentIntentSignature,
+      fulfillmentActivity,
+      dialogCodeHook,
+      conclusionStatement,
+      followUpPrompt,
+      rejectionStatement,
+      confirmationPrompt,
+      sampleUtterances,
+      slots,
+      description,
+      name,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetIntent = {
   type t
   type request = {
@@ -2803,10 +2727,9 @@ module GetIntent = {
     @ocaml.doc("<p>The name of the intent.</p>") name: option<intentName>,
   }
   @module("@aws-sdk/client-lex") @new external new: request => t = "GetIntentCommand"
-  let make = (~version, ~name, ()) => new({version: version, name: name})
+  let make = (~version, ~name, ()) => new({version, name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetBotAliases = {
   type t
   type request = {
@@ -2837,15 +2760,9 @@ module GetBotAliases = {
   }
   @module("@aws-sdk/client-lex") @new external new: request => t = "GetBotAliasesCommand"
   let make = (~botName, ~nameContains=?, ~maxResults=?, ~nextToken=?, ()) =>
-    new({
-      nameContains: nameContains,
-      maxResults: maxResults,
-      nextToken: nextToken,
-      botName: botName,
-    })
+    new({nameContains, maxResults, nextToken, botName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateIntentVersion = {
   type t
   type request = {
@@ -2907,6 +2824,6 @@ module CreateIntentVersion = {
     @ocaml.doc("<p>The name of the intent.</p>") name: option<intentName>,
   }
   @module("@aws-sdk/client-lex") @new external new: request => t = "CreateIntentVersionCommand"
-  let make = (~name, ~checksum=?, ()) => new({checksum: checksum, name: name})
+  let make = (~name, ~checksum=?, ()) => new({checksum, name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

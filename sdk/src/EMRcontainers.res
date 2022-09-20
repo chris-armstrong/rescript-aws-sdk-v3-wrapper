@@ -288,7 +288,6 @@ module DeleteVirtualCluster = {
   let make = (~id, ()) => new({id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteManagedEndpoint = {
   type t
   type request = {
@@ -304,10 +303,9 @@ module DeleteManagedEndpoint = {
   }
   @module("@aws-sdk/client-emr-containers") @new
   external new: request => t = "DeleteManagedEndpointCommand"
-  let make = (~virtualClusterId, ~id, ()) => new({virtualClusterId: virtualClusterId, id: id})
+  let make = (~virtualClusterId, ~id, ()) => new({virtualClusterId, id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CancelJobRun = {
   type t
   type request = {
@@ -324,10 +322,9 @@ module CancelJobRun = {
     id: option<resourceIdString>,
   }
   @module("@aws-sdk/client-emr-containers") @new external new: request => t = "CancelJobRunCommand"
-  let make = (~virtualClusterId, ~id, ()) => new({virtualClusterId: virtualClusterId, id: id})
+  let make = (~virtualClusterId, ~id, ()) => new({virtualClusterId, id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UntagResource = {
   type t
   type request = {
@@ -336,10 +333,9 @@ module UntagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-emr-containers") @new external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
+  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys, resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module TagResource = {
   type t
   type request = {
@@ -348,10 +344,9 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-emr-containers") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
+  let make = (~tags, ~resourceArn, ()) => new({tags, resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module ListTagsForResource = {
   type t
   type request = {@ocaml.doc("<p>The ARN of tagged resources.</p>") resourceArn: rsiArn}
@@ -361,7 +356,6 @@ module ListTagsForResource = {
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateVirtualCluster = {
   type t
   type request = {
@@ -381,10 +375,9 @@ module CreateVirtualCluster = {
   @module("@aws-sdk/client-emr-containers") @new
   external new: request => t = "CreateVirtualClusterCommand"
   let make = (~clientToken, ~containerProvider, ~name, ~tags=?, ()) =>
-    new({tags: tags, clientToken: clientToken, containerProvider: containerProvider, name: name})
+    new({tags, clientToken, containerProvider, name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeVirtualCluster = {
   type t
   type request = {
@@ -399,7 +392,6 @@ module DescribeVirtualCluster = {
   let make = (~id, ()) => new({id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListVirtualClusters = {
   type t
   type request = {
@@ -439,17 +431,16 @@ module ListVirtualClusters = {
     (),
   ) =>
     new({
-      nextToken: nextToken,
-      maxResults: maxResults,
-      states: states,
-      createdBefore: createdBefore,
-      createdAfter: createdAfter,
-      containerProviderType: containerProviderType,
-      containerProviderId: containerProviderId,
+      nextToken,
+      maxResults,
+      states,
+      createdBefore,
+      createdAfter,
+      containerProviderType,
+      containerProviderId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module StartJobRun = {
   type t
   type request = {
@@ -489,18 +480,17 @@ module StartJobRun = {
     (),
   ) =>
     new({
-      tags: tags,
-      configurationOverrides: configurationOverrides,
-      jobDriver: jobDriver,
-      releaseLabel: releaseLabel,
-      executionRoleArn: executionRoleArn,
-      clientToken: clientToken,
-      virtualClusterId: virtualClusterId,
-      name: name,
+      tags,
+      configurationOverrides,
+      jobDriver,
+      releaseLabel,
+      executionRoleArn,
+      clientToken,
+      virtualClusterId,
+      name,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateManagedEndpoint = {
   type t
   type request = {
@@ -549,19 +539,18 @@ module CreateManagedEndpoint = {
     (),
   ) =>
     new({
-      tags: tags,
-      clientToken: clientToken,
-      configurationOverrides: configurationOverrides,
-      certificateArn: certificateArn,
-      executionRoleArn: executionRoleArn,
-      releaseLabel: releaseLabel,
-      type_: type_,
-      virtualClusterId: virtualClusterId,
-      name: name,
+      tags,
+      clientToken,
+      configurationOverrides,
+      certificateArn,
+      executionRoleArn,
+      releaseLabel,
+      type_,
+      virtualClusterId,
+      name,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeManagedEndpoint = {
   type t
   type request = {
@@ -575,10 +564,9 @@ module DescribeManagedEndpoint = {
   }
   @module("@aws-sdk/client-emr-containers") @new
   external new: request => t = "DescribeManagedEndpointCommand"
-  let make = (~virtualClusterId, ~id, ()) => new({virtualClusterId: virtualClusterId, id: id})
+  let make = (~virtualClusterId, ~id, ()) => new({virtualClusterId, id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeJobRun = {
   type t
   type request = {
@@ -591,10 +579,9 @@ module DescribeJobRun = {
   }
   @module("@aws-sdk/client-emr-containers") @new
   external new: request => t = "DescribeJobRunCommand"
-  let make = (~virtualClusterId, ~id, ()) => new({virtualClusterId: virtualClusterId, id: id})
+  let make = (~virtualClusterId, ~id, ()) => new({virtualClusterId, id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListManagedEndpoints = {
   type t
   type request = {
@@ -626,19 +613,9 @@ module ListManagedEndpoints = {
     ~createdAfter=?,
     ~createdBefore=?,
     (),
-  ) =>
-    new({
-      nextToken: nextToken,
-      maxResults: maxResults,
-      states: states,
-      types: types,
-      createdAfter: createdAfter,
-      createdBefore: createdBefore,
-      virtualClusterId: virtualClusterId,
-    })
+  ) => new({nextToken, maxResults, states, types, createdAfter, createdBefore, virtualClusterId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListJobRuns = {
   type t
   type request = {
@@ -671,15 +648,6 @@ module ListJobRuns = {
     ~createdAfter=?,
     ~createdBefore=?,
     (),
-  ) =>
-    new({
-      nextToken: nextToken,
-      maxResults: maxResults,
-      states: states,
-      name: name,
-      createdAfter: createdAfter,
-      createdBefore: createdBefore,
-      virtualClusterId: virtualClusterId,
-    })
+  ) => new({nextToken, maxResults, states, name, createdAfter, createdBefore, virtualClusterId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

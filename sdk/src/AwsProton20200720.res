@@ -937,18 +937,9 @@ module UpdateTemplateSyncConfig = {
     ~templateName,
     ~subdirectory=?,
     (),
-  ) =>
-    new({
-      subdirectory: subdirectory,
-      branch: branch,
-      repositoryName: repositoryName,
-      repositoryProvider: repositoryProvider,
-      templateType: templateType,
-      templateName: templateName,
-    })
+  ) => new({subdirectory, branch, repositoryName, repositoryProvider, templateType, templateName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateServiceTemplate = {
   type t
   type request = {
@@ -966,11 +957,9 @@ module UpdateServiceTemplate = {
   }
   @module("@aws-sdk/client-awsproton20200720") @new
   external new: request => t = "UpdateServiceTemplateCommand"
-  let make = (~name, ~description=?, ~displayName=?, ()) =>
-    new({description: description, displayName: displayName, name: name})
+  let make = (~name, ~description=?, ~displayName=?, ()) => new({description, displayName, name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateServicePipeline = {
   type t
   type request = {
@@ -1036,17 +1025,9 @@ module UpdateServicePipeline = {
     ~templateMinorVersion=?,
     ~templateMajorVersion=?,
     (),
-  ) =>
-    new({
-      templateMinorVersion: templateMinorVersion,
-      templateMajorVersion: templateMajorVersion,
-      deploymentType: deploymentType,
-      spec: spec,
-      serviceName: serviceName,
-    })
+  ) => new({templateMinorVersion, templateMajorVersion, deploymentType, spec, serviceName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateServiceInstance = {
   type t
   type request = {
@@ -1112,18 +1093,9 @@ module UpdateServiceInstance = {
     ~templateMajorVersion=?,
     ~spec=?,
     (),
-  ) =>
-    new({
-      templateMinorVersion: templateMinorVersion,
-      templateMajorVersion: templateMajorVersion,
-      spec: spec,
-      deploymentType: deploymentType,
-      serviceName: serviceName,
-      name: name,
-    })
+  ) => new({templateMinorVersion, templateMajorVersion, spec, deploymentType, serviceName, name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateEnvironmentTemplateVersion = {
   type t
   type request = {
@@ -1148,16 +1120,9 @@ module UpdateEnvironmentTemplateVersion = {
   @module("@aws-sdk/client-awsproton20200720") @new
   external new: request => t = "UpdateEnvironmentTemplateVersionCommand"
   let make = (~minorVersion, ~majorVersion, ~templateName, ~status=?, ~description=?, ()) =>
-    new({
-      status: status,
-      description: description,
-      minorVersion: minorVersion,
-      majorVersion: majorVersion,
-      templateName: templateName,
-    })
+    new({status, description, minorVersion, majorVersion, templateName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateEnvironmentTemplate = {
   type t
   type request = {
@@ -1175,11 +1140,9 @@ module UpdateEnvironmentTemplate = {
   }
   @module("@aws-sdk/client-awsproton20200720") @new
   external new: request => t = "UpdateEnvironmentTemplateCommand"
-  let make = (~name, ~description=?, ~displayName=?, ()) =>
-    new({description: description, displayName: displayName, name: name})
+  let make = (~name, ~description=?, ~displayName=?, ()) => new({description, displayName, name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateEnvironmentAccountConnection = {
   type t
   type request = {
@@ -1196,10 +1159,9 @@ module UpdateEnvironmentAccountConnection = {
   }
   @module("@aws-sdk/client-awsproton20200720") @new
   external new: request => t = "UpdateEnvironmentAccountConnectionCommand"
-  let make = (~roleArn, ~id, ()) => new({roleArn: roleArn, id: id})
+  let make = (~roleArn, ~id, ()) => new({roleArn, id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UntagResource = {
   type t
   type request = {
@@ -1215,10 +1177,9 @@ module UntagResource = {
   type response = {.}
   @module("@aws-sdk/client-awsproton20200720") @new
   external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
+  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys, resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module RejectEnvironmentAccountConnection = {
   type t
   type request = {
@@ -1234,7 +1195,6 @@ module RejectEnvironmentAccountConnection = {
   let make = (~id, ()) => new({id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetTemplateSyncConfig = {
   type t
   type request = {
@@ -1247,11 +1207,9 @@ module GetTemplateSyncConfig = {
   }
   @module("@aws-sdk/client-awsproton20200720") @new
   external new: request => t = "GetTemplateSyncConfigCommand"
-  let make = (~templateType, ~templateName, ()) =>
-    new({templateType: templateType, templateName: templateName})
+  let make = (~templateType, ~templateName, ()) => new({templateType, templateName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetServiceTemplate = {
   type t
   type request = {
@@ -1267,7 +1225,6 @@ module GetServiceTemplate = {
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetServiceInstance = {
   type t
   type request = {
@@ -1282,10 +1239,9 @@ module GetServiceInstance = {
   }
   @module("@aws-sdk/client-awsproton20200720") @new
   external new: request => t = "GetServiceInstanceCommand"
-  let make = (~serviceName, ~name, ()) => new({serviceName: serviceName, name: name})
+  let make = (~serviceName, ~name, ()) => new({serviceName, name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetRepository = {
   type t
   type request = {
@@ -1299,10 +1255,9 @@ module GetRepository = {
   }
   @module("@aws-sdk/client-awsproton20200720") @new
   external new: request => t = "GetRepositoryCommand"
-  let make = (~name, ~provider, ()) => new({name: name, provider: provider})
+  let make = (~name, ~provider, ()) => new({name, provider})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetEnvironmentTemplateVersion = {
   type t
   type request = {
@@ -1323,10 +1278,9 @@ module GetEnvironmentTemplateVersion = {
   @module("@aws-sdk/client-awsproton20200720") @new
   external new: request => t = "GetEnvironmentTemplateVersionCommand"
   let make = (~minorVersion, ~majorVersion, ~templateName, ()) =>
-    new({minorVersion: minorVersion, majorVersion: majorVersion, templateName: templateName})
+    new({minorVersion, majorVersion, templateName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetEnvironmentTemplate = {
   type t
   type request = {
@@ -1344,7 +1298,6 @@ module GetEnvironmentTemplate = {
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetEnvironmentAccountConnection = {
   type t
   type request = {
@@ -1360,7 +1313,6 @@ module GetEnvironmentAccountConnection = {
   let make = (~id, ()) => new({id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteTemplateSyncConfig = {
   type t
   type request = {
@@ -1373,11 +1325,9 @@ module DeleteTemplateSyncConfig = {
   }
   @module("@aws-sdk/client-awsproton20200720") @new
   external new: request => t = "DeleteTemplateSyncConfigCommand"
-  let make = (~templateType, ~templateName, ()) =>
-    new({templateType: templateType, templateName: templateName})
+  let make = (~templateType, ~templateName, ()) => new({templateType, templateName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteServiceTemplate = {
   type t
   type request = {
@@ -1392,7 +1342,6 @@ module DeleteServiceTemplate = {
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteRepository = {
   type t
   type request = {
@@ -1405,10 +1354,9 @@ module DeleteRepository = {
   }
   @module("@aws-sdk/client-awsproton20200720") @new
   external new: request => t = "DeleteRepositoryCommand"
-  let make = (~name, ~provider, ()) => new({name: name, provider: provider})
+  let make = (~name, ~provider, ()) => new({name, provider})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteEnvironmentTemplateVersion = {
   type t
   type request = {
@@ -1425,10 +1373,9 @@ module DeleteEnvironmentTemplateVersion = {
   @module("@aws-sdk/client-awsproton20200720") @new
   external new: request => t = "DeleteEnvironmentTemplateVersionCommand"
   let make = (~minorVersion, ~majorVersion, ~templateName, ()) =>
-    new({minorVersion: minorVersion, majorVersion: majorVersion, templateName: templateName})
+    new({minorVersion, majorVersion, templateName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteEnvironmentTemplate = {
   type t
   type request = {
@@ -1443,7 +1390,6 @@ module DeleteEnvironmentTemplate = {
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteEnvironmentAccountConnection = {
   type t
   type request = {
@@ -1459,7 +1405,6 @@ module DeleteEnvironmentAccountConnection = {
   let make = (~id, ()) => new({id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateTemplateSyncConfig = {
   type t
   type request = {
@@ -1489,18 +1434,9 @@ module CreateTemplateSyncConfig = {
     ~templateName,
     ~subdirectory=?,
     (),
-  ) =>
-    new({
-      subdirectory: subdirectory,
-      branch: branch,
-      repositoryName: repositoryName,
-      repositoryProvider: repositoryProvider,
-      templateType: templateType,
-      templateName: templateName,
-    })
+  ) => new({subdirectory, branch, repositoryName, repositoryProvider, templateType, templateName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateRepository = {
   type t
   type request = {
@@ -1523,15 +1459,9 @@ module CreateRepository = {
   @module("@aws-sdk/client-awsproton20200720") @new
   external new: request => t = "CreateRepositoryCommand"
   let make = (~connectionArn, ~name, ~provider, ~encryptionKey=?, ()) =>
-    new({
-      encryptionKey: encryptionKey,
-      connectionArn: connectionArn,
-      name: name,
-      provider: provider,
-    })
+    new({encryptionKey, connectionArn, name, provider})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CancelServicePipelineDeployment = {
   type t
   type request = {
@@ -1547,7 +1477,6 @@ module CancelServicePipelineDeployment = {
   let make = (~serviceName, ()) => new({serviceName: serviceName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CancelServiceInstanceDeployment = {
   type t
   type request = {
@@ -1562,11 +1491,9 @@ module CancelServiceInstanceDeployment = {
   }
   @module("@aws-sdk/client-awsproton20200720") @new
   external new: request => t = "CancelServiceInstanceDeploymentCommand"
-  let make = (~serviceName, ~serviceInstanceName, ()) =>
-    new({serviceName: serviceName, serviceInstanceName: serviceInstanceName})
+  let make = (~serviceName, ~serviceInstanceName, ()) => new({serviceName, serviceInstanceName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module AcceptEnvironmentAccountConnection = {
   type t
   type request = {
@@ -1582,7 +1509,6 @@ module AcceptEnvironmentAccountConnection = {
   let make = (~id, ()) => new({id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateService = {
   type t
   type request = {
@@ -1599,11 +1525,9 @@ module UpdateService = {
   }
   @module("@aws-sdk/client-awsproton20200720") @new
   external new: request => t = "UpdateServiceCommand"
-  let make = (~name, ~spec=?, ~description=?, ()) =>
-    new({spec: spec, description: description, name: name})
+  let make = (~name, ~spec=?, ~description=?, ()) => new({spec, description, name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateEnvironment = {
   type t
   type request = {
@@ -1687,19 +1611,18 @@ module UpdateEnvironment = {
     (),
   ) =>
     new({
-      provisioningRepository: provisioningRepository,
-      environmentAccountConnectionId: environmentAccountConnectionId,
-      deploymentType: deploymentType,
-      protonServiceRoleArn: protonServiceRoleArn,
-      templateMinorVersion: templateMinorVersion,
-      templateMajorVersion: templateMajorVersion,
-      spec: spec,
-      description: description,
-      name: name,
+      provisioningRepository,
+      environmentAccountConnectionId,
+      deploymentType,
+      protonServiceRoleArn,
+      templateMinorVersion,
+      templateMajorVersion,
+      spec,
+      description,
+      name,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateAccountSettings = {
   type t
   type request = {
@@ -1729,13 +1652,9 @@ module UpdateAccountSettings = {
   @module("@aws-sdk/client-awsproton20200720") @new
   external new: request => t = "UpdateAccountSettingsCommand"
   let make = (~pipelineProvisioningRepository=?, ~pipelineServiceRoleArn=?, ()) =>
-    new({
-      pipelineProvisioningRepository: pipelineProvisioningRepository,
-      pipelineServiceRoleArn: pipelineServiceRoleArn,
-    })
+    new({pipelineProvisioningRepository, pipelineServiceRoleArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module TagResource = {
   type t
   type request = {
@@ -1748,10 +1667,9 @@ module TagResource = {
   type response = {.}
   @module("@aws-sdk/client-awsproton20200720") @new
   external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
+  let make = (~tags, ~resourceArn, ()) => new({tags, resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module NotifyResourceDeploymentStatusChange = {
   type t
   type request = {
@@ -1770,16 +1688,9 @@ module NotifyResourceDeploymentStatusChange = {
   @module("@aws-sdk/client-awsproton20200720") @new
   external new: request => t = "NotifyResourceDeploymentStatusChangeCommand"
   let make = (~status, ~resourceArn, ~statusMessage=?, ~deploymentId=?, ~outputs=?, ()) =>
-    new({
-      statusMessage: statusMessage,
-      deploymentId: deploymentId,
-      outputs: outputs,
-      status: status,
-      resourceArn: resourceArn,
-    })
+    new({statusMessage, deploymentId, outputs, status, resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module ListTagsForResource = {
   type t
   type request = {
@@ -1799,10 +1710,9 @@ module ListTagsForResource = {
   @module("@aws-sdk/client-awsproton20200720") @new
   external new: request => t = "ListTagsForResourceCommand"
   let make = (~resourceArn, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, resourceArn: resourceArn})
+    new({maxResults, nextToken, resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListServices = {
   type t
   type request = {
@@ -1821,11 +1731,9 @@ module ListServices = {
   }
   @module("@aws-sdk/client-awsproton20200720") @new
   external new: request => t = "ListServicesCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListServiceTemplates = {
   type t
   type request = {
@@ -1844,11 +1752,9 @@ module ListServiceTemplates = {
   }
   @module("@aws-sdk/client-awsproton20200720") @new
   external new: request => t = "ListServiceTemplatesCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListServiceTemplateVersions = {
   type t
   type request = {
@@ -1875,15 +1781,9 @@ module ListServiceTemplateVersions = {
   @module("@aws-sdk/client-awsproton20200720") @new
   external new: request => t = "ListServiceTemplateVersionsCommand"
   let make = (~templateName, ~majorVersion=?, ~maxResults=?, ~nextToken=?, ()) =>
-    new({
-      majorVersion: majorVersion,
-      templateName: templateName,
-      maxResults: maxResults,
-      nextToken: nextToken,
-    })
+    new({majorVersion, templateName, maxResults, nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListServicePipelineProvisionedResources = {
   type t
   type request = {
@@ -1901,11 +1801,9 @@ module ListServicePipelineProvisionedResources = {
   }
   @module("@aws-sdk/client-awsproton20200720") @new
   external new: request => t = "ListServicePipelineProvisionedResourcesCommand"
-  let make = (~serviceName, ~nextToken=?, ()) =>
-    new({nextToken: nextToken, serviceName: serviceName})
+  let make = (~serviceName, ~nextToken=?, ()) => new({nextToken, serviceName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListServicePipelineOutputs = {
   type t
   type request = {
@@ -1924,11 +1822,9 @@ module ListServicePipelineOutputs = {
   }
   @module("@aws-sdk/client-awsproton20200720") @new
   external new: request => t = "ListServicePipelineOutputsCommand"
-  let make = (~serviceName, ~nextToken=?, ()) =>
-    new({nextToken: nextToken, serviceName: serviceName})
+  let make = (~serviceName, ~nextToken=?, ()) => new({nextToken, serviceName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListServiceInstances = {
   type t
   type request = {
@@ -1950,10 +1846,9 @@ module ListServiceInstances = {
   @module("@aws-sdk/client-awsproton20200720") @new
   external new: request => t = "ListServiceInstancesCommand"
   let make = (~maxResults=?, ~nextToken=?, ~serviceName=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, serviceName: serviceName})
+    new({maxResults, nextToken, serviceName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListServiceInstanceProvisionedResources = {
   type t
   type request = {
@@ -1973,10 +1868,9 @@ module ListServiceInstanceProvisionedResources = {
   @module("@aws-sdk/client-awsproton20200720") @new
   external new: request => t = "ListServiceInstanceProvisionedResourcesCommand"
   let make = (~serviceInstanceName, ~serviceName, ~nextToken=?, ()) =>
-    new({nextToken: nextToken, serviceInstanceName: serviceInstanceName, serviceName: serviceName})
+    new({nextToken, serviceInstanceName, serviceName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListServiceInstanceOutputs = {
   type t
   type request = {
@@ -1998,10 +1892,9 @@ module ListServiceInstanceOutputs = {
   @module("@aws-sdk/client-awsproton20200720") @new
   external new: request => t = "ListServiceInstanceOutputsCommand"
   let make = (~serviceName, ~serviceInstanceName, ~nextToken=?, ()) =>
-    new({nextToken: nextToken, serviceName: serviceName, serviceInstanceName: serviceInstanceName})
+    new({nextToken, serviceName, serviceInstanceName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListRepositorySyncDefinitions = {
   type t
   type request = {
@@ -2023,15 +1916,9 @@ module ListRepositorySyncDefinitions = {
   @module("@aws-sdk/client-awsproton20200720") @new
   external new: request => t = "ListRepositorySyncDefinitionsCommand"
   let make = (~syncType, ~repositoryProvider, ~repositoryName, ~nextToken=?, ()) =>
-    new({
-      nextToken: nextToken,
-      syncType: syncType,
-      repositoryProvider: repositoryProvider,
-      repositoryName: repositoryName,
-    })
+    new({nextToken, syncType, repositoryProvider, repositoryName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListRepositories = {
   type t
   type request = {
@@ -2049,11 +1936,9 @@ module ListRepositories = {
   }
   @module("@aws-sdk/client-awsproton20200720") @new
   external new: request => t = "ListRepositoriesCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListEnvironments = {
   type t
   type request = {
@@ -2075,10 +1960,9 @@ module ListEnvironments = {
   @module("@aws-sdk/client-awsproton20200720") @new
   external new: request => t = "ListEnvironmentsCommand"
   let make = (~environmentTemplates=?, ~maxResults=?, ~nextToken=?, ()) =>
-    new({environmentTemplates: environmentTemplates, maxResults: maxResults, nextToken: nextToken})
+    new({environmentTemplates, maxResults, nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListEnvironmentTemplates = {
   type t
   type request = {
@@ -2097,11 +1981,9 @@ module ListEnvironmentTemplates = {
   }
   @module("@aws-sdk/client-awsproton20200720") @new
   external new: request => t = "ListEnvironmentTemplatesCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListEnvironmentTemplateVersions = {
   type t
   type request = {
@@ -2128,15 +2010,9 @@ module ListEnvironmentTemplateVersions = {
   @module("@aws-sdk/client-awsproton20200720") @new
   external new: request => t = "ListEnvironmentTemplateVersionsCommand"
   let make = (~templateName, ~majorVersion=?, ~maxResults=?, ~nextToken=?, ()) =>
-    new({
-      majorVersion: majorVersion,
-      templateName: templateName,
-      maxResults: maxResults,
-      nextToken: nextToken,
-    })
+    new({majorVersion, templateName, maxResults, nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListEnvironmentProvisionedResources = {
   type t
   type request = {
@@ -2154,11 +2030,9 @@ module ListEnvironmentProvisionedResources = {
   }
   @module("@aws-sdk/client-awsproton20200720") @new
   external new: request => t = "ListEnvironmentProvisionedResourcesCommand"
-  let make = (~environmentName, ~nextToken=?, ()) =>
-    new({nextToken: nextToken, environmentName: environmentName})
+  let make = (~environmentName, ~nextToken=?, ()) => new({nextToken, environmentName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListEnvironmentOutputs = {
   type t
   type request = {
@@ -2175,11 +2049,9 @@ module ListEnvironmentOutputs = {
   }
   @module("@aws-sdk/client-awsproton20200720") @new
   external new: request => t = "ListEnvironmentOutputsCommand"
-  let make = (~environmentName, ~nextToken=?, ()) =>
-    new({nextToken: nextToken, environmentName: environmentName})
+  let make = (~environmentName, ~nextToken=?, ()) => new({nextToken, environmentName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListEnvironmentAccountConnections = {
   type t
   type request = {
@@ -2211,16 +2083,9 @@ module ListEnvironmentAccountConnections = {
   @module("@aws-sdk/client-awsproton20200720") @new
   external new: request => t = "ListEnvironmentAccountConnectionsCommand"
   let make = (~requestedBy, ~maxResults=?, ~nextToken=?, ~statuses=?, ~environmentName=?, ()) =>
-    new({
-      maxResults: maxResults,
-      nextToken: nextToken,
-      statuses: statuses,
-      environmentName: environmentName,
-      requestedBy: requestedBy,
-    })
+    new({maxResults, nextToken, statuses, environmentName, requestedBy})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetTemplateSyncStatus = {
   type t
   type request = {
@@ -2239,10 +2104,9 @@ module GetTemplateSyncStatus = {
   @module("@aws-sdk/client-awsproton20200720") @new
   external new: request => t = "GetTemplateSyncStatusCommand"
   let make = (~templateVersion, ~templateType, ~templateName, ()) =>
-    new({templateVersion: templateVersion, templateType: templateType, templateName: templateName})
+    new({templateVersion, templateType, templateName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetService = {
   type t
   type request = {
@@ -2257,7 +2121,6 @@ module GetService = {
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetRepositorySyncStatus = {
   type t
   type request = {
@@ -2273,15 +2136,9 @@ module GetRepositorySyncStatus = {
   @module("@aws-sdk/client-awsproton20200720") @new
   external new: request => t = "GetRepositorySyncStatusCommand"
   let make = (~syncType, ~branch, ~repositoryProvider, ~repositoryName, ()) =>
-    new({
-      syncType: syncType,
-      branch: branch,
-      repositoryProvider: repositoryProvider,
-      repositoryName: repositoryName,
-    })
+    new({syncType, branch, repositoryProvider, repositoryName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetEnvironment = {
   type t
   type request = {
@@ -2297,7 +2154,6 @@ module GetEnvironment = {
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetAccountSettings = {
   type t
   type request = {.}
@@ -2310,7 +2166,6 @@ module GetAccountSettings = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteService = {
   type t
   type request = {@ocaml.doc("<p>The name of the service to delete.</p>") name: resourceName}
@@ -2323,7 +2178,6 @@ module DeleteService = {
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteEnvironment = {
   type t
   type request = {@ocaml.doc("<p>The name of the environment to delete.</p>") name: resourceName}
@@ -2336,7 +2190,6 @@ module DeleteEnvironment = {
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateServiceTemplate = {
   type t
   type request = {
@@ -2370,18 +2223,9 @@ module CreateServiceTemplate = {
     ~description=?,
     ~displayName=?,
     (),
-  ) =>
-    new({
-      tags: tags,
-      pipelineProvisioning: pipelineProvisioning,
-      encryptionKey: encryptionKey,
-      description: description,
-      displayName: displayName,
-      name: name,
-    })
+  ) => new({tags, pipelineProvisioning, encryptionKey, description, displayName, name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateService = {
   type t
   type request = {
@@ -2438,20 +2282,19 @@ module CreateService = {
     (),
   ) =>
     new({
-      tags: tags,
-      branchName: branchName,
-      repositoryId: repositoryId,
-      repositoryConnectionArn: repositoryConnectionArn,
-      spec: spec,
-      templateMinorVersion: templateMinorVersion,
-      templateMajorVersion: templateMajorVersion,
-      templateName: templateName,
-      description: description,
-      name: name,
+      tags,
+      branchName,
+      repositoryId,
+      repositoryConnectionArn,
+      spec,
+      templateMinorVersion,
+      templateMajorVersion,
+      templateName,
+      description,
+      name,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateEnvironmentTemplateVersion = {
   type t
   type request = {
@@ -2486,18 +2329,9 @@ module CreateEnvironmentTemplateVersion = {
     ~description=?,
     ~clientToken=?,
     (),
-  ) =>
-    new({
-      tags: tags,
-      source: source,
-      majorVersion: majorVersion,
-      description: description,
-      templateName: templateName,
-      clientToken: clientToken,
-    })
+  ) => new({tags, source, majorVersion, description, templateName, clientToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateEnvironmentTemplate = {
   type t
   type request = {
@@ -2531,18 +2365,9 @@ module CreateEnvironmentTemplate = {
     ~description=?,
     ~displayName=?,
     (),
-  ) =>
-    new({
-      tags: tags,
-      provisioning: provisioning,
-      encryptionKey: encryptionKey,
-      description: description,
-      displayName: displayName,
-      name: name,
-    })
+  ) => new({tags, provisioning, encryptionKey, description, displayName, name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateEnvironmentAccountConnection = {
   type t
   type request = {
@@ -2571,16 +2396,9 @@ module CreateEnvironmentAccountConnection = {
   @module("@aws-sdk/client-awsproton20200720") @new
   external new: request => t = "CreateEnvironmentAccountConnectionCommand"
   let make = (~environmentName, ~roleArn, ~managementAccountId, ~tags=?, ~clientToken=?, ()) =>
-    new({
-      tags: tags,
-      environmentName: environmentName,
-      roleArn: roleArn,
-      managementAccountId: managementAccountId,
-      clientToken: clientToken,
-    })
+    new({tags, environmentName, roleArn, managementAccountId, clientToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateEnvironment = {
   type t
   type request = {
@@ -2642,20 +2460,19 @@ module CreateEnvironment = {
     (),
   ) =>
     new({
-      provisioningRepository: provisioningRepository,
-      tags: tags,
-      environmentAccountConnectionId: environmentAccountConnectionId,
-      protonServiceRoleArn: protonServiceRoleArn,
-      spec: spec,
-      description: description,
-      templateMinorVersion: templateMinorVersion,
-      templateMajorVersion: templateMajorVersion,
-      templateName: templateName,
-      name: name,
+      provisioningRepository,
+      tags,
+      environmentAccountConnectionId,
+      protonServiceRoleArn,
+      spec,
+      description,
+      templateMinorVersion,
+      templateMajorVersion,
+      templateName,
+      name,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CancelEnvironmentDeployment = {
   type t
   type request = {
@@ -2671,7 +2488,6 @@ module CancelEnvironmentDeployment = {
   let make = (~environmentName, ()) => new({environmentName: environmentName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateServiceTemplateVersion = {
   type t
   type request = {
@@ -2709,16 +2525,15 @@ module UpdateServiceTemplateVersion = {
     (),
   ) =>
     new({
-      compatibleEnvironmentTemplates: compatibleEnvironmentTemplates,
-      status: status,
-      description: description,
-      minorVersion: minorVersion,
-      majorVersion: majorVersion,
-      templateName: templateName,
+      compatibleEnvironmentTemplates,
+      status,
+      description,
+      minorVersion,
+      majorVersion,
+      templateName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetServiceTemplateVersion = {
   type t
   type request = {
@@ -2739,10 +2554,9 @@ module GetServiceTemplateVersion = {
   @module("@aws-sdk/client-awsproton20200720") @new
   external new: request => t = "GetServiceTemplateVersionCommand"
   let make = (~minorVersion, ~majorVersion, ~templateName, ()) =>
-    new({minorVersion: minorVersion, majorVersion: majorVersion, templateName: templateName})
+    new({minorVersion, majorVersion, templateName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteServiceTemplateVersion = {
   type t
   type request = {
@@ -2759,10 +2573,9 @@ module DeleteServiceTemplateVersion = {
   @module("@aws-sdk/client-awsproton20200720") @new
   external new: request => t = "DeleteServiceTemplateVersionCommand"
   let make = (~minorVersion, ~majorVersion, ~templateName, ()) =>
-    new({minorVersion: minorVersion, majorVersion: majorVersion, templateName: templateName})
+    new({minorVersion, majorVersion, templateName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateServiceTemplateVersion = {
   type t
   type request = {
@@ -2806,13 +2619,13 @@ module CreateServiceTemplateVersion = {
     (),
   ) =>
     new({
-      tags: tags,
-      compatibleEnvironmentTemplates: compatibleEnvironmentTemplates,
-      source: source,
-      majorVersion: majorVersion,
-      description: description,
-      templateName: templateName,
-      clientToken: clientToken,
+      tags,
+      compatibleEnvironmentTemplates,
+      source,
+      majorVersion,
+      description,
+      templateName,
+      clientToken,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

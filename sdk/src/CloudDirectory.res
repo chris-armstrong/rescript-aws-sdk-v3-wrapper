@@ -1302,15 +1302,9 @@ module UpgradePublishedSchema = {
   @module("@aws-sdk/client-clouddirectory") @new
   external new: request => t = "UpgradePublishedSchemaCommand"
   let make = (~minorVersion, ~publishedSchemaArn, ~developmentSchemaArn, ~dryRun=?, ()) =>
-    new({
-      dryRun: dryRun,
-      minorVersion: minorVersion,
-      publishedSchemaArn: publishedSchemaArn,
-      developmentSchemaArn: developmentSchemaArn,
-    })
+    new({dryRun, minorVersion, publishedSchemaArn, developmentSchemaArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpgradeAppliedSchema = {
   type t
   type request = {
@@ -1337,10 +1331,9 @@ module UpgradeAppliedSchema = {
   @module("@aws-sdk/client-clouddirectory") @new
   external new: request => t = "UpgradeAppliedSchemaCommand"
   let make = (~directoryArn, ~publishedSchemaArn, ~dryRun=?, ()) =>
-    new({dryRun: dryRun, directoryArn: directoryArn, publishedSchemaArn: publishedSchemaArn})
+    new({dryRun, directoryArn, publishedSchemaArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateSchema = {
   type t
   type request = {
@@ -1358,10 +1351,9 @@ module UpdateSchema = {
     schemaArn: option<arn>,
   }
   @module("@aws-sdk/client-clouddirectory") @new external new: request => t = "UpdateSchemaCommand"
-  let make = (~name, ~schemaArn, ()) => new({name: name, schemaArn: schemaArn})
+  let make = (~name, ~schemaArn, ()) => new({name, schemaArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module PutSchemaFromJson = {
   type t
   type request = {
@@ -1373,10 +1365,9 @@ module PutSchemaFromJson = {
   }
   @module("@aws-sdk/client-clouddirectory") @new
   external new: request => t = "PutSchemaFromJsonCommand"
-  let make = (~document, ~schemaArn, ()) => new({document: document, schemaArn: schemaArn})
+  let make = (~document, ~schemaArn, ()) => new({document, schemaArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module PublishSchema = {
   type t
   type request = {
@@ -1408,15 +1399,9 @@ module PublishSchema = {
   }
   @module("@aws-sdk/client-clouddirectory") @new external new: request => t = "PublishSchemaCommand"
   let make = (~version, ~developmentSchemaArn, ~name=?, ~minorVersion=?, ()) =>
-    new({
-      name: name,
-      minorVersion: minorVersion,
-      version: version,
-      developmentSchemaArn: developmentSchemaArn,
-    })
+    new({name, minorVersion, version, developmentSchemaArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetSchemaAsJson = {
   type t
   type request = {
@@ -1432,7 +1417,6 @@ module GetSchemaAsJson = {
   let make = (~schemaArn, ()) => new({schemaArn: schemaArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetAppliedSchemaVersion = {
   type t
   type request = {
@@ -1450,7 +1434,6 @@ module GetAppliedSchemaVersion = {
   let make = (~schemaArn, ()) => new({schemaArn: schemaArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module EnableDirectory = {
   type t
   type request = {
@@ -1464,7 +1447,6 @@ module EnableDirectory = {
   let make = (~directoryArn, ()) => new({directoryArn: directoryArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DisableDirectory = {
   type t
   type request = {
@@ -1479,7 +1461,6 @@ module DisableDirectory = {
   let make = (~directoryArn, ()) => new({directoryArn: directoryArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteTypedLinkFacet = {
   type t
   type request = {
@@ -1492,10 +1473,9 @@ module DeleteTypedLinkFacet = {
   type response = {.}
   @module("@aws-sdk/client-clouddirectory") @new
   external new: request => t = "DeleteTypedLinkFacetCommand"
-  let make = (~name, ~schemaArn, ()) => new({name: name, schemaArn: schemaArn})
+  let make = (~name, ~schemaArn, ()) => new({name, schemaArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteSchema = {
   type t
   type request = {
@@ -1514,7 +1494,6 @@ module DeleteSchema = {
   let make = (~schemaArn, ()) => new({schemaArn: schemaArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteFacet = {
   type t
   type request = {
@@ -1526,10 +1505,9 @@ module DeleteFacet = {
   }
   type response = {.}
   @module("@aws-sdk/client-clouddirectory") @new external new: request => t = "DeleteFacetCommand"
-  let make = (~name, ~schemaArn, ()) => new({name: name, schemaArn: schemaArn})
+  let make = (~name, ~schemaArn, ()) => new({name, schemaArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteDirectory = {
   type t
   type request = {
@@ -1543,7 +1521,6 @@ module DeleteDirectory = {
   let make = (~directoryArn, ()) => new({directoryArn: directoryArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateSchema = {
   type t
   type request = {
@@ -1562,7 +1539,6 @@ module CreateSchema = {
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateDirectory = {
   type t
   type request = {
@@ -1591,10 +1567,9 @@ module CreateDirectory = {
   }
   @module("@aws-sdk/client-clouddirectory") @new
   external new: request => t = "CreateDirectoryCommand"
-  let make = (~schemaArn, ~name, ()) => new({schemaArn: schemaArn, name: name})
+  let make = (~schemaArn, ~name, ()) => new({schemaArn, name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ApplySchema = {
   type t
   type request = {
@@ -1618,11 +1593,9 @@ module ApplySchema = {
     appliedSchemaArn: option<arn>,
   }
   @module("@aws-sdk/client-clouddirectory") @new external new: request => t = "ApplySchemaCommand"
-  let make = (~directoryArn, ~publishedSchemaArn, ()) =>
-    new({directoryArn: directoryArn, publishedSchemaArn: publishedSchemaArn})
+  let make = (~directoryArn, ~publishedSchemaArn, ()) => new({directoryArn, publishedSchemaArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UntagResource = {
   type t
   type request = {
@@ -1635,10 +1608,9 @@ module UntagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-clouddirectory") @new external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
+  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys, resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module RemoveFacetFromObject = {
   type t
   type request = {
@@ -1653,10 +1625,9 @@ module RemoveFacetFromObject = {
   @module("@aws-sdk/client-clouddirectory") @new
   external new: request => t = "RemoveFacetFromObjectCommand"
   let make = (~objectReference, ~schemaFacet, ~directoryArn, ()) =>
-    new({objectReference: objectReference, schemaFacet: schemaFacet, directoryArn: directoryArn})
+    new({objectReference, schemaFacet, directoryArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module ListTypedLinkFacetNames = {
   type t
   type request = {
@@ -1677,10 +1648,9 @@ module ListTypedLinkFacetNames = {
   @module("@aws-sdk/client-clouddirectory") @new
   external new: request => t = "ListTypedLinkFacetNamesCommand"
   let make = (~schemaArn, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, schemaArn: schemaArn})
+    new({maxResults, nextToken, schemaArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListPublishedSchemaArns = {
   type t
   type request = {
@@ -1700,10 +1670,9 @@ module ListPublishedSchemaArns = {
   @module("@aws-sdk/client-clouddirectory") @new
   external new: request => t = "ListPublishedSchemaArnsCommand"
   let make = (~maxResults=?, ~nextToken=?, ~schemaArn=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, schemaArn: schemaArn})
+    new({maxResults, nextToken, schemaArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListPolicyAttachments = {
   type t
   type request = {
@@ -1738,17 +1707,9 @@ module ListPolicyAttachments = {
     ~maxResults=?,
     ~nextToken=?,
     (),
-  ) =>
-    new({
-      consistencyLevel: consistencyLevel,
-      maxResults: maxResults,
-      nextToken: nextToken,
-      policyReference: policyReference,
-      directoryArn: directoryArn,
-    })
+  ) => new({consistencyLevel, maxResults, nextToken, policyReference, directoryArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListObjectPolicies = {
   type t
   type request = {
@@ -1785,17 +1746,9 @@ module ListObjectPolicies = {
     ~maxResults=?,
     ~nextToken=?,
     (),
-  ) =>
-    new({
-      consistencyLevel: consistencyLevel,
-      maxResults: maxResults,
-      nextToken: nextToken,
-      objectReference: objectReference,
-      directoryArn: directoryArn,
-    })
+  ) => new({consistencyLevel, maxResults, nextToken, objectReference, directoryArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListObjectChildren = {
   type t
   type request = {
@@ -1833,17 +1786,9 @@ module ListObjectChildren = {
     ~maxResults=?,
     ~nextToken=?,
     (),
-  ) =>
-    new({
-      consistencyLevel: consistencyLevel,
-      maxResults: maxResults,
-      nextToken: nextToken,
-      objectReference: objectReference,
-      directoryArn: directoryArn,
-    })
+  ) => new({consistencyLevel, maxResults, nextToken, objectReference, directoryArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListManagedSchemaArns = {
   type t
   type request = {
@@ -1864,10 +1809,9 @@ module ListManagedSchemaArns = {
   @module("@aws-sdk/client-clouddirectory") @new
   external new: request => t = "ListManagedSchemaArnsCommand"
   let make = (~maxResults=?, ~nextToken=?, ~schemaArn=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, schemaArn: schemaArn})
+    new({maxResults, nextToken, schemaArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListFacetNames = {
   type t
   type request = {
@@ -1886,10 +1830,9 @@ module ListFacetNames = {
   @module("@aws-sdk/client-clouddirectory") @new
   external new: request => t = "ListFacetNamesCommand"
   let make = (~schemaArn, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, schemaArn: schemaArn})
+    new({maxResults, nextToken, schemaArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListDevelopmentSchemaArns = {
   type t
   type request = {
@@ -1904,11 +1847,9 @@ module ListDevelopmentSchemaArns = {
   }
   @module("@aws-sdk/client-clouddirectory") @new
   external new: request => t = "ListDevelopmentSchemaArnsCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListAppliedSchemaArns = {
   type t
   type request = {
@@ -1931,15 +1872,9 @@ module ListAppliedSchemaArns = {
   @module("@aws-sdk/client-clouddirectory") @new
   external new: request => t = "ListAppliedSchemaArnsCommand"
   let make = (~directoryArn, ~maxResults=?, ~nextToken=?, ~schemaArn=?, ()) =>
-    new({
-      maxResults: maxResults,
-      nextToken: nextToken,
-      schemaArn: schemaArn,
-      directoryArn: directoryArn,
-    })
+    new({maxResults, nextToken, schemaArn, directoryArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetTypedLinkFacetInformation = {
   type t
   type request = {
@@ -1961,10 +1896,9 @@ module GetTypedLinkFacetInformation = {
   }
   @module("@aws-sdk/client-clouddirectory") @new
   external new: request => t = "GetTypedLinkFacetInformationCommand"
-  let make = (~name, ~schemaArn, ()) => new({name: name, schemaArn: schemaArn})
+  let make = (~name, ~schemaArn, ()) => new({name, schemaArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetFacet = {
   type t
   type request = {
@@ -1979,10 +1913,9 @@ module GetFacet = {
     facet: option<facet>,
   }
   @module("@aws-sdk/client-clouddirectory") @new external new: request => t = "GetFacetCommand"
-  let make = (~name, ~schemaArn, ()) => new({name: name, schemaArn: schemaArn})
+  let make = (~name, ~schemaArn, ()) => new({name, schemaArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetDirectory = {
   type t
   type request = {
@@ -1995,7 +1928,6 @@ module GetDirectory = {
   let make = (~directoryArn, ()) => new({directoryArn: directoryArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DetachPolicy = {
   type t
   type request = {
@@ -2012,14 +1944,9 @@ module DetachPolicy = {
   type response = {.}
   @module("@aws-sdk/client-clouddirectory") @new external new: request => t = "DetachPolicyCommand"
   let make = (~objectReference, ~policyReference, ~directoryArn, ()) =>
-    new({
-      objectReference: objectReference,
-      policyReference: policyReference,
-      directoryArn: directoryArn,
-    })
+    new({objectReference, policyReference, directoryArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DetachObject = {
   type t
   type request = {
@@ -2042,10 +1969,9 @@ module DetachObject = {
   }
   @module("@aws-sdk/client-clouddirectory") @new external new: request => t = "DetachObjectCommand"
   let make = (~linkName, ~parentReference, ~directoryArn, ()) =>
-    new({linkName: linkName, parentReference: parentReference, directoryArn: directoryArn})
+    new({linkName, parentReference, directoryArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DetachFromIndex = {
   type t
   type request = {
@@ -2069,14 +1995,9 @@ module DetachFromIndex = {
   @module("@aws-sdk/client-clouddirectory") @new
   external new: request => t = "DetachFromIndexCommand"
   let make = (~targetReference, ~indexReference, ~directoryArn, ()) =>
-    new({
-      targetReference: targetReference,
-      indexReference: indexReference,
-      directoryArn: directoryArn,
-    })
+    new({targetReference, indexReference, directoryArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteObject = {
   type t
   type request = {
@@ -2089,11 +2010,9 @@ module DeleteObject = {
   }
   type response = {.}
   @module("@aws-sdk/client-clouddirectory") @new external new: request => t = "DeleteObjectCommand"
-  let make = (~objectReference, ~directoryArn, ()) =>
-    new({objectReference: objectReference, directoryArn: directoryArn})
+  let make = (~objectReference, ~directoryArn, ()) => new({objectReference, directoryArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module AttachToIndex = {
   type t
   type request = {
@@ -2117,14 +2036,9 @@ module AttachToIndex = {
   }
   @module("@aws-sdk/client-clouddirectory") @new external new: request => t = "AttachToIndexCommand"
   let make = (~targetReference, ~indexReference, ~directoryArn, ()) =>
-    new({
-      targetReference: targetReference,
-      indexReference: indexReference,
-      directoryArn: directoryArn,
-    })
+    new({targetReference, indexReference, directoryArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module AttachPolicy = {
   type t
   type request = {
@@ -2143,14 +2057,9 @@ module AttachPolicy = {
   type response = {.}
   @module("@aws-sdk/client-clouddirectory") @new external new: request => t = "AttachPolicyCommand"
   let make = (~objectReference, ~policyReference, ~directoryArn, ()) =>
-    new({
-      objectReference: objectReference,
-      policyReference: policyReference,
-      directoryArn: directoryArn,
-    })
+    new({objectReference, policyReference, directoryArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module AttachObject = {
   type t
   type request = {
@@ -2175,15 +2084,9 @@ module AttachObject = {
   }
   @module("@aws-sdk/client-clouddirectory") @new external new: request => t = "AttachObjectCommand"
   let make = (~linkName, ~childReference, ~parentReference, ~directoryArn, ()) =>
-    new({
-      linkName: linkName,
-      childReference: childReference,
-      parentReference: parentReference,
-      directoryArn: directoryArn,
-    })
+    new({linkName, childReference, parentReference, directoryArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module TagResource = {
   type t
   type request = {
@@ -2195,10 +2098,9 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-clouddirectory") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
+  let make = (~tags, ~resourceArn, ()) => new({tags, resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module ListTagsForResource = {
   type t
   type request = {
@@ -2228,10 +2130,9 @@ module ListTagsForResource = {
   @module("@aws-sdk/client-clouddirectory") @new
   external new: request => t = "ListTagsForResourceCommand"
   let make = (~resourceArn, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, resourceArn: resourceArn})
+    new({maxResults, nextToken, resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListObjectParents = {
   type t
   type request = {
@@ -2279,16 +2180,15 @@ module ListObjectParents = {
     (),
   ) =>
     new({
-      includeAllLinksToEachParent: includeAllLinksToEachParent,
-      consistencyLevel: consistencyLevel,
-      maxResults: maxResults,
-      nextToken: nextToken,
-      objectReference: objectReference,
-      directoryArn: directoryArn,
+      includeAllLinksToEachParent,
+      consistencyLevel,
+      maxResults,
+      nextToken,
+      objectReference,
+      directoryArn,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListDirectories = {
   type t
   type request = {
@@ -2308,11 +2208,9 @@ module ListDirectories = {
   }
   @module("@aws-sdk/client-clouddirectory") @new
   external new: request => t = "ListDirectoriesCommand"
-  let make = (~state=?, ~maxResults=?, ~nextToken=?, ()) =>
-    new({state: state, maxResults: maxResults, nextToken: nextToken})
+  let make = (~state=?, ~maxResults=?, ~nextToken=?, ()) => new({state, maxResults, nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetObjectInformation = {
   type t
   type request = {
@@ -2337,14 +2235,9 @@ module GetObjectInformation = {
   @module("@aws-sdk/client-clouddirectory") @new
   external new: request => t = "GetObjectInformationCommand"
   let make = (~objectReference, ~directoryArn, ~consistencyLevel=?, ()) =>
-    new({
-      consistencyLevel: consistencyLevel,
-      objectReference: objectReference,
-      directoryArn: directoryArn,
-    })
+    new({consistencyLevel, objectReference, directoryArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateIndex = {
   type t
   type request = {
@@ -2379,17 +2272,9 @@ module CreateIndex = {
     ~linkName=?,
     ~parentReference=?,
     (),
-  ) =>
-    new({
-      linkName: linkName,
-      parentReference: parentReference,
-      isUnique: isUnique,
-      orderedIndexedAttributeList: orderedIndexedAttributeList,
-      directoryArn: directoryArn,
-    })
+  ) => new({linkName, parentReference, isUnique, orderedIndexedAttributeList, directoryArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListObjectParentPaths = {
   type t
   type request = {
@@ -2415,15 +2300,9 @@ module ListObjectParentPaths = {
   @module("@aws-sdk/client-clouddirectory") @new
   external new: request => t = "ListObjectParentPathsCommand"
   let make = (~objectReference, ~directoryArn, ~maxResults=?, ~nextToken=?, ()) =>
-    new({
-      maxResults: maxResults,
-      nextToken: nextToken,
-      objectReference: objectReference,
-      directoryArn: directoryArn,
-    })
+    new({maxResults, nextToken, objectReference, directoryArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListObjectAttributes = {
   type t
   type request = {
@@ -2465,18 +2344,9 @@ module ListObjectAttributes = {
     ~maxResults=?,
     ~nextToken=?,
     (),
-  ) =>
-    new({
-      facetFilter: facetFilter,
-      consistencyLevel: consistencyLevel,
-      maxResults: maxResults,
-      nextToken: nextToken,
-      objectReference: objectReference,
-      directoryArn: directoryArn,
-    })
+  ) => new({facetFilter, consistencyLevel, maxResults, nextToken, objectReference, directoryArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetObjectAttributes = {
   type t
   type request = {
@@ -2513,17 +2383,9 @@ module GetObjectAttributes = {
     ~directoryArn,
     ~consistencyLevel=?,
     (),
-  ) =>
-    new({
-      attributeNames: attributeNames,
-      schemaFacet: schemaFacet,
-      consistencyLevel: consistencyLevel,
-      objectReference: objectReference,
-      directoryArn: directoryArn,
-    })
+  ) => new({attributeNames, schemaFacet, consistencyLevel, objectReference, directoryArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateObject = {
   type t
   type request = {
@@ -2559,17 +2421,9 @@ module CreateObject = {
     ~parentReference=?,
     ~objectAttributeList=?,
     (),
-  ) =>
-    new({
-      linkName: linkName,
-      parentReference: parentReference,
-      objectAttributeList: objectAttributeList,
-      schemaFacets: schemaFacets,
-      directoryArn: directoryArn,
-    })
+  ) => new({linkName, parentReference, objectAttributeList, schemaFacets, directoryArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module AddFacetToObject = {
   type t
   type request = {
@@ -2593,15 +2447,9 @@ module AddFacetToObject = {
   @module("@aws-sdk/client-clouddirectory") @new
   external new: request => t = "AddFacetToObjectCommand"
   let make = (~objectReference, ~schemaFacet, ~directoryArn, ~objectAttributeList=?, ()) =>
-    new({
-      objectReference: objectReference,
-      objectAttributeList: objectAttributeList,
-      schemaFacet: schemaFacet,
-      directoryArn: directoryArn,
-    })
+    new({objectReference, objectAttributeList, schemaFacet, directoryArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module UpdateObjectAttributes = {
   type t
   type request = {
@@ -2622,14 +2470,9 @@ module UpdateObjectAttributes = {
   @module("@aws-sdk/client-clouddirectory") @new
   external new: request => t = "UpdateObjectAttributesCommand"
   let make = (~attributeUpdates, ~objectReference, ~directoryArn, ()) =>
-    new({
-      attributeUpdates: attributeUpdates,
-      objectReference: objectReference,
-      directoryArn: directoryArn,
-    })
+    new({attributeUpdates, objectReference, directoryArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateLinkAttributes = {
   type t
   type request = {
@@ -2648,14 +2491,9 @@ module UpdateLinkAttributes = {
   @module("@aws-sdk/client-clouddirectory") @new
   external new: request => t = "UpdateLinkAttributesCommand"
   let make = (~attributeUpdates, ~typedLinkSpecifier, ~directoryArn, ()) =>
-    new({
-      attributeUpdates: attributeUpdates,
-      typedLinkSpecifier: typedLinkSpecifier,
-      directoryArn: directoryArn,
-    })
+    new({attributeUpdates, typedLinkSpecifier, directoryArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module LookupPolicy = {
   type t
   type request = {
@@ -2683,15 +2521,9 @@ module LookupPolicy = {
   }
   @module("@aws-sdk/client-clouddirectory") @new external new: request => t = "LookupPolicyCommand"
   let make = (~objectReference, ~directoryArn, ~maxResults=?, ~nextToken=?, ()) =>
-    new({
-      maxResults: maxResults,
-      nextToken: nextToken,
-      objectReference: objectReference,
-      directoryArn: directoryArn,
-    })
+    new({maxResults, nextToken, objectReference, directoryArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetLinkAttributes = {
   type t
   type request = {
@@ -2717,15 +2549,9 @@ module GetLinkAttributes = {
   @module("@aws-sdk/client-clouddirectory") @new
   external new: request => t = "GetLinkAttributesCommand"
   let make = (~attributeNames, ~typedLinkSpecifier, ~directoryArn, ~consistencyLevel=?, ()) =>
-    new({
-      consistencyLevel: consistencyLevel,
-      attributeNames: attributeNames,
-      typedLinkSpecifier: typedLinkSpecifier,
-      directoryArn: directoryArn,
-    })
+    new({consistencyLevel, attributeNames, typedLinkSpecifier, directoryArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DetachTypedLink = {
   type t
   type request = {
@@ -2739,11 +2565,9 @@ module DetachTypedLink = {
   type response = {.}
   @module("@aws-sdk/client-clouddirectory") @new
   external new: request => t = "DetachTypedLinkCommand"
-  let make = (~typedLinkSpecifier, ~directoryArn, ()) =>
-    new({typedLinkSpecifier: typedLinkSpecifier, directoryArn: directoryArn})
+  let make = (~typedLinkSpecifier, ~directoryArn, ()) => new({typedLinkSpecifier, directoryArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module AttachTypedLink = {
   type t
   type request = {
@@ -2777,17 +2601,9 @@ module AttachTypedLink = {
     ~sourceObjectReference,
     ~directoryArn,
     (),
-  ) =>
-    new({
-      attributes: attributes,
-      typedLinkFacet: typedLinkFacet,
-      targetObjectReference: targetObjectReference,
-      sourceObjectReference: sourceObjectReference,
-      directoryArn: directoryArn,
-    })
+  ) => new({attributes, typedLinkFacet, targetObjectReference, sourceObjectReference, directoryArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListTypedLinkFacetAttributes = {
   type t
   type request = {
@@ -2809,10 +2625,9 @@ module ListTypedLinkFacetAttributes = {
   @module("@aws-sdk/client-clouddirectory") @new
   external new: request => t = "ListTypedLinkFacetAttributesCommand"
   let make = (~name, ~schemaArn, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, name: name, schemaArn: schemaArn})
+    new({maxResults, nextToken, name, schemaArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListOutgoingTypedLinks = {
   type t
   type request = {
@@ -2856,17 +2671,16 @@ module ListOutgoingTypedLinks = {
     (),
   ) =>
     new({
-      consistencyLevel: consistencyLevel,
-      maxResults: maxResults,
-      nextToken: nextToken,
-      filterTypedLink: filterTypedLink,
-      filterAttributeRanges: filterAttributeRanges,
-      objectReference: objectReference,
-      directoryArn: directoryArn,
+      consistencyLevel,
+      maxResults,
+      nextToken,
+      filterTypedLink,
+      filterAttributeRanges,
+      objectReference,
+      directoryArn,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListIndex = {
   type t
   type request = {
@@ -2903,16 +2717,15 @@ module ListIndex = {
     (),
   ) =>
     new({
-      consistencyLevel: consistencyLevel,
-      nextToken: nextToken,
-      maxResults: maxResults,
-      indexReference: indexReference,
-      rangesOnIndexedValues: rangesOnIndexedValues,
-      directoryArn: directoryArn,
+      consistencyLevel,
+      nextToken,
+      maxResults,
+      indexReference,
+      rangesOnIndexedValues,
+      directoryArn,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListIncomingTypedLinks = {
   type t
   type request = {
@@ -2956,17 +2769,16 @@ module ListIncomingTypedLinks = {
     (),
   ) =>
     new({
-      consistencyLevel: consistencyLevel,
-      maxResults: maxResults,
-      nextToken: nextToken,
-      filterTypedLink: filterTypedLink,
-      filterAttributeRanges: filterAttributeRanges,
-      objectReference: objectReference,
-      directoryArn: directoryArn,
+      consistencyLevel,
+      maxResults,
+      nextToken,
+      filterTypedLink,
+      filterAttributeRanges,
+      objectReference,
+      directoryArn,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListAttachedIndices = {
   type t
   type request = {
@@ -2993,17 +2805,9 @@ module ListAttachedIndices = {
     ~maxResults=?,
     ~nextToken=?,
     (),
-  ) =>
-    new({
-      consistencyLevel: consistencyLevel,
-      maxResults: maxResults,
-      nextToken: nextToken,
-      targetReference: targetReference,
-      directoryArn: directoryArn,
-    })
+  ) => new({consistencyLevel, maxResults, nextToken, targetReference, directoryArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateTypedLinkFacet = {
   type t
   type request = {
@@ -3027,15 +2831,9 @@ module UpdateTypedLinkFacet = {
   @module("@aws-sdk/client-clouddirectory") @new
   external new: request => t = "UpdateTypedLinkFacetCommand"
   let make = (~identityAttributeOrder, ~attributeUpdates, ~name, ~schemaArn, ()) =>
-    new({
-      identityAttributeOrder: identityAttributeOrder,
-      attributeUpdates: attributeUpdates,
-      name: name,
-      schemaArn: schemaArn,
-    })
+    new({identityAttributeOrder, attributeUpdates, name, schemaArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module ListFacetAttributes = {
   type t
   type request = {
@@ -3055,10 +2853,9 @@ module ListFacetAttributes = {
   @module("@aws-sdk/client-clouddirectory") @new
   external new: request => t = "ListFacetAttributesCommand"
   let make = (~name, ~schemaArn, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, name: name, schemaArn: schemaArn})
+    new({maxResults, nextToken, name, schemaArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateTypedLinkFacet = {
   type t
   type request = {
@@ -3075,10 +2872,9 @@ module CreateTypedLinkFacet = {
   type response = {.}
   @module("@aws-sdk/client-clouddirectory") @new
   external new: request => t = "CreateTypedLinkFacetCommand"
-  let make = (~facet, ~schemaArn, ()) => new({facet: facet, schemaArn: schemaArn})
+  let make = (~facet, ~schemaArn, ()) => new({facet, schemaArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module CreateFacet = {
   type t
   type request = {
@@ -3125,16 +2921,9 @@ module CreateFacet = {
   type response = {.}
   @module("@aws-sdk/client-clouddirectory") @new external new: request => t = "CreateFacetCommand"
   let make = (~name, ~schemaArn, ~facetStyle=?, ~objectType=?, ~attributes=?, ()) =>
-    new({
-      facetStyle: facetStyle,
-      objectType: objectType,
-      attributes: attributes,
-      name: name,
-      schemaArn: schemaArn,
-    })
+    new({facetStyle, objectType, attributes, name, schemaArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module UpdateFacet = {
   type t
   type request = {
@@ -3157,15 +2946,9 @@ module UpdateFacet = {
   type response = {.}
   @module("@aws-sdk/client-clouddirectory") @new external new: request => t = "UpdateFacetCommand"
   let make = (~name, ~schemaArn, ~objectType=?, ~attributeUpdates=?, ()) =>
-    new({
-      objectType: objectType,
-      attributeUpdates: attributeUpdates,
-      name: name,
-      schemaArn: schemaArn,
-    })
+    new({objectType, attributeUpdates, name, schemaArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module BatchWrite = {
   type t
   type request = {
@@ -3181,11 +2964,9 @@ module BatchWrite = {
     responses: option<batchWriteOperationResponseList>,
   }
   @module("@aws-sdk/client-clouddirectory") @new external new: request => t = "BatchWriteCommand"
-  let make = (~operations, ~directoryArn, ()) =>
-    new({operations: operations, directoryArn: directoryArn})
+  let make = (~operations, ~directoryArn, ()) => new({operations, directoryArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module BatchRead = {
   type t
   type request = {
@@ -3206,6 +2987,6 @@ module BatchRead = {
   }
   @module("@aws-sdk/client-clouddirectory") @new external new: request => t = "BatchReadCommand"
   let make = (~operations, ~directoryArn, ~consistencyLevel=?, ()) =>
-    new({consistencyLevel: consistencyLevel, operations: operations, directoryArn: directoryArn})
+    new({consistencyLevel, operations, directoryArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

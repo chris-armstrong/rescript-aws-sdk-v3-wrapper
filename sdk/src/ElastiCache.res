@@ -3044,7 +3044,6 @@ module DeleteCacheSubnetGroup = {
   let make = (~cacheSubnetGroupName, ()) => new({cacheSubnetGroupName: cacheSubnetGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteCacheSecurityGroup = {
   type t
   @ocaml.doc("<p>Represents the input of a <code>DeleteCacheSecurityGroup</code> operation.</p>")
@@ -3062,7 +3061,6 @@ module DeleteCacheSecurityGroup = {
   let make = (~cacheSecurityGroupName, ()) => new({cacheSecurityGroupName: cacheSecurityGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteCacheParameterGroup = {
   type t
   @ocaml.doc("<p>Represents the input of a <code>DeleteCacheParameterGroup</code> operation.</p>")
@@ -3081,7 +3079,6 @@ module DeleteCacheParameterGroup = {
     new({cacheParameterGroupName: cacheParameterGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module ModifyUser = {
   type t
   type request = {
@@ -3106,17 +3103,9 @@ module ModifyUser = {
     ~appendAccessString=?,
     ~accessString=?,
     (),
-  ) =>
-    new({
-      noPasswordRequired: noPasswordRequired,
-      passwords: passwords,
-      appendAccessString: appendAccessString,
-      accessString: accessString,
-      userId: userId,
-    })
+  ) => new({noPasswordRequired, passwords, appendAccessString, accessString, userId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListAllowedNodeTypeModifications = {
   type t
   @ocaml.doc(
@@ -3163,10 +3152,9 @@ module ListAllowedNodeTypeModifications = {
   @module("@aws-sdk/client-elasticache") @new
   external new: request => t = "ListAllowedNodeTypeModificationsCommand"
   let make = (~replicationGroupId=?, ~cacheClusterId=?, ()) =>
-    new({replicationGroupId: replicationGroupId, cacheClusterId: cacheClusterId})
+    new({replicationGroupId, cacheClusterId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteUser = {
   type t
   type request = {@ocaml.doc("<p>The ID of the user.</p>") @as("UserId") userId: userId}
@@ -3175,7 +3163,6 @@ module DeleteUser = {
   let make = (~userId, ()) => new({userId: userId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ResetCacheParameterGroup = {
   type t
   @ocaml.doc("<p>Represents the input of a <code>ResetCacheParameterGroup</code> operation.</p>")
@@ -3219,14 +3206,9 @@ module ResetCacheParameterGroup = {
   @module("@aws-sdk/client-elasticache") @new
   external new: request => t = "ResetCacheParameterGroupCommand"
   let make = (~cacheParameterGroupName, ~parameterNameValues=?, ~resetAllParameters=?, ()) =>
-    new({
-      parameterNameValues: parameterNameValues,
-      resetAllParameters: resetAllParameters,
-      cacheParameterGroupName: cacheParameterGroupName,
-    })
+    new({parameterNameValues, resetAllParameters, cacheParameterGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module RemoveTagsFromResource = {
   type t
   @ocaml.doc("<p>Represents the input of a <code>RemoveTagsFromResource</code> operation.</p>")
@@ -3251,10 +3233,9 @@ module RemoveTagsFromResource = {
   }
   @module("@aws-sdk/client-elasticache") @new
   external new: request => t = "RemoveTagsFromResourceCommand"
-  let make = (~tagKeys, ~resourceName, ()) => new({tagKeys: tagKeys, resourceName: resourceName})
+  let make = (~tagKeys, ~resourceName, ()) => new({tagKeys, resourceName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ModifyUserGroup = {
   type t
   type request = {
@@ -3267,10 +3248,9 @@ module ModifyUserGroup = {
   type response = userGroup
   @module("@aws-sdk/client-elasticache") @new external new: request => t = "ModifyUserGroupCommand"
   let make = (~userGroupId, ~userIdsToRemove=?, ~userIdsToAdd=?, ()) =>
-    new({userIdsToRemove: userIdsToRemove, userIdsToAdd: userIdsToAdd, userGroupId: userGroupId})
+    new({userIdsToRemove, userIdsToAdd, userGroupId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ModifyCacheParameterGroup = {
   type t
   @ocaml.doc("<p>Represents the input of a <code>ModifyCacheParameterGroup</code> operation.</p>")
@@ -3304,13 +3284,9 @@ module ModifyCacheParameterGroup = {
   @module("@aws-sdk/client-elasticache") @new
   external new: request => t = "ModifyCacheParameterGroupCommand"
   let make = (~parameterNameValues, ~cacheParameterGroupName, ()) =>
-    new({
-      parameterNameValues: parameterNameValues,
-      cacheParameterGroupName: cacheParameterGroupName,
-    })
+    new({parameterNameValues, cacheParameterGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListTagsForResource = {
   type t
   @ocaml.doc("<p>The input parameters for the <code>ListTagsForResource</code> operation.</p>")
@@ -3333,7 +3309,6 @@ module ListTagsForResource = {
   let make = (~resourceName, ()) => new({resourceName: resourceName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeServiceUpdates = {
   type t
   type request = {
@@ -3363,15 +3338,9 @@ module DescribeServiceUpdates = {
   @module("@aws-sdk/client-elasticache") @new
   external new: request => t = "DescribeServiceUpdatesCommand"
   let make = (~marker=?, ~maxRecords=?, ~serviceUpdateStatus=?, ~serviceUpdateName=?, ()) =>
-    new({
-      marker: marker,
-      maxRecords: maxRecords,
-      serviceUpdateStatus: serviceUpdateStatus,
-      serviceUpdateName: serviceUpdateName,
-    })
+    new({marker, maxRecords, serviceUpdateStatus, serviceUpdateName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeEvents = {
   type t
   @ocaml.doc("<p>Represents the input of a <code>DescribeEvents</code> operation.</p>")
@@ -3432,19 +3401,9 @@ module DescribeEvents = {
     ~sourceType=?,
     ~sourceIdentifier=?,
     (),
-  ) =>
-    new({
-      marker: marker,
-      maxRecords: maxRecords,
-      duration: duration,
-      endTime: endTime,
-      startTime: startTime,
-      sourceType: sourceType,
-      sourceIdentifier: sourceIdentifier,
-    })
+  ) => new({marker, maxRecords, duration, endTime, startTime, sourceType, sourceIdentifier})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeCacheParameterGroups = {
   type t
   @ocaml.doc(
@@ -3483,10 +3442,9 @@ module DescribeCacheParameterGroups = {
   @module("@aws-sdk/client-elasticache") @new
   external new: request => t = "DescribeCacheParameterGroupsCommand"
   let make = (~marker=?, ~maxRecords=?, ~cacheParameterGroupName=?, ()) =>
-    new({marker: marker, maxRecords: maxRecords, cacheParameterGroupName: cacheParameterGroupName})
+    new({marker, maxRecords, cacheParameterGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeCacheEngineVersions = {
   type t
   @ocaml.doc("<p>Represents the input of a <code>DescribeCacheEngineVersions</code> operation.</p>")
@@ -3565,18 +3523,9 @@ module DescribeCacheEngineVersions = {
     ~engineVersion=?,
     ~engine=?,
     (),
-  ) =>
-    new({
-      defaultOnly: defaultOnly,
-      marker: marker,
-      maxRecords: maxRecords,
-      cacheParameterGroupFamily: cacheParameterGroupFamily,
-      engineVersion: engineVersion,
-      engine: engine,
-    })
+  ) => new({defaultOnly, marker, maxRecords, cacheParameterGroupFamily, engineVersion, engine})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteUserGroup = {
   type t
   type request = {
@@ -3587,7 +3536,6 @@ module DeleteUserGroup = {
   let make = (~userGroupId, ()) => new({userGroupId: userGroupId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateUserGroup = {
   type t
   type request = {
@@ -3604,10 +3552,9 @@ module CreateUserGroup = {
   type response = userGroup
   @module("@aws-sdk/client-elasticache") @new external new: request => t = "CreateUserGroupCommand"
   let make = (~engine, ~userGroupId, ~tags=?, ~userIds=?, ()) =>
-    new({tags: tags, userIds: userIds, engine: engine, userGroupId: userGroupId})
+    new({tags, userIds, engine, userGroupId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateUser = {
   type t
   type request = {
@@ -3641,19 +3588,9 @@ module CreateUser = {
     ~noPasswordRequired=?,
     ~passwords=?,
     (),
-  ) =>
-    new({
-      tags: tags,
-      noPasswordRequired: noPasswordRequired,
-      accessString: accessString,
-      passwords: passwords,
-      engine: engine,
-      userName: userName,
-      userId: userId,
-    })
+  ) => new({tags, noPasswordRequired, accessString, passwords, engine, userName, userId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateCacheParameterGroup = {
   type t
   @ocaml.doc("<p>Represents the input of a <code>CreateCacheParameterGroup</code> operation.</p>")
@@ -3688,15 +3625,9 @@ module CreateCacheParameterGroup = {
   @module("@aws-sdk/client-elasticache") @new
   external new: request => t = "CreateCacheParameterGroupCommand"
   let make = (~description, ~cacheParameterGroupFamily, ~cacheParameterGroupName, ~tags=?, ()) =>
-    new({
-      tags: tags,
-      description: description,
-      cacheParameterGroupFamily: cacheParameterGroupFamily,
-      cacheParameterGroupName: cacheParameterGroupName,
-    })
+    new({tags, description, cacheParameterGroupFamily, cacheParameterGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module BatchStopUpdateAction = {
   type t
   type request = {
@@ -3718,14 +3649,9 @@ module BatchStopUpdateAction = {
   @module("@aws-sdk/client-elasticache") @new
   external new: request => t = "BatchStopUpdateActionCommand"
   let make = (~serviceUpdateName, ~cacheClusterIds=?, ~replicationGroupIds=?, ()) =>
-    new({
-      serviceUpdateName: serviceUpdateName,
-      cacheClusterIds: cacheClusterIds,
-      replicationGroupIds: replicationGroupIds,
-    })
+    new({serviceUpdateName, cacheClusterIds, replicationGroupIds})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module BatchApplyUpdateAction = {
   type t
   type request = {
@@ -3747,14 +3673,9 @@ module BatchApplyUpdateAction = {
   @module("@aws-sdk/client-elasticache") @new
   external new: request => t = "BatchApplyUpdateActionCommand"
   let make = (~serviceUpdateName, ~cacheClusterIds=?, ~replicationGroupIds=?, ()) =>
-    new({
-      serviceUpdateName: serviceUpdateName,
-      cacheClusterIds: cacheClusterIds,
-      replicationGroupIds: replicationGroupIds,
-    })
+    new({serviceUpdateName, cacheClusterIds, replicationGroupIds})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module AddTagsToResource = {
   type t
   @ocaml.doc("<p>Represents the input of an AddTagsToResource operation.</p>")
@@ -3779,10 +3700,9 @@ module AddTagsToResource = {
   }
   @module("@aws-sdk/client-elasticache") @new
   external new: request => t = "AddTagsToResourceCommand"
-  let make = (~tags, ~resourceName, ()) => new({tags: tags, resourceName: resourceName})
+  let make = (~tags, ~resourceName, ()) => new({tags, resourceName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module RevokeCacheSecurityGroupIngress = {
   type t
   @ocaml.doc(
@@ -3805,14 +3725,9 @@ module RevokeCacheSecurityGroupIngress = {
   @module("@aws-sdk/client-elasticache") @new
   external new: request => t = "RevokeCacheSecurityGroupIngressCommand"
   let make = (~ec2SecurityGroupOwnerId, ~ec2SecurityGroupName, ~cacheSecurityGroupName, ()) =>
-    new({
-      ec2SecurityGroupOwnerId: ec2SecurityGroupOwnerId,
-      ec2SecurityGroupName: ec2SecurityGroupName,
-      cacheSecurityGroupName: cacheSecurityGroupName,
-    })
+    new({ec2SecurityGroupOwnerId, ec2SecurityGroupName, cacheSecurityGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module RebalanceSlotsInGlobalReplicationGroup = {
   type t
   type request = {
@@ -3828,10 +3743,9 @@ module RebalanceSlotsInGlobalReplicationGroup = {
   @module("@aws-sdk/client-elasticache") @new
   external new: request => t = "RebalanceSlotsInGlobalReplicationGroupCommand"
   let make = (~applyImmediately, ~globalReplicationGroupId, ()) =>
-    new({applyImmediately: applyImmediately, globalReplicationGroupId: globalReplicationGroupId})
+    new({applyImmediately, globalReplicationGroupId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module PurchaseReservedCacheNodesOffering = {
   type t
   @ocaml.doc(
@@ -3872,16 +3786,9 @@ module PurchaseReservedCacheNodesOffering = {
     ~cacheNodeCount=?,
     ~reservedCacheNodeId=?,
     (),
-  ) =>
-    new({
-      tags: tags,
-      cacheNodeCount: cacheNodeCount,
-      reservedCacheNodeId: reservedCacheNodeId,
-      reservedCacheNodesOfferingId: reservedCacheNodesOfferingId,
-    })
+  ) => new({tags, cacheNodeCount, reservedCacheNodeId, reservedCacheNodesOfferingId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ModifyGlobalReplicationGroup = {
   type t
   type request = {
@@ -3930,17 +3837,16 @@ module ModifyGlobalReplicationGroup = {
     (),
   ) =>
     new({
-      automaticFailoverEnabled: automaticFailoverEnabled,
-      globalReplicationGroupDescription: globalReplicationGroupDescription,
-      cacheParameterGroupName: cacheParameterGroupName,
-      engineVersion: engineVersion,
-      cacheNodeType: cacheNodeType,
-      applyImmediately: applyImmediately,
-      globalReplicationGroupId: globalReplicationGroupId,
+      automaticFailoverEnabled,
+      globalReplicationGroupDescription,
+      cacheParameterGroupName,
+      engineVersion,
+      cacheNodeType,
+      applyImmediately,
+      globalReplicationGroupId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module FailoverGlobalReplicationGroup = {
   type t
   type request = {
@@ -3958,14 +3864,9 @@ module FailoverGlobalReplicationGroup = {
   @module("@aws-sdk/client-elasticache") @new
   external new: request => t = "FailoverGlobalReplicationGroupCommand"
   let make = (~primaryReplicationGroupId, ~primaryRegion, ~globalReplicationGroupId, ()) =>
-    new({
-      primaryReplicationGroupId: primaryReplicationGroupId,
-      primaryRegion: primaryRegion,
-      globalReplicationGroupId: globalReplicationGroupId,
-    })
+    new({primaryReplicationGroupId, primaryRegion, globalReplicationGroupId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DisassociateGlobalReplicationGroup = {
   type t
   type request = {
@@ -3988,14 +3889,9 @@ module DisassociateGlobalReplicationGroup = {
   @module("@aws-sdk/client-elasticache") @new
   external new: request => t = "DisassociateGlobalReplicationGroupCommand"
   let make = (~replicationGroupRegion, ~replicationGroupId, ~globalReplicationGroupId, ()) =>
-    new({
-      replicationGroupRegion: replicationGroupRegion,
-      replicationGroupId: replicationGroupId,
-      globalReplicationGroupId: globalReplicationGroupId,
-    })
+    new({replicationGroupRegion, replicationGroupId, globalReplicationGroupId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeUsers = {
   type t
   type request = {
@@ -4024,10 +3920,9 @@ module DescribeUsers = {
   }
   @module("@aws-sdk/client-elasticache") @new external new: request => t = "DescribeUsersCommand"
   let make = (~marker=?, ~maxRecords=?, ~filters=?, ~userId=?, ~engine=?, ()) =>
-    new({marker: marker, maxRecords: maxRecords, filters: filters, userId: userId, engine: engine})
+    new({marker, maxRecords, filters, userId, engine})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteGlobalReplicationGroup = {
   type t
   type request = {
@@ -4045,13 +3940,9 @@ module DeleteGlobalReplicationGroup = {
   @module("@aws-sdk/client-elasticache") @new
   external new: request => t = "DeleteGlobalReplicationGroupCommand"
   let make = (~retainPrimaryReplicationGroup, ~globalReplicationGroupId, ()) =>
-    new({
-      retainPrimaryReplicationGroup: retainPrimaryReplicationGroup,
-      globalReplicationGroupId: globalReplicationGroupId,
-    })
+    new({retainPrimaryReplicationGroup, globalReplicationGroupId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DecreaseNodeGroupsInGlobalReplicationGroup = {
   type t
   type request = {
@@ -4093,15 +3984,14 @@ module DecreaseNodeGroupsInGlobalReplicationGroup = {
     (),
   ) =>
     new({
-      applyImmediately: applyImmediately,
-      globalNodeGroupsToRetain: globalNodeGroupsToRetain,
-      globalNodeGroupsToRemove: globalNodeGroupsToRemove,
-      nodeGroupCount: nodeGroupCount,
-      globalReplicationGroupId: globalReplicationGroupId,
+      applyImmediately,
+      globalNodeGroupsToRetain,
+      globalNodeGroupsToRemove,
+      nodeGroupCount,
+      globalReplicationGroupId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateGlobalReplicationGroup = {
   type t
   type request = {
@@ -4131,13 +4021,12 @@ module CreateGlobalReplicationGroup = {
     (),
   ) =>
     new({
-      primaryReplicationGroupId: primaryReplicationGroupId,
-      globalReplicationGroupDescription: globalReplicationGroupDescription,
-      globalReplicationGroupIdSuffix: globalReplicationGroupIdSuffix,
+      primaryReplicationGroupId,
+      globalReplicationGroupDescription,
+      globalReplicationGroupIdSuffix,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateCacheSecurityGroup = {
   type t
   @ocaml.doc("<p>Represents the input of a <code>CreateCacheSecurityGroup</code> operation.</p>")
@@ -4160,10 +4049,9 @@ module CreateCacheSecurityGroup = {
   @module("@aws-sdk/client-elasticache") @new
   external new: request => t = "CreateCacheSecurityGroupCommand"
   let make = (~description, ~cacheSecurityGroupName, ~tags=?, ()) =>
-    new({tags: tags, description: description, cacheSecurityGroupName: cacheSecurityGroupName})
+    new({tags, description, cacheSecurityGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module AuthorizeCacheSecurityGroupIngress = {
   type t
   @ocaml.doc("<p>Represents the input of an AuthorizeCacheSecurityGroupIngress operation.</p>")
@@ -4186,14 +4074,9 @@ module AuthorizeCacheSecurityGroupIngress = {
   @module("@aws-sdk/client-elasticache") @new
   external new: request => t = "AuthorizeCacheSecurityGroupIngressCommand"
   let make = (~ec2SecurityGroupOwnerId, ~ec2SecurityGroupName, ~cacheSecurityGroupName, ()) =>
-    new({
-      ec2SecurityGroupOwnerId: ec2SecurityGroupOwnerId,
-      ec2SecurityGroupName: ec2SecurityGroupName,
-      cacheSecurityGroupName: cacheSecurityGroupName,
-    })
+    new({ec2SecurityGroupOwnerId, ec2SecurityGroupName, cacheSecurityGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ModifyCacheSubnetGroup = {
   type t
   @ocaml.doc("<p>Represents the input of a <code>ModifyCacheSubnetGroup</code> operation.</p>")
@@ -4213,14 +4096,9 @@ module ModifyCacheSubnetGroup = {
   @module("@aws-sdk/client-elasticache") @new
   external new: request => t = "ModifyCacheSubnetGroupCommand"
   let make = (~cacheSubnetGroupName, ~subnetIds=?, ~cacheSubnetGroupDescription=?, ()) =>
-    new({
-      subnetIds: subnetIds,
-      cacheSubnetGroupDescription: cacheSubnetGroupDescription,
-      cacheSubnetGroupName: cacheSubnetGroupName,
-    })
+    new({subnetIds, cacheSubnetGroupDescription, cacheSubnetGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeUserGroups = {
   type t
   type request = {
@@ -4248,10 +4126,9 @@ module DescribeUserGroups = {
   @module("@aws-sdk/client-elasticache") @new
   external new: request => t = "DescribeUserGroupsCommand"
   let make = (~marker=?, ~maxRecords=?, ~userGroupId=?, ()) =>
-    new({marker: marker, maxRecords: maxRecords, userGroupId: userGroupId})
+    new({marker, maxRecords, userGroupId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeReservedCacheNodesOfferings = {
   type t
   @ocaml.doc(
@@ -4586,17 +4463,16 @@ module DescribeReservedCacheNodesOfferings = {
     (),
   ) =>
     new({
-      marker: marker,
-      maxRecords: maxRecords,
-      offeringType: offeringType,
-      productDescription: productDescription,
-      duration: duration,
-      cacheNodeType: cacheNodeType,
-      reservedCacheNodesOfferingId: reservedCacheNodesOfferingId,
+      marker,
+      maxRecords,
+      offeringType,
+      productDescription,
+      duration,
+      cacheNodeType,
+      reservedCacheNodesOfferingId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeReservedCacheNodes = {
   type t
   @ocaml.doc("<p>Represents the input of a <code>DescribeReservedCacheNodes</code> operation.</p>")
@@ -4930,18 +4806,17 @@ module DescribeReservedCacheNodes = {
     (),
   ) =>
     new({
-      marker: marker,
-      maxRecords: maxRecords,
-      offeringType: offeringType,
-      productDescription: productDescription,
-      duration: duration,
-      cacheNodeType: cacheNodeType,
-      reservedCacheNodesOfferingId: reservedCacheNodesOfferingId,
-      reservedCacheNodeId: reservedCacheNodeId,
+      marker,
+      maxRecords,
+      offeringType,
+      productDescription,
+      duration,
+      cacheNodeType,
+      reservedCacheNodesOfferingId,
+      reservedCacheNodeId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeGlobalReplicationGroups = {
   type t
   type request = {
@@ -4976,15 +4851,9 @@ module DescribeGlobalReplicationGroups = {
   @module("@aws-sdk/client-elasticache") @new
   external new: request => t = "DescribeGlobalReplicationGroupsCommand"
   let make = (~showMemberInfo=?, ~marker=?, ~maxRecords=?, ~globalReplicationGroupId=?, ()) =>
-    new({
-      showMemberInfo: showMemberInfo,
-      marker: marker,
-      maxRecords: maxRecords,
-      globalReplicationGroupId: globalReplicationGroupId,
-    })
+    new({showMemberInfo, marker, maxRecords, globalReplicationGroupId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeCacheSecurityGroups = {
   type t
   @ocaml.doc("<p>Represents the input of a <code>DescribeCacheSecurityGroups</code> operation.</p>")
@@ -5022,10 +4891,9 @@ module DescribeCacheSecurityGroups = {
   @module("@aws-sdk/client-elasticache") @new
   external new: request => t = "DescribeCacheSecurityGroupsCommand"
   let make = (~marker=?, ~maxRecords=?, ~cacheSecurityGroupName=?, ()) =>
-    new({marker: marker, maxRecords: maxRecords, cacheSecurityGroupName: cacheSecurityGroupName})
+    new({marker, maxRecords, cacheSecurityGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeCacheParameters = {
   type t
   @ocaml.doc("<p>Represents the input of a <code>DescribeCacheParameters</code> operation.</p>")
@@ -5068,15 +4936,9 @@ module DescribeCacheParameters = {
   @module("@aws-sdk/client-elasticache") @new
   external new: request => t = "DescribeCacheParametersCommand"
   let make = (~cacheParameterGroupName, ~marker=?, ~maxRecords=?, ~source=?, ()) =>
-    new({
-      marker: marker,
-      maxRecords: maxRecords,
-      source: source,
-      cacheParameterGroupName: cacheParameterGroupName,
-    })
+    new({marker, maxRecords, source, cacheParameterGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateCacheSubnetGroup = {
   type t
   @ocaml.doc("<p>Represents the input of a <code>CreateCacheSubnetGroup</code> operation.</p>")
@@ -5102,15 +4964,9 @@ module CreateCacheSubnetGroup = {
   @module("@aws-sdk/client-elasticache") @new
   external new: request => t = "CreateCacheSubnetGroupCommand"
   let make = (~subnetIds, ~cacheSubnetGroupDescription, ~cacheSubnetGroupName, ~tags=?, ()) =>
-    new({
-      tags: tags,
-      subnetIds: subnetIds,
-      cacheSubnetGroupDescription: cacheSubnetGroupDescription,
-      cacheSubnetGroupName: cacheSubnetGroupName,
-    })
+    new({tags, subnetIds, cacheSubnetGroupDescription, cacheSubnetGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module IncreaseNodeGroupsInGlobalReplicationGroup = {
   type t
   type request = {
@@ -5140,16 +4996,9 @@ module IncreaseNodeGroupsInGlobalReplicationGroup = {
     ~globalReplicationGroupId,
     ~regionalConfigurations=?,
     (),
-  ) =>
-    new({
-      applyImmediately: applyImmediately,
-      regionalConfigurations: regionalConfigurations,
-      nodeGroupCount: nodeGroupCount,
-      globalReplicationGroupId: globalReplicationGroupId,
-    })
+  ) => new({applyImmediately, regionalConfigurations, nodeGroupCount, globalReplicationGroupId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeEngineDefaultParameters = {
   type t
   @ocaml.doc(
@@ -5189,14 +5038,9 @@ module DescribeEngineDefaultParameters = {
   @module("@aws-sdk/client-elasticache") @new
   external new: request => t = "DescribeEngineDefaultParametersCommand"
   let make = (~cacheParameterGroupFamily, ~marker=?, ~maxRecords=?, ()) =>
-    new({
-      marker: marker,
-      maxRecords: maxRecords,
-      cacheParameterGroupFamily: cacheParameterGroupFamily,
-    })
+    new({marker, maxRecords, cacheParameterGroupFamily})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeCacheSubnetGroups = {
   type t
   @ocaml.doc("<p>Represents the input of a <code>DescribeCacheSubnetGroups</code> operation.</p>")
@@ -5233,10 +5077,9 @@ module DescribeCacheSubnetGroups = {
   @module("@aws-sdk/client-elasticache") @new
   external new: request => t = "DescribeCacheSubnetGroupsCommand"
   let make = (~marker=?, ~maxRecords=?, ~cacheSubnetGroupName=?, ()) =>
-    new({marker: marker, maxRecords: maxRecords, cacheSubnetGroupName: cacheSubnetGroupName})
+    new({marker, maxRecords, cacheSubnetGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteSnapshot = {
   type t
   @ocaml.doc("<p>Represents the input of a <code>DeleteSnapshot</code> operation.</p>")
@@ -5249,7 +5092,6 @@ module DeleteSnapshot = {
   let make = (~snapshotName, ()) => new({snapshotName: snapshotName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateSnapshot = {
   type t
   @ocaml.doc("<p>Represents the input of a <code>CreateSnapshot</code> operation.</p>")
@@ -5277,16 +5119,9 @@ module CreateSnapshot = {
   type response = {@as("Snapshot") snapshot: option<snapshot>}
   @module("@aws-sdk/client-elasticache") @new external new: request => t = "CreateSnapshotCommand"
   let make = (~snapshotName, ~tags=?, ~kmsKeyId=?, ~cacheClusterId=?, ~replicationGroupId=?, ()) =>
-    new({
-      tags: tags,
-      kmsKeyId: kmsKeyId,
-      snapshotName: snapshotName,
-      cacheClusterId: cacheClusterId,
-      replicationGroupId: replicationGroupId,
-    })
+    new({tags, kmsKeyId, snapshotName, cacheClusterId, replicationGroupId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CopySnapshot = {
   type t
   @ocaml.doc("<p>Represents the input of a <code>CopySnapshotMessage</code> operation.</p>")
@@ -5325,17 +5160,9 @@ module CopySnapshot = {
     ~kmsKeyId=?,
     ~targetBucket=?,
     (),
-  ) =>
-    new({
-      tags: tags,
-      kmsKeyId: kmsKeyId,
-      targetBucket: targetBucket,
-      targetSnapshotName: targetSnapshotName,
-      sourceSnapshotName: sourceSnapshotName,
-    })
+  ) => new({tags, kmsKeyId, targetBucket, targetSnapshotName, sourceSnapshotName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module TestFailover = {
   type t
   type request = {
@@ -5351,11 +5178,9 @@ module TestFailover = {
   }
   type response = {@as("ReplicationGroup") replicationGroup: option<replicationGroup>}
   @module("@aws-sdk/client-elasticache") @new external new: request => t = "TestFailoverCommand"
-  let make = (~nodeGroupId, ~replicationGroupId, ()) =>
-    new({nodeGroupId: nodeGroupId, replicationGroupId: replicationGroupId})
+  let make = (~nodeGroupId, ~replicationGroupId, ()) => new({nodeGroupId, replicationGroupId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module StartMigration = {
   type t
   type request = {
@@ -5371,13 +5196,9 @@ module StartMigration = {
   type response = {@as("ReplicationGroup") replicationGroup: option<replicationGroup>}
   @module("@aws-sdk/client-elasticache") @new external new: request => t = "StartMigrationCommand"
   let make = (~customerNodeEndpointList, ~replicationGroupId, ()) =>
-    new({
-      customerNodeEndpointList: customerNodeEndpointList,
-      replicationGroupId: replicationGroupId,
-    })
+    new({customerNodeEndpointList, replicationGroupId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module RebootCacheCluster = {
   type t
   @ocaml.doc("<p>Represents the input of a <code>RebootCacheCluster</code> operation.</p>")
@@ -5395,10 +5216,9 @@ module RebootCacheCluster = {
   @module("@aws-sdk/client-elasticache") @new
   external new: request => t = "RebootCacheClusterCommand"
   let make = (~cacheNodeIdsToReboot, ~cacheClusterId, ()) =>
-    new({cacheNodeIdsToReboot: cacheNodeIdsToReboot, cacheClusterId: cacheClusterId})
+    new({cacheNodeIdsToReboot, cacheClusterId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ModifyReplicationGroupShardConfiguration = {
   type t
   @ocaml.doc(
@@ -5459,16 +5279,15 @@ module ModifyReplicationGroupShardConfiguration = {
     (),
   ) =>
     new({
-      nodeGroupsToRetain: nodeGroupsToRetain,
-      nodeGroupsToRemove: nodeGroupsToRemove,
-      reshardingConfiguration: reshardingConfiguration,
-      applyImmediately: applyImmediately,
-      nodeGroupCount: nodeGroupCount,
-      replicationGroupId: replicationGroupId,
+      nodeGroupsToRetain,
+      nodeGroupsToRemove,
+      reshardingConfiguration,
+      applyImmediately,
+      nodeGroupCount,
+      replicationGroupId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ModifyReplicationGroup = {
   type t
   @ocaml.doc("<p>Represents the input of a <code>ModifyReplicationGroups</code> operation.</p>")
@@ -5692,35 +5511,34 @@ module ModifyReplicationGroup = {
     (),
   ) =>
     new({
-      logDeliveryConfigurations: logDeliveryConfigurations,
-      removeUserGroups: removeUserGroups,
-      userGroupIdsToRemove: userGroupIdsToRemove,
-      userGroupIdsToAdd: userGroupIdsToAdd,
-      authTokenUpdateStrategy: authTokenUpdateStrategy,
-      authToken: authToken,
-      cacheNodeType: cacheNodeType,
-      snapshotWindow: snapshotWindow,
-      snapshotRetentionLimit: snapshotRetentionLimit,
-      autoMinorVersionUpgrade: autoMinorVersionUpgrade,
-      engineVersion: engineVersion,
-      applyImmediately: applyImmediately,
-      notificationTopicStatus: notificationTopicStatus,
-      cacheParameterGroupName: cacheParameterGroupName,
-      notificationTopicArn: notificationTopicArn,
-      preferredMaintenanceWindow: preferredMaintenanceWindow,
-      securityGroupIds: securityGroupIds,
-      cacheSecurityGroupNames: cacheSecurityGroupNames,
-      nodeGroupId: nodeGroupId,
-      multiAZEnabled: multiAZEnabled,
-      automaticFailoverEnabled: automaticFailoverEnabled,
-      snapshottingClusterId: snapshottingClusterId,
-      primaryClusterId: primaryClusterId,
-      replicationGroupDescription: replicationGroupDescription,
-      replicationGroupId: replicationGroupId,
+      logDeliveryConfigurations,
+      removeUserGroups,
+      userGroupIdsToRemove,
+      userGroupIdsToAdd,
+      authTokenUpdateStrategy,
+      authToken,
+      cacheNodeType,
+      snapshotWindow,
+      snapshotRetentionLimit,
+      autoMinorVersionUpgrade,
+      engineVersion,
+      applyImmediately,
+      notificationTopicStatus,
+      cacheParameterGroupName,
+      notificationTopicArn,
+      preferredMaintenanceWindow,
+      securityGroupIds,
+      cacheSecurityGroupNames,
+      nodeGroupId,
+      multiAZEnabled,
+      automaticFailoverEnabled,
+      snapshottingClusterId,
+      primaryClusterId,
+      replicationGroupDescription,
+      replicationGroupId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ModifyCacheCluster = {
   type t
   @ocaml.doc("<p>Represents the input of a <code>ModifyCacheCluster</code> operation.</p>")
@@ -6066,30 +5884,29 @@ module ModifyCacheCluster = {
     (),
   ) =>
     new({
-      logDeliveryConfigurations: logDeliveryConfigurations,
-      authTokenUpdateStrategy: authTokenUpdateStrategy,
-      authToken: authToken,
-      cacheNodeType: cacheNodeType,
-      snapshotWindow: snapshotWindow,
-      snapshotRetentionLimit: snapshotRetentionLimit,
-      autoMinorVersionUpgrade: autoMinorVersionUpgrade,
-      engineVersion: engineVersion,
-      applyImmediately: applyImmediately,
-      notificationTopicStatus: notificationTopicStatus,
-      cacheParameterGroupName: cacheParameterGroupName,
-      notificationTopicArn: notificationTopicArn,
-      preferredMaintenanceWindow: preferredMaintenanceWindow,
-      securityGroupIds: securityGroupIds,
-      cacheSecurityGroupNames: cacheSecurityGroupNames,
-      newAvailabilityZones: newAvailabilityZones,
-      azmode: azmode,
-      cacheNodeIdsToRemove: cacheNodeIdsToRemove,
-      numCacheNodes: numCacheNodes,
-      cacheClusterId: cacheClusterId,
+      logDeliveryConfigurations,
+      authTokenUpdateStrategy,
+      authToken,
+      cacheNodeType,
+      snapshotWindow,
+      snapshotRetentionLimit,
+      autoMinorVersionUpgrade,
+      engineVersion,
+      applyImmediately,
+      notificationTopicStatus,
+      cacheParameterGroupName,
+      notificationTopicArn,
+      preferredMaintenanceWindow,
+      securityGroupIds,
+      cacheSecurityGroupNames,
+      newAvailabilityZones,
+      azmode,
+      cacheNodeIdsToRemove,
+      numCacheNodes,
+      cacheClusterId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module IncreaseReplicaCount = {
   type t
   type request = {
@@ -6122,16 +5939,9 @@ module IncreaseReplicaCount = {
     ~replicaConfiguration=?,
     ~newReplicaCount=?,
     (),
-  ) =>
-    new({
-      applyImmediately: applyImmediately,
-      replicaConfiguration: replicaConfiguration,
-      newReplicaCount: newReplicaCount,
-      replicationGroupId: replicationGroupId,
-    })
+  ) => new({applyImmediately, replicaConfiguration, newReplicaCount, replicationGroupId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeUpdateActions = {
   type t
   type request = {
@@ -6193,20 +6003,19 @@ module DescribeUpdateActions = {
     (),
   ) =>
     new({
-      marker: marker,
-      maxRecords: maxRecords,
-      showNodeLevelUpdateStatus: showNodeLevelUpdateStatus,
-      updateActionStatus: updateActionStatus,
-      serviceUpdateTimeRange: serviceUpdateTimeRange,
-      serviceUpdateStatus: serviceUpdateStatus,
-      engine: engine,
-      cacheClusterIds: cacheClusterIds,
-      replicationGroupIds: replicationGroupIds,
-      serviceUpdateName: serviceUpdateName,
+      marker,
+      maxRecords,
+      showNodeLevelUpdateStatus,
+      updateActionStatus,
+      serviceUpdateTimeRange,
+      serviceUpdateStatus,
+      engine,
+      cacheClusterIds,
+      replicationGroupIds,
+      serviceUpdateName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeSnapshots = {
   type t
   @ocaml.doc("<p>Represents the input of a <code>DescribeSnapshotsMessage</code> operation.</p>")
@@ -6274,17 +6083,16 @@ module DescribeSnapshots = {
     (),
   ) =>
     new({
-      showNodeGroupConfig: showNodeGroupConfig,
-      maxRecords: maxRecords,
-      marker: marker,
-      snapshotSource: snapshotSource,
-      snapshotName: snapshotName,
-      cacheClusterId: cacheClusterId,
-      replicationGroupId: replicationGroupId,
+      showNodeGroupConfig,
+      maxRecords,
+      marker,
+      snapshotSource,
+      snapshotName,
+      cacheClusterId,
+      replicationGroupId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteReplicationGroup = {
   type t
   @ocaml.doc("<p>Represents the input of a <code>DeleteReplicationGroup</code> operation.</p>")
@@ -6309,14 +6117,9 @@ module DeleteReplicationGroup = {
   @module("@aws-sdk/client-elasticache") @new
   external new: request => t = "DeleteReplicationGroupCommand"
   let make = (~replicationGroupId, ~finalSnapshotIdentifier=?, ~retainPrimaryCluster=?, ()) =>
-    new({
-      finalSnapshotIdentifier: finalSnapshotIdentifier,
-      retainPrimaryCluster: retainPrimaryCluster,
-      replicationGroupId: replicationGroupId,
-    })
+    new({finalSnapshotIdentifier, retainPrimaryCluster, replicationGroupId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteCacheCluster = {
   type t
   @ocaml.doc("<p>Represents the input of a <code>DeleteCacheCluster</code> operation.</p>")
@@ -6335,10 +6138,9 @@ module DeleteCacheCluster = {
   @module("@aws-sdk/client-elasticache") @new
   external new: request => t = "DeleteCacheClusterCommand"
   let make = (~cacheClusterId, ~finalSnapshotIdentifier=?, ()) =>
-    new({finalSnapshotIdentifier: finalSnapshotIdentifier, cacheClusterId: cacheClusterId})
+    new({finalSnapshotIdentifier, cacheClusterId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DecreaseReplicaCount = {
   type t
   type request = {
@@ -6398,15 +6200,14 @@ module DecreaseReplicaCount = {
     (),
   ) =>
     new({
-      applyImmediately: applyImmediately,
-      replicasToRemove: replicasToRemove,
-      replicaConfiguration: replicaConfiguration,
-      newReplicaCount: newReplicaCount,
-      replicationGroupId: replicationGroupId,
+      applyImmediately,
+      replicasToRemove,
+      replicaConfiguration,
+      newReplicaCount,
+      replicationGroupId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateReplicationGroup = {
   type t
   @ocaml.doc("<p>Represents the input of a <code>CreateReplicationGroup</code> operation.</p>")
@@ -7019,44 +6820,43 @@ module CreateReplicationGroup = {
     (),
   ) =>
     new({
-      dataTieringEnabled: dataTieringEnabled,
-      logDeliveryConfigurations: logDeliveryConfigurations,
-      userGroupIds: userGroupIds,
-      kmsKeyId: kmsKeyId,
-      atRestEncryptionEnabled: atRestEncryptionEnabled,
-      transitEncryptionEnabled: transitEncryptionEnabled,
-      authToken: authToken,
-      snapshotWindow: snapshotWindow,
-      snapshotRetentionLimit: snapshotRetentionLimit,
-      autoMinorVersionUpgrade: autoMinorVersionUpgrade,
-      notificationTopicArn: notificationTopicArn,
-      port: port,
-      preferredMaintenanceWindow: preferredMaintenanceWindow,
-      snapshotName: snapshotName,
-      snapshotArns: snapshotArns,
-      tags: tags,
-      securityGroupIds: securityGroupIds,
-      cacheSecurityGroupNames: cacheSecurityGroupNames,
-      cacheSubnetGroupName: cacheSubnetGroupName,
-      cacheParameterGroupName: cacheParameterGroupName,
-      engineVersion: engineVersion,
-      engine: engine,
-      cacheNodeType: cacheNodeType,
-      nodeGroupConfiguration: nodeGroupConfiguration,
-      replicasPerNodeGroup: replicasPerNodeGroup,
-      numNodeGroups: numNodeGroups,
-      preferredCacheClusterAZs: preferredCacheClusterAZs,
-      numCacheClusters: numCacheClusters,
-      multiAZEnabled: multiAZEnabled,
-      automaticFailoverEnabled: automaticFailoverEnabled,
-      primaryClusterId: primaryClusterId,
-      globalReplicationGroupId: globalReplicationGroupId,
-      replicationGroupDescription: replicationGroupDescription,
-      replicationGroupId: replicationGroupId,
+      dataTieringEnabled,
+      logDeliveryConfigurations,
+      userGroupIds,
+      kmsKeyId,
+      atRestEncryptionEnabled,
+      transitEncryptionEnabled,
+      authToken,
+      snapshotWindow,
+      snapshotRetentionLimit,
+      autoMinorVersionUpgrade,
+      notificationTopicArn,
+      port,
+      preferredMaintenanceWindow,
+      snapshotName,
+      snapshotArns,
+      tags,
+      securityGroupIds,
+      cacheSecurityGroupNames,
+      cacheSubnetGroupName,
+      cacheParameterGroupName,
+      engineVersion,
+      engine,
+      cacheNodeType,
+      nodeGroupConfiguration,
+      replicasPerNodeGroup,
+      numNodeGroups,
+      preferredCacheClusterAZs,
+      numCacheClusters,
+      multiAZEnabled,
+      automaticFailoverEnabled,
+      primaryClusterId,
+      globalReplicationGroupId,
+      replicationGroupDescription,
+      replicationGroupId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateCacheCluster = {
   type t
   @ocaml.doc("<p>Represents the input of a CreateCacheCluster operation.</p>")
@@ -7509,37 +7309,36 @@ module CreateCacheCluster = {
     (),
   ) =>
     new({
-      logDeliveryConfigurations: logDeliveryConfigurations,
-      preferredOutpostArns: preferredOutpostArns,
-      preferredOutpostArn: preferredOutpostArn,
-      outpostMode: outpostMode,
-      authToken: authToken,
-      snapshotWindow: snapshotWindow,
-      snapshotRetentionLimit: snapshotRetentionLimit,
-      autoMinorVersionUpgrade: autoMinorVersionUpgrade,
-      notificationTopicArn: notificationTopicArn,
-      port: port,
-      preferredMaintenanceWindow: preferredMaintenanceWindow,
-      snapshotName: snapshotName,
-      snapshotArns: snapshotArns,
-      tags: tags,
-      securityGroupIds: securityGroupIds,
-      cacheSecurityGroupNames: cacheSecurityGroupNames,
-      cacheSubnetGroupName: cacheSubnetGroupName,
-      cacheParameterGroupName: cacheParameterGroupName,
-      engineVersion: engineVersion,
-      engine: engine,
-      cacheNodeType: cacheNodeType,
-      numCacheNodes: numCacheNodes,
-      preferredAvailabilityZones: preferredAvailabilityZones,
-      preferredAvailabilityZone: preferredAvailabilityZone,
-      azmode: azmode,
-      replicationGroupId: replicationGroupId,
-      cacheClusterId: cacheClusterId,
+      logDeliveryConfigurations,
+      preferredOutpostArns,
+      preferredOutpostArn,
+      outpostMode,
+      authToken,
+      snapshotWindow,
+      snapshotRetentionLimit,
+      autoMinorVersionUpgrade,
+      notificationTopicArn,
+      port,
+      preferredMaintenanceWindow,
+      snapshotName,
+      snapshotArns,
+      tags,
+      securityGroupIds,
+      cacheSecurityGroupNames,
+      cacheSubnetGroupName,
+      cacheParameterGroupName,
+      engineVersion,
+      engine,
+      cacheNodeType,
+      numCacheNodes,
+      preferredAvailabilityZones,
+      preferredAvailabilityZone,
+      azmode,
+      replicationGroupId,
+      cacheClusterId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CompleteMigration = {
   type t
   type request = {
@@ -7555,11 +7354,9 @@ module CompleteMigration = {
   type response = {@as("ReplicationGroup") replicationGroup: option<replicationGroup>}
   @module("@aws-sdk/client-elasticache") @new
   external new: request => t = "CompleteMigrationCommand"
-  let make = (~replicationGroupId, ~force=?, ()) =>
-    new({force: force, replicationGroupId: replicationGroupId})
+  let make = (~replicationGroupId, ~force=?, ()) => new({force, replicationGroupId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeReplicationGroups = {
   type t
   @ocaml.doc("<p>Represents the input of a <code>DescribeReplicationGroups</code> operation.</p>")
@@ -7596,10 +7393,9 @@ module DescribeReplicationGroups = {
   @module("@aws-sdk/client-elasticache") @new
   external new: request => t = "DescribeReplicationGroupsCommand"
   let make = (~marker=?, ~maxRecords=?, ~replicationGroupId=?, ()) =>
-    new({marker: marker, maxRecords: maxRecords, replicationGroupId: replicationGroupId})
+    new({marker, maxRecords, replicationGroupId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeCacheClusters = {
   type t
   @ocaml.doc("<p>Represents the input of a <code>DescribeCacheClusters</code> operation.</p>")
@@ -7654,11 +7450,11 @@ module DescribeCacheClusters = {
     (),
   ) =>
     new({
-      showCacheClustersNotInReplicationGroups: showCacheClustersNotInReplicationGroups,
-      showCacheNodeInfo: showCacheNodeInfo,
-      marker: marker,
-      maxRecords: maxRecords,
-      cacheClusterId: cacheClusterId,
+      showCacheClustersNotInReplicationGroups,
+      showCacheNodeInfo,
+      marker,
+      maxRecords,
+      cacheClusterId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

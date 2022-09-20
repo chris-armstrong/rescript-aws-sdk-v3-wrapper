@@ -223,18 +223,9 @@ module UpdateResource = {
     ~roleArn=?,
     ~typeVersionId=?,
     (),
-  ) =>
-    new({
-      patchDocument: patchDocument,
-      identifier: identifier,
-      clientToken: clientToken,
-      roleArn: roleArn,
-      typeVersionId: typeVersionId,
-      typeName: typeName,
-    })
+  ) => new({patchDocument, identifier, clientToken, roleArn, typeVersionId, typeName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetResourceRequestStatus = {
   type t
   type request = {
@@ -254,7 +245,6 @@ module GetResourceRequestStatus = {
   let make = (~requestToken, ()) => new({requestToken: requestToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetResource = {
   type t
   type request = {
@@ -284,15 +274,9 @@ module GetResource = {
   }
   @module("@aws-sdk/client-cloudcontrolapi") @new external new: request => t = "GetResourceCommand"
   let make = (~identifier, ~typeName, ~roleArn=?, ~typeVersionId=?, ()) =>
-    new({
-      identifier: identifier,
-      roleArn: roleArn,
-      typeVersionId: typeVersionId,
-      typeName: typeName,
-    })
+    new({identifier, roleArn, typeVersionId, typeName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteResource = {
   type t
   type request = {
@@ -333,16 +317,9 @@ module DeleteResource = {
   @module("@aws-sdk/client-cloudcontrolapi") @new
   external new: request => t = "DeleteResourceCommand"
   let make = (~identifier, ~typeName, ~clientToken=?, ~roleArn=?, ~typeVersionId=?, ()) =>
-    new({
-      identifier: identifier,
-      clientToken: clientToken,
-      roleArn: roleArn,
-      typeVersionId: typeVersionId,
-      typeName: typeName,
-    })
+    new({identifier, clientToken, roleArn, typeVersionId, typeName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateResource = {
   type t
   type request = {
@@ -398,16 +375,9 @@ module CreateResource = {
   @module("@aws-sdk/client-cloudcontrolapi") @new
   external new: request => t = "CreateResourceCommand"
   let make = (~desiredState, ~typeName, ~clientToken=?, ~roleArn=?, ~typeVersionId=?, ()) =>
-    new({
-      desiredState: desiredState,
-      clientToken: clientToken,
-      roleArn: roleArn,
-      typeVersionId: typeVersionId,
-      typeName: typeName,
-    })
+    new({desiredState, clientToken, roleArn, typeVersionId, typeName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CancelResourceRequest = {
   type t
   type request = {
@@ -422,7 +392,6 @@ module CancelResourceRequest = {
   let make = (~requestToken, ()) => new({requestToken: requestToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListResources = {
   type t
   type request = {
@@ -471,18 +440,9 @@ module ListResources = {
     ~roleArn=?,
     ~typeVersionId=?,
     (),
-  ) =>
-    new({
-      resourceModel: resourceModel,
-      maxResults: maxResults,
-      nextToken: nextToken,
-      roleArn: roleArn,
-      typeVersionId: typeVersionId,
-      typeName: typeName,
-    })
+  ) => new({resourceModel, maxResults, nextToken, roleArn, typeVersionId, typeName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListResourceRequests = {
   type t
   type request = {
@@ -515,10 +475,6 @@ module ListResourceRequests = {
   @module("@aws-sdk/client-cloudcontrolapi") @new
   external new: request => t = "ListResourceRequestsCommand"
   let make = (~resourceRequestStatusFilter=?, ~nextToken=?, ~maxResults=?, ()) =>
-    new({
-      resourceRequestStatusFilter: resourceRequestStatusFilter,
-      nextToken: nextToken,
-      maxResults: maxResults,
-    })
+    new({resourceRequestStatusFilter, nextToken, maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

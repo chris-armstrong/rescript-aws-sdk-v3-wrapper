@@ -524,10 +524,9 @@ or <code>null</code> if there are no more results.</p>")
   }
   @module("@aws-sdk/client-ioteventsdata") @new external new: request => t = "ListAlarmsCommand"
   let make = (~alarmModelName, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, alarmModelName: alarmModelName})
+    new({maxResults, nextToken, alarmModelName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module BatchSnoozeAlarm = {
   type t
   type request = {
@@ -546,7 +545,6 @@ Each error entry contains an entry ID that helps you identify the entry that fai
   let make = (~snoozeActionRequests, ()) => new({snoozeActionRequests: snoozeActionRequests})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module BatchResetAlarm = {
   type t
   type request = {
@@ -565,7 +563,6 @@ Each error entry contains an entry ID that helps you identify the entry that fai
   let make = (~resetActionRequests, ()) => new({resetActionRequests: resetActionRequests})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module BatchEnableAlarm = {
   type t
   type request = {
@@ -584,7 +581,6 @@ Each error entry contains an entry ID that helps you identify the entry that fai
   let make = (~enableActionRequests, ()) => new({enableActionRequests: enableActionRequests})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module BatchDisableAlarm = {
   type t
   type request = {
@@ -603,7 +599,6 @@ Each error entry contains an entry ID that helps you identify the entry that fai
   let make = (~disableActionRequests, ()) => new({disableActionRequests: disableActionRequests})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module BatchAcknowledgeAlarm = {
   type t
   type request = {
@@ -623,7 +618,6 @@ Each error entry contains an entry ID that helps you identify the entry that fai
     new({acknowledgeActionRequests: acknowledgeActionRequests})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListDetectors = {
   type t
   type request = {
@@ -647,15 +641,9 @@ or <code>null</code> if there are no more results.</p>")
   }
   @module("@aws-sdk/client-ioteventsdata") @new external new: request => t = "ListDetectorsCommand"
   let make = (~detectorModelName, ~maxResults=?, ~nextToken=?, ~stateName=?, ()) =>
-    new({
-      maxResults: maxResults,
-      nextToken: nextToken,
-      stateName: stateName,
-      detectorModelName: detectorModelName,
-    })
+    new({maxResults, nextToken, stateName, detectorModelName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module BatchPutMessage = {
   type t
   type request = {
@@ -674,7 +662,6 @@ module BatchPutMessage = {
   let make = (~messages, ()) => new({messages: messages})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeDetector = {
   type t
   type request = {
@@ -690,11 +677,9 @@ module DescribeDetector = {
   }
   @module("@aws-sdk/client-ioteventsdata") @new
   external new: request => t = "DescribeDetectorCommand"
-  let make = (~detectorModelName, ~keyValue=?, ()) =>
-    new({keyValue: keyValue, detectorModelName: detectorModelName})
+  let make = (~detectorModelName, ~keyValue=?, ()) => new({keyValue, detectorModelName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeAlarm = {
   type t
   type request = {
@@ -705,11 +690,9 @@ module DescribeAlarm = {
   }
   type response = {@ocaml.doc("<p>Contains information about an alarm.</p>") alarm: option<alarm>}
   @module("@aws-sdk/client-ioteventsdata") @new external new: request => t = "DescribeAlarmCommand"
-  let make = (~alarmModelName, ~keyValue=?, ()) =>
-    new({keyValue: keyValue, alarmModelName: alarmModelName})
+  let make = (~alarmModelName, ~keyValue=?, ()) => new({keyValue, alarmModelName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module BatchUpdateDetector = {
   type t
   type request = {

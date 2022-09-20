@@ -317,10 +317,9 @@ module PutLexicon = {
   }
   type response = {.}
   @module("@aws-sdk/client-polly") @new external new: request => t = "PutLexiconCommand"
-  let make = (~content, ~name, ()) => new({content: content, name: name})
+  let make = (~content, ~name, ()) => new({content, name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteLexicon = {
   type t
   type request = {
@@ -334,7 +333,6 @@ module DeleteLexicon = {
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module SynthesizeSpeech = {
   type t
   type request = {
@@ -460,19 +458,18 @@ module SynthesizeSpeech = {
     (),
   ) =>
     new({
-      voiceId: voiceId,
-      textType: textType,
-      text: text,
-      speechMarkTypes: speechMarkTypes,
-      sampleRate: sampleRate,
-      outputFormat: outputFormat,
-      lexiconNames: lexiconNames,
-      languageCode: languageCode,
-      engine: engine,
+      voiceId,
+      textType,
+      text,
+      speechMarkTypes,
+      sampleRate,
+      outputFormat,
+      lexiconNames,
+      languageCode,
+      engine,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetLexicon = {
   type t
   type request = {@ocaml.doc("<p>Name of the lexicon.</p>") @as("Name") name: lexiconName}
@@ -491,7 +488,6 @@ module GetLexicon = {
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module StartSpeechSynthesisTask = {
   type t
   type request = {
@@ -576,22 +572,21 @@ module StartSpeechSynthesisTask = {
     (),
   ) =>
     new({
-      voiceId: voiceId,
-      textType: textType,
-      text: text,
-      speechMarkTypes: speechMarkTypes,
-      snsTopicArn: snsTopicArn,
-      sampleRate: sampleRate,
-      outputS3KeyPrefix: outputS3KeyPrefix,
-      outputS3BucketName: outputS3BucketName,
-      outputFormat: outputFormat,
-      lexiconNames: lexiconNames,
-      languageCode: languageCode,
-      engine: engine,
+      voiceId,
+      textType,
+      text,
+      speechMarkTypes,
+      snsTopicArn,
+      sampleRate,
+      outputS3KeyPrefix,
+      outputS3BucketName,
+      outputFormat,
+      lexiconNames,
+      languageCode,
+      engine,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetSpeechSynthesisTask = {
   type t
   type request = {
@@ -610,7 +605,6 @@ module GetSpeechSynthesisTask = {
   let make = (~taskId, ()) => new({taskId: taskId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListSpeechSynthesisTasks = {
   type t
   type request = {
@@ -641,11 +635,9 @@ module ListSpeechSynthesisTasks = {
   }
   @module("@aws-sdk/client-polly") @new
   external new: request => t = "ListSpeechSynthesisTasksCommand"
-  let make = (~status=?, ~nextToken=?, ~maxResults=?, ()) =>
-    new({status: status, nextToken: nextToken, maxResults: maxResults})
+  let make = (~status=?, ~nextToken=?, ~maxResults=?, ()) => new({status, nextToken, maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListLexicons = {
   type t
   type request = {
@@ -668,7 +660,6 @@ module ListLexicons = {
   let make = (~nextToken=?, ()) => new({nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeVoices = {
   type t
   type request = {
@@ -707,11 +698,6 @@ module DescribeVoices = {
   }
   @module("@aws-sdk/client-polly") @new external new: request => t = "DescribeVoicesCommand"
   let make = (~nextToken=?, ~includeAdditionalLanguageCodes=?, ~languageCode=?, ~engine=?, ()) =>
-    new({
-      nextToken: nextToken,
-      includeAdditionalLanguageCodes: includeAdditionalLanguageCodes,
-      languageCode: languageCode,
-      engine: engine,
-    })
+    new({nextToken, includeAdditionalLanguageCodes, languageCode, engine})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

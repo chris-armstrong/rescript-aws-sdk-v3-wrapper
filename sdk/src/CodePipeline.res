@@ -1488,15 +1488,9 @@ module StopPipelineExecution = {
   @module("@aws-sdk/client-codepipeline") @new
   external new: request => t = "StopPipelineExecutionCommand"
   let make = (~pipelineExecutionId, ~pipelineName, ~reason=?, ~abandon=?, ()) =>
-    new({
-      reason: reason,
-      abandon: abandon,
-      pipelineExecutionId: pipelineExecutionId,
-      pipelineName: pipelineName,
-    })
+    new({reason, abandon, pipelineExecutionId, pipelineName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module StartPipelineExecution = {
   type t
   @ocaml.doc("<p>Represents the input of a <code>StartPipelineExecution</code> action.</p>")
@@ -1514,11 +1508,9 @@ module StartPipelineExecution = {
   }
   @module("@aws-sdk/client-codepipeline") @new
   external new: request => t = "StartPipelineExecutionCommand"
-  let make = (~name, ~clientRequestToken=?, ()) =>
-    new({clientRequestToken: clientRequestToken, name: name})
+  let make = (~name, ~clientRequestToken=?, ()) => new({clientRequestToken, name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module RetryStageExecution = {
   type t
   @ocaml.doc("<p>Represents the input of a <code>RetryStageExecution</code> action.</p>")
@@ -1541,15 +1533,9 @@ module RetryStageExecution = {
   @module("@aws-sdk/client-codepipeline") @new
   external new: request => t = "RetryStageExecutionCommand"
   let make = (~retryMode, ~pipelineExecutionId, ~stageName, ~pipelineName, ()) =>
-    new({
-      retryMode: retryMode,
-      pipelineExecutionId: pipelineExecutionId,
-      stageName: stageName,
-      pipelineName: pipelineName,
-    })
+    new({retryMode, pipelineExecutionId, stageName, pipelineName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module RegisterWebhookWithThirdParty = {
   type t
   type request = {
@@ -1563,7 +1549,6 @@ module RegisterWebhookWithThirdParty = {
   let make = (~webhookName=?, ()) => new({webhookName: webhookName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module EnableStageTransition = {
   type t
   @ocaml.doc("<p>Represents the input of an <code>EnableStageTransition</code> action.</p>")
@@ -1583,10 +1568,9 @@ module EnableStageTransition = {
   @module("@aws-sdk/client-codepipeline") @new
   external new: request => t = "EnableStageTransitionCommand"
   let make = (~transitionType, ~stageName, ~pipelineName, ()) =>
-    new({transitionType: transitionType, stageName: stageName, pipelineName: pipelineName})
+    new({transitionType, stageName, pipelineName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DisableStageTransition = {
   type t
   @ocaml.doc("<p>Represents the input of a <code>DisableStageTransition</code> action.</p>")
@@ -1611,15 +1595,9 @@ module DisableStageTransition = {
   @module("@aws-sdk/client-codepipeline") @new
   external new: request => t = "DisableStageTransitionCommand"
   let make = (~reason, ~transitionType, ~stageName, ~pipelineName, ()) =>
-    new({
-      reason: reason,
-      transitionType: transitionType,
-      stageName: stageName,
-      pipelineName: pipelineName,
-    })
+    new({reason, transitionType, stageName, pipelineName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeregisterWebhookWithThirdParty = {
   type t
   type request = {
@@ -1632,7 +1610,6 @@ module DeregisterWebhookWithThirdParty = {
   let make = (~webhookName=?, ()) => new({webhookName: webhookName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteWebhook = {
   type t
   type request = {
@@ -1643,7 +1620,6 @@ module DeleteWebhook = {
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeletePipeline = {
   type t
   @ocaml.doc("<p>Represents the input of a <code>DeletePipeline</code> action.</p>")
@@ -1653,7 +1629,6 @@ module DeletePipeline = {
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteCustomActionType = {
   type t
   @ocaml.doc("<p>Represents the input of a <code>DeleteCustomActionType</code> operation. The custom
@@ -1670,11 +1645,9 @@ module DeleteCustomActionType = {
   type response = {.}
   @module("@aws-sdk/client-codepipeline") @new
   external new: request => t = "DeleteCustomActionTypeCommand"
-  let make = (~version, ~provider, ~category, ()) =>
-    new({version: version, provider: provider, category: category})
+  let make = (~version, ~provider, ~category, ()) => new({version, provider, category})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module AcknowledgeThirdPartyJob = {
   type t
   @ocaml.doc("<p>Represents the input of an AcknowledgeThirdPartyJob action.</p>")
@@ -1694,11 +1667,9 @@ module AcknowledgeThirdPartyJob = {
   }
   @module("@aws-sdk/client-codepipeline") @new
   external new: request => t = "AcknowledgeThirdPartyJobCommand"
-  let make = (~clientToken, ~nonce, ~jobId, ()) =>
-    new({clientToken: clientToken, nonce: nonce, jobId: jobId})
+  let make = (~clientToken, ~nonce, ~jobId, ()) => new({clientToken, nonce, jobId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module AcknowledgeJob = {
   type t
   @ocaml.doc("<p>Represents the input of an AcknowledgeJob action.</p>")
@@ -1717,10 +1688,9 @@ module AcknowledgeJob = {
     status: option<jobStatus>,
   }
   @module("@aws-sdk/client-codepipeline") @new external new: request => t = "AcknowledgeJobCommand"
-  let make = (~nonce, ~jobId, ()) => new({nonce: nonce, jobId: jobId})
+  let make = (~nonce, ~jobId, ()) => new({nonce, jobId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UntagResource = {
   type t
   type request = {
@@ -1731,10 +1701,9 @@ module UntagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-codepipeline") @new external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
+  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys, resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module PutThirdPartyJobSuccessResult = {
   type t
   @ocaml.doc("<p>Represents the input of a <code>PutThirdPartyJobSuccessResult</code>
@@ -1768,17 +1737,9 @@ module PutThirdPartyJobSuccessResult = {
     ~continuationToken=?,
     ~currentRevision=?,
     (),
-  ) =>
-    new({
-      executionDetails: executionDetails,
-      continuationToken: continuationToken,
-      currentRevision: currentRevision,
-      clientToken: clientToken,
-      jobId: jobId,
-    })
+  ) => new({executionDetails, continuationToken, currentRevision, clientToken, jobId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module PutThirdPartyJobFailureResult = {
   type t
   @ocaml.doc("<p>Represents the input of a <code>PutThirdPartyJobFailureResult</code>
@@ -1797,10 +1758,9 @@ module PutThirdPartyJobFailureResult = {
   @module("@aws-sdk/client-codepipeline") @new
   external new: request => t = "PutThirdPartyJobFailureResultCommand"
   let make = (~failureDetails, ~clientToken, ~jobId, ()) =>
-    new({failureDetails: failureDetails, clientToken: clientToken, jobId: jobId})
+    new({failureDetails, clientToken, jobId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module PutJobSuccessResult = {
   type t
   @ocaml.doc("<p>Represents the input of a <code>PutJobSuccessResult</code> action.</p>")
@@ -1835,17 +1795,9 @@ module PutJobSuccessResult = {
     ~continuationToken=?,
     ~currentRevision=?,
     (),
-  ) =>
-    new({
-      outputVariables: outputVariables,
-      executionDetails: executionDetails,
-      continuationToken: continuationToken,
-      currentRevision: currentRevision,
-      jobId: jobId,
-    })
+  ) => new({outputVariables, executionDetails, continuationToken, currentRevision, jobId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module PutJobFailureResult = {
   type t
   @ocaml.doc("<p>Represents the input of a <code>PutJobFailureResult</code> action.</p>")
@@ -1858,10 +1810,9 @@ module PutJobFailureResult = {
   type response = {.}
   @module("@aws-sdk/client-codepipeline") @new
   external new: request => t = "PutJobFailureResultCommand"
-  let make = (~failureDetails, ~jobId, ()) => new({failureDetails: failureDetails, jobId: jobId})
+  let make = (~failureDetails, ~jobId, ()) => new({failureDetails, jobId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module PutApprovalResult = {
   type t
   @ocaml.doc("<p>Represents the input of a <code>PutApprovalResult</code> action.</p>")
@@ -1886,16 +1837,9 @@ module PutApprovalResult = {
   @module("@aws-sdk/client-codepipeline") @new
   external new: request => t = "PutApprovalResultCommand"
   let make = (~token, ~result, ~actionName, ~stageName, ~pipelineName, ()) =>
-    new({
-      token: token,
-      result: result,
-      actionName: actionName,
-      stageName: stageName,
-      pipelineName: pipelineName,
-    })
+    new({token, result, actionName, stageName, pipelineName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module PutActionRevision = {
   type t
   @ocaml.doc("<p>Represents the input of a <code>PutActionRevision</code> action.</p>")
@@ -1920,15 +1864,9 @@ module PutActionRevision = {
   @module("@aws-sdk/client-codepipeline") @new
   external new: request => t = "PutActionRevisionCommand"
   let make = (~actionRevision, ~actionName, ~stageName, ~pipelineName, ()) =>
-    new({
-      actionRevision: actionRevision,
-      actionName: actionName,
-      stageName: stageName,
-      pipelineName: pipelineName,
-    })
+    new({actionRevision, actionName, stageName, pipelineName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module TagResource = {
   type t
   type request = {
@@ -1938,10 +1876,9 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-codepipeline") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
+  let make = (~tags, ~resourceArn, ()) => new({tags, resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module PollForThirdPartyJobs = {
   type t
   @ocaml.doc("<p>Represents the input of a <code>PollForThirdPartyJobs</code> action.</p>")
@@ -1957,11 +1894,9 @@ module PollForThirdPartyJobs = {
   }
   @module("@aws-sdk/client-codepipeline") @new
   external new: request => t = "PollForThirdPartyJobsCommand"
-  let make = (~actionTypeId, ~maxBatchSize=?, ()) =>
-    new({maxBatchSize: maxBatchSize, actionTypeId: actionTypeId})
+  let make = (~actionTypeId, ~maxBatchSize=?, ()) => new({maxBatchSize, actionTypeId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListTagsForResource = {
   type t
   type request = {
@@ -1985,10 +1920,9 @@ module ListTagsForResource = {
   @module("@aws-sdk/client-codepipeline") @new
   external new: request => t = "ListTagsForResourceCommand"
   let make = (~resourceArn, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, resourceArn: resourceArn})
+    new({maxResults, nextToken, resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListPipelines = {
   type t
   @ocaml.doc("<p>Represents the input of a <code>ListPipelines</code> action.</p>")
@@ -2010,11 +1944,9 @@ module ListPipelines = {
     @ocaml.doc("<p>The list of pipelines.</p>") pipelines: option<pipelineList>,
   }
   @module("@aws-sdk/client-codepipeline") @new external new: request => t = "ListPipelinesCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetPipelineExecution = {
   type t
   @ocaml.doc("<p>Represents the input of a <code>GetPipelineExecution</code> action.</p>")
@@ -2032,11 +1964,9 @@ module GetPipelineExecution = {
   }
   @module("@aws-sdk/client-codepipeline") @new
   external new: request => t = "GetPipelineExecutionCommand"
-  let make = (~pipelineExecutionId, ~pipelineName, ()) =>
-    new({pipelineExecutionId: pipelineExecutionId, pipelineName: pipelineName})
+  let make = (~pipelineExecutionId, ~pipelineName, ()) => new({pipelineExecutionId, pipelineName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateCustomActionType = {
   type t
   @ocaml.doc("<p>Represents the input of a CreateCustomActionType operation.</p>")
@@ -2085,18 +2015,17 @@ module CreateCustomActionType = {
     (),
   ) =>
     new({
-      tags: tags,
-      outputArtifactDetails: outputArtifactDetails,
-      inputArtifactDetails: inputArtifactDetails,
-      configurationProperties: configurationProperties,
-      settings: settings,
-      version: version,
-      provider: provider,
-      category: category,
+      tags,
+      outputArtifactDetails,
+      inputArtifactDetails,
+      configurationProperties,
+      settings,
+      version,
+      provider,
+      category,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module PutWebhook = {
   type t
   type request = {
@@ -2113,10 +2042,9 @@ module PutWebhook = {
     webhook: option<listWebhookItem>,
   }
   @module("@aws-sdk/client-codepipeline") @new external new: request => t = "PutWebhookCommand"
-  let make = (~webhook, ~tags=?, ()) => new({tags: tags, webhook: webhook})
+  let make = (~webhook, ~tags=?, ()) => new({tags, webhook})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListPipelineExecutions = {
   type t
   @ocaml.doc("<p>Represents the input of a <code>ListPipelineExecutions</code> action.</p>")
@@ -2146,10 +2074,9 @@ module ListPipelineExecutions = {
   @module("@aws-sdk/client-codepipeline") @new
   external new: request => t = "ListPipelineExecutionsCommand"
   let make = (~pipelineName, ~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken: nextToken, maxResults: maxResults, pipelineName: pipelineName})
+    new({nextToken, maxResults, pipelineName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListActionTypes = {
   type t
   @ocaml.doc("<p>Represents the input of a <code>ListActionTypes</code> action.</p>")
@@ -2172,10 +2099,9 @@ module ListActionTypes = {
   }
   @module("@aws-sdk/client-codepipeline") @new external new: request => t = "ListActionTypesCommand"
   let make = (~regionFilter=?, ~nextToken=?, ~actionOwnerFilter=?, ()) =>
-    new({regionFilter: regionFilter, nextToken: nextToken, actionOwnerFilter: actionOwnerFilter})
+    new({regionFilter, nextToken, actionOwnerFilter})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateActionType = {
   type t
   type request = {
@@ -2188,7 +2114,6 @@ module UpdateActionType = {
   let make = (~actionType, ()) => new({actionType: actionType})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module ListWebhooks = {
   type t
   type request = {
@@ -2212,11 +2137,9 @@ module ListWebhooks = {
     webhooks: option<webhookList>,
   }
   @module("@aws-sdk/client-codepipeline") @new external new: request => t = "ListWebhooksCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetActionType = {
   type t
   type request = {
@@ -2270,10 +2193,9 @@ module GetActionType = {
   }
   @module("@aws-sdk/client-codepipeline") @new external new: request => t = "GetActionTypeCommand"
   let make = (~version, ~provider, ~owner, ~category, ()) =>
-    new({version: version, provider: provider, owner: owner, category: category})
+    new({version, provider, owner, category})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListActionExecutions = {
   type t
   type request = {
@@ -2307,10 +2229,9 @@ module ListActionExecutions = {
   @module("@aws-sdk/client-codepipeline") @new
   external new: request => t = "ListActionExecutionsCommand"
   let make = (~pipelineName, ~nextToken=?, ~maxResults=?, ~filter=?, ()) =>
-    new({nextToken: nextToken, maxResults: maxResults, filter: filter, pipelineName: pipelineName})
+    new({nextToken, maxResults, filter, pipelineName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetThirdPartyJobDetails = {
   type t
   @ocaml.doc("<p>Represents the input of a <code>GetThirdPartyJobDetails</code> action.</p>")
@@ -2329,10 +2250,9 @@ module GetThirdPartyJobDetails = {
   }
   @module("@aws-sdk/client-codepipeline") @new
   external new: request => t = "GetThirdPartyJobDetailsCommand"
-  let make = (~clientToken, ~jobId, ()) => new({clientToken: clientToken, jobId: jobId})
+  let make = (~clientToken, ~jobId, ()) => new({clientToken, jobId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetPipelineState = {
   type t
   @ocaml.doc("<p>Represents the input of a <code>GetPipelineState</code> action.</p>")
@@ -2363,7 +2283,6 @@ module GetPipelineState = {
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetJobDetails = {
   type t
   @ocaml.doc("<p>Represents the input of a <code>GetJobDetails</code> action.</p>")
@@ -2381,7 +2300,6 @@ module GetJobDetails = {
   let make = (~jobId, ()) => new({jobId: jobId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdatePipeline = {
   type t
   @ocaml.doc("<p>Represents the input of an <code>UpdatePipeline</code> action.</p>")
@@ -2397,7 +2315,6 @@ module UpdatePipeline = {
   let make = (~pipeline, ()) => new({pipeline: pipeline})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module PollForJobs = {
   type t
   @ocaml.doc("<p>Represents the input of a <code>PollForJobs</code> action.</p>")
@@ -2417,10 +2334,9 @@ module PollForJobs = {
   }
   @module("@aws-sdk/client-codepipeline") @new external new: request => t = "PollForJobsCommand"
   let make = (~actionTypeId, ~queryParam=?, ~maxBatchSize=?, ()) =>
-    new({queryParam: queryParam, maxBatchSize: maxBatchSize, actionTypeId: actionTypeId})
+    new({queryParam, maxBatchSize, actionTypeId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetPipeline = {
   type t
   @ocaml.doc("<p>Represents the input of a <code>GetPipeline</code> action.</p>")
@@ -2442,10 +2358,9 @@ module GetPipeline = {
     pipeline: option<pipelineDeclaration>,
   }
   @module("@aws-sdk/client-codepipeline") @new external new: request => t = "GetPipelineCommand"
-  let make = (~name, ~version=?, ()) => new({version: version, name: name})
+  let make = (~name, ~version=?, ()) => new({version, name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreatePipeline = {
   type t
   @ocaml.doc("<p>Represents the input of a <code>CreatePipeline</code> action.</p>")
@@ -2463,6 +2378,6 @@ module CreatePipeline = {
     pipeline: option<pipelineDeclaration>,
   }
   @module("@aws-sdk/client-codepipeline") @new external new: request => t = "CreatePipelineCommand"
-  let make = (~pipeline, ~tags=?, ()) => new({tags: tags, pipeline: pipeline})
+  let make = (~pipeline, ~tags=?, ()) => new({tags, pipeline})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

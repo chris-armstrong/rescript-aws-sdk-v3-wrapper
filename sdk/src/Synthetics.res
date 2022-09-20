@@ -491,7 +491,6 @@ module StopCanary = {
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module StartCanary = {
   type t
   type request = {
@@ -505,7 +504,6 @@ module StartCanary = {
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteCanary = {
   type t
   type request = {
@@ -520,7 +518,6 @@ module DeleteCanary = {
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module UntagResource = {
   type t
   type request = {
@@ -535,10 +532,9 @@ module UntagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-synthetics") @new external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
+  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys, resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module TagResource = {
   type t
   type request = {
@@ -553,10 +549,9 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-synthetics") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
+  let make = (~tags, ~resourceArn, ()) => new({tags, resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module ListTagsForResource = {
   type t
   type request = {
@@ -579,7 +574,6 @@ module ListTagsForResource = {
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeRuntimeVersions = {
   type t
   type request = {
@@ -606,11 +600,9 @@ module DescribeRuntimeVersions = {
   }
   @module("@aws-sdk/client-synthetics") @new
   external new: request => t = "DescribeRuntimeVersionsCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetCanaryRuns = {
   type t
   type request = {
@@ -639,11 +631,9 @@ module GetCanaryRuns = {
     canaryRuns: option<canaryRuns>,
   }
   @module("@aws-sdk/client-synthetics") @new external new: request => t = "GetCanaryRunsCommand"
-  let make = (~name, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, name: name})
+  let make = (~name, ~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken, name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateCanary = {
   type t
   type request = {
@@ -764,22 +754,21 @@ module UpdateCanary = {
     (),
   ) =>
     new({
-      artifactConfig: artifactConfig,
-      artifactS3Location: artifactS3Location,
-      visualReference: visualReference,
-      vpcConfig: vpcConfig,
-      failureRetentionPeriodInDays: failureRetentionPeriodInDays,
-      successRetentionPeriodInDays: successRetentionPeriodInDays,
-      runConfig: runConfig,
-      schedule: schedule,
-      runtimeVersion: runtimeVersion,
-      executionRoleArn: executionRoleArn,
-      code: code,
-      name: name,
+      artifactConfig,
+      artifactS3Location,
+      visualReference,
+      vpcConfig,
+      failureRetentionPeriodInDays,
+      successRetentionPeriodInDays,
+      runConfig,
+      schedule,
+      runtimeVersion,
+      executionRoleArn,
+      code,
+      name,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DescribeCanariesLastRun = {
   type t
   type request = {
@@ -817,11 +806,9 @@ module DescribeCanariesLastRun = {
   }
   @module("@aws-sdk/client-synthetics") @new
   external new: request => t = "DescribeCanariesLastRunCommand"
-  let make = (~names=?, ~maxResults=?, ~nextToken=?, ()) =>
-    new({names: names, maxResults: maxResults, nextToken: nextToken})
+  let make = (~names=?, ~maxResults=?, ~nextToken=?, ()) => new({names, maxResults, nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetCanary = {
   type t
   type request = {
@@ -837,7 +824,6 @@ module GetCanary = {
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateCanary = {
   type t
   type request = {
@@ -964,22 +950,21 @@ module CreateCanary = {
     (),
   ) =>
     new({
-      artifactConfig: artifactConfig,
-      tags: tags,
-      vpcConfig: vpcConfig,
-      runtimeVersion: runtimeVersion,
-      failureRetentionPeriodInDays: failureRetentionPeriodInDays,
-      successRetentionPeriodInDays: successRetentionPeriodInDays,
-      runConfig: runConfig,
-      schedule: schedule,
-      executionRoleArn: executionRoleArn,
-      artifactS3Location: artifactS3Location,
-      code: code,
-      name: name,
+      artifactConfig,
+      tags,
+      vpcConfig,
+      runtimeVersion,
+      failureRetentionPeriodInDays,
+      successRetentionPeriodInDays,
+      runConfig,
+      schedule,
+      executionRoleArn,
+      artifactS3Location,
+      code,
+      name,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeCanaries = {
   type t
   type request = {
@@ -1016,7 +1001,6 @@ module DescribeCanaries = {
     canaries: option<canaries>,
   }
   @module("@aws-sdk/client-synthetics") @new external new: request => t = "DescribeCanariesCommand"
-  let make = (~names=?, ~maxResults=?, ~nextToken=?, ()) =>
-    new({names: names, maxResults: maxResults, nextToken: nextToken})
+  let make = (~names=?, ~maxResults=?, ~nextToken=?, ()) => new({names, maxResults, nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

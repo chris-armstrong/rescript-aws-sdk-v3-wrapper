@@ -82,7 +82,6 @@ module DeleteReportDefinition = {
   let make = (~reportId, ()) => new({reportId: reportId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateReportDefinition = {
   type t
   type request = {
@@ -105,17 +104,9 @@ module UpdateReportDefinition = {
     ~reportDescription,
     ~reportId,
     (),
-  ) =>
-    new({
-      destinationS3Location: destinationS3Location,
-      format: format,
-      reportFrequency: reportFrequency,
-      reportDescription: reportDescription,
-      reportId: reportId,
-    })
+  ) => new({destinationS3Location, format, reportFrequency, reportDescription, reportId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module PutReportDefinition = {
   type t
   type request = {
@@ -140,17 +131,9 @@ module PutReportDefinition = {
     ~reportDescription,
     ~reportId,
     (),
-  ) =>
-    new({
-      destinationS3Location: destinationS3Location,
-      format: format,
-      reportFrequency: reportFrequency,
-      reportDescription: reportDescription,
-      reportId: reportId,
-    })
+  ) => new({destinationS3Location, format, reportFrequency, reportDescription, reportId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ImportApplicationUsage = {
   type t
   type request = {
@@ -163,7 +146,6 @@ module ImportApplicationUsage = {
   let make = (~sourceS3Location, ()) => new({sourceS3Location: sourceS3Location})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetReportDefinition = {
   type t
   type request = {@ocaml.doc("<p>ID of the report to retrieve.</p>") reportId: reportId}
@@ -186,7 +168,6 @@ module GetReportDefinition = {
   let make = (~reportId, ()) => new({reportId: reportId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListReportDefinitions = {
   type t
   type request = {
@@ -203,7 +184,6 @@ module ListReportDefinitions = {
   }
   @module("@aws-sdk/client-application-cost-profiler") @new
   external new: request => t = "ListReportDefinitionsCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

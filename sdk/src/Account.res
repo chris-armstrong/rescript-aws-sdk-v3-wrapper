@@ -83,18 +83,9 @@ module PutAlternateContact = {
     ~name,
     ~accountId=?,
     (),
-  ) =>
-    new({
-      accountId: accountId,
-      alternateContactType: alternateContactType,
-      phoneNumber: phoneNumber,
-      emailAddress: emailAddress,
-      title: title,
-      name: name,
-    })
+  ) => new({accountId, alternateContactType, phoneNumber, emailAddress, title, name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteAlternateContact = {
   type t
   type request = {
@@ -125,11 +116,9 @@ module DeleteAlternateContact = {
   type response = {.}
   @module("@aws-sdk/client-account") @new
   external new: request => t = "DeleteAlternateContactCommand"
-  let make = (~alternateContactType, ~accountId=?, ()) =>
-    new({accountId: accountId, alternateContactType: alternateContactType})
+  let make = (~alternateContactType, ~accountId=?, ()) => new({accountId, alternateContactType})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module GetAlternateContact = {
   type t
   type request = {
@@ -163,7 +152,6 @@ module GetAlternateContact = {
     alternateContact: option<alternateContact>,
   }
   @module("@aws-sdk/client-account") @new external new: request => t = "GetAlternateContactCommand"
-  let make = (~alternateContactType, ~accountId=?, ()) =>
-    new({accountId: accountId, alternateContactType: alternateContactType})
+  let make = (~alternateContactType, ~accountId=?, ()) => new({accountId, alternateContactType})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

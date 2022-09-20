@@ -179,6 +179,6 @@ module GetEntitlements = {
   @module("@aws-sdk/client-aws-marketplace") @new
   external new: request => t = "GetEntitlementsCommand"
   let make = (~productCode, ~maxResults=?, ~nextToken=?, ~filter=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, filter: filter, productCode: productCode})
+    new({maxResults, nextToken, filter, productCode})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

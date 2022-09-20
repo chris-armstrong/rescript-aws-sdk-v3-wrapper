@@ -1097,7 +1097,6 @@ module StopFlow = {
   let make = (~flowArn, ()) => new({flowArn: flowArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module StartFlow = {
   type t
   type request = {
@@ -1112,7 +1111,6 @@ module StartFlow = {
   let make = (~flowArn, ()) => new({flowArn: flowArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module RevokeFlowEntitlement = {
   type t
   type request = {
@@ -1129,11 +1127,9 @@ module RevokeFlowEntitlement = {
   }
   @module("@aws-sdk/client-mediaconnect") @new
   external new: request => t = "RevokeFlowEntitlementCommand"
-  let make = (~flowArn, ~entitlementArn, ()) =>
-    new({flowArn: flowArn, entitlementArn: entitlementArn})
+  let make = (~flowArn, ~entitlementArn, ()) => new({flowArn, entitlementArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module RemoveFlowSource = {
   type t
   type request = {
@@ -1149,10 +1145,9 @@ module RemoveFlowSource = {
   }
   @module("@aws-sdk/client-mediaconnect") @new
   external new: request => t = "RemoveFlowSourceCommand"
-  let make = (~sourceArn, ~flowArn, ()) => new({sourceArn: sourceArn, flowArn: flowArn})
+  let make = (~sourceArn, ~flowArn, ()) => new({sourceArn, flowArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module RemoveFlowOutput = {
   type t
   type request = {
@@ -1168,10 +1163,9 @@ module RemoveFlowOutput = {
   }
   @module("@aws-sdk/client-mediaconnect") @new
   external new: request => t = "RemoveFlowOutputCommand"
-  let make = (~outputArn, ~flowArn, ()) => new({outputArn: outputArn, flowArn: flowArn})
+  let make = (~outputArn, ~flowArn, ()) => new({outputArn, flowArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module RemoveFlowMediaStream = {
   type t
   type request = {
@@ -1187,11 +1181,9 @@ module RemoveFlowMediaStream = {
   }
   @module("@aws-sdk/client-mediaconnect") @new
   external new: request => t = "RemoveFlowMediaStreamCommand"
-  let make = (~mediaStreamName, ~flowArn, ()) =>
-    new({mediaStreamName: mediaStreamName, flowArn: flowArn})
+  let make = (~mediaStreamName, ~flowArn, ()) => new({mediaStreamName, flowArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteFlow = {
   type t
   type request = {
@@ -1206,7 +1198,6 @@ module DeleteFlow = {
   let make = (~flowArn, ()) => new({flowArn: flowArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UntagResource = {
   type t
   type request = {
@@ -1219,10 +1210,9 @@ module UntagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-mediaconnect") @new external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
+  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys, resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module TagResource = {
   type t
   @ocaml.doc(
@@ -1242,10 +1232,9 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-mediaconnect") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
+  let make = (~tags, ~resourceArn, ()) => new({tags, resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module RemoveFlowVpcInterface = {
   type t
   type request = {
@@ -1268,11 +1257,9 @@ module RemoveFlowVpcInterface = {
   }
   @module("@aws-sdk/client-mediaconnect") @new
   external new: request => t = "RemoveFlowVpcInterfaceCommand"
-  let make = (~vpcInterfaceName, ~flowArn, ()) =>
-    new({vpcInterfaceName: vpcInterfaceName, flowArn: flowArn})
+  let make = (~vpcInterfaceName, ~flowArn, ()) => new({vpcInterfaceName, flowArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListTagsForResource = {
   type t
   type request = {
@@ -1294,7 +1281,6 @@ module ListTagsForResource = {
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateFlowEntitlement = {
   type t
   @ocaml.doc("The entitlement fields that you want to update.")
@@ -1341,18 +1327,9 @@ module UpdateFlowEntitlement = {
     ~encryption=?,
     ~description=?,
     (),
-  ) =>
-    new({
-      subscribers: subscribers,
-      flowArn: flowArn,
-      entitlementStatus: entitlementStatus,
-      entitlementArn: entitlementArn,
-      encryption: encryption,
-      description: description,
-    })
+  ) => new({subscribers, flowArn, entitlementStatus, entitlementArn, encryption, description})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module PurchaseOffering = {
   type t
   @ocaml.doc("A request to purchase a offering.")
@@ -1371,10 +1348,9 @@ module PurchaseOffering = {
   @module("@aws-sdk/client-mediaconnect") @new
   external new: request => t = "PurchaseOfferingCommand"
   let make = (~start, ~reservationName, ~offeringArn, ()) =>
-    new({start: start, reservationName: reservationName, offeringArn: offeringArn})
+    new({start, reservationName, offeringArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListEntitlements = {
   type t
   type request = {
@@ -1401,11 +1377,9 @@ module ListEntitlements = {
   }
   @module("@aws-sdk/client-mediaconnect") @new
   external new: request => t = "ListEntitlementsCommand"
-  let make = (~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken: nextToken, maxResults: maxResults})
+  let make = (~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeReservation = {
   type t
   type request = {
@@ -1418,7 +1392,6 @@ module DescribeReservation = {
   let make = (~reservationArn, ()) => new({reservationArn: reservationArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeOffering = {
   type t
   type request = {
@@ -1431,7 +1404,6 @@ module DescribeOffering = {
   let make = (~offeringArn, ()) => new({offeringArn: offeringArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateFlowMediaStream = {
   type t
   @ocaml.doc("The fields that you want to update in the media stream.")
@@ -1471,17 +1443,16 @@ module UpdateFlowMediaStream = {
     (),
   ) =>
     new({
-      videoFormat: videoFormat,
-      mediaStreamType: mediaStreamType,
-      mediaStreamName: mediaStreamName,
-      flowArn: flowArn,
-      description: description,
-      clockRate: clockRate,
-      attributes: attributes,
+      videoFormat,
+      mediaStreamType,
+      mediaStreamName,
+      flowArn,
+      description,
+      clockRate,
+      attributes,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListReservations = {
   type t
   type request = {
@@ -1510,11 +1481,9 @@ module ListReservations = {
   }
   @module("@aws-sdk/client-mediaconnect") @new
   external new: request => t = "ListReservationsCommand"
-  let make = (~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken: nextToken, maxResults: maxResults})
+  let make = (~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListOfferings = {
   type t
   type request = {
@@ -1540,11 +1509,9 @@ module ListOfferings = {
     nextToken: option<__string>,
   }
   @module("@aws-sdk/client-mediaconnect") @new external new: request => t = "ListOfferingsCommand"
-  let make = (~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken: nextToken, maxResults: maxResults})
+  let make = (~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListFlows = {
   type t
   type request = {
@@ -1568,11 +1535,9 @@ module ListFlows = {
     @ocaml.doc("A list of flow summaries.") @as("Flows") flows: option<__listOfListedFlow>,
   }
   @module("@aws-sdk/client-mediaconnect") @new external new: request => t = "ListFlowsCommand"
-  let make = (~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken: nextToken, maxResults: maxResults})
+  let make = (~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GrantFlowEntitlements = {
   type t
   @ocaml.doc("A request to grant entitlements on a flow.")
@@ -1589,10 +1554,9 @@ module GrantFlowEntitlements = {
   }
   @module("@aws-sdk/client-mediaconnect") @new
   external new: request => t = "GrantFlowEntitlementsCommand"
-  let make = (~flowArn, ~entitlements, ()) => new({flowArn: flowArn, entitlements: entitlements})
+  let make = (~flowArn, ~entitlements, ()) => new({flowArn, entitlements})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module AddFlowVpcInterfaces = {
   type t
   @ocaml.doc("A request to add VPC interfaces to the flow.")
@@ -1609,10 +1573,9 @@ module AddFlowVpcInterfaces = {
   }
   @module("@aws-sdk/client-mediaconnect") @new
   external new: request => t = "AddFlowVpcInterfacesCommand"
-  let make = (~vpcInterfaces, ~flowArn, ()) => new({vpcInterfaces: vpcInterfaces, flowArn: flowArn})
+  let make = (~vpcInterfaces, ~flowArn, ()) => new({vpcInterfaces, flowArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module AddFlowMediaStreams = {
   type t
   @ocaml.doc("A request to add media streams to the flow.")
@@ -1629,10 +1592,9 @@ module AddFlowMediaStreams = {
   }
   @module("@aws-sdk/client-mediaconnect") @new
   external new: request => t = "AddFlowMediaStreamsCommand"
-  let make = (~mediaStreams, ~flowArn, ()) => new({mediaStreams: mediaStreams, flowArn: flowArn})
+  let make = (~mediaStreams, ~flowArn, ()) => new({mediaStreams, flowArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateFlowSource = {
   type t
   @ocaml.doc("A request to update the source of a flow.")
@@ -1731,27 +1693,26 @@ module UpdateFlowSource = {
     (),
   ) =>
     new({
-      whitelistCidr: whitelistCidr,
-      vpcInterfaceName: vpcInterfaceName,
-      streamId: streamId,
-      sourceArn: sourceArn,
-      senderIpAddress: senderIpAddress,
-      senderControlPort: senderControlPort,
-      protocol: protocol,
-      minLatency: minLatency,
-      mediaStreamSourceConfigurations: mediaStreamSourceConfigurations,
-      maxSyncBuffer: maxSyncBuffer,
-      maxLatency: maxLatency,
-      maxBitrate: maxBitrate,
-      ingestPort: ingestPort,
-      flowArn: flowArn,
-      entitlementArn: entitlementArn,
-      description: description,
-      decryption: decryption,
+      whitelistCidr,
+      vpcInterfaceName,
+      streamId,
+      sourceArn,
+      senderIpAddress,
+      senderControlPort,
+      protocol,
+      minLatency,
+      mediaStreamSourceConfigurations,
+      maxSyncBuffer,
+      maxLatency,
+      maxBitrate,
+      ingestPort,
+      flowArn,
+      entitlementArn,
+      description,
+      decryption,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateFlowOutput = {
   type t
   @ocaml.doc("The fields that you want to update in the output.")
@@ -1849,27 +1810,26 @@ module UpdateFlowOutput = {
     (),
   ) =>
     new({
-      vpcInterfaceAttachment: vpcInterfaceAttachment,
-      streamId: streamId,
-      smoothingLatency: smoothingLatency,
-      senderIpAddress: senderIpAddress,
-      senderControlPort: senderControlPort,
-      remoteId: remoteId,
-      protocol: protocol,
-      port: port,
-      outputArn: outputArn,
-      minLatency: minLatency,
-      mediaStreamOutputConfigurations: mediaStreamOutputConfigurations,
-      maxLatency: maxLatency,
-      flowArn: flowArn,
-      encryption: encryption,
-      destination: destination,
-      description: description,
-      cidrAllowList: cidrAllowList,
+      vpcInterfaceAttachment,
+      streamId,
+      smoothingLatency,
+      senderIpAddress,
+      senderControlPort,
+      remoteId,
+      protocol,
+      port,
+      outputArn,
+      minLatency,
+      mediaStreamOutputConfigurations,
+      maxLatency,
+      flowArn,
+      encryption,
+      destination,
+      description,
+      cidrAllowList,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module AddFlowSources = {
   type t
   @ocaml.doc("A request to add sources to the flow.")
@@ -1885,10 +1845,9 @@ module AddFlowSources = {
     flowArn: option<__string>,
   }
   @module("@aws-sdk/client-mediaconnect") @new external new: request => t = "AddFlowSourcesCommand"
-  let make = (~sources, ~flowArn, ()) => new({sources: sources, flowArn: flowArn})
+  let make = (~sources, ~flowArn, ()) => new({sources, flowArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module AddFlowOutputs = {
   type t
   @ocaml.doc("A request to add outputs to the specified flow.")
@@ -1904,10 +1863,9 @@ module AddFlowOutputs = {
     flowArn: option<__string>,
   }
   @module("@aws-sdk/client-mediaconnect") @new external new: request => t = "AddFlowOutputsCommand"
-  let make = (~outputs, ~flowArn, ()) => new({outputs: outputs, flowArn: flowArn})
+  let make = (~outputs, ~flowArn, ()) => new({outputs, flowArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateFlow = {
   type t
   @ocaml.doc("A request to update flow.")
@@ -1919,10 +1877,9 @@ module UpdateFlow = {
   type response = {@as("Flow") flow: option<flow>}
   @module("@aws-sdk/client-mediaconnect") @new external new: request => t = "UpdateFlowCommand"
   let make = (~flowArn, ~maintenance=?, ~sourceFailoverConfig=?, ()) =>
-    new({maintenance: maintenance, sourceFailoverConfig: sourceFailoverConfig, flowArn: flowArn})
+    new({maintenance, sourceFailoverConfig, flowArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeFlow = {
   type t
   type request = {
@@ -1936,7 +1893,6 @@ module DescribeFlow = {
   let make = (~flowArn, ()) => new({flowArn: flowArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateFlow = {
   type t
   @ocaml.doc(
@@ -1981,16 +1937,16 @@ module CreateFlow = {
     (),
   ) =>
     new({
-      maintenance: maintenance,
-      vpcInterfaces: vpcInterfaces,
-      sources: sources,
-      sourceFailoverConfig: sourceFailoverConfig,
-      source: source,
-      outputs: outputs,
-      name: name,
-      mediaStreams: mediaStreams,
-      entitlements: entitlements,
-      availabilityZone: availabilityZone,
+      maintenance,
+      vpcInterfaces,
+      sources,
+      sourceFailoverConfig,
+      source,
+      outputs,
+      name,
+      mediaStreams,
+      entitlements,
+      availabilityZone,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

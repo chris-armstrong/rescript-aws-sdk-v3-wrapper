@@ -447,10 +447,9 @@ module UntagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-dlm") @new external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
+  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys, resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module TagResource = {
   type t
   type request = {
@@ -460,10 +459,9 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-dlm") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
+  let make = (~tags, ~resourceArn, ()) => new({tags, resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module ListTagsForResource = {
   type t
   type request = {
@@ -477,7 +475,6 @@ module ListTagsForResource = {
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteLifecyclePolicy = {
   type t
   type request = {
@@ -488,7 +485,6 @@ module DeleteLifecyclePolicy = {
   let make = (~policyId, ()) => new({policyId: policyId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module GetLifecyclePolicies = {
   type t
   type request = {
@@ -514,16 +510,9 @@ module GetLifecyclePolicies = {
   }
   @module("@aws-sdk/client-dlm") @new external new: request => t = "GetLifecyclePoliciesCommand"
   let make = (~tagsToAdd=?, ~targetTags=?, ~resourceTypes=?, ~state=?, ~policyIds=?, ()) =>
-    new({
-      tagsToAdd: tagsToAdd,
-      targetTags: targetTags,
-      resourceTypes: resourceTypes,
-      state: state,
-      policyIds: policyIds,
-    })
+    new({tagsToAdd, targetTags, resourceTypes, state, policyIds})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateLifecyclePolicy = {
   type t
   type request = {
@@ -545,16 +534,9 @@ module UpdateLifecyclePolicy = {
   type response = {.}
   @module("@aws-sdk/client-dlm") @new external new: request => t = "UpdateLifecyclePolicyCommand"
   let make = (~policyId, ~policyDetails=?, ~description=?, ~state=?, ~executionRoleArn=?, ()) =>
-    new({
-      policyDetails: policyDetails,
-      description: description,
-      state: state,
-      executionRoleArn: executionRoleArn,
-      policyId: policyId,
-    })
+    new({policyDetails, description, state, executionRoleArn, policyId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module CreateLifecyclePolicy = {
   type t
   type request = {
@@ -580,16 +562,9 @@ module CreateLifecyclePolicy = {
   }
   @module("@aws-sdk/client-dlm") @new external new: request => t = "CreateLifecyclePolicyCommand"
   let make = (~policyDetails, ~state, ~description, ~executionRoleArn, ~tags=?, ()) =>
-    new({
-      tags: tags,
-      policyDetails: policyDetails,
-      state: state,
-      description: description,
-      executionRoleArn: executionRoleArn,
-    })
+    new({tags, policyDetails, state, description, executionRoleArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetLifecyclePolicy = {
   type t
   type request = {

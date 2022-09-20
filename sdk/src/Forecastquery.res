@@ -88,12 +88,6 @@ module QueryForecast = {
   type response = {@ocaml.doc("<p>The forecast.</p>") @as("Forecast") forecast: option<forecast>}
   @module("@aws-sdk/client-forecast") @new external new: request => t = "QueryForecastCommand"
   let make = (~filters, ~forecastArn, ~nextToken=?, ~endDate=?, ~startDate=?, ()) =>
-    new({
-      nextToken: nextToken,
-      filters: filters,
-      endDate: endDate,
-      startDate: startDate,
-      forecastArn: forecastArn,
-    })
+    new({nextToken, filters, endDate, startDate, forecastArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

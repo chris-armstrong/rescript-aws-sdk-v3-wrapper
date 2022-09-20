@@ -191,10 +191,9 @@ module UploadDocuments = {
     status: option<string_>,
   }
   @module("@aws-sdk/client-cloudsearch") @new external new: request => t = "UploadDocumentsCommand"
-  let make = (~contentType, ~documents, ()) => new({contentType: contentType, documents: documents})
+  let make = (~contentType, ~documents, ()) => new({contentType, documents})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module Suggest = {
   type t
   @ocaml.doc("<p>Container for the parameters to the <code>Suggest</code> request.</p>")
@@ -215,11 +214,9 @@ module Suggest = {
     status: option<suggestStatus>,
   }
   @module("@aws-sdk/client-cloudsearch") @new external new: request => t = "SuggestCommand"
-  let make = (~suggester, ~query, ~size=?, ()) =>
-    new({size: size, suggester: suggester, query: query})
+  let make = (~suggester, ~query, ~size=?, ()) => new({size, suggester, query})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module Search = {
   type t
   @ocaml.doc("<p>Container for the parameters to the <code>Search</code> request.</p>")
@@ -495,20 +492,20 @@ module Search = {
     (),
   ) =>
     new({
-      stats: stats,
-      start: start,
-      sort: sort,
-      size: size,
-      return: return,
-      queryParser: queryParser,
-      queryOptions: queryOptions,
-      query: query,
-      partial: partial,
-      highlight: highlight,
-      filterQuery: filterQuery,
-      facet: facet,
-      expr: expr,
-      cursor: cursor,
+      stats,
+      start,
+      sort,
+      size,
+      return,
+      queryParser,
+      queryOptions,
+      query,
+      partial,
+      highlight,
+      filterQuery,
+      facet,
+      expr,
+      cursor,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

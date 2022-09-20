@@ -3003,7 +3003,6 @@ module DeletePreset = {
   let make = (~id, ()) => new({id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeletePipeline = {
   type t
   @ocaml.doc("<p>The <code>DeletePipelineRequest</code> structure.</p>")
@@ -3016,7 +3015,6 @@ module DeletePipeline = {
   let make = (~id, ()) => new({id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module CancelJob = {
   type t
   @ocaml.doc("<p>The <code>CancelJobRequest</code> structure.</p>")
@@ -3032,7 +3030,6 @@ module CancelJob = {
   let make = (~id, ()) => new({id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module TestRole = {
   type t
   @ocaml.doc("<p> The <code>TestRoleRequest</code> structure. </p>")
@@ -3071,10 +3068,9 @@ module TestRole = {
   }
   @module("@aws-sdk/client-elastictranscoder") @new external new: request => t = "TestRoleCommand"
   let make = (~topics, ~outputBucket, ~inputBucket, ~role, ()) =>
-    new({topics: topics, outputBucket: outputBucket, inputBucket: inputBucket, role: role})
+    new({topics, outputBucket, inputBucket, role})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ReadPreset = {
   type t
   @ocaml.doc("<p>The <code>ReadPresetRequest</code> structure.</p>")
@@ -3095,7 +3091,6 @@ module ReadPreset = {
   let make = (~id, ()) => new({id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreatePreset = {
   type t
   @ocaml.doc("<p>The <code>CreatePresetRequest</code> structure.</p>")
@@ -3143,17 +3138,9 @@ module CreatePreset = {
   @module("@aws-sdk/client-elastictranscoder") @new
   external new: request => t = "CreatePresetCommand"
   let make = (~container, ~name, ~thumbnails=?, ~audio=?, ~video=?, ~description=?, ()) =>
-    new({
-      thumbnails: thumbnails,
-      audio: audio,
-      video: video,
-      container: container,
-      description: description,
-      name: name,
-    })
+    new({thumbnails, audio, video, container, description, name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdatePipelineStatus = {
   type t
   @ocaml.doc("<p>The <code>UpdatePipelineStatusRequest</code> structure.</p>")
@@ -3184,10 +3171,9 @@ module UpdatePipelineStatus = {
   }
   @module("@aws-sdk/client-elastictranscoder") @new
   external new: request => t = "UpdatePipelineStatusCommand"
-  let make = (~status, ~id, ()) => new({status: status, id: id})
+  let make = (~status, ~id, ()) => new({status, id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdatePipelineNotifications = {
   type t
   @ocaml.doc("<p>The <code>UpdatePipelineNotificationsRequest</code> structure.</p>")
@@ -3239,10 +3225,9 @@ module UpdatePipelineNotifications = {
   }
   @module("@aws-sdk/client-elastictranscoder") @new
   external new: request => t = "UpdatePipelineNotificationsCommand"
-  let make = (~notifications, ~id, ()) => new({notifications: notifications, id: id})
+  let make = (~notifications, ~id, ()) => new({notifications, id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdatePipeline = {
   type t
   @ocaml.doc("<p>The <code>UpdatePipelineRequest</code> structure.</p>")
@@ -3523,19 +3508,9 @@ module UpdatePipeline = {
     ~name=?,
     (),
   ) =>
-    new({
-      thumbnailConfig: thumbnailConfig,
-      contentConfig: contentConfig,
-      notifications: notifications,
-      awsKmsKeyArn: awsKmsKeyArn,
-      role: role,
-      inputBucket: inputBucket,
-      name: name,
-      id: id,
-    })
+    new({thumbnailConfig, contentConfig, notifications, awsKmsKeyArn, role, inputBucket, name, id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ReadPipeline = {
   type t
   @ocaml.doc("<p>The <code>ReadPipelineRequest</code> structure.</p>")
@@ -3559,7 +3534,6 @@ module ReadPipeline = {
   let make = (~id, ()) => new({id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListPresets = {
   type t
   @ocaml.doc("<p>The <code>ListPresetsRequest</code> structure.</p>")
@@ -3586,10 +3560,9 @@ module ListPresets = {
   }
   @module("@aws-sdk/client-elastictranscoder") @new
   external new: request => t = "ListPresetsCommand"
-  let make = (~pageToken=?, ~ascending=?, ()) => new({pageToken: pageToken, ascending: ascending})
+  let make = (~pageToken=?, ~ascending=?, ()) => new({pageToken, ascending})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreatePipeline = {
   type t
   @ocaml.doc("<p>The <code>CreatePipelineRequest</code> structure.</p>")
@@ -3912,18 +3885,17 @@ module CreatePipeline = {
     (),
   ) =>
     new({
-      thumbnailConfig: thumbnailConfig,
-      contentConfig: contentConfig,
-      notifications: notifications,
-      awsKmsKeyArn: awsKmsKeyArn,
-      role: role,
-      outputBucket: outputBucket,
-      inputBucket: inputBucket,
-      name: name,
+      thumbnailConfig,
+      contentConfig,
+      notifications,
+      awsKmsKeyArn,
+      role,
+      outputBucket,
+      inputBucket,
+      name,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListPipelines = {
   type t
   @ocaml.doc("<p>The <code>ListPipelineRequest</code> structure.</p>")
@@ -3950,10 +3922,9 @@ module ListPipelines = {
   }
   @module("@aws-sdk/client-elastictranscoder") @new
   external new: request => t = "ListPipelinesCommand"
-  let make = (~pageToken=?, ~ascending=?, ()) => new({pageToken: pageToken, ascending: ascending})
+  let make = (~pageToken=?, ~ascending=?, ()) => new({pageToken, ascending})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ReadJob = {
   type t
   @ocaml.doc("<p>The <code>ReadJobRequest</code> structure.</p>")
@@ -3972,7 +3943,6 @@ module ReadJob = {
   let make = (~id, ()) => new({id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateJob = {
   type t
   @ocaml.doc("<p>The <code>CreateJobRequest</code> structure.</p>")
@@ -4037,20 +4007,9 @@ module CreateJob = {
     ~inputs=?,
     ~input=?,
     (),
-  ) =>
-    new({
-      userMetadata: userMetadata,
-      playlists: playlists,
-      outputKeyPrefix: outputKeyPrefix,
-      outputs: outputs,
-      output: output,
-      inputs: inputs,
-      input: input,
-      pipelineId: pipelineId,
-    })
+  ) => new({userMetadata, playlists, outputKeyPrefix, outputs, output, inputs, input, pipelineId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListJobsByStatus = {
   type t
   @ocaml.doc("<p>The <code>ListJobsByStatusRequest</code> structure.</p>")
@@ -4086,11 +4045,9 @@ module ListJobsByStatus = {
   }
   @module("@aws-sdk/client-elastictranscoder") @new
   external new: request => t = "ListJobsByStatusCommand"
-  let make = (~status, ~pageToken=?, ~ascending=?, ()) =>
-    new({pageToken: pageToken, ascending: ascending, status: status})
+  let make = (~status, ~pageToken=?, ~ascending=?, ()) => new({pageToken, ascending, status})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListJobsByPipeline = {
   type t
   @ocaml.doc("<p>The <code>ListJobsByPipelineRequest</code> structure.</p>")
@@ -4122,6 +4079,6 @@ module ListJobsByPipeline = {
   @module("@aws-sdk/client-elastictranscoder") @new
   external new: request => t = "ListJobsByPipelineCommand"
   let make = (~pipelineId, ~pageToken=?, ~ascending=?, ()) =>
-    new({pageToken: pageToken, ascending: ascending, pipelineId: pipelineId})
+    new({pageToken, ascending, pipelineId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

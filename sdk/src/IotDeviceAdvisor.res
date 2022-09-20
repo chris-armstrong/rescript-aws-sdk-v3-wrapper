@@ -200,11 +200,9 @@ module StopSuiteRun = {
   type response = {.}
   @module("@aws-sdk/client-iotdeviceadvisor") @new
   external new: request => t = "StopSuiteRunCommand"
-  let make = (~suiteRunId, ~suiteDefinitionId, ()) =>
-    new({suiteRunId: suiteRunId, suiteDefinitionId: suiteDefinitionId})
+  let make = (~suiteRunId, ~suiteDefinitionId, ()) => new({suiteRunId, suiteDefinitionId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module GetSuiteRunReport = {
   type t
   type request = {
@@ -217,11 +215,9 @@ module GetSuiteRunReport = {
   }
   @module("@aws-sdk/client-iotdeviceadvisor") @new
   external new: request => t = "GetSuiteRunReportCommand"
-  let make = (~suiteRunId, ~suiteDefinitionId, ()) =>
-    new({suiteRunId: suiteRunId, suiteDefinitionId: suiteDefinitionId})
+  let make = (~suiteRunId, ~suiteDefinitionId, ()) => new({suiteRunId, suiteDefinitionId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetEndpoint = {
   type t
   type request = {
@@ -234,11 +230,9 @@ module GetEndpoint = {
     @ocaml.doc("<p>The response of an Device Advisor endpoint.</p>") endpoint: option<endpoint>,
   }
   @module("@aws-sdk/client-iotdeviceadvisor") @new external new: request => t = "GetEndpointCommand"
-  let make = (~certificateArn=?, ~thingArn=?, ()) =>
-    new({certificateArn: certificateArn, thingArn: thingArn})
+  let make = (~certificateArn=?, ~thingArn=?, ()) => new({certificateArn, thingArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteSuiteDefinition = {
   type t
   type request = {
@@ -251,7 +245,6 @@ module DeleteSuiteDefinition = {
   let make = (~suiteDefinitionId, ()) => new({suiteDefinitionId: suiteDefinitionId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module UntagResource = {
   type t
   type request = {
@@ -263,10 +256,9 @@ module UntagResource = {
   type response = {.}
   @module("@aws-sdk/client-iotdeviceadvisor") @new
   external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
+  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys, resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module TagResource = {
   type t
   type request = {
@@ -276,10 +268,9 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-iotdeviceadvisor") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
+  let make = (~tags, ~resourceArn, ()) => new({tags, resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module ListTagsForResource = {
   type t
   type request = {
@@ -294,7 +285,6 @@ module ListTagsForResource = {
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module StartSuiteRun = {
   type t
   type request = {
@@ -320,16 +310,9 @@ module StartSuiteRun = {
     ~suiteRunConfiguration=?,
     ~suiteDefinitionVersion=?,
     (),
-  ) =>
-    new({
-      tags: tags,
-      suiteRunConfiguration: suiteRunConfiguration,
-      suiteDefinitionVersion: suiteDefinitionVersion,
-      suiteDefinitionId: suiteDefinitionId,
-    })
+  ) => new({tags, suiteRunConfiguration, suiteDefinitionVersion, suiteDefinitionId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListSuiteRuns = {
   type t
   type request = {
@@ -353,15 +336,9 @@ module ListSuiteRuns = {
   @module("@aws-sdk/client-iotdeviceadvisor") @new
   external new: request => t = "ListSuiteRunsCommand"
   let make = (~nextToken=?, ~maxResults=?, ~suiteDefinitionVersion=?, ~suiteDefinitionId=?, ()) =>
-    new({
-      nextToken: nextToken,
-      maxResults: maxResults,
-      suiteDefinitionVersion: suiteDefinitionVersion,
-      suiteDefinitionId: suiteDefinitionId,
-    })
+    new({nextToken, maxResults, suiteDefinitionVersion, suiteDefinitionId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateSuiteDefinition = {
   type t
   type request = {
@@ -387,13 +364,9 @@ module UpdateSuiteDefinition = {
   @module("@aws-sdk/client-iotdeviceadvisor") @new
   external new: request => t = "UpdateSuiteDefinitionCommand"
   let make = (~suiteDefinitionId, ~suiteDefinitionConfiguration=?, ()) =>
-    new({
-      suiteDefinitionConfiguration: suiteDefinitionConfiguration,
-      suiteDefinitionId: suiteDefinitionId,
-    })
+    new({suiteDefinitionConfiguration, suiteDefinitionId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetSuiteDefinition = {
   type t
   type request = {
@@ -421,10 +394,9 @@ module GetSuiteDefinition = {
   @module("@aws-sdk/client-iotdeviceadvisor") @new
   external new: request => t = "GetSuiteDefinitionCommand"
   let make = (~suiteDefinitionId, ~suiteDefinitionVersion=?, ()) =>
-    new({suiteDefinitionVersion: suiteDefinitionVersion, suiteDefinitionId: suiteDefinitionId})
+    new({suiteDefinitionVersion, suiteDefinitionId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateSuiteDefinition = {
   type t
   type request = {
@@ -445,10 +417,9 @@ module CreateSuiteDefinition = {
   @module("@aws-sdk/client-iotdeviceadvisor") @new
   external new: request => t = "CreateSuiteDefinitionCommand"
   let make = (~tags=?, ~suiteDefinitionConfiguration=?, ()) =>
-    new({tags: tags, suiteDefinitionConfiguration: suiteDefinitionConfiguration})
+    new({tags, suiteDefinitionConfiguration})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListSuiteDefinitions = {
   type t
   type request = {
@@ -465,11 +436,9 @@ module ListSuiteDefinitions = {
   }
   @module("@aws-sdk/client-iotdeviceadvisor") @new
   external new: request => t = "ListSuiteDefinitionsCommand"
-  let make = (~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken: nextToken, maxResults: maxResults})
+  let make = (~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetSuiteRun = {
   type t
   type request = {
@@ -496,7 +465,6 @@ module GetSuiteRun = {
     suiteDefinitionId: option<uuid>,
   }
   @module("@aws-sdk/client-iotdeviceadvisor") @new external new: request => t = "GetSuiteRunCommand"
-  let make = (~suiteRunId, ~suiteDefinitionId, ()) =>
-    new({suiteRunId: suiteRunId, suiteDefinitionId: suiteDefinitionId})
+  let make = (~suiteRunId, ~suiteDefinitionId, ()) => new({suiteRunId, suiteDefinitionId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

@@ -142,11 +142,6 @@ response in the next request to retrieve the next set of results.</p>")
   @module("@aws-sdk/client-connect") @new
   external new: request => t = "ListRealtimeContactAnalysisSegmentsCommand"
   let make = (~contactId, ~instanceId, ~nextToken=?, ~maxResults=?, ()) =>
-    new({
-      nextToken: nextToken,
-      maxResults: maxResults,
-      contactId: contactId,
-      instanceId: instanceId,
-    })
+    new({nextToken, maxResults, contactId, instanceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

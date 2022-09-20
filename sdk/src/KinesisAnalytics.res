@@ -991,7 +991,6 @@ module StopApplication = {
   let make = (~applicationName, ()) => new({applicationName: applicationName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteApplicationReferenceDataSource = {
   type t
   type request = {
@@ -1015,14 +1014,9 @@ module DeleteApplicationReferenceDataSource = {
   @module("@aws-sdk/client-kinesisanalytics") @new
   external new: request => t = "DeleteApplicationReferenceDataSourceCommand"
   let make = (~referenceId, ~currentApplicationVersionId, ~applicationName, ()) =>
-    new({
-      referenceId: referenceId,
-      currentApplicationVersionId: currentApplicationVersionId,
-      applicationName: applicationName,
-    })
+    new({referenceId, currentApplicationVersionId, applicationName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteApplicationOutput = {
   type t
   @ocaml.doc("<p></p>")
@@ -1051,14 +1045,9 @@ module DeleteApplicationOutput = {
   @module("@aws-sdk/client-kinesisanalytics") @new
   external new: request => t = "DeleteApplicationOutputCommand"
   let make = (~outputId, ~currentApplicationVersionId, ~applicationName, ()) =>
-    new({
-      outputId: outputId,
-      currentApplicationVersionId: currentApplicationVersionId,
-      applicationName: applicationName,
-    })
+    new({outputId, currentApplicationVersionId, applicationName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteApplicationInputProcessingConfiguration = {
   type t
   type request = {
@@ -1076,14 +1065,9 @@ module DeleteApplicationInputProcessingConfiguration = {
   @module("@aws-sdk/client-kinesisanalytics") @new
   external new: request => t = "DeleteApplicationInputProcessingConfigurationCommand"
   let make = (~inputId, ~currentApplicationVersionId, ~applicationName, ()) =>
-    new({
-      inputId: inputId,
-      currentApplicationVersionId: currentApplicationVersionId,
-      applicationName: applicationName,
-    })
+    new({inputId, currentApplicationVersionId, applicationName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteApplicationCloudWatchLoggingOption = {
   type t
   type request = {
@@ -1101,14 +1085,9 @@ module DeleteApplicationCloudWatchLoggingOption = {
   @module("@aws-sdk/client-kinesisanalytics") @new
   external new: request => t = "DeleteApplicationCloudWatchLoggingOptionCommand"
   let make = (~cloudWatchLoggingOptionId, ~currentApplicationVersionId, ~applicationName, ()) =>
-    new({
-      cloudWatchLoggingOptionId: cloudWatchLoggingOptionId,
-      currentApplicationVersionId: currentApplicationVersionId,
-      applicationName: applicationName,
-    })
+    new({cloudWatchLoggingOptionId, currentApplicationVersionId, applicationName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteApplication = {
   type t
   @ocaml.doc("<p></p>")
@@ -1125,11 +1104,9 @@ module DeleteApplication = {
   type response = {.}
   @module("@aws-sdk/client-kinesisanalytics") @new
   external new: request => t = "DeleteApplicationCommand"
-  let make = (~createTimestamp, ~applicationName, ()) =>
-    new({createTimestamp: createTimestamp, applicationName: applicationName})
+  let make = (~createTimestamp, ~applicationName, ()) => new({createTimestamp, applicationName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module UntagResource = {
   type t
   type request = {
@@ -1143,10 +1120,9 @@ module UntagResource = {
   type response = {.}
   @module("@aws-sdk/client-kinesisanalytics") @new
   external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceARN, ()) => new({tagKeys: tagKeys, resourceARN: resourceARN})
+  let make = (~tagKeys, ~resourceARN, ()) => new({tagKeys, resourceARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module AddApplicationCloudWatchLoggingOption = {
   type t
   type request = {
@@ -1165,14 +1141,9 @@ module AddApplicationCloudWatchLoggingOption = {
   @module("@aws-sdk/client-kinesisanalytics") @new
   external new: request => t = "AddApplicationCloudWatchLoggingOptionCommand"
   let make = (~cloudWatchLoggingOption, ~currentApplicationVersionId, ~applicationName, ()) =>
-    new({
-      cloudWatchLoggingOption: cloudWatchLoggingOption,
-      currentApplicationVersionId: currentApplicationVersionId,
-      applicationName: applicationName,
-    })
+    new({cloudWatchLoggingOption, currentApplicationVersionId, applicationName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module TagResource = {
   type t
   type request = {
@@ -1182,10 +1153,9 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-kinesisanalytics") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceARN, ()) => new({tags: tags, resourceARN: resourceARN})
+  let make = (~tags, ~resourceARN, ()) => new({tags, resourceARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module ListTagsForResource = {
   type t
   type request = {
@@ -1201,7 +1171,6 @@ module ListTagsForResource = {
   let make = (~resourceARN, ()) => new({resourceARN: resourceARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListApplications = {
   type t
   @ocaml.doc("<p></p>")
@@ -1226,10 +1195,9 @@ module ListApplications = {
   @module("@aws-sdk/client-kinesisanalytics") @new
   external new: request => t = "ListApplicationsCommand"
   let make = (~exclusiveStartApplicationName=?, ~limit=?, ()) =>
-    new({exclusiveStartApplicationName: exclusiveStartApplicationName, limit: limit})
+    new({exclusiveStartApplicationName, limit})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module AddApplicationOutput = {
   type t
   @ocaml.doc("<p></p>")
@@ -1254,14 +1222,9 @@ module AddApplicationOutput = {
   @module("@aws-sdk/client-kinesisanalytics") @new
   external new: request => t = "AddApplicationOutputCommand"
   let make = (~output, ~currentApplicationVersionId, ~applicationName, ()) =>
-    new({
-      output: output,
-      currentApplicationVersionId: currentApplicationVersionId,
-      applicationName: applicationName,
-    })
+    new({output, currentApplicationVersionId, applicationName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module AddApplicationInputProcessingConfiguration = {
   type t
   type request = {
@@ -1294,16 +1257,9 @@ module AddApplicationInputProcessingConfiguration = {
     ~currentApplicationVersionId,
     ~applicationName,
     (),
-  ) =>
-    new({
-      inputProcessingConfiguration: inputProcessingConfiguration,
-      inputId: inputId,
-      currentApplicationVersionId: currentApplicationVersionId,
-      applicationName: applicationName,
-    })
+  ) => new({inputProcessingConfiguration, inputId, currentApplicationVersionId, applicationName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module StartApplication = {
   type t
   @ocaml.doc("<p></p>")
@@ -1320,10 +1276,9 @@ module StartApplication = {
   @module("@aws-sdk/client-kinesisanalytics") @new
   external new: request => t = "StartApplicationCommand"
   let make = (~inputConfigurations, ~applicationName, ()) =>
-    new({inputConfigurations: inputConfigurations, applicationName: applicationName})
+    new({inputConfigurations, applicationName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DiscoverInputSchema = {
   type t
   type request = {
@@ -1381,15 +1336,14 @@ module DiscoverInputSchema = {
     (),
   ) =>
     new({
-      inputProcessingConfiguration: inputProcessingConfiguration,
-      s3Configuration: s3Configuration,
-      inputStartingPositionConfiguration: inputStartingPositionConfiguration,
-      roleARN: roleARN,
-      resourceARN: resourceARN,
+      inputProcessingConfiguration,
+      s3Configuration,
+      inputStartingPositionConfiguration,
+      roleARN,
+      resourceARN,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module AddApplicationReferenceDataSource = {
   type t
   @ocaml.doc("<p></p>")
@@ -1412,14 +1366,9 @@ module AddApplicationReferenceDataSource = {
   @module("@aws-sdk/client-kinesisanalytics") @new
   external new: request => t = "AddApplicationReferenceDataSourceCommand"
   let make = (~referenceDataSource, ~currentApplicationVersionId, ~applicationName, ()) =>
-    new({
-      referenceDataSource: referenceDataSource,
-      currentApplicationVersionId: currentApplicationVersionId,
-      applicationName: applicationName,
-    })
+    new({referenceDataSource, currentApplicationVersionId, applicationName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module AddApplicationInput = {
   type t
   @ocaml.doc("<p></p>")
@@ -1443,14 +1392,9 @@ module AddApplicationInput = {
   @module("@aws-sdk/client-kinesisanalytics") @new
   external new: request => t = "AddApplicationInputCommand"
   let make = (~input, ~currentApplicationVersionId, ~applicationName, ()) =>
-    new({
-      input: input,
-      currentApplicationVersionId: currentApplicationVersionId,
-      applicationName: applicationName,
-    })
+    new({input, currentApplicationVersionId, applicationName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module CreateApplication = {
   type t
   @ocaml.doc("<p>TBD</p>")
@@ -1530,17 +1474,16 @@ module CreateApplication = {
     (),
   ) =>
     new({
-      tags: tags,
-      applicationCode: applicationCode,
-      cloudWatchLoggingOptions: cloudWatchLoggingOptions,
-      outputs: outputs,
-      inputs: inputs,
-      applicationDescription: applicationDescription,
-      applicationName: applicationName,
+      tags,
+      applicationCode,
+      cloudWatchLoggingOptions,
+      outputs,
+      inputs,
+      applicationDescription,
+      applicationName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateApplication = {
   type t
   type request = {
@@ -1558,14 +1501,9 @@ module UpdateApplication = {
   @module("@aws-sdk/client-kinesisanalytics") @new
   external new: request => t = "UpdateApplicationCommand"
   let make = (~applicationUpdate, ~currentApplicationVersionId, ~applicationName, ()) =>
-    new({
-      applicationUpdate: applicationUpdate,
-      currentApplicationVersionId: currentApplicationVersionId,
-      applicationName: applicationName,
-    })
+    new({applicationUpdate, currentApplicationVersionId, applicationName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DescribeApplication = {
   type t
   @ocaml.doc("<p></p>")

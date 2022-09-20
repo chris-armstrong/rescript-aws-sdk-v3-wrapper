@@ -99,7 +99,6 @@ module DeleteRule = {
   let make = (~identifier, ()) => new({identifier: identifier})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module UntagResource = {
   type t
   type request = {
@@ -113,10 +112,9 @@ module UntagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-rbin") @new external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
+  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys, resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module UpdateRule = {
   type t
   type request = {
@@ -170,17 +168,9 @@ module UpdateRule = {
     ~description=?,
     ~retentionPeriod=?,
     (),
-  ) =>
-    new({
-      resourceTags: resourceTags,
-      resourceType: resourceType,
-      description: description,
-      retentionPeriod: retentionPeriod,
-      identifier: identifier,
-    })
+  ) => new({resourceTags, resourceType, description, retentionPeriod, identifier})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module TagResource = {
   type t
   type request = {
@@ -191,10 +181,9 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-rbin") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
+  let make = (~tags, ~resourceArn, ()) => new({tags, resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module ListTagsForResource = {
   type t
   type request = {
@@ -209,7 +198,6 @@ module ListTagsForResource = {
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetRule = {
   type t
   type request = {
@@ -241,7 +229,6 @@ module GetRule = {
   let make = (~identifier, ()) => new({identifier: identifier})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateRule = {
   type t
   type request = {
@@ -291,16 +278,9 @@ module CreateRule = {
   }
   @module("@aws-sdk/client-rbin") @new external new: request => t = "CreateRuleCommand"
   let make = (~resourceType, ~retentionPeriod, ~resourceTags=?, ~tags=?, ~description=?, ()) =>
-    new({
-      resourceTags: resourceTags,
-      resourceType: resourceType,
-      tags: tags,
-      description: description,
-      retentionPeriod: retentionPeriod,
-    })
+    new({resourceTags, resourceType, tags, description, retentionPeriod})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListRules = {
   type t
   type request = {
@@ -333,11 +313,6 @@ module ListRules = {
   }
   @module("@aws-sdk/client-rbin") @new external new: request => t = "ListRulesCommand"
   let make = (~resourceType, ~resourceTags=?, ~nextToken=?, ~maxResults=?, ()) =>
-    new({
-      resourceTags: resourceTags,
-      resourceType: resourceType,
-      nextToken: nextToken,
-      maxResults: maxResults,
-    })
+    new({resourceTags, resourceType, nextToken, maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

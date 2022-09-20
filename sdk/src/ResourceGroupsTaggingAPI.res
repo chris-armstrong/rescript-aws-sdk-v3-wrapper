@@ -196,7 +196,6 @@ module StartReportCreation = {
   let make = (~s3Bucket, ()) => new({s3Bucket: s3Bucket})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DescribeReportCreation = {
   type t
   type request = {.}
@@ -240,7 +239,6 @@ module DescribeReportCreation = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetTagValues = {
   type t
   type request = {
@@ -266,10 +264,9 @@ module GetTagValues = {
     paginationToken: option<paginationToken>,
   }
   @module("@aws-sdk/client-tagging") @new external new: request => t = "GetTagValuesCommand"
-  let make = (~key, ~paginationToken=?, ()) => new({key: key, paginationToken: paginationToken})
+  let make = (~key, ~paginationToken=?, ()) => new({key, paginationToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetTagKeys = {
   type t
   type request = {
@@ -292,7 +289,6 @@ module GetTagKeys = {
   let make = (~paginationToken=?, ()) => new({paginationToken: paginationToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UntagResources = {
   type t
   type request = {
@@ -317,11 +313,9 @@ module UntagResources = {
     failedResourcesMap: option<failedResourcesMap>,
   }
   @module("@aws-sdk/client-tagging") @new external new: request => t = "UntagResourcesCommand"
-  let make = (~tagKeys, ~resourceARNList, ()) =>
-    new({tagKeys: tagKeys, resourceARNList: resourceARNList})
+  let make = (~tagKeys, ~resourceARNList, ()) => new({tagKeys, resourceARNList})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module TagResources = {
   type t
   type request = {
@@ -346,10 +340,9 @@ module TagResources = {
     failedResourcesMap: option<failedResourcesMap>,
   }
   @module("@aws-sdk/client-tagging") @new external new: request => t = "TagResourcesCommand"
-  let make = (~tags, ~resourceARNList, ()) => new({tags: tags, resourceARNList: resourceARNList})
+  let make = (~tags, ~resourceARNList, ()) => new({tags, resourceARNList})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetComplianceSummary = {
   type t
   type request = {
@@ -434,17 +427,16 @@ module GetComplianceSummary = {
     (),
   ) =>
     new({
-      paginationToken: paginationToken,
-      maxResults: maxResults,
-      groupBy: groupBy,
-      tagKeyFilters: tagKeyFilters,
-      resourceTypeFilters: resourceTypeFilters,
-      regionFilters: regionFilters,
-      targetIdFilters: targetIdFilters,
+      paginationToken,
+      maxResults,
+      groupBy,
+      tagKeyFilters,
+      resourceTypeFilters,
+      regionFilters,
+      targetIdFilters,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetResources = {
   type t
   type request = {
@@ -602,14 +594,14 @@ module GetResources = {
     (),
   ) =>
     new({
-      resourceARNList: resourceARNList,
-      excludeCompliantResources: excludeCompliantResources,
-      includeComplianceDetails: includeComplianceDetails,
-      resourceTypeFilters: resourceTypeFilters,
-      tagsPerPage: tagsPerPage,
-      resourcesPerPage: resourcesPerPage,
-      tagFilters: tagFilters,
-      paginationToken: paginationToken,
+      resourceARNList,
+      excludeCompliantResources,
+      includeComplianceDetails,
+      resourceTypeFilters,
+      tagsPerPage,
+      resourcesPerPage,
+      tagFilters,
+      paginationToken,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

@@ -452,11 +452,9 @@ module UpdateScheduledQuery = {
   type response = {.}
   @module("@aws-sdk/client-timestream") @new
   external new: request => t = "UpdateScheduledQueryCommand"
-  let make = (~state, ~scheduledQueryArn, ()) =>
-    new({state: state, scheduledQueryArn: scheduledQueryArn})
+  let make = (~state, ~scheduledQueryArn, ()) => new({state, scheduledQueryArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module ExecuteScheduledQuery = {
   type t
   type request = {
@@ -473,14 +471,9 @@ module ExecuteScheduledQuery = {
   @module("@aws-sdk/client-timestream") @new
   external new: request => t = "ExecuteScheduledQueryCommand"
   let make = (~invocationTime, ~scheduledQueryArn, ~clientToken=?, ()) =>
-    new({
-      clientToken: clientToken,
-      invocationTime: invocationTime,
-      scheduledQueryArn: scheduledQueryArn,
-    })
+    new({clientToken, invocationTime, scheduledQueryArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteScheduledQuery = {
   type t
   type request = {
@@ -493,7 +486,6 @@ module DeleteScheduledQuery = {
   let make = (~scheduledQueryArn, ()) => new({scheduledQueryArn: scheduledQueryArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module CancelQuery = {
   type t
   type request = {
@@ -512,7 +504,6 @@ module CancelQuery = {
   let make = (~queryId, ()) => new({queryId: queryId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UntagResource = {
   type t
   type request = {
@@ -527,10 +518,9 @@ module UntagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-timestream") @new external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceARN, ()) => new({tagKeys: tagKeys, resourceARN: resourceARN})
+  let make = (~tagKeys, ~resourceARN, ()) => new({tagKeys, resourceARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module TagResource = {
   type t
   type request = {
@@ -543,10 +533,9 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-timestream") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceARN, ()) => new({tags: tags, resourceARN: resourceARN})
+  let make = (~tags, ~resourceARN, ()) => new({tags, resourceARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module ListTagsForResource = {
   type t
   type request = {
@@ -570,10 +559,9 @@ module ListTagsForResource = {
   @module("@aws-sdk/client-timestream") @new
   external new: request => t = "ListTagsForResourceCommand"
   let make = (~resourceARN, ~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken: nextToken, maxResults: maxResults, resourceARN: resourceARN})
+    new({nextToken, maxResults, resourceARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeEndpoints = {
   type t
   type request = {.}
@@ -587,7 +575,6 @@ module DescribeEndpoints = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListScheduledQueries = {
   type t
   type request = {
@@ -610,11 +597,9 @@ module ListScheduledQueries = {
   }
   @module("@aws-sdk/client-timestream") @new
   external new: request => t = "ListScheduledQueriesCommand"
-  let make = (~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken: nextToken, maxResults: maxResults})
+  let make = (~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateScheduledQuery = {
   type t
   type request = {
@@ -692,20 +677,19 @@ module CreateScheduledQuery = {
     (),
   ) =>
     new({
-      errorReportConfiguration: errorReportConfiguration,
-      kmsKeyId: kmsKeyId,
-      tags: tags,
-      scheduledQueryExecutionRoleArn: scheduledQueryExecutionRoleArn,
-      clientToken: clientToken,
-      targetConfiguration: targetConfiguration,
-      notificationConfiguration: notificationConfiguration,
-      scheduleConfiguration: scheduleConfiguration,
-      queryString: queryString,
-      name: name,
+      errorReportConfiguration,
+      kmsKeyId,
+      tags,
+      scheduledQueryExecutionRoleArn,
+      clientToken,
+      targetConfiguration,
+      notificationConfiguration,
+      scheduleConfiguration,
+      queryString,
+      name,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeScheduledQuery = {
   type t
   type request = {
@@ -721,7 +705,6 @@ module DescribeScheduledQuery = {
   let make = (~scheduledQueryArn, ()) => new({scheduledQueryArn: scheduledQueryArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module Query = {
   type t
   type request = {
@@ -836,15 +819,9 @@ module Query = {
   }
   @module("@aws-sdk/client-timestream") @new external new: request => t = "QueryCommand"
   let make = (~queryString, ~maxRows=?, ~nextToken=?, ~clientToken=?, ()) =>
-    new({
-      maxRows: maxRows,
-      nextToken: nextToken,
-      clientToken: clientToken,
-      queryString: queryString,
-    })
+    new({maxRows, nextToken, clientToken, queryString})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module PrepareQuery = {
   type t
   type request = {
@@ -869,7 +846,6 @@ module PrepareQuery = {
     queryString: queryString,
   }
   @module("@aws-sdk/client-timestream") @new external new: request => t = "PrepareQueryCommand"
-  let make = (~queryString, ~validateOnly=?, ()) =>
-    new({validateOnly: validateOnly, queryString: queryString})
+  let make = (~queryString, ~validateOnly=?, ()) => new({validateOnly, queryString})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

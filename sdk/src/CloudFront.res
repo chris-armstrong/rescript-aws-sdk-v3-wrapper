@@ -3940,10 +3940,9 @@ module GetFunction = {
     functionCode: option<functionBlob>,
   }
   @module("@aws-sdk/client-cloudfront") @new external new: request => t = "GetFunctionCommand"
-  let make = (~name, ~stage=?, ()) => new({stage: stage, name: name})
+  let make = (~name, ~stage=?, ()) => new({stage, name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteStreamingDistribution = {
   type t
   @ocaml.doc("<p>The request to delete a streaming distribution.</p>")
@@ -3957,10 +3956,9 @@ module DeleteStreamingDistribution = {
   type response = {.}
   @module("@aws-sdk/client-cloudfront") @new
   external new: request => t = "DeleteStreamingDistributionCommand"
-  let make = (~id, ~ifMatch=?, ()) => new({ifMatch: ifMatch, id: id})
+  let make = (~id, ~ifMatch=?, ()) => new({ifMatch, id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteResponseHeadersPolicy = {
   type t
   type request = {
@@ -3979,10 +3977,9 @@ module DeleteResponseHeadersPolicy = {
   type response = {.}
   @module("@aws-sdk/client-cloudfront") @new
   external new: request => t = "DeleteResponseHeadersPolicyCommand"
-  let make = (~id, ~ifMatch=?, ()) => new({ifMatch: ifMatch, id: id})
+  let make = (~id, ~ifMatch=?, ()) => new({ifMatch, id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteRealtimeLogConfig = {
   type t
   type request = {
@@ -3997,10 +3994,9 @@ module DeleteRealtimeLogConfig = {
   type response = {.}
   @module("@aws-sdk/client-cloudfront") @new
   external new: request => t = "DeleteRealtimeLogConfigCommand"
-  let make = (~arn=?, ~name=?, ()) => new({arn: arn, name: name})
+  let make = (~arn=?, ~name=?, ()) => new({arn, name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeletePublicKey = {
   type t
   type request = {
@@ -4013,10 +4009,9 @@ module DeletePublicKey = {
   }
   type response = {.}
   @module("@aws-sdk/client-cloudfront") @new external new: request => t = "DeletePublicKeyCommand"
-  let make = (~id, ~ifMatch=?, ()) => new({ifMatch: ifMatch, id: id})
+  let make = (~id, ~ifMatch=?, ()) => new({ifMatch, id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteOriginRequestPolicy = {
   type t
   type request = {
@@ -4034,10 +4029,9 @@ module DeleteOriginRequestPolicy = {
   type response = {.}
   @module("@aws-sdk/client-cloudfront") @new
   external new: request => t = "DeleteOriginRequestPolicyCommand"
-  let make = (~id, ~ifMatch=?, ()) => new({ifMatch: ifMatch, id: id})
+  let make = (~id, ~ifMatch=?, ()) => new({ifMatch, id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteMonitoringSubscription = {
   type t
   type request = {
@@ -4051,7 +4045,6 @@ module DeleteMonitoringSubscription = {
   let make = (~distributionId, ()) => new({distributionId: distributionId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteKeyGroup = {
   type t
   type request = {
@@ -4067,10 +4060,9 @@ module DeleteKeyGroup = {
   }
   type response = {.}
   @module("@aws-sdk/client-cloudfront") @new external new: request => t = "DeleteKeyGroupCommand"
-  let make = (~id, ~ifMatch=?, ()) => new({ifMatch: ifMatch, id: id})
+  let make = (~id, ~ifMatch=?, ()) => new({ifMatch, id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteFunction = {
   type t
   type request = {
@@ -4082,10 +4074,9 @@ module DeleteFunction = {
   }
   type response = {.}
   @module("@aws-sdk/client-cloudfront") @new external new: request => t = "DeleteFunctionCommand"
-  let make = (~ifMatch, ~name, ()) => new({ifMatch: ifMatch, name: name})
+  let make = (~ifMatch, ~name, ()) => new({ifMatch, name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteFieldLevelEncryptionProfile = {
   type t
   type request = {
@@ -4099,10 +4090,9 @@ module DeleteFieldLevelEncryptionProfile = {
   type response = {.}
   @module("@aws-sdk/client-cloudfront") @new
   external new: request => t = "DeleteFieldLevelEncryptionProfileCommand"
-  let make = (~id, ~ifMatch=?, ()) => new({ifMatch: ifMatch, id: id})
+  let make = (~id, ~ifMatch=?, ()) => new({ifMatch, id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteFieldLevelEncryptionConfig = {
   type t
   type request = {
@@ -4116,10 +4106,9 @@ module DeleteFieldLevelEncryptionConfig = {
   type response = {.}
   @module("@aws-sdk/client-cloudfront") @new
   external new: request => t = "DeleteFieldLevelEncryptionConfigCommand"
-  let make = (~id, ~ifMatch=?, ()) => new({ifMatch: ifMatch, id: id})
+  let make = (~id, ~ifMatch=?, ()) => new({ifMatch, id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteDistribution = {
   type t
   @ocaml.doc("<p>This action deletes a web distribution. To delete a web distribution using the CloudFront 
@@ -4179,10 +4168,9 @@ module DeleteDistribution = {
   type response = {.}
   @module("@aws-sdk/client-cloudfront") @new
   external new: request => t = "DeleteDistributionCommand"
-  let make = (~id, ~ifMatch=?, ()) => new({ifMatch: ifMatch, id: id})
+  let make = (~id, ~ifMatch=?, ()) => new({ifMatch, id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteCloudFrontOriginAccessIdentity = {
   type t
   @ocaml.doc("<p>Deletes a origin access identity.</p>")
@@ -4196,10 +4184,9 @@ module DeleteCloudFrontOriginAccessIdentity = {
   type response = {.}
   @module("@aws-sdk/client-cloudfront") @new
   external new: request => t = "DeleteCloudFrontOriginAccessIdentityCommand"
-  let make = (~id, ~ifMatch=?, ()) => new({ifMatch: ifMatch, id: id})
+  let make = (~id, ~ifMatch=?, ()) => new({ifMatch, id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteCachePolicy = {
   type t
   type request = {
@@ -4216,10 +4203,9 @@ module DeleteCachePolicy = {
   }
   type response = {.}
   @module("@aws-sdk/client-cloudfront") @new external new: request => t = "DeleteCachePolicyCommand"
-  let make = (~id, ~ifMatch=?, ()) => new({ifMatch: ifMatch, id: id})
+  let make = (~id, ~ifMatch=?, ()) => new({ifMatch, id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module AssociateAlias = {
   type t
   type request = {
@@ -4232,11 +4218,9 @@ module AssociateAlias = {
   }
   type response = {.}
   @module("@aws-sdk/client-cloudfront") @new external new: request => t = "AssociateAliasCommand"
-  let make = (~alias, ~targetDistributionId, ()) =>
-    new({alias: alias, targetDistributionId: targetDistributionId})
+  let make = (~alias, ~targetDistributionId, ()) => new({alias, targetDistributionId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module GetPublicKeyConfig = {
   type t
   type request = {
@@ -4256,7 +4240,6 @@ module GetPublicKeyConfig = {
   let make = (~id, ()) => new({id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetCloudFrontOriginAccessIdentityConfig = {
   type t
   @ocaml.doc("<p>The origin access identity's configuration information. For more information, see 
@@ -4277,7 +4260,6 @@ module GetCloudFrontOriginAccessIdentityConfig = {
   let make = (~id, ()) => new({id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdatePublicKey = {
   type t
   type request = {
@@ -4296,11 +4278,9 @@ module UpdatePublicKey = {
     @ocaml.doc("<p>The public key.</p>") @as("PublicKey") publicKey: option<publicKey>,
   }
   @module("@aws-sdk/client-cloudfront") @new external new: request => t = "UpdatePublicKeyCommand"
-  let make = (~id, ~publicKeyConfig, ~ifMatch=?, ()) =>
-    new({ifMatch: ifMatch, id: id, publicKeyConfig: publicKeyConfig})
+  let make = (~id, ~publicKeyConfig, ~ifMatch=?, ()) => new({ifMatch, id, publicKeyConfig})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateFunction = {
   type t
   type request = {
@@ -4328,10 +4308,9 @@ module UpdateFunction = {
   }
   @module("@aws-sdk/client-cloudfront") @new external new: request => t = "UpdateFunctionCommand"
   let make = (~functionCode, ~functionConfig, ~ifMatch, ~name, ()) =>
-    new({functionCode: functionCode, functionConfig: functionConfig, ifMatch: ifMatch, name: name})
+    new({functionCode, functionConfig, ifMatch, name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateCloudFrontOriginAccessIdentity = {
   type t
   @ocaml.doc("<p>The request to update an origin access identity.</p>")
@@ -4358,14 +4337,9 @@ module UpdateCloudFrontOriginAccessIdentity = {
   @module("@aws-sdk/client-cloudfront") @new
   external new: request => t = "UpdateCloudFrontOriginAccessIdentityCommand"
   let make = (~id, ~cloudFrontOriginAccessIdentityConfig, ~ifMatch=?, ()) =>
-    new({
-      ifMatch: ifMatch,
-      id: id,
-      cloudFrontOriginAccessIdentityConfig: cloudFrontOriginAccessIdentityConfig,
-    })
+    new({ifMatch, id, cloudFrontOriginAccessIdentityConfig})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UntagResource = {
   type t
   @ocaml.doc("<p> The request to remove tags from a CloudFront resource.</p>")
@@ -4377,10 +4351,9 @@ module UntagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-cloudfront") @new external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resource, ()) => new({tagKeys: tagKeys, resource: resource})
+  let make = (~tagKeys, ~resource, ()) => new({tagKeys, resource})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module PublishFunction = {
   type t
   type request = {
@@ -4399,10 +4372,9 @@ module PublishFunction = {
     functionSummary: option<functionSummary>,
   }
   @module("@aws-sdk/client-cloudfront") @new external new: request => t = "PublishFunctionCommand"
-  let make = (~ifMatch, ~name, ()) => new({ifMatch: ifMatch, name: name})
+  let make = (~ifMatch, ~name, ()) => new({ifMatch, name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListDistributionsByResponseHeadersPolicyId = {
   type t
   type request = {
@@ -4426,10 +4398,9 @@ module ListDistributionsByResponseHeadersPolicyId = {
   @module("@aws-sdk/client-cloudfront") @new
   external new: request => t = "ListDistributionsByResponseHeadersPolicyIdCommand"
   let make = (~responseHeadersPolicyId, ~maxItems=?, ~marker=?, ()) =>
-    new({responseHeadersPolicyId: responseHeadersPolicyId, maxItems: maxItems, marker: marker})
+    new({responseHeadersPolicyId, maxItems, marker})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListDistributionsByOriginRequestPolicyId = {
   type t
   type request = {
@@ -4454,10 +4425,9 @@ module ListDistributionsByOriginRequestPolicyId = {
   @module("@aws-sdk/client-cloudfront") @new
   external new: request => t = "ListDistributionsByOriginRequestPolicyIdCommand"
   let make = (~originRequestPolicyId, ~maxItems=?, ~marker=?, ()) =>
-    new({originRequestPolicyId: originRequestPolicyId, maxItems: maxItems, marker: marker})
+    new({originRequestPolicyId, maxItems, marker})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListDistributionsByKeyGroup = {
   type t
   type request = {
@@ -4477,11 +4447,9 @@ module ListDistributionsByKeyGroup = {
   type response = {@as("DistributionIdList") distributionIdList: option<distributionIdList>}
   @module("@aws-sdk/client-cloudfront") @new
   external new: request => t = "ListDistributionsByKeyGroupCommand"
-  let make = (~keyGroupId, ~maxItems=?, ~marker=?, ()) =>
-    new({keyGroupId: keyGroupId, maxItems: maxItems, marker: marker})
+  let make = (~keyGroupId, ~maxItems=?, ~marker=?, ()) => new({keyGroupId, maxItems, marker})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListDistributionsByCachePolicyId = {
   type t
   type request = {
@@ -4506,11 +4474,9 @@ module ListDistributionsByCachePolicyId = {
   }
   @module("@aws-sdk/client-cloudfront") @new
   external new: request => t = "ListDistributionsByCachePolicyIdCommand"
-  let make = (~cachePolicyId, ~maxItems=?, ~marker=?, ()) =>
-    new({cachePolicyId: cachePolicyId, maxItems: maxItems, marker: marker})
+  let make = (~cachePolicyId, ~maxItems=?, ~marker=?, ()) => new({cachePolicyId, maxItems, marker})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetPublicKey = {
   type t
   type request = {
@@ -4525,7 +4491,6 @@ module GetPublicKey = {
   let make = (~id, ()) => new({id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetMonitoringSubscription = {
   type t
   type request = {
@@ -4544,7 +4509,6 @@ module GetMonitoringSubscription = {
   let make = (~distributionId, ()) => new({distributionId: distributionId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetKeyGroupConfig = {
   type t
   type request = {
@@ -4563,7 +4527,6 @@ module GetKeyGroupConfig = {
   let make = (~id, ()) => new({id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetCloudFrontOriginAccessIdentity = {
   type t
   @ocaml.doc("<p>The request to get an origin access identity's information.</p>")
@@ -4583,7 +4546,6 @@ module GetCloudFrontOriginAccessIdentity = {
   let make = (~id, ()) => new({id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeFunction = {
   type t
   type request = {
@@ -4607,10 +4569,9 @@ module DescribeFunction = {
     functionSummary: option<functionSummary>,
   }
   @module("@aws-sdk/client-cloudfront") @new external new: request => t = "DescribeFunctionCommand"
-  let make = (~name, ~stage=?, ()) => new({stage: stage, name: name})
+  let make = (~name, ~stage=?, ()) => new({stage, name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreatePublicKey = {
   type t
   type request = {
@@ -4627,7 +4588,6 @@ module CreatePublicKey = {
   let make = (~publicKeyConfig, ()) => new({publicKeyConfig: publicKeyConfig})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateMonitoringSubscription = {
   type t
   type request = {
@@ -4648,10 +4608,9 @@ module CreateMonitoringSubscription = {
   @module("@aws-sdk/client-cloudfront") @new
   external new: request => t = "CreateMonitoringSubscriptionCommand"
   let make = (~monitoringSubscription, ~distributionId, ()) =>
-    new({monitoringSubscription: monitoringSubscription, distributionId: distributionId})
+    new({monitoringSubscription, distributionId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateFunction = {
   type t
   type request = {
@@ -4681,10 +4640,9 @@ module CreateFunction = {
   }
   @module("@aws-sdk/client-cloudfront") @new external new: request => t = "CreateFunctionCommand"
   let make = (~functionCode, ~functionConfig, ~name, ()) =>
-    new({functionCode: functionCode, functionConfig: functionConfig, name: name})
+    new({functionCode, functionConfig, name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateCloudFrontOriginAccessIdentity = {
   type t
   @ocaml.doc("<p>The request to create a new origin access identity (OAI). An origin access identity is a 
@@ -4714,7 +4672,6 @@ module CreateCloudFrontOriginAccessIdentity = {
     new({cloudFrontOriginAccessIdentityConfig: cloudFrontOriginAccessIdentityConfig})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateKeyGroup = {
   type t
   type request = {
@@ -4734,11 +4691,9 @@ module UpdateKeyGroup = {
     keyGroup: option<keyGroup>,
   }
   @module("@aws-sdk/client-cloudfront") @new external new: request => t = "UpdateKeyGroupCommand"
-  let make = (~id, ~keyGroupConfig, ~ifMatch=?, ()) =>
-    new({ifMatch: ifMatch, id: id, keyGroupConfig: keyGroupConfig})
+  let make = (~id, ~keyGroupConfig, ~ifMatch=?, ()) => new({ifMatch, id, keyGroupConfig})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module TestFunction = {
   type t
   type request = {
@@ -4764,10 +4719,9 @@ module TestFunction = {
   }
   @module("@aws-sdk/client-cloudfront") @new external new: request => t = "TestFunctionCommand"
   let make = (~eventObject, ~ifMatch, ~name, ~stage=?, ()) =>
-    new({eventObject: eventObject, stage: stage, ifMatch: ifMatch, name: name})
+    new({eventObject, stage, ifMatch, name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module TagResource = {
   type t
   @ocaml.doc("<p> The request to add tags to a CloudFront resource.</p>")
@@ -4779,10 +4733,9 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-cloudfront") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resource, ()) => new({tags: tags, resource: resource})
+  let make = (~tags, ~resource, ()) => new({tags, resource})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module ListTagsForResource = {
   type t
   @ocaml.doc("<p> The request to list tags for a CloudFront resource.</p>")
@@ -4800,7 +4753,6 @@ module ListTagsForResource = {
   let make = (~resource, ()) => new({resource: resource})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListPublicKeys = {
   type t
   type request = {
@@ -4821,10 +4773,9 @@ module ListPublicKeys = {
     publicKeyList: option<publicKeyList>,
   }
   @module("@aws-sdk/client-cloudfront") @new external new: request => t = "ListPublicKeysCommand"
-  let make = (~maxItems=?, ~marker=?, ()) => new({maxItems: maxItems, marker: marker})
+  let make = (~maxItems=?, ~marker=?, ()) => new({maxItems, marker})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListInvalidations = {
   type t
   @ocaml.doc("<p>The request to list invalidations. </p>")
@@ -4850,10 +4801,9 @@ module ListInvalidations = {
   }
   @module("@aws-sdk/client-cloudfront") @new external new: request => t = "ListInvalidationsCommand"
   let make = (~distributionId, ~maxItems=?, ~marker=?, ()) =>
-    new({maxItems: maxItems, marker: marker, distributionId: distributionId})
+    new({maxItems, marker, distributionId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListConflictingAliases = {
   type t
   type request = {
@@ -4881,10 +4831,9 @@ module ListConflictingAliases = {
   @module("@aws-sdk/client-cloudfront") @new
   external new: request => t = "ListConflictingAliasesCommand"
   let make = (~alias, ~distributionId, ~maxItems=?, ~marker=?, ()) =>
-    new({maxItems: maxItems, marker: marker, alias: alias, distributionId: distributionId})
+    new({maxItems, marker, alias, distributionId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListCloudFrontOriginAccessIdentities = {
   type t
   @ocaml.doc("<p>The request to list origin access identities. </p>")
@@ -4909,10 +4858,9 @@ module ListCloudFrontOriginAccessIdentities = {
   }
   @module("@aws-sdk/client-cloudfront") @new
   external new: request => t = "ListCloudFrontOriginAccessIdentitiesCommand"
-  let make = (~maxItems=?, ~marker=?, ()) => new({maxItems: maxItems, marker: marker})
+  let make = (~maxItems=?, ~marker=?, ()) => new({maxItems, marker})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetStreamingDistributionConfig = {
   type t
   @ocaml.doc("<p>To request to get a streaming distribution configuration.</p>")
@@ -4932,7 +4880,6 @@ module GetStreamingDistributionConfig = {
   let make = (~id, ()) => new({id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetKeyGroup = {
   type t
   type request = {
@@ -4950,7 +4897,6 @@ module GetKeyGroup = {
   let make = (~id, ()) => new({id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateKeyGroup = {
   type t
   type request = {
@@ -4968,7 +4914,6 @@ module CreateKeyGroup = {
   let make = (~keyGroupConfig, ()) => new({keyGroupConfig: keyGroupConfig})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateRealtimeLogConfig = {
   type t
   type request = {
@@ -4999,10 +4944,9 @@ module UpdateRealtimeLogConfig = {
   @module("@aws-sdk/client-cloudfront") @new
   external new: request => t = "UpdateRealtimeLogConfigCommand"
   let make = (~samplingRate=?, ~arn=?, ~name=?, ~fields=?, ~endPoints=?, ()) =>
-    new({samplingRate: samplingRate, arn: arn, name: name, fields: fields, endPoints: endPoints})
+    new({samplingRate, arn, name, fields, endPoints})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListFunctions = {
   type t
   type request = {
@@ -5025,11 +4969,9 @@ module ListFunctions = {
     functionList: option<functionList>,
   }
   @module("@aws-sdk/client-cloudfront") @new external new: request => t = "ListFunctionsCommand"
-  let make = (~stage=?, ~maxItems=?, ~marker=?, ()) =>
-    new({stage: stage, maxItems: maxItems, marker: marker})
+  let make = (~stage=?, ~maxItems=?, ~marker=?, ()) => new({stage, maxItems, marker})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetResponseHeadersPolicyConfig = {
   type t
   type request = {
@@ -5056,7 +4998,6 @@ module GetResponseHeadersPolicyConfig = {
   let make = (~id, ()) => new({id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetRealtimeLogConfig = {
   type t
   type request = {
@@ -5072,10 +5013,9 @@ module GetRealtimeLogConfig = {
   }
   @module("@aws-sdk/client-cloudfront") @new
   external new: request => t = "GetRealtimeLogConfigCommand"
-  let make = (~arn=?, ~name=?, ()) => new({arn: arn, name: name})
+  let make = (~arn=?, ~name=?, ()) => new({arn, name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetOriginRequestPolicyConfig = {
   type t
   type request = {
@@ -5098,7 +5038,6 @@ module GetOriginRequestPolicyConfig = {
   let make = (~id, ()) => new({id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetInvalidation = {
   type t
   @ocaml.doc("<p>The request to get an invalidation's information. </p>")
@@ -5118,10 +5057,9 @@ module GetInvalidation = {
     invalidation: option<invalidation>,
   }
   @module("@aws-sdk/client-cloudfront") @new external new: request => t = "GetInvalidationCommand"
-  let make = (~id, ~distributionId, ()) => new({id: id, distributionId: distributionId})
+  let make = (~id, ~distributionId, ()) => new({id, distributionId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateRealtimeLogConfig = {
   type t
   type request = {
@@ -5149,10 +5087,9 @@ module CreateRealtimeLogConfig = {
   @module("@aws-sdk/client-cloudfront") @new
   external new: request => t = "CreateRealtimeLogConfigCommand"
   let make = (~samplingRate, ~name, ~fields, ~endPoints, ()) =>
-    new({samplingRate: samplingRate, name: name, fields: fields, endPoints: endPoints})
+    new({samplingRate, name, fields, endPoints})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateInvalidation = {
   type t
   @ocaml.doc("<p>The request to create an invalidation.</p>")
@@ -5172,11 +5109,9 @@ module CreateInvalidation = {
   }
   @module("@aws-sdk/client-cloudfront") @new
   external new: request => t = "CreateInvalidationCommand"
-  let make = (~invalidationBatch, ~distributionId, ()) =>
-    new({invalidationBatch: invalidationBatch, distributionId: distributionId})
+  let make = (~invalidationBatch, ~distributionId, ()) => new({invalidationBatch, distributionId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateResponseHeadersPolicy = {
   type t
   type request = {
@@ -5200,10 +5135,9 @@ module UpdateResponseHeadersPolicy = {
   @module("@aws-sdk/client-cloudfront") @new
   external new: request => t = "UpdateResponseHeadersPolicyCommand"
   let make = (~id, ~responseHeadersPolicyConfig, ~ifMatch=?, ()) =>
-    new({ifMatch: ifMatch, id: id, responseHeadersPolicyConfig: responseHeadersPolicyConfig})
+    new({ifMatch, id, responseHeadersPolicyConfig})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateOriginRequestPolicy = {
   type t
   type request = {
@@ -5229,10 +5163,9 @@ module UpdateOriginRequestPolicy = {
   @module("@aws-sdk/client-cloudfront") @new
   external new: request => t = "UpdateOriginRequestPolicyCommand"
   let make = (~id, ~originRequestPolicyConfig, ~ifMatch=?, ()) =>
-    new({ifMatch: ifMatch, id: id, originRequestPolicyConfig: originRequestPolicyConfig})
+    new({ifMatch, id, originRequestPolicyConfig})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListStreamingDistributions = {
   type t
   @ocaml.doc("<p>The request to list your streaming distributions. </p>")
@@ -5254,10 +5187,9 @@ module ListStreamingDistributions = {
   }
   @module("@aws-sdk/client-cloudfront") @new
   external new: request => t = "ListStreamingDistributionsCommand"
-  let make = (~maxItems=?, ~marker=?, ()) => new({maxItems: maxItems, marker: marker})
+  let make = (~maxItems=?, ~marker=?, ()) => new({maxItems, marker})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetResponseHeadersPolicy = {
   type t
   type request = {
@@ -5284,7 +5216,6 @@ module GetResponseHeadersPolicy = {
   let make = (~id, ()) => new({id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetOriginRequestPolicy = {
   type t
   type request = {
@@ -5307,7 +5238,6 @@ module GetOriginRequestPolicy = {
   let make = (~id, ()) => new({id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetFieldLevelEncryptionConfig = {
   type t
   type request = {
@@ -5330,7 +5260,6 @@ module GetFieldLevelEncryptionConfig = {
   let make = (~id, ()) => new({id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetCachePolicyConfig = {
   type t
   type request = {
@@ -5352,7 +5281,6 @@ module GetCachePolicyConfig = {
   let make = (~id, ()) => new({id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateResponseHeadersPolicy = {
   type t
   type request = {
@@ -5378,7 +5306,6 @@ module CreateResponseHeadersPolicy = {
     new({responseHeadersPolicyConfig: responseHeadersPolicyConfig})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateOriginRequestPolicy = {
   type t
   type request = {
@@ -5400,7 +5327,6 @@ module CreateOriginRequestPolicy = {
     new({originRequestPolicyConfig: originRequestPolicyConfig})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateStreamingDistribution = {
   type t
   @ocaml.doc("<p>The request to update a streaming distribution.</p>")
@@ -5426,10 +5352,9 @@ module UpdateStreamingDistribution = {
   @module("@aws-sdk/client-cloudfront") @new
   external new: request => t = "UpdateStreamingDistributionCommand"
   let make = (~id, ~streamingDistributionConfig, ~ifMatch=?, ()) =>
-    new({ifMatch: ifMatch, id: id, streamingDistributionConfig: streamingDistributionConfig})
+    new({ifMatch, id, streamingDistributionConfig})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateFieldLevelEncryptionConfig = {
   type t
   type request = {
@@ -5454,10 +5379,9 @@ module UpdateFieldLevelEncryptionConfig = {
   @module("@aws-sdk/client-cloudfront") @new
   external new: request => t = "UpdateFieldLevelEncryptionConfigCommand"
   let make = (~id, ~fieldLevelEncryptionConfig, ~ifMatch=?, ()) =>
-    new({ifMatch: ifMatch, id: id, fieldLevelEncryptionConfig: fieldLevelEncryptionConfig})
+    new({ifMatch, id, fieldLevelEncryptionConfig})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateCachePolicy = {
   type t
   type request = {
@@ -5479,11 +5403,9 @@ module UpdateCachePolicy = {
     @ocaml.doc("<p>A cache policy.</p>") @as("CachePolicy") cachePolicy: option<cachePolicy>,
   }
   @module("@aws-sdk/client-cloudfront") @new external new: request => t = "UpdateCachePolicyCommand"
-  let make = (~id, ~cachePolicyConfig, ~ifMatch=?, ()) =>
-    new({ifMatch: ifMatch, id: id, cachePolicyConfig: cachePolicyConfig})
+  let make = (~id, ~cachePolicyConfig, ~ifMatch=?, ()) => new({ifMatch, id, cachePolicyConfig})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListRealtimeLogConfigs = {
   type t
   type request = {
@@ -5505,10 +5427,9 @@ module ListRealtimeLogConfigs = {
   }
   @module("@aws-sdk/client-cloudfront") @new
   external new: request => t = "ListRealtimeLogConfigsCommand"
-  let make = (~marker=?, ~maxItems=?, ()) => new({marker: marker, maxItems: maxItems})
+  let make = (~marker=?, ~maxItems=?, ()) => new({marker, maxItems})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListKeyGroups = {
   type t
   type request = {
@@ -5527,10 +5448,9 @@ module ListKeyGroups = {
     keyGroupList: option<keyGroupList>,
   }
   @module("@aws-sdk/client-cloudfront") @new external new: request => t = "ListKeyGroupsCommand"
-  let make = (~maxItems=?, ~marker=?, ()) => new({maxItems: maxItems, marker: marker})
+  let make = (~maxItems=?, ~marker=?, ()) => new({maxItems, marker})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetStreamingDistribution = {
   type t
   @ocaml.doc("<p>The request to get a streaming distribution's information.</p>")
@@ -5549,7 +5469,6 @@ module GetStreamingDistribution = {
   let make = (~id, ()) => new({id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetFieldLevelEncryptionProfileConfig = {
   type t
   type request = {
@@ -5574,7 +5493,6 @@ module GetFieldLevelEncryptionProfileConfig = {
   let make = (~id, ()) => new({id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetFieldLevelEncryption = {
   type t
   type request = {
@@ -5597,7 +5515,6 @@ module GetFieldLevelEncryption = {
   let make = (~id, ()) => new({id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetCachePolicy = {
   type t
   type request = {
@@ -5617,7 +5534,6 @@ module GetCachePolicy = {
   let make = (~id, ()) => new({id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateStreamingDistributionWithTags = {
   type t
   @ocaml.doc("<p>The request to create a new streaming distribution with tags.</p>")
@@ -5644,7 +5560,6 @@ module CreateStreamingDistributionWithTags = {
     new({streamingDistributionConfigWithTags: streamingDistributionConfigWithTags})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateStreamingDistribution = {
   type t
   @ocaml.doc("<p>The request to create a new streaming distribution.</p>")
@@ -5671,7 +5586,6 @@ module CreateStreamingDistribution = {
     new({streamingDistributionConfig: streamingDistributionConfig})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateFieldLevelEncryptionConfig = {
   type t
   type request = {
@@ -5698,7 +5612,6 @@ module CreateFieldLevelEncryptionConfig = {
     new({fieldLevelEncryptionConfig: fieldLevelEncryptionConfig})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateCachePolicy = {
   type t
   type request = {
@@ -5715,7 +5628,6 @@ module CreateCachePolicy = {
   let make = (~cachePolicyConfig, ()) => new({cachePolicyConfig: cachePolicyConfig})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateFieldLevelEncryptionProfile = {
   type t
   type request = {
@@ -5739,14 +5651,9 @@ module UpdateFieldLevelEncryptionProfile = {
   @module("@aws-sdk/client-cloudfront") @new
   external new: request => t = "UpdateFieldLevelEncryptionProfileCommand"
   let make = (~id, ~fieldLevelEncryptionProfileConfig, ~ifMatch=?, ()) =>
-    new({
-      ifMatch: ifMatch,
-      id: id,
-      fieldLevelEncryptionProfileConfig: fieldLevelEncryptionProfileConfig,
-    })
+    new({ifMatch, id, fieldLevelEncryptionProfileConfig})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListFieldLevelEncryptionConfigs = {
   type t
   type request = {
@@ -5770,10 +5677,9 @@ module ListFieldLevelEncryptionConfigs = {
   }
   @module("@aws-sdk/client-cloudfront") @new
   external new: request => t = "ListFieldLevelEncryptionConfigsCommand"
-  let make = (~maxItems=?, ~marker=?, ()) => new({maxItems: maxItems, marker: marker})
+  let make = (~maxItems=?, ~marker=?, ()) => new({maxItems, marker})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetFieldLevelEncryptionProfile = {
   type t
   type request = {
@@ -5795,7 +5701,6 @@ module GetFieldLevelEncryptionProfile = {
   let make = (~id, ()) => new({id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateFieldLevelEncryptionProfile = {
   type t
   type request = {
@@ -5822,7 +5727,6 @@ module CreateFieldLevelEncryptionProfile = {
     new({fieldLevelEncryptionProfileConfig: fieldLevelEncryptionProfileConfig})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListResponseHeadersPolicies = {
   type t
   type request = {
@@ -5859,11 +5763,9 @@ module ListResponseHeadersPolicies = {
   }
   @module("@aws-sdk/client-cloudfront") @new
   external new: request => t = "ListResponseHeadersPoliciesCommand"
-  let make = (~maxItems=?, ~marker=?, ~type_=?, ()) =>
-    new({maxItems: maxItems, marker: marker, type_: type_})
+  let make = (~maxItems=?, ~marker=?, ~type_=?, ()) => new({maxItems, marker, type_})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListOriginRequestPolicies = {
   type t
   type request = {
@@ -5899,11 +5801,9 @@ module ListOriginRequestPolicies = {
   }
   @module("@aws-sdk/client-cloudfront") @new
   external new: request => t = "ListOriginRequestPoliciesCommand"
-  let make = (~maxItems=?, ~marker=?, ~type_=?, ()) =>
-    new({maxItems: maxItems, marker: marker, type_: type_})
+  let make = (~maxItems=?, ~marker=?, ~type_=?, ()) => new({maxItems, marker, type_})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListFieldLevelEncryptionProfiles = {
   type t
   type request = {
@@ -5927,10 +5827,9 @@ module ListFieldLevelEncryptionProfiles = {
   }
   @module("@aws-sdk/client-cloudfront") @new
   external new: request => t = "ListFieldLevelEncryptionProfilesCommand"
-  let make = (~maxItems=?, ~marker=?, ()) => new({maxItems: maxItems, marker: marker})
+  let make = (~maxItems=?, ~marker=?, ()) => new({maxItems, marker})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetDistributionConfig = {
   type t
   @ocaml.doc("<p>The request to get a distribution configuration.</p>")
@@ -5955,7 +5854,6 @@ module GetDistributionConfig = {
   let make = (~id, ()) => new({id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateDistribution = {
   type t
   @ocaml.doc("<p>The request to update a distribution.</p>")
@@ -5979,11 +5877,9 @@ module UpdateDistribution = {
   }
   @module("@aws-sdk/client-cloudfront") @new
   external new: request => t = "UpdateDistributionCommand"
-  let make = (~id, ~distributionConfig, ~ifMatch=?, ()) =>
-    new({ifMatch: ifMatch, id: id, distributionConfig: distributionConfig})
+  let make = (~id, ~distributionConfig, ~ifMatch=?, ()) => new({ifMatch, id, distributionConfig})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListCachePolicies = {
   type t
   type request = {
@@ -6016,11 +5912,9 @@ module ListCachePolicies = {
     cachePolicyList: option<cachePolicyList>,
   }
   @module("@aws-sdk/client-cloudfront") @new external new: request => t = "ListCachePoliciesCommand"
-  let make = (~maxItems=?, ~marker=?, ~type_=?, ()) =>
-    new({maxItems: maxItems, marker: marker, type_: type_})
+  let make = (~maxItems=?, ~marker=?, ~type_=?, ()) => new({maxItems, marker, type_})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetDistribution = {
   type t
   @ocaml.doc("<p>The request to get a distribution's information.</p>")
@@ -6044,7 +5938,6 @@ module GetDistribution = {
   let make = (~id, ()) => new({id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateDistributionWithTags = {
   type t
   @ocaml.doc("<p>The request to create a new distribution with tags. </p>")
@@ -6069,7 +5962,6 @@ module CreateDistributionWithTags = {
     new({distributionConfigWithTags: distributionConfigWithTags})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateDistribution = {
   type t
   @ocaml.doc("<p>The request to create a new distribution.</p>")
@@ -6092,7 +5984,6 @@ module CreateDistribution = {
   let make = (~distributionConfig, ()) => new({distributionConfig: distributionConfig})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListDistributionsByWebACLId = {
   type t
   @ocaml.doc("<p>The request to list distributions that are associated with a specified WAF web 
@@ -6123,11 +6014,9 @@ module ListDistributionsByWebACLId = {
   }
   @module("@aws-sdk/client-cloudfront") @new
   external new: request => t = "ListDistributionsByWebACLIdCommand"
-  let make = (~webACLId, ~maxItems=?, ~marker=?, ()) =>
-    new({webACLId: webACLId, maxItems: maxItems, marker: marker})
+  let make = (~webACLId, ~maxItems=?, ~marker=?, ()) => new({webACLId, maxItems, marker})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListDistributionsByRealtimeLogConfig = {
   type t
   type request = {
@@ -6153,15 +6042,9 @@ module ListDistributionsByRealtimeLogConfig = {
   @module("@aws-sdk/client-cloudfront") @new
   external new: request => t = "ListDistributionsByRealtimeLogConfigCommand"
   let make = (~realtimeLogConfigArn=?, ~realtimeLogConfigName=?, ~maxItems=?, ~marker=?, ()) =>
-    new({
-      realtimeLogConfigArn: realtimeLogConfigArn,
-      realtimeLogConfigName: realtimeLogConfigName,
-      maxItems: maxItems,
-      marker: marker,
-    })
+    new({realtimeLogConfigArn, realtimeLogConfigName, maxItems, marker})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListDistributions = {
   type t
   @ocaml.doc("<p>The request to list your distributions. </p>")
@@ -6183,6 +6066,6 @@ module ListDistributions = {
     distributionList: option<distributionList>,
   }
   @module("@aws-sdk/client-cloudfront") @new external new: request => t = "ListDistributionsCommand"
-  let make = (~maxItems=?, ~marker=?, ()) => new({maxItems: maxItems, marker: marker})
+  let make = (~maxItems=?, ~marker=?, ()) => new({maxItems, marker})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

@@ -63,10 +63,9 @@ module SendAlexaOfferToMaster = {
   @module("@aws-sdk/client-kinesisvideo") @new
   external new: request => t = "SendAlexaOfferToMasterCommand"
   let make = (~messagePayload, ~senderClientId, ~channelARN, ()) =>
-    new({messagePayload: messagePayload, senderClientId: senderClientId, channelARN: channelARN})
+    new({messagePayload, senderClientId, channelARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetIceServerConfig = {
   type t
   type request = {
@@ -93,6 +92,6 @@ module GetIceServerConfig = {
   @module("@aws-sdk/client-kinesisvideo") @new
   external new: request => t = "GetIceServerConfigCommand"
   let make = (~channelARN, ~username=?, ~service=?, ~clientId=?, ()) =>
-    new({username: username, service: service, clientId: clientId, channelARN: channelARN})
+    new({username, service, clientId, channelARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

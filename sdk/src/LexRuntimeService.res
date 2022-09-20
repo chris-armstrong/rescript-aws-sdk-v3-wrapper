@@ -734,19 +734,18 @@ module PostContent = {
     (),
   ) =>
     new({
-      activeContexts: activeContexts,
-      inputStream: inputStream,
-      accept: accept,
-      contentType: contentType,
-      requestAttributes: requestAttributes,
-      sessionAttributes: sessionAttributes,
-      userId: userId,
-      botAlias: botAlias,
-      botName: botName,
+      activeContexts,
+      inputStream,
+      accept,
+      contentType,
+      requestAttributes,
+      sessionAttributes,
+      userId,
+      botAlias,
+      botName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteSession = {
   type t
   type request = {
@@ -765,11 +764,9 @@ module DeleteSession = {
     botName: option<botName>,
   }
   @module("@aws-sdk/client-lex") @new external new: request => t = "DeleteSessionCommand"
-  let make = (~userId, ~botAlias, ~botName, ()) =>
-    new({userId: userId, botAlias: botAlias, botName: botName})
+  let make = (~userId, ~botAlias, ~botName, ()) => new({userId, botAlias, botName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module PutSession = {
   type t
   type request = {
@@ -988,18 +985,17 @@ module PutSession = {
     (),
   ) =>
     new({
-      activeContexts: activeContexts,
-      accept: accept,
-      recentIntentSummaryView: recentIntentSummaryView,
-      dialogAction: dialogAction,
-      sessionAttributes: sessionAttributes,
-      userId: userId,
-      botAlias: botAlias,
-      botName: botName,
+      activeContexts,
+      accept,
+      recentIntentSummaryView,
+      dialogAction,
+      sessionAttributes,
+      userId,
+      botAlias,
+      botName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetSession = {
   type t
   type request = {
@@ -1040,15 +1036,9 @@ module GetSession = {
   }
   @module("@aws-sdk/client-lex") @new external new: request => t = "GetSessionCommand"
   let make = (~userId, ~botAlias, ~botName, ~checkpointLabelFilter=?, ()) =>
-    new({
-      checkpointLabelFilter: checkpointLabelFilter,
-      userId: userId,
-      botAlias: botAlias,
-      botName: botName,
-    })
+    new({checkpointLabelFilter, userId, botAlias, botName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module PostText = {
   type t
   type request = {
@@ -1273,13 +1263,13 @@ module PostText = {
     (),
   ) =>
     new({
-      activeContexts: activeContexts,
-      inputText: inputText,
-      requestAttributes: requestAttributes,
-      sessionAttributes: sessionAttributes,
-      userId: userId,
-      botAlias: botAlias,
-      botName: botName,
+      activeContexts,
+      inputText,
+      requestAttributes,
+      sessionAttributes,
+      userId,
+      botAlias,
+      botName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

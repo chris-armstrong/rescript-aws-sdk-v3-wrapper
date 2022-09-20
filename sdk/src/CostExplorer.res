@@ -1749,11 +1749,9 @@ module UpdateAnomalyMonitor = {
     @ocaml.doc("<p>A cost anomaly monitor ARN. </p>") @as("MonitorArn") monitorArn: genericString,
   }
   @module("@aws-sdk/client-ce") @new external new: request => t = "UpdateAnomalyMonitorCommand"
-  let make = (~monitorArn, ~monitorName=?, ()) =>
-    new({monitorName: monitorName, monitorArn: monitorArn})
+  let make = (~monitorArn, ~monitorName=?, ()) => new({monitorName, monitorArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ProvideAnomalyFeedback = {
   type t
   type request = {
@@ -1769,10 +1767,9 @@ module ProvideAnomalyFeedback = {
     anomalyId: genericString,
   }
   @module("@aws-sdk/client-ce") @new external new: request => t = "ProvideAnomalyFeedbackCommand"
-  let make = (~feedback, ~anomalyId, ()) => new({feedback: feedback, anomalyId: anomalyId})
+  let make = (~feedback, ~anomalyId, ()) => new({feedback, anomalyId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteCostCategoryDefinition = {
   type t
   type request = {
@@ -1799,7 +1796,6 @@ module DeleteCostCategoryDefinition = {
   let make = (~costCategoryArn, ()) => new({costCategoryArn: costCategoryArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteAnomalySubscription = {
   type t
   type request = {
@@ -1814,7 +1810,6 @@ module DeleteAnomalySubscription = {
   let make = (~subscriptionArn, ()) => new({subscriptionArn: subscriptionArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteAnomalyMonitor = {
   type t
   type request = {
@@ -1827,7 +1822,6 @@ module DeleteAnomalyMonitor = {
   let make = (~monitorArn, ()) => new({monitorArn: monitorArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module UntagResource = {
   type t
   type request = {
@@ -1844,11 +1838,9 @@ module UntagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-ce") @new external new: request => t = "UntagResourceCommand"
-  let make = (~resourceTagKeys, ~resourceArn, ()) =>
-    new({resourceTagKeys: resourceTagKeys, resourceArn: resourceArn})
+  let make = (~resourceTagKeys, ~resourceArn, ()) => new({resourceTagKeys, resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module UpdateAnomalySubscription = {
   type t
   type request = {
@@ -1881,18 +1873,9 @@ module UpdateAnomalySubscription = {
     ~frequency=?,
     ~threshold=?,
     (),
-  ) =>
-    new({
-      subscriptionName: subscriptionName,
-      subscribers: subscribers,
-      monitorArnList: monitorArnList,
-      frequency: frequency,
-      threshold: threshold,
-      subscriptionArn: subscriptionArn,
-    })
+  ) => new({subscriptionName, subscribers, monitorArnList, frequency, threshold, subscriptionArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module TagResource = {
   type t
   type request = {
@@ -1932,11 +1915,9 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-ce") @new external new: request => t = "TagResourceCommand"
-  let make = (~resourceTags, ~resourceArn, ()) =>
-    new({resourceTags: resourceTags, resourceArn: resourceArn})
+  let make = (~resourceTags, ~resourceArn, ()) => new({resourceTags, resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module ListTagsForResource = {
   type t
   type request = {
@@ -1956,7 +1937,6 @@ module ListTagsForResource = {
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateAnomalySubscription = {
   type t
   type request = {
@@ -2001,11 +1981,9 @@ module CreateAnomalySubscription = {
     subscriptionArn: genericString,
   }
   @module("@aws-sdk/client-ce") @new external new: request => t = "CreateAnomalySubscriptionCommand"
-  let make = (~anomalySubscription, ~resourceTags=?, ()) =>
-    new({resourceTags: resourceTags, anomalySubscription: anomalySubscription})
+  let make = (~anomalySubscription, ~resourceTags=?, ()) => new({resourceTags, anomalySubscription})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListCostCategoryDefinitions = {
   type t
   type request = {
@@ -2037,10 +2015,9 @@ module ListCostCategoryDefinitions = {
   @module("@aws-sdk/client-ce") @new
   external new: request => t = "ListCostCategoryDefinitionsCommand"
   let make = (~maxResults=?, ~nextToken=?, ~effectiveOn=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, effectiveOn: effectiveOn})
+    new({maxResults, nextToken, effectiveOn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetAnomalySubscriptions = {
   type t
   type request = {
@@ -2068,15 +2045,9 @@ module GetAnomalySubscriptions = {
   }
   @module("@aws-sdk/client-ce") @new external new: request => t = "GetAnomalySubscriptionsCommand"
   let make = (~maxResults=?, ~nextPageToken=?, ~monitorArn=?, ~subscriptionArnList=?, ()) =>
-    new({
-      maxResults: maxResults,
-      nextPageToken: nextPageToken,
-      monitorArn: monitorArn,
-      subscriptionArnList: subscriptionArnList,
-    })
+    new({maxResults, nextPageToken, monitorArn, subscriptionArnList})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetAnomalies = {
   type t
   type request = {
@@ -2119,18 +2090,9 @@ module GetAnomalies = {
     ~feedback=?,
     ~monitorArn=?,
     (),
-  ) =>
-    new({
-      maxResults: maxResults,
-      nextPageToken: nextPageToken,
-      totalImpact: totalImpact,
-      feedback: feedback,
-      dateInterval: dateInterval,
-      monitorArn: monitorArn,
-    })
+  ) => new({maxResults, nextPageToken, totalImpact, feedback, dateInterval, monitorArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetUsageForecast = {
   type t
   type request = {
@@ -2291,16 +2253,9 @@ module GetUsageForecast = {
   }
   @module("@aws-sdk/client-ce") @new external new: request => t = "GetUsageForecastCommand"
   let make = (~granularity, ~metric, ~timePeriod, ~predictionIntervalLevel=?, ~filter=?, ()) =>
-    new({
-      predictionIntervalLevel: predictionIntervalLevel,
-      filter: filter,
-      granularity: granularity,
-      metric: metric,
-      timePeriod: timePeriod,
-    })
+    new({predictionIntervalLevel, filter, granularity, metric, timePeriod})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetTags = {
   type t
   type request = {
@@ -2388,19 +2343,9 @@ module GetTags = {
     ~tagKey=?,
     ~searchString=?,
     (),
-  ) =>
-    new({
-      nextPageToken: nextPageToken,
-      maxResults: maxResults,
-      sortBy: sortBy,
-      filter: filter,
-      tagKey: tagKey,
-      timePeriod: timePeriod,
-      searchString: searchString,
-    })
+  ) => new({nextPageToken, maxResults, sortBy, filter, tagKey, timePeriod, searchString})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetSavingsPlansUtilizationDetails = {
   type t
   type request = {
@@ -2518,17 +2463,9 @@ module GetSavingsPlansUtilizationDetails = {
   @module("@aws-sdk/client-ce") @new
   external new: request => t = "GetSavingsPlansUtilizationDetailsCommand"
   let make = (~timePeriod, ~sortBy=?, ~maxResults=?, ~nextToken=?, ~dataType=?, ~filter=?, ()) =>
-    new({
-      sortBy: sortBy,
-      maxResults: maxResults,
-      nextToken: nextToken,
-      dataType: dataType,
-      filter: filter,
-      timePeriod: timePeriod,
-    })
+    new({sortBy, maxResults, nextToken, dataType, filter, timePeriod})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetSavingsPlansUtilization = {
   type t
   type request = {
@@ -2629,10 +2566,9 @@ module GetSavingsPlansUtilization = {
   @module("@aws-sdk/client-ce") @new
   external new: request => t = "GetSavingsPlansUtilizationCommand"
   let make = (~timePeriod, ~sortBy=?, ~filter=?, ~granularity=?, ()) =>
-    new({sortBy: sortBy, filter: filter, granularity: granularity, timePeriod: timePeriod})
+    new({sortBy, filter, granularity, timePeriod})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetSavingsPlansPurchaseRecommendation = {
   type t
   type request = {
@@ -2705,18 +2641,17 @@ module GetSavingsPlansPurchaseRecommendation = {
     (),
   ) =>
     new({
-      filter: filter,
-      lookbackPeriodInDays: lookbackPeriodInDays,
-      pageSize: pageSize,
-      nextPageToken: nextPageToken,
-      accountScope: accountScope,
-      paymentOption: paymentOption,
-      termInYears: termInYears,
-      savingsPlansType: savingsPlansType,
+      filter,
+      lookbackPeriodInDays,
+      pageSize,
+      nextPageToken,
+      accountScope,
+      paymentOption,
+      termInYears,
+      savingsPlansType,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetSavingsPlansCoverage = {
   type t
   type request = {
@@ -2844,20 +2779,9 @@ module GetSavingsPlansCoverage = {
     ~granularity=?,
     ~groupBy=?,
     (),
-  ) =>
-    new({
-      sortBy: sortBy,
-      maxResults: maxResults,
-      nextToken: nextToken,
-      metrics: metrics,
-      filter: filter,
-      granularity: granularity,
-      groupBy: groupBy,
-      timePeriod: timePeriod,
-    })
+  ) => new({sortBy, maxResults, nextToken, metrics, filter, granularity, groupBy, timePeriod})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetRightsizingRecommendation = {
   type t
   type request = {
@@ -2904,16 +2828,9 @@ module GetRightsizingRecommendation = {
   @module("@aws-sdk/client-ce") @new
   external new: request => t = "GetRightsizingRecommendationCommand"
   let make = (~service, ~nextPageToken=?, ~pageSize=?, ~configuration=?, ~filter=?, ()) =>
-    new({
-      nextPageToken: nextPageToken,
-      pageSize: pageSize,
-      service: service,
-      configuration: configuration,
-      filter: filter,
-    })
+    new({nextPageToken, pageSize, service, configuration, filter})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetReservationUtilization = {
   type t
   type request = {
@@ -3099,19 +3016,9 @@ module GetReservationUtilization = {
     ~granularity=?,
     ~groupBy=?,
     (),
-  ) =>
-    new({
-      maxResults: maxResults,
-      nextPageToken: nextPageToken,
-      sortBy: sortBy,
-      filter: filter,
-      granularity: granularity,
-      groupBy: groupBy,
-      timePeriod: timePeriod,
-    })
+  ) => new({maxResults, nextPageToken, sortBy, filter, granularity, groupBy, timePeriod})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetReservationPurchaseRecommendation = {
   type t
   type request = {
@@ -3180,20 +3087,19 @@ module GetReservationPurchaseRecommendation = {
     (),
   ) =>
     new({
-      nextPageToken: nextPageToken,
-      pageSize: pageSize,
-      serviceSpecification: serviceSpecification,
-      paymentOption: paymentOption,
-      termInYears: termInYears,
-      lookbackPeriodInDays: lookbackPeriodInDays,
-      accountScope: accountScope,
-      filter: filter,
-      service: service,
-      accountId: accountId,
+      nextPageToken,
+      pageSize,
+      serviceSpecification,
+      paymentOption,
+      termInYears,
+      lookbackPeriodInDays,
+      accountScope,
+      filter,
+      service,
+      accountId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetReservationCoverage = {
   type t
   @ocaml.doc(
@@ -3392,20 +3298,9 @@ module GetReservationCoverage = {
     ~granularity=?,
     ~groupBy=?,
     (),
-  ) =>
-    new({
-      maxResults: maxResults,
-      sortBy: sortBy,
-      nextPageToken: nextPageToken,
-      metrics: metrics,
-      filter: filter,
-      granularity: granularity,
-      groupBy: groupBy,
-      timePeriod: timePeriod,
-    })
+  ) => new({maxResults, sortBy, nextPageToken, metrics, filter, granularity, groupBy, timePeriod})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetDimensionValues = {
   type t
   type request = {
@@ -3758,19 +3653,9 @@ module GetDimensionValues = {
     ~searchString=?,
     (),
   ) =>
-    new({
-      nextPageToken: nextPageToken,
-      maxResults: maxResults,
-      sortBy: sortBy,
-      filter: filter,
-      context: context,
-      dimension: dimension,
-      timePeriod: timePeriod,
-      searchString: searchString,
-    })
+    new({nextPageToken, maxResults, sortBy, filter, context, dimension, timePeriod, searchString})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetCostForecast = {
   type t
   type request = {
@@ -3946,16 +3831,9 @@ module GetCostForecast = {
   }
   @module("@aws-sdk/client-ce") @new external new: request => t = "GetCostForecastCommand"
   let make = (~granularity, ~metric, ~timePeriod, ~predictionIntervalLevel=?, ~filter=?, ()) =>
-    new({
-      predictionIntervalLevel: predictionIntervalLevel,
-      filter: filter,
-      granularity: granularity,
-      metric: metric,
-      timePeriod: timePeriod,
-    })
+    new({predictionIntervalLevel, filter, granularity, metric, timePeriod})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetCostCategories = {
   type t
   type request = {
@@ -4046,19 +3924,9 @@ module GetCostCategories = {
     ~costCategoryName=?,
     ~searchString=?,
     (),
-  ) =>
-    new({
-      nextPageToken: nextPageToken,
-      maxResults: maxResults,
-      sortBy: sortBy,
-      filter: filter,
-      costCategoryName: costCategoryName,
-      timePeriod: timePeriod,
-      searchString: searchString,
-    })
+  ) => new({nextPageToken, maxResults, sortBy, filter, costCategoryName, timePeriod, searchString})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetCostAndUsageWithResources = {
   type t
   type request = {
@@ -4134,17 +4002,9 @@ module GetCostAndUsageWithResources = {
   @module("@aws-sdk/client-ce") @new
   external new: request => t = "GetCostAndUsageWithResourcesCommand"
   let make = (~filter, ~granularity, ~timePeriod, ~nextPageToken=?, ~groupBy=?, ~metrics=?, ()) =>
-    new({
-      nextPageToken: nextPageToken,
-      groupBy: groupBy,
-      metrics: metrics,
-      filter: filter,
-      granularity: granularity,
-      timePeriod: timePeriod,
-    })
+    new({nextPageToken, groupBy, metrics, filter, granularity, timePeriod})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetCostAndUsage = {
   type t
   type request = {
@@ -4220,17 +4080,9 @@ module GetCostAndUsage = {
   }
   @module("@aws-sdk/client-ce") @new external new: request => t = "GetCostAndUsageCommand"
   let make = (~metrics, ~granularity, ~timePeriod, ~nextPageToken=?, ~groupBy=?, ~filter=?, ()) =>
-    new({
-      nextPageToken: nextPageToken,
-      groupBy: groupBy,
-      metrics: metrics,
-      filter: filter,
-      granularity: granularity,
-      timePeriod: timePeriod,
-    })
+    new({nextPageToken, groupBy, metrics, filter, granularity, timePeriod})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateAnomalyMonitor = {
   type t
   type request = {
@@ -4275,11 +4127,9 @@ module CreateAnomalyMonitor = {
     monitorArn: genericString,
   }
   @module("@aws-sdk/client-ce") @new external new: request => t = "CreateAnomalyMonitorCommand"
-  let make = (~anomalyMonitor, ~resourceTags=?, ()) =>
-    new({resourceTags: resourceTags, anomalyMonitor: anomalyMonitor})
+  let make = (~anomalyMonitor, ~resourceTags=?, ()) => new({resourceTags, anomalyMonitor})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateCostCategoryDefinition = {
   type t
   type request = {
@@ -4312,16 +4162,9 @@ module UpdateCostCategoryDefinition = {
   @module("@aws-sdk/client-ce") @new
   external new: request => t = "UpdateCostCategoryDefinitionCommand"
   let make = (~rules, ~ruleVersion, ~costCategoryArn, ~splitChargeRules=?, ~defaultValue=?, ()) =>
-    new({
-      splitChargeRules: splitChargeRules,
-      defaultValue: defaultValue,
-      rules: rules,
-      ruleVersion: ruleVersion,
-      costCategoryArn: costCategoryArn,
-    })
+    new({splitChargeRules, defaultValue, rules, ruleVersion, costCategoryArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetAnomalyMonitors = {
   type t
   type request = {
@@ -4348,10 +4191,9 @@ module GetAnomalyMonitors = {
   }
   @module("@aws-sdk/client-ce") @new external new: request => t = "GetAnomalyMonitorsCommand"
   let make = (~maxResults=?, ~nextPageToken=?, ~monitorArnList=?, ()) =>
-    new({maxResults: maxResults, nextPageToken: nextPageToken, monitorArnList: monitorArnList})
+    new({maxResults, nextPageToken, monitorArnList})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateCostCategoryDefinition = {
   type t
   type request = {
@@ -4421,18 +4263,9 @@ module CreateCostCategoryDefinition = {
     ~splitChargeRules=?,
     ~defaultValue=?,
     (),
-  ) =>
-    new({
-      resourceTags: resourceTags,
-      splitChargeRules: splitChargeRules,
-      defaultValue: defaultValue,
-      rules: rules,
-      ruleVersion: ruleVersion,
-      name: name,
-    })
+  ) => new({resourceTags, splitChargeRules, defaultValue, rules, ruleVersion, name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeCostCategoryDefinition = {
   type t
   type request = {
@@ -4450,7 +4283,6 @@ module DescribeCostCategoryDefinition = {
   type response = {@as("CostCategory") costCategory: option<costCategory>}
   @module("@aws-sdk/client-ce") @new
   external new: request => t = "DescribeCostCategoryDefinitionCommand"
-  let make = (~costCategoryArn, ~effectiveOn=?, ()) =>
-    new({effectiveOn: effectiveOn, costCategoryArn: costCategoryArn})
+  let make = (~costCategoryArn, ~effectiveOn=?, ()) => new({effectiveOn, costCategoryArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

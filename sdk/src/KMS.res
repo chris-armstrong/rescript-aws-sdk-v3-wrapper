@@ -655,10 +655,9 @@ module UpdatePrimaryRegion = {
   }
   type response = {.}
   @module("@aws-sdk/client-kms") @new external new: request => t = "UpdatePrimaryRegionCommand"
-  let make = (~primaryRegion, ~keyId, ()) => new({primaryRegion: primaryRegion, keyId: keyId})
+  let make = (~primaryRegion, ~keyId, ()) => new({primaryRegion, keyId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module UpdateKeyDescription = {
   type t
   type request = {
@@ -684,10 +683,9 @@ module UpdateKeyDescription = {
   }
   type response = {.}
   @module("@aws-sdk/client-kms") @new external new: request => t = "UpdateKeyDescriptionCommand"
-  let make = (~description, ~keyId, ()) => new({description: description, keyId: keyId})
+  let make = (~description, ~keyId, ()) => new({description, keyId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module UpdateCustomKeyStore = {
   type t
   type request = {
@@ -723,16 +721,9 @@ module UpdateCustomKeyStore = {
     ~keyStorePassword=?,
     ~newCustomKeyStoreName=?,
     (),
-  ) =>
-    new({
-      cloudHsmClusterId: cloudHsmClusterId,
-      keyStorePassword: keyStorePassword,
-      newCustomKeyStoreName: newCustomKeyStoreName,
-      customKeyStoreId: customKeyStoreId,
-    })
+  ) => new({cloudHsmClusterId, keyStorePassword, newCustomKeyStoreName, customKeyStoreId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module UpdateAlias = {
   type t
   type request = {
@@ -766,10 +757,9 @@ module UpdateAlias = {
   }
   type response = {.}
   @module("@aws-sdk/client-kms") @new external new: request => t = "UpdateAliasCommand"
-  let make = (~targetKeyId, ~aliasName, ()) => new({targetKeyId: targetKeyId, aliasName: aliasName})
+  let make = (~targetKeyId, ~aliasName, ()) => new({targetKeyId, aliasName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module ScheduleKeyDeletion = {
   type t
   type request = {
@@ -824,11 +814,9 @@ module ScheduleKeyDeletion = {
     keyId: option<keyIdType>,
   }
   @module("@aws-sdk/client-kms") @new external new: request => t = "ScheduleKeyDeletionCommand"
-  let make = (~keyId, ~pendingWindowInDays=?, ()) =>
-    new({pendingWindowInDays: pendingWindowInDays, keyId: keyId})
+  let make = (~keyId, ~pendingWindowInDays=?, ()) => new({pendingWindowInDays, keyId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module RevokeGrant = {
   type t
   type request = {
@@ -858,10 +846,9 @@ different Amazon Web Services account, you must use the key ARN.</p>
   }
   type response = {.}
   @module("@aws-sdk/client-kms") @new external new: request => t = "RevokeGrantCommand"
-  let make = (~grantId, ~keyId, ()) => new({grantId: grantId, keyId: keyId})
+  let make = (~grantId, ~keyId, ()) => new({grantId, keyId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module RetireGrant = {
   type t
   type request = {
@@ -890,11 +877,9 @@ module RetireGrant = {
   }
   type response = {.}
   @module("@aws-sdk/client-kms") @new external new: request => t = "RetireGrantCommand"
-  let make = (~grantId=?, ~keyId=?, ~grantToken=?, ()) =>
-    new({grantId: grantId, keyId: keyId, grantToken: grantToken})
+  let make = (~grantId=?, ~keyId=?, ~grantToken=?, ()) => new({grantId, keyId, grantToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module PutKeyPolicy = {
   type t
   type request = {
@@ -955,15 +940,9 @@ module PutKeyPolicy = {
   type response = {.}
   @module("@aws-sdk/client-kms") @new external new: request => t = "PutKeyPolicyCommand"
   let make = (~policy, ~policyName, ~keyId, ~bypassPolicyLockoutSafetyCheck=?, ()) =>
-    new({
-      bypassPolicyLockoutSafetyCheck: bypassPolicyLockoutSafetyCheck,
-      policy: policy,
-      policyName: policyName,
-      keyId: keyId,
-    })
+    new({bypassPolicyLockoutSafetyCheck, policy, policyName, keyId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module ImportKeyMaterial = {
   type t
   type request = {
@@ -1010,16 +989,9 @@ module ImportKeyMaterial = {
   type response = {.}
   @module("@aws-sdk/client-kms") @new external new: request => t = "ImportKeyMaterialCommand"
   let make = (~encryptedKeyMaterial, ~importToken, ~keyId, ~expirationModel=?, ~validTo=?, ()) =>
-    new({
-      expirationModel: expirationModel,
-      validTo: validTo,
-      encryptedKeyMaterial: encryptedKeyMaterial,
-      importToken: importToken,
-      keyId: keyId,
-    })
+    new({expirationModel, validTo, encryptedKeyMaterial, importToken, keyId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module GetParametersForImport = {
   type t
   type request = {
@@ -1072,10 +1044,9 @@ module GetParametersForImport = {
   }
   @module("@aws-sdk/client-kms") @new external new: request => t = "GetParametersForImportCommand"
   let make = (~wrappingKeySpec, ~wrappingAlgorithm, ~keyId, ()) =>
-    new({wrappingKeySpec: wrappingKeySpec, wrappingAlgorithm: wrappingAlgorithm, keyId: keyId})
+    new({wrappingKeySpec, wrappingAlgorithm, keyId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetKeyRotationStatus = {
   type t
   type request = {
@@ -1107,7 +1078,6 @@ different Amazon Web Services account, you must use the key ARN.</p>
   let make = (~keyId, ()) => new({keyId: keyId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetKeyPolicy = {
   type t
   type request = {
@@ -1137,10 +1107,9 @@ module GetKeyPolicy = {
     policy: option<policyType>,
   }
   @module("@aws-sdk/client-kms") @new external new: request => t = "GetKeyPolicyCommand"
-  let make = (~policyName, ~keyId, ()) => new({policyName: policyName, keyId: keyId})
+  let make = (~policyName, ~keyId, ()) => new({policyName, keyId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GenerateRandom = {
   type t
   type request = {
@@ -1159,11 +1128,9 @@ module GenerateRandom = {
     plaintext: option<plaintextType>,
   }
   @module("@aws-sdk/client-kms") @new external new: request => t = "GenerateRandomCommand"
-  let make = (~customKeyStoreId=?, ~numberOfBytes=?, ()) =>
-    new({customKeyStoreId: customKeyStoreId, numberOfBytes: numberOfBytes})
+  let make = (~customKeyStoreId=?, ~numberOfBytes=?, ()) => new({customKeyStoreId, numberOfBytes})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module EnableKeyRotation = {
   type t
   type request = {
@@ -1189,7 +1156,6 @@ module EnableKeyRotation = {
   let make = (~keyId, ()) => new({keyId: keyId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module EnableKey = {
   type t
   type request = {
@@ -1215,7 +1181,6 @@ module EnableKey = {
   let make = (~keyId, ()) => new({keyId: keyId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DisconnectCustomKeyStore = {
   type t
   type request = {
@@ -1230,7 +1195,6 @@ module DisconnectCustomKeyStore = {
   let make = (~customKeyStoreId, ()) => new({customKeyStoreId: customKeyStoreId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DisableKeyRotation = {
   type t
   type request = {
@@ -1258,7 +1222,6 @@ module DisableKeyRotation = {
   let make = (~keyId, ()) => new({keyId: keyId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DisableKey = {
   type t
   type request = {
@@ -1284,7 +1247,6 @@ module DisableKey = {
   let make = (~keyId, ()) => new({keyId: keyId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteImportedKeyMaterial = {
   type t
   type request = {
@@ -1313,7 +1275,6 @@ module DeleteImportedKeyMaterial = {
   let make = (~keyId, ()) => new({keyId: keyId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteCustomKeyStore = {
   type t
   type request = {
@@ -1328,7 +1289,6 @@ module DeleteCustomKeyStore = {
   let make = (~customKeyStoreId, ()) => new({customKeyStoreId: customKeyStoreId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteAlias = {
   type t
   type request = {
@@ -1342,7 +1302,6 @@ module DeleteAlias = {
   let make = (~aliasName, ()) => new({aliasName: aliasName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module CreateCustomKeyStore = {
   type t
   type request = {
@@ -1380,16 +1339,9 @@ module CreateCustomKeyStore = {
     ~cloudHsmClusterId,
     ~customKeyStoreName,
     (),
-  ) =>
-    new({
-      keyStorePassword: keyStorePassword,
-      trustAnchorCertificate: trustAnchorCertificate,
-      cloudHsmClusterId: cloudHsmClusterId,
-      customKeyStoreName: customKeyStoreName,
-    })
+  ) => new({keyStorePassword, trustAnchorCertificate, cloudHsmClusterId, customKeyStoreName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateAlias = {
   type t
   type request = {
@@ -1428,10 +1380,9 @@ module CreateAlias = {
   }
   type response = {.}
   @module("@aws-sdk/client-kms") @new external new: request => t = "CreateAliasCommand"
-  let make = (~targetKeyId, ~aliasName, ()) => new({targetKeyId: targetKeyId, aliasName: aliasName})
+  let make = (~targetKeyId, ~aliasName, ()) => new({targetKeyId, aliasName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module ConnectCustomKeyStore = {
   type t
   type request = {
@@ -1445,7 +1396,6 @@ module ConnectCustomKeyStore = {
   let make = (~customKeyStoreId, ()) => new({customKeyStoreId: customKeyStoreId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module CancelKeyDeletion = {
   type t
   type request = {
@@ -1478,7 +1428,6 @@ module CancelKeyDeletion = {
   let make = (~keyId, ()) => new({keyId: keyId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module Verify = {
   type t
   type request = {
@@ -1565,18 +1514,9 @@ module Verify = {
     ~grantTokens=?,
     ~messageType=?,
     (),
-  ) =>
-    new({
-      grantTokens: grantTokens,
-      signingAlgorithm: signingAlgorithm,
-      signature: signature,
-      messageType: messageType,
-      message: message,
-      keyId: keyId,
-    })
+  ) => new({grantTokens, signingAlgorithm, signature, messageType, message, keyId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UntagResource = {
   type t
   type request = {
@@ -1603,10 +1543,9 @@ module UntagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-kms") @new external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~keyId, ()) => new({tagKeys: tagKeys, keyId: keyId})
+  let make = (~tagKeys, ~keyId, ()) => new({tagKeys, keyId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module Sign = {
   type t
   type request = {
@@ -1688,16 +1627,9 @@ module Sign = {
   }
   @module("@aws-sdk/client-kms") @new external new: request => t = "SignCommand"
   let make = (~signingAlgorithm, ~message, ~keyId, ~grantTokens=?, ~messageType=?, ()) =>
-    new({
-      signingAlgorithm: signingAlgorithm,
-      grantTokens: grantTokens,
-      messageType: messageType,
-      message: message,
-      keyId: keyId,
-    })
+    new({signingAlgorithm, grantTokens, messageType, message, keyId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ReEncrypt = {
   type t
   type request = {
@@ -1835,18 +1767,17 @@ module ReEncrypt = {
     (),
   ) =>
     new({
-      grantTokens: grantTokens,
-      destinationEncryptionAlgorithm: destinationEncryptionAlgorithm,
-      sourceEncryptionAlgorithm: sourceEncryptionAlgorithm,
-      destinationEncryptionContext: destinationEncryptionContext,
-      destinationKeyId: destinationKeyId,
-      sourceKeyId: sourceKeyId,
-      sourceEncryptionContext: sourceEncryptionContext,
-      ciphertextBlob: ciphertextBlob,
+      grantTokens,
+      destinationEncryptionAlgorithm,
+      sourceEncryptionAlgorithm,
+      destinationEncryptionContext,
+      destinationKeyId,
+      sourceKeyId,
+      sourceEncryptionContext,
+      ciphertextBlob,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListKeyPolicies = {
   type t
   type request = {
@@ -1896,10 +1827,9 @@ module ListKeyPolicies = {
     policyNames: option<policyNameList>,
   }
   @module("@aws-sdk/client-kms") @new external new: request => t = "ListKeyPoliciesCommand"
-  let make = (~keyId, ~marker=?, ~limit=?, ()) => new({marker: marker, limit: limit, keyId: keyId})
+  let make = (~keyId, ~marker=?, ~limit=?, ()) => new({marker, limit, keyId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetPublicKey = {
   type t
   type request = {
@@ -1974,10 +1904,9 @@ module GetPublicKey = {
     keyId: option<keyIdType>,
   }
   @module("@aws-sdk/client-kms") @new external new: request => t = "GetPublicKeyCommand"
-  let make = (~keyId, ~grantTokens=?, ()) => new({grantTokens: grantTokens, keyId: keyId})
+  let make = (~keyId, ~grantTokens=?, ()) => new({grantTokens, keyId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GenerateDataKeyWithoutPlaintext = {
   type t
   type request = {
@@ -2043,16 +1972,9 @@ module GenerateDataKeyWithoutPlaintext = {
   @module("@aws-sdk/client-kms") @new
   external new: request => t = "GenerateDataKeyWithoutPlaintextCommand"
   let make = (~keyId, ~grantTokens=?, ~numberOfBytes=?, ~keySpec=?, ~encryptionContext=?, ()) =>
-    new({
-      grantTokens: grantTokens,
-      numberOfBytes: numberOfBytes,
-      keySpec: keySpec,
-      encryptionContext: encryptionContext,
-      keyId: keyId,
-    })
+    new({grantTokens, numberOfBytes, keySpec, encryptionContext, keyId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GenerateDataKeyPairWithoutPlaintext = {
   type t
   type request = {
@@ -2120,15 +2042,9 @@ module GenerateDataKeyPairWithoutPlaintext = {
   @module("@aws-sdk/client-kms") @new
   external new: request => t = "GenerateDataKeyPairWithoutPlaintextCommand"
   let make = (~keyPairSpec, ~keyId, ~grantTokens=?, ~encryptionContext=?, ()) =>
-    new({
-      grantTokens: grantTokens,
-      keyPairSpec: keyPairSpec,
-      keyId: keyId,
-      encryptionContext: encryptionContext,
-    })
+    new({grantTokens, keyPairSpec, keyId, encryptionContext})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GenerateDataKeyPair = {
   type t
   type request = {
@@ -2200,15 +2116,9 @@ module GenerateDataKeyPair = {
   }
   @module("@aws-sdk/client-kms") @new external new: request => t = "GenerateDataKeyPairCommand"
   let make = (~keyPairSpec, ~keyId, ~grantTokens=?, ~encryptionContext=?, ()) =>
-    new({
-      grantTokens: grantTokens,
-      keyPairSpec: keyPairSpec,
-      keyId: keyId,
-      encryptionContext: encryptionContext,
-    })
+    new({grantTokens, keyPairSpec, keyId, encryptionContext})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GenerateDataKey = {
   type t
   type request = {
@@ -2281,16 +2191,9 @@ module GenerateDataKey = {
   }
   @module("@aws-sdk/client-kms") @new external new: request => t = "GenerateDataKeyCommand"
   let make = (~keyId, ~grantTokens=?, ~keySpec=?, ~numberOfBytes=?, ~encryptionContext=?, ()) =>
-    new({
-      grantTokens: grantTokens,
-      keySpec: keySpec,
-      numberOfBytes: numberOfBytes,
-      encryptionContext: encryptionContext,
-      keyId: keyId,
-    })
+    new({grantTokens, keySpec, numberOfBytes, encryptionContext, keyId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module Encrypt = {
   type t
   type request = {
@@ -2364,17 +2267,9 @@ module Encrypt = {
     ~grantTokens=?,
     ~encryptionContext=?,
     (),
-  ) =>
-    new({
-      encryptionAlgorithm: encryptionAlgorithm,
-      grantTokens: grantTokens,
-      encryptionContext: encryptionContext,
-      plaintext: plaintext,
-      keyId: keyId,
-    })
+  ) => new({encryptionAlgorithm, grantTokens, encryptionContext, plaintext, keyId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module Decrypt = {
   type t
   type request = {
@@ -2457,17 +2352,9 @@ module Decrypt = {
     ~grantTokens=?,
     ~encryptionContext=?,
     (),
-  ) =>
-    new({
-      encryptionAlgorithm: encryptionAlgorithm,
-      keyId: keyId,
-      grantTokens: grantTokens,
-      encryptionContext: encryptionContext,
-      ciphertextBlob: ciphertextBlob,
-    })
+  ) => new({encryptionAlgorithm, keyId, grantTokens, encryptionContext, ciphertextBlob})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module TagResource = {
   type t
   type request = {
@@ -2499,10 +2386,9 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-kms") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~keyId, ()) => new({tags: tags, keyId: keyId})
+  let make = (~tags, ~keyId, ()) => new({tags, keyId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module ListResourceTags = {
   type t
   type request = {
@@ -2557,10 +2443,9 @@ module ListResourceTags = {
     tags: option<tagList_>,
   }
   @module("@aws-sdk/client-kms") @new external new: request => t = "ListResourceTagsCommand"
-  let make = (~keyId, ~marker=?, ~limit=?, ()) => new({marker: marker, limit: limit, keyId: keyId})
+  let make = (~keyId, ~marker=?, ~limit=?, ()) => new({marker, limit, keyId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListKeys = {
   type t
   type request = {
@@ -2591,10 +2476,9 @@ module ListKeys = {
     @ocaml.doc("<p>A list of KMS keys.</p>") @as("Keys") keys: option<keyList>,
   }
   @module("@aws-sdk/client-kms") @new external new: request => t = "ListKeysCommand"
-  let make = (~marker=?, ~limit=?, ()) => new({marker: marker, limit: limit})
+  let make = (~marker=?, ~limit=?, ()) => new({marker, limit})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListAliases = {
   type t
   type request = {
@@ -2644,11 +2528,9 @@ module ListAliases = {
     @ocaml.doc("<p>A list of aliases.</p>") @as("Aliases") aliases: option<aliasList>,
   }
   @module("@aws-sdk/client-kms") @new external new: request => t = "ListAliasesCommand"
-  let make = (~marker=?, ~limit=?, ~keyId=?, ()) =>
-    new({marker: marker, limit: limit, keyId: keyId})
+  let make = (~marker=?, ~limit=?, ~keyId=?, ()) => new({marker, limit, keyId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeCustomKeyStores = {
   type t
   type request = {
@@ -2694,15 +2576,9 @@ module DescribeCustomKeyStores = {
   }
   @module("@aws-sdk/client-kms") @new external new: request => t = "DescribeCustomKeyStoresCommand"
   let make = (~marker=?, ~limit=?, ~customKeyStoreName=?, ~customKeyStoreId=?, ()) =>
-    new({
-      marker: marker,
-      limit: limit,
-      customKeyStoreName: customKeyStoreName,
-      customKeyStoreId: customKeyStoreId,
-    })
+    new({marker, limit, customKeyStoreName, customKeyStoreId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateGrant = {
   type t
   type request = {
@@ -2813,19 +2689,9 @@ different Amazon Web Services account, you must use the key ARN.</p>
     ~constraints=?,
     ~retiringPrincipal=?,
     (),
-  ) =>
-    new({
-      name: name,
-      grantTokens: grantTokens,
-      constraints: constraints,
-      operations: operations,
-      retiringPrincipal: retiringPrincipal,
-      granteePrincipal: granteePrincipal,
-      keyId: keyId,
-    })
+  ) => new({name, grantTokens, constraints, operations, retiringPrincipal, granteePrincipal, keyId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ReplicateKey = {
   type t
   type request = {
@@ -2956,18 +2822,9 @@ module ReplicateKey = {
     ~bypassPolicyLockoutSafetyCheck=?,
     ~policy=?,
     (),
-  ) =>
-    new({
-      tags: tags,
-      description: description,
-      bypassPolicyLockoutSafetyCheck: bypassPolicyLockoutSafetyCheck,
-      policy: policy,
-      replicaRegion: replicaRegion,
-      keyId: keyId,
-    })
+  ) => new({tags, description, bypassPolicyLockoutSafetyCheck, policy, replicaRegion, keyId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListRetirableGrants = {
   type t
   type request = {
@@ -3008,10 +2865,9 @@ module ListRetirableGrants = {
   }
   @module("@aws-sdk/client-kms") @new external new: request => t = "ListRetirableGrantsCommand"
   let make = (~retiringPrincipal, ~marker=?, ~limit=?, ()) =>
-    new({retiringPrincipal: retiringPrincipal, marker: marker, limit: limit})
+    new({retiringPrincipal, marker, limit})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListGrants = {
   type t
   type request = {
@@ -3069,16 +2925,9 @@ different Amazon Web Services account, you must use the key ARN.</p>
   }
   @module("@aws-sdk/client-kms") @new external new: request => t = "ListGrantsCommand"
   let make = (~keyId, ~granteePrincipal=?, ~grantId=?, ~marker=?, ~limit=?, ()) =>
-    new({
-      granteePrincipal: granteePrincipal,
-      grantId: grantId,
-      keyId: keyId,
-      marker: marker,
-      limit: limit,
-    })
+    new({granteePrincipal, grantId, keyId, marker, limit})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeKey = {
   type t
   type request = {
@@ -3121,10 +2970,9 @@ module DescribeKey = {
     keyMetadata: option<keyMetadata>,
   }
   @module("@aws-sdk/client-kms") @new external new: request => t = "DescribeKeyCommand"
-  let make = (~keyId, ~grantTokens=?, ()) => new({grantTokens: grantTokens, keyId: keyId})
+  let make = (~keyId, ~grantTokens=?, ()) => new({grantTokens, keyId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateKey = {
   type t
   type request = {
@@ -3364,16 +3212,16 @@ single-tenant key store.</p>")
     (),
   ) =>
     new({
-      multiRegion: multiRegion,
-      tags: tags,
-      bypassPolicyLockoutSafetyCheck: bypassPolicyLockoutSafetyCheck,
-      customKeyStoreId: customKeyStoreId,
-      origin: origin,
-      keySpec: keySpec,
-      customerMasterKeySpec: customerMasterKeySpec,
-      keyUsage: keyUsage,
-      description: description,
-      policy: policy,
+      multiRegion,
+      tags,
+      bypassPolicyLockoutSafetyCheck,
+      customKeyStoreId,
+      origin,
+      keySpec,
+      customerMasterKeySpec,
+      keyUsage,
+      description,
+      policy,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

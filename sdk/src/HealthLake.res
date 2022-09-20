@@ -314,7 +314,6 @@ module DeleteFHIRDatastore = {
   let make = (~datastoreId=?, ()) => new({datastoreId: datastoreId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UntagResource = {
   type t
   type request = {
@@ -331,10 +330,9 @@ module UntagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-healthlake") @new external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceARN, ()) => new({tagKeys: tagKeys, resourceARN: resourceARN})
+  let make = (~tagKeys, ~resourceARN, ()) => new({tagKeys, resourceARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module TagResource = {
   type t
   type request = {
@@ -351,10 +349,9 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-healthlake") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceARN, ()) => new({tags: tags, resourceARN: resourceARN})
+  let make = (~tags, ~resourceARN, ()) => new({tags, resourceARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module StartFHIRImportJob = {
   type t
   type request = {
@@ -396,16 +393,15 @@ module StartFHIRImportJob = {
     (),
   ) =>
     new({
-      clientToken: clientToken,
-      dataAccessRoleArn: dataAccessRoleArn,
-      datastoreId: datastoreId,
-      jobOutputDataConfig: jobOutputDataConfig,
-      inputDataConfig: inputDataConfig,
-      jobName: jobName,
+      clientToken,
+      dataAccessRoleArn,
+      datastoreId,
+      jobOutputDataConfig,
+      inputDataConfig,
+      jobName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module StartFHIRExportJob = {
   type t
   type request = {
@@ -444,16 +440,9 @@ module StartFHIRExportJob = {
   @module("@aws-sdk/client-healthlake") @new
   external new: request => t = "StartFHIRExportJobCommand"
   let make = (~clientToken, ~dataAccessRoleArn, ~datastoreId, ~outputDataConfig, ~jobName=?, ()) =>
-    new({
-      clientToken: clientToken,
-      dataAccessRoleArn: dataAccessRoleArn,
-      datastoreId: datastoreId,
-      outputDataConfig: outputDataConfig,
-      jobName: jobName,
-    })
+    new({clientToken, dataAccessRoleArn, datastoreId, outputDataConfig, jobName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListTagsForResource = {
   type t
   type request = {
@@ -475,7 +464,6 @@ module ListTagsForResource = {
   let make = (~resourceARN, ()) => new({resourceARN: resourceARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateFHIRDatastore = {
   type t
   type request = {
@@ -532,16 +520,15 @@ module CreateFHIRDatastore = {
     (),
   ) =>
     new({
-      tags: tags,
-      clientToken: clientToken,
-      preloadDataConfig: preloadDataConfig,
-      sseConfiguration: sseConfiguration,
-      datastoreTypeVersion: datastoreTypeVersion,
-      datastoreName: datastoreName,
+      tags,
+      clientToken,
+      preloadDataConfig,
+      sseConfiguration,
+      datastoreTypeVersion,
+      datastoreName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeFHIRImportJob = {
   type t
   type request = {
@@ -558,10 +545,9 @@ module DescribeFHIRImportJob = {
   }
   @module("@aws-sdk/client-healthlake") @new
   external new: request => t = "DescribeFHIRImportJobCommand"
-  let make = (~jobId, ~datastoreId, ()) => new({jobId: jobId, datastoreId: datastoreId})
+  let make = (~jobId, ~datastoreId, ()) => new({jobId, datastoreId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeFHIRExportJob = {
   type t
   type request = {
@@ -581,10 +567,9 @@ module DescribeFHIRExportJob = {
   }
   @module("@aws-sdk/client-healthlake") @new
   external new: request => t = "DescribeFHIRExportJobCommand"
-  let make = (~jobId, ~datastoreId, ()) => new({jobId: jobId, datastoreId: datastoreId})
+  let make = (~jobId, ~datastoreId, ()) => new({jobId, datastoreId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeFHIRDatastore = {
   type t
   type request = {
@@ -606,7 +591,6 @@ module DescribeFHIRDatastore = {
   let make = (~datastoreId=?, ()) => new({datastoreId: datastoreId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListFHIRImportJobs = {
   type t
   type request = {
@@ -670,18 +654,9 @@ module ListFHIRImportJobs = {
     ~nextToken=?,
     (),
   ) =>
-    new({
-      submittedAfter: submittedAfter,
-      submittedBefore: submittedBefore,
-      jobStatus: jobStatus,
-      jobName: jobName,
-      maxResults: maxResults,
-      nextToken: nextToken,
-      datastoreId: datastoreId,
-    })
+    new({submittedAfter, submittedBefore, jobStatus, jobName, maxResults, nextToken, datastoreId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListFHIRExportJobs = {
   type t
   type request = {
@@ -745,18 +720,9 @@ module ListFHIRExportJobs = {
     ~nextToken=?,
     (),
   ) =>
-    new({
-      submittedAfter: submittedAfter,
-      submittedBefore: submittedBefore,
-      jobStatus: jobStatus,
-      jobName: jobName,
-      maxResults: maxResults,
-      nextToken: nextToken,
-      datastoreId: datastoreId,
-    })
+    new({submittedAfter, submittedBefore, jobStatus, jobName, maxResults, nextToken, datastoreId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListFHIRDatastores = {
   type t
   type request = {
@@ -780,7 +746,6 @@ module ListFHIRDatastores = {
   }
   @module("@aws-sdk/client-healthlake") @new
   external new: request => t = "ListFHIRDatastoresCommand"
-  let make = (~maxResults=?, ~nextToken=?, ~filter=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, filter: filter})
+  let make = (~maxResults=?, ~nextToken=?, ~filter=?, ()) => new({maxResults, nextToken, filter})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

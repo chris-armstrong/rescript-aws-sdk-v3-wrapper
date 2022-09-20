@@ -2078,11 +2078,9 @@ module UnregisterConnector = {
   }
   type response = {.}
   @module("@aws-sdk/client-appflow") @new external new: request => t = "UnregisterConnectorCommand"
-  let make = (~connectorLabel, ~forceDelete=?, ()) =>
-    new({forceDelete: forceDelete, connectorLabel: connectorLabel})
+  let make = (~connectorLabel, ~forceDelete=?, ()) => new({forceDelete, connectorLabel})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module StopFlow = {
   type t
   type request = {
@@ -2098,7 +2096,6 @@ module StopFlow = {
   let make = (~flowName, ()) => new({flowName: flowName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module StartFlow = {
   type t
   type request = {
@@ -2117,7 +2114,6 @@ module StartFlow = {
   let make = (~flowName, ()) => new({flowName: flowName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteFlow = {
   type t
   type request = {
@@ -2130,10 +2126,9 @@ module DeleteFlow = {
   }
   type response = {.}
   @module("@aws-sdk/client-appflow") @new external new: request => t = "DeleteFlowCommand"
-  let make = (~flowName, ~forceDelete=?, ()) => new({forceDelete: forceDelete, flowName: flowName})
+  let make = (~flowName, ~forceDelete=?, ()) => new({forceDelete, flowName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteConnectorProfile = {
   type t
   type request = {
@@ -2147,11 +2142,9 @@ module DeleteConnectorProfile = {
   type response = {.}
   @module("@aws-sdk/client-appflow") @new
   external new: request => t = "DeleteConnectorProfileCommand"
-  let make = (~connectorProfileName, ~forceDelete=?, ()) =>
-    new({forceDelete: forceDelete, connectorProfileName: connectorProfileName})
+  let make = (~connectorProfileName, ~forceDelete=?, ()) => new({forceDelete, connectorProfileName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module UntagResource = {
   type t
   type request = {
@@ -2164,10 +2157,9 @@ module UntagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-appflow") @new external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
+  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys, resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module TagResource = {
   type t
   type request = {
@@ -2178,10 +2170,9 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-appflow") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
+  let make = (~tags, ~resourceArn, ()) => new({tags, resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module ListTagsForResource = {
   type t
   type request = {
@@ -2195,7 +2186,6 @@ module ListTagsForResource = {
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module RegisterConnector = {
   type t
   type request = {
@@ -2221,16 +2211,9 @@ module RegisterConnector = {
     ~description=?,
     ~connectorLabel=?,
     (),
-  ) =>
-    new({
-      connectorProvisioningConfig: connectorProvisioningConfig,
-      connectorProvisioningType: connectorProvisioningType,
-      description: description,
-      connectorLabel: connectorLabel,
-    })
+  ) => new({connectorProvisioningConfig, connectorProvisioningType, description, connectorLabel})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListFlows = {
   type t
   type request = {
@@ -2245,11 +2228,9 @@ module ListFlows = {
     @ocaml.doc("<p> The list of flows associated with your account. </p>") flows: option<flowList>,
   }
   @module("@aws-sdk/client-appflow") @new external new: request => t = "ListFlowsCommand"
-  let make = (~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken: nextToken, maxResults: maxResults})
+  let make = (~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListConnectors = {
   type t
   type request = {
@@ -2267,11 +2248,9 @@ module ListConnectors = {
     connectors: option<connectorList>,
   }
   @module("@aws-sdk/client-appflow") @new external new: request => t = "ListConnectorsCommand"
-  let make = (~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken: nextToken, maxResults: maxResults})
+  let make = (~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListConnectorEntities = {
   type t
   type request = {
@@ -2299,15 +2278,9 @@ module ListConnectorEntities = {
   @module("@aws-sdk/client-appflow") @new
   external new: request => t = "ListConnectorEntitiesCommand"
   let make = (~apiVersion=?, ~entitiesPath=?, ~connectorType=?, ~connectorProfileName=?, ()) =>
-    new({
-      apiVersion: apiVersion,
-      entitiesPath: entitiesPath,
-      connectorType: connectorType,
-      connectorProfileName: connectorProfileName,
-    })
+    new({apiVersion, entitiesPath, connectorType, connectorProfileName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeFlowExecutionRecords = {
   type t
   type request = {
@@ -2328,11 +2301,9 @@ module DescribeFlowExecutionRecords = {
   }
   @module("@aws-sdk/client-appflow") @new
   external new: request => t = "DescribeFlowExecutionRecordsCommand"
-  let make = (~flowName, ~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken: nextToken, maxResults: maxResults, flowName: flowName})
+  let make = (~flowName, ~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults, flowName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateConnectorProfile = {
   type t
   type request = {
@@ -2351,14 +2322,9 @@ module UpdateConnectorProfile = {
   @module("@aws-sdk/client-appflow") @new
   external new: request => t = "UpdateConnectorProfileCommand"
   let make = (~connectorProfileConfig, ~connectionMode, ~connectorProfileName, ()) =>
-    new({
-      connectorProfileConfig: connectorProfileConfig,
-      connectionMode: connectionMode,
-      connectorProfileName: connectorProfileName,
-    })
+    new({connectorProfileConfig, connectionMode, connectorProfileName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeConnectorEntity = {
   type t
   type request = {
@@ -2382,15 +2348,9 @@ module DescribeConnectorEntity = {
   @module("@aws-sdk/client-appflow") @new
   external new: request => t = "DescribeConnectorEntityCommand"
   let make = (~connectorEntityName, ~apiVersion=?, ~connectorProfileName=?, ~connectorType=?, ()) =>
-    new({
-      apiVersion: apiVersion,
-      connectorProfileName: connectorProfileName,
-      connectorType: connectorType,
-      connectorEntityName: connectorEntityName,
-    })
+    new({apiVersion, connectorProfileName, connectorType, connectorEntityName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateConnectorProfile = {
   type t
   type request = {
@@ -2431,16 +2391,15 @@ module CreateConnectorProfile = {
     (),
   ) =>
     new({
-      connectorProfileConfig: connectorProfileConfig,
-      connectionMode: connectionMode,
-      connectorLabel: connectorLabel,
-      connectorType: connectorType,
-      kmsArn: kmsArn,
-      connectorProfileName: connectorProfileName,
+      connectorProfileConfig,
+      connectionMode,
+      connectorLabel,
+      connectorType,
+      kmsArn,
+      connectorProfileName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateFlow = {
   type t
   type request = {
@@ -2471,17 +2430,9 @@ module UpdateFlow = {
     ~description=?,
     (),
   ) =>
-    new({
-      tasks: tasks,
-      destinationFlowConfigList: destinationFlowConfigList,
-      sourceFlowConfig: sourceFlowConfig,
-      triggerConfig: triggerConfig,
-      description: description,
-      flowName: flowName,
-    })
+    new({tasks, destinationFlowConfigList, sourceFlowConfig, triggerConfig, description, flowName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeFlow = {
   type t
   type request = {
@@ -2531,7 +2482,6 @@ module DescribeFlow = {
   let make = (~flowName, ()) => new({flowName: flowName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeConnectorProfiles = {
   type t
   type request = {
@@ -2568,17 +2518,9 @@ module DescribeConnectorProfiles = {
     ~connectorType=?,
     ~connectorProfileNames=?,
     (),
-  ) =>
-    new({
-      nextToken: nextToken,
-      maxResults: maxResults,
-      connectorLabel: connectorLabel,
-      connectorType: connectorType,
-      connectorProfileNames: connectorProfileNames,
-    })
+  ) => new({nextToken, maxResults, connectorLabel, connectorType, connectorProfileNames})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateFlow = {
   type t
   type request = {
@@ -2623,18 +2565,17 @@ module CreateFlow = {
     (),
   ) =>
     new({
-      tags: tags,
-      tasks: tasks,
-      destinationFlowConfigList: destinationFlowConfigList,
-      sourceFlowConfig: sourceFlowConfig,
-      triggerConfig: triggerConfig,
-      kmsArn: kmsArn,
-      description: description,
-      flowName: flowName,
+      tags,
+      tasks,
+      destinationFlowConfigList,
+      sourceFlowConfig,
+      triggerConfig,
+      kmsArn,
+      description,
+      flowName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeConnector = {
   type t
   type request = {
@@ -2651,11 +2592,9 @@ module DescribeConnector = {
     connectorConfiguration: option<connectorConfiguration>,
   }
   @module("@aws-sdk/client-appflow") @new external new: request => t = "DescribeConnectorCommand"
-  let make = (~connectorType, ~connectorLabel=?, ()) =>
-    new({connectorLabel: connectorLabel, connectorType: connectorType})
+  let make = (~connectorType, ~connectorLabel=?, ()) => new({connectorLabel, connectorType})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeConnectors = {
   type t
   type request = {
@@ -2677,6 +2616,6 @@ module DescribeConnectors = {
   }
   @module("@aws-sdk/client-appflow") @new external new: request => t = "DescribeConnectorsCommand"
   let make = (~nextToken=?, ~maxResults=?, ~connectorTypes=?, ()) =>
-    new({nextToken: nextToken, maxResults: maxResults, connectorTypes: connectorTypes})
+    new({nextToken, maxResults, connectorTypes})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

@@ -467,7 +467,6 @@ module GetArtifactUrl = {
   let make = (~artifactId, ()) => new({artifactId: artifactId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GenerateAccessLogs = {
   type t
   @ocaml.doc("<p> The request structure for the generate access logs request. </p>")
@@ -487,10 +486,9 @@ module GenerateAccessLogs = {
   }
   @module("@aws-sdk/client-amplify") @new external new: request => t = "GenerateAccessLogsCommand"
   let make = (~appId, ~domainName, ~endTime=?, ~startTime=?, ()) =>
-    new({appId: appId, domainName: domainName, endTime: endTime, startTime: startTime})
+    new({appId, domainName, endTime, startTime})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateWebhook = {
   type t
   @ocaml.doc("<p> The request structure for the update webhook request. </p>")
@@ -507,10 +505,9 @@ module UpdateWebhook = {
   }
   @module("@aws-sdk/client-amplify") @new external new: request => t = "UpdateWebhookCommand"
   let make = (~webhookId, ~description=?, ~branchName=?, ()) =>
-    new({description: description, branchName: branchName, webhookId: webhookId})
+    new({description, branchName, webhookId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UntagResource = {
   type t
   @ocaml.doc("<p> The request structure for the untag resource request. </p>")
@@ -521,10 +518,9 @@ module UntagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-amplify") @new external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
+  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys, resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module TagResource = {
   type t
   @ocaml.doc("<p> The request structure to tag a resource with a tag key and value. </p>")
@@ -535,10 +531,9 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-amplify") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
+  let make = (~tags, ~resourceArn, ()) => new({tags, resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module StopJob = {
   type t
   @ocaml.doc("<p> The request structure for the stop job request. </p>")
@@ -550,11 +545,9 @@ module StopJob = {
   @ocaml.doc("<p> The result structure for the stop job request. </p>")
   type response = {@ocaml.doc("<p> The summary for the job. </p>") jobSummary: jobSummary}
   @module("@aws-sdk/client-amplify") @new external new: request => t = "StopJobCommand"
-  let make = (~jobId, ~branchName, ~appId, ()) =>
-    new({jobId: jobId, branchName: branchName, appId: appId})
+  let make = (~jobId, ~branchName, ~appId, ()) => new({jobId, branchName, appId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module StartJob = {
   type t
   @ocaml.doc("<p> The request structure for the start job request. </p>")
@@ -590,20 +583,9 @@ module StartJob = {
     ~jobReason=?,
     ~jobId=?,
     (),
-  ) =>
-    new({
-      commitTime: commitTime,
-      commitMessage: commitMessage,
-      commitId: commitId,
-      jobReason: jobReason,
-      jobType: jobType,
-      jobId: jobId,
-      branchName: branchName,
-      appId: appId,
-    })
+  ) => new({commitTime, commitMessage, commitId, jobReason, jobType, jobId, branchName, appId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module StartDeployment = {
   type t
   @ocaml.doc("<p> The request structure for the start a deployment request. </p>")
@@ -623,10 +605,9 @@ module StartDeployment = {
   type response = {@ocaml.doc("<p> The summary for the job. </p>") jobSummary: jobSummary}
   @module("@aws-sdk/client-amplify") @new external new: request => t = "StartDeploymentCommand"
   let make = (~branchName, ~appId, ~sourceUrl=?, ~jobId=?, ()) =>
-    new({sourceUrl: sourceUrl, jobId: jobId, branchName: branchName, appId: appId})
+    new({sourceUrl, jobId, branchName, appId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListTagsForResource = {
   type t
   @ocaml.doc("<p> The request structure to use to list tags for a resource. </p>")
@@ -643,7 +624,6 @@ module ListTagsForResource = {
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetWebhook = {
   type t
   @ocaml.doc("<p> The request structure for the get webhook request. </p>")
@@ -654,7 +634,6 @@ module GetWebhook = {
   let make = (~webhookId, ()) => new({webhookId: webhookId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetBackendEnvironment = {
   type t
   @ocaml.doc("<p> The request structure for the get backend environment request. </p>")
@@ -669,10 +648,9 @@ module GetBackendEnvironment = {
   }
   @module("@aws-sdk/client-amplify") @new
   external new: request => t = "GetBackendEnvironmentCommand"
-  let make = (~environmentName, ~appId, ()) => new({environmentName: environmentName, appId: appId})
+  let make = (~environmentName, ~appId, ()) => new({environmentName, appId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteWebhook = {
   type t
   @ocaml.doc("<p> The request structure for the delete webhook request. </p>")
@@ -686,7 +664,6 @@ module DeleteWebhook = {
   let make = (~webhookId, ()) => new({webhookId: webhookId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteJob = {
   type t
   @ocaml.doc("<p> The request structure for the delete job request. </p>")
@@ -698,11 +675,9 @@ module DeleteJob = {
   @ocaml.doc("<p> The result structure for the delete job request. </p>")
   type response = {jobSummary: jobSummary}
   @module("@aws-sdk/client-amplify") @new external new: request => t = "DeleteJobCommand"
-  let make = (~jobId, ~branchName, ~appId, ()) =>
-    new({jobId: jobId, branchName: branchName, appId: appId})
+  let make = (~jobId, ~branchName, ~appId, ()) => new({jobId, branchName, appId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteBackendEnvironment = {
   type t
   @ocaml.doc("<p> The request structure for the delete backend environment request. </p>")
@@ -718,10 +693,9 @@ module DeleteBackendEnvironment = {
   }
   @module("@aws-sdk/client-amplify") @new
   external new: request => t = "DeleteBackendEnvironmentCommand"
-  let make = (~environmentName, ~appId, ()) => new({environmentName: environmentName, appId: appId})
+  let make = (~environmentName, ~appId, ()) => new({environmentName, appId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateWebhook = {
   type t
   @ocaml.doc("<p> The request structure for the create webhook request. </p>")
@@ -737,11 +711,9 @@ module CreateWebhook = {
     webhook: webhook,
   }
   @module("@aws-sdk/client-amplify") @new external new: request => t = "CreateWebhookCommand"
-  let make = (~branchName, ~appId, ~description=?, ()) =>
-    new({description: description, branchName: branchName, appId: appId})
+  let make = (~branchName, ~appId, ~description=?, ()) => new({description, branchName, appId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateDeployment = {
   type t
   @ocaml.doc("<p> The request structure for the create a new deployment request. </p>")
@@ -766,11 +738,9 @@ module CreateDeployment = {
     jobId: option<jobId>,
   }
   @module("@aws-sdk/client-amplify") @new external new: request => t = "CreateDeploymentCommand"
-  let make = (~branchName, ~appId, ~fileMap=?, ()) =>
-    new({fileMap: fileMap, branchName: branchName, appId: appId})
+  let make = (~branchName, ~appId, ~fileMap=?, ()) => new({fileMap, branchName, appId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateBackendEnvironment = {
   type t
   @ocaml.doc("<p> The request structure for the backend environment create request. </p>")
@@ -790,15 +760,9 @@ module CreateBackendEnvironment = {
   @module("@aws-sdk/client-amplify") @new
   external new: request => t = "CreateBackendEnvironmentCommand"
   let make = (~environmentName, ~appId, ~deploymentArtifacts=?, ~stackName=?, ()) =>
-    new({
-      deploymentArtifacts: deploymentArtifacts,
-      stackName: stackName,
-      environmentName: environmentName,
-      appId: appId,
-    })
+    new({deploymentArtifacts, stackName, environmentName, appId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateBranch = {
   type t
   @ocaml.doc("<p> The request structure for the update branch request. </p>")
@@ -868,27 +832,26 @@ module UpdateBranch = {
     (),
   ) =>
     new({
-      backendEnvironmentArn: backendEnvironmentArn,
-      pullRequestEnvironmentName: pullRequestEnvironmentName,
-      enablePullRequestPreview: enablePullRequestPreview,
-      displayName: displayName,
-      ttl: ttl,
-      buildSpec: buildSpec,
-      enablePerformanceMode: enablePerformanceMode,
-      enableBasicAuth: enableBasicAuth,
-      basicAuthCredentials: basicAuthCredentials,
-      environmentVariables: environmentVariables,
-      enableAutoBuild: enableAutoBuild,
-      enableNotification: enableNotification,
-      stage: stage,
-      framework: framework,
-      description: description,
-      branchName: branchName,
-      appId: appId,
+      backendEnvironmentArn,
+      pullRequestEnvironmentName,
+      enablePullRequestPreview,
+      displayName,
+      ttl,
+      buildSpec,
+      enablePerformanceMode,
+      enableBasicAuth,
+      basicAuthCredentials,
+      environmentVariables,
+      enableAutoBuild,
+      enableNotification,
+      stage,
+      framework,
+      description,
+      branchName,
+      appId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListWebhooks = {
   type t
   @ocaml.doc("<p> The request structure for the list webhooks request. </p>")
@@ -909,11 +872,9 @@ module ListWebhooks = {
     @ocaml.doc("<p> A list of webhooks. </p>") webhooks: webhooks,
   }
   @module("@aws-sdk/client-amplify") @new external new: request => t = "ListWebhooksCommand"
-  let make = (~appId, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, appId: appId})
+  let make = (~appId, ~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken, appId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListJobs = {
   type t
   @ocaml.doc("<p> The request structure for the list jobs request. </p>")
@@ -937,10 +898,9 @@ module ListJobs = {
   }
   @module("@aws-sdk/client-amplify") @new external new: request => t = "ListJobsCommand"
   let make = (~branchName, ~appId, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, branchName: branchName, appId: appId})
+    new({maxResults, nextToken, branchName, appId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListBackendEnvironments = {
   type t
   @ocaml.doc("<p> The request structure for the list backend environments request. </p>")
@@ -966,15 +926,9 @@ module ListBackendEnvironments = {
   @module("@aws-sdk/client-amplify") @new
   external new: request => t = "ListBackendEnvironmentsCommand"
   let make = (~appId, ~maxResults=?, ~nextToken=?, ~environmentName=?, ()) =>
-    new({
-      maxResults: maxResults,
-      nextToken: nextToken,
-      environmentName: environmentName,
-      appId: appId,
-    })
+    new({maxResults, nextToken, environmentName, appId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListArtifacts = {
   type t
   @ocaml.doc("<p> Describes the request structure for the list artifacts request. </p>")
@@ -999,16 +953,9 @@ module ListArtifacts = {
   }
   @module("@aws-sdk/client-amplify") @new external new: request => t = "ListArtifactsCommand"
   let make = (~jobId, ~branchName, ~appId, ~maxResults=?, ~nextToken=?, ()) =>
-    new({
-      maxResults: maxResults,
-      nextToken: nextToken,
-      jobId: jobId,
-      branchName: branchName,
-      appId: appId,
-    })
+    new({maxResults, nextToken, jobId, branchName, appId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetBranch = {
   type t
   @ocaml.doc("<p> The request structure for the get branch request. </p>")
@@ -1018,10 +965,9 @@ module GetBranch = {
   }
   type response = {branch: branch}
   @module("@aws-sdk/client-amplify") @new external new: request => t = "GetBranchCommand"
-  let make = (~branchName, ~appId, ()) => new({branchName: branchName, appId: appId})
+  let make = (~branchName, ~appId, ()) => new({branchName, appId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteBranch = {
   type t
   @ocaml.doc("<p> The request structure for the delete branch request. </p>")
@@ -1037,10 +983,9 @@ module DeleteBranch = {
     branch: branch,
   }
   @module("@aws-sdk/client-amplify") @new external new: request => t = "DeleteBranchCommand"
-  let make = (~branchName, ~appId, ()) => new({branchName: branchName, appId: appId})
+  let make = (~branchName, ~appId, ()) => new({branchName, appId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateBranch = {
   type t
   @ocaml.doc("<p> The request structure for the create branch request. </p>")
@@ -1111,28 +1056,27 @@ module CreateBranch = {
     (),
   ) =>
     new({
-      backendEnvironmentArn: backendEnvironmentArn,
-      pullRequestEnvironmentName: pullRequestEnvironmentName,
-      enablePullRequestPreview: enablePullRequestPreview,
-      displayName: displayName,
-      ttl: ttl,
-      buildSpec: buildSpec,
-      tags: tags,
-      enablePerformanceMode: enablePerformanceMode,
-      enableBasicAuth: enableBasicAuth,
-      basicAuthCredentials: basicAuthCredentials,
-      environmentVariables: environmentVariables,
-      enableAutoBuild: enableAutoBuild,
-      enableNotification: enableNotification,
-      framework: framework,
-      stage: stage,
-      description: description,
-      branchName: branchName,
-      appId: appId,
+      backendEnvironmentArn,
+      pullRequestEnvironmentName,
+      enablePullRequestPreview,
+      displayName,
+      ttl,
+      buildSpec,
+      tags,
+      enablePerformanceMode,
+      enableBasicAuth,
+      basicAuthCredentials,
+      environmentVariables,
+      enableAutoBuild,
+      enableNotification,
+      framework,
+      stage,
+      description,
+      branchName,
+      appId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateApp = {
   type t
   @ocaml.doc("<p> The request structure for the update app request. </p>")
@@ -1207,29 +1151,28 @@ module UpdateApp = {
     (),
   ) =>
     new({
-      accessToken: accessToken,
-      oauthToken: oauthToken,
-      repository: repository,
-      autoBranchCreationConfig: autoBranchCreationConfig,
-      autoBranchCreationPatterns: autoBranchCreationPatterns,
-      enableAutoBranchCreation: enableAutoBranchCreation,
-      customHeaders: customHeaders,
-      buildSpec: buildSpec,
-      customRules: customRules,
-      basicAuthCredentials: basicAuthCredentials,
-      enableBasicAuth: enableBasicAuth,
-      enableBranchAutoDeletion: enableBranchAutoDeletion,
-      enableBranchAutoBuild: enableBranchAutoBuild,
-      environmentVariables: environmentVariables,
-      iamServiceRoleArn: iamServiceRoleArn,
-      platform: platform,
-      description: description,
-      name: name,
-      appId: appId,
+      accessToken,
+      oauthToken,
+      repository,
+      autoBranchCreationConfig,
+      autoBranchCreationPatterns,
+      enableAutoBranchCreation,
+      customHeaders,
+      buildSpec,
+      customRules,
+      basicAuthCredentials,
+      enableBasicAuth,
+      enableBranchAutoDeletion,
+      enableBranchAutoBuild,
+      environmentVariables,
+      iamServiceRoleArn,
+      platform,
+      description,
+      name,
+      appId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListBranches = {
   type t
   @ocaml.doc("<p> The request structure for the list branches request. </p>")
@@ -1250,11 +1193,9 @@ module ListBranches = {
     @ocaml.doc("<p> A list of branches for an Amplify app. </p>") branches: branches,
   }
   @module("@aws-sdk/client-amplify") @new external new: request => t = "ListBranchesCommand"
-  let make = (~appId, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, appId: appId})
+  let make = (~appId, ~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken, appId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetApp = {
   type t
   @ocaml.doc("<p> The request structure for the get app request. </p>")
@@ -1264,7 +1205,6 @@ module GetApp = {
   let make = (~appId, ()) => new({appId: appId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteApp = {
   type t
   @ocaml.doc("<p> Describes the request structure for the delete app request. </p>")
@@ -1274,7 +1214,6 @@ module DeleteApp = {
   let make = (~appId, ()) => new({appId: appId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateApp = {
   type t
   @ocaml.doc("<p> The request structure used to create apps in Amplify. </p>")
@@ -1348,29 +1287,28 @@ module CreateApp = {
     (),
   ) =>
     new({
-      autoBranchCreationConfig: autoBranchCreationConfig,
-      autoBranchCreationPatterns: autoBranchCreationPatterns,
-      enableAutoBranchCreation: enableAutoBranchCreation,
-      customHeaders: customHeaders,
-      buildSpec: buildSpec,
-      tags: tags,
-      customRules: customRules,
-      basicAuthCredentials: basicAuthCredentials,
-      enableBasicAuth: enableBasicAuth,
-      enableBranchAutoDeletion: enableBranchAutoDeletion,
-      enableBranchAutoBuild: enableBranchAutoBuild,
-      environmentVariables: environmentVariables,
-      accessToken: accessToken,
-      oauthToken: oauthToken,
-      iamServiceRoleArn: iamServiceRoleArn,
-      platform: platform,
-      repository: repository,
-      description: description,
-      name: name,
+      autoBranchCreationConfig,
+      autoBranchCreationPatterns,
+      enableAutoBranchCreation,
+      customHeaders,
+      buildSpec,
+      tags,
+      customRules,
+      basicAuthCredentials,
+      enableBasicAuth,
+      enableBranchAutoDeletion,
+      enableBranchAutoBuild,
+      environmentVariables,
+      accessToken,
+      oauthToken,
+      iamServiceRoleArn,
+      platform,
+      repository,
+      description,
+      name,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateDomainAssociation = {
   type t
   @ocaml.doc("<p> The request structure for the update domain association request. </p>")
@@ -1405,16 +1343,15 @@ module UpdateDomainAssociation = {
     (),
   ) =>
     new({
-      autoSubDomainIAMRole: autoSubDomainIAMRole,
-      autoSubDomainCreationPatterns: autoSubDomainCreationPatterns,
-      subDomainSettings: subDomainSettings,
-      enableAutoSubDomain: enableAutoSubDomain,
-      domainName: domainName,
-      appId: appId,
+      autoSubDomainIAMRole,
+      autoSubDomainCreationPatterns,
+      subDomainSettings,
+      enableAutoSubDomain,
+      domainName,
+      appId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListApps = {
   type t
   @ocaml.doc("<p> The request structure for the list apps request. </p>")
@@ -1434,11 +1371,9 @@ module ListApps = {
     @ocaml.doc("<p> A list of Amplify apps. </p>") apps: apps,
   }
   @module("@aws-sdk/client-amplify") @new external new: request => t = "ListAppsCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetJob = {
   type t
   @ocaml.doc("<p> The request structure for the get job request. </p>")
@@ -1449,11 +1384,9 @@ module GetJob = {
   }
   type response = {job: job}
   @module("@aws-sdk/client-amplify") @new external new: request => t = "GetJobCommand"
-  let make = (~jobId, ~branchName, ~appId, ()) =>
-    new({jobId: jobId, branchName: branchName, appId: appId})
+  let make = (~jobId, ~branchName, ~appId, ()) => new({jobId, branchName, appId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetDomainAssociation = {
   type t
   @ocaml.doc("<p> The request structure for the get domain association request. </p>")
@@ -1468,10 +1401,9 @@ module GetDomainAssociation = {
     domainAssociation: domainAssociation,
   }
   @module("@aws-sdk/client-amplify") @new external new: request => t = "GetDomainAssociationCommand"
-  let make = (~domainName, ~appId, ()) => new({domainName: domainName, appId: appId})
+  let make = (~domainName, ~appId, ()) => new({domainName, appId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteDomainAssociation = {
   type t
   @ocaml.doc("<p> The request structure for the delete domain association request. </p>")
@@ -1482,10 +1414,9 @@ module DeleteDomainAssociation = {
   type response = {domainAssociation: domainAssociation}
   @module("@aws-sdk/client-amplify") @new
   external new: request => t = "DeleteDomainAssociationCommand"
-  let make = (~domainName, ~appId, ()) => new({domainName: domainName, appId: appId})
+  let make = (~domainName, ~appId, ()) => new({domainName, appId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateDomainAssociation = {
   type t
   @ocaml.doc("<p> The request structure for the create domain association request. </p>")
@@ -1519,16 +1450,15 @@ module CreateDomainAssociation = {
     (),
   ) =>
     new({
-      autoSubDomainIAMRole: autoSubDomainIAMRole,
-      autoSubDomainCreationPatterns: autoSubDomainCreationPatterns,
-      subDomainSettings: subDomainSettings,
-      enableAutoSubDomain: enableAutoSubDomain,
-      domainName: domainName,
-      appId: appId,
+      autoSubDomainIAMRole,
+      autoSubDomainCreationPatterns,
+      subDomainSettings,
+      enableAutoSubDomain,
+      domainName,
+      appId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListDomainAssociations = {
   type t
   @ocaml.doc("<p> The request structure for the list domain associations request. </p>")
@@ -1550,7 +1480,6 @@ module ListDomainAssociations = {
   }
   @module("@aws-sdk/client-amplify") @new
   external new: request => t = "ListDomainAssociationsCommand"
-  let make = (~appId, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, appId: appId})
+  let make = (~appId, ~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken, appId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

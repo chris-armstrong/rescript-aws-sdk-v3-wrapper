@@ -231,7 +231,6 @@ module DeleteResourceSet = {
   let make = (~resourceSetName, ()) => new({resourceSetName: resourceSetName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteRecoveryGroup = {
   type t
   type request = {
@@ -244,7 +243,6 @@ module DeleteRecoveryGroup = {
   let make = (~recoveryGroupName, ()) => new({recoveryGroupName: recoveryGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteReadinessCheck = {
   type t
   type request = {
@@ -257,7 +255,6 @@ module DeleteReadinessCheck = {
   let make = (~readinessCheckName, ()) => new({readinessCheckName: readinessCheckName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteCrossAccountAuthorization = {
   type t
   type request = {
@@ -271,7 +268,6 @@ module DeleteCrossAccountAuthorization = {
     new({crossAccountAuthorization: crossAccountAuthorization})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteCell = {
   type t
   type request = {@ocaml.doc("<p>The name of the cell.</p>") @as("CellName") cellName: __string}
@@ -281,7 +277,6 @@ module DeleteCell = {
   let make = (~cellName, ()) => new({cellName: cellName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module CreateCrossAccountAuthorization = {
   type t
   type request = {
@@ -298,7 +293,6 @@ module CreateCrossAccountAuthorization = {
     new({crossAccountAuthorization: crossAccountAuthorization})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateRecoveryGroup = {
   type t
   @ocaml.doc("<p>Name of a recovery group.</p>")
@@ -324,11 +318,9 @@ module UpdateRecoveryGroup = {
   }
   @module("@aws-sdk/client-route53-recovery-readiness") @new
   external new: request => t = "UpdateRecoveryGroupCommand"
-  let make = (~recoveryGroupName, ~cells, ()) =>
-    new({recoveryGroupName: recoveryGroupName, cells: cells})
+  let make = (~recoveryGroupName, ~cells, ()) => new({recoveryGroupName, cells})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateReadinessCheck = {
   type t
   @ocaml.doc("<p>Name of a readiness check to describe.</p>")
@@ -351,10 +343,9 @@ module UpdateReadinessCheck = {
   @module("@aws-sdk/client-route53-recovery-readiness") @new
   external new: request => t = "UpdateReadinessCheckCommand"
   let make = (~resourceSetName, ~readinessCheckName, ()) =>
-    new({resourceSetName: resourceSetName, readinessCheckName: readinessCheckName})
+    new({resourceSetName, readinessCheckName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateCell = {
   type t
   type request = {
@@ -380,10 +371,9 @@ module UpdateCell = {
   }
   @module("@aws-sdk/client-route53-recovery-readiness") @new
   external new: request => t = "UpdateCellCommand"
-  let make = (~cells, ~cellName, ()) => new({cells: cells, cellName: cellName})
+  let make = (~cells, ~cellName, ()) => new({cells, cellName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UntagResource = {
   type t
   type request = {
@@ -395,10 +385,9 @@ module UntagResource = {
   type response = {.}
   @module("@aws-sdk/client-route53-recovery-readiness") @new
   external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
+  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys, resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module TagResource = {
   type t
   type request = {
@@ -409,10 +398,9 @@ module TagResource = {
   type response = {.}
   @module("@aws-sdk/client-route53-recovery-readiness") @new
   external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
+  let make = (~tags, ~resourceArn, ()) => new({tags, resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module ListTagsForResources = {
   type t
   type request = {
@@ -425,7 +413,6 @@ module ListTagsForResources = {
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListCrossAccountAuthorizations = {
   type t
   type request = {
@@ -445,11 +432,9 @@ module ListCrossAccountAuthorizations = {
   }
   @module("@aws-sdk/client-route53-recovery-readiness") @new
   external new: request => t = "ListCrossAccountAuthorizationsCommand"
-  let make = (~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken: nextToken, maxResults: maxResults})
+  let make = (~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetRecoveryGroup = {
   type t
   type request = {
@@ -472,7 +457,6 @@ module GetRecoveryGroup = {
   let make = (~recoveryGroupName, ()) => new({recoveryGroupName: recoveryGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetReadinessCheck = {
   type t
   type request = {
@@ -494,7 +478,6 @@ module GetReadinessCheck = {
   let make = (~readinessCheckName, ()) => new({readinessCheckName: readinessCheckName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetCell = {
   type t
   type request = {@ocaml.doc("<p>The name of the cell.</p>") @as("CellName") cellName: __string}
@@ -516,7 +499,6 @@ module GetCell = {
   let make = (~cellName, ()) => new({cellName: cellName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateRecoveryGroup = {
   type t
   type request = {
@@ -540,11 +522,9 @@ module CreateRecoveryGroup = {
   }
   @module("@aws-sdk/client-route53-recovery-readiness") @new
   external new: request => t = "CreateRecoveryGroupCommand"
-  let make = (~recoveryGroupName, ~tags=?, ~cells=?, ()) =>
-    new({tags: tags, recoveryGroupName: recoveryGroupName, cells: cells})
+  let make = (~recoveryGroupName, ~tags=?, ~cells=?, ()) => new({tags, recoveryGroupName, cells})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateReadinessCheck = {
   type t
   type request = {
@@ -567,10 +547,9 @@ module CreateReadinessCheck = {
   @module("@aws-sdk/client-route53-recovery-readiness") @new
   external new: request => t = "CreateReadinessCheckCommand"
   let make = (~resourceSetName, ~readinessCheckName, ~tags=?, ()) =>
-    new({tags: tags, resourceSetName: resourceSetName, readinessCheckName: readinessCheckName})
+    new({tags, resourceSetName, readinessCheckName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateCell = {
   type t
   type request = {
@@ -597,11 +576,9 @@ module CreateCell = {
   }
   @module("@aws-sdk/client-route53-recovery-readiness") @new
   external new: request => t = "CreateCellCommand"
-  let make = (~cellName, ~tags=?, ~cells=?, ()) =>
-    new({tags: tags, cells: cells, cellName: cellName})
+  let make = (~cellName, ~tags=?, ~cells=?, ()) => new({tags, cells, cellName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListRules = {
   type t
   type request = {
@@ -624,10 +601,9 @@ module ListRules = {
   @module("@aws-sdk/client-route53-recovery-readiness") @new
   external new: request => t = "ListRulesCommand"
   let make = (~resourceType=?, ~nextToken=?, ~maxResults=?, ()) =>
-    new({resourceType: resourceType, nextToken: nextToken, maxResults: maxResults})
+    new({resourceType, nextToken, maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetRecoveryGroupReadinessSummary = {
   type t
   type request = {
@@ -653,10 +629,9 @@ module GetRecoveryGroupReadinessSummary = {
   @module("@aws-sdk/client-route53-recovery-readiness") @new
   external new: request => t = "GetRecoveryGroupReadinessSummaryCommand"
   let make = (~recoveryGroupName, ~nextToken=?, ~maxResults=?, ()) =>
-    new({recoveryGroupName: recoveryGroupName, nextToken: nextToken, maxResults: maxResults})
+    new({recoveryGroupName, nextToken, maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetReadinessCheckStatus = {
   type t
   type request = {
@@ -682,10 +657,9 @@ module GetReadinessCheckStatus = {
   @module("@aws-sdk/client-route53-recovery-readiness") @new
   external new: request => t = "GetReadinessCheckStatusCommand"
   let make = (~readinessCheckName, ~nextToken=?, ~maxResults=?, ()) =>
-    new({readinessCheckName: readinessCheckName, nextToken: nextToken, maxResults: maxResults})
+    new({readinessCheckName, nextToken, maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetCellReadinessSummary = {
   type t
   type request = {
@@ -709,11 +683,9 @@ module GetCellReadinessSummary = {
   }
   @module("@aws-sdk/client-route53-recovery-readiness") @new
   external new: request => t = "GetCellReadinessSummaryCommand"
-  let make = (~cellName, ~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken: nextToken, maxResults: maxResults, cellName: cellName})
+  let make = (~cellName, ~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults, cellName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetArchitectureRecommendations = {
   type t
   type request = {
@@ -742,10 +714,9 @@ module GetArchitectureRecommendations = {
   @module("@aws-sdk/client-route53-recovery-readiness") @new
   external new: request => t = "GetArchitectureRecommendationsCommand"
   let make = (~recoveryGroupName, ~nextToken=?, ~maxResults=?, ()) =>
-    new({recoveryGroupName: recoveryGroupName, nextToken: nextToken, maxResults: maxResults})
+    new({recoveryGroupName, nextToken, maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListRecoveryGroups = {
   type t
   type request = {
@@ -765,11 +736,9 @@ module ListRecoveryGroups = {
   }
   @module("@aws-sdk/client-route53-recovery-readiness") @new
   external new: request => t = "ListRecoveryGroupsCommand"
-  let make = (~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken: nextToken, maxResults: maxResults})
+  let make = (~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListReadinessChecks = {
   type t
   type request = {
@@ -790,11 +759,9 @@ module ListReadinessChecks = {
   }
   @module("@aws-sdk/client-route53-recovery-readiness") @new
   external new: request => t = "ListReadinessChecksCommand"
-  let make = (~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken: nextToken, maxResults: maxResults})
+  let make = (~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListCells = {
   type t
   type request = {
@@ -813,11 +780,9 @@ module ListCells = {
   }
   @module("@aws-sdk/client-route53-recovery-readiness") @new
   external new: request => t = "ListCellsCommand"
-  let make = (~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken: nextToken, maxResults: maxResults})
+  let make = (~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetReadinessCheckResourceStatus = {
   type t
   type request = {
@@ -847,15 +812,9 @@ module GetReadinessCheckResourceStatus = {
   @module("@aws-sdk/client-route53-recovery-readiness") @new
   external new: request => t = "GetReadinessCheckResourceStatusCommand"
   let make = (~resourceIdentifier, ~readinessCheckName, ~nextToken=?, ~maxResults=?, ()) =>
-    new({
-      resourceIdentifier: resourceIdentifier,
-      readinessCheckName: readinessCheckName,
-      nextToken: nextToken,
-      maxResults: maxResults,
-    })
+    new({resourceIdentifier, readinessCheckName, nextToken, maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateResourceSet = {
   type t
   @ocaml.doc("<p>Name of a resource set.</p>")
@@ -885,10 +844,9 @@ module UpdateResourceSet = {
   @module("@aws-sdk/client-route53-recovery-readiness") @new
   external new: request => t = "UpdateResourceSetCommand"
   let make = (~resources, ~resourceSetType, ~resourceSetName, ()) =>
-    new({resources: resources, resourceSetType: resourceSetType, resourceSetName: resourceSetName})
+    new({resources, resourceSetType, resourceSetName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetResourceSet = {
   type t
   type request = {
@@ -913,7 +871,6 @@ module GetResourceSet = {
   let make = (~resourceSetName, ()) => new({resourceSetName: resourceSetName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateResourceSet = {
   type t
   type request = {
@@ -946,15 +903,9 @@ module CreateResourceSet = {
   @module("@aws-sdk/client-route53-recovery-readiness") @new
   external new: request => t = "CreateResourceSetCommand"
   let make = (~resources, ~resourceSetType, ~resourceSetName, ~tags=?, ()) =>
-    new({
-      tags: tags,
-      resources: resources,
-      resourceSetType: resourceSetType,
-      resourceSetName: resourceSetName,
-    })
+    new({tags, resources, resourceSetType, resourceSetName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListResourceSets = {
   type t
   type request = {
@@ -974,7 +925,6 @@ module ListResourceSets = {
   }
   @module("@aws-sdk/client-route53-recovery-readiness") @new
   external new: request => t = "ListResourceSetsCommand"
-  let make = (~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken: nextToken, maxResults: maxResults})
+  let make = (~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

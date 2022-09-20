@@ -1359,11 +1359,9 @@ module UpdateInstanceCustomHealthStatus = {
   type response = {.}
   @module("@aws-sdk/client-servicediscovery") @new
   external new: request => t = "UpdateInstanceCustomHealthStatusCommand"
-  let make = (~status, ~instanceId, ~serviceId, ()) =>
-    new({status: status, instanceId: instanceId, serviceId: serviceId})
+  let make = (~status, ~instanceId, ~serviceId, ()) => new({status, instanceId, serviceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeregisterInstance = {
   type t
   type request = {
@@ -1384,10 +1382,9 @@ module DeregisterInstance = {
   }
   @module("@aws-sdk/client-servicediscovery") @new
   external new: request => t = "DeregisterInstanceCommand"
-  let make = (~instanceId, ~serviceId, ()) => new({instanceId: instanceId, serviceId: serviceId})
+  let make = (~instanceId, ~serviceId, ()) => new({instanceId, serviceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteService = {
   type t
   type request = {
@@ -1399,7 +1396,6 @@ module DeleteService = {
   let make = (~id, ()) => new({id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteNamespace = {
   type t
   type request = {
@@ -1416,7 +1412,6 @@ module DeleteNamespace = {
   let make = (~id, ()) => new({id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateHttpNamespace = {
   type t
   type request = {
@@ -1443,11 +1438,9 @@ module UpdateHttpNamespace = {
   }
   @module("@aws-sdk/client-servicediscovery") @new
   external new: request => t = "UpdateHttpNamespaceCommand"
-  let make = (~namespace, ~id, ~updaterRequestId=?, ()) =>
-    new({namespace: namespace, updaterRequestId: updaterRequestId, id: id})
+  let make = (~namespace, ~id, ~updaterRequestId=?, ()) => new({namespace, updaterRequestId, id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UntagResource = {
   type t
   type request = {
@@ -1462,10 +1455,9 @@ module UntagResource = {
   type response = {.}
   @module("@aws-sdk/client-servicediscovery") @new
   external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceARN, ()) => new({tagKeys: tagKeys, resourceARN: resourceARN})
+  let make = (~tagKeys, ~resourceARN, ()) => new({tagKeys, resourceARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module RegisterInstance = {
   type t
   type request = {
@@ -1613,15 +1605,9 @@ module RegisterInstance = {
   @module("@aws-sdk/client-servicediscovery") @new
   external new: request => t = "RegisterInstanceCommand"
   let make = (~attributes, ~instanceId, ~serviceId, ~creatorRequestId=?, ()) =>
-    new({
-      attributes: attributes,
-      creatorRequestId: creatorRequestId,
-      instanceId: instanceId,
-      serviceId: serviceId,
-    })
+    new({attributes, creatorRequestId, instanceId, serviceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetInstancesHealthStatus = {
   type t
   type request = {
@@ -1662,10 +1648,9 @@ module GetInstancesHealthStatus = {
   @module("@aws-sdk/client-servicediscovery") @new
   external new: request => t = "GetInstancesHealthStatusCommand"
   let make = (~serviceId, ~nextToken=?, ~maxResults=?, ~instances=?, ()) =>
-    new({nextToken: nextToken, maxResults: maxResults, instances: instances, serviceId: serviceId})
+    new({nextToken, maxResults, instances, serviceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module TagResource = {
   type t
   type request = {
@@ -1681,10 +1666,9 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-servicediscovery") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceARN, ()) => new({tags: tags, resourceARN: resourceARN})
+  let make = (~tags, ~resourceARN, ()) => new({tags, resourceARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module ListTagsForResource = {
   type t
   type request = {
@@ -1703,7 +1687,6 @@ module ListTagsForResource = {
   let make = (~resourceARN, ()) => new({resourceARN: resourceARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetOperation = {
   type t
   type request = {
@@ -1721,7 +1704,6 @@ module GetOperation = {
   let make = (~operationId, ()) => new({operationId: operationId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetInstance = {
   type t
   type request = {
@@ -1738,10 +1720,9 @@ module GetInstance = {
     instance: option<instance>,
   }
   @module("@aws-sdk/client-servicediscovery") @new external new: request => t = "GetInstanceCommand"
-  let make = (~instanceId, ~serviceId, ()) => new({instanceId: instanceId, serviceId: serviceId})
+  let make = (~instanceId, ~serviceId, ()) => new({instanceId, serviceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateHttpNamespace = {
   type t
   type request = {
@@ -1769,10 +1750,9 @@ module CreateHttpNamespace = {
   @module("@aws-sdk/client-servicediscovery") @new
   external new: request => t = "CreateHttpNamespaceCommand"
   let make = (~name, ~tags=?, ~description=?, ~creatorRequestId=?, ()) =>
-    new({tags: tags, description: description, creatorRequestId: creatorRequestId, name: name})
+    new({tags, description, creatorRequestId, name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListOperations = {
   type t
   type request = {
@@ -1815,11 +1795,9 @@ module ListOperations = {
   }
   @module("@aws-sdk/client-servicediscovery") @new
   external new: request => t = "ListOperationsCommand"
-  let make = (~filters=?, ~maxResults=?, ~nextToken=?, ()) =>
-    new({filters: filters, maxResults: maxResults, nextToken: nextToken})
+  let make = (~filters=?, ~maxResults=?, ~nextToken=?, ()) => new({filters, maxResults, nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListInstances = {
   type t
   type request = {
@@ -1852,10 +1830,9 @@ module ListInstances = {
   @module("@aws-sdk/client-servicediscovery") @new
   external new: request => t = "ListInstancesCommand"
   let make = (~serviceId, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, serviceId: serviceId})
+    new({maxResults, nextToken, serviceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DiscoverInstances = {
   type t
   type request = {
@@ -1927,17 +1904,9 @@ module DiscoverInstances = {
     ~maxResults=?,
     (),
   ) =>
-    new({
-      healthStatus: healthStatus,
-      optionalParameters: optionalParameters,
-      queryParameters: queryParameters,
-      maxResults: maxResults,
-      serviceName: serviceName,
-      namespaceName: namespaceName,
-    })
+    new({healthStatus, optionalParameters, queryParameters, maxResults, serviceName, namespaceName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreatePublicDnsNamespace = {
   type t
   type request = {
@@ -1969,16 +1938,9 @@ module CreatePublicDnsNamespace = {
   @module("@aws-sdk/client-servicediscovery") @new
   external new: request => t = "CreatePublicDnsNamespaceCommand"
   let make = (~name, ~properties=?, ~tags=?, ~description=?, ~creatorRequestId=?, ()) =>
-    new({
-      properties: properties,
-      tags: tags,
-      description: description,
-      creatorRequestId: creatorRequestId,
-      name: name,
-    })
+    new({properties, tags, description, creatorRequestId, name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreatePrivateDnsNamespace = {
   type t
   type request = {
@@ -2015,17 +1977,9 @@ module CreatePrivateDnsNamespace = {
   @module("@aws-sdk/client-servicediscovery") @new
   external new: request => t = "CreatePrivateDnsNamespaceCommand"
   let make = (~vpc, ~name, ~properties=?, ~tags=?, ~description=?, ~creatorRequestId=?, ()) =>
-    new({
-      properties: properties,
-      tags: tags,
-      vpc: vpc,
-      description: description,
-      creatorRequestId: creatorRequestId,
-      name: name,
-    })
+    new({properties, tags, vpc, description, creatorRequestId, name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateService = {
   type t
   type request = {
@@ -2042,10 +1996,9 @@ module UpdateService = {
   }
   @module("@aws-sdk/client-servicediscovery") @new
   external new: request => t = "UpdateServiceCommand"
-  let make = (~service, ~id, ()) => new({service: service, id: id})
+  let make = (~service, ~id, ()) => new({service, id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdatePublicDnsNamespace = {
   type t
   type request = {
@@ -2072,11 +2025,9 @@ module UpdatePublicDnsNamespace = {
   }
   @module("@aws-sdk/client-servicediscovery") @new
   external new: request => t = "UpdatePublicDnsNamespaceCommand"
-  let make = (~namespace, ~id, ~updaterRequestId=?, ()) =>
-    new({namespace: namespace, updaterRequestId: updaterRequestId, id: id})
+  let make = (~namespace, ~id, ~updaterRequestId=?, ()) => new({namespace, updaterRequestId, id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdatePrivateDnsNamespace = {
   type t
   type request = {
@@ -2103,11 +2054,9 @@ module UpdatePrivateDnsNamespace = {
   }
   @module("@aws-sdk/client-servicediscovery") @new
   external new: request => t = "UpdatePrivateDnsNamespaceCommand"
-  let make = (~namespace, ~id, ~updaterRequestId=?, ()) =>
-    new({namespace: namespace, updaterRequestId: updaterRequestId, id: id})
+  let make = (~namespace, ~id, ~updaterRequestId=?, ()) => new({namespace, updaterRequestId, id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetService = {
   type t
   type request = {
@@ -2122,7 +2071,6 @@ module GetService = {
   let make = (~id, ()) => new({id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetNamespace = {
   type t
   type request = {
@@ -2139,7 +2087,6 @@ module GetNamespace = {
   let make = (~id, ()) => new({id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateService = {
   type t
   type request = {
@@ -2232,19 +2179,18 @@ module CreateService = {
     (),
   ) =>
     new({
-      type_: type_,
-      tags: tags,
-      healthCheckCustomConfig: healthCheckCustomConfig,
-      healthCheckConfig: healthCheckConfig,
-      dnsConfig: dnsConfig,
-      description: description,
-      creatorRequestId: creatorRequestId,
-      namespaceId: namespaceId,
-      name: name,
+      type_,
+      tags,
+      healthCheckCustomConfig,
+      healthCheckConfig,
+      dnsConfig,
+      description,
+      creatorRequestId,
+      namespaceId,
+      name,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListServices = {
   type t
   type request = {
@@ -2287,11 +2233,9 @@ module ListServices = {
   }
   @module("@aws-sdk/client-servicediscovery") @new
   external new: request => t = "ListServicesCommand"
-  let make = (~filters=?, ~maxResults=?, ~nextToken=?, ()) =>
-    new({filters: filters, maxResults: maxResults, nextToken: nextToken})
+  let make = (~filters=?, ~maxResults=?, ~nextToken=?, ()) => new({filters, maxResults, nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListNamespaces = {
   type t
   type request = {
@@ -2335,7 +2279,6 @@ module ListNamespaces = {
   }
   @module("@aws-sdk/client-servicediscovery") @new
   external new: request => t = "ListNamespacesCommand"
-  let make = (~filters=?, ~maxResults=?, ~nextToken=?, ()) =>
-    new({filters: filters, maxResults: maxResults, nextToken: nextToken})
+  let make = (~filters=?, ~maxResults=?, ~nextToken=?, ()) => new({filters, maxResults, nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

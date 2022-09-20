@@ -1908,7 +1908,6 @@ module StopDeliveryStreamEncryption = {
   let make = (~deliveryStreamName, ()) => new({deliveryStreamName: deliveryStreamName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteDeliveryStream = {
   type t
   type request = {
@@ -1929,10 +1928,9 @@ module DeleteDeliveryStream = {
   @module("@aws-sdk/client-firehose") @new
   external new: request => t = "DeleteDeliveryStreamCommand"
   let make = (~deliveryStreamName, ~allowForceDelete=?, ()) =>
-    new({allowForceDelete: allowForceDelete, deliveryStreamName: deliveryStreamName})
+    new({allowForceDelete, deliveryStreamName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module UntagDeliveryStream = {
   type t
   type request = {
@@ -1945,11 +1943,9 @@ module UntagDeliveryStream = {
   }
   type response = {.}
   @module("@aws-sdk/client-firehose") @new external new: request => t = "UntagDeliveryStreamCommand"
-  let make = (~tagKeys, ~deliveryStreamName, ()) =>
-    new({tagKeys: tagKeys, deliveryStreamName: deliveryStreamName})
+  let make = (~tagKeys, ~deliveryStreamName, ()) => new({tagKeys, deliveryStreamName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module StartDeliveryStreamEncryption = {
   type t
   type request = {
@@ -1966,13 +1962,9 @@ module StartDeliveryStreamEncryption = {
   @module("@aws-sdk/client-firehose") @new
   external new: request => t = "StartDeliveryStreamEncryptionCommand"
   let make = (~deliveryStreamName, ~deliveryStreamEncryptionConfigurationInput=?, ()) =>
-    new({
-      deliveryStreamEncryptionConfigurationInput: deliveryStreamEncryptionConfigurationInput,
-      deliveryStreamName: deliveryStreamName,
-    })
+    new({deliveryStreamEncryptionConfigurationInput, deliveryStreamName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module PutRecord = {
   type t
   type request = {
@@ -1989,11 +1981,9 @@ module PutRecord = {
     @ocaml.doc("<p>The ID of the record.</p>") @as("RecordId") recordId: putResponseRecordId,
   }
   @module("@aws-sdk/client-firehose") @new external new: request => t = "PutRecordCommand"
-  let make = (~record, ~deliveryStreamName, ()) =>
-    new({record: record, deliveryStreamName: deliveryStreamName})
+  let make = (~record, ~deliveryStreamName, ()) => new({record, deliveryStreamName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListDeliveryStreams = {
   type t
   type request = {
@@ -2033,14 +2023,9 @@ module ListDeliveryStreams = {
   }
   @module("@aws-sdk/client-firehose") @new external new: request => t = "ListDeliveryStreamsCommand"
   let make = (~exclusiveStartDeliveryStreamName=?, ~deliveryStreamType=?, ~limit=?, ()) =>
-    new({
-      exclusiveStartDeliveryStreamName: exclusiveStartDeliveryStreamName,
-      deliveryStreamType: deliveryStreamType,
-      limit: limit,
-    })
+    new({exclusiveStartDeliveryStreamName, deliveryStreamType, limit})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module TagDeliveryStream = {
   type t
   type request = {
@@ -2052,11 +2037,9 @@ module TagDeliveryStream = {
   }
   type response = {.}
   @module("@aws-sdk/client-firehose") @new external new: request => t = "TagDeliveryStreamCommand"
-  let make = (~tags, ~deliveryStreamName, ()) =>
-    new({tags: tags, deliveryStreamName: deliveryStreamName})
+  let make = (~tags, ~deliveryStreamName, ()) => new({tags, deliveryStreamName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module PutRecordBatch = {
   type t
   type request = {
@@ -2083,11 +2066,9 @@ module PutRecordBatch = {
     failedPutCount: nonNegativeIntegerObject,
   }
   @module("@aws-sdk/client-firehose") @new external new: request => t = "PutRecordBatchCommand"
-  let make = (~records, ~deliveryStreamName, ()) =>
-    new({records: records, deliveryStreamName: deliveryStreamName})
+  let make = (~records, ~deliveryStreamName, ()) => new({records, deliveryStreamName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListTagsForDeliveryStream = {
   type t
   type request = {
@@ -2121,14 +2102,9 @@ module ListTagsForDeliveryStream = {
   @module("@aws-sdk/client-firehose") @new
   external new: request => t = "ListTagsForDeliveryStreamCommand"
   let make = (~deliveryStreamName, ~limit=?, ~exclusiveStartTagKey=?, ()) =>
-    new({
-      limit: limit,
-      exclusiveStartTagKey: exclusiveStartTagKey,
-      deliveryStreamName: deliveryStreamName,
-    })
+    new({limit, exclusiveStartTagKey, deliveryStreamName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateDestination = {
   type t
   type request = {
@@ -2180,20 +2156,19 @@ module UpdateDestination = {
     (),
   ) =>
     new({
-      httpEndpointDestinationUpdate: httpEndpointDestinationUpdate,
-      splunkDestinationUpdate: splunkDestinationUpdate,
-      amazonopensearchserviceDestinationUpdate: amazonopensearchserviceDestinationUpdate,
-      elasticsearchDestinationUpdate: elasticsearchDestinationUpdate,
-      redshiftDestinationUpdate: redshiftDestinationUpdate,
-      extendedS3DestinationUpdate: extendedS3DestinationUpdate,
-      s3DestinationUpdate: s3DestinationUpdate,
-      destinationId: destinationId,
-      currentDeliveryStreamVersionId: currentDeliveryStreamVersionId,
-      deliveryStreamName: deliveryStreamName,
+      httpEndpointDestinationUpdate,
+      splunkDestinationUpdate,
+      amazonopensearchserviceDestinationUpdate,
+      elasticsearchDestinationUpdate,
+      redshiftDestinationUpdate,
+      extendedS3DestinationUpdate,
+      s3DestinationUpdate,
+      destinationId,
+      currentDeliveryStreamVersionId,
+      deliveryStreamName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module CreateDeliveryStream = {
   type t
   type request = {
@@ -2282,22 +2257,21 @@ module CreateDeliveryStream = {
     (),
   ) =>
     new({
-      tags: tags,
-      httpEndpointDestinationConfiguration: httpEndpointDestinationConfiguration,
-      splunkDestinationConfiguration: splunkDestinationConfiguration,
-      amazonopensearchserviceDestinationConfiguration: amazonopensearchserviceDestinationConfiguration,
-      elasticsearchDestinationConfiguration: elasticsearchDestinationConfiguration,
-      redshiftDestinationConfiguration: redshiftDestinationConfiguration,
-      extendedS3DestinationConfiguration: extendedS3DestinationConfiguration,
-      s3DestinationConfiguration: s3DestinationConfiguration,
-      deliveryStreamEncryptionConfigurationInput: deliveryStreamEncryptionConfigurationInput,
-      kinesisStreamSourceConfiguration: kinesisStreamSourceConfiguration,
-      deliveryStreamType: deliveryStreamType,
-      deliveryStreamName: deliveryStreamName,
+      tags,
+      httpEndpointDestinationConfiguration,
+      splunkDestinationConfiguration,
+      amazonopensearchserviceDestinationConfiguration,
+      elasticsearchDestinationConfiguration,
+      redshiftDestinationConfiguration,
+      extendedS3DestinationConfiguration,
+      s3DestinationConfiguration,
+      deliveryStreamEncryptionConfigurationInput,
+      kinesisStreamSourceConfiguration,
+      deliveryStreamType,
+      deliveryStreamName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeDeliveryStream = {
   type t
   type request = {
@@ -2319,10 +2293,6 @@ module DescribeDeliveryStream = {
   @module("@aws-sdk/client-firehose") @new
   external new: request => t = "DescribeDeliveryStreamCommand"
   let make = (~deliveryStreamName, ~exclusiveStartDestinationId=?, ~limit=?, ()) =>
-    new({
-      exclusiveStartDestinationId: exclusiveStartDestinationId,
-      limit: limit,
-      deliveryStreamName: deliveryStreamName,
-    })
+    new({exclusiveStartDestinationId, limit, deliveryStreamName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

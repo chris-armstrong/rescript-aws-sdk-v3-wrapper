@@ -1000,16 +1000,9 @@ module UpdateLaunchProfileMember = {
   @module("@aws-sdk/client-nimble") @new
   external new: request => t = "UpdateLaunchProfileMemberCommand"
   let make = (~studioId, ~principalId, ~persona, ~launchProfileId, ~clientToken=?, ()) =>
-    new({
-      studioId: studioId,
-      principalId: principalId,
-      persona: persona,
-      launchProfileId: launchProfileId,
-      clientToken: clientToken,
-    })
+    new({studioId, principalId, persona, launchProfileId, clientToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UntagResource = {
   type t
   type request = {
@@ -1022,10 +1015,9 @@ module UntagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-nimble") @new external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
+  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys, resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module TagResource = {
   type t
   type request = {
@@ -1037,10 +1029,9 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-nimble") @new external new: request => t = "TagResourceCommand"
-  let make = (~resourceArn, ~tags=?, ()) => new({tags: tags, resourceArn: resourceArn})
+  let make = (~resourceArn, ~tags=?, ()) => new({tags, resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module ListTagsForResource = {
   type t
   type request = {
@@ -1058,7 +1049,6 @@ module ListTagsForResource = {
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetStudioMember = {
   type t
   type request = {
@@ -1070,10 +1060,9 @@ module GetStudioMember = {
   }
   type response = {@ocaml.doc("<p>The member.</p>") member: option<studioMembership>}
   @module("@aws-sdk/client-nimble") @new external new: request => t = "GetStudioMemberCommand"
-  let make = (~studioId, ~principalId, ()) => new({studioId: studioId, principalId: principalId})
+  let make = (~studioId, ~principalId, ()) => new({studioId, principalId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetStreamingSessionStream = {
   type t
   type request = {
@@ -1084,11 +1073,9 @@ module GetStreamingSessionStream = {
   type response = {@ocaml.doc("<p>The stream.</p>") stream: option<streamingSessionStream>}
   @module("@aws-sdk/client-nimble") @new
   external new: request => t = "GetStreamingSessionStreamCommand"
-  let make = (~studioId, ~streamId, ~sessionId, ()) =>
-    new({studioId: studioId, streamId: streamId, sessionId: sessionId})
+  let make = (~studioId, ~streamId, ~sessionId, ()) => new({studioId, streamId, sessionId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetLaunchProfileMember = {
   type t
   type request = {
@@ -1103,10 +1090,9 @@ module GetLaunchProfileMember = {
   @module("@aws-sdk/client-nimble") @new
   external new: request => t = "GetLaunchProfileMemberCommand"
   let make = (~studioId, ~principalId, ~launchProfileId, ()) =>
-    new({studioId: studioId, principalId: principalId, launchProfileId: launchProfileId})
+    new({studioId, principalId, launchProfileId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetEula = {
   type t
   type request = {@ocaml.doc("<p>The EULA ID.</p>") eulaId: string_}
@@ -1115,7 +1101,6 @@ module GetEula = {
   let make = (~eulaId, ()) => new({eulaId: eulaId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteStudioMember = {
   type t
   type request = {
@@ -1132,10 +1117,9 @@ module DeleteStudioMember = {
   type response = {.}
   @module("@aws-sdk/client-nimble") @new external new: request => t = "DeleteStudioMemberCommand"
   let make = (~studioId, ~principalId, ~clientToken=?, ()) =>
-    new({studioId: studioId, principalId: principalId, clientToken: clientToken})
+    new({studioId, principalId, clientToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteLaunchProfileMember = {
   type t
   type request = {
@@ -1154,15 +1138,9 @@ module DeleteLaunchProfileMember = {
   @module("@aws-sdk/client-nimble") @new
   external new: request => t = "DeleteLaunchProfileMemberCommand"
   let make = (~studioId, ~principalId, ~launchProfileId, ~clientToken=?, ()) =>
-    new({
-      studioId: studioId,
-      principalId: principalId,
-      launchProfileId: launchProfileId,
-      clientToken: clientToken,
-    })
+    new({studioId, principalId, launchProfileId, clientToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module CreateStreamingSessionStream = {
   type t
   type request = {
@@ -1179,15 +1157,9 @@ module CreateStreamingSessionStream = {
   @module("@aws-sdk/client-nimble") @new
   external new: request => t = "CreateStreamingSessionStreamCommand"
   let make = (~studioId, ~sessionId, ~expirationInSeconds=?, ~clientToken=?, ()) =>
-    new({
-      studioId: studioId,
-      sessionId: sessionId,
-      expirationInSeconds: expirationInSeconds,
-      clientToken: clientToken,
-    })
+    new({studioId, sessionId, expirationInSeconds, clientToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateStudio = {
   type t
   type request = {
@@ -1207,16 +1179,9 @@ module UpdateStudio = {
   type response = {@ocaml.doc("<p>Information about a studio.</p>") studio: studio}
   @module("@aws-sdk/client-nimble") @new external new: request => t = "UpdateStudioCommand"
   let make = (~studioId, ~userRoleArn=?, ~displayName=?, ~clientToken=?, ~adminRoleArn=?, ()) =>
-    new({
-      userRoleArn: userRoleArn,
-      studioId: studioId,
-      displayName: displayName,
-      clientToken: clientToken,
-      adminRoleArn: adminRoleArn,
-    })
+    new({userRoleArn, studioId, displayName, clientToken, adminRoleArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateStreamingImage = {
   type t
   type request = {
@@ -1232,16 +1197,9 @@ module UpdateStreamingImage = {
   type response = {streamingImage: option<streamingImage>}
   @module("@aws-sdk/client-nimble") @new external new: request => t = "UpdateStreamingImageCommand"
   let make = (~studioId, ~streamingImageId, ~name=?, ~description=?, ~clientToken=?, ()) =>
-    new({
-      studioId: studioId,
-      streamingImageId: streamingImageId,
-      name: name,
-      description: description,
-      clientToken: clientToken,
-    })
+    new({studioId, streamingImageId, name, description, clientToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module StopStreamingSession = {
   type t
   type request = {
@@ -1255,11 +1213,9 @@ module StopStreamingSession = {
   }
   type response = {session: option<streamingSession>}
   @module("@aws-sdk/client-nimble") @new external new: request => t = "StopStreamingSessionCommand"
-  let make = (~studioId, ~sessionId, ~clientToken=?, ()) =>
-    new({studioId: studioId, sessionId: sessionId, clientToken: clientToken})
+  let make = (~studioId, ~sessionId, ~clientToken=?, ()) => new({studioId, sessionId, clientToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module StartStudioSSOConfigurationRepair = {
   type t
   type request = {
@@ -1272,10 +1228,9 @@ module StartStudioSSOConfigurationRepair = {
   type response = {@ocaml.doc("<p>Information about a studio.</p>") studio: studio}
   @module("@aws-sdk/client-nimble") @new
   external new: request => t = "StartStudioSSOConfigurationRepairCommand"
-  let make = (~studioId, ~clientToken=?, ()) => new({studioId: studioId, clientToken: clientToken})
+  let make = (~studioId, ~clientToken=?, ()) => new({studioId, clientToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module StartStreamingSession = {
   type t
   type request = {
@@ -1289,11 +1244,9 @@ module StartStreamingSession = {
   }
   type response = {session: option<streamingSession>}
   @module("@aws-sdk/client-nimble") @new external new: request => t = "StartStreamingSessionCommand"
-  let make = (~studioId, ~sessionId, ~clientToken=?, ()) =>
-    new({studioId: studioId, sessionId: sessionId, clientToken: clientToken})
+  let make = (~studioId, ~sessionId, ~clientToken=?, ()) => new({studioId, sessionId, clientToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module PutStudioMembers = {
   type t
   type request = {
@@ -1308,15 +1261,9 @@ module PutStudioMembers = {
   type response = {.}
   @module("@aws-sdk/client-nimble") @new external new: request => t = "PutStudioMembersCommand"
   let make = (~studioId, ~members, ~identityStoreId, ~clientToken=?, ()) =>
-    new({
-      studioId: studioId,
-      members: members,
-      identityStoreId: identityStoreId,
-      clientToken: clientToken,
-    })
+    new({studioId, members, identityStoreId, clientToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module PutLaunchProfileMembers = {
   type t
   type request = {
@@ -1333,16 +1280,9 @@ module PutLaunchProfileMembers = {
   @module("@aws-sdk/client-nimble") @new
   external new: request => t = "PutLaunchProfileMembersCommand"
   let make = (~studioId, ~members, ~launchProfileId, ~identityStoreId, ~clientToken=?, ()) =>
-    new({
-      studioId: studioId,
-      members: members,
-      launchProfileId: launchProfileId,
-      identityStoreId: identityStoreId,
-      clientToken: clientToken,
-    })
+    new({studioId, members, launchProfileId, identityStoreId, clientToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module ListStudioMembers = {
   type t
   type request = {
@@ -1359,11 +1299,9 @@ module ListStudioMembers = {
     @ocaml.doc("<p>A list of admin members.</p>") members: option<studioMembershipList>,
   }
   @module("@aws-sdk/client-nimble") @new external new: request => t = "ListStudioMembersCommand"
-  let make = (~studioId, ~nextToken=?, ~maxResults=?, ()) =>
-    new({studioId: studioId, nextToken: nextToken, maxResults: maxResults})
+  let make = (~studioId, ~nextToken=?, ~maxResults=?, ()) => new({studioId, nextToken, maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListLaunchProfileMembers = {
   type t
   type request = {
@@ -1383,15 +1321,9 @@ module ListLaunchProfileMembers = {
   @module("@aws-sdk/client-nimble") @new
   external new: request => t = "ListLaunchProfileMembersCommand"
   let make = (~studioId, ~launchProfileId, ~nextToken=?, ~maxResults=?, ()) =>
-    new({
-      studioId: studioId,
-      nextToken: nextToken,
-      maxResults: maxResults,
-      launchProfileId: launchProfileId,
-    })
+    new({studioId, nextToken, maxResults, launchProfileId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListEulas = {
   type t
   type request = {
@@ -1406,10 +1338,9 @@ module ListEulas = {
     @ocaml.doc("<p>A collection of EULA resources.</p>") eulas: option<eulaList>,
   }
   @module("@aws-sdk/client-nimble") @new external new: request => t = "ListEulasCommand"
-  let make = (~nextToken=?, ~eulaIds=?, ()) => new({nextToken: nextToken, eulaIds: eulaIds})
+  let make = (~nextToken=?, ~eulaIds=?, ()) => new({nextToken, eulaIds})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListEulaAcceptances = {
   type t
   type request = {
@@ -1427,11 +1358,9 @@ module ListEulaAcceptances = {
     eulaAcceptances: option<eulaAcceptanceList>,
   }
   @module("@aws-sdk/client-nimble") @new external new: request => t = "ListEulaAcceptancesCommand"
-  let make = (~studioId, ~nextToken=?, ~eulaIds=?, ()) =>
-    new({studioId: studioId, nextToken: nextToken, eulaIds: eulaIds})
+  let make = (~studioId, ~nextToken=?, ~eulaIds=?, ()) => new({studioId, nextToken, eulaIds})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetStudio = {
   type t
   type request = {@ocaml.doc("<p>The studio ID. </p>") studioId: string_}
@@ -1440,7 +1369,6 @@ module GetStudio = {
   let make = (~studioId, ()) => new({studioId: studioId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetStreamingSession = {
   type t
   type request = {
@@ -1449,10 +1377,9 @@ module GetStreamingSession = {
   }
   type response = {@ocaml.doc("<p>The session.</p>") session: option<streamingSession>}
   @module("@aws-sdk/client-nimble") @new external new: request => t = "GetStreamingSessionCommand"
-  let make = (~studioId, ~sessionId, ()) => new({studioId: studioId, sessionId: sessionId})
+  let make = (~studioId, ~sessionId, ()) => new({studioId, sessionId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetStreamingImage = {
   type t
   type request = {
@@ -1461,11 +1388,9 @@ module GetStreamingImage = {
   }
   type response = {@ocaml.doc("<p>The streaming image.</p>") streamingImage: option<streamingImage>}
   @module("@aws-sdk/client-nimble") @new external new: request => t = "GetStreamingImageCommand"
-  let make = (~studioId, ~streamingImageId, ()) =>
-    new({studioId: studioId, streamingImageId: streamingImageId})
+  let make = (~studioId, ~streamingImageId, ()) => new({studioId, streamingImageId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteStudio = {
   type t
   type request = {
@@ -1477,10 +1402,9 @@ module DeleteStudio = {
   }
   type response = {@ocaml.doc("<p>Information about a studio.</p>") studio: studio}
   @module("@aws-sdk/client-nimble") @new external new: request => t = "DeleteStudioCommand"
-  let make = (~studioId, ~clientToken=?, ()) => new({studioId: studioId, clientToken: clientToken})
+  let make = (~studioId, ~clientToken=?, ()) => new({studioId, clientToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteStreamingSession = {
   type t
   type request = {
@@ -1494,11 +1418,9 @@ module DeleteStreamingSession = {
   type response = {@ocaml.doc("<p>The session.</p>") session: option<streamingSession>}
   @module("@aws-sdk/client-nimble") @new
   external new: request => t = "DeleteStreamingSessionCommand"
-  let make = (~studioId, ~sessionId, ~clientToken=?, ()) =>
-    new({studioId: studioId, sessionId: sessionId, clientToken: clientToken})
+  let make = (~studioId, ~sessionId, ~clientToken=?, ()) => new({studioId, sessionId, clientToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteStreamingImage = {
   type t
   type request = {
@@ -1512,10 +1434,9 @@ module DeleteStreamingImage = {
   type response = {@ocaml.doc("<p>The streaming image.</p>") streamingImage: option<streamingImage>}
   @module("@aws-sdk/client-nimble") @new external new: request => t = "DeleteStreamingImageCommand"
   let make = (~studioId, ~streamingImageId, ~clientToken=?, ()) =>
-    new({studioId: studioId, streamingImageId: streamingImageId, clientToken: clientToken})
+    new({studioId, streamingImageId, clientToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateStudio = {
   type t
   type request = {
@@ -1552,17 +1473,16 @@ module CreateStudio = {
     (),
   ) =>
     new({
-      userRoleArn: userRoleArn,
-      tags: tags,
-      studioName: studioName,
-      studioEncryptionConfiguration: studioEncryptionConfiguration,
-      displayName: displayName,
-      clientToken: clientToken,
-      adminRoleArn: adminRoleArn,
+      userRoleArn,
+      tags,
+      studioName,
+      studioEncryptionConfiguration,
+      displayName,
+      clientToken,
+      adminRoleArn,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateStreamingSession = {
   type t
   type request = {
@@ -1596,18 +1516,9 @@ module CreateStreamingSession = {
     ~clientToken=?,
     (),
   ) =>
-    new({
-      tags: tags,
-      studioId: studioId,
-      streamingImageId: streamingImageId,
-      ownedBy: ownedBy,
-      launchProfileId: launchProfileId,
-      ec2InstanceType: ec2InstanceType,
-      clientToken: clientToken,
-    })
+    new({tags, studioId, streamingImageId, ownedBy, launchProfileId, ec2InstanceType, clientToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateStreamingImage = {
   type t
   type request = {
@@ -1628,17 +1539,9 @@ module CreateStreamingImage = {
   type response = {@ocaml.doc("<p>The streaming image.</p>") streamingImage: option<streamingImage>}
   @module("@aws-sdk/client-nimble") @new external new: request => t = "CreateStreamingImageCommand"
   let make = (~studioId, ~name, ~ec2ImageId, ~tags=?, ~description=?, ~clientToken=?, ()) =>
-    new({
-      tags: tags,
-      studioId: studioId,
-      name: name,
-      ec2ImageId: ec2ImageId,
-      description: description,
-      clientToken: clientToken,
-    })
+    new({tags, studioId, name, ec2ImageId, description, clientToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module AcceptEulas = {
   type t
   type request = {
@@ -1654,11 +1557,9 @@ module AcceptEulas = {
     eulaAcceptances: option<eulaAcceptanceList>,
   }
   @module("@aws-sdk/client-nimble") @new external new: request => t = "AcceptEulasCommand"
-  let make = (~studioId, ~eulaIds=?, ~clientToken=?, ()) =>
-    new({studioId: studioId, eulaIds: eulaIds, clientToken: clientToken})
+  let make = (~studioId, ~eulaIds=?, ~clientToken=?, ()) => new({studioId, eulaIds, clientToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListStudios = {
   type t
   type request = {
@@ -1675,7 +1576,6 @@ module ListStudios = {
   let make = (~nextToken=?, ()) => new({nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListStreamingSessions = {
   type t
   type request = {
@@ -1697,16 +1597,9 @@ module ListStreamingSessions = {
   }
   @module("@aws-sdk/client-nimble") @new external new: request => t = "ListStreamingSessionsCommand"
   let make = (~studioId, ~sessionIds=?, ~ownedBy=?, ~nextToken=?, ~createdBy=?, ()) =>
-    new({
-      studioId: studioId,
-      sessionIds: sessionIds,
-      ownedBy: ownedBy,
-      nextToken: nextToken,
-      createdBy: createdBy,
-    })
+    new({studioId, sessionIds, ownedBy, nextToken, createdBy})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListStreamingImages = {
   type t
   type request = {
@@ -1724,11 +1617,9 @@ module ListStreamingImages = {
     nextToken: option<string_>,
   }
   @module("@aws-sdk/client-nimble") @new external new: request => t = "ListStreamingImagesCommand"
-  let make = (~studioId, ~owner=?, ~nextToken=?, ()) =>
-    new({studioId: studioId, owner: owner, nextToken: nextToken})
+  let make = (~studioId, ~owner=?, ~nextToken=?, ()) => new({studioId, owner, nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateLaunchProfile = {
   type t
   type request = {
@@ -1763,18 +1654,17 @@ module UpdateLaunchProfile = {
     (),
   ) =>
     new({
-      studioId: studioId,
-      studioComponentIds: studioComponentIds,
-      streamConfiguration: streamConfiguration,
-      name: name,
-      launchProfileProtocolVersions: launchProfileProtocolVersions,
-      launchProfileId: launchProfileId,
-      description: description,
-      clientToken: clientToken,
+      studioId,
+      studioComponentIds,
+      streamConfiguration,
+      name,
+      launchProfileProtocolVersions,
+      launchProfileId,
+      description,
+      clientToken,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetLaunchProfileInitialization = {
   type t
   type request = {
@@ -1801,17 +1691,9 @@ module GetLaunchProfileInitialization = {
     ~launchProfileProtocolVersions,
     ~launchProfileId,
     (),
-  ) =>
-    new({
-      studioId: studioId,
-      platform: platform,
-      launchPurpose: launchPurpose,
-      launchProfileProtocolVersions: launchProfileProtocolVersions,
-      launchProfileId: launchProfileId,
-    })
+  ) => new({studioId, platform, launchPurpose, launchProfileProtocolVersions, launchProfileId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetLaunchProfileDetails = {
   type t
   type request = {
@@ -1827,11 +1709,9 @@ module GetLaunchProfileDetails = {
   }
   @module("@aws-sdk/client-nimble") @new
   external new: request => t = "GetLaunchProfileDetailsCommand"
-  let make = (~studioId, ~launchProfileId, ()) =>
-    new({studioId: studioId, launchProfileId: launchProfileId})
+  let make = (~studioId, ~launchProfileId, ()) => new({studioId, launchProfileId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetLaunchProfile = {
   type t
   type request = {
@@ -1840,11 +1720,9 @@ module GetLaunchProfile = {
   }
   type response = {@ocaml.doc("<p>The launch profile.</p>") launchProfile: option<launchProfile>}
   @module("@aws-sdk/client-nimble") @new external new: request => t = "GetLaunchProfileCommand"
-  let make = (~studioId, ~launchProfileId, ()) =>
-    new({studioId: studioId, launchProfileId: launchProfileId})
+  let make = (~studioId, ~launchProfileId, ()) => new({studioId, launchProfileId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteLaunchProfile = {
   type t
   type request = {
@@ -1858,10 +1736,9 @@ module DeleteLaunchProfile = {
   type response = {@ocaml.doc("<p>The launch profile.</p>") launchProfile: option<launchProfile>}
   @module("@aws-sdk/client-nimble") @new external new: request => t = "DeleteLaunchProfileCommand"
   let make = (~studioId, ~launchProfileId, ~clientToken=?, ()) =>
-    new({studioId: studioId, launchProfileId: launchProfileId, clientToken: clientToken})
+    new({studioId, launchProfileId, clientToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateLaunchProfile = {
   type t
   type request = {
@@ -1902,19 +1779,18 @@ module CreateLaunchProfile = {
     (),
   ) =>
     new({
-      tags: tags,
-      studioId: studioId,
-      studioComponentIds: studioComponentIds,
-      streamConfiguration: streamConfiguration,
-      name: name,
-      launchProfileProtocolVersions: launchProfileProtocolVersions,
-      ec2SubnetIds: ec2SubnetIds,
-      description: description,
-      clientToken: clientToken,
+      tags,
+      studioId,
+      studioComponentIds,
+      streamConfiguration,
+      name,
+      launchProfileProtocolVersions,
+      ec2SubnetIds,
+      description,
+      clientToken,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateStudioComponent = {
   type t
   type request = {
@@ -1959,21 +1835,20 @@ module UpdateStudioComponent = {
     (),
   ) =>
     new({
-      type_: type_,
-      subtype: subtype,
-      studioId: studioId,
-      studioComponentId: studioComponentId,
-      scriptParameters: scriptParameters,
-      name: name,
-      initializationScripts: initializationScripts,
-      ec2SecurityGroupIds: ec2SecurityGroupIds,
-      description: description,
-      configuration: configuration,
-      clientToken: clientToken,
+      type_,
+      subtype,
+      studioId,
+      studioComponentId,
+      scriptParameters,
+      name,
+      initializationScripts,
+      ec2SecurityGroupIds,
+      description,
+      configuration,
+      clientToken,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListLaunchProfiles = {
   type t
   type request = {
@@ -1997,16 +1872,9 @@ module ListLaunchProfiles = {
   }
   @module("@aws-sdk/client-nimble") @new external new: request => t = "ListLaunchProfilesCommand"
   let make = (~studioId, ~states=?, ~principalId=?, ~nextToken=?, ~maxResults=?, ()) =>
-    new({
-      studioId: studioId,
-      states: states,
-      principalId: principalId,
-      nextToken: nextToken,
-      maxResults: maxResults,
-    })
+    new({studioId, states, principalId, nextToken, maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetStudioComponent = {
   type t
   type request = {
@@ -2018,11 +1886,9 @@ module GetStudioComponent = {
     studioComponent: option<studioComponent>,
   }
   @module("@aws-sdk/client-nimble") @new external new: request => t = "GetStudioComponentCommand"
-  let make = (~studioId, ~studioComponentId, ()) =>
-    new({studioId: studioId, studioComponentId: studioComponentId})
+  let make = (~studioId, ~studioComponentId, ()) => new({studioId, studioComponentId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteStudioComponent = {
   type t
   type request = {
@@ -2039,10 +1905,9 @@ module DeleteStudioComponent = {
   }
   @module("@aws-sdk/client-nimble") @new external new: request => t = "DeleteStudioComponentCommand"
   let make = (~studioId, ~studioComponentId, ~clientToken=?, ()) =>
-    new({studioId: studioId, studioComponentId: studioComponentId, clientToken: clientToken})
+    new({studioId, studioComponentId, clientToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateStudioComponent = {
   type t
   type request = {
@@ -2088,21 +1953,20 @@ module CreateStudioComponent = {
     (),
   ) =>
     new({
-      type_: type_,
-      tags: tags,
-      subtype: subtype,
-      studioId: studioId,
-      scriptParameters: scriptParameters,
-      name: name,
-      initializationScripts: initializationScripts,
-      ec2SecurityGroupIds: ec2SecurityGroupIds,
-      description: description,
-      configuration: configuration,
-      clientToken: clientToken,
+      type_,
+      tags,
+      subtype,
+      studioId,
+      scriptParameters,
+      name,
+      initializationScripts,
+      ec2SecurityGroupIds,
+      description,
+      configuration,
+      clientToken,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListStudioComponents = {
   type t
   type request = {
@@ -2129,12 +1993,6 @@ module ListStudioComponents = {
   }
   @module("@aws-sdk/client-nimble") @new external new: request => t = "ListStudioComponentsCommand"
   let make = (~studioId, ~types=?, ~states=?, ~nextToken=?, ~maxResults=?, ()) =>
-    new({
-      types: types,
-      studioId: studioId,
-      states: states,
-      nextToken: nextToken,
-      maxResults: maxResults,
-    })
+    new({types, studioId, states, nextToken, maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

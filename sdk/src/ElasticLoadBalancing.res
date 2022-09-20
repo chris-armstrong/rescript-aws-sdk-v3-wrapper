@@ -556,14 +556,9 @@ module SetLoadBalancerListenerSSLCertificate = {
   @module("@aws-sdk/client-elasticloadbalancing") @new
   external new: request => t = "SetLoadBalancerListenerSSLCertificateCommand"
   let make = (~sslcertificateId, ~loadBalancerPort, ~loadBalancerName, ()) =>
-    new({
-      sslcertificateId: sslcertificateId,
-      loadBalancerPort: loadBalancerPort,
-      loadBalancerName: loadBalancerName,
-    })
+    new({sslcertificateId, loadBalancerPort, loadBalancerName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteLoadBalancerPolicy = {
   type t
   @ocaml.doc("<p>Contains the parameters for DeleteLoadBalancerPolicy.</p>")
@@ -575,11 +570,9 @@ module DeleteLoadBalancerPolicy = {
   type response = {.}
   @module("@aws-sdk/client-elasticloadbalancing") @new
   external new: request => t = "DeleteLoadBalancerPolicyCommand"
-  let make = (~policyName, ~loadBalancerName, ()) =>
-    new({policyName: policyName, loadBalancerName: loadBalancerName})
+  let make = (~policyName, ~loadBalancerName, ()) => new({policyName, loadBalancerName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteLoadBalancer = {
   type t
   @ocaml.doc("<p>Contains the parameters for DeleteLoadBalancer.</p>")
@@ -593,7 +586,6 @@ module DeleteLoadBalancer = {
   let make = (~loadBalancerName, ()) => new({loadBalancerName: loadBalancerName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module CreateLBCookieStickinessPolicy = {
   type t
   @ocaml.doc("<p>Contains the parameters for CreateLBCookieStickinessPolicy.</p>")
@@ -615,14 +607,9 @@ module CreateLBCookieStickinessPolicy = {
   @module("@aws-sdk/client-elasticloadbalancing") @new
   external new: request => t = "CreateLBCookieStickinessPolicyCommand"
   let make = (~policyName, ~loadBalancerName, ~cookieExpirationPeriod=?, ()) =>
-    new({
-      cookieExpirationPeriod: cookieExpirationPeriod,
-      policyName: policyName,
-      loadBalancerName: loadBalancerName,
-    })
+    new({cookieExpirationPeriod, policyName, loadBalancerName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module CreateAppCookieStickinessPolicy = {
   type t
   @ocaml.doc("<p>Contains the parameters for CreateAppCookieStickinessPolicy.</p>")
@@ -641,10 +628,9 @@ module CreateAppCookieStickinessPolicy = {
   @module("@aws-sdk/client-elasticloadbalancing") @new
   external new: request => t = "CreateAppCookieStickinessPolicyCommand"
   let make = (~cookieName, ~policyName, ~loadBalancerName, ()) =>
-    new({cookieName: cookieName, policyName: policyName, loadBalancerName: loadBalancerName})
+    new({cookieName, policyName, loadBalancerName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module SetLoadBalancerPoliciesOfListener = {
   type t
   @ocaml.doc("<p>Contains the parameters for SetLoadBalancePoliciesOfListener.</p>")
@@ -663,14 +649,9 @@ module SetLoadBalancerPoliciesOfListener = {
   @module("@aws-sdk/client-elasticloadbalancing") @new
   external new: request => t = "SetLoadBalancerPoliciesOfListenerCommand"
   let make = (~policyNames, ~loadBalancerPort, ~loadBalancerName, ()) =>
-    new({
-      policyNames: policyNames,
-      loadBalancerPort: loadBalancerPort,
-      loadBalancerName: loadBalancerName,
-    })
+    new({policyNames, loadBalancerPort, loadBalancerName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module SetLoadBalancerPoliciesForBackendServer = {
   type t
   @ocaml.doc("<p>Contains the parameters for SetLoadBalancerPoliciesForBackendServer.</p>")
@@ -689,10 +670,9 @@ module SetLoadBalancerPoliciesForBackendServer = {
   @module("@aws-sdk/client-elasticloadbalancing") @new
   external new: request => t = "SetLoadBalancerPoliciesForBackendServerCommand"
   let make = (~policyNames, ~instancePort, ~loadBalancerName, ()) =>
-    new({policyNames: policyNames, instancePort: instancePort, loadBalancerName: loadBalancerName})
+    new({policyNames, instancePort, loadBalancerName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module EnableAvailabilityZonesForLoadBalancer = {
   type t
   @ocaml.doc("<p>Contains the parameters for EnableAvailabilityZonesForLoadBalancer.</p>")
@@ -714,10 +694,9 @@ module EnableAvailabilityZonesForLoadBalancer = {
   @module("@aws-sdk/client-elasticloadbalancing") @new
   external new: request => t = "EnableAvailabilityZonesForLoadBalancerCommand"
   let make = (~availabilityZones, ~loadBalancerName, ()) =>
-    new({availabilityZones: availabilityZones, loadBalancerName: loadBalancerName})
+    new({availabilityZones, loadBalancerName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DisableAvailabilityZonesForLoadBalancer = {
   type t
   @ocaml.doc("<p>Contains the parameters for DisableAvailabilityZonesForLoadBalancer.</p>")
@@ -736,10 +715,9 @@ module DisableAvailabilityZonesForLoadBalancer = {
   @module("@aws-sdk/client-elasticloadbalancing") @new
   external new: request => t = "DisableAvailabilityZonesForLoadBalancerCommand"
   let make = (~availabilityZones, ~loadBalancerName, ()) =>
-    new({availabilityZones: availabilityZones, loadBalancerName: loadBalancerName})
+    new({availabilityZones, loadBalancerName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DetachLoadBalancerFromSubnets = {
   type t
   @ocaml.doc("<p>Contains the parameters for DetachLoadBalancerFromSubnets.</p>")
@@ -755,11 +733,9 @@ module DetachLoadBalancerFromSubnets = {
   }
   @module("@aws-sdk/client-elasticloadbalancing") @new
   external new: request => t = "DetachLoadBalancerFromSubnetsCommand"
-  let make = (~subnets, ~loadBalancerName, ()) =>
-    new({subnets: subnets, loadBalancerName: loadBalancerName})
+  let make = (~subnets, ~loadBalancerName, ()) => new({subnets, loadBalancerName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteLoadBalancerListeners = {
   type t
   @ocaml.doc("<p>Contains the parameters for DeleteLoadBalancerListeners.</p>")
@@ -773,10 +749,9 @@ module DeleteLoadBalancerListeners = {
   @module("@aws-sdk/client-elasticloadbalancing") @new
   external new: request => t = "DeleteLoadBalancerListenersCommand"
   let make = (~loadBalancerPorts, ~loadBalancerName, ()) =>
-    new({loadBalancerPorts: loadBalancerPorts, loadBalancerName: loadBalancerName})
+    new({loadBalancerPorts, loadBalancerName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module ConfigureHealthCheck = {
   type t
   @ocaml.doc("<p>Contains the parameters for ConfigureHealthCheck.</p>")
@@ -792,11 +767,9 @@ module ConfigureHealthCheck = {
   }
   @module("@aws-sdk/client-elasticloadbalancing") @new
   external new: request => t = "ConfigureHealthCheckCommand"
-  let make = (~healthCheck, ~loadBalancerName, ()) =>
-    new({healthCheck: healthCheck, loadBalancerName: loadBalancerName})
+  let make = (~healthCheck, ~loadBalancerName, ()) => new({healthCheck, loadBalancerName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module AttachLoadBalancerToSubnets = {
   type t
   @ocaml.doc("<p>Contains the parameters for AttachLoaBalancerToSubnets.</p>")
@@ -816,11 +789,9 @@ module AttachLoadBalancerToSubnets = {
   }
   @module("@aws-sdk/client-elasticloadbalancing") @new
   external new: request => t = "AttachLoadBalancerToSubnetsCommand"
-  let make = (~subnets, ~loadBalancerName, ()) =>
-    new({subnets: subnets, loadBalancerName: loadBalancerName})
+  let make = (~subnets, ~loadBalancerName, ()) => new({subnets, loadBalancerName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ApplySecurityGroupsToLoadBalancer = {
   type t
   @ocaml.doc("<p>Contains the parameters for ApplySecurityGroupsToLoadBalancer.</p>")
@@ -841,11 +812,9 @@ module ApplySecurityGroupsToLoadBalancer = {
   }
   @module("@aws-sdk/client-elasticloadbalancing") @new
   external new: request => t = "ApplySecurityGroupsToLoadBalancerCommand"
-  let make = (~securityGroups, ~loadBalancerName, ()) =>
-    new({securityGroups: securityGroups, loadBalancerName: loadBalancerName})
+  let make = (~securityGroups, ~loadBalancerName, ()) => new({securityGroups, loadBalancerName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module RemoveTags = {
   type t
   @ocaml.doc("<p>Contains the parameters for RemoveTags.</p>")
@@ -860,11 +829,9 @@ module RemoveTags = {
   type response = {.}
   @module("@aws-sdk/client-elasticloadbalancing") @new
   external new: request => t = "RemoveTagsCommand"
-  let make = (~tags, ~loadBalancerNames, ()) =>
-    new({tags: tags, loadBalancerNames: loadBalancerNames})
+  let make = (~tags, ~loadBalancerNames, ()) => new({tags, loadBalancerNames})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module RegisterInstancesWithLoadBalancer = {
   type t
   @ocaml.doc("<p>Contains the parameters for RegisterInstancesWithLoadBalancer.</p>")
@@ -880,11 +847,9 @@ module RegisterInstancesWithLoadBalancer = {
   }
   @module("@aws-sdk/client-elasticloadbalancing") @new
   external new: request => t = "RegisterInstancesWithLoadBalancerCommand"
-  let make = (~instances, ~loadBalancerName, ()) =>
-    new({instances: instances, loadBalancerName: loadBalancerName})
+  let make = (~instances, ~loadBalancerName, ()) => new({instances, loadBalancerName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeInstanceHealth = {
   type t
   @ocaml.doc("<p>Contains the parameters for DescribeInstanceHealth.</p>")
@@ -900,11 +865,9 @@ module DescribeInstanceHealth = {
   }
   @module("@aws-sdk/client-elasticloadbalancing") @new
   external new: request => t = "DescribeInstanceHealthCommand"
-  let make = (~loadBalancerName, ~instances=?, ()) =>
-    new({instances: instances, loadBalancerName: loadBalancerName})
+  let make = (~loadBalancerName, ~instances=?, ()) => new({instances, loadBalancerName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeAccountLimits = {
   type t
   type request = {
@@ -926,10 +889,9 @@ module DescribeAccountLimits = {
   }
   @module("@aws-sdk/client-elasticloadbalancing") @new
   external new: request => t = "DescribeAccountLimitsCommand"
-  let make = (~pageSize=?, ~marker=?, ()) => new({pageSize: pageSize, marker: marker})
+  let make = (~pageSize=?, ~marker=?, ()) => new({pageSize, marker})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeregisterInstancesFromLoadBalancer = {
   type t
   @ocaml.doc("<p>Contains the parameters for DeregisterInstancesFromLoadBalancer.</p>")
@@ -945,11 +907,9 @@ module DeregisterInstancesFromLoadBalancer = {
   }
   @module("@aws-sdk/client-elasticloadbalancing") @new
   external new: request => t = "DeregisterInstancesFromLoadBalancerCommand"
-  let make = (~instances, ~loadBalancerName, ()) =>
-    new({instances: instances, loadBalancerName: loadBalancerName})
+  let make = (~instances, ~loadBalancerName, ()) => new({instances, loadBalancerName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateLoadBalancerPolicy = {
   type t
   @ocaml.doc("<p>Contains the parameters for CreateLoadBalancerPolicy.</p>")
@@ -972,15 +932,9 @@ module CreateLoadBalancerPolicy = {
   @module("@aws-sdk/client-elasticloadbalancing") @new
   external new: request => t = "CreateLoadBalancerPolicyCommand"
   let make = (~policyTypeName, ~policyName, ~loadBalancerName, ~policyAttributes=?, ()) =>
-    new({
-      policyAttributes: policyAttributes,
-      policyTypeName: policyTypeName,
-      policyName: policyName,
-      loadBalancerName: loadBalancerName,
-    })
+    new({policyAttributes, policyTypeName, policyName, loadBalancerName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module CreateLoadBalancerListeners = {
   type t
   @ocaml.doc("<p>Contains the parameters for CreateLoadBalancerListeners.</p>")
@@ -992,11 +946,9 @@ module CreateLoadBalancerListeners = {
   type response = {.}
   @module("@aws-sdk/client-elasticloadbalancing") @new
   external new: request => t = "CreateLoadBalancerListenersCommand"
-  let make = (~listeners, ~loadBalancerName, ()) =>
-    new({listeners: listeners, loadBalancerName: loadBalancerName})
+  let make = (~listeners, ~loadBalancerName, ()) => new({listeners, loadBalancerName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module CreateLoadBalancer = {
   type t
   @ocaml.doc("<p>Contains the parameters for CreateLoadBalancer.</p>")
@@ -1051,19 +1003,9 @@ module CreateLoadBalancer = {
     ~subnets=?,
     ~availabilityZones=?,
     (),
-  ) =>
-    new({
-      tags: tags,
-      scheme: scheme,
-      securityGroups: securityGroups,
-      subnets: subnets,
-      availabilityZones: availabilityZones,
-      listeners: listeners,
-      loadBalancerName: loadBalancerName,
-    })
+  ) => new({tags, scheme, securityGroups, subnets, availabilityZones, listeners, loadBalancerName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module AddTags = {
   type t
   @ocaml.doc("<p>Contains the parameters for AddTags.</p>")
@@ -1075,11 +1017,9 @@ module AddTags = {
   }
   type response = {.}
   @module("@aws-sdk/client-elasticloadbalancing") @new external new: request => t = "AddTagsCommand"
-  let make = (~tags, ~loadBalancerNames, ()) =>
-    new({tags: tags, loadBalancerNames: loadBalancerNames})
+  let make = (~tags, ~loadBalancerNames, ()) => new({tags, loadBalancerNames})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module ModifyLoadBalancerAttributes = {
   type t
   @ocaml.doc("<p>Contains the parameters for ModifyLoadBalancerAttributes.</p>")
@@ -1100,10 +1040,9 @@ module ModifyLoadBalancerAttributes = {
   @module("@aws-sdk/client-elasticloadbalancing") @new
   external new: request => t = "ModifyLoadBalancerAttributesCommand"
   let make = (~loadBalancerAttributes, ~loadBalancerName, ()) =>
-    new({loadBalancerAttributes: loadBalancerAttributes, loadBalancerName: loadBalancerName})
+    new({loadBalancerAttributes, loadBalancerName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeLoadBalancerAttributes = {
   type t
   @ocaml.doc("<p>Contains the parameters for DescribeLoadBalancerAttributes.</p>")
@@ -1122,7 +1061,6 @@ module DescribeLoadBalancerAttributes = {
   let make = (~loadBalancerName, ()) => new({loadBalancerName: loadBalancerName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeTags = {
   type t
   @ocaml.doc("<p>Contains the parameters for DescribeTags.</p>")
@@ -1140,7 +1078,6 @@ module DescribeTags = {
   let make = (~loadBalancerNames, ()) => new({loadBalancerNames: loadBalancerNames})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeLoadBalancerPolicyTypes = {
   type t
   @ocaml.doc("<p>Contains the parameters for DescribeLoadBalancerPolicyTypes.</p>")
@@ -1161,7 +1098,6 @@ module DescribeLoadBalancerPolicyTypes = {
   let make = (~policyTypeNames=?, ()) => new({policyTypeNames: policyTypeNames})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeLoadBalancerPolicies = {
   type t
   @ocaml.doc("<p>Contains the parameters for DescribeLoadBalancerPolicies.</p>")
@@ -1178,11 +1114,9 @@ module DescribeLoadBalancerPolicies = {
   }
   @module("@aws-sdk/client-elasticloadbalancing") @new
   external new: request => t = "DescribeLoadBalancerPoliciesCommand"
-  let make = (~policyNames=?, ~loadBalancerName=?, ()) =>
-    new({policyNames: policyNames, loadBalancerName: loadBalancerName})
+  let make = (~policyNames=?, ~loadBalancerName=?, ()) => new({policyNames, loadBalancerName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeLoadBalancers = {
   type t
   @ocaml.doc("<p>Contains the parameters for DescribeLoadBalancers.</p>")
@@ -1213,6 +1147,6 @@ module DescribeLoadBalancers = {
   @module("@aws-sdk/client-elasticloadbalancing") @new
   external new: request => t = "DescribeLoadBalancersCommand"
   let make = (~pageSize=?, ~marker=?, ~loadBalancerNames=?, ()) =>
-    new({pageSize: pageSize, marker: marker, loadBalancerNames: loadBalancerNames})
+    new({pageSize, marker, loadBalancerNames})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

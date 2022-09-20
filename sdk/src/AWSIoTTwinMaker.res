@@ -471,11 +471,9 @@ module UpdateWorkspace = {
   }
   @module("@aws-sdk/client-awsiottwinmaker") @new
   external new: request => t = "UpdateWorkspaceCommand"
-  let make = (~workspaceId, ~role=?, ~description=?, ()) =>
-    new({role: role, description: description, workspaceId: workspaceId})
+  let make = (~workspaceId, ~role=?, ~description=?, ()) => new({role, description, workspaceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetWorkspace = {
   type t
   type request = {@ocaml.doc("<p>The ID of the workspace.</p>") workspaceId: idOrArn}
@@ -497,7 +495,6 @@ module GetWorkspace = {
   let make = (~workspaceId, ()) => new({workspaceId: workspaceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteWorkspace = {
   type t
   type request = {@ocaml.doc("<p>The ID of the workspace to delete.</p>") workspaceId: id}
@@ -507,7 +504,6 @@ module DeleteWorkspace = {
   let make = (~workspaceId, ()) => new({workspaceId: workspaceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteScene = {
   type t
   type request = {
@@ -516,10 +512,9 @@ module DeleteScene = {
   }
   type response = {.}
   @module("@aws-sdk/client-awsiottwinmaker") @new external new: request => t = "DeleteSceneCommand"
-  let make = (~sceneId, ~workspaceId, ()) => new({sceneId: sceneId, workspaceId: workspaceId})
+  let make = (~sceneId, ~workspaceId, ()) => new({sceneId, workspaceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteEntity = {
   type t
   type request = {
@@ -534,10 +529,9 @@ module DeleteEntity = {
   type response = {@ocaml.doc("<p>The current state of the deleted entity.</p>") state: state}
   @module("@aws-sdk/client-awsiottwinmaker") @new external new: request => t = "DeleteEntityCommand"
   let make = (~entityId, ~workspaceId, ~isRecursive=?, ()) =>
-    new({isRecursive: isRecursive, entityId: entityId, workspaceId: workspaceId})
+    new({isRecursive, entityId, workspaceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteComponentType = {
   type t
   type request = {
@@ -549,11 +543,9 @@ module DeleteComponentType = {
   }
   @module("@aws-sdk/client-awsiottwinmaker") @new
   external new: request => t = "DeleteComponentTypeCommand"
-  let make = (~componentTypeId, ~workspaceId, ()) =>
-    new({componentTypeId: componentTypeId, workspaceId: workspaceId})
+  let make = (~componentTypeId, ~workspaceId, ()) => new({componentTypeId, workspaceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateScene = {
   type t
   type request = {
@@ -573,16 +565,9 @@ module UpdateScene = {
   }
   @module("@aws-sdk/client-awsiottwinmaker") @new external new: request => t = "UpdateSceneCommand"
   let make = (~sceneId, ~workspaceId, ~capabilities=?, ~description=?, ~contentLocation=?, ()) =>
-    new({
-      capabilities: capabilities,
-      description: description,
-      contentLocation: contentLocation,
-      sceneId: sceneId,
-      workspaceId: workspaceId,
-    })
+    new({capabilities, description, contentLocation, sceneId, workspaceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UntagResource = {
   type t
   type request = {
@@ -595,10 +580,9 @@ module UntagResource = {
   type response = {.}
   @module("@aws-sdk/client-awsiottwinmaker") @new
   external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceARN, ()) => new({tagKeys: tagKeys, resourceARN: resourceARN})
+  let make = (~tagKeys, ~resourceARN, ()) => new({tagKeys, resourceARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module TagResource = {
   type t
   type request = {
@@ -607,10 +591,9 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-awsiottwinmaker") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceARN, ()) => new({tags: tags, resourceARN: resourceARN})
+  let make = (~tags, ~resourceARN, ()) => new({tags, resourceARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module ListTagsForResource = {
   type t
   type request = {
@@ -627,10 +610,9 @@ module ListTagsForResource = {
   @module("@aws-sdk/client-awsiottwinmaker") @new
   external new: request => t = "ListTagsForResourceCommand"
   let make = (~resourceARN, ~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken: nextToken, maxResults: maxResults, resourceARN: resourceARN})
+    new({nextToken, maxResults, resourceARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetScene = {
   type t
   type request = {
@@ -653,10 +635,9 @@ module GetScene = {
     @ocaml.doc("<p>The ID of the workspace that contains the scene.</p>") workspaceId: id,
   }
   @module("@aws-sdk/client-awsiottwinmaker") @new external new: request => t = "GetSceneCommand"
-  let make = (~sceneId, ~workspaceId, ()) => new({sceneId: sceneId, workspaceId: workspaceId})
+  let make = (~sceneId, ~workspaceId, ()) => new({sceneId, workspaceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateWorkspace = {
   type t
   type request = {
@@ -677,16 +658,9 @@ module CreateWorkspace = {
   @module("@aws-sdk/client-awsiottwinmaker") @new
   external new: request => t = "CreateWorkspaceCommand"
   let make = (~role, ~s3Location, ~workspaceId, ~tags=?, ~description=?, ()) =>
-    new({
-      tags: tags,
-      role: role,
-      s3Location: s3Location,
-      description: description,
-      workspaceId: workspaceId,
-    })
+    new({tags, role, s3Location, description, workspaceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateScene = {
   type t
   type request = {
@@ -714,18 +688,9 @@ module CreateScene = {
     ~capabilities=?,
     ~description=?,
     (),
-  ) =>
-    new({
-      tags: tags,
-      capabilities: capabilities,
-      description: description,
-      contentLocation: contentLocation,
-      sceneId: sceneId,
-      workspaceId: workspaceId,
-    })
+  ) => new({tags, capabilities, description, contentLocation, sceneId, workspaceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListWorkspaces = {
   type t
   type request = {
@@ -741,11 +706,9 @@ module ListWorkspaces = {
   }
   @module("@aws-sdk/client-awsiottwinmaker") @new
   external new: request => t = "ListWorkspacesCommand"
-  let make = (~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken: nextToken, maxResults: maxResults})
+  let make = (~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListScenes = {
   type t
   type request = {
@@ -763,10 +726,9 @@ module ListScenes = {
   }
   @module("@aws-sdk/client-awsiottwinmaker") @new external new: request => t = "ListScenesCommand"
   let make = (~workspaceId, ~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken: nextToken, maxResults: maxResults, workspaceId: workspaceId})
+    new({nextToken, maxResults, workspaceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListEntities = {
   type t
   type request = {
@@ -785,10 +747,9 @@ module ListEntities = {
   }
   @module("@aws-sdk/client-awsiottwinmaker") @new external new: request => t = "ListEntitiesCommand"
   let make = (~workspaceId, ~nextToken=?, ~maxResults=?, ~filters=?, ()) =>
-    new({nextToken: nextToken, maxResults: maxResults, filters: filters, workspaceId: workspaceId})
+    new({nextToken, maxResults, filters, workspaceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListComponentTypes = {
   type t
   type request = {
@@ -811,10 +772,9 @@ module ListComponentTypes = {
   @module("@aws-sdk/client-awsiottwinmaker") @new
   external new: request => t = "ListComponentTypesCommand"
   let make = (~workspaceId, ~maxResults=?, ~nextToken=?, ~filters=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, filters: filters, workspaceId: workspaceId})
+    new({maxResults, nextToken, filters, workspaceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateComponentType = {
   type t
   type request = {
@@ -852,17 +812,16 @@ module UpdateComponentType = {
     (),
   ) =>
     new({
-      functions: functions,
-      extendsFrom: extendsFrom,
-      propertyDefinitions: propertyDefinitions,
-      description: description,
-      componentTypeId: componentTypeId,
-      isSingleton: isSingleton,
-      workspaceId: workspaceId,
+      functions,
+      extendsFrom,
+      propertyDefinitions,
+      description,
+      componentTypeId,
+      isSingleton,
+      workspaceId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetPropertyValue = {
   type t
   type request = {
@@ -891,17 +850,9 @@ module GetPropertyValue = {
     ~componentTypeId=?,
     ~componentName=?,
     (),
-  ) =>
-    new({
-      workspaceId: workspaceId,
-      selectedProperties: selectedProperties,
-      entityId: entityId,
-      componentTypeId: componentTypeId,
-      componentName: componentName,
-    })
+  ) => new({workspaceId, selectedProperties, entityId, componentTypeId, componentName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetComponentType = {
   type t
   type request = {
@@ -937,11 +888,9 @@ module GetComponentType = {
   }
   @module("@aws-sdk/client-awsiottwinmaker") @new
   external new: request => t = "GetComponentTypeCommand"
-  let make = (~componentTypeId, ~workspaceId, ()) =>
-    new({componentTypeId: componentTypeId, workspaceId: workspaceId})
+  let make = (~componentTypeId, ~workspaceId, ()) => new({componentTypeId, workspaceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateComponentType = {
   type t
   type request = {
@@ -982,18 +931,17 @@ module CreateComponentType = {
     (),
   ) =>
     new({
-      tags: tags,
-      functions: functions,
-      extendsFrom: extendsFrom,
-      propertyDefinitions: propertyDefinitions,
-      description: description,
-      componentTypeId: componentTypeId,
-      isSingleton: isSingleton,
-      workspaceId: workspaceId,
+      tags,
+      functions,
+      extendsFrom,
+      propertyDefinitions,
+      description,
+      componentTypeId,
+      isSingleton,
+      workspaceId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetPropertyValueHistory = {
   type t
   type request = {
@@ -1044,22 +992,21 @@ module GetPropertyValueHistory = {
     (),
   ) =>
     new({
-      orderByTime: orderByTime,
-      maxResults: maxResults,
-      nextToken: nextToken,
-      interpolation: interpolation,
-      endDateTime: endDateTime,
-      startDateTime: startDateTime,
-      propertyFilters: propertyFilters,
-      selectedProperties: selectedProperties,
-      componentTypeId: componentTypeId,
-      componentName: componentName,
-      entityId: entityId,
-      workspaceId: workspaceId,
+      orderByTime,
+      maxResults,
+      nextToken,
+      interpolation,
+      endDateTime,
+      startDateTime,
+      propertyFilters,
+      selectedProperties,
+      componentTypeId,
+      componentName,
+      entityId,
+      workspaceId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateEntity = {
   type t
   type request = {
@@ -1087,18 +1034,9 @@ module UpdateEntity = {
     ~description=?,
     ~entityName=?,
     (),
-  ) =>
-    new({
-      parentEntityUpdate: parentEntityUpdate,
-      componentUpdates: componentUpdates,
-      description: description,
-      entityName: entityName,
-      entityId: entityId,
-      workspaceId: workspaceId,
-    })
+  ) => new({parentEntityUpdate, componentUpdates, description, entityName, entityId, workspaceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetEntity = {
   type t
   type request = {
@@ -1127,10 +1065,9 @@ module GetEntity = {
     @ocaml.doc("<p>The ID of the entity.</p>") entityId: entityId,
   }
   @module("@aws-sdk/client-awsiottwinmaker") @new external new: request => t = "GetEntityCommand"
-  let make = (~entityId, ~workspaceId, ()) => new({entityId: entityId, workspaceId: workspaceId})
+  let make = (~entityId, ~workspaceId, ()) => new({entityId, workspaceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateEntity = {
   type t
   type request = {
@@ -1162,19 +1099,9 @@ module CreateEntity = {
     ~description=?,
     ~entityId=?,
     (),
-  ) =>
-    new({
-      tags: tags,
-      parentEntityId: parentEntityId,
-      components: components,
-      description: description,
-      entityName: entityName,
-      entityId: entityId,
-      workspaceId: workspaceId,
-    })
+  ) => new({tags, parentEntityId, components, description, entityName, entityId, workspaceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module BatchPutPropertyValues = {
   type t
   type request = {
@@ -1190,6 +1117,6 @@ module BatchPutPropertyValues = {
   }
   @module("@aws-sdk/client-awsiottwinmaker") @new
   external new: request => t = "BatchPutPropertyValuesCommand"
-  let make = (~entries, ~workspaceId, ()) => new({entries: entries, workspaceId: workspaceId})
+  let make = (~entries, ~workspaceId, ()) => new({entries, workspaceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

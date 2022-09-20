@@ -940,10 +940,9 @@ module VoteOnProposal = {
   @module("@aws-sdk/client-managedblockchain") @new
   external new: request => t = "VoteOnProposalCommand"
   let make = (~vote, ~voterMemberId, ~proposalId, ~networkId, ()) =>
-    new({vote: vote, voterMemberId: voterMemberId, proposalId: proposalId, networkId: networkId})
+    new({vote, voterMemberId, proposalId, networkId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module RejectInvitation = {
   type t
   type request = {
@@ -956,7 +955,6 @@ module RejectInvitation = {
   let make = (~invitationId, ()) => new({invitationId: invitationId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteNode = {
   type t
   type request = {
@@ -989,11 +987,9 @@ module DeleteNode = {
   }
   type response = {.}
   @module("@aws-sdk/client-managedblockchain") @new external new: request => t = "DeleteNodeCommand"
-  let make = (~nodeId, ~networkId, ~memberId=?, ()) =>
-    new({nodeId: nodeId, memberId: memberId, networkId: networkId})
+  let make = (~nodeId, ~networkId, ~memberId=?, ()) => new({nodeId, memberId, networkId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteMember = {
   type t
   type request = {
@@ -1006,10 +1002,9 @@ module DeleteMember = {
   type response = {.}
   @module("@aws-sdk/client-managedblockchain") @new
   external new: request => t = "DeleteMemberCommand"
-  let make = (~memberId, ~networkId, ()) => new({memberId: memberId, networkId: networkId})
+  let make = (~memberId, ~networkId, ()) => new({memberId, networkId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module UntagResource = {
   type t
   type request = {
@@ -1023,10 +1018,9 @@ module UntagResource = {
   type response = {.}
   @module("@aws-sdk/client-managedblockchain") @new
   external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
+  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys, resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module TagResource = {
   type t
   type request = {
@@ -1044,10 +1038,9 @@ module TagResource = {
   type response = {.}
   @module("@aws-sdk/client-managedblockchain") @new
   external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
+  let make = (~tags, ~resourceArn, ()) => new({tags, resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module ListTagsForResource = {
   type t
   type request = {
@@ -1065,7 +1058,6 @@ module ListTagsForResource = {
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListProposals = {
   type t
   type request = {
@@ -1095,10 +1087,9 @@ module ListProposals = {
   @module("@aws-sdk/client-managedblockchain") @new
   external new: request => t = "ListProposalsCommand"
   let make = (~networkId, ~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken: nextToken, maxResults: maxResults, networkId: networkId})
+    new({nextToken, maxResults, networkId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListProposalVotes = {
   type t
   type request = {
@@ -1138,15 +1129,9 @@ module ListProposalVotes = {
   @module("@aws-sdk/client-managedblockchain") @new
   external new: request => t = "ListProposalVotesCommand"
   let make = (~proposalId, ~networkId, ~nextToken=?, ~maxResults=?, ()) =>
-    new({
-      nextToken: nextToken,
-      maxResults: maxResults,
-      proposalId: proposalId,
-      networkId: networkId,
-    })
+    new({nextToken, maxResults, proposalId, networkId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListNodes = {
   type t
   type request = {
@@ -1180,16 +1165,9 @@ module ListNodes = {
   }
   @module("@aws-sdk/client-managedblockchain") @new external new: request => t = "ListNodesCommand"
   let make = (~networkId, ~nextToken=?, ~maxResults=?, ~status=?, ~memberId=?, ()) =>
-    new({
-      nextToken: nextToken,
-      maxResults: maxResults,
-      status: status,
-      memberId: memberId,
-      networkId: networkId,
-    })
+    new({nextToken, maxResults, status, memberId, networkId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListNetworks = {
   type t
   type request = {
@@ -1222,16 +1200,9 @@ module ListNetworks = {
   @module("@aws-sdk/client-managedblockchain") @new
   external new: request => t = "ListNetworksCommand"
   let make = (~nextToken=?, ~maxResults=?, ~status=?, ~framework=?, ~name=?, ()) =>
-    new({
-      nextToken: nextToken,
-      maxResults: maxResults,
-      status: status,
-      framework: framework,
-      name: name,
-    })
+    new({nextToken, maxResults, status, framework, name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListMembers = {
   type t
   type request = {
@@ -1268,17 +1239,9 @@ module ListMembers = {
   @module("@aws-sdk/client-managedblockchain") @new
   external new: request => t = "ListMembersCommand"
   let make = (~networkId, ~nextToken=?, ~maxResults=?, ~isOwned=?, ~status=?, ~name=?, ()) =>
-    new({
-      nextToken: nextToken,
-      maxResults: maxResults,
-      isOwned: isOwned,
-      status: status,
-      name: name,
-      networkId: networkId,
-    })
+    new({nextToken, maxResults, isOwned, status, name, networkId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListInvitations = {
   type t
   type request = {
@@ -1297,11 +1260,9 @@ module ListInvitations = {
   }
   @module("@aws-sdk/client-managedblockchain") @new
   external new: request => t = "ListInvitationsCommand"
-  let make = (~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken: nextToken, maxResults: maxResults})
+  let make = (~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetNetwork = {
   type t
   type request = {
@@ -1317,7 +1278,6 @@ module GetNetwork = {
   let make = (~networkId, ()) => new({networkId: networkId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateProposal = {
   type t
   type request = {
@@ -1358,17 +1318,9 @@ module CreateProposal = {
   @module("@aws-sdk/client-managedblockchain") @new
   external new: request => t = "CreateProposalCommand"
   let make = (~actions, ~memberId, ~networkId, ~clientRequestToken, ~tags=?, ~description=?, ()) =>
-    new({
-      tags: tags,
-      description: description,
-      actions: actions,
-      memberId: memberId,
-      networkId: networkId,
-      clientRequestToken: clientRequestToken,
-    })
+    new({tags, description, actions, memberId, networkId, clientRequestToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateNode = {
   type t
   type request = {
@@ -1386,15 +1338,9 @@ module UpdateNode = {
   type response = {.}
   @module("@aws-sdk/client-managedblockchain") @new external new: request => t = "UpdateNodeCommand"
   let make = (~nodeId, ~networkId, ~logPublishingConfiguration=?, ~memberId=?, ()) =>
-    new({
-      logPublishingConfiguration: logPublishingConfiguration,
-      nodeId: nodeId,
-      memberId: memberId,
-      networkId: networkId,
-    })
+    new({logPublishingConfiguration, nodeId, memberId, networkId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module UpdateMember = {
   type t
   type request = {
@@ -1413,14 +1359,9 @@ module UpdateMember = {
   @module("@aws-sdk/client-managedblockchain") @new
   external new: request => t = "UpdateMemberCommand"
   let make = (~memberId, ~networkId, ~logPublishingConfiguration=?, ()) =>
-    new({
-      logPublishingConfiguration: logPublishingConfiguration,
-      memberId: memberId,
-      networkId: networkId,
-    })
+    new({logPublishingConfiguration, memberId, networkId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module GetProposal = {
   type t
   type request = {
@@ -1435,10 +1376,9 @@ module GetProposal = {
   }
   @module("@aws-sdk/client-managedblockchain") @new
   external new: request => t = "GetProposalCommand"
-  let make = (~proposalId, ~networkId, ()) => new({proposalId: proposalId, networkId: networkId})
+  let make = (~proposalId, ~networkId, ()) => new({proposalId, networkId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetNode = {
   type t
   type request = {
@@ -1454,11 +1394,9 @@ module GetNode = {
     @ocaml.doc("<p>Properties of the node configuration.</p>") @as("Node") node: option<node>,
   }
   @module("@aws-sdk/client-managedblockchain") @new external new: request => t = "GetNodeCommand"
-  let make = (~nodeId, ~networkId, ~memberId=?, ()) =>
-    new({nodeId: nodeId, memberId: memberId, networkId: networkId})
+  let make = (~nodeId, ~networkId, ~memberId=?, ()) => new({nodeId, memberId, networkId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetMember = {
   type t
   type request = {
@@ -1472,10 +1410,9 @@ module GetMember = {
     @ocaml.doc("<p>The properties of a member.</p>") @as("Member") member: option<member>,
   }
   @module("@aws-sdk/client-managedblockchain") @new external new: request => t = "GetMemberCommand"
-  let make = (~memberId, ~networkId, ()) => new({memberId: memberId, networkId: networkId})
+  let make = (~memberId, ~networkId, ()) => new({memberId, networkId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateNode = {
   type t
   type request = {
@@ -1523,16 +1460,9 @@ module CreateNode = {
   }
   @module("@aws-sdk/client-managedblockchain") @new external new: request => t = "CreateNodeCommand"
   let make = (~nodeConfiguration, ~networkId, ~clientRequestToken, ~tags=?, ~memberId=?, ()) =>
-    new({
-      tags: tags,
-      nodeConfiguration: nodeConfiguration,
-      memberId: memberId,
-      networkId: networkId,
-      clientRequestToken: clientRequestToken,
-    })
+    new({tags, nodeConfiguration, memberId, networkId, clientRequestToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateNetwork = {
   type t
   type request = {
@@ -1590,19 +1520,18 @@ module CreateNetwork = {
     (),
   ) =>
     new({
-      tags: tags,
-      memberConfiguration: memberConfiguration,
-      votingPolicy: votingPolicy,
-      frameworkConfiguration: frameworkConfiguration,
-      frameworkVersion: frameworkVersion,
-      framework: framework,
-      description: description,
-      name: name,
-      clientRequestToken: clientRequestToken,
+      tags,
+      memberConfiguration,
+      votingPolicy,
+      frameworkConfiguration,
+      frameworkVersion,
+      framework,
+      description,
+      name,
+      clientRequestToken,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateMember = {
   type t
   type request = {
@@ -1629,11 +1558,6 @@ module CreateMember = {
   @module("@aws-sdk/client-managedblockchain") @new
   external new: request => t = "CreateMemberCommand"
   let make = (~memberConfiguration, ~networkId, ~invitationId, ~clientRequestToken, ()) =>
-    new({
-      memberConfiguration: memberConfiguration,
-      networkId: networkId,
-      invitationId: invitationId,
-      clientRequestToken: clientRequestToken,
-    })
+    new({memberConfiguration, networkId, invitationId, clientRequestToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

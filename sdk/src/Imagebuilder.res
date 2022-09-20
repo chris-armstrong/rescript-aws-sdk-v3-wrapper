@@ -1145,11 +1145,9 @@ module StartImagePipelineExecution = {
   }
   @module("@aws-sdk/client-imagebuilder") @new
   external new: request => t = "StartImagePipelineExecutionCommand"
-  let make = (~clientToken, ~imagePipelineArn, ()) =>
-    new({clientToken: clientToken, imagePipelineArn: imagePipelineArn})
+  let make = (~clientToken, ~imagePipelineArn, ()) => new({clientToken, imagePipelineArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module PutImageRecipePolicy = {
   type t
   type request = {
@@ -1169,10 +1167,9 @@ module PutImageRecipePolicy = {
   }
   @module("@aws-sdk/client-imagebuilder") @new
   external new: request => t = "PutImageRecipePolicyCommand"
-  let make = (~policy, ~imageRecipeArn, ()) => new({policy: policy, imageRecipeArn: imageRecipeArn})
+  let make = (~policy, ~imageRecipeArn, ()) => new({policy, imageRecipeArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module PutImagePolicy = {
   type t
   type request = {
@@ -1191,10 +1188,9 @@ module PutImagePolicy = {
     requestId: option<nonEmptyString>,
   }
   @module("@aws-sdk/client-imagebuilder") @new external new: request => t = "PutImagePolicyCommand"
-  let make = (~policy, ~imageArn, ()) => new({policy: policy, imageArn: imageArn})
+  let make = (~policy, ~imageArn, ()) => new({policy, imageArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module PutContainerRecipePolicy = {
   type t
   type request = {
@@ -1215,11 +1211,9 @@ module PutContainerRecipePolicy = {
   }
   @module("@aws-sdk/client-imagebuilder") @new
   external new: request => t = "PutContainerRecipePolicyCommand"
-  let make = (~policy, ~containerRecipeArn, ()) =>
-    new({policy: policy, containerRecipeArn: containerRecipeArn})
+  let make = (~policy, ~containerRecipeArn, ()) => new({policy, containerRecipeArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module PutComponentPolicy = {
   type t
   type request = {
@@ -1239,10 +1233,9 @@ module PutComponentPolicy = {
   }
   @module("@aws-sdk/client-imagebuilder") @new
   external new: request => t = "PutComponentPolicyCommand"
-  let make = (~policy, ~componentArn, ()) => new({policy: policy, componentArn: componentArn})
+  let make = (~policy, ~componentArn, ()) => new({policy, componentArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetImageRecipePolicy = {
   type t
   type request = {
@@ -1261,7 +1254,6 @@ module GetImageRecipePolicy = {
   let make = (~imageRecipeArn, ()) => new({imageRecipeArn: imageRecipeArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetImagePolicy = {
   type t
   type request = {
@@ -1279,7 +1271,6 @@ module GetImagePolicy = {
   let make = (~imageArn, ()) => new({imageArn: imageArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetContainerRecipePolicy = {
   type t
   type request = {
@@ -1299,7 +1290,6 @@ module GetContainerRecipePolicy = {
   let make = (~containerRecipeArn, ()) => new({containerRecipeArn: containerRecipeArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetComponentPolicy = {
   type t
   type request = {
@@ -1318,7 +1308,6 @@ module GetComponentPolicy = {
   let make = (~componentArn, ()) => new({componentArn: componentArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteInfrastructureConfiguration = {
   type t
   type request = {
@@ -1341,7 +1330,6 @@ module DeleteInfrastructureConfiguration = {
     new({infrastructureConfigurationArn: infrastructureConfigurationArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteImageRecipe = {
   type t
   type request = {
@@ -1359,7 +1347,6 @@ module DeleteImageRecipe = {
   let make = (~imageRecipeArn, ()) => new({imageRecipeArn: imageRecipeArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteImagePipeline = {
   type t
   type request = {
@@ -1377,7 +1364,6 @@ module DeleteImagePipeline = {
   let make = (~imagePipelineArn, ()) => new({imagePipelineArn: imagePipelineArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteImage = {
   type t
   type request = {
@@ -1398,7 +1384,6 @@ module DeleteImage = {
   let make = (~imageBuildVersionArn, ()) => new({imageBuildVersionArn: imageBuildVersionArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteDistributionConfiguration = {
   type t
   type request = {
@@ -1419,7 +1404,6 @@ module DeleteDistributionConfiguration = {
     new({distributionConfigurationArn: distributionConfigurationArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteContainerRecipe = {
   type t
   type request = {
@@ -1437,7 +1421,6 @@ module DeleteContainerRecipe = {
   let make = (~containerRecipeArn, ()) => new({containerRecipeArn: containerRecipeArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteComponent = {
   type t
   type request = {
@@ -1457,7 +1440,6 @@ module DeleteComponent = {
     new({componentBuildVersionArn: componentBuildVersionArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CancelImageCreation = {
   type t
   type request = {
@@ -1482,11 +1464,9 @@ module CancelImageCreation = {
   }
   @module("@aws-sdk/client-imagebuilder") @new
   external new: request => t = "CancelImageCreationCommand"
-  let make = (~clientToken, ~imageBuildVersionArn, ()) =>
-    new({clientToken: clientToken, imageBuildVersionArn: imageBuildVersionArn})
+  let make = (~clientToken, ~imageBuildVersionArn, ()) => new({clientToken, imageBuildVersionArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateImagePipeline = {
   type t
   type request = {
@@ -1544,21 +1524,20 @@ module UpdateImagePipeline = {
     (),
   ) =>
     new({
-      clientToken: clientToken,
-      status: status,
-      schedule: schedule,
-      enhancedImageMetadataEnabled: enhancedImageMetadataEnabled,
-      imageTestsConfiguration: imageTestsConfiguration,
-      distributionConfigurationArn: distributionConfigurationArn,
-      infrastructureConfigurationArn: infrastructureConfigurationArn,
-      containerRecipeArn: containerRecipeArn,
-      imageRecipeArn: imageRecipeArn,
-      description: description,
-      imagePipelineArn: imagePipelineArn,
+      clientToken,
+      status,
+      schedule,
+      enhancedImageMetadataEnabled,
+      imageTestsConfiguration,
+      distributionConfigurationArn,
+      infrastructureConfigurationArn,
+      containerRecipeArn,
+      imageRecipeArn,
+      description,
+      imagePipelineArn,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UntagResource = {
   type t
   type request = {
@@ -1568,10 +1547,9 @@ module UntagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-imagebuilder") @new external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
+  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys, resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module TagResource = {
   type t
   type request = {
@@ -1581,10 +1559,9 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-imagebuilder") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
+  let make = (~tags, ~resourceArn, ()) => new({tags, resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module ListTagsForResource = {
   type t
   type request = {
@@ -1599,7 +1576,6 @@ module ListTagsForResource = {
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ImportVmImage = {
   type t
   type request = {
@@ -1658,18 +1634,17 @@ module ImportVmImage = {
     (),
   ) =>
     new({
-      clientToken: clientToken,
-      tags: tags,
-      vmImportTaskId: vmImportTaskId,
-      osVersion: osVersion,
-      platform: platform,
-      description: description,
-      semanticVersion: semanticVersion,
-      name: name,
+      clientToken,
+      tags,
+      vmImportTaskId,
+      osVersion,
+      platform,
+      description,
+      semanticVersion,
+      name,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ImportComponent = {
   type t
   type request = {
@@ -1735,22 +1710,21 @@ module ImportComponent = {
     (),
   ) =>
     new({
-      clientToken: clientToken,
-      tags: tags,
-      kmsKeyId: kmsKeyId,
-      uri: uri,
-      data: data,
-      platform: platform,
-      format: format,
-      type_: type_,
-      changeDescription: changeDescription,
-      description: description,
-      semanticVersion: semanticVersion,
-      name: name,
+      clientToken,
+      tags,
+      kmsKeyId,
+      uri,
+      data,
+      platform,
+      format,
+      type_,
+      changeDescription,
+      description,
+      semanticVersion,
+      name,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateImagePipeline = {
   type t
   type request = {
@@ -1810,22 +1784,21 @@ module CreateImagePipeline = {
     (),
   ) =>
     new({
-      clientToken: clientToken,
-      tags: tags,
-      status: status,
-      schedule: schedule,
-      enhancedImageMetadataEnabled: enhancedImageMetadataEnabled,
-      imageTestsConfiguration: imageTestsConfiguration,
-      distributionConfigurationArn: distributionConfigurationArn,
-      infrastructureConfigurationArn: infrastructureConfigurationArn,
-      containerRecipeArn: containerRecipeArn,
-      imageRecipeArn: imageRecipeArn,
-      description: description,
-      name: name,
+      clientToken,
+      tags,
+      status,
+      schedule,
+      enhancedImageMetadataEnabled,
+      imageTestsConfiguration,
+      distributionConfigurationArn,
+      infrastructureConfigurationArn,
+      containerRecipeArn,
+      imageRecipeArn,
+      description,
+      name,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateImage = {
   type t
   type request = {
@@ -1875,18 +1848,17 @@ module CreateImage = {
     (),
   ) =>
     new({
-      clientToken: clientToken,
-      tags: tags,
-      enhancedImageMetadataEnabled: enhancedImageMetadataEnabled,
-      imageTestsConfiguration: imageTestsConfiguration,
-      infrastructureConfigurationArn: infrastructureConfigurationArn,
-      distributionConfigurationArn: distributionConfigurationArn,
-      containerRecipeArn: containerRecipeArn,
-      imageRecipeArn: imageRecipeArn,
+      clientToken,
+      tags,
+      enhancedImageMetadataEnabled,
+      imageTestsConfiguration,
+      infrastructureConfigurationArn,
+      distributionConfigurationArn,
+      containerRecipeArn,
+      imageRecipeArn,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateComponent = {
   type t
   type request = {
@@ -1957,21 +1929,20 @@ module CreateComponent = {
     (),
   ) =>
     new({
-      clientToken: clientToken,
-      tags: tags,
-      kmsKeyId: kmsKeyId,
-      uri: uri,
-      data: data,
-      supportedOsVersions: supportedOsVersions,
-      platform: platform,
-      changeDescription: changeDescription,
-      description: description,
-      semanticVersion: semanticVersion,
-      name: name,
+      clientToken,
+      tags,
+      kmsKeyId,
+      uri,
+      data,
+      supportedOsVersions,
+      platform,
+      changeDescription,
+      description,
+      semanticVersion,
+      name,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateInfrastructureConfiguration = {
   type t
   type request = {
@@ -2067,23 +2038,22 @@ module UpdateInfrastructureConfiguration = {
     (),
   ) =>
     new({
-      instanceMetadataOptions: instanceMetadataOptions,
-      resourceTags: resourceTags,
-      clientToken: clientToken,
-      snsTopicArn: snsTopicArn,
-      terminateInstanceOnFailure: terminateInstanceOnFailure,
-      keyPair: keyPair,
-      logging: logging,
-      subnetId: subnetId,
-      securityGroupIds: securityGroupIds,
-      instanceProfileName: instanceProfileName,
-      instanceTypes: instanceTypes,
-      description: description,
-      infrastructureConfigurationArn: infrastructureConfigurationArn,
+      instanceMetadataOptions,
+      resourceTags,
+      clientToken,
+      snsTopicArn,
+      terminateInstanceOnFailure,
+      keyPair,
+      logging,
+      subnetId,
+      securityGroupIds,
+      instanceProfileName,
+      instanceTypes,
+      description,
+      infrastructureConfigurationArn,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListImagePackages = {
   type t
   type request = {
@@ -2113,10 +2083,9 @@ module ListImagePackages = {
   @module("@aws-sdk/client-imagebuilder") @new
   external new: request => t = "ListImagePackagesCommand"
   let make = (~imageBuildVersionArn, ~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken: nextToken, maxResults: maxResults, imageBuildVersionArn: imageBuildVersionArn})
+    new({nextToken, maxResults, imageBuildVersionArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetImagePipeline = {
   type t
   type request = {
@@ -2135,7 +2104,6 @@ module GetImagePipeline = {
   let make = (~imagePipelineArn, ()) => new({imagePipelineArn: imagePipelineArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateInfrastructureConfiguration = {
   type t
   type request = {
@@ -2212,24 +2180,23 @@ module CreateInfrastructureConfiguration = {
     (),
   ) =>
     new({
-      clientToken: clientToken,
-      tags: tags,
-      instanceMetadataOptions: instanceMetadataOptions,
-      resourceTags: resourceTags,
-      snsTopicArn: snsTopicArn,
-      terminateInstanceOnFailure: terminateInstanceOnFailure,
-      keyPair: keyPair,
-      logging: logging,
-      subnetId: subnetId,
-      securityGroupIds: securityGroupIds,
-      instanceProfileName: instanceProfileName,
-      instanceTypes: instanceTypes,
-      description: description,
-      name: name,
+      clientToken,
+      tags,
+      instanceMetadataOptions,
+      resourceTags,
+      snsTopicArn,
+      terminateInstanceOnFailure,
+      keyPair,
+      logging,
+      subnetId,
+      securityGroupIds,
+      instanceProfileName,
+      instanceTypes,
+      description,
+      name,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListInfrastructureConfigurations = {
   type t
   type request = {
@@ -2253,11 +2220,9 @@ module ListInfrastructureConfigurations = {
   }
   @module("@aws-sdk/client-imagebuilder") @new
   external new: request => t = "ListInfrastructureConfigurationsCommand"
-  let make = (~nextToken=?, ~maxResults=?, ~filters=?, ()) =>
-    new({nextToken: nextToken, maxResults: maxResults, filters: filters})
+  let make = (~nextToken=?, ~maxResults=?, ~filters=?, ()) => new({nextToken, maxResults, filters})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListImages = {
   type t
   type request = {
@@ -2333,18 +2298,9 @@ module ListImages = {
     ~filters=?,
     ~owner=?,
     (),
-  ) =>
-    new({
-      includeDeprecated: includeDeprecated,
-      nextToken: nextToken,
-      maxResults: maxResults,
-      byName: byName,
-      filters: filters,
-      owner: owner,
-    })
+  ) => new({includeDeprecated, nextToken, maxResults, byName, filters, owner})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListImageRecipes = {
   type t
   type request = {
@@ -2391,10 +2347,9 @@ module ListImageRecipes = {
   @module("@aws-sdk/client-imagebuilder") @new
   external new: request => t = "ListImageRecipesCommand"
   let make = (~nextToken=?, ~maxResults=?, ~filters=?, ~owner=?, ()) =>
-    new({nextToken: nextToken, maxResults: maxResults, filters: filters, owner: owner})
+    new({nextToken, maxResults, filters, owner})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListImagePipelines = {
   type t
   type request = {
@@ -2449,11 +2404,9 @@ module ListImagePipelines = {
   }
   @module("@aws-sdk/client-imagebuilder") @new
   external new: request => t = "ListImagePipelinesCommand"
-  let make = (~nextToken=?, ~maxResults=?, ~filters=?, ()) =>
-    new({nextToken: nextToken, maxResults: maxResults, filters: filters})
+  let make = (~nextToken=?, ~maxResults=?, ~filters=?, ()) => new({nextToken, maxResults, filters})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListDistributionConfigurations = {
   type t
   type request = {
@@ -2477,11 +2430,9 @@ module ListDistributionConfigurations = {
   }
   @module("@aws-sdk/client-imagebuilder") @new
   external new: request => t = "ListDistributionConfigurationsCommand"
-  let make = (~nextToken=?, ~maxResults=?, ~filters=?, ()) =>
-    new({nextToken: nextToken, maxResults: maxResults, filters: filters})
+  let make = (~nextToken=?, ~maxResults=?, ~filters=?, ()) => new({nextToken, maxResults, filters})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListContainerRecipes = {
   type t
   type request = {
@@ -2533,10 +2484,9 @@ module ListContainerRecipes = {
   @module("@aws-sdk/client-imagebuilder") @new
   external new: request => t = "ListContainerRecipesCommand"
   let make = (~nextToken=?, ~maxResults=?, ~filters=?, ~owner=?, ()) =>
-    new({nextToken: nextToken, maxResults: maxResults, filters: filters, owner: owner})
+    new({nextToken, maxResults, filters, owner})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListComponents = {
   type t
   type request = {
@@ -2603,16 +2553,9 @@ module ListComponents = {
   }
   @module("@aws-sdk/client-imagebuilder") @new external new: request => t = "ListComponentsCommand"
   let make = (~nextToken=?, ~maxResults=?, ~byName=?, ~filters=?, ~owner=?, ()) =>
-    new({
-      nextToken: nextToken,
-      maxResults: maxResults,
-      byName: byName,
-      filters: filters,
-      owner: owner,
-    })
+    new({nextToken, maxResults, byName, filters, owner})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListComponentBuildVersions = {
   type t
   type request = {
@@ -2639,10 +2582,9 @@ module ListComponentBuildVersions = {
   @module("@aws-sdk/client-imagebuilder") @new
   external new: request => t = "ListComponentBuildVersionsCommand"
   let make = (~componentVersionArn, ~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken: nextToken, maxResults: maxResults, componentVersionArn: componentVersionArn})
+    new({nextToken, maxResults, componentVersionArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetInfrastructureConfiguration = {
   type t
   @ocaml.doc("<p> GetInfrastructureConfiguration request object.</p>")
@@ -2664,7 +2606,6 @@ module GetInfrastructureConfiguration = {
     new({infrastructureConfigurationArn: infrastructureConfigurationArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetComponent = {
   type t
   type request = {
@@ -2683,7 +2624,6 @@ module GetComponent = {
     new({componentBuildVersionArn: componentBuildVersionArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateDistributionConfiguration = {
   type t
   type request = {
@@ -2710,15 +2650,9 @@ module UpdateDistributionConfiguration = {
   @module("@aws-sdk/client-imagebuilder") @new
   external new: request => t = "UpdateDistributionConfigurationCommand"
   let make = (~clientToken, ~distributions, ~distributionConfigurationArn, ~description=?, ()) =>
-    new({
-      clientToken: clientToken,
-      distributions: distributions,
-      description: description,
-      distributionConfigurationArn: distributionConfigurationArn,
-    })
+    new({clientToken, distributions, description, distributionConfigurationArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateImageRecipe = {
   type t
   type request = {
@@ -2782,20 +2716,19 @@ module CreateImageRecipe = {
     (),
   ) =>
     new({
-      clientToken: clientToken,
-      additionalInstanceConfiguration: additionalInstanceConfiguration,
-      workingDirectory: workingDirectory,
-      tags: tags,
-      blockDeviceMappings: blockDeviceMappings,
-      parentImage: parentImage,
-      components: components,
-      semanticVersion: semanticVersion,
-      description: description,
-      name: name,
+      clientToken,
+      additionalInstanceConfiguration,
+      workingDirectory,
+      tags,
+      blockDeviceMappings,
+      parentImage,
+      components,
+      semanticVersion,
+      description,
+      name,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateDistributionConfiguration = {
   type t
   type request = {
@@ -2820,16 +2753,9 @@ module CreateDistributionConfiguration = {
   @module("@aws-sdk/client-imagebuilder") @new
   external new: request => t = "CreateDistributionConfigurationCommand"
   let make = (~clientToken, ~distributions, ~name, ~tags=?, ~description=?, ()) =>
-    new({
-      clientToken: clientToken,
-      tags: tags,
-      distributions: distributions,
-      description: description,
-      name: name,
-    })
+    new({clientToken, tags, distributions, description, name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateContainerRecipe = {
   type t
   type request = {
@@ -2910,26 +2836,25 @@ module CreateContainerRecipe = {
     (),
   ) =>
     new({
-      clientToken: clientToken,
-      kmsKeyId: kmsKeyId,
-      targetRepository: targetRepository,
-      workingDirectory: workingDirectory,
-      tags: tags,
-      parentImage: parentImage,
-      imageOsVersionOverride: imageOsVersionOverride,
-      platformOverride: platformOverride,
-      dockerfileTemplateUri: dockerfileTemplateUri,
-      dockerfileTemplateData: dockerfileTemplateData,
-      instanceConfiguration: instanceConfiguration,
-      components: components,
-      semanticVersion: semanticVersion,
-      description: description,
-      name: name,
-      containerType: containerType,
+      clientToken,
+      kmsKeyId,
+      targetRepository,
+      workingDirectory,
+      tags,
+      parentImage,
+      imageOsVersionOverride,
+      platformOverride,
+      dockerfileTemplateUri,
+      dockerfileTemplateData,
+      instanceConfiguration,
+      components,
+      semanticVersion,
+      description,
+      name,
+      containerType,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListImagePipelineImages = {
   type t
   type request = {
@@ -2970,15 +2895,9 @@ module ListImagePipelineImages = {
   @module("@aws-sdk/client-imagebuilder") @new
   external new: request => t = "ListImagePipelineImagesCommand"
   let make = (~imagePipelineArn, ~nextToken=?, ~maxResults=?, ~filters=?, ()) =>
-    new({
-      nextToken: nextToken,
-      maxResults: maxResults,
-      filters: filters,
-      imagePipelineArn: imagePipelineArn,
-    })
+    new({nextToken, maxResults, filters, imagePipelineArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListImageBuildVersions = {
   type t
   type request = {
@@ -3034,15 +2953,9 @@ module ListImageBuildVersions = {
   @module("@aws-sdk/client-imagebuilder") @new
   external new: request => t = "ListImageBuildVersionsCommand"
   let make = (~imageVersionArn, ~nextToken=?, ~maxResults=?, ~filters=?, ()) =>
-    new({
-      nextToken: nextToken,
-      maxResults: maxResults,
-      filters: filters,
-      imageVersionArn: imageVersionArn,
-    })
+    new({nextToken, maxResults, filters, imageVersionArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetImageRecipe = {
   type t
   type request = {
@@ -3060,7 +2973,6 @@ module GetImageRecipe = {
   let make = (~imageRecipeArn, ()) => new({imageRecipeArn: imageRecipeArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetDistributionConfiguration = {
   type t
   type request = {
@@ -3080,7 +2992,6 @@ module GetDistributionConfiguration = {
     new({distributionConfigurationArn: distributionConfigurationArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetContainerRecipe = {
   type t
   type request = {
@@ -3098,7 +3009,6 @@ module GetContainerRecipe = {
   let make = (~containerRecipeArn, ()) => new({containerRecipeArn: containerRecipeArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetImage = {
   type t
   type request = {

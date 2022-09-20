@@ -315,11 +315,9 @@ module UnshareApplication = {
   type response = {.}
   @module("@aws-sdk/client-serverlessrepo") @new
   external new: request => t = "UnshareApplicationCommand"
-  let make = (~organizationId, ~applicationId, ()) =>
-    new({organizationId: organizationId, applicationId: applicationId})
+  let make = (~organizationId, ~applicationId, ()) => new({organizationId, applicationId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module GetCloudFormationTemplate = {
   type t
   type request = {
@@ -361,11 +359,9 @@ module GetCloudFormationTemplate = {
   }
   @module("@aws-sdk/client-serverlessrepo") @new
   external new: request => t = "GetCloudFormationTemplateCommand"
-  let make = (~templateId, ~applicationId, ()) =>
-    new({templateId: templateId, applicationId: applicationId})
+  let make = (~templateId, ~applicationId, ()) => new({templateId, applicationId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteApplication = {
   type t
   type request = {
@@ -378,7 +374,6 @@ module DeleteApplication = {
   let make = (~applicationId, ()) => new({applicationId: applicationId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module CreateCloudFormationTemplate = {
   type t
   type request = {
@@ -420,11 +415,9 @@ module CreateCloudFormationTemplate = {
   }
   @module("@aws-sdk/client-serverlessrepo") @new
   external new: request => t = "CreateCloudFormationTemplateCommand"
-  let make = (~applicationId, ~semanticVersion=?, ()) =>
-    new({semanticVersion: semanticVersion, applicationId: applicationId})
+  let make = (~applicationId, ~semanticVersion=?, ()) => new({semanticVersion, applicationId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListApplicationVersions = {
   type t
   type request = {
@@ -444,10 +437,9 @@ module ListApplicationVersions = {
   @module("@aws-sdk/client-serverlessrepo") @new
   external new: request => t = "ListApplicationVersionsCommand"
   let make = (~applicationId, ~nextToken=?, ~maxItems=?, ()) =>
-    new({nextToken: nextToken, maxItems: maxItems, applicationId: applicationId})
+    new({nextToken, maxItems, applicationId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListApplicationDependencies = {
   type t
   type request = {
@@ -470,15 +462,9 @@ module ListApplicationDependencies = {
   @module("@aws-sdk/client-serverlessrepo") @new
   external new: request => t = "ListApplicationDependenciesCommand"
   let make = (~applicationId, ~semanticVersion=?, ~nextToken=?, ~maxItems=?, ()) =>
-    new({
-      semanticVersion: semanticVersion,
-      nextToken: nextToken,
-      maxItems: maxItems,
-      applicationId: applicationId,
-    })
+    new({semanticVersion, nextToken, maxItems, applicationId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module PutApplicationPolicy = {
   type t
   type request = {
@@ -493,11 +479,9 @@ module PutApplicationPolicy = {
   }
   @module("@aws-sdk/client-serverlessrepo") @new
   external new: request => t = "PutApplicationPolicyCommand"
-  let make = (~statements, ~applicationId, ()) =>
-    new({statements: statements, applicationId: applicationId})
+  let make = (~statements, ~applicationId, ()) => new({statements, applicationId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListApplications = {
   type t
   type request = {
@@ -514,10 +498,9 @@ module ListApplications = {
   }
   @module("@aws-sdk/client-serverlessrepo") @new
   external new: request => t = "ListApplicationsCommand"
-  let make = (~nextToken=?, ~maxItems=?, ()) => new({nextToken: nextToken, maxItems: maxItems})
+  let make = (~nextToken=?, ~maxItems=?, ()) => new({nextToken, maxItems})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetApplicationPolicy = {
   type t
   type request = {
@@ -533,7 +516,6 @@ module GetApplicationPolicy = {
   let make = (~applicationId, ()) => new({applicationId: applicationId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateCloudFormationChangeSet = {
   type t
   type request = {
@@ -644,23 +626,22 @@ module CreateCloudFormationChangeSet = {
     (),
   ) =>
     new({
-      templateId: templateId,
-      tags: tags,
-      stackName: stackName,
-      semanticVersion: semanticVersion,
-      rollbackConfiguration: rollbackConfiguration,
-      resourceTypes: resourceTypes,
-      parameterOverrides: parameterOverrides,
-      notificationArns: notificationArns,
-      description: description,
-      clientToken: clientToken,
-      changeSetName: changeSetName,
-      capabilities: capabilities,
-      applicationId: applicationId,
+      templateId,
+      tags,
+      stackName,
+      semanticVersion,
+      rollbackConfiguration,
+      resourceTypes,
+      parameterOverrides,
+      notificationArns,
+      description,
+      clientToken,
+      changeSetName,
+      capabilities,
+      applicationId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateApplicationVersion = {
   type t
   type request = {
@@ -752,16 +733,15 @@ module CreateApplicationVersion = {
     (),
   ) =>
     new({
-      templateUrl: templateUrl,
-      templateBody: templateBody,
-      sourceCodeUrl: sourceCodeUrl,
-      sourceCodeArchiveUrl: sourceCodeArchiveUrl,
-      semanticVersion: semanticVersion,
-      applicationId: applicationId,
+      templateUrl,
+      templateBody,
+      sourceCodeUrl,
+      sourceCodeArchiveUrl,
+      semanticVersion,
+      applicationId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateApplication = {
   type t
   type request = {
@@ -864,19 +844,9 @@ module UpdateApplication = {
     ~description=?,
     ~author=?,
     (),
-  ) =>
-    new({
-      readmeUrl: readmeUrl,
-      readmeBody: readmeBody,
-      labels: labels,
-      homePageUrl: homePageUrl,
-      description: description,
-      author: author,
-      applicationId: applicationId,
-    })
+  ) => new({readmeUrl, readmeBody, labels, homePageUrl, description, author, applicationId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetApplication = {
   type t
   type request = {
@@ -942,11 +912,9 @@ module GetApplication = {
   }
   @module("@aws-sdk/client-serverlessrepo") @new
   external new: request => t = "GetApplicationCommand"
-  let make = (~applicationId, ~semanticVersion=?, ()) =>
-    new({semanticVersion: semanticVersion, applicationId: applicationId})
+  let make = (~applicationId, ~semanticVersion=?, ()) => new({semanticVersion, applicationId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateApplication = {
   type t
   type request = {
@@ -1099,21 +1067,21 @@ module CreateApplication = {
     (),
   ) =>
     new({
-      templateUrl: templateUrl,
-      templateBody: templateBody,
-      spdxLicenseId: spdxLicenseId,
-      sourceCodeUrl: sourceCodeUrl,
-      sourceCodeArchiveUrl: sourceCodeArchiveUrl,
-      semanticVersion: semanticVersion,
-      readmeUrl: readmeUrl,
-      readmeBody: readmeBody,
-      name: name,
-      licenseUrl: licenseUrl,
-      licenseBody: licenseBody,
-      labels: labels,
-      homePageUrl: homePageUrl,
-      description: description,
-      author: author,
+      templateUrl,
+      templateBody,
+      spdxLicenseId,
+      sourceCodeUrl,
+      sourceCodeArchiveUrl,
+      semanticVersion,
+      readmeUrl,
+      readmeBody,
+      name,
+      licenseUrl,
+      licenseBody,
+      labels,
+      homePageUrl,
+      description,
+      author,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

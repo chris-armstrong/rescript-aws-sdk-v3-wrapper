@@ -459,15 +459,9 @@ module GetShardIterator = {
   }
   @module("@aws-sdk/client-dynamodb") @new external new: request => t = "GetShardIteratorCommand"
   let make = (~shardIteratorType, ~shardId, ~streamArn, ~sequenceNumber=?, ()) =>
-    new({
-      sequenceNumber: sequenceNumber,
-      shardIteratorType: shardIteratorType,
-      shardId: shardId,
-      streamArn: streamArn,
-    })
+    new({sequenceNumber, shardIteratorType, shardId, streamArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListStreams = {
   type t
   @ocaml.doc("<p>Represents the input of a <code>ListStreams</code> operation.</p>")
@@ -504,10 +498,9 @@ module ListStreams = {
   }
   @module("@aws-sdk/client-dynamodb") @new external new: request => t = "ListStreamsCommand"
   let make = (~exclusiveStartStreamArn=?, ~limit=?, ~tableName=?, ()) =>
-    new({exclusiveStartStreamArn: exclusiveStartStreamArn, limit: limit, tableName: tableName})
+    new({exclusiveStartStreamArn, limit, tableName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeStream = {
   type t
   @ocaml.doc("<p>Represents the input of a <code>DescribeStream</code> operation.</p>")
@@ -532,10 +525,9 @@ module DescribeStream = {
   }
   @module("@aws-sdk/client-dynamodb") @new external new: request => t = "DescribeStreamCommand"
   let make = (~streamArn, ~exclusiveStartShardId=?, ~limit=?, ()) =>
-    new({exclusiveStartShardId: exclusiveStartShardId, limit: limit, streamArn: streamArn})
+    new({exclusiveStartShardId, limit, streamArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetRecords = {
   type t
   @ocaml.doc("<p>Represents the input of a <code>GetRecords</code> operation.</p>")
@@ -565,6 +557,6 @@ module GetRecords = {
     records: option<recordList>,
   }
   @module("@aws-sdk/client-dynamodb") @new external new: request => t = "GetRecordsCommand"
-  let make = (~shardIterator, ~limit=?, ()) => new({limit: limit, shardIterator: shardIterator})
+  let make = (~shardIterator, ~limit=?, ()) => new({limit, shardIterator})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

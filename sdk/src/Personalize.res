@@ -1299,7 +1299,6 @@ module StopSolutionVersionCreation = {
   let make = (~solutionVersionArn, ()) => new({solutionVersionArn: solutionVersionArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteSolution = {
   type t
   type request = {@ocaml.doc("<p>The ARN of the solution to delete.</p>") solutionArn: arn}
@@ -1308,7 +1307,6 @@ module DeleteSolution = {
   let make = (~solutionArn, ()) => new({solutionArn: solutionArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteSchema = {
   type t
   type request = {
@@ -1319,7 +1317,6 @@ module DeleteSchema = {
   let make = (~schemaArn, ()) => new({schemaArn: schemaArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteRecommender = {
   type t
   type request = {
@@ -1332,7 +1329,6 @@ module DeleteRecommender = {
   let make = (~recommenderArn, ()) => new({recommenderArn: recommenderArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteFilter = {
   type t
   type request = {@ocaml.doc("<p>The ARN of the filter to delete.</p>") filterArn: arn}
@@ -1341,7 +1337,6 @@ module DeleteFilter = {
   let make = (~filterArn, ()) => new({filterArn: filterArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteEventTracker = {
   type t
   type request = {
@@ -1354,7 +1349,6 @@ module DeleteEventTracker = {
   let make = (~eventTrackerArn, ()) => new({eventTrackerArn: eventTrackerArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteDatasetGroup = {
   type t
   type request = {@ocaml.doc("<p>The ARN of the dataset group to delete.</p>") datasetGroupArn: arn}
@@ -1364,7 +1358,6 @@ module DeleteDatasetGroup = {
   let make = (~datasetGroupArn, ()) => new({datasetGroupArn: datasetGroupArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteDataset = {
   type t
   type request = {
@@ -1375,7 +1368,6 @@ module DeleteDataset = {
   let make = (~datasetArn, ()) => new({datasetArn: datasetArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteCampaign = {
   type t
   type request = {
@@ -1386,7 +1378,6 @@ module DeleteCampaign = {
   let make = (~campaignArn, ()) => new({campaignArn: campaignArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module CreateSolutionVersion = {
   type t
   type request = {
@@ -1413,11 +1404,9 @@ module CreateSolutionVersion = {
   }
   @module("@aws-sdk/client-personalize") @new
   external new: request => t = "CreateSolutionVersionCommand"
-  let make = (~solutionArn, ~trainingMode=?, ()) =>
-    new({trainingMode: trainingMode, solutionArn: solutionArn})
+  let make = (~solutionArn, ~trainingMode=?, ()) => new({trainingMode, solutionArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateSchema = {
   type t
   type request = {
@@ -1432,10 +1421,9 @@ module CreateSchema = {
     schemaArn: option<arn>,
   }
   @module("@aws-sdk/client-personalize") @new external new: request => t = "CreateSchemaCommand"
-  let make = (~schema, ~name, ~domain=?, ()) => new({domain: domain, schema: schema, name: name})
+  let make = (~schema, ~name, ~domain=?, ()) => new({domain, schema, name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateFilter = {
   type t
   type request = {
@@ -1450,10 +1438,9 @@ module CreateFilter = {
   type response = {@ocaml.doc("<p>The ARN of the new filter.</p>") filterArn: option<arn>}
   @module("@aws-sdk/client-personalize") @new external new: request => t = "CreateFilterCommand"
   let make = (~filterExpression, ~datasetGroupArn, ~name, ()) =>
-    new({filterExpression: filterExpression, datasetGroupArn: datasetGroupArn, name: name})
+    new({filterExpression, datasetGroupArn, name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateEventTracker = {
   type t
   type request = {
@@ -1471,10 +1458,9 @@ module CreateEventTracker = {
   }
   @module("@aws-sdk/client-personalize") @new
   external new: request => t = "CreateEventTrackerCommand"
-  let make = (~datasetGroupArn, ~name, ()) => new({datasetGroupArn: datasetGroupArn, name: name})
+  let make = (~datasetGroupArn, ~name, ()) => new({datasetGroupArn, name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateDatasetGroup = {
   type t
   type request = {
@@ -1500,10 +1486,9 @@ module CreateDatasetGroup = {
   @module("@aws-sdk/client-personalize") @new
   external new: request => t = "CreateDatasetGroupCommand"
   let make = (~name, ~domain=?, ~kmsKeyArn=?, ~roleArn=?, ()) =>
-    new({domain: domain, kmsKeyArn: kmsKeyArn, roleArn: roleArn, name: name})
+    new({domain, kmsKeyArn, roleArn, name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateDataset = {
   type t
   type request = {
@@ -1531,15 +1516,9 @@ module CreateDataset = {
   type response = {@ocaml.doc("<p>The ARN of the dataset.</p>") datasetArn: option<arn>}
   @module("@aws-sdk/client-personalize") @new external new: request => t = "CreateDatasetCommand"
   let make = (~datasetType, ~datasetGroupArn, ~schemaArn, ~name, ()) =>
-    new({
-      datasetType: datasetType,
-      datasetGroupArn: datasetGroupArn,
-      schemaArn: schemaArn,
-      name: name,
-    })
+    new({datasetType, datasetGroupArn, schemaArn, name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetSolutionMetrics = {
   type t
   type request = {
@@ -1558,7 +1537,6 @@ module GetSolutionMetrics = {
   let make = (~solutionVersionArn, ()) => new({solutionVersionArn: solutionVersionArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeSchema = {
   type t
   type request = {
@@ -1569,7 +1547,6 @@ module DescribeSchema = {
   let make = (~schemaArn, ()) => new({schemaArn: schemaArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeRecipe = {
   type t
   type request = {
@@ -1580,7 +1557,6 @@ module DescribeRecipe = {
   let make = (~recipeArn, ()) => new({recipeArn: recipeArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeFilter = {
   type t
   type request = {@ocaml.doc("<p>The ARN of the filter to describe.</p>") filterArn: arn}
@@ -1589,7 +1565,6 @@ module DescribeFilter = {
   let make = (~filterArn, ()) => new({filterArn: filterArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeEventTracker = {
   type t
   type request = {
@@ -1605,7 +1580,6 @@ module DescribeEventTracker = {
   let make = (~eventTrackerArn, ()) => new({eventTrackerArn: eventTrackerArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeDatasetGroup = {
   type t
   type request = {
@@ -1621,7 +1595,6 @@ module DescribeDatasetGroup = {
   let make = (~datasetGroupArn, ()) => new({datasetGroupArn: datasetGroupArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeDataset = {
   type t
   type request = {
@@ -1634,7 +1607,6 @@ module DescribeDataset = {
   let make = (~datasetArn, ()) => new({datasetArn: datasetArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateDatasetImportJob = {
   type t
   type request = {
@@ -1653,10 +1625,9 @@ module CreateDatasetImportJob = {
   @module("@aws-sdk/client-personalize") @new
   external new: request => t = "CreateDatasetImportJobCommand"
   let make = (~roleArn, ~dataSource, ~datasetArn, ~jobName, ()) =>
-    new({roleArn: roleArn, dataSource: dataSource, datasetArn: datasetArn, jobName: jobName})
+    new({roleArn, dataSource, datasetArn, jobName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateRecommender = {
   type t
   type request = {
@@ -1671,11 +1642,9 @@ module UpdateRecommender = {
   }
   @module("@aws-sdk/client-personalize") @new
   external new: request => t = "UpdateRecommenderCommand"
-  let make = (~recommenderConfig, ~recommenderArn, ()) =>
-    new({recommenderConfig: recommenderConfig, recommenderArn: recommenderArn})
+  let make = (~recommenderConfig, ~recommenderArn, ()) => new({recommenderConfig, recommenderArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateCampaign = {
   type t
   type request = {
@@ -1693,15 +1662,9 @@ module UpdateCampaign = {
   }
   @module("@aws-sdk/client-personalize") @new external new: request => t = "UpdateCampaignCommand"
   let make = (~campaignArn, ~campaignConfig=?, ~minProvisionedTPS=?, ~solutionVersionArn=?, ()) =>
-    new({
-      campaignConfig: campaignConfig,
-      minProvisionedTPS: minProvisionedTPS,
-      solutionVersionArn: solutionVersionArn,
-      campaignArn: campaignArn,
-    })
+    new({campaignConfig, minProvisionedTPS, solutionVersionArn, campaignArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListSolutions = {
   type t
   type request = {
@@ -1719,10 +1682,9 @@ module ListSolutions = {
   }
   @module("@aws-sdk/client-personalize") @new external new: request => t = "ListSolutionsCommand"
   let make = (~maxResults=?, ~nextToken=?, ~datasetGroupArn=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, datasetGroupArn: datasetGroupArn})
+    new({maxResults, nextToken, datasetGroupArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListSolutionVersions = {
   type t
   type request = {
@@ -1742,10 +1704,9 @@ module ListSolutionVersions = {
   @module("@aws-sdk/client-personalize") @new
   external new: request => t = "ListSolutionVersionsCommand"
   let make = (~maxResults=?, ~nextToken=?, ~solutionArn=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, solutionArn: solutionArn})
+    new({maxResults, nextToken, solutionArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListSchemas = {
   type t
   type request = {
@@ -1760,11 +1721,9 @@ module ListSchemas = {
     @ocaml.doc("<p>A list of schemas.</p>") schemas: option<schemas>,
   }
   @module("@aws-sdk/client-personalize") @new external new: request => t = "ListSchemasCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListRecipes = {
   type t
   type request = {
@@ -1786,15 +1745,9 @@ module ListRecipes = {
   }
   @module("@aws-sdk/client-personalize") @new external new: request => t = "ListRecipesCommand"
   let make = (~domain=?, ~maxResults=?, ~nextToken=?, ~recipeProvider=?, ()) =>
-    new({
-      domain: domain,
-      maxResults: maxResults,
-      nextToken: nextToken,
-      recipeProvider: recipeProvider,
-    })
+    new({domain, maxResults, nextToken, recipeProvider})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListFilters = {
   type t
   type request = {
@@ -1812,10 +1765,9 @@ module ListFilters = {
   }
   @module("@aws-sdk/client-personalize") @new external new: request => t = "ListFiltersCommand"
   let make = (~maxResults=?, ~nextToken=?, ~datasetGroupArn=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, datasetGroupArn: datasetGroupArn})
+    new({maxResults, nextToken, datasetGroupArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListEventTrackers = {
   type t
   type request = {
@@ -1835,10 +1787,9 @@ module ListEventTrackers = {
   @module("@aws-sdk/client-personalize") @new
   external new: request => t = "ListEventTrackersCommand"
   let make = (~maxResults=?, ~nextToken=?, ~datasetGroupArn=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, datasetGroupArn: datasetGroupArn})
+    new({maxResults, nextToken, datasetGroupArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListDatasets = {
   type t
   type request = {
@@ -1859,10 +1810,9 @@ module ListDatasets = {
   }
   @module("@aws-sdk/client-personalize") @new external new: request => t = "ListDatasetsCommand"
   let make = (~maxResults=?, ~nextToken=?, ~datasetGroupArn=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, datasetGroupArn: datasetGroupArn})
+    new({maxResults, nextToken, datasetGroupArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListDatasetImportJobs = {
   type t
   type request = {
@@ -1885,10 +1835,9 @@ module ListDatasetImportJobs = {
   @module("@aws-sdk/client-personalize") @new
   external new: request => t = "ListDatasetImportJobsCommand"
   let make = (~maxResults=?, ~nextToken=?, ~datasetArn=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, datasetArn: datasetArn})
+    new({maxResults, nextToken, datasetArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListDatasetGroups = {
   type t
   type request = {
@@ -1905,11 +1854,9 @@ module ListDatasetGroups = {
   }
   @module("@aws-sdk/client-personalize") @new
   external new: request => t = "ListDatasetGroupsCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListDatasetExportJobs = {
   type t
   type request = {
@@ -1932,10 +1879,9 @@ module ListDatasetExportJobs = {
   @module("@aws-sdk/client-personalize") @new
   external new: request => t = "ListDatasetExportJobsCommand"
   let make = (~maxResults=?, ~nextToken=?, ~datasetArn=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, datasetArn: datasetArn})
+    new({maxResults, nextToken, datasetArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListCampaigns = {
   type t
   type request = {
@@ -1954,10 +1900,9 @@ module ListCampaigns = {
   }
   @module("@aws-sdk/client-personalize") @new external new: request => t = "ListCampaignsCommand"
   let make = (~maxResults=?, ~nextToken=?, ~solutionArn=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, solutionArn: solutionArn})
+    new({maxResults, nextToken, solutionArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListBatchSegmentJobs = {
   type t
   type request = {
@@ -1981,10 +1926,9 @@ module ListBatchSegmentJobs = {
   @module("@aws-sdk/client-personalize") @new
   external new: request => t = "ListBatchSegmentJobsCommand"
   let make = (~maxResults=?, ~nextToken=?, ~solutionVersionArn=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, solutionVersionArn: solutionVersionArn})
+    new({maxResults, nextToken, solutionVersionArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListBatchInferenceJobs = {
   type t
   type request = {
@@ -2007,10 +1951,9 @@ module ListBatchInferenceJobs = {
   @module("@aws-sdk/client-personalize") @new
   external new: request => t = "ListBatchInferenceJobsCommand"
   let make = (~maxResults=?, ~nextToken=?, ~solutionVersionArn=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, solutionVersionArn: solutionVersionArn})
+    new({maxResults, nextToken, solutionVersionArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeFeatureTransformation = {
   type t
   type request = {
@@ -2027,7 +1970,6 @@ module DescribeFeatureTransformation = {
     new({featureTransformationArn: featureTransformationArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeDatasetImportJob = {
   type t
   type request = {
@@ -2058,7 +2000,6 @@ module DescribeDatasetImportJob = {
   let make = (~datasetImportJobArn, ()) => new({datasetImportJobArn: datasetImportJobArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateRecommender = {
   type t
   type request = {
@@ -2081,15 +2022,9 @@ module CreateRecommender = {
   @module("@aws-sdk/client-personalize") @new
   external new: request => t = "CreateRecommenderCommand"
   let make = (~recipeArn, ~datasetGroupArn, ~name, ~recommenderConfig=?, ()) =>
-    new({
-      recommenderConfig: recommenderConfig,
-      recipeArn: recipeArn,
-      datasetGroupArn: datasetGroupArn,
-      name: name,
-    })
+    new({recommenderConfig, recipeArn, datasetGroupArn, name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateDatasetExportJob = {
   type t
   type request = {
@@ -2116,16 +2051,9 @@ module CreateDatasetExportJob = {
   @module("@aws-sdk/client-personalize") @new
   external new: request => t = "CreateDatasetExportJobCommand"
   let make = (~jobOutput, ~roleArn, ~datasetArn, ~jobName, ~ingestionMode=?, ()) =>
-    new({
-      jobOutput: jobOutput,
-      roleArn: roleArn,
-      ingestionMode: ingestionMode,
-      datasetArn: datasetArn,
-      jobName: jobName,
-    })
+    new({jobOutput, roleArn, ingestionMode, datasetArn, jobName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateCampaign = {
   type t
   type request = {
@@ -2146,15 +2074,9 @@ module CreateCampaign = {
   }
   @module("@aws-sdk/client-personalize") @new external new: request => t = "CreateCampaignCommand"
   let make = (~solutionVersionArn, ~name, ~campaignConfig=?, ~minProvisionedTPS=?, ()) =>
-    new({
-      campaignConfig: campaignConfig,
-      minProvisionedTPS: minProvisionedTPS,
-      solutionVersionArn: solutionVersionArn,
-      name: name,
-    })
+    new({campaignConfig, minProvisionedTPS, solutionVersionArn, name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateBatchSegmentJob = {
   type t
   type request = {
@@ -2193,19 +2115,9 @@ module CreateBatchSegmentJob = {
     ~numResults=?,
     ~filterArn=?,
     (),
-  ) =>
-    new({
-      roleArn: roleArn,
-      jobOutput: jobOutput,
-      jobInput: jobInput,
-      numResults: numResults,
-      filterArn: filterArn,
-      solutionVersionArn: solutionVersionArn,
-      jobName: jobName,
-    })
+  ) => new({roleArn, jobOutput, jobInput, numResults, filterArn, solutionVersionArn, jobName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateBatchInferenceJob = {
   type t
   type request = {
@@ -2247,18 +2159,17 @@ module CreateBatchInferenceJob = {
     (),
   ) =>
     new({
-      batchInferenceJobConfig: batchInferenceJobConfig,
-      roleArn: roleArn,
-      jobOutput: jobOutput,
-      jobInput: jobInput,
-      numResults: numResults,
-      filterArn: filterArn,
-      solutionVersionArn: solutionVersionArn,
-      jobName: jobName,
+      batchInferenceJobConfig,
+      roleArn,
+      jobOutput,
+      jobInput,
+      numResults,
+      filterArn,
+      solutionVersionArn,
+      jobName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeDatasetExportJob = {
   type t
   type request = {
@@ -2289,7 +2200,6 @@ module DescribeDatasetExportJob = {
   let make = (~datasetExportJobArn, ()) => new({datasetExportJobArn: datasetExportJobArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeBatchSegmentJob = {
   type t
   type request = {
@@ -2304,7 +2214,6 @@ module DescribeBatchSegmentJob = {
   let make = (~batchSegmentJobArn, ()) => new({batchSegmentJobArn: batchSegmentJobArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeBatchInferenceJob = {
   type t
   type request = {
@@ -2319,7 +2228,6 @@ module DescribeBatchInferenceJob = {
   let make = (~batchInferenceJobArn, ()) => new({batchInferenceJobArn: batchInferenceJobArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListRecommenders = {
   type t
   type request = {
@@ -2339,10 +2247,9 @@ module ListRecommenders = {
   }
   @module("@aws-sdk/client-personalize") @new external new: request => t = "ListRecommendersCommand"
   let make = (~maxResults=?, ~nextToken=?, ~datasetGroupArn=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, datasetGroupArn: datasetGroupArn})
+    new({maxResults, nextToken, datasetGroupArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeRecommender = {
   type t
   type request = {
@@ -2357,7 +2264,6 @@ module DescribeRecommender = {
   let make = (~recommenderArn, ()) => new({recommenderArn: recommenderArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeCampaign = {
   type t
   type request = {
@@ -2368,7 +2274,6 @@ module DescribeCampaign = {
   let make = (~campaignArn, ()) => new({campaignArn: campaignArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeAlgorithm = {
   type t
   type request = {
@@ -2383,7 +2288,6 @@ module DescribeAlgorithm = {
   let make = (~algorithmArn, ()) => new({algorithmArn: algorithmArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateSolution = {
   type t
   type request = {
@@ -2434,19 +2338,9 @@ module CreateSolution = {
     ~performAutoML=?,
     ~performHPO=?,
     (),
-  ) =>
-    new({
-      solutionConfig: solutionConfig,
-      eventType: eventType,
-      datasetGroupArn: datasetGroupArn,
-      recipeArn: recipeArn,
-      performAutoML: performAutoML,
-      performHPO: performHPO,
-      name: name,
-    })
+  ) => new({solutionConfig, eventType, datasetGroupArn, recipeArn, performAutoML, performHPO, name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeSolutionVersion = {
   type t
   type request = {
@@ -2461,7 +2355,6 @@ module DescribeSolutionVersion = {
   let make = (~solutionVersionArn, ()) => new({solutionVersionArn: solutionVersionArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeSolution = {
   type t
   type request = {

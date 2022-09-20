@@ -735,10 +735,9 @@ module UpdateResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-lakeformation") @new external new: request => t = "UpdateResourceCommand"
-  let make = (~resourceArn, ~roleArn, ()) => new({resourceArn: resourceArn, roleArn: roleArn})
+  let make = (~resourceArn, ~roleArn, ()) => new({resourceArn, roleArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module StartTransaction = {
   type t
   type request = {
@@ -757,7 +756,6 @@ module StartTransaction = {
   let make = (~transactionType=?, ()) => new({transactionType: transactionType})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module RegisterResource = {
   type t
   type request = {
@@ -776,10 +774,9 @@ module RegisterResource = {
   @module("@aws-sdk/client-lakeformation") @new
   external new: request => t = "RegisterResourceCommand"
   let make = (~resourceArn, ~roleArn=?, ~useServiceLinkedRole=?, ()) =>
-    new({roleArn: roleArn, useServiceLinkedRole: useServiceLinkedRole, resourceArn: resourceArn})
+    new({roleArn, useServiceLinkedRole, resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module GetWorkUnitResults = {
   type t
   type request = {
@@ -807,10 +804,9 @@ module GetWorkUnitResults = {
   @module("@aws-sdk/client-lakeformation") @new
   external new: request => t = "GetWorkUnitResultsCommand"
   let make = (~workUnitToken, ~workUnitId, ~queryId, ()) =>
-    new({workUnitToken: workUnitToken, workUnitId: workUnitId, queryId: queryId})
+    new({workUnitToken, workUnitId, queryId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetQueryState = {
   type t
   type request = {
@@ -844,7 +840,6 @@ module GetQueryState = {
   let make = (~queryId, ()) => new({queryId: queryId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ExtendTransaction = {
   type t
   type request = {
@@ -857,7 +852,6 @@ module ExtendTransaction = {
   let make = (~transactionId=?, ()) => new({transactionId: transactionId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeregisterResource = {
   type t
   type request = {
@@ -871,7 +865,6 @@ module DeregisterResource = {
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteLFTag = {
   type t
   type request = {
@@ -884,10 +877,9 @@ module DeleteLFTag = {
   }
   type response = {.}
   @module("@aws-sdk/client-lakeformation") @new external new: request => t = "DeleteLFTagCommand"
-  let make = (~tagKey, ~catalogId=?, ()) => new({tagKey: tagKey, catalogId: catalogId})
+  let make = (~tagKey, ~catalogId=?, ()) => new({tagKey, catalogId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteDataCellsFilter = {
   type t
   type request = {
@@ -903,15 +895,9 @@ module DeleteDataCellsFilter = {
   @module("@aws-sdk/client-lakeformation") @new
   external new: request => t = "DeleteDataCellsFilterCommand"
   let make = (~name=?, ~tableName=?, ~databaseName=?, ~tableCatalogId=?, ()) =>
-    new({
-      name: name,
-      tableName: tableName,
-      databaseName: databaseName,
-      tableCatalogId: tableCatalogId,
-    })
+    new({name, tableName, databaseName, tableCatalogId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module CommitTransaction = {
   type t
   type request = {
@@ -927,7 +913,6 @@ module CommitTransaction = {
   let make = (~transactionId, ()) => new({transactionId: transactionId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CancelTransaction = {
   type t
   type request = {
@@ -940,7 +925,6 @@ module CancelTransaction = {
   let make = (~transactionId, ()) => new({transactionId: transactionId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module UpdateLFTag = {
   type t
   type request = {
@@ -960,15 +944,9 @@ module UpdateLFTag = {
   type response = {.}
   @module("@aws-sdk/client-lakeformation") @new external new: request => t = "UpdateLFTagCommand"
   let make = (~tagKey, ~tagValuesToAdd=?, ~tagValuesToDelete=?, ~catalogId=?, ()) =>
-    new({
-      tagValuesToAdd: tagValuesToAdd,
-      tagValuesToDelete: tagValuesToDelete,
-      tagKey: tagKey,
-      catalogId: catalogId,
-    })
+    new({tagValuesToAdd, tagValuesToDelete, tagKey, catalogId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module StartQueryPlanning = {
   type t
   type request = {
@@ -989,11 +967,9 @@ module StartQueryPlanning = {
   }
   @module("@aws-sdk/client-lakeformation") @new
   external new: request => t = "StartQueryPlanningCommand"
-  let make = (~queryString, ~queryPlanningContext, ()) =>
-    new({queryString: queryString, queryPlanningContext: queryPlanningContext})
+  let make = (~queryString, ~queryPlanningContext, ()) => new({queryString, queryPlanningContext})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetTemporaryGlueTableCredentials = {
   type t
   type request = {
@@ -1042,17 +1018,9 @@ module GetTemporaryGlueTableCredentials = {
     ~durationSeconds=?,
     ~permissions=?,
     (),
-  ) =>
-    new({
-      supportedPermissionTypes: supportedPermissionTypes,
-      auditContext: auditContext,
-      durationSeconds: durationSeconds,
-      permissions: permissions,
-      tableArn: tableArn,
-    })
+  ) => new({supportedPermissionTypes, auditContext, durationSeconds, permissions, tableArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetQueryStatistics = {
   type t
   type request = {
@@ -1078,7 +1046,6 @@ module GetQueryStatistics = {
   let make = (~queryId, ()) => new({queryId: queryId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetLFTag = {
   type t
   type request = {
@@ -1100,10 +1067,9 @@ module GetLFTag = {
     catalogId: option<catalogIdString>,
   }
   @module("@aws-sdk/client-lakeformation") @new external new: request => t = "GetLFTagCommand"
-  let make = (~tagKey, ~catalogId=?, ()) => new({tagKey: tagKey, catalogId: catalogId})
+  let make = (~tagKey, ~catalogId=?, ()) => new({tagKey, catalogId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeTransaction = {
   type t
   type request = {
@@ -1122,7 +1088,6 @@ module DescribeTransaction = {
   let make = (~transactionId, ()) => new({transactionId: transactionId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeResource = {
   type t
   type request = {
@@ -1138,7 +1103,6 @@ module DescribeResource = {
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateLFTag = {
   type t
   type request = {
@@ -1153,11 +1117,9 @@ module CreateLFTag = {
   }
   type response = {.}
   @module("@aws-sdk/client-lakeformation") @new external new: request => t = "CreateLFTagCommand"
-  let make = (~tagValues, ~tagKey, ~catalogId=?, ()) =>
-    new({tagValues: tagValues, tagKey: tagKey, catalogId: catalogId})
+  let make = (~tagValues, ~tagKey, ~catalogId=?, ()) => new({tagValues, tagKey, catalogId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module UpdateTableStorageOptimizer = {
   type t
   type request = {
@@ -1180,15 +1142,9 @@ module UpdateTableStorageOptimizer = {
   @module("@aws-sdk/client-lakeformation") @new
   external new: request => t = "UpdateTableStorageOptimizerCommand"
   let make = (~storageOptimizerConfig, ~tableName, ~databaseName, ~catalogId=?, ()) =>
-    new({
-      storageOptimizerConfig: storageOptimizerConfig,
-      tableName: tableName,
-      databaseName: databaseName,
-      catalogId: catalogId,
-    })
+    new({storageOptimizerConfig, tableName, databaseName, catalogId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListTransactions = {
   type t
   type request = {
@@ -1224,15 +1180,9 @@ module ListTransactions = {
   @module("@aws-sdk/client-lakeformation") @new
   external new: request => t = "ListTransactionsCommand"
   let make = (~nextToken=?, ~maxResults=?, ~statusFilter=?, ~catalogId=?, ()) =>
-    new({
-      nextToken: nextToken,
-      maxResults: maxResults,
-      statusFilter: statusFilter,
-      catalogId: catalogId,
-    })
+    new({nextToken, maxResults, statusFilter, catalogId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetWorkUnits = {
   type t
   type request = {
@@ -1261,11 +1211,9 @@ module GetWorkUnits = {
     nextToken: option<token>,
   }
   @module("@aws-sdk/client-lakeformation") @new external new: request => t = "GetWorkUnitsCommand"
-  let make = (~queryId, ~pageSize=?, ~nextToken=?, ()) =>
-    new({queryId: queryId, pageSize: pageSize, nextToken: nextToken})
+  let make = (~queryId, ~pageSize=?, ~nextToken=?, ()) => new({queryId, pageSize, nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetTemporaryGluePartitionCredentials = {
   type t
   type request = {
@@ -1315,17 +1263,9 @@ module GetTemporaryGluePartitionCredentials = {
     ~permissions=?,
     (),
   ) =>
-    new({
-      supportedPermissionTypes: supportedPermissionTypes,
-      auditContext: auditContext,
-      durationSeconds: durationSeconds,
-      permissions: permissions,
-      partition: partition,
-      tableArn: tableArn,
-    })
+    new({supportedPermissionTypes, auditContext, durationSeconds, permissions, partition, tableArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteObjectsOnCancel = {
   type t
   type request = {
@@ -1349,16 +1289,9 @@ module DeleteObjectsOnCancel = {
   @module("@aws-sdk/client-lakeformation") @new
   external new: request => t = "DeleteObjectsOnCancelCommand"
   let make = (~objects, ~transactionId, ~tableName, ~databaseName, ~catalogId=?, ()) =>
-    new({
-      objects: objects,
-      transactionId: transactionId,
-      tableName: tableName,
-      databaseName: databaseName,
-      catalogId: catalogId,
-    })
+    new({objects, transactionId, tableName, databaseName, catalogId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module ListTableStorageOptimizers = {
   type t
   type request = {
@@ -1397,18 +1330,9 @@ module ListTableStorageOptimizers = {
     ~storageOptimizerType=?,
     ~catalogId=?,
     (),
-  ) =>
-    new({
-      nextToken: nextToken,
-      maxResults: maxResults,
-      storageOptimizerType: storageOptimizerType,
-      tableName: tableName,
-      databaseName: databaseName,
-      catalogId: catalogId,
-    })
+  ) => new({nextToken, maxResults, storageOptimizerType, tableName, databaseName, catalogId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListResources = {
   type t
   type request = {
@@ -1436,10 +1360,9 @@ module ListResources = {
   }
   @module("@aws-sdk/client-lakeformation") @new external new: request => t = "ListResourcesCommand"
   let make = (~nextToken=?, ~maxResults=?, ~filterConditionList=?, ()) =>
-    new({nextToken: nextToken, maxResults: maxResults, filterConditionList: filterConditionList})
+    new({nextToken, maxResults, filterConditionList})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListLFTags = {
   type t
   type request = {
@@ -1468,15 +1391,9 @@ module ListLFTags = {
   }
   @module("@aws-sdk/client-lakeformation") @new external new: request => t = "ListLFTagsCommand"
   let make = (~nextToken=?, ~maxResults=?, ~resourceShareType=?, ~catalogId=?, ()) =>
-    new({
-      nextToken: nextToken,
-      maxResults: maxResults,
-      resourceShareType: resourceShareType,
-      catalogId: catalogId,
-    })
+    new({nextToken, maxResults, resourceShareType, catalogId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateDataCellsFilter = {
   type t
   type request = {
@@ -1492,7 +1409,6 @@ module CreateDataCellsFilter = {
   let make = (~tableData, ()) => new({tableData: tableData})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module UpdateTableObjects = {
   type t
   type request = {
@@ -1516,16 +1432,9 @@ module UpdateTableObjects = {
   @module("@aws-sdk/client-lakeformation") @new
   external new: request => t = "UpdateTableObjectsCommand"
   let make = (~writeOperations, ~tableName, ~databaseName, ~transactionId=?, ~catalogId=?, ()) =>
-    new({
-      writeOperations: writeOperations,
-      transactionId: transactionId,
-      tableName: tableName,
-      databaseName: databaseName,
-      catalogId: catalogId,
-    })
+    new({writeOperations, transactionId, tableName, databaseName, catalogId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module PutDataLakeSettings = {
   type t
   type request = {
@@ -1543,11 +1452,9 @@ module PutDataLakeSettings = {
   type response = {.}
   @module("@aws-sdk/client-lakeformation") @new
   external new: request => t = "PutDataLakeSettingsCommand"
-  let make = (~dataLakeSettings, ~catalogId=?, ()) =>
-    new({dataLakeSettings: dataLakeSettings, catalogId: catalogId})
+  let make = (~dataLakeSettings, ~catalogId=?, ()) => new({dataLakeSettings, catalogId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module ListDataCellsFilter = {
   type t
   type request = {
@@ -1569,11 +1476,9 @@ module ListDataCellsFilter = {
   }
   @module("@aws-sdk/client-lakeformation") @new
   external new: request => t = "ListDataCellsFilterCommand"
-  let make = (~maxResults=?, ~nextToken=?, ~table=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, table: table})
+  let make = (~maxResults=?, ~nextToken=?, ~table=?, ()) => new({maxResults, nextToken, table})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetTableObjects = {
   type t
   type request = {
@@ -1639,18 +1544,17 @@ module GetTableObjects = {
     (),
   ) =>
     new({
-      nextToken: nextToken,
-      maxResults: maxResults,
-      partitionPredicate: partitionPredicate,
-      queryAsOfTime: queryAsOfTime,
-      transactionId: transactionId,
-      tableName: tableName,
-      databaseName: databaseName,
-      catalogId: catalogId,
+      nextToken,
+      maxResults,
+      partitionPredicate,
+      queryAsOfTime,
+      transactionId,
+      tableName,
+      databaseName,
+      catalogId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetDataLakeSettings = {
   type t
   type request = {
@@ -1672,7 +1576,6 @@ module GetDataLakeSettings = {
   let make = (~catalogId=?, ()) => new({catalogId: catalogId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module SearchDatabasesByLFTags = {
   type t
   type request = {
@@ -1702,15 +1605,9 @@ module SearchDatabasesByLFTags = {
   @module("@aws-sdk/client-lakeformation") @new
   external new: request => t = "SearchDatabasesByLFTagsCommand"
   let make = (~expression, ~catalogId=?, ~maxResults=?, ~nextToken=?, ()) =>
-    new({
-      expression: expression,
-      catalogId: catalogId,
-      maxResults: maxResults,
-      nextToken: nextToken,
-    })
+    new({expression, catalogId, maxResults, nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module RevokePermissions = {
   type t
   type request = {
@@ -1743,17 +1640,9 @@ module RevokePermissions = {
     ~permissionsWithGrantOption=?,
     ~catalogId=?,
     (),
-  ) =>
-    new({
-      permissionsWithGrantOption: permissionsWithGrantOption,
-      permissions: permissions,
-      resource: resource,
-      principal: principal,
-      catalogId: catalogId,
-    })
+  ) => new({permissionsWithGrantOption, permissions, resource, principal, catalogId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module RemoveLFTagsFromResource = {
   type t
   type request = {
@@ -1774,11 +1663,9 @@ module RemoveLFTagsFromResource = {
   }
   @module("@aws-sdk/client-lakeformation") @new
   external new: request => t = "RemoveLFTagsFromResourceCommand"
-  let make = (~lftags, ~resource, ~catalogId=?, ()) =>
-    new({lftags: lftags, resource: resource, catalogId: catalogId})
+  let make = (~lftags, ~resource, ~catalogId=?, ()) => new({lftags, resource, catalogId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GrantPermissions = {
   type t
   type request = {
@@ -1817,17 +1704,9 @@ module GrantPermissions = {
     ~permissionsWithGrantOption=?,
     ~catalogId=?,
     (),
-  ) =>
-    new({
-      permissionsWithGrantOption: permissionsWithGrantOption,
-      permissions: permissions,
-      resource: resource,
-      principal: principal,
-      catalogId: catalogId,
-    })
+  ) => new({permissionsWithGrantOption, permissions, resource, principal, catalogId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module GetResourceLFTags = {
   type t
   type request = {
@@ -1855,10 +1734,9 @@ module GetResourceLFTags = {
   @module("@aws-sdk/client-lakeformation") @new
   external new: request => t = "GetResourceLFTagsCommand"
   let make = (~resource, ~showAssignedLFTags=?, ~catalogId=?, ()) =>
-    new({showAssignedLFTags: showAssignedLFTags, resource: resource, catalogId: catalogId})
+    new({showAssignedLFTags, resource, catalogId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module AddLFTagsToResource = {
   type t
   type request = {
@@ -1878,11 +1756,9 @@ module AddLFTagsToResource = {
   }
   @module("@aws-sdk/client-lakeformation") @new
   external new: request => t = "AddLFTagsToResourceCommand"
-  let make = (~lftags, ~resource, ~catalogId=?, ()) =>
-    new({lftags: lftags, resource: resource, catalogId: catalogId})
+  let make = (~lftags, ~resource, ~catalogId=?, ()) => new({lftags, resource, catalogId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module SearchTablesByLFTags = {
   type t
   type request = {
@@ -1912,15 +1788,9 @@ module SearchTablesByLFTags = {
   @module("@aws-sdk/client-lakeformation") @new
   external new: request => t = "SearchTablesByLFTagsCommand"
   let make = (~expression, ~catalogId=?, ~maxResults=?, ~nextToken=?, ()) =>
-    new({
-      expression: expression,
-      catalogId: catalogId,
-      maxResults: maxResults,
-      nextToken: nextToken,
-    })
+    new({expression, catalogId, maxResults, nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListPermissions = {
   type t
   type request = {
@@ -1968,19 +1838,9 @@ module ListPermissions = {
     ~principal=?,
     ~catalogId=?,
     (),
-  ) =>
-    new({
-      includeRelated: includeRelated,
-      maxResults: maxResults,
-      nextToken: nextToken,
-      resource: resource,
-      resourceType: resourceType,
-      principal: principal,
-      catalogId: catalogId,
-    })
+  ) => new({includeRelated, maxResults, nextToken, resource, resourceType, principal, catalogId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetEffectivePermissionsForPath = {
   type t
   type request = {
@@ -2013,15 +1873,9 @@ module GetEffectivePermissionsForPath = {
   @module("@aws-sdk/client-lakeformation") @new
   external new: request => t = "GetEffectivePermissionsForPathCommand"
   let make = (~resourceArn, ~maxResults=?, ~nextToken=?, ~catalogId=?, ()) =>
-    new({
-      maxResults: maxResults,
-      nextToken: nextToken,
-      resourceArn: resourceArn,
-      catalogId: catalogId,
-    })
+    new({maxResults, nextToken, resourceArn, catalogId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module BatchRevokePermissions = {
   type t
   type request = {
@@ -2042,10 +1896,9 @@ module BatchRevokePermissions = {
   }
   @module("@aws-sdk/client-lakeformation") @new
   external new: request => t = "BatchRevokePermissionsCommand"
-  let make = (~entries, ~catalogId=?, ()) => new({entries: entries, catalogId: catalogId})
+  let make = (~entries, ~catalogId=?, ()) => new({entries, catalogId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module BatchGrantPermissions = {
   type t
   type request = {
@@ -2066,6 +1919,6 @@ module BatchGrantPermissions = {
   }
   @module("@aws-sdk/client-lakeformation") @new
   external new: request => t = "BatchGrantPermissionsCommand"
-  let make = (~entries, ~catalogId=?, ()) => new({entries: entries, catalogId: catalogId})
+  let make = (~entries, ~catalogId=?, ()) => new({entries, catalogId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

@@ -257,10 +257,9 @@ module InitializeCluster = {
   }
   @module("@aws-sdk/client-cloudhsm") @new external new: request => t = "InitializeClusterCommand"
   let make = (~trustAnchor, ~signedCert, ~clusterId, ()) =>
-    new({trustAnchor: trustAnchor, signedCert: signedCert, clusterId: clusterId})
+    new({trustAnchor, signedCert, clusterId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteHsm = {
   type t
   type request = {
@@ -284,11 +283,9 @@ module DeleteHsm = {
     hsmId: option<hsmId>,
   }
   @module("@aws-sdk/client-cloudhsm") @new external new: request => t = "DeleteHsmCommand"
-  let make = (~clusterId, ~eniIp=?, ~eniId=?, ~hsmId=?, ()) =>
-    new({eniIp: eniIp, eniId: eniId, hsmId: hsmId, clusterId: clusterId})
+  let make = (~clusterId, ~eniIp=?, ~eniId=?, ~hsmId=?, ()) => new({eniIp, eniId, hsmId, clusterId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UntagResource = {
   type t
   type request = {
@@ -303,10 +300,9 @@ module UntagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-cloudhsm") @new external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeyList, ~resourceId, ()) => new({tagKeyList: tagKeyList, resourceId: resourceId})
+  let make = (~tagKeyList, ~resourceId, ()) => new({tagKeyList, resourceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module CreateHsm = {
   type t
   type request = {
@@ -330,10 +326,9 @@ module CreateHsm = {
   }
   @module("@aws-sdk/client-cloudhsm") @new external new: request => t = "CreateHsmCommand"
   let make = (~availabilityZone, ~clusterId, ~ipAddress=?, ()) =>
-    new({ipAddress: ipAddress, availabilityZone: availabilityZone, clusterId: clusterId})
+    new({ipAddress, availabilityZone, clusterId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module TagResource = {
   type t
   type request = {
@@ -345,10 +340,9 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-cloudhsm") @new external new: request => t = "TagResourceCommand"
-  let make = (~tagList_, ~resourceId, ()) => new({tagList_: tagList_, resourceId: resourceId})
+  let make = (~tagList_, ~resourceId, ()) => new({tagList_, resourceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module ListTags = {
   type t
   type request = {
@@ -374,10 +368,9 @@ module ListTags = {
   }
   @module("@aws-sdk/client-cloudhsm") @new external new: request => t = "ListTagsCommand"
   let make = (~resourceId, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, resourceId: resourceId})
+    new({maxResults, nextToken, resourceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CopyBackupToRegion = {
   type t
   type request = {
@@ -405,10 +398,9 @@ module CopyBackupToRegion = {
   }
   @module("@aws-sdk/client-cloudhsm") @new external new: request => t = "CopyBackupToRegionCommand"
   let make = (~backupId, ~destinationRegion, ~tagList_=?, ()) =>
-    new({tagList_: tagList_, backupId: backupId, destinationRegion: destinationRegion})
+    new({tagList_, backupId, destinationRegion})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module RestoreBackup = {
   type t
   type request = {
@@ -426,7 +418,6 @@ module RestoreBackup = {
   let make = (~backupId, ()) => new({backupId: backupId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ModifyCluster = {
   type t
   type request = {
@@ -440,11 +431,9 @@ module ModifyCluster = {
   }
   type response = {@as("Cluster") cluster: option<cluster>}
   @module("@aws-sdk/client-cloudhsm") @new external new: request => t = "ModifyClusterCommand"
-  let make = (~clusterId, ~backupRetentionPolicy, ()) =>
-    new({clusterId: clusterId, backupRetentionPolicy: backupRetentionPolicy})
+  let make = (~clusterId, ~backupRetentionPolicy, ()) => new({clusterId, backupRetentionPolicy})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ModifyBackupAttributes = {
   type t
   type request = {
@@ -461,10 +450,9 @@ module ModifyBackupAttributes = {
   type response = {@as("Backup") backup: option<backup>}
   @module("@aws-sdk/client-cloudhsm") @new
   external new: request => t = "ModifyBackupAttributesCommand"
-  let make = (~neverExpires, ~backupId, ()) => new({neverExpires: neverExpires, backupId: backupId})
+  let make = (~neverExpires, ~backupId, ()) => new({neverExpires, backupId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteCluster = {
   type t
   type request = {
@@ -481,7 +469,6 @@ module DeleteCluster = {
   let make = (~clusterId, ()) => new({clusterId: clusterId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteBackup = {
   type t
   type request = {
@@ -499,7 +486,6 @@ module DeleteBackup = {
   let make = (~backupId, ()) => new({backupId: backupId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateCluster = {
   type t
   type request = {
@@ -536,16 +522,9 @@ module CreateCluster = {
   }
   @module("@aws-sdk/client-cloudhsm") @new external new: request => t = "CreateClusterCommand"
   let make = (~subnetIds, ~hsmType, ~tagList_=?, ~sourceBackupId=?, ~backupRetentionPolicy=?, ()) =>
-    new({
-      tagList_: tagList_,
-      subnetIds: subnetIds,
-      sourceBackupId: sourceBackupId,
-      hsmType: hsmType,
-      backupRetentionPolicy: backupRetentionPolicy,
-    })
+    new({tagList_, subnetIds, sourceBackupId, hsmType, backupRetentionPolicy})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeClusters = {
   type t
   type request = {
@@ -576,11 +555,9 @@ module DescribeClusters = {
     @ocaml.doc("<p>A list of clusters.</p>") @as("Clusters") clusters: option<clusters>,
   }
   @module("@aws-sdk/client-cloudhsm") @new external new: request => t = "DescribeClustersCommand"
-  let make = (~maxResults=?, ~nextToken=?, ~filters=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, filters: filters})
+  let make = (~maxResults=?, ~nextToken=?, ~filters=?, ()) => new({maxResults, nextToken, filters})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeBackups = {
   type t
   type request = {
@@ -622,11 +599,6 @@ module DescribeBackups = {
   }
   @module("@aws-sdk/client-cloudhsm") @new external new: request => t = "DescribeBackupsCommand"
   let make = (~sortAscending=?, ~filters=?, ~maxResults=?, ~nextToken=?, ()) =>
-    new({
-      sortAscending: sortAscending,
-      filters: filters,
-      maxResults: maxResults,
-      nextToken: nextToken,
-    })
+    new({sortAscending, filters, maxResults, nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

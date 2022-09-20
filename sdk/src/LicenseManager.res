@@ -727,7 +727,6 @@ module RejectGrant = {
   let make = (~grantArn, ()) => new({grantArn: grantArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ExtendLicenseConsumption = {
   type t
   type request = {
@@ -747,11 +746,9 @@ module ExtendLicenseConsumption = {
   }
   @module("@aws-sdk/client-license-manager") @new
   external new: request => t = "ExtendLicenseConsumptionCommand"
-  let make = (~licenseConsumptionToken, ~dryRun=?, ()) =>
-    new({dryRun: dryRun, licenseConsumptionToken: licenseConsumptionToken})
+  let make = (~licenseConsumptionToken, ~dryRun=?, ()) => new({dryRun, licenseConsumptionToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteToken = {
   type t
   type request = {@ocaml.doc("<p>Token ID.</p>") @as("TokenId") tokenId: string_}
@@ -760,7 +757,6 @@ module DeleteToken = {
   let make = (~tokenId, ()) => new({tokenId: tokenId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteLicenseManagerReportGenerator = {
   type t
   type request = {
@@ -775,7 +771,6 @@ module DeleteLicenseManagerReportGenerator = {
     new({licenseManagerReportGeneratorArn: licenseManagerReportGeneratorArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteLicenseConfiguration = {
   type t
   type request = {
@@ -789,7 +784,6 @@ module DeleteLicenseConfiguration = {
     new({licenseConfigurationArn: licenseConfigurationArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteLicense = {
   type t
   type request = {
@@ -805,11 +799,9 @@ module DeleteLicense = {
   }
   @module("@aws-sdk/client-license-manager") @new
   external new: request => t = "DeleteLicenseCommand"
-  let make = (~sourceVersion, ~licenseArn, ()) =>
-    new({sourceVersion: sourceVersion, licenseArn: licenseArn})
+  let make = (~sourceVersion, ~licenseArn, ()) => new({sourceVersion, licenseArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteGrant = {
   type t
   type request = {
@@ -824,11 +816,9 @@ module DeleteGrant = {
     @ocaml.doc("<p>Grant ARN.</p>") @as("GrantArn") grantArn: option<arn>,
   }
   @module("@aws-sdk/client-license-manager") @new external new: request => t = "DeleteGrantCommand"
-  let make = (~version, ~grantArn, ~statusReason=?, ()) =>
-    new({version: version, statusReason: statusReason, grantArn: grantArn})
+  let make = (~version, ~grantArn, ~statusReason=?, ()) => new({version, statusReason, grantArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CheckInLicense = {
   type t
   type request = {
@@ -840,10 +830,9 @@ module CheckInLicense = {
   @module("@aws-sdk/client-license-manager") @new
   external new: request => t = "CheckInLicenseCommand"
   let make = (~licenseConsumptionToken, ~beneficiary=?, ()) =>
-    new({beneficiary: beneficiary, licenseConsumptionToken: licenseConsumptionToken})
+    new({beneficiary, licenseConsumptionToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module AcceptGrant = {
   type t
   type request = {
@@ -858,7 +847,6 @@ module AcceptGrant = {
   let make = (~grantArn, ()) => new({grantArn: grantArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateServiceSettings = {
   type t
   type request = {
@@ -887,16 +875,9 @@ module UpdateServiceSettings = {
     ~snsTopicArn=?,
     ~s3BucketArn=?,
     (),
-  ) =>
-    new({
-      enableCrossAccountsDiscovery: enableCrossAccountsDiscovery,
-      organizationConfiguration: organizationConfiguration,
-      snsTopicArn: snsTopicArn,
-      s3BucketArn: s3BucketArn,
-    })
+  ) => new({enableCrossAccountsDiscovery, organizationConfiguration, snsTopicArn, s3BucketArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module UntagResource = {
   type t
   type request = {
@@ -907,10 +888,9 @@ module UntagResource = {
   type response = {.}
   @module("@aws-sdk/client-license-manager") @new
   external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
+  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys, resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module GetServiceSettings = {
   type t
   type request = {.}
@@ -939,7 +919,6 @@ module GetServiceSettings = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetLicenseConversionTask = {
   type t
   type request = {
@@ -981,7 +960,6 @@ module GetLicenseConversionTask = {
     new({licenseConversionTaskId: licenseConversionTaskId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetAccessToken = {
   type t
   type request = {
@@ -996,11 +974,9 @@ module GetAccessToken = {
   }
   @module("@aws-sdk/client-license-manager") @new
   external new: request => t = "GetAccessTokenCommand"
-  let make = (~token, ~tokenProperties=?, ()) =>
-    new({tokenProperties: tokenProperties, token: token})
+  let make = (~token, ~tokenProperties=?, ()) => new({tokenProperties, token})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateToken = {
   type t
   type request = {
@@ -1038,17 +1014,9 @@ module CreateToken = {
     ~expirationInDays=?,
     ~roleArns=?,
     (),
-  ) =>
-    new({
-      clientToken: clientToken,
-      tokenProperties: tokenProperties,
-      expirationInDays: expirationInDays,
-      roleArns: roleArns,
-      licenseArn: licenseArn,
-    })
+  ) => new({clientToken, tokenProperties, expirationInDays, roleArns, licenseArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateLicenseConversionTaskForResource = {
   type t
   type request = {
@@ -1075,14 +1043,9 @@ module CreateLicenseConversionTaskForResource = {
   @module("@aws-sdk/client-license-manager") @new
   external new: request => t = "CreateLicenseConversionTaskForResourceCommand"
   let make = (~destinationLicenseContext, ~sourceLicenseContext, ~resourceArn, ()) =>
-    new({
-      destinationLicenseContext: destinationLicenseContext,
-      sourceLicenseContext: sourceLicenseContext,
-      resourceArn: resourceArn,
-    })
+    new({destinationLicenseContext, sourceLicenseContext, resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateGrantVersion = {
   type t
   type request = {
@@ -1118,18 +1081,9 @@ module CreateGrantVersion = {
     ~grantName=?,
     (),
   ) =>
-    new({
-      sourceVersion: sourceVersion,
-      statusReason: statusReason,
-      status: status,
-      allowedOperations: allowedOperations,
-      grantName: grantName,
-      grantArn: grantArn,
-      clientToken: clientToken,
-    })
+    new({sourceVersion, statusReason, status, allowedOperations, grantName, grantArn, clientToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateGrant = {
   type t
   type request = {
@@ -1160,18 +1114,9 @@ module CreateGrant = {
     ~grantName,
     ~clientToken,
     (),
-  ) =>
-    new({
-      allowedOperations: allowedOperations,
-      homeRegion: homeRegion,
-      principals: principals,
-      licenseArn: licenseArn,
-      grantName: grantName,
-      clientToken: clientToken,
-    })
+  ) => new({allowedOperations, homeRegion, principals, licenseArn, grantName, clientToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateLicenseSpecificationsForResource = {
   type t
   type request = {
@@ -1188,14 +1133,9 @@ module UpdateLicenseSpecificationsForResource = {
   @module("@aws-sdk/client-license-manager") @new
   external new: request => t = "UpdateLicenseSpecificationsForResourceCommand"
   let make = (~resourceArn, ~removeLicenseSpecifications=?, ~addLicenseSpecifications=?, ()) =>
-    new({
-      removeLicenseSpecifications: removeLicenseSpecifications,
-      addLicenseSpecifications: addLicenseSpecifications,
-      resourceArn: resourceArn,
-    })
+    new({removeLicenseSpecifications, addLicenseSpecifications, resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module UpdateLicenseManagerReportGenerator = {
   type t
   type request = {
@@ -1240,17 +1180,16 @@ module UpdateLicenseManagerReportGenerator = {
     (),
   ) =>
     new({
-      description: description,
-      clientToken: clientToken,
-      reportFrequency: reportFrequency,
-      reportContext: reportContext,
-      type_: type_,
-      reportGeneratorName: reportGeneratorName,
-      licenseManagerReportGeneratorArn: licenseManagerReportGeneratorArn,
+      description,
+      clientToken,
+      reportFrequency,
+      reportContext,
+      type_,
+      reportGeneratorName,
+      licenseManagerReportGeneratorArn,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module TagResource = {
   type t
   type request = {
@@ -1260,10 +1199,9 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-license-manager") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
+  let make = (~tags, ~resourceArn, ()) => new({tags, resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module ListTagsForResource = {
   type t
   type request = {
@@ -1278,7 +1216,6 @@ module ListTagsForResource = {
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListResourceInventory = {
   type t
   type request = {
@@ -1336,11 +1273,9 @@ module ListResourceInventory = {
   }
   @module("@aws-sdk/client-license-manager") @new
   external new: request => t = "ListResourceInventoryCommand"
-  let make = (~filters=?, ~nextToken=?, ~maxResults=?, ()) =>
-    new({filters: filters, nextToken: nextToken, maxResults: maxResults})
+  let make = (~filters=?, ~nextToken=?, ~maxResults=?, ()) => new({filters, nextToken, maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListLicenseSpecificationsForResource = {
   type t
   type request = {
@@ -1364,10 +1299,9 @@ module ListLicenseSpecificationsForResource = {
   @module("@aws-sdk/client-license-manager") @new
   external new: request => t = "ListLicenseSpecificationsForResourceCommand"
   let make = (~resourceArn, ~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken: nextToken, maxResults: maxResults, resourceArn: resourceArn})
+    new({nextToken, maxResults, resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListAssociationsForLicenseConfiguration = {
   type t
   type request = {
@@ -1389,14 +1323,9 @@ module ListAssociationsForLicenseConfiguration = {
   @module("@aws-sdk/client-license-manager") @new
   external new: request => t = "ListAssociationsForLicenseConfigurationCommand"
   let make = (~licenseConfigurationArn, ~nextToken=?, ~maxResults=?, ()) =>
-    new({
-      nextToken: nextToken,
-      maxResults: maxResults,
-      licenseConfigurationArn: licenseConfigurationArn,
-    })
+    new({nextToken, maxResults, licenseConfigurationArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetGrant = {
   type t
   type request = {
@@ -1405,10 +1334,9 @@ module GetGrant = {
   }
   type response = {@ocaml.doc("<p>Grant details.</p>") @as("Grant") grant: option<grant>}
   @module("@aws-sdk/client-license-manager") @new external new: request => t = "GetGrantCommand"
-  let make = (~grantArn, ~version=?, ()) => new({version: version, grantArn: grantArn})
+  let make = (~grantArn, ~version=?, ()) => new({version, grantArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateLicenseVersion = {
   type t
   type request = {
@@ -1463,22 +1391,21 @@ module CreateLicenseVersion = {
     (),
   ) =>
     new({
-      sourceVersion: sourceVersion,
-      clientToken: clientToken,
-      status: status,
-      consumptionConfiguration: consumptionConfiguration,
-      entitlements: entitlements,
-      licenseMetadata: licenseMetadata,
-      validity: validity,
-      homeRegion: homeRegion,
-      issuer: issuer,
-      productName: productName,
-      licenseName: licenseName,
-      licenseArn: licenseArn,
+      sourceVersion,
+      clientToken,
+      status,
+      consumptionConfiguration,
+      entitlements,
+      licenseMetadata,
+      validity,
+      homeRegion,
+      issuer,
+      productName,
+      licenseName,
+      licenseArn,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateLicenseManagerReportGenerator = {
   type t
   type request = {
@@ -1530,17 +1457,16 @@ module CreateLicenseManagerReportGenerator = {
     (),
   ) =>
     new({
-      tags: tags,
-      description: description,
-      clientToken: clientToken,
-      reportFrequency: reportFrequency,
-      reportContext: reportContext,
-      type_: type_,
-      reportGeneratorName: reportGeneratorName,
+      tags,
+      description,
+      clientToken,
+      reportFrequency,
+      reportContext,
+      type_,
+      reportGeneratorName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateLicense = {
   type t
   type request = {
@@ -1592,21 +1518,20 @@ module CreateLicense = {
     (),
   ) =>
     new({
-      clientToken: clientToken,
-      licenseMetadata: licenseMetadata,
-      consumptionConfiguration: consumptionConfiguration,
-      beneficiary: beneficiary,
-      entitlements: entitlements,
-      validity: validity,
-      homeRegion: homeRegion,
-      issuer: issuer,
-      productSKU: productSKU,
-      productName: productName,
-      licenseName: licenseName,
+      clientToken,
+      licenseMetadata,
+      consumptionConfiguration,
+      beneficiary,
+      entitlements,
+      validity,
+      homeRegion,
+      issuer,
+      productSKU,
+      productName,
+      licenseName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CheckoutLicense = {
   type t
   type request = {
@@ -1651,18 +1576,9 @@ module CheckoutLicense = {
     ~beneficiary=?,
     (),
   ) =>
-    new({
-      nodeId: nodeId,
-      beneficiary: beneficiary,
-      clientToken: clientToken,
-      entitlements: entitlements,
-      keyFingerprint: keyFingerprint,
-      checkoutType: checkoutType,
-      productSKU: productSKU,
-    })
+    new({nodeId, beneficiary, clientToken, entitlements, keyFingerprint, checkoutType, productSKU})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CheckoutBorrowLicense = {
   type t
   type request = {
@@ -1714,17 +1630,9 @@ module CheckoutBorrowLicense = {
     ~nodeId=?,
     (),
   ) =>
-    new({
-      clientToken: clientToken,
-      checkoutMetadata: checkoutMetadata,
-      nodeId: nodeId,
-      digitalSignatureMethod: digitalSignatureMethod,
-      entitlements: entitlements,
-      licenseArn: licenseArn,
-    })
+    new({clientToken, checkoutMetadata, nodeId, digitalSignatureMethod, entitlements, licenseArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListUsageForLicenseConfiguration = {
   type t
   type request = {
@@ -1767,15 +1675,9 @@ module ListUsageForLicenseConfiguration = {
   @module("@aws-sdk/client-license-manager") @new
   external new: request => t = "ListUsageForLicenseConfigurationCommand"
   let make = (~licenseConfigurationArn, ~filters=?, ~nextToken=?, ~maxResults=?, ()) =>
-    new({
-      filters: filters,
-      nextToken: nextToken,
-      maxResults: maxResults,
-      licenseConfigurationArn: licenseConfigurationArn,
-    })
+    new({filters, nextToken, maxResults, licenseConfigurationArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListTokens = {
   type t
   type request = {
@@ -1802,10 +1704,9 @@ module ListTokens = {
   }
   @module("@aws-sdk/client-license-manager") @new external new: request => t = "ListTokensCommand"
   let make = (~maxResults=?, ~nextToken=?, ~filters=?, ~tokenIds=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, filters: filters, tokenIds: tokenIds})
+    new({maxResults, nextToken, filters, tokenIds})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListReceivedGrants = {
   type t
   type request = {
@@ -1854,10 +1755,9 @@ module ListReceivedGrants = {
   @module("@aws-sdk/client-license-manager") @new
   external new: request => t = "ListReceivedGrantsCommand"
   let make = (~maxResults=?, ~nextToken=?, ~filters=?, ~grantArns=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, filters: filters, grantArns: grantArns})
+    new({maxResults, nextToken, filters, grantArns})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListLicenseConversionTasks = {
   type t
   type request = {
@@ -1880,11 +1780,9 @@ module ListLicenseConversionTasks = {
   }
   @module("@aws-sdk/client-license-manager") @new
   external new: request => t = "ListLicenseConversionTasksCommand"
-  let make = (~filters=?, ~maxResults=?, ~nextToken=?, ()) =>
-    new({filters: filters, maxResults: maxResults, nextToken: nextToken})
+  let make = (~filters=?, ~maxResults=?, ~nextToken=?, ()) => new({filters, maxResults, nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListDistributedGrants = {
   type t
   type request = {
@@ -1933,10 +1831,9 @@ module ListDistributedGrants = {
   @module("@aws-sdk/client-license-manager") @new
   external new: request => t = "ListDistributedGrantsCommand"
   let make = (~maxResults=?, ~nextToken=?, ~filters=?, ~grantArns=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, filters: filters, grantArns: grantArns})
+    new({maxResults, nextToken, filters, grantArns})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetLicenseUsage = {
   type t
   type request = {
@@ -1952,7 +1849,6 @@ module GetLicenseUsage = {
   let make = (~licenseArn, ()) => new({licenseArn: licenseArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetLicenseManagerReportGenerator = {
   type t
   type request = {
@@ -1973,7 +1869,6 @@ module GetLicenseManagerReportGenerator = {
     new({licenseManagerReportGeneratorArn: licenseManagerReportGeneratorArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetLicense = {
   type t
   type request = {
@@ -1983,10 +1878,9 @@ module GetLicense = {
   }
   type response = {@ocaml.doc("<p>License details.</p>") @as("License") license: option<license>}
   @module("@aws-sdk/client-license-manager") @new external new: request => t = "GetLicenseCommand"
-  let make = (~licenseArn, ~version=?, ()) => new({version: version, licenseArn: licenseArn})
+  let make = (~licenseArn, ~version=?, ()) => new({version, licenseArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListReceivedLicenses = {
   type t
   type request = {
@@ -2036,10 +1930,9 @@ module ListReceivedLicenses = {
   @module("@aws-sdk/client-license-manager") @new
   external new: request => t = "ListReceivedLicensesCommand"
   let make = (~maxResults=?, ~nextToken=?, ~filters=?, ~licenseArns=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, filters: filters, licenseArns: licenseArns})
+    new({maxResults, nextToken, filters, licenseArns})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListLicenses = {
   type t
   type request = {
@@ -2082,10 +1975,9 @@ module ListLicenses = {
   }
   @module("@aws-sdk/client-license-manager") @new external new: request => t = "ListLicensesCommand"
   let make = (~maxResults=?, ~nextToken=?, ~filters=?, ~licenseArns=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, filters: filters, licenseArns: licenseArns})
+    new({maxResults, nextToken, filters, licenseArns})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListLicenseVersions = {
   type t
   type request = {
@@ -2104,10 +1996,9 @@ module ListLicenseVersions = {
   @module("@aws-sdk/client-license-manager") @new
   external new: request => t = "ListLicenseVersionsCommand"
   let make = (~licenseArn, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, licenseArn: licenseArn})
+    new({maxResults, nextToken, licenseArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListLicenseManagerReportGenerators = {
   type t
   type request = {
@@ -2137,11 +2028,9 @@ module ListLicenseManagerReportGenerators = {
   }
   @module("@aws-sdk/client-license-manager") @new
   external new: request => t = "ListLicenseManagerReportGeneratorsCommand"
-  let make = (~maxResults=?, ~nextToken=?, ~filters=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, filters: filters})
+  let make = (~maxResults=?, ~nextToken=?, ~filters=?, ()) => new({maxResults, nextToken, filters})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListFailuresForLicenseConfigurationOperations = {
   type t
   type request = {
@@ -2163,14 +2052,9 @@ module ListFailuresForLicenseConfigurationOperations = {
   @module("@aws-sdk/client-license-manager") @new
   external new: request => t = "ListFailuresForLicenseConfigurationOperationsCommand"
   let make = (~licenseConfigurationArn, ~nextToken=?, ~maxResults=?, ()) =>
-    new({
-      nextToken: nextToken,
-      maxResults: maxResults,
-      licenseConfigurationArn: licenseConfigurationArn,
-    })
+    new({nextToken, maxResults, licenseConfigurationArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateLicenseConfiguration = {
   type t
   type request = {
@@ -2214,19 +2098,18 @@ module UpdateLicenseConfiguration = {
     (),
   ) =>
     new({
-      disassociateWhenNotFound: disassociateWhenNotFound,
-      productInformationList: productInformationList,
-      description: description,
-      name: name,
-      licenseCountHardLimit: licenseCountHardLimit,
-      licenseCount: licenseCount,
-      licenseRules: licenseRules,
-      licenseConfigurationStatus: licenseConfigurationStatus,
-      licenseConfigurationArn: licenseConfigurationArn,
+      disassociateWhenNotFound,
+      productInformationList,
+      description,
+      name,
+      licenseCountHardLimit,
+      licenseCount,
+      licenseRules,
+      licenseConfigurationStatus,
+      licenseConfigurationArn,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module GetLicenseConfiguration = {
   type t
   type request = {
@@ -2276,7 +2159,6 @@ module GetLicenseConfiguration = {
     new({licenseConfigurationArn: licenseConfigurationArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateLicenseConfiguration = {
   type t
   type request = {
@@ -2359,19 +2241,18 @@ module CreateLicenseConfiguration = {
     (),
   ) =>
     new({
-      productInformationList: productInformationList,
-      disassociateWhenNotFound: disassociateWhenNotFound,
-      tags: tags,
-      licenseRules: licenseRules,
-      licenseCountHardLimit: licenseCountHardLimit,
-      licenseCount: licenseCount,
-      licenseCountingType: licenseCountingType,
-      description: description,
-      name: name,
+      productInformationList,
+      disassociateWhenNotFound,
+      tags,
+      licenseRules,
+      licenseCountHardLimit,
+      licenseCount,
+      licenseCountingType,
+      description,
+      name,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListLicenseConfigurations = {
   type t
   type request = {
@@ -2414,11 +2295,6 @@ module ListLicenseConfigurations = {
   @module("@aws-sdk/client-license-manager") @new
   external new: request => t = "ListLicenseConfigurationsCommand"
   let make = (~filters=?, ~nextToken=?, ~maxResults=?, ~licenseConfigurationArns=?, ()) =>
-    new({
-      filters: filters,
-      nextToken: nextToken,
-      maxResults: maxResults,
-      licenseConfigurationArns: licenseConfigurationArns,
-    })
+    new({filters, nextToken, maxResults, licenseConfigurationArns})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

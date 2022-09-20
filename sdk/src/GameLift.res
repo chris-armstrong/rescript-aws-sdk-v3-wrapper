@@ -3269,7 +3269,6 @@ module ValidateMatchmakingRuleSet = {
   let make = (~ruleSetBody, ()) => new({ruleSetBody: ruleSetBody})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateFleetCapacity = {
   type t
   @ocaml.doc("<p>Represents the input for a request operation.</p>")
@@ -3311,16 +3310,9 @@ module UpdateFleetCapacity = {
   }
   @module("@aws-sdk/client-gamelift") @new external new: request => t = "UpdateFleetCapacityCommand"
   let make = (~fleetId, ~location=?, ~maxSize=?, ~minSize=?, ~desiredInstances=?, ()) =>
-    new({
-      location: location,
-      maxSize: maxSize,
-      minSize: minSize,
-      desiredInstances: desiredInstances,
-      fleetId: fleetId,
-    })
+    new({location, maxSize, minSize, desiredInstances, fleetId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module StopMatchmaking = {
   type t
   @ocaml.doc("<p>Represents the input for a request operation.</p>")
@@ -3333,7 +3325,6 @@ module StopMatchmaking = {
   let make = (~ticketId, ()) => new({ticketId: ticketId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module ResolveAlias = {
   type t
   @ocaml.doc("<p>Represents the input for a request operation.</p>")
@@ -3357,7 +3348,6 @@ module ResolveAlias = {
   let make = (~aliasId, ()) => new({aliasId: aliasId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetGameSessionLogUrl = {
   type t
   @ocaml.doc("<p>Represents the input for a request operation.</p>")
@@ -3380,7 +3370,6 @@ module GetGameSessionLogUrl = {
   let make = (~gameSessionId, ()) => new({gameSessionId: gameSessionId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeregisterGameServer = {
   type t
   type request = {
@@ -3395,11 +3384,9 @@ module DeregisterGameServer = {
   type response = {.}
   @module("@aws-sdk/client-gamelift") @new
   external new: request => t = "DeregisterGameServerCommand"
-  let make = (~gameServerId, ~gameServerGroupName, ()) =>
-    new({gameServerId: gameServerId, gameServerGroupName: gameServerGroupName})
+  let make = (~gameServerId, ~gameServerGroupName, ()) => new({gameServerId, gameServerGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteVpcPeeringConnection = {
   type t
   @ocaml.doc("<p>Represents the input for a request operation.</p>")
@@ -3417,11 +3404,9 @@ module DeleteVpcPeeringConnection = {
   type response = {.}
   @module("@aws-sdk/client-gamelift") @new
   external new: request => t = "DeleteVpcPeeringConnectionCommand"
-  let make = (~vpcPeeringConnectionId, ~fleetId, ()) =>
-    new({vpcPeeringConnectionId: vpcPeeringConnectionId, fleetId: fleetId})
+  let make = (~vpcPeeringConnectionId, ~fleetId, ()) => new({vpcPeeringConnectionId, fleetId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteVpcPeeringAuthorization = {
   type t
   @ocaml.doc("<p>Represents the input for a request operation.</p>")
@@ -3440,11 +3425,9 @@ module DeleteVpcPeeringAuthorization = {
   type response = {.}
   @module("@aws-sdk/client-gamelift") @new
   external new: request => t = "DeleteVpcPeeringAuthorizationCommand"
-  let make = (~peerVpcId, ~gameLiftAwsAccountId, ()) =>
-    new({peerVpcId: peerVpcId, gameLiftAwsAccountId: gameLiftAwsAccountId})
+  let make = (~peerVpcId, ~gameLiftAwsAccountId, ()) => new({peerVpcId, gameLiftAwsAccountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteScript = {
   type t
   type request = {
@@ -3459,7 +3442,6 @@ module DeleteScript = {
   let make = (~scriptId, ()) => new({scriptId: scriptId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteScalingPolicy = {
   type t
   @ocaml.doc("<p>Represents the input for a request operation.</p>")
@@ -3477,10 +3459,9 @@ module DeleteScalingPolicy = {
   }
   type response = {.}
   @module("@aws-sdk/client-gamelift") @new external new: request => t = "DeleteScalingPolicyCommand"
-  let make = (~fleetId, ~name, ()) => new({fleetId: fleetId, name: name})
+  let make = (~fleetId, ~name, ()) => new({fleetId, name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteMatchmakingRuleSet = {
   type t
   @ocaml.doc("<p>Represents the input for a request operation.</p>")
@@ -3496,7 +3477,6 @@ module DeleteMatchmakingRuleSet = {
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteMatchmakingConfiguration = {
   type t
   @ocaml.doc("<p>Represents the input for a request operation.</p>")
@@ -3513,7 +3493,6 @@ module DeleteMatchmakingConfiguration = {
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteGameSessionQueue = {
   type t
   @ocaml.doc("<p>Represents the input for a request operation. </p>")
@@ -3530,7 +3509,6 @@ module DeleteGameSessionQueue = {
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteFleet = {
   type t
   @ocaml.doc("<p>Represents the input for a request operation.</p>")
@@ -3546,7 +3524,6 @@ module DeleteFleet = {
   let make = (~fleetId, ()) => new({fleetId: fleetId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteBuild = {
   type t
   @ocaml.doc("<p>Represents the input for a request operation.</p>")
@@ -3562,7 +3539,6 @@ module DeleteBuild = {
   let make = (~buildId, ()) => new({buildId: buildId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteAlias = {
   type t
   @ocaml.doc("<p>Represents the input for a request operation.</p>")
@@ -3577,7 +3553,6 @@ module DeleteAlias = {
   let make = (~aliasId, ()) => new({aliasId: aliasId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module CreateVpcPeeringConnection = {
   type t
   @ocaml.doc("<p>Represents the input for a request operation.</p>")
@@ -3602,10 +3577,9 @@ module CreateVpcPeeringConnection = {
   @module("@aws-sdk/client-gamelift") @new
   external new: request => t = "CreateVpcPeeringConnectionCommand"
   let make = (~peerVpcId, ~peerVpcAwsAccountId, ~fleetId, ()) =>
-    new({peerVpcId: peerVpcId, peerVpcAwsAccountId: peerVpcAwsAccountId, fleetId: fleetId})
+    new({peerVpcId, peerVpcAwsAccountId, fleetId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module UpdateGameServer = {
   type t
   type request = {
@@ -3642,17 +3616,9 @@ module UpdateGameServer = {
     ~utilizationStatus=?,
     ~gameServerData=?,
     (),
-  ) =>
-    new({
-      healthCheck: healthCheck,
-      utilizationStatus: utilizationStatus,
-      gameServerData: gameServerData,
-      gameServerId: gameServerId,
-      gameServerGroupName: gameServerGroupName,
-    })
+  ) => new({healthCheck, utilizationStatus, gameServerData, gameServerId, gameServerGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateFleetAttributes = {
   type t
   @ocaml.doc("<p>Represents the input for a request operation.</p>")
@@ -3714,16 +3680,15 @@ module UpdateFleetAttributes = {
     (),
   ) =>
     new({
-      metricGroups: metricGroups,
-      resourceCreationLimitPolicy: resourceCreationLimitPolicy,
-      newGameSessionProtectionPolicy: newGameSessionProtectionPolicy,
-      description: description,
-      name: name,
-      fleetId: fleetId,
+      metricGroups,
+      resourceCreationLimitPolicy,
+      newGameSessionProtectionPolicy,
+      description,
+      name,
+      fleetId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateBuild = {
   type t
   @ocaml.doc("<p>Represents the input for a request operation.</p>")
@@ -3749,11 +3714,9 @@ module UpdateBuild = {
     @ocaml.doc("<p>The updated build resource.</p>") @as("Build") build: option<build>,
   }
   @module("@aws-sdk/client-gamelift") @new external new: request => t = "UpdateBuildCommand"
-  let make = (~buildId, ~version=?, ~name=?, ()) =>
-    new({version: version, name: name, buildId: buildId})
+  let make = (~buildId, ~version=?, ~name=?, ()) => new({version, name, buildId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UntagResource = {
   type t
   type request = {
@@ -3771,10 +3734,9 @@ module UntagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-gamelift") @new external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceARN, ()) => new({tagKeys: tagKeys, resourceARN: resourceARN})
+  let make = (~tagKeys, ~resourceARN, ()) => new({tagKeys, resourceARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module StopFleetActions = {
   type t
   @ocaml.doc("<p>Represents the input for a request operation.</p>")
@@ -3802,11 +3764,9 @@ module StopFleetActions = {
     fleetId: option<fleetId>,
   }
   @module("@aws-sdk/client-gamelift") @new external new: request => t = "StopFleetActionsCommand"
-  let make = (~actions, ~fleetId, ~location=?, ()) =>
-    new({location: location, actions: actions, fleetId: fleetId})
+  let make = (~actions, ~fleetId, ~location=?, ()) => new({location, actions, fleetId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module StartFleetActions = {
   type t
   @ocaml.doc("<p>Represents the input for a request operation.</p>")
@@ -3834,11 +3794,9 @@ module StartFleetActions = {
     fleetId: option<fleetId>,
   }
   @module("@aws-sdk/client-gamelift") @new external new: request => t = "StartFleetActionsCommand"
-  let make = (~actions, ~fleetId, ~location=?, ()) =>
-    new({location: location, actions: actions, fleetId: fleetId})
+  let make = (~actions, ~fleetId, ~location=?, ()) => new({location, actions, fleetId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module RequestUploadCredentials = {
   type t
   @ocaml.doc("<p>Represents the input for a request operation.</p>")
@@ -3866,7 +3824,6 @@ module RequestUploadCredentials = {
   let make = (~buildId, ()) => new({buildId: buildId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module RegisterGameServer = {
   type t
   type request = {
@@ -3905,17 +3862,9 @@ module RegisterGameServer = {
     ~gameServerData=?,
     ~connectionInfo=?,
     (),
-  ) =>
-    new({
-      gameServerData: gameServerData,
-      connectionInfo: connectionInfo,
-      instanceId: instanceId,
-      gameServerId: gameServerId,
-      gameServerGroupName: gameServerGroupName,
-    })
+  ) => new({gameServerData, connectionInfo, instanceId, gameServerId, gameServerGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module PutScalingPolicy = {
   type t
   @ocaml.doc("<p>Represents the input for a request operation.</p>")
@@ -4070,20 +4019,19 @@ module PutScalingPolicy = {
     (),
   ) =>
     new({
-      targetConfiguration: targetConfiguration,
-      policyType: policyType,
-      metricName: metricName,
-      evaluationPeriods: evaluationPeriods,
-      comparisonOperator: comparisonOperator,
-      threshold: threshold,
-      scalingAdjustmentType: scalingAdjustmentType,
-      scalingAdjustment: scalingAdjustment,
-      fleetId: fleetId,
-      name: name,
+      targetConfiguration,
+      policyType,
+      metricName,
+      evaluationPeriods,
+      comparisonOperator,
+      threshold,
+      scalingAdjustmentType,
+      scalingAdjustment,
+      fleetId,
+      name,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListFleets = {
   type t
   @ocaml.doc("<p>Represents the input for a request operation.</p>")
@@ -4123,10 +4071,9 @@ module ListFleets = {
   }
   @module("@aws-sdk/client-gamelift") @new external new: request => t = "ListFleetsCommand"
   let make = (~nextToken=?, ~limit=?, ~scriptId=?, ~buildId=?, ()) =>
-    new({nextToken: nextToken, limit: limit, scriptId: scriptId, buildId: buildId})
+    new({nextToken, limit, scriptId, buildId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeGameServer = {
   type t
   type request = {
@@ -4145,11 +4092,9 @@ module DescribeGameServer = {
     gameServer: option<gameServer>,
   }
   @module("@aws-sdk/client-gamelift") @new external new: request => t = "DescribeGameServerCommand"
-  let make = (~gameServerId, ~gameServerGroupName, ()) =>
-    new({gameServerId: gameServerId, gameServerGroupName: gameServerGroupName})
+  let make = (~gameServerId, ~gameServerGroupName, ()) => new({gameServerId, gameServerGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeFleetLocationUtilization = {
   type t
   @ocaml.doc("<p>Represents the input for a request operation.</p>")
@@ -4172,10 +4117,9 @@ module DescribeFleetLocationUtilization = {
   }
   @module("@aws-sdk/client-gamelift") @new
   external new: request => t = "DescribeFleetLocationUtilizationCommand"
-  let make = (~location, ~fleetId, ()) => new({location: location, fleetId: fleetId})
+  let make = (~location, ~fleetId, ()) => new({location, fleetId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeBuild = {
   type t
   @ocaml.doc("<p>Represents the input for a request operation.</p>")
@@ -4195,7 +4139,6 @@ module DescribeBuild = {
   let make = (~buildId, ()) => new({buildId: buildId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateVpcPeeringAuthorization = {
   type t
   @ocaml.doc("<p>Represents the input for a request operation.</p>")
@@ -4219,11 +4162,9 @@ module CreateVpcPeeringAuthorization = {
   }
   @module("@aws-sdk/client-gamelift") @new
   external new: request => t = "CreateVpcPeeringAuthorizationCommand"
-  let make = (~peerVpcId, ~gameLiftAwsAccountId, ()) =>
-    new({peerVpcId: peerVpcId, gameLiftAwsAccountId: gameLiftAwsAccountId})
+  let make = (~peerVpcId, ~gameLiftAwsAccountId, ()) => new({peerVpcId, gameLiftAwsAccountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreatePlayerSession = {
   type t
   @ocaml.doc("<p>Represents the input for a request operation.</p>")
@@ -4248,10 +4189,9 @@ module CreatePlayerSession = {
   }
   @module("@aws-sdk/client-gamelift") @new external new: request => t = "CreatePlayerSessionCommand"
   let make = (~playerId, ~gameSessionId, ~playerData=?, ()) =>
-    new({playerData: playerData, playerId: playerId, gameSessionId: gameSessionId})
+    new({playerData, playerId, gameSessionId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ClaimGameServer = {
   type t
   type request = {
@@ -4277,14 +4217,9 @@ module ClaimGameServer = {
   }
   @module("@aws-sdk/client-gamelift") @new external new: request => t = "ClaimGameServerCommand"
   let make = (~gameServerGroupName, ~gameServerData=?, ~gameServerId=?, ()) =>
-    new({
-      gameServerData: gameServerData,
-      gameServerId: gameServerId,
-      gameServerGroupName: gameServerGroupName,
-    })
+    new({gameServerData, gameServerId, gameServerGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module AcceptMatch = {
   type t
   @ocaml.doc("<p>Represents the input for a request operation.</p>")
@@ -4303,10 +4238,9 @@ module AcceptMatch = {
   type response = {.}
   @module("@aws-sdk/client-gamelift") @new external new: request => t = "AcceptMatchCommand"
   let make = (~acceptanceType, ~playerIds, ~ticketId, ()) =>
-    new({acceptanceType: acceptanceType, playerIds: playerIds, ticketId: ticketId})
+    new({acceptanceType, playerIds, ticketId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module UpdateScript = {
   type t
   type request = {
@@ -4355,16 +4289,9 @@ module UpdateScript = {
   }
   @module("@aws-sdk/client-gamelift") @new external new: request => t = "UpdateScriptCommand"
   let make = (~scriptId, ~zipFile=?, ~storageLocation=?, ~version=?, ~name=?, ()) =>
-    new({
-      zipFile: zipFile,
-      storageLocation: storageLocation,
-      version: version,
-      name: name,
-      scriptId: scriptId,
-    })
+    new({zipFile, storageLocation, version, name, scriptId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateFleetPortSettings = {
   type t
   @ocaml.doc("<p>Represents the input for a request operation.</p>")
@@ -4388,14 +4315,9 @@ module UpdateFleetPortSettings = {
   @module("@aws-sdk/client-gamelift") @new
   external new: request => t = "UpdateFleetPortSettingsCommand"
   let make = (~fleetId, ~inboundPermissionRevocations=?, ~inboundPermissionAuthorizations=?, ()) =>
-    new({
-      inboundPermissionRevocations: inboundPermissionRevocations,
-      inboundPermissionAuthorizations: inboundPermissionAuthorizations,
-      fleetId: fleetId,
-    })
+    new({inboundPermissionRevocations, inboundPermissionAuthorizations, fleetId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateAlias = {
   type t
   @ocaml.doc("<p>Represents the input for a request operation.</p>")
@@ -4422,10 +4344,9 @@ module UpdateAlias = {
   }
   @module("@aws-sdk/client-gamelift") @new external new: request => t = "UpdateAliasCommand"
   let make = (~aliasId, ~routingStrategy=?, ~description=?, ~name=?, ()) =>
-    new({routingStrategy: routingStrategy, description: description, name: name, aliasId: aliasId})
+    new({routingStrategy, description, name, aliasId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module TagResource = {
   type t
   type request = {
@@ -4446,10 +4367,9 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-gamelift") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceARN, ()) => new({tags: tags, resourceARN: resourceARN})
+  let make = (~tags, ~resourceARN, ()) => new({tags, resourceARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module ListTagsForResource = {
   type t
   type request = {
@@ -4473,7 +4393,6 @@ module ListTagsForResource = {
   let make = (~resourceARN, ()) => new({resourceARN: resourceARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListGameServers = {
   type t
   type request = {
@@ -4510,15 +4429,9 @@ module ListGameServers = {
   }
   @module("@aws-sdk/client-gamelift") @new external new: request => t = "ListGameServersCommand"
   let make = (~gameServerGroupName, ~nextToken=?, ~limit=?, ~sortOrder=?, ()) =>
-    new({
-      nextToken: nextToken,
-      limit: limit,
-      sortOrder: sortOrder,
-      gameServerGroupName: gameServerGroupName,
-    })
+    new({nextToken, limit, sortOrder, gameServerGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListBuilds = {
   type t
   @ocaml.doc("<p>Represents the input for a request operation.</p>")
@@ -4569,11 +4482,9 @@ module ListBuilds = {
     builds: option<buildList>,
   }
   @module("@aws-sdk/client-gamelift") @new external new: request => t = "ListBuildsCommand"
-  let make = (~nextToken=?, ~limit=?, ~status=?, ()) =>
-    new({nextToken: nextToken, limit: limit, status: status})
+  let make = (~nextToken=?, ~limit=?, ~status=?, ()) => new({nextToken, limit, status})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetInstanceAccess = {
   type t
   @ocaml.doc("<p>Represents the input for a request operation.</p>")
@@ -4598,10 +4509,9 @@ module GetInstanceAccess = {
     instanceAccess: option<instanceAccess>,
   }
   @module("@aws-sdk/client-gamelift") @new external new: request => t = "GetInstanceAccessCommand"
-  let make = (~instanceId, ~fleetId, ()) => new({instanceId: instanceId, fleetId: fleetId})
+  let make = (~instanceId, ~fleetId, ()) => new({instanceId, fleetId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeVpcPeeringAuthorizations = {
   type t
   type request = {.}
@@ -4616,7 +4526,6 @@ module DescribeVpcPeeringAuthorizations = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeScript = {
   type t
   type request = {
@@ -4633,7 +4542,6 @@ module DescribeScript = {
   let make = (~scriptId, ()) => new({scriptId: scriptId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribePlayerSessions = {
   type t
   @ocaml.doc("<p>Represents the input for a request operation.</p>")
@@ -4708,18 +4616,9 @@ module DescribePlayerSessions = {
     ~playerId=?,
     ~gameSessionId=?,
     (),
-  ) =>
-    new({
-      nextToken: nextToken,
-      limit: limit,
-      playerSessionStatusFilter: playerSessionStatusFilter,
-      playerSessionId: playerSessionId,
-      playerId: playerId,
-      gameSessionId: gameSessionId,
-    })
+  ) => new({nextToken, limit, playerSessionStatusFilter, playerSessionId, playerId, gameSessionId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeMatchmakingRuleSets = {
   type t
   @ocaml.doc("<p>Represents the input for a request operation.</p>")
@@ -4752,11 +4651,9 @@ module DescribeMatchmakingRuleSets = {
   }
   @module("@aws-sdk/client-gamelift") @new
   external new: request => t = "DescribeMatchmakingRuleSetsCommand"
-  let make = (~nextToken=?, ~limit=?, ~names=?, ()) =>
-    new({nextToken: nextToken, limit: limit, names: names})
+  let make = (~nextToken=?, ~limit=?, ~names=?, ()) => new({nextToken, limit, names})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeInstances = {
   type t
   @ocaml.doc("<p>Represents the input for a request operation.</p>")
@@ -4797,16 +4694,9 @@ module DescribeInstances = {
   }
   @module("@aws-sdk/client-gamelift") @new external new: request => t = "DescribeInstancesCommand"
   let make = (~fleetId, ~location=?, ~nextToken=?, ~limit=?, ~instanceId=?, ()) =>
-    new({
-      location: location,
-      nextToken: nextToken,
-      limit: limit,
-      instanceId: instanceId,
-      fleetId: fleetId,
-    })
+    new({location, nextToken, limit, instanceId, fleetId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeGameServerInstances = {
   type t
   type request = {
@@ -4846,15 +4736,9 @@ module DescribeGameServerInstances = {
   @module("@aws-sdk/client-gamelift") @new
   external new: request => t = "DescribeGameServerInstancesCommand"
   let make = (~gameServerGroupName, ~nextToken=?, ~limit=?, ~instanceIds=?, ()) =>
-    new({
-      nextToken: nextToken,
-      limit: limit,
-      instanceIds: instanceIds,
-      gameServerGroupName: gameServerGroupName,
-    })
+    new({nextToken, limit, instanceIds, gameServerGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeFleetUtilization = {
   type t
   @ocaml.doc("<p>Represents the input for a request operation.</p>")
@@ -4886,11 +4770,9 @@ module DescribeFleetUtilization = {
   }
   @module("@aws-sdk/client-gamelift") @new
   external new: request => t = "DescribeFleetUtilizationCommand"
-  let make = (~nextToken=?, ~limit=?, ~fleetIds=?, ()) =>
-    new({nextToken: nextToken, limit: limit, fleetIds: fleetIds})
+  let make = (~nextToken=?, ~limit=?, ~fleetIds=?, ()) => new({nextToken, limit, fleetIds})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeFleetPortSettings = {
   type t
   @ocaml.doc("<p>Represents the input for a request operation.</p>")
@@ -4927,10 +4809,9 @@ module DescribeFleetPortSettings = {
   }
   @module("@aws-sdk/client-gamelift") @new
   external new: request => t = "DescribeFleetPortSettingsCommand"
-  let make = (~fleetId, ~location=?, ()) => new({location: location, fleetId: fleetId})
+  let make = (~fleetId, ~location=?, ()) => new({location, fleetId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeFleetLocationCapacity = {
   type t
   @ocaml.doc("<p>Represents the input for a request operation.</p>")
@@ -4953,10 +4834,9 @@ module DescribeFleetLocationCapacity = {
   }
   @module("@aws-sdk/client-gamelift") @new
   external new: request => t = "DescribeFleetLocationCapacityCommand"
-  let make = (~location, ~fleetId, ()) => new({location: location, fleetId: fleetId})
+  let make = (~location, ~fleetId, ()) => new({location, fleetId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeFleetEvents = {
   type t
   @ocaml.doc("<p>Represents the input for a request operation.</p>")
@@ -5001,16 +4881,9 @@ module DescribeFleetEvents = {
   }
   @module("@aws-sdk/client-gamelift") @new external new: request => t = "DescribeFleetEventsCommand"
   let make = (~fleetId, ~nextToken=?, ~limit=?, ~endTime=?, ~startTime=?, ()) =>
-    new({
-      nextToken: nextToken,
-      limit: limit,
-      endTime: endTime,
-      startTime: startTime,
-      fleetId: fleetId,
-    })
+    new({nextToken, limit, endTime, startTime, fleetId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeEC2InstanceLimits = {
   type t
   @ocaml.doc("<p>Represents the input for a request operation.</p>")
@@ -5035,11 +4908,9 @@ module DescribeEC2InstanceLimits = {
   }
   @module("@aws-sdk/client-gamelift") @new
   external new: request => t = "DescribeEC2InstanceLimitsCommand"
-  let make = (~location=?, ~ec2InstanceType=?, ()) =>
-    new({location: location, ec2InstanceType: ec2InstanceType})
+  let make = (~location=?, ~ec2InstanceType=?, ()) => new({location, ec2InstanceType})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeAlias = {
   type t
   @ocaml.doc("<p>Represents the input for a request operation.</p>")
@@ -5057,7 +4928,6 @@ module DescribeAlias = {
   let make = (~aliasId, ()) => new({aliasId: aliasId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteFleetLocations = {
   type t
   @ocaml.doc("<p>Represents the input for a request operation.</p>")
@@ -5090,10 +4960,9 @@ module DeleteFleetLocations = {
   }
   @module("@aws-sdk/client-gamelift") @new
   external new: request => t = "DeleteFleetLocationsCommand"
-  let make = (~locations, ~fleetId, ()) => new({locations: locations, fleetId: fleetId})
+  let make = (~locations, ~fleetId, ()) => new({locations, fleetId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateScript = {
   type t
   type request = {
@@ -5144,16 +5013,9 @@ module CreateScript = {
   }
   @module("@aws-sdk/client-gamelift") @new external new: request => t = "CreateScriptCommand"
   let make = (~tags=?, ~zipFile=?, ~storageLocation=?, ~version=?, ~name=?, ()) =>
-    new({
-      tags: tags,
-      zipFile: zipFile,
-      storageLocation: storageLocation,
-      version: version,
-      name: name,
-    })
+    new({tags, zipFile, storageLocation, version, name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreatePlayerSessions = {
   type t
   @ocaml.doc("<p>Represents the input for a request operation.</p>")
@@ -5179,10 +5041,9 @@ module CreatePlayerSessions = {
   @module("@aws-sdk/client-gamelift") @new
   external new: request => t = "CreatePlayerSessionsCommand"
   let make = (~playerIds, ~gameSessionId, ~playerDataMap=?, ()) =>
-    new({playerDataMap: playerDataMap, playerIds: playerIds, gameSessionId: gameSessionId})
+    new({playerDataMap, playerIds, gameSessionId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateMatchmakingRuleSet = {
   type t
   @ocaml.doc("<p>Represents the input for a request operation.</p>")
@@ -5215,11 +5076,9 @@ module CreateMatchmakingRuleSet = {
   }
   @module("@aws-sdk/client-gamelift") @new
   external new: request => t = "CreateMatchmakingRuleSetCommand"
-  let make = (~ruleSetBody, ~name, ~tags=?, ()) =>
-    new({tags: tags, ruleSetBody: ruleSetBody, name: name})
+  let make = (~ruleSetBody, ~name, ~tags=?, ()) => new({tags, ruleSetBody, name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateFleetLocations = {
   type t
   @ocaml.doc("<p>Represents the input for a request operation.</p>")
@@ -5256,10 +5115,9 @@ module CreateFleetLocations = {
   }
   @module("@aws-sdk/client-gamelift") @new
   external new: request => t = "CreateFleetLocationsCommand"
-  let make = (~locations, ~fleetId, ()) => new({locations: locations, fleetId: fleetId})
+  let make = (~locations, ~fleetId, ()) => new({locations, fleetId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateBuild = {
   type t
   @ocaml.doc("<p>Represents the input for a request operation.</p>")
@@ -5319,16 +5177,9 @@ module CreateBuild = {
   }
   @module("@aws-sdk/client-gamelift") @new external new: request => t = "CreateBuildCommand"
   let make = (~tags=?, ~operatingSystem=?, ~storageLocation=?, ~version=?, ~name=?, ()) =>
-    new({
-      tags: tags,
-      operatingSystem: operatingSystem,
-      storageLocation: storageLocation,
-      version: version,
-      name: name,
-    })
+    new({tags, operatingSystem, storageLocation, version, name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateAlias = {
   type t
   @ocaml.doc("<p>Represents the input for a request operation.</p>")
@@ -5363,10 +5214,9 @@ module CreateAlias = {
   }
   @module("@aws-sdk/client-gamelift") @new external new: request => t = "CreateAliasCommand"
   let make = (~routingStrategy, ~name, ~tags=?, ~description=?, ()) =>
-    new({tags: tags, routingStrategy: routingStrategy, description: description, name: name})
+    new({tags, routingStrategy, description, name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateRuntimeConfiguration = {
   type t
   @ocaml.doc("<p>Represents the input for a request operation.</p>")
@@ -5391,11 +5241,9 @@ module UpdateRuntimeConfiguration = {
   }
   @module("@aws-sdk/client-gamelift") @new
   external new: request => t = "UpdateRuntimeConfigurationCommand"
-  let make = (~runtimeConfiguration, ~fleetId, ()) =>
-    new({runtimeConfiguration: runtimeConfiguration, fleetId: fleetId})
+  let make = (~runtimeConfiguration, ~fleetId, ()) => new({runtimeConfiguration, fleetId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateMatchmakingConfiguration = {
   type t
   @ocaml.doc("<p>Represents the input for a request operation.</p>")
@@ -5510,24 +5358,23 @@ module UpdateMatchmakingConfiguration = {
     (),
   ) =>
     new({
-      flexMatchMode: flexMatchMode,
-      backfillMode: backfillMode,
-      gameSessionData: gameSessionData,
-      gameProperties: gameProperties,
-      customEventData: customEventData,
-      additionalPlayerCount: additionalPlayerCount,
-      notificationTarget: notificationTarget,
-      ruleSetName: ruleSetName,
-      acceptanceRequired: acceptanceRequired,
-      acceptanceTimeoutSeconds: acceptanceTimeoutSeconds,
-      requestTimeoutSeconds: requestTimeoutSeconds,
-      gameSessionQueueArns: gameSessionQueueArns,
-      description: description,
-      name: name,
+      flexMatchMode,
+      backfillMode,
+      gameSessionData,
+      gameProperties,
+      customEventData,
+      additionalPlayerCount,
+      notificationTarget,
+      ruleSetName,
+      acceptanceRequired,
+      acceptanceTimeoutSeconds,
+      requestTimeoutSeconds,
+      gameSessionQueueArns,
+      description,
+      name,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateGameSessionQueue = {
   type t
   @ocaml.doc("<p>Represents the input for a request operation.</p>")
@@ -5594,18 +5441,17 @@ module UpdateGameSessionQueue = {
     (),
   ) =>
     new({
-      notificationTarget: notificationTarget,
-      customEventData: customEventData,
-      priorityConfiguration: priorityConfiguration,
-      filterConfiguration: filterConfiguration,
-      destinations: destinations,
-      playerLatencyPolicies: playerLatencyPolicies,
-      timeoutInSeconds: timeoutInSeconds,
-      name: name,
+      notificationTarget,
+      customEventData,
+      priorityConfiguration,
+      filterConfiguration,
+      destinations,
+      playerLatencyPolicies,
+      timeoutInSeconds,
+      name,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateGameSession = {
   type t
   @ocaml.doc("<p>Represents the input for a request operation.</p>")
@@ -5657,15 +5503,14 @@ module UpdateGameSession = {
     (),
   ) =>
     new({
-      protectionPolicy: protectionPolicy,
-      playerSessionCreationPolicy: playerSessionCreationPolicy,
-      name: name,
-      maximumPlayerSessionCount: maximumPlayerSessionCount,
-      gameSessionId: gameSessionId,
+      protectionPolicy,
+      playerSessionCreationPolicy,
+      name,
+      maximumPlayerSessionCount,
+      gameSessionId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateGameServerGroup = {
   type t
   type request = {
@@ -5744,15 +5589,14 @@ module UpdateGameServerGroup = {
     (),
   ) =>
     new({
-      balancingStrategy: balancingStrategy,
-      gameServerProtectionPolicy: gameServerProtectionPolicy,
-      instanceDefinitions: instanceDefinitions,
-      roleArn: roleArn,
-      gameServerGroupName: gameServerGroupName,
+      balancingStrategy,
+      gameServerProtectionPolicy,
+      instanceDefinitions,
+      roleArn,
+      gameServerGroupName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module SuspendGameServerGroup = {
   type t
   type request = {
@@ -5774,10 +5618,9 @@ module SuspendGameServerGroup = {
   @module("@aws-sdk/client-gamelift") @new
   external new: request => t = "SuspendGameServerGroupCommand"
   let make = (~suspendActions, ~gameServerGroupName, ()) =>
-    new({suspendActions: suspendActions, gameServerGroupName: gameServerGroupName})
+    new({suspendActions, gameServerGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module StopGameSessionPlacement = {
   type t
   @ocaml.doc("<p>Represents the input for a request operation.</p>")
@@ -5798,7 +5641,6 @@ module StopGameSessionPlacement = {
   let make = (~placementId, ()) => new({placementId: placementId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module StartGameSessionPlacement = {
   type t
   @ocaml.doc("<p>Represents the input for a request operation.</p>")
@@ -5860,18 +5702,17 @@ module StartGameSessionPlacement = {
     (),
   ) =>
     new({
-      gameSessionData: gameSessionData,
-      desiredPlayerSessions: desiredPlayerSessions,
-      playerLatencies: playerLatencies,
-      gameSessionName: gameSessionName,
-      maximumPlayerSessionCount: maximumPlayerSessionCount,
-      gameProperties: gameProperties,
-      gameSessionQueueName: gameSessionQueueName,
-      placementId: placementId,
+      gameSessionData,
+      desiredPlayerSessions,
+      playerLatencies,
+      gameSessionName,
+      maximumPlayerSessionCount,
+      gameProperties,
+      gameSessionQueueName,
+      placementId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ResumeGameServerGroup = {
   type t
   type request = {
@@ -5892,11 +5733,9 @@ module ResumeGameServerGroup = {
   }
   @module("@aws-sdk/client-gamelift") @new
   external new: request => t = "ResumeGameServerGroupCommand"
-  let make = (~resumeActions, ~gameServerGroupName, ()) =>
-    new({resumeActions: resumeActions, gameServerGroupName: gameServerGroupName})
+  let make = (~resumeActions, ~gameServerGroupName, ()) => new({resumeActions, gameServerGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListScripts = {
   type t
   type request = {
@@ -5921,10 +5760,9 @@ module ListScripts = {
     scripts: option<scriptList>,
   }
   @module("@aws-sdk/client-gamelift") @new external new: request => t = "ListScriptsCommand"
-  let make = (~nextToken=?, ~limit=?, ()) => new({nextToken: nextToken, limit: limit})
+  let make = (~nextToken=?, ~limit=?, ()) => new({nextToken, limit})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListAliases = {
   type t
   @ocaml.doc("<p>Represents the input for a request operation.</p>")
@@ -5976,10 +5814,9 @@ module ListAliases = {
   }
   @module("@aws-sdk/client-gamelift") @new external new: request => t = "ListAliasesCommand"
   let make = (~nextToken=?, ~limit=?, ~name=?, ~routingStrategyType=?, ()) =>
-    new({nextToken: nextToken, limit: limit, name: name, routingStrategyType: routingStrategyType})
+    new({nextToken, limit, name, routingStrategyType})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeVpcPeeringConnections = {
   type t
   @ocaml.doc("<p>Represents the input for a request operation.</p>")
@@ -6001,7 +5838,6 @@ module DescribeVpcPeeringConnections = {
   let make = (~fleetId=?, ()) => new({fleetId: fleetId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeScalingPolicies = {
   type t
   @ocaml.doc("<p>Represents the input for a request operation.</p>")
@@ -6082,16 +5918,9 @@ module DescribeScalingPolicies = {
   @module("@aws-sdk/client-gamelift") @new
   external new: request => t = "DescribeScalingPoliciesCommand"
   let make = (~fleetId, ~location=?, ~nextToken=?, ~limit=?, ~statusFilter=?, ()) =>
-    new({
-      location: location,
-      nextToken: nextToken,
-      limit: limit,
-      statusFilter: statusFilter,
-      fleetId: fleetId,
-    })
+    new({location, nextToken, limit, statusFilter, fleetId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeRuntimeConfiguration = {
   type t
   @ocaml.doc("<p>Represents the input for a request operation.</p>")
@@ -6113,7 +5942,6 @@ module DescribeRuntimeConfiguration = {
   let make = (~fleetId, ()) => new({fleetId: fleetId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeGameSessionPlacement = {
   type t
   @ocaml.doc("<p>Represents the input for a request operation.</p>")
@@ -6133,7 +5961,6 @@ module DescribeGameSessionPlacement = {
   let make = (~placementId, ()) => new({placementId: placementId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeGameServerGroup = {
   type t
   type request = {
@@ -6155,7 +5982,6 @@ module DescribeGameServerGroup = {
   let make = (~gameServerGroupName, ()) => new({gameServerGroupName: gameServerGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeFleetLocationAttributes = {
   type t
   @ocaml.doc("<p>Represents the input for a request operation.</p>")
@@ -6203,10 +6029,9 @@ module DescribeFleetLocationAttributes = {
   @module("@aws-sdk/client-gamelift") @new
   external new: request => t = "DescribeFleetLocationAttributesCommand"
   let make = (~fleetId, ~nextToken=?, ~limit=?, ~locations=?, ()) =>
-    new({nextToken: nextToken, limit: limit, locations: locations, fleetId: fleetId})
+    new({nextToken, limit, locations, fleetId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeFleetCapacity = {
   type t
   @ocaml.doc("<p>Represents the input for a request operation.</p>")
@@ -6239,11 +6064,9 @@ module DescribeFleetCapacity = {
   }
   @module("@aws-sdk/client-gamelift") @new
   external new: request => t = "DescribeFleetCapacityCommand"
-  let make = (~nextToken=?, ~limit=?, ~fleetIds=?, ()) =>
-    new({nextToken: nextToken, limit: limit, fleetIds: fleetIds})
+  let make = (~nextToken=?, ~limit=?, ~fleetIds=?, ()) => new({nextToken, limit, fleetIds})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeFleetAttributes = {
   type t
   @ocaml.doc("<p>Represents the input for a request operation.</p>")
@@ -6276,11 +6099,9 @@ module DescribeFleetAttributes = {
   }
   @module("@aws-sdk/client-gamelift") @new
   external new: request => t = "DescribeFleetAttributesCommand"
-  let make = (~nextToken=?, ~limit=?, ~fleetIds=?, ()) =>
-    new({nextToken: nextToken, limit: limit, fleetIds: fleetIds})
+  let make = (~nextToken=?, ~limit=?, ~fleetIds=?, ()) => new({nextToken, limit, fleetIds})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteGameServerGroup = {
   type t
   type request = {
@@ -6320,11 +6141,9 @@ module DeleteGameServerGroup = {
   }
   @module("@aws-sdk/client-gamelift") @new
   external new: request => t = "DeleteGameServerGroupCommand"
-  let make = (~gameServerGroupName, ~deleteOption=?, ()) =>
-    new({deleteOption: deleteOption, gameServerGroupName: gameServerGroupName})
+  let make = (~gameServerGroupName, ~deleteOption=?, ()) => new({deleteOption, gameServerGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateMatchmakingConfiguration = {
   type t
   @ocaml.doc("<p>Represents the input for a request operation.</p>")
@@ -6454,25 +6273,24 @@ module CreateMatchmakingConfiguration = {
     (),
   ) =>
     new({
-      tags: tags,
-      flexMatchMode: flexMatchMode,
-      backfillMode: backfillMode,
-      gameSessionData: gameSessionData,
-      gameProperties: gameProperties,
-      customEventData: customEventData,
-      additionalPlayerCount: additionalPlayerCount,
-      notificationTarget: notificationTarget,
-      ruleSetName: ruleSetName,
-      acceptanceRequired: acceptanceRequired,
-      acceptanceTimeoutSeconds: acceptanceTimeoutSeconds,
-      requestTimeoutSeconds: requestTimeoutSeconds,
-      gameSessionQueueArns: gameSessionQueueArns,
-      description: description,
-      name: name,
+      tags,
+      flexMatchMode,
+      backfillMode,
+      gameSessionData,
+      gameProperties,
+      customEventData,
+      additionalPlayerCount,
+      notificationTarget,
+      ruleSetName,
+      acceptanceRequired,
+      acceptanceTimeoutSeconds,
+      requestTimeoutSeconds,
+      gameSessionQueueArns,
+      description,
+      name,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateGameSessionQueue = {
   type t
   @ocaml.doc("<p>Represents the input for a request operation.</p>")
@@ -6550,19 +6368,18 @@ module CreateGameSessionQueue = {
     (),
   ) =>
     new({
-      tags: tags,
-      notificationTarget: notificationTarget,
-      customEventData: customEventData,
-      priorityConfiguration: priorityConfiguration,
-      filterConfiguration: filterConfiguration,
-      destinations: destinations,
-      playerLatencyPolicies: playerLatencyPolicies,
-      timeoutInSeconds: timeoutInSeconds,
-      name: name,
+      tags,
+      notificationTarget,
+      customEventData,
+      priorityConfiguration,
+      filterConfiguration,
+      destinations,
+      playerLatencyPolicies,
+      timeoutInSeconds,
+      name,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateGameSession = {
   type t
   @ocaml.doc("<p>Represents the input for a request operation.</p>")
@@ -6645,20 +6462,19 @@ module CreateGameSession = {
     (),
   ) =>
     new({
-      location: location,
-      gameSessionData: gameSessionData,
-      idempotencyToken: idempotencyToken,
-      gameSessionId: gameSessionId,
-      creatorId: creatorId,
-      gameProperties: gameProperties,
-      name: name,
-      maximumPlayerSessionCount: maximumPlayerSessionCount,
-      aliasId: aliasId,
-      fleetId: fleetId,
+      location,
+      gameSessionData,
+      idempotencyToken,
+      gameSessionId,
+      creatorId,
+      gameProperties,
+      name,
+      maximumPlayerSessionCount,
+      aliasId,
+      fleetId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateGameServerGroup = {
   type t
   type request = {
@@ -6796,21 +6612,20 @@ module CreateGameServerGroup = {
     (),
   ) =>
     new({
-      tags: tags,
-      vpcSubnets: vpcSubnets,
-      gameServerProtectionPolicy: gameServerProtectionPolicy,
-      balancingStrategy: balancingStrategy,
-      autoScalingPolicy: autoScalingPolicy,
-      instanceDefinitions: instanceDefinitions,
-      launchTemplate: launchTemplate,
-      maxSize: maxSize,
-      minSize: minSize,
-      roleArn: roleArn,
-      gameServerGroupName: gameServerGroupName,
+      tags,
+      vpcSubnets,
+      gameServerProtectionPolicy,
+      balancingStrategy,
+      autoScalingPolicy,
+      instanceDefinitions,
+      launchTemplate,
+      maxSize,
+      minSize,
+      roleArn,
+      gameServerGroupName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateFleet = {
   type t
   @ocaml.doc("<p>Represents the input for a request operation.</p>")
@@ -6994,30 +6809,29 @@ module CreateFleet = {
     (),
   ) =>
     new({
-      tags: tags,
-      locations: locations,
-      certificateConfiguration: certificateConfiguration,
-      instanceRoleArn: instanceRoleArn,
-      fleetType: fleetType,
-      peerVpcId: peerVpcId,
-      peerVpcAwsAccountId: peerVpcAwsAccountId,
-      metricGroups: metricGroups,
-      resourceCreationLimitPolicy: resourceCreationLimitPolicy,
-      runtimeConfiguration: runtimeConfiguration,
-      newGameSessionProtectionPolicy: newGameSessionProtectionPolicy,
-      ec2InboundPermissions: ec2InboundPermissions,
-      ec2InstanceType: ec2InstanceType,
-      logPaths: logPaths,
-      serverLaunchParameters: serverLaunchParameters,
-      serverLaunchPath: serverLaunchPath,
-      scriptId: scriptId,
-      buildId: buildId,
-      description: description,
-      name: name,
+      tags,
+      locations,
+      certificateConfiguration,
+      instanceRoleArn,
+      fleetType,
+      peerVpcId,
+      peerVpcAwsAccountId,
+      metricGroups,
+      resourceCreationLimitPolicy,
+      runtimeConfiguration,
+      newGameSessionProtectionPolicy,
+      ec2InboundPermissions,
+      ec2InstanceType,
+      logPaths,
+      serverLaunchParameters,
+      serverLaunchPath,
+      scriptId,
+      buildId,
+      description,
+      name,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module SearchGameSessions = {
   type t
   @ocaml.doc("<p>Represents the input for a request operation.</p>")
@@ -7154,19 +6968,9 @@ module SearchGameSessions = {
     ~aliasId=?,
     ~fleetId=?,
     (),
-  ) =>
-    new({
-      nextToken: nextToken,
-      limit: limit,
-      sortExpression: sortExpression,
-      filterExpression: filterExpression,
-      location: location,
-      aliasId: aliasId,
-      fleetId: fleetId,
-    })
+  ) => new({nextToken, limit, sortExpression, filterExpression, location, aliasId, fleetId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListGameServerGroups = {
   type t
   type request = {
@@ -7193,10 +6997,9 @@ module ListGameServerGroups = {
   }
   @module("@aws-sdk/client-gamelift") @new
   external new: request => t = "ListGameServerGroupsCommand"
-  let make = (~nextToken=?, ~limit=?, ()) => new({nextToken: nextToken, limit: limit})
+  let make = (~nextToken=?, ~limit=?, ()) => new({nextToken, limit})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeMatchmakingConfigurations = {
   type t
   @ocaml.doc("<p>Represents the input for a request operation.</p>")
@@ -7233,10 +7036,9 @@ module DescribeMatchmakingConfigurations = {
   @module("@aws-sdk/client-gamelift") @new
   external new: request => t = "DescribeMatchmakingConfigurationsCommand"
   let make = (~nextToken=?, ~limit=?, ~ruleSetName=?, ~names=?, ()) =>
-    new({nextToken: nextToken, limit: limit, ruleSetName: ruleSetName, names: names})
+    new({nextToken, limit, ruleSetName, names})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeGameSessions = {
   type t
   @ocaml.doc("<p>Represents the input for a request operation.</p>")
@@ -7296,19 +7098,9 @@ module DescribeGameSessions = {
     ~gameSessionId=?,
     ~fleetId=?,
     (),
-  ) =>
-    new({
-      nextToken: nextToken,
-      limit: limit,
-      statusFilter: statusFilter,
-      location: location,
-      aliasId: aliasId,
-      gameSessionId: gameSessionId,
-      fleetId: fleetId,
-    })
+  ) => new({nextToken, limit, statusFilter, location, aliasId, gameSessionId, fleetId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeGameSessionQueues = {
   type t
   @ocaml.doc("<p>Represents the input for a request operation.</p>")
@@ -7341,11 +7133,9 @@ module DescribeGameSessionQueues = {
   }
   @module("@aws-sdk/client-gamelift") @new
   external new: request => t = "DescribeGameSessionQueuesCommand"
-  let make = (~nextToken=?, ~limit=?, ~names=?, ()) =>
-    new({nextToken: nextToken, limit: limit, names: names})
+  let make = (~nextToken=?, ~limit=?, ~names=?, ()) => new({nextToken, limit, names})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeGameSessionDetails = {
   type t
   @ocaml.doc("<p>Represents the input for a request operation.</p>")
@@ -7402,19 +7192,9 @@ module DescribeGameSessionDetails = {
     ~gameSessionId=?,
     ~fleetId=?,
     (),
-  ) =>
-    new({
-      nextToken: nextToken,
-      limit: limit,
-      statusFilter: statusFilter,
-      location: location,
-      aliasId: aliasId,
-      gameSessionId: gameSessionId,
-      fleetId: fleetId,
-    })
+  ) => new({nextToken, limit, statusFilter, location, aliasId, gameSessionId, fleetId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module StartMatchmaking = {
   type t
   @ocaml.doc("<p>Represents the input for a request operation.</p>")
@@ -7446,10 +7226,9 @@ module StartMatchmaking = {
   }
   @module("@aws-sdk/client-gamelift") @new external new: request => t = "StartMatchmakingCommand"
   let make = (~players, ~configurationName, ~ticketId=?, ()) =>
-    new({players: players, configurationName: configurationName, ticketId: ticketId})
+    new({players, configurationName, ticketId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module StartMatchBackfill = {
   type t
   @ocaml.doc("<p>Represents the input for a request operation.</p>")
@@ -7501,15 +7280,9 @@ module StartMatchBackfill = {
   }
   @module("@aws-sdk/client-gamelift") @new external new: request => t = "StartMatchBackfillCommand"
   let make = (~players, ~configurationName, ~gameSessionArn=?, ~ticketId=?, ()) =>
-    new({
-      players: players,
-      gameSessionArn: gameSessionArn,
-      configurationName: configurationName,
-      ticketId: ticketId,
-    })
+    new({players, gameSessionArn, configurationName, ticketId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeMatchmaking = {
   type t
   @ocaml.doc("<p>Represents the input for a request operation.</p>")

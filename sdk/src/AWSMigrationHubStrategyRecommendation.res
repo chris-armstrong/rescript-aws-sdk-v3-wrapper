@@ -919,7 +919,6 @@ module StopAssessment = {
   let make = (~assessmentId, ()) => new({assessmentId: assessmentId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module StartAssessment = {
   type t
   type request = {
@@ -943,13 +942,9 @@ module StartAssessment = {
   @module("@aws-sdk/client-awsmigrationhubstrategyrecommendation") @new
   external new: request => t = "StartAssessmentCommand"
   let make = (~s3bucketForReportData=?, ~s3bucketForAnalysisData=?, ()) =>
-    new({
-      s3bucketForReportData: s3bucketForReportData,
-      s3bucketForAnalysisData: s3bucketForAnalysisData,
-    })
+    new({s3bucketForReportData, s3bucketForAnalysisData})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetImportFileTask = {
   type t
   type request = {
@@ -987,7 +982,6 @@ module GetImportFileTask = {
   let make = (~id, ()) => new({id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateServerConfig = {
   type t
   type request = {
@@ -1000,11 +994,9 @@ module UpdateServerConfig = {
   type response = {.}
   @module("@aws-sdk/client-awsmigrationhubstrategyrecommendation") @new
   external new: request => t = "UpdateServerConfigCommand"
-  let make = (~serverId, ~strategyOption=?, ()) =>
-    new({strategyOption: strategyOption, serverId: serverId})
+  let make = (~serverId, ~strategyOption=?, ()) => new({strategyOption, serverId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module GetAssessment = {
   type t
   type request = {
@@ -1021,7 +1013,6 @@ module GetAssessment = {
   let make = (~id, ()) => new({id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateApplicationComponentConfig = {
   type t
   type request = {
@@ -1054,15 +1045,14 @@ module UpdateApplicationComponentConfig = {
     (),
   ) =>
     new({
-      secretsManagerKey: secretsManagerKey,
-      sourceCodeList: sourceCodeList,
-      strategyOption: strategyOption,
-      inclusionStatus: inclusionStatus,
-      applicationComponentId: applicationComponentId,
+      secretsManagerKey,
+      sourceCodeList,
+      strategyOption,
+      inclusionStatus,
+      applicationComponentId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module StartRecommendationReportGeneration = {
   type t
   type request = {
@@ -1079,11 +1069,9 @@ module StartRecommendationReportGeneration = {
   }
   @module("@aws-sdk/client-awsmigrationhubstrategyrecommendation") @new
   external new: request => t = "StartRecommendationReportGenerationCommand"
-  let make = (~groupIdFilter=?, ~outputFormat=?, ()) =>
-    new({groupIdFilter: groupIdFilter, outputFormat: outputFormat})
+  let make = (~groupIdFilter=?, ~outputFormat=?, ()) => new({groupIdFilter, outputFormat})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module StartImportFileTask = {
   type t
   type request = {
@@ -1119,18 +1107,9 @@ module StartImportFileTask = {
     ~groupId=?,
     ~dataSourceType=?,
     (),
-  ) =>
-    new({
-      s3bucketForReportData: s3bucketForReportData,
-      groupId: groupId,
-      dataSourceType: dataSourceType,
-      s3key: s3key,
-      s3Bucket: s3Bucket,
-      name: name,
-    })
+  ) => new({s3bucketForReportData, groupId, dataSourceType, s3key, s3Bucket, name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListImportFileTask = {
   type t
   type request = {
@@ -1151,11 +1130,9 @@ if a previous call to this action returned 100 items, but you set <code>maxResul
   }
   @module("@aws-sdk/client-awsmigrationhubstrategyrecommendation") @new
   external new: request => t = "ListImportFileTaskCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListCollectors = {
   type t
   type request = {
@@ -1178,11 +1155,9 @@ if a previous call to this action returned 100 items, but you set <code>maxResul
   }
   @module("@aws-sdk/client-awsmigrationhubstrategyrecommendation") @new
   external new: request => t = "ListCollectorsCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetRecommendationReportDetails = {
   type t
   type request = {
@@ -1203,7 +1178,6 @@ module GetRecommendationReportDetails = {
   let make = (~id, ()) => new({id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetPortfolioSummary = {
   type t
   type request = {.}
@@ -1217,7 +1191,6 @@ module GetPortfolioSummary = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetApplicationComponentDetails = {
   type t
   type request = {
@@ -1246,7 +1219,6 @@ module GetApplicationComponentDetails = {
   let make = (~applicationComponentId, ()) => new({applicationComponentId: applicationComponentId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module PutPortfolioPreferences = {
   type t
   type request = {
@@ -1261,14 +1233,9 @@ module PutPortfolioPreferences = {
   @module("@aws-sdk/client-awsmigrationhubstrategyrecommendation") @new
   external new: request => t = "PutPortfolioPreferencesCommand"
   let make = (~databasePreferences=?, ~applicationPreferences=?, ~prioritizeBusinessGoals=?, ()) =>
-    new({
-      databasePreferences: databasePreferences,
-      applicationPreferences: applicationPreferences,
-      prioritizeBusinessGoals: prioritizeBusinessGoals,
-    })
+    new({databasePreferences, applicationPreferences, prioritizeBusinessGoals})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module ListApplicationComponents = {
   type t
   type request = {
@@ -1311,18 +1278,9 @@ if a previous call to this action returned 100 items, but you set <code>maxResul
     ~filterValue=?,
     ~applicationComponentCriteria=?,
     (),
-  ) =>
-    new({
-      maxResults: maxResults,
-      nextToken: nextToken,
-      groupIdFilter: groupIdFilter,
-      sort: sort,
-      filterValue: filterValue,
-      applicationComponentCriteria: applicationComponentCriteria,
-    })
+  ) => new({maxResults, nextToken, groupIdFilter, sort, filterValue, applicationComponentCriteria})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetServerStrategies = {
   type t
   type request = {@ocaml.doc("<p> The ID of the server. </p>") serverId: serverId}
@@ -1335,7 +1293,6 @@ module GetServerStrategies = {
   let make = (~serverId, ()) => new({serverId: serverId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetServerDetails = {
   type t
   type request = {
@@ -1362,11 +1319,9 @@ if a previous call to this action returned 100 items, but you set <code>maxResul
   }
   @module("@aws-sdk/client-awsmigrationhubstrategyrecommendation") @new
   external new: request => t = "GetServerDetailsCommand"
-  let make = (~serverId, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, serverId: serverId})
+  let make = (~serverId, ~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken, serverId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetPortfolioPreferences = {
   type t
   type request = {.}
@@ -1383,7 +1338,6 @@ module GetPortfolioPreferences = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetApplicationComponentStrategies = {
   type t
   type request = {
@@ -1401,7 +1355,6 @@ module GetApplicationComponentStrategies = {
   let make = (~applicationComponentId, ()) => new({applicationComponentId: applicationComponentId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListServers = {
   type t
   type request = {
@@ -1442,14 +1395,6 @@ if a previous call to this action returned 100 items, but you set <code>maxResul
     ~filterValue=?,
     ~serverCriteria=?,
     (),
-  ) =>
-    new({
-      maxResults: maxResults,
-      nextToken: nextToken,
-      groupIdFilter: groupIdFilter,
-      sort: sort,
-      filterValue: filterValue,
-      serverCriteria: serverCriteria,
-    })
+  ) => new({maxResults, nextToken, groupIdFilter, sort, filterValue, serverCriteria})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

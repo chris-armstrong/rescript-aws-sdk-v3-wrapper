@@ -498,7 +498,6 @@ module DeleteSite = {
   let make = (~siteId, ()) => new({siteId: siteId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteOutpost = {
   type t
   type request = {
@@ -513,7 +512,6 @@ module DeleteOutpost = {
   let make = (~outpostId, ()) => new({outpostId: outpostId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module CancelOrder = {
   type t
   type request = {
@@ -528,7 +526,6 @@ module CancelOrder = {
   let make = (~orderId, ()) => new({orderId: orderId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module UpdateSiteAddress = {
   type t
   type request = {
@@ -561,11 +558,9 @@ module UpdateSiteAddress = {
     addressType: option<addressType>,
   }
   @module("@aws-sdk/client-outposts") @new external new: request => t = "UpdateSiteAddressCommand"
-  let make = (~address, ~addressType, ~siteId, ()) =>
-    new({address: address, addressType: addressType, siteId: siteId})
+  let make = (~address, ~addressType, ~siteId, ()) => new({address, addressType, siteId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UntagResource = {
   type t
   type request = {
@@ -575,10 +570,9 @@ module UntagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-outposts") @new external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
+  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys, resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module TagResource = {
   type t
   type request = {
@@ -588,10 +582,9 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-outposts") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
+  let make = (~tags, ~resourceArn, ()) => new({tags, resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module ListTagsForResource = {
   type t
   type request = {
@@ -603,7 +596,6 @@ module ListTagsForResource = {
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetSiteAddress = {
   type t
   type request = {
@@ -626,10 +618,9 @@ module GetSiteAddress = {
     @as("SiteId") siteId: option<siteId>,
   }
   @module("@aws-sdk/client-outposts") @new external new: request => t = "GetSiteAddressCommand"
-  let make = (~addressType, ~siteId, ()) => new({addressType: addressType, siteId: siteId})
+  let make = (~addressType, ~siteId, ()) => new({addressType, siteId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateSiteRackPhysicalProperties = {
   type t
   type request = {
@@ -801,20 +792,19 @@ module UpdateSiteRackPhysicalProperties = {
     (),
   ) =>
     new({
-      maximumSupportedWeightLbs: maximumSupportedWeightLbs,
-      opticalStandard: opticalStandard,
-      fiberOpticCableType: fiberOpticCableType,
-      uplinkCount: uplinkCount,
-      uplinkGbps: uplinkGbps,
-      powerFeedDrop: powerFeedDrop,
-      powerConnector: powerConnector,
-      powerPhase: powerPhase,
-      powerDrawKva: powerDrawKva,
-      siteId: siteId,
+      maximumSupportedWeightLbs,
+      opticalStandard,
+      fiberOpticCableType,
+      uplinkCount,
+      uplinkGbps,
+      powerFeedDrop,
+      powerConnector,
+      powerPhase,
+      powerDrawKva,
+      siteId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateSite = {
   type t
   type request = {
@@ -834,10 +824,9 @@ module UpdateSite = {
   type response = {@as("Site") site: option<site>}
   @module("@aws-sdk/client-outposts") @new external new: request => t = "UpdateSiteCommand"
   let make = (~siteId, ~notes=?, ~description=?, ~name=?, ()) =>
-    new({notes: notes, description: description, name: name, siteId: siteId})
+    new({notes, description, name, siteId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateOutpost = {
   type t
   type request = {
@@ -857,15 +846,9 @@ module UpdateOutpost = {
   type response = {@as("Outpost") outpost: option<outpost>}
   @module("@aws-sdk/client-outposts") @new external new: request => t = "UpdateOutpostCommand"
   let make = (~outpostId, ~supportedHardwareType=?, ~description=?, ~name=?, ()) =>
-    new({
-      supportedHardwareType: supportedHardwareType,
-      description: description,
-      name: name,
-      outpostId: outpostId,
-    })
+    new({supportedHardwareType, description, name, outpostId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetSite = {
   type t
   type request = {
@@ -880,7 +863,6 @@ module GetSite = {
   let make = (~siteId, ()) => new({siteId: siteId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetOutpostInstanceTypes = {
   type t
   type request = {
@@ -905,10 +887,9 @@ module GetOutpostInstanceTypes = {
   @module("@aws-sdk/client-outposts") @new
   external new: request => t = "GetOutpostInstanceTypesCommand"
   let make = (~outpostId, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, outpostId: outpostId})
+    new({maxResults, nextToken, outpostId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetOutpost = {
   type t
   type request = {
@@ -923,7 +904,6 @@ module GetOutpost = {
   let make = (~outpostId, ()) => new({outpostId: outpostId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateSite = {
   type t
   type request = {
@@ -971,18 +951,9 @@ module CreateSite = {
     ~description=?,
     (),
   ) =>
-    new({
-      rackPhysicalProperties: rackPhysicalProperties,
-      shippingAddress: shippingAddress,
-      operatingAddress: operatingAddress,
-      tags: tags,
-      notes: notes,
-      description: description,
-      name: name,
-    })
+    new({rackPhysicalProperties, shippingAddress, operatingAddress, tags, notes, description, name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateOutpost = {
   type t
   type request = {
@@ -1015,17 +986,16 @@ module CreateOutpost = {
     (),
   ) =>
     new({
-      supportedHardwareType: supportedHardwareType,
-      tags: tags,
-      availabilityZoneId: availabilityZoneId,
-      availabilityZone: availabilityZone,
-      siteId: siteId,
-      description: description,
-      name: name,
+      supportedHardwareType,
+      tags,
+      availabilityZoneId,
+      availabilityZone,
+      siteId,
+      description,
+      name,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListSites = {
   type t
   type request = {
@@ -1066,15 +1036,14 @@ module ListSites = {
     (),
   ) =>
     new({
-      operatingAddressCityFilter: operatingAddressCityFilter,
-      operatingAddressStateOrRegionFilter: operatingAddressStateOrRegionFilter,
-      operatingAddressCountryCodeFilter: operatingAddressCountryCodeFilter,
-      maxResults: maxResults,
-      nextToken: nextToken,
+      operatingAddressCityFilter,
+      operatingAddressStateOrRegionFilter,
+      operatingAddressCountryCodeFilter,
+      maxResults,
+      nextToken,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListOutposts = {
   type t
   type request = {
@@ -1119,15 +1088,14 @@ module ListOutposts = {
     (),
   ) =>
     new({
-      availabilityZoneIdFilter: availabilityZoneIdFilter,
-      availabilityZoneFilter: availabilityZoneFilter,
-      lifeCycleStatusFilter: lifeCycleStatusFilter,
-      maxResults: maxResults,
-      nextToken: nextToken,
+      availabilityZoneIdFilter,
+      availabilityZoneFilter,
+      lifeCycleStatusFilter,
+      maxResults,
+      nextToken,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListOrders = {
   type t
   type request = {
@@ -1149,14 +1117,9 @@ module ListOrders = {
   }
   @module("@aws-sdk/client-outposts") @new external new: request => t = "ListOrdersCommand"
   let make = (~maxResults=?, ~nextToken=?, ~outpostIdentifierFilter=?, ()) =>
-    new({
-      maxResults: maxResults,
-      nextToken: nextToken,
-      outpostIdentifierFilter: outpostIdentifierFilter,
-    })
+    new({maxResults, nextToken, outpostIdentifierFilter})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetOrder = {
   type t
   type request = {@ocaml.doc("<p>The ID of the order.</p>") @as("OrderId") orderId: orderId}
@@ -1165,7 +1128,6 @@ module GetOrder = {
   let make = (~orderId, ()) => new({orderId: orderId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetCatalogItem = {
   type t
   type request = {
@@ -1179,7 +1141,6 @@ module GetCatalogItem = {
   let make = (~catalogItemId, ()) => new({catalogItemId: catalogItemId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateOrder = {
   type t
   type request = {
@@ -1200,15 +1161,9 @@ module CreateOrder = {
   }
   @module("@aws-sdk/client-outposts") @new external new: request => t = "CreateOrderCommand"
   let make = (~paymentOption, ~lineItems, ~outpostIdentifier, ~paymentTerm=?, ()) =>
-    new({
-      paymentTerm: paymentTerm,
-      paymentOption: paymentOption,
-      lineItems: lineItems,
-      outpostIdentifier: outpostIdentifier,
-    })
+    new({paymentTerm, paymentOption, lineItems, outpostIdentifier})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListCatalogItems = {
   type t
   type request = {
@@ -1252,13 +1207,6 @@ module ListCatalogItems = {
     ~maxResults=?,
     ~nextToken=?,
     (),
-  ) =>
-    new({
-      ec2FamilyFilter: ec2FamilyFilter,
-      supportedStorageFilter: supportedStorageFilter,
-      itemClassFilter: itemClassFilter,
-      maxResults: maxResults,
-      nextToken: nextToken,
-    })
+  ) => new({ec2FamilyFilter, supportedStorageFilter, itemClassFilter, maxResults, nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

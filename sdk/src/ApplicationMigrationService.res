@@ -582,20 +582,20 @@ module UpdateReplicationConfigurationTemplate = {
     (),
   ) =>
     new({
-      stagingAreaTags: stagingAreaTags,
-      createPublicIP: createPublicIP,
-      dataPlaneRouting: dataPlaneRouting,
-      bandwidthThrottling: bandwidthThrottling,
-      ebsEncryptionKeyArn: ebsEncryptionKeyArn,
-      ebsEncryption: ebsEncryption,
-      defaultLargeStagingDiskType: defaultLargeStagingDiskType,
-      useDedicatedReplicationServer: useDedicatedReplicationServer,
-      replicationServerInstanceType: replicationServerInstanceType,
-      replicationServersSecurityGroupsIDs: replicationServersSecurityGroupsIDs,
-      associateDefaultSecurityGroup: associateDefaultSecurityGroup,
-      stagingAreaSubnetId: stagingAreaSubnetId,
-      arn: arn,
-      replicationConfigurationTemplateID: replicationConfigurationTemplateID,
+      stagingAreaTags,
+      createPublicIP,
+      dataPlaneRouting,
+      bandwidthThrottling,
+      ebsEncryptionKeyArn,
+      ebsEncryption,
+      defaultLargeStagingDiskType,
+      useDedicatedReplicationServer,
+      replicationServerInstanceType,
+      replicationServersSecurityGroupsIDs,
+      associateDefaultSecurityGroup,
+      stagingAreaSubnetId,
+      arn,
+      replicationConfigurationTemplateID,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
@@ -694,21 +694,21 @@ module UpdateReplicationConfiguration = {
     (),
   ) =>
     new({
-      stagingAreaTags: stagingAreaTags,
-      createPublicIP: createPublicIP,
-      dataPlaneRouting: dataPlaneRouting,
-      bandwidthThrottling: bandwidthThrottling,
-      ebsEncryptionKeyArn: ebsEncryptionKeyArn,
-      ebsEncryption: ebsEncryption,
-      replicatedDisks: replicatedDisks,
-      defaultLargeStagingDiskType: defaultLargeStagingDiskType,
-      useDedicatedReplicationServer: useDedicatedReplicationServer,
-      replicationServerInstanceType: replicationServerInstanceType,
-      replicationServersSecurityGroupsIDs: replicationServersSecurityGroupsIDs,
-      associateDefaultSecurityGroup: associateDefaultSecurityGroup,
-      stagingAreaSubnetId: stagingAreaSubnetId,
-      name: name,
-      sourceServerID: sourceServerID,
+      stagingAreaTags,
+      createPublicIP,
+      dataPlaneRouting,
+      bandwidthThrottling,
+      ebsEncryptionKeyArn,
+      ebsEncryption,
+      replicatedDisks,
+      defaultLargeStagingDiskType,
+      useDedicatedReplicationServer,
+      replicationServerInstanceType,
+      replicationServersSecurityGroupsIDs,
+      associateDefaultSecurityGroup,
+      stagingAreaSubnetId,
+      name,
+      sourceServerID,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
@@ -758,13 +758,13 @@ module UpdateLaunchConfiguration = {
     (),
   ) =>
     new({
-      licensing: licensing,
-      copyTags: copyTags,
-      copyPrivateIp: copyPrivateIp,
-      targetInstanceTypeRightSizingMethod: targetInstanceTypeRightSizingMethod,
-      launchDisposition: launchDisposition,
-      name: name,
-      sourceServerID: sourceServerID,
+      licensing,
+      copyTags,
+      copyPrivateIp,
+      targetInstanceTypeRightSizingMethod,
+      launchDisposition,
+      name,
+      sourceServerID,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
@@ -777,7 +777,7 @@ module UntagResource = {
   }
 
   @module("@aws-sdk/client-mgn") @new external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
+  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys, resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
@@ -789,7 +789,7 @@ module TagResource = {
   }
 
   @module("@aws-sdk/client-mgn") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
+  let make = (~tags, ~resourceArn, ()) => new({tags, resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
@@ -927,19 +927,19 @@ module CreateReplicationConfigurationTemplate = {
     (),
   ) =>
     new({
-      tags: tags,
-      stagingAreaTags: stagingAreaTags,
-      createPublicIP: createPublicIP,
-      dataPlaneRouting: dataPlaneRouting,
-      bandwidthThrottling: bandwidthThrottling,
-      ebsEncryptionKeyArn: ebsEncryptionKeyArn,
-      ebsEncryption: ebsEncryption,
-      defaultLargeStagingDiskType: defaultLargeStagingDiskType,
-      useDedicatedReplicationServer: useDedicatedReplicationServer,
-      replicationServerInstanceType: replicationServerInstanceType,
-      replicationServersSecurityGroupsIDs: replicationServersSecurityGroupsIDs,
-      associateDefaultSecurityGroup: associateDefaultSecurityGroup,
-      stagingAreaSubnetId: stagingAreaSubnetId,
+      tags,
+      stagingAreaTags,
+      createPublicIP,
+      dataPlaneRouting,
+      bandwidthThrottling,
+      ebsEncryptionKeyArn,
+      ebsEncryption,
+      defaultLargeStagingDiskType,
+      useDedicatedReplicationServer,
+      replicationServerInstanceType,
+      replicationServersSecurityGroupsIDs,
+      associateDefaultSecurityGroup,
+      stagingAreaSubnetId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
@@ -953,7 +953,7 @@ module TerminateTargetInstances = {
   }
   type response = {@ocaml.doc("<p>Terminate Target instance Job response.</p>") job: option<job>}
   @module("@aws-sdk/client-mgn") @new external new: request => t = "TerminateTargetInstancesCommand"
-  let make = (~sourceServerIDs, ~tags=?, ()) => new({tags: tags, sourceServerIDs: sourceServerIDs})
+  let make = (~sourceServerIDs, ~tags=?, ()) => new({tags, sourceServerIDs})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -966,7 +966,7 @@ module StartTest = {
   }
   type response = {@ocaml.doc("<p>Start Test Job response.</p>") job: option<job>}
   @module("@aws-sdk/client-mgn") @new external new: request => t = "StartTestCommand"
-  let make = (~sourceServerIDs, ~tags=?, ()) => new({tags: tags, sourceServerIDs: sourceServerIDs})
+  let make = (~sourceServerIDs, ~tags=?, ()) => new({tags, sourceServerIDs})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -979,7 +979,7 @@ module StartCutover = {
   }
   type response = {@ocaml.doc("<p>Start Cutover Job response.</p>") job: option<job>}
   @module("@aws-sdk/client-mgn") @new external new: request => t = "StartCutoverCommand"
-  let make = (~sourceServerIDs, ~tags=?, ()) => new({tags: tags, sourceServerIDs: sourceServerIDs})
+  let make = (~sourceServerIDs, ~tags=?, ()) => new({tags, sourceServerIDs})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -1003,9 +1003,9 @@ module DescribeReplicationConfigurationTemplates = {
   external new: request => t = "DescribeReplicationConfigurationTemplatesCommand"
   let make = (~replicationConfigurationTemplateIDs, ~nextToken=?, ~maxResults=?, ()) =>
     new({
-      nextToken: nextToken,
-      maxResults: maxResults,
-      replicationConfigurationTemplateIDs: replicationConfigurationTemplateIDs,
+      nextToken,
+      maxResults,
+      replicationConfigurationTemplateIDs,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
@@ -1024,8 +1024,7 @@ module DescribeJobLogItems = {
     @ocaml.doc("<p>Request to describe Job log response items.</p>") items: option<jobLogs>,
   }
   @module("@aws-sdk/client-mgn") @new external new: request => t = "DescribeJobLogItemsCommand"
-  let make = (~jobID, ~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken: nextToken, maxResults: maxResults, jobID: jobID})
+  let make = (~jobID, ~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults, jobID})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -1091,8 +1090,7 @@ module DescribeJobs = {
     @ocaml.doc("<p>Request to describe Job log items.</p>") items: option<jobsList>,
   }
   @module("@aws-sdk/client-mgn") @new external new: request => t = "DescribeJobsCommand"
-  let make = (~filters, ~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken: nextToken, maxResults: maxResults, filters: filters})
+  let make = (~filters, ~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults, filters})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -1109,8 +1107,7 @@ module ChangeServerLifeCycleState = {
   type response = sourceServer
   @module("@aws-sdk/client-mgn") @new
   external new: request => t = "ChangeServerLifeCycleStateCommand"
-  let make = (~lifeCycle, ~sourceServerID, ()) =>
-    new({lifeCycle: lifeCycle, sourceServerID: sourceServerID})
+  let make = (~lifeCycle, ~sourceServerID, ()) => new({lifeCycle, sourceServerID})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -1131,7 +1128,6 @@ module DescribeSourceServers = {
     items: option<sourceServersList>,
   }
   @module("@aws-sdk/client-mgn") @new external new: request => t = "DescribeSourceServersCommand"
-  let make = (~filters, ~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken: nextToken, maxResults: maxResults, filters: filters})
+  let make = (~filters, ~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults, filters})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

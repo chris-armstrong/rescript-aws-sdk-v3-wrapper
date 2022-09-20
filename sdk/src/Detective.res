@@ -297,10 +297,9 @@ module UpdateOrganizationConfiguration = {
   type response = {.}
   @module("@aws-sdk/client-detective") @new
   external new: request => t = "UpdateOrganizationConfigurationCommand"
-  let make = (~graphArn, ~autoEnable=?, ()) => new({autoEnable: autoEnable, graphArn: graphArn})
+  let make = (~graphArn, ~autoEnable=?, ()) => new({autoEnable, graphArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module StartMonitoringMember = {
   type t
   type request = {
@@ -314,10 +313,9 @@ module StartMonitoringMember = {
   type response = {.}
   @module("@aws-sdk/client-detective") @new
   external new: request => t = "StartMonitoringMemberCommand"
-  let make = (~accountId, ~graphArn, ()) => new({accountId: accountId, graphArn: graphArn})
+  let make = (~accountId, ~graphArn, ()) => new({accountId, graphArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module RejectInvitation = {
   type t
   type request = {
@@ -332,7 +330,6 @@ module RejectInvitation = {
   let make = (~graphArn, ()) => new({graphArn: graphArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module EnableOrganizationAdminAccount = {
   type t
   type request = {
@@ -348,7 +345,6 @@ module EnableOrganizationAdminAccount = {
   let make = (~accountId, ()) => new({accountId: accountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DisassociateMembership = {
   type t
   type request = {
@@ -364,7 +360,6 @@ module DisassociateMembership = {
   let make = (~graphArn, ()) => new({graphArn: graphArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DisableOrganizationAdminAccount = {
   type t
   type request = {.}
@@ -374,7 +369,6 @@ module DisableOrganizationAdminAccount = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DescribeOrganizationConfiguration = {
   type t
   type request = {
@@ -392,7 +386,6 @@ module DescribeOrganizationConfiguration = {
   let make = (~graphArn, ()) => new({graphArn: graphArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteGraph = {
   type t
   type request = {
@@ -404,7 +397,6 @@ module DeleteGraph = {
   let make = (~graphArn, ()) => new({graphArn: graphArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module AcceptInvitation = {
   type t
   type request = {
@@ -419,7 +411,6 @@ module AcceptInvitation = {
   let make = (~graphArn, ()) => new({graphArn: graphArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module UntagResource = {
   type t
   type request = {
@@ -432,10 +423,9 @@ module UntagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-detective") @new external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
+  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys, resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module TagResource = {
   type t
   type request = {
@@ -449,10 +439,9 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-detective") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
+  let make = (~tags, ~resourceArn, ()) => new({tags, resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module ListTagsForResource = {
   type t
   type request = {
@@ -471,7 +460,6 @@ module ListTagsForResource = {
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateGraph = {
   type t
   type request = {
@@ -489,7 +477,6 @@ module CreateGraph = {
   let make = (~tags=?, ()) => new({tags: tags})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListOrganizationAdminAccounts = {
   type t
   type request = {
@@ -511,11 +498,9 @@ module ListOrganizationAdminAccounts = {
   }
   @module("@aws-sdk/client-detective") @new
   external new: request => t = "ListOrganizationAdminAccountsCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListMembers = {
   type t
   type request = {
@@ -550,11 +535,9 @@ module ListMembers = {
     memberDetails: option<memberDetailList>,
   }
   @module("@aws-sdk/client-detective") @new external new: request => t = "ListMembersCommand"
-  let make = (~graphArn, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, graphArn: graphArn})
+  let make = (~graphArn, ~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken, graphArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListInvitations = {
   type t
   type request = {
@@ -580,11 +563,9 @@ module ListInvitations = {
     invitations: option<memberDetailList>,
   }
   @module("@aws-sdk/client-detective") @new external new: request => t = "ListInvitationsCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListGraphs = {
   type t
   type request = {
@@ -608,11 +589,9 @@ module ListGraphs = {
     graphList: option<graphList>,
   }
   @module("@aws-sdk/client-detective") @new external new: request => t = "ListGraphsCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetMembers = {
   type t
   type request = {
@@ -639,10 +618,9 @@ module GetMembers = {
     memberDetails: option<memberDetailList>,
   }
   @module("@aws-sdk/client-detective") @new external new: request => t = "GetMembersCommand"
-  let make = (~accountIds, ~graphArn, ()) => new({accountIds: accountIds, graphArn: graphArn})
+  let make = (~accountIds, ~graphArn, ()) => new({accountIds, graphArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteMembers = {
   type t
   type request = {
@@ -666,10 +644,9 @@ module DeleteMembers = {
     accountIds: option<accountIdList>,
   }
   @module("@aws-sdk/client-detective") @new external new: request => t = "DeleteMembersCommand"
-  let make = (~accountIds, ~graphArn, ()) => new({accountIds: accountIds, graphArn: graphArn})
+  let make = (~accountIds, ~graphArn, ()) => new({accountIds, graphArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateMembers = {
   type t
   type request = {
@@ -708,11 +685,6 @@ module CreateMembers = {
   }
   @module("@aws-sdk/client-detective") @new external new: request => t = "CreateMembersCommand"
   let make = (~accounts, ~graphArn, ~disableEmailNotification=?, ~message=?, ()) =>
-    new({
-      accounts: accounts,
-      disableEmailNotification: disableEmailNotification,
-      message: message,
-      graphArn: graphArn,
-    })
+    new({accounts, disableEmailNotification, message, graphArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

@@ -9376,14 +9376,9 @@ module UpdateStandardsControl = {
   @module("@aws-sdk/client-securityhub") @new
   external new: request => t = "UpdateStandardsControlCommand"
   let make = (~standardsControlArn, ~disabledReason=?, ~controlStatus=?, ()) =>
-    new({
-      disabledReason: disabledReason,
-      controlStatus: controlStatus,
-      standardsControlArn: standardsControlArn,
-    })
+    new({disabledReason, controlStatus, standardsControlArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module UpdateSecurityHubConfiguration = {
   type t
   type request = {
@@ -9401,7 +9396,6 @@ module UpdateSecurityHubConfiguration = {
   let make = (~autoEnableControls=?, ()) => new({autoEnableControls: autoEnableControls})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module UpdateOrganizationConfiguration = {
   type t
   type request = {
@@ -9418,7 +9412,6 @@ module UpdateOrganizationConfiguration = {
   let make = (~autoEnable, ()) => new({autoEnable: autoEnable})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module UpdateActionTarget = {
   type t
   type request = {
@@ -9433,10 +9426,9 @@ module UpdateActionTarget = {
   @module("@aws-sdk/client-securityhub") @new
   external new: request => t = "UpdateActionTargetCommand"
   let make = (~actionTargetArn, ~description=?, ~name=?, ()) =>
-    new({description: description, name: name, actionTargetArn: actionTargetArn})
+    new({description, name, actionTargetArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module GetInvitationsCount = {
   type t
   type request = {.}
@@ -9451,7 +9443,6 @@ module GetInvitationsCount = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module EnableOrganizationAdminAccount = {
   type t
   type request = {
@@ -9466,7 +9457,6 @@ module EnableOrganizationAdminAccount = {
   let make = (~adminAccountId, ()) => new({adminAccountId: adminAccountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module EnableImportFindingsForProduct = {
   type t
   type request = {
@@ -9483,7 +9473,6 @@ module EnableImportFindingsForProduct = {
   let make = (~productArn, ()) => new({productArn: productArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DisassociateFromMasterAccount = {
   type t
   type request = {.}
@@ -9493,7 +9482,6 @@ module DisassociateFromMasterAccount = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DisassociateFromAdministratorAccount = {
   type t
   type request = {.}
@@ -9503,7 +9491,6 @@ module DisassociateFromAdministratorAccount = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DisableSecurityHub = {
   type t
   type request = {.}
@@ -9513,7 +9500,6 @@ module DisableSecurityHub = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DisableOrganizationAdminAccount = {
   type t
   type request = {
@@ -9529,7 +9515,6 @@ module DisableOrganizationAdminAccount = {
   let make = (~adminAccountId, ()) => new({adminAccountId: adminAccountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DisableImportFindingsForProduct = {
   type t
   type request = {
@@ -9543,7 +9528,6 @@ module DisableImportFindingsForProduct = {
   let make = (~productSubscriptionArn, ()) => new({productSubscriptionArn: productSubscriptionArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DescribeOrganizationConfiguration = {
   type t
   type request = {.}
@@ -9563,7 +9547,6 @@ module DescribeOrganizationConfiguration = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeHub = {
   type t
   type request = {
@@ -9587,7 +9570,6 @@ module DescribeHub = {
   let make = (~hubArn=?, ()) => new({hubArn: hubArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteInsight = {
   type t
   type request = {
@@ -9602,7 +9584,6 @@ module DeleteInsight = {
   let make = (~insightArn, ()) => new({insightArn: insightArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteFindingAggregator = {
   type t
   type request = {
@@ -9618,7 +9599,6 @@ module DeleteFindingAggregator = {
   let make = (~findingAggregatorArn, ()) => new({findingAggregatorArn: findingAggregatorArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteActionTarget = {
   type t
   type request = {
@@ -9635,7 +9615,6 @@ module DeleteActionTarget = {
   let make = (~actionTargetArn, ()) => new({actionTargetArn: actionTargetArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateActionTarget = {
   type t
   type request = {
@@ -9656,10 +9635,9 @@ module CreateActionTarget = {
   }
   @module("@aws-sdk/client-securityhub") @new
   external new: request => t = "CreateActionTargetCommand"
-  let make = (~id, ~description, ~name, ()) => new({id: id, description: description, name: name})
+  let make = (~id, ~description, ~name, ()) => new({id, description, name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module AcceptInvitation = {
   type t
   type request = {
@@ -9676,10 +9654,9 @@ module AcceptInvitation = {
   }
   type response = {.}
   @module("@aws-sdk/client-securityhub") @new external new: request => t = "AcceptInvitationCommand"
-  let make = (~invitationId, ~masterId, ()) => new({invitationId: invitationId, masterId: masterId})
+  let make = (~invitationId, ~masterId, ()) => new({invitationId, masterId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module AcceptAdministratorInvitation = {
   type t
   type request = {
@@ -9697,11 +9674,9 @@ module AcceptAdministratorInvitation = {
   type response = {.}
   @module("@aws-sdk/client-securityhub") @new
   external new: request => t = "AcceptAdministratorInvitationCommand"
-  let make = (~invitationId, ~administratorId, ()) =>
-    new({invitationId: invitationId, administratorId: administratorId})
+  let make = (~invitationId, ~administratorId, ()) => new({invitationId, administratorId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module UpdateFindingAggregator = {
   type t
   type request = {
@@ -9753,14 +9728,9 @@ module UpdateFindingAggregator = {
   @module("@aws-sdk/client-securityhub") @new
   external new: request => t = "UpdateFindingAggregatorCommand"
   let make = (~regionLinkingMode, ~findingAggregatorArn, ~regions=?, ()) =>
-    new({
-      regions: regions,
-      regionLinkingMode: regionLinkingMode,
-      findingAggregatorArn: findingAggregatorArn,
-    })
+    new({regions, regionLinkingMode, findingAggregatorArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UntagResource = {
   type t
   type request = {
@@ -9774,10 +9744,9 @@ module UntagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-securityhub") @new external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
+  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys, resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module TagResource = {
   type t
   type request = {
@@ -9791,10 +9760,9 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-securityhub") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
+  let make = (~tags, ~resourceArn, ()) => new({tags, resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module ListTagsForResource = {
   type t
   type request = {
@@ -9809,7 +9777,6 @@ module ListTagsForResource = {
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListEnabledProductsForImport = {
   type t
   type request = {
@@ -9835,11 +9802,9 @@ module ListEnabledProductsForImport = {
   }
   @module("@aws-sdk/client-securityhub") @new
   external new: request => t = "ListEnabledProductsForImportCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetMasterAccount = {
   type t
   type request = {.}
@@ -9853,7 +9818,6 @@ module GetMasterAccount = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetFindingAggregator = {
   type t
   type request = {
@@ -9881,7 +9845,6 @@ module GetFindingAggregator = {
   let make = (~findingAggregatorArn, ()) => new({findingAggregatorArn: findingAggregatorArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetAdministratorAccount = {
   type t
   type request = {.}
@@ -9891,7 +9854,6 @@ module GetAdministratorAccount = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module EnableSecurityHub = {
   type t
   type request = {
@@ -9908,11 +9870,9 @@ module EnableSecurityHub = {
   type response = {.}
   @module("@aws-sdk/client-securityhub") @new
   external new: request => t = "EnableSecurityHubCommand"
-  let make = (~enableDefaultStandards=?, ~tags=?, ()) =>
-    new({enableDefaultStandards: enableDefaultStandards, tags: tags})
+  let make = (~enableDefaultStandards=?, ~tags=?, ()) => new({enableDefaultStandards, tags})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DisassociateMembers = {
   type t
   type request = {
@@ -9928,7 +9888,6 @@ module DisassociateMembers = {
   let make = (~accountIds, ()) => new({accountIds: accountIds})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module CreateFindingAggregator = {
   type t
   type request = {
@@ -9978,11 +9937,9 @@ module CreateFindingAggregator = {
   }
   @module("@aws-sdk/client-securityhub") @new
   external new: request => t = "CreateFindingAggregatorCommand"
-  let make = (~regionLinkingMode, ~regions=?, ()) =>
-    new({regions: regions, regionLinkingMode: regionLinkingMode})
+  let make = (~regionLinkingMode, ~regions=?, ()) => new({regions, regionLinkingMode})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListOrganizationAdminAccounts = {
   type t
   type request = {
@@ -10004,11 +9961,9 @@ module ListOrganizationAdminAccounts = {
   }
   @module("@aws-sdk/client-securityhub") @new
   external new: request => t = "ListOrganizationAdminAccountsCommand"
-  let make = (~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken: nextToken, maxResults: maxResults})
+  let make = (~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListMembers = {
   type t
   type request = {
@@ -10039,10 +9994,9 @@ module ListMembers = {
   }
   @module("@aws-sdk/client-securityhub") @new external new: request => t = "ListMembersCommand"
   let make = (~nextToken=?, ~maxResults=?, ~onlyAssociated=?, ()) =>
-    new({nextToken: nextToken, maxResults: maxResults, onlyAssociated: onlyAssociated})
+    new({nextToken, maxResults, onlyAssociated})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListInvitations = {
   type t
   type request = {
@@ -10065,11 +10019,9 @@ module ListInvitations = {
     invitations: option<invitationList>,
   }
   @module("@aws-sdk/client-securityhub") @new external new: request => t = "ListInvitationsCommand"
-  let make = (~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken: nextToken, maxResults: maxResults})
+  let make = (~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListFindingAggregators = {
   type t
   type request = {
@@ -10098,11 +10050,9 @@ module ListFindingAggregators = {
   }
   @module("@aws-sdk/client-securityhub") @new
   external new: request => t = "ListFindingAggregatorsCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module InviteMembers = {
   type t
   type request = {
@@ -10122,7 +10072,6 @@ module InviteMembers = {
   let make = (~accountIds, ()) => new({accountIds: accountIds})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetMembers = {
   type t
   type request = {
@@ -10144,7 +10093,6 @@ module GetMembers = {
   let make = (~accountIds, ()) => new({accountIds: accountIds})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeStandards = {
   type t
   type request = {
@@ -10167,11 +10115,9 @@ module DescribeStandards = {
   }
   @module("@aws-sdk/client-securityhub") @new
   external new: request => t = "DescribeStandardsCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeActionTargets = {
   type t
   type request = {
@@ -10203,10 +10149,9 @@ module DescribeActionTargets = {
   @module("@aws-sdk/client-securityhub") @new
   external new: request => t = "DescribeActionTargetsCommand"
   let make = (~maxResults=?, ~nextToken=?, ~actionTargetArns=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, actionTargetArns: actionTargetArns})
+    new({maxResults, nextToken, actionTargetArns})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteMembers = {
   type t
   type request = {
@@ -10224,7 +10169,6 @@ module DeleteMembers = {
   let make = (~accountIds, ()) => new({accountIds: accountIds})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteInvitations = {
   type t
   type request = {
@@ -10243,7 +10187,6 @@ module DeleteInvitations = {
   let make = (~accountIds, ()) => new({accountIds: accountIds})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeclineInvitations = {
   type t
   type request = {
@@ -10263,7 +10206,6 @@ module DeclineInvitations = {
   let make = (~accountIds, ()) => new({accountIds: accountIds})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateMembers = {
   type t
   type request = {
@@ -10282,7 +10224,6 @@ module CreateMembers = {
   let make = (~accountDetails, ()) => new({accountDetails: accountDetails})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetInsightResults = {
   type t
   type request = {
@@ -10298,7 +10239,6 @@ module GetInsightResults = {
   let make = (~insightArn, ()) => new({insightArn: insightArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetEnabledStandards = {
   type t
   type request = {
@@ -10327,14 +10267,9 @@ module GetEnabledStandards = {
   @module("@aws-sdk/client-securityhub") @new
   external new: request => t = "GetEnabledStandardsCommand"
   let make = (~maxResults=?, ~nextToken=?, ~standardsSubscriptionArns=?, ()) =>
-    new({
-      maxResults: maxResults,
-      nextToken: nextToken,
-      standardsSubscriptionArns: standardsSubscriptionArns,
-    })
+    new({maxResults, nextToken, standardsSubscriptionArns})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeStandardsControls = {
   type t
   type request = {
@@ -10363,14 +10298,9 @@ module DescribeStandardsControls = {
   @module("@aws-sdk/client-securityhub") @new
   external new: request => t = "DescribeStandardsControlsCommand"
   let make = (~standardsSubscriptionArn, ~maxResults=?, ~nextToken=?, ()) =>
-    new({
-      maxResults: maxResults,
-      nextToken: nextToken,
-      standardsSubscriptionArn: standardsSubscriptionArn,
-    })
+    new({maxResults, nextToken, standardsSubscriptionArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeProducts = {
   type t
   type request = {
@@ -10395,10 +10325,9 @@ module DescribeProducts = {
   }
   @module("@aws-sdk/client-securityhub") @new external new: request => t = "DescribeProductsCommand"
   let make = (~productArn=?, ~maxResults=?, ~nextToken=?, ()) =>
-    new({productArn: productArn, maxResults: maxResults, nextToken: nextToken})
+    new({productArn, maxResults, nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module BatchUpdateFindings = {
   type t
   type request = {
@@ -10505,20 +10434,19 @@ module BatchUpdateFindings = {
     (),
   ) =>
     new({
-      relatedFindings: relatedFindings,
-      workflow: workflow,
-      userDefinedFields: userDefinedFields,
-      types: types,
-      criticality: criticality,
-      confidence: confidence,
-      verificationState: verificationState,
-      severity: severity,
-      note: note,
-      findingIdentifiers: findingIdentifiers,
+      relatedFindings,
+      workflow,
+      userDefinedFields,
+      types,
+      criticality,
+      confidence,
+      verificationState,
+      severity,
+      note,
+      findingIdentifiers,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module BatchEnableStandards = {
   type t
   type request = {
@@ -10537,7 +10465,6 @@ module BatchEnableStandards = {
     new({standardsSubscriptionRequests: standardsSubscriptionRequests})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module BatchDisableStandards = {
   type t
   type request = {
@@ -10556,7 +10483,6 @@ module BatchDisableStandards = {
     new({standardsSubscriptionArns: standardsSubscriptionArns})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateInsight = {
   type t
   type request = {
@@ -10572,10 +10498,9 @@ module UpdateInsight = {
   type response = {.}
   @module("@aws-sdk/client-securityhub") @new external new: request => t = "UpdateInsightCommand"
   let make = (~insightArn, ~groupByAttribute=?, ~filters=?, ~name=?, ()) =>
-    new({groupByAttribute: groupByAttribute, filters: filters, name: name, insightArn: insightArn})
+    new({groupByAttribute, filters, name, insightArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module UpdateFindings = {
   type t
   type request = {
@@ -10588,11 +10513,9 @@ module UpdateFindings = {
   }
   type response = {.}
   @module("@aws-sdk/client-securityhub") @new external new: request => t = "UpdateFindingsCommand"
-  let make = (~filters, ~recordState=?, ~note=?, ()) =>
-    new({recordState: recordState, note: note, filters: filters})
+  let make = (~filters, ~recordState=?, ~note=?, ()) => new({recordState, note, filters})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module CreateInsight = {
   type t
   type request = {
@@ -10613,11 +10536,9 @@ module CreateInsight = {
     insightArn: nonEmptyString,
   }
   @module("@aws-sdk/client-securityhub") @new external new: request => t = "CreateInsightCommand"
-  let make = (~groupByAttribute, ~filters, ~name, ()) =>
-    new({groupByAttribute: groupByAttribute, filters: filters, name: name})
+  let make = (~groupByAttribute, ~filters, ~name, ()) => new({groupByAttribute, filters, name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetInsights = {
   type t
   type request = {
@@ -10645,10 +10566,9 @@ module GetInsights = {
   }
   @module("@aws-sdk/client-securityhub") @new external new: request => t = "GetInsightsCommand"
   let make = (~maxResults=?, ~nextToken=?, ~insightArns=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, insightArns: insightArns})
+    new({maxResults, nextToken, insightArns})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetFindings = {
   type t
   type request = {
@@ -10683,15 +10603,9 @@ module GetFindings = {
   }
   @module("@aws-sdk/client-securityhub") @new external new: request => t = "GetFindingsCommand"
   let make = (~maxResults=?, ~nextToken=?, ~sortCriteria=?, ~filters=?, ()) =>
-    new({
-      maxResults: maxResults,
-      nextToken: nextToken,
-      sortCriteria: sortCriteria,
-      filters: filters,
-    })
+    new({maxResults, nextToken, sortCriteria, filters})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module BatchImportFindings = {
   type t
   type request = {

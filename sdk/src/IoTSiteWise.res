@@ -1079,15 +1079,9 @@ module UpdateProject = {
   type response = {.}
   @module("@aws-sdk/client-iotsitewise") @new external new: request => t = "UpdateProjectCommand"
   let make = (~projectName, ~projectId, ~clientToken=?, ~projectDescription=?, ()) =>
-    new({
-      clientToken: clientToken,
-      projectDescription: projectDescription,
-      projectName: projectName,
-      projectId: projectId,
-    })
+    new({clientToken, projectDescription, projectName, projectId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module UpdateGatewayCapabilityConfiguration = {
   type t
   type request = {
@@ -1127,14 +1121,9 @@ module UpdateGatewayCapabilityConfiguration = {
   @module("@aws-sdk/client-iotsitewise") @new
   external new: request => t = "UpdateGatewayCapabilityConfigurationCommand"
   let make = (~capabilityConfiguration, ~capabilityNamespace, ~gatewayId, ()) =>
-    new({
-      capabilityConfiguration: capabilityConfiguration,
-      capabilityNamespace: capabilityNamespace,
-      gatewayId: gatewayId,
-    })
+    new({capabilityConfiguration, capabilityNamespace, gatewayId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateGateway = {
   type t
   type request = {
@@ -1143,10 +1132,9 @@ module UpdateGateway = {
   }
   type response = {.}
   @module("@aws-sdk/client-iotsitewise") @new external new: request => t = "UpdateGatewayCommand"
-  let make = (~gatewayName, ~gatewayId, ()) => new({gatewayName: gatewayName, gatewayId: gatewayId})
+  let make = (~gatewayName, ~gatewayId, ()) => new({gatewayName, gatewayId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module UpdateDashboard = {
   type t
   type request = {
@@ -1171,17 +1159,9 @@ module UpdateDashboard = {
     ~clientToken=?,
     ~dashboardDescription=?,
     (),
-  ) =>
-    new({
-      clientToken: clientToken,
-      dashboardDefinition: dashboardDefinition,
-      dashboardDescription: dashboardDescription,
-      dashboardName: dashboardName,
-      dashboardId: dashboardId,
-    })
+  ) => new({clientToken, dashboardDefinition, dashboardDescription, dashboardName, dashboardId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module UpdateAssetProperty = {
   type t
   type request = {
@@ -1213,17 +1193,9 @@ module UpdateAssetProperty = {
     ~propertyNotificationState=?,
     ~propertyAlias=?,
     (),
-  ) =>
-    new({
-      clientToken: clientToken,
-      propertyNotificationState: propertyNotificationState,
-      propertyAlias: propertyAlias,
-      propertyId: propertyId,
-      assetId: assetId,
-    })
+  ) => new({clientToken, propertyNotificationState, propertyAlias, propertyId, assetId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DisassociateTimeSeriesFromAssetProperty = {
   type t
   type request = {
@@ -1239,10 +1211,9 @@ module DisassociateTimeSeriesFromAssetProperty = {
   @module("@aws-sdk/client-iotsitewise") @new
   external new: request => t = "DisassociateTimeSeriesFromAssetPropertyCommand"
   let make = (~propertyId, ~assetId, ~alias, ~clientToken=?, ()) =>
-    new({clientToken: clientToken, propertyId: propertyId, assetId: assetId, alias: alias})
+    new({clientToken, propertyId, assetId, alias})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DisassociateAssets = {
   type t
   type request = {
@@ -1263,15 +1234,9 @@ module DisassociateAssets = {
   @module("@aws-sdk/client-iotsitewise") @new
   external new: request => t = "DisassociateAssetsCommand"
   let make = (~childAssetId, ~hierarchyId, ~assetId, ~clientToken=?, ()) =>
-    new({
-      clientToken: clientToken,
-      childAssetId: childAssetId,
-      hierarchyId: hierarchyId,
-      assetId: assetId,
-    })
+    new({clientToken, childAssetId, hierarchyId, assetId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DescribeTimeSeries = {
   type t
   type request = {
@@ -1302,11 +1267,9 @@ module DescribeTimeSeries = {
   }
   @module("@aws-sdk/client-iotsitewise") @new
   external new: request => t = "DescribeTimeSeriesCommand"
-  let make = (~propertyId=?, ~assetId=?, ~alias=?, ()) =>
-    new({propertyId: propertyId, assetId: assetId, alias: alias})
+  let make = (~propertyId=?, ~assetId=?, ~alias=?, ()) => new({propertyId, assetId, alias})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeProject = {
   type t
   type request = {@ocaml.doc("<p>The ID of the project.</p>") projectId: id}
@@ -1329,7 +1292,6 @@ module DescribeProject = {
   let make = (~projectId, ()) => new({projectId: projectId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeGatewayCapabilityConfiguration = {
   type t
   type request = {
@@ -1369,11 +1331,9 @@ module DescribeGatewayCapabilityConfiguration = {
   }
   @module("@aws-sdk/client-iotsitewise") @new
   external new: request => t = "DescribeGatewayCapabilityConfigurationCommand"
-  let make = (~capabilityNamespace, ~gatewayId, ()) =>
-    new({capabilityNamespace: capabilityNamespace, gatewayId: gatewayId})
+  let make = (~capabilityNamespace, ~gatewayId, ()) => new({capabilityNamespace, gatewayId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeDashboard = {
   type t
   type request = {@ocaml.doc("<p>The ID of the dashboard.</p>") dashboardId: id}
@@ -1400,7 +1360,6 @@ module DescribeDashboard = {
   let make = (~dashboardId, ()) => new({dashboardId: dashboardId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteTimeSeries = {
   type t
   type request = {
@@ -1416,10 +1375,9 @@ module DeleteTimeSeries = {
   type response = {.}
   @module("@aws-sdk/client-iotsitewise") @new external new: request => t = "DeleteTimeSeriesCommand"
   let make = (~clientToken=?, ~propertyId=?, ~assetId=?, ~alias=?, ()) =>
-    new({clientToken: clientToken, propertyId: propertyId, assetId: assetId, alias: alias})
+    new({clientToken, propertyId, assetId, alias})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteProject = {
   type t
   type request = {
@@ -1431,11 +1389,9 @@ module DeleteProject = {
   }
   type response = {.}
   @module("@aws-sdk/client-iotsitewise") @new external new: request => t = "DeleteProjectCommand"
-  let make = (~projectId, ~clientToken=?, ()) =>
-    new({clientToken: clientToken, projectId: projectId})
+  let make = (~projectId, ~clientToken=?, ()) => new({clientToken, projectId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteGateway = {
   type t
   type request = {@ocaml.doc("<p>The ID of the gateway to delete.</p>") gatewayId: id}
@@ -1444,7 +1400,6 @@ module DeleteGateway = {
   let make = (~gatewayId, ()) => new({gatewayId: gatewayId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteDashboard = {
   type t
   type request = {
@@ -1456,11 +1411,9 @@ module DeleteDashboard = {
   }
   type response = {.}
   @module("@aws-sdk/client-iotsitewise") @new external new: request => t = "DeleteDashboardCommand"
-  let make = (~dashboardId, ~clientToken=?, ()) =>
-    new({clientToken: clientToken, dashboardId: dashboardId})
+  let make = (~dashboardId, ~clientToken=?, ()) => new({clientToken, dashboardId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteAccessPolicy = {
   type t
   type request = {
@@ -1473,11 +1426,9 @@ module DeleteAccessPolicy = {
   type response = {.}
   @module("@aws-sdk/client-iotsitewise") @new
   external new: request => t = "DeleteAccessPolicyCommand"
-  let make = (~accessPolicyId, ~clientToken=?, ()) =>
-    new({clientToken: clientToken, accessPolicyId: accessPolicyId})
+  let make = (~accessPolicyId, ~clientToken=?, ()) => new({clientToken, accessPolicyId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module AssociateTimeSeriesToAssetProperty = {
   type t
   type request = {
@@ -1493,10 +1444,9 @@ module AssociateTimeSeriesToAssetProperty = {
   @module("@aws-sdk/client-iotsitewise") @new
   external new: request => t = "AssociateTimeSeriesToAssetPropertyCommand"
   let make = (~propertyId, ~assetId, ~alias, ~clientToken=?, ()) =>
-    new({clientToken: clientToken, propertyId: propertyId, assetId: assetId, alias: alias})
+    new({clientToken, propertyId, assetId, alias})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module AssociateAssets = {
   type t
   type request = {
@@ -1514,15 +1464,9 @@ module AssociateAssets = {
   type response = {.}
   @module("@aws-sdk/client-iotsitewise") @new external new: request => t = "AssociateAssetsCommand"
   let make = (~childAssetId, ~hierarchyId, ~assetId, ~clientToken=?, ()) =>
-    new({
-      clientToken: clientToken,
-      childAssetId: childAssetId,
-      hierarchyId: hierarchyId,
-      assetId: assetId,
-    })
+    new({clientToken, childAssetId, hierarchyId, assetId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module UntagResource = {
   type t
   type request = {
@@ -1534,10 +1478,9 @@ module UntagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-iotsitewise") @new external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
+  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys, resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module TagResource = {
   type t
   type request = {
@@ -1552,10 +1495,9 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-iotsitewise") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
+  let make = (~tags, ~resourceArn, ()) => new({tags, resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module PutLoggingOptions = {
   type t
   type request = {@ocaml.doc("<p>The logging options to set.</p>") loggingOptions: loggingOptions}
@@ -1565,7 +1507,6 @@ module PutLoggingOptions = {
   let make = (~loggingOptions, ()) => new({loggingOptions: loggingOptions})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module ListTagsForResource = {
   type t
   type request = {
@@ -1585,7 +1526,6 @@ module ListTagsForResource = {
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListProjectAssets = {
   type t
   type request = {
@@ -1607,10 +1547,9 @@ module ListProjectAssets = {
   @module("@aws-sdk/client-iotsitewise") @new
   external new: request => t = "ListProjectAssetsCommand"
   let make = (~projectId, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, projectId: projectId})
+    new({maxResults, nextToken, projectId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeLoggingOptions = {
   type t
   type request = {.}
@@ -1620,7 +1559,6 @@ module DescribeLoggingOptions = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateProject = {
   type t
   type request = {
@@ -1646,16 +1584,9 @@ module CreateProject = {
   }
   @module("@aws-sdk/client-iotsitewise") @new external new: request => t = "CreateProjectCommand"
   let make = (~projectName, ~portalId, ~tags=?, ~clientToken=?, ~projectDescription=?, ()) =>
-    new({
-      tags: tags,
-      clientToken: clientToken,
-      projectDescription: projectDescription,
-      projectName: projectName,
-      portalId: portalId,
-    })
+    new({tags, clientToken, projectDescription, projectName, portalId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateDashboard = {
   type t
   type request = {
@@ -1691,18 +1622,9 @@ module CreateDashboard = {
     ~clientToken=?,
     ~dashboardDescription=?,
     (),
-  ) =>
-    new({
-      tags: tags,
-      clientToken: clientToken,
-      dashboardDefinition: dashboardDefinition,
-      dashboardDescription: dashboardDescription,
-      dashboardName: dashboardName,
-      projectId: projectId,
-    })
+  ) => new({tags, clientToken, dashboardDefinition, dashboardDescription, dashboardName, projectId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdatePortal = {
   type t
   type request = {
@@ -1746,19 +1668,18 @@ module UpdatePortal = {
     (),
   ) =>
     new({
-      alarms: alarms,
-      notificationSenderEmail: notificationSenderEmail,
-      clientToken: clientToken,
-      roleArn: roleArn,
-      portalLogoImage: portalLogoImage,
-      portalContactEmail: portalContactEmail,
-      portalDescription: portalDescription,
-      portalName: portalName,
-      portalId: portalId,
+      alarms,
+      notificationSenderEmail,
+      clientToken,
+      roleArn,
+      portalLogoImage,
+      portalContactEmail,
+      portalDescription,
+      portalName,
+      portalId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateAccessPolicy = {
   type t
   type request = {
@@ -1792,15 +1713,14 @@ module UpdateAccessPolicy = {
     (),
   ) =>
     new({
-      clientToken: clientToken,
-      accessPolicyPermission: accessPolicyPermission,
-      accessPolicyResource: accessPolicyResource,
-      accessPolicyIdentity: accessPolicyIdentity,
-      accessPolicyId: accessPolicyId,
+      clientToken,
+      accessPolicyPermission,
+      accessPolicyResource,
+      accessPolicyIdentity,
+      accessPolicyId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module PutStorageConfiguration = {
   type t
   type request = {
@@ -1889,16 +1809,9 @@ module PutStorageConfiguration = {
     ~disassociatedDataStorage=?,
     ~multiLayerStorage=?,
     (),
-  ) =>
-    new({
-      retentionPeriod: retentionPeriod,
-      disassociatedDataStorage: disassociatedDataStorage,
-      multiLayerStorage: multiLayerStorage,
-      storageType: storageType,
-    })
+  ) => new({retentionPeriod, disassociatedDataStorage, multiLayerStorage, storageType})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module PutDefaultEncryptionConfiguration = {
   type t
   type request = {
@@ -1921,11 +1834,9 @@ module PutDefaultEncryptionConfiguration = {
   }
   @module("@aws-sdk/client-iotsitewise") @new
   external new: request => t = "PutDefaultEncryptionConfigurationCommand"
-  let make = (~encryptionType, ~kmsKeyId=?, ()) =>
-    new({kmsKeyId: kmsKeyId, encryptionType: encryptionType})
+  let make = (~encryptionType, ~kmsKeyId=?, ()) => new({kmsKeyId, encryptionType})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListTimeSeries = {
   type t
   type request = {
@@ -1962,16 +1873,9 @@ module ListTimeSeries = {
   }
   @module("@aws-sdk/client-iotsitewise") @new external new: request => t = "ListTimeSeriesCommand"
   let make = (~timeSeriesType=?, ~aliasPrefix=?, ~assetId=?, ~maxResults=?, ~nextToken=?, ()) =>
-    new({
-      timeSeriesType: timeSeriesType,
-      aliasPrefix: aliasPrefix,
-      assetId: assetId,
-      maxResults: maxResults,
-      nextToken: nextToken,
-    })
+    new({timeSeriesType, aliasPrefix, assetId, maxResults, nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListProjects = {
   type t
   type request = {
@@ -1991,11 +1895,9 @@ module ListProjects = {
     projectSummaries: projectSummaries,
   }
   @module("@aws-sdk/client-iotsitewise") @new external new: request => t = "ListProjectsCommand"
-  let make = (~portalId, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, portalId: portalId})
+  let make = (~portalId, ~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken, portalId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListDashboards = {
   type t
   type request = {
@@ -2016,10 +1918,9 @@ module ListDashboards = {
   }
   @module("@aws-sdk/client-iotsitewise") @new external new: request => t = "ListDashboardsCommand"
   let make = (~projectId, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, projectId: projectId})
+    new({maxResults, nextToken, projectId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetAssetPropertyValue = {
   type t
   type request = {
@@ -2038,10 +1939,9 @@ module GetAssetPropertyValue = {
   @module("@aws-sdk/client-iotsitewise") @new
   external new: request => t = "GetAssetPropertyValueCommand"
   let make = (~propertyAlias=?, ~propertyId=?, ~assetId=?, ()) =>
-    new({propertyAlias: propertyAlias, propertyId: propertyId, assetId: assetId})
+    new({propertyAlias, propertyId, assetId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeStorageConfiguration = {
   type t
   type request = {.}
@@ -2094,7 +1994,6 @@ module DescribeStorageConfiguration = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribePortal = {
   type t
   type request = {@ocaml.doc("<p>The ID of the portal.</p>") portalId: id}
@@ -2143,7 +2042,6 @@ module DescribePortal = {
   let make = (~portalId, ()) => new({portalId: portalId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeGateway = {
   type t
   type request = {@ocaml.doc("<p>The ID of the gateway device.</p>") gatewayId: id}
@@ -2169,7 +2067,6 @@ module DescribeGateway = {
   let make = (~gatewayId, ()) => new({gatewayId: gatewayId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeDefaultEncryptionConfiguration = {
   type t
   type request = {.}
@@ -2189,7 +2086,6 @@ module DescribeDefaultEncryptionConfiguration = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeAccessPolicy = {
   type t
   type request = {@ocaml.doc("<p>The ID of the access policy.</p>") accessPolicyId: id}
@@ -2219,7 +2115,6 @@ module DescribeAccessPolicy = {
   let make = (~accessPolicyId, ()) => new({accessPolicyId: accessPolicyId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeletePortal = {
   type t
   type request = {
@@ -2235,10 +2130,9 @@ module DeletePortal = {
     portalStatus: portalStatus,
   }
   @module("@aws-sdk/client-iotsitewise") @new external new: request => t = "DeletePortalCommand"
-  let make = (~portalId, ~clientToken=?, ()) => new({clientToken: clientToken, portalId: portalId})
+  let make = (~portalId, ~clientToken=?, ()) => new({clientToken, portalId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreatePortal = {
   type t
   type request = {
@@ -2328,20 +2222,19 @@ module CreatePortal = {
     (),
   ) =>
     new({
-      alarms: alarms,
-      notificationSenderEmail: notificationSenderEmail,
-      portalAuthMode: portalAuthMode,
-      tags: tags,
-      roleArn: roleArn,
-      portalLogoImageFile: portalLogoImageFile,
-      clientToken: clientToken,
-      portalContactEmail: portalContactEmail,
-      portalDescription: portalDescription,
-      portalName: portalName,
+      alarms,
+      notificationSenderEmail,
+      portalAuthMode,
+      tags,
+      roleArn,
+      portalLogoImageFile,
+      clientToken,
+      portalContactEmail,
+      portalDescription,
+      portalName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateGateway = {
   type t
   type request = {
@@ -2366,10 +2259,9 @@ module CreateGateway = {
   }
   @module("@aws-sdk/client-iotsitewise") @new external new: request => t = "CreateGatewayCommand"
   let make = (~gatewayPlatform, ~gatewayName, ~tags=?, ()) =>
-    new({tags: tags, gatewayPlatform: gatewayPlatform, gatewayName: gatewayName})
+    new({tags, gatewayPlatform, gatewayName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateAccessPolicy = {
   type t
   type request = {
@@ -2411,17 +2303,9 @@ module CreateAccessPolicy = {
     ~tags=?,
     ~clientToken=?,
     (),
-  ) =>
-    new({
-      tags: tags,
-      clientToken: clientToken,
-      accessPolicyPermission: accessPolicyPermission,
-      accessPolicyResource: accessPolicyResource,
-      accessPolicyIdentity: accessPolicyIdentity,
-    })
+  ) => new({tags, clientToken, accessPolicyPermission, accessPolicyResource, accessPolicyIdentity})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module BatchDisassociateProjectAssets = {
   type t
   type request = {
@@ -2438,11 +2322,9 @@ module BatchDisassociateProjectAssets = {
   }
   @module("@aws-sdk/client-iotsitewise") @new
   external new: request => t = "BatchDisassociateProjectAssetsCommand"
-  let make = (~assetIds, ~projectId, ~clientToken=?, ()) =>
-    new({clientToken: clientToken, assetIds: assetIds, projectId: projectId})
+  let make = (~assetIds, ~projectId, ~clientToken=?, ()) => new({clientToken, assetIds, projectId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module BatchAssociateProjectAssets = {
   type t
   type request = {
@@ -2459,11 +2341,9 @@ module BatchAssociateProjectAssets = {
   }
   @module("@aws-sdk/client-iotsitewise") @new
   external new: request => t = "BatchAssociateProjectAssetsCommand"
-  let make = (~assetIds, ~projectId, ~clientToken=?, ()) =>
-    new({clientToken: clientToken, assetIds: assetIds, projectId: projectId})
+  let make = (~assetIds, ~projectId, ~clientToken=?, ()) => new({clientToken, assetIds, projectId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListAssetRelationships = {
   type t
   type request = {
@@ -2495,15 +2375,9 @@ module ListAssetRelationships = {
   @module("@aws-sdk/client-iotsitewise") @new
   external new: request => t = "ListAssetRelationshipsCommand"
   let make = (~traversalType, ~assetId, ~maxResults=?, ~nextToken=?, ()) =>
-    new({
-      maxResults: maxResults,
-      nextToken: nextToken,
-      traversalType: traversalType,
-      assetId: assetId,
-    })
+    new({maxResults, nextToken, traversalType, assetId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetInterpolatedAssetPropertyValues = {
   type t
   type request = {
@@ -2618,23 +2492,22 @@ module GetInterpolatedAssetPropertyValues = {
     (),
   ) =>
     new({
-      intervalWindowInSeconds: intervalWindowInSeconds,
-      type_: type_,
-      maxResults: maxResults,
-      nextToken: nextToken,
-      intervalInSeconds: intervalInSeconds,
-      quality: quality,
-      endTimeOffsetInNanos: endTimeOffsetInNanos,
-      endTimeInSeconds: endTimeInSeconds,
-      startTimeOffsetInNanos: startTimeOffsetInNanos,
-      startTimeInSeconds: startTimeInSeconds,
-      propertyAlias: propertyAlias,
-      propertyId: propertyId,
-      assetId: assetId,
+      intervalWindowInSeconds,
+      type_,
+      maxResults,
+      nextToken,
+      intervalInSeconds,
+      quality,
+      endTimeOffsetInNanos,
+      endTimeInSeconds,
+      startTimeOffsetInNanos,
+      startTimeInSeconds,
+      propertyAlias,
+      propertyId,
+      assetId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetAssetPropertyValueHistory = {
   type t
   type request = {
@@ -2687,19 +2560,18 @@ module GetAssetPropertyValueHistory = {
     (),
   ) =>
     new({
-      maxResults: maxResults,
-      nextToken: nextToken,
-      timeOrdering: timeOrdering,
-      qualities: qualities,
-      endDate: endDate,
-      startDate: startDate,
-      propertyAlias: propertyAlias,
-      propertyId: propertyId,
-      assetId: assetId,
+      maxResults,
+      nextToken,
+      timeOrdering,
+      qualities,
+      endDate,
+      startDate,
+      propertyAlias,
+      propertyId,
+      assetId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetAssetPropertyAggregates = {
   type t
   type request = {
@@ -2755,21 +2627,20 @@ module GetAssetPropertyAggregates = {
     (),
   ) =>
     new({
-      maxResults: maxResults,
-      nextToken: nextToken,
-      timeOrdering: timeOrdering,
-      endDate: endDate,
-      startDate: startDate,
-      qualities: qualities,
-      resolution: resolution,
-      aggregateTypes: aggregateTypes,
-      propertyAlias: propertyAlias,
-      propertyId: propertyId,
-      assetId: assetId,
+      maxResults,
+      nextToken,
+      timeOrdering,
+      endDate,
+      startDate,
+      qualities,
+      resolution,
+      aggregateTypes,
+      propertyAlias,
+      propertyId,
+      assetId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateAsset = {
   type t
   type request = {
@@ -2786,11 +2657,9 @@ module UpdateAsset = {
     assetStatus: assetStatus,
   }
   @module("@aws-sdk/client-iotsitewise") @new external new: request => t = "UpdateAssetCommand"
-  let make = (~assetName, ~assetId, ~clientToken=?, ()) =>
-    new({clientToken: clientToken, assetName: assetName, assetId: assetId})
+  let make = (~assetName, ~assetId, ~clientToken=?, ()) => new({clientToken, assetName, assetId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListPortals = {
   type t
   type request = {
@@ -2809,11 +2678,9 @@ module ListPortals = {
     portalSummaries: option<portalSummaries>,
   }
   @module("@aws-sdk/client-iotsitewise") @new external new: request => t = "ListPortalsCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListGateways = {
   type t
   type request = {
@@ -2831,11 +2698,9 @@ module ListGateways = {
     @ocaml.doc("<p>A list that summarizes each gateway.</p>") gatewaySummaries: gatewaySummaries,
   }
   @module("@aws-sdk/client-iotsitewise") @new external new: request => t = "ListGatewaysCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListAccessPolicies = {
   type t
   type request = {
@@ -2880,19 +2745,9 @@ module ListAccessPolicies = {
     ~identityId=?,
     ~identityType=?,
     (),
-  ) =>
-    new({
-      maxResults: maxResults,
-      nextToken: nextToken,
-      iamArn: iamArn,
-      resourceId: resourceId,
-      resourceType: resourceType,
-      identityId: identityId,
-      identityType: identityType,
-    })
+  ) => new({maxResults, nextToken, iamArn, resourceId, resourceType, identityId, identityType})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteAssetModel = {
   type t
   type request = {
@@ -2908,11 +2763,9 @@ module DeleteAssetModel = {
     assetModelStatus: assetModelStatus,
   }
   @module("@aws-sdk/client-iotsitewise") @new external new: request => t = "DeleteAssetModelCommand"
-  let make = (~assetModelId, ~clientToken=?, ()) =>
-    new({clientToken: clientToken, assetModelId: assetModelId})
+  let make = (~assetModelId, ~clientToken=?, ()) => new({clientToken, assetModelId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteAsset = {
   type t
   type request = {
@@ -2928,10 +2781,9 @@ module DeleteAsset = {
     assetStatus: assetStatus,
   }
   @module("@aws-sdk/client-iotsitewise") @new external new: request => t = "DeleteAssetCommand"
-  let make = (~assetId, ~clientToken=?, ()) => new({clientToken: clientToken, assetId: assetId})
+  let make = (~assetId, ~clientToken=?, ()) => new({clientToken, assetId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateAsset = {
   type t
   type request = {
@@ -2961,10 +2813,9 @@ module CreateAsset = {
   }
   @module("@aws-sdk/client-iotsitewise") @new external new: request => t = "CreateAssetCommand"
   let make = (~assetModelId, ~assetName, ~tags=?, ~clientToken=?, ()) =>
-    new({tags: tags, clientToken: clientToken, assetModelId: assetModelId, assetName: assetName})
+    new({tags, clientToken, assetModelId, assetName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeAsset = {
   type t
   type request = {@ocaml.doc("<p>The ID of the asset.</p>") assetId: id}
@@ -3001,7 +2852,6 @@ module DescribeAsset = {
   let make = (~assetId, ()) => new({assetId: assetId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListAssociatedAssets = {
   type t
   type request = {
@@ -3045,16 +2895,9 @@ module ListAssociatedAssets = {
   @module("@aws-sdk/client-iotsitewise") @new
   external new: request => t = "ListAssociatedAssetsCommand"
   let make = (~assetId, ~maxResults=?, ~nextToken=?, ~traversalDirection=?, ~hierarchyId=?, ()) =>
-    new({
-      maxResults: maxResults,
-      nextToken: nextToken,
-      traversalDirection: traversalDirection,
-      hierarchyId: hierarchyId,
-      assetId: assetId,
-    })
+    new({maxResults, nextToken, traversalDirection, hierarchyId, assetId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListAssets = {
   type t
   type request = {
@@ -3093,10 +2936,9 @@ module ListAssets = {
   }
   @module("@aws-sdk/client-iotsitewise") @new external new: request => t = "ListAssetsCommand"
   let make = (~filter=?, ~assetModelId=?, ~maxResults=?, ~nextToken=?, ()) =>
-    new({filter: filter, assetModelId: assetModelId, maxResults: maxResults, nextToken: nextToken})
+    new({filter, assetModelId, maxResults, nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListAssetModels = {
   type t
   type request = {
@@ -3115,11 +2957,9 @@ module ListAssetModels = {
     assetModelSummaries: assetModelSummaries,
   }
   @module("@aws-sdk/client-iotsitewise") @new external new: request => t = "ListAssetModelsCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module BatchPutAssetPropertyValue = {
   type t
   type request = {
@@ -3137,7 +2977,6 @@ module BatchPutAssetPropertyValue = {
   let make = (~entries, ()) => new({entries: entries})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeAssetProperty = {
   type t
   type request = {
@@ -3159,10 +2998,9 @@ module DescribeAssetProperty = {
   }
   @module("@aws-sdk/client-iotsitewise") @new
   external new: request => t = "DescribeAssetPropertyCommand"
-  let make = (~propertyId, ~assetId, ()) => new({propertyId: propertyId, assetId: assetId})
+  let make = (~propertyId, ~assetId, ()) => new({propertyId, assetId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateAssetModel = {
   type t
   type request = {
@@ -3208,17 +3046,16 @@ module UpdateAssetModel = {
     (),
   ) =>
     new({
-      clientToken: clientToken,
-      assetModelCompositeModels: assetModelCompositeModels,
-      assetModelHierarchies: assetModelHierarchies,
-      assetModelProperties: assetModelProperties,
-      assetModelDescription: assetModelDescription,
-      assetModelName: assetModelName,
-      assetModelId: assetModelId,
+      clientToken,
+      assetModelCompositeModels,
+      assetModelHierarchies,
+      assetModelProperties,
+      assetModelDescription,
+      assetModelName,
+      assetModelId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeAssetModel = {
   type t
   type request = {@ocaml.doc("<p>The ID of the asset model.</p>") assetModelId: id}
@@ -3254,7 +3091,6 @@ module DescribeAssetModel = {
   let make = (~assetModelId, ()) => new({assetModelId: assetModelId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateAssetModel = {
   type t
   type request = {
@@ -3312,13 +3148,13 @@ module CreateAssetModel = {
     (),
   ) =>
     new({
-      tags: tags,
-      clientToken: clientToken,
-      assetModelCompositeModels: assetModelCompositeModels,
-      assetModelHierarchies: assetModelHierarchies,
-      assetModelProperties: assetModelProperties,
-      assetModelDescription: assetModelDescription,
-      assetModelName: assetModelName,
+      tags,
+      clientToken,
+      assetModelCompositeModels,
+      assetModelHierarchies,
+      assetModelProperties,
+      assetModelDescription,
+      assetModelName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

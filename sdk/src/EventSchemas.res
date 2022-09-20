@@ -106,7 +106,6 @@ module StopDiscoverer = {
   let make = (~discovererId, ()) => new({discovererId: discovererId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module StartDiscoverer = {
   type t
   type request = {
@@ -121,7 +120,6 @@ module StartDiscoverer = {
   let make = (~discovererId, ()) => new({discovererId: discovererId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module PutResourcePolicy = {
   type t
   @ocaml.doc("<p>The name of the policy.</p>")
@@ -140,10 +138,9 @@ module PutResourcePolicy = {
   }
   @module("@aws-sdk/client-schemas") @new external new: request => t = "PutResourcePolicyCommand"
   let make = (~policy, ~revisionId=?, ~registryName=?, ()) =>
-    new({revisionId: revisionId, registryName: registryName, policy: policy})
+    new({revisionId, registryName, policy})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module PutCodeBinding = {
   type t
   type request = {
@@ -166,15 +163,9 @@ module PutCodeBinding = {
   }
   @module("@aws-sdk/client-schemas") @new external new: request => t = "PutCodeBindingCommand"
   let make = (~schemaName, ~registryName, ~language, ~schemaVersion=?, ()) =>
-    new({
-      schemaVersion: schemaVersion,
-      schemaName: schemaName,
-      registryName: registryName,
-      language: language,
-    })
+    new({schemaVersion, schemaName, registryName, language})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetResourcePolicy = {
   type t
   type request = {
@@ -190,7 +181,6 @@ module GetResourcePolicy = {
   let make = (~registryName=?, ()) => new({registryName: registryName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetCodeBindingSource = {
   type t
   type request = {
@@ -204,15 +194,9 @@ module GetCodeBindingSource = {
   type response = {@as("Body") body: option<body>}
   @module("@aws-sdk/client-schemas") @new external new: request => t = "GetCodeBindingSourceCommand"
   let make = (~schemaName, ~registryName, ~language, ~schemaVersion=?, ()) =>
-    new({
-      schemaVersion: schemaVersion,
-      schemaName: schemaName,
-      registryName: registryName,
-      language: language,
-    })
+    new({schemaVersion, schemaName, registryName, language})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ExportSchema = {
   type t
   type request = {
@@ -232,15 +216,9 @@ module ExportSchema = {
   }
   @module("@aws-sdk/client-schemas") @new external new: request => t = "ExportSchemaCommand"
   let make = (~type_, ~schemaName, ~registryName, ~schemaVersion=?, ()) =>
-    new({
-      type_: type_,
-      schemaVersion: schemaVersion,
-      schemaName: schemaName,
-      registryName: registryName,
-    })
+    new({type_, schemaVersion, schemaName, registryName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeCodeBinding = {
   type t
   type request = {
@@ -263,15 +241,9 @@ module DescribeCodeBinding = {
   }
   @module("@aws-sdk/client-schemas") @new external new: request => t = "DescribeCodeBindingCommand"
   let make = (~schemaName, ~registryName, ~language, ~schemaVersion=?, ()) =>
-    new({
-      schemaVersion: schemaVersion,
-      schemaName: schemaName,
-      registryName: registryName,
-      language: language,
-    })
+    new({schemaVersion, schemaName, registryName, language})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteSchemaVersion = {
   type t
   type request = {
@@ -282,10 +254,9 @@ module DeleteSchemaVersion = {
   type response = {.}
   @module("@aws-sdk/client-schemas") @new external new: request => t = "DeleteSchemaVersionCommand"
   let make = (~schemaVersion, ~schemaName, ~registryName, ()) =>
-    new({schemaVersion: schemaVersion, schemaName: schemaName, registryName: registryName})
+    new({schemaVersion, schemaName, registryName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteSchema = {
   type t
   type request = {
@@ -294,11 +265,9 @@ module DeleteSchema = {
   }
   type response = {.}
   @module("@aws-sdk/client-schemas") @new external new: request => t = "DeleteSchemaCommand"
-  let make = (~schemaName, ~registryName, ()) =>
-    new({schemaName: schemaName, registryName: registryName})
+  let make = (~schemaName, ~registryName, ()) => new({schemaName, registryName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteResourcePolicy = {
   type t
   type request = {
@@ -310,7 +279,6 @@ module DeleteResourcePolicy = {
   let make = (~registryName=?, ()) => new({registryName: registryName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteRegistry = {
   type t
   type request = {
@@ -321,7 +289,6 @@ module DeleteRegistry = {
   let make = (~registryName, ()) => new({registryName: registryName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteDiscoverer = {
   type t
   type request = {
@@ -332,7 +299,6 @@ module DeleteDiscoverer = {
   let make = (~discovererId, ()) => new({discovererId: discovererId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module UpdateSchema = {
   type t
   type request = {
@@ -369,18 +335,9 @@ module UpdateSchema = {
     ~content=?,
     ~clientTokenId=?,
     (),
-  ) =>
-    new({
-      type_: type_,
-      schemaName: schemaName,
-      registryName: registryName,
-      description: description,
-      content: content,
-      clientTokenId: clientTokenId,
-    })
+  ) => new({type_, schemaName, registryName, description, content, clientTokenId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateRegistry = {
   type t
   @ocaml.doc("<p>Updates the registry.</p>")
@@ -398,11 +355,9 @@ module UpdateRegistry = {
     description: option<__string>,
   }
   @module("@aws-sdk/client-schemas") @new external new: request => t = "UpdateRegistryCommand"
-  let make = (~registryName, ~description=?, ()) =>
-    new({registryName: registryName, description: description})
+  let make = (~registryName, ~description=?, ()) => new({registryName, description})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateDiscoverer = {
   type t
   type request = {
@@ -433,10 +388,9 @@ module UpdateDiscoverer = {
   }
   @module("@aws-sdk/client-schemas") @new external new: request => t = "UpdateDiscovererCommand"
   let make = (~discovererId, ~crossAccount=?, ~description=?, ()) =>
-    new({crossAccount: crossAccount, discovererId: discovererId, description: description})
+    new({crossAccount, discovererId, description})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UntagResource = {
   type t
   type request = {
@@ -445,10 +399,9 @@ module UntagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-schemas") @new external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
+  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys, resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module TagResource = {
   type t
   @ocaml.doc("<p></p>")
@@ -458,10 +411,9 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-schemas") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
+  let make = (~tags, ~resourceArn, ()) => new({tags, resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module ListTagsForResource = {
   type t
   type request = {
@@ -472,7 +424,6 @@ module ListTagsForResource = {
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetDiscoveredSchema = {
   type t
   type request = {
@@ -488,10 +439,9 @@ module GetDiscoveredSchema = {
     content: option<__string>,
   }
   @module("@aws-sdk/client-schemas") @new external new: request => t = "GetDiscoveredSchemaCommand"
-  let make = (~type_, ~events, ()) => new({type_: type_, events: events})
+  let make = (~type_, ~events, ()) => new({type_, events})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeSchema = {
   type t
   type request = {
@@ -519,10 +469,9 @@ module DescribeSchema = {
   }
   @module("@aws-sdk/client-schemas") @new external new: request => t = "DescribeSchemaCommand"
   let make = (~schemaName, ~registryName, ~schemaVersion=?, ()) =>
-    new({schemaVersion: schemaVersion, schemaName: schemaName, registryName: registryName})
+    new({schemaVersion, schemaName, registryName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeRegistry = {
   type t
   type request = {
@@ -540,7 +489,6 @@ module DescribeRegistry = {
   let make = (~registryName, ()) => new({registryName: registryName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeDiscoverer = {
   type t
   type request = {
@@ -566,7 +514,6 @@ module DescribeDiscoverer = {
   let make = (~discovererId, ()) => new({discovererId: discovererId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateSchema = {
   type t
   type request = {
@@ -595,17 +542,9 @@ module CreateSchema = {
   }
   @module("@aws-sdk/client-schemas") @new external new: request => t = "CreateSchemaCommand"
   let make = (~type_, ~schemaName, ~registryName, ~content, ~tags=?, ~description=?, ()) =>
-    new({
-      type_: type_,
-      tags: tags,
-      schemaName: schemaName,
-      registryName: registryName,
-      description: description,
-      content: content,
-    })
+    new({type_, tags, schemaName, registryName, description, content})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateRegistry = {
   type t
   type request = {
@@ -623,11 +562,9 @@ module CreateRegistry = {
     description: option<__string>,
   }
   @module("@aws-sdk/client-schemas") @new external new: request => t = "CreateRegistryCommand"
-  let make = (~registryName, ~tags=?, ~description=?, ()) =>
-    new({tags: tags, registryName: registryName, description: description})
+  let make = (~registryName, ~tags=?, ~description=?, ()) => new({tags, registryName, description})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateDiscoverer = {
   type t
   type request = {
@@ -659,10 +596,9 @@ module CreateDiscoverer = {
   }
   @module("@aws-sdk/client-schemas") @new external new: request => t = "CreateDiscovererCommand"
   let make = (~sourceArn, ~tags=?, ~crossAccount=?, ~description=?, ()) =>
-    new({tags: tags, crossAccount: crossAccount, sourceArn: sourceArn, description: description})
+    new({tags, crossAccount, sourceArn, description})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListSchemaVersions = {
   type t
   type request = {
@@ -686,10 +622,9 @@ module ListSchemaVersions = {
   }
   @module("@aws-sdk/client-schemas") @new external new: request => t = "ListSchemaVersionsCommand"
   let make = (~schemaName, ~registryName, ~nextToken=?, ~limit=?, ()) =>
-    new({schemaName: schemaName, registryName: registryName, nextToken: nextToken, limit: limit})
+    new({schemaName, registryName, nextToken, limit})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListSchemas = {
   type t
   type request = {
@@ -717,15 +652,9 @@ module ListSchemas = {
   }
   @module("@aws-sdk/client-schemas") @new external new: request => t = "ListSchemasCommand"
   let make = (~registryName, ~schemaNamePrefix=?, ~nextToken=?, ~limit=?, ()) =>
-    new({
-      schemaNamePrefix: schemaNamePrefix,
-      registryName: registryName,
-      nextToken: nextToken,
-      limit: limit,
-    })
+    new({schemaNamePrefix, registryName, nextToken, limit})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListRegistries = {
   type t
   type request = {
@@ -757,10 +686,9 @@ module ListRegistries = {
   }
   @module("@aws-sdk/client-schemas") @new external new: request => t = "ListRegistriesCommand"
   let make = (~scope=?, ~registryNamePrefix=?, ~nextToken=?, ~limit=?, ()) =>
-    new({scope: scope, registryNamePrefix: registryNamePrefix, nextToken: nextToken, limit: limit})
+    new({scope, registryNamePrefix, nextToken, limit})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListDiscoverers = {
   type t
   type request = {
@@ -792,15 +720,9 @@ module ListDiscoverers = {
   }
   @module("@aws-sdk/client-schemas") @new external new: request => t = "ListDiscoverersCommand"
   let make = (~sourceArnPrefix=?, ~nextToken=?, ~limit=?, ~discovererIdPrefix=?, ()) =>
-    new({
-      sourceArnPrefix: sourceArnPrefix,
-      nextToken: nextToken,
-      limit: limit,
-      discovererIdPrefix: discovererIdPrefix,
-    })
+    new({sourceArnPrefix, nextToken, limit, discovererIdPrefix})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module SearchSchemas = {
   type t
   type request = {
@@ -828,6 +750,6 @@ module SearchSchemas = {
   }
   @module("@aws-sdk/client-schemas") @new external new: request => t = "SearchSchemasCommand"
   let make = (~registryName, ~keywords, ~nextToken=?, ~limit=?, ()) =>
-    new({registryName: registryName, nextToken: nextToken, limit: limit, keywords: keywords})
+    new({registryName, nextToken, limit, keywords})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

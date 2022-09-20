@@ -121,7 +121,6 @@ module DeleteEnvironment = {
   let make = (~environmentId, ()) => new({environmentId: environmentId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module UntagResource = {
   type t
   type request = {
@@ -133,10 +132,9 @@ module UntagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-finspace") @new external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
+  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys, resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module TagResource = {
   type t
   type request = {
@@ -146,10 +144,9 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-finspace") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
+  let make = (~tags, ~resourceArn, ()) => new({tags, resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module ListTagsForResource = {
   type t
   type request = {
@@ -160,7 +157,6 @@ module ListTagsForResource = {
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateEnvironment = {
   type t
   type request = {
@@ -224,18 +220,17 @@ module CreateEnvironment = {
     (),
   ) =>
     new({
-      dataBundles: dataBundles,
-      superuserParameters: superuserParameters,
-      federationParameters: federationParameters,
-      federationMode: federationMode,
-      tags: tags,
-      kmsKeyId: kmsKeyId,
-      description: description,
-      name: name,
+      dataBundles,
+      superuserParameters,
+      federationParameters,
+      federationMode,
+      tags,
+      kmsKeyId,
+      description,
+      name,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateEnvironment = {
   type t
   type request = {
@@ -267,17 +262,9 @@ module UpdateEnvironment = {
     ~description=?,
     ~name=?,
     (),
-  ) =>
-    new({
-      federationParameters: federationParameters,
-      federationMode: federationMode,
-      description: description,
-      name: name,
-      environmentId: environmentId,
-    })
+  ) => new({federationParameters, federationMode, description, name, environmentId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetEnvironment = {
   type t
   type request = {
@@ -290,7 +277,6 @@ module GetEnvironment = {
   let make = (~environmentId, ()) => new({environmentId: environmentId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListEnvironments = {
   type t
   type request = {
@@ -309,7 +295,6 @@ module ListEnvironments = {
     environments: option<environmentList>,
   }
   @module("@aws-sdk/client-finspace") @new external new: request => t = "ListEnvironmentsCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

@@ -1261,10 +1261,9 @@ module RemoveRoleFromDBCluster = {
   type response = {.}
   @module("@aws-sdk/client-rds") @new external new: request => t = "RemoveRoleFromDBClusterCommand"
   let make = (~roleArn, ~dbclusterIdentifier, ~featureName=?, ()) =>
-    new({featureName: featureName, roleArn: roleArn, dbclusterIdentifier: dbclusterIdentifier})
+    new({featureName, roleArn, dbclusterIdentifier})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteDBSubnetGroup = {
   type t
   type request = {
@@ -1284,7 +1283,6 @@ module DeleteDBSubnetGroup = {
   let make = (~dbsubnetGroupName, ()) => new({dbsubnetGroupName: dbsubnetGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteDBParameterGroup = {
   type t
   type request = {
@@ -1309,7 +1307,6 @@ module DeleteDBParameterGroup = {
   let make = (~dbparameterGroupName, ()) => new({dbparameterGroupName: dbparameterGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteDBClusterParameterGroup = {
   type t
   type request = {
@@ -1336,7 +1333,6 @@ module DeleteDBClusterParameterGroup = {
     new({dbclusterParameterGroupName: dbclusterParameterGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module AddRoleToDBCluster = {
   type t
   type request = {
@@ -1355,10 +1351,9 @@ module AddRoleToDBCluster = {
   type response = {.}
   @module("@aws-sdk/client-rds") @new external new: request => t = "AddRoleToDBClusterCommand"
   let make = (~roleArn, ~dbclusterIdentifier, ~featureName=?, ()) =>
-    new({featureName: featureName, roleArn: roleArn, dbclusterIdentifier: dbclusterIdentifier})
+    new({featureName, roleArn, dbclusterIdentifier})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module RemoveTagsFromResource = {
   type t
   type request = {
@@ -1372,10 +1367,9 @@ module RemoveTagsFromResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-rds") @new external new: request => t = "RemoveTagsFromResourceCommand"
-  let make = (~tagKeys, ~resourceName, ()) => new({tagKeys: tagKeys, resourceName: resourceName})
+  let make = (~tagKeys, ~resourceName, ()) => new({tagKeys, resourceName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module ModifyDBClusterEndpoint = {
   type t
   type request = {
@@ -1472,16 +1466,9 @@ module ModifyDBClusterEndpoint = {
     ~staticMembers=?,
     ~endpointType=?,
     (),
-  ) =>
-    new({
-      excludedMembers: excludedMembers,
-      staticMembers: staticMembers,
-      endpointType: endpointType,
-      dbclusterEndpointIdentifier: dbclusterEndpointIdentifier,
-    })
+  ) => new({excludedMembers, staticMembers, endpointType, dbclusterEndpointIdentifier})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteDBClusterEndpoint = {
   type t
   type request = {
@@ -1563,7 +1550,6 @@ module DeleteDBClusterEndpoint = {
     new({dbclusterEndpointIdentifier: dbclusterEndpointIdentifier})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ResetDBParameterGroup = {
   type t
   type request = {
@@ -1597,14 +1583,9 @@ module ResetDBParameterGroup = {
   }
   @module("@aws-sdk/client-rds") @new external new: request => t = "ResetDBParameterGroupCommand"
   let make = (~dbparameterGroupName, ~parameters=?, ~resetAllParameters=?, ()) =>
-    new({
-      parameters: parameters,
-      resetAllParameters: resetAllParameters,
-      dbparameterGroupName: dbparameterGroupName,
-    })
+    new({parameters, resetAllParameters, dbparameterGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ResetDBClusterParameterGroup = {
   type t
   type request = {
@@ -1646,14 +1627,9 @@ module ResetDBClusterParameterGroup = {
   @module("@aws-sdk/client-rds") @new
   external new: request => t = "ResetDBClusterParameterGroupCommand"
   let make = (~dbclusterParameterGroupName, ~parameters=?, ~resetAllParameters=?, ()) =>
-    new({
-      parameters: parameters,
-      resetAllParameters: resetAllParameters,
-      dbclusterParameterGroupName: dbclusterParameterGroupName,
-    })
+    new({parameters, resetAllParameters, dbclusterParameterGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module RemoveSourceIdentifierFromSubscription = {
   type t
   type request = {
@@ -1669,11 +1645,9 @@ module RemoveSourceIdentifierFromSubscription = {
   type response = {@as("EventSubscription") eventSubscription: option<eventSubscription>}
   @module("@aws-sdk/client-rds") @new
   external new: request => t = "RemoveSourceIdentifierFromSubscriptionCommand"
-  let make = (~sourceIdentifier, ~subscriptionName, ()) =>
-    new({sourceIdentifier: sourceIdentifier, subscriptionName: subscriptionName})
+  let make = (~sourceIdentifier, ~subscriptionName, ()) => new({sourceIdentifier, subscriptionName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ModifyEventSubscription = {
   type t
   type request = {
@@ -1709,17 +1683,9 @@ module ModifyEventSubscription = {
     ~sourceType=?,
     ~snsTopicArn=?,
     (),
-  ) =>
-    new({
-      enabled: enabled,
-      eventCategories: eventCategories,
-      sourceType: sourceType,
-      snsTopicArn: snsTopicArn,
-      subscriptionName: subscriptionName,
-    })
+  ) => new({enabled, eventCategories, sourceType, snsTopicArn, subscriptionName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ModifyDBParameterGroup = {
   type t
   type request = {
@@ -1750,11 +1716,9 @@ module ModifyDBParameterGroup = {
     dbparameterGroupName: option<string_>,
   }
   @module("@aws-sdk/client-rds") @new external new: request => t = "ModifyDBParameterGroupCommand"
-  let make = (~parameters, ~dbparameterGroupName, ()) =>
-    new({parameters: parameters, dbparameterGroupName: dbparameterGroupName})
+  let make = (~parameters, ~dbparameterGroupName, ()) => new({parameters, dbparameterGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ModifyDBClusterParameterGroup = {
   type t
   type request = {
@@ -1788,10 +1752,9 @@ module ModifyDBClusterParameterGroup = {
   @module("@aws-sdk/client-rds") @new
   external new: request => t = "ModifyDBClusterParameterGroupCommand"
   let make = (~parameters, ~dbclusterParameterGroupName, ()) =>
-    new({parameters: parameters, dbclusterParameterGroupName: dbclusterParameterGroupName})
+    new({parameters, dbclusterParameterGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteEventSubscription = {
   type t
   type request = {
@@ -1804,7 +1767,6 @@ module DeleteEventSubscription = {
   let make = (~subscriptionName, ()) => new({subscriptionName: subscriptionName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteDBClusterSnapshot = {
   type t
   type request = {
@@ -1820,7 +1782,6 @@ module DeleteDBClusterSnapshot = {
     new({dbclusterSnapshotIdentifier: dbclusterSnapshotIdentifier})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateEventSubscription = {
   type t
   type request = {
@@ -1893,19 +1854,9 @@ module CreateEventSubscription = {
     ~eventCategories=?,
     ~sourceType=?,
     (),
-  ) =>
-    new({
-      tags: tags,
-      enabled: enabled,
-      sourceIds: sourceIds,
-      eventCategories: eventCategories,
-      sourceType: sourceType,
-      snsTopicArn: snsTopicArn,
-      subscriptionName: subscriptionName,
-    })
+  ) => new({tags, enabled, sourceIds, eventCategories, sourceType, snsTopicArn, subscriptionName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateDBParameterGroup = {
   type t
   type request = {
@@ -1940,15 +1891,9 @@ module CreateDBParameterGroup = {
   type response = {@as("DBParameterGroup") dbparameterGroup: option<dbparameterGroup>}
   @module("@aws-sdk/client-rds") @new external new: request => t = "CreateDBParameterGroupCommand"
   let make = (~description, ~dbparameterGroupFamily, ~dbparameterGroupName, ~tags=?, ()) =>
-    new({
-      tags: tags,
-      description: description,
-      dbparameterGroupFamily: dbparameterGroupFamily,
-      dbparameterGroupName: dbparameterGroupName,
-    })
+    new({tags, description, dbparameterGroupFamily, dbparameterGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateDBClusterSnapshot = {
   type t
   type request = {
@@ -1988,14 +1933,9 @@ module CreateDBClusterSnapshot = {
   type response = {@as("DBClusterSnapshot") dbclusterSnapshot: option<dbclusterSnapshot>}
   @module("@aws-sdk/client-rds") @new external new: request => t = "CreateDBClusterSnapshotCommand"
   let make = (~dbclusterIdentifier, ~dbclusterSnapshotIdentifier, ~tags=?, ()) =>
-    new({
-      tags: tags,
-      dbclusterIdentifier: dbclusterIdentifier,
-      dbclusterSnapshotIdentifier: dbclusterSnapshotIdentifier,
-    })
+    new({tags, dbclusterIdentifier, dbclusterSnapshotIdentifier})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateDBClusterParameterGroup = {
   type t
   type request = {
@@ -2028,15 +1968,9 @@ module CreateDBClusterParameterGroup = {
   @module("@aws-sdk/client-rds") @new
   external new: request => t = "CreateDBClusterParameterGroupCommand"
   let make = (~description, ~dbparameterGroupFamily, ~dbclusterParameterGroupName, ~tags=?, ()) =>
-    new({
-      tags: tags,
-      description: description,
-      dbparameterGroupFamily: dbparameterGroupFamily,
-      dbclusterParameterGroupName: dbclusterParameterGroupName,
-    })
+    new({tags, description, dbparameterGroupFamily, dbclusterParameterGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateDBClusterEndpoint = {
   type t
   type request = {
@@ -2143,16 +2077,15 @@ module CreateDBClusterEndpoint = {
     (),
   ) =>
     new({
-      tags: tags,
-      excludedMembers: excludedMembers,
-      staticMembers: staticMembers,
-      endpointType: endpointType,
-      dbclusterEndpointIdentifier: dbclusterEndpointIdentifier,
-      dbclusterIdentifier: dbclusterIdentifier,
+      tags,
+      excludedMembers,
+      staticMembers,
+      endpointType,
+      dbclusterEndpointIdentifier,
+      dbclusterIdentifier,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CopyDBParameterGroup = {
   type t
   type request = {
@@ -2210,14 +2143,13 @@ module CopyDBParameterGroup = {
     (),
   ) =>
     new({
-      tags: tags,
-      targetDBParameterGroupDescription: targetDBParameterGroupDescription,
-      targetDBParameterGroupIdentifier: targetDBParameterGroupIdentifier,
-      sourceDBParameterGroupIdentifier: sourceDBParameterGroupIdentifier,
+      tags,
+      targetDBParameterGroupDescription,
+      targetDBParameterGroupIdentifier,
+      sourceDBParameterGroupIdentifier,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CopyDBClusterSnapshot = {
   type t
   type request = {
@@ -2292,16 +2224,15 @@ module CopyDBClusterSnapshot = {
     (),
   ) =>
     new({
-      tags: tags,
-      copyTags: copyTags,
-      preSignedUrl: preSignedUrl,
-      kmsKeyId: kmsKeyId,
-      targetDBClusterSnapshotIdentifier: targetDBClusterSnapshotIdentifier,
-      sourceDBClusterSnapshotIdentifier: sourceDBClusterSnapshotIdentifier,
+      tags,
+      copyTags,
+      preSignedUrl,
+      kmsKeyId,
+      targetDBClusterSnapshotIdentifier,
+      sourceDBClusterSnapshotIdentifier,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CopyDBClusterParameterGroup = {
   type t
   type request = {
@@ -2366,14 +2297,13 @@ module CopyDBClusterParameterGroup = {
     (),
   ) =>
     new({
-      tags: tags,
-      targetDBClusterParameterGroupDescription: targetDBClusterParameterGroupDescription,
-      targetDBClusterParameterGroupIdentifier: targetDBClusterParameterGroupIdentifier,
-      sourceDBClusterParameterGroupIdentifier: sourceDBClusterParameterGroupIdentifier,
+      tags,
+      targetDBClusterParameterGroupDescription,
+      targetDBClusterParameterGroupIdentifier,
+      sourceDBClusterParameterGroupIdentifier,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module AddTagsToResource = {
   type t
   type request = {
@@ -2387,10 +2317,9 @@ module AddTagsToResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-rds") @new external new: request => t = "AddTagsToResourceCommand"
-  let make = (~tags, ~resourceName, ()) => new({tags: tags, resourceName: resourceName})
+  let make = (~tags, ~resourceName, ()) => new({tags, resourceName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module AddSourceIdentifierToSubscription = {
   type t
   type request = {
@@ -2424,11 +2353,9 @@ module AddSourceIdentifierToSubscription = {
   type response = {@as("EventSubscription") eventSubscription: option<eventSubscription>}
   @module("@aws-sdk/client-rds") @new
   external new: request => t = "AddSourceIdentifierToSubscriptionCommand"
-  let make = (~sourceIdentifier, ~subscriptionName, ()) =>
-    new({sourceIdentifier: sourceIdentifier, subscriptionName: subscriptionName})
+  let make = (~sourceIdentifier, ~subscriptionName, ()) => new({sourceIdentifier, subscriptionName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module StopDBCluster = {
   type t
   type request = {
@@ -2442,7 +2369,6 @@ module StopDBCluster = {
   let make = (~dbclusterIdentifier, ()) => new({dbclusterIdentifier: dbclusterIdentifier})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module StartDBCluster = {
   type t
   type request = {
@@ -2456,7 +2382,6 @@ module StartDBCluster = {
   let make = (~dbclusterIdentifier, ()) => new({dbclusterIdentifier: dbclusterIdentifier})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module RestoreDBClusterToPointInTime = {
   type t
   type request = {
@@ -2629,25 +2554,24 @@ module RestoreDBClusterToPointInTime = {
     (),
   ) =>
     new({
-      deletionProtection: deletionProtection,
-      dbclusterParameterGroupName: dbclusterParameterGroupName,
-      enableCloudwatchLogsExports: enableCloudwatchLogsExports,
-      enableIAMDatabaseAuthentication: enableIAMDatabaseAuthentication,
-      kmsKeyId: kmsKeyId,
-      tags: tags,
-      vpcSecurityGroupIds: vpcSecurityGroupIds,
-      optionGroupName: optionGroupName,
-      dbsubnetGroupName: dbsubnetGroupName,
-      port: port,
-      useLatestRestorableTime: useLatestRestorableTime,
-      restoreToTime: restoreToTime,
-      sourceDBClusterIdentifier: sourceDBClusterIdentifier,
-      restoreType: restoreType,
-      dbclusterIdentifier: dbclusterIdentifier,
+      deletionProtection,
+      dbclusterParameterGroupName,
+      enableCloudwatchLogsExports,
+      enableIAMDatabaseAuthentication,
+      kmsKeyId,
+      tags,
+      vpcSecurityGroupIds,
+      optionGroupName,
+      dbsubnetGroupName,
+      port,
+      useLatestRestorableTime,
+      restoreToTime,
+      sourceDBClusterIdentifier,
+      restoreType,
+      dbclusterIdentifier,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module RestoreDBClusterFromSnapshot = {
   type t
   type request = {
@@ -2793,27 +2717,26 @@ module RestoreDBClusterFromSnapshot = {
     (),
   ) =>
     new({
-      copyTagsToSnapshot: copyTagsToSnapshot,
-      deletionProtection: deletionProtection,
-      dbclusterParameterGroupName: dbclusterParameterGroupName,
-      enableCloudwatchLogsExports: enableCloudwatchLogsExports,
-      enableIAMDatabaseAuthentication: enableIAMDatabaseAuthentication,
-      kmsKeyId: kmsKeyId,
-      tags: tags,
-      vpcSecurityGroupIds: vpcSecurityGroupIds,
-      optionGroupName: optionGroupName,
-      databaseName: databaseName,
-      dbsubnetGroupName: dbsubnetGroupName,
-      port: port,
-      engineVersion: engineVersion,
-      engine: engine,
-      snapshotIdentifier: snapshotIdentifier,
-      dbclusterIdentifier: dbclusterIdentifier,
-      availabilityZones: availabilityZones,
+      copyTagsToSnapshot,
+      deletionProtection,
+      dbclusterParameterGroupName,
+      enableCloudwatchLogsExports,
+      enableIAMDatabaseAuthentication,
+      kmsKeyId,
+      tags,
+      vpcSecurityGroupIds,
+      optionGroupName,
+      databaseName,
+      dbsubnetGroupName,
+      port,
+      engineVersion,
+      engine,
+      snapshotIdentifier,
+      dbclusterIdentifier,
+      availabilityZones,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module PromoteReadReplicaDBCluster = {
   type t
   type request = {
@@ -2825,7 +2748,6 @@ module PromoteReadReplicaDBCluster = {
   let make = (~dbclusterIdentifier, ()) => new({dbclusterIdentifier: dbclusterIdentifier})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ModifyDBCluster = {
   type t
   type request = {
@@ -3012,28 +2934,27 @@ module ModifyDBCluster = {
     (),
   ) =>
     new({
-      copyTagsToSnapshot: copyTagsToSnapshot,
-      deletionProtection: deletionProtection,
-      dbinstanceParameterGroupName: dbinstanceParameterGroupName,
-      allowMajorVersionUpgrade: allowMajorVersionUpgrade,
-      engineVersion: engineVersion,
-      cloudwatchLogsExportConfiguration: cloudwatchLogsExportConfiguration,
-      enableIAMDatabaseAuthentication: enableIAMDatabaseAuthentication,
-      preferredMaintenanceWindow: preferredMaintenanceWindow,
-      preferredBackupWindow: preferredBackupWindow,
-      optionGroupName: optionGroupName,
-      masterUserPassword: masterUserPassword,
-      port: port,
-      vpcSecurityGroupIds: vpcSecurityGroupIds,
-      dbclusterParameterGroupName: dbclusterParameterGroupName,
-      backupRetentionPeriod: backupRetentionPeriod,
-      applyImmediately: applyImmediately,
-      newDBClusterIdentifier: newDBClusterIdentifier,
-      dbclusterIdentifier: dbclusterIdentifier,
+      copyTagsToSnapshot,
+      deletionProtection,
+      dbinstanceParameterGroupName,
+      allowMajorVersionUpgrade,
+      engineVersion,
+      cloudwatchLogsExportConfiguration,
+      enableIAMDatabaseAuthentication,
+      preferredMaintenanceWindow,
+      preferredBackupWindow,
+      optionGroupName,
+      masterUserPassword,
+      port,
+      vpcSecurityGroupIds,
+      dbclusterParameterGroupName,
+      backupRetentionPeriod,
+      applyImmediately,
+      newDBClusterIdentifier,
+      dbclusterIdentifier,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListTagsForResource = {
   type t
   type request = {
@@ -3050,10 +2971,9 @@ module ListTagsForResource = {
     tagList_: option<tagList_>,
   }
   @module("@aws-sdk/client-rds") @new external new: request => t = "ListTagsForResourceCommand"
-  let make = (~resourceName, ~filters=?, ()) => new({filters: filters, resourceName: resourceName})
+  let make = (~resourceName, ~filters=?, ()) => new({filters, resourceName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module FailoverDBCluster = {
   type t
   type request = {
@@ -3076,13 +2996,9 @@ module FailoverDBCluster = {
   type response = {@as("DBCluster") dbcluster: option<dbcluster>}
   @module("@aws-sdk/client-rds") @new external new: request => t = "FailoverDBClusterCommand"
   let make = (~targetDBInstanceIdentifier=?, ~dbclusterIdentifier=?, ()) =>
-    new({
-      targetDBInstanceIdentifier: targetDBInstanceIdentifier,
-      dbclusterIdentifier: dbclusterIdentifier,
-    })
+    new({targetDBInstanceIdentifier, dbclusterIdentifier})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeEvents = {
   type t
   type request = {
@@ -3176,19 +3092,18 @@ module DescribeEvents = {
     (),
   ) =>
     new({
-      marker: marker,
-      maxRecords: maxRecords,
-      filters: filters,
-      eventCategories: eventCategories,
-      duration: duration,
-      endTime: endTime,
-      startTime: startTime,
-      sourceType: sourceType,
-      sourceIdentifier: sourceIdentifier,
+      marker,
+      maxRecords,
+      filters,
+      eventCategories,
+      duration,
+      endTime,
+      startTime,
+      sourceType,
+      sourceIdentifier,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeEventSubscriptions = {
   type t
   type request = {
@@ -3222,15 +3137,9 @@ module DescribeEventSubscriptions = {
   @module("@aws-sdk/client-rds") @new
   external new: request => t = "DescribeEventSubscriptionsCommand"
   let make = (~marker=?, ~maxRecords=?, ~filters=?, ~subscriptionName=?, ()) =>
-    new({
-      marker: marker,
-      maxRecords: maxRecords,
-      filters: filters,
-      subscriptionName: subscriptionName,
-    })
+    new({marker, maxRecords, filters, subscriptionName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeEventCategories = {
   type t
   type request = {
@@ -3246,10 +3155,9 @@ module DescribeEventCategories = {
     eventCategoriesMapList: option<eventCategoriesMapList>,
   }
   @module("@aws-sdk/client-rds") @new external new: request => t = "DescribeEventCategoriesCommand"
-  let make = (~filters=?, ~sourceType=?, ()) => new({filters: filters, sourceType: sourceType})
+  let make = (~filters=?, ~sourceType=?, ()) => new({filters, sourceType})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeEngineDefaultParameters = {
   type t
   type request = {
@@ -3274,15 +3182,9 @@ module DescribeEngineDefaultParameters = {
   @module("@aws-sdk/client-rds") @new
   external new: request => t = "DescribeEngineDefaultParametersCommand"
   let make = (~dbparameterGroupFamily, ~marker=?, ~maxRecords=?, ~filters=?, ()) =>
-    new({
-      marker: marker,
-      maxRecords: maxRecords,
-      filters: filters,
-      dbparameterGroupFamily: dbparameterGroupFamily,
-    })
+    new({marker, maxRecords, filters, dbparameterGroupFamily})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeEngineDefaultClusterParameters = {
   type t
   type request = {
@@ -3310,15 +3212,9 @@ module DescribeEngineDefaultClusterParameters = {
   @module("@aws-sdk/client-rds") @new
   external new: request => t = "DescribeEngineDefaultClusterParametersCommand"
   let make = (~dbparameterGroupFamily, ~marker=?, ~maxRecords=?, ~filters=?, ()) =>
-    new({
-      marker: marker,
-      maxRecords: maxRecords,
-      filters: filters,
-      dbparameterGroupFamily: dbparameterGroupFamily,
-    })
+    new({marker, maxRecords, filters, dbparameterGroupFamily})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeDBParameters = {
   type t
   type request = {
@@ -3363,16 +3259,9 @@ module DescribeDBParameters = {
   }
   @module("@aws-sdk/client-rds") @new external new: request => t = "DescribeDBParametersCommand"
   let make = (~dbparameterGroupName, ~marker=?, ~maxRecords=?, ~filters=?, ~source=?, ()) =>
-    new({
-      marker: marker,
-      maxRecords: maxRecords,
-      filters: filters,
-      source: source,
-      dbparameterGroupName: dbparameterGroupName,
-    })
+    new({marker, maxRecords, filters, source, dbparameterGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeDBParameterGroups = {
   type t
   type request = {
@@ -3412,15 +3301,9 @@ module DescribeDBParameterGroups = {
   @module("@aws-sdk/client-rds") @new
   external new: request => t = "DescribeDBParameterGroupsCommand"
   let make = (~marker=?, ~maxRecords=?, ~filters=?, ~dbparameterGroupName=?, ()) =>
-    new({
-      marker: marker,
-      maxRecords: maxRecords,
-      filters: filters,
-      dbparameterGroupName: dbparameterGroupName,
-    })
+    new({marker, maxRecords, filters, dbparameterGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeDBClusterSnapshots = {
   type t
   type request = {
@@ -3540,18 +3423,17 @@ module DescribeDBClusterSnapshots = {
     (),
   ) =>
     new({
-      includePublic: includePublic,
-      includeShared: includeShared,
-      marker: marker,
-      maxRecords: maxRecords,
-      filters: filters,
-      snapshotType: snapshotType,
-      dbclusterSnapshotIdentifier: dbclusterSnapshotIdentifier,
-      dbclusterIdentifier: dbclusterIdentifier,
+      includePublic,
+      includeShared,
+      marker,
+      maxRecords,
+      filters,
+      snapshotType,
+      dbclusterSnapshotIdentifier,
+      dbclusterIdentifier,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeDBClusterParameters = {
   type t
   type request = {
@@ -3597,16 +3479,9 @@ module DescribeDBClusterParameters = {
   @module("@aws-sdk/client-rds") @new
   external new: request => t = "DescribeDBClusterParametersCommand"
   let make = (~dbclusterParameterGroupName, ~marker=?, ~maxRecords=?, ~filters=?, ~source=?, ()) =>
-    new({
-      marker: marker,
-      maxRecords: maxRecords,
-      filters: filters,
-      source: source,
-      dbclusterParameterGroupName: dbclusterParameterGroupName,
-    })
+    new({marker, maxRecords, filters, source, dbclusterParameterGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeDBClusterParameterGroups = {
   type t
   type request = {
@@ -3648,15 +3523,9 @@ module DescribeDBClusterParameterGroups = {
   @module("@aws-sdk/client-rds") @new
   external new: request => t = "DescribeDBClusterParameterGroupsCommand"
   let make = (~marker=?, ~maxRecords=?, ~filters=?, ~dbclusterParameterGroupName=?, ()) =>
-    new({
-      marker: marker,
-      maxRecords: maxRecords,
-      filters: filters,
-      dbclusterParameterGroupName: dbclusterParameterGroupName,
-    })
+    new({marker, maxRecords, filters, dbclusterParameterGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeDBClusterEndpoints = {
   type t
   type request = {
@@ -3719,17 +3588,9 @@ module DescribeDBClusterEndpoints = {
     ~dbclusterEndpointIdentifier=?,
     ~dbclusterIdentifier=?,
     (),
-  ) =>
-    new({
-      marker: marker,
-      maxRecords: maxRecords,
-      filters: filters,
-      dbclusterEndpointIdentifier: dbclusterEndpointIdentifier,
-      dbclusterIdentifier: dbclusterIdentifier,
-    })
+  ) => new({marker, maxRecords, filters, dbclusterEndpointIdentifier, dbclusterIdentifier})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteDBCluster = {
   type t
   type request = {
@@ -3779,14 +3640,9 @@ module DeleteDBCluster = {
   type response = {@as("DBCluster") dbcluster: option<dbcluster>}
   @module("@aws-sdk/client-rds") @new external new: request => t = "DeleteDBClusterCommand"
   let make = (~dbclusterIdentifier, ~finalDBSnapshotIdentifier=?, ~skipFinalSnapshot=?, ()) =>
-    new({
-      finalDBSnapshotIdentifier: finalDBSnapshotIdentifier,
-      skipFinalSnapshot: skipFinalSnapshot,
-      dbclusterIdentifier: dbclusterIdentifier,
-    })
+    new({finalDBSnapshotIdentifier, skipFinalSnapshot, dbclusterIdentifier})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateDBCluster = {
   type t
   type request = {
@@ -3999,35 +3855,34 @@ module CreateDBCluster = {
     (),
   ) =>
     new({
-      deletionProtection: deletionProtection,
-      enableCloudwatchLogsExports: enableCloudwatchLogsExports,
-      enableIAMDatabaseAuthentication: enableIAMDatabaseAuthentication,
-      preSignedUrl: preSignedUrl,
-      kmsKeyId: kmsKeyId,
-      storageEncrypted: storageEncrypted,
-      tags: tags,
-      replicationSourceIdentifier: replicationSourceIdentifier,
-      preferredMaintenanceWindow: preferredMaintenanceWindow,
-      preferredBackupWindow: preferredBackupWindow,
-      optionGroupName: optionGroupName,
-      masterUserPassword: masterUserPassword,
-      masterUsername: masterUsername,
-      port: port,
-      engineVersion: engineVersion,
-      engine: engine,
-      dbsubnetGroupName: dbsubnetGroupName,
-      vpcSecurityGroupIds: vpcSecurityGroupIds,
-      dbclusterParameterGroupName: dbclusterParameterGroupName,
-      dbclusterIdentifier: dbclusterIdentifier,
-      databaseName: databaseName,
-      copyTagsToSnapshot: copyTagsToSnapshot,
-      characterSetName: characterSetName,
-      backupRetentionPeriod: backupRetentionPeriod,
-      availabilityZones: availabilityZones,
+      deletionProtection,
+      enableCloudwatchLogsExports,
+      enableIAMDatabaseAuthentication,
+      preSignedUrl,
+      kmsKeyId,
+      storageEncrypted,
+      tags,
+      replicationSourceIdentifier,
+      preferredMaintenanceWindow,
+      preferredBackupWindow,
+      optionGroupName,
+      masterUserPassword,
+      masterUsername,
+      port,
+      engineVersion,
+      engine,
+      dbsubnetGroupName,
+      vpcSecurityGroupIds,
+      dbclusterParameterGroupName,
+      dbclusterIdentifier,
+      databaseName,
+      copyTagsToSnapshot,
+      characterSetName,
+      backupRetentionPeriod,
+      availabilityZones,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ApplyPendingMaintenanceAction = {
   type t
   type request = {
@@ -4070,10 +3925,9 @@ module ApplyPendingMaintenanceAction = {
   @module("@aws-sdk/client-rds") @new
   external new: request => t = "ApplyPendingMaintenanceActionCommand"
   let make = (~optInType, ~applyAction, ~resourceIdentifier, ()) =>
-    new({optInType: optInType, applyAction: applyAction, resourceIdentifier: resourceIdentifier})
+    new({optInType, applyAction, resourceIdentifier})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ModifyDBSubnetGroup = {
   type t
   type request = {
@@ -4092,14 +3946,9 @@ module ModifyDBSubnetGroup = {
   type response = {@as("DBSubnetGroup") dbsubnetGroup: option<dbsubnetGroup>}
   @module("@aws-sdk/client-rds") @new external new: request => t = "ModifyDBSubnetGroupCommand"
   let make = (~subnetIds, ~dbsubnetGroupName, ~dbsubnetGroupDescription=?, ()) =>
-    new({
-      subnetIds: subnetIds,
-      dbsubnetGroupDescription: dbsubnetGroupDescription,
-      dbsubnetGroupName: dbsubnetGroupName,
-    })
+    new({subnetIds, dbsubnetGroupDescription, dbsubnetGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ModifyDBClusterSnapshotAttribute = {
   type t
   type request = {
@@ -4142,16 +3991,9 @@ module ModifyDBClusterSnapshotAttribute = {
     ~valuesToRemove=?,
     ~valuesToAdd=?,
     (),
-  ) =>
-    new({
-      valuesToRemove: valuesToRemove,
-      valuesToAdd: valuesToAdd,
-      attributeName: attributeName,
-      dbclusterSnapshotIdentifier: dbclusterSnapshotIdentifier,
-    })
+  ) => new({valuesToRemove, valuesToAdd, attributeName, dbclusterSnapshotIdentifier})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribePendingMaintenanceActions = {
   type t
   type request = {
@@ -4205,15 +4047,9 @@ module DescribePendingMaintenanceActions = {
   @module("@aws-sdk/client-rds") @new
   external new: request => t = "DescribePendingMaintenanceActionsCommand"
   let make = (~maxRecords=?, ~marker=?, ~filters=?, ~resourceIdentifier=?, ()) =>
-    new({
-      maxRecords: maxRecords,
-      marker: marker,
-      filters: filters,
-      resourceIdentifier: resourceIdentifier,
-    })
+    new({maxRecords, marker, filters, resourceIdentifier})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeOrderableDBInstanceOptions = {
   type t
   type request = {
@@ -4273,20 +4109,9 @@ module DescribeOrderableDBInstanceOptions = {
     ~dbinstanceClass=?,
     ~engineVersion=?,
     (),
-  ) =>
-    new({
-      marker: marker,
-      maxRecords: maxRecords,
-      filters: filters,
-      vpc: vpc,
-      licenseModel: licenseModel,
-      dbinstanceClass: dbinstanceClass,
-      engineVersion: engineVersion,
-      engine: engine,
-    })
+  ) => new({marker, maxRecords, filters, vpc, licenseModel, dbinstanceClass, engineVersion, engine})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeDBEngineVersions = {
   type t
   type request = {
@@ -4356,19 +4181,18 @@ module DescribeDBEngineVersions = {
     (),
   ) =>
     new({
-      listSupportedTimezones: listSupportedTimezones,
-      listSupportedCharacterSets: listSupportedCharacterSets,
-      defaultOnly: defaultOnly,
-      marker: marker,
-      maxRecords: maxRecords,
-      filters: filters,
-      dbparameterGroupFamily: dbparameterGroupFamily,
-      engineVersion: engineVersion,
-      engine: engine,
+      listSupportedTimezones,
+      listSupportedCharacterSets,
+      defaultOnly,
+      marker,
+      maxRecords,
+      filters,
+      dbparameterGroupFamily,
+      engineVersion,
+      engine,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeDBClusters = {
   type t
   type request = {
@@ -4426,15 +4250,9 @@ module DescribeDBClusters = {
   }
   @module("@aws-sdk/client-rds") @new external new: request => t = "DescribeDBClustersCommand"
   let make = (~marker=?, ~maxRecords=?, ~filters=?, ~dbclusterIdentifier=?, ()) =>
-    new({
-      marker: marker,
-      maxRecords: maxRecords,
-      filters: filters,
-      dbclusterIdentifier: dbclusterIdentifier,
-    })
+    new({marker, maxRecords, filters, dbclusterIdentifier})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeDBClusterSnapshotAttributes = {
   type t
   type request = {
@@ -4452,7 +4270,6 @@ module DescribeDBClusterSnapshotAttributes = {
     new({dbclusterSnapshotIdentifier: dbclusterSnapshotIdentifier})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateDBSubnetGroup = {
   type t
   type request = {
@@ -4473,15 +4290,9 @@ module CreateDBSubnetGroup = {
   type response = {@as("DBSubnetGroup") dbsubnetGroup: option<dbsubnetGroup>}
   @module("@aws-sdk/client-rds") @new external new: request => t = "CreateDBSubnetGroupCommand"
   let make = (~subnetIds, ~dbsubnetGroupDescription, ~dbsubnetGroupName, ~tags=?, ()) =>
-    new({
-      tags: tags,
-      subnetIds: subnetIds,
-      dbsubnetGroupDescription: dbsubnetGroupDescription,
-      dbsubnetGroupName: dbsubnetGroupName,
-    })
+    new({tags, subnetIds, dbsubnetGroupDescription, dbsubnetGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module RebootDBInstance = {
   type t
   type request = {
@@ -4503,10 +4314,9 @@ module RebootDBInstance = {
   type response = {@as("DBInstance") dbinstance: option<dbinstance>}
   @module("@aws-sdk/client-rds") @new external new: request => t = "RebootDBInstanceCommand"
   let make = (~dbinstanceIdentifier, ~forceFailover=?, ()) =>
-    new({forceFailover: forceFailover, dbinstanceIdentifier: dbinstanceIdentifier})
+    new({forceFailover, dbinstanceIdentifier})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ModifyDBInstance = {
   type t
   type request = {
@@ -4806,47 +4616,46 @@ module ModifyDBInstance = {
     (),
   ) =>
     new({
-      deletionProtection: deletionProtection,
-      cloudwatchLogsExportConfiguration: cloudwatchLogsExportConfiguration,
-      performanceInsightsKMSKeyId: performanceInsightsKMSKeyId,
-      enablePerformanceInsights: enablePerformanceInsights,
-      enableIAMDatabaseAuthentication: enableIAMDatabaseAuthentication,
-      promotionTier: promotionTier,
-      domainIAMRoleName: domainIAMRoleName,
-      monitoringRoleArn: monitoringRoleArn,
-      publiclyAccessible: publiclyAccessible,
-      dbportNumber: dbportNumber,
-      monitoringInterval: monitoringInterval,
-      copyTagsToSnapshot: copyTagsToSnapshot,
-      domain: domain,
-      cacertificateIdentifier: cacertificateIdentifier,
-      tdeCredentialPassword: tdeCredentialPassword,
-      tdeCredentialArn: tdeCredentialArn,
-      storageType: storageType,
-      newDBInstanceIdentifier: newDBInstanceIdentifier,
-      optionGroupName: optionGroupName,
-      iops: iops,
-      licenseModel: licenseModel,
-      autoMinorVersionUpgrade: autoMinorVersionUpgrade,
-      allowMajorVersionUpgrade: allowMajorVersionUpgrade,
-      engineVersion: engineVersion,
-      multiAZ: multiAZ,
-      preferredMaintenanceWindow: preferredMaintenanceWindow,
-      preferredBackupWindow: preferredBackupWindow,
-      backupRetentionPeriod: backupRetentionPeriod,
-      dbparameterGroupName: dbparameterGroupName,
-      masterUserPassword: masterUserPassword,
-      applyImmediately: applyImmediately,
-      vpcSecurityGroupIds: vpcSecurityGroupIds,
-      dbsecurityGroups: dbsecurityGroups,
-      dbsubnetGroupName: dbsubnetGroupName,
-      dbinstanceClass: dbinstanceClass,
-      allocatedStorage: allocatedStorage,
-      dbinstanceIdentifier: dbinstanceIdentifier,
+      deletionProtection,
+      cloudwatchLogsExportConfiguration,
+      performanceInsightsKMSKeyId,
+      enablePerformanceInsights,
+      enableIAMDatabaseAuthentication,
+      promotionTier,
+      domainIAMRoleName,
+      monitoringRoleArn,
+      publiclyAccessible,
+      dbportNumber,
+      monitoringInterval,
+      copyTagsToSnapshot,
+      domain,
+      cacertificateIdentifier,
+      tdeCredentialPassword,
+      tdeCredentialArn,
+      storageType,
+      newDBInstanceIdentifier,
+      optionGroupName,
+      iops,
+      licenseModel,
+      autoMinorVersionUpgrade,
+      allowMajorVersionUpgrade,
+      engineVersion,
+      multiAZ,
+      preferredMaintenanceWindow,
+      preferredBackupWindow,
+      backupRetentionPeriod,
+      dbparameterGroupName,
+      masterUserPassword,
+      applyImmediately,
+      vpcSecurityGroupIds,
+      dbsecurityGroups,
+      dbsubnetGroupName,
+      dbinstanceClass,
+      allocatedStorage,
+      dbinstanceIdentifier,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeValidDBInstanceModifications = {
   type t
   type request = {
@@ -4863,7 +4672,6 @@ module DescribeValidDBInstanceModifications = {
   let make = (~dbinstanceIdentifier, ()) => new({dbinstanceIdentifier: dbinstanceIdentifier})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeDBSubnetGroups = {
   type t
   type request = {
@@ -4896,15 +4704,9 @@ module DescribeDBSubnetGroups = {
   }
   @module("@aws-sdk/client-rds") @new external new: request => t = "DescribeDBSubnetGroupsCommand"
   let make = (~marker=?, ~maxRecords=?, ~filters=?, ~dbsubnetGroupName=?, ()) =>
-    new({
-      marker: marker,
-      maxRecords: maxRecords,
-      filters: filters,
-      dbsubnetGroupName: dbsubnetGroupName,
-    })
+    new({marker, maxRecords, filters, dbsubnetGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteDBInstance = {
   type t
   type request = {
@@ -4960,14 +4762,9 @@ module DeleteDBInstance = {
   type response = {@as("DBInstance") dbinstance: option<dbinstance>}
   @module("@aws-sdk/client-rds") @new external new: request => t = "DeleteDBInstanceCommand"
   let make = (~dbinstanceIdentifier, ~finalDBSnapshotIdentifier=?, ~skipFinalSnapshot=?, ()) =>
-    new({
-      finalDBSnapshotIdentifier: finalDBSnapshotIdentifier,
-      skipFinalSnapshot: skipFinalSnapshot,
-      dbinstanceIdentifier: dbinstanceIdentifier,
-    })
+    new({finalDBSnapshotIdentifier, skipFinalSnapshot, dbinstanceIdentifier})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateDBInstance = {
   type t
   type request = {
@@ -5268,53 +5065,52 @@ module CreateDBInstance = {
     (),
   ) =>
     new({
-      deletionProtection: deletionProtection,
-      enableCloudwatchLogsExports: enableCloudwatchLogsExports,
-      performanceInsightsKMSKeyId: performanceInsightsKMSKeyId,
-      enablePerformanceInsights: enablePerformanceInsights,
-      enableIAMDatabaseAuthentication: enableIAMDatabaseAuthentication,
-      timezone: timezone,
-      promotionTier: promotionTier,
-      domainIAMRoleName: domainIAMRoleName,
-      monitoringRoleArn: monitoringRoleArn,
-      monitoringInterval: monitoringInterval,
-      copyTagsToSnapshot: copyTagsToSnapshot,
-      domain: domain,
-      kmsKeyId: kmsKeyId,
-      storageEncrypted: storageEncrypted,
-      tdeCredentialPassword: tdeCredentialPassword,
-      tdeCredentialArn: tdeCredentialArn,
-      storageType: storageType,
-      dbclusterIdentifier: dbclusterIdentifier,
-      tags: tags,
-      publiclyAccessible: publiclyAccessible,
-      characterSetName: characterSetName,
-      optionGroupName: optionGroupName,
-      iops: iops,
-      licenseModel: licenseModel,
-      autoMinorVersionUpgrade: autoMinorVersionUpgrade,
-      engineVersion: engineVersion,
-      multiAZ: multiAZ,
-      port: port,
-      preferredBackupWindow: preferredBackupWindow,
-      backupRetentionPeriod: backupRetentionPeriod,
-      dbparameterGroupName: dbparameterGroupName,
-      preferredMaintenanceWindow: preferredMaintenanceWindow,
-      dbsubnetGroupName: dbsubnetGroupName,
-      availabilityZone: availabilityZone,
-      vpcSecurityGroupIds: vpcSecurityGroupIds,
-      dbsecurityGroups: dbsecurityGroups,
-      masterUserPassword: masterUserPassword,
-      masterUsername: masterUsername,
-      engine: engine,
-      dbinstanceClass: dbinstanceClass,
-      allocatedStorage: allocatedStorage,
-      dbinstanceIdentifier: dbinstanceIdentifier,
-      dbname: dbname,
+      deletionProtection,
+      enableCloudwatchLogsExports,
+      performanceInsightsKMSKeyId,
+      enablePerformanceInsights,
+      enableIAMDatabaseAuthentication,
+      timezone,
+      promotionTier,
+      domainIAMRoleName,
+      monitoringRoleArn,
+      monitoringInterval,
+      copyTagsToSnapshot,
+      domain,
+      kmsKeyId,
+      storageEncrypted,
+      tdeCredentialPassword,
+      tdeCredentialArn,
+      storageType,
+      dbclusterIdentifier,
+      tags,
+      publiclyAccessible,
+      characterSetName,
+      optionGroupName,
+      iops,
+      licenseModel,
+      autoMinorVersionUpgrade,
+      engineVersion,
+      multiAZ,
+      port,
+      preferredBackupWindow,
+      backupRetentionPeriod,
+      dbparameterGroupName,
+      preferredMaintenanceWindow,
+      dbsubnetGroupName,
+      availabilityZone,
+      vpcSecurityGroupIds,
+      dbsecurityGroups,
+      masterUserPassword,
+      masterUsername,
+      engine,
+      dbinstanceClass,
+      allocatedStorage,
+      dbinstanceIdentifier,
+      dbname,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeDBInstances = {
   type t
   type request = {
@@ -5372,11 +5168,6 @@ module DescribeDBInstances = {
   }
   @module("@aws-sdk/client-rds") @new external new: request => t = "DescribeDBInstancesCommand"
   let make = (~marker=?, ~maxRecords=?, ~filters=?, ~dbinstanceIdentifier=?, ()) =>
-    new({
-      marker: marker,
-      maxRecords: maxRecords,
-      filters: filters,
-      dbinstanceIdentifier: dbinstanceIdentifier,
-    })
+    new({marker, maxRecords, filters, dbinstanceIdentifier})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

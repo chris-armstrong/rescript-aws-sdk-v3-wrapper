@@ -475,7 +475,6 @@ module StopTextTranslationJob = {
   let make = (~jobId, ()) => new({jobId: jobId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteTerminology = {
   type t
   type request = {
@@ -487,7 +486,6 @@ module DeleteTerminology = {
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteParallelData = {
   type t
   type request = {
@@ -504,7 +502,6 @@ module DeleteParallelData = {
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateParallelData = {
   type t
   type request = {
@@ -539,15 +536,9 @@ module UpdateParallelData = {
   }
   @module("@aws-sdk/client-translate") @new external new: request => t = "UpdateParallelDataCommand"
   let make = (~clientToken, ~parallelDataConfig, ~name, ~description=?, ()) =>
-    new({
-      clientToken: clientToken,
-      parallelDataConfig: parallelDataConfig,
-      description: description,
-      name: name,
-    })
+    new({clientToken, parallelDataConfig, description, name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateParallelData = {
   type t
   type request = {
@@ -578,16 +569,9 @@ module CreateParallelData = {
   }
   @module("@aws-sdk/client-translate") @new external new: request => t = "CreateParallelDataCommand"
   let make = (~clientToken, ~parallelDataConfig, ~name, ~encryptionKey=?, ~description=?, ()) =>
-    new({
-      clientToken: clientToken,
-      encryptionKey: encryptionKey,
-      parallelDataConfig: parallelDataConfig,
-      description: description,
-      name: name,
-    })
+    new({clientToken, encryptionKey, parallelDataConfig, description, name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module StartTextTranslationJob = {
   type t
   type request = {
@@ -699,20 +683,19 @@ module StartTextTranslationJob = {
     (),
   ) =>
     new({
-      settings: settings,
-      clientToken: clientToken,
-      parallelDataNames: parallelDataNames,
-      terminologyNames: terminologyNames,
-      targetLanguageCodes: targetLanguageCodes,
-      sourceLanguageCode: sourceLanguageCode,
-      dataAccessRoleArn: dataAccessRoleArn,
-      outputDataConfig: outputDataConfig,
-      inputDataConfig: inputDataConfig,
-      jobName: jobName,
+      settings,
+      clientToken,
+      parallelDataNames,
+      terminologyNames,
+      targetLanguageCodes,
+      sourceLanguageCode,
+      dataAccessRoleArn,
+      outputDataConfig,
+      inputDataConfig,
+      jobName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ImportTerminology = {
   type t
   type request = {
@@ -746,16 +729,9 @@ module ImportTerminology = {
   }
   @module("@aws-sdk/client-translate") @new external new: request => t = "ImportTerminologyCommand"
   let make = (~terminologyData, ~mergeStrategy, ~name, ~encryptionKey=?, ~description=?, ()) =>
-    new({
-      encryptionKey: encryptionKey,
-      terminologyData: terminologyData,
-      description: description,
-      mergeStrategy: mergeStrategy,
-      name: name,
-    })
+    new({encryptionKey, terminologyData, description, mergeStrategy, name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetTerminology = {
   type t
   type request = {
@@ -797,11 +773,9 @@ module GetTerminology = {
     terminologyProperties: option<terminologyProperties>,
   }
   @module("@aws-sdk/client-translate") @new external new: request => t = "GetTerminologyCommand"
-  let make = (~name, ~terminologyDataFormat=?, ()) =>
-    new({terminologyDataFormat: terminologyDataFormat, name: name})
+  let make = (~name, ~terminologyDataFormat=?, ()) => new({terminologyDataFormat, name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetParallelData = {
   type t
   type request = {
@@ -844,7 +818,6 @@ module GetParallelData = {
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListTerminologies = {
   type t
   type request = {
@@ -868,11 +841,9 @@ module ListTerminologies = {
     terminologyPropertiesList: option<terminologyPropertiesList>,
   }
   @module("@aws-sdk/client-translate") @new external new: request => t = "ListTerminologiesCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListParallelData = {
   type t
   type request = {
@@ -895,11 +866,9 @@ module ListParallelData = {
     parallelDataPropertiesList: option<parallelDataPropertiesList>,
   }
   @module("@aws-sdk/client-translate") @new external new: request => t = "ListParallelDataCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeTextTranslationJob = {
   type t
   type request = {
@@ -919,7 +888,6 @@ module DescribeTextTranslationJob = {
   let make = (~jobId, ()) => new({jobId: jobId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module TranslateText = {
   type t
   type request = {
@@ -972,17 +940,9 @@ module TranslateText = {
     ~settings=?,
     ~terminologyNames=?,
     (),
-  ) =>
-    new({
-      settings: settings,
-      targetLanguageCode: targetLanguageCode,
-      sourceLanguageCode: sourceLanguageCode,
-      terminologyNames: terminologyNames,
-      text: text,
-    })
+  ) => new({settings, targetLanguageCode, sourceLanguageCode, terminologyNames, text})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListTextTranslationJobs = {
   type t
   type request = {
@@ -1009,7 +969,6 @@ module ListTextTranslationJobs = {
   }
   @module("@aws-sdk/client-translate") @new
   external new: request => t = "ListTextTranslationJobsCommand"
-  let make = (~maxResults=?, ~nextToken=?, ~filter=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, filter: filter})
+  let make = (~maxResults=?, ~nextToken=?, ~filter=?, ()) => new({maxResults, nextToken, filter})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

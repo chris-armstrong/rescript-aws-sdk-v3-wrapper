@@ -801,15 +801,9 @@ module UpdateVariable = {
   type response = {.}
   @module("@aws-sdk/client-frauddetector") @new external new: request => t = "UpdateVariableCommand"
   let make = (~name, ~variableType=?, ~description=?, ~defaultValue=?, ()) =>
-    new({
-      variableType: variableType,
-      description: description,
-      defaultValue: defaultValue,
-      name: name,
-    })
+    new({variableType, description, defaultValue, name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module UpdateModelVersionStatus = {
   type t
   type request = {
@@ -822,15 +816,9 @@ module UpdateModelVersionStatus = {
   @module("@aws-sdk/client-frauddetector") @new
   external new: request => t = "UpdateModelVersionStatusCommand"
   let make = (~status, ~modelVersionNumber, ~modelType, ~modelId, ()) =>
-    new({
-      status: status,
-      modelVersionNumber: modelVersionNumber,
-      modelType: modelType,
-      modelId: modelId,
-    })
+    new({status, modelVersionNumber, modelType, modelId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module UpdateModel = {
   type t
   type request = {
@@ -840,11 +828,9 @@ module UpdateModel = {
   }
   type response = {.}
   @module("@aws-sdk/client-frauddetector") @new external new: request => t = "UpdateModelCommand"
-  let make = (~modelType, ~modelId, ~description=?, ()) =>
-    new({description: description, modelType: modelType, modelId: modelId})
+  let make = (~modelType, ~modelId, ~description=?, ()) => new({description, modelType, modelId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module UpdateEventLabel = {
   type t
   type request = {
@@ -862,15 +848,9 @@ module UpdateEventLabel = {
   @module("@aws-sdk/client-frauddetector") @new
   external new: request => t = "UpdateEventLabelCommand"
   let make = (~labelTimestamp, ~assignedLabel, ~eventTypeName, ~eventId, ()) =>
-    new({
-      labelTimestamp: labelTimestamp,
-      assignedLabel: assignedLabel,
-      eventTypeName: eventTypeName,
-      eventId: eventId,
-    })
+    new({labelTimestamp, assignedLabel, eventTypeName, eventId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module UpdateDetectorVersionStatus = {
   type t
   type request = {
@@ -882,10 +862,9 @@ module UpdateDetectorVersionStatus = {
   @module("@aws-sdk/client-frauddetector") @new
   external new: request => t = "UpdateDetectorVersionStatusCommand"
   let make = (~status, ~detectorVersionId, ~detectorId, ()) =>
-    new({status: status, detectorVersionId: detectorVersionId, detectorId: detectorId})
+    new({status, detectorVersionId, detectorId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module UpdateDetectorVersionMetadata = {
   type t
   type request = {
@@ -897,10 +876,9 @@ module UpdateDetectorVersionMetadata = {
   @module("@aws-sdk/client-frauddetector") @new
   external new: request => t = "UpdateDetectorVersionMetadataCommand"
   let make = (~description, ~detectorVersionId, ~detectorId, ()) =>
-    new({description: description, detectorVersionId: detectorVersionId, detectorId: detectorId})
+    new({description, detectorVersionId, detectorId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module PutKMSEncryptionKey = {
   type t
   type request = {
@@ -912,7 +890,6 @@ module PutKMSEncryptionKey = {
   let make = (~kmsEncryptionKeyArn, ()) => new({kmsEncryptionKeyArn: kmsEncryptionKeyArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module GetDeleteEventsByEventTypeStatus = {
   type t
   type request = {
@@ -928,7 +905,6 @@ module GetDeleteEventsByEventTypeStatus = {
   let make = (~eventTypeName, ()) => new({eventTypeName: eventTypeName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteVariable = {
   type t
   type request = {@ocaml.doc("<p>The name of the variable to delete.</p>") name: string_}
@@ -937,7 +913,6 @@ module DeleteVariable = {
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteOutcome = {
   type t
   type request = {@ocaml.doc("<p>The name of the outcome to delete.</p>") name: identifier}
@@ -946,7 +921,6 @@ module DeleteOutcome = {
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteModelVersion = {
   type t
   type request = {
@@ -959,10 +933,9 @@ module DeleteModelVersion = {
   @module("@aws-sdk/client-frauddetector") @new
   external new: request => t = "DeleteModelVersionCommand"
   let make = (~modelVersionNumber, ~modelType, ~modelId, ()) =>
-    new({modelVersionNumber: modelVersionNumber, modelType: modelType, modelId: modelId})
+    new({modelVersionNumber, modelType, modelId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteModel = {
   type t
   type request = {
@@ -971,10 +944,9 @@ module DeleteModel = {
   }
   type response = {.}
   @module("@aws-sdk/client-frauddetector") @new external new: request => t = "DeleteModelCommand"
-  let make = (~modelType, ~modelId, ()) => new({modelType: modelType, modelId: modelId})
+  let make = (~modelType, ~modelId, ()) => new({modelType, modelId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteLabel = {
   type t
   type request = {@ocaml.doc("<p>The name of the label to delete.</p>") name: identifier}
@@ -983,7 +955,6 @@ module DeleteLabel = {
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteExternalModel = {
   type t
   type request = {
@@ -996,7 +967,6 @@ module DeleteExternalModel = {
   let make = (~modelEndpoint, ()) => new({modelEndpoint: modelEndpoint})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteEventsByEventType = {
   type t
   type request = {@ocaml.doc("<p>The name of the event type.</p>") eventTypeName: identifier}
@@ -1010,7 +980,6 @@ module DeleteEventsByEventType = {
   let make = (~eventTypeName, ()) => new({eventTypeName: eventTypeName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteEventType = {
   type t
   type request = {@ocaml.doc("<p>The name of the event type to delete.</p>") name: identifier}
@@ -1020,7 +989,6 @@ module DeleteEventType = {
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteEvent = {
   type t
   type request = {
@@ -1034,10 +1002,9 @@ module DeleteEvent = {
   type response = {.}
   @module("@aws-sdk/client-frauddetector") @new external new: request => t = "DeleteEventCommand"
   let make = (~eventTypeName, ~eventId, ~deleteAuditHistory=?, ()) =>
-    new({deleteAuditHistory: deleteAuditHistory, eventTypeName: eventTypeName, eventId: eventId})
+    new({deleteAuditHistory, eventTypeName, eventId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteEntityType = {
   type t
   type request = {@ocaml.doc("<p>The name of the entity type to delete.</p>") name: identifier}
@@ -1047,7 +1014,6 @@ module DeleteEntityType = {
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteDetectorVersion = {
   type t
   type request = {
@@ -1059,11 +1025,9 @@ module DeleteDetectorVersion = {
   type response = {.}
   @module("@aws-sdk/client-frauddetector") @new
   external new: request => t = "DeleteDetectorVersionCommand"
-  let make = (~detectorVersionId, ~detectorId, ()) =>
-    new({detectorVersionId: detectorVersionId, detectorId: detectorId})
+  let make = (~detectorVersionId, ~detectorId, ()) => new({detectorVersionId, detectorId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteDetector = {
   type t
   type request = {@ocaml.doc("<p>The ID of the detector to delete.</p>") detectorId: identifier}
@@ -1072,7 +1036,6 @@ module DeleteDetector = {
   let make = (~detectorId, ()) => new({detectorId: detectorId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteBatchPredictionJob = {
   type t
   type request = {
@@ -1084,7 +1047,6 @@ module DeleteBatchPredictionJob = {
   let make = (~jobId, ()) => new({jobId: jobId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteBatchImportJob = {
   type t
   type request = {@ocaml.doc("<p>The ID of the batch import job to delete. </p>") jobId: identifier}
@@ -1094,7 +1056,6 @@ module DeleteBatchImportJob = {
   let make = (~jobId, ()) => new({jobId: jobId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module CancelBatchPredictionJob = {
   type t
   type request = {
@@ -1106,7 +1067,6 @@ module CancelBatchPredictionJob = {
   let make = (~jobId, ()) => new({jobId: jobId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module CancelBatchImportJob = {
   type t
   type request = {
@@ -1120,7 +1080,6 @@ module CancelBatchImportJob = {
   let make = (~jobId, ()) => new({jobId: jobId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module UpdateRuleMetadata = {
   type t
   type request = {
@@ -1130,10 +1089,9 @@ module UpdateRuleMetadata = {
   type response = {.}
   @module("@aws-sdk/client-frauddetector") @new
   external new: request => t = "UpdateRuleMetadataCommand"
-  let make = (~description, ~rule, ()) => new({description: description, rule: rule})
+  let make = (~description, ~rule, ()) => new({description, rule})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module UntagResource = {
   type t
   type request = {
@@ -1143,10 +1101,9 @@ module UntagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-frauddetector") @new external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceARN, ()) => new({tagKeys: tagKeys, resourceARN: resourceARN})
+  let make = (~tagKeys, ~resourceARN, ()) => new({tagKeys, resourceARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module GetKMSEncryptionKey = {
   type t
   type request = {.}
@@ -1156,7 +1113,6 @@ module GetKMSEncryptionKey = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteRule = {
   type t
   type request = {rule: rule}
@@ -1165,7 +1121,6 @@ module DeleteRule = {
   let make = (~rule, ()) => new({rule: rule})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module UpdateRuleVersion = {
   type t
   type request = {
@@ -1180,17 +1135,9 @@ module UpdateRuleVersion = {
   @module("@aws-sdk/client-frauddetector") @new
   external new: request => t = "UpdateRuleVersionCommand"
   let make = (~outcomes, ~language, ~expression, ~rule, ~tags=?, ~description=?, ()) =>
-    new({
-      tags: tags,
-      outcomes: outcomes,
-      language: language,
-      expression: expression,
-      description: description,
-      rule: rule,
-    })
+    new({tags, outcomes, language, expression, description, rule})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateModelVersion = {
   type t
   type request = {
@@ -1225,17 +1172,9 @@ module UpdateModelVersion = {
     ~externalEventsDetail=?,
     (),
   ) =>
-    new({
-      tags: tags,
-      ingestedEventsDetail: ingestedEventsDetail,
-      externalEventsDetail: externalEventsDetail,
-      majorVersionNumber: majorVersionNumber,
-      modelType: modelType,
-      modelId: modelId,
-    })
+    new({tags, ingestedEventsDetail, externalEventsDetail, majorVersionNumber, modelType, modelId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateDetectorVersion = {
   type t
   type request = {
@@ -1268,17 +1207,16 @@ module UpdateDetectorVersion = {
     (),
   ) =>
     new({
-      ruleExecutionMode: ruleExecutionMode,
-      modelVersions: modelVersions,
-      description: description,
-      rules: rules,
-      externalModelEndpoints: externalModelEndpoints,
-      detectorVersionId: detectorVersionId,
-      detectorId: detectorId,
+      ruleExecutionMode,
+      modelVersions,
+      description,
+      rules,
+      externalModelEndpoints,
+      detectorVersionId,
+      detectorId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module TagResource = {
   type t
   type request = {
@@ -1287,10 +1225,9 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-frauddetector") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceARN, ()) => new({tags: tags, resourceARN: resourceARN})
+  let make = (~tags, ~resourceARN, ()) => new({tags, resourceARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module SendEvent = {
   type t
   type request = {
@@ -1327,17 +1264,16 @@ module SendEvent = {
     (),
   ) =>
     new({
-      entities: entities,
-      labelTimestamp: labelTimestamp,
-      assignedLabel: assignedLabel,
-      eventVariables: eventVariables,
-      eventTimestamp: eventTimestamp,
-      eventTypeName: eventTypeName,
-      eventId: eventId,
+      entities,
+      labelTimestamp,
+      assignedLabel,
+      eventVariables,
+      eventTimestamp,
+      eventTypeName,
+      eventId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module PutOutcome = {
   type t
   type request = {
@@ -1347,11 +1283,9 @@ module PutOutcome = {
   }
   type response = {.}
   @module("@aws-sdk/client-frauddetector") @new external new: request => t = "PutOutcomeCommand"
-  let make = (~name, ~tags=?, ~description=?, ()) =>
-    new({tags: tags, description: description, name: name})
+  let make = (~name, ~tags=?, ~description=?, ()) => new({tags, description, name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module PutLabel = {
   type t
   type request = {
@@ -1361,11 +1295,9 @@ module PutLabel = {
   }
   type response = {.}
   @module("@aws-sdk/client-frauddetector") @new external new: request => t = "PutLabelCommand"
-  let make = (~name, ~tags=?, ~description=?, ()) =>
-    new({tags: tags, description: description, name: name})
+  let make = (~name, ~tags=?, ~description=?, ()) => new({tags, description, name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module PutExternalModel = {
   type t
   type request = {
@@ -1395,17 +1327,16 @@ module PutExternalModel = {
     (),
   ) =>
     new({
-      tags: tags,
-      modelEndpointStatus: modelEndpointStatus,
-      outputConfiguration: outputConfiguration,
-      inputConfiguration: inputConfiguration,
-      invokeModelEndpointRoleArn: invokeModelEndpointRoleArn,
-      modelSource: modelSource,
-      modelEndpoint: modelEndpoint,
+      tags,
+      modelEndpointStatus,
+      outputConfiguration,
+      inputConfiguration,
+      invokeModelEndpointRoleArn,
+      modelSource,
+      modelEndpoint,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module PutEventType = {
   type t
   type request = {
@@ -1432,19 +1363,9 @@ module PutEventType = {
     ~labels=?,
     ~description=?,
     (),
-  ) =>
-    new({
-      tags: tags,
-      eventIngestion: eventIngestion,
-      entityTypes: entityTypes,
-      labels: labels,
-      eventVariables: eventVariables,
-      description: description,
-      name: name,
-    })
+  ) => new({tags, eventIngestion, entityTypes, labels, eventVariables, description, name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module PutEntityType = {
   type t
   type request = {
@@ -1454,11 +1375,9 @@ module PutEntityType = {
   }
   type response = {.}
   @module("@aws-sdk/client-frauddetector") @new external new: request => t = "PutEntityTypeCommand"
-  let make = (~name, ~tags=?, ~description=?, ()) =>
-    new({tags: tags, description: description, name: name})
+  let make = (~name, ~tags=?, ~description=?, ()) => new({tags, description, name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module PutDetector = {
   type t
   type request = {
@@ -1470,15 +1389,9 @@ module PutDetector = {
   type response = {.}
   @module("@aws-sdk/client-frauddetector") @new external new: request => t = "PutDetectorCommand"
   let make = (~eventTypeName, ~detectorId, ~tags=?, ~description=?, ()) =>
-    new({
-      tags: tags,
-      eventTypeName: eventTypeName,
-      description: description,
-      detectorId: detectorId,
-    })
+    new({tags, eventTypeName, description, detectorId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module ListTagsForResource = {
   type t
   type request = {
@@ -1495,10 +1408,9 @@ module ListTagsForResource = {
   @module("@aws-sdk/client-frauddetector") @new
   external new: request => t = "ListTagsForResourceCommand"
   let make = (~resourceARN, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, resourceARN: resourceARN})
+    new({maxResults, nextToken, resourceARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListEventPredictions = {
   type t
   type request = {
@@ -1554,17 +1466,16 @@ The summary of the past predictions.
     (),
   ) =>
     new({
-      maxResults: maxResults,
-      nextToken: nextToken,
-      predictionTimeRange: predictionTimeRange,
-      detectorVersionId: detectorVersionId,
-      detectorId: detectorId,
-      eventType: eventType,
-      eventId: eventId,
+      maxResults,
+      nextToken,
+      predictionTimeRange,
+      detectorVersionId,
+      detectorId,
+      eventType,
+      eventId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetVariables = {
   type t
   type request = {
@@ -1580,11 +1491,9 @@ module GetVariables = {
     @ocaml.doc("<p>The names of the variables returned. </p>") variables: option<variableList>,
   }
   @module("@aws-sdk/client-frauddetector") @new external new: request => t = "GetVariablesCommand"
-  let make = (~maxResults=?, ~nextToken=?, ~name=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, name: name})
+  let make = (~maxResults=?, ~nextToken=?, ~name=?, ()) => new({maxResults, nextToken, name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetOutcomes = {
   type t
   type request = {
@@ -1598,11 +1507,9 @@ module GetOutcomes = {
     @ocaml.doc("<p>The outcomes. </p>") outcomes: option<outcomeList>,
   }
   @module("@aws-sdk/client-frauddetector") @new external new: request => t = "GetOutcomesCommand"
-  let make = (~maxResults=?, ~nextToken=?, ~name=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, name: name})
+  let make = (~maxResults=?, ~nextToken=?, ~name=?, ()) => new({maxResults, nextToken, name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetModels = {
   type t
   type request = {
@@ -1619,10 +1526,9 @@ module GetModels = {
   }
   @module("@aws-sdk/client-frauddetector") @new external new: request => t = "GetModelsCommand"
   let make = (~maxResults=?, ~nextToken=?, ~modelType=?, ~modelId=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, modelType: modelType, modelId: modelId})
+    new({maxResults, nextToken, modelType, modelId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetLabels = {
   type t
   type request = {
@@ -1636,11 +1542,9 @@ module GetLabels = {
     @ocaml.doc("<p>An array of labels.</p>") labels: option<labelList>,
   }
   @module("@aws-sdk/client-frauddetector") @new external new: request => t = "GetLabelsCommand"
-  let make = (~maxResults=?, ~nextToken=?, ~name=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, name: name})
+  let make = (~maxResults=?, ~nextToken=?, ~name=?, ()) => new({maxResults, nextToken, name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetEntityTypes = {
   type t
   type request = {
@@ -1654,11 +1558,9 @@ module GetEntityTypes = {
     @ocaml.doc("<p>An array of entity types.</p>") entityTypes: option<entityTypeList>,
   }
   @module("@aws-sdk/client-frauddetector") @new external new: request => t = "GetEntityTypesCommand"
-  let make = (~maxResults=?, ~nextToken=?, ~name=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, name: name})
+  let make = (~maxResults=?, ~nextToken=?, ~name=?, ()) => new({maxResults, nextToken, name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetDetectors = {
   type t
   type request = {
@@ -1673,10 +1575,9 @@ module GetDetectors = {
   }
   @module("@aws-sdk/client-frauddetector") @new external new: request => t = "GetDetectorsCommand"
   let make = (~maxResults=?, ~nextToken=?, ~detectorId=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, detectorId: detectorId})
+    new({maxResults, nextToken, detectorId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetDetectorVersion = {
   type t
   type request = {
@@ -1709,11 +1610,9 @@ module GetDetectorVersion = {
   }
   @module("@aws-sdk/client-frauddetector") @new
   external new: request => t = "GetDetectorVersionCommand"
-  let make = (~detectorVersionId, ~detectorId, ()) =>
-    new({detectorVersionId: detectorVersionId, detectorId: detectorId})
+  let make = (~detectorVersionId, ~detectorId, ()) => new({detectorVersionId, detectorId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetBatchPredictionJobs = {
   type t
   type request = {
@@ -1730,11 +1629,9 @@ module GetBatchPredictionJobs = {
   }
   @module("@aws-sdk/client-frauddetector") @new
   external new: request => t = "GetBatchPredictionJobsCommand"
-  let make = (~nextToken=?, ~maxResults=?, ~jobId=?, ()) =>
-    new({nextToken: nextToken, maxResults: maxResults, jobId: jobId})
+  let make = (~nextToken=?, ~maxResults=?, ~jobId=?, ()) => new({nextToken, maxResults, jobId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetBatchImportJobs = {
   type t
   type request = {
@@ -1750,11 +1647,9 @@ module GetBatchImportJobs = {
   }
   @module("@aws-sdk/client-frauddetector") @new
   external new: request => t = "GetBatchImportJobsCommand"
-  let make = (~nextToken=?, ~maxResults=?, ~jobId=?, ()) =>
-    new({nextToken: nextToken, maxResults: maxResults, jobId: jobId})
+  let make = (~nextToken=?, ~maxResults=?, ~jobId=?, ()) => new({nextToken, maxResults, jobId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeDetector = {
   type t
   type request = {
@@ -1774,10 +1669,9 @@ module DescribeDetector = {
   @module("@aws-sdk/client-frauddetector") @new
   external new: request => t = "DescribeDetectorCommand"
   let make = (~detectorId, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, detectorId: detectorId})
+    new({maxResults, nextToken, detectorId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateVariable = {
   type t
   type request = {
@@ -1805,19 +1699,9 @@ module CreateVariable = {
     ~variableType=?,
     ~description=?,
     (),
-  ) =>
-    new({
-      tags: tags,
-      variableType: variableType,
-      description: description,
-      defaultValue: defaultValue,
-      dataSource: dataSource,
-      dataType: dataType,
-      name: name,
-    })
+  ) => new({tags, variableType, description, defaultValue, dataSource, dataType, name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module CreateRule = {
   type t
   type request = {
@@ -1841,19 +1725,9 @@ module CreateRule = {
     ~tags=?,
     ~description=?,
     (),
-  ) =>
-    new({
-      tags: tags,
-      outcomes: outcomes,
-      language: language,
-      expression: expression,
-      description: description,
-      detectorId: detectorId,
-      ruleId: ruleId,
-    })
+  ) => new({tags, outcomes, language, expression, description, detectorId, ruleId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateModel = {
   type t
   type request = {
@@ -1866,16 +1740,9 @@ module CreateModel = {
   type response = {.}
   @module("@aws-sdk/client-frauddetector") @new external new: request => t = "CreateModelCommand"
   let make = (~eventTypeName, ~modelType, ~modelId, ~tags=?, ~description=?, ()) =>
-    new({
-      tags: tags,
-      eventTypeName: eventTypeName,
-      description: description,
-      modelType: modelType,
-      modelId: modelId,
-    })
+    new({tags, eventTypeName, description, modelType, modelId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module CreateDetectorVersion = {
   type t
   type request = {
@@ -1915,17 +1782,16 @@ module CreateDetectorVersion = {
     (),
   ) =>
     new({
-      tags: tags,
-      ruleExecutionMode: ruleExecutionMode,
-      modelVersions: modelVersions,
-      rules: rules,
-      externalModelEndpoints: externalModelEndpoints,
-      description: description,
-      detectorId: detectorId,
+      tags,
+      ruleExecutionMode,
+      modelVersions,
+      rules,
+      externalModelEndpoints,
+      description,
+      detectorId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateBatchPredictionJob = {
   type t
   type request = {
@@ -1954,18 +1820,17 @@ module CreateBatchPredictionJob = {
     (),
   ) =>
     new({
-      tags: tags,
-      iamRoleArn: iamRoleArn,
-      detectorVersion: detectorVersion,
-      detectorName: detectorName,
-      eventTypeName: eventTypeName,
-      outputPath: outputPath,
-      inputPath: inputPath,
-      jobId: jobId,
+      tags,
+      iamRoleArn,
+      detectorVersion,
+      detectorName,
+      eventTypeName,
+      outputPath,
+      inputPath,
+      jobId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module CreateBatchImportJob = {
   type t
   type request = {
@@ -1988,17 +1853,9 @@ module CreateBatchImportJob = {
   @module("@aws-sdk/client-frauddetector") @new
   external new: request => t = "CreateBatchImportJobCommand"
   let make = (~iamRoleArn, ~eventTypeName, ~outputPath, ~inputPath, ~jobId, ~tags=?, ()) =>
-    new({
-      tags: tags,
-      iamRoleArn: iamRoleArn,
-      eventTypeName: eventTypeName,
-      outputPath: outputPath,
-      inputPath: inputPath,
-      jobId: jobId,
-    })
+    new({tags, iamRoleArn, eventTypeName, outputPath, inputPath, jobId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module BatchGetVariable = {
   type t
   type request = {@ocaml.doc("<p>The list of variable names to get.</p>") names: nameList}
@@ -2011,7 +1868,6 @@ module BatchGetVariable = {
   let make = (~names, ()) => new({names: names})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module BatchCreateVariable = {
   type t
   type request = {
@@ -2025,10 +1881,9 @@ module BatchCreateVariable = {
   }
   @module("@aws-sdk/client-frauddetector") @new
   external new: request => t = "BatchCreateVariableCommand"
-  let make = (~variableEntries, ~tags=?, ()) => new({tags: tags, variableEntries: variableEntries})
+  let make = (~variableEntries, ~tags=?, ()) => new({tags, variableEntries})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetRules = {
   type t
   type request = {
@@ -2046,16 +1901,9 @@ module GetRules = {
   }
   @module("@aws-sdk/client-frauddetector") @new external new: request => t = "GetRulesCommand"
   let make = (~detectorId, ~maxResults=?, ~nextToken=?, ~ruleVersion=?, ~ruleId=?, ()) =>
-    new({
-      maxResults: maxResults,
-      nextToken: nextToken,
-      ruleVersion: ruleVersion,
-      detectorId: detectorId,
-      ruleId: ruleId,
-    })
+    new({maxResults, nextToken, ruleVersion, detectorId, ruleId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetEventTypes = {
   type t
   type request = {
@@ -2069,11 +1917,9 @@ module GetEventTypes = {
     @ocaml.doc("<p>An array of event types.</p>") eventTypes: option<eventTypeList>,
   }
   @module("@aws-sdk/client-frauddetector") @new external new: request => t = "GetEventTypesCommand"
-  let make = (~maxResults=?, ~nextToken=?, ~name=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, name: name})
+  let make = (~maxResults=?, ~nextToken=?, ~name=?, ()) => new({maxResults, nextToken, name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetEventPrediction = {
   type t
   type request = {
@@ -2137,18 +1983,17 @@ module GetEventPrediction = {
     (),
   ) =>
     new({
-      externalModelEndpointDataBlobs: externalModelEndpointDataBlobs,
-      eventVariables: eventVariables,
-      eventTimestamp: eventTimestamp,
-      entities: entities,
-      eventTypeName: eventTypeName,
-      eventId: eventId,
-      detectorVersionId: detectorVersionId,
-      detectorId: detectorId,
+      externalModelEndpointDataBlobs,
+      eventVariables,
+      eventTimestamp,
+      entities,
+      eventTypeName,
+      eventId,
+      detectorVersionId,
+      detectorId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetEvent = {
   type t
   type request = {
@@ -2157,10 +2002,9 @@ module GetEvent = {
   }
   type response = {@ocaml.doc("<p>The details of the event.</p>") event: option<event>}
   @module("@aws-sdk/client-frauddetector") @new external new: request => t = "GetEventCommand"
-  let make = (~eventTypeName, ~eventId, ()) => new({eventTypeName: eventTypeName, eventId: eventId})
+  let make = (~eventTypeName, ~eventId, ()) => new({eventTypeName, eventId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetModelVersion = {
   type t
   type request = {
@@ -2237,10 +2081,9 @@ module GetModelVersion = {
   @module("@aws-sdk/client-frauddetector") @new
   external new: request => t = "GetModelVersionCommand"
   let make = (~modelVersionNumber, ~modelType, ~modelId, ()) =>
-    new({modelVersionNumber: modelVersionNumber, modelType: modelType, modelId: modelId})
+    new({modelVersionNumber, modelType, modelId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetExternalModels = {
   type t
   type request = {
@@ -2258,10 +2101,9 @@ module GetExternalModels = {
   @module("@aws-sdk/client-frauddetector") @new
   external new: request => t = "GetExternalModelsCommand"
   let make = (~maxResults=?, ~nextToken=?, ~modelEndpoint=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, modelEndpoint: modelEndpoint})
+    new({maxResults, nextToken, modelEndpoint})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateModelVersion = {
   type t
   type request = {
@@ -2300,17 +2142,16 @@ module CreateModelVersion = {
     (),
   ) =>
     new({
-      tags: tags,
-      ingestedEventsDetail: ingestedEventsDetail,
-      externalEventsDetail: externalEventsDetail,
-      trainingDataSchema: trainingDataSchema,
-      trainingDataSource: trainingDataSource,
-      modelType: modelType,
-      modelId: modelId,
+      tags,
+      ingestedEventsDetail,
+      externalEventsDetail,
+      trainingDataSchema,
+      trainingDataSource,
+      modelType,
+      modelId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeModelVersions = {
   type t
   type request = {
@@ -2329,16 +2170,9 @@ module DescribeModelVersions = {
   @module("@aws-sdk/client-frauddetector") @new
   external new: request => t = "DescribeModelVersionsCommand"
   let make = (~maxResults=?, ~nextToken=?, ~modelType=?, ~modelVersionNumber=?, ~modelId=?, ()) =>
-    new({
-      maxResults: maxResults,
-      nextToken: nextToken,
-      modelType: modelType,
-      modelVersionNumber: modelVersionNumber,
-      modelId: modelId,
-    })
+    new({maxResults, nextToken, modelType, modelVersionNumber, modelId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetEventPredictionMetadata = {
   type t
   type request = {
@@ -2433,13 +2267,6 @@ The event ID.
     ~eventTypeName,
     ~eventId,
     (),
-  ) =>
-    new({
-      predictionTimestamp: predictionTimestamp,
-      detectorVersionId: detectorVersionId,
-      detectorId: detectorId,
-      eventTypeName: eventTypeName,
-      eventId: eventId,
-    })
+  ) => new({predictionTimestamp, detectorVersionId, detectorId, eventTypeName, eventId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

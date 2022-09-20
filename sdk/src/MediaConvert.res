@@ -8346,7 +8346,6 @@ module DisassociateCertificate = {
   let make = (~arn, ()) => new({arn: arn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteQueue = {
   type t
   type request = {
@@ -8357,7 +8356,6 @@ module DeleteQueue = {
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeletePreset = {
   type t
   type request = {@ocaml.doc("The name of the preset to be deleted.") @as("Name") name: __string}
@@ -8366,7 +8364,6 @@ module DeletePreset = {
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeletePolicy = {
   type t
   type request = {.}
@@ -8375,7 +8372,6 @@ module DeletePolicy = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteJobTemplate = {
   type t
   type request = {
@@ -8387,7 +8383,6 @@ module DeleteJobTemplate = {
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module CancelJob = {
   type t
   type request = {@ocaml.doc("The Job ID of the job to be cancelled.") @as("Id") id: __string}
@@ -8396,7 +8391,6 @@ module CancelJob = {
   let make = (~id, ()) => new({id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module AssociateCertificate = {
   type t
   type request = {
@@ -8412,7 +8406,6 @@ module AssociateCertificate = {
   let make = (~arn, ()) => new({arn: arn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module UntagResource = {
   type t
   type request = {
@@ -8426,10 +8419,9 @@ module UntagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-mediaconvert") @new external new: request => t = "UntagResourceCommand"
-  let make = (~arn, ~tagKeys=?, ()) => new({tagKeys: tagKeys, arn: arn})
+  let make = (~arn, ~tagKeys=?, ()) => new({tagKeys, arn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module TagResource = {
   type t
   type request = {
@@ -8446,10 +8438,9 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-mediaconvert") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~arn, ()) => new({tags: tags, arn: arn})
+  let make = (~tags, ~arn, ()) => new({tags, arn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module PutPolicy = {
   type t
   type request = {
@@ -8470,7 +8461,6 @@ module PutPolicy = {
   let make = (~policy, ()) => new({policy: policy})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetPolicy = {
   type t
   type request = {.}
@@ -8485,7 +8475,6 @@ module GetPolicy = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateQueue = {
   type t
   type request = {
@@ -8512,15 +8501,9 @@ module UpdateQueue = {
   }
   @module("@aws-sdk/client-mediaconvert") @new external new: request => t = "UpdateQueueCommand"
   let make = (~name, ~status=?, ~reservationPlanSettings=?, ~description=?, ()) =>
-    new({
-      status: status,
-      reservationPlanSettings: reservationPlanSettings,
-      name: name,
-      description: description,
-    })
+    new({status, reservationPlanSettings, name, description})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListTagsForResource = {
   type t
   type request = {
@@ -8542,7 +8525,6 @@ module ListTagsForResource = {
   let make = (~arn, ()) => new({arn: arn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetQueue = {
   type t
   type request = {
@@ -8559,7 +8541,6 @@ module GetQueue = {
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeEndpoints = {
   type t
   @ocaml.doc("DescribeEndpointsRequest")
@@ -8587,11 +8568,9 @@ module DescribeEndpoints = {
   }
   @module("@aws-sdk/client-mediaconvert") @new
   external new: request => t = "DescribeEndpointsCommand"
-  let make = (~nextToken=?, ~mode=?, ~maxResults=?, ()) =>
-    new({nextToken: nextToken, mode: mode, maxResults: maxResults})
+  let make = (~nextToken=?, ~mode=?, ~maxResults=?, ()) => new({nextToken, mode, maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateQueue = {
   type t
   type request = {
@@ -8635,18 +8614,9 @@ module CreateQueue = {
     ~pricingPlan=?,
     ~description=?,
     (),
-  ) =>
-    new({
-      tags: tags,
-      status: status,
-      reservationPlanSettings: reservationPlanSettings,
-      pricingPlan: pricingPlan,
-      name: name,
-      description: description,
-    })
+  ) => new({tags, status, reservationPlanSettings, pricingPlan, name, description})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListQueues = {
   type t
   type request = {
@@ -8676,10 +8646,9 @@ module ListQueues = {
   }
   @module("@aws-sdk/client-mediaconvert") @new external new: request => t = "ListQueuesCommand"
   let make = (~order=?, ~nextToken=?, ~maxResults=?, ~listBy=?, ()) =>
-    new({order: order, nextToken: nextToken, maxResults: maxResults, listBy: listBy})
+    new({order, nextToken, maxResults, listBy})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdatePreset = {
   type t
   type request = {
@@ -8699,10 +8668,9 @@ module UpdatePreset = {
   }
   @module("@aws-sdk/client-mediaconvert") @new external new: request => t = "UpdatePresetCommand"
   let make = (~name, ~settings=?, ~description=?, ~category=?, ()) =>
-    new({settings: settings, name: name, description: description, category: category})
+    new({settings, name, description, category})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetPreset = {
   type t
   type request = {@ocaml.doc("The name of the preset.") @as("Name") name: __string}
@@ -8717,7 +8685,6 @@ module GetPreset = {
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreatePreset = {
   type t
   type request = {
@@ -8742,10 +8709,9 @@ module CreatePreset = {
   }
   @module("@aws-sdk/client-mediaconvert") @new external new: request => t = "CreatePresetCommand"
   let make = (~settings, ~name, ~tags=?, ~description=?, ~category=?, ()) =>
-    new({tags: tags, settings: settings, name: name, description: description, category: category})
+    new({tags, settings, name, description, category})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListPresets = {
   type t
   type request = {
@@ -8780,16 +8746,9 @@ module ListPresets = {
   }
   @module("@aws-sdk/client-mediaconvert") @new external new: request => t = "ListPresetsCommand"
   let make = (~order=?, ~nextToken=?, ~maxResults=?, ~listBy=?, ~category=?, ()) =>
-    new({
-      order: order,
-      nextToken: nextToken,
-      maxResults: maxResults,
-      listBy: listBy,
-      category: category,
-    })
+    new({order, nextToken, maxResults, listBy, category})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateJobTemplate = {
   type t
   type request = {
@@ -8846,19 +8805,18 @@ module UpdateJobTemplate = {
     (),
   ) =>
     new({
-      statusUpdateInterval: statusUpdateInterval,
-      settings: settings,
-      queue: queue,
-      priority: priority,
-      name: name,
-      hopDestinations: hopDestinations,
-      description: description,
-      category: category,
-      accelerationSettings: accelerationSettings,
+      statusUpdateInterval,
+      settings,
+      queue,
+      priority,
+      name,
+      hopDestinations,
+      description,
+      category,
+      accelerationSettings,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetJobTemplate = {
   type t
   type request = {@ocaml.doc("The name of the job template.") @as("Name") name: __string}
@@ -8873,7 +8831,6 @@ module GetJobTemplate = {
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetJob = {
   type t
   type request = {@ocaml.doc("the job ID of the job.") @as("Id") id: __string}
@@ -8888,7 +8845,6 @@ module GetJob = {
   let make = (~id, ()) => new({id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateJobTemplate = {
   type t
   type request = {
@@ -8956,20 +8912,19 @@ module CreateJobTemplate = {
     (),
   ) =>
     new({
-      tags: tags,
-      statusUpdateInterval: statusUpdateInterval,
-      settings: settings,
-      queue: queue,
-      priority: priority,
-      name: name,
-      hopDestinations: hopDestinations,
-      description: description,
-      category: category,
-      accelerationSettings: accelerationSettings,
+      tags,
+      statusUpdateInterval,
+      settings,
+      queue,
+      priority,
+      name,
+      hopDestinations,
+      description,
+      category,
+      accelerationSettings,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateJob = {
   type t
   type request = {
@@ -9058,23 +9013,22 @@ module CreateJob = {
     (),
   ) =>
     new({
-      userMetadata: userMetadata,
-      tags: tags,
-      statusUpdateInterval: statusUpdateInterval,
-      simulateReservedQueue: simulateReservedQueue,
-      settings: settings,
-      role: role,
-      queue: queue,
-      priority: priority,
-      jobTemplate: jobTemplate,
-      hopDestinations: hopDestinations,
-      clientRequestToken: clientRequestToken,
-      billingTagsSource: billingTagsSource,
-      accelerationSettings: accelerationSettings,
+      userMetadata,
+      tags,
+      statusUpdateInterval,
+      simulateReservedQueue,
+      settings,
+      role,
+      queue,
+      priority,
+      jobTemplate,
+      hopDestinations,
+      clientRequestToken,
+      billingTagsSource,
+      accelerationSettings,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListJobs = {
   type t
   type request = {
@@ -9106,10 +9060,9 @@ module ListJobs = {
   }
   @module("@aws-sdk/client-mediaconvert") @new external new: request => t = "ListJobsCommand"
   let make = (~status=?, ~queue=?, ~order=?, ~nextToken=?, ~maxResults=?, ()) =>
-    new({status: status, queue: queue, order: order, nextToken: nextToken, maxResults: maxResults})
+    new({status, queue, order, nextToken, maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListJobTemplates = {
   type t
   type request = {
@@ -9148,12 +9101,6 @@ module ListJobTemplates = {
   @module("@aws-sdk/client-mediaconvert") @new
   external new: request => t = "ListJobTemplatesCommand"
   let make = (~order=?, ~nextToken=?, ~maxResults=?, ~listBy=?, ~category=?, ()) =>
-    new({
-      order: order,
-      nextToken: nextToken,
-      maxResults: maxResults,
-      listBy: listBy,
-      category: category,
-    })
+    new({order, nextToken, maxResults, listBy, category})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

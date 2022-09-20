@@ -97,11 +97,9 @@ module DescribeUser = {
     userName: userName,
   }
   @module("@aws-sdk/client-identitystore") @new external new: request => t = "DescribeUserCommand"
-  let make = (~userId, ~identityStoreId, ()) =>
-    new({userId: userId, identityStoreId: identityStoreId})
+  let make = (~userId, ~identityStoreId, ()) => new({userId, identityStoreId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeGroup = {
   type t
   type request = {
@@ -128,11 +126,9 @@ module DescribeGroup = {
     groupId: resourceId,
   }
   @module("@aws-sdk/client-identitystore") @new external new: request => t = "DescribeGroupCommand"
-  let make = (~groupId, ~identityStoreId, ()) =>
-    new({groupId: groupId, identityStoreId: identityStoreId})
+  let make = (~groupId, ~identityStoreId, ()) => new({groupId, identityStoreId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListUsers = {
   type t
   type request = {
@@ -172,15 +168,9 @@ module ListUsers = {
   }
   @module("@aws-sdk/client-identitystore") @new external new: request => t = "ListUsersCommand"
   let make = (~identityStoreId, ~filters=?, ~nextToken=?, ~maxResults=?, ()) =>
-    new({
-      filters: filters,
-      nextToken: nextToken,
-      maxResults: maxResults,
-      identityStoreId: identityStoreId,
-    })
+    new({filters, nextToken, maxResults, identityStoreId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListGroups = {
   type t
   type request = {
@@ -220,11 +210,6 @@ module ListGroups = {
   }
   @module("@aws-sdk/client-identitystore") @new external new: request => t = "ListGroupsCommand"
   let make = (~identityStoreId, ~filters=?, ~nextToken=?, ~maxResults=?, ()) =>
-    new({
-      filters: filters,
-      nextToken: nextToken,
-      maxResults: maxResults,
-      identityStoreId: identityStoreId,
-    })
+    new({filters, nextToken, maxResults, identityStoreId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

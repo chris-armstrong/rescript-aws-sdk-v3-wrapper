@@ -85,10 +85,9 @@ module UpdateDeviceState = {
   }
   type response = {.}
   @module("@aws-sdk/client-iot1click") @new external new: request => t = "UpdateDeviceStateCommand"
-  let make = (~deviceId, ~enabled=?, ()) => new({enabled: enabled, deviceId: deviceId})
+  let make = (~deviceId, ~enabled=?, ()) => new({enabled, deviceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module UnclaimDevice = {
   type t
   type request = {
@@ -101,7 +100,6 @@ module UnclaimDevice = {
   let make = (~deviceId, ()) => new({deviceId: deviceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module InitiateDeviceClaim = {
   type t
   type request = {
@@ -115,7 +113,6 @@ module InitiateDeviceClaim = {
   let make = (~deviceId, ()) => new({deviceId: deviceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ClaimDevicesByClaimCode = {
   type t
   type request = {
@@ -138,7 +135,6 @@ module ClaimDevicesByClaimCode = {
   let make = (~claimCode, ()) => new({claimCode: claimCode})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UntagResource = {
   type t
   type request = {
@@ -148,10 +144,9 @@ module UntagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-iot1click") @new external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
+  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys, resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module TagResource = {
   type t
   type request = {
@@ -166,10 +161,9 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-iot1click") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
+  let make = (~tags, ~resourceArn, ()) => new({tags, resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module ListTagsForResource = {
   type t
   type request = {
@@ -189,7 +183,6 @@ module ListTagsForResource = {
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module InvokeDeviceMethod = {
   type t
   type request = {
@@ -207,14 +200,9 @@ module InvokeDeviceMethod = {
   }
   @module("@aws-sdk/client-iot1click") @new external new: request => t = "InvokeDeviceMethodCommand"
   let make = (~deviceId, ~deviceMethodParameters=?, ~deviceMethod=?, ()) =>
-    new({
-      deviceMethodParameters: deviceMethodParameters,
-      deviceMethod: deviceMethod,
-      deviceId: deviceId,
-    })
+    new({deviceMethodParameters, deviceMethod, deviceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module FinalizeDeviceClaim = {
   type t
   type request = {
@@ -232,10 +220,9 @@ module FinalizeDeviceClaim = {
   }
   @module("@aws-sdk/client-iot1click") @new
   external new: request => t = "FinalizeDeviceClaimCommand"
-  let make = (~deviceId, ~tags=?, ()) => new({tags: tags, deviceId: deviceId})
+  let make = (~deviceId, ~tags=?, ()) => new({tags, deviceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetDeviceMethods = {
   type t
   type request = {
@@ -249,7 +236,6 @@ module GetDeviceMethods = {
   let make = (~deviceId, ()) => new({deviceId: deviceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeDevice = {
   type t
   type request = {
@@ -263,7 +249,6 @@ module DescribeDevice = {
   let make = (~deviceId, ()) => new({deviceId: deviceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListDevices = {
   type t
   type request = {
@@ -284,10 +269,9 @@ module ListDevices = {
   }
   @module("@aws-sdk/client-iot1click") @new external new: request => t = "ListDevicesCommand"
   let make = (~nextToken=?, ~maxResults=?, ~deviceType=?, ()) =>
-    new({nextToken: nextToken, maxResults: maxResults, deviceType: deviceType})
+    new({nextToken, maxResults, deviceType})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListDeviceEvents = {
   type t
   type request = {
@@ -319,12 +303,6 @@ module ListDeviceEvents = {
   }
   @module("@aws-sdk/client-iot1click") @new external new: request => t = "ListDeviceEventsCommand"
   let make = (~toTimeStamp, ~fromTimeStamp, ~deviceId, ~nextToken=?, ~maxResults=?, ()) =>
-    new({
-      toTimeStamp: toTimeStamp,
-      nextToken: nextToken,
-      maxResults: maxResults,
-      fromTimeStamp: fromTimeStamp,
-      deviceId: deviceId,
-    })
+    new({toTimeStamp, nextToken, maxResults, fromTimeStamp, deviceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

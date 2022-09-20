@@ -3730,11 +3730,9 @@ module StopActivityStream = {
     kmsKeyId: option<string_>,
   }
   @module("@aws-sdk/client-rds") @new external new: request => t = "StopActivityStreamCommand"
-  let make = (~resourceArn, ~applyImmediately=?, ()) =>
-    new({applyImmediately: applyImmediately, resourceArn: resourceArn})
+  let make = (~resourceArn, ~applyImmediately=?, ()) => new({applyImmediately, resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module StartActivityStream = {
   type t
   type request = {
@@ -3793,17 +3791,9 @@ module StartActivityStream = {
     ~engineNativeAuditFieldsIncluded=?,
     ~applyImmediately=?,
     (),
-  ) =>
-    new({
-      engineNativeAuditFieldsIncluded: engineNativeAuditFieldsIncluded,
-      applyImmediately: applyImmediately,
-      kmsKeyId: kmsKeyId,
-      mode: mode,
-      resourceArn: resourceArn,
-    })
+  ) => new({engineNativeAuditFieldsIncluded, applyImmediately, kmsKeyId, mode, resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module RemoveRoleFromDBInstance = {
   type t
   type request = {
@@ -3822,10 +3812,9 @@ module RemoveRoleFromDBInstance = {
   type response = {.}
   @module("@aws-sdk/client-rds") @new external new: request => t = "RemoveRoleFromDBInstanceCommand"
   let make = (~featureName, ~roleArn, ~dbinstanceIdentifier, ()) =>
-    new({featureName: featureName, roleArn: roleArn, dbinstanceIdentifier: dbinstanceIdentifier})
+    new({featureName, roleArn, dbinstanceIdentifier})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module RemoveRoleFromDBCluster = {
   type t
   type request = {
@@ -3844,10 +3833,9 @@ module RemoveRoleFromDBCluster = {
   type response = {.}
   @module("@aws-sdk/client-rds") @new external new: request => t = "RemoveRoleFromDBClusterCommand"
   let make = (~roleArn, ~dbclusterIdentifier, ~featureName=?, ()) =>
-    new({featureName: featureName, roleArn: roleArn, dbclusterIdentifier: dbclusterIdentifier})
+    new({featureName, roleArn, dbclusterIdentifier})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module ModifyCurrentDBClusterCapacity = {
   type t
   type request = {
@@ -3910,15 +3898,9 @@ module ModifyCurrentDBClusterCapacity = {
   @module("@aws-sdk/client-rds") @new
   external new: request => t = "ModifyCurrentDBClusterCapacityCommand"
   let make = (~dbclusterIdentifier, ~timeoutAction=?, ~secondsBeforeTimeout=?, ~capacity=?, ()) =>
-    new({
-      timeoutAction: timeoutAction,
-      secondsBeforeTimeout: secondsBeforeTimeout,
-      capacity: capacity,
-      dbclusterIdentifier: dbclusterIdentifier,
-    })
+    new({timeoutAction, secondsBeforeTimeout, capacity, dbclusterIdentifier})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DownloadDBLogFilePortion = {
   type t
   @ocaml.doc("<p></p>")
@@ -3984,15 +3966,9 @@ module DownloadDBLogFilePortion = {
   }
   @module("@aws-sdk/client-rds") @new external new: request => t = "DownloadDBLogFilePortionCommand"
   let make = (~logFileName, ~dbinstanceIdentifier, ~numberOfLines=?, ~marker=?, ()) =>
-    new({
-      numberOfLines: numberOfLines,
-      marker: marker,
-      logFileName: logFileName,
-      dbinstanceIdentifier: dbinstanceIdentifier,
-    })
+    new({numberOfLines, marker, logFileName, dbinstanceIdentifier})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteOptionGroup = {
   type t
   @ocaml.doc("<p></p>")
@@ -4009,7 +3985,6 @@ module DeleteOptionGroup = {
   let make = (~optionGroupName, ()) => new({optionGroupName: optionGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteDBSubnetGroup = {
   type t
   @ocaml.doc("<p></p>")
@@ -4029,7 +4004,6 @@ module DeleteDBSubnetGroup = {
   let make = (~dbsubnetGroupName, ()) => new({dbsubnetGroupName: dbsubnetGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteDBSecurityGroup = {
   type t
   @ocaml.doc("<p></p>")
@@ -4061,7 +4035,6 @@ module DeleteDBSecurityGroup = {
   let make = (~dbsecurityGroupName, ()) => new({dbsecurityGroupName: dbsecurityGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteDBParameterGroup = {
   type t
   @ocaml.doc("<p></p>")
@@ -4087,7 +4060,6 @@ module DeleteDBParameterGroup = {
   let make = (~dbparameterGroupName, ()) => new({dbparameterGroupName: dbparameterGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteDBClusterParameterGroup = {
   type t
   @ocaml.doc("<p></p>")
@@ -4115,7 +4087,6 @@ module DeleteDBClusterParameterGroup = {
     new({dbclusterParameterGroupName: dbclusterParameterGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module BacktrackDBCluster = {
   type t
   @ocaml.doc("<p></p>")
@@ -4178,16 +4149,9 @@ module BacktrackDBCluster = {
     ~useEarliestTimeOnPointInTimeUnavailable=?,
     ~force=?,
     (),
-  ) =>
-    new({
-      useEarliestTimeOnPointInTimeUnavailable: useEarliestTimeOnPointInTimeUnavailable,
-      force: force,
-      backtrackTo: backtrackTo,
-      dbclusterIdentifier: dbclusterIdentifier,
-    })
+  ) => new({useEarliestTimeOnPointInTimeUnavailable, force, backtrackTo, dbclusterIdentifier})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module AddRoleToDBInstance = {
   type t
   type request = {
@@ -4206,10 +4170,9 @@ module AddRoleToDBInstance = {
   type response = {.}
   @module("@aws-sdk/client-rds") @new external new: request => t = "AddRoleToDBInstanceCommand"
   let make = (~featureName, ~roleArn, ~dbinstanceIdentifier, ()) =>
-    new({featureName: featureName, roleArn: roleArn, dbinstanceIdentifier: dbinstanceIdentifier})
+    new({featureName, roleArn, dbinstanceIdentifier})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module AddRoleToDBCluster = {
   type t
   type request = {
@@ -4228,10 +4191,9 @@ module AddRoleToDBCluster = {
   type response = {.}
   @module("@aws-sdk/client-rds") @new external new: request => t = "AddRoleToDBClusterCommand"
   let make = (~roleArn, ~dbclusterIdentifier, ~featureName=?, ()) =>
-    new({featureName: featureName, roleArn: roleArn, dbclusterIdentifier: dbclusterIdentifier})
+    new({featureName, roleArn, dbclusterIdentifier})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module StartExportTask = {
   type t
   type request = {
@@ -4331,18 +4293,9 @@ module StartExportTask = {
     ~s3Prefix=?,
     (),
   ) =>
-    new({
-      exportOnly: exportOnly,
-      s3Prefix: s3Prefix,
-      kmsKeyId: kmsKeyId,
-      iamRoleArn: iamRoleArn,
-      s3BucketName: s3BucketName,
-      sourceArn: sourceArn,
-      exportTaskIdentifier: exportTaskIdentifier,
-    })
+    new({exportOnly, s3Prefix, kmsKeyId, iamRoleArn, s3BucketName, sourceArn, exportTaskIdentifier})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module RemoveTagsFromResource = {
   type t
   @ocaml.doc("<p></p>")
@@ -4359,10 +4312,9 @@ module RemoveTagsFromResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-rds") @new external new: request => t = "RemoveTagsFromResourceCommand"
-  let make = (~tagKeys, ~resourceName, ()) => new({tagKeys: tagKeys, resourceName: resourceName})
+  let make = (~tagKeys, ~resourceName, ()) => new({tagKeys, resourceName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module ModifyDBClusterEndpoint = {
   type t
   type request = {
@@ -4393,16 +4345,9 @@ module ModifyDBClusterEndpoint = {
     ~staticMembers=?,
     ~endpointType=?,
     (),
-  ) =>
-    new({
-      excludedMembers: excludedMembers,
-      staticMembers: staticMembers,
-      endpointType: endpointType,
-      dbclusterEndpointIdentifier: dbclusterEndpointIdentifier,
-    })
+  ) => new({excludedMembers, staticMembers, endpointType, dbclusterEndpointIdentifier})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ModifyCertificates = {
   type t
   type request = {
@@ -4420,13 +4365,9 @@ module ModifyCertificates = {
   type response = {@as("Certificate") certificate: option<certificate>}
   @module("@aws-sdk/client-rds") @new external new: request => t = "ModifyCertificatesCommand"
   let make = (~removeCustomerOverride=?, ~certificateIdentifier=?, ()) =>
-    new({
-      removeCustomerOverride: removeCustomerOverride,
-      certificateIdentifier: certificateIdentifier,
-    })
+    new({removeCustomerOverride, certificateIdentifier})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ImportInstallationMedia = {
   type t
   type request = {
@@ -4497,15 +4438,14 @@ module ImportInstallationMedia = {
     (),
   ) =>
     new({
-      osinstallationMediaPath: osinstallationMediaPath,
-      engineInstallationMediaPath: engineInstallationMediaPath,
-      engineVersion: engineVersion,
-      engine: engine,
-      customAvailabilityZoneId: customAvailabilityZoneId,
+      osinstallationMediaPath,
+      engineInstallationMediaPath,
+      engineVersion,
+      engine,
+      customAvailabilityZoneId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeregisterDBProxyTargets = {
   type t
   type request = {
@@ -4530,16 +4470,9 @@ module DeregisterDBProxyTargets = {
     ~dbinstanceIdentifiers=?,
     ~targetGroupName=?,
     (),
-  ) =>
-    new({
-      dbclusterIdentifiers: dbclusterIdentifiers,
-      dbinstanceIdentifiers: dbinstanceIdentifiers,
-      targetGroupName: targetGroupName,
-      dbproxyName: dbproxyName,
-    })
+  ) => new({dbclusterIdentifiers, dbinstanceIdentifiers, targetGroupName, dbproxyName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteInstallationMedia = {
   type t
   type request = {
@@ -4551,7 +4484,6 @@ module DeleteInstallationMedia = {
   let make = (~installationMediaId, ()) => new({installationMediaId: installationMediaId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteDBClusterEndpoint = {
   type t
   type request = {
@@ -4567,7 +4499,6 @@ module DeleteDBClusterEndpoint = {
     new({dbclusterEndpointIdentifier: dbclusterEndpointIdentifier})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CancelExportTask = {
   type t
   type request = {
@@ -4580,7 +4511,6 @@ module CancelExportTask = {
   let make = (~exportTaskIdentifier, ()) => new({exportTaskIdentifier: exportTaskIdentifier})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module RemoveSourceIdentifierFromSubscription = {
   type t
   @ocaml.doc("<p></p>")
@@ -4598,11 +4528,9 @@ module RemoveSourceIdentifierFromSubscription = {
   type response = {@as("EventSubscription") eventSubscription: option<eventSubscription>}
   @module("@aws-sdk/client-rds") @new
   external new: request => t = "RemoveSourceIdentifierFromSubscriptionCommand"
-  let make = (~sourceIdentifier, ~subscriptionName, ()) =>
-    new({sourceIdentifier: sourceIdentifier, subscriptionName: subscriptionName})
+  let make = (~sourceIdentifier, ~subscriptionName, ()) => new({sourceIdentifier, subscriptionName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ModifyEventSubscription = {
   type t
   @ocaml.doc("<p></p>")
@@ -4638,17 +4566,9 @@ module ModifyEventSubscription = {
     ~sourceType=?,
     ~snsTopicArn=?,
     (),
-  ) =>
-    new({
-      enabled: enabled,
-      eventCategories: eventCategories,
-      sourceType: sourceType,
-      snsTopicArn: snsTopicArn,
-      subscriptionName: subscriptionName,
-    })
+  ) => new({enabled, eventCategories, sourceType, snsTopicArn, subscriptionName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ModifyDBProxyEndpoint = {
   type t
   type request = {
@@ -4677,14 +4597,9 @@ module ModifyDBProxyEndpoint = {
   }
   @module("@aws-sdk/client-rds") @new external new: request => t = "ModifyDBProxyEndpointCommand"
   let make = (~dbproxyEndpointName, ~vpcSecurityGroupIds=?, ~newDBProxyEndpointName=?, ()) =>
-    new({
-      vpcSecurityGroupIds: vpcSecurityGroupIds,
-      newDBProxyEndpointName: newDBProxyEndpointName,
-      dbproxyEndpointName: dbproxyEndpointName,
-    })
+    new({vpcSecurityGroupIds, newDBProxyEndpointName, dbproxyEndpointName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeAccountAttributes = {
   type t
   type request = {.}
@@ -4700,7 +4615,6 @@ module DescribeAccountAttributes = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteEventSubscription = {
   type t
   @ocaml.doc("<p></p>")
@@ -4714,7 +4628,6 @@ module DeleteEventSubscription = {
   let make = (~subscriptionName, ()) => new({subscriptionName: subscriptionName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteDBProxyEndpoint = {
   type t
   type request = {
@@ -4732,7 +4645,6 @@ module DeleteDBProxyEndpoint = {
   let make = (~dbproxyEndpointName, ()) => new({dbproxyEndpointName: dbproxyEndpointName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteCustomAvailabilityZone = {
   type t
   type request = {
@@ -4748,7 +4660,6 @@ module DeleteCustomAvailabilityZone = {
     new({customAvailabilityZoneId: customAvailabilityZoneId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateEventSubscription = {
   type t
   @ocaml.doc("<p></p>")
@@ -4829,19 +4740,9 @@ module CreateEventSubscription = {
     ~eventCategories=?,
     ~sourceType=?,
     (),
-  ) =>
-    new({
-      tags: tags,
-      enabled: enabled,
-      sourceIds: sourceIds,
-      eventCategories: eventCategories,
-      sourceType: sourceType,
-      snsTopicArn: snsTopicArn,
-      subscriptionName: subscriptionName,
-    })
+  ) => new({tags, enabled, sourceIds, eventCategories, sourceType, snsTopicArn, subscriptionName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateDBProxyEndpoint = {
   type t
   type request = {
@@ -4883,18 +4784,9 @@ module CreateDBProxyEndpoint = {
     ~targetRole=?,
     ~vpcSecurityGroupIds=?,
     (),
-  ) =>
-    new({
-      tags: tags,
-      targetRole: targetRole,
-      vpcSecurityGroupIds: vpcSecurityGroupIds,
-      vpcSubnetIds: vpcSubnetIds,
-      dbproxyEndpointName: dbproxyEndpointName,
-      dbproxyName: dbproxyName,
-    })
+  ) => new({tags, targetRole, vpcSecurityGroupIds, vpcSubnetIds, dbproxyEndpointName, dbproxyName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateDBParameterGroup = {
   type t
   @ocaml.doc("<p></p>")
@@ -5010,15 +4902,9 @@ module CreateDBParameterGroup = {
   type response = {@as("DBParameterGroup") dbparameterGroup: option<dbparameterGroup>}
   @module("@aws-sdk/client-rds") @new external new: request => t = "CreateDBParameterGroupCommand"
   let make = (~description, ~dbparameterGroupFamily, ~dbparameterGroupName, ~tags=?, ()) =>
-    new({
-      tags: tags,
-      description: description,
-      dbparameterGroupFamily: dbparameterGroupFamily,
-      dbparameterGroupName: dbparameterGroupName,
-    })
+    new({tags, description, dbparameterGroupFamily, dbparameterGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateDBClusterParameterGroup = {
   type t
   @ocaml.doc("<p></p>")
@@ -5107,15 +4993,9 @@ module CreateDBClusterParameterGroup = {
   @module("@aws-sdk/client-rds") @new
   external new: request => t = "CreateDBClusterParameterGroupCommand"
   let make = (~description, ~dbparameterGroupFamily, ~dbclusterParameterGroupName, ~tags=?, ()) =>
-    new({
-      tags: tags,
-      description: description,
-      dbparameterGroupFamily: dbparameterGroupFamily,
-      dbclusterParameterGroupName: dbclusterParameterGroupName,
-    })
+    new({tags, description, dbparameterGroupFamily, dbclusterParameterGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateDBClusterEndpoint = {
   type t
   type request = {
@@ -5156,16 +5036,15 @@ module CreateDBClusterEndpoint = {
     (),
   ) =>
     new({
-      tags: tags,
-      excludedMembers: excludedMembers,
-      staticMembers: staticMembers,
-      endpointType: endpointType,
-      dbclusterEndpointIdentifier: dbclusterEndpointIdentifier,
-      dbclusterIdentifier: dbclusterIdentifier,
+      tags,
+      excludedMembers,
+      staticMembers,
+      endpointType,
+      dbclusterEndpointIdentifier,
+      dbclusterIdentifier,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateCustomAvailabilityZone = {
   type t
   @ocaml.doc("<p></p>")
@@ -5197,16 +5076,9 @@ module CreateCustomAvailabilityZone = {
     ~newVpnTunnelName=?,
     ~existingVpnId=?,
     (),
-  ) =>
-    new({
-      vpnTunnelOriginatorIP: vpnTunnelOriginatorIP,
-      newVpnTunnelName: newVpnTunnelName,
-      existingVpnId: existingVpnId,
-      customAvailabilityZoneName: customAvailabilityZoneName,
-    })
+  ) => new({vpnTunnelOriginatorIP, newVpnTunnelName, existingVpnId, customAvailabilityZoneName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CopyDBParameterGroup = {
   type t
   @ocaml.doc("<p></p>")
@@ -5259,14 +5131,13 @@ module CopyDBParameterGroup = {
     (),
   ) =>
     new({
-      tags: tags,
-      targetDBParameterGroupDescription: targetDBParameterGroupDescription,
-      targetDBParameterGroupIdentifier: targetDBParameterGroupIdentifier,
-      sourceDBParameterGroupIdentifier: sourceDBParameterGroupIdentifier,
+      tags,
+      targetDBParameterGroupDescription,
+      targetDBParameterGroupIdentifier,
+      sourceDBParameterGroupIdentifier,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CopyDBClusterParameterGroup = {
   type t
   type request = {
@@ -5321,14 +5192,13 @@ module CopyDBClusterParameterGroup = {
     (),
   ) =>
     new({
-      tags: tags,
-      targetDBClusterParameterGroupDescription: targetDBClusterParameterGroupDescription,
-      targetDBClusterParameterGroupIdentifier: targetDBClusterParameterGroupIdentifier,
-      sourceDBClusterParameterGroupIdentifier: sourceDBClusterParameterGroupIdentifier,
+      tags,
+      targetDBClusterParameterGroupDescription,
+      targetDBClusterParameterGroupIdentifier,
+      sourceDBClusterParameterGroupIdentifier,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module AddTagsToResource = {
   type t
   @ocaml.doc("<p></p>")
@@ -5344,10 +5214,9 @@ module AddTagsToResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-rds") @new external new: request => t = "AddTagsToResourceCommand"
-  let make = (~tags, ~resourceName, ()) => new({tags: tags, resourceName: resourceName})
+  let make = (~tags, ~resourceName, ()) => new({tags, resourceName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module AddSourceIdentifierToSubscription = {
   type t
   @ocaml.doc("<p></p>")
@@ -5388,11 +5257,9 @@ module AddSourceIdentifierToSubscription = {
   type response = {@as("EventSubscription") eventSubscription: option<eventSubscription>}
   @module("@aws-sdk/client-rds") @new
   external new: request => t = "AddSourceIdentifierToSubscriptionCommand"
-  let make = (~sourceIdentifier, ~subscriptionName, ()) =>
-    new({sourceIdentifier: sourceIdentifier, subscriptionName: subscriptionName})
+  let make = (~sourceIdentifier, ~subscriptionName, ()) => new({sourceIdentifier, subscriptionName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module StopDBInstanceAutomatedBackupsReplication = {
   type t
   type request = {
@@ -5409,7 +5276,6 @@ module StopDBInstanceAutomatedBackupsReplication = {
   let make = (~sourceDBInstanceArn, ()) => new({sourceDBInstanceArn: sourceDBInstanceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module StartDBInstanceAutomatedBackupsReplication = {
   type t
   type request = {
@@ -5438,15 +5304,9 @@ module StartDBInstanceAutomatedBackupsReplication = {
   @module("@aws-sdk/client-rds") @new
   external new: request => t = "StartDBInstanceAutomatedBackupsReplicationCommand"
   let make = (~sourceDBInstanceArn, ~preSignedUrl=?, ~kmsKeyId=?, ~backupRetentionPeriod=?, ()) =>
-    new({
-      preSignedUrl: preSignedUrl,
-      kmsKeyId: kmsKeyId,
-      backupRetentionPeriod: backupRetentionPeriod,
-      sourceDBInstanceArn: sourceDBInstanceArn,
-    })
+    new({preSignedUrl, kmsKeyId, backupRetentionPeriod, sourceDBInstanceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module RevokeDBSecurityGroupIngress = {
   type t
   @ocaml.doc("<p></p>")
@@ -5490,15 +5350,14 @@ module RevokeDBSecurityGroupIngress = {
     (),
   ) =>
     new({
-      ec2SecurityGroupOwnerId: ec2SecurityGroupOwnerId,
-      ec2SecurityGroupId: ec2SecurityGroupId,
-      ec2SecurityGroupName: ec2SecurityGroupName,
-      cidrip: cidrip,
-      dbsecurityGroupName: dbsecurityGroupName,
+      ec2SecurityGroupOwnerId,
+      ec2SecurityGroupId,
+      ec2SecurityGroupName,
+      cidrip,
+      dbsecurityGroupName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ResetDBParameterGroup = {
   type t
   @ocaml.doc("<p></p>")
@@ -5553,14 +5412,9 @@ module ResetDBParameterGroup = {
   }
   @module("@aws-sdk/client-rds") @new external new: request => t = "ResetDBParameterGroupCommand"
   let make = (~dbparameterGroupName, ~parameters=?, ~resetAllParameters=?, ()) =>
-    new({
-      parameters: parameters,
-      resetAllParameters: resetAllParameters,
-      dbparameterGroupName: dbparameterGroupName,
-    })
+    new({parameters, resetAllParameters, dbparameterGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ResetDBClusterParameterGroup = {
   type t
   @ocaml.doc("<p></p>")
@@ -5602,14 +5456,9 @@ module ResetDBClusterParameterGroup = {
   @module("@aws-sdk/client-rds") @new
   external new: request => t = "ResetDBClusterParameterGroupCommand"
   let make = (~dbclusterParameterGroupName, ~parameters=?, ~resetAllParameters=?, ()) =>
-    new({
-      parameters: parameters,
-      resetAllParameters: resetAllParameters,
-      dbclusterParameterGroupName: dbclusterParameterGroupName,
-    })
+    new({parameters, resetAllParameters, dbclusterParameterGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module RegisterDBProxyTargets = {
   type t
   type request = {
@@ -5640,16 +5489,9 @@ module RegisterDBProxyTargets = {
     ~dbinstanceIdentifiers=?,
     ~targetGroupName=?,
     (),
-  ) =>
-    new({
-      dbclusterIdentifiers: dbclusterIdentifiers,
-      dbinstanceIdentifiers: dbinstanceIdentifiers,
-      targetGroupName: targetGroupName,
-      dbproxyName: dbproxyName,
-    })
+  ) => new({dbclusterIdentifiers, dbinstanceIdentifiers, targetGroupName, dbproxyName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module PurchaseReservedDBInstancesOffering = {
   type t
   @ocaml.doc("<p></p>")
@@ -5678,16 +5520,9 @@ module PurchaseReservedDBInstancesOffering = {
     ~dbinstanceCount=?,
     ~reservedDBInstanceId=?,
     (),
-  ) =>
-    new({
-      tags: tags,
-      dbinstanceCount: dbinstanceCount,
-      reservedDBInstanceId: reservedDBInstanceId,
-      reservedDBInstancesOfferingId: reservedDBInstancesOfferingId,
-    })
+  ) => new({tags, dbinstanceCount, reservedDBInstanceId, reservedDBInstancesOfferingId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ModifyDBSnapshot = {
   type t
   type request = {
@@ -5741,14 +5576,9 @@ module ModifyDBSnapshot = {
   type response = {@as("DBSnapshot") dbsnapshot: option<dbsnapshot>}
   @module("@aws-sdk/client-rds") @new external new: request => t = "ModifyDBSnapshotCommand"
   let make = (~dbsnapshotIdentifier, ~optionGroupName=?, ~engineVersion=?, ()) =>
-    new({
-      optionGroupName: optionGroupName,
-      engineVersion: engineVersion,
-      dbsnapshotIdentifier: dbsnapshotIdentifier,
-    })
+    new({optionGroupName, engineVersion, dbsnapshotIdentifier})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ModifyDBProxyTargetGroup = {
   type t
   type request = {
@@ -5776,15 +5606,9 @@ module ModifyDBProxyTargetGroup = {
   }
   @module("@aws-sdk/client-rds") @new external new: request => t = "ModifyDBProxyTargetGroupCommand"
   let make = (~dbproxyName, ~targetGroupName, ~newName=?, ~connectionPoolConfig=?, ()) =>
-    new({
-      newName: newName,
-      connectionPoolConfig: connectionPoolConfig,
-      dbproxyName: dbproxyName,
-      targetGroupName: targetGroupName,
-    })
+    new({newName, connectionPoolConfig, dbproxyName, targetGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ModifyDBProxy = {
   type t
   type request = {
@@ -5843,18 +5667,17 @@ module ModifyDBProxy = {
     (),
   ) =>
     new({
-      securityGroups: securityGroups,
-      roleArn: roleArn,
-      debugLogging: debugLogging,
-      idleClientTimeout: idleClientTimeout,
-      requireTLS: requireTLS,
-      auth: auth,
-      newDBProxyName: newDBProxyName,
-      dbproxyName: dbproxyName,
+      securityGroups,
+      roleArn,
+      debugLogging,
+      idleClientTimeout,
+      requireTLS,
+      auth,
+      newDBProxyName,
+      dbproxyName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ModifyDBParameterGroup = {
   type t
   @ocaml.doc("<p></p>")
@@ -5893,11 +5716,9 @@ module ModifyDBParameterGroup = {
     dbparameterGroupName: option<string_>,
   }
   @module("@aws-sdk/client-rds") @new external new: request => t = "ModifyDBParameterGroupCommand"
-  let make = (~parameters, ~dbparameterGroupName, ()) =>
-    new({parameters: parameters, dbparameterGroupName: dbparameterGroupName})
+  let make = (~parameters, ~dbparameterGroupName, ()) => new({parameters, dbparameterGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ModifyDBClusterParameterGroup = {
   type t
   @ocaml.doc("<p></p>")
@@ -5943,10 +5764,9 @@ module ModifyDBClusterParameterGroup = {
   @module("@aws-sdk/client-rds") @new
   external new: request => t = "ModifyDBClusterParameterGroupCommand"
   let make = (~parameters, ~dbclusterParameterGroupName, ()) =>
-    new({parameters: parameters, dbclusterParameterGroupName: dbclusterParameterGroupName})
+    new({parameters, dbclusterParameterGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ModifyCustomDBEngineVersion = {
   type t
   type request = {
@@ -5984,10 +5804,9 @@ module ModifyCustomDBEngineVersion = {
   @module("@aws-sdk/client-rds") @new
   external new: request => t = "ModifyCustomDBEngineVersionCommand"
   let make = (~engineVersion, ~engine, ~status=?, ~description=?, ()) =>
-    new({status: status, description: description, engineVersion: engineVersion, engine: engine})
+    new({status, description, engineVersion, engine})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListTagsForResource = {
   type t
   @ocaml.doc("<p></p>")
@@ -6008,10 +5827,9 @@ module ListTagsForResource = {
     tagList_: option<tagList_>,
   }
   @module("@aws-sdk/client-rds") @new external new: request => t = "ListTagsForResourceCommand"
-  let make = (~resourceName, ~filters=?, ()) => new({filters: filters, resourceName: resourceName})
+  let make = (~resourceName, ~filters=?, ()) => new({filters, resourceName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeSourceRegions = {
   type t
   @ocaml.doc("<p></p>")
@@ -6057,10 +5875,9 @@ module DescribeSourceRegions = {
   }
   @module("@aws-sdk/client-rds") @new external new: request => t = "DescribeSourceRegionsCommand"
   let make = (~filters=?, ~marker=?, ~maxRecords=?, ~regionName=?, ()) =>
-    new({filters: filters, marker: marker, maxRecords: maxRecords, regionName: regionName})
+    new({filters, marker, maxRecords, regionName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeInstallationMedia = {
   type t
   type request = {
@@ -6113,15 +5930,9 @@ module DescribeInstallationMedia = {
   @module("@aws-sdk/client-rds") @new
   external new: request => t = "DescribeInstallationMediaCommand"
   let make = (~marker=?, ~maxRecords=?, ~filters=?, ~installationMediaId=?, ()) =>
-    new({
-      marker: marker,
-      maxRecords: maxRecords,
-      filters: filters,
-      installationMediaId: installationMediaId,
-    })
+    new({marker, maxRecords, filters, installationMediaId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeExportTasks = {
   type t
   type request = {
@@ -6211,16 +6022,9 @@ module DescribeExportTasks = {
   }
   @module("@aws-sdk/client-rds") @new external new: request => t = "DescribeExportTasksCommand"
   let make = (~maxRecords=?, ~marker=?, ~filters=?, ~sourceArn=?, ~exportTaskIdentifier=?, ()) =>
-    new({
-      maxRecords: maxRecords,
-      marker: marker,
-      filters: filters,
-      sourceArn: sourceArn,
-      exportTaskIdentifier: exportTaskIdentifier,
-    })
+    new({maxRecords, marker, filters, sourceArn, exportTaskIdentifier})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeEvents = {
   type t
   @ocaml.doc("<p></p>")
@@ -6332,19 +6136,18 @@ module DescribeEvents = {
     (),
   ) =>
     new({
-      marker: marker,
-      maxRecords: maxRecords,
-      filters: filters,
-      eventCategories: eventCategories,
-      duration: duration,
-      endTime: endTime,
-      startTime: startTime,
-      sourceType: sourceType,
-      sourceIdentifier: sourceIdentifier,
+      marker,
+      maxRecords,
+      filters,
+      eventCategories,
+      duration,
+      endTime,
+      startTime,
+      sourceType,
+      sourceIdentifier,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeEventSubscriptions = {
   type t
   @ocaml.doc("<p></p>")
@@ -6385,15 +6188,9 @@ module DescribeEventSubscriptions = {
   @module("@aws-sdk/client-rds") @new
   external new: request => t = "DescribeEventSubscriptionsCommand"
   let make = (~marker=?, ~maxRecords=?, ~filters=?, ~subscriptionName=?, ()) =>
-    new({
-      marker: marker,
-      maxRecords: maxRecords,
-      filters: filters,
-      subscriptionName: subscriptionName,
-    })
+    new({marker, maxRecords, filters, subscriptionName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeEventCategories = {
   type t
   @ocaml.doc("<p></p>")
@@ -6413,10 +6210,9 @@ module DescribeEventCategories = {
     eventCategoriesMapList: option<eventCategoriesMapList>,
   }
   @module("@aws-sdk/client-rds") @new external new: request => t = "DescribeEventCategoriesCommand"
-  let make = (~filters=?, ~sourceType=?, ()) => new({filters: filters, sourceType: sourceType})
+  let make = (~filters=?, ~sourceType=?, ()) => new({filters, sourceType})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeDBProxyTargets = {
   type t
   type request = {
@@ -6456,16 +6252,9 @@ module DescribeDBProxyTargets = {
   }
   @module("@aws-sdk/client-rds") @new external new: request => t = "DescribeDBProxyTargetsCommand"
   let make = (~dbproxyName, ~maxRecords=?, ~marker=?, ~filters=?, ~targetGroupName=?, ()) =>
-    new({
-      maxRecords: maxRecords,
-      marker: marker,
-      filters: filters,
-      targetGroupName: targetGroupName,
-      dbproxyName: dbproxyName,
-    })
+    new({maxRecords, marker, filters, targetGroupName, dbproxyName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeDBProxyEndpoints = {
   type t
   type request = {
@@ -6508,16 +6297,9 @@ module DescribeDBProxyEndpoints = {
   }
   @module("@aws-sdk/client-rds") @new external new: request => t = "DescribeDBProxyEndpointsCommand"
   let make = (~maxRecords=?, ~marker=?, ~filters=?, ~dbproxyEndpointName=?, ~dbproxyName=?, ()) =>
-    new({
-      maxRecords: maxRecords,
-      marker: marker,
-      filters: filters,
-      dbproxyEndpointName: dbproxyEndpointName,
-      dbproxyName: dbproxyName,
-    })
+    new({maxRecords, marker, filters, dbproxyEndpointName, dbproxyName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeDBParameters = {
   type t
   type request = {
@@ -6569,16 +6351,9 @@ module DescribeDBParameters = {
   }
   @module("@aws-sdk/client-rds") @new external new: request => t = "DescribeDBParametersCommand"
   let make = (~dbparameterGroupName, ~marker=?, ~maxRecords=?, ~filters=?, ~source=?, ()) =>
-    new({
-      marker: marker,
-      maxRecords: maxRecords,
-      filters: filters,
-      source: source,
-      dbparameterGroupName: dbparameterGroupName,
-    })
+    new({marker, maxRecords, filters, source, dbparameterGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeDBParameterGroups = {
   type t
   @ocaml.doc("<p></p>")
@@ -6626,15 +6401,9 @@ module DescribeDBParameterGroups = {
   @module("@aws-sdk/client-rds") @new
   external new: request => t = "DescribeDBParameterGroupsCommand"
   let make = (~marker=?, ~maxRecords=?, ~filters=?, ~dbparameterGroupName=?, ()) =>
-    new({
-      marker: marker,
-      maxRecords: maxRecords,
-      filters: filters,
-      dbparameterGroupName: dbparameterGroupName,
-    })
+    new({marker, maxRecords, filters, dbparameterGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeDBLogFiles = {
   type t
   @ocaml.doc("<p></p>")
@@ -6696,17 +6465,16 @@ module DescribeDBLogFiles = {
     (),
   ) =>
     new({
-      marker: marker,
-      maxRecords: maxRecords,
-      filters: filters,
-      fileSize: fileSize,
-      fileLastWritten: fileLastWritten,
-      filenameContains: filenameContains,
-      dbinstanceIdentifier: dbinstanceIdentifier,
+      marker,
+      maxRecords,
+      filters,
+      fileSize,
+      fileLastWritten,
+      filenameContains,
+      dbinstanceIdentifier,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeDBClusterParameters = {
   type t
   @ocaml.doc("<p></p>")
@@ -6760,16 +6528,9 @@ module DescribeDBClusterParameters = {
   @module("@aws-sdk/client-rds") @new
   external new: request => t = "DescribeDBClusterParametersCommand"
   let make = (~dbclusterParameterGroupName, ~marker=?, ~maxRecords=?, ~filters=?, ~source=?, ()) =>
-    new({
-      marker: marker,
-      maxRecords: maxRecords,
-      filters: filters,
-      source: source,
-      dbclusterParameterGroupName: dbclusterParameterGroupName,
-    })
+    new({marker, maxRecords, filters, source, dbclusterParameterGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeDBClusterParameterGroups = {
   type t
   @ocaml.doc("<p></p>")
@@ -6815,15 +6576,9 @@ module DescribeDBClusterParameterGroups = {
   @module("@aws-sdk/client-rds") @new
   external new: request => t = "DescribeDBClusterParameterGroupsCommand"
   let make = (~marker=?, ~maxRecords=?, ~filters=?, ~dbclusterParameterGroupName=?, ()) =>
-    new({
-      marker: marker,
-      maxRecords: maxRecords,
-      filters: filters,
-      dbclusterParameterGroupName: dbclusterParameterGroupName,
-    })
+    new({marker, maxRecords, filters, dbclusterParameterGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeDBClusterEndpoints = {
   type t
   type request = {
@@ -6882,17 +6637,9 @@ module DescribeDBClusterEndpoints = {
     ~dbclusterEndpointIdentifier=?,
     ~dbclusterIdentifier=?,
     (),
-  ) =>
-    new({
-      marker: marker,
-      maxRecords: maxRecords,
-      filters: filters,
-      dbclusterEndpointIdentifier: dbclusterEndpointIdentifier,
-      dbclusterIdentifier: dbclusterIdentifier,
-    })
+  ) => new({marker, maxRecords, filters, dbclusterEndpointIdentifier, dbclusterIdentifier})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeDBClusterBacktracks = {
   type t
   @ocaml.doc("<p></p>")
@@ -7005,17 +6752,9 @@ module DescribeDBClusterBacktracks = {
     ~filters=?,
     ~backtrackIdentifier=?,
     (),
-  ) =>
-    new({
-      marker: marker,
-      maxRecords: maxRecords,
-      filters: filters,
-      backtrackIdentifier: backtrackIdentifier,
-      dbclusterIdentifier: dbclusterIdentifier,
-    })
+  ) => new({marker, maxRecords, filters, backtrackIdentifier, dbclusterIdentifier})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeCustomAvailabilityZones = {
   type t
   type request = {
@@ -7058,15 +6797,9 @@ module DescribeCustomAvailabilityZones = {
   @module("@aws-sdk/client-rds") @new
   external new: request => t = "DescribeCustomAvailabilityZonesCommand"
   let make = (~marker=?, ~maxRecords=?, ~filters=?, ~customAvailabilityZoneId=?, ()) =>
-    new({
-      marker: marker,
-      maxRecords: maxRecords,
-      filters: filters,
-      customAvailabilityZoneId: customAvailabilityZoneId,
-    })
+    new({marker, maxRecords, filters, customAvailabilityZoneId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeCertificates = {
   type t
   @ocaml.doc("<p></p>")
@@ -7114,15 +6847,9 @@ module DescribeCertificates = {
   }
   @module("@aws-sdk/client-rds") @new external new: request => t = "DescribeCertificatesCommand"
   let make = (~marker=?, ~maxRecords=?, ~filters=?, ~certificateIdentifier=?, ()) =>
-    new({
-      marker: marker,
-      maxRecords: maxRecords,
-      filters: filters,
-      certificateIdentifier: certificateIdentifier,
-    })
+    new({marker, maxRecords, filters, certificateIdentifier})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteDBSnapshot = {
   type t
   @ocaml.doc("<p></p>")
@@ -7137,7 +6864,6 @@ module DeleteDBSnapshot = {
   let make = (~dbsnapshotIdentifier, ()) => new({dbsnapshotIdentifier: dbsnapshotIdentifier})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteDBProxy = {
   type t
   type request = {
@@ -7155,7 +6881,6 @@ module DeleteDBProxy = {
   let make = (~dbproxyName, ()) => new({dbproxyName: dbproxyName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteDBInstanceAutomatedBackup = {
   type t
   @ocaml.doc(
@@ -7179,13 +6904,9 @@ module DeleteDBInstanceAutomatedBackup = {
   @module("@aws-sdk/client-rds") @new
   external new: request => t = "DeleteDBInstanceAutomatedBackupCommand"
   let make = (~dbinstanceAutomatedBackupsArn=?, ~dbiResourceId=?, ()) =>
-    new({
-      dbinstanceAutomatedBackupsArn: dbinstanceAutomatedBackupsArn,
-      dbiResourceId: dbiResourceId,
-    })
+    new({dbinstanceAutomatedBackupsArn, dbiResourceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteDBClusterSnapshot = {
   type t
   @ocaml.doc("<p></p>")
@@ -7201,7 +6922,6 @@ module DeleteDBClusterSnapshot = {
     new({dbclusterSnapshotIdentifier: dbclusterSnapshotIdentifier})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteCustomDBEngineVersion = {
   type t
   type request = {
@@ -7219,10 +6939,9 @@ module DeleteCustomDBEngineVersion = {
   type response = dbengineVersion
   @module("@aws-sdk/client-rds") @new
   external new: request => t = "DeleteCustomDBEngineVersionCommand"
-  let make = (~engineVersion, ~engine, ()) => new({engineVersion: engineVersion, engine: engine})
+  let make = (~engineVersion, ~engine, ()) => new({engineVersion, engine})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateDBSnapshot = {
   type t
   @ocaml.doc("<p></p>")
@@ -7261,14 +6980,9 @@ module CreateDBSnapshot = {
   type response = {@as("DBSnapshot") dbsnapshot: option<dbsnapshot>}
   @module("@aws-sdk/client-rds") @new external new: request => t = "CreateDBSnapshotCommand"
   let make = (~dbinstanceIdentifier, ~dbsnapshotIdentifier, ~tags=?, ()) =>
-    new({
-      tags: tags,
-      dbinstanceIdentifier: dbinstanceIdentifier,
-      dbsnapshotIdentifier: dbsnapshotIdentifier,
-    })
+    new({tags, dbinstanceIdentifier, dbsnapshotIdentifier})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateDBSecurityGroup = {
   type t
   @ocaml.doc("<p></p>")
@@ -7302,14 +7016,9 @@ module CreateDBSecurityGroup = {
   type response = {@as("DBSecurityGroup") dbsecurityGroup: option<dbsecurityGroup>}
   @module("@aws-sdk/client-rds") @new external new: request => t = "CreateDBSecurityGroupCommand"
   let make = (~dbsecurityGroupDescription, ~dbsecurityGroupName, ~tags=?, ()) =>
-    new({
-      tags: tags,
-      dbsecurityGroupDescription: dbsecurityGroupDescription,
-      dbsecurityGroupName: dbsecurityGroupName,
-    })
+    new({tags, dbsecurityGroupDescription, dbsecurityGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateDBProxy = {
   type t
   type request = {
@@ -7379,20 +7088,19 @@ module CreateDBProxy = {
     (),
   ) =>
     new({
-      tags: tags,
-      debugLogging: debugLogging,
-      idleClientTimeout: idleClientTimeout,
-      requireTLS: requireTLS,
-      vpcSecurityGroupIds: vpcSecurityGroupIds,
-      vpcSubnetIds: vpcSubnetIds,
-      roleArn: roleArn,
-      auth: auth,
-      engineFamily: engineFamily,
-      dbproxyName: dbproxyName,
+      tags,
+      debugLogging,
+      idleClientTimeout,
+      requireTLS,
+      vpcSecurityGroupIds,
+      vpcSubnetIds,
+      roleArn,
+      auth,
+      engineFamily,
+      dbproxyName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateDBClusterSnapshot = {
   type t
   @ocaml.doc("<p></p>")
@@ -7431,14 +7139,9 @@ module CreateDBClusterSnapshot = {
   type response = {@as("DBClusterSnapshot") dbclusterSnapshot: option<dbclusterSnapshot>}
   @module("@aws-sdk/client-rds") @new external new: request => t = "CreateDBClusterSnapshotCommand"
   let make = (~dbclusterIdentifier, ~dbclusterSnapshotIdentifier, ~tags=?, ()) =>
-    new({
-      tags: tags,
-      dbclusterIdentifier: dbclusterIdentifier,
-      dbclusterSnapshotIdentifier: dbclusterSnapshotIdentifier,
-    })
+    new({tags, dbclusterIdentifier, dbclusterSnapshotIdentifier})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateCustomDBEngineVersion = {
   type t
   type request = {
@@ -7520,18 +7223,17 @@ module CreateCustomDBEngineVersion = {
     (),
   ) =>
     new({
-      tags: tags,
-      manifest: manifest,
-      description: description,
-      kmskeyId: kmskeyId,
-      databaseInstallationFilesS3Prefix: databaseInstallationFilesS3Prefix,
-      databaseInstallationFilesS3BucketName: databaseInstallationFilesS3BucketName,
-      engineVersion: engineVersion,
-      engine: engine,
+      tags,
+      manifest,
+      description,
+      kmskeyId,
+      databaseInstallationFilesS3Prefix,
+      databaseInstallationFilesS3BucketName,
+      engineVersion,
+      engine,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CopyDBSnapshot = {
   type t
   @ocaml.doc("<p></p>")
@@ -7675,18 +7377,17 @@ module CopyDBSnapshot = {
     (),
   ) =>
     new({
-      targetCustomAvailabilityZone: targetCustomAvailabilityZone,
-      optionGroupName: optionGroupName,
-      preSignedUrl: preSignedUrl,
-      copyTags: copyTags,
-      tags: tags,
-      kmsKeyId: kmsKeyId,
-      targetDBSnapshotIdentifier: targetDBSnapshotIdentifier,
-      sourceDBSnapshotIdentifier: sourceDBSnapshotIdentifier,
+      targetCustomAvailabilityZone,
+      optionGroupName,
+      preSignedUrl,
+      copyTags,
+      tags,
+      kmsKeyId,
+      targetDBSnapshotIdentifier,
+      sourceDBSnapshotIdentifier,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CopyDBClusterSnapshot = {
   type t
   @ocaml.doc("<p></p>")
@@ -7798,16 +7499,15 @@ module CopyDBClusterSnapshot = {
     (),
   ) =>
     new({
-      tags: tags,
-      copyTags: copyTags,
-      preSignedUrl: preSignedUrl,
-      kmsKeyId: kmsKeyId,
-      targetDBClusterSnapshotIdentifier: targetDBClusterSnapshotIdentifier,
-      sourceDBClusterSnapshotIdentifier: sourceDBClusterSnapshotIdentifier,
+      tags,
+      copyTags,
+      preSignedUrl,
+      kmsKeyId,
+      targetDBClusterSnapshotIdentifier,
+      sourceDBClusterSnapshotIdentifier,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module AuthorizeDBSecurityGroupIngress = {
   type t
   @ocaml.doc("<p></p>")
@@ -7847,15 +7547,14 @@ module AuthorizeDBSecurityGroupIngress = {
     (),
   ) =>
     new({
-      ec2SecurityGroupOwnerId: ec2SecurityGroupOwnerId,
-      ec2SecurityGroupId: ec2SecurityGroupId,
-      ec2SecurityGroupName: ec2SecurityGroupName,
-      cidrip: cidrip,
-      dbsecurityGroupName: dbsecurityGroupName,
+      ec2SecurityGroupOwnerId,
+      ec2SecurityGroupId,
+      ec2SecurityGroupName,
+      cidrip,
+      dbsecurityGroupName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ApplyPendingMaintenanceAction = {
   type t
   @ocaml.doc("<p></p>")
@@ -7902,10 +7601,9 @@ module ApplyPendingMaintenanceAction = {
   @module("@aws-sdk/client-rds") @new
   external new: request => t = "ApplyPendingMaintenanceActionCommand"
   let make = (~optInType, ~applyAction, ~resourceIdentifier, ()) =>
-    new({optInType: optInType, applyAction: applyAction, resourceIdentifier: resourceIdentifier})
+    new({optInType, applyAction, resourceIdentifier})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module StopDBCluster = {
   type t
   type request = {
@@ -7919,7 +7617,6 @@ module StopDBCluster = {
   let make = (~dbclusterIdentifier, ()) => new({dbclusterIdentifier: dbclusterIdentifier})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module StartDBCluster = {
   type t
   type request = {
@@ -7933,7 +7630,6 @@ module StartDBCluster = {
   let make = (~dbclusterIdentifier, ()) => new({dbclusterIdentifier: dbclusterIdentifier})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module RestoreDBClusterToPointInTime = {
   type t
   @ocaml.doc("<p></p>")
@@ -8239,35 +7935,34 @@ module RestoreDBClusterToPointInTime = {
     (),
   ) =>
     new({
-      iops: iops,
-      publiclyAccessible: publiclyAccessible,
-      storageType: storageType,
-      dbclusterInstanceClass: dbclusterInstanceClass,
-      engineMode: engineMode,
-      scalingConfiguration: scalingConfiguration,
-      domainIAMRoleName: domainIAMRoleName,
-      domain: domain,
-      copyTagsToSnapshot: copyTagsToSnapshot,
-      deletionProtection: deletionProtection,
-      dbclusterParameterGroupName: dbclusterParameterGroupName,
-      enableCloudwatchLogsExports: enableCloudwatchLogsExports,
-      backtrackWindow: backtrackWindow,
-      enableIAMDatabaseAuthentication: enableIAMDatabaseAuthentication,
-      kmsKeyId: kmsKeyId,
-      tags: tags,
-      vpcSecurityGroupIds: vpcSecurityGroupIds,
-      optionGroupName: optionGroupName,
-      dbsubnetGroupName: dbsubnetGroupName,
-      port: port,
-      useLatestRestorableTime: useLatestRestorableTime,
-      restoreToTime: restoreToTime,
-      sourceDBClusterIdentifier: sourceDBClusterIdentifier,
-      restoreType: restoreType,
-      dbclusterIdentifier: dbclusterIdentifier,
+      iops,
+      publiclyAccessible,
+      storageType,
+      dbclusterInstanceClass,
+      engineMode,
+      scalingConfiguration,
+      domainIAMRoleName,
+      domain,
+      copyTagsToSnapshot,
+      deletionProtection,
+      dbclusterParameterGroupName,
+      enableCloudwatchLogsExports,
+      backtrackWindow,
+      enableIAMDatabaseAuthentication,
+      kmsKeyId,
+      tags,
+      vpcSecurityGroupIds,
+      optionGroupName,
+      dbsubnetGroupName,
+      port,
+      useLatestRestorableTime,
+      restoreToTime,
+      sourceDBClusterIdentifier,
+      restoreType,
+      dbclusterIdentifier,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module RestoreDBClusterFromSnapshot = {
   type t
   @ocaml.doc("<p></p>")
@@ -8599,36 +8294,35 @@ module RestoreDBClusterFromSnapshot = {
     (),
   ) =>
     new({
-      publiclyAccessible: publiclyAccessible,
-      iops: iops,
-      storageType: storageType,
-      dbclusterInstanceClass: dbclusterInstanceClass,
-      domainIAMRoleName: domainIAMRoleName,
-      domain: domain,
-      copyTagsToSnapshot: copyTagsToSnapshot,
-      deletionProtection: deletionProtection,
-      dbclusterParameterGroupName: dbclusterParameterGroupName,
-      scalingConfiguration: scalingConfiguration,
-      engineMode: engineMode,
-      enableCloudwatchLogsExports: enableCloudwatchLogsExports,
-      backtrackWindow: backtrackWindow,
-      enableIAMDatabaseAuthentication: enableIAMDatabaseAuthentication,
-      kmsKeyId: kmsKeyId,
-      tags: tags,
-      vpcSecurityGroupIds: vpcSecurityGroupIds,
-      optionGroupName: optionGroupName,
-      databaseName: databaseName,
-      dbsubnetGroupName: dbsubnetGroupName,
-      port: port,
-      engineVersion: engineVersion,
-      engine: engine,
-      snapshotIdentifier: snapshotIdentifier,
-      dbclusterIdentifier: dbclusterIdentifier,
-      availabilityZones: availabilityZones,
+      publiclyAccessible,
+      iops,
+      storageType,
+      dbclusterInstanceClass,
+      domainIAMRoleName,
+      domain,
+      copyTagsToSnapshot,
+      deletionProtection,
+      dbclusterParameterGroupName,
+      scalingConfiguration,
+      engineMode,
+      enableCloudwatchLogsExports,
+      backtrackWindow,
+      enableIAMDatabaseAuthentication,
+      kmsKeyId,
+      tags,
+      vpcSecurityGroupIds,
+      optionGroupName,
+      databaseName,
+      dbsubnetGroupName,
+      port,
+      engineVersion,
+      engine,
+      snapshotIdentifier,
+      dbclusterIdentifier,
+      availabilityZones,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module RestoreDBClusterFromS3 = {
   type t
   type request = {
@@ -8923,41 +8617,40 @@ module RestoreDBClusterFromS3 = {
     (),
   ) =>
     new({
-      domainIAMRoleName: domainIAMRoleName,
-      domain: domain,
-      copyTagsToSnapshot: copyTagsToSnapshot,
-      deletionProtection: deletionProtection,
-      enableCloudwatchLogsExports: enableCloudwatchLogsExports,
-      backtrackWindow: backtrackWindow,
-      s3IngestionRoleArn: s3IngestionRoleArn,
-      s3Prefix: s3Prefix,
-      s3BucketName: s3BucketName,
-      sourceEngineVersion: sourceEngineVersion,
-      sourceEngine: sourceEngine,
-      enableIAMDatabaseAuthentication: enableIAMDatabaseAuthentication,
-      kmsKeyId: kmsKeyId,
-      storageEncrypted: storageEncrypted,
-      tags: tags,
-      preferredMaintenanceWindow: preferredMaintenanceWindow,
-      preferredBackupWindow: preferredBackupWindow,
-      optionGroupName: optionGroupName,
-      masterUserPassword: masterUserPassword,
-      masterUsername: masterUsername,
-      port: port,
-      engineVersion: engineVersion,
-      engine: engine,
-      dbsubnetGroupName: dbsubnetGroupName,
-      vpcSecurityGroupIds: vpcSecurityGroupIds,
-      dbclusterParameterGroupName: dbclusterParameterGroupName,
-      dbclusterIdentifier: dbclusterIdentifier,
-      databaseName: databaseName,
-      characterSetName: characterSetName,
-      backupRetentionPeriod: backupRetentionPeriod,
-      availabilityZones: availabilityZones,
+      domainIAMRoleName,
+      domain,
+      copyTagsToSnapshot,
+      deletionProtection,
+      enableCloudwatchLogsExports,
+      backtrackWindow,
+      s3IngestionRoleArn,
+      s3Prefix,
+      s3BucketName,
+      sourceEngineVersion,
+      sourceEngine,
+      enableIAMDatabaseAuthentication,
+      kmsKeyId,
+      storageEncrypted,
+      tags,
+      preferredMaintenanceWindow,
+      preferredBackupWindow,
+      optionGroupName,
+      masterUserPassword,
+      masterUsername,
+      port,
+      engineVersion,
+      engine,
+      dbsubnetGroupName,
+      vpcSecurityGroupIds,
+      dbclusterParameterGroupName,
+      dbclusterIdentifier,
+      databaseName,
+      characterSetName,
+      backupRetentionPeriod,
+      availabilityZones,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module RemoveFromGlobalCluster = {
   type t
   type request = {
@@ -8973,13 +8666,9 @@ module RemoveFromGlobalCluster = {
   type response = {@as("GlobalCluster") globalCluster: option<globalCluster>}
   @module("@aws-sdk/client-rds") @new external new: request => t = "RemoveFromGlobalClusterCommand"
   let make = (~dbClusterIdentifier=?, ~globalClusterIdentifier=?, ()) =>
-    new({
-      dbClusterIdentifier: dbClusterIdentifier,
-      globalClusterIdentifier: globalClusterIdentifier,
-    })
+    new({dbClusterIdentifier, globalClusterIdentifier})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module RebootDBCluster = {
   type t
   type request = {
@@ -8998,7 +8687,6 @@ module RebootDBCluster = {
   let make = (~dbclusterIdentifier, ()) => new({dbclusterIdentifier: dbclusterIdentifier})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module PromoteReadReplicaDBCluster = {
   type t
   @ocaml.doc("<p></p>")
@@ -9022,7 +8710,6 @@ module PromoteReadReplicaDBCluster = {
   let make = (~dbclusterIdentifier, ()) => new({dbclusterIdentifier: dbclusterIdentifier})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ModifyGlobalCluster = {
   type t
   type request = {
@@ -9095,15 +8782,14 @@ module ModifyGlobalCluster = {
     (),
   ) =>
     new({
-      allowMajorVersionUpgrade: allowMajorVersionUpgrade,
-      engineVersion: engineVersion,
-      deletionProtection: deletionProtection,
-      newGlobalClusterIdentifier: newGlobalClusterIdentifier,
-      globalClusterIdentifier: globalClusterIdentifier,
+      allowMajorVersionUpgrade,
+      engineVersion,
+      deletionProtection,
+      newGlobalClusterIdentifier,
+      globalClusterIdentifier,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ModifyDBSubnetGroup = {
   type t
   @ocaml.doc("<p></p>")
@@ -9123,14 +8809,9 @@ module ModifyDBSubnetGroup = {
   type response = {@as("DBSubnetGroup") dbsubnetGroup: option<dbsubnetGroup>}
   @module("@aws-sdk/client-rds") @new external new: request => t = "ModifyDBSubnetGroupCommand"
   let make = (~subnetIds, ~dbsubnetGroupName, ~dbsubnetGroupDescription=?, ()) =>
-    new({
-      subnetIds: subnetIds,
-      dbsubnetGroupDescription: dbsubnetGroupDescription,
-      dbsubnetGroupName: dbsubnetGroupName,
-    })
+    new({subnetIds, dbsubnetGroupDescription, dbsubnetGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ModifyDBSnapshotAttribute = {
   type t
   @ocaml.doc("<p></p>")
@@ -9172,15 +8853,9 @@ module ModifyDBSnapshotAttribute = {
   @module("@aws-sdk/client-rds") @new
   external new: request => t = "ModifyDBSnapshotAttributeCommand"
   let make = (~attributeName, ~dbsnapshotIdentifier, ~valuesToRemove=?, ~valuesToAdd=?, ()) =>
-    new({
-      valuesToRemove: valuesToRemove,
-      valuesToAdd: valuesToAdd,
-      attributeName: attributeName,
-      dbsnapshotIdentifier: dbsnapshotIdentifier,
-    })
+    new({valuesToRemove, valuesToAdd, attributeName, dbsnapshotIdentifier})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ModifyDBClusterSnapshotAttribute = {
   type t
   @ocaml.doc("<p></p>")
@@ -9227,16 +8902,9 @@ module ModifyDBClusterSnapshotAttribute = {
     ~valuesToRemove=?,
     ~valuesToAdd=?,
     (),
-  ) =>
-    new({
-      valuesToRemove: valuesToRemove,
-      valuesToAdd: valuesToAdd,
-      attributeName: attributeName,
-      dbclusterSnapshotIdentifier: dbclusterSnapshotIdentifier,
-    })
+  ) => new({valuesToRemove, valuesToAdd, attributeName, dbclusterSnapshotIdentifier})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ModifyDBCluster = {
   type t
   @ocaml.doc("<p></p>")
@@ -9609,44 +9277,43 @@ module ModifyDBCluster = {
     (),
   ) =>
     new({
-      performanceInsightsRetentionPeriod: performanceInsightsRetentionPeriod,
-      performanceInsightsKMSKeyId: performanceInsightsKMSKeyId,
-      enablePerformanceInsights: enablePerformanceInsights,
-      monitoringRoleArn: monitoringRoleArn,
-      monitoringInterval: monitoringInterval,
-      autoMinorVersionUpgrade: autoMinorVersionUpgrade,
-      iops: iops,
-      storageType: storageType,
-      allocatedStorage: allocatedStorage,
-      dbclusterInstanceClass: dbclusterInstanceClass,
-      enableGlobalWriteForwarding: enableGlobalWriteForwarding,
-      copyTagsToSnapshot: copyTagsToSnapshot,
-      enableHttpEndpoint: enableHttpEndpoint,
-      deletionProtection: deletionProtection,
-      scalingConfiguration: scalingConfiguration,
-      domainIAMRoleName: domainIAMRoleName,
-      domain: domain,
-      dbinstanceParameterGroupName: dbinstanceParameterGroupName,
-      allowMajorVersionUpgrade: allowMajorVersionUpgrade,
-      engineVersion: engineVersion,
-      cloudwatchLogsExportConfiguration: cloudwatchLogsExportConfiguration,
-      backtrackWindow: backtrackWindow,
-      enableIAMDatabaseAuthentication: enableIAMDatabaseAuthentication,
-      preferredMaintenanceWindow: preferredMaintenanceWindow,
-      preferredBackupWindow: preferredBackupWindow,
-      optionGroupName: optionGroupName,
-      masterUserPassword: masterUserPassword,
-      port: port,
-      vpcSecurityGroupIds: vpcSecurityGroupIds,
-      dbclusterParameterGroupName: dbclusterParameterGroupName,
-      backupRetentionPeriod: backupRetentionPeriod,
-      applyImmediately: applyImmediately,
-      newDBClusterIdentifier: newDBClusterIdentifier,
-      dbclusterIdentifier: dbclusterIdentifier,
+      performanceInsightsRetentionPeriod,
+      performanceInsightsKMSKeyId,
+      enablePerformanceInsights,
+      monitoringRoleArn,
+      monitoringInterval,
+      autoMinorVersionUpgrade,
+      iops,
+      storageType,
+      allocatedStorage,
+      dbclusterInstanceClass,
+      enableGlobalWriteForwarding,
+      copyTagsToSnapshot,
+      enableHttpEndpoint,
+      deletionProtection,
+      scalingConfiguration,
+      domainIAMRoleName,
+      domain,
+      dbinstanceParameterGroupName,
+      allowMajorVersionUpgrade,
+      engineVersion,
+      cloudwatchLogsExportConfiguration,
+      backtrackWindow,
+      enableIAMDatabaseAuthentication,
+      preferredMaintenanceWindow,
+      preferredBackupWindow,
+      optionGroupName,
+      masterUserPassword,
+      port,
+      vpcSecurityGroupIds,
+      dbclusterParameterGroupName,
+      backupRetentionPeriod,
+      applyImmediately,
+      newDBClusterIdentifier,
+      dbclusterIdentifier,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module FailoverGlobalCluster = {
   type t
   type request = {
@@ -9672,13 +9339,9 @@ module FailoverGlobalCluster = {
   type response = {@as("GlobalCluster") globalCluster: option<globalCluster>}
   @module("@aws-sdk/client-rds") @new external new: request => t = "FailoverGlobalClusterCommand"
   let make = (~targetDbClusterIdentifier, ~globalClusterIdentifier, ()) =>
-    new({
-      targetDbClusterIdentifier: targetDbClusterIdentifier,
-      globalClusterIdentifier: globalClusterIdentifier,
-    })
+    new({targetDbClusterIdentifier, globalClusterIdentifier})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module FailoverDBCluster = {
   type t
   @ocaml.doc("<p></p>")
@@ -9702,13 +9365,9 @@ module FailoverDBCluster = {
   type response = {@as("DBCluster") dbcluster: option<dbcluster>}
   @module("@aws-sdk/client-rds") @new external new: request => t = "FailoverDBClusterCommand"
   let make = (~dbclusterIdentifier, ~targetDBInstanceIdentifier=?, ()) =>
-    new({
-      targetDBInstanceIdentifier: targetDBInstanceIdentifier,
-      dbclusterIdentifier: dbclusterIdentifier,
-    })
+    new({targetDBInstanceIdentifier, dbclusterIdentifier})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeReservedDBInstancesOfferings = {
   type t
   @ocaml.doc("<p></p>")
@@ -9789,19 +9448,18 @@ module DescribeReservedDBInstancesOfferings = {
     (),
   ) =>
     new({
-      marker: marker,
-      maxRecords: maxRecords,
-      filters: filters,
-      multiAZ: multiAZ,
-      offeringType: offeringType,
-      productDescription: productDescription,
-      duration: duration,
-      dbinstanceClass: dbinstanceClass,
-      reservedDBInstancesOfferingId: reservedDBInstancesOfferingId,
+      marker,
+      maxRecords,
+      filters,
+      multiAZ,
+      offeringType,
+      productDescription,
+      duration,
+      dbinstanceClass,
+      reservedDBInstancesOfferingId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeReservedDBInstances = {
   type t
   @ocaml.doc("<p></p>")
@@ -9893,21 +9551,20 @@ module DescribeReservedDBInstances = {
     (),
   ) =>
     new({
-      marker: marker,
-      maxRecords: maxRecords,
-      filters: filters,
-      leaseId: leaseId,
-      multiAZ: multiAZ,
-      offeringType: offeringType,
-      productDescription: productDescription,
-      duration: duration,
-      dbinstanceClass: dbinstanceClass,
-      reservedDBInstancesOfferingId: reservedDBInstancesOfferingId,
-      reservedDBInstanceId: reservedDBInstanceId,
+      marker,
+      maxRecords,
+      filters,
+      leaseId,
+      multiAZ,
+      offeringType,
+      productDescription,
+      duration,
+      dbinstanceClass,
+      reservedDBInstancesOfferingId,
+      reservedDBInstanceId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribePendingMaintenanceActions = {
   type t
   @ocaml.doc("<p></p>")
@@ -9965,15 +9622,9 @@ module DescribePendingMaintenanceActions = {
   @module("@aws-sdk/client-rds") @new
   external new: request => t = "DescribePendingMaintenanceActionsCommand"
   let make = (~maxRecords=?, ~marker=?, ~filters=?, ~resourceIdentifier=?, ()) =>
-    new({
-      maxRecords: maxRecords,
-      marker: marker,
-      filters: filters,
-      resourceIdentifier: resourceIdentifier,
-    })
+    new({maxRecords, marker, filters, resourceIdentifier})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeOrderableDBInstanceOptions = {
   type t
   @ocaml.doc("<p></p>")
@@ -10128,19 +9779,18 @@ module DescribeOrderableDBInstanceOptions = {
     (),
   ) =>
     new({
-      marker: marker,
-      maxRecords: maxRecords,
-      filters: filters,
-      vpc: vpc,
-      availabilityZoneGroup: availabilityZoneGroup,
-      licenseModel: licenseModel,
-      dbinstanceClass: dbinstanceClass,
-      engineVersion: engineVersion,
-      engine: engine,
+      marker,
+      maxRecords,
+      filters,
+      vpc,
+      availabilityZoneGroup,
+      licenseModel,
+      dbinstanceClass,
+      engineVersion,
+      engine,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeEngineDefaultParameters = {
   type t
   @ocaml.doc("<p></p>")
@@ -10168,15 +9818,9 @@ module DescribeEngineDefaultParameters = {
   @module("@aws-sdk/client-rds") @new
   external new: request => t = "DescribeEngineDefaultParametersCommand"
   let make = (~dbparameterGroupFamily, ~marker=?, ~maxRecords=?, ~filters=?, ()) =>
-    new({
-      marker: marker,
-      maxRecords: maxRecords,
-      filters: filters,
-      dbparameterGroupFamily: dbparameterGroupFamily,
-    })
+    new({marker, maxRecords, filters, dbparameterGroupFamily})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeEngineDefaultClusterParameters = {
   type t
   @ocaml.doc("<p></p>")
@@ -10207,15 +9851,9 @@ module DescribeEngineDefaultClusterParameters = {
   @module("@aws-sdk/client-rds") @new
   external new: request => t = "DescribeEngineDefaultClusterParametersCommand"
   let make = (~dbparameterGroupFamily, ~marker=?, ~maxRecords=?, ~filters=?, ()) =>
-    new({
-      marker: marker,
-      maxRecords: maxRecords,
-      filters: filters,
-      dbparameterGroupFamily: dbparameterGroupFamily,
-    })
+    new({marker, maxRecords, filters, dbparameterGroupFamily})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeDBSnapshots = {
   type t
   @ocaml.doc("<p></p>")
@@ -10371,19 +10009,18 @@ module DescribeDBSnapshots = {
     (),
   ) =>
     new({
-      dbiResourceId: dbiResourceId,
-      includePublic: includePublic,
-      includeShared: includeShared,
-      marker: marker,
-      maxRecords: maxRecords,
-      filters: filters,
-      snapshotType: snapshotType,
-      dbsnapshotIdentifier: dbsnapshotIdentifier,
-      dbinstanceIdentifier: dbinstanceIdentifier,
+      dbiResourceId,
+      includePublic,
+      includeShared,
+      marker,
+      maxRecords,
+      filters,
+      snapshotType,
+      dbsnapshotIdentifier,
+      dbinstanceIdentifier,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeDBSnapshotAttributes = {
   type t
   @ocaml.doc("<p></p>")
@@ -10401,7 +10038,6 @@ module DescribeDBSnapshotAttributes = {
   let make = (~dbsnapshotIdentifier, ()) => new({dbsnapshotIdentifier: dbsnapshotIdentifier})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeDBSecurityGroups = {
   type t
   @ocaml.doc("<p></p>")
@@ -10442,15 +10078,9 @@ module DescribeDBSecurityGroups = {
   }
   @module("@aws-sdk/client-rds") @new external new: request => t = "DescribeDBSecurityGroupsCommand"
   let make = (~marker=?, ~maxRecords=?, ~filters=?, ~dbsecurityGroupName=?, ()) =>
-    new({
-      marker: marker,
-      maxRecords: maxRecords,
-      filters: filters,
-      dbsecurityGroupName: dbsecurityGroupName,
-    })
+    new({marker, maxRecords, filters, dbsecurityGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeDBProxyTargetGroups = {
   type t
   type request = {
@@ -10493,16 +10123,9 @@ module DescribeDBProxyTargetGroups = {
   @module("@aws-sdk/client-rds") @new
   external new: request => t = "DescribeDBProxyTargetGroupsCommand"
   let make = (~dbproxyName, ~maxRecords=?, ~marker=?, ~filters=?, ~targetGroupName=?, ()) =>
-    new({
-      maxRecords: maxRecords,
-      marker: marker,
-      filters: filters,
-      targetGroupName: targetGroupName,
-      dbproxyName: dbproxyName,
-    })
+    new({maxRecords, marker, filters, targetGroupName, dbproxyName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeDBProxies = {
   type t
   type request = {
@@ -10540,10 +10163,9 @@ module DescribeDBProxies = {
   }
   @module("@aws-sdk/client-rds") @new external new: request => t = "DescribeDBProxiesCommand"
   let make = (~maxRecords=?, ~marker=?, ~filters=?, ~dbproxyName=?, ()) =>
-    new({maxRecords: maxRecords, marker: marker, filters: filters, dbproxyName: dbproxyName})
+    new({maxRecords, marker, filters, dbproxyName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeDBInstanceAutomatedBackups = {
   type t
   @ocaml.doc("<p>Parameter input for DescribeDBInstanceAutomatedBackups.</p>")
@@ -10634,16 +10256,15 @@ module DescribeDBInstanceAutomatedBackups = {
     (),
   ) =>
     new({
-      dbinstanceAutomatedBackupsArn: dbinstanceAutomatedBackupsArn,
-      marker: marker,
-      maxRecords: maxRecords,
-      filters: filters,
-      dbinstanceIdentifier: dbinstanceIdentifier,
-      dbiResourceId: dbiResourceId,
+      dbinstanceAutomatedBackupsArn,
+      marker,
+      maxRecords,
+      filters,
+      dbinstanceIdentifier,
+      dbiResourceId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeDBClusterSnapshots = {
   type t
   @ocaml.doc("<p></p>")
@@ -10784,18 +10405,17 @@ module DescribeDBClusterSnapshots = {
     (),
   ) =>
     new({
-      includePublic: includePublic,
-      includeShared: includeShared,
-      marker: marker,
-      maxRecords: maxRecords,
-      filters: filters,
-      snapshotType: snapshotType,
-      dbclusterSnapshotIdentifier: dbclusterSnapshotIdentifier,
-      dbclusterIdentifier: dbclusterIdentifier,
+      includePublic,
+      includeShared,
+      marker,
+      maxRecords,
+      filters,
+      snapshotType,
+      dbclusterSnapshotIdentifier,
+      dbclusterIdentifier,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeDBClusterSnapshotAttributes = {
   type t
   @ocaml.doc("<p></p>")
@@ -10814,7 +10434,6 @@ module DescribeDBClusterSnapshotAttributes = {
     new({dbclusterSnapshotIdentifier: dbclusterSnapshotIdentifier})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteGlobalCluster = {
   type t
   type request = {
@@ -10828,7 +10447,6 @@ module DeleteGlobalCluster = {
     new({globalClusterIdentifier: globalClusterIdentifier})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteDBCluster = {
   type t
   @ocaml.doc("<p></p>")
@@ -10875,14 +10493,9 @@ module DeleteDBCluster = {
   type response = {@as("DBCluster") dbcluster: option<dbcluster>}
   @module("@aws-sdk/client-rds") @new external new: request => t = "DeleteDBClusterCommand"
   let make = (~dbclusterIdentifier, ~finalDBSnapshotIdentifier=?, ~skipFinalSnapshot=?, ()) =>
-    new({
-      finalDBSnapshotIdentifier: finalDBSnapshotIdentifier,
-      skipFinalSnapshot: skipFinalSnapshot,
-      dbclusterIdentifier: dbclusterIdentifier,
-    })
+    new({finalDBSnapshotIdentifier, skipFinalSnapshot, dbclusterIdentifier})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateGlobalCluster = {
   type t
   type request = {
@@ -10923,17 +10536,16 @@ module CreateGlobalCluster = {
     (),
   ) =>
     new({
-      storageEncrypted: storageEncrypted,
-      databaseName: databaseName,
-      deletionProtection: deletionProtection,
-      engineVersion: engineVersion,
-      engine: engine,
-      sourceDBClusterIdentifier: sourceDBClusterIdentifier,
-      globalClusterIdentifier: globalClusterIdentifier,
+      storageEncrypted,
+      databaseName,
+      deletionProtection,
+      engineVersion,
+      engine,
+      sourceDBClusterIdentifier,
+      globalClusterIdentifier,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateDBSubnetGroup = {
   type t
   @ocaml.doc("<p></p>")
@@ -10964,15 +10576,9 @@ module CreateDBSubnetGroup = {
   type response = {@as("DBSubnetGroup") dbsubnetGroup: option<dbsubnetGroup>}
   @module("@aws-sdk/client-rds") @new external new: request => t = "CreateDBSubnetGroupCommand"
   let make = (~subnetIds, ~dbsubnetGroupDescription, ~dbsubnetGroupName, ~tags=?, ()) =>
-    new({
-      tags: tags,
-      subnetIds: subnetIds,
-      dbsubnetGroupDescription: dbsubnetGroupDescription,
-      dbsubnetGroupName: dbsubnetGroupName,
-    })
+    new({tags, subnetIds, dbsubnetGroupDescription, dbsubnetGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateDBCluster = {
   type t
   @ocaml.doc("<p></p>")
@@ -11565,54 +11171,53 @@ module CreateDBCluster = {
     (),
   ) =>
     new({
-      performanceInsightsRetentionPeriod: performanceInsightsRetentionPeriod,
-      performanceInsightsKMSKeyId: performanceInsightsKMSKeyId,
-      enablePerformanceInsights: enablePerformanceInsights,
-      monitoringRoleArn: monitoringRoleArn,
-      monitoringInterval: monitoringInterval,
-      autoMinorVersionUpgrade: autoMinorVersionUpgrade,
-      publiclyAccessible: publiclyAccessible,
-      iops: iops,
-      storageType: storageType,
-      allocatedStorage: allocatedStorage,
-      dbclusterInstanceClass: dbclusterInstanceClass,
-      enableGlobalWriteForwarding: enableGlobalWriteForwarding,
-      domainIAMRoleName: domainIAMRoleName,
-      domain: domain,
-      copyTagsToSnapshot: copyTagsToSnapshot,
-      enableHttpEndpoint: enableHttpEndpoint,
-      globalClusterIdentifier: globalClusterIdentifier,
-      deletionProtection: deletionProtection,
-      scalingConfiguration: scalingConfiguration,
-      engineMode: engineMode,
-      enableCloudwatchLogsExports: enableCloudwatchLogsExports,
-      backtrackWindow: backtrackWindow,
-      enableIAMDatabaseAuthentication: enableIAMDatabaseAuthentication,
-      preSignedUrl: preSignedUrl,
-      kmsKeyId: kmsKeyId,
-      storageEncrypted: storageEncrypted,
-      tags: tags,
-      replicationSourceIdentifier: replicationSourceIdentifier,
-      preferredMaintenanceWindow: preferredMaintenanceWindow,
-      preferredBackupWindow: preferredBackupWindow,
-      optionGroupName: optionGroupName,
-      masterUserPassword: masterUserPassword,
-      masterUsername: masterUsername,
-      port: port,
-      engineVersion: engineVersion,
-      engine: engine,
-      dbsubnetGroupName: dbsubnetGroupName,
-      vpcSecurityGroupIds: vpcSecurityGroupIds,
-      dbclusterParameterGroupName: dbclusterParameterGroupName,
-      dbclusterIdentifier: dbclusterIdentifier,
-      databaseName: databaseName,
-      characterSetName: characterSetName,
-      backupRetentionPeriod: backupRetentionPeriod,
-      availabilityZones: availabilityZones,
+      performanceInsightsRetentionPeriod,
+      performanceInsightsKMSKeyId,
+      enablePerformanceInsights,
+      monitoringRoleArn,
+      monitoringInterval,
+      autoMinorVersionUpgrade,
+      publiclyAccessible,
+      iops,
+      storageType,
+      allocatedStorage,
+      dbclusterInstanceClass,
+      enableGlobalWriteForwarding,
+      domainIAMRoleName,
+      domain,
+      copyTagsToSnapshot,
+      enableHttpEndpoint,
+      globalClusterIdentifier,
+      deletionProtection,
+      scalingConfiguration,
+      engineMode,
+      enableCloudwatchLogsExports,
+      backtrackWindow,
+      enableIAMDatabaseAuthentication,
+      preSignedUrl,
+      kmsKeyId,
+      storageEncrypted,
+      tags,
+      replicationSourceIdentifier,
+      preferredMaintenanceWindow,
+      preferredBackupWindow,
+      optionGroupName,
+      masterUserPassword,
+      masterUsername,
+      port,
+      engineVersion,
+      engine,
+      dbsubnetGroupName,
+      vpcSecurityGroupIds,
+      dbclusterParameterGroupName,
+      dbclusterIdentifier,
+      databaseName,
+      characterSetName,
+      backupRetentionPeriod,
+      availabilityZones,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module StopDBInstance = {
   type t
   type request = {
@@ -11627,10 +11232,9 @@ module StopDBInstance = {
   type response = {@as("DBInstance") dbinstance: option<dbinstance>}
   @module("@aws-sdk/client-rds") @new external new: request => t = "StopDBInstanceCommand"
   let make = (~dbinstanceIdentifier, ~dbsnapshotIdentifier=?, ()) =>
-    new({dbsnapshotIdentifier: dbsnapshotIdentifier, dbinstanceIdentifier: dbinstanceIdentifier})
+    new({dbsnapshotIdentifier, dbinstanceIdentifier})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module StartDBInstance = {
   type t
   type request = {
@@ -11642,7 +11246,6 @@ module StartDBInstance = {
   let make = (~dbinstanceIdentifier, ()) => new({dbinstanceIdentifier: dbinstanceIdentifier})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module RestoreDBInstanceToPointInTime = {
   type t
   @ocaml.doc("<p></p>")
@@ -12021,46 +11624,45 @@ module RestoreDBInstanceToPointInTime = {
     (),
   ) =>
     new({
-      backupTarget: backupTarget,
-      customIamInstanceProfile: customIamInstanceProfile,
-      enableCustomerOwnedIp: enableCustomerOwnedIp,
-      sourceDBInstanceAutomatedBackupsArn: sourceDBInstanceAutomatedBackupsArn,
-      maxAllocatedStorage: maxAllocatedStorage,
-      sourceDbiResourceId: sourceDbiResourceId,
-      deletionProtection: deletionProtection,
-      dbparameterGroupName: dbparameterGroupName,
-      useDefaultProcessorFeatures: useDefaultProcessorFeatures,
-      processorFeatures: processorFeatures,
-      enableCloudwatchLogsExports: enableCloudwatchLogsExports,
-      enableIAMDatabaseAuthentication: enableIAMDatabaseAuthentication,
-      domainIAMRoleName: domainIAMRoleName,
-      domain: domain,
-      vpcSecurityGroupIds: vpcSecurityGroupIds,
-      tdeCredentialPassword: tdeCredentialPassword,
-      tdeCredentialArn: tdeCredentialArn,
-      storageType: storageType,
-      tags: tags,
-      copyTagsToSnapshot: copyTagsToSnapshot,
-      optionGroupName: optionGroupName,
-      iops: iops,
-      engine: engine,
-      dbname: dbname,
-      licenseModel: licenseModel,
-      autoMinorVersionUpgrade: autoMinorVersionUpgrade,
-      publiclyAccessible: publiclyAccessible,
-      multiAZ: multiAZ,
-      dbsubnetGroupName: dbsubnetGroupName,
-      availabilityZone: availabilityZone,
-      port: port,
-      dbinstanceClass: dbinstanceClass,
-      useLatestRestorableTime: useLatestRestorableTime,
-      restoreTime: restoreTime,
-      targetDBInstanceIdentifier: targetDBInstanceIdentifier,
-      sourceDBInstanceIdentifier: sourceDBInstanceIdentifier,
+      backupTarget,
+      customIamInstanceProfile,
+      enableCustomerOwnedIp,
+      sourceDBInstanceAutomatedBackupsArn,
+      maxAllocatedStorage,
+      sourceDbiResourceId,
+      deletionProtection,
+      dbparameterGroupName,
+      useDefaultProcessorFeatures,
+      processorFeatures,
+      enableCloudwatchLogsExports,
+      enableIAMDatabaseAuthentication,
+      domainIAMRoleName,
+      domain,
+      vpcSecurityGroupIds,
+      tdeCredentialPassword,
+      tdeCredentialArn,
+      storageType,
+      tags,
+      copyTagsToSnapshot,
+      optionGroupName,
+      iops,
+      engine,
+      dbname,
+      licenseModel,
+      autoMinorVersionUpgrade,
+      publiclyAccessible,
+      multiAZ,
+      dbsubnetGroupName,
+      availabilityZone,
+      port,
+      dbinstanceClass,
+      useLatestRestorableTime,
+      restoreTime,
+      targetDBInstanceIdentifier,
+      sourceDBInstanceIdentifier,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module RestoreDBInstanceFromS3 = {
   type t
   type request = {
@@ -12437,54 +12039,53 @@ module RestoreDBInstanceFromS3 = {
     (),
   ) =>
     new({
-      maxAllocatedStorage: maxAllocatedStorage,
-      deletionProtection: deletionProtection,
-      useDefaultProcessorFeatures: useDefaultProcessorFeatures,
-      processorFeatures: processorFeatures,
-      enableCloudwatchLogsExports: enableCloudwatchLogsExports,
-      performanceInsightsRetentionPeriod: performanceInsightsRetentionPeriod,
-      performanceInsightsKMSKeyId: performanceInsightsKMSKeyId,
-      enablePerformanceInsights: enablePerformanceInsights,
-      s3IngestionRoleArn: s3IngestionRoleArn,
-      s3Prefix: s3Prefix,
-      s3BucketName: s3BucketName,
-      sourceEngineVersion: sourceEngineVersion,
-      sourceEngine: sourceEngine,
-      enableIAMDatabaseAuthentication: enableIAMDatabaseAuthentication,
-      monitoringRoleArn: monitoringRoleArn,
-      monitoringInterval: monitoringInterval,
-      copyTagsToSnapshot: copyTagsToSnapshot,
-      kmsKeyId: kmsKeyId,
-      storageEncrypted: storageEncrypted,
-      storageType: storageType,
-      tags: tags,
-      publiclyAccessible: publiclyAccessible,
-      optionGroupName: optionGroupName,
-      iops: iops,
-      licenseModel: licenseModel,
-      autoMinorVersionUpgrade: autoMinorVersionUpgrade,
-      engineVersion: engineVersion,
-      multiAZ: multiAZ,
-      port: port,
-      preferredBackupWindow: preferredBackupWindow,
-      backupRetentionPeriod: backupRetentionPeriod,
-      dbparameterGroupName: dbparameterGroupName,
-      preferredMaintenanceWindow: preferredMaintenanceWindow,
-      dbsubnetGroupName: dbsubnetGroupName,
-      availabilityZone: availabilityZone,
-      vpcSecurityGroupIds: vpcSecurityGroupIds,
-      dbsecurityGroups: dbsecurityGroups,
-      masterUserPassword: masterUserPassword,
-      masterUsername: masterUsername,
-      engine: engine,
-      dbinstanceClass: dbinstanceClass,
-      allocatedStorage: allocatedStorage,
-      dbinstanceIdentifier: dbinstanceIdentifier,
-      dbname: dbname,
+      maxAllocatedStorage,
+      deletionProtection,
+      useDefaultProcessorFeatures,
+      processorFeatures,
+      enableCloudwatchLogsExports,
+      performanceInsightsRetentionPeriod,
+      performanceInsightsKMSKeyId,
+      enablePerformanceInsights,
+      s3IngestionRoleArn,
+      s3Prefix,
+      s3BucketName,
+      sourceEngineVersion,
+      sourceEngine,
+      enableIAMDatabaseAuthentication,
+      monitoringRoleArn,
+      monitoringInterval,
+      copyTagsToSnapshot,
+      kmsKeyId,
+      storageEncrypted,
+      storageType,
+      tags,
+      publiclyAccessible,
+      optionGroupName,
+      iops,
+      licenseModel,
+      autoMinorVersionUpgrade,
+      engineVersion,
+      multiAZ,
+      port,
+      preferredBackupWindow,
+      backupRetentionPeriod,
+      dbparameterGroupName,
+      preferredMaintenanceWindow,
+      dbsubnetGroupName,
+      availabilityZone,
+      vpcSecurityGroupIds,
+      dbsecurityGroups,
+      masterUserPassword,
+      masterUsername,
+      engine,
+      dbinstanceClass,
+      allocatedStorage,
+      dbinstanceIdentifier,
+      dbname,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module RestoreDBInstanceFromDBSnapshot = {
   type t
   @ocaml.doc("<p></p>")
@@ -12833,41 +12434,40 @@ module RestoreDBInstanceFromDBSnapshot = {
     (),
   ) =>
     new({
-      backupTarget: backupTarget,
-      customIamInstanceProfile: customIamInstanceProfile,
-      enableCustomerOwnedIp: enableCustomerOwnedIp,
-      deletionProtection: deletionProtection,
-      dbparameterGroupName: dbparameterGroupName,
-      useDefaultProcessorFeatures: useDefaultProcessorFeatures,
-      processorFeatures: processorFeatures,
-      enableCloudwatchLogsExports: enableCloudwatchLogsExports,
-      enableIAMDatabaseAuthentication: enableIAMDatabaseAuthentication,
-      domainIAMRoleName: domainIAMRoleName,
-      copyTagsToSnapshot: copyTagsToSnapshot,
-      domain: domain,
-      vpcSecurityGroupIds: vpcSecurityGroupIds,
-      tdeCredentialPassword: tdeCredentialPassword,
-      tdeCredentialArn: tdeCredentialArn,
-      storageType: storageType,
-      tags: tags,
-      optionGroupName: optionGroupName,
-      iops: iops,
-      engine: engine,
-      dbname: dbname,
-      licenseModel: licenseModel,
-      autoMinorVersionUpgrade: autoMinorVersionUpgrade,
-      publiclyAccessible: publiclyAccessible,
-      multiAZ: multiAZ,
-      dbsubnetGroupName: dbsubnetGroupName,
-      availabilityZone: availabilityZone,
-      port: port,
-      dbinstanceClass: dbinstanceClass,
-      dbsnapshotIdentifier: dbsnapshotIdentifier,
-      dbinstanceIdentifier: dbinstanceIdentifier,
+      backupTarget,
+      customIamInstanceProfile,
+      enableCustomerOwnedIp,
+      deletionProtection,
+      dbparameterGroupName,
+      useDefaultProcessorFeatures,
+      processorFeatures,
+      enableCloudwatchLogsExports,
+      enableIAMDatabaseAuthentication,
+      domainIAMRoleName,
+      copyTagsToSnapshot,
+      domain,
+      vpcSecurityGroupIds,
+      tdeCredentialPassword,
+      tdeCredentialArn,
+      storageType,
+      tags,
+      optionGroupName,
+      iops,
+      engine,
+      dbname,
+      licenseModel,
+      autoMinorVersionUpgrade,
+      publiclyAccessible,
+      multiAZ,
+      dbsubnetGroupName,
+      availabilityZone,
+      port,
+      dbinstanceClass,
+      dbsnapshotIdentifier,
+      dbinstanceIdentifier,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module RebootDBInstance = {
   type t
   @ocaml.doc("<p></p>")
@@ -12889,10 +12489,9 @@ module RebootDBInstance = {
   type response = {@as("DBInstance") dbinstance: option<dbinstance>}
   @module("@aws-sdk/client-rds") @new external new: request => t = "RebootDBInstanceCommand"
   let make = (~dbinstanceIdentifier, ~forceFailover=?, ()) =>
-    new({forceFailover: forceFailover, dbinstanceIdentifier: dbinstanceIdentifier})
+    new({forceFailover, dbinstanceIdentifier})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module PromoteReadReplica = {
   type t
   @ocaml.doc("<p></p>")
@@ -12951,14 +12550,9 @@ module PromoteReadReplica = {
   type response = {@as("DBInstance") dbinstance: option<dbinstance>}
   @module("@aws-sdk/client-rds") @new external new: request => t = "PromoteReadReplicaCommand"
   let make = (~dbinstanceIdentifier, ~preferredBackupWindow=?, ~backupRetentionPeriod=?, ()) =>
-    new({
-      preferredBackupWindow: preferredBackupWindow,
-      backupRetentionPeriod: backupRetentionPeriod,
-      dbinstanceIdentifier: dbinstanceIdentifier,
-    })
+    new({preferredBackupWindow, backupRetentionPeriod, dbinstanceIdentifier})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ModifyOptionGroup = {
   type t
   @ocaml.doc("<p></p>")
@@ -12984,15 +12578,9 @@ module ModifyOptionGroup = {
   type response = {@as("OptionGroup") optionGroup: option<optionGroup>}
   @module("@aws-sdk/client-rds") @new external new: request => t = "ModifyOptionGroupCommand"
   let make = (~optionGroupName, ~applyImmediately=?, ~optionsToRemove=?, ~optionsToInclude=?, ()) =>
-    new({
-      applyImmediately: applyImmediately,
-      optionsToRemove: optionsToRemove,
-      optionsToInclude: optionsToInclude,
-      optionGroupName: optionGroupName,
-    })
+    new({applyImmediately, optionsToRemove, optionsToInclude, optionGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ModifyDBInstance = {
   type t
   @ocaml.doc("<p></p>")
@@ -13643,57 +13231,56 @@ module ModifyDBInstance = {
     (),
   ) =>
     new({
-      resumeFullAutomationModeMinutes: resumeFullAutomationModeMinutes,
-      automationMode: automationMode,
-      awsBackupRecoveryPointArn: awsBackupRecoveryPointArn,
-      enableCustomerOwnedIp: enableCustomerOwnedIp,
-      replicaMode: replicaMode,
-      certificateRotationRestart: certificateRotationRestart,
-      maxAllocatedStorage: maxAllocatedStorage,
-      deletionProtection: deletionProtection,
-      useDefaultProcessorFeatures: useDefaultProcessorFeatures,
-      processorFeatures: processorFeatures,
-      cloudwatchLogsExportConfiguration: cloudwatchLogsExportConfiguration,
-      performanceInsightsRetentionPeriod: performanceInsightsRetentionPeriod,
-      performanceInsightsKMSKeyId: performanceInsightsKMSKeyId,
-      enablePerformanceInsights: enablePerformanceInsights,
-      enableIAMDatabaseAuthentication: enableIAMDatabaseAuthentication,
-      promotionTier: promotionTier,
-      domainIAMRoleName: domainIAMRoleName,
-      monitoringRoleArn: monitoringRoleArn,
-      publiclyAccessible: publiclyAccessible,
-      dbportNumber: dbportNumber,
-      monitoringInterval: monitoringInterval,
-      copyTagsToSnapshot: copyTagsToSnapshot,
-      domain: domain,
-      cacertificateIdentifier: cacertificateIdentifier,
-      tdeCredentialPassword: tdeCredentialPassword,
-      tdeCredentialArn: tdeCredentialArn,
-      storageType: storageType,
-      newDBInstanceIdentifier: newDBInstanceIdentifier,
-      optionGroupName: optionGroupName,
-      iops: iops,
-      licenseModel: licenseModel,
-      autoMinorVersionUpgrade: autoMinorVersionUpgrade,
-      allowMajorVersionUpgrade: allowMajorVersionUpgrade,
-      engineVersion: engineVersion,
-      multiAZ: multiAZ,
-      preferredMaintenanceWindow: preferredMaintenanceWindow,
-      preferredBackupWindow: preferredBackupWindow,
-      backupRetentionPeriod: backupRetentionPeriod,
-      dbparameterGroupName: dbparameterGroupName,
-      masterUserPassword: masterUserPassword,
-      applyImmediately: applyImmediately,
-      vpcSecurityGroupIds: vpcSecurityGroupIds,
-      dbsecurityGroups: dbsecurityGroups,
-      dbsubnetGroupName: dbsubnetGroupName,
-      dbinstanceClass: dbinstanceClass,
-      allocatedStorage: allocatedStorage,
-      dbinstanceIdentifier: dbinstanceIdentifier,
+      resumeFullAutomationModeMinutes,
+      automationMode,
+      awsBackupRecoveryPointArn,
+      enableCustomerOwnedIp,
+      replicaMode,
+      certificateRotationRestart,
+      maxAllocatedStorage,
+      deletionProtection,
+      useDefaultProcessorFeatures,
+      processorFeatures,
+      cloudwatchLogsExportConfiguration,
+      performanceInsightsRetentionPeriod,
+      performanceInsightsKMSKeyId,
+      enablePerformanceInsights,
+      enableIAMDatabaseAuthentication,
+      promotionTier,
+      domainIAMRoleName,
+      monitoringRoleArn,
+      publiclyAccessible,
+      dbportNumber,
+      monitoringInterval,
+      copyTagsToSnapshot,
+      domain,
+      cacertificateIdentifier,
+      tdeCredentialPassword,
+      tdeCredentialArn,
+      storageType,
+      newDBInstanceIdentifier,
+      optionGroupName,
+      iops,
+      licenseModel,
+      autoMinorVersionUpgrade,
+      allowMajorVersionUpgrade,
+      engineVersion,
+      multiAZ,
+      preferredMaintenanceWindow,
+      preferredBackupWindow,
+      backupRetentionPeriod,
+      dbparameterGroupName,
+      masterUserPassword,
+      applyImmediately,
+      vpcSecurityGroupIds,
+      dbsecurityGroups,
+      dbsubnetGroupName,
+      dbinstanceClass,
+      allocatedStorage,
+      dbinstanceIdentifier,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeValidDBInstanceModifications = {
   type t
   @ocaml.doc("<p></p>")
@@ -13711,7 +13298,6 @@ module DescribeValidDBInstanceModifications = {
   let make = (~dbinstanceIdentifier, ()) => new({dbinstanceIdentifier: dbinstanceIdentifier})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeGlobalClusters = {
   type t
   type request = {
@@ -13750,15 +13336,9 @@ module DescribeGlobalClusters = {
   }
   @module("@aws-sdk/client-rds") @new external new: request => t = "DescribeGlobalClustersCommand"
   let make = (~marker=?, ~maxRecords=?, ~filters=?, ~globalClusterIdentifier=?, ()) =>
-    new({
-      marker: marker,
-      maxRecords: maxRecords,
-      filters: filters,
-      globalClusterIdentifier: globalClusterIdentifier,
-    })
+    new({marker, maxRecords, filters, globalClusterIdentifier})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeDBSubnetGroups = {
   type t
   @ocaml.doc("<p></p>")
@@ -13798,15 +13378,9 @@ module DescribeDBSubnetGroups = {
   }
   @module("@aws-sdk/client-rds") @new external new: request => t = "DescribeDBSubnetGroupsCommand"
   let make = (~marker=?, ~maxRecords=?, ~filters=?, ~dbsubnetGroupName=?, ()) =>
-    new({
-      marker: marker,
-      maxRecords: maxRecords,
-      filters: filters,
-      dbsubnetGroupName: dbsubnetGroupName,
-    })
+    new({marker, maxRecords, filters, dbsubnetGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeDBEngineVersions = {
   type t
   type request = {
@@ -14042,20 +13616,19 @@ module DescribeDBEngineVersions = {
     (),
   ) =>
     new({
-      includeAll: includeAll,
-      listSupportedTimezones: listSupportedTimezones,
-      listSupportedCharacterSets: listSupportedCharacterSets,
-      defaultOnly: defaultOnly,
-      marker: marker,
-      maxRecords: maxRecords,
-      filters: filters,
-      dbparameterGroupFamily: dbparameterGroupFamily,
-      engineVersion: engineVersion,
-      engine: engine,
+      includeAll,
+      listSupportedTimezones,
+      listSupportedCharacterSets,
+      defaultOnly,
+      marker,
+      maxRecords,
+      filters,
+      dbparameterGroupFamily,
+      engineVersion,
+      engine,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeDBClusters = {
   type t
   @ocaml.doc("<p></p>")
@@ -14130,16 +13703,9 @@ module DescribeDBClusters = {
   }
   @module("@aws-sdk/client-rds") @new external new: request => t = "DescribeDBClustersCommand"
   let make = (~includeShared=?, ~marker=?, ~maxRecords=?, ~filters=?, ~dbclusterIdentifier=?, ()) =>
-    new({
-      includeShared: includeShared,
-      marker: marker,
-      maxRecords: maxRecords,
-      filters: filters,
-      dbclusterIdentifier: dbclusterIdentifier,
-    })
+    new({includeShared, marker, maxRecords, filters, dbclusterIdentifier})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteDBInstance = {
   type t
   @ocaml.doc("<p></p>")
@@ -14205,14 +13771,13 @@ module DeleteDBInstance = {
     (),
   ) =>
     new({
-      deleteAutomatedBackups: deleteAutomatedBackups,
-      finalDBSnapshotIdentifier: finalDBSnapshotIdentifier,
-      skipFinalSnapshot: skipFinalSnapshot,
-      dbinstanceIdentifier: dbinstanceIdentifier,
+      deleteAutomatedBackups,
+      finalDBSnapshotIdentifier,
+      skipFinalSnapshot,
+      dbinstanceIdentifier,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateOptionGroup = {
   type t
   @ocaml.doc("<p></p>")
@@ -14313,17 +13878,9 @@ module CreateOptionGroup = {
     ~optionGroupName,
     ~tags=?,
     (),
-  ) =>
-    new({
-      tags: tags,
-      optionGroupDescription: optionGroupDescription,
-      majorEngineVersion: majorEngineVersion,
-      engineName: engineName,
-      optionGroupName: optionGroupName,
-    })
+  ) => new({tags, optionGroupDescription, majorEngineVersion, engineName, optionGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateDBInstanceReadReplica = {
   type t
   type request = {
@@ -14735,43 +14292,42 @@ module CreateDBInstanceReadReplica = {
     (),
   ) =>
     new({
-      customIamInstanceProfile: customIamInstanceProfile,
-      maxAllocatedStorage: maxAllocatedStorage,
-      replicaMode: replicaMode,
-      domainIAMRoleName: domainIAMRoleName,
-      domain: domain,
-      deletionProtection: deletionProtection,
-      useDefaultProcessorFeatures: useDefaultProcessorFeatures,
-      processorFeatures: processorFeatures,
-      enableCloudwatchLogsExports: enableCloudwatchLogsExports,
-      performanceInsightsRetentionPeriod: performanceInsightsRetentionPeriod,
-      performanceInsightsKMSKeyId: performanceInsightsKMSKeyId,
-      enablePerformanceInsights: enablePerformanceInsights,
-      enableIAMDatabaseAuthentication: enableIAMDatabaseAuthentication,
-      preSignedUrl: preSignedUrl,
-      kmsKeyId: kmsKeyId,
-      monitoringRoleArn: monitoringRoleArn,
-      monitoringInterval: monitoringInterval,
-      copyTagsToSnapshot: copyTagsToSnapshot,
-      storageType: storageType,
-      vpcSecurityGroupIds: vpcSecurityGroupIds,
-      dbsubnetGroupName: dbsubnetGroupName,
-      tags: tags,
-      publiclyAccessible: publiclyAccessible,
-      dbparameterGroupName: dbparameterGroupName,
-      optionGroupName: optionGroupName,
-      iops: iops,
-      autoMinorVersionUpgrade: autoMinorVersionUpgrade,
-      multiAZ: multiAZ,
-      port: port,
-      availabilityZone: availabilityZone,
-      dbinstanceClass: dbinstanceClass,
-      sourceDBInstanceIdentifier: sourceDBInstanceIdentifier,
-      dbinstanceIdentifier: dbinstanceIdentifier,
+      customIamInstanceProfile,
+      maxAllocatedStorage,
+      replicaMode,
+      domainIAMRoleName,
+      domain,
+      deletionProtection,
+      useDefaultProcessorFeatures,
+      processorFeatures,
+      enableCloudwatchLogsExports,
+      performanceInsightsRetentionPeriod,
+      performanceInsightsKMSKeyId,
+      enablePerformanceInsights,
+      enableIAMDatabaseAuthentication,
+      preSignedUrl,
+      kmsKeyId,
+      monitoringRoleArn,
+      monitoringInterval,
+      copyTagsToSnapshot,
+      storageType,
+      vpcSecurityGroupIds,
+      dbsubnetGroupName,
+      tags,
+      publiclyAccessible,
+      dbparameterGroupName,
+      optionGroupName,
+      iops,
+      autoMinorVersionUpgrade,
+      multiAZ,
+      port,
+      availabilityZone,
+      dbinstanceClass,
+      sourceDBInstanceIdentifier,
+      dbinstanceIdentifier,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateDBInstance = {
   type t
   @ocaml.doc("<p></p>")
@@ -15774,60 +15330,59 @@ module CreateDBInstance = {
     (),
   ) =>
     new({
-      backupTarget: backupTarget,
-      customIamInstanceProfile: customIamInstanceProfile,
-      enableCustomerOwnedIp: enableCustomerOwnedIp,
-      maxAllocatedStorage: maxAllocatedStorage,
-      deletionProtection: deletionProtection,
-      processorFeatures: processorFeatures,
-      enableCloudwatchLogsExports: enableCloudwatchLogsExports,
-      performanceInsightsRetentionPeriod: performanceInsightsRetentionPeriod,
-      performanceInsightsKMSKeyId: performanceInsightsKMSKeyId,
-      enablePerformanceInsights: enablePerformanceInsights,
-      enableIAMDatabaseAuthentication: enableIAMDatabaseAuthentication,
-      timezone: timezone,
-      promotionTier: promotionTier,
-      domainIAMRoleName: domainIAMRoleName,
-      monitoringRoleArn: monitoringRoleArn,
-      monitoringInterval: monitoringInterval,
-      copyTagsToSnapshot: copyTagsToSnapshot,
-      domain: domain,
-      kmsKeyId: kmsKeyId,
-      storageEncrypted: storageEncrypted,
-      tdeCredentialPassword: tdeCredentialPassword,
-      tdeCredentialArn: tdeCredentialArn,
-      storageType: storageType,
-      dbclusterIdentifier: dbclusterIdentifier,
-      tags: tags,
-      publiclyAccessible: publiclyAccessible,
-      ncharCharacterSetName: ncharCharacterSetName,
-      characterSetName: characterSetName,
-      optionGroupName: optionGroupName,
-      iops: iops,
-      licenseModel: licenseModel,
-      autoMinorVersionUpgrade: autoMinorVersionUpgrade,
-      engineVersion: engineVersion,
-      multiAZ: multiAZ,
-      port: port,
-      preferredBackupWindow: preferredBackupWindow,
-      backupRetentionPeriod: backupRetentionPeriod,
-      dbparameterGroupName: dbparameterGroupName,
-      preferredMaintenanceWindow: preferredMaintenanceWindow,
-      dbsubnetGroupName: dbsubnetGroupName,
-      availabilityZone: availabilityZone,
-      vpcSecurityGroupIds: vpcSecurityGroupIds,
-      dbsecurityGroups: dbsecurityGroups,
-      masterUserPassword: masterUserPassword,
-      masterUsername: masterUsername,
-      engine: engine,
-      dbinstanceClass: dbinstanceClass,
-      allocatedStorage: allocatedStorage,
-      dbinstanceIdentifier: dbinstanceIdentifier,
-      dbname: dbname,
+      backupTarget,
+      customIamInstanceProfile,
+      enableCustomerOwnedIp,
+      maxAllocatedStorage,
+      deletionProtection,
+      processorFeatures,
+      enableCloudwatchLogsExports,
+      performanceInsightsRetentionPeriod,
+      performanceInsightsKMSKeyId,
+      enablePerformanceInsights,
+      enableIAMDatabaseAuthentication,
+      timezone,
+      promotionTier,
+      domainIAMRoleName,
+      monitoringRoleArn,
+      monitoringInterval,
+      copyTagsToSnapshot,
+      domain,
+      kmsKeyId,
+      storageEncrypted,
+      tdeCredentialPassword,
+      tdeCredentialArn,
+      storageType,
+      dbclusterIdentifier,
+      tags,
+      publiclyAccessible,
+      ncharCharacterSetName,
+      characterSetName,
+      optionGroupName,
+      iops,
+      licenseModel,
+      autoMinorVersionUpgrade,
+      engineVersion,
+      multiAZ,
+      port,
+      preferredBackupWindow,
+      backupRetentionPeriod,
+      dbparameterGroupName,
+      preferredMaintenanceWindow,
+      dbsubnetGroupName,
+      availabilityZone,
+      vpcSecurityGroupIds,
+      dbsecurityGroups,
+      masterUserPassword,
+      masterUsername,
+      engine,
+      dbinstanceClass,
+      allocatedStorage,
+      dbinstanceIdentifier,
+      dbname,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CopyOptionGroup = {
   type t
   @ocaml.doc("<p></p>")
@@ -15876,14 +15431,13 @@ module CopyOptionGroup = {
     (),
   ) =>
     new({
-      tags: tags,
-      targetOptionGroupDescription: targetOptionGroupDescription,
-      targetOptionGroupIdentifier: targetOptionGroupIdentifier,
-      sourceOptionGroupIdentifier: sourceOptionGroupIdentifier,
+      tags,
+      targetOptionGroupDescription,
+      targetOptionGroupIdentifier,
+      sourceOptionGroupIdentifier,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeOptionGroups = {
   type t
   @ocaml.doc("<p></p>")
@@ -15996,18 +15550,9 @@ module DescribeOptionGroups = {
     ~filters=?,
     ~optionGroupName=?,
     (),
-  ) =>
-    new({
-      majorEngineVersion: majorEngineVersion,
-      engineName: engineName,
-      maxRecords: maxRecords,
-      marker: marker,
-      filters: filters,
-      optionGroupName: optionGroupName,
-    })
+  ) => new({majorEngineVersion, engineName, maxRecords, marker, filters, optionGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeOptionGroupOptions = {
   type t
   @ocaml.doc("<p></p>")
@@ -16108,16 +15653,9 @@ module DescribeOptionGroupOptions = {
   @module("@aws-sdk/client-rds") @new
   external new: request => t = "DescribeOptionGroupOptionsCommand"
   let make = (~engineName, ~marker=?, ~maxRecords=?, ~filters=?, ~majorEngineVersion=?, ()) =>
-    new({
-      marker: marker,
-      maxRecords: maxRecords,
-      filters: filters,
-      majorEngineVersion: majorEngineVersion,
-      engineName: engineName,
-    })
+    new({marker, maxRecords, filters, majorEngineVersion, engineName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeDBInstances = {
   type t
   @ocaml.doc("<p></p>")
@@ -16195,11 +15733,6 @@ module DescribeDBInstances = {
   }
   @module("@aws-sdk/client-rds") @new external new: request => t = "DescribeDBInstancesCommand"
   let make = (~marker=?, ~maxRecords=?, ~filters=?, ~dbinstanceIdentifier=?, ()) =>
-    new({
-      marker: marker,
-      maxRecords: maxRecords,
-      filters: filters,
-      dbinstanceIdentifier: dbinstanceIdentifier,
-    })
+    new({marker, maxRecords, filters, dbinstanceIdentifier})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

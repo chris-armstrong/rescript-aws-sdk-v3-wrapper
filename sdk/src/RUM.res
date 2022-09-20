@@ -255,7 +255,6 @@ module DeleteAppMonitor = {
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module UntagResource = {
   type t
   type request = {
@@ -267,10 +266,9 @@ module UntagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-rum") @new external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
+  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys, resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module TagResource = {
   type t
   type request = {
@@ -282,10 +280,9 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-rum") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
+  let make = (~tags, ~resourceArn, ()) => new({tags, resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module ListTagsForResource = {
   type t
   type request = {
@@ -304,7 +301,6 @@ module ListTagsForResource = {
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateAppMonitor = {
   type t
   type request = {
@@ -332,15 +328,9 @@ module UpdateAppMonitor = {
   type response = {.}
   @module("@aws-sdk/client-rum") @new external new: request => t = "UpdateAppMonitorCommand"
   let make = (~name, ~cwLogEnabled=?, ~appMonitorConfiguration=?, ~domain=?, ()) =>
-    new({
-      cwLogEnabled: cwLogEnabled,
-      appMonitorConfiguration: appMonitorConfiguration,
-      domain: domain,
-      name: name,
-    })
+    new({cwLogEnabled, appMonitorConfiguration, domain, name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module PutRumEvents = {
   type t
   type request = {
@@ -365,16 +355,9 @@ module PutRumEvents = {
   type response = {.}
   @module("@aws-sdk/client-rum") @new external new: request => t = "PutRumEventsCommand"
   let make = (~rumEvents, ~userDetails, ~appMonitorDetails, ~batchId, ~id, ()) =>
-    new({
-      rumEvents: rumEvents,
-      userDetails: userDetails,
-      appMonitorDetails: appMonitorDetails,
-      batchId: batchId,
-      id: id,
-    })
+    new({rumEvents, userDetails, appMonitorDetails, batchId, id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module ListAppMonitors = {
   type t
   type request = {
@@ -399,11 +382,9 @@ module ListAppMonitors = {
     nextToken: option<baseString>,
   }
   @module("@aws-sdk/client-rum") @new external new: request => t = "ListAppMonitorsCommand"
-  let make = (~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken: nextToken, maxResults: maxResults})
+  let make = (~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateAppMonitor = {
   type t
   type request = {
@@ -445,16 +426,9 @@ module CreateAppMonitor = {
   }
   @module("@aws-sdk/client-rum") @new external new: request => t = "CreateAppMonitorCommand"
   let make = (~domain, ~name, ~cwLogEnabled=?, ~appMonitorConfiguration=?, ~tags=?, ()) =>
-    new({
-      cwLogEnabled: cwLogEnabled,
-      appMonitorConfiguration: appMonitorConfiguration,
-      tags: tags,
-      domain: domain,
-      name: name,
-    })
+    new({cwLogEnabled, appMonitorConfiguration, tags, domain, name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetAppMonitorData = {
   type t
   type request = {
@@ -491,16 +465,9 @@ module GetAppMonitorData = {
   }
   @module("@aws-sdk/client-rum") @new external new: request => t = "GetAppMonitorDataCommand"
   let make = (~timeRange, ~name, ~nextToken=?, ~maxResults=?, ~filters=?, ()) =>
-    new({
-      nextToken: nextToken,
-      maxResults: maxResults,
-      filters: filters,
-      timeRange: timeRange,
-      name: name,
-    })
+    new({nextToken, maxResults, filters, timeRange, name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetAppMonitor = {
   type t
   type request = {

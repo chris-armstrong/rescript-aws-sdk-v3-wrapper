@@ -264,16 +264,9 @@ module SetTaskStatus = {
   type response = {.}
   @module("@aws-sdk/client-datapipeline") @new external new: request => t = "SetTaskStatusCommand"
   let make = (~taskStatus, ~taskId, ~errorStackTrace=?, ~errorMessage=?, ~errorId=?, ()) =>
-    new({
-      errorStackTrace: errorStackTrace,
-      errorMessage: errorMessage,
-      errorId: errorId,
-      taskStatus: taskStatus,
-      taskId: taskId,
-    })
+    new({errorStackTrace, errorMessage, errorId, taskStatus, taskId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module ReportTaskRunnerHeartbeat = {
   type t
   @ocaml.doc("<p>Contains the parameters for ReportTaskRunnerHeartbeat.</p>")
@@ -296,10 +289,9 @@ module ReportTaskRunnerHeartbeat = {
   @module("@aws-sdk/client-datapipeline") @new
   external new: request => t = "ReportTaskRunnerHeartbeatCommand"
   let make = (~taskrunnerId, ~hostname=?, ~workerGroup=?, ()) =>
-    new({hostname: hostname, workerGroup: workerGroup, taskrunnerId: taskrunnerId})
+    new({hostname, workerGroup, taskrunnerId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module EvaluateExpression = {
   type t
   @ocaml.doc("<p>Contains the parameters for EvaluateExpression.</p>")
@@ -312,11 +304,9 @@ module EvaluateExpression = {
   type response = {@ocaml.doc("<p>The evaluated expression.</p>") evaluatedExpression: longString}
   @module("@aws-sdk/client-datapipeline") @new
   external new: request => t = "EvaluateExpressionCommand"
-  let make = (~expression, ~objectId, ~pipelineId, ()) =>
-    new({expression: expression, objectId: objectId, pipelineId: pipelineId})
+  let make = (~expression, ~objectId, ~pipelineId, ()) => new({expression, objectId, pipelineId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeletePipeline = {
   type t
   @ocaml.doc("<p>Contains the parameters for DeletePipeline.</p>")
@@ -326,7 +316,6 @@ module DeletePipeline = {
   let make = (~pipelineId, ()) => new({pipelineId: pipelineId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeactivatePipeline = {
   type t
   @ocaml.doc("<p>Contains the parameters for DeactivatePipeline.</p>")
@@ -341,11 +330,9 @@ module DeactivatePipeline = {
   type response = {.}
   @module("@aws-sdk/client-datapipeline") @new
   external new: request => t = "DeactivatePipelineCommand"
-  let make = (~pipelineId, ~cancelActive=?, ()) =>
-    new({cancelActive: cancelActive, pipelineId: pipelineId})
+  let make = (~pipelineId, ~cancelActive=?, ()) => new({cancelActive, pipelineId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module SetStatus = {
   type t
   @ocaml.doc("<p>Contains the parameters for SetStatus.</p>")
@@ -361,11 +348,9 @@ module SetStatus = {
   }
   type response = {.}
   @module("@aws-sdk/client-datapipeline") @new external new: request => t = "SetStatusCommand"
-  let make = (~status, ~objectIds, ~pipelineId, ()) =>
-    new({status: status, objectIds: objectIds, pipelineId: pipelineId})
+  let make = (~status, ~objectIds, ~pipelineId, ()) => new({status, objectIds, pipelineId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module RemoveTags = {
   type t
   @ocaml.doc("<p>Contains the parameters for RemoveTags.</p>")
@@ -375,10 +360,9 @@ module RemoveTags = {
   }
   type response = {.}
   @module("@aws-sdk/client-datapipeline") @new external new: request => t = "RemoveTagsCommand"
-  let make = (~tagKeys, ~pipelineId, ()) => new({tagKeys: tagKeys, pipelineId: pipelineId})
+  let make = (~tagKeys, ~pipelineId, ()) => new({tagKeys, pipelineId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module ReportTaskProgress = {
   type t
   @ocaml.doc("<p>Contains the parameters for ReportTaskProgress.</p>")
@@ -401,10 +385,9 @@ module ReportTaskProgress = {
   }
   @module("@aws-sdk/client-datapipeline") @new
   external new: request => t = "ReportTaskProgressCommand"
-  let make = (~taskId, ~fields=?, ()) => new({fields: fields, taskId: taskId})
+  let make = (~taskId, ~fields=?, ()) => new({fields, taskId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListPipelines = {
   type t
   @ocaml.doc("<p>Contains the parameters for ListPipelines.</p>")
@@ -431,7 +414,6 @@ module ListPipelines = {
   let make = (~marker=?, ()) => new({marker: marker})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreatePipeline = {
   type t
   @ocaml.doc("<p>Contains the parameters for CreatePipeline.</p>")
@@ -463,10 +445,9 @@ module CreatePipeline = {
   }
   @module("@aws-sdk/client-datapipeline") @new external new: request => t = "CreatePipelineCommand"
   let make = (~uniqueId, ~name, ~tags=?, ~description=?, ()) =>
-    new({tags: tags, description: description, uniqueId: uniqueId, name: name})
+    new({tags, description, uniqueId, name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module AddTags = {
   type t
   @ocaml.doc("<p>Contains the parameters for AddTags.</p>")
@@ -476,10 +457,9 @@ module AddTags = {
   }
   type response = {.}
   @module("@aws-sdk/client-datapipeline") @new external new: request => t = "AddTagsCommand"
-  let make = (~tags, ~pipelineId, ()) => new({tags: tags, pipelineId: pipelineId})
+  let make = (~tags, ~pipelineId, ()) => new({tags, pipelineId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module ActivatePipeline = {
   type t
   @ocaml.doc("<p>Contains the parameters for ActivatePipeline.</p>")
@@ -496,10 +476,9 @@ module ActivatePipeline = {
   @module("@aws-sdk/client-datapipeline") @new
   external new: request => t = "ActivatePipelineCommand"
   let make = (~pipelineId, ~startTimestamp=?, ~parameterValues=?, ()) =>
-    new({startTimestamp: startTimestamp, parameterValues: parameterValues, pipelineId: pipelineId})
+    new({startTimestamp, parameterValues, pipelineId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module ValidatePipelineDefinition = {
   type t
   @ocaml.doc("<p>Contains the parameters for ValidatePipelineDefinition.</p>")
@@ -525,15 +504,9 @@ module ValidatePipelineDefinition = {
   @module("@aws-sdk/client-datapipeline") @new
   external new: request => t = "ValidatePipelineDefinitionCommand"
   let make = (~pipelineObjects, ~pipelineId, ~parameterValues=?, ~parameterObjects=?, ()) =>
-    new({
-      parameterValues: parameterValues,
-      parameterObjects: parameterObjects,
-      pipelineObjects: pipelineObjects,
-      pipelineId: pipelineId,
-    })
+    new({parameterValues, parameterObjects, pipelineObjects, pipelineId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module PutPipelineDefinition = {
   type t
   @ocaml.doc("<p>Contains the parameters for PutPipelineDefinition.</p>")
@@ -565,15 +538,9 @@ module PutPipelineDefinition = {
   @module("@aws-sdk/client-datapipeline") @new
   external new: request => t = "PutPipelineDefinitionCommand"
   let make = (~pipelineObjects, ~pipelineId, ~parameterValues=?, ~parameterObjects=?, ()) =>
-    new({
-      parameterValues: parameterValues,
-      parameterObjects: parameterObjects,
-      pipelineObjects: pipelineObjects,
-      pipelineId: pipelineId,
-    })
+    new({parameterValues, parameterObjects, pipelineObjects, pipelineId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetPipelineDefinition = {
   type t
   @ocaml.doc("<p>Contains the parameters for GetPipelineDefinition.</p>")
@@ -595,10 +562,9 @@ module GetPipelineDefinition = {
   }
   @module("@aws-sdk/client-datapipeline") @new
   external new: request => t = "GetPipelineDefinitionCommand"
-  let make = (~pipelineId, ~version=?, ()) => new({version: version, pipelineId: pipelineId})
+  let make = (~pipelineId, ~version=?, ()) => new({version, pipelineId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribePipelines = {
   type t
   @ocaml.doc("<p>Contains the parameters for DescribePipelines.</p>")
@@ -617,7 +583,6 @@ module DescribePipelines = {
   let make = (~pipelineIds, ()) => new({pipelineIds: pipelineIds})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeObjects = {
   type t
   @ocaml.doc("<p>Contains the parameters for DescribeObjects.</p>")
@@ -648,15 +613,9 @@ module DescribeObjects = {
   }
   @module("@aws-sdk/client-datapipeline") @new external new: request => t = "DescribeObjectsCommand"
   let make = (~objectIds, ~pipelineId, ~marker=?, ~evaluateExpressions=?, ()) =>
-    new({
-      marker: marker,
-      evaluateExpressions: evaluateExpressions,
-      objectIds: objectIds,
-      pipelineId: pipelineId,
-    })
+    new({marker, evaluateExpressions, objectIds, pipelineId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module QueryObjects = {
   type t
   @ocaml.doc("<p>Contains the parameters for QueryObjects.</p>")
@@ -691,10 +650,9 @@ module QueryObjects = {
   }
   @module("@aws-sdk/client-datapipeline") @new external new: request => t = "QueryObjectsCommand"
   let make = (~sphere, ~pipelineId, ~limit=?, ~marker=?, ~query=?, ()) =>
-    new({limit: limit, marker: marker, sphere: sphere, query: query, pipelineId: pipelineId})
+    new({limit, marker, sphere, query, pipelineId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module PollForTask = {
   type t
   @ocaml.doc("<p>Contains the parameters for PollForTask.</p>")
@@ -718,6 +676,6 @@ module PollForTask = {
   }
   @module("@aws-sdk/client-datapipeline") @new external new: request => t = "PollForTaskCommand"
   let make = (~workerGroup, ~instanceIdentity=?, ~hostname=?, ()) =>
-    new({instanceIdentity: instanceIdentity, hostname: hostname, workerGroup: workerGroup})
+    new({instanceIdentity, hostname, workerGroup})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

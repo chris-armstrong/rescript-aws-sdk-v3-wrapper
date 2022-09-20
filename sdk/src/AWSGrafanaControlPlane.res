@@ -380,10 +380,9 @@ module UntagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-grafana") @new external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
+  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys, resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module TagResource = {
   type t
   type request = {
@@ -395,10 +394,9 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-grafana") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
+  let make = (~tags, ~resourceArn, ()) => new({tags, resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module ListTagsForResource = {
   type t
   type request = {
@@ -413,7 +411,6 @@ module ListTagsForResource = {
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateWorkspace = {
   type t
   type request = {
@@ -489,21 +486,20 @@ module UpdateWorkspace = {
     (),
   ) =>
     new({
-      workspaceRoleArn: workspaceRoleArn,
-      workspaceOrganizationalUnits: workspaceOrganizationalUnits,
-      workspaceNotificationDestinations: workspaceNotificationDestinations,
-      workspaceName: workspaceName,
-      workspaceId: workspaceId,
-      workspaceDescription: workspaceDescription,
-      workspaceDataSources: workspaceDataSources,
-      stackSetName: stackSetName,
-      permissionType: permissionType,
-      organizationRoleName: organizationRoleName,
-      accountAccessType: accountAccessType,
+      workspaceRoleArn,
+      workspaceOrganizationalUnits,
+      workspaceNotificationDestinations,
+      workspaceName,
+      workspaceId,
+      workspaceDescription,
+      workspaceDataSources,
+      stackSetName,
+      permissionType,
+      organizationRoleName,
+      accountAccessType,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListPermissions = {
   type t
   type request = {
@@ -534,17 +530,9 @@ module ListPermissions = {
   }
   @module("@aws-sdk/client-grafana") @new external new: request => t = "ListPermissionsCommand"
   let make = (~workspaceId, ~groupId=?, ~userId=?, ~userType=?, ~nextToken=?, ~maxResults=?, ()) =>
-    new({
-      workspaceId: workspaceId,
-      groupId: groupId,
-      userId: userId,
-      userType: userType,
-      nextToken: nextToken,
-      maxResults: maxResults,
-    })
+    new({workspaceId, groupId, userId, userType, nextToken, maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DisassociateLicense = {
   type t
   type request = {
@@ -557,11 +545,9 @@ module DisassociateLicense = {
     workspace: workspaceDescription,
   }
   @module("@aws-sdk/client-grafana") @new external new: request => t = "DisassociateLicenseCommand"
-  let make = (~licenseType, ~workspaceId, ()) =>
-    new({licenseType: licenseType, workspaceId: workspaceId})
+  let make = (~licenseType, ~workspaceId, ()) => new({licenseType, workspaceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeWorkspace = {
   type t
   type request = {
@@ -576,7 +562,6 @@ module DescribeWorkspace = {
   let make = (~workspaceId, ()) => new({workspaceId: workspaceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteWorkspace = {
   type t
   type request = {@ocaml.doc("<p>The ID of the workspace to delete.</p>") workspaceId: workspaceId}
@@ -588,7 +573,6 @@ module DeleteWorkspace = {
   let make = (~workspaceId, ()) => new({workspaceId: workspaceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateWorkspace = {
   type t
   type request = {
@@ -671,23 +655,22 @@ module CreateWorkspace = {
     (),
   ) =>
     new({
-      tags: tags,
-      authenticationProviders: authenticationProviders,
-      workspaceRoleArn: workspaceRoleArn,
-      workspaceOrganizationalUnits: workspaceOrganizationalUnits,
-      workspaceNotificationDestinations: workspaceNotificationDestinations,
-      workspaceName: workspaceName,
-      workspaceDescription: workspaceDescription,
-      workspaceDataSources: workspaceDataSources,
-      stackSetName: stackSetName,
-      permissionType: permissionType,
-      organizationRoleName: organizationRoleName,
-      clientToken: clientToken,
-      accountAccessType: accountAccessType,
+      tags,
+      authenticationProviders,
+      workspaceRoleArn,
+      workspaceOrganizationalUnits,
+      workspaceNotificationDestinations,
+      workspaceName,
+      workspaceDescription,
+      workspaceDataSources,
+      stackSetName,
+      permissionType,
+      organizationRoleName,
+      clientToken,
+      accountAccessType,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module AssociateLicense = {
   type t
   type request = {
@@ -701,11 +684,9 @@ module AssociateLicense = {
     workspace: workspaceDescription,
   }
   @module("@aws-sdk/client-grafana") @new external new: request => t = "AssociateLicenseCommand"
-  let make = (~licenseType, ~workspaceId, ()) =>
-    new({licenseType: licenseType, workspaceId: workspaceId})
+  let make = (~licenseType, ~workspaceId, ()) => new({licenseType, workspaceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListWorkspaces = {
   type t
   type request = {
@@ -724,11 +705,9 @@ module ListWorkspaces = {
     workspaces: workspaceList,
   }
   @module("@aws-sdk/client-grafana") @new external new: request => t = "ListWorkspacesCommand"
-  let make = (~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken: nextToken, maxResults: maxResults})
+  let make = (~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateWorkspaceAuthentication = {
   type t
   type request = {
@@ -754,14 +733,9 @@ module UpdateWorkspaceAuthentication = {
   @module("@aws-sdk/client-grafana") @new
   external new: request => t = "UpdateWorkspaceAuthenticationCommand"
   let make = (~authenticationProviders, ~workspaceId, ~samlConfiguration=?, ()) =>
-    new({
-      samlConfiguration: samlConfiguration,
-      authenticationProviders: authenticationProviders,
-      workspaceId: workspaceId,
-    })
+    new({samlConfiguration, authenticationProviders, workspaceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdatePermissions = {
   type t
   type request = {
@@ -775,10 +749,9 @@ module UpdatePermissions = {
   }
   @module("@aws-sdk/client-grafana") @new external new: request => t = "UpdatePermissionsCommand"
   let make = (~workspaceId, ~updateInstructionBatch, ()) =>
-    new({workspaceId: workspaceId, updateInstructionBatch: updateInstructionBatch})
+    new({workspaceId, updateInstructionBatch})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeWorkspaceAuthentication = {
   type t
   type request = {

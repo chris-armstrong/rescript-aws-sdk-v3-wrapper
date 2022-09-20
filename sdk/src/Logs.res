@@ -502,7 +502,6 @@ module StopQuery = {
   let make = (~queryId, ()) => new({queryId: queryId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module PutSubscriptionFilter = {
   type t
   type request = {
@@ -556,18 +555,9 @@ module PutSubscriptionFilter = {
     ~distribution=?,
     ~roleArn=?,
     (),
-  ) =>
-    new({
-      distribution: distribution,
-      roleArn: roleArn,
-      destinationArn: destinationArn,
-      filterPattern: filterPattern,
-      filterName: filterName,
-      logGroupName: logGroupName,
-    })
+  ) => new({distribution, roleArn, destinationArn, filterPattern, filterName, logGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module PutRetentionPolicy = {
   type t
   type request = {
@@ -576,11 +566,9 @@ module PutRetentionPolicy = {
   }
   type response = {.}
   @module("@aws-sdk/client-logs") @new external new: request => t = "PutRetentionPolicyCommand"
-  let make = (~retentionInDays, ~logGroupName, ()) =>
-    new({retentionInDays: retentionInDays, logGroupName: logGroupName})
+  let make = (~retentionInDays, ~logGroupName, ()) => new({retentionInDays, logGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module PutDestinationPolicy = {
   type t
   type request = {
@@ -604,10 +592,9 @@ module PutDestinationPolicy = {
   type response = {.}
   @module("@aws-sdk/client-logs") @new external new: request => t = "PutDestinationPolicyCommand"
   let make = (~accessPolicy, ~destinationName, ~forceUpdate=?, ()) =>
-    new({forceUpdate: forceUpdate, accessPolicy: accessPolicy, destinationName: destinationName})
+    new({forceUpdate, accessPolicy, destinationName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DisassociateKmsKey = {
   type t
   type request = {@ocaml.doc("<p>The name of the log group.</p>") logGroupName: logGroupName}
@@ -616,7 +603,6 @@ module DisassociateKmsKey = {
   let make = (~logGroupName, ()) => new({logGroupName: logGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteSubscriptionFilter = {
   type t
   type request = {
@@ -626,11 +612,9 @@ module DeleteSubscriptionFilter = {
   type response = {.}
   @module("@aws-sdk/client-logs") @new
   external new: request => t = "DeleteSubscriptionFilterCommand"
-  let make = (~filterName, ~logGroupName, ()) =>
-    new({filterName: filterName, logGroupName: logGroupName})
+  let make = (~filterName, ~logGroupName, ()) => new({filterName, logGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteRetentionPolicy = {
   type t
   type request = {@ocaml.doc("<p>The name of the log group.</p>") logGroupName: logGroupName}
@@ -639,7 +623,6 @@ module DeleteRetentionPolicy = {
   let make = (~logGroupName, ()) => new({logGroupName: logGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteResourcePolicy = {
   type t
   type request = {
@@ -651,7 +634,6 @@ module DeleteResourcePolicy = {
   let make = (~policyName=?, ()) => new({policyName: policyName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteQueryDefinition = {
   type t
   type request = {
@@ -668,7 +650,6 @@ module DeleteQueryDefinition = {
   let make = (~queryDefinitionId, ()) => new({queryDefinitionId: queryDefinitionId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteMetricFilter = {
   type t
   type request = {
@@ -677,11 +658,9 @@ module DeleteMetricFilter = {
   }
   type response = {.}
   @module("@aws-sdk/client-logs") @new external new: request => t = "DeleteMetricFilterCommand"
-  let make = (~filterName, ~logGroupName, ()) =>
-    new({filterName: filterName, logGroupName: logGroupName})
+  let make = (~filterName, ~logGroupName, ()) => new({filterName, logGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteLogStream = {
   type t
   type request = {
@@ -690,11 +669,9 @@ module DeleteLogStream = {
   }
   type response = {.}
   @module("@aws-sdk/client-logs") @new external new: request => t = "DeleteLogStreamCommand"
-  let make = (~logStreamName, ~logGroupName, ()) =>
-    new({logStreamName: logStreamName, logGroupName: logGroupName})
+  let make = (~logStreamName, ~logGroupName, ()) => new({logStreamName, logGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteLogGroup = {
   type t
   type request = {@ocaml.doc("<p>The name of the log group.</p>") logGroupName: logGroupName}
@@ -703,7 +680,6 @@ module DeleteLogGroup = {
   let make = (~logGroupName, ()) => new({logGroupName: logGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteDestination = {
   type t
   type request = {
@@ -714,7 +690,6 @@ module DeleteDestination = {
   let make = (~destinationName, ()) => new({destinationName: destinationName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module CreateLogStream = {
   type t
   type request = {
@@ -723,11 +698,9 @@ module CreateLogStream = {
   }
   type response = {.}
   @module("@aws-sdk/client-logs") @new external new: request => t = "CreateLogStreamCommand"
-  let make = (~logStreamName, ~logGroupName, ()) =>
-    new({logStreamName: logStreamName, logGroupName: logGroupName})
+  let make = (~logStreamName, ~logGroupName, ()) => new({logStreamName, logGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module CreateExportTask = {
   type t
   type request = {
@@ -763,19 +736,9 @@ module CreateExportTask = {
     ~logStreamNamePrefix=?,
     ~taskName=?,
     (),
-  ) =>
-    new({
-      destinationPrefix: destinationPrefix,
-      destination: destination,
-      to: to,
-      from: from,
-      logStreamNamePrefix: logStreamNamePrefix,
-      logGroupName: logGroupName,
-      taskName: taskName,
-    })
+  ) => new({destinationPrefix, destination, to, from, logStreamNamePrefix, logGroupName, taskName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CancelExportTask = {
   type t
   type request = {@ocaml.doc("<p>The ID of the export task.</p>") taskId: exportTaskId}
@@ -784,7 +747,6 @@ module CancelExportTask = {
   let make = (~taskId, ()) => new({taskId: taskId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module AssociateKmsKey = {
   type t
   type request = {
@@ -795,10 +757,9 @@ module AssociateKmsKey = {
   }
   type response = {.}
   @module("@aws-sdk/client-logs") @new external new: request => t = "AssociateKmsKeyCommand"
-  let make = (~kmsKeyId, ~logGroupName, ()) => new({kmsKeyId: kmsKeyId, logGroupName: logGroupName})
+  let make = (~kmsKeyId, ~logGroupName, ()) => new({kmsKeyId, logGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module UntagLogGroup = {
   type t
   type request = {
@@ -808,10 +769,9 @@ module UntagLogGroup = {
   }
   type response = {.}
   @module("@aws-sdk/client-logs") @new external new: request => t = "UntagLogGroupCommand"
-  let make = (~tags, ~logGroupName, ()) => new({tags: tags, logGroupName: logGroupName})
+  let make = (~tags, ~logGroupName, ()) => new({tags, logGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module TagLogGroup = {
   type t
   type request = {
@@ -820,10 +780,9 @@ module TagLogGroup = {
   }
   type response = {.}
   @module("@aws-sdk/client-logs") @new external new: request => t = "TagLogGroupCommand"
-  let make = (~tags, ~logGroupName, ()) => new({tags: tags, logGroupName: logGroupName})
+  let make = (~tags, ~logGroupName, ()) => new({tags, logGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module PutResourcePolicy = {
   type t
   type request = {
@@ -872,11 +831,9 @@ condition context keys.</p>
   }
   type response = {@ocaml.doc("<p>The new policy.</p>") resourcePolicy: option<resourcePolicy>}
   @module("@aws-sdk/client-logs") @new external new: request => t = "PutResourcePolicyCommand"
-  let make = (~policyDocument=?, ~policyName=?, ()) =>
-    new({policyDocument: policyDocument, policyName: policyName})
+  let make = (~policyDocument=?, ~policyName=?, ()) => new({policyDocument, policyName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module PutQueryDefinition = {
   type t
   type request = {
@@ -904,15 +861,9 @@ module PutQueryDefinition = {
   }
   @module("@aws-sdk/client-logs") @new external new: request => t = "PutQueryDefinitionCommand"
   let make = (~queryString, ~name, ~logGroupNames=?, ~queryDefinitionId=?, ()) =>
-    new({
-      queryString: queryString,
-      logGroupNames: logGroupNames,
-      queryDefinitionId: queryDefinitionId,
-      name: name,
-    })
+    new({queryString, logGroupNames, queryDefinitionId, name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module PutDestination = {
   type t
   type request = {
@@ -928,10 +879,9 @@ module PutDestination = {
   type response = {@ocaml.doc("<p>The destination.</p>") destination: option<destination>}
   @module("@aws-sdk/client-logs") @new external new: request => t = "PutDestinationCommand"
   let make = (~roleArn, ~targetArn, ~destinationName, ()) =>
-    new({roleArn: roleArn, targetArn: targetArn, destinationName: destinationName})
+    new({roleArn, targetArn, destinationName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListTagsLogGroup = {
   type t
   type request = {@ocaml.doc("<p>The name of the log group.</p>") logGroupName: logGroupName}
@@ -940,7 +890,6 @@ module ListTagsLogGroup = {
   let make = (~logGroupName, ()) => new({logGroupName: logGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetLogRecord = {
   type t
   type request = {
@@ -957,7 +906,6 @@ module GetLogRecord = {
   let make = (~logRecordPointer, ()) => new({logRecordPointer: logRecordPointer})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateLogGroup = {
   type t
   type request = {
@@ -975,11 +923,9 @@ module CreateLogGroup = {
   }
   type response = {.}
   @module("@aws-sdk/client-logs") @new external new: request => t = "CreateLogGroupCommand"
-  let make = (~logGroupName, ~tags=?, ~kmsKeyId=?, ()) =>
-    new({tags: tags, kmsKeyId: kmsKeyId, logGroupName: logGroupName})
+  let make = (~logGroupName, ~tags=?, ~kmsKeyId=?, ()) => new({tags, kmsKeyId, logGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module StartQuery = {
   type t
   type request = {
@@ -1016,18 +962,9 @@ module StartQuery = {
     ~logGroupNames=?,
     ~logGroupName=?,
     (),
-  ) =>
-    new({
-      limit: limit,
-      queryString: queryString,
-      endTime: endTime,
-      startTime: startTime,
-      logGroupNames: logGroupNames,
-      logGroupName: logGroupName,
-    })
+  ) => new({limit, queryString, endTime, startTime, logGroupNames, logGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module PutLogEvents = {
   type t
   type request = {
@@ -1047,15 +984,9 @@ module PutLogEvents = {
   }
   @module("@aws-sdk/client-logs") @new external new: request => t = "PutLogEventsCommand"
   let make = (~logEvents, ~logStreamName, ~logGroupName, ~sequenceToken=?, ()) =>
-    new({
-      sequenceToken: sequenceToken,
-      logEvents: logEvents,
-      logStreamName: logStreamName,
-      logGroupName: logGroupName,
-    })
+    new({sequenceToken, logEvents, logStreamName, logGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetLogGroupFields = {
   type t
   type request = {
@@ -1073,10 +1004,9 @@ module GetLogGroupFields = {
     logGroupFields: option<logGroupFieldList>,
   }
   @module("@aws-sdk/client-logs") @new external new: request => t = "GetLogGroupFieldsCommand"
-  let make = (~logGroupName, ~time=?, ()) => new({time: time, logGroupName: logGroupName})
+  let make = (~logGroupName, ~time=?, ()) => new({time, logGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetLogEvents = {
   type t
   type request = {
@@ -1125,19 +1055,9 @@ module GetLogEvents = {
     ~endTime=?,
     ~startTime=?,
     (),
-  ) =>
-    new({
-      startFromHead: startFromHead,
-      limit: limit,
-      nextToken: nextToken,
-      endTime: endTime,
-      startTime: startTime,
-      logStreamName: logStreamName,
-      logGroupName: logGroupName,
-    })
+  ) => new({startFromHead, limit, nextToken, endTime, startTime, logStreamName, logGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module FilterLogEvents = {
   type t
   type request = {
@@ -1203,19 +1123,18 @@ module FilterLogEvents = {
     (),
   ) =>
     new({
-      interleaved: interleaved,
-      limit: limit,
-      nextToken: nextToken,
-      filterPattern: filterPattern,
-      endTime: endTime,
-      startTime: startTime,
-      logStreamNamePrefix: logStreamNamePrefix,
-      logStreamNames: logStreamNames,
-      logGroupName: logGroupName,
+      interleaved,
+      limit,
+      nextToken,
+      filterPattern,
+      endTime,
+      startTime,
+      logStreamNamePrefix,
+      logStreamNames,
+      logGroupName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeSubscriptionFilters = {
   type t
   type request = {
@@ -1240,15 +1159,9 @@ module DescribeSubscriptionFilters = {
   @module("@aws-sdk/client-logs") @new
   external new: request => t = "DescribeSubscriptionFiltersCommand"
   let make = (~logGroupName, ~limit=?, ~nextToken=?, ~filterNamePrefix=?, ()) =>
-    new({
-      limit: limit,
-      nextToken: nextToken,
-      filterNamePrefix: filterNamePrefix,
-      logGroupName: logGroupName,
-    })
+    new({limit, nextToken, filterNamePrefix, logGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeResourcePolicies = {
   type t
   type request = {
@@ -1265,10 +1178,9 @@ module DescribeResourcePolicies = {
   }
   @module("@aws-sdk/client-logs") @new
   external new: request => t = "DescribeResourcePoliciesCommand"
-  let make = (~limit=?, ~nextToken=?, ()) => new({limit: limit, nextToken: nextToken})
+  let make = (~limit=?, ~nextToken=?, ()) => new({limit, nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeQueries = {
   type t
   type request = {
@@ -1287,10 +1199,9 @@ module DescribeQueries = {
   }
   @module("@aws-sdk/client-logs") @new external new: request => t = "DescribeQueriesCommand"
   let make = (~nextToken=?, ~maxResults=?, ~status=?, ~logGroupName=?, ()) =>
-    new({nextToken: nextToken, maxResults: maxResults, status: status, logGroupName: logGroupName})
+    new({nextToken, maxResults, status, logGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeLogStreams = {
   type t
   type request = {
@@ -1336,18 +1247,9 @@ module DescribeLogStreams = {
     ~orderBy=?,
     ~logStreamNamePrefix=?,
     (),
-  ) =>
-    new({
-      limit: limit,
-      nextToken: nextToken,
-      descending: descending,
-      orderBy: orderBy,
-      logStreamNamePrefix: logStreamNamePrefix,
-      logGroupName: logGroupName,
-    })
+  ) => new({limit, nextToken, descending, orderBy, logStreamNamePrefix, logGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeLogGroups = {
   type t
   type request = {
@@ -1370,10 +1272,9 @@ module DescribeLogGroups = {
   }
   @module("@aws-sdk/client-logs") @new external new: request => t = "DescribeLogGroupsCommand"
   let make = (~limit=?, ~nextToken=?, ~logGroupNamePrefix=?, ()) =>
-    new({limit: limit, nextToken: nextToken, logGroupNamePrefix: logGroupNamePrefix})
+    new({limit, nextToken, logGroupNamePrefix})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeDestinations = {
   type t
   type request = {
@@ -1397,10 +1298,9 @@ module DescribeDestinations = {
   }
   @module("@aws-sdk/client-logs") @new external new: request => t = "DescribeDestinationsCommand"
   let make = (~limit=?, ~nextToken=?, ~destinationNamePrefix=?, ()) =>
-    new({limit: limit, nextToken: nextToken, destinationNamePrefix: destinationNamePrefix})
+    new({limit, nextToken, destinationNamePrefix})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module TestMetricFilter = {
   type t
   type request = {
@@ -1409,11 +1309,9 @@ module TestMetricFilter = {
   }
   type response = {@ocaml.doc("<p>The matched events.</p>") matches: option<metricFilterMatches>}
   @module("@aws-sdk/client-logs") @new external new: request => t = "TestMetricFilterCommand"
-  let make = (~logEventMessages, ~filterPattern, ()) =>
-    new({logEventMessages: logEventMessages, filterPattern: filterPattern})
+  let make = (~logEventMessages, ~filterPattern, ()) => new({logEventMessages, filterPattern})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module PutMetricFilter = {
   type t
   type request = {
@@ -1427,15 +1325,9 @@ module PutMetricFilter = {
   type response = {.}
   @module("@aws-sdk/client-logs") @new external new: request => t = "PutMetricFilterCommand"
   let make = (~metricTransformations, ~filterPattern, ~filterName, ~logGroupName, ()) =>
-    new({
-      metricTransformations: metricTransformations,
-      filterPattern: filterPattern,
-      filterName: filterName,
-      logGroupName: logGroupName,
-    })
+    new({metricTransformations, filterPattern, filterName, logGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module GetQueryResults = {
   type t
   type request = {@ocaml.doc("<p>The ID number of the query.</p>") queryId: queryId}
@@ -1460,7 +1352,6 @@ module GetQueryResults = {
   let make = (~queryId, ()) => new({queryId: queryId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeQueryDefinitions = {
   type t
   type request = {
@@ -1480,14 +1371,9 @@ module DescribeQueryDefinitions = {
   @module("@aws-sdk/client-logs") @new
   external new: request => t = "DescribeQueryDefinitionsCommand"
   let make = (~nextToken=?, ~maxResults=?, ~queryDefinitionNamePrefix=?, ()) =>
-    new({
-      nextToken: nextToken,
-      maxResults: maxResults,
-      queryDefinitionNamePrefix: queryDefinitionNamePrefix,
-    })
+    new({nextToken, maxResults, queryDefinitionNamePrefix})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeExportTasks = {
   type t
   type request = {
@@ -1514,10 +1400,9 @@ module DescribeExportTasks = {
   }
   @module("@aws-sdk/client-logs") @new external new: request => t = "DescribeExportTasksCommand"
   let make = (~limit=?, ~nextToken=?, ~statusCode=?, ~taskId=?, ()) =>
-    new({limit: limit, nextToken: nextToken, statusCode: statusCode, taskId: taskId})
+    new({limit, nextToken, statusCode, taskId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeMetricFilters = {
   type t
   type request = {
@@ -1553,14 +1438,6 @@ module DescribeMetricFilters = {
     ~filterNamePrefix=?,
     ~logGroupName=?,
     (),
-  ) =>
-    new({
-      metricNamespace: metricNamespace,
-      metricName: metricName,
-      limit: limit,
-      nextToken: nextToken,
-      filterNamePrefix: filterNamePrefix,
-      logGroupName: logGroupName,
-    })
+  ) => new({metricNamespace, metricName, limit, nextToken, filterNamePrefix, logGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

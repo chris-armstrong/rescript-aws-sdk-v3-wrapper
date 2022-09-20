@@ -627,17 +627,9 @@ module StartExpenseAnalysis = {
     ~clientRequestToken=?,
     (),
   ) =>
-    new({
-      kmskeyId: kmskeyId,
-      outputConfig: outputConfig,
-      notificationChannel: notificationChannel,
-      jobTag: jobTag,
-      clientRequestToken: clientRequestToken,
-      documentLocation: documentLocation,
-    })
+    new({kmskeyId, outputConfig, notificationChannel, jobTag, clientRequestToken, documentLocation})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module StartDocumentTextDetection = {
   type t
   type request = {
@@ -690,17 +682,9 @@ module StartDocumentTextDetection = {
     ~clientRequestToken=?,
     (),
   ) =>
-    new({
-      kmskeyId: kmskeyId,
-      outputConfig: outputConfig,
-      notificationChannel: notificationChannel,
-      jobTag: jobTag,
-      clientRequestToken: clientRequestToken,
-      documentLocation: documentLocation,
-    })
+    new({kmskeyId, outputConfig, notificationChannel, jobTag, clientRequestToken, documentLocation})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module StartDocumentAnalysis = {
   type t
   type request = {
@@ -763,17 +747,16 @@ module StartDocumentAnalysis = {
     (),
   ) =>
     new({
-      kmskeyId: kmskeyId,
-      outputConfig: outputConfig,
-      notificationChannel: notificationChannel,
-      jobTag: jobTag,
-      clientRequestToken: clientRequestToken,
-      featureTypes: featureTypes,
-      documentLocation: documentLocation,
+      kmskeyId,
+      outputConfig,
+      notificationChannel,
+      jobTag,
+      clientRequestToken,
+      featureTypes,
+      documentLocation,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetDocumentTextDetection = {
   type t
   type request = {
@@ -818,11 +801,9 @@ module GetDocumentTextDetection = {
   }
   @module("@aws-sdk/client-textract") @new
   external new: request => t = "GetDocumentTextDetectionCommand"
-  let make = (~jobId, ~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken: nextToken, maxResults: maxResults, jobId: jobId})
+  let make = (~jobId, ~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults, jobId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetDocumentAnalysis = {
   type t
   type request = {
@@ -865,11 +846,9 @@ module GetDocumentAnalysis = {
     documentMetadata: option<documentMetadata>,
   }
   @module("@aws-sdk/client-textract") @new external new: request => t = "GetDocumentAnalysisCommand"
-  let make = (~jobId, ~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken: nextToken, maxResults: maxResults, jobId: jobId})
+  let make = (~jobId, ~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults, jobId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DetectDocumentText = {
   type t
   type request = {
@@ -897,7 +876,6 @@ module DetectDocumentText = {
   let make = (~document, ()) => new({document: document})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module AnalyzeDocument = {
   type t
   type request = {
@@ -937,10 +915,9 @@ module AnalyzeDocument = {
   }
   @module("@aws-sdk/client-textract") @new external new: request => t = "AnalyzeDocumentCommand"
   let make = (~featureTypes, ~document, ~humanLoopConfig=?, ()) =>
-    new({humanLoopConfig: humanLoopConfig, featureTypes: featureTypes, document: document})
+    new({humanLoopConfig, featureTypes, document})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module AnalyzeID = {
   type t
   type request = {
@@ -961,7 +938,6 @@ module AnalyzeID = {
   let make = (~documentPages, ()) => new({documentPages: documentPages})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetExpenseAnalysis = {
   type t
   type request = {
@@ -1006,11 +982,9 @@ module GetExpenseAnalysis = {
     documentMetadata: option<documentMetadata>,
   }
   @module("@aws-sdk/client-textract") @new external new: request => t = "GetExpenseAnalysisCommand"
-  let make = (~jobId, ~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken: nextToken, maxResults: maxResults, jobId: jobId})
+  let make = (~jobId, ~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults, jobId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module AnalyzeExpense = {
   type t
   type request = {@as("Document") document: document}

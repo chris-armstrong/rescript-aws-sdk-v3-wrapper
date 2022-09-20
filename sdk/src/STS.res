@@ -150,7 +150,6 @@ module GetCallerIdentity = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetAccessKeyInfo = {
   type t
   type request = {
@@ -168,7 +167,6 @@ module GetAccessKeyInfo = {
   let make = (~accessKeyId, ()) => new({accessKeyId: accessKeyId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DecodeAuthorizationMessage = {
   type t
   type request = {
@@ -187,7 +185,6 @@ module DecodeAuthorizationMessage = {
   let make = (~encodedMessage, ()) => new({encodedMessage: encodedMessage})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetSessionToken = {
   type t
   type request = {
@@ -235,10 +232,9 @@ module GetSessionToken = {
   }
   @module("@aws-sdk/client-sts") @new external new: request => t = "GetSessionTokenCommand"
   let make = (~tokenCode=?, ~serialNumber=?, ~durationSeconds=?, ()) =>
-    new({tokenCode: tokenCode, serialNumber: serialNumber, durationSeconds: durationSeconds})
+    new({tokenCode, serialNumber, durationSeconds})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetFederationToken = {
   type t
   type request = {
@@ -381,16 +377,9 @@ module GetFederationToken = {
   }
   @module("@aws-sdk/client-sts") @new external new: request => t = "GetFederationTokenCommand"
   let make = (~name, ~tags=?, ~durationSeconds=?, ~policyArns=?, ~policy=?, ()) =>
-    new({
-      tags: tags,
-      durationSeconds: durationSeconds,
-      policyArns: policyArns,
-      policy: policy,
-      name: name,
-    })
+    new({tags, durationSeconds, policyArns, policy, name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module AssumeRoleWithWebIdentity = {
   type t
   type request = {
@@ -569,17 +558,16 @@ module AssumeRoleWithWebIdentity = {
     (),
   ) =>
     new({
-      durationSeconds: durationSeconds,
-      policy: policy,
-      policyArns: policyArns,
-      providerId: providerId,
-      webIdentityToken: webIdentityToken,
-      roleSessionName: roleSessionName,
-      roleArn: roleArn,
+      durationSeconds,
+      policy,
+      policyArns,
+      providerId,
+      webIdentityToken,
+      roleSessionName,
+      roleArn,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module AssumeRoleWithSAML = {
   type t
   type request = {
@@ -759,18 +747,9 @@ module AssumeRoleWithSAML = {
     ~policy=?,
     ~policyArns=?,
     (),
-  ) =>
-    new({
-      durationSeconds: durationSeconds,
-      policy: policy,
-      policyArns: policyArns,
-      samlassertion: samlassertion,
-      principalArn: principalArn,
-      roleArn: roleArn,
-    })
+  ) => new({durationSeconds, policy, policyArns, samlassertion, principalArn, roleArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module AssumeRole = {
   type t
   type request = {
@@ -1015,17 +994,17 @@ module AssumeRole = {
     (),
   ) =>
     new({
-      sourceIdentity: sourceIdentity,
-      tokenCode: tokenCode,
-      serialNumber: serialNumber,
-      externalId: externalId,
-      transitiveTagKeys: transitiveTagKeys,
-      tags: tags,
-      durationSeconds: durationSeconds,
-      policy: policy,
-      policyArns: policyArns,
-      roleSessionName: roleSessionName,
-      roleArn: roleArn,
+      sourceIdentity,
+      tokenCode,
+      serialNumber,
+      externalId,
+      transitiveTagKeys,
+      tags,
+      durationSeconds,
+      policy,
+      policyArns,
+      roleSessionName,
+      roleArn,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

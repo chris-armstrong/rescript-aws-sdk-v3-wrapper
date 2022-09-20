@@ -227,15 +227,9 @@ module NotifyApplicationState = {
   type response = {.}
   @module("@aws-sdk/client-mgh") @new external new: request => t = "NotifyApplicationStateCommand"
   let make = (~status, ~applicationId, ~dryRun=?, ~updateDateTime=?, ()) =>
-    new({
-      dryRun: dryRun,
-      updateDateTime: updateDateTime,
-      status: status,
-      applicationId: applicationId,
-    })
+    new({dryRun, updateDateTime, status, applicationId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module ImportMigrationTask = {
   type t
   type request = {
@@ -254,14 +248,9 @@ module ImportMigrationTask = {
   type response = {.}
   @module("@aws-sdk/client-mgh") @new external new: request => t = "ImportMigrationTaskCommand"
   let make = (~migrationTaskName, ~progressUpdateStream, ~dryRun=?, ()) =>
-    new({
-      dryRun: dryRun,
-      migrationTaskName: migrationTaskName,
-      progressUpdateStream: progressUpdateStream,
-    })
+    new({dryRun, migrationTaskName, progressUpdateStream})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DisassociateDiscoveredResource = {
   type t
   type request = {
@@ -285,15 +274,9 @@ module DisassociateDiscoveredResource = {
   @module("@aws-sdk/client-mgh") @new
   external new: request => t = "DisassociateDiscoveredResourceCommand"
   let make = (~configurationId, ~migrationTaskName, ~progressUpdateStream, ~dryRun=?, ()) =>
-    new({
-      dryRun: dryRun,
-      configurationId: configurationId,
-      migrationTaskName: migrationTaskName,
-      progressUpdateStream: progressUpdateStream,
-    })
+    new({dryRun, configurationId, migrationTaskName, progressUpdateStream})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DisassociateCreatedArtifact = {
   type t
   type request = {
@@ -317,15 +300,9 @@ module DisassociateCreatedArtifact = {
   @module("@aws-sdk/client-mgh") @new
   external new: request => t = "DisassociateCreatedArtifactCommand"
   let make = (~createdArtifactName, ~migrationTaskName, ~progressUpdateStream, ~dryRun=?, ()) =>
-    new({
-      dryRun: dryRun,
-      createdArtifactName: createdArtifactName,
-      migrationTaskName: migrationTaskName,
-      progressUpdateStream: progressUpdateStream,
-    })
+    new({dryRun, createdArtifactName, migrationTaskName, progressUpdateStream})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DescribeApplicationState = {
   type t
   type request = {
@@ -346,7 +323,6 @@ module DescribeApplicationState = {
   let make = (~applicationId, ()) => new({applicationId: applicationId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteProgressUpdateStream = {
   type t
   type request = {
@@ -363,11 +339,9 @@ module DeleteProgressUpdateStream = {
   type response = {.}
   @module("@aws-sdk/client-mgh") @new
   external new: request => t = "DeleteProgressUpdateStreamCommand"
-  let make = (~progressUpdateStreamName, ~dryRun=?, ()) =>
-    new({dryRun: dryRun, progressUpdateStreamName: progressUpdateStreamName})
+  let make = (~progressUpdateStreamName, ~dryRun=?, ()) => new({dryRun, progressUpdateStreamName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module CreateProgressUpdateStream = {
   type t
   type request = {
@@ -384,11 +358,9 @@ module CreateProgressUpdateStream = {
   type response = {.}
   @module("@aws-sdk/client-mgh") @new
   external new: request => t = "CreateProgressUpdateStreamCommand"
-  let make = (~progressUpdateStreamName, ~dryRun=?, ()) =>
-    new({dryRun: dryRun, progressUpdateStreamName: progressUpdateStreamName})
+  let make = (~progressUpdateStreamName, ~dryRun=?, ()) => new({dryRun, progressUpdateStreamName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module NotifyMigrationTaskState = {
   type t
   type request = {
@@ -423,17 +395,9 @@ module NotifyMigrationTaskState = {
     ~dryRun=?,
     (),
   ) =>
-    new({
-      dryRun: dryRun,
-      nextUpdateSeconds: nextUpdateSeconds,
-      updateDateTime: updateDateTime,
-      task: task,
-      migrationTaskName: migrationTaskName,
-      progressUpdateStream: progressUpdateStream,
-    })
+    new({dryRun, nextUpdateSeconds, updateDateTime, task, migrationTaskName, progressUpdateStream})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module AssociateDiscoveredResource = {
   type t
   type request = {
@@ -455,15 +419,9 @@ module AssociateDiscoveredResource = {
   @module("@aws-sdk/client-mgh") @new
   external new: request => t = "AssociateDiscoveredResourceCommand"
   let make = (~discoveredResource, ~migrationTaskName, ~progressUpdateStream, ~dryRun=?, ()) =>
-    new({
-      dryRun: dryRun,
-      discoveredResource: discoveredResource,
-      migrationTaskName: migrationTaskName,
-      progressUpdateStream: progressUpdateStream,
-    })
+    new({dryRun, discoveredResource, migrationTaskName, progressUpdateStream})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module AssociateCreatedArtifact = {
   type t
   type request = {
@@ -486,15 +444,9 @@ module AssociateCreatedArtifact = {
   type response = {.}
   @module("@aws-sdk/client-mgh") @new external new: request => t = "AssociateCreatedArtifactCommand"
   let make = (~createdArtifact, ~migrationTaskName, ~progressUpdateStream, ~dryRun=?, ()) =>
-    new({
-      dryRun: dryRun,
-      createdArtifact: createdArtifact,
-      migrationTaskName: migrationTaskName,
-      progressUpdateStream: progressUpdateStream,
-    })
+    new({dryRun, createdArtifact, migrationTaskName, progressUpdateStream})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module PutResourceAttributes = {
   type t
   type request = {
@@ -543,15 +495,9 @@ module PutResourceAttributes = {
   type response = {.}
   @module("@aws-sdk/client-mgh") @new external new: request => t = "PutResourceAttributesCommand"
   let make = (~resourceAttributeList, ~migrationTaskName, ~progressUpdateStream, ~dryRun=?, ()) =>
-    new({
-      dryRun: dryRun,
-      resourceAttributeList: resourceAttributeList,
-      migrationTaskName: migrationTaskName,
-      progressUpdateStream: progressUpdateStream,
-    })
+    new({dryRun, resourceAttributeList, migrationTaskName, progressUpdateStream})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module ListProgressUpdateStreams = {
   type t
   type request = {
@@ -576,11 +522,9 @@ module ListProgressUpdateStreams = {
   }
   @module("@aws-sdk/client-mgh") @new
   external new: request => t = "ListProgressUpdateStreamsCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListMigrationTasks = {
   type t
   type request = {
@@ -607,10 +551,9 @@ module ListMigrationTasks = {
   }
   @module("@aws-sdk/client-mgh") @new external new: request => t = "ListMigrationTasksCommand"
   let make = (~resourceName=?, ~maxResults=?, ~nextToken=?, ()) =>
-    new({resourceName: resourceName, maxResults: maxResults, nextToken: nextToken})
+    new({resourceName, maxResults, nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListDiscoveredResources = {
   type t
   type request = {
@@ -642,15 +585,9 @@ module ListDiscoveredResources = {
   }
   @module("@aws-sdk/client-mgh") @new external new: request => t = "ListDiscoveredResourcesCommand"
   let make = (~migrationTaskName, ~progressUpdateStream, ~maxResults=?, ~nextToken=?, ()) =>
-    new({
-      maxResults: maxResults,
-      nextToken: nextToken,
-      migrationTaskName: migrationTaskName,
-      progressUpdateStream: progressUpdateStream,
-    })
+    new({maxResults, nextToken, migrationTaskName, progressUpdateStream})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListCreatedArtifacts = {
   type t
   type request = {
@@ -681,15 +618,9 @@ module ListCreatedArtifacts = {
   }
   @module("@aws-sdk/client-mgh") @new external new: request => t = "ListCreatedArtifactsCommand"
   let make = (~migrationTaskName, ~progressUpdateStream, ~maxResults=?, ~nextToken=?, ()) =>
-    new({
-      maxResults: maxResults,
-      nextToken: nextToken,
-      migrationTaskName: migrationTaskName,
-      progressUpdateStream: progressUpdateStream,
-    })
+    new({maxResults, nextToken, migrationTaskName, progressUpdateStream})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListApplicationStates = {
   type t
   type request = {
@@ -717,10 +648,9 @@ module ListApplicationStates = {
   }
   @module("@aws-sdk/client-mgh") @new external new: request => t = "ListApplicationStatesCommand"
   let make = (~maxResults=?, ~nextToken=?, ~applicationIds=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, applicationIds: applicationIds})
+    new({maxResults, nextToken, applicationIds})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeMigrationTask = {
   type t
   type request = {
@@ -739,6 +669,6 @@ module DescribeMigrationTask = {
   }
   @module("@aws-sdk/client-mgh") @new external new: request => t = "DescribeMigrationTaskCommand"
   let make = (~migrationTaskName, ~progressUpdateStream, ()) =>
-    new({migrationTaskName: migrationTaskName, progressUpdateStream: progressUpdateStream})
+    new({migrationTaskName, progressUpdateStream})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

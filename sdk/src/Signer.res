@@ -301,15 +301,9 @@ module RevokeSigningProfile = {
   type response = {.}
   @module("@aws-sdk/client-signer") @new external new: request => t = "RevokeSigningProfileCommand"
   let make = (~effectiveTime, ~reason, ~profileVersion, ~profileName, ()) =>
-    new({
-      effectiveTime: effectiveTime,
-      reason: reason,
-      profileVersion: profileVersion,
-      profileName: profileName,
-    })
+    new({effectiveTime, reason, profileVersion, profileName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module RevokeSignature = {
   type t
   type request = {
@@ -319,11 +313,9 @@ module RevokeSignature = {
   }
   type response = {.}
   @module("@aws-sdk/client-signer") @new external new: request => t = "RevokeSignatureCommand"
-  let make = (~reason, ~jobId, ~jobOwner=?, ()) =>
-    new({reason: reason, jobOwner: jobOwner, jobId: jobId})
+  let make = (~reason, ~jobId, ~jobOwner=?, ()) => new({reason, jobOwner, jobId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module RemoveProfilePermission = {
   type t
   type request = {
@@ -343,10 +335,9 @@ module RemoveProfilePermission = {
   @module("@aws-sdk/client-signer") @new
   external new: request => t = "RemoveProfilePermissionCommand"
   let make = (~statementId, ~revisionId, ~profileName, ()) =>
-    new({statementId: statementId, revisionId: revisionId, profileName: profileName})
+    new({statementId, revisionId, profileName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CancelSigningProfile = {
   type t
   type request = {
@@ -357,7 +348,6 @@ module CancelSigningProfile = {
   let make = (~profileName, ()) => new({profileName: profileName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module AddProfilePermission = {
   type t
   type request = {
@@ -386,18 +376,9 @@ module AddProfilePermission = {
     ~revisionId=?,
     ~profileVersion=?,
     (),
-  ) =>
-    new({
-      statementId: statementId,
-      revisionId: revisionId,
-      principal: principal,
-      action: action,
-      profileVersion: profileVersion,
-      profileName: profileName,
-    })
+  ) => new({statementId, revisionId, principal, action, profileVersion, profileName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UntagResource = {
   type t
   type request = {
@@ -408,10 +389,9 @@ module UntagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-signer") @new external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
+  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys, resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module TagResource = {
   type t
   type request = {
@@ -421,10 +401,9 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-signer") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
+  let make = (~tags, ~resourceArn, ()) => new({tags, resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module ListTagsForResource = {
   type t
   type request = {
@@ -438,7 +417,6 @@ module ListTagsForResource = {
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module StartSigningJob = {
   type t
   type request = {
@@ -461,16 +439,9 @@ module StartSigningJob = {
   }
   @module("@aws-sdk/client-signer") @new external new: request => t = "StartSigningJobCommand"
   let make = (~clientRequestToken, ~profileName, ~destination, ~source, ~profileOwner=?, ()) =>
-    new({
-      profileOwner: profileOwner,
-      clientRequestToken: clientRequestToken,
-      profileName: profileName,
-      destination: destination,
-      source: source,
-    })
+    new({profileOwner, clientRequestToken, profileName, destination, source})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module PutSigningProfile = {
   type t
   type request = {
@@ -512,17 +483,16 @@ module PutSigningProfile = {
     (),
   ) =>
     new({
-      tags: tags,
-      signingParameters: signingParameters,
-      overrides: overrides,
-      platformId: platformId,
-      signatureValidityPeriod: signatureValidityPeriod,
-      signingMaterial: signingMaterial,
-      profileName: profileName,
+      tags,
+      signingParameters,
+      overrides,
+      platformId,
+      signatureValidityPeriod,
+      signingMaterial,
+      profileName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListProfilePermissions = {
   type t
   type request = {
@@ -543,11 +513,9 @@ module ListProfilePermissions = {
   }
   @module("@aws-sdk/client-signer") @new
   external new: request => t = "ListProfilePermissionsCommand"
-  let make = (~profileName, ~nextToken=?, ()) =>
-    new({nextToken: nextToken, profileName: profileName})
+  let make = (~profileName, ~nextToken=?, ()) => new({nextToken, profileName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetSigningProfile = {
   type t
   type request = {
@@ -586,11 +554,9 @@ module GetSigningProfile = {
     @ocaml.doc("<p>The name of the target signing profile.</p>") profileName: option<profileName>,
   }
   @module("@aws-sdk/client-signer") @new external new: request => t = "GetSigningProfileCommand"
-  let make = (~profileName, ~profileOwner=?, ()) =>
-    new({profileOwner: profileOwner, profileName: profileName})
+  let make = (~profileName, ~profileOwner=?, ()) => new({profileOwner, profileName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeSigningJob = {
   type t
   type request = {@ocaml.doc("<p>The ID of the signing job on input.</p>") jobId: jobId}
@@ -640,7 +606,6 @@ module DescribeSigningJob = {
   let make = (~jobId, ()) => new({jobId: jobId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListSigningProfiles = {
   type t
   type request = {
@@ -670,16 +635,9 @@ module ListSigningProfiles = {
   }
   @module("@aws-sdk/client-signer") @new external new: request => t = "ListSigningProfilesCommand"
   let make = (~statuses=?, ~platformId=?, ~nextToken=?, ~maxResults=?, ~includeCanceled=?, ()) =>
-    new({
-      statuses: statuses,
-      platformId: platformId,
-      nextToken: nextToken,
-      maxResults: maxResults,
-      includeCanceled: includeCanceled,
-    })
+    new({statuses, platformId, nextToken, maxResults, includeCanceled})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetSigningPlatform = {
   type t
   type request = {
@@ -710,7 +668,6 @@ module GetSigningPlatform = {
   let make = (~platformId, ()) => new({platformId: platformId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListSigningJobs = {
   type t
   type request = {
@@ -762,19 +719,18 @@ module ListSigningJobs = {
     (),
   ) =>
     new({
-      jobInvoker: jobInvoker,
-      signatureExpiresAfter: signatureExpiresAfter,
-      signatureExpiresBefore: signatureExpiresBefore,
-      isRevoked: isRevoked,
-      nextToken: nextToken,
-      maxResults: maxResults,
-      requestedBy: requestedBy,
-      platformId: platformId,
-      status: status,
+      jobInvoker,
+      signatureExpiresAfter,
+      signatureExpiresBefore,
+      isRevoked,
+      nextToken,
+      maxResults,
+      requestedBy,
+      platformId,
+      status,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListSigningPlatforms = {
   type t
   type request = {
@@ -798,12 +754,6 @@ module ListSigningPlatforms = {
   }
   @module("@aws-sdk/client-signer") @new external new: request => t = "ListSigningPlatformsCommand"
   let make = (~nextToken=?, ~maxResults=?, ~target=?, ~partner=?, ~category=?, ()) =>
-    new({
-      nextToken: nextToken,
-      maxResults: maxResults,
-      target: target,
-      partner: partner,
-      category: category,
-    })
+    new({nextToken, maxResults, target, partner, category})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

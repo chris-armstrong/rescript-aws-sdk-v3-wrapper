@@ -132,14 +132,9 @@ module DisassociateDeviceFromPlacement = {
   @module("@aws-sdk/client-iot1click") @new
   external new: request => t = "DisassociateDeviceFromPlacementCommand"
   let make = (~deviceTemplateName, ~placementName, ~projectName, ()) =>
-    new({
-      deviceTemplateName: deviceTemplateName,
-      placementName: placementName,
-      projectName: projectName,
-    })
+    new({deviceTemplateName, placementName, projectName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteProject = {
   type t
   type request = {
@@ -150,7 +145,6 @@ module DeleteProject = {
   let make = (~projectName, ()) => new({projectName: projectName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeletePlacement = {
   type t
   type request = {
@@ -160,11 +154,9 @@ module DeletePlacement = {
   }
   type response = {.}
   @module("@aws-sdk/client-iot1click") @new external new: request => t = "DeletePlacementCommand"
-  let make = (~projectName, ~placementName, ()) =>
-    new({projectName: projectName, placementName: placementName})
+  let make = (~projectName, ~placementName, ()) => new({projectName, placementName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module AssociateDeviceWithPlacement = {
   type t
   type request = {
@@ -185,15 +177,9 @@ module AssociateDeviceWithPlacement = {
   @module("@aws-sdk/client-iot1click") @new
   external new: request => t = "AssociateDeviceWithPlacementCommand"
   let make = (~deviceTemplateName, ~deviceId, ~placementName, ~projectName, ()) =>
-    new({
-      deviceTemplateName: deviceTemplateName,
-      deviceId: deviceId,
-      placementName: placementName,
-      projectName: projectName,
-    })
+    new({deviceTemplateName, deviceId, placementName, projectName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module UpdatePlacement = {
   type t
   type request = {
@@ -207,10 +193,9 @@ module UpdatePlacement = {
   type response = {.}
   @module("@aws-sdk/client-iot1click") @new external new: request => t = "UpdatePlacementCommand"
   let make = (~projectName, ~placementName, ~attributes=?, ()) =>
-    new({attributes: attributes, projectName: projectName, placementName: placementName})
+    new({attributes, projectName, placementName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module UntagResource = {
   type t
   type request = {
@@ -220,10 +205,9 @@ module UntagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-iot1click") @new external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
+  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys, resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module TagResource = {
   type t
   type request = {
@@ -235,10 +219,9 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-iot1click") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
+  let make = (~tags, ~resourceArn, ()) => new({tags, resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module ListTagsForResource = {
   type t
   type request = {
@@ -256,7 +239,6 @@ module ListTagsForResource = {
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetDevicesInPlacement = {
   type t
   type request = {
@@ -270,11 +252,9 @@ module GetDevicesInPlacement = {
   }
   @module("@aws-sdk/client-iot1click") @new
   external new: request => t = "GetDevicesInPlacementCommand"
-  let make = (~placementName, ~projectName, ()) =>
-    new({placementName: placementName, projectName: projectName})
+  let make = (~placementName, ~projectName, ()) => new({placementName, projectName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreatePlacement = {
   type t
   type request = {
@@ -288,10 +268,9 @@ module CreatePlacement = {
   type response = {.}
   @module("@aws-sdk/client-iot1click") @new external new: request => t = "CreatePlacementCommand"
   let make = (~projectName, ~placementName, ~attributes=?, ()) =>
-    new({attributes: attributes, projectName: projectName, placementName: placementName})
+    new({attributes, projectName, placementName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module ListPlacements = {
   type t
   type request = {
@@ -312,10 +291,9 @@ module ListPlacements = {
   }
   @module("@aws-sdk/client-iot1click") @new external new: request => t = "ListPlacementsCommand"
   let make = (~projectName, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, projectName: projectName})
+    new({maxResults, nextToken, projectName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribePlacement = {
   type t
   type request = {
@@ -327,11 +305,9 @@ module DescribePlacement = {
     @ocaml.doc("<p>An object describing the placement.</p>") placement: placementDescription,
   }
   @module("@aws-sdk/client-iot1click") @new external new: request => t = "DescribePlacementCommand"
-  let make = (~projectName, ~placementName, ()) =>
-    new({projectName: projectName, placementName: placementName})
+  let make = (~projectName, ~placementName, ()) => new({projectName, placementName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListProjects = {
   type t
   type request = {
@@ -348,11 +324,9 @@ module ListProjects = {
     @ocaml.doc("<p>An object containing the list of projects.</p>") projects: projectSummaryList,
   }
   @module("@aws-sdk/client-iot1click") @new external new: request => t = "ListProjectsCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateProject = {
   type t
   type request = {
@@ -368,10 +342,9 @@ module UpdateProject = {
   type response = {.}
   @module("@aws-sdk/client-iot1click") @new external new: request => t = "UpdateProjectCommand"
   let make = (~projectName, ~placementTemplate=?, ~description=?, ()) =>
-    new({placementTemplate: placementTemplate, description: description, projectName: projectName})
+    new({placementTemplate, description, projectName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module CreateProject = {
   type t
   type request = {
@@ -390,15 +363,9 @@ module CreateProject = {
   type response = {.}
   @module("@aws-sdk/client-iot1click") @new external new: request => t = "CreateProjectCommand"
   let make = (~projectName, ~tags=?, ~placementTemplate=?, ~description=?, ()) =>
-    new({
-      tags: tags,
-      placementTemplate: placementTemplate,
-      description: description,
-      projectName: projectName,
-    })
+    new({tags, placementTemplate, description, projectName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DescribeProject = {
   type t
   type request = {

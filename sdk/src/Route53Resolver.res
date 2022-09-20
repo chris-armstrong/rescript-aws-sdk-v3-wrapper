@@ -1315,11 +1315,9 @@ module PutResolverRulePolicy = {
   }
   @module("@aws-sdk/client-route53resolver") @new
   external new: request => t = "PutResolverRulePolicyCommand"
-  let make = (~resolverRulePolicy, ~arn, ()) =>
-    new({resolverRulePolicy: resolverRulePolicy, arn: arn})
+  let make = (~resolverRulePolicy, ~arn, ()) => new({resolverRulePolicy, arn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module PutResolverQueryLogConfigPolicy = {
   type t
   type request = {
@@ -1369,11 +1367,9 @@ module PutResolverQueryLogConfigPolicy = {
   }
   @module("@aws-sdk/client-route53resolver") @new
   external new: request => t = "PutResolverQueryLogConfigPolicyCommand"
-  let make = (~resolverQueryLogConfigPolicy, ~arn, ()) =>
-    new({resolverQueryLogConfigPolicy: resolverQueryLogConfigPolicy, arn: arn})
+  let make = (~resolverQueryLogConfigPolicy, ~arn, ()) => new({resolverQueryLogConfigPolicy, arn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module PutFirewallRuleGroupPolicy = {
   type t
   type request = {
@@ -1389,11 +1385,9 @@ module PutFirewallRuleGroupPolicy = {
   type response = {@ocaml.doc("<p></p>") @as("ReturnValue") returnValue: option<boolean_>}
   @module("@aws-sdk/client-route53resolver") @new
   external new: request => t = "PutFirewallRuleGroupPolicyCommand"
-  let make = (~firewallRuleGroupPolicy, ~arn, ()) =>
-    new({firewallRuleGroupPolicy: firewallRuleGroupPolicy, arn: arn})
+  let make = (~firewallRuleGroupPolicy, ~arn, ()) => new({firewallRuleGroupPolicy, arn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ImportFirewallDomains = {
   type t
   type request = {
@@ -1427,14 +1421,9 @@ module ImportFirewallDomains = {
   @module("@aws-sdk/client-route53resolver") @new
   external new: request => t = "ImportFirewallDomainsCommand"
   let make = (~domainFileUrl, ~operation, ~firewallDomainListId, ()) =>
-    new({
-      domainFileUrl: domainFileUrl,
-      operation: operation,
-      firewallDomainListId: firewallDomainListId,
-    })
+    new({domainFileUrl, operation, firewallDomainListId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetResolverRulePolicy = {
   type t
   type request = {
@@ -1456,7 +1445,6 @@ module GetResolverRulePolicy = {
   let make = (~arn, ()) => new({arn: arn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetResolverQueryLogConfigPolicy = {
   type t
   type request = {
@@ -1477,7 +1465,6 @@ module GetResolverQueryLogConfigPolicy = {
   let make = (~arn, ()) => new({arn: arn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetFirewallRuleGroupPolicy = {
   type t
   type request = {
@@ -1495,7 +1482,6 @@ module GetFirewallRuleGroupPolicy = {
   let make = (~arn, ()) => new({arn: arn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateResolverDnssecConfig = {
   type t
   type request = {
@@ -1518,10 +1504,9 @@ module UpdateResolverDnssecConfig = {
   }
   @module("@aws-sdk/client-route53resolver") @new
   external new: request => t = "UpdateResolverDnssecConfigCommand"
-  let make = (~validation, ~resourceId, ()) => new({validation: validation, resourceId: resourceId})
+  let make = (~validation, ~resourceId, ()) => new({validation, resourceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateResolverConfig = {
   type t
   type request = {
@@ -1548,11 +1533,9 @@ module UpdateResolverConfig = {
   }
   @module("@aws-sdk/client-route53resolver") @new
   external new: request => t = "UpdateResolverConfigCommand"
-  let make = (~autodefinedReverseFlag, ~resourceId, ()) =>
-    new({autodefinedReverseFlag: autodefinedReverseFlag, resourceId: resourceId})
+  let make = (~autodefinedReverseFlag, ~resourceId, ()) => new({autodefinedReverseFlag, resourceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateFirewallRuleGroupAssociation = {
   type t
   type request = {
@@ -1581,15 +1564,9 @@ module UpdateFirewallRuleGroupAssociation = {
   @module("@aws-sdk/client-route53resolver") @new
   external new: request => t = "UpdateFirewallRuleGroupAssociationCommand"
   let make = (~firewallRuleGroupAssociationId, ~name=?, ~mutationProtection=?, ~priority=?, ()) =>
-    new({
-      name: name,
-      mutationProtection: mutationProtection,
-      priority: priority,
-      firewallRuleGroupAssociationId: firewallRuleGroupAssociationId,
-    })
+    new({name, mutationProtection, priority, firewallRuleGroupAssociationId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateFirewallRule = {
   type t
   type request = {
@@ -1675,19 +1652,18 @@ module UpdateFirewallRule = {
     (),
   ) =>
     new({
-      name: name,
-      blockOverrideTtl: blockOverrideTtl,
-      blockOverrideDnsType: blockOverrideDnsType,
-      blockOverrideDomain: blockOverrideDomain,
-      blockResponse: blockResponse,
-      action: action,
-      priority: priority,
-      firewallDomainListId: firewallDomainListId,
-      firewallRuleGroupId: firewallRuleGroupId,
+      name,
+      blockOverrideTtl,
+      blockOverrideDnsType,
+      blockOverrideDomain,
+      blockResponse,
+      action,
+      priority,
+      firewallDomainListId,
+      firewallRuleGroupId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateFirewallDomains = {
   type t
   type request = {
@@ -1743,10 +1719,9 @@ module UpdateFirewallDomains = {
   @module("@aws-sdk/client-route53resolver") @new
   external new: request => t = "UpdateFirewallDomainsCommand"
   let make = (~domains, ~operation, ~firewallDomainListId, ()) =>
-    new({domains: domains, operation: operation, firewallDomainListId: firewallDomainListId})
+    new({domains, operation, firewallDomainListId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateFirewallConfig = {
   type t
   type request = {
@@ -1776,11 +1751,9 @@ module UpdateFirewallConfig = {
   }
   @module("@aws-sdk/client-route53resolver") @new
   external new: request => t = "UpdateFirewallConfigCommand"
-  let make = (~firewallFailOpen, ~resourceId, ()) =>
-    new({firewallFailOpen: firewallFailOpen, resourceId: resourceId})
+  let make = (~firewallFailOpen, ~resourceId, ()) => new({firewallFailOpen, resourceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UntagResource = {
   type t
   type request = {
@@ -1826,10 +1799,9 @@ module UntagResource = {
   type response = {.}
   @module("@aws-sdk/client-route53resolver") @new
   external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
+  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys, resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module ListFirewallDomains = {
   type t
   type request = {
@@ -1864,10 +1836,9 @@ module ListFirewallDomains = {
   @module("@aws-sdk/client-route53resolver") @new
   external new: request => t = "ListFirewallDomainsCommand"
   let make = (~firewallDomainListId, ~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken: nextToken, maxResults: maxResults, firewallDomainListId: firewallDomainListId})
+    new({nextToken, maxResults, firewallDomainListId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetResolverRuleAssociation = {
   type t
   type request = {
@@ -1890,7 +1861,6 @@ module GetResolverRuleAssociation = {
     new({resolverRuleAssociationId: resolverRuleAssociationId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetResolverQueryLogConfigAssociation = {
   type t
   type request = {
@@ -1913,7 +1883,6 @@ module GetResolverQueryLogConfigAssociation = {
     new({resolverQueryLogConfigAssociationId: resolverQueryLogConfigAssociationId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetResolverQueryLogConfig = {
   type t
   type request = {
@@ -1936,7 +1905,6 @@ module GetResolverQueryLogConfig = {
     new({resolverQueryLogConfigId: resolverQueryLogConfigId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetResolverDnssecConfig = {
   type t
   type request = {
@@ -1954,7 +1922,6 @@ module GetResolverDnssecConfig = {
   let make = (~resourceId, ()) => new({resourceId: resourceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetResolverConfig = {
   type t
   type request = {
@@ -1973,7 +1940,6 @@ module GetResolverConfig = {
   let make = (~resourceId, ()) => new({resourceId: resourceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetFirewallRuleGroupAssociation = {
   type t
   type request = {
@@ -1991,7 +1957,6 @@ module GetFirewallRuleGroupAssociation = {
     new({firewallRuleGroupAssociationId: firewallRuleGroupAssociationId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetFirewallRuleGroup = {
   type t
   type request = {
@@ -2009,7 +1974,6 @@ module GetFirewallRuleGroup = {
   let make = (~firewallRuleGroupId, ()) => new({firewallRuleGroupId: firewallRuleGroupId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetFirewallDomainList = {
   type t
   type request = {
@@ -2025,7 +1989,6 @@ module GetFirewallDomainList = {
   let make = (~firewallDomainListId, ()) => new({firewallDomainListId: firewallDomainListId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetFirewallConfig = {
   type t
   type request = {
@@ -2044,7 +2007,6 @@ module GetFirewallConfig = {
   let make = (~resourceId, ()) => new({resourceId: resourceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DisassociateResolverRule = {
   type t
   type request = {
@@ -2066,10 +2028,9 @@ module DisassociateResolverRule = {
   }
   @module("@aws-sdk/client-route53resolver") @new
   external new: request => t = "DisassociateResolverRuleCommand"
-  let make = (~resolverRuleId, ~vpcid, ()) => new({resolverRuleId: resolverRuleId, vpcid: vpcid})
+  let make = (~resolverRuleId, ~vpcid, ()) => new({resolverRuleId, vpcid})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DisassociateResolverQueryLogConfig = {
   type t
   type request = {
@@ -2094,10 +2055,9 @@ module DisassociateResolverQueryLogConfig = {
   @module("@aws-sdk/client-route53resolver") @new
   external new: request => t = "DisassociateResolverQueryLogConfigCommand"
   let make = (~resourceId, ~resolverQueryLogConfigId, ()) =>
-    new({resourceId: resourceId, resolverQueryLogConfigId: resolverQueryLogConfigId})
+    new({resourceId, resolverQueryLogConfigId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DisassociateFirewallRuleGroup = {
   type t
   type request = {
@@ -2116,7 +2076,6 @@ module DisassociateFirewallRuleGroup = {
     new({firewallRuleGroupAssociationId: firewallRuleGroupAssociationId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteResolverQueryLogConfig = {
   type t
   type request = {
@@ -2137,7 +2096,6 @@ module DeleteResolverQueryLogConfig = {
     new({resolverQueryLogConfigId: resolverQueryLogConfigId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteFirewallRuleGroup = {
   type t
   type request = {
@@ -2155,7 +2113,6 @@ module DeleteFirewallRuleGroup = {
   let make = (~firewallRuleGroupId, ()) => new({firewallRuleGroupId: firewallRuleGroupId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteFirewallRule = {
   type t
   type request = {
@@ -2176,10 +2133,9 @@ module DeleteFirewallRule = {
   @module("@aws-sdk/client-route53resolver") @new
   external new: request => t = "DeleteFirewallRuleCommand"
   let make = (~firewallDomainListId, ~firewallRuleGroupId, ()) =>
-    new({firewallDomainListId: firewallDomainListId, firewallRuleGroupId: firewallRuleGroupId})
+    new({firewallDomainListId, firewallRuleGroupId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteFirewallDomainList = {
   type t
   type request = {
@@ -2196,7 +2152,6 @@ module DeleteFirewallDomainList = {
   let make = (~firewallDomainListId, ()) => new({firewallDomainListId: firewallDomainListId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateFirewallRule = {
   type t
   type request = {
@@ -2293,20 +2248,19 @@ module CreateFirewallRule = {
     (),
   ) =>
     new({
-      name: name,
-      blockOverrideTtl: blockOverrideTtl,
-      blockOverrideDnsType: blockOverrideDnsType,
-      blockOverrideDomain: blockOverrideDomain,
-      blockResponse: blockResponse,
-      action: action,
-      priority: priority,
-      firewallDomainListId: firewallDomainListId,
-      firewallRuleGroupId: firewallRuleGroupId,
-      creatorRequestId: creatorRequestId,
+      name,
+      blockOverrideTtl,
+      blockOverrideDnsType,
+      blockOverrideDomain,
+      blockResponse,
+      action,
+      priority,
+      firewallDomainListId,
+      firewallRuleGroupId,
+      creatorRequestId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module AssociateResolverRule = {
   type t
   type request = {
@@ -2332,11 +2286,9 @@ module AssociateResolverRule = {
   }
   @module("@aws-sdk/client-route53resolver") @new
   external new: request => t = "AssociateResolverRuleCommand"
-  let make = (~vpcid, ~resolverRuleId, ~name=?, ()) =>
-    new({vpcid: vpcid, name: name, resolverRuleId: resolverRuleId})
+  let make = (~vpcid, ~resolverRuleId, ~name=?, ()) => new({vpcid, name, resolverRuleId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module AssociateResolverQueryLogConfig = {
   type t
   type request = {
@@ -2363,10 +2315,9 @@ module AssociateResolverQueryLogConfig = {
   @module("@aws-sdk/client-route53resolver") @new
   external new: request => t = "AssociateResolverQueryLogConfigCommand"
   let make = (~resourceId, ~resolverQueryLogConfigId, ()) =>
-    new({resourceId: resourceId, resolverQueryLogConfigId: resolverQueryLogConfigId})
+    new({resourceId, resolverQueryLogConfigId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateResolverEndpoint = {
   type t
   type request = {
@@ -2383,11 +2334,9 @@ module UpdateResolverEndpoint = {
   }
   @module("@aws-sdk/client-route53resolver") @new
   external new: request => t = "UpdateResolverEndpointCommand"
-  let make = (~resolverEndpointId, ~name=?, ()) =>
-    new({name: name, resolverEndpointId: resolverEndpointId})
+  let make = (~resolverEndpointId, ~name=?, ()) => new({name, resolverEndpointId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module TagResource = {
   type t
   type request = {
@@ -2432,10 +2381,9 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-route53resolver") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
+  let make = (~tags, ~resourceArn, ()) => new({tags, resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module ListTagsForResource = {
   type t
   type request = {
@@ -2469,10 +2417,9 @@ module ListTagsForResource = {
   @module("@aws-sdk/client-route53resolver") @new
   external new: request => t = "ListTagsForResourceCommand"
   let make = (~resourceArn, ~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken: nextToken, maxResults: maxResults, resourceArn: resourceArn})
+    new({nextToken, maxResults, resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListResolverEndpointIpAddresses = {
   type t
   type request = {
@@ -2507,10 +2454,9 @@ module ListResolverEndpointIpAddresses = {
   @module("@aws-sdk/client-route53resolver") @new
   external new: request => t = "ListResolverEndpointIpAddressesCommand"
   let make = (~resolverEndpointId, ~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken: nextToken, maxResults: maxResults, resolverEndpointId: resolverEndpointId})
+    new({nextToken, maxResults, resolverEndpointId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListResolverConfigs = {
   type t
   type request = {
@@ -2544,11 +2490,9 @@ module ListResolverConfigs = {
   }
   @module("@aws-sdk/client-route53resolver") @new
   external new: request => t = "ListResolverConfigsCommand"
-  let make = (~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken: nextToken, maxResults: maxResults})
+  let make = (~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListFirewallRules = {
   type t
   type request = {
@@ -2608,16 +2552,9 @@ module ListFirewallRules = {
   @module("@aws-sdk/client-route53resolver") @new
   external new: request => t = "ListFirewallRulesCommand"
   let make = (~firewallRuleGroupId, ~nextToken=?, ~maxResults=?, ~action=?, ~priority=?, ()) =>
-    new({
-      nextToken: nextToken,
-      maxResults: maxResults,
-      action: action,
-      priority: priority,
-      firewallRuleGroupId: firewallRuleGroupId,
-    })
+    new({nextToken, maxResults, action, priority, firewallRuleGroupId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListFirewallRuleGroups = {
   type t
   type request = {
@@ -2647,11 +2584,9 @@ module ListFirewallRuleGroups = {
   }
   @module("@aws-sdk/client-route53resolver") @new
   external new: request => t = "ListFirewallRuleGroupsCommand"
-  let make = (~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken: nextToken, maxResults: maxResults})
+  let make = (~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListFirewallRuleGroupAssociations = {
   type t
   type request = {
@@ -2707,18 +2642,9 @@ module ListFirewallRuleGroupAssociations = {
     ~vpcId=?,
     ~firewallRuleGroupId=?,
     (),
-  ) =>
-    new({
-      nextToken: nextToken,
-      maxResults: maxResults,
-      status: status,
-      priority: priority,
-      vpcId: vpcId,
-      firewallRuleGroupId: firewallRuleGroupId,
-    })
+  ) => new({nextToken, maxResults, status, priority, vpcId, firewallRuleGroupId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListFirewallDomainLists = {
   type t
   type request = {
@@ -2749,11 +2675,9 @@ module ListFirewallDomainLists = {
   }
   @module("@aws-sdk/client-route53resolver") @new
   external new: request => t = "ListFirewallDomainListsCommand"
-  let make = (~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken: nextToken, maxResults: maxResults})
+  let make = (~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListFirewallConfigs = {
   type t
   type request = {
@@ -2783,11 +2707,9 @@ module ListFirewallConfigs = {
   }
   @module("@aws-sdk/client-route53resolver") @new
   external new: request => t = "ListFirewallConfigsCommand"
-  let make = (~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken: nextToken, maxResults: maxResults})
+  let make = (~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetResolverEndpoint = {
   type t
   type request = {
@@ -2807,7 +2729,6 @@ module GetResolverEndpoint = {
   let make = (~resolverEndpointId, ()) => new({resolverEndpointId: resolverEndpointId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DisassociateResolverEndpointIpAddress = {
   type t
   type request = {
@@ -2829,11 +2750,9 @@ module DisassociateResolverEndpointIpAddress = {
   }
   @module("@aws-sdk/client-route53resolver") @new
   external new: request => t = "DisassociateResolverEndpointIpAddressCommand"
-  let make = (~ipAddress, ~resolverEndpointId, ()) =>
-    new({ipAddress: ipAddress, resolverEndpointId: resolverEndpointId})
+  let make = (~ipAddress, ~resolverEndpointId, ()) => new({ipAddress, resolverEndpointId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteResolverEndpoint = {
   type t
   type request = {
@@ -2853,7 +2772,6 @@ module DeleteResolverEndpoint = {
   let make = (~resolverEndpointId, ()) => new({resolverEndpointId: resolverEndpointId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateResolverQueryLogConfig = {
   type t
   type request = {
@@ -2912,15 +2830,9 @@ module CreateResolverQueryLogConfig = {
   @module("@aws-sdk/client-route53resolver") @new
   external new: request => t = "CreateResolverQueryLogConfigCommand"
   let make = (~creatorRequestId, ~destinationArn, ~name, ~tags=?, ()) =>
-    new({
-      tags: tags,
-      creatorRequestId: creatorRequestId,
-      destinationArn: destinationArn,
-      name: name,
-    })
+    new({tags, creatorRequestId, destinationArn, name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateResolverEndpoint = {
   type t
   type request = {
@@ -2980,18 +2892,9 @@ module CreateResolverEndpoint = {
     ~tags=?,
     ~name=?,
     (),
-  ) =>
-    new({
-      tags: tags,
-      ipAddresses: ipAddresses,
-      direction: direction,
-      securityGroupIds: securityGroupIds,
-      name: name,
-      creatorRequestId: creatorRequestId,
-    })
+  ) => new({tags, ipAddresses, direction, securityGroupIds, name, creatorRequestId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateFirewallRuleGroup = {
   type t
   type request = {
@@ -3016,11 +2919,9 @@ module CreateFirewallRuleGroup = {
   }
   @module("@aws-sdk/client-route53resolver") @new
   external new: request => t = "CreateFirewallRuleGroupCommand"
-  let make = (~name, ~creatorRequestId, ~tags=?, ()) =>
-    new({tags: tags, name: name, creatorRequestId: creatorRequestId})
+  let make = (~name, ~creatorRequestId, ~tags=?, ()) => new({tags, name, creatorRequestId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateFirewallDomainList = {
   type t
   type request = {
@@ -3046,11 +2947,9 @@ module CreateFirewallDomainList = {
   }
   @module("@aws-sdk/client-route53resolver") @new
   external new: request => t = "CreateFirewallDomainListCommand"
-  let make = (~name, ~creatorRequestId, ~tags=?, ()) =>
-    new({tags: tags, name: name, creatorRequestId: creatorRequestId})
+  let make = (~name, ~creatorRequestId, ~tags=?, ()) => new({tags, name, creatorRequestId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module AssociateResolverEndpointIpAddress = {
   type t
   type request = {
@@ -3071,11 +2970,9 @@ module AssociateResolverEndpointIpAddress = {
   }
   @module("@aws-sdk/client-route53resolver") @new
   external new: request => t = "AssociateResolverEndpointIpAddressCommand"
-  let make = (~ipAddress, ~resolverEndpointId, ()) =>
-    new({ipAddress: ipAddress, resolverEndpointId: resolverEndpointId})
+  let make = (~ipAddress, ~resolverEndpointId, ()) => new({ipAddress, resolverEndpointId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module AssociateFirewallRuleGroup = {
   type t
   type request = {
@@ -3131,19 +3028,9 @@ module AssociateFirewallRuleGroup = {
     ~tags=?,
     ~mutationProtection=?,
     (),
-  ) =>
-    new({
-      tags: tags,
-      mutationProtection: mutationProtection,
-      name: name,
-      priority: priority,
-      vpcId: vpcId,
-      firewallRuleGroupId: firewallRuleGroupId,
-      creatorRequestId: creatorRequestId,
-    })
+  ) => new({tags, mutationProtection, name, priority, vpcId, firewallRuleGroupId, creatorRequestId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateResolverRule = {
   type t
   type request = {
@@ -3159,10 +3046,9 @@ module UpdateResolverRule = {
   }
   @module("@aws-sdk/client-route53resolver") @new
   external new: request => t = "UpdateResolverRuleCommand"
-  let make = (~config, ~resolverRuleId, ()) => new({config: config, resolverRuleId: resolverRuleId})
+  let make = (~config, ~resolverRuleId, ()) => new({config, resolverRuleId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListResolverRuleAssociations = {
   type t
   type request = {
@@ -3199,11 +3085,9 @@ module ListResolverRuleAssociations = {
   }
   @module("@aws-sdk/client-route53resolver") @new
   external new: request => t = "ListResolverRuleAssociationsCommand"
-  let make = (~filters=?, ~nextToken=?, ~maxResults=?, ()) =>
-    new({filters: filters, nextToken: nextToken, maxResults: maxResults})
+  let make = (~filters=?, ~nextToken=?, ~maxResults=?, ()) => new({filters, nextToken, maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListResolverQueryLogConfigs = {
   type t
   type request = {
@@ -3337,16 +3221,9 @@ module ListResolverQueryLogConfigs = {
   @module("@aws-sdk/client-route53resolver") @new
   external new: request => t = "ListResolverQueryLogConfigsCommand"
   let make = (~sortOrder=?, ~sortBy=?, ~filters=?, ~nextToken=?, ~maxResults=?, ()) =>
-    new({
-      sortOrder: sortOrder,
-      sortBy: sortBy,
-      filters: filters,
-      nextToken: nextToken,
-      maxResults: maxResults,
-    })
+    new({sortOrder, sortBy, filters, nextToken, maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListResolverQueryLogConfigAssociations = {
   type t
   type request = {
@@ -3475,16 +3352,9 @@ module ListResolverQueryLogConfigAssociations = {
   @module("@aws-sdk/client-route53resolver") @new
   external new: request => t = "ListResolverQueryLogConfigAssociationsCommand"
   let make = (~sortOrder=?, ~sortBy=?, ~filters=?, ~nextToken=?, ~maxResults=?, ()) =>
-    new({
-      sortOrder: sortOrder,
-      sortBy: sortBy,
-      filters: filters,
-      nextToken: nextToken,
-      maxResults: maxResults,
-    })
+    new({sortOrder, sortBy, filters, nextToken, maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListResolverEndpoints = {
   type t
   type request = {
@@ -3521,11 +3391,9 @@ module ListResolverEndpoints = {
   }
   @module("@aws-sdk/client-route53resolver") @new
   external new: request => t = "ListResolverEndpointsCommand"
-  let make = (~filters=?, ~nextToken=?, ~maxResults=?, ()) =>
-    new({filters: filters, nextToken: nextToken, maxResults: maxResults})
+  let make = (~filters=?, ~nextToken=?, ~maxResults=?, ()) => new({filters, nextToken, maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListResolverDnssecConfigs = {
   type t
   type request = {
@@ -3561,11 +3429,9 @@ module ListResolverDnssecConfigs = {
   }
   @module("@aws-sdk/client-route53resolver") @new
   external new: request => t = "ListResolverDnssecConfigsCommand"
-  let make = (~filters=?, ~nextToken=?, ~maxResults=?, ()) =>
-    new({filters: filters, nextToken: nextToken, maxResults: maxResults})
+  let make = (~filters=?, ~nextToken=?, ~maxResults=?, ()) => new({filters, nextToken, maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetResolverRule = {
   type t
   type request = {
@@ -3585,7 +3451,6 @@ module GetResolverRule = {
   let make = (~resolverRuleId, ()) => new({resolverRuleId: resolverRuleId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteResolverRule = {
   type t
   type request = {
@@ -3604,7 +3469,6 @@ module DeleteResolverRule = {
   let make = (~resolverRuleId, ()) => new({resolverRuleId: resolverRuleId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateResolverRule = {
   type t
   type request = {
@@ -3665,19 +3529,9 @@ module CreateResolverRule = {
     ~targetIps=?,
     ~name=?,
     (),
-  ) =>
-    new({
-      tags: tags,
-      resolverEndpointId: resolverEndpointId,
-      targetIps: targetIps,
-      domainName: domainName,
-      ruleType: ruleType,
-      name: name,
-      creatorRequestId: creatorRequestId,
-    })
+  ) => new({tags, resolverEndpointId, targetIps, domainName, ruleType, name, creatorRequestId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListResolverRules = {
   type t
   type request = {
@@ -3715,7 +3569,6 @@ module ListResolverRules = {
   }
   @module("@aws-sdk/client-route53resolver") @new
   external new: request => t = "ListResolverRulesCommand"
-  let make = (~filters=?, ~nextToken=?, ~maxResults=?, ()) =>
-    new({filters: filters, nextToken: nextToken, maxResults: maxResults})
+  let make = (~filters=?, ~nextToken=?, ~maxResults=?, ()) => new({filters, nextToken, maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

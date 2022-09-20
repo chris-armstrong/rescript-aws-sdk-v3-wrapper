@@ -721,7 +721,6 @@ module StartDeployment = {
   let make = (~serviceArn, ()) => new({serviceArn: serviceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UntagResource = {
   type t
   type request = {
@@ -734,10 +733,9 @@ module UntagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-apprunner") @new external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
+  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys, resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DescribeAutoScalingConfiguration = {
   type t
   type request = {
@@ -763,7 +761,6 @@ module DescribeAutoScalingConfiguration = {
     new({autoScalingConfigurationArn: autoScalingConfigurationArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteConnection = {
   type t
   type request = {
@@ -782,7 +779,6 @@ module DeleteConnection = {
   let make = (~connectionArn, ()) => new({connectionArn: connectionArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteAutoScalingConfiguration = {
   type t
   type request = {
@@ -807,7 +803,6 @@ module DeleteAutoScalingConfiguration = {
     new({autoScalingConfigurationArn: autoScalingConfigurationArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module TagResource = {
   type t
   type request = {
@@ -822,10 +817,9 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-apprunner") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
+  let make = (~tags, ~resourceArn, ()) => new({tags, resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module ListTagsForResource = {
   type t
   type request = {
@@ -844,7 +838,6 @@ module ListTagsForResource = {
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListServices = {
   type t
   type request = {
@@ -871,11 +864,9 @@ module ListServices = {
     serviceSummaryList: serviceSummaryList,
   }
   @module("@aws-sdk/client-apprunner") @new external new: request => t = "ListServicesCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListOperations = {
   type t
   type request = {
@@ -907,10 +898,9 @@ module ListOperations = {
   }
   @module("@aws-sdk/client-apprunner") @new external new: request => t = "ListOperationsCommand"
   let make = (~serviceArn, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, serviceArn: serviceArn})
+    new({maxResults, nextToken, serviceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListConnections = {
   type t
   type request = {
@@ -942,10 +932,9 @@ module ListConnections = {
   }
   @module("@aws-sdk/client-apprunner") @new external new: request => t = "ListConnectionsCommand"
   let make = (~nextToken=?, ~maxResults=?, ~connectionName=?, ()) =>
-    new({nextToken: nextToken, maxResults: maxResults, connectionName: connectionName})
+    new({nextToken, maxResults, connectionName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListAutoScalingConfigurations = {
   type t
   type request = {
@@ -983,15 +972,9 @@ module ListAutoScalingConfigurations = {
   @module("@aws-sdk/client-apprunner") @new
   external new: request => t = "ListAutoScalingConfigurationsCommand"
   let make = (~nextToken=?, ~maxResults=?, ~latestOnly=?, ~autoScalingConfigurationName=?, ()) =>
-    new({
-      nextToken: nextToken,
-      maxResults: maxResults,
-      latestOnly: latestOnly,
-      autoScalingConfigurationName: autoScalingConfigurationName,
-    })
+    new({nextToken, maxResults, latestOnly, autoScalingConfigurationName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeVpcConnector = {
   type t
   type request = {
@@ -1012,7 +995,6 @@ module DescribeVpcConnector = {
   let make = (~vpcConnectorArn, ()) => new({vpcConnectorArn: vpcConnectorArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteVpcConnector = {
   type t
   type request = {
@@ -1032,7 +1014,6 @@ module DeleteVpcConnector = {
   let make = (~vpcConnectorArn, ()) => new({vpcConnectorArn: vpcConnectorArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateVpcConnector = {
   type t
   type request = {
@@ -1061,15 +1042,9 @@ module CreateVpcConnector = {
   }
   @module("@aws-sdk/client-apprunner") @new external new: request => t = "CreateVpcConnectorCommand"
   let make = (~subnets, ~vpcConnectorName, ~tags=?, ~securityGroups=?, ()) =>
-    new({
-      tags: tags,
-      securityGroups: securityGroups,
-      subnets: subnets,
-      vpcConnectorName: vpcConnectorName,
-    })
+    new({tags, securityGroups, subnets, vpcConnectorName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateConnection = {
   type t
   type request = {
@@ -1093,10 +1068,9 @@ module CreateConnection = {
   }
   @module("@aws-sdk/client-apprunner") @new external new: request => t = "CreateConnectionCommand"
   let make = (~providerType, ~connectionName, ~tags=?, ()) =>
-    new({tags: tags, providerType: providerType, connectionName: connectionName})
+    new({tags, providerType, connectionName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateAutoScalingConfiguration = {
   type t
   type request = {
@@ -1151,17 +1125,9 @@ module CreateAutoScalingConfiguration = {
     ~minSize=?,
     ~maxConcurrency=?,
     (),
-  ) =>
-    new({
-      tags: tags,
-      maxSize: maxSize,
-      minSize: minSize,
-      maxConcurrency: maxConcurrency,
-      autoScalingConfigurationName: autoScalingConfigurationName,
-    })
+  ) => new({tags, maxSize, minSize, maxConcurrency, autoScalingConfigurationName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListVpcConnectors = {
   type t
   type request = {
@@ -1187,11 +1153,9 @@ module ListVpcConnectors = {
     vpcConnectors: vpcConnectors,
   }
   @module("@aws-sdk/client-apprunner") @new external new: request => t = "ListVpcConnectorsCommand"
-  let make = (~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken: nextToken, maxResults: maxResults})
+  let make = (~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DisassociateCustomDomain = {
   type t
   type request = {
@@ -1221,10 +1185,9 @@ module DisassociateCustomDomain = {
   }
   @module("@aws-sdk/client-apprunner") @new
   external new: request => t = "DisassociateCustomDomainCommand"
-  let make = (~domainName, ~serviceArn, ()) => new({domainName: domainName, serviceArn: serviceArn})
+  let make = (~domainName, ~serviceArn, ()) => new({domainName, serviceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module AssociateCustomDomain = {
   type t
   type request = {
@@ -1263,10 +1226,9 @@ module AssociateCustomDomain = {
   @module("@aws-sdk/client-apprunner") @new
   external new: request => t = "AssociateCustomDomainCommand"
   let make = (~domainName, ~serviceArn, ~enableWWWSubdomain=?, ()) =>
-    new({enableWWWSubdomain: enableWWWSubdomain, domainName: domainName, serviceArn: serviceArn})
+    new({enableWWWSubdomain, domainName, serviceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeCustomDomains = {
   type t
   type request = {
@@ -1309,10 +1271,9 @@ module DescribeCustomDomains = {
   @module("@aws-sdk/client-apprunner") @new
   external new: request => t = "DescribeCustomDomainsCommand"
   let make = (~serviceArn, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, serviceArn: serviceArn})
+    new({maxResults, nextToken, serviceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateService = {
   type t
   type request = {
@@ -1370,16 +1331,15 @@ module UpdateService = {
     (),
   ) =>
     new({
-      networkConfiguration: networkConfiguration,
-      healthCheckConfiguration: healthCheckConfiguration,
-      autoScalingConfigurationArn: autoScalingConfigurationArn,
-      instanceConfiguration: instanceConfiguration,
-      sourceConfiguration: sourceConfiguration,
-      serviceArn: serviceArn,
+      networkConfiguration,
+      healthCheckConfiguration,
+      autoScalingConfigurationArn,
+      instanceConfiguration,
+      sourceConfiguration,
+      serviceArn,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ResumeService = {
   type t
   type request = {
@@ -1402,7 +1362,6 @@ module ResumeService = {
   let make = (~serviceArn, ()) => new({serviceArn: serviceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module PauseService = {
   type t
   type request = {
@@ -1425,7 +1384,6 @@ module PauseService = {
   let make = (~serviceArn, ()) => new({serviceArn: serviceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeService = {
   type t
   type request = {
@@ -1446,7 +1404,6 @@ module DescribeService = {
   let make = (~serviceArn, ()) => new({serviceArn: serviceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteService = {
   type t
   type request = {
@@ -1469,7 +1426,6 @@ module DeleteService = {
   let make = (~serviceArn, ()) => new({serviceArn: serviceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateService = {
   type t
   type request = {
@@ -1535,14 +1491,14 @@ module CreateService = {
     (),
   ) =>
     new({
-      networkConfiguration: networkConfiguration,
-      autoScalingConfigurationArn: autoScalingConfigurationArn,
-      healthCheckConfiguration: healthCheckConfiguration,
-      encryptionConfiguration: encryptionConfiguration,
-      tags: tags,
-      instanceConfiguration: instanceConfiguration,
-      sourceConfiguration: sourceConfiguration,
-      serviceName: serviceName,
+      networkConfiguration,
+      autoScalingConfigurationArn,
+      healthCheckConfiguration,
+      encryptionConfiguration,
+      tags,
+      instanceConfiguration,
+      sourceConfiguration,
+      serviceName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

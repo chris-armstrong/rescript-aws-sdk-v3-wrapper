@@ -813,7 +813,6 @@ module GetServiceRoleForAccount = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DisassociateServiceRoleFromAccount = {
   type t
   type request = {.}
@@ -827,7 +826,6 @@ module DisassociateServiceRoleFromAccount = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateConnectivityInfo = {
   type t
   type request = {
@@ -844,11 +842,9 @@ module UpdateConnectivityInfo = {
   }
   @module("@aws-sdk/client-greengrass") @new
   external new: request => t = "UpdateConnectivityInfoCommand"
-  let make = (~connectivityInfo, ~thingName, ()) =>
-    new({connectivityInfo: connectivityInfo, thingName: thingName})
+  let make = (~connectivityInfo, ~thingName, ()) => new({connectivityInfo, thingName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UntagResource = {
   type t
   type request = {
@@ -860,10 +856,9 @@ module UntagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-greengrass") @new external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
+  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys, resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module TagResource = {
   type t
   type request = {
@@ -878,10 +873,9 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-greengrass") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
+  let make = (~tags, ~resourceArn, ()) => new({tags, resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module ListTagsForResource = {
   type t
   type request = {
@@ -901,7 +895,6 @@ module ListTagsForResource = {
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListInstalledComponents = {
   type t
   type request = {
@@ -923,10 +916,9 @@ module ListInstalledComponents = {
   @module("@aws-sdk/client-greengrass") @new
   external new: request => t = "ListInstalledComponentsCommand"
   let make = (~coreDeviceThingName, ~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken: nextToken, maxResults: maxResults, coreDeviceThingName: coreDeviceThingName})
+    new({nextToken, maxResults, coreDeviceThingName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListEffectiveDeployments = {
   type t
   type request = {
@@ -948,10 +940,9 @@ module ListEffectiveDeployments = {
   @module("@aws-sdk/client-greengrass") @new
   external new: request => t = "ListEffectiveDeploymentsCommand"
   let make = (~coreDeviceThingName, ~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken: nextToken, maxResults: maxResults, coreDeviceThingName: coreDeviceThingName})
+    new({nextToken, maxResults, coreDeviceThingName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListDeployments = {
   type t
   type request = {
@@ -989,15 +980,9 @@ module ListDeployments = {
   }
   @module("@aws-sdk/client-greengrass") @new external new: request => t = "ListDeploymentsCommand"
   let make = (~nextToken=?, ~maxResults=?, ~historyFilter=?, ~targetArn=?, ()) =>
-    new({
-      nextToken: nextToken,
-      maxResults: maxResults,
-      historyFilter: historyFilter,
-      targetArn: targetArn,
-    })
+    new({nextToken, maxResults, historyFilter, targetArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListCoreDevices = {
   type t
   type request = {
@@ -1033,15 +1018,9 @@ module ListCoreDevices = {
   }
   @module("@aws-sdk/client-greengrass") @new external new: request => t = "ListCoreDevicesCommand"
   let make = (~nextToken=?, ~maxResults=?, ~status=?, ~thingGroupArn=?, ()) =>
-    new({
-      nextToken: nextToken,
-      maxResults: maxResults,
-      status: status,
-      thingGroupArn: thingGroupArn,
-    })
+    new({nextToken, maxResults, status, thingGroupArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListComponentVersions = {
   type t
   type request = {
@@ -1064,11 +1043,9 @@ module ListComponentVersions = {
   }
   @module("@aws-sdk/client-greengrass") @new
   external new: request => t = "ListComponentVersionsCommand"
-  let make = (~arn, ~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken: nextToken, maxResults: maxResults, arn: arn})
+  let make = (~arn, ~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults, arn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListClientDevicesAssociatedWithCoreDevice = {
   type t
   type request = {
@@ -1092,10 +1069,9 @@ module ListClientDevicesAssociatedWithCoreDevice = {
   @module("@aws-sdk/client-greengrass") @new
   external new: request => t = "ListClientDevicesAssociatedWithCoreDeviceCommand"
   let make = (~coreDeviceThingName, ~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken: nextToken, maxResults: maxResults, coreDeviceThingName: coreDeviceThingName})
+    new({nextToken, maxResults, coreDeviceThingName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetCoreDevice = {
   type t
   type request = {
@@ -1139,7 +1115,6 @@ module GetCoreDevice = {
   let make = (~coreDeviceThingName, ()) => new({coreDeviceThingName: coreDeviceThingName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetConnectivityInfo = {
   type t
   type request = {
@@ -1157,7 +1132,6 @@ module GetConnectivityInfo = {
   let make = (~thingName, ()) => new({thingName: thingName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetComponentVersionArtifact = {
   type t
   type request = {
@@ -1176,10 +1150,9 @@ module GetComponentVersionArtifact = {
   type response = {@ocaml.doc("<p>The URL of the artifact.</p>") preSignedUrl: nonEmptyString}
   @module("@aws-sdk/client-greengrass") @new
   external new: request => t = "GetComponentVersionArtifactCommand"
-  let make = (~artifactName, ~arn, ()) => new({artifactName: artifactName, arn: arn})
+  let make = (~artifactName, ~arn, ()) => new({artifactName, arn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetComponent = {
   type t
   type request = {
@@ -1198,11 +1171,9 @@ module GetComponent = {
     @ocaml.doc("<p>The format of the recipe.</p>") recipeOutputFormat: recipeOutputFormat,
   }
   @module("@aws-sdk/client-greengrass") @new external new: request => t = "GetComponentCommand"
-  let make = (~arn, ~recipeOutputFormat=?, ()) =>
-    new({arn: arn, recipeOutputFormat: recipeOutputFormat})
+  let make = (~arn, ~recipeOutputFormat=?, ()) => new({arn, recipeOutputFormat})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteCoreDevice = {
   type t
   type request = {
@@ -1214,7 +1185,6 @@ module DeleteCoreDevice = {
   let make = (~coreDeviceThingName, ()) => new({coreDeviceThingName: coreDeviceThingName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteComponent = {
   type t
   type request = {
@@ -1228,7 +1198,6 @@ module DeleteComponent = {
   let make = (~arn, ()) => new({arn: arn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module CancelDeployment = {
   type t
   type request = {@ocaml.doc("<p>The ID of the deployment.</p>") deploymentId: nonEmptyString}
@@ -1240,7 +1209,6 @@ module CancelDeployment = {
   let make = (~deploymentId, ()) => new({deploymentId: deploymentId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module BatchDisassociateClientDeviceFromCoreDevice = {
   type t
   type request = {
@@ -1256,11 +1224,9 @@ module BatchDisassociateClientDeviceFromCoreDevice = {
   }
   @module("@aws-sdk/client-greengrass") @new
   external new: request => t = "BatchDisassociateClientDeviceFromCoreDeviceCommand"
-  let make = (~coreDeviceThingName, ~entries=?, ()) =>
-    new({coreDeviceThingName: coreDeviceThingName, entries: entries})
+  let make = (~coreDeviceThingName, ~entries=?, ()) => new({coreDeviceThingName, entries})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module BatchAssociateClientDeviceWithCoreDevice = {
   type t
   type request = {
@@ -1276,11 +1242,9 @@ module BatchAssociateClientDeviceWithCoreDevice = {
   }
   @module("@aws-sdk/client-greengrass") @new
   external new: request => t = "BatchAssociateClientDeviceWithCoreDeviceCommand"
-  let make = (~coreDeviceThingName, ~entries=?, ()) =>
-    new({coreDeviceThingName: coreDeviceThingName, entries: entries})
+  let make = (~coreDeviceThingName, ~entries=?, ()) => new({coreDeviceThingName, entries})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module AssociateServiceRoleToAccount = {
   type t
   type request = {
@@ -1298,7 +1262,6 @@ module AssociateServiceRoleToAccount = {
   let make = (~roleArn, ()) => new({roleArn: roleArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ResolveComponentCandidates = {
   type t
   type request = {
@@ -1314,11 +1277,9 @@ module ResolveComponentCandidates = {
   }
   @module("@aws-sdk/client-greengrass") @new
   external new: request => t = "ResolveComponentCandidatesCommand"
-  let make = (~componentCandidates, ~platform, ()) =>
-    new({componentCandidates: componentCandidates, platform: platform})
+  let make = (~componentCandidates, ~platform, ()) => new({componentCandidates, platform})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeComponent = {
   type t
   type request = {
@@ -1354,7 +1315,6 @@ module DescribeComponent = {
   let make = (~arn, ()) => new({arn: arn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetDeployment = {
   type t
   type request = {@ocaml.doc("<p>The ID of the deployment.</p>") deploymentId: nonEmptyString}
@@ -1395,7 +1355,6 @@ module GetDeployment = {
   let make = (~deploymentId, ()) => new({deploymentId: deploymentId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateDeployment = {
   type t
   type request = {
@@ -1445,17 +1404,16 @@ module CreateDeployment = {
     (),
   ) =>
     new({
-      clientToken: clientToken,
-      tags: tags,
-      deploymentPolicies: deploymentPolicies,
-      iotJobConfiguration: iotJobConfiguration,
-      components: components,
-      deploymentName: deploymentName,
-      targetArn: targetArn,
+      clientToken,
+      tags,
+      deploymentPolicies,
+      iotJobConfiguration,
+      components,
+      deploymentName,
+      targetArn,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListComponents = {
   type t
   type request = {
@@ -1476,11 +1434,9 @@ module ListComponents = {
     @ocaml.doc("<p>A list that summarizes each component.</p>") components: option<componentList>,
   }
   @module("@aws-sdk/client-greengrass") @new external new: request => t = "ListComponentsCommand"
-  let make = (~nextToken=?, ~maxResults=?, ~scope=?, ()) =>
-    new({nextToken: nextToken, maxResults: maxResults, scope: scope})
+  let make = (~nextToken=?, ~maxResults=?, ~scope=?, ()) => new({nextToken, maxResults, scope})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateComponentVersion = {
   type t
   type request = {
@@ -1518,11 +1474,6 @@ module CreateComponentVersion = {
   @module("@aws-sdk/client-greengrass") @new
   external new: request => t = "CreateComponentVersionCommand"
   let make = (~clientToken=?, ~tags=?, ~lambdaFunction=?, ~inlineRecipe=?, ()) =>
-    new({
-      clientToken: clientToken,
-      tags: tags,
-      lambdaFunction: lambdaFunction,
-      inlineRecipe: inlineRecipe,
-    })
+    new({clientToken, tags, lambdaFunction, inlineRecipe})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

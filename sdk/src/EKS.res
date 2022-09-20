@@ -1063,10 +1063,9 @@ module UntagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-eks") @new external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
+  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys, resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module TagResource = {
   type t
   type request = {
@@ -1078,10 +1077,9 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-eks") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
+  let make = (~tags, ~resourceArn, ()) => new({tags, resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module ListUpdates = {
   type t
   type request = {
@@ -1117,16 +1115,9 @@ module ListUpdates = {
   }
   @module("@aws-sdk/client-eks") @new external new: request => t = "ListUpdatesCommand"
   let make = (~name, ~maxResults=?, ~nextToken=?, ~addonName=?, ~nodegroupName=?, ()) =>
-    new({
-      maxResults: maxResults,
-      nextToken: nextToken,
-      addonName: addonName,
-      nodegroupName: nodegroupName,
-      name: name,
-    })
+    new({maxResults, nextToken, addonName, nodegroupName, name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListTagsForResource = {
   type t
   type request = {
@@ -1139,7 +1130,6 @@ module ListTagsForResource = {
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListNodegroups = {
   type t
   type request = {
@@ -1173,10 +1163,9 @@ module ListNodegroups = {
   }
   @module("@aws-sdk/client-eks") @new external new: request => t = "ListNodegroupsCommand"
   let make = (~clusterName, ~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken: nextToken, maxResults: maxResults, clusterName: clusterName})
+    new({nextToken, maxResults, clusterName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListFargateProfiles = {
   type t
   type request = {
@@ -1213,10 +1202,9 @@ module ListFargateProfiles = {
   }
   @module("@aws-sdk/client-eks") @new external new: request => t = "ListFargateProfilesCommand"
   let make = (~clusterName, ~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken: nextToken, maxResults: maxResults, clusterName: clusterName})
+    new({nextToken, maxResults, clusterName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListClusters = {
   type t
   type request = {
@@ -1256,10 +1244,9 @@ module ListClusters = {
   }
   @module("@aws-sdk/client-eks") @new external new: request => t = "ListClustersCommand"
   let make = (~include_=?, ~nextToken=?, ~maxResults=?, ()) =>
-    new({include_: include_, nextToken: nextToken, maxResults: maxResults})
+    new({include_, nextToken, maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListAddons = {
   type t
   type request = {
@@ -1298,10 +1285,9 @@ module ListAddons = {
   }
   @module("@aws-sdk/client-eks") @new external new: request => t = "ListAddonsCommand"
   let make = (~clusterName, ~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken: nextToken, maxResults: maxResults, clusterName: clusterName})
+    new({nextToken, maxResults, clusterName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListIdentityProviderConfigs = {
   type t
   type request = {
@@ -1338,10 +1324,9 @@ module ListIdentityProviderConfigs = {
   @module("@aws-sdk/client-eks") @new
   external new: request => t = "ListIdentityProviderConfigsCommand"
   let make = (~clusterName, ~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken: nextToken, maxResults: maxResults, clusterName: clusterName})
+    new({nextToken, maxResults, clusterName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeIdentityProviderConfig = {
   type t
   type request = {
@@ -1358,10 +1343,9 @@ module DescribeIdentityProviderConfig = {
   @module("@aws-sdk/client-eks") @new
   external new: request => t = "DescribeIdentityProviderConfigCommand"
   let make = (~identityProviderConfig, ~clusterName, ()) =>
-    new({identityProviderConfig: identityProviderConfig, clusterName: clusterName})
+    new({identityProviderConfig, clusterName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateNodegroupVersion = {
   type t
   type request = {
@@ -1408,17 +1392,16 @@ module UpdateNodegroupVersion = {
     (),
   ) =>
     new({
-      clientRequestToken: clientRequestToken,
-      force: force,
-      launchTemplate: launchTemplate,
-      releaseVersion: releaseVersion,
-      version: version,
-      nodegroupName: nodegroupName,
-      clusterName: clusterName,
+      clientRequestToken,
+      force,
+      launchTemplate,
+      releaseVersion,
+      version,
+      nodegroupName,
+      clusterName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateNodegroupConfig = {
   type t
   type request = {
@@ -1455,17 +1438,16 @@ module UpdateNodegroupConfig = {
     (),
   ) =>
     new({
-      clientRequestToken: clientRequestToken,
-      updateConfig: updateConfig,
-      scalingConfig: scalingConfig,
-      taints: taints,
-      labels: labels,
-      nodegroupName: nodegroupName,
-      clusterName: clusterName,
+      clientRequestToken,
+      updateConfig,
+      scalingConfig,
+      taints,
+      labels,
+      nodegroupName,
+      clusterName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateClusterVersion = {
   type t
   type request = {
@@ -1481,10 +1463,9 @@ module UpdateClusterVersion = {
   }
   @module("@aws-sdk/client-eks") @new external new: request => t = "UpdateClusterVersionCommand"
   let make = (~version, ~name, ~clientRequestToken=?, ()) =>
-    new({clientRequestToken: clientRequestToken, version: version, name: name})
+    new({clientRequestToken, version, name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateClusterConfig = {
   type t
   type request = {
@@ -1509,15 +1490,9 @@ module UpdateClusterConfig = {
   type response = {update: option<update>}
   @module("@aws-sdk/client-eks") @new external new: request => t = "UpdateClusterConfigCommand"
   let make = (~name, ~clientRequestToken=?, ~logging=?, ~resourcesVpcConfig=?, ()) =>
-    new({
-      clientRequestToken: clientRequestToken,
-      logging: logging,
-      resourcesVpcConfig: resourcesVpcConfig,
-      name: name,
-    })
+    new({clientRequestToken, logging, resourcesVpcConfig, name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateAddon = {
   type t
   type request = {
@@ -1558,16 +1533,15 @@ module UpdateAddon = {
     (),
   ) =>
     new({
-      clientRequestToken: clientRequestToken,
-      resolveConflicts: resolveConflicts,
-      serviceAccountRoleArn: serviceAccountRoleArn,
-      addonVersion: addonVersion,
-      addonName: addonName,
-      clusterName: clusterName,
+      clientRequestToken,
+      resolveConflicts,
+      serviceAccountRoleArn,
+      addonVersion,
+      addonName,
+      clusterName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DisassociateIdentityProviderConfig = {
   type t
   type request = {
@@ -1583,14 +1557,9 @@ module DisassociateIdentityProviderConfig = {
   @module("@aws-sdk/client-eks") @new
   external new: request => t = "DisassociateIdentityProviderConfigCommand"
   let make = (~identityProviderConfig, ~clusterName, ~clientRequestToken=?, ()) =>
-    new({
-      clientRequestToken: clientRequestToken,
-      identityProviderConfig: identityProviderConfig,
-      clusterName: clusterName,
-    })
+    new({clientRequestToken, identityProviderConfig, clusterName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeUpdate = {
   type t
   type request = {
@@ -1609,10 +1578,9 @@ module DescribeUpdate = {
   }
   @module("@aws-sdk/client-eks") @new external new: request => t = "DescribeUpdateCommand"
   let make = (~updateId, ~name, ~addonName=?, ~nodegroupName=?, ()) =>
-    new({addonName: addonName, nodegroupName: nodegroupName, updateId: updateId, name: name})
+    new({addonName, nodegroupName, updateId, name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeFargateProfile = {
   type t
   type request = {
@@ -1626,11 +1594,9 @@ module DescribeFargateProfile = {
     fargateProfile: option<fargateProfile>,
   }
   @module("@aws-sdk/client-eks") @new external new: request => t = "DescribeFargateProfileCommand"
-  let make = (~fargateProfileName, ~clusterName, ()) =>
-    new({fargateProfileName: fargateProfileName, clusterName: clusterName})
+  let make = (~fargateProfileName, ~clusterName, ()) => new({fargateProfileName, clusterName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteFargateProfile = {
   type t
   type request = {
@@ -1643,11 +1609,9 @@ module DeleteFargateProfile = {
     @ocaml.doc("<p>The deleted Fargate profile.</p>") fargateProfile: option<fargateProfile>,
   }
   @module("@aws-sdk/client-eks") @new external new: request => t = "DeleteFargateProfileCommand"
-  let make = (~fargateProfileName, ~clusterName, ()) =>
-    new({fargateProfileName: fargateProfileName, clusterName: clusterName})
+  let make = (~fargateProfileName, ~clusterName, ()) => new({fargateProfileName, clusterName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateFargateProfile = {
   type t
   type request = {
@@ -1694,17 +1658,16 @@ module CreateFargateProfile = {
     (),
   ) =>
     new({
-      tags: tags,
-      clientRequestToken: clientRequestToken,
-      selectors: selectors,
-      subnets: subnets,
-      podExecutionRoleArn: podExecutionRoleArn,
-      clusterName: clusterName,
-      fargateProfileName: fargateProfileName,
+      tags,
+      clientRequestToken,
+      selectors,
+      subnets,
+      podExecutionRoleArn,
+      clusterName,
+      fargateProfileName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module AssociateIdentityProviderConfig = {
   type t
   type request = {
@@ -1727,10 +1690,9 @@ module AssociateIdentityProviderConfig = {
   @module("@aws-sdk/client-eks") @new
   external new: request => t = "AssociateIdentityProviderConfigCommand"
   let make = (~oidc, ~clusterName, ~clientRequestToken=?, ~tags=?, ()) =>
-    new({clientRequestToken: clientRequestToken, tags: tags, oidc: oidc, clusterName: clusterName})
+    new({clientRequestToken, tags, oidc, clusterName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module AssociateEncryptionConfig = {
   type t
   type request = {
@@ -1747,14 +1709,9 @@ module AssociateEncryptionConfig = {
   @module("@aws-sdk/client-eks") @new
   external new: request => t = "AssociateEncryptionConfigCommand"
   let make = (~encryptionConfig, ~clusterName, ~clientRequestToken=?, ()) =>
-    new({
-      clientRequestToken: clientRequestToken,
-      encryptionConfig: encryptionConfig,
-      clusterName: clusterName,
-    })
+    new({clientRequestToken, encryptionConfig, clusterName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module RegisterCluster = {
   type t
   type request = {
@@ -1775,15 +1732,9 @@ module RegisterCluster = {
   type response = {cluster: option<cluster>}
   @module("@aws-sdk/client-eks") @new external new: request => t = "RegisterClusterCommand"
   let make = (~connectorConfig, ~name, ~tags=?, ~clientRequestToken=?, ()) =>
-    new({
-      tags: tags,
-      clientRequestToken: clientRequestToken,
-      connectorConfig: connectorConfig,
-      name: name,
-    })
+    new({tags, clientRequestToken, connectorConfig, name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeNodegroup = {
   type t
   type request = {
@@ -1795,11 +1746,9 @@ module DescribeNodegroup = {
     @ocaml.doc("<p>The full description of your node group.</p>") nodegroup: option<nodegroup>,
   }
   @module("@aws-sdk/client-eks") @new external new: request => t = "DescribeNodegroupCommand"
-  let make = (~nodegroupName, ~clusterName, ()) =>
-    new({nodegroupName: nodegroupName, clusterName: clusterName})
+  let make = (~nodegroupName, ~clusterName, ()) => new({nodegroupName, clusterName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeCluster = {
   type t
   type request = {@ocaml.doc("<p>The name of the cluster to describe.</p>") name: string_}
@@ -1810,7 +1759,6 @@ module DescribeCluster = {
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeAddon = {
   type t
   type request = {
@@ -1822,10 +1770,9 @@ module DescribeAddon = {
   }
   type response = {addon: option<addon>}
   @module("@aws-sdk/client-eks") @new external new: request => t = "DescribeAddonCommand"
-  let make = (~addonName, ~clusterName, ()) => new({addonName: addonName, clusterName: clusterName})
+  let make = (~addonName, ~clusterName, ()) => new({addonName, clusterName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeregisterCluster = {
   type t
   type request = {
@@ -1836,7 +1783,6 @@ module DeregisterCluster = {
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteNodegroup = {
   type t
   type request = {
@@ -1850,11 +1796,9 @@ module DeleteNodegroup = {
     nodegroup: option<nodegroup>,
   }
   @module("@aws-sdk/client-eks") @new external new: request => t = "DeleteNodegroupCommand"
-  let make = (~nodegroupName, ~clusterName, ()) =>
-    new({nodegroupName: nodegroupName, clusterName: clusterName})
+  let make = (~nodegroupName, ~clusterName, ()) => new({nodegroupName, clusterName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteCluster = {
   type t
   type request = {@ocaml.doc("<p>The name of the cluster to delete.</p>") name: string_}
@@ -1865,7 +1809,6 @@ module DeleteCluster = {
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteAddon = {
   type t
   type request = {
@@ -1881,11 +1824,9 @@ module DeleteAddon = {
   }
   type response = {addon: option<addon>}
   @module("@aws-sdk/client-eks") @new external new: request => t = "DeleteAddonCommand"
-  let make = (~addonName, ~clusterName, ~preserve=?, ()) =>
-    new({preserve: preserve, addonName: addonName, clusterName: clusterName})
+  let make = (~addonName, ~clusterName, ~preserve=?, ()) => new({preserve, addonName, clusterName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateNodegroup = {
   type t
   type request = {
@@ -2000,28 +1941,27 @@ module CreateNodegroup = {
     (),
   ) =>
     new({
-      releaseVersion: releaseVersion,
-      version: version,
-      capacityType: capacityType,
-      updateConfig: updateConfig,
-      launchTemplate: launchTemplate,
-      clientRequestToken: clientRequestToken,
-      tags: tags,
-      taints: taints,
-      labels: labels,
-      nodeRole: nodeRole,
-      remoteAccess: remoteAccess,
-      amiType: amiType,
-      instanceTypes: instanceTypes,
-      subnets: subnets,
-      diskSize: diskSize,
-      scalingConfig: scalingConfig,
-      nodegroupName: nodegroupName,
-      clusterName: clusterName,
+      releaseVersion,
+      version,
+      capacityType,
+      updateConfig,
+      launchTemplate,
+      clientRequestToken,
+      tags,
+      taints,
+      labels,
+      nodeRole,
+      remoteAccess,
+      amiType,
+      instanceTypes,
+      subnets,
+      diskSize,
+      scalingConfig,
+      nodegroupName,
+      clusterName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateCluster = {
   type t
   type request = {
@@ -2082,19 +2022,18 @@ module CreateCluster = {
     (),
   ) =>
     new({
-      encryptionConfig: encryptionConfig,
-      tags: tags,
-      clientRequestToken: clientRequestToken,
-      logging: logging,
-      kubernetesNetworkConfig: kubernetesNetworkConfig,
-      resourcesVpcConfig: resourcesVpcConfig,
-      roleArn: roleArn,
-      version: version,
-      name: name,
+      encryptionConfig,
+      tags,
+      clientRequestToken,
+      logging,
+      kubernetesNetworkConfig,
+      resourcesVpcConfig,
+      roleArn,
+      version,
+      name,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateAddon = {
   type t
   type request = {
@@ -2139,17 +2078,16 @@ module CreateAddon = {
     (),
   ) =>
     new({
-      tags: tags,
-      clientRequestToken: clientRequestToken,
-      resolveConflicts: resolveConflicts,
-      serviceAccountRoleArn: serviceAccountRoleArn,
-      addonVersion: addonVersion,
-      addonName: addonName,
-      clusterName: clusterName,
+      tags,
+      clientRequestToken,
+      resolveConflicts,
+      serviceAccountRoleArn,
+      addonVersion,
+      addonName,
+      clusterName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeAddonVersions = {
   type t
   type request = {
@@ -2186,11 +2124,6 @@ module DescribeAddonVersions = {
   }
   @module("@aws-sdk/client-eks") @new external new: request => t = "DescribeAddonVersionsCommand"
   let make = (~addonName=?, ~nextToken=?, ~maxResults=?, ~kubernetesVersion=?, ()) =>
-    new({
-      addonName: addonName,
-      nextToken: nextToken,
-      maxResults: maxResults,
-      kubernetesVersion: kubernetesVersion,
-    })
+    new({addonName, nextToken, maxResults, kubernetesVersion})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

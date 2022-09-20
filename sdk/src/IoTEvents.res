@@ -1185,7 +1185,6 @@ module DescribeDetectorModelAnalysis = {
   let make = (~analysisId, ()) => new({analysisId: analysisId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteInput = {
   type t
   type request = {@ocaml.doc("<p>The name of the input to delete.</p>") inputName: inputName}
@@ -1194,7 +1193,6 @@ module DeleteInput = {
   let make = (~inputName, ()) => new({inputName: inputName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteDetectorModel = {
   type t
   type request = {
@@ -1207,7 +1205,6 @@ module DeleteDetectorModel = {
   let make = (~detectorModelName, ()) => new({detectorModelName: detectorModelName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteAlarmModel = {
   type t
   type request = {@ocaml.doc("<p>The name of the alarm model.</p>") alarmModelName: alarmModelName}
@@ -1216,7 +1213,6 @@ module DeleteAlarmModel = {
   let make = (~alarmModelName, ()) => new({alarmModelName: alarmModelName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module UntagResource = {
   type t
   type request = {
@@ -1226,10 +1222,9 @@ module UntagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-iotevents") @new external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
+  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys, resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module TagResource = {
   type t
   type request = {
@@ -1238,10 +1233,9 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-iotevents") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
+  let make = (~tags, ~resourceArn, ()) => new({tags, resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module ListTagsForResource = {
   type t
   type request = {@ocaml.doc("<p>The ARN of the resource.</p>") resourceArn: amazonResourceName}
@@ -1253,7 +1247,6 @@ module ListTagsForResource = {
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListInputs = {
   type t
   type request = {
@@ -1270,11 +1263,9 @@ or <code>null</code> if there are no more results.</p>")
     inputSummaries: option<inputSummaries>,
   }
   @module("@aws-sdk/client-iotevents") @new external new: request => t = "ListInputsCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListDetectorModels = {
   type t
   type request = {
@@ -1291,11 +1282,9 @@ or <code>null</code> if there are no more results.</p>")
     detectorModelSummaries: option<detectorModelSummaries>,
   }
   @module("@aws-sdk/client-iotevents") @new external new: request => t = "ListDetectorModelsCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListDetectorModelVersions = {
   type t
   type request = {
@@ -1316,10 +1305,9 @@ or <code>null</code> if there are no more results.</p>")
   @module("@aws-sdk/client-iotevents") @new
   external new: request => t = "ListDetectorModelVersionsCommand"
   let make = (~detectorModelName, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, detectorModelName: detectorModelName})
+    new({maxResults, nextToken, detectorModelName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListAlarmModels = {
   type t
   type request = {
@@ -1336,11 +1324,9 @@ or <code>null</code> if there are no more results.</p>")
     alarmModelSummaries: option<alarmModelSummaries>,
   }
   @module("@aws-sdk/client-iotevents") @new external new: request => t = "ListAlarmModelsCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListAlarmModelVersions = {
   type t
   type request = {
@@ -1360,10 +1346,9 @@ or <code>null</code> if there are no more results.</p>")
   @module("@aws-sdk/client-iotevents") @new
   external new: request => t = "ListAlarmModelVersionsCommand"
   let make = (~alarmModelName, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, alarmModelName: alarmModelName})
+    new({maxResults, nextToken, alarmModelName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateInput = {
   type t
   type request = {
@@ -1378,14 +1363,9 @@ module UpdateInput = {
   }
   @module("@aws-sdk/client-iotevents") @new external new: request => t = "UpdateInputCommand"
   let make = (~inputDefinition, ~inputName, ~inputDescription=?, ()) =>
-    new({
-      inputDefinition: inputDefinition,
-      inputDescription: inputDescription,
-      inputName: inputName,
-    })
+    new({inputDefinition, inputDescription, inputName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module PutLoggingOptions = {
   type t
   type request = {
@@ -1397,7 +1377,6 @@ module PutLoggingOptions = {
   let make = (~loggingOptions, ()) => new({loggingOptions: loggingOptions})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module ListInputRoutings = {
   type t
   type request = {
@@ -1427,10 +1406,9 @@ or <code>null</code> if there are no more results.
   }
   @module("@aws-sdk/client-iotevents") @new external new: request => t = "ListInputRoutingsCommand"
   let make = (~inputIdentifier, ~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken: nextToken, maxResults: maxResults, inputIdentifier: inputIdentifier})
+    new({nextToken, maxResults, inputIdentifier})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeLoggingOptions = {
   type t
   type request = {.}
@@ -1443,7 +1421,6 @@ module DescribeLoggingOptions = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateInput = {
   type t
   type request = {
@@ -1459,15 +1436,9 @@ module CreateInput = {
   }
   @module("@aws-sdk/client-iotevents") @new external new: request => t = "CreateInputCommand"
   let make = (~inputDefinition, ~inputName, ~tags=?, ~inputDescription=?, ()) =>
-    new({
-      tags: tags,
-      inputDefinition: inputDefinition,
-      inputDescription: inputDescription,
-      inputName: inputName,
-    })
+    new({tags, inputDefinition, inputDescription, inputName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetDetectorModelAnalysisResults = {
   type t
   type request = {
@@ -1488,10 +1459,9 @@ or <code>null</code> if there are no more results.</p>")
   @module("@aws-sdk/client-iotevents") @new
   external new: request => t = "GetDetectorModelAnalysisResultsCommand"
   let make = (~analysisId, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, analysisId: analysisId})
+    new({maxResults, nextToken, analysisId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeInput = {
   type t
   type request = {@ocaml.doc("<p>The name of the input.</p>") inputName: inputName}
@@ -1500,7 +1470,6 @@ module DescribeInput = {
   let make = (~inputName, ()) => new({inputName: inputName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateAlarmModel = {
   type t
   type request = {
@@ -1569,18 +1538,17 @@ module UpdateAlarmModel = {
     (),
   ) =>
     new({
-      alarmCapabilities: alarmCapabilities,
-      alarmEventActions: alarmEventActions,
-      alarmNotification: alarmNotification,
-      alarmRule: alarmRule,
-      severity: severity,
-      roleArn: roleArn,
-      alarmModelDescription: alarmModelDescription,
-      alarmModelName: alarmModelName,
+      alarmCapabilities,
+      alarmEventActions,
+      alarmNotification,
+      alarmRule,
+      severity,
+      roleArn,
+      alarmModelDescription,
+      alarmModelName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeAlarmModel = {
   type t
   type request = {
@@ -1648,11 +1616,9 @@ associated with this key to the alarm.</p>")
     creationTime: option<timestamp_>,
   }
   @module("@aws-sdk/client-iotevents") @new external new: request => t = "DescribeAlarmModelCommand"
-  let make = (~alarmModelName, ~alarmModelVersion=?, ()) =>
-    new({alarmModelVersion: alarmModelVersion, alarmModelName: alarmModelName})
+  let make = (~alarmModelName, ~alarmModelVersion=?, ()) => new({alarmModelVersion, alarmModelName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateAlarmModel = {
   type t
   type request = {
@@ -1734,20 +1700,19 @@ associated with this key to the alarm.</p>")
     (),
   ) =>
     new({
-      alarmCapabilities: alarmCapabilities,
-      alarmEventActions: alarmEventActions,
-      alarmNotification: alarmNotification,
-      alarmRule: alarmRule,
-      severity: severity,
-      key: key,
-      tags: tags,
-      roleArn: roleArn,
-      alarmModelDescription: alarmModelDescription,
-      alarmModelName: alarmModelName,
+      alarmCapabilities,
+      alarmEventActions,
+      alarmNotification,
+      alarmRule,
+      severity,
+      key,
+      tags,
+      roleArn,
+      alarmModelDescription,
+      alarmModelName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateDetectorModel = {
   type t
   type request = {
@@ -1780,15 +1745,14 @@ module UpdateDetectorModel = {
     (),
   ) =>
     new({
-      evaluationMethod: evaluationMethod,
-      roleArn: roleArn,
-      detectorModelDescription: detectorModelDescription,
-      detectorModelDefinition: detectorModelDefinition,
-      detectorModelName: detectorModelName,
+      evaluationMethod,
+      roleArn,
+      detectorModelDescription,
+      detectorModelDefinition,
+      detectorModelName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module StartDetectorModelAnalysis = {
   type t
   type request = {detectorModelDefinition: detectorModelDefinition}
@@ -1802,7 +1766,6 @@ module StartDetectorModelAnalysis = {
     new({detectorModelDefinition: detectorModelDefinition})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateDetectorModel = {
   type t
   type request = {
@@ -1843,17 +1806,16 @@ module CreateDetectorModel = {
     (),
   ) =>
     new({
-      evaluationMethod: evaluationMethod,
-      tags: tags,
-      roleArn: roleArn,
-      key: key,
-      detectorModelDescription: detectorModelDescription,
-      detectorModelDefinition: detectorModelDefinition,
-      detectorModelName: detectorModelName,
+      evaluationMethod,
+      tags,
+      roleArn,
+      key,
+      detectorModelDescription,
+      detectorModelDefinition,
+      detectorModelName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeDetectorModel = {
   type t
   type request = {
@@ -1867,6 +1829,6 @@ module DescribeDetectorModel = {
   @module("@aws-sdk/client-iotevents") @new
   external new: request => t = "DescribeDetectorModelCommand"
   let make = (~detectorModelName, ~detectorModelVersion=?, ()) =>
-    new({detectorModelVersion: detectorModelVersion, detectorModelName: detectorModelName})
+    new({detectorModelVersion, detectorModelName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

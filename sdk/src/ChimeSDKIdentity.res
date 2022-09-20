@@ -292,15 +292,9 @@ module UpdateAppInstanceUserEndpoint = {
   @module("@aws-sdk/client-chime") @new
   external new: request => t = "UpdateAppInstanceUserEndpointCommand"
   let make = (~endpointId, ~appInstanceUserArn, ~allowMessages=?, ~name=?, ()) =>
-    new({
-      allowMessages: allowMessages,
-      name: name,
-      endpointId: endpointId,
-      appInstanceUserArn: appInstanceUserArn,
-    })
+    new({allowMessages, name, endpointId, appInstanceUserArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateAppInstanceUser = {
   type t
   type request = {
@@ -316,10 +310,9 @@ module UpdateAppInstanceUser = {
   }
   @module("@aws-sdk/client-chime") @new external new: request => t = "UpdateAppInstanceUserCommand"
   let make = (~metadata, ~name, ~appInstanceUserArn, ()) =>
-    new({metadata: metadata, name: name, appInstanceUserArn: appInstanceUserArn})
+    new({metadata, name, appInstanceUserArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateAppInstance = {
   type t
   type request = {
@@ -333,11 +326,9 @@ module UpdateAppInstance = {
     appInstanceArn: option<chimeArn>,
   }
   @module("@aws-sdk/client-chime") @new external new: request => t = "UpdateAppInstanceCommand"
-  let make = (~metadata, ~name, ~appInstanceArn, ()) =>
-    new({metadata: metadata, name: name, appInstanceArn: appInstanceArn})
+  let make = (~metadata, ~name, ~appInstanceArn, ()) => new({metadata, name, appInstanceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeregisterAppInstanceUserEndpoint = {
   type t
   type request = {
@@ -350,11 +341,9 @@ module DeregisterAppInstanceUserEndpoint = {
   type response = {.}
   @module("@aws-sdk/client-chime") @new
   external new: request => t = "DeregisterAppInstanceUserEndpointCommand"
-  let make = (~endpointId, ~appInstanceUserArn, ()) =>
-    new({endpointId: endpointId, appInstanceUserArn: appInstanceUserArn})
+  let make = (~endpointId, ~appInstanceUserArn, ()) => new({endpointId, appInstanceUserArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteAppInstanceUser = {
   type t
   type request = {
@@ -366,7 +355,6 @@ module DeleteAppInstanceUser = {
   let make = (~appInstanceUserArn, ()) => new({appInstanceUserArn: appInstanceUserArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteAppInstanceAdmin = {
   type t
   type request = {
@@ -379,10 +367,9 @@ module DeleteAppInstanceAdmin = {
   type response = {.}
   @module("@aws-sdk/client-chime") @new external new: request => t = "DeleteAppInstanceAdminCommand"
   let make = (~appInstanceArn, ~appInstanceAdminArn, ()) =>
-    new({appInstanceArn: appInstanceArn, appInstanceAdminArn: appInstanceAdminArn})
+    new({appInstanceArn, appInstanceAdminArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteAppInstance = {
   type t
   type request = {
@@ -394,7 +381,6 @@ module DeleteAppInstance = {
   let make = (~appInstanceArn, ()) => new({appInstanceArn: appInstanceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module UntagResource = {
   type t
   type request = {
@@ -403,10 +389,9 @@ module UntagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-chime") @new external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceARN, ()) => new({tagKeys: tagKeys, resourceARN: resourceARN})
+  let make = (~tagKeys, ~resourceARN, ()) => new({tagKeys, resourceARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module RegisterAppInstanceUserEndpoint = {
   type t
   type request = {
@@ -463,17 +448,16 @@ module RegisterAppInstanceUserEndpoint = {
     (),
   ) =>
     new({
-      allowMessages: allowMessages,
-      clientRequestToken: clientRequestToken,
-      endpointAttributes: endpointAttributes,
-      resourceArn: resourceArn,
-      type_: type_,
-      name: name,
-      appInstanceUserArn: appInstanceUserArn,
+      allowMessages,
+      clientRequestToken,
+      endpointAttributes,
+      resourceArn,
+      type_,
+      name,
+      appInstanceUserArn,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeAppInstanceUser = {
   type t
   type request = {
@@ -489,7 +473,6 @@ module DescribeAppInstanceUser = {
   let make = (~appInstanceUserArn, ()) => new({appInstanceUserArn: appInstanceUserArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeAppInstance = {
   type t
   type request = {
@@ -506,7 +489,6 @@ module DescribeAppInstance = {
   let make = (~appInstanceArn, ()) => new({appInstanceArn: appInstanceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateAppInstanceAdmin = {
   type t
   type request = {
@@ -526,10 +508,9 @@ module CreateAppInstanceAdmin = {
   }
   @module("@aws-sdk/client-chime") @new external new: request => t = "CreateAppInstanceAdminCommand"
   let make = (~appInstanceArn, ~appInstanceAdminArn, ()) =>
-    new({appInstanceArn: appInstanceArn, appInstanceAdminArn: appInstanceAdminArn})
+    new({appInstanceArn, appInstanceAdminArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module TagResource = {
   type t
   type request = {
@@ -538,10 +519,9 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-chime") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceARN, ()) => new({tags: tags, resourceARN: resourceARN})
+  let make = (~tags, ~resourceARN, ()) => new({tags, resourceARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module PutAppInstanceRetentionSettings = {
   type t
   type request = {
@@ -561,13 +541,9 @@ module PutAppInstanceRetentionSettings = {
   @module("@aws-sdk/client-chime") @new
   external new: request => t = "PutAppInstanceRetentionSettingsCommand"
   let make = (~appInstanceRetentionSettings, ~appInstanceArn, ()) =>
-    new({
-      appInstanceRetentionSettings: appInstanceRetentionSettings,
-      appInstanceArn: appInstanceArn,
-    })
+    new({appInstanceRetentionSettings, appInstanceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListTagsForResource = {
   type t
   type request = {
@@ -578,7 +554,6 @@ module ListTagsForResource = {
   let make = (~resourceARN, ()) => new({resourceARN: resourceARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListAppInstances = {
   type t
   type request = {
@@ -599,11 +574,9 @@ module ListAppInstances = {
     appInstances: option<appInstanceList>,
   }
   @module("@aws-sdk/client-chime") @new external new: request => t = "ListAppInstancesCommand"
-  let make = (~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken: nextToken, maxResults: maxResults})
+  let make = (~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListAppInstanceUsers = {
   type t
   type request = {
@@ -631,10 +604,9 @@ module ListAppInstanceUsers = {
   }
   @module("@aws-sdk/client-chime") @new external new: request => t = "ListAppInstanceUsersCommand"
   let make = (~appInstanceArn, ~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken: nextToken, maxResults: maxResults, appInstanceArn: appInstanceArn})
+    new({nextToken, maxResults, appInstanceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetAppInstanceRetentionSettings = {
   type t
   type request = {
@@ -655,7 +627,6 @@ module GetAppInstanceRetentionSettings = {
   let make = (~appInstanceArn, ()) => new({appInstanceArn: appInstanceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeAppInstanceUserEndpoint = {
   type t
   type request = {
@@ -673,11 +644,9 @@ module DescribeAppInstanceUserEndpoint = {
   }
   @module("@aws-sdk/client-chime") @new
   external new: request => t = "DescribeAppInstanceUserEndpointCommand"
-  let make = (~endpointId, ~appInstanceUserArn, ()) =>
-    new({endpointId: endpointId, appInstanceUserArn: appInstanceUserArn})
+  let make = (~endpointId, ~appInstanceUserArn, ()) => new({endpointId, appInstanceUserArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeAppInstanceAdmin = {
   type t
   type request = {
@@ -696,10 +665,9 @@ module DescribeAppInstanceAdmin = {
   @module("@aws-sdk/client-chime") @new
   external new: request => t = "DescribeAppInstanceAdminCommand"
   let make = (~appInstanceArn, ~appInstanceAdminArn, ()) =>
-    new({appInstanceArn: appInstanceArn, appInstanceAdminArn: appInstanceAdminArn})
+    new({appInstanceArn, appInstanceAdminArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateAppInstanceUser = {
   type t
   type request = {
@@ -729,18 +697,9 @@ module CreateAppInstanceUser = {
     ~tags=?,
     ~metadata=?,
     (),
-  ) =>
-    new({
-      tags: tags,
-      clientRequestToken: clientRequestToken,
-      metadata: metadata,
-      name: name,
-      appInstanceUserId: appInstanceUserId,
-      appInstanceArn: appInstanceArn,
-    })
+  ) => new({tags, clientRequestToken, metadata, name, appInstanceUserId, appInstanceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateAppInstance = {
   type t
   type request = {
@@ -764,10 +723,9 @@ module CreateAppInstance = {
   }
   @module("@aws-sdk/client-chime") @new external new: request => t = "CreateAppInstanceCommand"
   let make = (~clientRequestToken, ~name, ~tags=?, ~metadata=?, ()) =>
-    new({tags: tags, clientRequestToken: clientRequestToken, metadata: metadata, name: name})
+    new({tags, clientRequestToken, metadata, name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListAppInstanceUserEndpoints = {
   type t
   type request = {
@@ -794,10 +752,9 @@ module ListAppInstanceUserEndpoints = {
   @module("@aws-sdk/client-chime") @new
   external new: request => t = "ListAppInstanceUserEndpointsCommand"
   let make = (~appInstanceUserArn, ~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken: nextToken, maxResults: maxResults, appInstanceUserArn: appInstanceUserArn})
+    new({nextToken, maxResults, appInstanceUserArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListAppInstanceAdmins = {
   type t
   type request = {
@@ -823,6 +780,6 @@ module ListAppInstanceAdmins = {
   }
   @module("@aws-sdk/client-chime") @new external new: request => t = "ListAppInstanceAdminsCommand"
   let make = (~appInstanceArn, ~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken: nextToken, maxResults: maxResults, appInstanceArn: appInstanceArn})
+    new({nextToken, maxResults, appInstanceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

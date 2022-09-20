@@ -1176,15 +1176,9 @@ module UpdateSubnetChangeProtection = {
   @module("@aws-sdk/client-network-firewall") @new
   external new: request => t = "UpdateSubnetChangeProtectionCommand"
   let make = (~subnetChangeProtection, ~firewallName=?, ~firewallArn=?, ~updateToken=?, ()) =>
-    new({
-      subnetChangeProtection: subnetChangeProtection,
-      firewallName: firewallName,
-      firewallArn: firewallArn,
-      updateToken: updateToken,
-    })
+    new({subnetChangeProtection, firewallName, firewallArn, updateToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateFirewallPolicyChangeProtection = {
   type t
   type request = {
@@ -1234,16 +1228,9 @@ module UpdateFirewallPolicyChangeProtection = {
     ~firewallArn=?,
     ~updateToken=?,
     (),
-  ) =>
-    new({
-      firewallPolicyChangeProtection: firewallPolicyChangeProtection,
-      firewallName: firewallName,
-      firewallArn: firewallArn,
-      updateToken: updateToken,
-    })
+  ) => new({firewallPolicyChangeProtection, firewallName, firewallArn, updateToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateFirewallDescription = {
   type t
   type request = {
@@ -1284,15 +1271,9 @@ module UpdateFirewallDescription = {
   @module("@aws-sdk/client-network-firewall") @new
   external new: request => t = "UpdateFirewallDescriptionCommand"
   let make = (~description=?, ~firewallName=?, ~firewallArn=?, ~updateToken=?, ()) =>
-    new({
-      description: description,
-      firewallName: firewallName,
-      firewallArn: firewallArn,
-      updateToken: updateToken,
-    })
+    new({description, firewallName, firewallArn, updateToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateFirewallDeleteProtection = {
   type t
   type request = {
@@ -1337,15 +1318,9 @@ module UpdateFirewallDeleteProtection = {
   @module("@aws-sdk/client-network-firewall") @new
   external new: request => t = "UpdateFirewallDeleteProtectionCommand"
   let make = (~deleteProtection, ~firewallName=?, ~firewallArn=?, ~updateToken=?, ()) =>
-    new({
-      deleteProtection: deleteProtection,
-      firewallName: firewallName,
-      firewallArn: firewallArn,
-      updateToken: updateToken,
-    })
+    new({deleteProtection, firewallName, firewallArn, updateToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module PutResourcePolicy = {
   type t
   type request = {
@@ -1390,10 +1365,9 @@ module PutResourcePolicy = {
   type response = {.}
   @module("@aws-sdk/client-network-firewall") @new
   external new: request => t = "PutResourcePolicyCommand"
-  let make = (~policy, ~resourceArn, ()) => new({policy: policy, resourceArn: resourceArn})
+  let make = (~policy, ~resourceArn, ()) => new({policy, resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DescribeResourcePolicy = {
   type t
   type request = {
@@ -1413,7 +1387,6 @@ module DescribeResourcePolicy = {
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteResourcePolicy = {
   type t
   type request = {
@@ -1429,7 +1402,6 @@ module DeleteResourcePolicy = {
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module AssociateFirewallPolicy = {
   type t
   type request = {
@@ -1470,15 +1442,9 @@ module AssociateFirewallPolicy = {
   @module("@aws-sdk/client-network-firewall") @new
   external new: request => t = "AssociateFirewallPolicyCommand"
   let make = (~firewallPolicyArn, ~firewallName=?, ~firewallArn=?, ~updateToken=?, ()) =>
-    new({
-      firewallPolicyArn: firewallPolicyArn,
-      firewallName: firewallName,
-      firewallArn: firewallArn,
-      updateToken: updateToken,
-    })
+    new({firewallPolicyArn, firewallName, firewallArn, updateToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UntagResource = {
   type t
   type request = {
@@ -1489,10 +1455,9 @@ module UntagResource = {
   type response = {.}
   @module("@aws-sdk/client-network-firewall") @new
   external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
+  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys, resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DescribeRuleGroupMetadata = {
   type t
   type request = {
@@ -1544,10 +1509,9 @@ stateless rules. If it is stateful, it contains stateful rules. </p>
   @module("@aws-sdk/client-network-firewall") @new
   external new: request => t = "DescribeRuleGroupMetadataCommand"
   let make = (~type_=?, ~ruleGroupArn=?, ~ruleGroupName=?, ()) =>
-    new({type_: type_, ruleGroupArn: ruleGroupArn, ruleGroupName: ruleGroupName})
+    new({type_, ruleGroupArn, ruleGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module TagResource = {
   type t
   type request = {
@@ -1557,10 +1521,9 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-network-firewall") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
+  let make = (~tags, ~resourceArn, ()) => new({tags, resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module ListTagsForResource = {
   type t
   type request = {
@@ -1589,10 +1552,9 @@ module ListTagsForResource = {
   @module("@aws-sdk/client-network-firewall") @new
   external new: request => t = "ListTagsForResourceCommand"
   let make = (~resourceArn, ~maxResults=?, ~nextToken=?, ()) =>
-    new({resourceArn: resourceArn, maxResults: maxResults, nextToken: nextToken})
+    new({resourceArn, maxResults, nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListRuleGroups = {
   type t
   type request = {
@@ -1625,11 +1587,9 @@ module ListRuleGroups = {
   }
   @module("@aws-sdk/client-network-firewall") @new
   external new: request => t = "ListRuleGroupsCommand"
-  let make = (~scope=?, ~maxResults=?, ~nextToken=?, ()) =>
-    new({scope: scope, maxResults: maxResults, nextToken: nextToken})
+  let make = (~scope=?, ~maxResults=?, ~nextToken=?, ()) => new({scope, maxResults, nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListFirewalls = {
   type t
   type request = {
@@ -1662,11 +1622,9 @@ module ListFirewalls = {
   }
   @module("@aws-sdk/client-network-firewall") @new
   external new: request => t = "ListFirewallsCommand"
-  let make = (~maxResults=?, ~vpcIds=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, vpcIds: vpcIds, nextToken: nextToken})
+  let make = (~maxResults=?, ~vpcIds=?, ~nextToken=?, ()) => new({maxResults, vpcIds, nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListFirewallPolicies = {
   type t
   type request = {
@@ -1694,11 +1652,9 @@ module ListFirewallPolicies = {
   }
   @module("@aws-sdk/client-network-firewall") @new
   external new: request => t = "ListFirewallPoliciesCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DisassociateSubnets = {
   type t
   type request = {
@@ -1739,15 +1695,9 @@ module DisassociateSubnets = {
   @module("@aws-sdk/client-network-firewall") @new
   external new: request => t = "DisassociateSubnetsCommand"
   let make = (~subnetIds, ~firewallName=?, ~firewallArn=?, ~updateToken=?, ()) =>
-    new({
-      subnetIds: subnetIds,
-      firewallName: firewallName,
-      firewallArn: firewallArn,
-      updateToken: updateToken,
-    })
+    new({subnetIds, firewallName, firewallArn, updateToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module AssociateSubnets = {
   type t
   type request = {
@@ -1788,15 +1738,9 @@ module AssociateSubnets = {
   @module("@aws-sdk/client-network-firewall") @new
   external new: request => t = "AssociateSubnetsCommand"
   let make = (~subnetMappings, ~firewallName=?, ~firewallArn=?, ~updateToken=?, ()) =>
-    new({
-      subnetMappings: subnetMappings,
-      firewallName: firewallName,
-      firewallArn: firewallArn,
-      updateToken: updateToken,
-    })
+    new({subnetMappings, firewallName, firewallArn, updateToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteRuleGroup = {
   type t
   type request = {
@@ -1826,10 +1770,9 @@ stateless rules. If it is stateful, it contains stateful rules. </p>
   @module("@aws-sdk/client-network-firewall") @new
   external new: request => t = "DeleteRuleGroupCommand"
   let make = (~type_=?, ~ruleGroupArn=?, ~ruleGroupName=?, ()) =>
-    new({type_: type_, ruleGroupArn: ruleGroupArn, ruleGroupName: ruleGroupName})
+    new({type_, ruleGroupArn, ruleGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteFirewallPolicy = {
   type t
   type request = {
@@ -1851,10 +1794,9 @@ module DeleteFirewallPolicy = {
   @module("@aws-sdk/client-network-firewall") @new
   external new: request => t = "DeleteFirewallPolicyCommand"
   let make = (~firewallPolicyArn=?, ~firewallPolicyName=?, ()) =>
-    new({firewallPolicyArn: firewallPolicyArn, firewallPolicyName: firewallPolicyName})
+    new({firewallPolicyArn, firewallPolicyName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateLoggingConfiguration = {
   type t
   type request = {
@@ -1884,14 +1826,9 @@ module UpdateLoggingConfiguration = {
   @module("@aws-sdk/client-network-firewall") @new
   external new: request => t = "UpdateLoggingConfigurationCommand"
   let make = (~loggingConfiguration=?, ~firewallName=?, ~firewallArn=?, ()) =>
-    new({
-      loggingConfiguration: loggingConfiguration,
-      firewallName: firewallName,
-      firewallArn: firewallArn,
-    })
+    new({loggingConfiguration, firewallName, firewallArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeLoggingConfiguration = {
   type t
   type request = {
@@ -1911,11 +1848,9 @@ module DescribeLoggingConfiguration = {
   }
   @module("@aws-sdk/client-network-firewall") @new
   external new: request => t = "DescribeLoggingConfigurationCommand"
-  let make = (~firewallName=?, ~firewallArn=?, ()) =>
-    new({firewallName: firewallName, firewallArn: firewallArn})
+  let make = (~firewallName=?, ~firewallArn=?, ()) => new({firewallName, firewallArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeFirewall = {
   type t
   type request = {
@@ -1947,11 +1882,9 @@ module DescribeFirewall = {
   }
   @module("@aws-sdk/client-network-firewall") @new
   external new: request => t = "DescribeFirewallCommand"
-  let make = (~firewallArn=?, ~firewallName=?, ()) =>
-    new({firewallArn: firewallArn, firewallName: firewallName})
+  let make = (~firewallArn=?, ~firewallName=?, ()) => new({firewallArn, firewallName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteFirewall = {
   type t
   type request = {
@@ -1970,11 +1903,9 @@ module DeleteFirewall = {
   }
   @module("@aws-sdk/client-network-firewall") @new
   external new: request => t = "DeleteFirewallCommand"
-  let make = (~firewallArn=?, ~firewallName=?, ()) =>
-    new({firewallArn: firewallArn, firewallName: firewallName})
+  let make = (~firewallArn=?, ~firewallName=?, ()) => new({firewallArn, firewallName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateFirewall = {
   type t
   type request = {
@@ -2043,19 +1974,18 @@ module CreateFirewall = {
     (),
   ) =>
     new({
-      tags: tags,
-      description: description,
-      firewallPolicyChangeProtection: firewallPolicyChangeProtection,
-      subnetChangeProtection: subnetChangeProtection,
-      deleteProtection: deleteProtection,
-      subnetMappings: subnetMappings,
-      vpcId: vpcId,
-      firewallPolicyArn: firewallPolicyArn,
-      firewallName: firewallName,
+      tags,
+      description,
+      firewallPolicyChangeProtection,
+      subnetChangeProtection,
+      deleteProtection,
+      subnetMappings,
+      vpcId,
+      firewallPolicyArn,
+      firewallName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateFirewallPolicy = {
   type t
   type request = {
@@ -2106,17 +2036,9 @@ module UpdateFirewallPolicy = {
     ~firewallPolicyArn=?,
     (),
   ) =>
-    new({
-      dryRun: dryRun,
-      description: description,
-      firewallPolicy: firewallPolicy,
-      firewallPolicyName: firewallPolicyName,
-      firewallPolicyArn: firewallPolicyArn,
-      updateToken: updateToken,
-    })
+    new({dryRun, description, firewallPolicy, firewallPolicyName, firewallPolicyArn, updateToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeFirewallPolicy = {
   type t
   type request = {
@@ -2145,10 +2067,9 @@ module DescribeFirewallPolicy = {
   @module("@aws-sdk/client-network-firewall") @new
   external new: request => t = "DescribeFirewallPolicyCommand"
   let make = (~firewallPolicyArn=?, ~firewallPolicyName=?, ()) =>
-    new({firewallPolicyArn: firewallPolicyArn, firewallPolicyName: firewallPolicyName})
+    new({firewallPolicyArn, firewallPolicyName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateFirewallPolicy = {
   type t
   type request = {
@@ -2187,16 +2108,9 @@ module CreateFirewallPolicy = {
   @module("@aws-sdk/client-network-firewall") @new
   external new: request => t = "CreateFirewallPolicyCommand"
   let make = (~firewallPolicy, ~firewallPolicyName, ~dryRun=?, ~tags=?, ~description=?, ()) =>
-    new({
-      dryRun: dryRun,
-      tags: tags,
-      description: description,
-      firewallPolicy: firewallPolicy,
-      firewallPolicyName: firewallPolicyName,
-    })
+    new({dryRun, tags, description, firewallPolicy, firewallPolicyName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateRuleGroup = {
   type t
   type request = {
@@ -2268,20 +2182,9 @@ response returns a <a>RuleGroup</a> object that Network Firewall has populated f
     ~ruleGroupName=?,
     ~ruleGroupArn=?,
     (),
-  ) =>
-    new({
-      dryRun: dryRun,
-      description: description,
-      type_: type_,
-      rules: rules,
-      ruleGroup: ruleGroup,
-      ruleGroupName: ruleGroupName,
-      ruleGroupArn: ruleGroupArn,
-      updateToken: updateToken,
-    })
+  ) => new({dryRun, description, type_, rules, ruleGroup, ruleGroupName, ruleGroupArn, updateToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeRuleGroup = {
   type t
   type request = {
@@ -2323,10 +2226,9 @@ stateless rules. If it is stateful, it contains stateful rules. </p>
   @module("@aws-sdk/client-network-firewall") @new
   external new: request => t = "DescribeRuleGroupCommand"
   let make = (~type_=?, ~ruleGroupArn=?, ~ruleGroupName=?, ()) =>
-    new({type_: type_, ruleGroupArn: ruleGroupArn, ruleGroupName: ruleGroupName})
+    new({type_, ruleGroupArn, ruleGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateRuleGroup = {
   type t
   type request = {
@@ -2433,16 +2335,6 @@ response returns a <a>RuleGroup</a> object that Network Firewall has populated f
     ~rules=?,
     ~ruleGroup=?,
     (),
-  ) =>
-    new({
-      dryRun: dryRun,
-      tags: tags,
-      capacity: capacity,
-      description: description,
-      type_: type_,
-      rules: rules,
-      ruleGroup: ruleGroup,
-      ruleGroupName: ruleGroupName,
-    })
+  ) => new({dryRun, tags, capacity, description, type_, rules, ruleGroup, ruleGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

@@ -1255,15 +1255,9 @@ module UpdateArchive = {
   }
   @module("@aws-sdk/client-events") @new external new: request => t = "UpdateArchiveCommand"
   let make = (~archiveName, ~retentionDays=?, ~eventPattern=?, ~description=?, ()) =>
-    new({
-      retentionDays: retentionDays,
-      eventPattern: eventPattern,
-      description: description,
-      archiveName: archiveName,
-    })
+    new({retentionDays, eventPattern, description, archiveName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateApiDestination = {
   type t
   type request = {
@@ -1309,16 +1303,15 @@ module UpdateApiDestination = {
     (),
   ) =>
     new({
-      invocationRateLimitPerSecond: invocationRateLimitPerSecond,
-      httpMethod: httpMethod,
-      invocationEndpoint: invocationEndpoint,
-      connectionArn: connectionArn,
-      description: description,
-      name: name,
+      invocationRateLimitPerSecond,
+      httpMethod,
+      invocationEndpoint,
+      connectionArn,
+      description,
+      name,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module TestEventPattern = {
   type t
   type request = {
@@ -1374,10 +1367,9 @@ module TestEventPattern = {
     result: option<boolean_>,
   }
   @module("@aws-sdk/client-events") @new external new: request => t = "TestEventPatternCommand"
-  let make = (~event, ~eventPattern, ()) => new({event: event, eventPattern: eventPattern})
+  let make = (~event, ~eventPattern, ()) => new({event, eventPattern})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module RemovePermission = {
   type t
   type request = {
@@ -1395,14 +1387,9 @@ module RemovePermission = {
   type response = {.}
   @module("@aws-sdk/client-events") @new external new: request => t = "RemovePermissionCommand"
   let make = (~eventBusName=?, ~removeAllPermissions=?, ~statementId=?, ()) =>
-    new({
-      eventBusName: eventBusName,
-      removeAllPermissions: removeAllPermissions,
-      statementId: statementId,
-    })
+    new({eventBusName, removeAllPermissions, statementId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module EnableRule = {
   type t
   type request = {
@@ -1414,10 +1401,9 @@ module EnableRule = {
   }
   type response = {.}
   @module("@aws-sdk/client-events") @new external new: request => t = "EnableRuleCommand"
-  let make = (~name, ~eventBusName=?, ()) => new({eventBusName: eventBusName, name: name})
+  let make = (~name, ~eventBusName=?, ()) => new({eventBusName, name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DisableRule = {
   type t
   type request = {
@@ -1429,10 +1415,9 @@ module DisableRule = {
   }
   type response = {.}
   @module("@aws-sdk/client-events") @new external new: request => t = "DisableRuleCommand"
-  let make = (~name, ~eventBusName=?, ()) => new({eventBusName: eventBusName, name: name})
+  let make = (~name, ~eventBusName=?, ()) => new({eventBusName, name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DescribeRule = {
   type t
   type request = {
@@ -1477,10 +1462,9 @@ module DescribeRule = {
     @ocaml.doc("<p>The name of the rule.</p>") @as("Name") name: option<ruleName>,
   }
   @module("@aws-sdk/client-events") @new external new: request => t = "DescribeRuleCommand"
-  let make = (~name, ~eventBusName=?, ()) => new({eventBusName: eventBusName, name: name})
+  let make = (~name, ~eventBusName=?, ()) => new({eventBusName, name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribePartnerEventSource = {
   type t
   type request = {
@@ -1495,7 +1479,6 @@ module DescribePartnerEventSource = {
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeEventSource = {
   type t
   type request = {
@@ -1525,7 +1508,6 @@ module DescribeEventSource = {
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeEventBus = {
   type t
   type request = {
@@ -1552,7 +1534,6 @@ module DescribeEventBus = {
   let make = (~name=?, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeArchive = {
   type t
   type request = {
@@ -1587,7 +1568,6 @@ module DescribeArchive = {
   let make = (~archiveName, ()) => new({archiveName: archiveName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeApiDestination = {
   type t
   type request = {
@@ -1630,7 +1610,6 @@ module DescribeApiDestination = {
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteRule = {
   type t
   type request = {
@@ -1649,11 +1628,9 @@ module DeleteRule = {
   }
   type response = {.}
   @module("@aws-sdk/client-events") @new external new: request => t = "DeleteRuleCommand"
-  let make = (~name, ~force=?, ~eventBusName=?, ()) =>
-    new({force: force, eventBusName: eventBusName, name: name})
+  let make = (~name, ~force=?, ~eventBusName=?, ()) => new({force, eventBusName, name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeletePartnerEventSource = {
   type t
   type request = {
@@ -1667,10 +1644,9 @@ module DeletePartnerEventSource = {
   type response = {.}
   @module("@aws-sdk/client-events") @new
   external new: request => t = "DeletePartnerEventSourceCommand"
-  let make = (~account, ~name, ()) => new({account: account, name: name})
+  let make = (~account, ~name, ()) => new({account, name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteEventBus = {
   type t
   type request = {
@@ -1681,7 +1657,6 @@ module DeleteEventBus = {
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteConnection = {
   type t
   type request = {
@@ -1708,7 +1683,6 @@ module DeleteConnection = {
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteArchive = {
   type t
   type request = {
@@ -1720,7 +1694,6 @@ module DeleteArchive = {
   let make = (~archiveName, ()) => new({archiveName: archiveName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteApiDestination = {
   type t
   type request = {
@@ -1732,7 +1705,6 @@ module DeleteApiDestination = {
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeauthorizeConnection = {
   type t
   type request = {
@@ -1759,7 +1731,6 @@ module DeauthorizeConnection = {
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeactivateEventSource = {
   type t
   type request = {
@@ -1771,7 +1742,6 @@ module DeactivateEventSource = {
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module CreatePartnerEventSource = {
   type t
   type request = {
@@ -1794,10 +1764,9 @@ module CreatePartnerEventSource = {
   }
   @module("@aws-sdk/client-events") @new
   external new: request => t = "CreatePartnerEventSourceCommand"
-  let make = (~account, ~name, ()) => new({account: account, name: name})
+  let make = (~account, ~name, ()) => new({account, name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateArchive = {
   type t
   type request = {
@@ -1834,17 +1803,9 @@ module CreateArchive = {
     ~eventPattern=?,
     ~description=?,
     (),
-  ) =>
-    new({
-      retentionDays: retentionDays,
-      eventPattern: eventPattern,
-      description: description,
-      eventSourceArn: eventSourceArn,
-      archiveName: archiveName,
-    })
+  ) => new({retentionDays, eventPattern, description, eventSourceArn, archiveName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateApiDestination = {
   type t
   type request = {
@@ -1895,16 +1856,15 @@ module CreateApiDestination = {
     (),
   ) =>
     new({
-      invocationRateLimitPerSecond: invocationRateLimitPerSecond,
-      httpMethod: httpMethod,
-      invocationEndpoint: invocationEndpoint,
-      connectionArn: connectionArn,
-      description: description,
-      name: name,
+      invocationRateLimitPerSecond,
+      httpMethod,
+      invocationEndpoint,
+      connectionArn,
+      description,
+      name,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CancelReplay = {
   type t
   type request = {
@@ -1921,7 +1881,6 @@ module CancelReplay = {
   let make = (~replayName, ()) => new({replayName: replayName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ActivateEventSource = {
   type t
   type request = {
@@ -1933,7 +1892,6 @@ module ActivateEventSource = {
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module UntagResource = {
   type t
   type request = {
@@ -1945,10 +1903,9 @@ module UntagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-events") @new external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceARN, ()) => new({tagKeys: tagKeys, resourceARN: resourceARN})
+  let make = (~tagKeys, ~resourceARN, ()) => new({tagKeys, resourceARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module PutPermission = {
   type t
   type request = {
@@ -2005,18 +1962,9 @@ module PutPermission = {
     ~action=?,
     ~eventBusName=?,
     (),
-  ) =>
-    new({
-      policy: policy,
-      condition: condition,
-      statementId: statementId,
-      principal: principal,
-      action: action,
-      eventBusName: eventBusName,
-    })
+  ) => new({policy, condition, statementId, principal, action, eventBusName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module ListRuleNamesByTarget = {
   type t
   type request = {
@@ -2042,10 +1990,9 @@ module ListRuleNamesByTarget = {
   }
   @module("@aws-sdk/client-events") @new external new: request => t = "ListRuleNamesByTargetCommand"
   let make = (~targetArn, ~limit=?, ~nextToken=?, ~eventBusName=?, ()) =>
-    new({limit: limit, nextToken: nextToken, eventBusName: eventBusName, targetArn: targetArn})
+    new({limit, nextToken, eventBusName, targetArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module TagResource = {
   type t
   type request = {
@@ -2057,10 +2004,9 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-events") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceARN, ()) => new({tags: tags, resourceARN: resourceARN})
+  let make = (~tags, ~resourceARN, ()) => new({tags, resourceARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module StartReplay = {
   type t
   type request = {
@@ -2099,18 +2045,9 @@ module StartReplay = {
     ~replayName,
     ~description=?,
     (),
-  ) =>
-    new({
-      destination: destination,
-      eventEndTime: eventEndTime,
-      eventStartTime: eventStartTime,
-      eventSourceArn: eventSourceArn,
-      description: description,
-      replayName: replayName,
-    })
+  ) => new({destination, eventEndTime, eventStartTime, eventSourceArn, description, replayName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module RemoveTargets = {
   type t
   type request = {
@@ -2136,11 +2073,9 @@ module RemoveTargets = {
     failedEntryCount: option<integer_>,
   }
   @module("@aws-sdk/client-events") @new external new: request => t = "RemoveTargetsCommand"
-  let make = (~ids, ~rule, ~force=?, ~eventBusName=?, ()) =>
-    new({force: force, ids: ids, eventBusName: eventBusName, rule: rule})
+  let make = (~ids, ~rule, ~force=?, ~eventBusName=?, ()) => new({force, ids, eventBusName, rule})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module PutRule = {
   type t
   type request = {
@@ -2189,19 +2124,9 @@ module PutRule = {
     ~scheduleExpression=?,
     (),
   ) =>
-    new({
-      eventBusName: eventBusName,
-      tags: tags,
-      roleArn: roleArn,
-      description: description,
-      state: state,
-      eventPattern: eventPattern,
-      scheduleExpression: scheduleExpression,
-      name: name,
-    })
+    new({eventBusName, tags, roleArn, description, state, eventPattern, scheduleExpression, name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListTagsForResource = {
   type t
   type request = {
@@ -2218,7 +2143,6 @@ module ListTagsForResource = {
   let make = (~resourceARN, ()) => new({resourceARN: resourceARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListRules = {
   type t
   type request = {
@@ -2244,10 +2168,9 @@ module ListRules = {
   }
   @module("@aws-sdk/client-events") @new external new: request => t = "ListRulesCommand"
   let make = (~limit=?, ~nextToken=?, ~eventBusName=?, ~namePrefix=?, ()) =>
-    new({limit: limit, nextToken: nextToken, eventBusName: eventBusName, namePrefix: namePrefix})
+    new({limit, nextToken, eventBusName, namePrefix})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListReplays = {
   type t
   type request = {
@@ -2277,16 +2200,9 @@ module ListReplays = {
   }
   @module("@aws-sdk/client-events") @new external new: request => t = "ListReplaysCommand"
   let make = (~limit=?, ~nextToken=?, ~eventSourceArn=?, ~state=?, ~namePrefix=?, ()) =>
-    new({
-      limit: limit,
-      nextToken: nextToken,
-      eventSourceArn: eventSourceArn,
-      state: state,
-      namePrefix: namePrefix,
-    })
+    new({limit, nextToken, eventSourceArn, state, namePrefix})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListPartnerEventSources = {
   type t
   type request = {
@@ -2316,11 +2232,9 @@ module ListPartnerEventSources = {
   }
   @module("@aws-sdk/client-events") @new
   external new: request => t = "ListPartnerEventSourcesCommand"
-  let make = (~namePrefix, ~limit=?, ~nextToken=?, ()) =>
-    new({limit: limit, nextToken: nextToken, namePrefix: namePrefix})
+  let make = (~namePrefix, ~limit=?, ~nextToken=?, ()) => new({limit, nextToken, namePrefix})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListPartnerEventSourceAccounts = {
   type t
   type request = {
@@ -2350,10 +2264,9 @@ module ListPartnerEventSourceAccounts = {
   @module("@aws-sdk/client-events") @new
   external new: request => t = "ListPartnerEventSourceAccountsCommand"
   let make = (~eventSourceName, ~limit=?, ~nextToken=?, ()) =>
-    new({limit: limit, nextToken: nextToken, eventSourceName: eventSourceName})
+    new({limit, nextToken, eventSourceName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListEventSources = {
   type t
   type request = {
@@ -2380,11 +2293,9 @@ module ListEventSources = {
     eventSources: option<eventSourceList>,
   }
   @module("@aws-sdk/client-events") @new external new: request => t = "ListEventSourcesCommand"
-  let make = (~limit=?, ~nextToken=?, ~namePrefix=?, ()) =>
-    new({limit: limit, nextToken: nextToken, namePrefix: namePrefix})
+  let make = (~limit=?, ~nextToken=?, ~namePrefix=?, ()) => new({limit, nextToken, namePrefix})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListEventBuses = {
   type t
   type request = {
@@ -2411,11 +2322,9 @@ module ListEventBuses = {
     eventBuses: option<eventBusList>,
   }
   @module("@aws-sdk/client-events") @new external new: request => t = "ListEventBusesCommand"
-  let make = (~limit=?, ~nextToken=?, ~namePrefix=?, ()) =>
-    new({limit: limit, nextToken: nextToken, namePrefix: namePrefix})
+  let make = (~limit=?, ~nextToken=?, ~namePrefix=?, ()) => new({limit, nextToken, namePrefix})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListConnections = {
   type t
   type request = {
@@ -2443,15 +2352,9 @@ module ListConnections = {
   }
   @module("@aws-sdk/client-events") @new external new: request => t = "ListConnectionsCommand"
   let make = (~limit=?, ~nextToken=?, ~connectionState=?, ~namePrefix=?, ()) =>
-    new({
-      limit: limit,
-      nextToken: nextToken,
-      connectionState: connectionState,
-      namePrefix: namePrefix,
-    })
+    new({limit, nextToken, connectionState, namePrefix})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListArchives = {
   type t
   type request = {
@@ -2481,16 +2384,9 @@ module ListArchives = {
   }
   @module("@aws-sdk/client-events") @new external new: request => t = "ListArchivesCommand"
   let make = (~limit=?, ~nextToken=?, ~state=?, ~eventSourceArn=?, ~namePrefix=?, ()) =>
-    new({
-      limit: limit,
-      nextToken: nextToken,
-      state: state,
-      eventSourceArn: eventSourceArn,
-      namePrefix: namePrefix,
-    })
+    new({limit, nextToken, state, eventSourceArn, namePrefix})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListApiDestinations = {
   type t
   type request = {
@@ -2521,10 +2417,9 @@ module ListApiDestinations = {
   }
   @module("@aws-sdk/client-events") @new external new: request => t = "ListApiDestinationsCommand"
   let make = (~limit=?, ~nextToken=?, ~connectionArn=?, ~namePrefix=?, ()) =>
-    new({limit: limit, nextToken: nextToken, connectionArn: connectionArn, namePrefix: namePrefix})
+    new({limit, nextToken, connectionArn, namePrefix})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeReplay = {
   type t
   type request = {
@@ -2563,7 +2458,6 @@ module DescribeReplay = {
   let make = (~replayName, ()) => new({replayName: replayName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateEventBus = {
   type t
   type request = {
@@ -2586,11 +2480,9 @@ module CreateEventBus = {
     eventBusArn: option<string_>,
   }
   @module("@aws-sdk/client-events") @new external new: request => t = "CreateEventBusCommand"
-  let make = (~name, ~tags=?, ~eventSourceName=?, ()) =>
-    new({tags: tags, eventSourceName: eventSourceName, name: name})
+  let make = (~name, ~tags=?, ~eventSourceName=?, ()) => new({tags, eventSourceName, name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module PutPartnerEvents = {
   type t
   type request = {
@@ -2611,7 +2503,6 @@ module PutPartnerEvents = {
   let make = (~entries, ()) => new({entries: entries})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module PutEvents = {
   type t
   type request = {
@@ -2634,7 +2525,6 @@ module PutEvents = {
   let make = (~entries, ()) => new({entries: entries})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateConnection = {
   type t
   type request = {
@@ -2665,15 +2555,9 @@ module UpdateConnection = {
   }
   @module("@aws-sdk/client-events") @new external new: request => t = "UpdateConnectionCommand"
   let make = (~name, ~authParameters=?, ~authorizationType=?, ~description=?, ()) =>
-    new({
-      authParameters: authParameters,
-      authorizationType: authorizationType,
-      description: description,
-      name: name,
-    })
+    new({authParameters, authorizationType, description, name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeConnection = {
   type t
   type request = {
@@ -2715,7 +2599,6 @@ module DescribeConnection = {
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateConnection = {
   type t
   type request = {
@@ -2746,15 +2629,9 @@ module CreateConnection = {
   }
   @module("@aws-sdk/client-events") @new external new: request => t = "CreateConnectionCommand"
   let make = (~authParameters, ~authorizationType, ~name, ~description=?, ()) =>
-    new({
-      authParameters: authParameters,
-      authorizationType: authorizationType,
-      description: description,
-      name: name,
-    })
+    new({authParameters, authorizationType, description, name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module PutTargets = {
   type t
   type request = {
@@ -2773,11 +2650,9 @@ module PutTargets = {
     failedEntryCount: option<integer_>,
   }
   @module("@aws-sdk/client-events") @new external new: request => t = "PutTargetsCommand"
-  let make = (~targets, ~rule, ~eventBusName=?, ()) =>
-    new({targets: targets, eventBusName: eventBusName, rule: rule})
+  let make = (~targets, ~rule, ~eventBusName=?, ()) => new({targets, eventBusName, rule})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListTargetsByRule = {
   type t
   type request = {
@@ -2802,6 +2677,6 @@ module ListTargetsByRule = {
   }
   @module("@aws-sdk/client-events") @new external new: request => t = "ListTargetsByRuleCommand"
   let make = (~rule, ~limit=?, ~nextToken=?, ~eventBusName=?, ()) =>
-    new({limit: limit, nextToken: nextToken, eventBusName: eventBusName, rule: rule})
+    new({limit, nextToken, eventBusName, rule})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

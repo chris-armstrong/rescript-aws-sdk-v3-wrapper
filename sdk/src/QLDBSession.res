@@ -249,14 +249,14 @@ module SendCommand = {
     (),
   ) =>
     new({
-      fetchPage: fetchPage,
-      executeStatement: executeStatement,
-      abortTransaction: abortTransaction,
-      commitTransaction: commitTransaction,
-      endSession: endSession,
-      startTransaction: startTransaction,
-      startSession: startSession,
-      sessionToken: sessionToken,
+      fetchPage,
+      executeStatement,
+      abortTransaction,
+      commitTransaction,
+      endSession,
+      startTransaction,
+      startSession,
+      sessionToken,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

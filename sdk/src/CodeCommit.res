@@ -1424,10 +1424,9 @@ module UpdateRepositoryName = {
   type response = {.}
   @module("@aws-sdk/client-codecommit") @new
   external new: request => t = "UpdateRepositoryNameCommand"
-  let make = (~newName, ~oldName, ()) => new({newName: newName, oldName: oldName})
+  let make = (~newName, ~oldName, ()) => new({newName, oldName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module UpdateRepositoryDescription = {
   type t
   @ocaml.doc("<p>Represents the input of an update repository description operation.</p>")
@@ -1443,10 +1442,9 @@ module UpdateRepositoryDescription = {
   @module("@aws-sdk/client-codecommit") @new
   external new: request => t = "UpdateRepositoryDescriptionCommand"
   let make = (~repositoryName, ~repositoryDescription=?, ()) =>
-    new({repositoryDescription: repositoryDescription, repositoryName: repositoryName})
+    new({repositoryDescription, repositoryName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module UpdatePullRequestApprovalState = {
   type t
   type request = {
@@ -1459,10 +1457,9 @@ module UpdatePullRequestApprovalState = {
   @module("@aws-sdk/client-codecommit") @new
   external new: request => t = "UpdatePullRequestApprovalStateCommand"
   let make = (~approvalState, ~revisionId, ~pullRequestId, ()) =>
-    new({approvalState: approvalState, revisionId: revisionId, pullRequestId: pullRequestId})
+    new({approvalState, revisionId, pullRequestId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module UpdateDefaultBranch = {
   type t
   @ocaml.doc("<p>Represents the input of an update default branch operation.</p>")
@@ -1475,11 +1472,9 @@ module UpdateDefaultBranch = {
   type response = {.}
   @module("@aws-sdk/client-codecommit") @new
   external new: request => t = "UpdateDefaultBranchCommand"
-  let make = (~defaultBranchName, ~repositoryName, ()) =>
-    new({defaultBranchName: defaultBranchName, repositoryName: repositoryName})
+  let make = (~defaultBranchName, ~repositoryName, ()) => new({defaultBranchName, repositoryName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module PutFile = {
   type t
   type request = {
@@ -1536,19 +1531,18 @@ module PutFile = {
     (),
   ) =>
     new({
-      email: email,
-      name: name,
-      commitMessage: commitMessage,
-      parentCommitId: parentCommitId,
-      fileMode: fileMode,
-      filePath: filePath,
-      fileContent: fileContent,
-      branchName: branchName,
-      repositoryName: repositoryName,
+      email,
+      name,
+      commitMessage,
+      parentCommitId,
+      fileMode,
+      filePath,
+      fileContent,
+      branchName,
+      repositoryName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module PutCommentReaction = {
   type t
   type request = {
@@ -1561,11 +1555,9 @@ module PutCommentReaction = {
   type response = {.}
   @module("@aws-sdk/client-codecommit") @new
   external new: request => t = "PutCommentReactionCommand"
-  let make = (~reactionValue, ~commentId, ()) =>
-    new({reactionValue: reactionValue, commentId: commentId})
+  let make = (~reactionValue, ~commentId, ()) => new({reactionValue, commentId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module OverridePullRequestApprovalRules = {
   type t
   type request = {
@@ -1584,10 +1576,9 @@ module OverridePullRequestApprovalRules = {
   @module("@aws-sdk/client-codecommit") @new
   external new: request => t = "OverridePullRequestApprovalRulesCommand"
   let make = (~overrideStatus, ~revisionId, ~pullRequestId, ()) =>
-    new({overrideStatus: overrideStatus, revisionId: revisionId, pullRequestId: pullRequestId})
+    new({overrideStatus, revisionId, pullRequestId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module MergeBranchesByFastForward = {
   type t
   type request = {
@@ -1615,16 +1606,9 @@ module MergeBranchesByFastForward = {
     ~repositoryName,
     ~targetBranch=?,
     (),
-  ) =>
-    new({
-      targetBranch: targetBranch,
-      destinationCommitSpecifier: destinationCommitSpecifier,
-      sourceCommitSpecifier: sourceCommitSpecifier,
-      repositoryName: repositoryName,
-    })
+  ) => new({targetBranch, destinationCommitSpecifier, sourceCommitSpecifier, repositoryName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetPullRequestOverrideState = {
   type t
   type request = {
@@ -1649,11 +1633,9 @@ module GetPullRequestOverrideState = {
   }
   @module("@aws-sdk/client-codecommit") @new
   external new: request => t = "GetPullRequestOverrideStateCommand"
-  let make = (~revisionId, ~pullRequestId, ()) =>
-    new({revisionId: revisionId, pullRequestId: pullRequestId})
+  let make = (~revisionId, ~pullRequestId, ()) => new({revisionId, pullRequestId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetMergeCommit = {
   type t
   type request = {
@@ -1702,15 +1684,14 @@ module GetMergeCommit = {
     (),
   ) =>
     new({
-      conflictResolutionStrategy: conflictResolutionStrategy,
-      conflictDetailLevel: conflictDetailLevel,
-      destinationCommitSpecifier: destinationCommitSpecifier,
-      sourceCommitSpecifier: sourceCommitSpecifier,
-      repositoryName: repositoryName,
+      conflictResolutionStrategy,
+      conflictDetailLevel,
+      destinationCommitSpecifier,
+      sourceCommitSpecifier,
+      repositoryName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetFile = {
   type t
   type request = {
@@ -1750,10 +1731,9 @@ module GetFile = {
   }
   @module("@aws-sdk/client-codecommit") @new external new: request => t = "GetFileCommand"
   let make = (~filePath, ~repositoryName, ~commitSpecifier=?, ()) =>
-    new({filePath: filePath, commitSpecifier: commitSpecifier, repositoryName: repositoryName})
+    new({filePath, commitSpecifier, repositoryName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetBlob = {
   type t
   @ocaml.doc("<p>Represents the input of a get blob operation.</p>")
@@ -1765,10 +1745,9 @@ module GetBlob = {
   @ocaml.doc("<p>Represents the output of a get blob operation.</p>")
   type response = {@ocaml.doc("<p>The content of the blob, usually a file.</p>") content: blob}
   @module("@aws-sdk/client-codecommit") @new external new: request => t = "GetBlobCommand"
-  let make = (~blobId, ~repositoryName, ()) => new({blobId: blobId, repositoryName: repositoryName})
+  let make = (~blobId, ~repositoryName, ()) => new({blobId, repositoryName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DisassociateApprovalRuleTemplateFromRepository = {
   type t
   type request = {
@@ -1783,10 +1762,9 @@ module DisassociateApprovalRuleTemplateFromRepository = {
   @module("@aws-sdk/client-codecommit") @new
   external new: request => t = "DisassociateApprovalRuleTemplateFromRepositoryCommand"
   let make = (~repositoryName, ~approvalRuleTemplateName, ()) =>
-    new({repositoryName: repositoryName, approvalRuleTemplateName: approvalRuleTemplateName})
+    new({repositoryName, approvalRuleTemplateName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteRepository = {
   type t
   @ocaml.doc("<p>Represents the input of a delete repository operation.</p>")
@@ -1802,7 +1780,6 @@ module DeleteRepository = {
   let make = (~repositoryName, ()) => new({repositoryName: repositoryName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeletePullRequestApprovalRule = {
   type t
   type request = {
@@ -1823,11 +1800,9 @@ module DeletePullRequestApprovalRule = {
   }
   @module("@aws-sdk/client-codecommit") @new
   external new: request => t = "DeletePullRequestApprovalRuleCommand"
-  let make = (~approvalRuleName, ~pullRequestId, ()) =>
-    new({approvalRuleName: approvalRuleName, pullRequestId: pullRequestId})
+  let make = (~approvalRuleName, ~pullRequestId, ()) => new({approvalRuleName, pullRequestId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteFile = {
   type t
   type request = {
@@ -1887,18 +1862,17 @@ module DeleteFile = {
     (),
   ) =>
     new({
-      email: email,
-      name: name,
-      commitMessage: commitMessage,
-      keepEmptyFolders: keepEmptyFolders,
-      parentCommitId: parentCommitId,
-      filePath: filePath,
-      branchName: branchName,
-      repositoryName: repositoryName,
+      email,
+      name,
+      commitMessage,
+      keepEmptyFolders,
+      parentCommitId,
+      filePath,
+      branchName,
+      repositoryName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteApprovalRuleTemplate = {
   type t
   type request = {
@@ -1916,7 +1890,6 @@ module DeleteApprovalRuleTemplate = {
     new({approvalRuleTemplateName: approvalRuleTemplateName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateBranch = {
   type t
   @ocaml.doc("<p>Represents the input of a create branch operation.</p>")
@@ -1929,10 +1902,9 @@ module CreateBranch = {
   type response = {.}
   @module("@aws-sdk/client-codecommit") @new external new: request => t = "CreateBranchCommand"
   let make = (~commitId, ~branchName, ~repositoryName, ()) =>
-    new({commitId: commitId, branchName: branchName, repositoryName: repositoryName})
+    new({commitId, branchName, repositoryName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module AssociateApprovalRuleTemplateWithRepository = {
   type t
   type request = {
@@ -1945,10 +1917,9 @@ module AssociateApprovalRuleTemplateWithRepository = {
   @module("@aws-sdk/client-codecommit") @new
   external new: request => t = "AssociateApprovalRuleTemplateWithRepositoryCommand"
   let make = (~repositoryName, ~approvalRuleTemplateName, ()) =>
-    new({repositoryName: repositoryName, approvalRuleTemplateName: approvalRuleTemplateName})
+    new({repositoryName, approvalRuleTemplateName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module UpdateApprovalRuleTemplateName = {
   type t
   type request = {
@@ -1964,13 +1935,9 @@ module UpdateApprovalRuleTemplateName = {
   @module("@aws-sdk/client-codecommit") @new
   external new: request => t = "UpdateApprovalRuleTemplateNameCommand"
   let make = (~newApprovalRuleTemplateName, ~oldApprovalRuleTemplateName, ()) =>
-    new({
-      newApprovalRuleTemplateName: newApprovalRuleTemplateName,
-      oldApprovalRuleTemplateName: oldApprovalRuleTemplateName,
-    })
+    new({newApprovalRuleTemplateName, oldApprovalRuleTemplateName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateApprovalRuleTemplateDescription = {
   type t
   type request = {
@@ -1986,13 +1953,9 @@ module UpdateApprovalRuleTemplateDescription = {
   @module("@aws-sdk/client-codecommit") @new
   external new: request => t = "UpdateApprovalRuleTemplateDescriptionCommand"
   let make = (~approvalRuleTemplateDescription, ~approvalRuleTemplateName, ()) =>
-    new({
-      approvalRuleTemplateDescription: approvalRuleTemplateDescription,
-      approvalRuleTemplateName: approvalRuleTemplateName,
-    })
+    new({approvalRuleTemplateDescription, approvalRuleTemplateName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateApprovalRuleTemplateContent = {
   type t
   type request = {
@@ -2012,14 +1975,9 @@ module UpdateApprovalRuleTemplateContent = {
   @module("@aws-sdk/client-codecommit") @new
   external new: request => t = "UpdateApprovalRuleTemplateContentCommand"
   let make = (~newRuleContent, ~approvalRuleTemplateName, ~existingRuleContentSha256=?, ()) =>
-    new({
-      existingRuleContentSha256: existingRuleContentSha256,
-      newRuleContent: newRuleContent,
-      approvalRuleTemplateName: approvalRuleTemplateName,
-    })
+    new({existingRuleContentSha256, newRuleContent, approvalRuleTemplateName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UntagResource = {
   type t
   type request = {
@@ -2032,10 +1990,9 @@ module UntagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-codecommit") @new external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
+  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys, resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module TagResource = {
   type t
   type request = {
@@ -2047,10 +2004,9 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-codecommit") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
+  let make = (~tags, ~resourceArn, ()) => new({tags, resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module ListTagsForResource = {
   type t
   type request = {
@@ -2071,11 +2027,9 @@ module ListTagsForResource = {
   }
   @module("@aws-sdk/client-codecommit") @new
   external new: request => t = "ListTagsForResourceCommand"
-  let make = (~resourceArn, ~nextToken=?, ()) =>
-    new({nextToken: nextToken, resourceArn: resourceArn})
+  let make = (~resourceArn, ~nextToken=?, ()) => new({nextToken, resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListRepositoriesForApprovalRuleTemplate = {
   type t
   type request = {
@@ -2104,14 +2058,9 @@ module ListRepositoriesForApprovalRuleTemplate = {
   @module("@aws-sdk/client-codecommit") @new
   external new: request => t = "ListRepositoriesForApprovalRuleTemplateCommand"
   let make = (~approvalRuleTemplateName, ~maxResults=?, ~nextToken=?, ()) =>
-    new({
-      maxResults: maxResults,
-      nextToken: nextToken,
-      approvalRuleTemplateName: approvalRuleTemplateName,
-    })
+    new({maxResults, nextToken, approvalRuleTemplateName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListPullRequests = {
   type t
   type request = {
@@ -2148,17 +2097,9 @@ module ListPullRequests = {
     ~pullRequestStatus=?,
     ~authorArn=?,
     (),
-  ) =>
-    new({
-      maxResults: maxResults,
-      nextToken: nextToken,
-      pullRequestStatus: pullRequestStatus,
-      authorArn: authorArn,
-      repositoryName: repositoryName,
-    })
+  ) => new({maxResults, nextToken, pullRequestStatus, authorArn, repositoryName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListBranches = {
   type t
   @ocaml.doc("<p>Represents the input of a list branches operation.</p>")
@@ -2175,11 +2116,9 @@ module ListBranches = {
     @ocaml.doc("<p>The list of branch names.</p>") branches: option<branchNameList>,
   }
   @module("@aws-sdk/client-codecommit") @new external new: request => t = "ListBranchesCommand"
-  let make = (~repositoryName, ~nextToken=?, ()) =>
-    new({nextToken: nextToken, repositoryName: repositoryName})
+  let make = (~repositoryName, ~nextToken=?, ()) => new({nextToken, repositoryName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListAssociatedApprovalRuleTemplatesForRepository = {
   type t
   type request = {
@@ -2206,10 +2145,9 @@ module ListAssociatedApprovalRuleTemplatesForRepository = {
   @module("@aws-sdk/client-codecommit") @new
   external new: request => t = "ListAssociatedApprovalRuleTemplatesForRepositoryCommand"
   let make = (~repositoryName, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, repositoryName: repositoryName})
+    new({maxResults, nextToken, repositoryName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListApprovalRuleTemplates = {
   type t
   type request = {
@@ -2233,11 +2171,9 @@ module ListApprovalRuleTemplates = {
   }
   @module("@aws-sdk/client-codecommit") @new
   external new: request => t = "ListApprovalRuleTemplatesCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetRepository = {
   type t
   @ocaml.doc("<p>Represents the input of a get repository operation.</p>")
@@ -2254,7 +2190,6 @@ module GetRepository = {
   let make = (~repositoryName, ()) => new({repositoryName: repositoryName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetMergeOptions = {
   type t
   type request = {
@@ -2301,15 +2236,14 @@ module GetMergeOptions = {
     (),
   ) =>
     new({
-      conflictResolutionStrategy: conflictResolutionStrategy,
-      conflictDetailLevel: conflictDetailLevel,
-      destinationCommitSpecifier: destinationCommitSpecifier,
-      sourceCommitSpecifier: sourceCommitSpecifier,
-      repositoryName: repositoryName,
+      conflictResolutionStrategy,
+      conflictDetailLevel,
+      destinationCommitSpecifier,
+      sourceCommitSpecifier,
+      repositoryName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetBranch = {
   type t
   @ocaml.doc("<p>Represents the input of a get branch operation.</p>")
@@ -2324,11 +2258,9 @@ module GetBranch = {
   @ocaml.doc("<p>Represents the output of a get branch operation.</p>")
   type response = {@ocaml.doc("<p>The name of the branch.</p>") branch: option<branchInfo>}
   @module("@aws-sdk/client-codecommit") @new external new: request => t = "GetBranchCommand"
-  let make = (~branchName=?, ~repositoryName=?, ()) =>
-    new({branchName: branchName, repositoryName: repositoryName})
+  let make = (~branchName=?, ~repositoryName=?, ()) => new({branchName, repositoryName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetApprovalRuleTemplate = {
   type t
   type request = {
@@ -2347,7 +2279,6 @@ module GetApprovalRuleTemplate = {
     new({approvalRuleTemplateName: approvalRuleTemplateName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteBranch = {
   type t
   @ocaml.doc("<p>Represents the input of a delete branch operation.</p>")
@@ -2364,11 +2295,9 @@ module DeleteBranch = {
     deletedBranch: option<branchInfo>,
   }
   @module("@aws-sdk/client-codecommit") @new external new: request => t = "DeleteBranchCommand"
-  let make = (~branchName, ~repositoryName, ()) =>
-    new({branchName: branchName, repositoryName: repositoryName})
+  let make = (~branchName, ~repositoryName, ()) => new({branchName, repositoryName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateRepository = {
   type t
   @ocaml.doc("<p>Represents the input of a create repository operation.</p>")
@@ -2401,10 +2330,9 @@ module CreateRepository = {
   }
   @module("@aws-sdk/client-codecommit") @new external new: request => t = "CreateRepositoryCommand"
   let make = (~repositoryName, ~tags=?, ~repositoryDescription=?, ()) =>
-    new({tags: tags, repositoryDescription: repositoryDescription, repositoryName: repositoryName})
+    new({tags, repositoryDescription, repositoryName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateApprovalRuleTemplate = {
   type t
   type request = {
@@ -2473,15 +2401,9 @@ module CreateApprovalRuleTemplate = {
     ~approvalRuleTemplateName,
     ~approvalRuleTemplateDescription=?,
     (),
-  ) =>
-    new({
-      approvalRuleTemplateDescription: approvalRuleTemplateDescription,
-      approvalRuleTemplateContent: approvalRuleTemplateContent,
-      approvalRuleTemplateName: approvalRuleTemplateName,
-    })
+  ) => new({approvalRuleTemplateDescription, approvalRuleTemplateContent, approvalRuleTemplateName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdatePullRequestApprovalRuleContent = {
   type t
   type request = {
@@ -2546,16 +2468,9 @@ module UpdatePullRequestApprovalRuleContent = {
     ~pullRequestId,
     ~existingRuleContentSha256=?,
     (),
-  ) =>
-    new({
-      newRuleContent: newRuleContent,
-      existingRuleContentSha256: existingRuleContentSha256,
-      approvalRuleName: approvalRuleName,
-      pullRequestId: pullRequestId,
-    })
+  ) => new({newRuleContent, existingRuleContentSha256, approvalRuleName, pullRequestId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateComment = {
   type t
   type request = {
@@ -2569,10 +2484,9 @@ module UpdateComment = {
     @ocaml.doc("<p>Information about the updated comment.</p>") comment: option<comment>,
   }
   @module("@aws-sdk/client-codecommit") @new external new: request => t = "UpdateCommentCommand"
-  let make = (~content, ~commentId, ()) => new({content: content, commentId: commentId})
+  let make = (~content, ~commentId, ()) => new({content, commentId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module PostCommentReply = {
   type t
   type request = {
@@ -2591,10 +2505,9 @@ module PostCommentReply = {
   }
   @module("@aws-sdk/client-codecommit") @new external new: request => t = "PostCommentReplyCommand"
   let make = (~content, ~inReplyTo, ~clientRequestToken=?, ()) =>
-    new({content: content, clientRequestToken: clientRequestToken, inReplyTo: inReplyTo})
+    new({content, clientRequestToken, inReplyTo})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module PostCommentForPullRequest = {
   type t
   type request = {
@@ -2657,17 +2570,16 @@ module PostCommentForPullRequest = {
     (),
   ) =>
     new({
-      clientRequestToken: clientRequestToken,
-      content: content,
-      location: location,
-      afterCommitId: afterCommitId,
-      beforeCommitId: beforeCommitId,
-      repositoryName: repositoryName,
-      pullRequestId: pullRequestId,
+      clientRequestToken,
+      content,
+      location,
+      afterCommitId,
+      beforeCommitId,
+      repositoryName,
+      pullRequestId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module PostCommentForComparedCommit = {
   type t
   type request = {
@@ -2722,18 +2634,9 @@ module PostCommentForComparedCommit = {
     ~location=?,
     ~beforeCommitId=?,
     (),
-  ) =>
-    new({
-      clientRequestToken: clientRequestToken,
-      content: content,
-      location: location,
-      afterCommitId: afterCommitId,
-      beforeCommitId: beforeCommitId,
-      repositoryName: repositoryName,
-    })
+  ) => new({clientRequestToken, content, location, afterCommitId, beforeCommitId, repositoryName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListRepositories = {
   type t
   @ocaml.doc("<p>Represents the input of a list repositories operation.</p>")
@@ -2757,11 +2660,9 @@ module ListRepositories = {
     repositories: option<repositoryNameIdPairList>,
   }
   @module("@aws-sdk/client-codecommit") @new external new: request => t = "ListRepositoriesCommand"
-  let make = (~order=?, ~sortBy=?, ~nextToken=?, ()) =>
-    new({order: order, sortBy: sortBy, nextToken: nextToken})
+  let make = (~order=?, ~sortBy=?, ~nextToken=?, ()) => new({order, sortBy, nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetPullRequestApprovalStates = {
   type t
   type request = {
@@ -2775,11 +2676,9 @@ module GetPullRequestApprovalStates = {
   }
   @module("@aws-sdk/client-codecommit") @new
   external new: request => t = "GetPullRequestApprovalStatesCommand"
-  let make = (~revisionId, ~pullRequestId, ()) =>
-    new({revisionId: revisionId, pullRequestId: pullRequestId})
+  let make = (~revisionId, ~pullRequestId, ()) => new({revisionId, pullRequestId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetFolder = {
   type t
   type request = {
@@ -2815,10 +2714,9 @@ module GetFolder = {
   }
   @module("@aws-sdk/client-codecommit") @new external new: request => t = "GetFolderCommand"
   let make = (~folderPath, ~repositoryName, ~commitSpecifier=?, ()) =>
-    new({folderPath: folderPath, commitSpecifier: commitSpecifier, repositoryName: repositoryName})
+    new({folderPath, commitSpecifier, repositoryName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetCommit = {
   type t
   @ocaml.doc("<p>Represents the input of a get commit operation.</p>")
@@ -2836,11 +2734,9 @@ module GetCommit = {
     commit: commit,
   }
   @module("@aws-sdk/client-codecommit") @new external new: request => t = "GetCommitCommand"
-  let make = (~commitId, ~repositoryName, ()) =>
-    new({commitId: commitId, repositoryName: repositoryName})
+  let make = (~commitId, ~repositoryName, ()) => new({commitId, repositoryName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetComment = {
   type t
   type request = {
@@ -2853,7 +2749,6 @@ module GetComment = {
   let make = (~commentId, ()) => new({commentId: commentId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module EvaluatePullRequestApprovalRules = {
   type t
   type request = {
@@ -2871,11 +2766,9 @@ module EvaluatePullRequestApprovalRules = {
   }
   @module("@aws-sdk/client-codecommit") @new
   external new: request => t = "EvaluatePullRequestApprovalRulesCommand"
-  let make = (~revisionId, ~pullRequestId, ()) =>
-    new({revisionId: revisionId, pullRequestId: pullRequestId})
+  let make = (~revisionId, ~pullRequestId, ()) => new({revisionId, pullRequestId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteCommentContent = {
   type t
   type request = {
@@ -2891,7 +2784,6 @@ module DeleteCommentContent = {
   let make = (~commentId, ()) => new({commentId: commentId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreatePullRequestApprovalRule = {
   type t
   type request = {
@@ -2951,14 +2843,9 @@ module CreatePullRequestApprovalRule = {
   @module("@aws-sdk/client-codecommit") @new
   external new: request => t = "CreatePullRequestApprovalRuleCommand"
   let make = (~approvalRuleContent, ~approvalRuleName, ~pullRequestId, ()) =>
-    new({
-      approvalRuleContent: approvalRuleContent,
-      approvalRuleName: approvalRuleName,
-      pullRequestId: pullRequestId,
-    })
+    new({approvalRuleContent, approvalRuleName, pullRequestId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module BatchGetRepositories = {
   type t
   @ocaml.doc("<p>Represents the input of a batch get repositories operation.</p>")
@@ -2983,7 +2870,6 @@ module BatchGetRepositories = {
   let make = (~repositoryNames, ()) => new({repositoryNames: repositoryNames})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module BatchDisassociateApprovalRuleTemplateFromRepositories = {
   type t
   type request = {
@@ -3010,10 +2896,9 @@ module BatchDisassociateApprovalRuleTemplateFromRepositories = {
   @module("@aws-sdk/client-codecommit") @new
   external new: request => t = "BatchDisassociateApprovalRuleTemplateFromRepositoriesCommand"
   let make = (~repositoryNames, ~approvalRuleTemplateName, ()) =>
-    new({repositoryNames: repositoryNames, approvalRuleTemplateName: approvalRuleTemplateName})
+    new({repositoryNames, approvalRuleTemplateName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module BatchAssociateApprovalRuleTemplateWithRepositories = {
   type t
   type request = {
@@ -3040,10 +2925,9 @@ module BatchAssociateApprovalRuleTemplateWithRepositories = {
   @module("@aws-sdk/client-codecommit") @new
   external new: request => t = "BatchAssociateApprovalRuleTemplateWithRepositoriesCommand"
   let make = (~repositoryNames, ~approvalRuleTemplateName, ()) =>
-    new({repositoryNames: repositoryNames, approvalRuleTemplateName: approvalRuleTemplateName})
+    new({repositoryNames, approvalRuleTemplateName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module TestRepositoryTriggers = {
   type t
   @ocaml.doc("<p>Represents the input of a test repository triggers operation.</p>")
@@ -3064,11 +2948,9 @@ module TestRepositoryTriggers = {
   }
   @module("@aws-sdk/client-codecommit") @new
   external new: request => t = "TestRepositoryTriggersCommand"
-  let make = (~triggers, ~repositoryName, ()) =>
-    new({triggers: triggers, repositoryName: repositoryName})
+  let make = (~triggers, ~repositoryName, ()) => new({triggers, repositoryName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module PutRepositoryTriggers = {
   type t
   @ocaml.doc("<p>Represents the input of a put repository triggers operation.</p>")
@@ -3085,11 +2967,9 @@ module PutRepositoryTriggers = {
   }
   @module("@aws-sdk/client-codecommit") @new
   external new: request => t = "PutRepositoryTriggersCommand"
-  let make = (~triggers, ~repositoryName, ()) =>
-    new({triggers: triggers, repositoryName: repositoryName})
+  let make = (~triggers, ~repositoryName, ()) => new({triggers, repositoryName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module MergeBranchesByThreeWay = {
   type t
   type request = {
@@ -3150,21 +3030,20 @@ module MergeBranchesByThreeWay = {
     (),
   ) =>
     new({
-      conflictResolution: conflictResolution,
-      keepEmptyFolders: keepEmptyFolders,
-      commitMessage: commitMessage,
-      email: email,
-      authorName: authorName,
-      conflictResolutionStrategy: conflictResolutionStrategy,
-      conflictDetailLevel: conflictDetailLevel,
-      targetBranch: targetBranch,
-      destinationCommitSpecifier: destinationCommitSpecifier,
-      sourceCommitSpecifier: sourceCommitSpecifier,
-      repositoryName: repositoryName,
+      conflictResolution,
+      keepEmptyFolders,
+      commitMessage,
+      email,
+      authorName,
+      conflictResolutionStrategy,
+      conflictDetailLevel,
+      targetBranch,
+      destinationCommitSpecifier,
+      sourceCommitSpecifier,
+      repositoryName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module MergeBranchesBySquash = {
   type t
   type request = {
@@ -3224,21 +3103,20 @@ module MergeBranchesBySquash = {
     (),
   ) =>
     new({
-      conflictResolution: conflictResolution,
-      keepEmptyFolders: keepEmptyFolders,
-      commitMessage: commitMessage,
-      email: email,
-      authorName: authorName,
-      conflictResolutionStrategy: conflictResolutionStrategy,
-      conflictDetailLevel: conflictDetailLevel,
-      targetBranch: targetBranch,
-      destinationCommitSpecifier: destinationCommitSpecifier,
-      sourceCommitSpecifier: sourceCommitSpecifier,
-      repositoryName: repositoryName,
+      conflictResolution,
+      keepEmptyFolders,
+      commitMessage,
+      email,
+      authorName,
+      conflictResolutionStrategy,
+      conflictDetailLevel,
+      targetBranch,
+      destinationCommitSpecifier,
+      sourceCommitSpecifier,
+      repositoryName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetRepositoryTriggers = {
   type t
   @ocaml.doc("<p>Represents the input of a get repository triggers operation.</p>")
@@ -3258,7 +3136,6 @@ module GetRepositoryTriggers = {
   let make = (~repositoryName, ()) => new({repositoryName: repositoryName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetMergeConflicts = {
   type t
   type request = {
@@ -3322,18 +3199,17 @@ module GetMergeConflicts = {
     (),
   ) =>
     new({
-      nextToken: nextToken,
-      conflictResolutionStrategy: conflictResolutionStrategy,
-      maxConflictFiles: maxConflictFiles,
-      conflictDetailLevel: conflictDetailLevel,
-      mergeOption: mergeOption,
-      sourceCommitSpecifier: sourceCommitSpecifier,
-      destinationCommitSpecifier: destinationCommitSpecifier,
-      repositoryName: repositoryName,
+      nextToken,
+      conflictResolutionStrategy,
+      maxConflictFiles,
+      conflictDetailLevel,
+      mergeOption,
+      sourceCommitSpecifier,
+      destinationCommitSpecifier,
+      repositoryName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetDifferences = {
   type t
   type request = {
@@ -3390,17 +3266,16 @@ module GetDifferences = {
     (),
   ) =>
     new({
-      nextToken: nextToken,
-      maxResults: maxResults,
-      afterPath: afterPath,
-      beforePath: beforePath,
-      afterCommitSpecifier: afterCommitSpecifier,
-      beforeCommitSpecifier: beforeCommitSpecifier,
-      repositoryName: repositoryName,
+      nextToken,
+      maxResults,
+      afterPath,
+      beforePath,
+      afterCommitSpecifier,
+      beforeCommitSpecifier,
+      repositoryName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetCommentReactions = {
   type t
   type request = {
@@ -3430,15 +3305,9 @@ module GetCommentReactions = {
   @module("@aws-sdk/client-codecommit") @new
   external new: request => t = "GetCommentReactionsCommand"
   let make = (~commentId, ~maxResults=?, ~nextToken=?, ~reactionUserArn=?, ()) =>
-    new({
-      maxResults: maxResults,
-      nextToken: nextToken,
-      reactionUserArn: reactionUserArn,
-      commentId: commentId,
-    })
+    new({maxResults, nextToken, reactionUserArn, commentId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeMergeConflicts = {
   type t
   type request = {
@@ -3505,19 +3374,18 @@ module DescribeMergeConflicts = {
     (),
   ) =>
     new({
-      nextToken: nextToken,
-      conflictResolutionStrategy: conflictResolutionStrategy,
-      conflictDetailLevel: conflictDetailLevel,
-      filePath: filePath,
-      maxMergeHunks: maxMergeHunks,
-      mergeOption: mergeOption,
-      sourceCommitSpecifier: sourceCommitSpecifier,
-      destinationCommitSpecifier: destinationCommitSpecifier,
-      repositoryName: repositoryName,
+      nextToken,
+      conflictResolutionStrategy,
+      conflictDetailLevel,
+      filePath,
+      maxMergeHunks,
+      mergeOption,
+      sourceCommitSpecifier,
+      destinationCommitSpecifier,
+      repositoryName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateUnreferencedMergeCommit = {
   type t
   type request = {
@@ -3582,21 +3450,20 @@ module CreateUnreferencedMergeCommit = {
     (),
   ) =>
     new({
-      conflictResolution: conflictResolution,
-      keepEmptyFolders: keepEmptyFolders,
-      commitMessage: commitMessage,
-      email: email,
-      authorName: authorName,
-      conflictResolutionStrategy: conflictResolutionStrategy,
-      conflictDetailLevel: conflictDetailLevel,
-      mergeOption: mergeOption,
-      destinationCommitSpecifier: destinationCommitSpecifier,
-      sourceCommitSpecifier: sourceCommitSpecifier,
-      repositoryName: repositoryName,
+      conflictResolution,
+      keepEmptyFolders,
+      commitMessage,
+      email,
+      authorName,
+      conflictResolutionStrategy,
+      conflictDetailLevel,
+      mergeOption,
+      destinationCommitSpecifier,
+      sourceCommitSpecifier,
+      repositoryName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateCommit = {
   type t
   type request = {
@@ -3656,20 +3523,19 @@ module CreateCommit = {
     (),
   ) =>
     new({
-      setFileModes: setFileModes,
-      deleteFiles: deleteFiles,
-      putFiles: putFiles,
-      keepEmptyFolders: keepEmptyFolders,
-      commitMessage: commitMessage,
-      email: email,
-      authorName: authorName,
-      parentCommitId: parentCommitId,
-      branchName: branchName,
-      repositoryName: repositoryName,
+      setFileModes,
+      deleteFiles,
+      putFiles,
+      keepEmptyFolders,
+      commitMessage,
+      email,
+      authorName,
+      parentCommitId,
+      branchName,
+      repositoryName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module BatchGetCommits = {
   type t
   type request = {
@@ -3693,11 +3559,9 @@ module BatchGetCommits = {
     commits: option<commitObjectsList>,
   }
   @module("@aws-sdk/client-codecommit") @new external new: request => t = "BatchGetCommitsCommand"
-  let make = (~repositoryName, ~commitIds, ()) =>
-    new({repositoryName: repositoryName, commitIds: commitIds})
+  let make = (~repositoryName, ~commitIds, ()) => new({repositoryName, commitIds})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdatePullRequestTitle = {
   type t
   type request = {
@@ -3713,10 +3577,9 @@ module UpdatePullRequestTitle = {
   }
   @module("@aws-sdk/client-codecommit") @new
   external new: request => t = "UpdatePullRequestTitleCommand"
-  let make = (~title, ~pullRequestId, ()) => new({title: title, pullRequestId: pullRequestId})
+  let make = (~title, ~pullRequestId, ()) => new({title, pullRequestId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdatePullRequestStatus = {
   type t
   type request = {
@@ -3734,11 +3597,9 @@ module UpdatePullRequestStatus = {
   }
   @module("@aws-sdk/client-codecommit") @new
   external new: request => t = "UpdatePullRequestStatusCommand"
-  let make = (~pullRequestStatus, ~pullRequestId, ()) =>
-    new({pullRequestStatus: pullRequestStatus, pullRequestId: pullRequestId})
+  let make = (~pullRequestStatus, ~pullRequestId, ()) => new({pullRequestStatus, pullRequestId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdatePullRequestDescription = {
   type t
   type request = {
@@ -3755,11 +3616,9 @@ module UpdatePullRequestDescription = {
   }
   @module("@aws-sdk/client-codecommit") @new
   external new: request => t = "UpdatePullRequestDescriptionCommand"
-  let make = (~description, ~pullRequestId, ()) =>
-    new({description: description, pullRequestId: pullRequestId})
+  let make = (~description, ~pullRequestId, ()) => new({description, pullRequestId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module MergePullRequestByThreeWay = {
   type t
   type request = {
@@ -3814,20 +3673,19 @@ module MergePullRequestByThreeWay = {
     (),
   ) =>
     new({
-      conflictResolution: conflictResolution,
-      keepEmptyFolders: keepEmptyFolders,
-      email: email,
-      authorName: authorName,
-      commitMessage: commitMessage,
-      conflictResolutionStrategy: conflictResolutionStrategy,
-      conflictDetailLevel: conflictDetailLevel,
-      sourceCommitId: sourceCommitId,
-      repositoryName: repositoryName,
-      pullRequestId: pullRequestId,
+      conflictResolution,
+      keepEmptyFolders,
+      email,
+      authorName,
+      commitMessage,
+      conflictResolutionStrategy,
+      conflictDetailLevel,
+      sourceCommitId,
+      repositoryName,
+      pullRequestId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module MergePullRequestBySquash = {
   type t
   type request = {
@@ -3882,20 +3740,19 @@ module MergePullRequestBySquash = {
     (),
   ) =>
     new({
-      conflictResolution: conflictResolution,
-      keepEmptyFolders: keepEmptyFolders,
-      email: email,
-      authorName: authorName,
-      commitMessage: commitMessage,
-      conflictResolutionStrategy: conflictResolutionStrategy,
-      conflictDetailLevel: conflictDetailLevel,
-      sourceCommitId: sourceCommitId,
-      repositoryName: repositoryName,
-      pullRequestId: pullRequestId,
+      conflictResolution,
+      keepEmptyFolders,
+      email,
+      authorName,
+      commitMessage,
+      conflictResolutionStrategy,
+      conflictDetailLevel,
+      sourceCommitId,
+      repositoryName,
+      pullRequestId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module MergePullRequestByFastForward = {
   type t
   type request = {
@@ -3916,14 +3773,9 @@ module MergePullRequestByFastForward = {
   @module("@aws-sdk/client-codecommit") @new
   external new: request => t = "MergePullRequestByFastForwardCommand"
   let make = (~repositoryName, ~pullRequestId, ~sourceCommitId=?, ()) =>
-    new({
-      sourceCommitId: sourceCommitId,
-      repositoryName: repositoryName,
-      pullRequestId: pullRequestId,
-    })
+    new({sourceCommitId, repositoryName, pullRequestId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetPullRequest = {
   type t
   type request = {
@@ -3939,7 +3791,6 @@ module GetPullRequest = {
   let make = (~pullRequestId, ()) => new({pullRequestId: pullRequestId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribePullRequestEvents = {
   type t
   type request = {
@@ -3979,17 +3830,9 @@ module DescribePullRequestEvents = {
     ~actorArn=?,
     ~pullRequestEventType=?,
     (),
-  ) =>
-    new({
-      maxResults: maxResults,
-      nextToken: nextToken,
-      actorArn: actorArn,
-      pullRequestEventType: pullRequestEventType,
-      pullRequestId: pullRequestId,
-    })
+  ) => new({maxResults, nextToken, actorArn, pullRequestEventType, pullRequestId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreatePullRequest = {
   type t
   type request = {
@@ -4016,15 +3859,9 @@ module CreatePullRequest = {
   }
   @module("@aws-sdk/client-codecommit") @new external new: request => t = "CreatePullRequestCommand"
   let make = (~targets, ~title, ~clientRequestToken=?, ~description=?, ()) =>
-    new({
-      clientRequestToken: clientRequestToken,
-      targets: targets,
-      description: description,
-      title: title,
-    })
+    new({clientRequestToken, targets, description, title})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetCommentsForPullRequest = {
   type t
   type request = {
@@ -4067,18 +3904,9 @@ module GetCommentsForPullRequest = {
     ~beforeCommitId=?,
     ~repositoryName=?,
     (),
-  ) =>
-    new({
-      maxResults: maxResults,
-      nextToken: nextToken,
-      afterCommitId: afterCommitId,
-      beforeCommitId: beforeCommitId,
-      repositoryName: repositoryName,
-      pullRequestId: pullRequestId,
-    })
+  ) => new({maxResults, nextToken, afterCommitId, beforeCommitId, repositoryName, pullRequestId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetCommentsForComparedCommit = {
   type t
   type request = {
@@ -4115,17 +3943,9 @@ module GetCommentsForComparedCommit = {
     ~nextToken=?,
     ~beforeCommitId=?,
     (),
-  ) =>
-    new({
-      maxResults: maxResults,
-      nextToken: nextToken,
-      afterCommitId: afterCommitId,
-      beforeCommitId: beforeCommitId,
-      repositoryName: repositoryName,
-    })
+  ) => new({maxResults, nextToken, afterCommitId, beforeCommitId, repositoryName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module BatchDescribeMergeConflicts = {
   type t
   type request = {
@@ -4201,16 +4021,16 @@ module BatchDescribeMergeConflicts = {
     (),
   ) =>
     new({
-      nextToken: nextToken,
-      conflictResolutionStrategy: conflictResolutionStrategy,
-      conflictDetailLevel: conflictDetailLevel,
-      filePaths: filePaths,
-      maxConflictFiles: maxConflictFiles,
-      maxMergeHunks: maxMergeHunks,
-      mergeOption: mergeOption,
-      sourceCommitSpecifier: sourceCommitSpecifier,
-      destinationCommitSpecifier: destinationCommitSpecifier,
-      repositoryName: repositoryName,
+      nextToken,
+      conflictResolutionStrategy,
+      conflictDetailLevel,
+      filePaths,
+      maxConflictFiles,
+      maxMergeHunks,
+      mergeOption,
+      sourceCommitSpecifier,
+      destinationCommitSpecifier,
+      repositoryName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

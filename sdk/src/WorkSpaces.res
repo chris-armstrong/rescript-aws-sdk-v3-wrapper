@@ -1098,10 +1098,9 @@ module UpdateWorkspaceImagePermission = {
   @module("@aws-sdk/client-workspaces") @new
   external new: request => t = "UpdateWorkspaceImagePermissionCommand"
   let make = (~sharedAccountId, ~allowCopyImage, ~imageId, ()) =>
-    new({sharedAccountId: sharedAccountId, allowCopyImage: allowCopyImage, imageId: imageId})
+    new({sharedAccountId, allowCopyImage, imageId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module UpdateWorkspaceBundle = {
   type t
   type request = {
@@ -1112,10 +1111,9 @@ module UpdateWorkspaceBundle = {
   type response = {.}
   @module("@aws-sdk/client-workspaces") @new
   external new: request => t = "UpdateWorkspaceBundleCommand"
-  let make = (~imageId=?, ~bundleId=?, ()) => new({imageId: imageId, bundleId: bundleId})
+  let make = (~imageId=?, ~bundleId=?, ()) => new({imageId, bundleId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module UpdateConnectClientAddIn = {
   type t
   type request = {
@@ -1131,11 +1129,9 @@ module UpdateConnectClientAddIn = {
   type response = {.}
   @module("@aws-sdk/client-workspaces") @new
   external new: request => t = "UpdateConnectClientAddInCommand"
-  let make = (~resourceId, ~addInId, ~url=?, ~name=?, ()) =>
-    new({url: url, name: name, resourceId: resourceId, addInId: addInId})
+  let make = (~resourceId, ~addInId, ~url=?, ~name=?, ()) => new({url, name, resourceId, addInId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module RestoreWorkspace = {
   type t
   type request = {
@@ -1147,7 +1143,6 @@ module RestoreWorkspace = {
   let make = (~workspaceId, ()) => new({workspaceId: workspaceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module ModifyWorkspaceState = {
   type t
   type request = {
@@ -1159,11 +1154,9 @@ module ModifyWorkspaceState = {
   type response = {.}
   @module("@aws-sdk/client-workspaces") @new
   external new: request => t = "ModifyWorkspaceStateCommand"
-  let make = (~workspaceState, ~workspaceId, ()) =>
-    new({workspaceState: workspaceState, workspaceId: workspaceId})
+  let make = (~workspaceState, ~workspaceId, ()) => new({workspaceState, workspaceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module ModifyAccount = {
   type t
   type request = {
@@ -1180,13 +1173,9 @@ module ModifyAccount = {
   type response = {.}
   @module("@aws-sdk/client-workspaces") @new external new: request => t = "ModifyAccountCommand"
   let make = (~dedicatedTenancyManagementCidrRange=?, ~dedicatedTenancySupport=?, ()) =>
-    new({
-      dedicatedTenancyManagementCidrRange: dedicatedTenancyManagementCidrRange,
-      dedicatedTenancySupport: dedicatedTenancySupport,
-    })
+    new({dedicatedTenancyManagementCidrRange, dedicatedTenancySupport})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module MigrateWorkspace = {
   type t
   type request = {
@@ -1207,11 +1196,9 @@ module MigrateWorkspace = {
     sourceWorkspaceId: option<workspaceId>,
   }
   @module("@aws-sdk/client-workspaces") @new external new: request => t = "MigrateWorkspaceCommand"
-  let make = (~bundleId, ~sourceWorkspaceId, ()) =>
-    new({bundleId: bundleId, sourceWorkspaceId: sourceWorkspaceId})
+  let make = (~bundleId, ~sourceWorkspaceId, ()) => new({bundleId, sourceWorkspaceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DisassociateConnectionAlias = {
   type t
   type request = {
@@ -1224,7 +1211,6 @@ module DisassociateConnectionAlias = {
   let make = (~aliasId, ()) => new({aliasId: aliasId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DescribeAccount = {
   type t
   type request = {.}
@@ -1244,7 +1230,6 @@ module DescribeAccount = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeregisterWorkspaceDirectory = {
   type t
   type request = {
@@ -1260,7 +1245,6 @@ module DeregisterWorkspaceDirectory = {
   let make = (~directoryId, ()) => new({directoryId: directoryId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteWorkspaceImage = {
   type t
   type request = {
@@ -1272,7 +1256,6 @@ module DeleteWorkspaceImage = {
   let make = (~imageId, ()) => new({imageId: imageId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteWorkspaceBundle = {
   type t
   type request = {
@@ -1284,7 +1267,6 @@ module DeleteWorkspaceBundle = {
   let make = (~bundleId=?, ()) => new({bundleId: bundleId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteIpGroup = {
   type t
   type request = {
@@ -1296,7 +1278,6 @@ module DeleteIpGroup = {
   let make = (~groupId, ()) => new({groupId: groupId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteConnectionAlias = {
   type t
   type request = {
@@ -1309,7 +1290,6 @@ module DeleteConnectionAlias = {
   let make = (~aliasId, ()) => new({aliasId: aliasId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteConnectClientAddIn = {
   type t
   type request = {
@@ -1322,10 +1302,9 @@ module DeleteConnectClientAddIn = {
   type response = {.}
   @module("@aws-sdk/client-workspaces") @new
   external new: request => t = "DeleteConnectClientAddInCommand"
-  let make = (~resourceId, ~addInId, ()) => new({resourceId: resourceId, addInId: addInId})
+  let make = (~resourceId, ~addInId, ()) => new({resourceId, addInId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module CreateConnectClientAddIn = {
   type t
   type request = {
@@ -1341,10 +1320,9 @@ module CreateConnectClientAddIn = {
   }
   @module("@aws-sdk/client-workspaces") @new
   external new: request => t = "CreateConnectClientAddInCommand"
-  let make = (~url, ~name, ~resourceId, ()) => new({url: url, name: name, resourceId: resourceId})
+  let make = (~url, ~name, ~resourceId, ()) => new({url, name, resourceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module AssociateConnectionAlias = {
   type t
   type request = {
@@ -1362,10 +1340,9 @@ module AssociateConnectionAlias = {
   }
   @module("@aws-sdk/client-workspaces") @new
   external new: request => t = "AssociateConnectionAliasCommand"
-  let make = (~resourceId, ~aliasId, ()) => new({resourceId: resourceId, aliasId: aliasId})
+  let make = (~resourceId, ~aliasId, ()) => new({resourceId, aliasId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateConnectionAliasPermission = {
   type t
   type request = {
@@ -1383,11 +1360,9 @@ module UpdateConnectionAliasPermission = {
   type response = {.}
   @module("@aws-sdk/client-workspaces") @new
   external new: request => t = "UpdateConnectionAliasPermissionCommand"
-  let make = (~connectionAliasPermission, ~aliasId, ()) =>
-    new({connectionAliasPermission: connectionAliasPermission, aliasId: aliasId})
+  let make = (~connectionAliasPermission, ~aliasId, ()) => new({connectionAliasPermission, aliasId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module RevokeIpRules = {
   type t
   type request = {
@@ -1397,10 +1372,9 @@ module RevokeIpRules = {
   }
   type response = {.}
   @module("@aws-sdk/client-workspaces") @new external new: request => t = "RevokeIpRulesCommand"
-  let make = (~userRules, ~groupId, ()) => new({userRules: userRules, groupId: groupId})
+  let make = (~userRules, ~groupId, ()) => new({userRules, groupId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module ModifyWorkspaceProperties = {
   type t
   type request = {
@@ -1412,11 +1386,9 @@ module ModifyWorkspaceProperties = {
   type response = {.}
   @module("@aws-sdk/client-workspaces") @new
   external new: request => t = "ModifyWorkspacePropertiesCommand"
-  let make = (~workspaceProperties, ~workspaceId, ()) =>
-    new({workspaceProperties: workspaceProperties, workspaceId: workspaceId})
+  let make = (~workspaceProperties, ~workspaceId, ()) => new({workspaceProperties, workspaceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module ModifyWorkspaceCreationProperties = {
   type t
   type request = {
@@ -1429,10 +1401,9 @@ module ModifyWorkspaceCreationProperties = {
   @module("@aws-sdk/client-workspaces") @new
   external new: request => t = "ModifyWorkspaceCreationPropertiesCommand"
   let make = (~workspaceCreationProperties, ~resourceId, ()) =>
-    new({workspaceCreationProperties: workspaceCreationProperties, resourceId: resourceId})
+    new({workspaceCreationProperties, resourceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module ModifyWorkspaceAccessProperties = {
   type t
   type request = {
@@ -1445,10 +1416,9 @@ module ModifyWorkspaceAccessProperties = {
   @module("@aws-sdk/client-workspaces") @new
   external new: request => t = "ModifyWorkspaceAccessPropertiesCommand"
   let make = (~workspaceAccessProperties, ~resourceId, ()) =>
-    new({workspaceAccessProperties: workspaceAccessProperties, resourceId: resourceId})
+    new({workspaceAccessProperties, resourceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module ModifySelfservicePermissions = {
   type t
   type request = {
@@ -1460,11 +1430,9 @@ module ModifySelfservicePermissions = {
   type response = {.}
   @module("@aws-sdk/client-workspaces") @new
   external new: request => t = "ModifySelfservicePermissionsCommand"
-  let make = (~selfservicePermissions, ~resourceId, ()) =>
-    new({selfservicePermissions: selfservicePermissions, resourceId: resourceId})
+  let make = (~selfservicePermissions, ~resourceId, ()) => new({selfservicePermissions, resourceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module ModifyClientProperties = {
   type t
   type request = {
@@ -1476,11 +1444,9 @@ module ModifyClientProperties = {
   type response = {.}
   @module("@aws-sdk/client-workspaces") @new
   external new: request => t = "ModifyClientPropertiesCommand"
-  let make = (~clientProperties, ~resourceId, ()) =>
-    new({clientProperties: clientProperties, resourceId: resourceId})
+  let make = (~clientProperties, ~resourceId, ()) => new({clientProperties, resourceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module ListAvailableManagementCidrRanges = {
   type t
   type request = {
@@ -1507,14 +1473,9 @@ module ListAvailableManagementCidrRanges = {
   @module("@aws-sdk/client-workspaces") @new
   external new: request => t = "ListAvailableManagementCidrRangesCommand"
   let make = (~managementCidrRangeConstraint, ~nextToken=?, ~maxResults=?, ()) =>
-    new({
-      nextToken: nextToken,
-      maxResults: maxResults,
-      managementCidrRangeConstraint: managementCidrRangeConstraint,
-    })
+    new({nextToken, maxResults, managementCidrRangeConstraint})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DisassociateIpGroups = {
   type t
   type request = {
@@ -1526,10 +1487,9 @@ module DisassociateIpGroups = {
   type response = {.}
   @module("@aws-sdk/client-workspaces") @new
   external new: request => t = "DisassociateIpGroupsCommand"
-  let make = (~groupIds, ~directoryId, ()) => new({groupIds: groupIds, directoryId: directoryId})
+  let make = (~groupIds, ~directoryId, ()) => new({groupIds, directoryId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteTags = {
   type t
   type request = {
@@ -1542,10 +1502,9 @@ module DeleteTags = {
   }
   type response = {.}
   @module("@aws-sdk/client-workspaces") @new external new: request => t = "DeleteTagsCommand"
-  let make = (~tagKeys, ~resourceId, ()) => new({tagKeys: tagKeys, resourceId: resourceId})
+  let make = (~tagKeys, ~resourceId, ()) => new({tagKeys, resourceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteClientBranding = {
   type t
   type request = {
@@ -1560,10 +1519,9 @@ module DeleteClientBranding = {
   type response = {.}
   @module("@aws-sdk/client-workspaces") @new
   external new: request => t = "DeleteClientBrandingCommand"
-  let make = (~platforms, ~resourceId, ()) => new({platforms: platforms, resourceId: resourceId})
+  let make = (~platforms, ~resourceId, ()) => new({platforms, resourceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module AssociateIpGroups = {
   type t
   type request = {
@@ -1574,10 +1532,9 @@ module AssociateIpGroups = {
   }
   type response = {.}
   @module("@aws-sdk/client-workspaces") @new external new: request => t = "AssociateIpGroupsCommand"
-  let make = (~groupIds, ~directoryId, ()) => new({groupIds: groupIds, directoryId: directoryId})
+  let make = (~groupIds, ~directoryId, ()) => new({groupIds, directoryId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module UpdateRulesOfIpGroup = {
   type t
   type request = {
@@ -1587,10 +1544,9 @@ module UpdateRulesOfIpGroup = {
   type response = {.}
   @module("@aws-sdk/client-workspaces") @new
   external new: request => t = "UpdateRulesOfIpGroupCommand"
-  let make = (~userRules, ~groupId, ()) => new({userRules: userRules, groupId: groupId})
+  let make = (~userRules, ~groupId, ()) => new({userRules, groupId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module TerminateWorkspaces = {
   type t
   type request = {
@@ -1609,7 +1565,6 @@ module TerminateWorkspaces = {
     new({terminateWorkspaceRequests: terminateWorkspaceRequests})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module StopWorkspaces = {
   type t
   type request = {
@@ -1626,7 +1581,6 @@ module StopWorkspaces = {
   let make = (~stopWorkspaceRequests, ()) => new({stopWorkspaceRequests: stopWorkspaceRequests})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module StartWorkspaces = {
   type t
   type request = {
@@ -1643,7 +1597,6 @@ module StartWorkspaces = {
   let make = (~startWorkspaceRequests, ()) => new({startWorkspaceRequests: startWorkspaceRequests})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module RegisterWorkspaceDirectory = {
   type t
   type request = {
@@ -1690,18 +1643,9 @@ module RegisterWorkspaceDirectory = {
     ~enableSelfService=?,
     ~subnetIds=?,
     (),
-  ) =>
-    new({
-      tags: tags,
-      tenancy: tenancy,
-      enableSelfService: enableSelfService,
-      enableWorkDocs: enableWorkDocs,
-      subnetIds: subnetIds,
-      directoryId: directoryId,
-    })
+  ) => new({tags, tenancy, enableSelfService, enableWorkDocs, subnetIds, directoryId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module RebuildWorkspaces = {
   type t
   type request = {
@@ -1719,7 +1663,6 @@ module RebuildWorkspaces = {
     new({rebuildWorkspaceRequests: rebuildWorkspaceRequests})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module RebootWorkspaces = {
   type t
   type request = {
@@ -1737,7 +1680,6 @@ module RebootWorkspaces = {
     new({rebootWorkspaceRequests: rebootWorkspaceRequests})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ImportWorkspaceImage = {
   type t
   type request = {
@@ -1781,18 +1723,9 @@ module ImportWorkspaceImage = {
     ~applications=?,
     ~tags=?,
     (),
-  ) =>
-    new({
-      applications: applications,
-      tags: tags,
-      imageDescription: imageDescription,
-      imageName: imageName,
-      ingestionProcess: ingestionProcess,
-      ec2ImageId: ec2ImageId,
-    })
+  ) => new({applications, tags, imageDescription, imageName, ingestionProcess, ec2ImageId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ImportClientBranding = {
   type t
   type request = {
@@ -1846,17 +1779,16 @@ module ImportClientBranding = {
     (),
   ) =>
     new({
-      deviceTypeWeb: deviceTypeWeb,
-      deviceTypeLinux: deviceTypeLinux,
-      deviceTypeIos: deviceTypeIos,
-      deviceTypeAndroid: deviceTypeAndroid,
-      deviceTypeOsx: deviceTypeOsx,
-      deviceTypeWindows: deviceTypeWindows,
-      resourceId: resourceId,
+      deviceTypeWeb,
+      deviceTypeLinux,
+      deviceTypeIos,
+      deviceTypeAndroid,
+      deviceTypeOsx,
+      deviceTypeWindows,
+      resourceId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeWorkspacesConnectionStatus = {
   type t
   type request = {
@@ -1879,11 +1811,9 @@ module DescribeWorkspacesConnectionStatus = {
   }
   @module("@aws-sdk/client-workspaces") @new
   external new: request => t = "DescribeWorkspacesConnectionStatusCommand"
-  let make = (~nextToken=?, ~workspaceIds=?, ()) =>
-    new({nextToken: nextToken, workspaceIds: workspaceIds})
+  let make = (~nextToken=?, ~workspaceIds=?, ()) => new({nextToken, workspaceIds})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeWorkspaceSnapshots = {
   type t
   type request = {
@@ -1905,7 +1835,6 @@ module DescribeWorkspaceSnapshots = {
   let make = (~workspaceId, ()) => new({workspaceId: workspaceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeWorkspaceImagePermissions = {
   type t
   type request = {
@@ -1931,11 +1860,9 @@ module DescribeWorkspaceImagePermissions = {
   }
   @module("@aws-sdk/client-workspaces") @new
   external new: request => t = "DescribeWorkspaceImagePermissionsCommand"
-  let make = (~imageId, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, imageId: imageId})
+  let make = (~imageId, ~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken, imageId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeTags = {
   type t
   type request = {
@@ -1950,7 +1877,6 @@ module DescribeTags = {
   let make = (~resourceId, ()) => new({resourceId: resourceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeConnectionAliasPermissions = {
   type t
   type request = {
@@ -1976,11 +1902,9 @@ module DescribeConnectionAliasPermissions = {
   }
   @module("@aws-sdk/client-workspaces") @new
   external new: request => t = "DescribeConnectionAliasPermissionsCommand"
-  let make = (~aliasId, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, aliasId: aliasId})
+  let make = (~aliasId, ~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken, aliasId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeConnectClientAddIns = {
   type t
   type request = {
@@ -2005,10 +1929,9 @@ module DescribeConnectClientAddIns = {
   @module("@aws-sdk/client-workspaces") @new
   external new: request => t = "DescribeConnectClientAddInsCommand"
   let make = (~resourceId, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, resourceId: resourceId})
+    new({maxResults, nextToken, resourceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeClientBranding = {
   type t
   type request = {
@@ -2036,7 +1959,6 @@ module DescribeClientBranding = {
   let make = (~resourceId, ()) => new({resourceId: resourceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeAccountModifications = {
   type t
   type request = {
@@ -2059,7 +1981,6 @@ module DescribeAccountModifications = {
   let make = (~nextToken=?, ()) => new({nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateWorkspaceBundle = {
   type t
   type request = {
@@ -2093,19 +2014,9 @@ module CreateWorkspaceBundle = {
     ~tags=?,
     ~rootStorage=?,
     (),
-  ) =>
-    new({
-      tags: tags,
-      rootStorage: rootStorage,
-      userStorage: userStorage,
-      computeType: computeType,
-      imageId: imageId,
-      bundleDescription: bundleDescription,
-      bundleName: bundleName,
-    })
+  ) => new({tags, rootStorage, userStorage, computeType, imageId, bundleDescription, bundleName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateUpdatedWorkspaceImage = {
   type t
   type request = {
@@ -2132,10 +2043,9 @@ module CreateUpdatedWorkspaceImage = {
   @module("@aws-sdk/client-workspaces") @new
   external new: request => t = "CreateUpdatedWorkspaceImageCommand"
   let make = (~sourceImageId, ~description, ~name, ~tags=?, ()) =>
-    new({tags: tags, sourceImageId: sourceImageId, description: description, name: name})
+    new({tags, sourceImageId, description, name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateTags = {
   type t
   type request = {
@@ -2150,10 +2060,9 @@ module CreateTags = {
   }
   type response = {.}
   @module("@aws-sdk/client-workspaces") @new external new: request => t = "CreateTagsCommand"
-  let make = (~tags, ~resourceId, ()) => new({tags: tags, resourceId: resourceId})
+  let make = (~tags, ~resourceId, ()) => new({tags, resourceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module CreateIpGroup = {
   type t
   type request = {
@@ -2171,10 +2080,9 @@ module CreateIpGroup = {
   }
   @module("@aws-sdk/client-workspaces") @new external new: request => t = "CreateIpGroupCommand"
   let make = (~groupName, ~tags=?, ~userRules=?, ~groupDesc=?, ()) =>
-    new({tags: tags, userRules: userRules, groupDesc: groupDesc, groupName: groupName})
+    new({tags, userRules, groupDesc, groupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateConnectionAlias = {
   type t
   type request = {
@@ -2196,11 +2104,9 @@ module CreateConnectionAlias = {
   }
   @module("@aws-sdk/client-workspaces") @new
   external new: request => t = "CreateConnectionAliasCommand"
-  let make = (~connectionString, ~tags=?, ()) =>
-    new({tags: tags, connectionString: connectionString})
+  let make = (~connectionString, ~tags=?, ()) => new({tags, connectionString})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CopyWorkspaceImage = {
   type t
   type request = {
@@ -2220,16 +2126,9 @@ module CopyWorkspaceImage = {
   @module("@aws-sdk/client-workspaces") @new
   external new: request => t = "CopyWorkspaceImageCommand"
   let make = (~sourceRegion, ~sourceImageId, ~name, ~tags=?, ~description=?, ()) =>
-    new({
-      tags: tags,
-      sourceRegion: sourceRegion,
-      sourceImageId: sourceImageId,
-      description: description,
-      name: name,
-    })
+    new({tags, sourceRegion, sourceImageId, description, name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module AuthorizeIpRules = {
   type t
   type request = {
@@ -2238,10 +2137,9 @@ module AuthorizeIpRules = {
   }
   type response = {.}
   @module("@aws-sdk/client-workspaces") @new external new: request => t = "AuthorizeIpRulesCommand"
-  let make = (~userRules, ~groupId, ()) => new({userRules: userRules, groupId: groupId})
+  let make = (~userRules, ~groupId, ()) => new({userRules, groupId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DescribeWorkspaceImages = {
   type t
   type request = {
@@ -2267,10 +2165,9 @@ module DescribeWorkspaceImages = {
   @module("@aws-sdk/client-workspaces") @new
   external new: request => t = "DescribeWorkspaceImagesCommand"
   let make = (~maxResults=?, ~nextToken=?, ~imageType=?, ~imageIds=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, imageType: imageType, imageIds: imageIds})
+    new({maxResults, nextToken, imageType, imageIds})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeWorkspaceDirectories = {
   type t
   type request = {
@@ -2295,11 +2192,9 @@ module DescribeWorkspaceDirectories = {
   }
   @module("@aws-sdk/client-workspaces") @new
   external new: request => t = "DescribeWorkspaceDirectoriesCommand"
-  let make = (~nextToken=?, ~limit=?, ~directoryIds=?, ()) =>
-    new({nextToken: nextToken, limit: limit, directoryIds: directoryIds})
+  let make = (~nextToken=?, ~limit=?, ~directoryIds=?, ()) => new({nextToken, limit, directoryIds})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeWorkspaceBundles = {
   type t
   type request = {
@@ -2329,11 +2224,9 @@ module DescribeWorkspaceBundles = {
   }
   @module("@aws-sdk/client-workspaces") @new
   external new: request => t = "DescribeWorkspaceBundlesCommand"
-  let make = (~nextToken=?, ~owner=?, ~bundleIds=?, ()) =>
-    new({nextToken: nextToken, owner: owner, bundleIds: bundleIds})
+  let make = (~nextToken=?, ~owner=?, ~bundleIds=?, ()) => new({nextToken, owner, bundleIds})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeClientProperties = {
   type t
   type request = {
@@ -2350,7 +2243,6 @@ module DescribeClientProperties = {
   let make = (~resourceIds, ()) => new({resourceIds: resourceIds})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeWorkspaces = {
   type t
   type request = {
@@ -2400,18 +2292,9 @@ module DescribeWorkspaces = {
     ~directoryId=?,
     ~workspaceIds=?,
     (),
-  ) =>
-    new({
-      nextToken: nextToken,
-      limit: limit,
-      bundleId: bundleId,
-      userName: userName,
-      directoryId: directoryId,
-      workspaceIds: workspaceIds,
-    })
+  ) => new({nextToken, limit, bundleId, userName, directoryId, workspaceIds})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeIpGroups = {
   type t
   type request = {
@@ -2434,10 +2317,9 @@ module DescribeIpGroups = {
   }
   @module("@aws-sdk/client-workspaces") @new external new: request => t = "DescribeIpGroupsCommand"
   let make = (~maxResults=?, ~nextToken=?, ~groupIds=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, groupIds: groupIds})
+    new({maxResults, nextToken, groupIds})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeConnectionAliases = {
   type t
   type request = {
@@ -2465,10 +2347,9 @@ module DescribeConnectionAliases = {
   @module("@aws-sdk/client-workspaces") @new
   external new: request => t = "DescribeConnectionAliasesCommand"
   let make = (~nextToken=?, ~limit=?, ~resourceId=?, ~aliasIds=?, ()) =>
-    new({nextToken: nextToken, limit: limit, resourceId: resourceId, aliasIds: aliasIds})
+    new({nextToken, limit, resourceId, aliasIds})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateWorkspaces = {
   type t
   type request = {

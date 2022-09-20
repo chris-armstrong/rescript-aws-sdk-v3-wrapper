@@ -690,7 +690,6 @@ module StopChannel = {
   let make = (~channelName, ()) => new({channelName: channelName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module StartChannel = {
   type t
   type request = {
@@ -702,7 +701,6 @@ module StartChannel = {
   let make = (~channelName, ()) => new({channelName: channelName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module PutChannelPolicy = {
   type t
   type request = {
@@ -714,10 +712,9 @@ module PutChannelPolicy = {
   }
   type response = {.}
   @module("@aws-sdk/client-mediatailor") @new external new: request => t = "PutChannelPolicyCommand"
-  let make = (~policy, ~channelName, ()) => new({policy: policy, channelName: channelName})
+  let make = (~policy, ~channelName, ()) => new({policy, channelName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module GetChannelPolicy = {
   type t
   type request = {
@@ -731,7 +728,6 @@ module GetChannelPolicy = {
   let make = (~channelName, ()) => new({channelName: channelName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteVodSource = {
   type t
   type request = {
@@ -743,11 +739,9 @@ module DeleteVodSource = {
   }
   type response = {.}
   @module("@aws-sdk/client-mediatailor") @new external new: request => t = "DeleteVodSourceCommand"
-  let make = (~vodSourceName, ~sourceLocationName, ()) =>
-    new({vodSourceName: vodSourceName, sourceLocationName: sourceLocationName})
+  let make = (~vodSourceName, ~sourceLocationName, ()) => new({vodSourceName, sourceLocationName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteSourceLocation = {
   type t
   type request = {
@@ -761,7 +755,6 @@ module DeleteSourceLocation = {
   let make = (~sourceLocationName, ()) => new({sourceLocationName: sourceLocationName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteProgram = {
   type t
   type request = {
@@ -772,11 +765,9 @@ module DeleteProgram = {
   }
   type response = {.}
   @module("@aws-sdk/client-mediatailor") @new external new: request => t = "DeleteProgramCommand"
-  let make = (~programName, ~channelName, ()) =>
-    new({programName: programName, channelName: channelName})
+  let make = (~programName, ~channelName, ()) => new({programName, channelName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeletePrefetchSchedule = {
   type t
   type request = {
@@ -787,11 +778,9 @@ module DeletePrefetchSchedule = {
   type response = {.}
   @module("@aws-sdk/client-mediatailor") @new
   external new: request => t = "DeletePrefetchScheduleCommand"
-  let make = (~playbackConfigurationName, ~name, ()) =>
-    new({playbackConfigurationName: playbackConfigurationName, name: name})
+  let make = (~playbackConfigurationName, ~name, ()) => new({playbackConfigurationName, name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeletePlaybackConfiguration = {
   type t
   type request = {
@@ -803,7 +792,6 @@ module DeletePlaybackConfiguration = {
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteChannelPolicy = {
   type t
   type request = {
@@ -816,7 +804,6 @@ module DeleteChannelPolicy = {
   let make = (~channelName, ()) => new({channelName: channelName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteChannel = {
   type t
   type request = {
@@ -828,7 +815,6 @@ module DeleteChannel = {
   let make = (~channelName, ()) => new({channelName: channelName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module ConfigureLogsForPlaybackConfiguration = {
   type t
   @ocaml.doc("<p>Configures Amazon CloudWatch log settings for a playback configuration.</p>")
@@ -853,10 +839,9 @@ module ConfigureLogsForPlaybackConfiguration = {
   @module("@aws-sdk/client-mediatailor") @new
   external new: request => t = "ConfigureLogsForPlaybackConfigurationCommand"
   let make = (~playbackConfigurationName, ~percentEnabled, ()) =>
-    new({playbackConfigurationName: playbackConfigurationName, percentEnabled: percentEnabled})
+    new({playbackConfigurationName, percentEnabled})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UntagResource = {
   type t
   type request = {
@@ -873,10 +858,9 @@ module UntagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-mediatailor") @new external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
+  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys, resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module TagResource = {
   type t
   type request = {
@@ -890,10 +874,9 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-mediatailor") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
+  let make = (~tags, ~resourceArn, ()) => new({tags, resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module ListTagsForResource = {
   type t
   type request = {
@@ -912,7 +895,6 @@ module ListTagsForResource = {
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateVodSource = {
   type t
   type request = {
@@ -944,14 +926,9 @@ module UpdateVodSource = {
   }
   @module("@aws-sdk/client-mediatailor") @new external new: request => t = "UpdateVodSourceCommand"
   let make = (~vodSourceName, ~sourceLocationName, ~httpPackageConfigurations, ()) =>
-    new({
-      vodSourceName: vodSourceName,
-      sourceLocationName: sourceLocationName,
-      httpPackageConfigurations: httpPackageConfigurations,
-    })
+    new({vodSourceName, sourceLocationName, httpPackageConfigurations})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateSourceLocation = {
   type t
   type request = {
@@ -1006,15 +983,14 @@ module UpdateSourceLocation = {
     (),
   ) =>
     new({
-      sourceLocationName: sourceLocationName,
-      segmentDeliveryConfigurations: segmentDeliveryConfigurations,
-      httpConfiguration: httpConfiguration,
-      defaultSegmentDeliveryConfiguration: defaultSegmentDeliveryConfiguration,
-      accessConfiguration: accessConfiguration,
+      sourceLocationName,
+      segmentDeliveryConfigurations,
+      httpConfiguration,
+      defaultSegmentDeliveryConfiguration,
+      accessConfiguration,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module PutPlaybackConfiguration = {
   type t
   type request = {
@@ -1177,24 +1153,23 @@ module PutPlaybackConfiguration = {
     (),
   ) =>
     new({
-      videoContentSourceUrl: videoContentSourceUrl,
-      transcodeProfileName: transcodeProfileName,
-      tags: tags,
-      slateAdUrl: slateAdUrl,
-      personalizationThresholdSeconds: personalizationThresholdSeconds,
-      name: name,
-      manifestProcessingRules: manifestProcessingRules,
-      livePreRollConfiguration: livePreRollConfiguration,
-      dashConfiguration: dashConfiguration,
-      configurationAliases: configurationAliases,
-      cdnConfiguration: cdnConfiguration,
-      bumper: bumper,
-      availSuppression: availSuppression,
-      adDecisionServerUrl: adDecisionServerUrl,
+      videoContentSourceUrl,
+      transcodeProfileName,
+      tags,
+      slateAdUrl,
+      personalizationThresholdSeconds,
+      name,
+      manifestProcessingRules,
+      livePreRollConfiguration,
+      dashConfiguration,
+      configurationAliases,
+      cdnConfiguration,
+      bumper,
+      availSuppression,
+      adDecisionServerUrl,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetPlaybackConfiguration = {
   type t
   type request = {
@@ -1284,7 +1259,6 @@ module GetPlaybackConfiguration = {
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeVodSource = {
   type t
   type request = {
@@ -1313,11 +1287,9 @@ module DescribeVodSource = {
   }
   @module("@aws-sdk/client-mediatailor") @new
   external new: request => t = "DescribeVodSourceCommand"
-  let make = (~vodSourceName, ~sourceLocationName, ()) =>
-    new({vodSourceName: vodSourceName, sourceLocationName: sourceLocationName})
+  let make = (~vodSourceName, ~sourceLocationName, ()) => new({vodSourceName, sourceLocationName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeSourceLocation = {
   type t
   type request = {
@@ -1354,7 +1326,6 @@ module DescribeSourceLocation = {
   let make = (~sourceLocationName, ()) => new({sourceLocationName: sourceLocationName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateVodSource = {
   type t
   type request = {
@@ -1388,15 +1359,9 @@ module CreateVodSource = {
   }
   @module("@aws-sdk/client-mediatailor") @new external new: request => t = "CreateVodSourceCommand"
   let make = (~vodSourceName, ~sourceLocationName, ~httpPackageConfigurations, ~tags=?, ()) =>
-    new({
-      vodSourceName: vodSourceName,
-      tags: tags,
-      sourceLocationName: sourceLocationName,
-      httpPackageConfigurations: httpPackageConfigurations,
-    })
+    new({vodSourceName, tags, sourceLocationName, httpPackageConfigurations})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateSourceLocation = {
   type t
   type request = {
@@ -1454,16 +1419,15 @@ module CreateSourceLocation = {
     (),
   ) =>
     new({
-      tags: tags,
-      sourceLocationName: sourceLocationName,
-      segmentDeliveryConfigurations: segmentDeliveryConfigurations,
-      httpConfiguration: httpConfiguration,
-      defaultSegmentDeliveryConfiguration: defaultSegmentDeliveryConfiguration,
-      accessConfiguration: accessConfiguration,
+      tags,
+      sourceLocationName,
+      segmentDeliveryConfigurations,
+      httpConfiguration,
+      defaultSegmentDeliveryConfiguration,
+      accessConfiguration,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateChannel = {
   type t
   type request = {
@@ -1501,10 +1465,9 @@ module UpdateChannel = {
   }
   @module("@aws-sdk/client-mediatailor") @new external new: request => t = "UpdateChannelCommand"
   let make = (~outputs, ~channelName, ~fillerSlate=?, ()) =>
-    new({outputs: outputs, fillerSlate: fillerSlate, channelName: channelName})
+    new({outputs, fillerSlate, channelName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListAlerts = {
   type t
   type request = {
@@ -1532,10 +1495,9 @@ module ListAlerts = {
   }
   @module("@aws-sdk/client-mediatailor") @new external new: request => t = "ListAlertsCommand"
   let make = (~resourceArn, ~nextToken=?, ~maxResults=?, ()) =>
-    new({resourceArn: resourceArn, nextToken: nextToken, maxResults: maxResults})
+    new({resourceArn, nextToken, maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetPrefetchSchedule = {
   type t
   type request = {
@@ -1572,11 +1534,9 @@ module GetPrefetchSchedule = {
   }
   @module("@aws-sdk/client-mediatailor") @new
   external new: request => t = "GetPrefetchScheduleCommand"
-  let make = (~playbackConfigurationName, ~name, ()) =>
-    new({playbackConfigurationName: playbackConfigurationName, name: name})
+  let make = (~playbackConfigurationName, ~name, ()) => new({playbackConfigurationName, name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeProgram = {
   type t
   type request = {
@@ -1605,11 +1565,9 @@ module DescribeProgram = {
     adBreaks: option<__listOfAdBreak>,
   }
   @module("@aws-sdk/client-mediatailor") @new external new: request => t = "DescribeProgramCommand"
-  let make = (~programName, ~channelName, ()) =>
-    new({programName: programName, channelName: channelName})
+  let make = (~programName, ~channelName, ()) => new({programName, channelName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeChannel = {
   type t
   type request = {
@@ -1643,7 +1601,6 @@ module DescribeChannel = {
   let make = (~channelName, ()) => new({channelName: channelName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateProgram = {
   type t
   type request = {
@@ -1690,16 +1647,15 @@ module CreateProgram = {
     (),
   ) =>
     new({
-      vodSourceName: vodSourceName,
-      sourceLocationName: sourceLocationName,
-      scheduleConfiguration: scheduleConfiguration,
-      programName: programName,
-      channelName: channelName,
-      adBreaks: adBreaks,
+      vodSourceName,
+      sourceLocationName,
+      scheduleConfiguration,
+      programName,
+      channelName,
+      adBreaks,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreatePrefetchSchedule = {
   type t
   type request = {
@@ -1752,16 +1708,9 @@ module CreatePrefetchSchedule = {
   @module("@aws-sdk/client-mediatailor") @new
   external new: request => t = "CreatePrefetchScheduleCommand"
   let make = (~retrieval, ~playbackConfigurationName, ~name, ~consumption, ~streamId=?, ()) =>
-    new({
-      streamId: streamId,
-      retrieval: retrieval,
-      playbackConfigurationName: playbackConfigurationName,
-      name: name,
-      consumption: consumption,
-    })
+    new({streamId, retrieval, playbackConfigurationName, name, consumption})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateChannel = {
   type t
   type request = {
@@ -1806,16 +1755,9 @@ module CreateChannel = {
   }
   @module("@aws-sdk/client-mediatailor") @new external new: request => t = "CreateChannelCommand"
   let make = (~playbackMode, ~outputs, ~channelName, ~tags=?, ~fillerSlate=?, ()) =>
-    new({
-      tags: tags,
-      playbackMode: playbackMode,
-      outputs: outputs,
-      fillerSlate: fillerSlate,
-      channelName: channelName,
-    })
+    new({tags, playbackMode, outputs, fillerSlate, channelName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListVodSources = {
   type t
   type request = {
@@ -1843,10 +1785,9 @@ module ListVodSources = {
   }
   @module("@aws-sdk/client-mediatailor") @new external new: request => t = "ListVodSourcesCommand"
   let make = (~sourceLocationName, ~nextToken=?, ~maxResults=?, ()) =>
-    new({sourceLocationName: sourceLocationName, nextToken: nextToken, maxResults: maxResults})
+    new({sourceLocationName, nextToken, maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListSourceLocations = {
   type t
   type request = {
@@ -1872,11 +1813,9 @@ module ListSourceLocations = {
   }
   @module("@aws-sdk/client-mediatailor") @new
   external new: request => t = "ListSourceLocationsCommand"
-  let make = (~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken: nextToken, maxResults: maxResults})
+  let make = (~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListPlaybackConfigurations = {
   type t
   type request = {
@@ -1902,11 +1841,9 @@ module ListPlaybackConfigurations = {
   }
   @module("@aws-sdk/client-mediatailor") @new
   external new: request => t = "ListPlaybackConfigurationsCommand"
-  let make = (~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken: nextToken, maxResults: maxResults})
+  let make = (~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetChannelSchedule = {
   type t
   type request = {
@@ -1940,15 +1877,9 @@ module GetChannelSchedule = {
   @module("@aws-sdk/client-mediatailor") @new
   external new: request => t = "GetChannelScheduleCommand"
   let make = (~channelName, ~nextToken=?, ~maxResults=?, ~durationMinutes=?, ()) =>
-    new({
-      nextToken: nextToken,
-      maxResults: maxResults,
-      durationMinutes: durationMinutes,
-      channelName: channelName,
-    })
+    new({nextToken, maxResults, durationMinutes, channelName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListPrefetchSchedules = {
   type t
   type request = {
@@ -1985,15 +1916,9 @@ module ListPrefetchSchedules = {
   @module("@aws-sdk/client-mediatailor") @new
   external new: request => t = "ListPrefetchSchedulesCommand"
   let make = (~playbackConfigurationName, ~streamId=?, ~nextToken=?, ~maxResults=?, ()) =>
-    new({
-      streamId: streamId,
-      playbackConfigurationName: playbackConfigurationName,
-      nextToken: nextToken,
-      maxResults: maxResults,
-    })
+    new({streamId, playbackConfigurationName, nextToken, maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListChannels = {
   type t
   type request = {
@@ -2018,7 +1943,6 @@ module ListChannels = {
     items: option<__listOfChannel>,
   }
   @module("@aws-sdk/client-mediatailor") @new external new: request => t = "ListChannelsCommand"
-  let make = (~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken: nextToken, maxResults: maxResults})
+  let make = (~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

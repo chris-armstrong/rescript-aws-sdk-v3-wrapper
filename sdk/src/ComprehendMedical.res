@@ -815,7 +815,6 @@ module StopSNOMEDCTInferenceJob = {
   let make = (~jobId, ()) => new({jobId: jobId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module StopRxNormInferenceJob = {
   type t
   type request = {@ocaml.doc("<p>The identifier of the job.</p>") @as("JobId") jobId: jobId}
@@ -830,7 +829,6 @@ module StopRxNormInferenceJob = {
   let make = (~jobId, ()) => new({jobId: jobId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module StopPHIDetectionJob = {
   type t
   type request = {
@@ -845,7 +843,6 @@ module StopPHIDetectionJob = {
   let make = (~jobId, ()) => new({jobId: jobId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module StopICD10CMInferenceJob = {
   type t
   type request = {@ocaml.doc("<p>The identifier of the job.</p>") @as("JobId") jobId: jobId}
@@ -860,7 +857,6 @@ module StopICD10CMInferenceJob = {
   let make = (~jobId, ()) => new({jobId: jobId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module StopEntitiesDetectionV2Job = {
   type t
   type request = {
@@ -877,7 +873,6 @@ module StopEntitiesDetectionV2Job = {
   let make = (~jobId, ()) => new({jobId: jobId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module StartSNOMEDCTInferenceJob = {
   type t
   type request = {
@@ -929,17 +924,16 @@ module StartSNOMEDCTInferenceJob = {
     (),
   ) =>
     new({
-      languageCode: languageCode,
-      kmskey: kmskey,
-      clientRequestToken: clientRequestToken,
-      jobName: jobName,
-      dataAccessRoleArn: dataAccessRoleArn,
-      outputDataConfig: outputDataConfig,
-      inputDataConfig: inputDataConfig,
+      languageCode,
+      kmskey,
+      clientRequestToken,
+      jobName,
+      dataAccessRoleArn,
+      outputDataConfig,
+      inputDataConfig,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module StartRxNormInferenceJob = {
   type t
   type request = {
@@ -983,17 +977,16 @@ module StartRxNormInferenceJob = {
     (),
   ) =>
     new({
-      languageCode: languageCode,
-      kmskey: kmskey,
-      clientRequestToken: clientRequestToken,
-      jobName: jobName,
-      dataAccessRoleArn: dataAccessRoleArn,
-      outputDataConfig: outputDataConfig,
-      inputDataConfig: inputDataConfig,
+      languageCode,
+      kmskey,
+      clientRequestToken,
+      jobName,
+      dataAccessRoleArn,
+      outputDataConfig,
+      inputDataConfig,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module StartPHIDetectionJob = {
   type t
   type request = {
@@ -1040,17 +1033,16 @@ module StartPHIDetectionJob = {
     (),
   ) =>
     new({
-      languageCode: languageCode,
-      kmskey: kmskey,
-      clientRequestToken: clientRequestToken,
-      jobName: jobName,
-      dataAccessRoleArn: dataAccessRoleArn,
-      outputDataConfig: outputDataConfig,
-      inputDataConfig: inputDataConfig,
+      languageCode,
+      kmskey,
+      clientRequestToken,
+      jobName,
+      dataAccessRoleArn,
+      outputDataConfig,
+      inputDataConfig,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module StartICD10CMInferenceJob = {
   type t
   type request = {
@@ -1097,17 +1089,16 @@ module StartICD10CMInferenceJob = {
     (),
   ) =>
     new({
-      languageCode: languageCode,
-      kmskey: kmskey,
-      clientRequestToken: clientRequestToken,
-      jobName: jobName,
-      dataAccessRoleArn: dataAccessRoleArn,
-      outputDataConfig: outputDataConfig,
-      inputDataConfig: inputDataConfig,
+      languageCode,
+      kmskey,
+      clientRequestToken,
+      jobName,
+      dataAccessRoleArn,
+      outputDataConfig,
+      inputDataConfig,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module StartEntitiesDetectionV2Job = {
   type t
   type request = {
@@ -1157,17 +1148,16 @@ module StartEntitiesDetectionV2Job = {
     (),
   ) =>
     new({
-      languageCode: languageCode,
-      kmskey: kmskey,
-      clientRequestToken: clientRequestToken,
-      jobName: jobName,
-      dataAccessRoleArn: dataAccessRoleArn,
-      outputDataConfig: outputDataConfig,
-      inputDataConfig: inputDataConfig,
+      languageCode,
+      kmskey,
+      clientRequestToken,
+      jobName,
+      dataAccessRoleArn,
+      outputDataConfig,
+      inputDataConfig,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeSNOMEDCTInferenceJob = {
   type t
   type request = {
@@ -1186,7 +1176,6 @@ module DescribeSNOMEDCTInferenceJob = {
   let make = (~jobId, ()) => new({jobId: jobId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeRxNormInferenceJob = {
   type t
   type request = {
@@ -1205,7 +1194,6 @@ module DescribeRxNormInferenceJob = {
   let make = (~jobId, ()) => new({jobId: jobId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribePHIDetectionJob = {
   type t
   type request = {
@@ -1224,7 +1212,6 @@ module DescribePHIDetectionJob = {
   let make = (~jobId, ()) => new({jobId: jobId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeICD10CMInferenceJob = {
   type t
   type request = {
@@ -1243,7 +1230,6 @@ module DescribeICD10CMInferenceJob = {
   let make = (~jobId, ()) => new({jobId: jobId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeEntitiesDetectionV2Job = {
   type t
   type request = {
@@ -1263,7 +1249,6 @@ module DescribeEntitiesDetectionV2Job = {
   let make = (~jobId, ()) => new({jobId: jobId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListSNOMEDCTInferenceJobs = {
   type t
   type request = {
@@ -1293,11 +1278,9 @@ module ListSNOMEDCTInferenceJobs = {
   }
   @module("@aws-sdk/client-comprehendmedical") @new
   external new: request => t = "ListSNOMEDCTInferenceJobsCommand"
-  let make = (~maxResults=?, ~nextToken=?, ~filter=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, filter: filter})
+  let make = (~maxResults=?, ~nextToken=?, ~filter=?, ()) => new({maxResults, nextToken, filter})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListRxNormInferenceJobs = {
   type t
   type request = {
@@ -1319,11 +1302,9 @@ module ListRxNormInferenceJobs = {
   }
   @module("@aws-sdk/client-comprehendmedical") @new
   external new: request => t = "ListRxNormInferenceJobsCommand"
-  let make = (~maxResults=?, ~nextToken=?, ~filter=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, filter: filter})
+  let make = (~maxResults=?, ~nextToken=?, ~filter=?, ()) => new({maxResults, nextToken, filter})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListPHIDetectionJobs = {
   type t
   type request = {
@@ -1346,11 +1327,9 @@ module ListPHIDetectionJobs = {
   }
   @module("@aws-sdk/client-comprehendmedical") @new
   external new: request => t = "ListPHIDetectionJobsCommand"
-  let make = (~maxResults=?, ~nextToken=?, ~filter=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, filter: filter})
+  let make = (~maxResults=?, ~nextToken=?, ~filter=?, ()) => new({maxResults, nextToken, filter})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListICD10CMInferenceJobs = {
   type t
   type request = {
@@ -1373,11 +1352,9 @@ module ListICD10CMInferenceJobs = {
   }
   @module("@aws-sdk/client-comprehendmedical") @new
   external new: request => t = "ListICD10CMInferenceJobsCommand"
-  let make = (~maxResults=?, ~nextToken=?, ~filter=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, filter: filter})
+  let make = (~maxResults=?, ~nextToken=?, ~filter=?, ()) => new({maxResults, nextToken, filter})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListEntitiesDetectionV2Jobs = {
   type t
   type request = {
@@ -1400,11 +1377,9 @@ module ListEntitiesDetectionV2Jobs = {
   }
   @module("@aws-sdk/client-comprehendmedical") @new
   external new: request => t = "ListEntitiesDetectionV2JobsCommand"
-  let make = (~maxResults=?, ~nextToken=?, ~filter=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, filter: filter})
+  let make = (~maxResults=?, ~nextToken=?, ~filter=?, ()) => new({maxResults, nextToken, filter})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module InferSNOMEDCT = {
   type t
   type request = {
@@ -1446,7 +1421,6 @@ module InferSNOMEDCT = {
   let make = (~text, ()) => new({text: text})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module InferRxNorm = {
   type t
   type request = {
@@ -1476,7 +1450,6 @@ module InferRxNorm = {
   let make = (~text, ()) => new({text: text})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module InferICD10CM = {
   type t
   type request = {
@@ -1506,7 +1479,6 @@ module InferICD10CM = {
   let make = (~text, ()) => new({text: text})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DetectPHI = {
   type t
   type request = {
@@ -1536,7 +1508,6 @@ module DetectPHI = {
   let make = (~text, ()) => new({text: text})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DetectEntitiesV2 = {
   type t
   type request = {
@@ -1572,7 +1543,6 @@ module DetectEntitiesV2 = {
   let make = (~text, ()) => new({text: text})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DetectEntities = {
   type t
   type request = {

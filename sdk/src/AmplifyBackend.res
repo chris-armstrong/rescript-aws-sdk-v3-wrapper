@@ -665,16 +665,9 @@ module UpdateBackendJob = {
   @module("@aws-sdk/client-amplifybackend") @new
   external new: request => t = "UpdateBackendJobCommand"
   let make = (~jobId, ~backendEnvironmentName, ~appId, ~status=?, ~operation=?, ()) =>
-    new({
-      status: status,
-      operation: operation,
-      jobId: jobId,
-      backendEnvironmentName: backendEnvironmentName,
-      appId: appId,
-    })
+    new({status, operation, jobId, backendEnvironmentName, appId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module RemoveBackendConfig = {
   type t
   type request = {@ocaml.doc("<p>The app ID.</p>") @as("AppId") appId: __string}
@@ -687,7 +680,6 @@ module RemoveBackendConfig = {
   let make = (~appId, ()) => new({appId: appId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module RemoveAllBackends = {
   type t
   @ocaml.doc("<p>The request body for RemoveAllBackends.</p>")
@@ -707,11 +699,9 @@ module RemoveAllBackends = {
   }
   @module("@aws-sdk/client-amplifybackend") @new
   external new: request => t = "RemoveAllBackendsCommand"
-  let make = (~appId, ~cleanAmplifyApp=?, ()) =>
-    new({cleanAmplifyApp: cleanAmplifyApp, appId: appId})
+  let make = (~appId, ~cleanAmplifyApp=?, ()) => new({cleanAmplifyApp, appId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ImportBackendStorage = {
   type t
   @ocaml.doc("<p>The request body for ImportBackendStorage.</p>")
@@ -733,15 +723,9 @@ module ImportBackendStorage = {
   @module("@aws-sdk/client-amplifybackend") @new
   external new: request => t = "ImportBackendStorageCommand"
   let make = (~serviceName, ~backendEnvironmentName, ~appId, ~bucketName=?, ()) =>
-    new({
-      serviceName: serviceName,
-      bucketName: bucketName,
-      backendEnvironmentName: backendEnvironmentName,
-      appId: appId,
-    })
+    new({serviceName, bucketName, backendEnvironmentName, appId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ImportBackendAuth = {
   type t
   @ocaml.doc("<p>The request body for ImportBackendAuth.</p>")
@@ -778,18 +762,9 @@ module ImportBackendAuth = {
     ~appId,
     ~identityPoolId=?,
     (),
-  ) =>
-    new({
-      webClientId: webClientId,
-      userPoolId: userPoolId,
-      nativeClientId: nativeClientId,
-      identityPoolId: identityPoolId,
-      backendEnvironmentName: backendEnvironmentName,
-      appId: appId,
-    })
+  ) => new({webClientId, userPoolId, nativeClientId, identityPoolId, backendEnvironmentName, appId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetToken = {
   type t
   type request = {
@@ -807,10 +782,9 @@ module GetToken = {
     @ocaml.doc("<p>The app ID.</p>") @as("AppId") appId: option<__string>,
   }
   @module("@aws-sdk/client-amplifybackend") @new external new: request => t = "GetTokenCommand"
-  let make = (~sessionId, ~appId, ()) => new({sessionId: sessionId, appId: appId})
+  let make = (~sessionId, ~appId, ()) => new({sessionId, appId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetBackendJob = {
   type t
   type request = {
@@ -835,10 +809,9 @@ module GetBackendJob = {
   }
   @module("@aws-sdk/client-amplifybackend") @new external new: request => t = "GetBackendJobCommand"
   let make = (~jobId, ~backendEnvironmentName, ~appId, ()) =>
-    new({jobId: jobId, backendEnvironmentName: backendEnvironmentName, appId: appId})
+    new({jobId, backendEnvironmentName, appId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetBackendAPIModels = {
   type t
   @ocaml.doc("<p>The request body for GetBackendAPIModels.</p>")
@@ -856,10 +829,9 @@ module GetBackendAPIModels = {
   @module("@aws-sdk/client-amplifybackend") @new
   external new: request => t = "GetBackendAPIModelsCommand"
   let make = (~resourceName, ~backendEnvironmentName, ~appId, ()) =>
-    new({resourceName: resourceName, backendEnvironmentName: backendEnvironmentName, appId: appId})
+    new({resourceName, backendEnvironmentName, appId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GenerateBackendAPIModels = {
   type t
   @ocaml.doc("<p>The request body for GenerateBackendAPIModels.</p>")
@@ -882,10 +854,9 @@ module GenerateBackendAPIModels = {
   @module("@aws-sdk/client-amplifybackend") @new
   external new: request => t = "GenerateBackendAPIModelsCommand"
   let make = (~resourceName, ~backendEnvironmentName, ~appId, ()) =>
-    new({resourceName: resourceName, backendEnvironmentName: backendEnvironmentName, appId: appId})
+    new({resourceName, backendEnvironmentName, appId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteToken = {
   type t
   type request = {
@@ -897,10 +868,9 @@ module DeleteToken = {
     isSuccess: option<__boolean>,
   }
   @module("@aws-sdk/client-amplifybackend") @new external new: request => t = "DeleteTokenCommand"
-  let make = (~sessionId, ~appId, ()) => new({sessionId: sessionId, appId: appId})
+  let make = (~sessionId, ~appId, ()) => new({sessionId, appId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteBackendStorage = {
   type t
   @ocaml.doc("<p>The request body for DeleteBackendStorage.</p>")
@@ -923,15 +893,9 @@ module DeleteBackendStorage = {
   @module("@aws-sdk/client-amplifybackend") @new
   external new: request => t = "DeleteBackendStorageCommand"
   let make = (~serviceName, ~resourceName, ~backendEnvironmentName, ~appId, ()) =>
-    new({
-      serviceName: serviceName,
-      resourceName: resourceName,
-      backendEnvironmentName: backendEnvironmentName,
-      appId: appId,
-    })
+    new({serviceName, resourceName, backendEnvironmentName, appId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteBackendAuth = {
   type t
   @ocaml.doc("<p>The request body for DeleteBackendAuth.</p>")
@@ -954,10 +918,9 @@ module DeleteBackendAuth = {
   @module("@aws-sdk/client-amplifybackend") @new
   external new: request => t = "DeleteBackendAuthCommand"
   let make = (~resourceName, ~backendEnvironmentName, ~appId, ()) =>
-    new({resourceName: resourceName, backendEnvironmentName: backendEnvironmentName, appId: appId})
+    new({resourceName, backendEnvironmentName, appId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteBackend = {
   type t
   type request = {
@@ -976,11 +939,9 @@ module DeleteBackend = {
     @ocaml.doc("<p>The app ID.</p>") @as("AppId") appId: option<__string>,
   }
   @module("@aws-sdk/client-amplifybackend") @new external new: request => t = "DeleteBackendCommand"
-  let make = (~backendEnvironmentName, ~appId, ()) =>
-    new({backendEnvironmentName: backendEnvironmentName, appId: appId})
+  let make = (~backendEnvironmentName, ~appId, ()) => new({backendEnvironmentName, appId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateToken = {
   type t
   type request = {@ocaml.doc("<p>The app ID.</p>") @as("AppId") appId: __string}
@@ -998,7 +959,6 @@ module CreateToken = {
   let make = (~appId, ()) => new({appId: appId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateBackendConfig = {
   type t
   @ocaml.doc("<p>The request body for CreateBackendConfig.</p>")
@@ -1016,11 +976,9 @@ module CreateBackendConfig = {
   }
   @module("@aws-sdk/client-amplifybackend") @new
   external new: request => t = "CreateBackendConfigCommand"
-  let make = (~appId, ~backendManagerAppId=?, ()) =>
-    new({backendManagerAppId: backendManagerAppId, appId: appId})
+  let make = (~appId, ~backendManagerAppId=?, ()) => new({backendManagerAppId, appId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateBackend = {
   type t
   @ocaml.doc("<p>The request body for CreateBackend.</p>")
@@ -1046,16 +1004,9 @@ module CreateBackend = {
   }
   @module("@aws-sdk/client-amplifybackend") @new external new: request => t = "CreateBackendCommand"
   let make = (~backendEnvironmentName, ~appName, ~appId, ~resourceName=?, ~resourceConfig=?, ()) =>
-    new({
-      resourceName: resourceName,
-      resourceConfig: resourceConfig,
-      backendEnvironmentName: backendEnvironmentName,
-      appName: appName,
-      appId: appId,
-    })
+    new({resourceName, resourceConfig, backendEnvironmentName, appName, appId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CloneBackend = {
   type t
   @ocaml.doc("<p>The request body for CloneBackend.</p>")
@@ -1079,14 +1030,9 @@ module CloneBackend = {
   }
   @module("@aws-sdk/client-amplifybackend") @new external new: request => t = "CloneBackendCommand"
   let make = (~targetEnvironmentName, ~backendEnvironmentName, ~appId, ()) =>
-    new({
-      targetEnvironmentName: targetEnvironmentName,
-      backendEnvironmentName: backendEnvironmentName,
-      appId: appId,
-    })
+    new({targetEnvironmentName, backendEnvironmentName, appId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateBackendConfig = {
   type t
   @ocaml.doc("<p>The request body for UpdateBackendConfig.</p>")
@@ -1110,11 +1056,9 @@ module UpdateBackendConfig = {
   }
   @module("@aws-sdk/client-amplifybackend") @new
   external new: request => t = "UpdateBackendConfigCommand"
-  let make = (~appId, ~loginAuthConfig=?, ()) =>
-    new({loginAuthConfig: loginAuthConfig, appId: appId})
+  let make = (~appId, ~loginAuthConfig=?, ()) => new({loginAuthConfig, appId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetBackend = {
   type t
   @ocaml.doc("<p>The request body for GetBackend.</p>")
@@ -1140,11 +1084,9 @@ module GetBackend = {
     amplifyFeatureFlags: option<__string>,
   }
   @module("@aws-sdk/client-amplifybackend") @new external new: request => t = "GetBackendCommand"
-  let make = (~appId, ~backendEnvironmentName=?, ()) =>
-    new({backendEnvironmentName: backendEnvironmentName, appId: appId})
+  let make = (~appId, ~backendEnvironmentName=?, ()) => new({backendEnvironmentName, appId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListS3Buckets = {
   type t
   @ocaml.doc("<p>The request body for S3Buckets.</p>")
@@ -1159,7 +1101,6 @@ module ListS3Buckets = {
   let make = (~nextToken=?, ()) => new({nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListBackendJobs = {
   type t
   @ocaml.doc("<p>The request body for ListBackendJobs.</p>")
@@ -1201,19 +1142,9 @@ module ListBackendJobs = {
     ~maxResults=?,
     ~jobId=?,
     (),
-  ) =>
-    new({
-      status: status,
-      operation: operation,
-      nextToken: nextToken,
-      maxResults: maxResults,
-      jobId: jobId,
-      backendEnvironmentName: backendEnvironmentName,
-      appId: appId,
-    })
+  ) => new({status, operation, nextToken, maxResults, jobId, backendEnvironmentName, appId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateBackendStorage = {
   type t
   @ocaml.doc("<p>The request body for UpdateBackendStorage.</p>")
@@ -1237,15 +1168,9 @@ module UpdateBackendStorage = {
   @module("@aws-sdk/client-amplifybackend") @new
   external new: request => t = "UpdateBackendStorageCommand"
   let make = (~resourceName, ~resourceConfig, ~backendEnvironmentName, ~appId, ()) =>
-    new({
-      resourceName: resourceName,
-      resourceConfig: resourceConfig,
-      backendEnvironmentName: backendEnvironmentName,
-      appId: appId,
-    })
+    new({resourceName, resourceConfig, backendEnvironmentName, appId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetBackendStorage = {
   type t
   @ocaml.doc("<p>The request body for GetBackendStorage.</p>")
@@ -1269,10 +1194,9 @@ module GetBackendStorage = {
   @module("@aws-sdk/client-amplifybackend") @new
   external new: request => t = "GetBackendStorageCommand"
   let make = (~resourceName, ~backendEnvironmentName, ~appId, ()) =>
-    new({resourceName: resourceName, backendEnvironmentName: backendEnvironmentName, appId: appId})
+    new({resourceName, backendEnvironmentName, appId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateBackendStorage = {
   type t
   @ocaml.doc("<p>The request body for CreateBackendStorage.</p>")
@@ -1296,15 +1220,9 @@ module CreateBackendStorage = {
   @module("@aws-sdk/client-amplifybackend") @new
   external new: request => t = "CreateBackendStorageCommand"
   let make = (~resourceName, ~resourceConfig, ~backendEnvironmentName, ~appId, ()) =>
-    new({
-      resourceName: resourceName,
-      resourceConfig: resourceConfig,
-      backendEnvironmentName: backendEnvironmentName,
-      appId: appId,
-    })
+    new({resourceName, resourceConfig, backendEnvironmentName, appId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateBackendAPI = {
   type t
   @ocaml.doc("<p>The request body for UpdateBackendAPI.</p>")
@@ -1332,15 +1250,9 @@ module UpdateBackendAPI = {
   @module("@aws-sdk/client-amplifybackend") @new
   external new: request => t = "UpdateBackendAPICommand"
   let make = (~resourceName, ~backendEnvironmentName, ~appId, ~resourceConfig=?, ()) =>
-    new({
-      resourceName: resourceName,
-      resourceConfig: resourceConfig,
-      backendEnvironmentName: backendEnvironmentName,
-      appId: appId,
-    })
+    new({resourceName, resourceConfig, backendEnvironmentName, appId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetBackendAPI = {
   type t
   @ocaml.doc("<p>The request body for GetBackendAPI.</p>")
@@ -1368,15 +1280,9 @@ module GetBackendAPI = {
   }
   @module("@aws-sdk/client-amplifybackend") @new external new: request => t = "GetBackendAPICommand"
   let make = (~resourceName, ~backendEnvironmentName, ~appId, ~resourceConfig=?, ()) =>
-    new({
-      resourceName: resourceName,
-      resourceConfig: resourceConfig,
-      backendEnvironmentName: backendEnvironmentName,
-      appId: appId,
-    })
+    new({resourceName, resourceConfig, backendEnvironmentName, appId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteBackendAPI = {
   type t
   @ocaml.doc("<p>The request body for DeleteBackendAPI.</p>")
@@ -1404,15 +1310,9 @@ module DeleteBackendAPI = {
   @module("@aws-sdk/client-amplifybackend") @new
   external new: request => t = "DeleteBackendAPICommand"
   let make = (~resourceName, ~backendEnvironmentName, ~appId, ~resourceConfig=?, ()) =>
-    new({
-      resourceName: resourceName,
-      resourceConfig: resourceConfig,
-      backendEnvironmentName: backendEnvironmentName,
-      appId: appId,
-    })
+    new({resourceName, resourceConfig, backendEnvironmentName, appId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateBackendAPI = {
   type t
   @ocaml.doc("<p>The request body for CreateBackendAPI.</p>")
@@ -1437,15 +1337,9 @@ module CreateBackendAPI = {
   @module("@aws-sdk/client-amplifybackend") @new
   external new: request => t = "CreateBackendAPICommand"
   let make = (~resourceName, ~resourceConfig, ~backendEnvironmentName, ~appId, ()) =>
-    new({
-      resourceName: resourceName,
-      resourceConfig: resourceConfig,
-      backendEnvironmentName: backendEnvironmentName,
-      appId: appId,
-    })
+    new({resourceName, resourceConfig, backendEnvironmentName, appId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateBackendAuth = {
   type t
   @ocaml.doc("<p>The request body for UpdateBackendAuth.</p>")
@@ -1470,15 +1364,9 @@ module UpdateBackendAuth = {
   @module("@aws-sdk/client-amplifybackend") @new
   external new: request => t = "UpdateBackendAuthCommand"
   let make = (~resourceName, ~resourceConfig, ~backendEnvironmentName, ~appId, ()) =>
-    new({
-      resourceName: resourceName,
-      resourceConfig: resourceConfig,
-      backendEnvironmentName: backendEnvironmentName,
-      appId: appId,
-    })
+    new({resourceName, resourceConfig, backendEnvironmentName, appId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetBackendAuth = {
   type t
   @ocaml.doc("<p>The request body for GetBackendAuth.</p>")
@@ -1505,10 +1393,9 @@ module GetBackendAuth = {
   @module("@aws-sdk/client-amplifybackend") @new
   external new: request => t = "GetBackendAuthCommand"
   let make = (~resourceName, ~backendEnvironmentName, ~appId, ()) =>
-    new({resourceName: resourceName, backendEnvironmentName: backendEnvironmentName, appId: appId})
+    new({resourceName, backendEnvironmentName, appId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateBackendAuth = {
   type t
   @ocaml.doc("<p>The request body for CreateBackendAuth.</p>")
@@ -1533,11 +1420,6 @@ module CreateBackendAuth = {
   @module("@aws-sdk/client-amplifybackend") @new
   external new: request => t = "CreateBackendAuthCommand"
   let make = (~resourceName, ~resourceConfig, ~backendEnvironmentName, ~appId, ()) =>
-    new({
-      resourceName: resourceName,
-      resourceConfig: resourceConfig,
-      backendEnvironmentName: backendEnvironmentName,
-      appId: appId,
-    })
+    new({resourceName, resourceConfig, backendEnvironmentName, appId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

@@ -164,7 +164,6 @@ module StopAccessLogging = {
   let make = (~containerName, ()) => new({containerName: containerName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module StartAccessLogging = {
   type t
   type request = {
@@ -178,7 +177,6 @@ module StartAccessLogging = {
   let make = (~containerName, ()) => new({containerName: containerName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module PutLifecyclePolicy = {
   type t
   type request = {
@@ -194,11 +192,9 @@ module PutLifecyclePolicy = {
   type response = {.}
   @module("@aws-sdk/client-mediastore") @new
   external new: request => t = "PutLifecyclePolicyCommand"
-  let make = (~lifecyclePolicy, ~containerName, ()) =>
-    new({lifecyclePolicy: lifecyclePolicy, containerName: containerName})
+  let make = (~lifecyclePolicy, ~containerName, ()) => new({lifecyclePolicy, containerName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module PutContainerPolicy = {
   type t
   type request = {
@@ -220,10 +216,9 @@ module PutContainerPolicy = {
   type response = {.}
   @module("@aws-sdk/client-mediastore") @new
   external new: request => t = "PutContainerPolicyCommand"
-  let make = (~policy, ~containerName, ()) => new({policy: policy, containerName: containerName})
+  let make = (~policy, ~containerName, ()) => new({policy, containerName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module GetLifecyclePolicy = {
   type t
   type request = {
@@ -241,7 +236,6 @@ module GetLifecyclePolicy = {
   let make = (~containerName, ()) => new({containerName: containerName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetContainerPolicy = {
   type t
   type request = {
@@ -256,7 +250,6 @@ module GetContainerPolicy = {
   let make = (~containerName, ()) => new({containerName: containerName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteMetricPolicy = {
   type t
   type request = {
@@ -272,7 +265,6 @@ module DeleteMetricPolicy = {
   let make = (~containerName, ()) => new({containerName: containerName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteLifecyclePolicy = {
   type t
   type request = {
@@ -286,7 +278,6 @@ module DeleteLifecyclePolicy = {
   let make = (~containerName, ()) => new({containerName: containerName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteCorsPolicy = {
   type t
   type request = {
@@ -298,7 +289,6 @@ module DeleteCorsPolicy = {
   let make = (~containerName, ()) => new({containerName: containerName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteContainerPolicy = {
   type t
   type request = {
@@ -311,7 +301,6 @@ module DeleteContainerPolicy = {
   let make = (~containerName, ()) => new({containerName: containerName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteContainer = {
   type t
   type request = {
@@ -323,7 +312,6 @@ module DeleteContainer = {
   let make = (~containerName, ()) => new({containerName: containerName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module UntagResource = {
   type t
   type request = {
@@ -337,10 +325,9 @@ module UntagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-mediastore") @new external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resource, ()) => new({tagKeys: tagKeys, resource: resource})
+  let make = (~tagKeys, ~resource, ()) => new({tagKeys, resource})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DescribeContainer = {
   type t
   type request = {
@@ -355,7 +342,6 @@ module DescribeContainer = {
   let make = (~containerName=?, ()) => new({containerName: containerName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module TagResource = {
   type t
   type request = {
@@ -370,10 +356,9 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-mediastore") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resource, ()) => new({tags: tags, resource: resource})
+  let make = (~tags, ~resource, ()) => new({tags, resource})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module ListTagsForResource = {
   type t
   type request = {
@@ -389,7 +374,6 @@ module ListTagsForResource = {
   let make = (~resource, ()) => new({resource: resource})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListContainers = {
   type t
   type request = {
@@ -413,11 +397,9 @@ module ListContainers = {
     @ocaml.doc("<p>The names of the containers.</p>") @as("Containers") containers: containerList,
   }
   @module("@aws-sdk/client-mediastore") @new external new: request => t = "ListContainersCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateContainer = {
   type t
   type request = {
@@ -450,10 +432,9 @@ module CreateContainer = {
     container: container,
   }
   @module("@aws-sdk/client-mediastore") @new external new: request => t = "CreateContainerCommand"
-  let make = (~containerName, ~tags=?, ()) => new({tags: tags, containerName: containerName})
+  let make = (~containerName, ~tags=?, ()) => new({tags, containerName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module PutMetricPolicy = {
   type t
   type request = {
@@ -474,11 +455,9 @@ module PutMetricPolicy = {
   }
   type response = {.}
   @module("@aws-sdk/client-mediastore") @new external new: request => t = "PutMetricPolicyCommand"
-  let make = (~metricPolicy, ~containerName, ()) =>
-    new({metricPolicy: metricPolicy, containerName: containerName})
+  let make = (~metricPolicy, ~containerName, ()) => new({metricPolicy, containerName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module PutCorsPolicy = {
   type t
   type request = {
@@ -490,11 +469,9 @@ module PutCorsPolicy = {
   }
   type response = {.}
   @module("@aws-sdk/client-mediastore") @new external new: request => t = "PutCorsPolicyCommand"
-  let make = (~corsPolicy, ~containerName, ()) =>
-    new({corsPolicy: corsPolicy, containerName: containerName})
+  let make = (~corsPolicy, ~containerName, ()) => new({corsPolicy, containerName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module GetMetricPolicy = {
   type t
   type request = {
@@ -511,7 +488,6 @@ module GetMetricPolicy = {
   let make = (~containerName, ()) => new({containerName: containerName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetCorsPolicy = {
   type t
   type request = {

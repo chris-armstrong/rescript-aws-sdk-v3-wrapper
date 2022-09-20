@@ -947,7 +947,6 @@ module RemoveAccountFromOrganization = {
   let make = (~accountId, ()) => new({accountId: accountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module RegisterDelegatedAdministrator = {
   type t
   type request = {
@@ -963,11 +962,9 @@ module RegisterDelegatedAdministrator = {
   type response = {.}
   @module("@aws-sdk/client-organizations") @new
   external new: request => t = "RegisterDelegatedAdministratorCommand"
-  let make = (~servicePrincipal, ~accountId, ()) =>
-    new({servicePrincipal: servicePrincipal, accountId: accountId})
+  let make = (~servicePrincipal, ~accountId, ()) => new({servicePrincipal, accountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module MoveAccount = {
   type t
   type request = {
@@ -1018,14 +1015,9 @@ module MoveAccount = {
   type response = {.}
   @module("@aws-sdk/client-organizations") @new external new: request => t = "MoveAccountCommand"
   let make = (~destinationParentId, ~sourceParentId, ~accountId, ()) =>
-    new({
-      destinationParentId: destinationParentId,
-      sourceParentId: sourceParentId,
-      accountId: accountId,
-    })
+    new({destinationParentId, sourceParentId, accountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module LeaveOrganization = {
   type t
   type request = {.}
@@ -1035,7 +1027,6 @@ module LeaveOrganization = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module EnableAWSServiceAccess = {
   type t
   type request = {
@@ -1052,7 +1043,6 @@ module EnableAWSServiceAccess = {
   let make = (~servicePrincipal, ()) => new({servicePrincipal: servicePrincipal})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DisableAWSServiceAccess = {
   type t
   type request = {
@@ -1069,7 +1059,6 @@ module DisableAWSServiceAccess = {
   let make = (~servicePrincipal, ()) => new({servicePrincipal: servicePrincipal})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DetachPolicy = {
   type t
   type request = {
@@ -1107,10 +1096,9 @@ module DetachPolicy = {
   }
   type response = {.}
   @module("@aws-sdk/client-organizations") @new external new: request => t = "DetachPolicyCommand"
-  let make = (~targetId, ~policyId, ()) => new({targetId: targetId, policyId: policyId})
+  let make = (~targetId, ~policyId, ()) => new({targetId, policyId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeregisterDelegatedAdministrator = {
   type t
   type request = {
@@ -1130,11 +1118,9 @@ module DeregisterDelegatedAdministrator = {
   type response = {.}
   @module("@aws-sdk/client-organizations") @new
   external new: request => t = "DeregisterDelegatedAdministratorCommand"
-  let make = (~servicePrincipal, ~accountId, ()) =>
-    new({servicePrincipal: servicePrincipal, accountId: accountId})
+  let make = (~servicePrincipal, ~accountId, ()) => new({servicePrincipal, accountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeletePolicy = {
   type t
   type request = {
@@ -1151,7 +1137,6 @@ module DeletePolicy = {
   let make = (~policyId, ()) => new({policyId: policyId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteOrganizationalUnit = {
   type t
   type request = {
@@ -1170,7 +1155,6 @@ module DeleteOrganizationalUnit = {
   let make = (~organizationalUnitId, ()) => new({organizationalUnitId: organizationalUnitId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteOrganization = {
   type t
   type request = {.}
@@ -1180,7 +1164,6 @@ module DeleteOrganization = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module CloseAccount = {
   type t
   type request = {
@@ -1195,7 +1178,6 @@ module CloseAccount = {
   let make = (~accountId, ()) => new({accountId: accountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module AttachPolicy = {
   type t
   type request = {
@@ -1233,10 +1215,9 @@ module AttachPolicy = {
   }
   type response = {.}
   @module("@aws-sdk/client-organizations") @new external new: request => t = "AttachPolicyCommand"
-  let make = (~targetId, ~policyId, ()) => new({targetId: targetId, policyId: policyId})
+  let make = (~targetId, ~policyId, ()) => new({targetId, policyId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module UpdateOrganizationalUnit = {
   type t
   type request = {
@@ -1263,11 +1244,9 @@ module UpdateOrganizationalUnit = {
   }
   @module("@aws-sdk/client-organizations") @new
   external new: request => t = "UpdateOrganizationalUnitCommand"
-  let make = (~organizationalUnitId, ~name=?, ()) =>
-    new({name: name, organizationalUnitId: organizationalUnitId})
+  let make = (~organizationalUnitId, ~name=?, ()) => new({name, organizationalUnitId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UntagResource = {
   type t
   type request = {
@@ -1304,10 +1283,9 @@ module UntagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-organizations") @new external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceId, ()) => new({tagKeys: tagKeys, resourceId: resourceId})
+  let make = (~tagKeys, ~resourceId, ()) => new({tagKeys, resourceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DescribeOrganizationalUnit = {
   type t
   type request = {
@@ -1331,7 +1309,6 @@ module DescribeOrganizationalUnit = {
   let make = (~organizationalUnitId, ()) => new({organizationalUnitId: organizationalUnitId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeEffectivePolicy = {
   type t
   type request = {
@@ -1368,10 +1345,9 @@ module DescribeEffectivePolicy = {
   }
   @module("@aws-sdk/client-organizations") @new
   external new: request => t = "DescribeEffectivePolicyCommand"
-  let make = (~policyType, ~targetId=?, ()) => new({targetId: targetId, policyType: policyType})
+  let make = (~policyType, ~targetId=?, ()) => new({targetId, policyType})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeCreateAccountStatus = {
   type t
   type request = {
@@ -1395,7 +1371,6 @@ module DescribeCreateAccountStatus = {
   let make = (~createAccountRequestId, ()) => new({createAccountRequestId: createAccountRequestId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeAccount = {
   type t
   type request = {
@@ -1416,7 +1391,6 @@ module DescribeAccount = {
   let make = (~accountId, ()) => new({accountId: accountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdatePolicy = {
   type t
   type request = {
@@ -1448,10 +1422,9 @@ module UpdatePolicy = {
   }
   @module("@aws-sdk/client-organizations") @new external new: request => t = "UpdatePolicyCommand"
   let make = (~policyId, ~content=?, ~description=?, ~name=?, ()) =>
-    new({content: content, description: description, name: name, policyId: policyId})
+    new({content, description, name, policyId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module TagResource = {
   type t
   type request = {
@@ -1494,10 +1467,9 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-organizations") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceId, ()) => new({tags: tags, resourceId: resourceId})
+  let make = (~tags, ~resourceId, ()) => new({tags, resourceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module ListTargetsForPolicy = {
   type t
   type request = {
@@ -1538,11 +1510,9 @@ module ListTargetsForPolicy = {
   }
   @module("@aws-sdk/client-organizations") @new
   external new: request => t = "ListTargetsForPolicyCommand"
-  let make = (~policyId, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, policyId: policyId})
+  let make = (~policyId, ~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken, policyId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListTagsForResource = {
   type t
   type request = {
@@ -1592,10 +1562,9 @@ module ListTagsForResource = {
   }
   @module("@aws-sdk/client-organizations") @new
   external new: request => t = "ListTagsForResourceCommand"
-  let make = (~resourceId, ~nextToken=?, ()) => new({nextToken: nextToken, resourceId: resourceId})
+  let make = (~resourceId, ~nextToken=?, ()) => new({nextToken, resourceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListPoliciesForTarget = {
   type t
   type request = {
@@ -1680,10 +1649,9 @@ module ListPoliciesForTarget = {
   @module("@aws-sdk/client-organizations") @new
   external new: request => t = "ListPoliciesForTargetCommand"
   let make = (~filter, ~targetId, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, filter: filter, targetId: targetId})
+    new({maxResults, nextToken, filter, targetId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListPolicies = {
   type t
   type request = {
@@ -1744,11 +1712,9 @@ module ListPolicies = {
     policies: option<policies>,
   }
   @module("@aws-sdk/client-organizations") @new external new: request => t = "ListPoliciesCommand"
-  let make = (~filter, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, filter: filter})
+  let make = (~filter, ~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken, filter})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListParents = {
   type t
   type request = {
@@ -1800,11 +1766,9 @@ module ListParents = {
     parents: option<parents>,
   }
   @module("@aws-sdk/client-organizations") @new external new: request => t = "ListParentsCommand"
-  let make = (~childId, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, childId: childId})
+  let make = (~childId, ~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken, childId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListOrganizationalUnitsForParent = {
   type t
   type request = {
@@ -1857,11 +1821,9 @@ module ListOrganizationalUnitsForParent = {
   }
   @module("@aws-sdk/client-organizations") @new
   external new: request => t = "ListOrganizationalUnitsForParentCommand"
-  let make = (~parentId, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, parentId: parentId})
+  let make = (~parentId, ~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken, parentId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListDelegatedServicesForAccount = {
   type t
   type request = {
@@ -1902,10 +1864,9 @@ module ListDelegatedServicesForAccount = {
   @module("@aws-sdk/client-organizations") @new
   external new: request => t = "ListDelegatedServicesForAccountCommand"
   let make = (~accountId, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, accountId: accountId})
+    new({maxResults, nextToken, accountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListDelegatedAdministrators = {
   type t
   type request = {
@@ -1947,10 +1908,9 @@ module ListDelegatedAdministrators = {
   @module("@aws-sdk/client-organizations") @new
   external new: request => t = "ListDelegatedAdministratorsCommand"
   let make = (~maxResults=?, ~nextToken=?, ~servicePrincipal=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, servicePrincipal: servicePrincipal})
+    new({maxResults, nextToken, servicePrincipal})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListCreateAccountStatus = {
   type t
   type request = {
@@ -1991,11 +1951,9 @@ module ListCreateAccountStatus = {
   }
   @module("@aws-sdk/client-organizations") @new
   external new: request => t = "ListCreateAccountStatusCommand"
-  let make = (~maxResults=?, ~nextToken=?, ~states=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, states: states})
+  let make = (~maxResults=?, ~nextToken=?, ~states=?, ()) => new({maxResults, nextToken, states})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListChildren = {
   type t
   type request = {
@@ -2051,10 +2009,9 @@ module ListChildren = {
   }
   @module("@aws-sdk/client-organizations") @new external new: request => t = "ListChildrenCommand"
   let make = (~childType, ~parentId, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, childType: childType, parentId: parentId})
+    new({maxResults, nextToken, childType, parentId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListAccountsForParent = {
   type t
   type request = {
@@ -2092,11 +2049,9 @@ module ListAccountsForParent = {
   }
   @module("@aws-sdk/client-organizations") @new
   external new: request => t = "ListAccountsForParentCommand"
-  let make = (~parentId, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, parentId: parentId})
+  let make = (~parentId, ~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken, parentId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListAccounts = {
   type t
   type request = {
@@ -2129,11 +2084,9 @@ module ListAccounts = {
     accounts: option<accounts>,
   }
   @module("@aws-sdk/client-organizations") @new external new: request => t = "ListAccountsCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListAWSServiceAccessForOrganization = {
   type t
   type request = {
@@ -2170,11 +2123,9 @@ module ListAWSServiceAccessForOrganization = {
   }
   @module("@aws-sdk/client-organizations") @new
   external new: request => t = "ListAWSServiceAccessForOrganizationCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribePolicy = {
   type t
   type request = {
@@ -2194,7 +2145,6 @@ module DescribePolicy = {
   let make = (~policyId, ()) => new({policyId: policyId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreatePolicy = {
   type t
   type request = {
@@ -2254,10 +2204,9 @@ module CreatePolicy = {
   }
   @module("@aws-sdk/client-organizations") @new external new: request => t = "CreatePolicyCommand"
   let make = (~type_, ~name, ~description, ~content, ~tags=?, ()) =>
-    new({tags: tags, type_: type_, name: name, description: description, content: content})
+    new({tags, type_, name, description, content})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateOrganizationalUnit = {
   type t
   type request = {
@@ -2301,10 +2250,9 @@ module CreateOrganizationalUnit = {
   }
   @module("@aws-sdk/client-organizations") @new
   external new: request => t = "CreateOrganizationalUnitCommand"
-  let make = (~name, ~parentId, ~tags=?, ()) => new({tags: tags, name: name, parentId: parentId})
+  let make = (~name, ~parentId, ~tags=?, ()) => new({tags, name, parentId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateGovCloudAccount = {
   type t
   type request = {
@@ -2400,16 +2348,9 @@ module CreateGovCloudAccount = {
   @module("@aws-sdk/client-organizations") @new
   external new: request => t = "CreateGovCloudAccountCommand"
   let make = (~accountName, ~email, ~tags=?, ~iamUserAccessToBilling=?, ~roleName=?, ()) =>
-    new({
-      tags: tags,
-      iamUserAccessToBilling: iamUserAccessToBilling,
-      roleName: roleName,
-      accountName: accountName,
-      email: email,
-    })
+    new({tags, iamUserAccessToBilling, roleName, accountName, email})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateAccount = {
   type t
   type request = {
@@ -2518,16 +2459,9 @@ module CreateAccount = {
   }
   @module("@aws-sdk/client-organizations") @new external new: request => t = "CreateAccountCommand"
   let make = (~accountName, ~email, ~tags=?, ~iamUserAccessToBilling=?, ~roleName=?, ()) =>
-    new({
-      tags: tags,
-      iamUserAccessToBilling: iamUserAccessToBilling,
-      roleName: roleName,
-      accountName: accountName,
-      email: email,
-    })
+    new({tags, iamUserAccessToBilling, roleName, accountName, email})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module EnablePolicyType = {
   type t
   type request = {
@@ -2573,10 +2507,9 @@ module EnablePolicyType = {
   }
   @module("@aws-sdk/client-organizations") @new
   external new: request => t = "EnablePolicyTypeCommand"
-  let make = (~policyType, ~rootId, ()) => new({policyType: policyType, rootId: rootId})
+  let make = (~policyType, ~rootId, ()) => new({policyType, rootId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DisablePolicyType = {
   type t
   type request = {
@@ -2622,10 +2555,9 @@ module DisablePolicyType = {
   }
   @module("@aws-sdk/client-organizations") @new
   external new: request => t = "DisablePolicyTypeCommand"
-  let make = (~policyType, ~rootId, ()) => new({policyType: policyType, rootId: rootId})
+  let make = (~policyType, ~rootId, ()) => new({policyType, rootId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeOrganization = {
   type t
   type request = {.}
@@ -2647,7 +2579,6 @@ module DescribeOrganization = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateOrganization = {
   type t
   type request = {
@@ -2687,7 +2618,6 @@ module CreateOrganization = {
   let make = (~featureSet=?, ()) => new({featureSet: featureSet})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListRoots = {
   type t
   type request = {
@@ -2720,11 +2650,9 @@ module ListRoots = {
     roots: option<roots>,
   }
   @module("@aws-sdk/client-organizations") @new external new: request => t = "ListRootsCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module InviteAccountToOrganization = {
   type t
   type request = {
@@ -2784,10 +2712,9 @@ module InviteAccountToOrganization = {
   }
   @module("@aws-sdk/client-organizations") @new
   external new: request => t = "InviteAccountToOrganizationCommand"
-  let make = (~target, ~tags=?, ~notes=?, ()) => new({tags: tags, notes: notes, target: target})
+  let make = (~target, ~tags=?, ~notes=?, ()) => new({tags, notes, target})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module EnableAllFeatures = {
   type t
   type request = {.}
@@ -2802,7 +2729,6 @@ module EnableAllFeatures = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeHandshake = {
   type t
   type request = {
@@ -2824,7 +2750,6 @@ module DescribeHandshake = {
   let make = (~handshakeId, ()) => new({handshakeId: handshakeId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeclineHandshake = {
   type t
   type request = {
@@ -2846,7 +2771,6 @@ module DeclineHandshake = {
   let make = (~handshakeId, ()) => new({handshakeId: handshakeId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CancelHandshake = {
   type t
   type request = {
@@ -2867,7 +2791,6 @@ module CancelHandshake = {
   let make = (~handshakeId, ()) => new({handshakeId: handshakeId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module AcceptHandshake = {
   type t
   type request = {
@@ -2887,7 +2810,6 @@ module AcceptHandshake = {
   let make = (~handshakeId, ()) => new({handshakeId: handshakeId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListHandshakesForOrganization = {
   type t
   type request = {
@@ -2932,11 +2854,9 @@ module ListHandshakesForOrganization = {
   }
   @module("@aws-sdk/client-organizations") @new
   external new: request => t = "ListHandshakesForOrganizationCommand"
-  let make = (~maxResults=?, ~nextToken=?, ~filter=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, filter: filter})
+  let make = (~maxResults=?, ~nextToken=?, ~filter=?, ()) => new({maxResults, nextToken, filter})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListHandshakesForAccount = {
   type t
   type request = {
@@ -2981,7 +2901,6 @@ module ListHandshakesForAccount = {
   }
   @module("@aws-sdk/client-organizations") @new
   external new: request => t = "ListHandshakesForAccountCommand"
-  let make = (~maxResults=?, ~nextToken=?, ~filter=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, filter: filter})
+  let make = (~maxResults=?, ~nextToken=?, ~filter=?, ()) => new({maxResults, nextToken, filter})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

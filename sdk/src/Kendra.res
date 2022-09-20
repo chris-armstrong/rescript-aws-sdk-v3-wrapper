@@ -3365,16 +3365,15 @@ module UpdateQuerySuggestionsConfig = {
     (),
   ) =>
     new({
-      minimumQueryCount: minimumQueryCount,
-      minimumNumberOfQueryingUsers: minimumNumberOfQueryingUsers,
-      includeQueriesWithoutUserInformation: includeQueriesWithoutUserInformation,
-      queryLogLookBackWindowInDays: queryLogLookBackWindowInDays,
-      mode: mode,
-      indexId: indexId,
+      minimumQueryCount,
+      minimumNumberOfQueryingUsers,
+      includeQueriesWithoutUserInformation,
+      queryLogLookBackWindowInDays,
+      mode,
+      indexId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module StopDataSourceSyncJob = {
   type t
   type request = {
@@ -3387,10 +3386,9 @@ module StopDataSourceSyncJob = {
   }
   type response = {.}
   @module("@aws-sdk/client-kendra") @new external new: request => t = "StopDataSourceSyncJobCommand"
-  let make = (~indexId, ~id, ()) => new({indexId: indexId, id: id})
+  let make = (~indexId, ~id, ()) => new({indexId, id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module StartDataSourceSyncJob = {
   type t
   type request = {
@@ -3405,10 +3403,9 @@ module StartDataSourceSyncJob = {
   }
   @module("@aws-sdk/client-kendra") @new
   external new: request => t = "StartDataSourceSyncJobCommand"
-  let make = (~indexId, ~id, ()) => new({indexId: indexId, id: id})
+  let make = (~indexId, ~id, ()) => new({indexId, id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeQuerySuggestionsConfig = {
   type t
   type request = {
@@ -3470,7 +3467,6 @@ module DescribeQuerySuggestionsConfig = {
   let make = (~indexId, ()) => new({indexId: indexId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteThesaurus = {
   type t
   type request = {
@@ -3481,10 +3477,9 @@ module DeleteThesaurus = {
   }
   type response = {.}
   @module("@aws-sdk/client-kendra") @new external new: request => t = "DeleteThesaurusCommand"
-  let make = (~indexId, ~id, ()) => new({indexId: indexId, id: id})
+  let make = (~indexId, ~id, ()) => new({indexId, id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteQuerySuggestionsBlockList = {
   type t
   type request = {
@@ -3496,10 +3491,9 @@ module DeleteQuerySuggestionsBlockList = {
   type response = {.}
   @module("@aws-sdk/client-kendra") @new
   external new: request => t = "DeleteQuerySuggestionsBlockListCommand"
-  let make = (~id, ~indexId, ()) => new({id: id, indexId: indexId})
+  let make = (~id, ~indexId, ()) => new({id, indexId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeletePrincipalMapping = {
   type t
   type request = {
@@ -3539,10 +3533,9 @@ module DeletePrincipalMapping = {
   @module("@aws-sdk/client-kendra") @new
   external new: request => t = "DeletePrincipalMappingCommand"
   let make = (~groupId, ~indexId, ~orderingId=?, ~dataSourceId=?, ()) =>
-    new({orderingId: orderingId, groupId: groupId, dataSourceId: dataSourceId, indexId: indexId})
+    new({orderingId, groupId, dataSourceId, indexId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteIndex = {
   type t
   type request = {@ocaml.doc("<p>The identifier of the index to delete.</p>") @as("Id") id: indexId}
@@ -3551,7 +3544,6 @@ module DeleteIndex = {
   let make = (~id, ()) => new({id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteFaq = {
   type t
   type request = {
@@ -3560,10 +3552,9 @@ module DeleteFaq = {
   }
   type response = {.}
   @module("@aws-sdk/client-kendra") @new external new: request => t = "DeleteFaqCommand"
-  let make = (~indexId, ~id, ()) => new({indexId: indexId, id: id})
+  let make = (~indexId, ~id, ()) => new({indexId, id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteExperience = {
   type t
   type request = {
@@ -3578,10 +3569,9 @@ module DeleteExperience = {
   }
   type response = {.}
   @module("@aws-sdk/client-kendra") @new external new: request => t = "DeleteExperienceCommand"
-  let make = (~indexId, ~id, ()) => new({indexId: indexId, id: id})
+  let make = (~indexId, ~id, ()) => new({indexId, id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteDataSource = {
   type t
   type request = {
@@ -3594,10 +3584,9 @@ module DeleteDataSource = {
   }
   type response = {.}
   @module("@aws-sdk/client-kendra") @new external new: request => t = "DeleteDataSourceCommand"
-  let make = (~indexId, ~id, ()) => new({indexId: indexId, id: id})
+  let make = (~indexId, ~id, ()) => new({indexId, id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module ClearQuerySuggestions = {
   type t
   type request = {
@@ -3610,7 +3599,6 @@ module ClearQuerySuggestions = {
   let make = (~indexId, ()) => new({indexId: indexId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module UpdateThesaurus = {
   type t
   type request = {
@@ -3628,17 +3616,9 @@ module UpdateThesaurus = {
   type response = {.}
   @module("@aws-sdk/client-kendra") @new external new: request => t = "UpdateThesaurusCommand"
   let make = (~indexId, ~id, ~sourceS3Path=?, ~roleArn=?, ~description=?, ~name=?, ()) =>
-    new({
-      sourceS3Path: sourceS3Path,
-      roleArn: roleArn,
-      description: description,
-      indexId: indexId,
-      name: name,
-      id: id,
-    })
+    new({sourceS3Path, roleArn, description, indexId, name, id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module UpdateQuerySuggestionsBlockList = {
   type t
   type request = {
@@ -3670,17 +3650,9 @@ module UpdateQuerySuggestionsBlockList = {
   @module("@aws-sdk/client-kendra") @new
   external new: request => t = "UpdateQuerySuggestionsBlockListCommand"
   let make = (~id, ~indexId, ~roleArn=?, ~sourceS3Path=?, ~description=?, ~name=?, ()) =>
-    new({
-      roleArn: roleArn,
-      sourceS3Path: sourceS3Path,
-      description: description,
-      name: name,
-      id: id,
-      indexId: indexId,
-    })
+    new({roleArn, sourceS3Path, description, name, id, indexId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module UntagResource = {
   type t
   type request = {
@@ -3695,10 +3667,9 @@ module UntagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-kendra") @new external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceARN, ()) => new({tagKeys: tagKeys, resourceARN: resourceARN})
+  let make = (~tagKeys, ~resourceARN, ()) => new({tagKeys, resourceARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DescribeThesaurus = {
   type t
   type request = {
@@ -3753,10 +3724,9 @@ module DescribeThesaurus = {
     @ocaml.doc("<p>The identifier of the thesaurus.</p>") @as("Id") id: option<thesaurusId>,
   }
   @module("@aws-sdk/client-kendra") @new external new: request => t = "DescribeThesaurusCommand"
-  let make = (~indexId, ~id, ()) => new({indexId: indexId, id: id})
+  let make = (~indexId, ~id, ()) => new({indexId, id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeQuerySuggestionsBlockList = {
   type t
   type request = {
@@ -3812,10 +3782,9 @@ module DescribeQuerySuggestionsBlockList = {
   }
   @module("@aws-sdk/client-kendra") @new
   external new: request => t = "DescribeQuerySuggestionsBlockListCommand"
-  let make = (~id, ~indexId, ()) => new({id: id, indexId: indexId})
+  let make = (~id, ~indexId, ()) => new({id, indexId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeFaq = {
   type t
   type request = {
@@ -3860,10 +3829,9 @@ module DescribeFaq = {
     @ocaml.doc("<p>The identifier of the FAQ.</p>") @as("Id") id: option<faqId>,
   }
   @module("@aws-sdk/client-kendra") @new external new: request => t = "DescribeFaqCommand"
-  let make = (~indexId, ~id, ()) => new({indexId: indexId, id: id})
+  let make = (~indexId, ~id, ()) => new({indexId, id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module TagResource = {
   type t
   type request = {
@@ -3878,10 +3846,9 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-kendra") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceARN, ()) => new({tags: tags, resourceARN: resourceARN})
+  let make = (~tags, ~resourceARN, ()) => new({tags, resourceARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module SubmitFeedback = {
   type t
   type request = {
@@ -3904,15 +3871,9 @@ module SubmitFeedback = {
   type response = {.}
   @module("@aws-sdk/client-kendra") @new external new: request => t = "SubmitFeedbackCommand"
   let make = (~queryId, ~indexId, ~relevanceFeedbackItems=?, ~clickFeedbackItems=?, ()) =>
-    new({
-      relevanceFeedbackItems: relevanceFeedbackItems,
-      clickFeedbackItems: clickFeedbackItems,
-      queryId: queryId,
-      indexId: indexId,
-    })
+    new({relevanceFeedbackItems, clickFeedbackItems, queryId, indexId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module ListThesauri = {
   type t
   type request = {
@@ -3940,11 +3901,9 @@ module ListThesauri = {
     nextToken: option<nextToken>,
   }
   @module("@aws-sdk/client-kendra") @new external new: request => t = "ListThesauriCommand"
-  let make = (~indexId, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, indexId: indexId})
+  let make = (~indexId, ~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken, indexId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListTagsForResource = {
   type t
   type request = {
@@ -3961,7 +3920,6 @@ module ListTagsForResource = {
   let make = (~resourceARN, ()) => new({resourceARN: resourceARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListQuerySuggestionsBlockLists = {
   type t
   type request = {
@@ -3997,11 +3955,9 @@ module ListQuerySuggestionsBlockLists = {
   }
   @module("@aws-sdk/client-kendra") @new
   external new: request => t = "ListQuerySuggestionsBlockListsCommand"
-  let make = (~indexId, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, indexId: indexId})
+  let make = (~indexId, ~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken, indexId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListIndices = {
   type t
   type request = {
@@ -4027,11 +3983,9 @@ module ListIndices = {
     indexConfigurationSummaryItems: option<indexConfigurationSummaryList>,
   }
   @module("@aws-sdk/client-kendra") @new external new: request => t = "ListIndicesCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListGroupsOlderThanOrderingId = {
   type t
   type request = {
@@ -4080,16 +4034,9 @@ module ListGroupsOlderThanOrderingId = {
   @module("@aws-sdk/client-kendra") @new
   external new: request => t = "ListGroupsOlderThanOrderingIdCommand"
   let make = (~orderingId, ~indexId, ~maxResults=?, ~nextToken=?, ~dataSourceId=?, ()) =>
-    new({
-      maxResults: maxResults,
-      nextToken: nextToken,
-      orderingId: orderingId,
-      dataSourceId: dataSourceId,
-      indexId: indexId,
-    })
+    new({maxResults, nextToken, orderingId, dataSourceId, indexId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListFaqs = {
   type t
   type request = {
@@ -4114,11 +4061,9 @@ module ListFaqs = {
     nextToken: option<nextToken>,
   }
   @module("@aws-sdk/client-kendra") @new external new: request => t = "ListFaqsCommand"
-  let make = (~indexId, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, indexId: indexId})
+  let make = (~indexId, ~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken, indexId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListEntityPersonas = {
   type t
   type request = {
@@ -4146,10 +4091,9 @@ module ListEntityPersonas = {
   }
   @module("@aws-sdk/client-kendra") @new external new: request => t = "ListEntityPersonasCommand"
   let make = (~indexId, ~id, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, indexId: indexId, id: id})
+    new({maxResults, nextToken, indexId, id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListDataSources = {
   type t
   type request = {
@@ -4175,11 +4119,9 @@ module ListDataSources = {
     summaryItems: option<dataSourceSummaryList>,
   }
   @module("@aws-sdk/client-kendra") @new external new: request => t = "ListDataSourcesCommand"
-  let make = (~indexId, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, indexId: indexId})
+  let make = (~indexId, ~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken, indexId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetSnapshots = {
   type t
   type request = {
@@ -4257,16 +4199,9 @@ module GetSnapshots = {
   }
   @module("@aws-sdk/client-kendra") @new external new: request => t = "GetSnapshotsCommand"
   let make = (~metricType, ~interval, ~indexId, ~maxResults=?, ~nextToken=?, ()) =>
-    new({
-      maxResults: maxResults,
-      nextToken: nextToken,
-      metricType: metricType,
-      interval: interval,
-      indexId: indexId,
-    })
+    new({maxResults, nextToken, metricType, interval, indexId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DisassociatePersonasFromEntities = {
   type t
   type request = {
@@ -4288,11 +4223,9 @@ module DisassociatePersonasFromEntities = {
   }
   @module("@aws-sdk/client-kendra") @new
   external new: request => t = "DisassociatePersonasFromEntitiesCommand"
-  let make = (~entityIds, ~indexId, ~id, ()) =>
-    new({entityIds: entityIds, indexId: indexId, id: id})
+  let make = (~entityIds, ~indexId, ~id, ()) => new({entityIds, indexId, id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DisassociateEntitiesFromExperience = {
   type t
   type request = {
@@ -4313,11 +4246,9 @@ module DisassociateEntitiesFromExperience = {
   }
   @module("@aws-sdk/client-kendra") @new
   external new: request => t = "DisassociateEntitiesFromExperienceCommand"
-  let make = (~entityList, ~indexId, ~id, ()) =>
-    new({entityList: entityList, indexId: indexId, id: id})
+  let make = (~entityList, ~indexId, ~id, ()) => new({entityList, indexId, id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribePrincipalMapping = {
   type t
   type request = {
@@ -4380,11 +4311,9 @@ module DescribePrincipalMapping = {
   }
   @module("@aws-sdk/client-kendra") @new
   external new: request => t = "DescribePrincipalMappingCommand"
-  let make = (~groupId, ~indexId, ~dataSourceId=?, ()) =>
-    new({groupId: groupId, dataSourceId: dataSourceId, indexId: indexId})
+  let make = (~groupId, ~indexId, ~dataSourceId=?, ()) => new({groupId, dataSourceId, indexId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateThesaurus = {
   type t
   type request = {
@@ -4433,19 +4362,9 @@ module CreateThesaurus = {
     ~tags=?,
     ~description=?,
     (),
-  ) =>
-    new({
-      clientToken: clientToken,
-      sourceS3Path: sourceS3Path,
-      tags: tags,
-      roleArn: roleArn,
-      description: description,
-      name: name,
-      indexId: indexId,
-    })
+  ) => new({clientToken, sourceS3Path, tags, roleArn, description, name, indexId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateQuerySuggestionsBlockList = {
   type t
   type request = {
@@ -4504,19 +4423,9 @@ module CreateQuerySuggestionsBlockList = {
     ~clientToken=?,
     ~description=?,
     (),
-  ) =>
-    new({
-      tags: tags,
-      roleArn: roleArn,
-      clientToken: clientToken,
-      sourceS3Path: sourceS3Path,
-      description: description,
-      name: name,
-      indexId: indexId,
-    })
+  ) => new({tags, roleArn, clientToken, sourceS3Path, description, name, indexId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateFaq = {
   type t
   type request = {
@@ -4572,20 +4481,9 @@ module CreateFaq = {
     ~description=?,
     (),
   ) =>
-    new({
-      languageCode: languageCode,
-      clientToken: clientToken,
-      fileFormat: fileFormat,
-      tags: tags,
-      roleArn: roleArn,
-      s3Path: s3Path,
-      description: description,
-      name: name,
-      indexId: indexId,
-    })
+    new({languageCode, clientToken, fileFormat, tags, roleArn, s3Path, description, name, indexId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module BatchDeleteDocument = {
   type t
   type request = {
@@ -4608,14 +4506,9 @@ module BatchDeleteDocument = {
   }
   @module("@aws-sdk/client-kendra") @new external new: request => t = "BatchDeleteDocumentCommand"
   let make = (~documentIdList, ~indexId, ~dataSourceSyncJobMetricTarget=?, ()) =>
-    new({
-      dataSourceSyncJobMetricTarget: dataSourceSyncJobMetricTarget,
-      documentIdList: documentIdList,
-      indexId: indexId,
-    })
+    new({dataSourceSyncJobMetricTarget, documentIdList, indexId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module AssociatePersonasToEntities = {
   type t
   type request = {
@@ -4640,10 +4533,9 @@ module AssociatePersonasToEntities = {
   }
   @module("@aws-sdk/client-kendra") @new
   external new: request => t = "AssociatePersonasToEntitiesCommand"
-  let make = (~personas, ~indexId, ~id, ()) => new({personas: personas, indexId: indexId, id: id})
+  let make = (~personas, ~indexId, ~id, ()) => new({personas, indexId, id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module AssociateEntitiesToExperience = {
   type t
   type request = {
@@ -4664,11 +4556,9 @@ module AssociateEntitiesToExperience = {
   }
   @module("@aws-sdk/client-kendra") @new
   external new: request => t = "AssociateEntitiesToExperienceCommand"
-  let make = (~entityList, ~indexId, ~id, ()) =>
-    new({entityList: entityList, indexId: indexId, id: id})
+  let make = (~entityList, ~indexId, ~id, ()) => new({entityList, indexId, id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateExperience = {
   type t
   type request = {
@@ -4698,17 +4588,9 @@ module UpdateExperience = {
   type response = {.}
   @module("@aws-sdk/client-kendra") @new external new: request => t = "UpdateExperienceCommand"
   let make = (~indexId, ~id, ~description=?, ~configuration=?, ~roleArn=?, ~name=?, ()) =>
-    new({
-      description: description,
-      configuration: configuration,
-      roleArn: roleArn,
-      indexId: indexId,
-      name: name,
-      id: id,
-    })
+    new({description, configuration, roleArn, indexId, name, id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module PutPrincipalMapping = {
   type t
   type request = {
@@ -4761,17 +4643,9 @@ module PutPrincipalMapping = {
   type response = {.}
   @module("@aws-sdk/client-kendra") @new external new: request => t = "PutPrincipalMappingCommand"
   let make = (~groupMembers, ~groupId, ~indexId, ~roleArn=?, ~orderingId=?, ~dataSourceId=?, ()) =>
-    new({
-      roleArn: roleArn,
-      orderingId: orderingId,
-      groupMembers: groupMembers,
-      groupId: groupId,
-      dataSourceId: dataSourceId,
-      indexId: indexId,
-    })
+    new({roleArn, orderingId, groupMembers, groupId, dataSourceId, indexId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module ListExperienceEntities = {
   type t
   type request = {
@@ -4797,11 +4671,9 @@ module ListExperienceEntities = {
   }
   @module("@aws-sdk/client-kendra") @new
   external new: request => t = "ListExperienceEntitiesCommand"
-  let make = (~indexId, ~id, ~nextToken=?, ()) =>
-    new({nextToken: nextToken, indexId: indexId, id: id})
+  let make = (~indexId, ~id, ~nextToken=?, ()) => new({nextToken, indexId, id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListDataSourceSyncJobs = {
   type t
   type request = {
@@ -4845,18 +4717,9 @@ module ListDataSourceSyncJobs = {
     ~maxResults=?,
     ~nextToken=?,
     (),
-  ) =>
-    new({
-      statusFilter: statusFilter,
-      startTimeFilter: startTimeFilter,
-      maxResults: maxResults,
-      nextToken: nextToken,
-      indexId: indexId,
-      id: id,
-    })
+  ) => new({statusFilter, startTimeFilter, maxResults, nextToken, indexId, id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeExperience = {
   type t
   type request = {
@@ -4913,10 +4776,9 @@ module DescribeExperience = {
     id: option<experienceId>,
   }
   @module("@aws-sdk/client-kendra") @new external new: request => t = "DescribeExperienceCommand"
-  let make = (~indexId, ~id, ()) => new({indexId: indexId, id: id})
+  let make = (~indexId, ~id, ()) => new({indexId, id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateIndex = {
   type t
   type request = {
@@ -5007,20 +4869,19 @@ module CreateIndex = {
     (),
   ) =>
     new({
-      userGroupResolutionConfiguration: userGroupResolutionConfiguration,
-      userContextPolicy: userContextPolicy,
-      userTokenConfigurations: userTokenConfigurations,
-      tags: tags,
-      clientToken: clientToken,
-      description: description,
-      serverSideEncryptionConfiguration: serverSideEncryptionConfiguration,
-      roleArn: roleArn,
-      edition: edition,
-      name: name,
+      userGroupResolutionConfiguration,
+      userContextPolicy,
+      userTokenConfigurations,
+      tags,
+      clientToken,
+      description,
+      serverSideEncryptionConfiguration,
+      roleArn,
+      edition,
+      name,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateExperience = {
   type t
   type request = {
@@ -5054,17 +4915,9 @@ module CreateExperience = {
   }
   @module("@aws-sdk/client-kendra") @new external new: request => t = "CreateExperienceCommand"
   let make = (~indexId, ~name, ~clientToken=?, ~description=?, ~configuration=?, ~roleArn=?, ()) =>
-    new({
-      clientToken: clientToken,
-      description: description,
-      configuration: configuration,
-      roleArn: roleArn,
-      indexId: indexId,
-      name: name,
-    })
+    new({clientToken, description, configuration, roleArn, indexId, name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateIndex = {
   type t
   type request = {
@@ -5112,19 +4965,18 @@ module UpdateIndex = {
     (),
   ) =>
     new({
-      userGroupResolutionConfiguration: userGroupResolutionConfiguration,
-      userContextPolicy: userContextPolicy,
-      userTokenConfigurations: userTokenConfigurations,
-      capacityUnits: capacityUnits,
-      documentMetadataConfigurationUpdates: documentMetadataConfigurationUpdates,
-      description: description,
-      roleArn: roleArn,
-      name: name,
-      id: id,
+      userGroupResolutionConfiguration,
+      userContextPolicy,
+      userTokenConfigurations,
+      capacityUnits,
+      documentMetadataConfigurationUpdates,
+      description,
+      roleArn,
+      name,
+      id,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module ListExperiences = {
   type t
   type request = {
@@ -5149,11 +5001,9 @@ module ListExperiences = {
     summaryItems: option<experiencesSummaryList>,
   }
   @module("@aws-sdk/client-kendra") @new external new: request => t = "ListExperiencesCommand"
-  let make = (~indexId, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, indexId: indexId})
+  let make = (~indexId, ~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken, indexId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeIndex = {
   type t
   type request = {@ocaml.doc("<p>The name of the index to describe.</p>") @as("Id") id: indexId}
@@ -5220,7 +5070,6 @@ module DescribeIndex = {
   let make = (~id, ()) => new({id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetQuerySuggestions = {
   type t
   type request = {
@@ -5250,10 +5099,9 @@ module GetQuerySuggestions = {
   }
   @module("@aws-sdk/client-kendra") @new external new: request => t = "GetQuerySuggestionsCommand"
   let make = (~queryText, ~indexId, ~maxSuggestionsCount=?, ()) =>
-    new({maxSuggestionsCount: maxSuggestionsCount, queryText: queryText, indexId: indexId})
+    new({maxSuggestionsCount, queryText, indexId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module BatchPutDocument = {
   type t
   type request = {
@@ -5309,15 +5157,9 @@ module BatchPutDocument = {
   }
   @module("@aws-sdk/client-kendra") @new external new: request => t = "BatchPutDocumentCommand"
   let make = (~documents, ~indexId, ~customDocumentEnrichmentConfiguration=?, ~roleArn=?, ()) =>
-    new({
-      customDocumentEnrichmentConfiguration: customDocumentEnrichmentConfiguration,
-      documents: documents,
-      roleArn: roleArn,
-      indexId: indexId,
-    })
+    new({customDocumentEnrichmentConfiguration, documents, roleArn, indexId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module BatchGetDocumentStatus = {
   type t
   type request = {
@@ -5347,11 +5189,9 @@ module BatchGetDocumentStatus = {
   }
   @module("@aws-sdk/client-kendra") @new
   external new: request => t = "BatchGetDocumentStatusCommand"
-  let make = (~documentInfoList, ~indexId, ()) =>
-    new({documentInfoList: documentInfoList, indexId: indexId})
+  let make = (~documentInfoList, ~indexId, ()) => new({documentInfoList, indexId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateDataSource = {
   type t
   type request = {
@@ -5410,19 +5250,18 @@ module UpdateDataSource = {
     (),
   ) =>
     new({
-      customDocumentEnrichmentConfiguration: customDocumentEnrichmentConfiguration,
-      languageCode: languageCode,
-      roleArn: roleArn,
-      schedule: schedule,
-      description: description,
-      configuration: configuration,
-      indexId: indexId,
-      name: name,
-      id: id,
+      customDocumentEnrichmentConfiguration,
+      languageCode,
+      roleArn,
+      schedule,
+      description,
+      configuration,
+      indexId,
+      name,
+      id,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DescribeDataSource = {
   type t
   type request = {
@@ -5483,10 +5322,9 @@ module DescribeDataSource = {
     @ocaml.doc("<p>The identifier of the data source.</p>") @as("Id") id: option<dataSourceId>,
   }
   @module("@aws-sdk/client-kendra") @new external new: request => t = "DescribeDataSourceCommand"
-  let make = (~indexId, ~id, ()) => new({indexId: indexId, id: id})
+  let make = (~indexId, ~id, ()) => new({indexId, id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateDataSource = {
   type t
   type request = {
@@ -5576,21 +5414,20 @@ module CreateDataSource = {
     (),
   ) =>
     new({
-      customDocumentEnrichmentConfiguration: customDocumentEnrichmentConfiguration,
-      languageCode: languageCode,
-      clientToken: clientToken,
-      tags: tags,
-      roleArn: roleArn,
-      schedule: schedule,
-      description: description,
-      configuration: configuration,
-      type_: type_,
-      indexId: indexId,
-      name: name,
+      customDocumentEnrichmentConfiguration,
+      languageCode,
+      clientToken,
+      tags,
+      roleArn,
+      schedule,
+      description,
+      configuration,
+      type_,
+      indexId,
+      name,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module Query = {
   type t
   type request = {
@@ -5712,19 +5549,19 @@ module Query = {
     (),
   ) =>
     new({
-      spellCorrectionConfiguration: spellCorrectionConfiguration,
-      visitorId: visitorId,
-      userContext: userContext,
-      sortingConfiguration: sortingConfiguration,
-      pageSize: pageSize,
-      pageNumber: pageNumber,
-      documentRelevanceOverrideConfigurations: documentRelevanceOverrideConfigurations,
-      queryResultTypeFilter: queryResultTypeFilter,
-      requestedDocumentAttributes: requestedDocumentAttributes,
-      facets: facets,
-      attributeFilter: attributeFilter,
-      queryText: queryText,
-      indexId: indexId,
+      spellCorrectionConfiguration,
+      visitorId,
+      userContext,
+      sortingConfiguration,
+      pageSize,
+      pageNumber,
+      documentRelevanceOverrideConfigurations,
+      queryResultTypeFilter,
+      requestedDocumentAttributes,
+      facets,
+      attributeFilter,
+      queryText,
+      indexId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

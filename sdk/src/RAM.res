@@ -397,7 +397,6 @@ module PromoteResourceShareCreatedFromPolicy = {
   let make = (~resourceShareArn, ()) => new({resourceShareArn: resourceShareArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module EnableSharingWithAwsOrganization = {
   type t
   type request = {.}
@@ -411,7 +410,6 @@ module EnableSharingWithAwsOrganization = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DisassociateResourceSharePermission = {
   type t
   type request = {
@@ -445,14 +443,9 @@ module DisassociateResourceSharePermission = {
   @module("@aws-sdk/client-ram") @new
   external new: request => t = "DisassociateResourceSharePermissionCommand"
   let make = (~permissionArn, ~resourceShareArn, ~clientToken=?, ()) =>
-    new({
-      clientToken: clientToken,
-      permissionArn: permissionArn,
-      resourceShareArn: resourceShareArn,
-    })
+    new({clientToken, permissionArn, resourceShareArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteResourceShare = {
   type t
   type request = {
@@ -481,11 +474,9 @@ module DeleteResourceShare = {
     returnValue: option<boolean_>,
   }
   @module("@aws-sdk/client-ram") @new external new: request => t = "DeleteResourceShareCommand"
-  let make = (~resourceShareArn, ~clientToken=?, ()) =>
-    new({clientToken: clientToken, resourceShareArn: resourceShareArn})
+  let make = (~resourceShareArn, ~clientToken=?, ()) => new({clientToken, resourceShareArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module AssociateResourceSharePermission = {
   type t
   type request = {
@@ -541,17 +532,9 @@ module AssociateResourceSharePermission = {
     ~clientToken=?,
     ~replace=?,
     (),
-  ) =>
-    new({
-      permissionVersion: permissionVersion,
-      clientToken: clientToken,
-      replace: replace,
-      permissionArn: permissionArn,
-      resourceShareArn: resourceShareArn,
-    })
+  ) => new({permissionVersion, clientToken, replace, permissionArn, resourceShareArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UntagResource = {
   type t
   type request = {
@@ -563,11 +546,9 @@ module UntagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-ram") @new external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceShareArn, ()) =>
-    new({tagKeys: tagKeys, resourceShareArn: resourceShareArn})
+  let make = (~tagKeys, ~resourceShareArn, ()) => new({tagKeys, resourceShareArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module GetResourcePolicies = {
   type t
   type request = {
@@ -605,15 +586,9 @@ module GetResourcePolicies = {
   }
   @module("@aws-sdk/client-ram") @new external new: request => t = "GetResourcePoliciesCommand"
   let make = (~resourceArns, ~maxResults=?, ~nextToken=?, ~principal=?, ()) =>
-    new({
-      maxResults: maxResults,
-      nextToken: nextToken,
-      principal: principal,
-      resourceArns: resourceArns,
-    })
+    new({maxResults, nextToken, principal, resourceArns})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetPermission = {
   type t
   type request = {
@@ -630,11 +605,9 @@ module GetPermission = {
     permission: option<resourceSharePermissionDetail>,
   }
   @module("@aws-sdk/client-ram") @new external new: request => t = "GetPermissionCommand"
-  let make = (~permissionArn, ~permissionVersion=?, ()) =>
-    new({permissionVersion: permissionVersion, permissionArn: permissionArn})
+  let make = (~permissionArn, ~permissionVersion=?, ()) => new({permissionVersion, permissionArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module TagResource = {
   type t
   type request = {
@@ -648,10 +621,9 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-ram") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceShareArn, ()) => new({tags: tags, resourceShareArn: resourceShareArn})
+  let make = (~tags, ~resourceShareArn, ()) => new({tags, resourceShareArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module ListResources = {
   type t
   type request = {
@@ -747,18 +719,17 @@ module ListResources = {
     (),
   ) =>
     new({
-      resourceRegionScope: resourceRegionScope,
-      maxResults: maxResults,
-      nextToken: nextToken,
-      resourceShareArns: resourceShareArns,
-      resourceArns: resourceArns,
-      resourceType: resourceType,
-      principal: principal,
-      resourceOwner: resourceOwner,
+      resourceRegionScope,
+      maxResults,
+      nextToken,
+      resourceShareArns,
+      resourceArns,
+      resourceType,
+      principal,
+      resourceOwner,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListResourceTypes = {
   type t
   type request = {
@@ -813,10 +784,9 @@ module ListResourceTypes = {
   }
   @module("@aws-sdk/client-ram") @new external new: request => t = "ListResourceTypesCommand"
   let make = (~resourceRegionScope=?, ~maxResults=?, ~nextToken=?, ()) =>
-    new({resourceRegionScope: resourceRegionScope, maxResults: maxResults, nextToken: nextToken})
+    new({resourceRegionScope, maxResults, nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListResourceSharePermissions = {
   type t
   type request = {
@@ -855,10 +825,9 @@ module ListResourceSharePermissions = {
   @module("@aws-sdk/client-ram") @new
   external new: request => t = "ListResourceSharePermissionsCommand"
   let make = (~resourceShareArn, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, resourceShareArn: resourceShareArn})
+    new({maxResults, nextToken, resourceShareArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListPrincipals = {
   type t
   type request = {
@@ -965,17 +934,16 @@ module ListPrincipals = {
     (),
   ) =>
     new({
-      maxResults: maxResults,
-      nextToken: nextToken,
-      resourceShareArns: resourceShareArns,
-      resourceType: resourceType,
-      principals: principals,
-      resourceArn: resourceArn,
-      resourceOwner: resourceOwner,
+      maxResults,
+      nextToken,
+      resourceShareArns,
+      resourceType,
+      principals,
+      resourceArn,
+      resourceOwner,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListPermissions = {
   type t
   type request = {
@@ -1013,10 +981,9 @@ module ListPermissions = {
   }
   @module("@aws-sdk/client-ram") @new external new: request => t = "ListPermissionsCommand"
   let make = (~maxResults=?, ~nextToken=?, ~resourceType=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, resourceType: resourceType})
+    new({maxResults, nextToken, resourceType})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListPermissionVersions = {
   type t
   type request = {
@@ -1055,10 +1022,9 @@ module ListPermissionVersions = {
   }
   @module("@aws-sdk/client-ram") @new external new: request => t = "ListPermissionVersionsCommand"
   let make = (~permissionArn, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, permissionArn: permissionArn})
+    new({maxResults, nextToken, permissionArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListPendingInvitationResources = {
   type t
   type request = {
@@ -1123,16 +1089,9 @@ module ListPendingInvitationResources = {
     ~maxResults=?,
     ~nextToken=?,
     (),
-  ) =>
-    new({
-      resourceRegionScope: resourceRegionScope,
-      maxResults: maxResults,
-      nextToken: nextToken,
-      resourceShareInvitationArn: resourceShareInvitationArn,
-    })
+  ) => new({resourceRegionScope, maxResults, nextToken, resourceShareInvitationArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetResourceShareAssociations = {
   type t
   type request = {
@@ -1206,17 +1165,16 @@ module GetResourceShareAssociations = {
     (),
   ) =>
     new({
-      maxResults: maxResults,
-      nextToken: nextToken,
-      associationStatus: associationStatus,
-      principal: principal,
-      resourceArn: resourceArn,
-      resourceShareArns: resourceShareArns,
-      associationType: associationType,
+      maxResults,
+      nextToken,
+      associationStatus,
+      principal,
+      resourceArn,
+      resourceShareArns,
+      associationType,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DisassociateResourceShare = {
   type t
   type request = {
@@ -1286,15 +1244,9 @@ module DisassociateResourceShare = {
   @module("@aws-sdk/client-ram") @new
   external new: request => t = "DisassociateResourceShareCommand"
   let make = (~resourceShareArn, ~clientToken=?, ~principals=?, ~resourceArns=?, ()) =>
-    new({
-      clientToken: clientToken,
-      principals: principals,
-      resourceArns: resourceArns,
-      resourceShareArn: resourceShareArn,
-    })
+    new({clientToken, principals, resourceArns, resourceShareArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module AssociateResourceShare = {
   type t
   type request = {
@@ -1362,15 +1314,9 @@ module AssociateResourceShare = {
   }
   @module("@aws-sdk/client-ram") @new external new: request => t = "AssociateResourceShareCommand"
   let make = (~resourceShareArn, ~clientToken=?, ~principals=?, ~resourceArns=?, ()) =>
-    new({
-      clientToken: clientToken,
-      principals: principals,
-      resourceArns: resourceArns,
-      resourceShareArn: resourceShareArn,
-    })
+    new({clientToken, principals, resourceArns, resourceShareArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateResourceShare = {
   type t
   type request = {
@@ -1403,15 +1349,9 @@ module UpdateResourceShare = {
   }
   @module("@aws-sdk/client-ram") @new external new: request => t = "UpdateResourceShareCommand"
   let make = (~resourceShareArn, ~clientToken=?, ~allowExternalPrincipals=?, ~name=?, ()) =>
-    new({
-      clientToken: clientToken,
-      allowExternalPrincipals: allowExternalPrincipals,
-      name: name,
-      resourceShareArn: resourceShareArn,
-    })
+    new({clientToken, allowExternalPrincipals, name, resourceShareArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module RejectResourceShareInvitation = {
   type t
   type request = {
@@ -1441,10 +1381,9 @@ module RejectResourceShareInvitation = {
   @module("@aws-sdk/client-ram") @new
   external new: request => t = "RejectResourceShareInvitationCommand"
   let make = (~resourceShareInvitationArn, ~clientToken=?, ()) =>
-    new({clientToken: clientToken, resourceShareInvitationArn: resourceShareInvitationArn})
+    new({clientToken, resourceShareInvitationArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateResourceShare = {
   type t
   type request = {
@@ -1531,17 +1470,16 @@ module CreateResourceShare = {
     (),
   ) =>
     new({
-      permissionArns: permissionArns,
-      clientToken: clientToken,
-      allowExternalPrincipals: allowExternalPrincipals,
-      tags: tags,
-      principals: principals,
-      resourceArns: resourceArns,
-      name: name,
+      permissionArns,
+      clientToken,
+      allowExternalPrincipals,
+      tags,
+      principals,
+      resourceArns,
+      name,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module AcceptResourceShareInvitation = {
   type t
   type request = {
@@ -1571,10 +1509,9 @@ module AcceptResourceShareInvitation = {
   @module("@aws-sdk/client-ram") @new
   external new: request => t = "AcceptResourceShareInvitationCommand"
   let make = (~resourceShareInvitationArn, ~clientToken=?, ()) =>
-    new({clientToken: clientToken, resourceShareInvitationArn: resourceShareInvitationArn})
+    new({clientToken, resourceShareInvitationArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetResourceShares = {
   type t
   type request = {
@@ -1653,18 +1590,17 @@ module GetResourceShares = {
     (),
   ) =>
     new({
-      permissionArn: permissionArn,
-      maxResults: maxResults,
-      nextToken: nextToken,
-      tagFilters: tagFilters,
-      name: name,
-      resourceOwner: resourceOwner,
-      resourceShareStatus: resourceShareStatus,
-      resourceShareArns: resourceShareArns,
+      permissionArn,
+      maxResults,
+      nextToken,
+      tagFilters,
+      name,
+      resourceOwner,
+      resourceShareStatus,
+      resourceShareArns,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetResourceShareInvitations = {
   type t
   type request = {
@@ -1711,12 +1647,6 @@ module GetResourceShareInvitations = {
     ~resourceShareArns=?,
     ~resourceShareInvitationArns=?,
     (),
-  ) =>
-    new({
-      maxResults: maxResults,
-      nextToken: nextToken,
-      resourceShareArns: resourceShareArns,
-      resourceShareInvitationArns: resourceShareInvitationArns,
-    })
+  ) => new({maxResults, nextToken, resourceShareArns, resourceShareInvitationArns})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

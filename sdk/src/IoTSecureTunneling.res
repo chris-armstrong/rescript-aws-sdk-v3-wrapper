@@ -121,10 +121,9 @@ module CloseTunnel = {
   type response = {.}
   @module("@aws-sdk/client-iotsecuredtunneling") @new
   external new: request => t = "CloseTunnelCommand"
-  let make = (~tunnelId, ~delete=?, ()) => new({delete: delete, tunnelId: tunnelId})
+  let make = (~tunnelId, ~delete=?, ()) => new({delete, tunnelId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module UntagResource = {
   type t
   type request = {
@@ -134,10 +133,9 @@ module UntagResource = {
   type response = {.}
   @module("@aws-sdk/client-iotsecuredtunneling") @new
   external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
+  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys, resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module TagResource = {
   type t
   type request = {
@@ -147,10 +145,9 @@ module TagResource = {
   type response = {.}
   @module("@aws-sdk/client-iotsecuredtunneling") @new
   external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
+  let make = (~tags, ~resourceArn, ()) => new({tags, resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module OpenTunnel = {
   type t
   type request = {
@@ -176,15 +173,9 @@ module OpenTunnel = {
   @module("@aws-sdk/client-iotsecuredtunneling") @new
   external new: request => t = "OpenTunnelCommand"
   let make = (~timeoutConfig=?, ~destinationConfig=?, ~tags=?, ~description=?, ()) =>
-    new({
-      timeoutConfig: timeoutConfig,
-      destinationConfig: destinationConfig,
-      tags: tags,
-      description: description,
-    })
+    new({timeoutConfig, destinationConfig, tags, description})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListTunnels = {
   type t
   type request = {
@@ -203,10 +194,9 @@ module ListTunnels = {
   @module("@aws-sdk/client-iotsecuredtunneling") @new
   external new: request => t = "ListTunnelsCommand"
   let make = (~nextToken=?, ~maxResults=?, ~thingName=?, ()) =>
-    new({nextToken: nextToken, maxResults: maxResults, thingName: thingName})
+    new({nextToken, maxResults, thingName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListTagsForResource = {
   type t
   type request = {@ocaml.doc("<p>The resource ARN.</p>") resourceArn: amazonResourceName}
@@ -216,7 +206,6 @@ module ListTagsForResource = {
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeTunnel = {
   type t
   type request = {@ocaml.doc("<p>The tunnel to describe.</p>") tunnelId: tunnelId}

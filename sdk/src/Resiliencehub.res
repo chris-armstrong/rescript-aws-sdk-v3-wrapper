@@ -636,10 +636,9 @@ see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespa
   }
   @module("@aws-sdk/client-resiliencehub") @new
   external new: request => t = "ResolveAppVersionResourcesCommand"
-  let make = (~appVersion, ~appArn, ()) => new({appVersion: appVersion, appArn: appArn})
+  let make = (~appVersion, ~appArn, ()) => new({appVersion, appArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module PutDraftAppVersionTemplate = {
   type t
   type request = {
@@ -663,11 +662,9 @@ see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespa
   }
   @module("@aws-sdk/client-resiliencehub") @new
   external new: request => t = "PutDraftAppVersionTemplateCommand"
-  let make = (~appTemplateBody, ~appArn, ()) =>
-    new({appTemplateBody: appTemplateBody, appArn: appArn})
+  let make = (~appTemplateBody, ~appArn, ()) => new({appTemplateBody, appArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module PublishAppVersion = {
   type t
   type request = {
@@ -692,7 +689,6 @@ see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespa
   let make = (~appArn, ()) => new({appArn: appArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeDraftAppVersionResourcesImportStatus = {
   type t
   type request = {
@@ -722,7 +718,6 @@ see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespa
   let make = (~appArn, ()) => new({appArn: appArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeAppVersionTemplate = {
   type t
   type request = {
@@ -746,10 +741,9 @@ see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespa
   }
   @module("@aws-sdk/client-resiliencehub") @new
   external new: request => t = "DescribeAppVersionTemplateCommand"
-  let make = (~appVersion, ~appArn, ()) => new({appVersion: appVersion, appArn: appArn})
+  let make = (~appVersion, ~appArn, ()) => new({appVersion, appArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeAppVersionResourcesResolutionStatus = {
   type t
   type request = {
@@ -777,11 +771,9 @@ see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespa
   }
   @module("@aws-sdk/client-resiliencehub") @new
   external new: request => t = "DescribeAppVersionResourcesResolutionStatusCommand"
-  let make = (~appVersion, ~appArn, ~resolutionId=?, ()) =>
-    new({resolutionId: resolutionId, appVersion: appVersion, appArn: appArn})
+  let make = (~appVersion, ~appArn, ~resolutionId=?, ()) => new({resolutionId, appVersion, appArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteResiliencyPolicy = {
   type t
   type request = {
@@ -805,11 +797,9 @@ see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespa
   }
   @module("@aws-sdk/client-resiliencehub") @new
   external new: request => t = "DeleteResiliencyPolicyCommand"
-  let make = (~policyArn, ~clientToken=?, ()) =>
-    new({clientToken: clientToken, policyArn: policyArn})
+  let make = (~policyArn, ~clientToken=?, ()) => new({clientToken, policyArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteRecommendationTemplate = {
   type t
   type request = {
@@ -827,10 +817,9 @@ You should not reuse the same client token for other API requests.</p>")
   @module("@aws-sdk/client-resiliencehub") @new
   external new: request => t = "DeleteRecommendationTemplateCommand"
   let make = (~recommendationTemplateArn, ~clientToken=?, ()) =>
-    new({clientToken: clientToken, recommendationTemplateArn: recommendationTemplateArn})
+    new({clientToken, recommendationTemplateArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteAppAssessment = {
   type t
   type request = {
@@ -856,11 +845,9 @@ see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespa
   }
   @module("@aws-sdk/client-resiliencehub") @new
   external new: request => t = "DeleteAppAssessmentCommand"
-  let make = (~assessmentArn, ~clientToken=?, ()) =>
-    new({clientToken: clientToken, assessmentArn: assessmentArn})
+  let make = (~assessmentArn, ~clientToken=?, ()) => new({clientToken, assessmentArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteApp = {
   type t
   type request = {
@@ -886,10 +873,9 @@ see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespa
   }
   @module("@aws-sdk/client-resiliencehub") @new external new: request => t = "DeleteAppCommand"
   let make = (~appArn, ~clientToken=?, ~forceDelete=?, ()) =>
-    new({clientToken: clientToken, forceDelete: forceDelete, appArn: appArn})
+    new({clientToken, forceDelete, appArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UntagResource = {
   type t
   type request = {
@@ -898,10 +884,9 @@ module UntagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-resiliencehub") @new external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
+  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys, resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module TagResource = {
   type t
   type request = {
@@ -911,10 +896,9 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-resiliencehub") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
+  let make = (~tags, ~resourceArn, ()) => new({tags, resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module RemoveDraftAppVersionResourceMappings = {
   type t
   type request = {
@@ -955,17 +939,9 @@ see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespa
     ~logicalStackNames=?,
     ~resourceNames=?,
     (),
-  ) =>
-    new({
-      resourceGroupNames: resourceGroupNames,
-      appRegistryAppNames: appRegistryAppNames,
-      logicalStackNames: logicalStackNames,
-      resourceNames: resourceNames,
-      appArn: appArn,
-    })
+  ) => new({resourceGroupNames, appRegistryAppNames, logicalStackNames, resourceNames, appArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListTagsForResource = {
   type t
   type request = {
@@ -983,7 +959,6 @@ Each tag consists of a key/value pair.</p>")
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ImportResourcesToDraftAppVersion = {
   type t
   type request = {
@@ -1010,10 +985,9 @@ see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespa
   }
   @module("@aws-sdk/client-resiliencehub") @new
   external new: request => t = "ImportResourcesToDraftAppVersionCommand"
-  let make = (~sourceArns, ~appArn, ()) => new({sourceArns: sourceArns, appArn: appArn})
+  let make = (~sourceArns, ~appArn, ()) => new({sourceArns, appArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateApp = {
   type t
   type request = {
@@ -1041,15 +1015,9 @@ see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespa
   }
   @module("@aws-sdk/client-resiliencehub") @new external new: request => t = "UpdateAppCommand"
   let make = (~appArn, ~clearResiliencyPolicyArn=?, ~policyArn=?, ~description=?, ()) =>
-    new({
-      clearResiliencyPolicyArn: clearResiliencyPolicyArn,
-      policyArn: policyArn,
-      description: description,
-      appArn: appArn,
-    })
+    new({clearResiliencyPolicyArn, policyArn, description, appArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListApps = {
   type t
   type request = {
@@ -1075,10 +1043,9 @@ see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespa
   }
   @module("@aws-sdk/client-resiliencehub") @new external new: request => t = "ListAppsCommand"
   let make = (~appArn=?, ~name=?, ~maxResults=?, ~nextToken=?, ()) =>
-    new({appArn: appArn, name: name, maxResults: maxResults, nextToken: nextToken})
+    new({appArn, name, maxResults, nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListAppVersions = {
   type t
   type request = {
@@ -1103,11 +1070,9 @@ see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespa
   }
   @module("@aws-sdk/client-resiliencehub") @new
   external new: request => t = "ListAppVersionsCommand"
-  let make = (~appArn, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, appArn: appArn})
+  let make = (~appArn, ~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken, appArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeApp = {
   type t
   type request = {
@@ -1127,7 +1092,6 @@ see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespa
   let make = (~appArn, ()) => new({appArn: appArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateRecommendationTemplate = {
   type t
   type request = {
@@ -1200,18 +1164,17 @@ see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespa
     (),
   ) =>
     new({
-      bucketName: bucketName,
-      tags: tags,
-      clientToken: clientToken,
-      name: name,
-      assessmentArn: assessmentArn,
-      recommendationTypes: recommendationTypes,
-      format: format,
-      recommendationIds: recommendationIds,
+      bucketName,
+      tags,
+      clientToken,
+      name,
+      assessmentArn,
+      recommendationTypes,
+      format,
+      recommendationIds,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateApp = {
   type t
   type request = {
@@ -1238,16 +1201,9 @@ see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespa
   }
   @module("@aws-sdk/client-resiliencehub") @new external new: request => t = "CreateAppCommand"
   let make = (~name, ~clientToken=?, ~tags=?, ~policyArn=?, ~description=?, ()) =>
-    new({
-      clientToken: clientToken,
-      tags: tags,
-      policyArn: policyArn,
-      description: description,
-      name: name,
-    })
+    new({clientToken, tags, policyArn, description, name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateResiliencyPolicy = {
   type t
   type request = {
@@ -1285,18 +1241,9 @@ see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespa
     ~policyDescription=?,
     ~policyName=?,
     (),
-  ) =>
-    new({
-      policy: policy,
-      tier: tier,
-      dataLocationConstraint: dataLocationConstraint,
-      policyDescription: policyDescription,
-      policyName: policyName,
-      policyArn: policyArn,
-    })
+  ) => new({policy, tier, dataLocationConstraint, policyDescription, policyName, policyArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListUnsupportedAppVersionResources = {
   type t
   type request = {
@@ -1326,16 +1273,9 @@ see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespa
   @module("@aws-sdk/client-resiliencehub") @new
   external new: request => t = "ListUnsupportedAppVersionResourcesCommand"
   let make = (~appVersion, ~appArn, ~maxResults=?, ~nextToken=?, ~resolutionId=?, ()) =>
-    new({
-      maxResults: maxResults,
-      nextToken: nextToken,
-      resolutionId: resolutionId,
-      appVersion: appVersion,
-      appArn: appArn,
-    })
+    new({maxResults, nextToken, resolutionId, appVersion, appArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListRecommendationTemplates = {
   type t
   type request = {
@@ -1380,17 +1320,16 @@ see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespa
     (),
   ) =>
     new({
-      maxResults: maxResults,
-      nextToken: nextToken,
-      name: name,
-      recommendationTemplateArn: recommendationTemplateArn,
-      status: status,
-      reverseOrder: reverseOrder,
-      assessmentArn: assessmentArn,
+      maxResults,
+      nextToken,
+      name,
+      recommendationTemplateArn,
+      status,
+      reverseOrder,
+      assessmentArn,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListAppVersionResourceMappings = {
   type t
   type request = {
@@ -1422,10 +1361,9 @@ see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespa
   @module("@aws-sdk/client-resiliencehub") @new
   external new: request => t = "ListAppVersionResourceMappingsCommand"
   let make = (~appVersion, ~appArn, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, appVersion: appVersion, appArn: appArn})
+    new({maxResults, nextToken, appVersion, appArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListAppAssessments = {
   type t
   type request = {
@@ -1476,18 +1414,17 @@ see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespa
     (),
   ) =>
     new({
-      maxResults: maxResults,
-      nextToken: nextToken,
-      reverseOrder: reverseOrder,
-      invoker: invoker,
-      complianceStatus: complianceStatus,
-      assessmentStatus: assessmentStatus,
-      assessmentName: assessmentName,
-      appArn: appArn,
+      maxResults,
+      nextToken,
+      reverseOrder,
+      invoker,
+      complianceStatus,
+      assessmentStatus,
+      assessmentName,
+      appArn,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeResiliencyPolicy = {
   type t
   type request = {
@@ -1509,7 +1446,6 @@ see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespa
   let make = (~policyArn, ()) => new({policyArn: policyArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateResiliencyPolicy = {
   type t
   type request = {
@@ -1548,19 +1484,9 @@ You should not reuse the same client token for other API requests.</p>")
     ~dataLocationConstraint=?,
     ~policyDescription=?,
     (),
-  ) =>
-    new({
-      tags: tags,
-      clientToken: clientToken,
-      policy: policy,
-      tier: tier,
-      dataLocationConstraint: dataLocationConstraint,
-      policyDescription: policyDescription,
-      policyName: policyName,
-    })
+  ) => new({tags, clientToken, policy, tier, dataLocationConstraint, policyDescription, policyName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module AddDraftAppVersionResourceMappings = {
   type t
   type request = {
@@ -1594,11 +1520,9 @@ see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespa
   }
   @module("@aws-sdk/client-resiliencehub") @new
   external new: request => t = "AddDraftAppVersionResourceMappingsCommand"
-  let make = (~resourceMappings, ~appArn, ()) =>
-    new({resourceMappings: resourceMappings, appArn: appArn})
+  let make = (~resourceMappings, ~appArn, ()) => new({resourceMappings, appArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module StartAppAssessment = {
   type t
   type request = {
@@ -1621,16 +1545,9 @@ see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespa
   @module("@aws-sdk/client-resiliencehub") @new
   external new: request => t = "StartAppAssessmentCommand"
   let make = (~assessmentName, ~appVersion, ~appArn, ~tags=?, ~clientToken=?, ()) =>
-    new({
-      tags: tags,
-      clientToken: clientToken,
-      assessmentName: assessmentName,
-      appVersion: appVersion,
-      appArn: appArn,
-    })
+    new({tags, clientToken, assessmentName, appVersion, appArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListTestRecommendations = {
   type t
   type request = {
@@ -1657,10 +1574,9 @@ see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespa
   @module("@aws-sdk/client-resiliencehub") @new
   external new: request => t = "ListTestRecommendationsCommand"
   let make = (~assessmentArn, ~maxResults=?, ~nextToken=?, ()) =>
-    new({assessmentArn: assessmentArn, maxResults: maxResults, nextToken: nextToken})
+    new({assessmentArn, maxResults, nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListSuggestedResiliencyPolicies = {
   type t
   type request = {
@@ -1680,11 +1596,9 @@ module ListSuggestedResiliencyPolicies = {
   }
   @module("@aws-sdk/client-resiliencehub") @new
   external new: request => t = "ListSuggestedResiliencyPoliciesCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListSopRecommendations = {
   type t
   type request = {
@@ -1712,10 +1626,9 @@ see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespa
   @module("@aws-sdk/client-resiliencehub") @new
   external new: request => t = "ListSopRecommendationsCommand"
   let make = (~assessmentArn, ~maxResults=?, ~nextToken=?, ()) =>
-    new({assessmentArn: assessmentArn, maxResults: maxResults, nextToken: nextToken})
+    new({assessmentArn, maxResults, nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListResiliencyPolicies = {
   type t
   type request = {
@@ -1737,10 +1650,9 @@ module ListResiliencyPolicies = {
   @module("@aws-sdk/client-resiliencehub") @new
   external new: request => t = "ListResiliencyPoliciesCommand"
   let make = (~maxResults=?, ~nextToken=?, ~policyName=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, policyName: policyName})
+    new({maxResults, nextToken, policyName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListAppVersionResources = {
   type t
   type request = {
@@ -1770,16 +1682,9 @@ see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespa
   @module("@aws-sdk/client-resiliencehub") @new
   external new: request => t = "ListAppVersionResourcesCommand"
   let make = (~appVersion, ~appArn, ~maxResults=?, ~nextToken=?, ~resolutionId=?, ()) =>
-    new({
-      maxResults: maxResults,
-      nextToken: nextToken,
-      resolutionId: resolutionId,
-      appVersion: appVersion,
-      appArn: appArn,
-    })
+    new({maxResults, nextToken, resolutionId, appVersion, appArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListAppComponentCompliances = {
   type t
   type request = {
@@ -1808,10 +1713,9 @@ see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespa
   @module("@aws-sdk/client-resiliencehub") @new
   external new: request => t = "ListAppComponentCompliancesCommand"
   let make = (~assessmentArn, ~maxResults=?, ~nextToken=?, ()) =>
-    new({assessmentArn: assessmentArn, maxResults: maxResults, nextToken: nextToken})
+    new({assessmentArn, maxResults, nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListAlarmRecommendations = {
   type t
   type request = {
@@ -1840,10 +1744,9 @@ see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespa
   @module("@aws-sdk/client-resiliencehub") @new
   external new: request => t = "ListAlarmRecommendationsCommand"
   let make = (~assessmentArn, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, assessmentArn: assessmentArn})
+    new({maxResults, nextToken, assessmentArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeAppAssessment = {
   type t
   type request = {
@@ -1865,7 +1768,6 @@ see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespa
   let make = (~assessmentArn, ()) => new({assessmentArn: assessmentArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListAppComponentRecommendations = {
   type t
   type request = {
@@ -1894,6 +1796,6 @@ see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespa
   @module("@aws-sdk/client-resiliencehub") @new
   external new: request => t = "ListAppComponentRecommendationsCommand"
   let make = (~assessmentArn, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, assessmentArn: assessmentArn})
+    new({maxResults, nextToken, assessmentArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

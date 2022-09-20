@@ -1050,21 +1050,20 @@ module UpdateTrail = {
     (),
   ) =>
     new({
-      isOrganizationTrail: isOrganizationTrail,
-      kmsKeyId: kmsKeyId,
-      cloudWatchLogsRoleArn: cloudWatchLogsRoleArn,
-      cloudWatchLogsLogGroupArn: cloudWatchLogsLogGroupArn,
-      enableLogFileValidation: enableLogFileValidation,
-      isMultiRegionTrail: isMultiRegionTrail,
-      includeGlobalServiceEvents: includeGlobalServiceEvents,
-      snsTopicName: snsTopicName,
-      s3KeyPrefix: s3KeyPrefix,
-      s3BucketName: s3BucketName,
-      name: name,
+      isOrganizationTrail,
+      kmsKeyId,
+      cloudWatchLogsRoleArn,
+      cloudWatchLogsLogGroupArn,
+      enableLogFileValidation,
+      isMultiRegionTrail,
+      includeGlobalServiceEvents,
+      snsTopicName,
+      s3KeyPrefix,
+      s3BucketName,
+      name,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module StopLogging = {
   type t
   @ocaml.doc(
@@ -1084,7 +1083,6 @@ module StopLogging = {
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module StartQuery = {
   type t
   type request = {
@@ -1098,7 +1096,6 @@ module StartQuery = {
   let make = (~queryStatement, ()) => new({queryStatement: queryStatement})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module StartLogging = {
   type t
   @ocaml.doc(
@@ -1118,7 +1115,6 @@ module StartLogging = {
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module GetTrailStatus = {
   type t
   @ocaml.doc("<p>The name of a trail about which you want the current status.</p>")
@@ -1219,7 +1215,6 @@ module GetTrailStatus = {
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteTrail = {
   type t
   @ocaml.doc("<p>The request that specifies the name of a trail to delete.</p>")
@@ -1236,7 +1231,6 @@ module DeleteTrail = {
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteEventDataStore = {
   type t
   type request = {
@@ -1250,7 +1244,6 @@ module DeleteEventDataStore = {
   let make = (~eventDataStore, ()) => new({eventDataStore: eventDataStore})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module CancelQuery = {
   type t
   type request = {
@@ -1272,11 +1265,9 @@ module CancelQuery = {
     @ocaml.doc("<p>The ID of the canceled query.</p>") @as("QueryId") queryId: uuid,
   }
   @module("@aws-sdk/client-cloudtrail") @new external new: request => t = "CancelQueryCommand"
-  let make = (~queryId, ~eventDataStore, ()) =>
-    new({queryId: queryId, eventDataStore: eventDataStore})
+  let make = (~queryId, ~eventDataStore, ()) => new({queryId, eventDataStore})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetTrail = {
   type t
   type request = {
@@ -1291,7 +1282,6 @@ module GetTrail = {
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeQuery = {
   type t
   type request = {
@@ -1319,11 +1309,9 @@ module DescribeQuery = {
     @ocaml.doc("<p>The ID of the query.</p>") @as("QueryId") queryId: option<uuid>,
   }
   @module("@aws-sdk/client-cloudtrail") @new external new: request => t = "DescribeQueryCommand"
-  let make = (~queryId, ~eventDataStore, ()) =>
-    new({queryId: queryId, eventDataStore: eventDataStore})
+  let make = (~queryId, ~eventDataStore, ()) => new({queryId, eventDataStore})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module RemoveTags = {
   type t
   @ocaml.doc("<p>Specifies the tags to remove from a trail.</p>")
@@ -1338,10 +1326,9 @@ module RemoveTags = {
   }
   type response = {.}
   @module("@aws-sdk/client-cloudtrail") @new external new: request => t = "RemoveTagsCommand"
-  let make = (~tagsList, ~resourceId, ()) => new({tagsList: tagsList, resourceId: resourceId})
+  let make = (~tagsList, ~resourceId, ()) => new({tagsList, resourceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module PutInsightSelectors = {
   type t
   type request = {
@@ -1369,11 +1356,9 @@ module PutInsightSelectors = {
   }
   @module("@aws-sdk/client-cloudtrail") @new
   external new: request => t = "PutInsightSelectorsCommand"
-  let make = (~insightSelectors, ~trailName, ()) =>
-    new({insightSelectors: insightSelectors, trailName: trailName})
+  let make = (~insightSelectors, ~trailName, ()) => new({insightSelectors, trailName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListTrails = {
   type t
   type request = {
@@ -1399,7 +1384,6 @@ module ListTrails = {
   let make = (~nextToken=?, ()) => new({nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListQueries = {
   type t
   type request = {
@@ -1443,18 +1427,9 @@ module ListQueries = {
     ~maxResults=?,
     ~nextToken=?,
     (),
-  ) =>
-    new({
-      queryStatus: queryStatus,
-      endTime: endTime,
-      startTime: startTime,
-      maxResults: maxResults,
-      nextToken: nextToken,
-      eventDataStore: eventDataStore,
-    })
+  ) => new({queryStatus, endTime, startTime, maxResults, nextToken, eventDataStore})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListPublicKeys = {
   type t
   @ocaml.doc("<p>Requests the public keys for a specified time range.</p>")
@@ -1482,11 +1457,9 @@ module ListPublicKeys = {
     publicKeyList: option<publicKeyList>,
   }
   @module("@aws-sdk/client-cloudtrail") @new external new: request => t = "ListPublicKeysCommand"
-  let make = (~nextToken=?, ~endTime=?, ~startTime=?, ()) =>
-    new({nextToken: nextToken, endTime: endTime, startTime: startTime})
+  let make = (~nextToken=?, ~endTime=?, ~startTime=?, ()) => new({nextToken, endTime, startTime})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetInsightSelectors = {
   type t
   type request = {
@@ -1533,7 +1506,6 @@ module GetInsightSelectors = {
   let make = (~trailName, ()) => new({trailName: trailName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeTrails = {
   type t
   @ocaml.doc("<p>Returns information about the trail.</p>")
@@ -1573,10 +1545,9 @@ module DescribeTrails = {
   }
   @module("@aws-sdk/client-cloudtrail") @new external new: request => t = "DescribeTrailsCommand"
   let make = (~includeShadowTrails=?, ~trailNameList=?, ()) =>
-    new({includeShadowTrails: includeShadowTrails, trailNameList: trailNameList})
+    new({includeShadowTrails, trailNameList})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateTrail = {
   type t
   @ocaml.doc("<p>Specifies the settings for each trail.</p>")
@@ -1751,22 +1722,21 @@ module CreateTrail = {
     (),
   ) =>
     new({
-      tagsList: tagsList,
-      isOrganizationTrail: isOrganizationTrail,
-      kmsKeyId: kmsKeyId,
-      cloudWatchLogsRoleArn: cloudWatchLogsRoleArn,
-      cloudWatchLogsLogGroupArn: cloudWatchLogsLogGroupArn,
-      enableLogFileValidation: enableLogFileValidation,
-      isMultiRegionTrail: isMultiRegionTrail,
-      includeGlobalServiceEvents: includeGlobalServiceEvents,
-      snsTopicName: snsTopicName,
-      s3KeyPrefix: s3KeyPrefix,
-      s3BucketName: s3BucketName,
-      name: name,
+      tagsList,
+      isOrganizationTrail,
+      kmsKeyId,
+      cloudWatchLogsRoleArn,
+      cloudWatchLogsLogGroupArn,
+      enableLogFileValidation,
+      isMultiRegionTrail,
+      includeGlobalServiceEvents,
+      snsTopicName,
+      s3KeyPrefix,
+      s3BucketName,
+      name,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module AddTags = {
   type t
   @ocaml.doc("<p>Specifies the tags to add to a trail.</p>")
@@ -1782,10 +1752,9 @@ module AddTags = {
   }
   type response = {.}
   @module("@aws-sdk/client-cloudtrail") @new external new: request => t = "AddTagsCommand"
-  let make = (~tagsList, ~resourceId, ()) => new({tagsList: tagsList, resourceId: resourceId})
+  let make = (~tagsList, ~resourceId, ()) => new({tagsList, resourceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module GetQueryResults = {
   type t
   type request = {
@@ -1818,15 +1787,9 @@ module GetQueryResults = {
   }
   @module("@aws-sdk/client-cloudtrail") @new external new: request => t = "GetQueryResultsCommand"
   let make = (~queryId, ~eventDataStore, ~maxQueryResults=?, ~nextToken=?, ()) =>
-    new({
-      maxQueryResults: maxQueryResults,
-      nextToken: nextToken,
-      queryId: queryId,
-      eventDataStore: eventDataStore,
-    })
+    new({maxQueryResults, nextToken, queryId, eventDataStore})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module LookupEvents = {
   type t
   @ocaml.doc("<p>Contains a request for LookupEvents.</p>")
@@ -1883,18 +1846,9 @@ module LookupEvents = {
     ~startTime=?,
     ~lookupAttributes=?,
     (),
-  ) =>
-    new({
-      nextToken: nextToken,
-      maxResults: maxResults,
-      eventCategory: eventCategory,
-      endTime: endTime,
-      startTime: startTime,
-      lookupAttributes: lookupAttributes,
-    })
+  ) => new({nextToken, maxResults, eventCategory, endTime, startTime, lookupAttributes})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListTags = {
   type t
   @ocaml.doc("<p>Specifies a list of trail tags to return.</p>")
@@ -1917,11 +1871,9 @@ module ListTags = {
     resourceTagList: option<resourceTagList>,
   }
   @module("@aws-sdk/client-cloudtrail") @new external new: request => t = "ListTagsCommand"
-  let make = (~resourceIdList, ~nextToken=?, ()) =>
-    new({nextToken: nextToken, resourceIdList: resourceIdList})
+  let make = (~resourceIdList, ~nextToken=?, ()) => new({nextToken, resourceIdList})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateEventDataStore = {
   type t
   type request = {
@@ -2006,17 +1958,16 @@ module UpdateEventDataStore = {
     (),
   ) =>
     new({
-      terminationProtectionEnabled: terminationProtectionEnabled,
-      retentionPeriod: retentionPeriod,
-      organizationEnabled: organizationEnabled,
-      multiRegionEnabled: multiRegionEnabled,
-      advancedEventSelectors: advancedEventSelectors,
-      name: name,
-      eventDataStore: eventDataStore,
+      terminationProtectionEnabled,
+      retentionPeriod,
+      organizationEnabled,
+      multiRegionEnabled,
+      advancedEventSelectors,
+      name,
+      eventDataStore,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module RestoreEventDataStore = {
   type t
   type request = {
@@ -2064,7 +2015,6 @@ module RestoreEventDataStore = {
   let make = (~eventDataStore, ()) => new({eventDataStore: eventDataStore})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module PutEventSelectors = {
   type t
   type request = {
@@ -2127,14 +2077,9 @@ module PutEventSelectors = {
   }
   @module("@aws-sdk/client-cloudtrail") @new external new: request => t = "PutEventSelectorsCommand"
   let make = (~trailName, ~advancedEventSelectors=?, ~eventSelectors=?, ()) =>
-    new({
-      advancedEventSelectors: advancedEventSelectors,
-      eventSelectors: eventSelectors,
-      trailName: trailName,
-    })
+    new({advancedEventSelectors, eventSelectors, trailName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetEventSelectors = {
   type t
   type request = {
@@ -2181,7 +2126,6 @@ module GetEventSelectors = {
   let make = (~trailName, ()) => new({trailName: trailName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetEventDataStore = {
   type t
   type request = {
@@ -2232,7 +2176,6 @@ module GetEventDataStore = {
   let make = (~eventDataStore, ()) => new({eventDataStore: eventDataStore})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateEventDataStore = {
   type t
   type request = {
@@ -2313,17 +2256,16 @@ module CreateEventDataStore = {
     (),
   ) =>
     new({
-      tagsList: tagsList,
-      terminationProtectionEnabled: terminationProtectionEnabled,
-      retentionPeriod: retentionPeriod,
-      organizationEnabled: organizationEnabled,
-      multiRegionEnabled: multiRegionEnabled,
-      advancedEventSelectors: advancedEventSelectors,
-      name: name,
+      tagsList,
+      terminationProtectionEnabled,
+      retentionPeriod,
+      organizationEnabled,
+      multiRegionEnabled,
+      advancedEventSelectors,
+      name,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListEventDataStores = {
   type t
   type request = {
@@ -2345,7 +2287,6 @@ module ListEventDataStores = {
   }
   @module("@aws-sdk/client-cloudtrail") @new
   external new: request => t = "ListEventDataStoresCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

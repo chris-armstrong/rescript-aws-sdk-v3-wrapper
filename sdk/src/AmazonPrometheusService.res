@@ -153,11 +153,9 @@ module UpdateWorkspaceAlias = {
   }
   type response = {.}
   @module("@aws-sdk/client-aps") @new external new: request => t = "UpdateWorkspaceAliasCommand"
-  let make = (~workspaceId, ~clientToken=?, ~alias=?, ()) =>
-    new({clientToken: clientToken, alias: alias, workspaceId: workspaceId})
+  let make = (~workspaceId, ~clientToken=?, ~alias=?, ()) => new({clientToken, alias, workspaceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module UntagResource = {
   type t
   type request = {
@@ -166,10 +164,9 @@ module UntagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-aps") @new external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
+  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys, resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module TagResource = {
   type t
   type request = {
@@ -178,10 +175,9 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-aps") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
+  let make = (~tags, ~resourceArn, ()) => new({tags, resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module PutRuleGroupsNamespace = {
   type t
   @ocaml.doc("Represents the input of a PutRuleGroupsNamespace operation.")
@@ -205,10 +201,9 @@ module PutRuleGroupsNamespace = {
   }
   @module("@aws-sdk/client-aps") @new external new: request => t = "PutRuleGroupsNamespaceCommand"
   let make = (~data, ~name, ~workspaceId, ~clientToken=?, ()) =>
-    new({clientToken: clientToken, data: data, name: name, workspaceId: workspaceId})
+    new({clientToken, data, name, workspaceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module PutAlertManagerDefinition = {
   type t
   @ocaml.doc("Represents the input of a PutAlertManagerDefinition operation.")
@@ -227,11 +222,9 @@ module PutAlertManagerDefinition = {
   }
   @module("@aws-sdk/client-aps") @new
   external new: request => t = "PutAlertManagerDefinitionCommand"
-  let make = (~data, ~workspaceId, ~clientToken=?, ()) =>
-    new({clientToken: clientToken, data: data, workspaceId: workspaceId})
+  let make = (~data, ~workspaceId, ~clientToken=?, ()) => new({clientToken, data, workspaceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListTagsForResource = {
   type t
   type request = {@ocaml.doc("The ARN of the resource.") resourceArn: baseString}
@@ -240,7 +233,6 @@ module ListTagsForResource = {
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteWorkspace = {
   type t
   @ocaml.doc("Represents the input of a DeleteWorkspace operation.")
@@ -253,11 +245,9 @@ module DeleteWorkspace = {
   }
   type response = {.}
   @module("@aws-sdk/client-aps") @new external new: request => t = "DeleteWorkspaceCommand"
-  let make = (~workspaceId, ~clientToken=?, ()) =>
-    new({clientToken: clientToken, workspaceId: workspaceId})
+  let make = (~workspaceId, ~clientToken=?, ()) => new({clientToken, workspaceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteRuleGroupsNamespace = {
   type t
   @ocaml.doc("Represents the input of a DeleteRuleGroupsNamespace operation.")
@@ -272,11 +262,9 @@ module DeleteRuleGroupsNamespace = {
   type response = {.}
   @module("@aws-sdk/client-aps") @new
   external new: request => t = "DeleteRuleGroupsNamespaceCommand"
-  let make = (~name, ~workspaceId, ~clientToken=?, ()) =>
-    new({clientToken: clientToken, name: name, workspaceId: workspaceId})
+  let make = (~name, ~workspaceId, ~clientToken=?, ()) => new({clientToken, name, workspaceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteAlertManagerDefinition = {
   type t
   @ocaml.doc("Represents the input of a DeleteAlertManagerDefinition operation.")
@@ -291,11 +279,9 @@ module DeleteAlertManagerDefinition = {
   type response = {.}
   @module("@aws-sdk/client-aps") @new
   external new: request => t = "DeleteAlertManagerDefinitionCommand"
-  let make = (~workspaceId, ~clientToken=?, ()) =>
-    new({clientToken: clientToken, workspaceId: workspaceId})
+  let make = (~workspaceId, ~clientToken=?, ()) => new({clientToken, workspaceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module CreateWorkspace = {
   type t
   @ocaml.doc("Represents the input of a CreateWorkspace operation.")
@@ -319,11 +305,9 @@ module CreateWorkspace = {
     @ocaml.doc("The generated ID of the workspace that was just created.") workspaceId: workspaceId,
   }
   @module("@aws-sdk/client-aps") @new external new: request => t = "CreateWorkspaceCommand"
-  let make = (~tags=?, ~clientToken=?, ~alias=?, ()) =>
-    new({tags: tags, clientToken: clientToken, alias: alias})
+  let make = (~tags=?, ~clientToken=?, ~alias=?, ()) => new({tags, clientToken, alias})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateRuleGroupsNamespace = {
   type t
   @ocaml.doc("Represents the input of a CreateRuleGroupsNamespace operation.")
@@ -349,10 +333,9 @@ module CreateRuleGroupsNamespace = {
   @module("@aws-sdk/client-aps") @new
   external new: request => t = "CreateRuleGroupsNamespaceCommand"
   let make = (~data, ~name, ~workspaceId, ~tags=?, ~clientToken=?, ()) =>
-    new({tags: tags, clientToken: clientToken, data: data, name: name, workspaceId: workspaceId})
+    new({tags, clientToken, data, name, workspaceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateAlertManagerDefinition = {
   type t
   @ocaml.doc("Represents the input of a CreateAlertManagerDefinition operation.")
@@ -371,11 +354,9 @@ module CreateAlertManagerDefinition = {
   }
   @module("@aws-sdk/client-aps") @new
   external new: request => t = "CreateAlertManagerDefinitionCommand"
-  let make = (~data, ~workspaceId, ~clientToken=?, ()) =>
-    new({clientToken: clientToken, data: data, workspaceId: workspaceId})
+  let make = (~data, ~workspaceId, ~clientToken=?, ()) => new({clientToken, data, workspaceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeWorkspace = {
   type t
   @ocaml.doc("Represents the input of a DescribeWorkspace operation.")
@@ -388,7 +369,6 @@ module DescribeWorkspace = {
   let make = (~workspaceId, ()) => new({workspaceId: workspaceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeRuleGroupsNamespace = {
   type t
   @ocaml.doc("Represents the input of a DescribeRuleGroupsNamespace operation.")
@@ -403,10 +383,9 @@ module DescribeRuleGroupsNamespace = {
   }
   @module("@aws-sdk/client-aps") @new
   external new: request => t = "DescribeRuleGroupsNamespaceCommand"
-  let make = (~name, ~workspaceId, ()) => new({name: name, workspaceId: workspaceId})
+  let make = (~name, ~workspaceId, ()) => new({name, workspaceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeAlertManagerDefinition = {
   type t
   @ocaml.doc("Represents the input of a DescribeAlertManagerDefinition operation.")
@@ -421,7 +400,6 @@ module DescribeAlertManagerDefinition = {
   let make = (~workspaceId, ()) => new({workspaceId: workspaceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListWorkspaces = {
   type t
   @ocaml.doc("Represents the input of a ListWorkspaces operation.")
@@ -445,11 +423,9 @@ module ListWorkspaces = {
     workspaces: workspaceSummaryList,
   }
   @module("@aws-sdk/client-aps") @new external new: request => t = "ListWorkspacesCommand"
-  let make = (~maxResults=?, ~alias=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, alias: alias, nextToken: nextToken})
+  let make = (~maxResults=?, ~alias=?, ~nextToken=?, ()) => new({maxResults, alias, nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListRuleGroupsNamespaces = {
   type t
   @ocaml.doc("Represents the input of a ListRuleGroupsNamespaces operation.")
@@ -475,6 +451,6 @@ module ListRuleGroupsNamespaces = {
   }
   @module("@aws-sdk/client-aps") @new external new: request => t = "ListRuleGroupsNamespacesCommand"
   let make = (~workspaceId, ~maxResults=?, ~nextToken=?, ~name=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, name: name, workspaceId: workspaceId})
+    new({maxResults, nextToken, name, workspaceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

@@ -184,15 +184,9 @@ module SendMessage = {
   }
   @module("@aws-sdk/client-connect") @new external new: request => t = "SendMessageCommand"
   let make = (~connectionToken, ~content, ~contentType, ~clientToken=?, ()) =>
-    new({
-      connectionToken: connectionToken,
-      clientToken: clientToken,
-      content: content,
-      contentType: contentType,
-    })
+    new({connectionToken, clientToken, content, contentType})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module SendEvent = {
   type t
   type request = {
@@ -230,15 +224,9 @@ module SendEvent = {
   }
   @module("@aws-sdk/client-connect") @new external new: request => t = "SendEventCommand"
   let make = (~connectionToken, ~contentType, ~clientToken=?, ~content=?, ()) =>
-    new({
-      connectionToken: connectionToken,
-      clientToken: clientToken,
-      content: content,
-      contentType: contentType,
-    })
+    new({connectionToken, clientToken, content, contentType})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetAttachment = {
   type t
   type request = {
@@ -260,11 +248,9 @@ to <a href=\"https://docs.aws.amazon.com/connect-participant/latest/APIReference
     url: option<preSignedAttachmentUrl>,
   }
   @module("@aws-sdk/client-connect") @new external new: request => t = "GetAttachmentCommand"
-  let make = (~connectionToken, ~attachmentId, ()) =>
-    new({connectionToken: connectionToken, attachmentId: attachmentId})
+  let make = (~connectionToken, ~attachmentId, ()) => new({connectionToken, attachmentId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DisconnectParticipant = {
   type t
   type request = {
@@ -279,11 +265,9 @@ module DisconnectParticipant = {
   type response = {.}
   @module("@aws-sdk/client-connect") @new
   external new: request => t = "DisconnectParticipantCommand"
-  let make = (~connectionToken, ~clientToken=?, ()) =>
-    new({connectionToken: connectionToken, clientToken: clientToken})
+  let make = (~connectionToken, ~clientToken=?, ()) => new({connectionToken, clientToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module CreateParticipantConnection = {
   type t
   type request = {
@@ -310,10 +294,9 @@ module CreateParticipantConnection = {
   @module("@aws-sdk/client-connect") @new
   external new: request => t = "CreateParticipantConnectionCommand"
   let make = (~participantToken, ~type_, ~connectParticipant=?, ()) =>
-    new({connectParticipant: connectParticipant, participantToken: participantToken, type_: type_})
+    new({connectParticipant, participantToken, type_})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CompleteAttachmentUpload = {
   type t
   type request = {
@@ -331,10 +314,9 @@ module CompleteAttachmentUpload = {
   @module("@aws-sdk/client-connect") @new
   external new: request => t = "CompleteAttachmentUploadCommand"
   let make = (~connectionToken, ~clientToken, ~attachmentIds, ()) =>
-    new({connectionToken: connectionToken, clientToken: clientToken, attachmentIds: attachmentIds})
+    new({connectionToken, clientToken, attachmentIds})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module StartAttachmentUpload = {
   type t
   type request = {
@@ -370,17 +352,9 @@ module StartAttachmentUpload = {
     ~attachmentSizeInBytes,
     ~contentType,
     (),
-  ) =>
-    new({
-      connectionToken: connectionToken,
-      clientToken: clientToken,
-      attachmentName: attachmentName,
-      attachmentSizeInBytes: attachmentSizeInBytes,
-      contentType: contentType,
-    })
+  ) => new({connectionToken, clientToken, attachmentName, attachmentSizeInBytes, contentType})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetTranscript = {
   type t
   type request = {
@@ -430,13 +404,13 @@ module GetTranscript = {
     (),
   ) =>
     new({
-      connectionToken: connectionToken,
-      startPosition: startPosition,
-      sortOrder: sortOrder,
-      scanDirection: scanDirection,
-      nextToken: nextToken,
-      maxResults: maxResults,
-      contactId: contactId,
+      connectionToken,
+      startPosition,
+      sortOrder,
+      scanDirection,
+      nextToken,
+      maxResults,
+      contactId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

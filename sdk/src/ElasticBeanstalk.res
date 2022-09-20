@@ -1612,14 +1612,13 @@ module SwapEnvironmentCNAMEs = {
     (),
   ) =>
     new({
-      destinationEnvironmentName: destinationEnvironmentName,
-      destinationEnvironmentId: destinationEnvironmentId,
-      sourceEnvironmentName: sourceEnvironmentName,
-      sourceEnvironmentId: sourceEnvironmentId,
+      destinationEnvironmentName,
+      destinationEnvironmentId,
+      sourceEnvironmentName,
+      sourceEnvironmentId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module RestartAppServer = {
   type t
   @ocaml.doc("<p></p>")
@@ -1640,11 +1639,9 @@ module RestartAppServer = {
   type response = {.}
   @module("@aws-sdk/client-elasticbeanstalk") @new
   external new: request => t = "RestartAppServerCommand"
-  let make = (~environmentName=?, ~environmentId=?, ()) =>
-    new({environmentName: environmentName, environmentId: environmentId})
+  let make = (~environmentName=?, ~environmentId=?, ()) => new({environmentName, environmentId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module RequestEnvironmentInfo = {
   type t
   @ocaml.doc("<p>Request to retrieve logs from an environment and store them in your Elastic Beanstalk
@@ -1673,10 +1670,9 @@ module RequestEnvironmentInfo = {
   @module("@aws-sdk/client-elasticbeanstalk") @new
   external new: request => t = "RequestEnvironmentInfoCommand"
   let make = (~infoType, ~environmentName=?, ~environmentId=?, ()) =>
-    new({infoType: infoType, environmentName: environmentName, environmentId: environmentId})
+    new({infoType, environmentName, environmentId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module RebuildEnvironment = {
   type t
   @ocaml.doc("<p></p>")
@@ -1697,11 +1693,9 @@ module RebuildEnvironment = {
   type response = {.}
   @module("@aws-sdk/client-elasticbeanstalk") @new
   external new: request => t = "RebuildEnvironmentCommand"
-  let make = (~environmentName=?, ~environmentId=?, ()) =>
-    new({environmentName: environmentName, environmentId: environmentId})
+  let make = (~environmentName=?, ~environmentId=?, ()) => new({environmentName, environmentId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DisassociateEnvironmentOperationsRole = {
   type t
   @ocaml.doc("<p>Request to disassociate the operations role from an environment.</p>")
@@ -1716,7 +1710,6 @@ module DisassociateEnvironmentOperationsRole = {
   let make = (~environmentName, ()) => new({environmentName: environmentName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteEnvironmentConfiguration = {
   type t
   @ocaml.doc("<p>Request to delete a draft environment configuration.</p>")
@@ -1731,11 +1724,9 @@ module DeleteEnvironmentConfiguration = {
   type response = {.}
   @module("@aws-sdk/client-elasticbeanstalk") @new
   external new: request => t = "DeleteEnvironmentConfigurationCommand"
-  let make = (~environmentName, ~applicationName, ()) =>
-    new({environmentName: environmentName, applicationName: applicationName})
+  let make = (~environmentName, ~applicationName, ()) => new({environmentName, applicationName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteConfigurationTemplate = {
   type t
   @ocaml.doc("<p>Request to delete a configuration template.</p>")
@@ -1749,11 +1740,9 @@ module DeleteConfigurationTemplate = {
   type response = {.}
   @module("@aws-sdk/client-elasticbeanstalk") @new
   external new: request => t = "DeleteConfigurationTemplateCommand"
-  let make = (~templateName, ~applicationName, ()) =>
-    new({templateName: templateName, applicationName: applicationName})
+  let make = (~templateName, ~applicationName, ()) => new({templateName, applicationName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteApplicationVersion = {
   type t
   @ocaml.doc("<p>Request to delete an application version.</p>")
@@ -1773,14 +1762,9 @@ module DeleteApplicationVersion = {
   @module("@aws-sdk/client-elasticbeanstalk") @new
   external new: request => t = "DeleteApplicationVersionCommand"
   let make = (~versionLabel, ~applicationName, ~deleteSourceBundle=?, ()) =>
-    new({
-      deleteSourceBundle: deleteSourceBundle,
-      versionLabel: versionLabel,
-      applicationName: applicationName,
-    })
+    new({deleteSourceBundle, versionLabel, applicationName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteApplication = {
   type t
   @ocaml.doc("<p>Request to delete an application.</p>")
@@ -1796,10 +1780,9 @@ module DeleteApplication = {
   @module("@aws-sdk/client-elasticbeanstalk") @new
   external new: request => t = "DeleteApplicationCommand"
   let make = (~applicationName, ~terminateEnvByForce=?, ()) =>
-    new({terminateEnvByForce: terminateEnvByForce, applicationName: applicationName})
+    new({terminateEnvByForce, applicationName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module CreateStorageLocation = {
   type t
   type request = {.}
@@ -1813,7 +1796,6 @@ module CreateStorageLocation = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CheckDNSAvailability = {
   type t
   @ocaml.doc("<p>Results message indicating whether a CNAME is available.</p>")
@@ -1846,7 +1828,6 @@ module CheckDNSAvailability = {
   let make = (~cnameprefix, ()) => new({cnameprefix: cnameprefix})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module AssociateEnvironmentOperationsRole = {
   type t
   @ocaml.doc("<p>Request to add or change the operations role used by an environment.</p>")
@@ -1862,11 +1843,9 @@ module AssociateEnvironmentOperationsRole = {
   type response = {.}
   @module("@aws-sdk/client-elasticbeanstalk") @new
   external new: request => t = "AssociateEnvironmentOperationsRoleCommand"
-  let make = (~operationsRole, ~environmentName, ()) =>
-    new({operationsRole: operationsRole, environmentName: environmentName})
+  let make = (~operationsRole, ~environmentName, ()) => new({operationsRole, environmentName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module ApplyEnvironmentManagedAction = {
   type t
   @ocaml.doc("<p>Request to execute a scheduled managed action immediately.</p>")
@@ -1891,10 +1870,9 @@ module ApplyEnvironmentManagedAction = {
   @module("@aws-sdk/client-elasticbeanstalk") @new
   external new: request => t = "ApplyEnvironmentManagedActionCommand"
   let make = (~actionId, ~environmentId=?, ~environmentName=?, ()) =>
-    new({actionId: actionId, environmentId: environmentId, environmentName: environmentName})
+    new({actionId, environmentId, environmentName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module AbortEnvironmentUpdate = {
   type t
   @ocaml.doc("<p></p>")
@@ -1911,11 +1889,9 @@ module AbortEnvironmentUpdate = {
   type response = {.}
   @module("@aws-sdk/client-elasticbeanstalk") @new
   external new: request => t = "AbortEnvironmentUpdateCommand"
-  let make = (~environmentName=?, ~environmentId=?, ()) =>
-    new({environmentName: environmentName, environmentId: environmentId})
+  let make = (~environmentName=?, ~environmentId=?, ()) => new({environmentName, environmentId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module ValidateConfigurationSettings = {
   type t
   @ocaml.doc("<p>A list of validation messages for a specified configuration template.</p>")
@@ -1943,15 +1919,9 @@ module ValidateConfigurationSettings = {
   @module("@aws-sdk/client-elasticbeanstalk") @new
   external new: request => t = "ValidateConfigurationSettingsCommand"
   let make = (~optionSettings, ~applicationName, ~environmentName=?, ~templateName=?, ()) =>
-    new({
-      optionSettings: optionSettings,
-      environmentName: environmentName,
-      templateName: templateName,
-      applicationName: applicationName,
-    })
+    new({optionSettings, environmentName, templateName, applicationName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateTagsForResource = {
   type t
   type request = {
@@ -1975,10 +1945,9 @@ module UpdateTagsForResource = {
   @module("@aws-sdk/client-elasticbeanstalk") @new
   external new: request => t = "UpdateTagsForResourceCommand"
   let make = (~resourceArn, ~tagsToRemove=?, ~tagsToAdd=?, ()) =>
-    new({tagsToRemove: tagsToRemove, tagsToAdd: tagsToAdd, resourceArn: resourceArn})
+    new({tagsToRemove, tagsToAdd, resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module UpdateConfigurationTemplate = {
   type t
   @ocaml.doc("<p>The result message containing the options for the specified solution stack.</p>")
@@ -2017,17 +1986,9 @@ module UpdateConfigurationTemplate = {
     ~optionSettings=?,
     ~description=?,
     (),
-  ) =>
-    new({
-      optionsToRemove: optionsToRemove,
-      optionSettings: optionSettings,
-      description: description,
-      templateName: templateName,
-      applicationName: applicationName,
-    })
+  ) => new({optionsToRemove, optionSettings, description, templateName, applicationName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateApplicationVersion = {
   type t
   @ocaml.doc("<p></p>")
@@ -2055,10 +2016,9 @@ module UpdateApplicationVersion = {
   @module("@aws-sdk/client-elasticbeanstalk") @new
   external new: request => t = "UpdateApplicationVersionCommand"
   let make = (~versionLabel, ~applicationName, ~description=?, ()) =>
-    new({description: description, versionLabel: versionLabel, applicationName: applicationName})
+    new({description, versionLabel, applicationName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module RetrieveEnvironmentInfo = {
   type t
   @ocaml.doc("<p>Request to download logs retrieved with <a>RequestEnvironmentInfo</a>.</p>")
@@ -2090,10 +2050,9 @@ module RetrieveEnvironmentInfo = {
   @module("@aws-sdk/client-elasticbeanstalk") @new
   external new: request => t = "RetrieveEnvironmentInfoCommand"
   let make = (~infoType, ~environmentName=?, ~environmentId=?, ()) =>
-    new({infoType: infoType, environmentName: environmentName, environmentId: environmentId})
+    new({infoType, environmentName, environmentId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListTagsForResource = {
   type t
   type request = {
@@ -2116,7 +2075,6 @@ module ListTagsForResource = {
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeEvents = {
   type t
   @ocaml.doc("<p>Request to retrieve a list of events for an environment.</p>")
@@ -2198,22 +2156,21 @@ module DescribeEvents = {
     (),
   ) =>
     new({
-      nextToken: nextToken,
-      maxRecords: maxRecords,
-      endTime: endTime,
-      startTime: startTime,
-      severity: severity,
-      requestId: requestId,
-      platformArn: platformArn,
-      environmentName: environmentName,
-      environmentId: environmentId,
-      templateName: templateName,
-      versionLabel: versionLabel,
-      applicationName: applicationName,
+      nextToken,
+      maxRecords,
+      endTime,
+      startTime,
+      severity,
+      requestId,
+      platformArn,
+      environmentName,
+      environmentId,
+      templateName,
+      versionLabel,
+      applicationName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeEnvironmentManagedActions = {
   type t
   @ocaml.doc("<p>Request to list an environment's upcoming and in-progress managed actions.</p>")
@@ -2234,10 +2191,9 @@ module DescribeEnvironmentManagedActions = {
   @module("@aws-sdk/client-elasticbeanstalk") @new
   external new: request => t = "DescribeEnvironmentManagedActionsCommand"
   let make = (~status=?, ~environmentId=?, ~environmentName=?, ()) =>
-    new({status: status, environmentId: environmentId, environmentName: environmentName})
+    new({status, environmentId, environmentName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeEnvironmentManagedActionHistory = {
   type t
   @ocaml.doc("<p>Request to list completed and failed managed actions.</p>")
@@ -2264,15 +2220,9 @@ module DescribeEnvironmentManagedActionHistory = {
   @module("@aws-sdk/client-elasticbeanstalk") @new
   external new: request => t = "DescribeEnvironmentManagedActionHistoryCommand"
   let make = (~maxItems=?, ~nextToken=?, ~environmentName=?, ~environmentId=?, ()) =>
-    new({
-      maxItems: maxItems,
-      nextToken: nextToken,
-      environmentName: environmentName,
-      environmentId: environmentId,
-    })
+    new({maxItems, nextToken, environmentName, environmentId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeEnvironmentHealth = {
   type t
   @ocaml.doc("<p>See the example below to learn how to create a request body.</p>")
@@ -2323,14 +2273,9 @@ module DescribeEnvironmentHealth = {
   @module("@aws-sdk/client-elasticbeanstalk") @new
   external new: request => t = "DescribeEnvironmentHealthCommand"
   let make = (~attributeNames=?, ~environmentId=?, ~environmentName=?, ()) =>
-    new({
-      attributeNames: attributeNames,
-      environmentId: environmentId,
-      environmentName: environmentName,
-    })
+    new({attributeNames, environmentId, environmentName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeAccountAttributes = {
   type t
   type request = {.}
@@ -2346,7 +2291,6 @@ module DescribeAccountAttributes = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeletePlatformVersion = {
   type t
   type request = {
@@ -2363,7 +2307,6 @@ module DeletePlatformVersion = {
   let make = (~platformArn=?, ()) => new({platformArn: platformArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreatePlatformVersion = {
   type t
   @ocaml.doc("<p>Request to create a new platform version.</p>")
@@ -2406,16 +2349,15 @@ module CreatePlatformVersion = {
     (),
   ) =>
     new({
-      tags: tags,
-      optionSettings: optionSettings,
-      environmentName: environmentName,
-      platformDefinitionBundle: platformDefinitionBundle,
-      platformVersion: platformVersion,
-      platformName: platformName,
+      tags,
+      optionSettings,
+      environmentName,
+      platformDefinitionBundle,
+      platformVersion,
+      platformName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateConfigurationTemplate = {
   type t
   @ocaml.doc("<p>Request to create a configuration template.</p>")
@@ -2497,19 +2439,18 @@ module CreateConfigurationTemplate = {
     (),
   ) =>
     new({
-      tags: tags,
-      optionSettings: optionSettings,
-      description: description,
-      environmentId: environmentId,
-      sourceConfiguration: sourceConfiguration,
-      platformArn: platformArn,
-      solutionStackName: solutionStackName,
-      templateName: templateName,
-      applicationName: applicationName,
+      tags,
+      optionSettings,
+      description,
+      environmentId,
+      sourceConfiguration,
+      platformArn,
+      solutionStackName,
+      templateName,
+      applicationName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateApplicationVersion = {
   type t
   @ocaml.doc("<p></p>")
@@ -2591,19 +2532,18 @@ module CreateApplicationVersion = {
     (),
   ) =>
     new({
-      tags: tags,
-      process: process,
-      autoCreateApplication: autoCreateApplication,
-      buildConfiguration: buildConfiguration,
-      sourceBundle: sourceBundle,
-      sourceBuildInformation: sourceBuildInformation,
-      description: description,
-      versionLabel: versionLabel,
-      applicationName: applicationName,
+      tags,
+      process,
+      autoCreateApplication,
+      buildConfiguration,
+      sourceBundle,
+      sourceBuildInformation,
+      description,
+      versionLabel,
+      applicationName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateApplicationResourceLifecycle = {
   type t
   type request = {
@@ -2621,10 +2561,9 @@ module UpdateApplicationResourceLifecycle = {
   @module("@aws-sdk/client-elasticbeanstalk") @new
   external new: request => t = "UpdateApplicationResourceLifecycleCommand"
   let make = (~resourceLifecycleConfig, ~applicationName, ()) =>
-    new({resourceLifecycleConfig: resourceLifecycleConfig, applicationName: applicationName})
+    new({resourceLifecycleConfig, applicationName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListPlatformVersions = {
   type t
   type request = {
@@ -2653,11 +2592,9 @@ module ListPlatformVersions = {
   }
   @module("@aws-sdk/client-elasticbeanstalk") @new
   external new: request => t = "ListPlatformVersionsCommand"
-  let make = (~nextToken=?, ~maxRecords=?, ~filters=?, ()) =>
-    new({nextToken: nextToken, maxRecords: maxRecords, filters: filters})
+  let make = (~nextToken=?, ~maxRecords=?, ~filters=?, ()) => new({nextToken, maxRecords, filters})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListPlatformBranches = {
   type t
   type request = {
@@ -2754,11 +2691,9 @@ module ListPlatformBranches = {
   }
   @module("@aws-sdk/client-elasticbeanstalk") @new
   external new: request => t = "ListPlatformBranchesCommand"
-  let make = (~nextToken=?, ~maxRecords=?, ~filters=?, ()) =>
-    new({nextToken: nextToken, maxRecords: maxRecords, filters: filters})
+  let make = (~nextToken=?, ~maxRecords=?, ~filters=?, ()) => new({nextToken, maxRecords, filters})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListAvailableSolutionStacks = {
   type t
   type request = {.}
@@ -2777,7 +2712,6 @@ module ListAvailableSolutionStacks = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribePlatformVersion = {
   type t
   type request = {
@@ -2793,7 +2727,6 @@ module DescribePlatformVersion = {
   let make = (~platformArn=?, ()) => new({platformArn: platformArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeEnvironmentResources = {
   type t
   @ocaml.doc("<p>Request to describe the resources in an environment.</p>")
@@ -2819,11 +2752,9 @@ module DescribeEnvironmentResources = {
   }
   @module("@aws-sdk/client-elasticbeanstalk") @new
   external new: request => t = "DescribeEnvironmentResourcesCommand"
-  let make = (~environmentName=?, ~environmentId=?, ()) =>
-    new({environmentName: environmentName, environmentId: environmentId})
+  let make = (~environmentName=?, ~environmentId=?, ()) => new({environmentName, environmentId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeConfigurationOptions = {
   type t
   @ocaml.doc("<p>Result message containing a list of application version descriptions.</p>")
@@ -2873,17 +2804,9 @@ module DescribeConfigurationOptions = {
     ~applicationName=?,
     (),
   ) =>
-    new({
-      options: options,
-      platformArn: platformArn,
-      solutionStackName: solutionStackName,
-      environmentName: environmentName,
-      templateName: templateName,
-      applicationName: applicationName,
-    })
+    new({options, platformArn, solutionStackName, environmentName, templateName, applicationName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeApplicationVersions = {
   type t
   @ocaml.doc("<p>Request to describe application versions.</p>")
@@ -2921,15 +2844,9 @@ module DescribeApplicationVersions = {
   @module("@aws-sdk/client-elasticbeanstalk") @new
   external new: request => t = "DescribeApplicationVersionsCommand"
   let make = (~nextToken=?, ~maxRecords=?, ~versionLabels=?, ~applicationName=?, ()) =>
-    new({
-      nextToken: nextToken,
-      maxRecords: maxRecords,
-      versionLabels: versionLabels,
-      applicationName: applicationName,
-    })
+    new({nextToken, maxRecords, versionLabels, applicationName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateEnvironment = {
   type t
   @ocaml.doc("<p>Request to update an environment.</p>")
@@ -3012,22 +2929,21 @@ module UpdateEnvironment = {
     (),
   ) =>
     new({
-      optionsToRemove: optionsToRemove,
-      optionSettings: optionSettings,
-      platformArn: platformArn,
-      solutionStackName: solutionStackName,
-      templateName: templateName,
-      versionLabel: versionLabel,
-      tier: tier,
-      description: description,
-      groupName: groupName,
-      environmentName: environmentName,
-      environmentId: environmentId,
-      applicationName: applicationName,
+      optionsToRemove,
+      optionSettings,
+      platformArn,
+      solutionStackName,
+      templateName,
+      versionLabel,
+      tier,
+      description,
+      groupName,
+      environmentName,
+      environmentId,
+      applicationName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateApplication = {
   type t
   @ocaml.doc("<p>Request to update an application.</p>")
@@ -3050,11 +2966,9 @@ module UpdateApplication = {
   }
   @module("@aws-sdk/client-elasticbeanstalk") @new
   external new: request => t = "UpdateApplicationCommand"
-  let make = (~applicationName, ~description=?, ()) =>
-    new({description: description, applicationName: applicationName})
+  let make = (~applicationName, ~description=?, ()) => new({description, applicationName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module TerminateEnvironment = {
   type t
   @ocaml.doc("<p>Request to terminate an environment.</p>")
@@ -3102,15 +3016,9 @@ module TerminateEnvironment = {
   @module("@aws-sdk/client-elasticbeanstalk") @new
   external new: request => t = "TerminateEnvironmentCommand"
   let make = (~forceTerminate=?, ~terminateResources=?, ~environmentName=?, ~environmentId=?, ()) =>
-    new({
-      forceTerminate: forceTerminate,
-      terminateResources: terminateResources,
-      environmentName: environmentName,
-      environmentId: environmentId,
-    })
+    new({forceTerminate, terminateResources, environmentName, environmentId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeInstancesHealth = {
   type t
   @ocaml.doc("<p>Parameters for a call to <code>DescribeInstancesHealth</code>.</p>")
@@ -3146,15 +3054,9 @@ module DescribeInstancesHealth = {
   @module("@aws-sdk/client-elasticbeanstalk") @new
   external new: request => t = "DescribeInstancesHealthCommand"
   let make = (~nextToken=?, ~attributeNames=?, ~environmentId=?, ~environmentName=?, ()) =>
-    new({
-      nextToken: nextToken,
-      attributeNames: attributeNames,
-      environmentId: environmentId,
-      environmentName: environmentName,
-    })
+    new({nextToken, attributeNames, environmentId, environmentName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeConfigurationSettings = {
   type t
   @ocaml.doc("<p>Result message containing all of the configuration settings for a specified solution
@@ -3188,14 +3090,9 @@ module DescribeConfigurationSettings = {
   @module("@aws-sdk/client-elasticbeanstalk") @new
   external new: request => t = "DescribeConfigurationSettingsCommand"
   let make = (~applicationName, ~environmentName=?, ~templateName=?, ()) =>
-    new({
-      environmentName: environmentName,
-      templateName: templateName,
-      applicationName: applicationName,
-    })
+    new({environmentName, templateName, applicationName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateEnvironment = {
   type t
   @ocaml.doc("<p></p>")
@@ -3302,24 +3199,23 @@ module CreateEnvironment = {
     (),
   ) =>
     new({
-      operationsRole: operationsRole,
-      optionsToRemove: optionsToRemove,
-      optionSettings: optionSettings,
-      platformArn: platformArn,
-      solutionStackName: solutionStackName,
-      templateName: templateName,
-      versionLabel: versionLabel,
-      tags: tags,
-      tier: tier,
-      cnameprefix: cnameprefix,
-      description: description,
-      groupName: groupName,
-      environmentName: environmentName,
-      applicationName: applicationName,
+      operationsRole,
+      optionsToRemove,
+      optionSettings,
+      platformArn,
+      solutionStackName,
+      templateName,
+      versionLabel,
+      tags,
+      tier,
+      cnameprefix,
+      description,
+      groupName,
+      environmentName,
+      applicationName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateApplication = {
   type t
   @ocaml.doc("<p>Request to create an application.</p>")
@@ -3347,15 +3243,9 @@ module CreateApplication = {
   @module("@aws-sdk/client-elasticbeanstalk") @new
   external new: request => t = "CreateApplicationCommand"
   let make = (~applicationName, ~tags=?, ~resourceLifecycleConfig=?, ~description=?, ()) =>
-    new({
-      tags: tags,
-      resourceLifecycleConfig: resourceLifecycleConfig,
-      description: description,
-      applicationName: applicationName,
-    })
+    new({tags, resourceLifecycleConfig, description, applicationName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeApplications = {
   type t
   @ocaml.doc("<p>Request to describe one or more applications.</p>")
@@ -3376,7 +3266,6 @@ module DescribeApplications = {
   let make = (~applicationNames=?, ()) => new({applicationNames: applicationNames})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeEnvironments = {
   type t
   @ocaml.doc("<p>Request to describe one or more environments.</p>")
@@ -3444,18 +3333,17 @@ module DescribeEnvironments = {
     (),
   ) =>
     new({
-      nextToken: nextToken,
-      maxRecords: maxRecords,
-      includedDeletedBackTo: includedDeletedBackTo,
-      includeDeleted: includeDeleted,
-      environmentNames: environmentNames,
-      environmentIds: environmentIds,
-      versionLabel: versionLabel,
-      applicationName: applicationName,
+      nextToken,
+      maxRecords,
+      includedDeletedBackTo,
+      includeDeleted,
+      environmentNames,
+      environmentIds,
+      versionLabel,
+      applicationName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ComposeEnvironments = {
   type t
   @ocaml.doc("<p>Request to create or update a group of environments.</p>")
@@ -3488,6 +3376,6 @@ module ComposeEnvironments = {
   @module("@aws-sdk/client-elasticbeanstalk") @new
   external new: request => t = "ComposeEnvironmentsCommand"
   let make = (~versionLabels=?, ~groupName=?, ~applicationName=?, ()) =>
-    new({versionLabels: versionLabels, groupName: groupName, applicationName: applicationName})
+    new({versionLabels, groupName, applicationName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

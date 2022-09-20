@@ -383,11 +383,9 @@ module DeleteTable = {
   }
   type response = {.}
   @module("@aws-sdk/client-timestream") @new external new: request => t = "DeleteTableCommand"
-  let make = (~tableName, ~databaseName, ()) =>
-    new({tableName: tableName, databaseName: databaseName})
+  let make = (~tableName, ~databaseName, ()) => new({tableName, databaseName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteDatabase = {
   type t
   type request = {
@@ -399,7 +397,6 @@ module DeleteDatabase = {
   let make = (~databaseName, ()) => new({databaseName: databaseName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module UpdateDatabase = {
   type t
   type request = {
@@ -437,10 +434,9 @@ module UpdateDatabase = {
   }
   type response = {@as("Database") database: option<database>}
   @module("@aws-sdk/client-timestream") @new external new: request => t = "UpdateDatabaseCommand"
-  let make = (~kmsKeyId, ~databaseName, ()) => new({kmsKeyId: kmsKeyId, databaseName: databaseName})
+  let make = (~kmsKeyId, ~databaseName, ()) => new({kmsKeyId, databaseName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UntagResource = {
   type t
   type request = {
@@ -459,10 +455,9 @@ module UntagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-timestream") @new external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceARN, ()) => new({tagKeys: tagKeys, resourceARN: resourceARN})
+  let make = (~tagKeys, ~resourceARN, ()) => new({tagKeys, resourceARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DescribeDatabase = {
   type t
   type request = {
@@ -477,7 +472,6 @@ module DescribeDatabase = {
   let make = (~databaseName, ()) => new({databaseName: databaseName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module TagResource = {
   type t
   type request = {
@@ -495,10 +489,9 @@ The tags to be assigned to the Timestream resource.
   }
   type response = {.}
   @module("@aws-sdk/client-timestream") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceARN, ()) => new({tags: tags, resourceARN: resourceARN})
+  let make = (~tags, ~resourceARN, ()) => new({tags, resourceARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module ListTagsForResource = {
   type t
   type request = {
@@ -520,7 +513,6 @@ The tags currently associated with the Timestream resource.
   let make = (~resourceARN, ()) => new({resourceARN: resourceARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListDatabases = {
   type t
   type request = {
@@ -544,11 +536,9 @@ module ListDatabases = {
     @ocaml.doc("<p>A list of database names.</p>") @as("Databases") databases: option<databaseList>,
   }
   @module("@aws-sdk/client-timestream") @new external new: request => t = "ListDatabasesCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeEndpoints = {
   type t
   type request = {.}
@@ -563,7 +553,6 @@ module DescribeEndpoints = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateDatabase = {
   type t
   type request = {
@@ -586,11 +575,9 @@ module CreateDatabase = {
     database: option<database>,
   }
   @module("@aws-sdk/client-timestream") @new external new: request => t = "CreateDatabaseCommand"
-  let make = (~databaseName, ~tags=?, ~kmsKeyId=?, ()) =>
-    new({tags: tags, kmsKeyId: kmsKeyId, databaseName: databaseName})
+  let make = (~databaseName, ~tags=?, ~kmsKeyId=?, ()) => new({tags, kmsKeyId, databaseName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module WriteRecords = {
   type t
   type request = {
@@ -620,15 +607,9 @@ module WriteRecords = {
   }
   @module("@aws-sdk/client-timestream") @new external new: request => t = "WriteRecordsCommand"
   let make = (~records, ~tableName, ~databaseName, ~commonAttributes=?, ()) =>
-    new({
-      records: records,
-      commonAttributes: commonAttributes,
-      tableName: tableName,
-      databaseName: databaseName,
-    })
+    new({records, commonAttributes, tableName, databaseName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateTable = {
   type t
   type request = {
@@ -654,16 +635,9 @@ module UpdateTable = {
     ~magneticStoreWriteProperties=?,
     ~retentionProperties=?,
     (),
-  ) =>
-    new({
-      magneticStoreWriteProperties: magneticStoreWriteProperties,
-      retentionProperties: retentionProperties,
-      tableName: tableName,
-      databaseName: databaseName,
-    })
+  ) => new({magneticStoreWriteProperties, retentionProperties, tableName, databaseName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeTable = {
   type t
   type request = {
@@ -673,11 +647,9 @@ module DescribeTable = {
   }
   type response = {@ocaml.doc("<p>The Timestream table.</p>") @as("Table") table: option<table>}
   @module("@aws-sdk/client-timestream") @new external new: request => t = "DescribeTableCommand"
-  let make = (~tableName, ~databaseName, ()) =>
-    new({tableName: tableName, databaseName: databaseName})
+  let make = (~tableName, ~databaseName, ()) => new({tableName, databaseName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateTable = {
   type t
   type request = {
@@ -712,17 +684,9 @@ module CreateTable = {
     ~tags=?,
     ~retentionProperties=?,
     (),
-  ) =>
-    new({
-      magneticStoreWriteProperties: magneticStoreWriteProperties,
-      tags: tags,
-      retentionProperties: retentionProperties,
-      tableName: tableName,
-      databaseName: databaseName,
-    })
+  ) => new({magneticStoreWriteProperties, tags, retentionProperties, tableName, databaseName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListTables = {
   type t
   type request = {
@@ -749,6 +713,6 @@ module ListTables = {
   }
   @module("@aws-sdk/client-timestream") @new external new: request => t = "ListTablesCommand"
   let make = (~maxResults=?, ~nextToken=?, ~databaseName=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, databaseName: databaseName})
+    new({maxResults, nextToken, databaseName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

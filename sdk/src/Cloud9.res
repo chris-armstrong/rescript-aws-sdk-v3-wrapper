@@ -327,15 +327,9 @@ module UpdateEnvironment = {
   type response = {.}
   @module("@aws-sdk/client-cloud9") @new external new: request => t = "UpdateEnvironmentCommand"
   let make = (~environmentId, ~managedCredentialsAction=?, ~description=?, ~name=?, ()) =>
-    new({
-      managedCredentialsAction: managedCredentialsAction,
-      description: description,
-      name: name,
-      environmentId: environmentId,
-    })
+    new({managedCredentialsAction, description, name, environmentId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DescribeEnvironmentStatus = {
   type t
   type request = {
@@ -383,7 +377,6 @@ module DescribeEnvironmentStatus = {
   let make = (~environmentId, ()) => new({environmentId: environmentId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteEnvironmentMembership = {
   type t
   type request = {
@@ -396,10 +389,9 @@ module DeleteEnvironmentMembership = {
   type response = {.}
   @module("@aws-sdk/client-cloud9") @new
   external new: request => t = "DeleteEnvironmentMembershipCommand"
-  let make = (~userArn, ~environmentId, ()) => new({userArn: userArn, environmentId: environmentId})
+  let make = (~userArn, ~environmentId, ()) => new({userArn, environmentId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteEnvironment = {
   type t
   type request = {
@@ -410,7 +402,6 @@ module DeleteEnvironment = {
   let make = (~environmentId, ()) => new({environmentId: environmentId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module UpdateEnvironmentMembership = {
   type t
   type request = {
@@ -441,10 +432,9 @@ module UpdateEnvironmentMembership = {
   @module("@aws-sdk/client-cloud9") @new
   external new: request => t = "UpdateEnvironmentMembershipCommand"
   let make = (~permissions, ~userArn, ~environmentId, ()) =>
-    new({permissions: permissions, userArn: userArn, environmentId: environmentId})
+    new({permissions, userArn, environmentId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UntagResource = {
   type t
   type request = {
@@ -459,10 +449,9 @@ module UntagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-cloud9") @new external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceARN, ()) => new({tagKeys: tagKeys, resourceARN: resourceARN})
+  let make = (~tagKeys, ~resourceARN, ()) => new({tagKeys, resourceARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module ListEnvironments = {
   type t
   type request = {
@@ -484,11 +473,9 @@ module ListEnvironments = {
     nextToken: option<string_>,
   }
   @module("@aws-sdk/client-cloud9") @new external new: request => t = "ListEnvironmentsCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateEnvironmentMembership = {
   type t
   type request = {
@@ -519,10 +506,9 @@ module CreateEnvironmentMembership = {
   @module("@aws-sdk/client-cloud9") @new
   external new: request => t = "CreateEnvironmentMembershipCommand"
   let make = (~permissions, ~userArn, ~environmentId, ()) =>
-    new({permissions: permissions, userArn: userArn, environmentId: environmentId})
+    new({permissions, userArn, environmentId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module TagResource = {
   type t
   type request = {
@@ -536,10 +522,9 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-cloud9") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceARN, ()) => new({tags: tags, resourceARN: resourceARN})
+  let make = (~tags, ~resourceARN, ()) => new({tags, resourceARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module ListTagsForResource = {
   type t
   type request = {
@@ -557,7 +542,6 @@ module ListTagsForResource = {
   let make = (~resourceARN, ()) => new({resourceARN: resourceARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeEnvironmentMemberships = {
   type t
   type request = {
@@ -605,16 +589,9 @@ module DescribeEnvironmentMemberships = {
   @module("@aws-sdk/client-cloud9") @new
   external new: request => t = "DescribeEnvironmentMembershipsCommand"
   let make = (~maxResults=?, ~nextToken=?, ~permissions=?, ~environmentId=?, ~userArn=?, ()) =>
-    new({
-      maxResults: maxResults,
-      nextToken: nextToken,
-      permissions: permissions,
-      environmentId: environmentId,
-      userArn: userArn,
-    })
+    new({maxResults, nextToken, permissions, environmentId, userArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateEnvironmentEC2 = {
   type t
   type request = {
@@ -724,21 +701,20 @@ module CreateEnvironmentEC2 = {
     (),
   ) =>
     new({
-      dryRun: dryRun,
-      connectionType: connectionType,
-      tags: tags,
-      ownerArn: ownerArn,
-      automaticStopTimeMinutes: automaticStopTimeMinutes,
-      imageId: imageId,
-      subnetId: subnetId,
-      instanceType: instanceType,
-      clientRequestToken: clientRequestToken,
-      description: description,
-      name: name,
+      dryRun,
+      connectionType,
+      tags,
+      ownerArn,
+      automaticStopTimeMinutes,
+      imageId,
+      subnetId,
+      instanceType,
+      clientRequestToken,
+      description,
+      name,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeEnvironments = {
   type t
   type request = {

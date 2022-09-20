@@ -2312,7 +2312,6 @@ module GetTrafficPolicyInstanceCount = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetHostedZoneCount = {
   type t
   type request = {.}
@@ -2330,7 +2329,6 @@ module GetHostedZoneCount = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetHealthCheckCount = {
   type t
   type request = {.}
@@ -2348,7 +2346,6 @@ module GetHealthCheckCount = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteTrafficPolicyInstance = {
   type t
   @ocaml.doc("<p>A request to delete a specified traffic policy instance.</p>")
@@ -2367,7 +2364,6 @@ module DeleteTrafficPolicyInstance = {
   let make = (~id, ()) => new({id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteTrafficPolicy = {
   type t
   @ocaml.doc("<p>A request to delete a specified traffic policy version.</p>")
@@ -2380,10 +2376,9 @@ module DeleteTrafficPolicy = {
   }
   type response = {.}
   @module("@aws-sdk/client-route53") @new external new: request => t = "DeleteTrafficPolicyCommand"
-  let make = (~version, ~id, ()) => new({version: version, id: id})
+  let make = (~version, ~id, ()) => new({version, id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteReusableDelegationSet = {
   type t
   @ocaml.doc("<p>A request to delete a reusable delegation set.</p>")
@@ -2397,7 +2392,6 @@ module DeleteReusableDelegationSet = {
   let make = (~id, ()) => new({id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteQueryLoggingConfig = {
   type t
   type request = {
@@ -2410,7 +2404,6 @@ module DeleteQueryLoggingConfig = {
   let make = (~id, ()) => new({id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteHealthCheck = {
   type t
   @ocaml.doc("<p>This action deletes a health check.</p>")
@@ -2423,7 +2416,6 @@ module DeleteHealthCheck = {
   let make = (~healthCheckId, ()) => new({healthCheckId: healthCheckId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module UpdateTrafficPolicyInstance = {
   type t
   @ocaml.doc(
@@ -2460,15 +2452,9 @@ module UpdateTrafficPolicyInstance = {
   @module("@aws-sdk/client-route53") @new
   external new: request => t = "UpdateTrafficPolicyInstanceCommand"
   let make = (~trafficPolicyVersion, ~trafficPolicyId, ~ttl, ~id, ()) =>
-    new({
-      trafficPolicyVersion: trafficPolicyVersion,
-      trafficPolicyId: trafficPolicyId,
-      ttl: ttl,
-      id: id,
-    })
+    new({trafficPolicyVersion, trafficPolicyId, ttl, id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateTrafficPolicyComment = {
   type t
   @ocaml.doc(
@@ -2497,10 +2483,9 @@ module UpdateTrafficPolicyComment = {
   }
   @module("@aws-sdk/client-route53") @new
   external new: request => t = "UpdateTrafficPolicyCommentCommand"
-  let make = (~comment, ~version, ~id, ()) => new({comment: comment, version: version, id: id})
+  let make = (~comment, ~version, ~id, ()) => new({comment, version, id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module TestDNSAnswer = {
   type t
   @ocaml.doc("<p>Gets the value that Amazon Route 53 returns in response to a DNS request for a specified record name and type. You can optionally specify 
@@ -2585,16 +2570,15 @@ module TestDNSAnswer = {
     (),
   ) =>
     new({
-      edns0ClientSubnetMask: edns0ClientSubnetMask,
-      edns0ClientSubnetIP: edns0ClientSubnetIP,
-      resolverIP: resolverIP,
-      recordType: recordType,
-      recordName: recordName,
-      hostedZoneId: hostedZoneId,
+      edns0ClientSubnetMask,
+      edns0ClientSubnetIP,
+      resolverIP,
+      recordType,
+      recordName,
+      hostedZoneId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetTrafficPolicyInstance = {
   type t
   @ocaml.doc("<p>Gets information about a specified traffic policy instance.</p>")
@@ -2618,7 +2602,6 @@ module GetTrafficPolicyInstance = {
   let make = (~id, ()) => new({id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetTrafficPolicy = {
   type t
   @ocaml.doc("<p>Gets information about a specific traffic policy version.</p>")
@@ -2639,10 +2622,9 @@ module GetTrafficPolicy = {
     trafficPolicy: trafficPolicy,
   }
   @module("@aws-sdk/client-route53") @new external new: request => t = "GetTrafficPolicyCommand"
-  let make = (~version, ~id, ()) => new({version: version, id: id})
+  let make = (~version, ~id, ()) => new({version, id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetReusableDelegationSetLimit = {
   type t
   @ocaml.doc(
@@ -2672,10 +2654,9 @@ module GetReusableDelegationSetLimit = {
   }
   @module("@aws-sdk/client-route53") @new
   external new: request => t = "GetReusableDelegationSetLimitCommand"
-  let make = (~delegationSetId, ~type_, ()) => new({delegationSetId: delegationSetId, type_: type_})
+  let make = (~delegationSetId, ~type_, ()) => new({delegationSetId, type_})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetQueryLoggingConfig = {
   type t
   type request = {
@@ -2696,7 +2677,6 @@ module GetQueryLoggingConfig = {
   let make = (~id, ()) => new({id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetHostedZoneLimit = {
   type t
   @ocaml.doc(
@@ -2736,10 +2716,9 @@ module GetHostedZoneLimit = {
     limit: hostedZoneLimit,
   }
   @module("@aws-sdk/client-route53") @new external new: request => t = "GetHostedZoneLimitCommand"
-  let make = (~hostedZoneId, ~type_, ()) => new({hostedZoneId: hostedZoneId, type_: type_})
+  let make = (~hostedZoneId, ~type_, ()) => new({hostedZoneId, type_})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetGeoLocation = {
   type t
   @ocaml.doc(
@@ -2801,10 +2780,9 @@ module GetGeoLocation = {
   }
   @module("@aws-sdk/client-route53") @new external new: request => t = "GetGeoLocationCommand"
   let make = (~subdivisionCode=?, ~countryCode=?, ~continentCode=?, ()) =>
-    new({subdivisionCode: subdivisionCode, countryCode: countryCode, continentCode: continentCode})
+    new({subdivisionCode, countryCode, continentCode})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetCheckerIpRanges = {
   type t
   type request = {.}
@@ -2819,7 +2797,6 @@ module GetCheckerIpRanges = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetChange = {
   type t
   @ocaml.doc("<p>The input for a GetChange request.</p>")
@@ -2839,7 +2816,6 @@ module GetChange = {
   let make = (~id, ()) => new({id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetAccountLimit = {
   type t
   @ocaml.doc(
@@ -2895,7 +2871,6 @@ module GetAccountLimit = {
   let make = (~type_, ()) => new({type_: type_})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module EnableHostedZoneDNSSEC = {
   type t
   type request = {
@@ -2908,7 +2883,6 @@ module EnableHostedZoneDNSSEC = {
   let make = (~hostedZoneId, ()) => new({hostedZoneId: hostedZoneId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DisassociateVPCFromHostedZone = {
   type t
   @ocaml.doc("<p>A complex type that contains information about the VPC that you want to disassociate from a 
@@ -2938,11 +2912,9 @@ module DisassociateVPCFromHostedZone = {
   }
   @module("@aws-sdk/client-route53") @new
   external new: request => t = "DisassociateVPCFromHostedZoneCommand"
-  let make = (~vpc, ~hostedZoneId, ~comment=?, ()) =>
-    new({comment: comment, vpc: vpc, hostedZoneId: hostedZoneId})
+  let make = (~vpc, ~hostedZoneId, ~comment=?, ()) => new({comment, vpc, hostedZoneId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DisableHostedZoneDNSSEC = {
   type t
   type request = {
@@ -2955,7 +2927,6 @@ module DisableHostedZoneDNSSEC = {
   let make = (~hostedZoneId, ()) => new({hostedZoneId: hostedZoneId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteVPCAssociationAuthorization = {
   type t
   @ocaml.doc("<p>A complex type that contains information about the request to remove authorization to associate a VPC 
@@ -2973,10 +2944,9 @@ module DeleteVPCAssociationAuthorization = {
   type response = {.}
   @module("@aws-sdk/client-route53") @new
   external new: request => t = "DeleteVPCAssociationAuthorizationCommand"
-  let make = (~vpc, ~hostedZoneId, ()) => new({vpc: vpc, hostedZoneId: hostedZoneId})
+  let make = (~vpc, ~hostedZoneId, ()) => new({vpc, hostedZoneId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteKeySigningKey = {
   type t
   type request = {
@@ -2987,10 +2957,9 @@ module DeleteKeySigningKey = {
   }
   type response = {@as("ChangeInfo") changeInfo: changeInfo}
   @module("@aws-sdk/client-route53") @new external new: request => t = "DeleteKeySigningKeyCommand"
-  let make = (~name, ~hostedZoneId, ()) => new({name: name, hostedZoneId: hostedZoneId})
+  let make = (~name, ~hostedZoneId, ()) => new({name, hostedZoneId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteHostedZone = {
   type t
   @ocaml.doc("<p>A request to delete a hosted zone.</p>")
@@ -3011,7 +2980,6 @@ module DeleteHostedZone = {
   let make = (~id, ()) => new({id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeactivateKeySigningKey = {
   type t
   type request = {
@@ -3023,10 +2991,9 @@ module DeactivateKeySigningKey = {
   type response = {@as("ChangeInfo") changeInfo: changeInfo}
   @module("@aws-sdk/client-route53") @new
   external new: request => t = "DeactivateKeySigningKeyCommand"
-  let make = (~name, ~hostedZoneId, ()) => new({name: name, hostedZoneId: hostedZoneId})
+  let make = (~name, ~hostedZoneId, ()) => new({name, hostedZoneId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateVPCAssociationAuthorization = {
   type t
   @ocaml.doc("<p>A complex type that contains information about the request to authorize associating a VPC with your private hosted zone. 
@@ -3054,10 +3021,9 @@ module CreateVPCAssociationAuthorization = {
   }
   @module("@aws-sdk/client-route53") @new
   external new: request => t = "CreateVPCAssociationAuthorizationCommand"
-  let make = (~vpc, ~hostedZoneId, ()) => new({vpc: vpc, hostedZoneId: hostedZoneId})
+  let make = (~vpc, ~hostedZoneId, ()) => new({vpc, hostedZoneId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateTrafficPolicyVersion = {
   type t
   @ocaml.doc(
@@ -3092,10 +3058,9 @@ module CreateTrafficPolicyVersion = {
   }
   @module("@aws-sdk/client-route53") @new
   external new: request => t = "CreateTrafficPolicyVersionCommand"
-  let make = (~document, ~id, ~comment=?, ()) => new({comment: comment, document: document, id: id})
+  let make = (~document, ~id, ~comment=?, ()) => new({comment, document, id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateTrafficPolicyInstance = {
   type t
   @ocaml.doc(
@@ -3140,16 +3105,9 @@ module CreateTrafficPolicyInstance = {
   @module("@aws-sdk/client-route53") @new
   external new: request => t = "CreateTrafficPolicyInstanceCommand"
   let make = (~trafficPolicyVersion, ~trafficPolicyId, ~ttl, ~name, ~hostedZoneId, ()) =>
-    new({
-      trafficPolicyVersion: trafficPolicyVersion,
-      trafficPolicyId: trafficPolicyId,
-      ttl: ttl,
-      name: name,
-      hostedZoneId: hostedZoneId,
-    })
+    new({trafficPolicyVersion, trafficPolicyId, ttl, name, hostedZoneId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateTrafficPolicy = {
   type t
   @ocaml.doc(
@@ -3176,11 +3134,9 @@ module CreateTrafficPolicy = {
     trafficPolicy: trafficPolicy,
   }
   @module("@aws-sdk/client-route53") @new external new: request => t = "CreateTrafficPolicyCommand"
-  let make = (~document, ~name, ~comment=?, ()) =>
-    new({comment: comment, document: document, name: name})
+  let make = (~document, ~name, ~comment=?, ()) => new({comment, document, name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateQueryLoggingConfig = {
   type t
   type request = {
@@ -3214,10 +3170,9 @@ module CreateQueryLoggingConfig = {
   @module("@aws-sdk/client-route53") @new
   external new: request => t = "CreateQueryLoggingConfigCommand"
   let make = (~cloudWatchLogsLogGroupArn, ~hostedZoneId, ()) =>
-    new({cloudWatchLogsLogGroupArn: cloudWatchLogsLogGroupArn, hostedZoneId: hostedZoneId})
+    new({cloudWatchLogsLogGroupArn, hostedZoneId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateKeySigningKey = {
   type t
   type request = {
@@ -3291,16 +3246,9 @@ module CreateKeySigningKey = {
   }
   @module("@aws-sdk/client-route53") @new external new: request => t = "CreateKeySigningKeyCommand"
   let make = (~status, ~name, ~keyManagementServiceArn, ~hostedZoneId, ~callerReference, ()) =>
-    new({
-      status: status,
-      name: name,
-      keyManagementServiceArn: keyManagementServiceArn,
-      hostedZoneId: hostedZoneId,
-      callerReference: callerReference,
-    })
+    new({status, name, keyManagementServiceArn, hostedZoneId, callerReference})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module AssociateVPCWithHostedZone = {
   type t
   @ocaml.doc(
@@ -3331,11 +3279,9 @@ module AssociateVPCWithHostedZone = {
   }
   @module("@aws-sdk/client-route53") @new
   external new: request => t = "AssociateVPCWithHostedZoneCommand"
-  let make = (~vpc, ~hostedZoneId, ~comment=?, ()) =>
-    new({comment: comment, vpc: vpc, hostedZoneId: hostedZoneId})
+  let make = (~vpc, ~hostedZoneId, ~comment=?, ()) => new({comment, vpc, hostedZoneId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ActivateKeySigningKey = {
   type t
   type request = {
@@ -3349,10 +3295,9 @@ module ActivateKeySigningKey = {
   type response = {@as("ChangeInfo") changeInfo: changeInfo}
   @module("@aws-sdk/client-route53") @new
   external new: request => t = "ActivateKeySigningKeyCommand"
-  let make = (~name, ~hostedZoneId, ()) => new({name: name, hostedZoneId: hostedZoneId})
+  let make = (~name, ~hostedZoneId, ()) => new({name, hostedZoneId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateHostedZoneComment = {
   type t
   @ocaml.doc("<p>A request to update the comment for a hosted zone.</p>")
@@ -3377,10 +3322,9 @@ module UpdateHostedZoneComment = {
   }
   @module("@aws-sdk/client-route53") @new
   external new: request => t = "UpdateHostedZoneCommentCommand"
-  let make = (~id, ~comment=?, ()) => new({comment: comment, id: id})
+  let make = (~id, ~comment=?, ()) => new({comment, id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListVPCAssociationAuthorizations = {
   type t
   @ocaml.doc(
@@ -3424,10 +3368,9 @@ module ListVPCAssociationAuthorizations = {
   @module("@aws-sdk/client-route53") @new
   external new: request => t = "ListVPCAssociationAuthorizationsCommand"
   let make = (~hostedZoneId, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, hostedZoneId: hostedZoneId})
+    new({maxResults, nextToken, hostedZoneId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListTrafficPolicyVersions = {
   type t
   @ocaml.doc("<p>A complex type that contains the information about the request to list your traffic
@@ -3477,10 +3420,9 @@ module ListTrafficPolicyVersions = {
   @module("@aws-sdk/client-route53") @new
   external new: request => t = "ListTrafficPolicyVersionsCommand"
   let make = (~id, ~maxItems=?, ~trafficPolicyVersionMarker=?, ()) =>
-    new({maxItems: maxItems, trafficPolicyVersionMarker: trafficPolicyVersionMarker, id: id})
+    new({maxItems, trafficPolicyVersionMarker, id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListTrafficPolicyInstancesByPolicy = {
   type t
   @ocaml.doc(
@@ -3565,16 +3507,15 @@ module ListTrafficPolicyInstancesByPolicy = {
     (),
   ) =>
     new({
-      maxItems: maxItems,
-      trafficPolicyInstanceTypeMarker: trafficPolicyInstanceTypeMarker,
-      trafficPolicyInstanceNameMarker: trafficPolicyInstanceNameMarker,
-      hostedZoneIdMarker: hostedZoneIdMarker,
-      trafficPolicyVersion: trafficPolicyVersion,
-      trafficPolicyId: trafficPolicyId,
+      maxItems,
+      trafficPolicyInstanceTypeMarker,
+      trafficPolicyInstanceNameMarker,
+      hostedZoneIdMarker,
+      trafficPolicyVersion,
+      trafficPolicyId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListTrafficPolicyInstancesByHostedZone = {
   type t
   @ocaml.doc(
@@ -3642,15 +3583,9 @@ module ListTrafficPolicyInstancesByHostedZone = {
     ~trafficPolicyInstanceNameMarker=?,
     (),
   ) =>
-    new({
-      maxItems: maxItems,
-      trafficPolicyInstanceTypeMarker: trafficPolicyInstanceTypeMarker,
-      trafficPolicyInstanceNameMarker: trafficPolicyInstanceNameMarker,
-      hostedZoneId: hostedZoneId,
-    })
+    new({maxItems, trafficPolicyInstanceTypeMarker, trafficPolicyInstanceNameMarker, hostedZoneId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListTrafficPolicyInstances = {
   type t
   @ocaml.doc(
@@ -3725,14 +3660,13 @@ module ListTrafficPolicyInstances = {
     (),
   ) =>
     new({
-      maxItems: maxItems,
-      trafficPolicyInstanceTypeMarker: trafficPolicyInstanceTypeMarker,
-      trafficPolicyInstanceNameMarker: trafficPolicyInstanceNameMarker,
-      hostedZoneIdMarker: hostedZoneIdMarker,
+      maxItems,
+      trafficPolicyInstanceTypeMarker,
+      trafficPolicyInstanceNameMarker,
+      hostedZoneIdMarker,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListTrafficPolicies = {
   type t
   @ocaml.doc("<p>A complex type that contains the information about the request to list the traffic policies that are associated 
@@ -3774,11 +3708,9 @@ module ListTrafficPolicies = {
     trafficPolicySummaries: trafficPolicySummaries,
   }
   @module("@aws-sdk/client-route53") @new external new: request => t = "ListTrafficPoliciesCommand"
-  let make = (~maxItems=?, ~trafficPolicyIdMarker=?, ()) =>
-    new({maxItems: maxItems, trafficPolicyIdMarker: trafficPolicyIdMarker})
+  let make = (~maxItems=?, ~trafficPolicyIdMarker=?, ()) => new({maxItems, trafficPolicyIdMarker})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListQueryLoggingConfigs = {
   type t
   type request = {
@@ -3821,10 +3753,9 @@ module ListQueryLoggingConfigs = {
   @module("@aws-sdk/client-route53") @new
   external new: request => t = "ListQueryLoggingConfigsCommand"
   let make = (~maxResults=?, ~nextToken=?, ~hostedZoneId=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, hostedZoneId: hostedZoneId})
+    new({maxResults, nextToken, hostedZoneId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListGeoLocations = {
   type t
   @ocaml.doc(
@@ -3891,16 +3822,9 @@ module ListGeoLocations = {
     ~startCountryCode=?,
     ~startContinentCode=?,
     (),
-  ) =>
-    new({
-      maxItems: maxItems,
-      startSubdivisionCode: startSubdivisionCode,
-      startCountryCode: startCountryCode,
-      startContinentCode: startContinentCode,
-    })
+  ) => new({maxItems, startSubdivisionCode, startCountryCode, startContinentCode})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetReusableDelegationSet = {
   type t
   @ocaml.doc("<p>A request to get information about a specified reusable delegation set.</p>")
@@ -3924,7 +3848,6 @@ module GetReusableDelegationSet = {
   let make = (~id, ()) => new({id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetHostedZone = {
   type t
   @ocaml.doc("<p>A request to get information about a specified hosted zone. </p>")
@@ -3956,7 +3879,6 @@ module GetHostedZone = {
   let make = (~id, ()) => new({id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetDNSSEC = {
   type t
   type request = {
@@ -3973,7 +3895,6 @@ module GetDNSSEC = {
   let make = (~hostedZoneId, ()) => new({hostedZoneId: hostedZoneId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateReusableDelegationSet = {
   type t
   type request = {
@@ -3998,11 +3919,9 @@ module CreateReusableDelegationSet = {
   }
   @module("@aws-sdk/client-route53") @new
   external new: request => t = "CreateReusableDelegationSetCommand"
-  let make = (~callerReference, ~hostedZoneId=?, ()) =>
-    new({hostedZoneId: hostedZoneId, callerReference: callerReference})
+  let make = (~callerReference, ~hostedZoneId=?, ()) => new({hostedZoneId, callerReference})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateHostedZone = {
   type t
   @ocaml.doc(
@@ -4073,16 +3992,9 @@ module CreateHostedZone = {
   }
   @module("@aws-sdk/client-route53") @new external new: request => t = "CreateHostedZoneCommand"
   let make = (~callerReference, ~name, ~delegationSetId=?, ~hostedZoneConfig=?, ~vpc=?, ()) =>
-    new({
-      delegationSetId: delegationSetId,
-      hostedZoneConfig: hostedZoneConfig,
-      callerReference: callerReference,
-      vpc: vpc,
-      name: name,
-    })
+    new({delegationSetId, hostedZoneConfig, callerReference, vpc, name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ChangeTagsForResource = {
   type t
   @ocaml.doc(
@@ -4117,15 +4029,9 @@ module ChangeTagsForResource = {
   @module("@aws-sdk/client-route53") @new
   external new: request => t = "ChangeTagsForResourceCommand"
   let make = (~resourceId, ~resourceType, ~removeTagKeys=?, ~addTags=?, ()) =>
-    new({
-      removeTagKeys: removeTagKeys,
-      addTags: addTags,
-      resourceId: resourceId,
-      resourceType: resourceType,
-    })
+    new({removeTagKeys, addTags, resourceId, resourceType})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module ListTagsForResource = {
   type t
   @ocaml.doc(
@@ -4158,11 +4064,9 @@ module ListTagsForResource = {
     resourceTagSet: resourceTagSet,
   }
   @module("@aws-sdk/client-route53") @new external new: request => t = "ListTagsForResourceCommand"
-  let make = (~resourceId, ~resourceType, ()) =>
-    new({resourceId: resourceId, resourceType: resourceType})
+  let make = (~resourceId, ~resourceType, ()) => new({resourceId, resourceType})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListReusableDelegationSets = {
   type t
   @ocaml.doc(
@@ -4210,10 +4114,9 @@ module ListReusableDelegationSets = {
   }
   @module("@aws-sdk/client-route53") @new
   external new: request => t = "ListReusableDelegationSetsCommand"
-  let make = (~maxItems=?, ~marker=?, ()) => new({maxItems: maxItems, marker: marker})
+  let make = (~maxItems=?, ~marker=?, ()) => new({maxItems, marker})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListHostedZonesByVPC = {
   type t
   @ocaml.doc(
@@ -4258,10 +4161,9 @@ module ListHostedZonesByVPC = {
   }
   @module("@aws-sdk/client-route53") @new external new: request => t = "ListHostedZonesByVPCCommand"
   let make = (~vpcregion, ~vpcid, ~nextToken=?, ~maxItems=?, ()) =>
-    new({nextToken: nextToken, maxItems: maxItems, vpcregion: vpcregion, vpcid: vpcid})
+    new({nextToken, maxItems, vpcregion, vpcid})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListHostedZonesByName = {
   type t
   @ocaml.doc("<p>Retrieves a list of the public and private hosted zones that are associated with the current Amazon Web Services account in ASCII order by domain 
@@ -4325,10 +4227,9 @@ module ListHostedZonesByName = {
   @module("@aws-sdk/client-route53") @new
   external new: request => t = "ListHostedZonesByNameCommand"
   let make = (~maxItems=?, ~hostedZoneId=?, ~dnsname=?, ()) =>
-    new({maxItems: maxItems, hostedZoneId: hostedZoneId, dnsname: dnsname})
+    new({maxItems, hostedZoneId, dnsname})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListHostedZones = {
   type t
   @ocaml.doc(
@@ -4378,10 +4279,9 @@ module ListHostedZones = {
   }
   @module("@aws-sdk/client-route53") @new external new: request => t = "ListHostedZonesCommand"
   let make = (~delegationSetId=?, ~maxItems=?, ~marker=?, ()) =>
-    new({delegationSetId: delegationSetId, maxItems: maxItems, marker: marker})
+    new({delegationSetId, maxItems, marker})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetHealthCheckStatus = {
   type t
   @ocaml.doc("<p>A request to get the status for a health check.</p>")
@@ -4407,7 +4307,6 @@ module GetHealthCheckStatus = {
   let make = (~healthCheckId, ()) => new({healthCheckId: healthCheckId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetHealthCheckLastFailureReason = {
   type t
   @ocaml.doc("<p>A request for the reason that a health check failed most recently.</p>")
@@ -4436,7 +4335,6 @@ module GetHealthCheckLastFailureReason = {
   let make = (~healthCheckId, ()) => new({healthCheckId: healthCheckId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateHealthCheck = {
   type t
   @ocaml.doc(
@@ -4762,27 +4660,26 @@ module UpdateHealthCheck = {
     (),
   ) =>
     new({
-      resetElements: resetElements,
-      insufficientDataHealthStatus: insufficientDataHealthStatus,
-      alarmIdentifier: alarmIdentifier,
-      regions: regions,
-      enableSNI: enableSNI,
-      childHealthChecks: childHealthChecks,
-      healthThreshold: healthThreshold,
-      disabled: disabled,
-      inverted: inverted,
-      failureThreshold: failureThreshold,
-      searchString: searchString,
-      fullyQualifiedDomainName: fullyQualifiedDomainName,
-      resourcePath: resourcePath,
-      port: port,
-      ipaddress: ipaddress,
-      healthCheckVersion: healthCheckVersion,
-      healthCheckId: healthCheckId,
+      resetElements,
+      insufficientDataHealthStatus,
+      alarmIdentifier,
+      regions,
+      enableSNI,
+      childHealthChecks,
+      healthThreshold,
+      disabled,
+      inverted,
+      failureThreshold,
+      searchString,
+      fullyQualifiedDomainName,
+      resourcePath,
+      port,
+      ipaddress,
+      healthCheckVersion,
+      healthCheckId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListTagsForResources = {
   type t
   @ocaml.doc(
@@ -4815,11 +4712,9 @@ module ListTagsForResources = {
     resourceTagSets: resourceTagSetList,
   }
   @module("@aws-sdk/client-route53") @new external new: request => t = "ListTagsForResourcesCommand"
-  let make = (~resourceIds, ~resourceType, ()) =>
-    new({resourceIds: resourceIds, resourceType: resourceType})
+  let make = (~resourceIds, ~resourceType, ()) => new({resourceIds, resourceType})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListResourceRecordSets = {
   type t
   @ocaml.doc(
@@ -4927,17 +4822,9 @@ module ListResourceRecordSets = {
     ~startRecordType=?,
     ~startRecordName=?,
     (),
-  ) =>
-    new({
-      maxItems: maxItems,
-      startRecordIdentifier: startRecordIdentifier,
-      startRecordType: startRecordType,
-      startRecordName: startRecordName,
-      hostedZoneId: hostedZoneId,
-    })
+  ) => new({maxItems, startRecordIdentifier, startRecordType, startRecordName, hostedZoneId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetHealthCheck = {
   type t
   @ocaml.doc("<p>A request to get information about a specified health check. </p>")
@@ -4960,7 +4847,6 @@ module GetHealthCheck = {
   let make = (~healthCheckId, ()) => new({healthCheckId: healthCheckId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateHealthCheck = {
   type t
   @ocaml.doc("<p>A complex type that contains the health check request information.</p>")
@@ -5003,11 +4889,9 @@ module CreateHealthCheck = {
     healthCheck: healthCheck,
   }
   @module("@aws-sdk/client-route53") @new external new: request => t = "CreateHealthCheckCommand"
-  let make = (~healthCheckConfig, ~callerReference, ()) =>
-    new({healthCheckConfig: healthCheckConfig, callerReference: callerReference})
+  let make = (~healthCheckConfig, ~callerReference, ()) => new({healthCheckConfig, callerReference})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListHealthChecks = {
   type t
   @ocaml.doc(
@@ -5054,10 +4938,9 @@ module ListHealthChecks = {
     healthChecks: healthChecks,
   }
   @module("@aws-sdk/client-route53") @new external new: request => t = "ListHealthChecksCommand"
-  let make = (~maxItems=?, ~marker=?, ()) => new({maxItems: maxItems, marker: marker})
+  let make = (~maxItems=?, ~marker=?, ()) => new({maxItems, marker})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ChangeResourceRecordSets = {
   type t
   @ocaml.doc("<p>A complex type that contains change information for the resource record set.</p>")
@@ -5084,7 +4967,6 @@ module ChangeResourceRecordSets = {
   }
   @module("@aws-sdk/client-route53") @new
   external new: request => t = "ChangeResourceRecordSetsCommand"
-  let make = (~changeBatch, ~hostedZoneId, ()) =>
-    new({changeBatch: changeBatch, hostedZoneId: hostedZoneId})
+  let make = (~changeBatch, ~hostedZoneId, ()) => new({changeBatch, hostedZoneId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

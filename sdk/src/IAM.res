@@ -1678,11 +1678,9 @@ module UpdateUser = {
   }
   type response = {.}
   @module("@aws-sdk/client-iam") @new external new: request => t = "UpdateUserCommand"
-  let make = (~userName, ~newUserName=?, ~newPath=?, ()) =>
-    new({newUserName: newUserName, newPath: newPath, userName: userName})
+  let make = (~userName, ~newUserName=?, ~newPath=?, ()) => new({newUserName, newPath, userName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module UpdateSigningCertificate = {
   type t
   type request = {
@@ -1704,11 +1702,9 @@ module UpdateSigningCertificate = {
   }
   type response = {.}
   @module("@aws-sdk/client-iam") @new external new: request => t = "UpdateSigningCertificateCommand"
-  let make = (~status, ~certificateId, ~userName=?, ()) =>
-    new({status: status, certificateId: certificateId, userName: userName})
+  let make = (~status, ~certificateId, ~userName=?, ()) => new({status, certificateId, userName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module UpdateServiceSpecificCredential = {
   type t
   type request = {
@@ -1731,14 +1727,9 @@ module UpdateServiceSpecificCredential = {
   @module("@aws-sdk/client-iam") @new
   external new: request => t = "UpdateServiceSpecificCredentialCommand"
   let make = (~status, ~serviceSpecificCredentialId, ~userName=?, ()) =>
-    new({
-      status: status,
-      serviceSpecificCredentialId: serviceSpecificCredentialId,
-      userName: userName,
-    })
+    new({status, serviceSpecificCredentialId, userName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module UpdateServerCertificate = {
   type t
   type request = {
@@ -1765,14 +1756,9 @@ module UpdateServerCertificate = {
   type response = {.}
   @module("@aws-sdk/client-iam") @new external new: request => t = "UpdateServerCertificateCommand"
   let make = (~serverCertificateName, ~newServerCertificateName=?, ~newPath=?, ()) =>
-    new({
-      newServerCertificateName: newServerCertificateName,
-      newPath: newPath,
-      serverCertificateName: serverCertificateName,
-    })
+    new({newServerCertificateName, newPath, serverCertificateName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module UpdateSSHPublicKey = {
   type t
   type request = {
@@ -1794,11 +1780,9 @@ module UpdateSSHPublicKey = {
   }
   type response = {.}
   @module("@aws-sdk/client-iam") @new external new: request => t = "UpdateSSHPublicKeyCommand"
-  let make = (~status, ~sshpublicKeyId, ~userName, ()) =>
-    new({status: status, sshpublicKeyId: sshpublicKeyId, userName: userName})
+  let make = (~status, ~sshpublicKeyId, ~userName, ()) => new({status, sshpublicKeyId, userName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module UpdateSAMLProvider = {
   type t
   type request = {
@@ -1823,10 +1807,9 @@ module UpdateSAMLProvider = {
   }
   @module("@aws-sdk/client-iam") @new external new: request => t = "UpdateSAMLProviderCommand"
   let make = (~samlproviderArn, ~samlmetadataDocument, ()) =>
-    new({samlproviderArn: samlproviderArn, samlmetadataDocument: samlmetadataDocument})
+    new({samlproviderArn, samlmetadataDocument})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateRole = {
   type t
   type request = {
@@ -1854,10 +1837,9 @@ module UpdateRole = {
   type response = {.}
   @module("@aws-sdk/client-iam") @new external new: request => t = "UpdateRoleCommand"
   let make = (~roleName, ~maxSessionDuration=?, ~description=?, ()) =>
-    new({maxSessionDuration: maxSessionDuration, description: description, roleName: roleName})
+    new({maxSessionDuration, description, roleName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module UpdateLoginProfile = {
   type t
   type request = {
@@ -1895,10 +1877,9 @@ module UpdateLoginProfile = {
   type response = {.}
   @module("@aws-sdk/client-iam") @new external new: request => t = "UpdateLoginProfileCommand"
   let make = (~userName, ~passwordResetRequired=?, ~password=?, ()) =>
-    new({passwordResetRequired: passwordResetRequired, password: password, userName: userName})
+    new({passwordResetRequired, password, userName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module UpdateGroup = {
   type t
   type request = {
@@ -1925,10 +1906,9 @@ module UpdateGroup = {
   type response = {.}
   @module("@aws-sdk/client-iam") @new external new: request => t = "UpdateGroupCommand"
   let make = (~groupName, ~newGroupName=?, ~newPath=?, ()) =>
-    new({newGroupName: newGroupName, newPath: newPath, groupName: groupName})
+    new({newGroupName, newPath, groupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module UpdateAssumeRolePolicy = {
   type t
   type request = {
@@ -1962,11 +1942,9 @@ module UpdateAssumeRolePolicy = {
   }
   type response = {.}
   @module("@aws-sdk/client-iam") @new external new: request => t = "UpdateAssumeRolePolicyCommand"
-  let make = (~policyDocument, ~roleName, ()) =>
-    new({policyDocument: policyDocument, roleName: roleName})
+  let make = (~policyDocument, ~roleName, ()) => new({policyDocument, roleName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module UpdateAccountPasswordPolicy = {
   type t
   type request = {
@@ -2060,19 +2038,18 @@ module UpdateAccountPasswordPolicy = {
     (),
   ) =>
     new({
-      hardExpiry: hardExpiry,
-      passwordReusePrevention: passwordReusePrevention,
-      maxPasswordAge: maxPasswordAge,
-      allowUsersToChangePassword: allowUsersToChangePassword,
-      requireLowercaseCharacters: requireLowercaseCharacters,
-      requireUppercaseCharacters: requireUppercaseCharacters,
-      requireNumbers: requireNumbers,
-      requireSymbols: requireSymbols,
-      minimumPasswordLength: minimumPasswordLength,
+      hardExpiry,
+      passwordReusePrevention,
+      maxPasswordAge,
+      allowUsersToChangePassword,
+      requireLowercaseCharacters,
+      requireUppercaseCharacters,
+      requireNumbers,
+      requireSymbols,
+      minimumPasswordLength,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module UpdateAccessKey = {
   type t
   type request = {
@@ -2094,11 +2071,9 @@ module UpdateAccessKey = {
   }
   type response = {.}
   @module("@aws-sdk/client-iam") @new external new: request => t = "UpdateAccessKeyCommand"
-  let make = (~status, ~accessKeyId, ~userName=?, ()) =>
-    new({status: status, accessKeyId: accessKeyId, userName: userName})
+  let make = (~status, ~accessKeyId, ~userName=?, ()) => new({status, accessKeyId, userName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module SetSecurityTokenServicePreferences = {
   type t
   type request = {
@@ -2119,7 +2094,6 @@ module SetSecurityTokenServicePreferences = {
     new({globalEndpointTokenVersion: globalEndpointTokenVersion})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module SetDefaultPolicyVersion = {
   type t
   type request = {
@@ -2136,10 +2110,9 @@ module SetDefaultPolicyVersion = {
   }
   type response = {.}
   @module("@aws-sdk/client-iam") @new external new: request => t = "SetDefaultPolicyVersionCommand"
-  let make = (~versionId, ~policyArn, ()) => new({versionId: versionId, policyArn: policyArn})
+  let make = (~versionId, ~policyArn, ()) => new({versionId, policyArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module ResyncMFADevice = {
   type t
   type request = {
@@ -2165,15 +2138,9 @@ module ResyncMFADevice = {
   type response = {.}
   @module("@aws-sdk/client-iam") @new external new: request => t = "ResyncMFADeviceCommand"
   let make = (~authenticationCode2, ~authenticationCode1, ~serialNumber, ~userName, ()) =>
-    new({
-      authenticationCode2: authenticationCode2,
-      authenticationCode1: authenticationCode1,
-      serialNumber: serialNumber,
-      userName: userName,
-    })
+    new({authenticationCode2, authenticationCode1, serialNumber, userName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module RemoveUserFromGroup = {
   type t
   type request = {
@@ -2190,10 +2157,9 @@ module RemoveUserFromGroup = {
   }
   type response = {.}
   @module("@aws-sdk/client-iam") @new external new: request => t = "RemoveUserFromGroupCommand"
-  let make = (~userName, ~groupName, ()) => new({userName: userName, groupName: groupName})
+  let make = (~userName, ~groupName, ()) => new({userName, groupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module RemoveRoleFromInstanceProfile = {
   type t
   type request = {
@@ -2211,11 +2177,9 @@ module RemoveRoleFromInstanceProfile = {
   type response = {.}
   @module("@aws-sdk/client-iam") @new
   external new: request => t = "RemoveRoleFromInstanceProfileCommand"
-  let make = (~roleName, ~instanceProfileName, ()) =>
-    new({roleName: roleName, instanceProfileName: instanceProfileName})
+  let make = (~roleName, ~instanceProfileName, ()) => new({roleName, instanceProfileName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module RemoveClientIDFromOpenIDConnectProvider = {
   type t
   type request = {
@@ -2232,11 +2196,9 @@ module RemoveClientIDFromOpenIDConnectProvider = {
   type response = {.}
   @module("@aws-sdk/client-iam") @new
   external new: request => t = "RemoveClientIDFromOpenIDConnectProviderCommand"
-  let make = (~clientID, ~openIDConnectProviderArn, ()) =>
-    new({clientID: clientID, openIDConnectProviderArn: openIDConnectProviderArn})
+  let make = (~clientID, ~openIDConnectProviderArn, ()) => new({clientID, openIDConnectProviderArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module PutUserPolicy = {
   type t
   type request = {
@@ -2277,10 +2239,9 @@ module PutUserPolicy = {
   type response = {.}
   @module("@aws-sdk/client-iam") @new external new: request => t = "PutUserPolicyCommand"
   let make = (~policyDocument, ~policyName, ~userName, ()) =>
-    new({policyDocument: policyDocument, policyName: policyName, userName: userName})
+    new({policyDocument, policyName, userName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module PutUserPermissionsBoundary = {
   type t
   type request = {
@@ -2296,11 +2257,9 @@ module PutUserPermissionsBoundary = {
   type response = {.}
   @module("@aws-sdk/client-iam") @new
   external new: request => t = "PutUserPermissionsBoundaryCommand"
-  let make = (~permissionsBoundary, ~userName, ()) =>
-    new({permissionsBoundary: permissionsBoundary, userName: userName})
+  let make = (~permissionsBoundary, ~userName, ()) => new({permissionsBoundary, userName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module PutRolePolicy = {
   type t
   type request = {
@@ -2340,10 +2299,9 @@ module PutRolePolicy = {
   type response = {.}
   @module("@aws-sdk/client-iam") @new external new: request => t = "PutRolePolicyCommand"
   let make = (~policyDocument, ~policyName, ~roleName, ()) =>
-    new({policyDocument: policyDocument, policyName: policyName, roleName: roleName})
+    new({policyDocument, policyName, roleName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module PutRolePermissionsBoundary = {
   type t
   type request = {
@@ -2359,11 +2317,9 @@ module PutRolePermissionsBoundary = {
   type response = {.}
   @module("@aws-sdk/client-iam") @new
   external new: request => t = "PutRolePermissionsBoundaryCommand"
-  let make = (~permissionsBoundary, ~roleName, ()) =>
-    new({permissionsBoundary: permissionsBoundary, roleName: roleName})
+  let make = (~permissionsBoundary, ~roleName, ()) => new({permissionsBoundary, roleName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module PutGroupPolicy = {
   type t
   type request = {
@@ -2404,10 +2360,9 @@ module PutGroupPolicy = {
   type response = {.}
   @module("@aws-sdk/client-iam") @new external new: request => t = "PutGroupPolicyCommand"
   let make = (~policyDocument, ~policyName, ~groupName, ()) =>
-    new({policyDocument: policyDocument, policyName: policyName, groupName: groupName})
+    new({policyDocument, policyName, groupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module GetUserPolicy = {
   type t
   type request = {
@@ -2437,10 +2392,9 @@ module GetUserPolicy = {
     userName: existingUserNameType,
   }
   @module("@aws-sdk/client-iam") @new external new: request => t = "GetUserPolicyCommand"
-  let make = (~policyName, ~userName, ()) => new({policyName: policyName, userName: userName})
+  let make = (~policyName, ~userName, ()) => new({policyName, userName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetRolePolicy = {
   type t
   type request = {
@@ -2469,10 +2423,9 @@ module GetRolePolicy = {
     roleName: roleNameType,
   }
   @module("@aws-sdk/client-iam") @new external new: request => t = "GetRolePolicyCommand"
-  let make = (~policyName, ~roleName, ()) => new({policyName: policyName, roleName: roleName})
+  let make = (~policyName, ~roleName, ()) => new({policyName, roleName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetGroupPolicy = {
   type t
   type request = {
@@ -2502,10 +2455,9 @@ module GetGroupPolicy = {
     groupName: groupNameType,
   }
   @module("@aws-sdk/client-iam") @new external new: request => t = "GetGroupPolicyCommand"
-  let make = (~policyName, ~groupName, ()) => new({policyName: policyName, groupName: groupName})
+  let make = (~policyName, ~groupName, ()) => new({policyName, groupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetCredentialReport = {
   type t
   type request = {.}
@@ -2527,7 +2479,6 @@ module GetCredentialReport = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GenerateServiceLastAccessedDetails = {
   type t
   type request = {
@@ -2554,10 +2505,9 @@ module GenerateServiceLastAccessedDetails = {
   }
   @module("@aws-sdk/client-iam") @new
   external new: request => t = "GenerateServiceLastAccessedDetailsCommand"
-  let make = (~arn, ~granularity=?, ()) => new({granularity: granularity, arn: arn})
+  let make = (~arn, ~granularity=?, ()) => new({granularity, arn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GenerateOrganizationsAccessReport = {
   type t
   type request = {
@@ -2585,11 +2535,9 @@ module GenerateOrganizationsAccessReport = {
   }
   @module("@aws-sdk/client-iam") @new
   external new: request => t = "GenerateOrganizationsAccessReportCommand"
-  let make = (~entityPath, ~organizationsPolicyId=?, ()) =>
-    new({organizationsPolicyId: organizationsPolicyId, entityPath: entityPath})
+  let make = (~entityPath, ~organizationsPolicyId=?, ()) => new({organizationsPolicyId, entityPath})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GenerateCredentialReport = {
   type t
   type request = {.}
@@ -2605,7 +2553,6 @@ module GenerateCredentialReport = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module EnableMFADevice = {
   type t
   type request = {
@@ -2649,15 +2596,9 @@ module EnableMFADevice = {
   type response = {.}
   @module("@aws-sdk/client-iam") @new external new: request => t = "EnableMFADeviceCommand"
   let make = (~authenticationCode2, ~authenticationCode1, ~serialNumber, ~userName, ()) =>
-    new({
-      authenticationCode2: authenticationCode2,
-      authenticationCode1: authenticationCode1,
-      serialNumber: serialNumber,
-      userName: userName,
-    })
+    new({authenticationCode2, authenticationCode1, serialNumber, userName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DetachUserPolicy = {
   type t
   type request = {
@@ -2673,10 +2614,9 @@ module DetachUserPolicy = {
   }
   type response = {.}
   @module("@aws-sdk/client-iam") @new external new: request => t = "DetachUserPolicyCommand"
-  let make = (~policyArn, ~userName, ()) => new({policyArn: policyArn, userName: userName})
+  let make = (~policyArn, ~userName, ()) => new({policyArn, userName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DetachRolePolicy = {
   type t
   type request = {
@@ -2692,10 +2632,9 @@ module DetachRolePolicy = {
   }
   type response = {.}
   @module("@aws-sdk/client-iam") @new external new: request => t = "DetachRolePolicyCommand"
-  let make = (~policyArn, ~roleName, ()) => new({policyArn: policyArn, roleName: roleName})
+  let make = (~policyArn, ~roleName, ()) => new({policyArn, roleName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DetachGroupPolicy = {
   type t
   type request = {
@@ -2711,10 +2650,9 @@ module DetachGroupPolicy = {
   }
   type response = {.}
   @module("@aws-sdk/client-iam") @new external new: request => t = "DetachGroupPolicyCommand"
-  let make = (~policyArn, ~groupName, ()) => new({policyArn: policyArn, groupName: groupName})
+  let make = (~policyArn, ~groupName, ()) => new({policyArn, groupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteVirtualMFADevice = {
   type t
   type request = {
@@ -2731,7 +2669,6 @@ module DeleteVirtualMFADevice = {
   let make = (~serialNumber, ()) => new({serialNumber: serialNumber})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteUserPolicy = {
   type t
   type request = {
@@ -2749,10 +2686,9 @@ module DeleteUserPolicy = {
   }
   type response = {.}
   @module("@aws-sdk/client-iam") @new external new: request => t = "DeleteUserPolicyCommand"
-  let make = (~policyName, ~userName, ()) => new({policyName: policyName, userName: userName})
+  let make = (~policyName, ~userName, ()) => new({policyName, userName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteUserPermissionsBoundary = {
   type t
   type request = {
@@ -2767,7 +2703,6 @@ module DeleteUserPermissionsBoundary = {
   let make = (~userName, ()) => new({userName: userName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteUser = {
   type t
   type request = {
@@ -2782,7 +2717,6 @@ module DeleteUser = {
   let make = (~userName, ()) => new({userName: userName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteSigningCertificate = {
   type t
   type request = {
@@ -2799,11 +2733,9 @@ module DeleteSigningCertificate = {
   }
   type response = {.}
   @module("@aws-sdk/client-iam") @new external new: request => t = "DeleteSigningCertificateCommand"
-  let make = (~certificateId, ~userName=?, ()) =>
-    new({certificateId: certificateId, userName: userName})
+  let make = (~certificateId, ~userName=?, ()) => new({certificateId, userName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteServiceSpecificCredential = {
   type t
   type request = {
@@ -2825,10 +2757,9 @@ module DeleteServiceSpecificCredential = {
   @module("@aws-sdk/client-iam") @new
   external new: request => t = "DeleteServiceSpecificCredentialCommand"
   let make = (~serviceSpecificCredentialId, ~userName=?, ()) =>
-    new({serviceSpecificCredentialId: serviceSpecificCredentialId, userName: userName})
+    new({serviceSpecificCredentialId, userName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteServiceLinkedRole = {
   type t
   type request = {
@@ -2846,7 +2777,6 @@ module DeleteServiceLinkedRole = {
   let make = (~roleName, ()) => new({roleName: roleName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteServerCertificate = {
   type t
   type request = {
@@ -2861,7 +2791,6 @@ module DeleteServerCertificate = {
   let make = (~serverCertificateName, ()) => new({serverCertificateName: serverCertificateName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteSSHPublicKey = {
   type t
   type request = {
@@ -2878,11 +2807,9 @@ module DeleteSSHPublicKey = {
   }
   type response = {.}
   @module("@aws-sdk/client-iam") @new external new: request => t = "DeleteSSHPublicKeyCommand"
-  let make = (~sshpublicKeyId, ~userName, ()) =>
-    new({sshpublicKeyId: sshpublicKeyId, userName: userName})
+  let make = (~sshpublicKeyId, ~userName, ()) => new({sshpublicKeyId, userName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteSAMLProvider = {
   type t
   type request = {
@@ -2895,7 +2822,6 @@ module DeleteSAMLProvider = {
   let make = (~samlproviderArn, ()) => new({samlproviderArn: samlproviderArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteRolePolicy = {
   type t
   type request = {
@@ -2913,10 +2839,9 @@ module DeleteRolePolicy = {
   }
   type response = {.}
   @module("@aws-sdk/client-iam") @new external new: request => t = "DeleteRolePolicyCommand"
-  let make = (~policyName, ~roleName, ()) => new({policyName: policyName, roleName: roleName})
+  let make = (~policyName, ~roleName, ()) => new({policyName, roleName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteRolePermissionsBoundary = {
   type t
   type request = {
@@ -2931,7 +2856,6 @@ module DeleteRolePermissionsBoundary = {
   let make = (~roleName, ()) => new({roleName: roleName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteRole = {
   type t
   type request = {
@@ -2946,7 +2870,6 @@ module DeleteRole = {
   let make = (~roleName, ()) => new({roleName: roleName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeletePolicyVersion = {
   type t
   type request = {
@@ -2966,10 +2889,9 @@ module DeletePolicyVersion = {
   }
   type response = {.}
   @module("@aws-sdk/client-iam") @new external new: request => t = "DeletePolicyVersionCommand"
-  let make = (~versionId, ~policyArn, ()) => new({versionId: versionId, policyArn: policyArn})
+  let make = (~versionId, ~policyArn, ()) => new({versionId, policyArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeletePolicy = {
   type t
   type request = {
@@ -2983,7 +2905,6 @@ module DeletePolicy = {
   let make = (~policyArn, ()) => new({policyArn: policyArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteOpenIDConnectProvider = {
   type t
   type request = {
@@ -2999,7 +2920,6 @@ module DeleteOpenIDConnectProvider = {
     new({openIDConnectProviderArn: openIDConnectProviderArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteLoginProfile = {
   type t
   type request = {
@@ -3014,7 +2934,6 @@ module DeleteLoginProfile = {
   let make = (~userName, ()) => new({userName: userName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteInstanceProfile = {
   type t
   type request = {
@@ -3029,7 +2948,6 @@ module DeleteInstanceProfile = {
   let make = (~instanceProfileName, ()) => new({instanceProfileName: instanceProfileName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteGroupPolicy = {
   type t
   type request = {
@@ -3047,10 +2965,9 @@ module DeleteGroupPolicy = {
   }
   type response = {.}
   @module("@aws-sdk/client-iam") @new external new: request => t = "DeleteGroupPolicyCommand"
-  let make = (~policyName, ~groupName, ()) => new({policyName: policyName, groupName: groupName})
+  let make = (~policyName, ~groupName, ()) => new({policyName, groupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteGroup = {
   type t
   type request = {
@@ -3065,7 +2982,6 @@ module DeleteGroup = {
   let make = (~groupName, ()) => new({groupName: groupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteAccountPasswordPolicy = {
   type t
   type request = {.}
@@ -3075,7 +2991,6 @@ module DeleteAccountPasswordPolicy = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteAccountAlias = {
   type t
   type request = {
@@ -3091,7 +3006,6 @@ module DeleteAccountAlias = {
   let make = (~accountAlias, ()) => new({accountAlias: accountAlias})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteAccessKey = {
   type t
   type request = {
@@ -3109,10 +3023,9 @@ module DeleteAccessKey = {
   }
   type response = {.}
   @module("@aws-sdk/client-iam") @new external new: request => t = "DeleteAccessKeyCommand"
-  let make = (~accessKeyId, ~userName=?, ()) => new({accessKeyId: accessKeyId, userName: userName})
+  let make = (~accessKeyId, ~userName=?, ()) => new({accessKeyId, userName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeactivateMFADevice = {
   type t
   type request = {
@@ -3131,10 +3044,9 @@ module DeactivateMFADevice = {
   }
   type response = {.}
   @module("@aws-sdk/client-iam") @new external new: request => t = "DeactivateMFADeviceCommand"
-  let make = (~serialNumber, ~userName, ()) => new({serialNumber: serialNumber, userName: userName})
+  let make = (~serialNumber, ~userName, ()) => new({serialNumber, userName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module CreateAccountAlias = {
   type t
   type request = {
@@ -3150,7 +3062,6 @@ module CreateAccountAlias = {
   let make = (~accountAlias, ()) => new({accountAlias: accountAlias})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module ChangePassword = {
   type t
   type request = {
@@ -3170,11 +3081,9 @@ module ChangePassword = {
   }
   type response = {.}
   @module("@aws-sdk/client-iam") @new external new: request => t = "ChangePasswordCommand"
-  let make = (~newPassword, ~oldPassword, ()) =>
-    new({newPassword: newPassword, oldPassword: oldPassword})
+  let make = (~newPassword, ~oldPassword, ()) => new({newPassword, oldPassword})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module AttachUserPolicy = {
   type t
   type request = {
@@ -3190,10 +3099,9 @@ module AttachUserPolicy = {
   }
   type response = {.}
   @module("@aws-sdk/client-iam") @new external new: request => t = "AttachUserPolicyCommand"
-  let make = (~policyArn, ~userName, ()) => new({policyArn: policyArn, userName: userName})
+  let make = (~policyArn, ~userName, ()) => new({policyArn, userName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module AttachRolePolicy = {
   type t
   type request = {
@@ -3209,10 +3117,9 @@ module AttachRolePolicy = {
   }
   type response = {.}
   @module("@aws-sdk/client-iam") @new external new: request => t = "AttachRolePolicyCommand"
-  let make = (~policyArn, ~roleName, ()) => new({policyArn: policyArn, roleName: roleName})
+  let make = (~policyArn, ~roleName, ()) => new({policyArn, roleName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module AttachGroupPolicy = {
   type t
   type request = {
@@ -3228,10 +3135,9 @@ module AttachGroupPolicy = {
   }
   type response = {.}
   @module("@aws-sdk/client-iam") @new external new: request => t = "AttachGroupPolicyCommand"
-  let make = (~policyArn, ~groupName, ()) => new({policyArn: policyArn, groupName: groupName})
+  let make = (~policyArn, ~groupName, ()) => new({policyArn, groupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module AddUserToGroup = {
   type t
   type request = {
@@ -3248,10 +3154,9 @@ module AddUserToGroup = {
   }
   type response = {.}
   @module("@aws-sdk/client-iam") @new external new: request => t = "AddUserToGroupCommand"
-  let make = (~userName, ~groupName, ()) => new({userName: userName, groupName: groupName})
+  let make = (~userName, ~groupName, ()) => new({userName, groupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module AddRoleToInstanceProfile = {
   type t
   type request = {
@@ -3268,11 +3173,9 @@ module AddRoleToInstanceProfile = {
   }
   type response = {.}
   @module("@aws-sdk/client-iam") @new external new: request => t = "AddRoleToInstanceProfileCommand"
-  let make = (~roleName, ~instanceProfileName, ()) =>
-    new({roleName: roleName, instanceProfileName: instanceProfileName})
+  let make = (~roleName, ~instanceProfileName, ()) => new({roleName, instanceProfileName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module AddClientIDToOpenIDConnectProvider = {
   type t
   type request = {
@@ -3288,11 +3191,9 @@ module AddClientIDToOpenIDConnectProvider = {
   type response = {.}
   @module("@aws-sdk/client-iam") @new
   external new: request => t = "AddClientIDToOpenIDConnectProviderCommand"
-  let make = (~clientID, ~openIDConnectProviderArn, ()) =>
-    new({clientID: clientID, openIDConnectProviderArn: openIDConnectProviderArn})
+  let make = (~clientID, ~openIDConnectProviderArn, ()) => new({clientID, openIDConnectProviderArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module UploadSigningCertificate = {
   type t
   type request = {
@@ -3328,11 +3229,9 @@ module UploadSigningCertificate = {
     certificate: signingCertificate,
   }
   @module("@aws-sdk/client-iam") @new external new: request => t = "UploadSigningCertificateCommand"
-  let make = (~certificateBody, ~userName=?, ()) =>
-    new({certificateBody: certificateBody, userName: userName})
+  let make = (~certificateBody, ~userName=?, ()) => new({certificateBody, userName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UploadSSHPublicKey = {
   type t
   type request = {
@@ -3370,11 +3269,9 @@ module UploadSSHPublicKey = {
     sshpublicKey: option<sshpublicKey>,
   }
   @module("@aws-sdk/client-iam") @new external new: request => t = "UploadSSHPublicKeyCommand"
-  let make = (~sshpublicKeyBody, ~userName, ()) =>
-    new({sshpublicKeyBody: sshpublicKeyBody, userName: userName})
+  let make = (~sshpublicKeyBody, ~userName, ()) => new({sshpublicKeyBody, userName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateOpenIDConnectProviderThumbprint = {
   type t
   type request = {
@@ -3393,10 +3290,9 @@ module UpdateOpenIDConnectProviderThumbprint = {
   @module("@aws-sdk/client-iam") @new
   external new: request => t = "UpdateOpenIDConnectProviderThumbprintCommand"
   let make = (~thumbprintList, ~openIDConnectProviderArn, ()) =>
-    new({thumbprintList: thumbprintList, openIDConnectProviderArn: openIDConnectProviderArn})
+    new({thumbprintList, openIDConnectProviderArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module UntagUser = {
   type t
   type request = {
@@ -3412,10 +3308,9 @@ module UntagUser = {
   }
   type response = {.}
   @module("@aws-sdk/client-iam") @new external new: request => t = "UntagUserCommand"
-  let make = (~tagKeys, ~userName, ()) => new({tagKeys: tagKeys, userName: userName})
+  let make = (~tagKeys, ~userName, ()) => new({tagKeys, userName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module UntagServerCertificate = {
   type t
   type request = {
@@ -3431,11 +3326,9 @@ module UntagServerCertificate = {
   }
   type response = {.}
   @module("@aws-sdk/client-iam") @new external new: request => t = "UntagServerCertificateCommand"
-  let make = (~tagKeys, ~serverCertificateName, ()) =>
-    new({tagKeys: tagKeys, serverCertificateName: serverCertificateName})
+  let make = (~tagKeys, ~serverCertificateName, ()) => new({tagKeys, serverCertificateName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module UntagSAMLProvider = {
   type t
   type request = {
@@ -3452,11 +3345,9 @@ module UntagSAMLProvider = {
   }
   type response = {.}
   @module("@aws-sdk/client-iam") @new external new: request => t = "UntagSAMLProviderCommand"
-  let make = (~tagKeys, ~samlproviderArn, ()) =>
-    new({tagKeys: tagKeys, samlproviderArn: samlproviderArn})
+  let make = (~tagKeys, ~samlproviderArn, ()) => new({tagKeys, samlproviderArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module UntagRole = {
   type t
   type request = {
@@ -3472,10 +3363,9 @@ module UntagRole = {
   }
   type response = {.}
   @module("@aws-sdk/client-iam") @new external new: request => t = "UntagRoleCommand"
-  let make = (~tagKeys, ~roleName, ()) => new({tagKeys: tagKeys, roleName: roleName})
+  let make = (~tagKeys, ~roleName, ()) => new({tagKeys, roleName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module UntagPolicy = {
   type t
   type request = {
@@ -3492,10 +3382,9 @@ module UntagPolicy = {
   }
   type response = {.}
   @module("@aws-sdk/client-iam") @new external new: request => t = "UntagPolicyCommand"
-  let make = (~tagKeys, ~policyArn, ()) => new({tagKeys: tagKeys, policyArn: policyArn})
+  let make = (~tagKeys, ~policyArn, ()) => new({tagKeys, policyArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module UntagOpenIDConnectProvider = {
   type t
   type request = {
@@ -3512,11 +3401,9 @@ module UntagOpenIDConnectProvider = {
   type response = {.}
   @module("@aws-sdk/client-iam") @new
   external new: request => t = "UntagOpenIDConnectProviderCommand"
-  let make = (~tagKeys, ~openIDConnectProviderArn, ()) =>
-    new({tagKeys: tagKeys, openIDConnectProviderArn: openIDConnectProviderArn})
+  let make = (~tagKeys, ~openIDConnectProviderArn, ()) => new({tagKeys, openIDConnectProviderArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module UntagMFADevice = {
   type t
   type request = {
@@ -3533,10 +3420,9 @@ module UntagMFADevice = {
   }
   type response = {.}
   @module("@aws-sdk/client-iam") @new external new: request => t = "UntagMFADeviceCommand"
-  let make = (~tagKeys, ~serialNumber, ()) => new({tagKeys: tagKeys, serialNumber: serialNumber})
+  let make = (~tagKeys, ~serialNumber, ()) => new({tagKeys, serialNumber})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module UntagInstanceProfile = {
   type t
   type request = {
@@ -3552,11 +3438,9 @@ module UntagInstanceProfile = {
   }
   type response = {.}
   @module("@aws-sdk/client-iam") @new external new: request => t = "UntagInstanceProfileCommand"
-  let make = (~tagKeys, ~instanceProfileName, ()) =>
-    new({tagKeys: tagKeys, instanceProfileName: instanceProfileName})
+  let make = (~tagKeys, ~instanceProfileName, ()) => new({tagKeys, instanceProfileName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module ResetServiceSpecificCredential = {
   type t
   type request = {
@@ -3586,10 +3470,9 @@ module ResetServiceSpecificCredential = {
   @module("@aws-sdk/client-iam") @new
   external new: request => t = "ResetServiceSpecificCredentialCommand"
   let make = (~serviceSpecificCredentialId, ~userName=?, ()) =>
-    new({serviceSpecificCredentialId: serviceSpecificCredentialId, userName: userName})
+    new({serviceSpecificCredentialId, userName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListUserPolicies = {
   type t
   type request = {
@@ -3634,11 +3517,9 @@ module ListUserPolicies = {
     @ocaml.doc("<p>A list of policy names.</p>") @as("PolicyNames") policyNames: policyNameListType,
   }
   @module("@aws-sdk/client-iam") @new external new: request => t = "ListUserPoliciesCommand"
-  let make = (~userName, ~maxItems=?, ~marker=?, ()) =>
-    new({maxItems: maxItems, marker: marker, userName: userName})
+  let make = (~userName, ~maxItems=?, ~marker=?, ()) => new({maxItems, marker, userName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListRolePolicies = {
   type t
   type request = {
@@ -3683,11 +3564,9 @@ module ListRolePolicies = {
     @ocaml.doc("<p>A list of policy names.</p>") @as("PolicyNames") policyNames: policyNameListType,
   }
   @module("@aws-sdk/client-iam") @new external new: request => t = "ListRolePoliciesCommand"
-  let make = (~roleName, ~maxItems=?, ~marker=?, ()) =>
-    new({maxItems: maxItems, marker: marker, roleName: roleName})
+  let make = (~roleName, ~maxItems=?, ~marker=?, ()) => new({maxItems, marker, roleName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListGroupPolicies = {
   type t
   type request = {
@@ -3736,11 +3615,9 @@ module ListGroupPolicies = {
     policyNames: policyNameListType,
   }
   @module("@aws-sdk/client-iam") @new external new: request => t = "ListGroupPoliciesCommand"
-  let make = (~groupName, ~maxItems=?, ~marker=?, ()) =>
-    new({maxItems: maxItems, marker: marker, groupName: groupName})
+  let make = (~groupName, ~maxItems=?, ~marker=?, ()) => new({maxItems, marker, groupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListAccountAliases = {
   type t
   type request = {
@@ -3783,10 +3660,9 @@ module ListAccountAliases = {
     accountAliases: accountAliasListType,
   }
   @module("@aws-sdk/client-iam") @new external new: request => t = "ListAccountAliasesCommand"
-  let make = (~maxItems=?, ~marker=?, ()) => new({maxItems: maxItems, marker: marker})
+  let make = (~maxItems=?, ~marker=?, ()) => new({maxItems, marker})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetSSHPublicKey = {
   type t
   type request = {
@@ -3815,10 +3691,9 @@ module GetSSHPublicKey = {
   }
   @module("@aws-sdk/client-iam") @new external new: request => t = "GetSSHPublicKeyCommand"
   let make = (~encoding, ~sshpublicKeyId, ~userName, ()) =>
-    new({encoding: encoding, sshpublicKeyId: sshpublicKeyId, userName: userName})
+    new({encoding, sshpublicKeyId, userName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetPolicyVersion = {
   type t
   type request = {
@@ -3842,10 +3717,9 @@ module GetPolicyVersion = {
     policyVersion: option<policyVersion>,
   }
   @module("@aws-sdk/client-iam") @new external new: request => t = "GetPolicyVersionCommand"
-  let make = (~versionId, ~policyArn, ()) => new({versionId: versionId, policyArn: policyArn})
+  let make = (~versionId, ~policyArn, ()) => new({versionId, policyArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetLoginProfile = {
   type t
   type request = {
@@ -3867,7 +3741,6 @@ module GetLoginProfile = {
   let make = (~userName, ()) => new({userName: userName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetContextKeysForPrincipalPolicy = {
   type t
   type request = {
@@ -3912,11 +3785,9 @@ module GetContextKeysForPrincipalPolicy = {
   }
   @module("@aws-sdk/client-iam") @new
   external new: request => t = "GetContextKeysForPrincipalPolicyCommand"
-  let make = (~policySourceArn, ~policyInputList=?, ()) =>
-    new({policyInputList: policyInputList, policySourceArn: policySourceArn})
+  let make = (~policySourceArn, ~policyInputList=?, ()) => new({policyInputList, policySourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetContextKeysForCustomPolicy = {
   type t
   type request = {
@@ -3955,7 +3826,6 @@ module GetContextKeysForCustomPolicy = {
   let make = (~policyInputList, ()) => new({policyInputList: policyInputList})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetAccountSummary = {
   type t
   type request = {.}
@@ -3971,7 +3841,6 @@ module GetAccountSummary = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetAccountPasswordPolicy = {
   type t
   type request = {.}
@@ -3986,7 +3855,6 @@ module GetAccountPasswordPolicy = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetAccessKeyLastUsed = {
   type t
   type request = {
@@ -4012,7 +3880,6 @@ module GetAccessKeyLastUsed = {
   let make = (~accessKeyId, ()) => new({accessKeyId: accessKeyId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateServiceSpecificCredential = {
   type t
   type request = {
@@ -4041,10 +3908,9 @@ module CreateServiceSpecificCredential = {
   }
   @module("@aws-sdk/client-iam") @new
   external new: request => t = "CreateServiceSpecificCredentialCommand"
-  let make = (~serviceName, ~userName, ()) => new({serviceName: serviceName, userName: userName})
+  let make = (~serviceName, ~userName, ()) => new({serviceName, userName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreatePolicyVersion = {
   type t
   type request = {
@@ -4096,10 +3962,9 @@ module CreatePolicyVersion = {
   }
   @module("@aws-sdk/client-iam") @new external new: request => t = "CreatePolicyVersionCommand"
   let make = (~policyDocument, ~policyArn, ~setAsDefault=?, ()) =>
-    new({setAsDefault: setAsDefault, policyDocument: policyDocument, policyArn: policyArn})
+    new({setAsDefault, policyDocument, policyArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateLoginProfile = {
   type t
   type request = {
@@ -4134,10 +3999,9 @@ module CreateLoginProfile = {
   }
   @module("@aws-sdk/client-iam") @new external new: request => t = "CreateLoginProfileCommand"
   let make = (~password, ~userName, ~passwordResetRequired=?, ()) =>
-    new({passwordResetRequired: passwordResetRequired, password: password, userName: userName})
+    new({passwordResetRequired, password, userName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateGroup = {
   type t
   type request = {
@@ -4163,10 +4027,9 @@ module CreateGroup = {
     group: group,
   }
   @module("@aws-sdk/client-iam") @new external new: request => t = "CreateGroupCommand"
-  let make = (~groupName, ~path=?, ()) => new({groupName: groupName, path: path})
+  let make = (~groupName, ~path=?, ()) => new({groupName, path})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateAccessKey = {
   type t
   type request = {
@@ -4186,7 +4049,6 @@ module CreateAccessKey = {
   let make = (~userName=?, ()) => new({userName: userName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UploadServerCertificate = {
   type t
   type request = {
@@ -4301,18 +4163,9 @@ module UploadServerCertificate = {
     ~certificateChain=?,
     ~path=?,
     (),
-  ) =>
-    new({
-      tags: tags,
-      certificateChain: certificateChain,
-      privateKey: privateKey,
-      certificateBody: certificateBody,
-      serverCertificateName: serverCertificateName,
-      path: path,
-    })
+  ) => new({tags, certificateChain, privateKey, certificateBody, serverCertificateName, path})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module TagUser = {
   type t
   type request = {
@@ -4329,10 +4182,9 @@ module TagUser = {
   }
   type response = {.}
   @module("@aws-sdk/client-iam") @new external new: request => t = "TagUserCommand"
-  let make = (~tags, ~userName, ()) => new({tags: tags, userName: userName})
+  let make = (~tags, ~userName, ()) => new({tags, userName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module TagServerCertificate = {
   type t
   type request = {
@@ -4348,11 +4200,9 @@ module TagServerCertificate = {
   }
   type response = {.}
   @module("@aws-sdk/client-iam") @new external new: request => t = "TagServerCertificateCommand"
-  let make = (~tags, ~serverCertificateName, ()) =>
-    new({tags: tags, serverCertificateName: serverCertificateName})
+  let make = (~tags, ~serverCertificateName, ()) => new({tags, serverCertificateName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module TagSAMLProvider = {
   type t
   type request = {
@@ -4368,10 +4218,9 @@ module TagSAMLProvider = {
   }
   type response = {.}
   @module("@aws-sdk/client-iam") @new external new: request => t = "TagSAMLProviderCommand"
-  let make = (~tags, ~samlproviderArn, ()) => new({tags: tags, samlproviderArn: samlproviderArn})
+  let make = (~tags, ~samlproviderArn, ()) => new({tags, samlproviderArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module TagRole = {
   type t
   type request = {
@@ -4388,10 +4237,9 @@ module TagRole = {
   }
   type response = {.}
   @module("@aws-sdk/client-iam") @new external new: request => t = "TagRoleCommand"
-  let make = (~tags, ~roleName, ()) => new({tags: tags, roleName: roleName})
+  let make = (~tags, ~roleName, ()) => new({tags, roleName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module TagPolicy = {
   type t
   type request = {
@@ -4407,10 +4255,9 @@ module TagPolicy = {
   }
   type response = {.}
   @module("@aws-sdk/client-iam") @new external new: request => t = "TagPolicyCommand"
-  let make = (~tags, ~policyArn, ()) => new({tags: tags, policyArn: policyArn})
+  let make = (~tags, ~policyArn, ()) => new({tags, policyArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module TagOpenIDConnectProvider = {
   type t
   type request = {
@@ -4426,11 +4273,9 @@ module TagOpenIDConnectProvider = {
   }
   type response = {.}
   @module("@aws-sdk/client-iam") @new external new: request => t = "TagOpenIDConnectProviderCommand"
-  let make = (~tags, ~openIDConnectProviderArn, ()) =>
-    new({tags: tags, openIDConnectProviderArn: openIDConnectProviderArn})
+  let make = (~tags, ~openIDConnectProviderArn, ()) => new({tags, openIDConnectProviderArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module TagMFADevice = {
   type t
   type request = {
@@ -4447,10 +4292,9 @@ module TagMFADevice = {
   }
   type response = {.}
   @module("@aws-sdk/client-iam") @new external new: request => t = "TagMFADeviceCommand"
-  let make = (~tags, ~serialNumber, ()) => new({tags: tags, serialNumber: serialNumber})
+  let make = (~tags, ~serialNumber, ()) => new({tags, serialNumber})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module TagInstanceProfile = {
   type t
   type request = {
@@ -4466,11 +4310,9 @@ module TagInstanceProfile = {
   }
   type response = {.}
   @module("@aws-sdk/client-iam") @new external new: request => t = "TagInstanceProfileCommand"
-  let make = (~tags, ~instanceProfileName, ()) =>
-    new({tags: tags, instanceProfileName: instanceProfileName})
+  let make = (~tags, ~instanceProfileName, ()) => new({tags, instanceProfileName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module ListUserTags = {
   type t
   type request = {
@@ -4517,11 +4359,9 @@ module ListUserTags = {
     tags: tagListType,
   }
   @module("@aws-sdk/client-iam") @new external new: request => t = "ListUserTagsCommand"
-  let make = (~userName, ~maxItems=?, ~marker=?, ()) =>
-    new({maxItems: maxItems, marker: marker, userName: userName})
+  let make = (~userName, ~maxItems=?, ~marker=?, ()) => new({maxItems, marker, userName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListSigningCertificates = {
   type t
   type request = {
@@ -4567,11 +4407,9 @@ module ListSigningCertificates = {
     certificates: certificateListType,
   }
   @module("@aws-sdk/client-iam") @new external new: request => t = "ListSigningCertificatesCommand"
-  let make = (~maxItems=?, ~marker=?, ~userName=?, ()) =>
-    new({maxItems: maxItems, marker: marker, userName: userName})
+  let make = (~maxItems=?, ~marker=?, ~userName=?, ()) => new({maxItems, marker, userName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListServiceSpecificCredentials = {
   type t
   type request = {
@@ -4595,11 +4433,9 @@ module ListServiceSpecificCredentials = {
   }
   @module("@aws-sdk/client-iam") @new
   external new: request => t = "ListServiceSpecificCredentialsCommand"
-  let make = (~serviceName=?, ~userName=?, ()) =>
-    new({serviceName: serviceName, userName: userName})
+  let make = (~serviceName=?, ~userName=?, ()) => new({serviceName, userName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListServerCertificates = {
   type t
   type request = {
@@ -4650,11 +4486,9 @@ module ListServerCertificates = {
     serverCertificateMetadataList: serverCertificateMetadataListType,
   }
   @module("@aws-sdk/client-iam") @new external new: request => t = "ListServerCertificatesCommand"
-  let make = (~maxItems=?, ~marker=?, ~pathPrefix=?, ()) =>
-    new({maxItems: maxItems, marker: marker, pathPrefix: pathPrefix})
+  let make = (~maxItems=?, ~marker=?, ~pathPrefix=?, ()) => new({maxItems, marker, pathPrefix})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListServerCertificateTags = {
   type t
   type request = {
@@ -4702,10 +4536,9 @@ module ListServerCertificateTags = {
   @module("@aws-sdk/client-iam") @new
   external new: request => t = "ListServerCertificateTagsCommand"
   let make = (~serverCertificateName, ~maxItems=?, ~marker=?, ()) =>
-    new({maxItems: maxItems, marker: marker, serverCertificateName: serverCertificateName})
+    new({maxItems, marker, serverCertificateName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListSSHPublicKeys = {
   type t
   type request = {
@@ -4753,11 +4586,9 @@ module ListSSHPublicKeys = {
     sshpublicKeys: option<sshpublicKeyListType>,
   }
   @module("@aws-sdk/client-iam") @new external new: request => t = "ListSSHPublicKeysCommand"
-  let make = (~maxItems=?, ~marker=?, ~userName=?, ()) =>
-    new({maxItems: maxItems, marker: marker, userName: userName})
+  let make = (~maxItems=?, ~marker=?, ~userName=?, ()) => new({maxItems, marker, userName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListSAMLProviders = {
   type t
   type request = {.}
@@ -4773,7 +4604,6 @@ module ListSAMLProviders = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListSAMLProviderTags = {
   type t
   type request = {
@@ -4821,10 +4651,9 @@ module ListSAMLProviderTags = {
   }
   @module("@aws-sdk/client-iam") @new external new: request => t = "ListSAMLProviderTagsCommand"
   let make = (~samlproviderArn, ~maxItems=?, ~marker=?, ()) =>
-    new({maxItems: maxItems, marker: marker, samlproviderArn: samlproviderArn})
+    new({maxItems, marker, samlproviderArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListRoleTags = {
   type t
   type request = {
@@ -4871,11 +4700,9 @@ module ListRoleTags = {
     tags: tagListType,
   }
   @module("@aws-sdk/client-iam") @new external new: request => t = "ListRoleTagsCommand"
-  let make = (~roleName, ~maxItems=?, ~marker=?, ()) =>
-    new({maxItems: maxItems, marker: marker, roleName: roleName})
+  let make = (~roleName, ~maxItems=?, ~marker=?, ()) => new({maxItems, marker, roleName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListPolicyVersions = {
   type t
   type request = {
@@ -4924,11 +4751,9 @@ module ListPolicyVersions = {
     versions: option<policyDocumentVersionListType>,
   }
   @module("@aws-sdk/client-iam") @new external new: request => t = "ListPolicyVersionsCommand"
-  let make = (~policyArn, ~maxItems=?, ~marker=?, ()) =>
-    new({maxItems: maxItems, marker: marker, policyArn: policyArn})
+  let make = (~policyArn, ~maxItems=?, ~marker=?, ()) => new({maxItems, marker, policyArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListPolicyTags = {
   type t
   type request = {
@@ -4974,11 +4799,9 @@ module ListPolicyTags = {
     tags: tagListType,
   }
   @module("@aws-sdk/client-iam") @new external new: request => t = "ListPolicyTagsCommand"
-  let make = (~policyArn, ~maxItems=?, ~marker=?, ()) =>
-    new({maxItems: maxItems, marker: marker, policyArn: policyArn})
+  let make = (~policyArn, ~maxItems=?, ~marker=?, ()) => new({maxItems, marker, policyArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListOpenIDConnectProviders = {
   type t
   type request = {.}
@@ -4996,7 +4819,6 @@ module ListOpenIDConnectProviders = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListOpenIDConnectProviderTags = {
   type t
   type request = {
@@ -5045,10 +4867,9 @@ module ListOpenIDConnectProviderTags = {
   @module("@aws-sdk/client-iam") @new
   external new: request => t = "ListOpenIDConnectProviderTagsCommand"
   let make = (~openIDConnectProviderArn, ~maxItems=?, ~marker=?, ()) =>
-    new({maxItems: maxItems, marker: marker, openIDConnectProviderArn: openIDConnectProviderArn})
+    new({maxItems, marker, openIDConnectProviderArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListMFADevices = {
   type t
   type request = {
@@ -5093,11 +4914,9 @@ module ListMFADevices = {
     @ocaml.doc("<p>A list of MFA devices.</p>") @as("MFADevices") mfadevices: mfaDeviceListType,
   }
   @module("@aws-sdk/client-iam") @new external new: request => t = "ListMFADevicesCommand"
-  let make = (~maxItems=?, ~marker=?, ~userName=?, ()) =>
-    new({maxItems: maxItems, marker: marker, userName: userName})
+  let make = (~maxItems=?, ~marker=?, ~userName=?, ()) => new({maxItems, marker, userName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListMFADeviceTags = {
   type t
   type request = {
@@ -5145,11 +4964,9 @@ module ListMFADeviceTags = {
     tags: tagListType,
   }
   @module("@aws-sdk/client-iam") @new external new: request => t = "ListMFADeviceTagsCommand"
-  let make = (~serialNumber, ~maxItems=?, ~marker=?, ()) =>
-    new({maxItems: maxItems, marker: marker, serialNumber: serialNumber})
+  let make = (~serialNumber, ~maxItems=?, ~marker=?, ()) => new({maxItems, marker, serialNumber})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListInstanceProfileTags = {
   type t
   type request = {
@@ -5197,10 +5014,9 @@ module ListInstanceProfileTags = {
   }
   @module("@aws-sdk/client-iam") @new external new: request => t = "ListInstanceProfileTagsCommand"
   let make = (~instanceProfileName, ~maxItems=?, ~marker=?, ()) =>
-    new({maxItems: maxItems, marker: marker, instanceProfileName: instanceProfileName})
+    new({maxItems, marker, instanceProfileName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListGroupsForUser = {
   type t
   type request = {
@@ -5245,11 +5061,9 @@ module ListGroupsForUser = {
     @ocaml.doc("<p>A list of groups.</p>") @as("Groups") groups: groupListType,
   }
   @module("@aws-sdk/client-iam") @new external new: request => t = "ListGroupsForUserCommand"
-  let make = (~userName, ~maxItems=?, ~marker=?, ()) =>
-    new({maxItems: maxItems, marker: marker, userName: userName})
+  let make = (~userName, ~maxItems=?, ~marker=?, ()) => new({maxItems, marker, userName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListGroups = {
   type t
   type request = {
@@ -5298,11 +5112,9 @@ module ListGroups = {
     @ocaml.doc("<p>A list of groups.</p>") @as("Groups") groups: groupListType,
   }
   @module("@aws-sdk/client-iam") @new external new: request => t = "ListGroupsCommand"
-  let make = (~maxItems=?, ~marker=?, ~pathPrefix=?, ()) =>
-    new({maxItems: maxItems, marker: marker, pathPrefix: pathPrefix})
+  let make = (~maxItems=?, ~marker=?, ~pathPrefix=?, ()) => new({maxItems, marker, pathPrefix})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListEntitiesForPolicy = {
   type t
   type request = {
@@ -5383,18 +5195,9 @@ module ListEntitiesForPolicy = {
     ~pathPrefix=?,
     ~entityFilter=?,
     (),
-  ) =>
-    new({
-      maxItems: maxItems,
-      marker: marker,
-      policyUsageFilter: policyUsageFilter,
-      pathPrefix: pathPrefix,
-      entityFilter: entityFilter,
-      policyArn: policyArn,
-    })
+  ) => new({maxItems, marker, policyUsageFilter, pathPrefix, entityFilter, policyArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListAttachedUserPolicies = {
   type t
   type request = {
@@ -5449,10 +5252,9 @@ module ListAttachedUserPolicies = {
   }
   @module("@aws-sdk/client-iam") @new external new: request => t = "ListAttachedUserPoliciesCommand"
   let make = (~userName, ~maxItems=?, ~marker=?, ~pathPrefix=?, ()) =>
-    new({maxItems: maxItems, marker: marker, pathPrefix: pathPrefix, userName: userName})
+    new({maxItems, marker, pathPrefix, userName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListAttachedRolePolicies = {
   type t
   type request = {
@@ -5507,10 +5309,9 @@ module ListAttachedRolePolicies = {
   }
   @module("@aws-sdk/client-iam") @new external new: request => t = "ListAttachedRolePoliciesCommand"
   let make = (~roleName, ~maxItems=?, ~marker=?, ~pathPrefix=?, ()) =>
-    new({maxItems: maxItems, marker: marker, pathPrefix: pathPrefix, roleName: roleName})
+    new({maxItems, marker, pathPrefix, roleName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListAttachedGroupPolicies = {
   type t
   type request = {
@@ -5566,10 +5367,9 @@ module ListAttachedGroupPolicies = {
   @module("@aws-sdk/client-iam") @new
   external new: request => t = "ListAttachedGroupPoliciesCommand"
   let make = (~groupName, ~maxItems=?, ~marker=?, ~pathPrefix=?, ()) =>
-    new({maxItems: maxItems, marker: marker, pathPrefix: pathPrefix, groupName: groupName})
+    new({maxItems, marker, pathPrefix, groupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListAccessKeys = {
   type t
   type request = {
@@ -5616,11 +5416,9 @@ module ListAccessKeys = {
     accessKeyMetadata: accessKeyMetadataListType,
   }
   @module("@aws-sdk/client-iam") @new external new: request => t = "ListAccessKeysCommand"
-  let make = (~maxItems=?, ~marker=?, ~userName=?, ()) =>
-    new({maxItems: maxItems, marker: marker, userName: userName})
+  let make = (~maxItems=?, ~marker=?, ~userName=?, ()) => new({maxItems, marker, userName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetSAMLProvider = {
   type t
   type request = {
@@ -5652,7 +5450,6 @@ module GetSAMLProvider = {
   let make = (~samlproviderArn, ()) => new({samlproviderArn: samlproviderArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetOrganizationsAccessReport = {
   type t
   type request = {
@@ -5725,10 +5522,9 @@ module GetOrganizationsAccessReport = {
   @module("@aws-sdk/client-iam") @new
   external new: request => t = "GetOrganizationsAccessReportCommand"
   let make = (~jobId, ~sortKey=?, ~marker=?, ~maxItems=?, ()) =>
-    new({sortKey: sortKey, marker: marker, maxItems: maxItems, jobId: jobId})
+    new({sortKey, marker, maxItems, jobId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetOpenIDConnectProvider = {
   type t
   type request = {
@@ -5768,7 +5564,6 @@ module GetOpenIDConnectProvider = {
     new({openIDConnectProviderArn: openIDConnectProviderArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateSAMLProvider = {
   type t
   type request = {
@@ -5810,11 +5605,9 @@ module CreateSAMLProvider = {
     samlproviderArn: option<arnType>,
   }
   @module("@aws-sdk/client-iam") @new external new: request => t = "CreateSAMLProviderCommand"
-  let make = (~name, ~samlmetadataDocument, ~tags=?, ()) =>
-    new({tags: tags, name: name, samlmetadataDocument: samlmetadataDocument})
+  let make = (~name, ~samlmetadataDocument, ~tags=?, ()) => new({tags, name, samlmetadataDocument})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateOpenIDConnectProvider = {
   type t
   type request = {
@@ -5886,10 +5679,9 @@ module CreateOpenIDConnectProvider = {
   @module("@aws-sdk/client-iam") @new
   external new: request => t = "CreateOpenIDConnectProviderCommand"
   let make = (~thumbprintList, ~url, ~tags=?, ~clientIDList=?, ()) =>
-    new({tags: tags, thumbprintList: thumbprintList, clientIDList: clientIDList, url: url})
+    new({tags, thumbprintList, clientIDList, url})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateRoleDescription = {
   type t
   type request = {
@@ -5904,10 +5696,9 @@ module UpdateRoleDescription = {
     role: option<role>,
   }
   @module("@aws-sdk/client-iam") @new external new: request => t = "UpdateRoleDescriptionCommand"
-  let make = (~description, ~roleName, ()) => new({description: description, roleName: roleName})
+  let make = (~description, ~roleName, ()) => new({description, roleName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetUser = {
   type t
   type request = {
@@ -5943,7 +5734,6 @@ module GetUser = {
   let make = (~userName=?, ()) => new({userName: userName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetServiceLastAccessedDetailsWithEntities = {
   type t
   type request = {
@@ -6015,10 +5805,9 @@ module GetServiceLastAccessedDetailsWithEntities = {
   @module("@aws-sdk/client-iam") @new
   external new: request => t = "GetServiceLastAccessedDetailsWithEntitiesCommand"
   let make = (~serviceNamespace, ~jobId, ~marker=?, ~maxItems=?, ()) =>
-    new({marker: marker, maxItems: maxItems, serviceNamespace: serviceNamespace, jobId: jobId})
+    new({marker, maxItems, serviceNamespace, jobId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetServerCertificate = {
   type t
   type request = {
@@ -6039,7 +5828,6 @@ module GetServerCertificate = {
   let make = (~serverCertificateName, ()) => new({serverCertificateName: serverCertificateName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetRole = {
   type t
   type request = {
@@ -6057,7 +5845,6 @@ module GetRole = {
   let make = (~roleName, ()) => new({roleName: roleName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetPolicy = {
   type t
   type request = {
@@ -6076,7 +5863,6 @@ module GetPolicy = {
   let make = (~policyArn, ()) => new({policyArn: policyArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateUser = {
   type t
   type request = {
@@ -6116,10 +5902,9 @@ module CreateUser = {
   }
   @module("@aws-sdk/client-iam") @new external new: request => t = "CreateUserCommand"
   let make = (~userName, ~tags=?, ~permissionsBoundary=?, ~path=?, ()) =>
-    new({tags: tags, permissionsBoundary: permissionsBoundary, userName: userName, path: path})
+    new({tags, permissionsBoundary, userName, path})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateServiceLinkedRole = {
   type t
   type request = {
@@ -6155,10 +5940,9 @@ module CreateServiceLinkedRole = {
   }
   @module("@aws-sdk/client-iam") @new external new: request => t = "CreateServiceLinkedRoleCommand"
   let make = (~awsserviceName, ~customSuffix=?, ~description=?, ()) =>
-    new({customSuffix: customSuffix, description: description, awsserviceName: awsserviceName})
+    new({customSuffix, description, awsserviceName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateRole = {
   type t
   type request = {
@@ -6248,17 +6032,16 @@ module CreateRole = {
     (),
   ) =>
     new({
-      tags: tags,
-      permissionsBoundary: permissionsBoundary,
-      maxSessionDuration: maxSessionDuration,
-      description: description,
-      assumeRolePolicyDocument: assumeRolePolicyDocument,
-      roleName: roleName,
-      path: path,
+      tags,
+      permissionsBoundary,
+      maxSessionDuration,
+      description,
+      assumeRolePolicyDocument,
+      roleName,
+      path,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreatePolicy = {
   type t
   type request = {
@@ -6333,16 +6116,9 @@ module CreatePolicy = {
   }
   @module("@aws-sdk/client-iam") @new external new: request => t = "CreatePolicyCommand"
   let make = (~policyDocument, ~policyName, ~tags=?, ~description=?, ~path=?, ()) =>
-    new({
-      tags: tags,
-      description: description,
-      policyDocument: policyDocument,
-      path: path,
-      policyName: policyName,
-    })
+    new({tags, description, policyDocument, path, policyName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListUsers = {
   type t
   type request = {
@@ -6391,11 +6167,9 @@ module ListUsers = {
     @ocaml.doc("<p>A list of users.</p>") @as("Users") users: userListType,
   }
   @module("@aws-sdk/client-iam") @new external new: request => t = "ListUsersCommand"
-  let make = (~maxItems=?, ~marker=?, ~pathPrefix=?, ()) =>
-    new({maxItems: maxItems, marker: marker, pathPrefix: pathPrefix})
+  let make = (~maxItems=?, ~marker=?, ~pathPrefix=?, ()) => new({maxItems, marker, pathPrefix})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListRoles = {
   type t
   type request = {
@@ -6444,11 +6218,9 @@ module ListRoles = {
     @ocaml.doc("<p>A list of roles.</p>") @as("Roles") roles: roleListType,
   }
   @module("@aws-sdk/client-iam") @new external new: request => t = "ListRolesCommand"
-  let make = (~maxItems=?, ~marker=?, ~pathPrefix=?, ()) =>
-    new({maxItems: maxItems, marker: marker, pathPrefix: pathPrefix})
+  let make = (~maxItems=?, ~marker=?, ~pathPrefix=?, ()) => new({maxItems, marker, pathPrefix})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListPoliciesGrantingServiceAccess = {
   type t
   type request = {
@@ -6493,11 +6265,9 @@ module ListPoliciesGrantingServiceAccess = {
   }
   @module("@aws-sdk/client-iam") @new
   external new: request => t = "ListPoliciesGrantingServiceAccessCommand"
-  let make = (~serviceNamespaces, ~arn, ~marker=?, ()) =>
-    new({serviceNamespaces: serviceNamespaces, arn: arn, marker: marker})
+  let make = (~serviceNamespaces, ~arn, ~marker=?, ()) => new({serviceNamespaces, arn, marker})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListPolicies = {
   type t
   type request = {
@@ -6575,18 +6345,9 @@ module ListPolicies = {
     ~onlyAttached=?,
     ~scope=?,
     (),
-  ) =>
-    new({
-      maxItems: maxItems,
-      marker: marker,
-      policyUsageFilter: policyUsageFilter,
-      pathPrefix: pathPrefix,
-      onlyAttached: onlyAttached,
-      scope: scope,
-    })
+  ) => new({maxItems, marker, policyUsageFilter, pathPrefix, onlyAttached, scope})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetServiceLinkedRoleDeletionStatus = {
   type t
   type request = {
@@ -6606,7 +6367,6 @@ module GetServiceLinkedRoleDeletionStatus = {
   let make = (~deletionTaskId, ()) => new({deletionTaskId: deletionTaskId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetServiceLastAccessedDetails = {
   type t
   type request = {
@@ -6673,11 +6433,9 @@ module GetServiceLastAccessedDetails = {
   }
   @module("@aws-sdk/client-iam") @new
   external new: request => t = "GetServiceLastAccessedDetailsCommand"
-  let make = (~jobId, ~marker=?, ~maxItems=?, ()) =>
-    new({marker: marker, maxItems: maxItems, jobId: jobId})
+  let make = (~jobId, ~marker=?, ~maxItems=?, ()) => new({marker, maxItems, jobId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetGroup = {
   type t
   type request = {
@@ -6723,11 +6481,9 @@ module GetGroup = {
     group: group,
   }
   @module("@aws-sdk/client-iam") @new external new: request => t = "GetGroupCommand"
-  let make = (~groupName, ~maxItems=?, ~marker=?, ()) =>
-    new({maxItems: maxItems, marker: marker, groupName: groupName})
+  let make = (~groupName, ~maxItems=?, ~marker=?, ()) => new({maxItems, marker, groupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateVirtualMFADevice = {
   type t
   type request = {
@@ -6765,10 +6521,9 @@ module CreateVirtualMFADevice = {
   }
   @module("@aws-sdk/client-iam") @new external new: request => t = "CreateVirtualMFADeviceCommand"
   let make = (~virtualMFADeviceName, ~tags=?, ~path=?, ()) =>
-    new({tags: tags, virtualMFADeviceName: virtualMFADeviceName, path: path})
+    new({tags, virtualMFADeviceName, path})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListVirtualMFADevices = {
   type t
   type request = {
@@ -6818,10 +6573,9 @@ module ListVirtualMFADevices = {
   }
   @module("@aws-sdk/client-iam") @new external new: request => t = "ListVirtualMFADevicesCommand"
   let make = (~maxItems=?, ~marker=?, ~assignmentStatus=?, ()) =>
-    new({maxItems: maxItems, marker: marker, assignmentStatus: assignmentStatus})
+    new({maxItems, marker, assignmentStatus})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetInstanceProfile = {
   type t
   type request = {
@@ -6842,7 +6596,6 @@ module GetInstanceProfile = {
   let make = (~instanceProfileName, ()) => new({instanceProfileName: instanceProfileName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateInstanceProfile = {
   type t
   type request = {
@@ -6878,11 +6631,9 @@ module CreateInstanceProfile = {
     instanceProfile: instanceProfile,
   }
   @module("@aws-sdk/client-iam") @new external new: request => t = "CreateInstanceProfileCommand"
-  let make = (~instanceProfileName, ~tags=?, ~path=?, ()) =>
-    new({tags: tags, path: path, instanceProfileName: instanceProfileName})
+  let make = (~instanceProfileName, ~tags=?, ~path=?, ()) => new({tags, path, instanceProfileName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListInstanceProfilesForRole = {
   type t
   type request = {
@@ -6929,11 +6680,9 @@ module ListInstanceProfilesForRole = {
   }
   @module("@aws-sdk/client-iam") @new
   external new: request => t = "ListInstanceProfilesForRoleCommand"
-  let make = (~roleName, ~maxItems=?, ~marker=?, ()) =>
-    new({maxItems: maxItems, marker: marker, roleName: roleName})
+  let make = (~roleName, ~maxItems=?, ~marker=?, ()) => new({maxItems, marker, roleName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListInstanceProfiles = {
   type t
   type request = {
@@ -6984,11 +6733,9 @@ module ListInstanceProfiles = {
     instanceProfiles: instanceProfileListType,
   }
   @module("@aws-sdk/client-iam") @new external new: request => t = "ListInstanceProfilesCommand"
-  let make = (~maxItems=?, ~marker=?, ~pathPrefix=?, ()) =>
-    new({maxItems: maxItems, marker: marker, pathPrefix: pathPrefix})
+  let make = (~maxItems=?, ~marker=?, ~pathPrefix=?, ()) => new({maxItems, marker, pathPrefix})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module SimulatePrincipalPolicy = {
   type t
   type request = {
@@ -7232,22 +6979,21 @@ module SimulatePrincipalPolicy = {
     (),
   ) =>
     new({
-      marker: marker,
-      maxItems: maxItems,
-      resourceHandlingOption: resourceHandlingOption,
-      contextEntries: contextEntries,
-      callerArn: callerArn,
-      resourceOwner: resourceOwner,
-      resourcePolicy: resourcePolicy,
-      resourceArns: resourceArns,
-      actionNames: actionNames,
-      permissionsBoundaryPolicyInputList: permissionsBoundaryPolicyInputList,
-      policyInputList: policyInputList,
-      policySourceArn: policySourceArn,
+      marker,
+      maxItems,
+      resourceHandlingOption,
+      contextEntries,
+      callerArn,
+      resourceOwner,
+      resourcePolicy,
+      resourceArns,
+      actionNames,
+      permissionsBoundaryPolicyInputList,
+      policyInputList,
+      policySourceArn,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module SimulateCustomPolicy = {
   type t
   type request = {
@@ -7481,21 +7227,20 @@ module SimulateCustomPolicy = {
     (),
   ) =>
     new({
-      marker: marker,
-      maxItems: maxItems,
-      resourceHandlingOption: resourceHandlingOption,
-      contextEntries: contextEntries,
-      callerArn: callerArn,
-      resourceOwner: resourceOwner,
-      resourcePolicy: resourcePolicy,
-      resourceArns: resourceArns,
-      actionNames: actionNames,
-      permissionsBoundaryPolicyInputList: permissionsBoundaryPolicyInputList,
-      policyInputList: policyInputList,
+      marker,
+      maxItems,
+      resourceHandlingOption,
+      contextEntries,
+      callerArn,
+      resourceOwner,
+      resourcePolicy,
+      resourceArns,
+      actionNames,
+      permissionsBoundaryPolicyInputList,
+      policyInputList,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetAccountAuthorizationDetails = {
   type t
   type request = {
@@ -7550,7 +7295,6 @@ module GetAccountAuthorizationDetails = {
   }
   @module("@aws-sdk/client-iam") @new
   external new: request => t = "GetAccountAuthorizationDetailsCommand"
-  let make = (~marker=?, ~maxItems=?, ~filter=?, ()) =>
-    new({marker: marker, maxItems: maxItems, filter: filter})
+  let make = (~marker=?, ~maxItems=?, ~filter=?, ()) => new({marker, maxItems, filter})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

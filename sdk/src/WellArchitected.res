@@ -717,10 +717,9 @@ module UntagResource = {
   type response = {.}
   @module("@aws-sdk/client-wellarchitected") @new
   external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~workloadArn, ()) => new({tagKeys: tagKeys, workloadArn: workloadArn})
+  let make = (~tagKeys, ~workloadArn, ()) => new({tagKeys, workloadArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module TagResource = {
   type t
   type request = {
@@ -729,10 +728,9 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-wellarchitected") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~workloadArn, ()) => new({tags: tags, workloadArn: workloadArn})
+  let make = (~tags, ~workloadArn, ()) => new({tags, workloadArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module ListTagsForResource = {
   type t
   type request = {@as("WorkloadArn") workloadArn: workloadArn}
@@ -742,7 +740,6 @@ module ListTagsForResource = {
   let make = (~workloadArn, ()) => new({workloadArn: workloadArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpgradeLensReview = {
   type t
   type request = {
@@ -755,15 +752,9 @@ module UpgradeLensReview = {
   @module("@aws-sdk/client-wellarchitected") @new
   external new: request => t = "UpgradeLensReviewCommand"
   let make = (~milestoneName, ~lensAlias, ~workloadId, ~clientRequestToken=?, ()) =>
-    new({
-      clientRequestToken: clientRequestToken,
-      milestoneName: milestoneName,
-      lensAlias: lensAlias,
-      workloadId: workloadId,
-    })
+    new({clientRequestToken, milestoneName, lensAlias, workloadId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module UpdateWorkloadShare = {
   type t
   @ocaml.doc("<p>Input for Update Workload Share</p>")
@@ -780,10 +771,9 @@ module UpdateWorkloadShare = {
   @module("@aws-sdk/client-wellarchitected") @new
   external new: request => t = "UpdateWorkloadShareCommand"
   let make = (~permissionType, ~workloadId, ~shareId, ()) =>
-    new({permissionType: permissionType, workloadId: workloadId, shareId: shareId})
+    new({permissionType, workloadId, shareId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateWorkload = {
   type t
   @ocaml.doc("<p>Input to update a workload.</p>")
@@ -833,25 +823,24 @@ module UpdateWorkload = {
     (),
   ) =>
     new({
-      improvementStatus: improvementStatus,
-      notes: notes,
-      industry: industry,
-      industryType: industryType,
-      isReviewOwnerUpdateAcknowledged: isReviewOwnerUpdateAcknowledged,
-      reviewOwner: reviewOwner,
-      architecturalDesign: architecturalDesign,
-      pillarPriorities: pillarPriorities,
-      nonAwsRegions: nonAwsRegions,
-      awsRegions: awsRegions,
-      accountIds: accountIds,
-      environment: environment,
-      description: description,
-      workloadName: workloadName,
-      workloadId: workloadId,
+      improvementStatus,
+      notes,
+      industry,
+      industryType,
+      isReviewOwnerUpdateAcknowledged,
+      reviewOwner,
+      architecturalDesign,
+      pillarPriorities,
+      nonAwsRegions,
+      awsRegions,
+      accountIds,
+      environment,
+      description,
+      workloadName,
+      workloadId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateShareInvitation = {
   type t
   @ocaml.doc("<p>Input for Update Share Invitation</p>")
@@ -867,10 +856,9 @@ module UpdateShareInvitation = {
   @module("@aws-sdk/client-wellarchitected") @new
   external new: request => t = "UpdateShareInvitationCommand"
   let make = (~shareInvitationAction, ~shareInvitationId, ()) =>
-    new({shareInvitationAction: shareInvitationAction, shareInvitationId: shareInvitationId})
+    new({shareInvitationAction, shareInvitationId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListWorkloadShares = {
   type t
   @ocaml.doc("<p>Input for List Workload Share</p>")
@@ -894,15 +882,9 @@ module ListWorkloadShares = {
   @module("@aws-sdk/client-wellarchitected") @new
   external new: request => t = "ListWorkloadSharesCommand"
   let make = (~workloadId, ~maxResults=?, ~nextToken=?, ~sharedWithPrefix=?, ()) =>
-    new({
-      maxResults: maxResults,
-      nextToken: nextToken,
-      sharedWithPrefix: sharedWithPrefix,
-      workloadId: workloadId,
-    })
+    new({maxResults, nextToken, sharedWithPrefix, workloadId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListShareInvitations = {
   type t
   @ocaml.doc("<p>Input for List Share Invitations</p>")
@@ -935,17 +917,9 @@ module ListShareInvitations = {
     ~lensNamePrefix=?,
     ~workloadNamePrefix=?,
     (),
-  ) =>
-    new({
-      maxResults: maxResults,
-      nextToken: nextToken,
-      shareResourceType: shareResourceType,
-      lensNamePrefix: lensNamePrefix,
-      workloadNamePrefix: workloadNamePrefix,
-    })
+  ) => new({maxResults, nextToken, shareResourceType, lensNamePrefix, workloadNamePrefix})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListLenses = {
   type t
   @ocaml.doc("<p>Input to list lenses.</p>")
@@ -965,16 +939,9 @@ module ListLenses = {
   }
   @module("@aws-sdk/client-wellarchitected") @new external new: request => t = "ListLensesCommand"
   let make = (~lensName=?, ~lensStatus=?, ~lensType=?, ~maxResults=?, ~nextToken=?, ()) =>
-    new({
-      lensName: lensName,
-      lensStatus: lensStatus,
-      lensType: lensType,
-      maxResults: maxResults,
-      nextToken: nextToken,
-    })
+    new({lensName, lensStatus, lensType, maxResults, nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListLensShares = {
   type t
   type request = {
@@ -996,15 +963,9 @@ module ListLensShares = {
   @module("@aws-sdk/client-wellarchitected") @new
   external new: request => t = "ListLensSharesCommand"
   let make = (~lensAlias, ~maxResults=?, ~nextToken=?, ~sharedWithPrefix=?, ()) =>
-    new({
-      maxResults: maxResults,
-      nextToken: nextToken,
-      sharedWithPrefix: sharedWithPrefix,
-      lensAlias: lensAlias,
-    })
+    new({maxResults, nextToken, sharedWithPrefix, lensAlias})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ImportLens = {
   type t
   type request = {
@@ -1020,15 +981,9 @@ module ImportLens = {
   }
   @module("@aws-sdk/client-wellarchitected") @new external new: request => t = "ImportLensCommand"
   let make = (~clientRequestToken, ~jsonstring, ~tags=?, ~lensAlias=?, ()) =>
-    new({
-      tags: tags,
-      clientRequestToken: clientRequestToken,
-      jsonstring: jsonstring,
-      lensAlias: lensAlias,
-    })
+    new({tags, clientRequestToken, jsonstring, lensAlias})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetWorkload = {
   type t
   @ocaml.doc("<p>Input to get a workload.</p>")
@@ -1039,7 +994,6 @@ module GetWorkload = {
   let make = (~workloadId, ()) => new({workloadId: workloadId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetLensReviewReport = {
   type t
   @ocaml.doc("<p>Input to get lens review report.</p>")
@@ -1057,10 +1011,9 @@ module GetLensReviewReport = {
   @module("@aws-sdk/client-wellarchitected") @new
   external new: request => t = "GetLensReviewReportCommand"
   let make = (~lensAlias, ~workloadId, ~milestoneNumber=?, ()) =>
-    new({milestoneNumber: milestoneNumber, lensAlias: lensAlias, workloadId: workloadId})
+    new({milestoneNumber, lensAlias, workloadId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetLens = {
   type t
   type request = {
@@ -1070,11 +1023,9 @@ module GetLens = {
   }
   type response = {@ocaml.doc("<p>A lens return object.</p>") @as("Lens") lens: option<lens>}
   @module("@aws-sdk/client-wellarchitected") @new external new: request => t = "GetLensCommand"
-  let make = (~lensAlias, ~lensVersion=?, ()) =>
-    new({lensVersion: lensVersion, lensAlias: lensAlias})
+  let make = (~lensAlias, ~lensVersion=?, ()) => new({lensVersion, lensAlias})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ExportLens = {
   type t
   type request = {
@@ -1086,11 +1037,9 @@ module ExportLens = {
     @ocaml.doc("<p>The JSON for the lens.</p>") @as("LensJSON") lensJSON: option<lensJSON>,
   }
   @module("@aws-sdk/client-wellarchitected") @new external new: request => t = "ExportLensCommand"
-  let make = (~lensAlias, ~lensVersion=?, ()) =>
-    new({lensVersion: lensVersion, lensAlias: lensAlias})
+  let make = (~lensAlias, ~lensVersion=?, ()) => new({lensVersion, lensAlias})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DisassociateLenses = {
   type t
   @ocaml.doc("<p>Input to disassociate lens reviews.</p>")
@@ -1101,11 +1050,9 @@ module DisassociateLenses = {
   type response = {.}
   @module("@aws-sdk/client-wellarchitected") @new
   external new: request => t = "DisassociateLensesCommand"
-  let make = (~lensAliases, ~workloadId, ()) =>
-    new({lensAliases: lensAliases, workloadId: workloadId})
+  let make = (~lensAliases, ~workloadId, ()) => new({lensAliases, workloadId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteWorkloadShare = {
   type t
   @ocaml.doc("<p>Input for Delete Workload Share</p>")
@@ -1118,10 +1065,9 @@ module DeleteWorkloadShare = {
   @module("@aws-sdk/client-wellarchitected") @new
   external new: request => t = "DeleteWorkloadShareCommand"
   let make = (~clientRequestToken, ~workloadId, ~shareId, ()) =>
-    new({clientRequestToken: clientRequestToken, workloadId: workloadId, shareId: shareId})
+    new({clientRequestToken, workloadId, shareId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteWorkload = {
   type t
   @ocaml.doc("<p>Input for workload deletion.</p>")
@@ -1132,11 +1078,9 @@ module DeleteWorkload = {
   type response = {.}
   @module("@aws-sdk/client-wellarchitected") @new
   external new: request => t = "DeleteWorkloadCommand"
-  let make = (~clientRequestToken, ~workloadId, ()) =>
-    new({clientRequestToken: clientRequestToken, workloadId: workloadId})
+  let make = (~clientRequestToken, ~workloadId, ()) => new({clientRequestToken, workloadId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteLensShare = {
   type t
   type request = {
@@ -1148,10 +1092,9 @@ module DeleteLensShare = {
   @module("@aws-sdk/client-wellarchitected") @new
   external new: request => t = "DeleteLensShareCommand"
   let make = (~clientRequestToken, ~lensAlias, ~shareId, ()) =>
-    new({clientRequestToken: clientRequestToken, lensAlias: lensAlias, shareId: shareId})
+    new({clientRequestToken, lensAlias, shareId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteLens = {
   type t
   type request = {
@@ -1163,10 +1106,9 @@ module DeleteLens = {
   type response = {.}
   @module("@aws-sdk/client-wellarchitected") @new external new: request => t = "DeleteLensCommand"
   let make = (~lensStatus, ~clientRequestToken, ~lensAlias, ()) =>
-    new({lensStatus: lensStatus, clientRequestToken: clientRequestToken, lensAlias: lensAlias})
+    new({lensStatus, clientRequestToken, lensAlias})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module CreateWorkloadShare = {
   type t
   @ocaml.doc("<p>Input for Create Workload Share</p>")
@@ -1184,15 +1126,9 @@ module CreateWorkloadShare = {
   @module("@aws-sdk/client-wellarchitected") @new
   external new: request => t = "CreateWorkloadShareCommand"
   let make = (~clientRequestToken, ~permissionType, ~sharedWith, ~workloadId, ()) =>
-    new({
-      clientRequestToken: clientRequestToken,
-      permissionType: permissionType,
-      sharedWith: sharedWith,
-      workloadId: workloadId,
-    })
+    new({clientRequestToken, permissionType, sharedWith, workloadId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateWorkload = {
   type t
   @ocaml.doc("<p>Input for workload creation.</p>")
@@ -1240,25 +1176,24 @@ module CreateWorkload = {
     (),
   ) =>
     new({
-      tags: tags,
-      clientRequestToken: clientRequestToken,
-      notes: notes,
-      lenses: lenses,
-      industry: industry,
-      industryType: industryType,
-      reviewOwner: reviewOwner,
-      architecturalDesign: architecturalDesign,
-      pillarPriorities: pillarPriorities,
-      nonAwsRegions: nonAwsRegions,
-      awsRegions: awsRegions,
-      accountIds: accountIds,
-      environment: environment,
-      description: description,
-      workloadName: workloadName,
+      tags,
+      clientRequestToken,
+      notes,
+      lenses,
+      industry,
+      industryType,
+      reviewOwner,
+      architecturalDesign,
+      pillarPriorities,
+      nonAwsRegions,
+      awsRegions,
+      accountIds,
+      environment,
+      description,
+      workloadName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateMilestone = {
   type t
   @ocaml.doc("<p>Input for milestone creation.</p>")
@@ -1275,14 +1210,9 @@ module CreateMilestone = {
   @module("@aws-sdk/client-wellarchitected") @new
   external new: request => t = "CreateMilestoneCommand"
   let make = (~clientRequestToken, ~milestoneName, ~workloadId, ()) =>
-    new({
-      clientRequestToken: clientRequestToken,
-      milestoneName: milestoneName,
-      workloadId: workloadId,
-    })
+    new({clientRequestToken, milestoneName, workloadId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateLensVersion = {
   type t
   type request = {
@@ -1301,15 +1231,9 @@ module CreateLensVersion = {
   @module("@aws-sdk/client-wellarchitected") @new
   external new: request => t = "CreateLensVersionCommand"
   let make = (~clientRequestToken, ~lensVersion, ~lensAlias, ~isMajorVersion=?, ()) =>
-    new({
-      clientRequestToken: clientRequestToken,
-      isMajorVersion: isMajorVersion,
-      lensVersion: lensVersion,
-      lensAlias: lensAlias,
-    })
+    new({clientRequestToken, isMajorVersion, lensVersion, lensAlias})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateLensShare = {
   type t
   type request = {
@@ -1321,10 +1245,9 @@ module CreateLensShare = {
   @module("@aws-sdk/client-wellarchitected") @new
   external new: request => t = "CreateLensShareCommand"
   let make = (~clientRequestToken, ~sharedWith, ~lensAlias, ()) =>
-    new({clientRequestToken: clientRequestToken, sharedWith: sharedWith, lensAlias: lensAlias})
+    new({clientRequestToken, sharedWith, lensAlias})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module AssociateLenses = {
   type t
   @ocaml.doc("<p>Input to associate lens reviews.</p>")
@@ -1335,11 +1258,9 @@ module AssociateLenses = {
   type response = {.}
   @module("@aws-sdk/client-wellarchitected") @new
   external new: request => t = "AssociateLensesCommand"
-  let make = (~lensAliases, ~workloadId, ()) =>
-    new({lensAliases: lensAliases, workloadId: workloadId})
+  let make = (~lensAliases, ~workloadId, ()) => new({lensAliases, workloadId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module ListWorkloads = {
   type t
   @ocaml.doc("<p>Input to list all workloads.</p>")
@@ -1357,10 +1278,9 @@ module ListWorkloads = {
   @module("@aws-sdk/client-wellarchitected") @new
   external new: request => t = "ListWorkloadsCommand"
   let make = (~maxResults=?, ~nextToken=?, ~workloadNamePrefix=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, workloadNamePrefix: workloadNamePrefix})
+    new({maxResults, nextToken, workloadNamePrefix})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListNotifications = {
   type t
   type request = {
@@ -1378,10 +1298,9 @@ module ListNotifications = {
   @module("@aws-sdk/client-wellarchitected") @new
   external new: request => t = "ListNotificationsCommand"
   let make = (~maxResults=?, ~nextToken=?, ~workloadId=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, workloadId: workloadId})
+    new({maxResults, nextToken, workloadId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListLensReviews = {
   type t
   @ocaml.doc("<p>Input to list lens reviews.</p>")
@@ -1401,15 +1320,9 @@ module ListLensReviews = {
   @module("@aws-sdk/client-wellarchitected") @new
   external new: request => t = "ListLensReviewsCommand"
   let make = (~workloadId, ~maxResults=?, ~nextToken=?, ~milestoneNumber=?, ()) =>
-    new({
-      maxResults: maxResults,
-      nextToken: nextToken,
-      milestoneNumber: milestoneNumber,
-      workloadId: workloadId,
-    })
+    new({maxResults, nextToken, milestoneNumber, workloadId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetMilestone = {
   type t
   @ocaml.doc("<p>Input to get a milestone.</p>")
@@ -1423,11 +1336,9 @@ module GetMilestone = {
     @as("WorkloadId") workloadId: option<workloadId>,
   }
   @module("@aws-sdk/client-wellarchitected") @new external new: request => t = "GetMilestoneCommand"
-  let make = (~milestoneNumber, ~workloadId, ()) =>
-    new({milestoneNumber: milestoneNumber, workloadId: workloadId})
+  let make = (~milestoneNumber, ~workloadId, ()) => new({milestoneNumber, workloadId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateLensReview = {
   type t
   @ocaml.doc("<p>Input for update lens review.</p>")
@@ -1445,15 +1356,9 @@ module UpdateLensReview = {
   @module("@aws-sdk/client-wellarchitected") @new
   external new: request => t = "UpdateLensReviewCommand"
   let make = (~lensAlias, ~workloadId, ~pillarNotes=?, ~lensNotes=?, ()) =>
-    new({
-      pillarNotes: pillarNotes,
-      lensNotes: lensNotes,
-      lensAlias: lensAlias,
-      workloadId: workloadId,
-    })
+    new({pillarNotes, lensNotes, lensAlias, workloadId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateAnswer = {
   type t
   @ocaml.doc("<p>Input to update answer.</p>")
@@ -1491,18 +1396,17 @@ module UpdateAnswer = {
     (),
   ) =>
     new({
-      reason: reason,
-      isApplicable: isApplicable,
-      notes: notes,
-      choiceUpdates: choiceUpdates,
-      selectedChoices: selectedChoices,
-      questionId: questionId,
-      lensAlias: lensAlias,
-      workloadId: workloadId,
+      reason,
+      isApplicable,
+      notes,
+      choiceUpdates,
+      selectedChoices,
+      questionId,
+      lensAlias,
+      workloadId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListMilestones = {
   type t
   @ocaml.doc("<p>Input to list all milestones for a workload.</p>")
@@ -1520,10 +1424,9 @@ module ListMilestones = {
   @module("@aws-sdk/client-wellarchitected") @new
   external new: request => t = "ListMilestonesCommand"
   let make = (~workloadId, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, workloadId: workloadId})
+    new({maxResults, nextToken, workloadId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListLensReviewImprovements = {
   type t
   @ocaml.doc("<p>Input to list lens review improvements.</p>")
@@ -1555,18 +1458,9 @@ module ListLensReviewImprovements = {
     ~milestoneNumber=?,
     ~pillarId=?,
     (),
-  ) =>
-    new({
-      maxResults: maxResults,
-      nextToken: nextToken,
-      milestoneNumber: milestoneNumber,
-      pillarId: pillarId,
-      lensAlias: lensAlias,
-      workloadId: workloadId,
-    })
+  ) => new({maxResults, nextToken, milestoneNumber, pillarId, lensAlias, workloadId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetLensReview = {
   type t
   @ocaml.doc("<p>Input to get lens review.</p>")
@@ -1584,10 +1478,9 @@ module GetLensReview = {
   @module("@aws-sdk/client-wellarchitected") @new
   external new: request => t = "GetLensReviewCommand"
   let make = (~lensAlias, ~workloadId, ~milestoneNumber=?, ()) =>
-    new({milestoneNumber: milestoneNumber, lensAlias: lensAlias, workloadId: workloadId})
+    new({milestoneNumber, lensAlias, workloadId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetAnswer = {
   type t
   @ocaml.doc("<p>Input to get answer.</p>")
@@ -1607,15 +1500,9 @@ module GetAnswer = {
   }
   @module("@aws-sdk/client-wellarchitected") @new external new: request => t = "GetAnswerCommand"
   let make = (~questionId, ~lensAlias, ~workloadId, ~milestoneNumber=?, ()) =>
-    new({
-      milestoneNumber: milestoneNumber,
-      questionId: questionId,
-      lensAlias: lensAlias,
-      workloadId: workloadId,
-    })
+    new({milestoneNumber, questionId, lensAlias, workloadId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListAnswers = {
   type t
   @ocaml.doc("<p>Input to list answers.</p>")
@@ -1646,18 +1533,9 @@ module ListAnswers = {
     ~milestoneNumber=?,
     ~pillarId=?,
     (),
-  ) =>
-    new({
-      maxResults: maxResults,
-      nextToken: nextToken,
-      milestoneNumber: milestoneNumber,
-      pillarId: pillarId,
-      lensAlias: lensAlias,
-      workloadId: workloadId,
-    })
+  ) => new({maxResults, nextToken, milestoneNumber, pillarId, lensAlias, workloadId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetLensVersionDifference = {
   type t
   type request = {
@@ -1681,10 +1559,6 @@ module GetLensVersionDifference = {
   @module("@aws-sdk/client-wellarchitected") @new
   external new: request => t = "GetLensVersionDifferenceCommand"
   let make = (~lensAlias, ~targetLensVersion=?, ~baseLensVersion=?, ()) =>
-    new({
-      targetLensVersion: targetLensVersion,
-      baseLensVersion: baseLensVersion,
-      lensAlias: lensAlias,
-    })
+    new({targetLensVersion, baseLensVersion, lensAlias})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

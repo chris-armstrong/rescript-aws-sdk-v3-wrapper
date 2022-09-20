@@ -293,10 +293,9 @@ module UntagResource = {
   type response = {.}
   @module("@aws-sdk/client-snow-device-management") @new
   external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
+  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys, resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module TagResource = {
   type t
   type request = {
@@ -309,10 +308,9 @@ module TagResource = {
   type response = {.}
   @module("@aws-sdk/client-snow-device-management") @new
   external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
+  let make = (~tags, ~resourceArn, ()) => new({tags, resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module ListTagsForResource = {
   type t
   type request = {
@@ -327,7 +325,6 @@ module ListTagsForResource = {
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeTask = {
   type t
   type request = {@ocaml.doc("<p>The ID of the task to be described.</p>") taskId: taskId}
@@ -352,7 +349,6 @@ module DescribeTask = {
   let make = (~taskId, ()) => new({taskId: taskId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeExecution = {
   type t
   type request = {
@@ -371,11 +367,9 @@ module DescribeExecution = {
   }
   @module("@aws-sdk/client-snow-device-management") @new
   external new: request => t = "DescribeExecutionCommand"
-  let make = (~managedDeviceId, ~taskId, ()) =>
-    new({managedDeviceId: managedDeviceId, taskId: taskId})
+  let make = (~managedDeviceId, ~taskId, ()) => new({managedDeviceId, taskId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CancelTask = {
   type t
   type request = {
@@ -392,7 +386,6 @@ module CancelTask = {
   let make = (~taskId, ()) => new({taskId: taskId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListDeviceResources = {
   type t
   type request = {
@@ -415,15 +408,9 @@ module ListDeviceResources = {
   @module("@aws-sdk/client-snow-device-management") @new
   external new: request => t = "ListDeviceResourcesCommand"
   let make = (~managedDeviceId, ~nextToken=?, ~maxResults=?, ~type_=?, ()) =>
-    new({
-      nextToken: nextToken,
-      maxResults: maxResults,
-      type_: type_,
-      managedDeviceId: managedDeviceId,
-    })
+    new({nextToken, maxResults, type_, managedDeviceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateTask = {
   type t
   type request = {
@@ -448,16 +435,9 @@ module CreateTask = {
   @module("@aws-sdk/client-snow-device-management") @new
   external new: request => t = "CreateTaskCommand"
   let make = (~command, ~targets, ~clientToken=?, ~tags=?, ~description=?, ()) =>
-    new({
-      clientToken: clientToken,
-      tags: tags,
-      description: description,
-      command: command,
-      targets: targets,
-    })
+    new({clientToken, tags, description, command, targets})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListTasks = {
   type t
   type request = {
@@ -474,11 +454,9 @@ module ListTasks = {
   }
   @module("@aws-sdk/client-snow-device-management") @new
   external new: request => t = "ListTasksCommand"
-  let make = (~nextToken=?, ~maxResults=?, ~state=?, ()) =>
-    new({nextToken: nextToken, maxResults: maxResults, state: state})
+  let make = (~nextToken=?, ~maxResults=?, ~state=?, ()) => new({nextToken, maxResults, state})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListExecutions = {
   type t
   type request = {
@@ -500,10 +478,9 @@ module ListExecutions = {
   @module("@aws-sdk/client-snow-device-management") @new
   external new: request => t = "ListExecutionsCommand"
   let make = (~taskId, ~nextToken=?, ~maxResults=?, ~state=?, ()) =>
-    new({nextToken: nextToken, maxResults: maxResults, state: state, taskId: taskId})
+    new({nextToken, maxResults, state, taskId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListDevices = {
   type t
   type request = {
@@ -521,11 +498,9 @@ module ListDevices = {
   }
   @module("@aws-sdk/client-snow-device-management") @new
   external new: request => t = "ListDevicesCommand"
-  let make = (~nextToken=?, ~maxResults=?, ~jobId=?, ()) =>
-    new({nextToken: nextToken, maxResults: maxResults, jobId: jobId})
+  let make = (~nextToken=?, ~maxResults=?, ~jobId=?, ()) => new({nextToken, maxResults, jobId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeDevice = {
   type t
   type request = {
@@ -563,7 +538,6 @@ module DescribeDevice = {
   let make = (~managedDeviceId, ()) => new({managedDeviceId: managedDeviceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeDeviceEc2Instances = {
   type t
   type request = {
@@ -577,7 +551,6 @@ module DescribeDeviceEc2Instances = {
   }
   @module("@aws-sdk/client-snow-device-management") @new
   external new: request => t = "DescribeDeviceEc2InstancesCommand"
-  let make = (~instanceIds, ~managedDeviceId, ()) =>
-    new({instanceIds: instanceIds, managedDeviceId: managedDeviceId})
+  let make = (~instanceIds, ~managedDeviceId, ()) => new({instanceIds, managedDeviceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

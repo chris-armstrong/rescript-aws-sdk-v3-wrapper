@@ -1793,7 +1793,6 @@ module StopStreamProcessor = {
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module StopProjectVersion = {
   type t
   type request = {
@@ -1811,7 +1810,6 @@ module StopProjectVersion = {
   let make = (~projectVersionArn, ()) => new({projectVersionArn: projectVersionArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module StartStreamProcessor = {
   type t
   type request = {
@@ -1824,7 +1822,6 @@ module StartStreamProcessor = {
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module StartProjectVersion = {
   type t
   type request = {
@@ -1846,10 +1843,9 @@ module StartProjectVersion = {
   @module("@aws-sdk/client-rekognition") @new
   external new: request => t = "StartProjectVersionCommand"
   let make = (~minInferenceUnits, ~projectVersionArn, ()) =>
-    new({minInferenceUnits: minInferenceUnits, projectVersionArn: projectVersionArn})
+    new({minInferenceUnits, projectVersionArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeCollection = {
   type t
   type request = {
@@ -1879,7 +1875,6 @@ module DescribeCollection = {
   let make = (~collectionId, ()) => new({collectionId: collectionId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteStreamProcessor = {
   type t
   type request = {
@@ -1892,7 +1887,6 @@ module DeleteStreamProcessor = {
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteProjectVersion = {
   type t
   type request = {
@@ -1911,7 +1905,6 @@ module DeleteProjectVersion = {
   let make = (~projectVersionArn, ()) => new({projectVersionArn: projectVersionArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteProject = {
   type t
   type request = {
@@ -1927,7 +1920,6 @@ module DeleteProject = {
   let make = (~projectArn, ()) => new({projectArn: projectArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteDataset = {
   type t
   type request = {
@@ -1942,7 +1934,6 @@ The ARN of the Amazon Rekognition Custom Labels dataset that you want to delete.
   let make = (~datasetArn, ()) => new({datasetArn: datasetArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteCollection = {
   type t
   type request = {
@@ -1958,7 +1949,6 @@ module DeleteCollection = {
   let make = (~collectionId, ()) => new({collectionId: collectionId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateProject = {
   type t
   type request = {
@@ -1975,7 +1965,6 @@ module CreateProject = {
   let make = (~projectName, ()) => new({projectName: projectName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateDatasetEntries = {
   type t
   type request = {
@@ -1993,10 +1982,9 @@ The Amazon Resource Name (ARN) of the dataset that you want to update.
   type response = {.}
   @module("@aws-sdk/client-rekognition") @new
   external new: request => t = "UpdateDatasetEntriesCommand"
-  let make = (~changes, ~datasetArn, ()) => new({changes: changes, datasetArn: datasetArn})
+  let make = (~changes, ~datasetArn, ()) => new({changes, datasetArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module UntagResource = {
   type t
   type request = {
@@ -2013,10 +2001,9 @@ module UntagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-rekognition") @new external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
+  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys, resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module TagResource = {
   type t
   type request = {
@@ -2033,10 +2020,9 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-rekognition") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
+  let make = (~tags, ~resourceArn, ()) => new({tags, resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module ListTagsForResource = {
   type t
   type request = {
@@ -2058,7 +2044,6 @@ module ListTagsForResource = {
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListDatasetEntries = {
   type t
   type request = {
@@ -2123,18 +2108,9 @@ A list of entries (images) in the dataset.
     ~containsLabels=?,
     (),
   ) =>
-    new({
-      maxResults: maxResults,
-      nextToken: nextToken,
-      hasErrors: hasErrors,
-      sourceRefContains: sourceRefContains,
-      labeled: labeled,
-      containsLabels: containsLabels,
-      datasetArn: datasetArn,
-    })
+    new({maxResults, nextToken, hasErrors, sourceRefContains, labeled, containsLabels, datasetArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListCollections = {
   type t
   type request = {
@@ -2157,11 +2133,9 @@ module ListCollections = {
     collectionIds: option<collectionIdList>,
   }
   @module("@aws-sdk/client-rekognition") @new external new: request => t = "ListCollectionsCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetCelebrityInfo = {
   type t
   type request = {
@@ -2181,7 +2155,6 @@ module GetCelebrityInfo = {
   let make = (~id, ()) => new({id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteFaces = {
   type t
   type request = {
@@ -2195,10 +2168,9 @@ module DeleteFaces = {
     deletedFaces: option<faceIdList>,
   }
   @module("@aws-sdk/client-rekognition") @new external new: request => t = "DeleteFacesCommand"
-  let make = (~faceIds, ~collectionId, ()) => new({faceIds: faceIds, collectionId: collectionId})
+  let make = (~faceIds, ~collectionId, ()) => new({faceIds, collectionId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateCollection = {
   type t
   type request = {
@@ -2224,10 +2196,9 @@ module CreateCollection = {
     statusCode: option<uinteger>,
   }
   @module("@aws-sdk/client-rekognition") @new external new: request => t = "CreateCollectionCommand"
-  let make = (~collectionId, ~tags=?, ()) => new({tags: tags, collectionId: collectionId})
+  let make = (~collectionId, ~tags=?, ()) => new({tags, collectionId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module StartPersonTracking = {
   type t
   type request = {
@@ -2258,15 +2229,9 @@ module StartPersonTracking = {
   @module("@aws-sdk/client-rekognition") @new
   external new: request => t = "StartPersonTrackingCommand"
   let make = (~video, ~jobTag=?, ~notificationChannel=?, ~clientRequestToken=?, ()) =>
-    new({
-      jobTag: jobTag,
-      notificationChannel: notificationChannel,
-      clientRequestToken: clientRequestToken,
-      video: video,
-    })
+    new({jobTag, notificationChannel, clientRequestToken, video})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module StartLabelDetection = {
   type t
   type request = {
@@ -2311,17 +2276,9 @@ module StartLabelDetection = {
     ~minConfidence=?,
     ~clientRequestToken=?,
     (),
-  ) =>
-    new({
-      jobTag: jobTag,
-      notificationChannel: notificationChannel,
-      minConfidence: minConfidence,
-      clientRequestToken: clientRequestToken,
-      video: video,
-    })
+  ) => new({jobTag, notificationChannel, minConfidence, clientRequestToken, video})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module StartFaceSearch = {
   type t
   type request = {
@@ -2369,17 +2326,9 @@ module StartFaceSearch = {
     ~clientRequestToken=?,
     (),
   ) =>
-    new({
-      jobTag: jobTag,
-      notificationChannel: notificationChannel,
-      collectionId: collectionId,
-      faceMatchThreshold: faceMatchThreshold,
-      clientRequestToken: clientRequestToken,
-      video: video,
-    })
+    new({jobTag, notificationChannel, collectionId, faceMatchThreshold, clientRequestToken, video})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module StartFaceDetection = {
   type t
   type request = {
@@ -2423,17 +2372,9 @@ module StartFaceDetection = {
     ~notificationChannel=?,
     ~clientRequestToken=?,
     (),
-  ) =>
-    new({
-      jobTag: jobTag,
-      faceAttributes: faceAttributes,
-      notificationChannel: notificationChannel,
-      clientRequestToken: clientRequestToken,
-      video: video,
-    })
+  ) => new({jobTag, faceAttributes, notificationChannel, clientRequestToken, video})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module StartContentModeration = {
   type t
   type request = {
@@ -2477,17 +2418,9 @@ module StartContentModeration = {
     ~clientRequestToken=?,
     ~minConfidence=?,
     (),
-  ) =>
-    new({
-      jobTag: jobTag,
-      notificationChannel: notificationChannel,
-      clientRequestToken: clientRequestToken,
-      minConfidence: minConfidence,
-      video: video,
-    })
+  ) => new({jobTag, notificationChannel, clientRequestToken, minConfidence, video})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module StartCelebrityRecognition = {
   type t
   type request = {
@@ -2518,15 +2451,9 @@ module StartCelebrityRecognition = {
   @module("@aws-sdk/client-rekognition") @new
   external new: request => t = "StartCelebrityRecognitionCommand"
   let make = (~video, ~jobTag=?, ~notificationChannel=?, ~clientRequestToken=?, ()) =>
-    new({
-      jobTag: jobTag,
-      notificationChannel: notificationChannel,
-      clientRequestToken: clientRequestToken,
-      video: video,
-    })
+    new({jobTag, notificationChannel, clientRequestToken, video})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListStreamProcessors = {
   type t
   type request = {
@@ -2550,11 +2477,9 @@ module ListStreamProcessors = {
   }
   @module("@aws-sdk/client-rekognition") @new
   external new: request => t = "ListStreamProcessorsCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DistributeDatasetEntries = {
   type t
   type request = {
@@ -2570,7 +2495,6 @@ module DistributeDatasetEntries = {
   let make = (~datasets, ()) => new({datasets: datasets})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DescribeStreamProcessor = {
   type t
   type request = {
@@ -2613,7 +2537,6 @@ module DescribeStreamProcessor = {
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeDataset = {
   type t
   type request = {
@@ -2634,7 +2557,6 @@ The description for the dataset.
   let make = (~datasetArn, ()) => new({datasetArn: datasetArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateStreamProcessor = {
   type t
   type request = {
@@ -2674,17 +2596,9 @@ module CreateStreamProcessor = {
   @module("@aws-sdk/client-rekognition") @new
   external new: request => t = "CreateStreamProcessorCommand"
   let make = (~roleArn, ~settings, ~name, ~output, ~input, ~tags=?, ()) =>
-    new({
-      tags: tags,
-      roleArn: roleArn,
-      settings: settings,
-      name: name,
-      output: output,
-      input: input,
-    })
+    new({tags, roleArn, settings, name, output, input})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module StartSegmentDetection = {
   type t
   type request = {
@@ -2726,18 +2640,9 @@ module StartSegmentDetection = {
     ~notificationChannel=?,
     ~clientRequestToken=?,
     (),
-  ) =>
-    new({
-      segmentTypes: segmentTypes,
-      filters: filters,
-      jobTag: jobTag,
-      notificationChannel: notificationChannel,
-      clientRequestToken: clientRequestToken,
-      video: video,
-    })
+  ) => new({segmentTypes, filters, jobTag, notificationChannel, clientRequestToken, video})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListFaces = {
   type t
   type request = {
@@ -2766,10 +2671,9 @@ module ListFaces = {
   }
   @module("@aws-sdk/client-rekognition") @new external new: request => t = "ListFacesCommand"
   let make = (~collectionId, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, collectionId: collectionId})
+    new({maxResults, nextToken, collectionId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListDatasetLabels = {
   type t
   type request = {
@@ -2804,10 +2708,9 @@ A list of the labels in the dataset.
   @module("@aws-sdk/client-rekognition") @new
   external new: request => t = "ListDatasetLabelsCommand"
   let make = (~datasetArn, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, datasetArn: datasetArn})
+    new({maxResults, nextToken, datasetArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetSegmentDetection = {
   type t
   type request = {
@@ -2865,11 +2768,9 @@ module GetSegmentDetection = {
   }
   @module("@aws-sdk/client-rekognition") @new
   external new: request => t = "GetSegmentDetectionCommand"
-  let make = (~jobId, ~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken: nextToken, maxResults: maxResults, jobId: jobId})
+  let make = (~jobId, ~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults, jobId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetContentModeration = {
   type t
   type request = {
@@ -2925,10 +2826,9 @@ module GetContentModeration = {
   @module("@aws-sdk/client-rekognition") @new
   external new: request => t = "GetContentModerationCommand"
   let make = (~jobId, ~sortBy=?, ~nextToken=?, ~maxResults=?, ()) =>
-    new({sortBy: sortBy, nextToken: nextToken, maxResults: maxResults, jobId: jobId})
+    new({sortBy, nextToken, maxResults, jobId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DetectModerationLabels = {
   type t
   type request = {
@@ -2968,10 +2868,9 @@ module DetectModerationLabels = {
   @module("@aws-sdk/client-rekognition") @new
   external new: request => t = "DetectModerationLabelsCommand"
   let make = (~image, ~humanLoopConfig=?, ~minConfidence=?, ()) =>
-    new({humanLoopConfig: humanLoopConfig, minConfidence: minConfidence, image: image})
+    new({humanLoopConfig, minConfidence, image})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateDataset = {
   type t
   type request = {
@@ -3004,10 +2903,9 @@ The ARN of the created  Amazon Rekognition Custom Labels dataset.
   }
   @module("@aws-sdk/client-rekognition") @new external new: request => t = "CreateDatasetCommand"
   let make = (~projectArn, ~datasetType, ~datasetSource=?, ()) =>
-    new({projectArn: projectArn, datasetType: datasetType, datasetSource: datasetSource})
+    new({projectArn, datasetType, datasetSource})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module StartTextDetection = {
   type t
   type request = {
@@ -3038,16 +2936,9 @@ module StartTextDetection = {
   @module("@aws-sdk/client-rekognition") @new
   external new: request => t = "StartTextDetectionCommand"
   let make = (~video, ~filters=?, ~jobTag=?, ~notificationChannel=?, ~clientRequestToken=?, ()) =>
-    new({
-      filters: filters,
-      jobTag: jobTag,
-      notificationChannel: notificationChannel,
-      clientRequestToken: clientRequestToken,
-      video: video,
-    })
+    new({filters, jobTag, notificationChannel, clientRequestToken, video})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module SearchFacesByImage = {
   type t
   type request = {
@@ -3108,16 +2999,9 @@ module SearchFacesByImage = {
   @module("@aws-sdk/client-rekognition") @new
   external new: request => t = "SearchFacesByImageCommand"
   let make = (~image, ~collectionId, ~qualityFilter=?, ~faceMatchThreshold=?, ~maxFaces=?, ()) =>
-    new({
-      qualityFilter: qualityFilter,
-      faceMatchThreshold: faceMatchThreshold,
-      maxFaces: maxFaces,
-      image: image,
-      collectionId: collectionId,
-    })
+    new({qualityFilter, faceMatchThreshold, maxFaces, image, collectionId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module SearchFaces = {
   type t
   type request = {
@@ -3152,15 +3036,9 @@ module SearchFaces = {
   }
   @module("@aws-sdk/client-rekognition") @new external new: request => t = "SearchFacesCommand"
   let make = (~faceId, ~collectionId, ~faceMatchThreshold=?, ~maxFaces=?, ()) =>
-    new({
-      faceMatchThreshold: faceMatchThreshold,
-      maxFaces: maxFaces,
-      faceId: faceId,
-      collectionId: collectionId,
-    })
+    new({faceMatchThreshold, maxFaces, faceId, collectionId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DetectFaces = {
   type t
   type request = {
@@ -3199,10 +3077,9 @@ module DetectFaces = {
     faceDetails: option<faceDetailList>,
   }
   @module("@aws-sdk/client-rekognition") @new external new: request => t = "DetectFacesCommand"
-  let make = (~image, ~attributes=?, ()) => new({attributes: attributes, image: image})
+  let make = (~image, ~attributes=?, ()) => new({attributes, image})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeProjects = {
   type t
   type request = {
@@ -3235,10 +3112,9 @@ module DescribeProjects = {
   }
   @module("@aws-sdk/client-rekognition") @new external new: request => t = "DescribeProjectsCommand"
   let make = (~projectNames=?, ~maxResults=?, ~nextToken=?, ()) =>
-    new({projectNames: projectNames, maxResults: maxResults, nextToken: nextToken})
+    new({projectNames, maxResults, nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module RecognizeCelebrities = {
   type t
   type request = {
@@ -3285,7 +3161,6 @@ module RecognizeCelebrities = {
   let make = (~image, ()) => new({image: image})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module IndexFaces = {
   type t
   type request = {
@@ -3400,18 +3275,9 @@ module IndexFaces = {
     ~detectionAttributes=?,
     ~externalImageId=?,
     (),
-  ) =>
-    new({
-      qualityFilter: qualityFilter,
-      maxFaces: maxFaces,
-      detectionAttributes: detectionAttributes,
-      externalImageId: externalImageId,
-      image: image,
-      collectionId: collectionId,
-    })
+  ) => new({qualityFilter, maxFaces, detectionAttributes, externalImageId, image, collectionId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetFaceDetection = {
   type t
   type request = {
@@ -3453,11 +3319,9 @@ module GetFaceDetection = {
     jobStatus: option<videoJobStatus>,
   }
   @module("@aws-sdk/client-rekognition") @new external new: request => t = "GetFaceDetectionCommand"
-  let make = (~jobId, ~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken: nextToken, maxResults: maxResults, jobId: jobId})
+  let make = (~jobId, ~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults, jobId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DetectText = {
   type t
   type request = {
@@ -3482,10 +3346,9 @@ module DetectText = {
     textDetections: option<textDetectionList>,
   }
   @module("@aws-sdk/client-rekognition") @new external new: request => t = "DetectTextCommand"
-  let make = (~image, ~filters=?, ()) => new({filters: filters, image: image})
+  let make = (~image, ~filters=?, ()) => new({filters, image})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DetectLabels = {
   type t
   type request = {
@@ -3528,11 +3391,9 @@ module DetectLabels = {
     labels: option<labels>,
   }
   @module("@aws-sdk/client-rekognition") @new external new: request => t = "DetectLabelsCommand"
-  let make = (~image, ~minConfidence=?, ~maxLabels=?, ()) =>
-    new({minConfidence: minConfidence, maxLabels: maxLabels, image: image})
+  let make = (~image, ~minConfidence=?, ~maxLabels=?, ()) => new({minConfidence, maxLabels, image})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DetectCustomLabels = {
   type t
   type request = {
@@ -3561,15 +3422,9 @@ module DetectCustomLabels = {
   @module("@aws-sdk/client-rekognition") @new
   external new: request => t = "DetectCustomLabelsCommand"
   let make = (~image, ~projectVersionArn, ~minConfidence=?, ~maxResults=?, ()) =>
-    new({
-      minConfidence: minConfidence,
-      maxResults: maxResults,
-      image: image,
-      projectVersionArn: projectVersionArn,
-    })
+    new({minConfidence, maxResults, image, projectVersionArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateProjectVersion = {
   type t
   type request = {
@@ -3644,19 +3499,9 @@ module CreateProjectVersion = {
     ~testingData=?,
     ~trainingData=?,
     (),
-  ) =>
-    new({
-      kmsKeyId: kmsKeyId,
-      tags: tags,
-      testingData: testingData,
-      trainingData: trainingData,
-      outputConfig: outputConfig,
-      versionName: versionName,
-      projectArn: projectArn,
-    })
+  ) => new({kmsKeyId, tags, testingData, trainingData, outputConfig, versionName, projectArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CompareFaces = {
   type t
   type request = {
@@ -3737,15 +3582,9 @@ module CompareFaces = {
   }
   @module("@aws-sdk/client-rekognition") @new external new: request => t = "CompareFacesCommand"
   let make = (~targetImage, ~sourceImage, ~qualityFilter=?, ~similarityThreshold=?, ()) =>
-    new({
-      qualityFilter: qualityFilter,
-      similarityThreshold: similarityThreshold,
-      targetImage: targetImage,
-      sourceImage: sourceImage,
-    })
+    new({qualityFilter, similarityThreshold, targetImage, sourceImage})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetTextDetection = {
   type t
   type request = {
@@ -3785,11 +3624,9 @@ module GetTextDetection = {
     jobStatus: option<videoJobStatus>,
   }
   @module("@aws-sdk/client-rekognition") @new external new: request => t = "GetTextDetectionCommand"
-  let make = (~jobId, ~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken: nextToken, maxResults: maxResults, jobId: jobId})
+  let make = (~jobId, ~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults, jobId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetPersonTracking = {
   type t
   type request = {
@@ -3838,10 +3675,9 @@ module GetPersonTracking = {
   @module("@aws-sdk/client-rekognition") @new
   external new: request => t = "GetPersonTrackingCommand"
   let make = (~jobId, ~sortBy=?, ~nextToken=?, ~maxResults=?, ()) =>
-    new({sortBy: sortBy, nextToken: nextToken, maxResults: maxResults, jobId: jobId})
+    new({sortBy, nextToken, maxResults, jobId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetLabelDetection = {
   type t
   type request = {
@@ -3893,10 +3729,9 @@ module GetLabelDetection = {
   @module("@aws-sdk/client-rekognition") @new
   external new: request => t = "GetLabelDetectionCommand"
   let make = (~jobId, ~sortBy=?, ~nextToken=?, ~maxResults=?, ()) =>
-    new({sortBy: sortBy, nextToken: nextToken, maxResults: maxResults, jobId: jobId})
+    new({sortBy, nextToken, maxResults, jobId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetFaceSearch = {
   type t
   type request = {
@@ -3948,10 +3783,9 @@ module GetFaceSearch = {
   }
   @module("@aws-sdk/client-rekognition") @new external new: request => t = "GetFaceSearchCommand"
   let make = (~jobId, ~sortBy=?, ~nextToken=?, ~maxResults=?, ()) =>
-    new({sortBy: sortBy, nextToken: nextToken, maxResults: maxResults, jobId: jobId})
+    new({sortBy, nextToken, maxResults, jobId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetCelebrityRecognition = {
   type t
   type request = {
@@ -3995,10 +3829,9 @@ module GetCelebrityRecognition = {
   @module("@aws-sdk/client-rekognition") @new
   external new: request => t = "GetCelebrityRecognitionCommand"
   let make = (~jobId, ~sortBy=?, ~nextToken=?, ~maxResults=?, ()) =>
-    new({sortBy: sortBy, nextToken: nextToken, maxResults: maxResults, jobId: jobId})
+    new({sortBy, nextToken, maxResults, jobId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DetectProtectiveEquipment = {
   type t
   type request = {
@@ -4028,11 +3861,9 @@ module DetectProtectiveEquipment = {
   }
   @module("@aws-sdk/client-rekognition") @new
   external new: request => t = "DetectProtectiveEquipmentCommand"
-  let make = (~image, ~summarizationAttributes=?, ()) =>
-    new({summarizationAttributes: summarizationAttributes, image: image})
+  let make = (~image, ~summarizationAttributes=?, ()) => new({summarizationAttributes, image})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeProjectVersions = {
   type t
   type request = {
@@ -4072,11 +3903,6 @@ module DescribeProjectVersions = {
   @module("@aws-sdk/client-rekognition") @new
   external new: request => t = "DescribeProjectVersionsCommand"
   let make = (~projectArn, ~maxResults=?, ~nextToken=?, ~versionNames=?, ()) =>
-    new({
-      maxResults: maxResults,
-      nextToken: nextToken,
-      versionNames: versionNames,
-      projectArn: projectArn,
-    })
+    new({maxResults, nextToken, versionNames, projectArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

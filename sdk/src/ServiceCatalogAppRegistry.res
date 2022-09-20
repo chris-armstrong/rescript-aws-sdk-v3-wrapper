@@ -211,10 +211,9 @@ module SyncResource = {
     applicationArn: option<applicationArn>,
   }
   @module("@aws-sdk/client-servicecatalog") @new external new: request => t = "SyncResourceCommand"
-  let make = (~resource, ~resourceType, ()) => new({resource: resource, resourceType: resourceType})
+  let make = (~resource, ~resourceType, ()) => new({resource, resourceType})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DisassociateResource = {
   type t
   type request = {
@@ -232,10 +231,9 @@ module DisassociateResource = {
   @module("@aws-sdk/client-servicecatalog") @new
   external new: request => t = "DisassociateResourceCommand"
   let make = (~resource, ~resourceType, ~application, ()) =>
-    new({resource: resource, resourceType: resourceType, application: application})
+    new({resource, resourceType, application})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DisassociateAttributeGroup = {
   type t
   type request = {
@@ -253,11 +251,9 @@ module DisassociateAttributeGroup = {
   }
   @module("@aws-sdk/client-servicecatalog") @new
   external new: request => t = "DisassociateAttributeGroupCommand"
-  let make = (~attributeGroup, ~application, ()) =>
-    new({attributeGroup: attributeGroup, application: application})
+  let make = (~attributeGroup, ~application, ()) => new({attributeGroup, application})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module AssociateResource = {
   type t
   type request = {
@@ -278,10 +274,9 @@ module AssociateResource = {
   @module("@aws-sdk/client-servicecatalog") @new
   external new: request => t = "AssociateResourceCommand"
   let make = (~resource, ~resourceType, ~application, ()) =>
-    new({resource: resource, resourceType: resourceType, application: application})
+    new({resource, resourceType, application})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module AssociateAttributeGroup = {
   type t
   type request = {
@@ -303,11 +298,9 @@ module AssociateAttributeGroup = {
   }
   @module("@aws-sdk/client-servicecatalog") @new
   external new: request => t = "AssociateAttributeGroupCommand"
-  let make = (~attributeGroup, ~application, ()) =>
-    new({attributeGroup: attributeGroup, application: application})
+  let make = (~attributeGroup, ~application, ()) => new({attributeGroup, application})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UntagResource = {
   type t
   type request = {
@@ -318,10 +311,9 @@ module UntagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-servicecatalog") @new external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
+  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys, resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module TagResource = {
   type t
   type request = {
@@ -331,10 +323,9 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-servicecatalog") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
+  let make = (~tags, ~resourceArn, ()) => new({tags, resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module ListTagsForResource = {
   type t
   type request = {
@@ -347,7 +338,6 @@ module ListTagsForResource = {
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListAssociatedAttributeGroups = {
   type t
   type request = {
@@ -371,10 +361,9 @@ module ListAssociatedAttributeGroups = {
   @module("@aws-sdk/client-servicecatalog") @new
   external new: request => t = "ListAssociatedAttributeGroupsCommand"
   let make = (~application, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, application: application})
+    new({maxResults, nextToken, application})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetAttributeGroup = {
   type t
   type request = {
@@ -411,7 +400,6 @@ module GetAttributeGroup = {
   let make = (~attributeGroup, ()) => new({attributeGroup: attributeGroup})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteAttributeGroup = {
   type t
   type request = {
@@ -429,7 +417,6 @@ module DeleteAttributeGroup = {
   let make = (~attributeGroup, ()) => new({attributeGroup: attributeGroup})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteApplication = {
   type t
   type request = {
@@ -444,7 +431,6 @@ module DeleteApplication = {
   let make = (~application, ()) => new({application: application})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateAttributeGroup = {
   type t
   type request = {
@@ -469,15 +455,9 @@ module UpdateAttributeGroup = {
   @module("@aws-sdk/client-servicecatalog") @new
   external new: request => t = "UpdateAttributeGroupCommand"
   let make = (~attributeGroup, ~attributes=?, ~description=?, ~name=?, ()) =>
-    new({
-      attributes: attributes,
-      description: description,
-      name: name,
-      attributeGroup: attributeGroup,
-    })
+    new({attributes, description, name, attributeGroup})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateApplication = {
   type t
   type request = {
@@ -495,11 +475,9 @@ module UpdateApplication = {
   }
   @module("@aws-sdk/client-servicecatalog") @new
   external new: request => t = "UpdateApplicationCommand"
-  let make = (~application, ~description=?, ~name=?, ()) =>
-    new({description: description, name: name, application: application})
+  let make = (~application, ~description=?, ~name=?, ()) => new({description, name, application})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListAttributeGroups = {
   type t
   type request = {
@@ -522,11 +500,9 @@ module ListAttributeGroups = {
   }
   @module("@aws-sdk/client-servicecatalog") @new
   external new: request => t = "ListAttributeGroupsCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListAssociatedResources = {
   type t
   type request = {
@@ -550,10 +526,9 @@ module ListAssociatedResources = {
   @module("@aws-sdk/client-servicecatalog") @new
   external new: request => t = "ListAssociatedResourcesCommand"
   let make = (~application, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, application: application})
+    new({maxResults, nextToken, application})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListApplications = {
   type t
   type request = {
@@ -575,11 +550,9 @@ module ListApplications = {
   }
   @module("@aws-sdk/client-servicecatalog") @new
   external new: request => t = "ListApplicationsCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetApplication = {
   type t
   type request = {
@@ -619,7 +592,6 @@ module GetApplication = {
   let make = (~application, ()) => new({application: application})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateAttributeGroup = {
   type t
   type request = {
@@ -645,16 +617,9 @@ module CreateAttributeGroup = {
   @module("@aws-sdk/client-servicecatalog") @new
   external new: request => t = "CreateAttributeGroupCommand"
   let make = (~clientToken, ~attributes, ~name, ~tags=?, ~description=?, ()) =>
-    new({
-      clientToken: clientToken,
-      tags: tags,
-      attributes: attributes,
-      description: description,
-      name: name,
-    })
+    new({clientToken, tags, attributes, description, name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateApplication = {
   type t
   type request = {
@@ -677,10 +642,9 @@ module CreateApplication = {
   @module("@aws-sdk/client-servicecatalog") @new
   external new: request => t = "CreateApplicationCommand"
   let make = (~clientToken, ~name, ~tags=?, ~description=?, ()) =>
-    new({clientToken: clientToken, tags: tags, description: description, name: name})
+    new({clientToken, tags, description, name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetAssociatedResource = {
   type t
   type request = {
@@ -696,6 +660,6 @@ module GetAssociatedResource = {
   @module("@aws-sdk/client-servicecatalog") @new
   external new: request => t = "GetAssociatedResourceCommand"
   let make = (~resource, ~resourceType, ~application, ()) =>
-    new({resource: resource, resourceType: resourceType, application: application})
+    new({resource, resourceType, application})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

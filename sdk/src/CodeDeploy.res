@@ -1576,10 +1576,9 @@ module UpdateApplication = {
   type response = {.}
   @module("@aws-sdk/client-codedeploy") @new external new: request => t = "UpdateApplicationCommand"
   let make = (~newApplicationName=?, ~applicationName=?, ()) =>
-    new({newApplicationName: newApplicationName, applicationName: applicationName})
+    new({newApplicationName, applicationName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module StopDeployment = {
   type t
   @ocaml.doc("<p> Represents the input of a <code>StopDeployment</code> operation. </p>")
@@ -1604,11 +1603,9 @@ module StopDeployment = {
     status: option<stopStatus>,
   }
   @module("@aws-sdk/client-codedeploy") @new external new: request => t = "StopDeploymentCommand"
-  let make = (~deploymentId, ~autoRollbackEnabled=?, ()) =>
-    new({autoRollbackEnabled: autoRollbackEnabled, deploymentId: deploymentId})
+  let make = (~deploymentId, ~autoRollbackEnabled=?, ()) => new({autoRollbackEnabled, deploymentId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module SkipWaitTimeForInstanceTermination = {
   type t
   type request = {
@@ -1622,7 +1619,6 @@ module SkipWaitTimeForInstanceTermination = {
   let make = (~deploymentId=?, ()) => new({deploymentId: deploymentId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module RegisterOnPremisesInstance = {
   type t
   @ocaml.doc("<p>Represents the input of the register on-premises instance operation.</p>")
@@ -1638,10 +1634,9 @@ module RegisterOnPremisesInstance = {
   @module("@aws-sdk/client-codedeploy") @new
   external new: request => t = "RegisterOnPremisesInstanceCommand"
   let make = (~instanceName, ~iamUserArn=?, ~iamSessionArn=?, ()) =>
-    new({iamUserArn: iamUserArn, iamSessionArn: iamSessionArn, instanceName: instanceName})
+    new({iamUserArn, iamSessionArn, instanceName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module PutLifecycleEventHookExecutionStatus = {
   type t
   type request = {
@@ -1664,14 +1659,9 @@ module PutLifecycleEventHookExecutionStatus = {
   @module("@aws-sdk/client-codedeploy") @new
   external new: request => t = "PutLifecycleEventHookExecutionStatusCommand"
   let make = (~status=?, ~lifecycleEventHookExecutionId=?, ~deploymentId=?, ()) =>
-    new({
-      status: status,
-      lifecycleEventHookExecutionId: lifecycleEventHookExecutionId,
-      deploymentId: deploymentId,
-    })
+    new({status, lifecycleEventHookExecutionId, deploymentId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeregisterOnPremisesInstance = {
   type t
   @ocaml.doc(
@@ -1687,7 +1677,6 @@ module DeregisterOnPremisesInstance = {
   let make = (~instanceName, ()) => new({instanceName: instanceName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteResourcesByExternalId = {
   type t
   type request = {
@@ -1701,7 +1690,6 @@ module DeleteResourcesByExternalId = {
   let make = (~externalId=?, ()) => new({externalId: externalId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteGitHubAccountToken = {
   type t
   @ocaml.doc("<p>Represents the input of a <code>DeleteGitHubAccount</code> operation.</p>")
@@ -1719,7 +1707,6 @@ module DeleteGitHubAccountToken = {
   let make = (~tokenName=?, ()) => new({tokenName: tokenName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteDeploymentConfig = {
   type t
   @ocaml.doc("<p>Represents the input of a <code>DeleteDeploymentConfig</code> operation.</p>")
@@ -1734,7 +1721,6 @@ module DeleteDeploymentConfig = {
   let make = (~deploymentConfigName, ()) => new({deploymentConfigName: deploymentConfigName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteApplication = {
   type t
   @ocaml.doc("<p>Represents the input of a <code>DeleteApplication</code> operation.</p>")
@@ -1748,7 +1734,6 @@ module DeleteApplication = {
   let make = (~applicationName, ()) => new({applicationName: applicationName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module ContinueDeployment = {
   type t
   type request = {
@@ -1764,11 +1749,9 @@ module ContinueDeployment = {
   type response = {.}
   @module("@aws-sdk/client-codedeploy") @new
   external new: request => t = "ContinueDeploymentCommand"
-  let make = (~deploymentWaitType=?, ~deploymentId=?, ()) =>
-    new({deploymentWaitType: deploymentWaitType, deploymentId: deploymentId})
+  let make = (~deploymentWaitType=?, ~deploymentId=?, ()) => new({deploymentWaitType, deploymentId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module UntagResource = {
   type t
   type request = {
@@ -1784,10 +1767,9 @@ module UntagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-codedeploy") @new external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
+  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys, resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module ListGitHubAccountTokenNames = {
   type t
   @ocaml.doc("<p>Represents the input of a <code>ListGitHubAccountTokenNames</code> operation.</p>")
@@ -1812,7 +1794,6 @@ module ListGitHubAccountTokenNames = {
   let make = (~nextToken=?, ()) => new({nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListDeployments = {
   type t
   @ocaml.doc("<p>Represents the input of a <code>ListDeployments</code> operation.</p>")
@@ -1894,16 +1875,15 @@ module ListDeployments = {
     (),
   ) =>
     new({
-      nextToken: nextToken,
-      createTimeRange: createTimeRange,
-      includeOnlyStatuses: includeOnlyStatuses,
-      externalId: externalId,
-      deploymentGroupName: deploymentGroupName,
-      applicationName: applicationName,
+      nextToken,
+      createTimeRange,
+      includeOnlyStatuses,
+      externalId,
+      deploymentGroupName,
+      applicationName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListDeploymentInstances = {
   type t
   @ocaml.doc("<p> Represents the input of a <code>ListDeploymentInstances</code> operation. </p>")
@@ -1959,15 +1939,9 @@ module ListDeploymentInstances = {
   @module("@aws-sdk/client-codedeploy") @new
   external new: request => t = "ListDeploymentInstancesCommand"
   let make = (~deploymentId, ~instanceTypeFilter=?, ~instanceStatusFilter=?, ~nextToken=?, ()) =>
-    new({
-      instanceTypeFilter: instanceTypeFilter,
-      instanceStatusFilter: instanceStatusFilter,
-      nextToken: nextToken,
-      deploymentId: deploymentId,
-    })
+    new({instanceTypeFilter, instanceStatusFilter, nextToken, deploymentId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListDeploymentGroups = {
   type t
   @ocaml.doc("<p>Represents the input of a <code>ListDeploymentGroups</code> operation.</p>")
@@ -1991,11 +1965,9 @@ module ListDeploymentGroups = {
   }
   @module("@aws-sdk/client-codedeploy") @new
   external new: request => t = "ListDeploymentGroupsCommand"
-  let make = (~applicationName, ~nextToken=?, ()) =>
-    new({nextToken: nextToken, applicationName: applicationName})
+  let make = (~applicationName, ~nextToken=?, ()) => new({nextToken, applicationName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListDeploymentConfigs = {
   type t
   @ocaml.doc("<p>Represents the input of a <code>ListDeploymentConfigs</code> operation.</p>")
@@ -2019,7 +1991,6 @@ module ListDeploymentConfigs = {
   let make = (~nextToken=?, ()) => new({nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListApplications = {
   type t
   @ocaml.doc("<p>Represents the input of a <code>ListApplications</code> operation.</p>")
@@ -2040,7 +2011,6 @@ module ListApplications = {
   let make = (~nextToken=?, ()) => new({nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetApplication = {
   type t
   @ocaml.doc("<p>Represents the input of a <code>GetApplication</code> operation.</p>")
@@ -2057,7 +2027,6 @@ module GetApplication = {
   let make = (~applicationName, ()) => new({applicationName: applicationName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module TagResource = {
   type t
   type request = {
@@ -2073,10 +2042,9 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-codedeploy") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
+  let make = (~tags, ~resourceArn, ()) => new({tags, resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module RemoveTagsFromOnPremisesInstances = {
   type t
   @ocaml.doc("<p>Represents the input of a <code>RemoveTagsFromOnPremisesInstances</code>
@@ -2090,10 +2058,9 @@ module RemoveTagsFromOnPremisesInstances = {
   type response = {.}
   @module("@aws-sdk/client-codedeploy") @new
   external new: request => t = "RemoveTagsFromOnPremisesInstancesCommand"
-  let make = (~instanceNames, ~tags, ()) => new({instanceNames: instanceNames, tags: tags})
+  let make = (~instanceNames, ~tags, ()) => new({instanceNames, tags})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module RegisterApplicationRevision = {
   type t
   @ocaml.doc("<p>Represents the input of a RegisterApplicationRevision operation.</p>")
@@ -2110,10 +2077,9 @@ module RegisterApplicationRevision = {
   @module("@aws-sdk/client-codedeploy") @new
   external new: request => t = "RegisterApplicationRevisionCommand"
   let make = (~revision, ~applicationName, ~description=?, ()) =>
-    new({revision: revision, description: description, applicationName: applicationName})
+    new({revision, description, applicationName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module ListTagsForResource = {
   type t
   type request = {
@@ -2140,11 +2106,9 @@ module ListTagsForResource = {
   }
   @module("@aws-sdk/client-codedeploy") @new
   external new: request => t = "ListTagsForResourceCommand"
-  let make = (~resourceArn, ~nextToken=?, ()) =>
-    new({nextToken: nextToken, resourceArn: resourceArn})
+  let make = (~resourceArn, ~nextToken=?, ()) => new({nextToken, resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListOnPremisesInstances = {
   type t
   @ocaml.doc("<p>Represents the input of a <code>ListOnPremisesInstances</code> operation.</p>")
@@ -2182,10 +2146,9 @@ module ListOnPremisesInstances = {
   @module("@aws-sdk/client-codedeploy") @new
   external new: request => t = "ListOnPremisesInstancesCommand"
   let make = (~nextToken=?, ~tagFilters=?, ~registrationStatus=?, ()) =>
-    new({nextToken: nextToken, tagFilters: tagFilters, registrationStatus: registrationStatus})
+    new({nextToken, tagFilters, registrationStatus})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListDeploymentTargets = {
   type t
   type request = {
@@ -2220,10 +2183,9 @@ module ListDeploymentTargets = {
   @module("@aws-sdk/client-codedeploy") @new
   external new: request => t = "ListDeploymentTargetsCommand"
   let make = (~targetFilters=?, ~nextToken=?, ~deploymentId=?, ()) =>
-    new({targetFilters: targetFilters, nextToken: nextToken, deploymentId: deploymentId})
+    new({targetFilters, nextToken, deploymentId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetApplicationRevision = {
   type t
   @ocaml.doc("<p>Represents the input of a <code>GetApplicationRevision</code> operation.</p>")
@@ -2246,11 +2208,9 @@ module GetApplicationRevision = {
   }
   @module("@aws-sdk/client-codedeploy") @new
   external new: request => t = "GetApplicationRevisionCommand"
-  let make = (~revision, ~applicationName, ()) =>
-    new({revision: revision, applicationName: applicationName})
+  let make = (~revision, ~applicationName, ()) => new({revision, applicationName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteDeploymentGroup = {
   type t
   @ocaml.doc("<p>Represents the input of a <code>DeleteDeploymentGroup</code> operation.</p>")
@@ -2273,10 +2233,9 @@ module DeleteDeploymentGroup = {
   @module("@aws-sdk/client-codedeploy") @new
   external new: request => t = "DeleteDeploymentGroupCommand"
   let make = (~deploymentGroupName, ~applicationName, ()) =>
-    new({deploymentGroupName: deploymentGroupName, applicationName: applicationName})
+    new({deploymentGroupName, applicationName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateDeploymentConfig = {
   type t
   @ocaml.doc("<p>Represents the input of a <code>CreateDeploymentConfig</code> operation.</p>")
@@ -2322,16 +2281,9 @@ module CreateDeploymentConfig = {
     ~trafficRoutingConfig=?,
     ~minimumHealthyHosts=?,
     (),
-  ) =>
-    new({
-      computePlatform: computePlatform,
-      trafficRoutingConfig: trafficRoutingConfig,
-      minimumHealthyHosts: minimumHealthyHosts,
-      deploymentConfigName: deploymentConfigName,
-    })
+  ) => new({computePlatform, trafficRoutingConfig, minimumHealthyHosts, deploymentConfigName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateApplication = {
   type t
   @ocaml.doc("<p>Represents the input of a <code>CreateApplication</code> operation.</p>")
@@ -2353,10 +2305,9 @@ module CreateApplication = {
   }
   @module("@aws-sdk/client-codedeploy") @new external new: request => t = "CreateApplicationCommand"
   let make = (~applicationName, ~tags=?, ~computePlatform=?, ()) =>
-    new({tags: tags, computePlatform: computePlatform, applicationName: applicationName})
+    new({tags, computePlatform, applicationName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module BatchGetApplications = {
   type t
   @ocaml.doc("<p>Represents the input of a <code>BatchGetApplications</code> operation.</p>")
@@ -2375,7 +2326,6 @@ module BatchGetApplications = {
   let make = (~applicationNames, ()) => new({applicationNames: applicationNames})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module AddTagsToOnPremisesInstances = {
   type t
   @ocaml.doc("<p>Represents the input of, and adds tags to, an on-premises instance operation.</p>")
@@ -2390,10 +2340,9 @@ module AddTagsToOnPremisesInstances = {
   type response = {.}
   @module("@aws-sdk/client-codedeploy") @new
   external new: request => t = "AddTagsToOnPremisesInstancesCommand"
-  let make = (~instanceNames, ~tags, ()) => new({instanceNames: instanceNames, tags: tags})
+  let make = (~instanceNames, ~tags, ()) => new({instanceNames, tags})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module ListApplicationRevisions = {
   type t
   @ocaml.doc("<p> Represents the input of a <code>ListApplicationRevisions</code> operation. </p>")
@@ -2485,19 +2434,9 @@ module ListApplicationRevisions = {
     ~sortOrder=?,
     ~sortBy=?,
     (),
-  ) =>
-    new({
-      nextToken: nextToken,
-      deployed: deployed,
-      s3KeyPrefix: s3KeyPrefix,
-      s3Bucket: s3Bucket,
-      sortOrder: sortOrder,
-      sortBy: sortBy,
-      applicationName: applicationName,
-    })
+  ) => new({nextToken, deployed, s3KeyPrefix, s3Bucket, sortOrder, sortBy, applicationName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetOnPremisesInstance = {
   type t
   @ocaml.doc("<p> Represents the input of a <code>GetOnPremisesInstance</code> operation. </p>")
@@ -2515,7 +2454,6 @@ module GetOnPremisesInstance = {
   let make = (~instanceName, ()) => new({instanceName: instanceName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetDeploymentConfig = {
   type t
   @ocaml.doc("<p>Represents the input of a <code>GetDeploymentConfig</code> operation.</p>")
@@ -2534,7 +2472,6 @@ module GetDeploymentConfig = {
   let make = (~deploymentConfigName, ()) => new({deploymentConfigName: deploymentConfigName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetDeploymentInstance = {
   type t
   @ocaml.doc("<p> Represents the input of a <code>GetDeploymentInstance</code> operation. </p>")
@@ -2549,11 +2486,9 @@ module GetDeploymentInstance = {
   }
   @module("@aws-sdk/client-codedeploy") @new
   external new: request => t = "GetDeploymentInstanceCommand"
-  let make = (~instanceId, ~deploymentId, ()) =>
-    new({instanceId: instanceId, deploymentId: deploymentId})
+  let make = (~instanceId, ~deploymentId, ()) => new({instanceId, deploymentId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module BatchGetOnPremisesInstances = {
   type t
   @ocaml.doc("<p>Represents the input of a <code>BatchGetOnPremisesInstances</code> operation.</p>")
@@ -2574,7 +2509,6 @@ module BatchGetOnPremisesInstances = {
   let make = (~instanceNames, ()) => new({instanceNames: instanceNames})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module BatchGetApplicationRevisions = {
   type t
   @ocaml.doc(
@@ -2604,11 +2538,9 @@ module BatchGetApplicationRevisions = {
   }
   @module("@aws-sdk/client-codedeploy") @new
   external new: request => t = "BatchGetApplicationRevisionsCommand"
-  let make = (~revisions, ~applicationName, ()) =>
-    new({revisions: revisions, applicationName: applicationName})
+  let make = (~revisions, ~applicationName, ()) => new({revisions, applicationName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateDeploymentGroup = {
   type t
   @ocaml.doc("<p>Represents the input of an <code>UpdateDeploymentGroup</code> operation.</p>")
@@ -2709,28 +2641,27 @@ module UpdateDeploymentGroup = {
     (),
   ) =>
     new({
-      onPremisesTagSet: onPremisesTagSet,
-      ecsServices: ecsServices,
-      ec2TagSet: ec2TagSet,
-      loadBalancerInfo: loadBalancerInfo,
-      blueGreenDeploymentConfiguration: blueGreenDeploymentConfiguration,
-      deploymentStyle: deploymentStyle,
-      outdatedInstancesStrategy: outdatedInstancesStrategy,
-      autoRollbackConfiguration: autoRollbackConfiguration,
-      alarmConfiguration: alarmConfiguration,
-      triggerConfigurations: triggerConfigurations,
-      serviceRoleArn: serviceRoleArn,
-      autoScalingGroups: autoScalingGroups,
-      onPremisesInstanceTagFilters: onPremisesInstanceTagFilters,
-      ec2TagFilters: ec2TagFilters,
-      deploymentConfigName: deploymentConfigName,
-      newDeploymentGroupName: newDeploymentGroupName,
-      currentDeploymentGroupName: currentDeploymentGroupName,
-      applicationName: applicationName,
+      onPremisesTagSet,
+      ecsServices,
+      ec2TagSet,
+      loadBalancerInfo,
+      blueGreenDeploymentConfiguration,
+      deploymentStyle,
+      outdatedInstancesStrategy,
+      autoRollbackConfiguration,
+      alarmConfiguration,
+      triggerConfigurations,
+      serviceRoleArn,
+      autoScalingGroups,
+      onPremisesInstanceTagFilters,
+      ec2TagFilters,
+      deploymentConfigName,
+      newDeploymentGroupName,
+      currentDeploymentGroupName,
+      applicationName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetDeploymentTarget = {
   type t
   type request = {
@@ -2747,11 +2678,9 @@ module GetDeploymentTarget = {
   }
   @module("@aws-sdk/client-codedeploy") @new
   external new: request => t = "GetDeploymentTargetCommand"
-  let make = (~targetId=?, ~deploymentId=?, ()) =>
-    new({targetId: targetId, deploymentId: deploymentId})
+  let make = (~targetId=?, ~deploymentId=?, ()) => new({targetId, deploymentId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateDeploymentGroup = {
   type t
   @ocaml.doc("<p>Represents the input of a <code>CreateDeploymentGroup</code> operation.</p>")
@@ -2858,28 +2787,27 @@ module CreateDeploymentGroup = {
     (),
   ) =>
     new({
-      tags: tags,
-      onPremisesTagSet: onPremisesTagSet,
-      ecsServices: ecsServices,
-      ec2TagSet: ec2TagSet,
-      loadBalancerInfo: loadBalancerInfo,
-      blueGreenDeploymentConfiguration: blueGreenDeploymentConfiguration,
-      deploymentStyle: deploymentStyle,
-      outdatedInstancesStrategy: outdatedInstancesStrategy,
-      autoRollbackConfiguration: autoRollbackConfiguration,
-      alarmConfiguration: alarmConfiguration,
-      triggerConfigurations: triggerConfigurations,
-      serviceRoleArn: serviceRoleArn,
-      autoScalingGroups: autoScalingGroups,
-      onPremisesInstanceTagFilters: onPremisesInstanceTagFilters,
-      ec2TagFilters: ec2TagFilters,
-      deploymentConfigName: deploymentConfigName,
-      deploymentGroupName: deploymentGroupName,
-      applicationName: applicationName,
+      tags,
+      onPremisesTagSet,
+      ecsServices,
+      ec2TagSet,
+      loadBalancerInfo,
+      blueGreenDeploymentConfiguration,
+      deploymentStyle,
+      outdatedInstancesStrategy,
+      autoRollbackConfiguration,
+      alarmConfiguration,
+      triggerConfigurations,
+      serviceRoleArn,
+      autoScalingGroups,
+      onPremisesInstanceTagFilters,
+      ec2TagFilters,
+      deploymentConfigName,
+      deploymentGroupName,
+      applicationName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateDeployment = {
   type t
   @ocaml.doc("<p>Represents the input of a <code>CreateDeployment</code> operation.</p>")
@@ -2972,20 +2900,19 @@ module CreateDeployment = {
     (),
   ) =>
     new({
-      fileExistsBehavior: fileExistsBehavior,
-      updateOutdatedInstancesOnly: updateOutdatedInstancesOnly,
-      autoRollbackConfiguration: autoRollbackConfiguration,
-      targetInstances: targetInstances,
-      ignoreApplicationStopFailures: ignoreApplicationStopFailures,
-      description: description,
-      deploymentConfigName: deploymentConfigName,
-      revision: revision,
-      deploymentGroupName: deploymentGroupName,
-      applicationName: applicationName,
+      fileExistsBehavior,
+      updateOutdatedInstancesOnly,
+      autoRollbackConfiguration,
+      targetInstances,
+      ignoreApplicationStopFailures,
+      description,
+      deploymentConfigName,
+      revision,
+      deploymentGroupName,
+      applicationName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module BatchGetDeploymentInstances = {
   type t
   @ocaml.doc(
@@ -3008,11 +2935,9 @@ module BatchGetDeploymentInstances = {
   }
   @module("@aws-sdk/client-codedeploy") @new
   external new: request => t = "BatchGetDeploymentInstancesCommand"
-  let make = (~instanceIds, ~deploymentId, ()) =>
-    new({instanceIds: instanceIds, deploymentId: deploymentId})
+  let make = (~instanceIds, ~deploymentId, ()) => new({instanceIds, deploymentId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetDeploymentGroup = {
   type t
   @ocaml.doc("<p>Represents the input of a <code>GetDeploymentGroup</code> operation.</p>")
@@ -3031,10 +2956,9 @@ module GetDeploymentGroup = {
   @module("@aws-sdk/client-codedeploy") @new
   external new: request => t = "GetDeploymentGroupCommand"
   let make = (~deploymentGroupName, ~applicationName, ()) =>
-    new({deploymentGroupName: deploymentGroupName, applicationName: applicationName})
+    new({deploymentGroupName, applicationName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetDeployment = {
   type t
   @ocaml.doc("<p>Represents the input of a <code>GetDeployment</code> operation.</p>")
@@ -3052,7 +2976,6 @@ module GetDeployment = {
   let make = (~deploymentId, ()) => new({deploymentId: deploymentId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module BatchGetDeploymentTargets = {
   type t
   type request = {
@@ -3115,11 +3038,9 @@ module BatchGetDeploymentTargets = {
   }
   @module("@aws-sdk/client-codedeploy") @new
   external new: request => t = "BatchGetDeploymentTargetsCommand"
-  let make = (~targetIds=?, ~deploymentId=?, ()) =>
-    new({targetIds: targetIds, deploymentId: deploymentId})
+  let make = (~targetIds=?, ~deploymentId=?, ()) => new({targetIds, deploymentId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module BatchGetDeployments = {
   type t
   @ocaml.doc("<p> Represents the input of a <code>BatchGetDeployments</code> operation. </p>")
@@ -3138,7 +3059,6 @@ module BatchGetDeployments = {
   let make = (~deploymentIds, ()) => new({deploymentIds: deploymentIds})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module BatchGetDeploymentGroups = {
   type t
   @ocaml.doc("<p>Represents the input of a <code>BatchGetDeploymentGroups</code> operation.</p>")
@@ -3159,6 +3079,6 @@ module BatchGetDeploymentGroups = {
   @module("@aws-sdk/client-codedeploy") @new
   external new: request => t = "BatchGetDeploymentGroupsCommand"
   let make = (~deploymentGroupNames, ~applicationName, ()) =>
-    new({deploymentGroupNames: deploymentGroupNames, applicationName: applicationName})
+    new({deploymentGroupNames, applicationName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

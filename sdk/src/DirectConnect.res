@@ -1103,10 +1103,9 @@ module DescribeLoa = {
   type response = loa
   @module("@aws-sdk/client-directconnect") @new external new: request => t = "DescribeLoaCommand"
   let make = (~connectionId, ~loaContentType=?, ~providerName=?, ()) =>
-    new({loaContentType: loaContentType, providerName: providerName, connectionId: connectionId})
+    new({loaContentType, providerName, connectionId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteVirtualInterface = {
   type t
   type request = {
@@ -1159,7 +1158,6 @@ module DeleteVirtualInterface = {
   let make = (~virtualInterfaceId, ()) => new({virtualInterfaceId: virtualInterfaceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteInterconnect = {
   type t
   type request = {@ocaml.doc("<p>The ID of the interconnect.</p>") interconnectId: interconnectId}
@@ -1203,7 +1201,6 @@ module DeleteInterconnect = {
   let make = (~interconnectId, ()) => new({interconnectId: interconnectId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ConfirmTransitVirtualInterface = {
   type t
   type request = {
@@ -1256,10 +1253,9 @@ module ConfirmTransitVirtualInterface = {
   @module("@aws-sdk/client-directconnect") @new
   external new: request => t = "ConfirmTransitVirtualInterfaceCommand"
   let make = (~directConnectGatewayId, ~virtualInterfaceId, ()) =>
-    new({directConnectGatewayId: directConnectGatewayId, virtualInterfaceId: virtualInterfaceId})
+    new({directConnectGatewayId, virtualInterfaceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ConfirmPublicVirtualInterface = {
   type t
   type request = {
@@ -1312,7 +1308,6 @@ module ConfirmPublicVirtualInterface = {
   let make = (~virtualInterfaceId, ()) => new({virtualInterfaceId: virtualInterfaceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ConfirmPrivateVirtualInterface = {
   type t
   type request = {
@@ -1367,14 +1362,9 @@ module ConfirmPrivateVirtualInterface = {
   @module("@aws-sdk/client-directconnect") @new
   external new: request => t = "ConfirmPrivateVirtualInterfaceCommand"
   let make = (~virtualInterfaceId, ~directConnectGatewayId=?, ~virtualGatewayId=?, ()) =>
-    new({
-      directConnectGatewayId: directConnectGatewayId,
-      virtualGatewayId: virtualGatewayId,
-      virtualInterfaceId: virtualInterfaceId,
-    })
+    new({directConnectGatewayId, virtualGatewayId, virtualInterfaceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ConfirmCustomerAgreement = {
   type t
   type request = {
@@ -1396,7 +1386,6 @@ module ConfirmCustomerAgreement = {
   let make = (~agreementName=?, ()) => new({agreementName: agreementName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ConfirmConnection = {
   type t
   type request = {@ocaml.doc("<p>The ID of the hosted connection.</p>") connectionId: connectionId}
@@ -1447,7 +1436,6 @@ module ConfirmConnection = {
   let make = (~connectionId, ()) => new({connectionId: connectionId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateDirectConnectGateway = {
   type t
   type request = {
@@ -1460,13 +1448,9 @@ module UpdateDirectConnectGateway = {
   @module("@aws-sdk/client-directconnect") @new
   external new: request => t = "UpdateDirectConnectGatewayCommand"
   let make = (~newDirectConnectGatewayName, ~directConnectGatewayId, ()) =>
-    new({
-      newDirectConnectGatewayName: newDirectConnectGatewayName,
-      directConnectGatewayId: directConnectGatewayId,
-    })
+    new({newDirectConnectGatewayName, directConnectGatewayId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UntagResource = {
   type t
   type request = {
@@ -1475,10 +1459,9 @@ module UntagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-directconnect") @new external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
+  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys, resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DescribeRouterConfiguration = {
   type t
   @ocaml.doc("<p>Provides the details about a virtual interface's router.</p>")
@@ -1501,10 +1484,9 @@ module DescribeRouterConfiguration = {
   @module("@aws-sdk/client-directconnect") @new
   external new: request => t = "DescribeRouterConfigurationCommand"
   let make = (~virtualInterfaceId, ~routerTypeIdentifier=?, ()) =>
-    new({routerTypeIdentifier: routerTypeIdentifier, virtualInterfaceId: virtualInterfaceId})
+    new({routerTypeIdentifier, virtualInterfaceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeInterconnectLoa = {
   type t
   type request = {
@@ -1525,14 +1507,9 @@ module DescribeInterconnectLoa = {
   @module("@aws-sdk/client-directconnect") @new
   external new: request => t = "DescribeInterconnectLoaCommand"
   let make = (~interconnectId, ~loaContentType=?, ~providerName=?, ()) =>
-    new({
-      loaContentType: loaContentType,
-      providerName: providerName,
-      interconnectId: interconnectId,
-    })
+    new({loaContentType, providerName, interconnectId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeConnectionLoa = {
   type t
   type request = {
@@ -1552,10 +1529,9 @@ module DescribeConnectionLoa = {
   @module("@aws-sdk/client-directconnect") @new
   external new: request => t = "DescribeConnectionLoaCommand"
   let make = (~connectionId, ~loaContentType=?, ~providerName=?, ()) =>
-    new({loaContentType: loaContentType, providerName: providerName, connectionId: connectionId})
+    new({loaContentType, providerName, connectionId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteDirectConnectGateway = {
   type t
   type request = {
@@ -1571,7 +1547,6 @@ module DeleteDirectConnectGateway = {
   let make = (~directConnectGatewayId, ()) => new({directConnectGatewayId: directConnectGatewayId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateDirectConnectGateway = {
   type t
   type request = {
@@ -1589,10 +1564,9 @@ module CreateDirectConnectGateway = {
   @module("@aws-sdk/client-directconnect") @new
   external new: request => t = "CreateDirectConnectGatewayCommand"
   let make = (~directConnectGatewayName, ~amazonSideAsn=?, ()) =>
-    new({amazonSideAsn: amazonSideAsn, directConnectGatewayName: directConnectGatewayName})
+    new({amazonSideAsn, directConnectGatewayName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateVirtualInterfaceAttributes = {
   type t
   type request = {
@@ -1611,15 +1585,9 @@ module UpdateVirtualInterfaceAttributes = {
   @module("@aws-sdk/client-directconnect") @new
   external new: request => t = "UpdateVirtualInterfaceAttributesCommand"
   let make = (~virtualInterfaceId, ~virtualInterfaceName=?, ~enableSiteLink=?, ~mtu=?, ()) =>
-    new({
-      virtualInterfaceName: virtualInterfaceName,
-      enableSiteLink: enableSiteLink,
-      mtu: mtu,
-      virtualInterfaceId: virtualInterfaceId,
-    })
+    new({virtualInterfaceName, enableSiteLink, mtu, virtualInterfaceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateConnection = {
   type t
   type request = {
@@ -1635,14 +1603,9 @@ module UpdateConnection = {
   @module("@aws-sdk/client-directconnect") @new
   external new: request => t = "UpdateConnectionCommand"
   let make = (~connectionId, ~encryptionMode=?, ~connectionName=?, ()) =>
-    new({
-      encryptionMode: encryptionMode,
-      connectionName: connectionName,
-      connectionId: connectionId,
-    })
+    new({encryptionMode, connectionName, connectionId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module TagResource = {
   type t
   type request = {
@@ -1651,10 +1614,9 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-directconnect") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
+  let make = (~tags, ~resourceArn, ()) => new({tags, resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module StopBgpFailoverTest = {
   type t
   type request = {
@@ -1670,7 +1632,6 @@ module StopBgpFailoverTest = {
   let make = (~virtualInterfaceId, ()) => new({virtualInterfaceId: virtualInterfaceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module StartBgpFailoverTest = {
   type t
   type request = {
@@ -1689,14 +1650,9 @@ module StartBgpFailoverTest = {
   @module("@aws-sdk/client-directconnect") @new
   external new: request => t = "StartBgpFailoverTestCommand"
   let make = (~virtualInterfaceId, ~testDurationInMinutes=?, ~bgpPeers=?, ()) =>
-    new({
-      testDurationInMinutes: testDurationInMinutes,
-      bgpPeers: bgpPeers,
-      virtualInterfaceId: virtualInterfaceId,
-    })
+    new({testDurationInMinutes, bgpPeers, virtualInterfaceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DisassociateMacSecKey = {
   type t
   type request = {
@@ -1719,11 +1675,9 @@ module DisassociateMacSecKey = {
   }
   @module("@aws-sdk/client-directconnect") @new
   external new: request => t = "DisassociateMacSecKeyCommand"
-  let make = (~secretARN, ~connectionId, ()) =>
-    new({secretARN: secretARN, connectionId: connectionId})
+  let make = (~secretARN, ~connectionId, ()) => new({secretARN, connectionId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DisassociateConnectionFromLag = {
   type t
   type request = {
@@ -1733,10 +1687,9 @@ module DisassociateConnectionFromLag = {
   type response = connection
   @module("@aws-sdk/client-directconnect") @new
   external new: request => t = "DisassociateConnectionFromLagCommand"
-  let make = (~lagId, ~connectionId, ()) => new({lagId: lagId, connectionId: connectionId})
+  let make = (~lagId, ~connectionId, ()) => new({lagId, connectionId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeVirtualGateways = {
   type t
   type request = {.}
@@ -1748,7 +1701,6 @@ module DescribeVirtualGateways = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeDirectConnectGateways = {
   type t
   type request = {
@@ -1770,14 +1722,9 @@ module DescribeDirectConnectGateways = {
   @module("@aws-sdk/client-directconnect") @new
   external new: request => t = "DescribeDirectConnectGatewaysCommand"
   let make = (~nextToken=?, ~maxResults=?, ~directConnectGatewayId=?, ()) =>
-    new({
-      nextToken: nextToken,
-      maxResults: maxResults,
-      directConnectGatewayId: directConnectGatewayId,
-    })
+    new({nextToken, maxResults, directConnectGatewayId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeDirectConnectGatewayAttachments = {
   type t
   type request = {
@@ -1801,15 +1748,9 @@ module DescribeDirectConnectGatewayAttachments = {
   @module("@aws-sdk/client-directconnect") @new
   external new: request => t = "DescribeDirectConnectGatewayAttachmentsCommand"
   let make = (~nextToken=?, ~maxResults=?, ~virtualInterfaceId=?, ~directConnectGatewayId=?, ()) =>
-    new({
-      nextToken: nextToken,
-      maxResults: maxResults,
-      virtualInterfaceId: virtualInterfaceId,
-      directConnectGatewayId: directConnectGatewayId,
-    })
+    new({nextToken, maxResults, virtualInterfaceId, directConnectGatewayId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeCustomerMetadata = {
   type t
   type request = {.}
@@ -1834,7 +1775,6 @@ module DescribeCustomerMetadata = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteConnection = {
   type t
   type request = {@ocaml.doc("<p>The ID of the connection.</p>") connectionId: connectionId}
@@ -1844,7 +1784,6 @@ module DeleteConnection = {
   let make = (~connectionId, ()) => new({connectionId: connectionId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateInterconnect = {
   type t
   type request = {
@@ -1861,17 +1800,9 @@ module CreateInterconnect = {
   @module("@aws-sdk/client-directconnect") @new
   external new: request => t = "CreateInterconnectCommand"
   let make = (~location, ~bandwidth, ~interconnectName, ~providerName=?, ~tags=?, ~lagId=?, ()) =>
-    new({
-      providerName: providerName,
-      tags: tags,
-      lagId: lagId,
-      location: location,
-      bandwidth: bandwidth,
-      interconnectName: interconnectName,
-    })
+    new({providerName, tags, lagId, location, bandwidth, interconnectName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateConnection = {
   type t
   type request = {
@@ -1898,19 +1829,9 @@ module CreateConnection = {
     ~tags=?,
     ~lagId=?,
     (),
-  ) =>
-    new({
-      requestMACSec: requestMACSec,
-      providerName: providerName,
-      tags: tags,
-      lagId: lagId,
-      connectionName: connectionName,
-      bandwidth: bandwidth,
-      location: location,
-    })
+  ) => new({requestMACSec, providerName, tags, lagId, connectionName, bandwidth, location})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module AssociateVirtualInterface = {
   type t
   type request = {
@@ -1920,11 +1841,9 @@ module AssociateVirtualInterface = {
   type response = virtualInterface
   @module("@aws-sdk/client-directconnect") @new
   external new: request => t = "AssociateVirtualInterfaceCommand"
-  let make = (~connectionId, ~virtualInterfaceId, ()) =>
-    new({connectionId: connectionId, virtualInterfaceId: virtualInterfaceId})
+  let make = (~connectionId, ~virtualInterfaceId, ()) => new({connectionId, virtualInterfaceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module AssociateMacSecKey = {
   type t
   type request = {
@@ -1959,10 +1878,9 @@ module AssociateMacSecKey = {
   @module("@aws-sdk/client-directconnect") @new
   external new: request => t = "AssociateMacSecKeyCommand"
   let make = (~connectionId, ~cak=?, ~ckn=?, ~secretARN=?, ()) =>
-    new({cak: cak, ckn: ckn, secretARN: secretARN, connectionId: connectionId})
+    new({cak, ckn, secretARN, connectionId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module AssociateHostedConnection = {
   type t
   type request = {
@@ -1972,11 +1890,9 @@ module AssociateHostedConnection = {
   type response = connection
   @module("@aws-sdk/client-directconnect") @new
   external new: request => t = "AssociateHostedConnectionCommand"
-  let make = (~parentConnectionId, ~connectionId, ()) =>
-    new({parentConnectionId: parentConnectionId, connectionId: connectionId})
+  let make = (~parentConnectionId, ~connectionId, ()) => new({parentConnectionId, connectionId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module AssociateConnectionWithLag = {
   type t
   type request = {
@@ -1986,10 +1902,9 @@ module AssociateConnectionWithLag = {
   type response = connection
   @module("@aws-sdk/client-directconnect") @new
   external new: request => t = "AssociateConnectionWithLagCommand"
-  let make = (~lagId, ~connectionId, ()) => new({lagId: lagId, connectionId: connectionId})
+  let make = (~lagId, ~connectionId, ()) => new({lagId, connectionId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module AllocateHostedConnection = {
   type t
   type request = {
@@ -2010,17 +1925,9 @@ module AllocateHostedConnection = {
   @module("@aws-sdk/client-directconnect") @new
   external new: request => t = "AllocateHostedConnectionCommand"
   let make = (~vlan, ~connectionName, ~bandwidth, ~ownerAccount, ~connectionId, ~tags=?, ()) =>
-    new({
-      tags: tags,
-      vlan: vlan,
-      connectionName: connectionName,
-      bandwidth: bandwidth,
-      ownerAccount: ownerAccount,
-      connectionId: connectionId,
-    })
+    new({tags, vlan, connectionName, bandwidth, ownerAccount, connectionId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module AllocateConnectionOnInterconnect = {
   type t
   type request = {
@@ -2042,16 +1949,9 @@ module AllocateConnectionOnInterconnect = {
   @module("@aws-sdk/client-directconnect") @new
   external new: request => t = "AllocateConnectionOnInterconnectCommand"
   let make = (~vlan, ~interconnectId, ~ownerAccount, ~connectionName, ~bandwidth, ()) =>
-    new({
-      vlan: vlan,
-      interconnectId: interconnectId,
-      ownerAccount: ownerAccount,
-      connectionName: connectionName,
-      bandwidth: bandwidth,
-    })
+    new({vlan, interconnectId, ownerAccount, connectionName, bandwidth})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateDirectConnectGatewayAssociation = {
   type t
   type request = {
@@ -2074,13 +1974,12 @@ module UpdateDirectConnectGatewayAssociation = {
     (),
   ) =>
     new({
-      removeAllowedPrefixesToDirectConnectGateway: removeAllowedPrefixesToDirectConnectGateway,
-      addAllowedPrefixesToDirectConnectGateway: addAllowedPrefixesToDirectConnectGateway,
-      associationId: associationId,
+      removeAllowedPrefixesToDirectConnectGateway,
+      addAllowedPrefixesToDirectConnectGateway,
+      associationId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListVirtualInterfaceTestHistory = {
   type t
   type request = {
@@ -2118,18 +2017,9 @@ module ListVirtualInterfaceTestHistory = {
     ~virtualInterfaceId=?,
     ~testId=?,
     (),
-  ) =>
-    new({
-      nextToken: nextToken,
-      maxResults: maxResults,
-      status: status,
-      bgpPeers: bgpPeers,
-      virtualInterfaceId: virtualInterfaceId,
-      testId: testId,
-    })
+  ) => new({nextToken, maxResults, status, bgpPeers, virtualInterfaceId, testId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeLocations = {
   type t
   type request = {.}
@@ -2139,7 +2029,6 @@ module DescribeLocations = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteDirectConnectGatewayAssociationProposal = {
   type t
   type request = {
@@ -2155,7 +2044,6 @@ module DeleteDirectConnectGatewayAssociationProposal = {
   let make = (~proposalId, ()) => new({proposalId: proposalId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteDirectConnectGatewayAssociation = {
   type t
   type request = {
@@ -2173,14 +2061,9 @@ module DeleteDirectConnectGatewayAssociation = {
   @module("@aws-sdk/client-directconnect") @new
   external new: request => t = "DeleteDirectConnectGatewayAssociationCommand"
   let make = (~virtualGatewayId=?, ~directConnectGatewayId=?, ~associationId=?, ()) =>
-    new({
-      virtualGatewayId: virtualGatewayId,
-      directConnectGatewayId: directConnectGatewayId,
-      associationId: associationId,
-    })
+    new({virtualGatewayId, directConnectGatewayId, associationId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteBGPPeer = {
   type t
   type request = {
@@ -2199,15 +2082,9 @@ module DeleteBGPPeer = {
   }
   @module("@aws-sdk/client-directconnect") @new external new: request => t = "DeleteBGPPeerCommand"
   let make = (~bgpPeerId=?, ~customerAddress=?, ~asn=?, ~virtualInterfaceId=?, ()) =>
-    new({
-      bgpPeerId: bgpPeerId,
-      customerAddress: customerAddress,
-      asn: asn,
-      virtualInterfaceId: virtualInterfaceId,
-    })
+    new({bgpPeerId, customerAddress, asn, virtualInterfaceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateTransitVirtualInterface = {
   type t
   type request = {
@@ -2219,10 +2096,9 @@ module CreateTransitVirtualInterface = {
   @module("@aws-sdk/client-directconnect") @new
   external new: request => t = "CreateTransitVirtualInterfaceCommand"
   let make = (~newTransitVirtualInterface, ~connectionId, ()) =>
-    new({newTransitVirtualInterface: newTransitVirtualInterface, connectionId: connectionId})
+    new({newTransitVirtualInterface, connectionId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreatePublicVirtualInterface = {
   type t
   type request = {
@@ -2234,10 +2110,9 @@ module CreatePublicVirtualInterface = {
   @module("@aws-sdk/client-directconnect") @new
   external new: request => t = "CreatePublicVirtualInterfaceCommand"
   let make = (~newPublicVirtualInterface, ~connectionId, ()) =>
-    new({newPublicVirtualInterface: newPublicVirtualInterface, connectionId: connectionId})
+    new({newPublicVirtualInterface, connectionId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreatePrivateVirtualInterface = {
   type t
   type request = {
@@ -2249,10 +2124,9 @@ module CreatePrivateVirtualInterface = {
   @module("@aws-sdk/client-directconnect") @new
   external new: request => t = "CreatePrivateVirtualInterfaceCommand"
   let make = (~newPrivateVirtualInterface, ~connectionId, ()) =>
-    new({newPrivateVirtualInterface: newPrivateVirtualInterface, connectionId: connectionId})
+    new({newPrivateVirtualInterface, connectionId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateDirectConnectGatewayAssociationProposal = {
   type t
   type request = {
@@ -2286,15 +2160,14 @@ module CreateDirectConnectGatewayAssociationProposal = {
     (),
   ) =>
     new({
-      removeAllowedPrefixesToDirectConnectGateway: removeAllowedPrefixesToDirectConnectGateway,
-      addAllowedPrefixesToDirectConnectGateway: addAllowedPrefixesToDirectConnectGateway,
-      gatewayId: gatewayId,
-      directConnectGatewayOwnerAccount: directConnectGatewayOwnerAccount,
-      directConnectGatewayId: directConnectGatewayId,
+      removeAllowedPrefixesToDirectConnectGateway,
+      addAllowedPrefixesToDirectConnectGateway,
+      gatewayId,
+      directConnectGatewayOwnerAccount,
+      directConnectGatewayId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateDirectConnectGatewayAssociation = {
   type t
   type request = {
@@ -2323,14 +2196,13 @@ module CreateDirectConnectGatewayAssociation = {
     (),
   ) =>
     new({
-      virtualGatewayId: virtualGatewayId,
-      addAllowedPrefixesToDirectConnectGateway: addAllowedPrefixesToDirectConnectGateway,
-      gatewayId: gatewayId,
-      directConnectGatewayId: directConnectGatewayId,
+      virtualGatewayId,
+      addAllowedPrefixesToDirectConnectGateway,
+      gatewayId,
+      directConnectGatewayId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateBGPPeer = {
   type t
   type request = {
@@ -2342,11 +2214,9 @@ module CreateBGPPeer = {
     @ocaml.doc("<p>The virtual interface.</p>") virtualInterface: option<virtualInterface>,
   }
   @module("@aws-sdk/client-directconnect") @new external new: request => t = "CreateBGPPeerCommand"
-  let make = (~newBGPPeer=?, ~virtualInterfaceId=?, ()) =>
-    new({newBGPPeer: newBGPPeer, virtualInterfaceId: virtualInterfaceId})
+  let make = (~newBGPPeer=?, ~virtualInterfaceId=?, ()) => new({newBGPPeer, virtualInterfaceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module AllocateTransitVirtualInterface = {
   type t
   type request = {
@@ -2365,14 +2235,9 @@ module AllocateTransitVirtualInterface = {
   @module("@aws-sdk/client-directconnect") @new
   external new: request => t = "AllocateTransitVirtualInterfaceCommand"
   let make = (~newTransitVirtualInterfaceAllocation, ~ownerAccount, ~connectionId, ()) =>
-    new({
-      newTransitVirtualInterfaceAllocation: newTransitVirtualInterfaceAllocation,
-      ownerAccount: ownerAccount,
-      connectionId: connectionId,
-    })
+    new({newTransitVirtualInterfaceAllocation, ownerAccount, connectionId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module AllocatePublicVirtualInterface = {
   type t
   type request = {
@@ -2391,14 +2256,9 @@ module AllocatePublicVirtualInterface = {
   @module("@aws-sdk/client-directconnect") @new
   external new: request => t = "AllocatePublicVirtualInterfaceCommand"
   let make = (~newPublicVirtualInterfaceAllocation, ~ownerAccount, ~connectionId, ()) =>
-    new({
-      newPublicVirtualInterfaceAllocation: newPublicVirtualInterfaceAllocation,
-      ownerAccount: ownerAccount,
-      connectionId: connectionId,
-    })
+    new({newPublicVirtualInterfaceAllocation, ownerAccount, connectionId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module AllocatePrivateVirtualInterface = {
   type t
   type request = {
@@ -2417,14 +2277,9 @@ module AllocatePrivateVirtualInterface = {
   @module("@aws-sdk/client-directconnect") @new
   external new: request => t = "AllocatePrivateVirtualInterfaceCommand"
   let make = (~newPrivateVirtualInterfaceAllocation, ~ownerAccount, ~connectionId, ()) =>
-    new({
-      newPrivateVirtualInterfaceAllocation: newPrivateVirtualInterfaceAllocation,
-      ownerAccount: ownerAccount,
-      connectionId: connectionId,
-    })
+    new({newPrivateVirtualInterfaceAllocation, ownerAccount, connectionId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module AcceptDirectConnectGatewayAssociationProposal = {
   type t
   type request = {
@@ -2451,14 +2306,13 @@ module AcceptDirectConnectGatewayAssociationProposal = {
     (),
   ) =>
     new({
-      overrideAllowedPrefixesToDirectConnectGateway: overrideAllowedPrefixesToDirectConnectGateway,
-      associatedGatewayOwnerAccount: associatedGatewayOwnerAccount,
-      proposalId: proposalId,
-      directConnectGatewayId: directConnectGatewayId,
+      overrideAllowedPrefixesToDirectConnectGateway,
+      associatedGatewayOwnerAccount,
+      proposalId,
+      directConnectGatewayId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateLag = {
   type t
   type request = {
@@ -2475,15 +2329,9 @@ module UpdateLag = {
   type response = lag
   @module("@aws-sdk/client-directconnect") @new external new: request => t = "UpdateLagCommand"
   let make = (~lagId, ~encryptionMode=?, ~minimumLinks=?, ~lagName=?, ()) =>
-    new({
-      encryptionMode: encryptionMode,
-      minimumLinks: minimumLinks,
-      lagName: lagName,
-      lagId: lagId,
-    })
+    new({encryptionMode, minimumLinks, lagName, lagId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeVirtualInterfaces = {
   type t
   type request = {
@@ -2496,11 +2344,9 @@ module DescribeVirtualInterfaces = {
   }
   @module("@aws-sdk/client-directconnect") @new
   external new: request => t = "DescribeVirtualInterfacesCommand"
-  let make = (~virtualInterfaceId=?, ~connectionId=?, ()) =>
-    new({virtualInterfaceId: virtualInterfaceId, connectionId: connectionId})
+  let make = (~virtualInterfaceId=?, ~connectionId=?, ()) => new({virtualInterfaceId, connectionId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeTags = {
   type t
   type request = {
@@ -2514,7 +2360,6 @@ module DescribeTags = {
   let make = (~resourceArns, ()) => new({resourceArns: resourceArns})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeInterconnects = {
   type t
   type request = {
@@ -2526,7 +2371,6 @@ module DescribeInterconnects = {
   let make = (~interconnectId=?, ()) => new({interconnectId: interconnectId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeHostedConnections = {
   type t
   type request = {
@@ -2538,7 +2382,6 @@ module DescribeHostedConnections = {
   let make = (~connectionId, ()) => new({connectionId: connectionId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeDirectConnectGatewayAssociations = {
   type t
   type request = {
@@ -2575,16 +2418,15 @@ module DescribeDirectConnectGatewayAssociations = {
     (),
   ) =>
     new({
-      virtualGatewayId: virtualGatewayId,
-      nextToken: nextToken,
-      maxResults: maxResults,
-      directConnectGatewayId: directConnectGatewayId,
-      associatedGatewayId: associatedGatewayId,
-      associationId: associationId,
+      virtualGatewayId,
+      nextToken,
+      maxResults,
+      directConnectGatewayId,
+      associatedGatewayId,
+      associationId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeDirectConnectGatewayAssociationProposals = {
   type t
   type request = {
@@ -2618,17 +2460,9 @@ module DescribeDirectConnectGatewayAssociationProposals = {
     ~proposalId=?,
     ~directConnectGatewayId=?,
     (),
-  ) =>
-    new({
-      nextToken: nextToken,
-      maxResults: maxResults,
-      associatedGatewayId: associatedGatewayId,
-      proposalId: proposalId,
-      directConnectGatewayId: directConnectGatewayId,
-    })
+  ) => new({nextToken, maxResults, associatedGatewayId, proposalId, directConnectGatewayId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeConnectionsOnInterconnect = {
   type t
   type request = {@ocaml.doc("<p>The ID of the interconnect.</p>") interconnectId: interconnectId}
@@ -2638,7 +2472,6 @@ module DescribeConnectionsOnInterconnect = {
   let make = (~interconnectId, ()) => new({interconnectId: interconnectId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeConnections = {
   type t
   type request = {@ocaml.doc("<p>The ID of the connection.</p>") connectionId: option<connectionId>}
@@ -2648,7 +2481,6 @@ module DescribeConnections = {
   let make = (~connectionId=?, ()) => new({connectionId: connectionId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteLag = {
   type t
   type request = {@ocaml.doc("<p>The ID of the LAG.</p>") lagId: lagId}
@@ -2657,7 +2489,6 @@ module DeleteLag = {
   let make = (~lagId, ()) => new({lagId: lagId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateLag = {
   type t
   type request = {
@@ -2697,19 +2528,18 @@ module CreateLag = {
     (),
   ) =>
     new({
-      requestMACSec: requestMACSec,
-      providerName: providerName,
-      childConnectionTags: childConnectionTags,
-      tags: tags,
-      connectionId: connectionId,
-      lagName: lagName,
-      connectionsBandwidth: connectionsBandwidth,
-      location: location,
-      numberOfConnections: numberOfConnections,
+      requestMACSec,
+      providerName,
+      childConnectionTags,
+      tags,
+      connectionId,
+      lagName,
+      connectionsBandwidth,
+      location,
+      numberOfConnections,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeLags = {
   type t
   type request = {@ocaml.doc("<p>The ID of the LAG.</p>") lagId: option<lagId>}

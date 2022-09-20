@@ -338,14 +338,9 @@ module ValidateConfiguration = {
   @module("@aws-sdk/client-appconfig") @new
   external new: request => t = "ValidateConfigurationCommand"
   let make = (~configurationVersion, ~configurationProfileId, ~applicationId, ()) =>
-    new({
-      configurationVersion: configurationVersion,
-      configurationProfileId: configurationProfileId,
-      applicationId: applicationId,
-    })
+    new({configurationVersion, configurationProfileId, applicationId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module UpdateEnvironment = {
   type t
   type request = {
@@ -361,16 +356,9 @@ module UpdateEnvironment = {
   type response = environment
   @module("@aws-sdk/client-appconfig") @new external new: request => t = "UpdateEnvironmentCommand"
   let make = (~environmentId, ~applicationId, ~monitors=?, ~description=?, ~name=?, ()) =>
-    new({
-      monitors: monitors,
-      description: description,
-      name: name,
-      environmentId: environmentId,
-      applicationId: applicationId,
-    })
+    new({monitors, description, name, environmentId, applicationId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateDeploymentStrategy = {
   type t
   type request = {
@@ -434,16 +422,15 @@ module UpdateDeploymentStrategy = {
     (),
   ) =>
     new({
-      growthType: growthType,
-      growthFactor: growthFactor,
-      finalBakeTimeInMinutes: finalBakeTimeInMinutes,
-      deploymentDurationInMinutes: deploymentDurationInMinutes,
-      description: description,
-      deploymentStrategyId: deploymentStrategyId,
+      growthType,
+      growthFactor,
+      finalBakeTimeInMinutes,
+      deploymentDurationInMinutes,
+      description,
+      deploymentStrategyId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateConfigurationProfile = {
   type t
   type request = {
@@ -498,18 +485,9 @@ module UpdateConfigurationProfile = {
     ~description=?,
     ~name=?,
     (),
-  ) =>
-    new({
-      validators: validators,
-      retrievalRoleArn: retrievalRoleArn,
-      description: description,
-      name: name,
-      configurationProfileId: configurationProfileId,
-      applicationId: applicationId,
-    })
+  ) => new({validators, retrievalRoleArn, description, name, configurationProfileId, applicationId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateApplication = {
   type t
   type request = {
@@ -521,10 +499,9 @@ module UpdateApplication = {
   type response = application
   @module("@aws-sdk/client-appconfig") @new external new: request => t = "UpdateApplicationCommand"
   let make = (~applicationId, ~description=?, ~name=?, ()) =>
-    new({description: description, name: name, applicationId: applicationId})
+    new({description, name, applicationId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UntagResource = {
   type t
   type request = {
@@ -534,10 +511,9 @@ module UntagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-appconfig") @new external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
+  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys, resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module TagResource = {
   type t
   type request = {
@@ -551,10 +527,9 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-appconfig") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
+  let make = (~tags, ~resourceArn, ()) => new({tags, resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module StopDeployment = {
   type t
   type request = {
@@ -614,14 +589,9 @@ module StopDeployment = {
   }
   @module("@aws-sdk/client-appconfig") @new external new: request => t = "StopDeploymentCommand"
   let make = (~deploymentNumber, ~environmentId, ~applicationId, ()) =>
-    new({
-      deploymentNumber: deploymentNumber,
-      environmentId: environmentId,
-      applicationId: applicationId,
-    })
+    new({deploymentNumber, environmentId, applicationId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module StartDeployment = {
   type t
   type request = {
@@ -702,17 +672,16 @@ module StartDeployment = {
     (),
   ) =>
     new({
-      tags: tags,
-      description: description,
-      configurationVersion: configurationVersion,
-      configurationProfileId: configurationProfileId,
-      deploymentStrategyId: deploymentStrategyId,
-      environmentId: environmentId,
-      applicationId: applicationId,
+      tags,
+      description,
+      configurationVersion,
+      configurationProfileId,
+      deploymentStrategyId,
+      environmentId,
+      applicationId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListTagsForResource = {
   type t
   type request = {@ocaml.doc("<p>The resource ARN.</p>") @as("ResourceArn") resourceArn: arn}
@@ -728,7 +697,6 @@ module ListTagsForResource = {
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListHostedConfigurationVersions = {
   type t
   type request = {
@@ -754,15 +722,9 @@ module ListHostedConfigurationVersions = {
   @module("@aws-sdk/client-appconfig") @new
   external new: request => t = "ListHostedConfigurationVersionsCommand"
   let make = (~configurationProfileId, ~applicationId, ~nextToken=?, ~maxResults=?, ()) =>
-    new({
-      nextToken: nextToken,
-      maxResults: maxResults,
-      configurationProfileId: configurationProfileId,
-      applicationId: applicationId,
-    })
+    new({nextToken, maxResults, configurationProfileId, applicationId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListDeployments = {
   type t
   type request = {
@@ -789,15 +751,9 @@ module ListDeployments = {
   }
   @module("@aws-sdk/client-appconfig") @new external new: request => t = "ListDeploymentsCommand"
   let make = (~environmentId, ~applicationId, ~nextToken=?, ~maxResults=?, ()) =>
-    new({
-      nextToken: nextToken,
-      maxResults: maxResults,
-      environmentId: environmentId,
-      applicationId: applicationId,
-    })
+    new({nextToken, maxResults, environmentId, applicationId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListDeploymentStrategies = {
   type t
   type request = {
@@ -819,11 +775,9 @@ module ListDeploymentStrategies = {
   }
   @module("@aws-sdk/client-appconfig") @new
   external new: request => t = "ListDeploymentStrategiesCommand"
-  let make = (~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken: nextToken, maxResults: maxResults})
+  let make = (~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListConfigurationProfiles = {
   type t
   type request = {
@@ -851,10 +805,9 @@ module ListConfigurationProfiles = {
   @module("@aws-sdk/client-appconfig") @new
   external new: request => t = "ListConfigurationProfilesCommand"
   let make = (~applicationId, ~type_=?, ~nextToken=?, ~maxResults=?, ()) =>
-    new({type_: type_, nextToken: nextToken, maxResults: maxResults, applicationId: applicationId})
+    new({type_, nextToken, maxResults, applicationId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListApplications = {
   type t
   type request = {
@@ -879,11 +832,9 @@ module ListApplications = {
     items: option<applicationList>,
   }
   @module("@aws-sdk/client-appconfig") @new external new: request => t = "ListApplicationsCommand"
-  let make = (~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken: nextToken, maxResults: maxResults})
+  let make = (~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetHostedConfigurationVersion = {
   type t
   type request = {
@@ -910,14 +861,9 @@ module GetHostedConfigurationVersion = {
   @module("@aws-sdk/client-appconfig") @new
   external new: request => t = "GetHostedConfigurationVersionCommand"
   let make = (~versionNumber, ~configurationProfileId, ~applicationId, ()) =>
-    new({
-      versionNumber: versionNumber,
-      configurationProfileId: configurationProfileId,
-      applicationId: applicationId,
-    })
+    new({versionNumber, configurationProfileId, applicationId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetEnvironment = {
   type t
   type request = {
@@ -929,11 +875,9 @@ module GetEnvironment = {
   }
   type response = environment
   @module("@aws-sdk/client-appconfig") @new external new: request => t = "GetEnvironmentCommand"
-  let make = (~environmentId, ~applicationId, ()) =>
-    new({environmentId: environmentId, applicationId: applicationId})
+  let make = (~environmentId, ~applicationId, ()) => new({environmentId, applicationId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetDeploymentStrategy = {
   type t
   type request = {
@@ -946,7 +890,6 @@ module GetDeploymentStrategy = {
   let make = (~deploymentStrategyId, ()) => new({deploymentStrategyId: deploymentStrategyId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetDeployment = {
   type t
   type request = {
@@ -1010,14 +953,9 @@ module GetDeployment = {
   }
   @module("@aws-sdk/client-appconfig") @new external new: request => t = "GetDeploymentCommand"
   let make = (~deploymentNumber, ~environmentId, ~applicationId, ()) =>
-    new({
-      deploymentNumber: deploymentNumber,
-      environmentId: environmentId,
-      applicationId: applicationId,
-    })
+    new({deploymentNumber, environmentId, applicationId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetConfigurationProfile = {
   type t
   type request = {
@@ -1060,10 +998,9 @@ module GetConfigurationProfile = {
   @module("@aws-sdk/client-appconfig") @new
   external new: request => t = "GetConfigurationProfileCommand"
   let make = (~configurationProfileId, ~applicationId, ()) =>
-    new({configurationProfileId: configurationProfileId, applicationId: applicationId})
+    new({configurationProfileId, applicationId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetConfiguration = {
   type t
   type request = {
@@ -1129,17 +1066,9 @@ module GetConfiguration = {
     ~application,
     ~clientConfigurationVersion=?,
     (),
-  ) =>
-    new({
-      clientConfigurationVersion: clientConfigurationVersion,
-      clientId: clientId,
-      configuration: configuration,
-      environment: environment,
-      application: application,
-    })
+  ) => new({clientConfigurationVersion, clientId, configuration, environment, application})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetApplication = {
   type t
   type request = {
@@ -1151,7 +1080,6 @@ module GetApplication = {
   let make = (~applicationId, ()) => new({applicationId: applicationId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteHostedConfigurationVersion = {
   type t
   type request = {
@@ -1165,14 +1093,9 @@ module DeleteHostedConfigurationVersion = {
   @module("@aws-sdk/client-appconfig") @new
   external new: request => t = "DeleteHostedConfigurationVersionCommand"
   let make = (~versionNumber, ~configurationProfileId, ~applicationId, ()) =>
-    new({
-      versionNumber: versionNumber,
-      configurationProfileId: configurationProfileId,
-      applicationId: applicationId,
-    })
+    new({versionNumber, configurationProfileId, applicationId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteEnvironment = {
   type t
   type request = {
@@ -1184,11 +1107,9 @@ module DeleteEnvironment = {
   }
   type response = {.}
   @module("@aws-sdk/client-appconfig") @new external new: request => t = "DeleteEnvironmentCommand"
-  let make = (~environmentId, ~applicationId, ()) =>
-    new({environmentId: environmentId, applicationId: applicationId})
+  let make = (~environmentId, ~applicationId, ()) => new({environmentId, applicationId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteDeploymentStrategy = {
   type t
   type request = {
@@ -1202,7 +1123,6 @@ module DeleteDeploymentStrategy = {
   let make = (~deploymentStrategyId, ()) => new({deploymentStrategyId: deploymentStrategyId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteConfigurationProfile = {
   type t
   type request = {
@@ -1219,10 +1139,9 @@ module DeleteConfigurationProfile = {
   @module("@aws-sdk/client-appconfig") @new
   external new: request => t = "DeleteConfigurationProfileCommand"
   let make = (~configurationProfileId, ~applicationId, ()) =>
-    new({configurationProfileId: configurationProfileId, applicationId: applicationId})
+    new({configurationProfileId, applicationId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteApplication = {
   type t
   type request = {
@@ -1234,7 +1153,6 @@ module DeleteApplication = {
   let make = (~applicationId, ()) => new({applicationId: applicationId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module CreateHostedConfigurationVersion = {
   type t
   type request = {
@@ -1283,16 +1201,15 @@ module CreateHostedConfigurationVersion = {
     (),
   ) =>
     new({
-      latestVersionNumber: latestVersionNumber,
-      contentType: contentType,
-      content: content,
-      description: description,
-      configurationProfileId: configurationProfileId,
-      applicationId: applicationId,
+      latestVersionNumber,
+      contentType,
+      content,
+      description,
+      configurationProfileId,
+      applicationId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateEnvironment = {
   type t
   type request = {
@@ -1312,16 +1229,9 @@ module CreateEnvironment = {
   type response = environment
   @module("@aws-sdk/client-appconfig") @new external new: request => t = "CreateEnvironmentCommand"
   let make = (~name, ~applicationId, ~tags=?, ~monitors=?, ~description=?, ()) =>
-    new({
-      tags: tags,
-      monitors: monitors,
-      description: description,
-      name: name,
-      applicationId: applicationId,
-    })
+    new({tags, monitors, description, name, applicationId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateDeploymentStrategy = {
   type t
   type request = {
@@ -1395,18 +1305,17 @@ module CreateDeploymentStrategy = {
     (),
   ) =>
     new({
-      tags: tags,
-      replicateTo: replicateTo,
-      growthType: growthType,
-      growthFactor: growthFactor,
-      finalBakeTimeInMinutes: finalBakeTimeInMinutes,
-      deploymentDurationInMinutes: deploymentDurationInMinutes,
-      description: description,
-      name: name,
+      tags,
+      replicateTo,
+      growthType,
+      growthFactor,
+      finalBakeTimeInMinutes,
+      deploymentDurationInMinutes,
+      description,
+      name,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateConfigurationProfile = {
   type t
   type request = {
@@ -1498,19 +1407,9 @@ module CreateConfigurationProfile = {
     ~description=?,
     (),
   ) =>
-    new({
-      type_: type_,
-      tags: tags,
-      validators: validators,
-      retrievalRoleArn: retrievalRoleArn,
-      locationUri: locationUri,
-      description: description,
-      name: name,
-      applicationId: applicationId,
-    })
+    new({type_, tags, validators, retrievalRoleArn, locationUri, description, name, applicationId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateApplication = {
   type t
   type request = {
@@ -1525,11 +1424,9 @@ module CreateApplication = {
   }
   type response = application
   @module("@aws-sdk/client-appconfig") @new external new: request => t = "CreateApplicationCommand"
-  let make = (~name, ~tags=?, ~description=?, ()) =>
-    new({tags: tags, description: description, name: name})
+  let make = (~name, ~tags=?, ~description=?, ()) => new({tags, description, name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListEnvironments = {
   type t
   type request = {
@@ -1552,6 +1449,6 @@ module ListEnvironments = {
   }
   @module("@aws-sdk/client-appconfig") @new external new: request => t = "ListEnvironmentsCommand"
   let make = (~applicationId, ~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken: nextToken, maxResults: maxResults, applicationId: applicationId})
+    new({nextToken, maxResults, applicationId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

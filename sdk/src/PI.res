@@ -497,16 +497,9 @@ module ListAvailableResourceMetrics = {
   @module("@aws-sdk/client-pi") @new
   external new: request => t = "ListAvailableResourceMetricsCommand"
   let make = (~metricTypes, ~identifier, ~serviceType, ~maxResults=?, ~nextToken=?, ()) =>
-    new({
-      maxResults: maxResults,
-      nextToken: nextToken,
-      metricTypes: metricTypes,
-      identifier: identifier,
-      serviceType: serviceType,
-    })
+    new({maxResults, nextToken, metricTypes, identifier, serviceType})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetResourceMetadata = {
   type t
   type request = {
@@ -536,11 +529,9 @@ module GetResourceMetadata = {
     identifier: option<string_>,
   }
   @module("@aws-sdk/client-pi") @new external new: request => t = "GetResourceMetadataCommand"
-  let make = (~identifier, ~serviceType, ()) =>
-    new({identifier: identifier, serviceType: serviceType})
+  let make = (~identifier, ~serviceType, ()) => new({identifier, serviceType})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetDimensionKeyDetails = {
   type t
   type request = {
@@ -578,16 +569,9 @@ module GetDimensionKeyDetails = {
   }
   @module("@aws-sdk/client-pi") @new external new: request => t = "GetDimensionKeyDetailsCommand"
   let make = (~groupIdentifier, ~group, ~identifier, ~serviceType, ~requestedDimensions=?, ()) =>
-    new({
-      requestedDimensions: requestedDimensions,
-      groupIdentifier: groupIdentifier,
-      group: group,
-      identifier: identifier,
-      serviceType: serviceType,
-    })
+    new({requestedDimensions, groupIdentifier, group, identifier, serviceType})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeDimensionKeys = {
   type t
   type request = {
@@ -761,22 +745,21 @@ module DescribeDimensionKeys = {
     (),
   ) =>
     new({
-      nextToken: nextToken,
-      maxResults: maxResults,
-      filter: filter,
-      partitionBy: partitionBy,
-      additionalMetrics: additionalMetrics,
-      groupBy: groupBy,
-      periodInSeconds: periodInSeconds,
-      metric: metric,
-      endTime: endTime,
-      startTime: startTime,
-      identifier: identifier,
-      serviceType: serviceType,
+      nextToken,
+      maxResults,
+      filter,
+      partitionBy,
+      additionalMetrics,
+      groupBy,
+      periodInSeconds,
+      metric,
+      endTime,
+      startTime,
+      identifier,
+      serviceType,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetResourceMetrics = {
   type t
   type request = {
@@ -892,18 +875,17 @@ module GetResourceMetrics = {
     (),
   ) =>
     new({
-      nextToken: nextToken,
-      maxResults: maxResults,
-      periodInSeconds: periodInSeconds,
-      endTime: endTime,
-      startTime: startTime,
-      metricQueries: metricQueries,
-      identifier: identifier,
-      serviceType: serviceType,
+      nextToken,
+      maxResults,
+      periodInSeconds,
+      endTime,
+      startTime,
+      metricQueries,
+      identifier,
+      serviceType,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListAvailableResourceDimensions = {
   type t
   type request = {
@@ -945,12 +927,6 @@ module ListAvailableResourceDimensions = {
   @module("@aws-sdk/client-pi") @new
   external new: request => t = "ListAvailableResourceDimensionsCommand"
   let make = (~metrics, ~identifier, ~serviceType, ~nextToken=?, ~maxResults=?, ()) =>
-    new({
-      nextToken: nextToken,
-      maxResults: maxResults,
-      metrics: metrics,
-      identifier: identifier,
-      serviceType: serviceType,
-    })
+    new({nextToken, maxResults, metrics, identifier, serviceType})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

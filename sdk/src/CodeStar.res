@@ -320,15 +320,9 @@ module UpdateUserProfile = {
   }
   @module("@aws-sdk/client-codestar") @new external new: request => t = "UpdateUserProfileCommand"
   let make = (~userArn, ~sshPublicKey=?, ~emailAddress=?, ~displayName=?, ()) =>
-    new({
-      sshPublicKey: sshPublicKey,
-      emailAddress: emailAddress,
-      displayName: displayName,
-      userArn: userArn,
-    })
+    new({sshPublicKey, emailAddress, displayName, userArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateTeamMember = {
   type t
   type request = {
@@ -356,15 +350,9 @@ module UpdateTeamMember = {
   }
   @module("@aws-sdk/client-codestar") @new external new: request => t = "UpdateTeamMemberCommand"
   let make = (~userArn, ~projectId, ~remoteAccessAllowed=?, ~projectRole=?, ()) =>
-    new({
-      remoteAccessAllowed: remoteAccessAllowed,
-      projectRole: projectRole,
-      userArn: userArn,
-      projectId: projectId,
-    })
+    new({remoteAccessAllowed, projectRole, userArn, projectId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateProject = {
   type t
   type request = {
@@ -375,11 +363,9 @@ module UpdateProject = {
   }
   type response = {.}
   @module("@aws-sdk/client-codestar") @new external new: request => t = "UpdateProjectCommand"
-  let make = (~id, ~description=?, ~name=?, ()) =>
-    new({description: description, name: name, id: id})
+  let make = (~id, ~description=?, ~name=?, ()) => new({description, name, id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DisassociateTeamMember = {
   type t
   type request = {
@@ -394,10 +380,9 @@ module DisassociateTeamMember = {
   type response = {.}
   @module("@aws-sdk/client-codestar") @new
   external new: request => t = "DisassociateTeamMemberCommand"
-  let make = (~userArn, ~projectId, ()) => new({userArn: userArn, projectId: projectId})
+  let make = (~userArn, ~projectId, ()) => new({userArn, projectId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DescribeUserProfile = {
   type t
   type request = {@ocaml.doc("<p>The Amazon Resource Name (ARN) of the user.</p>") userArn: userArn}
@@ -429,7 +414,6 @@ module DescribeUserProfile = {
   let make = (~userArn, ()) => new({userArn: userArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteUserProfile = {
   type t
   type request = {
@@ -444,7 +428,6 @@ module DeleteUserProfile = {
   let make = (~userArn, ()) => new({userArn: userArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteProject = {
   type t
   type request = {
@@ -467,10 +450,9 @@ module DeleteProject = {
   }
   @module("@aws-sdk/client-codestar") @new external new: request => t = "DeleteProjectCommand"
   let make = (~id, ~deleteStack=?, ~clientRequestToken=?, ()) =>
-    new({deleteStack: deleteStack, clientRequestToken: clientRequestToken, id: id})
+    new({deleteStack, clientRequestToken, id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateUserProfile = {
   type t
   type request = {
@@ -508,15 +490,9 @@ module CreateUserProfile = {
   }
   @module("@aws-sdk/client-codestar") @new external new: request => t = "CreateUserProfileCommand"
   let make = (~emailAddress, ~displayName, ~userArn, ~sshPublicKey=?, ()) =>
-    new({
-      sshPublicKey: sshPublicKey,
-      emailAddress: emailAddress,
-      displayName: displayName,
-      userArn: userArn,
-    })
+    new({sshPublicKey, emailAddress, displayName, userArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module AssociateTeamMember = {
   type t
   type request = {
@@ -548,17 +524,9 @@ module AssociateTeamMember = {
     ~remoteAccessAllowed=?,
     ~clientRequestToken=?,
     (),
-  ) =>
-    new({
-      remoteAccessAllowed: remoteAccessAllowed,
-      projectRole: projectRole,
-      userArn: userArn,
-      clientRequestToken: clientRequestToken,
-      projectId: projectId,
-    })
+  ) => new({remoteAccessAllowed, projectRole, userArn, clientRequestToken, projectId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UntagProject = {
   type t
   type request = {
@@ -567,10 +535,9 @@ module UntagProject = {
   }
   type response = {.}
   @module("@aws-sdk/client-codestar") @new external new: request => t = "UntagProjectCommand"
-  let make = (~tags, ~id, ()) => new({tags: tags, id: id})
+  let make = (~tags, ~id, ()) => new({tags, id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module TagProject = {
   type t
   type request = {
@@ -579,10 +546,9 @@ module TagProject = {
   }
   type response = {@ocaml.doc("<p>The tags for the project.</p>") tags: option<tags>}
   @module("@aws-sdk/client-codestar") @new external new: request => t = "TagProjectCommand"
-  let make = (~tags, ~id, ()) => new({tags: tags, id: id})
+  let make = (~tags, ~id, ()) => new({tags, id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListTagsForProject = {
   type t
   type request = {
@@ -595,11 +561,9 @@ module ListTagsForProject = {
     @ocaml.doc("<p>The tags for the project.</p>") tags: option<tags>,
   }
   @module("@aws-sdk/client-codestar") @new external new: request => t = "ListTagsForProjectCommand"
-  let make = (~id, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, id: id})
+  let make = (~id, ~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken, id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeProject = {
   type t
   type request = {@ocaml.doc("<p>The ID of the project.</p>") id: projectId}
@@ -625,7 +589,6 @@ module DescribeProject = {
   let make = (~id, ()) => new({id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListUserProfiles = {
   type t
   type request = {
@@ -643,11 +606,9 @@ module ListUserProfiles = {
     userProfiles: userProfilesList,
   }
   @module("@aws-sdk/client-codestar") @new external new: request => t = "ListUserProfilesCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListTeamMembers = {
   type t
   type request = {
@@ -668,10 +629,9 @@ module ListTeamMembers = {
   }
   @module("@aws-sdk/client-codestar") @new external new: request => t = "ListTeamMembersCommand"
   let make = (~projectId, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, projectId: projectId})
+    new({maxResults, nextToken, projectId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListResources = {
   type t
   type request = {
@@ -693,10 +653,9 @@ module ListResources = {
   }
   @module("@aws-sdk/client-codestar") @new external new: request => t = "ListResourcesCommand"
   let make = (~projectId, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, projectId: projectId})
+    new({maxResults, nextToken, projectId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListProjects = {
   type t
   type request = {
@@ -715,11 +674,9 @@ module ListProjects = {
     @ocaml.doc("<p>A list of projects.</p>") projects: projectsList,
   }
   @module("@aws-sdk/client-codestar") @new external new: request => t = "ListProjectsCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateProject = {
   type t
   type request = {
@@ -757,15 +714,6 @@ module CreateProject = {
     ~clientRequestToken=?,
     ~description=?,
     (),
-  ) =>
-    new({
-      tags: tags,
-      toolchain: toolchain,
-      sourceCode: sourceCode,
-      clientRequestToken: clientRequestToken,
-      description: description,
-      id: id,
-      name: name,
-    })
+  ) => new({tags, toolchain, sourceCode, clientRequestToken, description, id, name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

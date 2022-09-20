@@ -150,7 +150,6 @@ module DeleteReportDefinition = {
   let make = (~reportName=?, ()) => new({reportName: reportName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module PutReportDefinition = {
   type t
   @ocaml.doc("<p>Creates a Cost and Usage Report.</p>")
@@ -165,7 +164,6 @@ module PutReportDefinition = {
   let make = (~reportDefinition, ()) => new({reportDefinition: reportDefinition})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module ModifyReportDefinition = {
   type t
   type request = {
@@ -174,11 +172,9 @@ module ModifyReportDefinition = {
   }
   type response = {.}
   @module("@aws-sdk/client-cur") @new external new: request => t = "ModifyReportDefinitionCommand"
-  let make = (~reportDefinition, ~reportName, ()) =>
-    new({reportDefinition: reportDefinition, reportName: reportName})
+  let make = (~reportDefinition, ~reportName, ()) => new({reportDefinition, reportName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DescribeReportDefinitions = {
   type t
   @ocaml.doc("<p>Requests a list of AWS Cost and Usage reports owned by the account.</p>")
@@ -195,7 +191,6 @@ module DescribeReportDefinitions = {
   }
   @module("@aws-sdk/client-cur") @new
   external new: request => t = "DescribeReportDefinitionsCommand"
-  let make = (~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken: nextToken, maxResults: maxResults})
+  let make = (~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

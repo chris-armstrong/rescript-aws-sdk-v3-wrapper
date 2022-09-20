@@ -508,7 +508,6 @@ module DeleteCustomPlugin = {
   let make = (~customPluginArn, ()) => new({customPluginArn: customPluginArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteConnector = {
   type t
   type request = {
@@ -526,11 +525,9 @@ module DeleteConnector = {
     connectorArn: option<__string>,
   }
   @module("@aws-sdk/client-kafkaconnect") @new external new: request => t = "DeleteConnectorCommand"
-  let make = (~connectorArn, ~currentVersion=?, ()) =>
-    new({currentVersion: currentVersion, connectorArn: connectorArn})
+  let make = (~connectorArn, ~currentVersion=?, ()) => new({currentVersion, connectorArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeWorkerConfiguration = {
   type t
   type request = {
@@ -553,7 +550,6 @@ module DescribeWorkerConfiguration = {
   let make = (~workerConfigurationArn, ()) => new({workerConfigurationArn: workerConfigurationArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateWorkerConfiguration = {
   type t
   type request = {
@@ -577,10 +573,9 @@ module CreateWorkerConfiguration = {
   @module("@aws-sdk/client-kafkaconnect") @new
   external new: request => t = "CreateWorkerConfigurationCommand"
   let make = (~propertiesFileContent, ~name, ~description=?, ()) =>
-    new({propertiesFileContent: propertiesFileContent, name: name, description: description})
+    new({propertiesFileContent, name, description})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateCustomPlugin = {
   type t
   type request = {
@@ -602,10 +597,9 @@ module CreateCustomPlugin = {
   @module("@aws-sdk/client-kafkaconnect") @new
   external new: request => t = "CreateCustomPluginCommand"
   let make = (~name, ~location, ~contentType, ~description=?, ()) =>
-    new({name: name, location: location, description: description, contentType: contentType})
+    new({name, location, description, contentType})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateConnector = {
   type t
   type request = {
@@ -622,10 +616,9 @@ module UpdateConnector = {
   }
   @module("@aws-sdk/client-kafkaconnect") @new external new: request => t = "UpdateConnectorCommand"
   let make = (~currentVersion, ~connectorArn, ~capacity, ()) =>
-    new({currentVersion: currentVersion, connectorArn: connectorArn, capacity: capacity})
+    new({currentVersion, connectorArn, capacity})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListWorkerConfigurations = {
   type t
   type request = {
@@ -646,11 +639,9 @@ module ListWorkerConfigurations = {
   }
   @module("@aws-sdk/client-kafkaconnect") @new
   external new: request => t = "ListWorkerConfigurationsCommand"
-  let make = (~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken: nextToken, maxResults: maxResults})
+  let make = (~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeCustomPlugin = {
   type t
   type request = {
@@ -676,7 +667,6 @@ module DescribeCustomPlugin = {
   let make = (~customPluginArn, ()) => new({customPluginArn: customPluginArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeConnector = {
   type t
   type request = {
@@ -725,7 +715,6 @@ module DescribeConnector = {
   let make = (~connectorArn, ()) => new({connectorArn: connectorArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateConnector = {
   type t
   type request = {
@@ -779,22 +768,21 @@ module CreateConnector = {
     (),
   ) =>
     new({
-      workerConfiguration: workerConfiguration,
-      serviceExecutionRoleArn: serviceExecutionRoleArn,
-      plugins: plugins,
-      logDelivery: logDelivery,
-      kafkaConnectVersion: kafkaConnectVersion,
-      kafkaClusterEncryptionInTransit: kafkaClusterEncryptionInTransit,
-      kafkaClusterClientAuthentication: kafkaClusterClientAuthentication,
-      kafkaCluster: kafkaCluster,
-      connectorName: connectorName,
-      connectorDescription: connectorDescription,
-      connectorConfiguration: connectorConfiguration,
-      capacity: capacity,
+      workerConfiguration,
+      serviceExecutionRoleArn,
+      plugins,
+      logDelivery,
+      kafkaConnectVersion,
+      kafkaClusterEncryptionInTransit,
+      kafkaClusterClientAuthentication,
+      kafkaCluster,
+      connectorName,
+      connectorDescription,
+      connectorConfiguration,
+      capacity,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListCustomPlugins = {
   type t
   type request = {
@@ -815,11 +803,9 @@ module ListCustomPlugins = {
   }
   @module("@aws-sdk/client-kafkaconnect") @new
   external new: request => t = "ListCustomPluginsCommand"
-  let make = (~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken: nextToken, maxResults: maxResults})
+  let make = (~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListConnectors = {
   type t
   type request = {
@@ -842,6 +828,6 @@ module ListConnectors = {
   }
   @module("@aws-sdk/client-kafkaconnect") @new external new: request => t = "ListConnectorsCommand"
   let make = (~nextToken=?, ~maxResults=?, ~connectorNamePrefix=?, ()) =>
-    new({nextToken: nextToken, maxResults: maxResults, connectorNamePrefix: connectorNamePrefix})
+    new({nextToken, maxResults, connectorNamePrefix})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

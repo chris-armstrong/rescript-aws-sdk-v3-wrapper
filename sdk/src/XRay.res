@@ -978,10 +978,9 @@ module DeleteGroup = {
   }
   type response = {.}
   @module("@aws-sdk/client-xray") @new external new: request => t = "DeleteGroupCommand"
-  let make = (~groupARN=?, ~groupName=?, ()) => new({groupARN: groupARN, groupName: groupName})
+  let make = (~groupARN=?, ~groupName=?, ()) => new({groupARN, groupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module UntagResource = {
   type t
   type request = {
@@ -996,10 +995,9 @@ module UntagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-xray") @new external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceARN, ()) => new({tagKeys: tagKeys, resourceARN: resourceARN})
+  let make = (~tagKeys, ~resourceARN, ()) => new({tagKeys, resourceARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module PutEncryptionConfig = {
   type t
   type request = {
@@ -1036,10 +1034,9 @@ module PutEncryptionConfig = {
     encryptionConfig: option<encryptionConfig>,
   }
   @module("@aws-sdk/client-xray") @new external new: request => t = "PutEncryptionConfigCommand"
-  let make = (~type_, ~keyId=?, ()) => new({type_: type_, keyId: keyId})
+  let make = (~type_, ~keyId=?, ()) => new({type_, keyId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetEncryptionConfig = {
   type t
   type request = {.}
@@ -1051,7 +1048,6 @@ module GetEncryptionConfig = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateGroup = {
   type t
   type request = {
@@ -1085,15 +1081,9 @@ module UpdateGroup = {
   }
   @module("@aws-sdk/client-xray") @new external new: request => t = "UpdateGroupCommand"
   let make = (~insightsConfiguration=?, ~filterExpression=?, ~groupARN=?, ~groupName=?, ()) =>
-    new({
-      insightsConfiguration: insightsConfiguration,
-      filterExpression: filterExpression,
-      groupARN: groupARN,
-      groupName: groupName,
-    })
+    new({insightsConfiguration, filterExpression, groupARN, groupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module TagResource = {
   type t
   type request = {
@@ -1131,10 +1121,9 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-xray") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceARN, ()) => new({tags: tags, resourceARN: resourceARN})
+  let make = (~tags, ~resourceARN, ()) => new({tags, resourceARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module PutTraceSegments = {
   type t
   type request = {
@@ -1151,7 +1140,6 @@ module PutTraceSegments = {
   let make = (~traceSegmentDocuments, ()) => new({traceSegmentDocuments: traceSegmentDocuments})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListTagsForResource = {
   type t
   type request = {
@@ -1175,11 +1163,9 @@ module ListTagsForResource = {
     tags: option<tagList_>,
   }
   @module("@aws-sdk/client-xray") @new external new: request => t = "ListTagsForResourceCommand"
-  let make = (~resourceARN, ~nextToken=?, ()) =>
-    new({nextToken: nextToken, resourceARN: resourceARN})
+  let make = (~resourceARN, ~nextToken=?, ()) => new({nextToken, resourceARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetSamplingTargets = {
   type t
   type request = {
@@ -1206,7 +1192,6 @@ module GetSamplingTargets = {
     new({samplingStatisticsDocuments: samplingStatisticsDocuments})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetSamplingStatisticSummaries = {
   type t
   type request = {
@@ -1224,7 +1209,6 @@ module GetSamplingStatisticSummaries = {
   let make = (~nextToken=?, ()) => new({nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetGroup = {
   type t
   type request = {
@@ -1240,10 +1224,9 @@ module GetGroup = {
     group: option<group>,
   }
   @module("@aws-sdk/client-xray") @new external new: request => t = "GetGroupCommand"
-  let make = (~groupARN=?, ~groupName=?, ()) => new({groupARN: groupARN, groupName: groupName})
+  let make = (~groupARN=?, ~groupName=?, ()) => new({groupARN, groupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateGroup = {
   type t
   type request = {
@@ -1306,15 +1289,9 @@ module CreateGroup = {
   }
   @module("@aws-sdk/client-xray") @new external new: request => t = "CreateGroupCommand"
   let make = (~groupName, ~tags=?, ~insightsConfiguration=?, ~filterExpression=?, ()) =>
-    new({
-      tags: tags,
-      insightsConfiguration: insightsConfiguration,
-      filterExpression: filterExpression,
-      groupName: groupName,
-    })
+    new({tags, insightsConfiguration, filterExpression, groupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateSamplingRule = {
   type t
   type request = {
@@ -1329,7 +1306,6 @@ module UpdateSamplingRule = {
   let make = (~samplingRuleUpdate, ()) => new({samplingRuleUpdate: samplingRuleUpdate})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module PutTelemetryRecords = {
   type t
   type request = {
@@ -1341,15 +1317,9 @@ module PutTelemetryRecords = {
   type response = {.}
   @module("@aws-sdk/client-xray") @new external new: request => t = "PutTelemetryRecordsCommand"
   let make = (~telemetryRecords, ~resourceARN=?, ~hostname=?, ~ec2InstanceId=?, ()) =>
-    new({
-      resourceARN: resourceARN,
-      hostname: hostname,
-      ec2InstanceId: ec2InstanceId,
-      telemetryRecords: telemetryRecords,
-    })
+    new({resourceARN, hostname, ec2InstanceId, telemetryRecords})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module GetGroups = {
   type t
   type request = {
@@ -1364,7 +1334,6 @@ module GetGroups = {
   let make = (~nextToken=?, ()) => new({nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteSamplingRule = {
   type t
   type request = {
@@ -1384,10 +1353,9 @@ module DeleteSamplingRule = {
     samplingRuleRecord: option<samplingRuleRecord>,
   }
   @module("@aws-sdk/client-xray") @new external new: request => t = "DeleteSamplingRuleCommand"
-  let make = (~ruleARN=?, ~ruleName=?, ()) => new({ruleARN: ruleARN, ruleName: ruleName})
+  let make = (~ruleARN=?, ~ruleName=?, ()) => new({ruleARN, ruleName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateSamplingRule = {
   type t
   type request = {
@@ -1426,10 +1394,9 @@ module CreateSamplingRule = {
     samplingRuleRecord: option<samplingRuleRecord>,
   }
   @module("@aws-sdk/client-xray") @new external new: request => t = "CreateSamplingRuleCommand"
-  let make = (~samplingRule, ~tags=?, ()) => new({tags: tags, samplingRule: samplingRule})
+  let make = (~samplingRule, ~tags=?, ()) => new({tags, samplingRule})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetTimeSeriesServiceStatistics = {
   type t
   type request = {
@@ -1482,18 +1449,17 @@ module GetTimeSeriesServiceStatistics = {
     (),
   ) =>
     new({
-      nextToken: nextToken,
-      forecastStatistics: forecastStatistics,
-      period: period,
-      entitySelectorExpression: entitySelectorExpression,
-      groupARN: groupARN,
-      groupName: groupName,
-      endTime: endTime,
-      startTime: startTime,
+      nextToken,
+      forecastStatistics,
+      period,
+      entitySelectorExpression,
+      groupARN,
+      groupName,
+      endTime,
+      startTime,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetSamplingRules = {
   type t
   type request = {
@@ -1508,7 +1474,6 @@ module GetSamplingRules = {
   let make = (~nextToken=?, ()) => new({nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetInsightImpactGraph = {
   type t
   type request = {
@@ -1549,10 +1514,9 @@ module GetInsightImpactGraph = {
   }
   @module("@aws-sdk/client-xray") @new external new: request => t = "GetInsightImpactGraphCommand"
   let make = (~endTime, ~startTime, ~insightId, ~nextToken=?, ()) =>
-    new({nextToken: nextToken, endTime: endTime, startTime: startTime, insightId: insightId})
+    new({nextToken, endTime, startTime, insightId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module BatchGetTraces = {
   type t
   type request = {
@@ -1570,10 +1534,9 @@ module BatchGetTraces = {
     traces: option<traceList>,
   }
   @module("@aws-sdk/client-xray") @new external new: request => t = "BatchGetTracesCommand"
-  let make = (~traceIds, ~nextToken=?, ()) => new({nextToken: nextToken, traceIds: traceIds})
+  let make = (~traceIds, ~nextToken=?, ()) => new({nextToken, traceIds})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetInsight = {
   type t
   type request = {
@@ -1591,7 +1554,6 @@ module GetInsight = {
   let make = (~insightId, ()) => new({insightId: insightId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetInsightSummaries = {
   type t
   type request = {
@@ -1636,19 +1598,9 @@ module GetInsightSummaries = {
     ~groupARN=?,
     ~states=?,
     (),
-  ) =>
-    new({
-      nextToken: nextToken,
-      maxResults: maxResults,
-      endTime: endTime,
-      startTime: startTime,
-      groupName: groupName,
-      groupARN: groupARN,
-      states: states,
-    })
+  ) => new({nextToken, maxResults, endTime, startTime, groupName, groupARN, states})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetInsightEvents = {
   type t
   type request = {
@@ -1677,10 +1629,9 @@ module GetInsightEvents = {
   }
   @module("@aws-sdk/client-xray") @new external new: request => t = "GetInsightEventsCommand"
   let make = (~insightId, ~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken: nextToken, maxResults: maxResults, insightId: insightId})
+    new({nextToken, maxResults, insightId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetTraceGraph = {
   type t
   type request = {
@@ -1696,10 +1647,9 @@ module GetTraceGraph = {
     services: option<serviceList>,
   }
   @module("@aws-sdk/client-xray") @new external new: request => t = "GetTraceGraphCommand"
-  let make = (~traceIds, ~nextToken=?, ()) => new({nextToken: nextToken, traceIds: traceIds})
+  let make = (~traceIds, ~nextToken=?, ()) => new({nextToken, traceIds})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetServiceGraph = {
   type t
   type request = {
@@ -1736,16 +1686,9 @@ module GetServiceGraph = {
   }
   @module("@aws-sdk/client-xray") @new external new: request => t = "GetServiceGraphCommand"
   let make = (~endTime, ~startTime, ~nextToken=?, ~groupARN=?, ~groupName=?, ()) =>
-    new({
-      nextToken: nextToken,
-      groupARN: groupARN,
-      groupName: groupName,
-      endTime: endTime,
-      startTime: startTime,
-    })
+    new({nextToken, groupARN, groupName, endTime, startTime})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetTraceSummaries = {
   type t
   type request = {
@@ -1803,13 +1746,13 @@ module GetTraceSummaries = {
     (),
   ) =>
     new({
-      nextToken: nextToken,
-      filterExpression: filterExpression,
-      samplingStrategy: samplingStrategy,
-      sampling: sampling,
-      timeRangeType: timeRangeType,
-      endTime: endTime,
-      startTime: startTime,
+      nextToken,
+      filterExpression,
+      samplingStrategy,
+      sampling,
+      timeRangeType,
+      endTime,
+      startTime,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

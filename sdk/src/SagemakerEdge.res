@@ -73,11 +73,9 @@ module GetDeviceRegistration = {
   }
   @module("@aws-sdk/client-sagemaker") @new
   external new: request => t = "GetDeviceRegistrationCommand"
-  let make = (~deviceFleetName, ~deviceName, ()) =>
-    new({deviceFleetName: deviceFleetName, deviceName: deviceName})
+  let make = (~deviceFleetName, ~deviceName, ()) => new({deviceFleetName, deviceName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module SendHeartbeat = {
   type t
   type request = {
@@ -97,12 +95,6 @@ module SendHeartbeat = {
   type response = {.}
   @module("@aws-sdk/client-sagemaker") @new external new: request => t = "SendHeartbeatCommand"
   let make = (~deviceFleetName, ~deviceName, ~agentVersion, ~models=?, ~agentMetrics=?, ()) =>
-    new({
-      deviceFleetName: deviceFleetName,
-      deviceName: deviceName,
-      agentVersion: agentVersion,
-      models: models,
-      agentMetrics: agentMetrics,
-    })
+    new({deviceFleetName, deviceName, agentVersion, models, agentMetrics})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }

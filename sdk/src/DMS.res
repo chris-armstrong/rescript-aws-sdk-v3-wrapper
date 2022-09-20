@@ -3324,7 +3324,6 @@ module DeleteReplicationSubnetGroup = {
     new({replicationSubnetGroupIdentifier: replicationSubnetGroupIdentifier})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module TestConnection = {
   type t
   @ocaml.doc("<p></p>")
@@ -3344,10 +3343,9 @@ module TestConnection = {
   }
   @module("@aws-sdk/client-dms") @new external new: request => t = "TestConnectionCommand"
   let make = (~endpointArn, ~replicationInstanceArn, ()) =>
-    new({endpointArn: endpointArn, replicationInstanceArn: replicationInstanceArn})
+    new({endpointArn, replicationInstanceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module RemoveTagsFromResource = {
   type t
   @ocaml.doc("<p>Removes one or more tags from an DMS resource.</p>")
@@ -3362,10 +3360,9 @@ module RemoveTagsFromResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-dms") @new external new: request => t = "RemoveTagsFromResourceCommand"
-  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
+  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys, resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module RefreshSchemas = {
   type t
   @ocaml.doc("<p></p>")
@@ -3386,10 +3383,9 @@ module RefreshSchemas = {
   }
   @module("@aws-sdk/client-dms") @new external new: request => t = "RefreshSchemasCommand"
   let make = (~replicationInstanceArn, ~endpointArn, ()) =>
-    new({replicationInstanceArn: replicationInstanceArn, endpointArn: endpointArn})
+    new({replicationInstanceArn, endpointArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeSchemas = {
   type t
   @ocaml.doc("<p></p>")
@@ -3422,11 +3418,9 @@ module DescribeSchemas = {
     marker: option<string_>,
   }
   @module("@aws-sdk/client-dms") @new external new: request => t = "DescribeSchemasCommand"
-  let make = (~endpointArn, ~marker=?, ~maxRecords=?, ()) =>
-    new({marker: marker, maxRecords: maxRecords, endpointArn: endpointArn})
+  let make = (~endpointArn, ~marker=?, ~maxRecords=?, ()) => new({marker, maxRecords, endpointArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeRefreshSchemasStatus = {
   type t
   @ocaml.doc("<p></p>")
@@ -3447,7 +3441,6 @@ module DescribeRefreshSchemasStatus = {
   let make = (~endpointArn, ()) => new({endpointArn: endpointArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeApplicableIndividualAssessments = {
   type t
   @ocaml.doc("<p></p>")
@@ -3516,17 +3509,16 @@ module DescribeApplicableIndividualAssessments = {
     (),
   ) =>
     new({
-      marker: marker,
-      maxRecords: maxRecords,
-      migrationType: migrationType,
-      targetEngineName: targetEngineName,
-      sourceEngineName: sourceEngineName,
-      replicationInstanceArn: replicationInstanceArn,
-      replicationTaskArn: replicationTaskArn,
+      marker,
+      maxRecords,
+      migrationType,
+      targetEngineName,
+      sourceEngineName,
+      replicationInstanceArn,
+      replicationTaskArn,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteConnection = {
   type t
   @ocaml.doc("<p></p>")
@@ -3547,10 +3539,9 @@ module DeleteConnection = {
   }
   @module("@aws-sdk/client-dms") @new external new: request => t = "DeleteConnectionCommand"
   let make = (~replicationInstanceArn, ~endpointArn, ()) =>
-    new({replicationInstanceArn: replicationInstanceArn, endpointArn: endpointArn})
+    new({replicationInstanceArn, endpointArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteCertificate = {
   type t
   type request = {
@@ -3565,7 +3556,6 @@ module DeleteCertificate = {
   let make = (~certificateArn, ()) => new({certificateArn: certificateArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module StopReplicationTask = {
   type t
   @ocaml.doc("<p></p>")
@@ -3583,7 +3573,6 @@ module StopReplicationTask = {
   let make = (~replicationTaskArn, ()) => new({replicationTaskArn: replicationTaskArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module StartReplicationTaskAssessmentRun = {
   type t
   @ocaml.doc("<p></p>")
@@ -3679,19 +3668,18 @@ module StartReplicationTaskAssessmentRun = {
     (),
   ) =>
     new({
-      exclude: exclude,
-      includeOnly: includeOnly,
-      assessmentRunName: assessmentRunName,
-      resultKmsKeyArn: resultKmsKeyArn,
-      resultEncryptionMode: resultEncryptionMode,
-      resultLocationFolder: resultLocationFolder,
-      resultLocationBucket: resultLocationBucket,
-      serviceAccessRoleArn: serviceAccessRoleArn,
-      replicationTaskArn: replicationTaskArn,
+      exclude,
+      includeOnly,
+      assessmentRunName,
+      resultKmsKeyArn,
+      resultEncryptionMode,
+      resultLocationFolder,
+      resultLocationBucket,
+      serviceAccessRoleArn,
+      replicationTaskArn,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module StartReplicationTaskAssessment = {
   type t
   @ocaml.doc("<p></p>")
@@ -3710,7 +3698,6 @@ module StartReplicationTaskAssessment = {
   let make = (~replicationTaskArn, ()) => new({replicationTaskArn: replicationTaskArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module StartReplicationTask = {
   type t
   @ocaml.doc("<p></p>")
@@ -3772,15 +3759,14 @@ module StartReplicationTask = {
     (),
   ) =>
     new({
-      cdcStopPosition: cdcStopPosition,
-      cdcStartPosition: cdcStartPosition,
-      cdcStartTime: cdcStartTime,
-      startReplicationTaskType: startReplicationTaskType,
-      replicationTaskArn: replicationTaskArn,
+      cdcStopPosition,
+      cdcStartPosition,
+      cdcStartTime,
+      startReplicationTaskType,
+      replicationTaskArn,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ReloadTables = {
   type t
   type request = {
@@ -3804,14 +3790,9 @@ module ReloadTables = {
   }
   @module("@aws-sdk/client-dms") @new external new: request => t = "ReloadTablesCommand"
   let make = (~tablesToReload, ~replicationTaskArn, ~reloadOption=?, ()) =>
-    new({
-      reloadOption: reloadOption,
-      tablesToReload: tablesToReload,
-      replicationTaskArn: replicationTaskArn,
-    })
+    new({reloadOption, tablesToReload, replicationTaskArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module MoveReplicationTask = {
   type t
   @ocaml.doc("<p></p>")
@@ -3830,13 +3811,9 @@ module MoveReplicationTask = {
   }
   @module("@aws-sdk/client-dms") @new external new: request => t = "MoveReplicationTaskCommand"
   let make = (~targetReplicationInstanceArn, ~replicationTaskArn, ()) =>
-    new({
-      targetReplicationInstanceArn: targetReplicationInstanceArn,
-      replicationTaskArn: replicationTaskArn,
-    })
+    new({targetReplicationInstanceArn, replicationTaskArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ModifyReplicationTask = {
   type t
   @ocaml.doc("<p></p>")
@@ -3930,19 +3907,18 @@ module ModifyReplicationTask = {
     (),
   ) =>
     new({
-      taskData: taskData,
-      cdcStopPosition: cdcStopPosition,
-      cdcStartPosition: cdcStartPosition,
-      cdcStartTime: cdcStartTime,
-      replicationTaskSettings: replicationTaskSettings,
-      tableMappings: tableMappings,
-      migrationType: migrationType,
-      replicationTaskIdentifier: replicationTaskIdentifier,
-      replicationTaskArn: replicationTaskArn,
+      taskData,
+      cdcStopPosition,
+      cdcStartPosition,
+      cdcStartTime,
+      replicationTaskSettings,
+      tableMappings,
+      migrationType,
+      replicationTaskIdentifier,
+      replicationTaskArn,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ModifyEventSubscription = {
   type t
   @ocaml.doc("<p></p>")
@@ -3980,17 +3956,9 @@ module ModifyEventSubscription = {
     ~sourceType=?,
     ~snsTopicArn=?,
     (),
-  ) =>
-    new({
-      enabled: enabled,
-      eventCategories: eventCategories,
-      sourceType: sourceType,
-      snsTopicArn: snsTopicArn,
-      subscriptionName: subscriptionName,
-    })
+  ) => new({enabled, eventCategories, sourceType, snsTopicArn, subscriptionName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListTagsForResource = {
   type t
   @ocaml.doc("<p></p>")
@@ -4012,11 +3980,9 @@ module ListTagsForResource = {
     @ocaml.doc("<p>A list of tags for the resource.</p>") @as("TagList") tagList_: option<tagList_>,
   }
   @module("@aws-sdk/client-dms") @new external new: request => t = "ListTagsForResourceCommand"
-  let make = (~resourceArnList=?, ~resourceArn=?, ()) =>
-    new({resourceArnList: resourceArnList, resourceArn: resourceArn})
+  let make = (~resourceArnList=?, ~resourceArn=?, ()) => new({resourceArnList, resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ImportCertificate = {
   type t
   type request = {
@@ -4045,15 +4011,9 @@ module ImportCertificate = {
   }
   @module("@aws-sdk/client-dms") @new external new: request => t = "ImportCertificateCommand"
   let make = (~certificateIdentifier, ~tags=?, ~certificateWallet=?, ~certificatePem=?, ()) =>
-    new({
-      tags: tags,
-      certificateWallet: certificateWallet,
-      certificatePem: certificatePem,
-      certificateIdentifier: certificateIdentifier,
-    })
+    new({tags, certificateWallet, certificatePem, certificateIdentifier})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeReplicationTaskAssessmentResults = {
   type t
   @ocaml.doc("<p></p>")
@@ -4092,10 +4052,9 @@ module DescribeReplicationTaskAssessmentResults = {
   @module("@aws-sdk/client-dms") @new
   external new: request => t = "DescribeReplicationTaskAssessmentResultsCommand"
   let make = (~marker=?, ~maxRecords=?, ~replicationTaskArn=?, ()) =>
-    new({marker: marker, maxRecords: maxRecords, replicationTaskArn: replicationTaskArn})
+    new({marker, maxRecords, replicationTaskArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeReplicationInstanceTaskLogs = {
   type t
   type request = {
@@ -4132,10 +4091,9 @@ module DescribeReplicationInstanceTaskLogs = {
   @module("@aws-sdk/client-dms") @new
   external new: request => t = "DescribeReplicationInstanceTaskLogsCommand"
   let make = (~replicationInstanceArn, ~marker=?, ~maxRecords=?, ()) =>
-    new({marker: marker, maxRecords: maxRecords, replicationInstanceArn: replicationInstanceArn})
+    new({marker, maxRecords, replicationInstanceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeAccountAttributes = {
   type t
   type request = {.}
@@ -4163,7 +4121,6 @@ module DescribeAccountAttributes = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteReplicationTaskAssessmentRun = {
   type t
   @ocaml.doc("<p></p>")
@@ -4187,7 +4144,6 @@ module DeleteReplicationTaskAssessmentRun = {
     new({replicationTaskAssessmentRunArn: replicationTaskAssessmentRunArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteReplicationTask = {
   type t
   @ocaml.doc("<p></p>")
@@ -4205,7 +4161,6 @@ module DeleteReplicationTask = {
   let make = (~replicationTaskArn, ()) => new({replicationTaskArn: replicationTaskArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteEventSubscription = {
   type t
   @ocaml.doc("<p></p>")
@@ -4223,7 +4178,6 @@ module DeleteEventSubscription = {
   let make = (~subscriptionName, ()) => new({subscriptionName: subscriptionName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateReplicationTask = {
   type t
   @ocaml.doc("<p></p>")
@@ -4339,23 +4293,22 @@ module CreateReplicationTask = {
     (),
   ) =>
     new({
-      resourceIdentifier: resourceIdentifier,
-      taskData: taskData,
-      tags: tags,
-      cdcStopPosition: cdcStopPosition,
-      cdcStartPosition: cdcStartPosition,
-      cdcStartTime: cdcStartTime,
-      replicationTaskSettings: replicationTaskSettings,
-      tableMappings: tableMappings,
-      migrationType: migrationType,
-      replicationInstanceArn: replicationInstanceArn,
-      targetEndpointArn: targetEndpointArn,
-      sourceEndpointArn: sourceEndpointArn,
-      replicationTaskIdentifier: replicationTaskIdentifier,
+      resourceIdentifier,
+      taskData,
+      tags,
+      cdcStopPosition,
+      cdcStartPosition,
+      cdcStartTime,
+      replicationTaskSettings,
+      tableMappings,
+      migrationType,
+      replicationInstanceArn,
+      targetEndpointArn,
+      sourceEndpointArn,
+      replicationTaskIdentifier,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateEventSubscription = {
   type t
   @ocaml.doc("<p></p>")
@@ -4413,19 +4366,9 @@ module CreateEventSubscription = {
     ~eventCategories=?,
     ~sourceType=?,
     (),
-  ) =>
-    new({
-      tags: tags,
-      enabled: enabled,
-      sourceIds: sourceIds,
-      eventCategories: eventCategories,
-      sourceType: sourceType,
-      snsTopicArn: snsTopicArn,
-      subscriptionName: subscriptionName,
-    })
+  ) => new({tags, enabled, sourceIds, eventCategories, sourceType, snsTopicArn, subscriptionName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CancelReplicationTaskAssessmentRun = {
   type t
   @ocaml.doc("<p></p>")
@@ -4449,7 +4392,6 @@ module CancelReplicationTaskAssessmentRun = {
     new({replicationTaskAssessmentRunArn: replicationTaskAssessmentRunArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module AddTagsToResource = {
   type t
   @ocaml.doc("<p>Associates a set of tags with an DMS resource.</p>")
@@ -4463,10 +4405,9 @@ module AddTagsToResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-dms") @new external new: request => t = "AddTagsToResourceCommand"
-  let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
+  let make = (~tags, ~resourceArn, ()) => new({tags, resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module ModifyEndpoint = {
   type t
   @ocaml.doc("<p></p>")
@@ -4717,43 +4658,42 @@ module ModifyEndpoint = {
     (),
   ) =>
     new({
-      gcpMySQLSettings: gcpMySQLSettings,
-      exactSettings: exactSettings,
-      redisSettings: redisSettings,
-      docDbSettings: docDbSettings,
-      ibmdb2Settings: ibmdb2Settings,
-      microsoftSQLServerSettings: microsoftSQLServerSettings,
-      sybaseSettings: sybaseSettings,
-      oracleSettings: oracleSettings,
-      mySQLSettings: mySQLSettings,
-      postgreSQLSettings: postgreSQLSettings,
-      redshiftSettings: redshiftSettings,
-      neptuneSettings: neptuneSettings,
-      elasticsearchSettings: elasticsearchSettings,
-      kafkaSettings: kafkaSettings,
-      kinesisSettings: kinesisSettings,
-      mongoDbSettings: mongoDbSettings,
-      dmsTransferSettings: dmsTransferSettings,
-      s3Settings: s3Settings,
-      dynamoDbSettings: dynamoDbSettings,
-      externalTableDefinition: externalTableDefinition,
-      serviceAccessRoleArn: serviceAccessRoleArn,
-      sslMode: sslMode,
-      certificateArn: certificateArn,
-      extraConnectionAttributes: extraConnectionAttributes,
-      databaseName: databaseName,
-      port: port,
-      serverName: serverName,
-      password: password,
-      username: username,
-      engineName: engineName,
-      endpointType: endpointType,
-      endpointIdentifier: endpointIdentifier,
-      endpointArn: endpointArn,
+      gcpMySQLSettings,
+      exactSettings,
+      redisSettings,
+      docDbSettings,
+      ibmdb2Settings,
+      microsoftSQLServerSettings,
+      sybaseSettings,
+      oracleSettings,
+      mySQLSettings,
+      postgreSQLSettings,
+      redshiftSettings,
+      neptuneSettings,
+      elasticsearchSettings,
+      kafkaSettings,
+      kinesisSettings,
+      mongoDbSettings,
+      dmsTransferSettings,
+      s3Settings,
+      dynamoDbSettings,
+      externalTableDefinition,
+      serviceAccessRoleArn,
+      sslMode,
+      certificateArn,
+      extraConnectionAttributes,
+      databaseName,
+      port,
+      serverName,
+      password,
+      username,
+      engineName,
+      endpointType,
+      endpointIdentifier,
+      endpointArn,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeTableStatistics = {
   type t
   @ocaml.doc("<p></p>")
@@ -4795,15 +4735,9 @@ module DescribeTableStatistics = {
   }
   @module("@aws-sdk/client-dms") @new external new: request => t = "DescribeTableStatisticsCommand"
   let make = (~replicationTaskArn, ~filters=?, ~marker=?, ~maxRecords=?, ()) =>
-    new({
-      filters: filters,
-      marker: marker,
-      maxRecords: maxRecords,
-      replicationTaskArn: replicationTaskArn,
-    })
+    new({filters, marker, maxRecords, replicationTaskArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeReplicationTasks = {
   type t
   @ocaml.doc("<p></p>")
@@ -4843,15 +4777,9 @@ module DescribeReplicationTasks = {
   }
   @module("@aws-sdk/client-dms") @new external new: request => t = "DescribeReplicationTasksCommand"
   let make = (~withoutSettings=?, ~marker=?, ~maxRecords=?, ~filters=?, ()) =>
-    new({
-      withoutSettings: withoutSettings,
-      marker: marker,
-      maxRecords: maxRecords,
-      filters: filters,
-    })
+    new({withoutSettings, marker, maxRecords, filters})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeReplicationTaskIndividualAssessments = {
   type t
   @ocaml.doc("<p></p>")
@@ -4888,11 +4816,9 @@ module DescribeReplicationTaskIndividualAssessments = {
   }
   @module("@aws-sdk/client-dms") @new
   external new: request => t = "DescribeReplicationTaskIndividualAssessmentsCommand"
-  let make = (~marker=?, ~maxRecords=?, ~filters=?, ()) =>
-    new({marker: marker, maxRecords: maxRecords, filters: filters})
+  let make = (~marker=?, ~maxRecords=?, ~filters=?, ()) => new({marker, maxRecords, filters})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeReplicationTaskAssessmentRuns = {
   type t
   @ocaml.doc("<p></p>")
@@ -4930,11 +4856,9 @@ module DescribeReplicationTaskAssessmentRuns = {
   }
   @module("@aws-sdk/client-dms") @new
   external new: request => t = "DescribeReplicationTaskAssessmentRunsCommand"
-  let make = (~marker=?, ~maxRecords=?, ~filters=?, ()) =>
-    new({marker: marker, maxRecords: maxRecords, filters: filters})
+  let make = (~marker=?, ~maxRecords=?, ~filters=?, ()) => new({marker, maxRecords, filters})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeOrderableReplicationInstances = {
   type t
   @ocaml.doc("<p></p>")
@@ -4965,10 +4889,9 @@ module DescribeOrderableReplicationInstances = {
   }
   @module("@aws-sdk/client-dms") @new
   external new: request => t = "DescribeOrderableReplicationInstancesCommand"
-  let make = (~marker=?, ~maxRecords=?, ()) => new({marker: marker, maxRecords: maxRecords})
+  let make = (~marker=?, ~maxRecords=?, ()) => new({marker, maxRecords})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeEvents = {
   type t
   @ocaml.doc("<p></p>")
@@ -5029,19 +4952,18 @@ module DescribeEvents = {
     (),
   ) =>
     new({
-      marker: marker,
-      maxRecords: maxRecords,
-      filters: filters,
-      eventCategories: eventCategories,
-      duration: duration,
-      endTime: endTime,
-      startTime: startTime,
-      sourceType: sourceType,
-      sourceIdentifier: sourceIdentifier,
+      marker,
+      maxRecords,
+      filters,
+      eventCategories,
+      duration,
+      endTime,
+      startTime,
+      sourceType,
+      sourceIdentifier,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeEventSubscriptions = {
   type t
   @ocaml.doc("<p></p>")
@@ -5079,15 +5001,9 @@ module DescribeEventSubscriptions = {
   @module("@aws-sdk/client-dms") @new
   external new: request => t = "DescribeEventSubscriptionsCommand"
   let make = (~marker=?, ~maxRecords=?, ~filters=?, ~subscriptionName=?, ()) =>
-    new({
-      marker: marker,
-      maxRecords: maxRecords,
-      filters: filters,
-      subscriptionName: subscriptionName,
-    })
+    new({marker, maxRecords, filters, subscriptionName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeEventCategories = {
   type t
   @ocaml.doc("<p></p>")
@@ -5105,10 +5021,9 @@ module DescribeEventCategories = {
     eventCategoryGroupList: option<eventCategoryGroupList>,
   }
   @module("@aws-sdk/client-dms") @new external new: request => t = "DescribeEventCategoriesCommand"
-  let make = (~filters=?, ~sourceType=?, ()) => new({filters: filters, sourceType: sourceType})
+  let make = (~filters=?, ~sourceType=?, ()) => new({filters, sourceType})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeEndpointTypes = {
   type t
   @ocaml.doc("<p></p>")
@@ -5141,11 +5056,9 @@ module DescribeEndpointTypes = {
     marker: option<string_>,
   }
   @module("@aws-sdk/client-dms") @new external new: request => t = "DescribeEndpointTypesCommand"
-  let make = (~marker=?, ~maxRecords=?, ~filters=?, ()) =>
-    new({marker: marker, maxRecords: maxRecords, filters: filters})
+  let make = (~marker=?, ~maxRecords=?, ~filters=?, ()) => new({marker, maxRecords, filters})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeEndpointSettings = {
   type t
   type request = {
@@ -5174,11 +5087,9 @@ module DescribeEndpointSettings = {
     marker: option<string_>,
   }
   @module("@aws-sdk/client-dms") @new external new: request => t = "DescribeEndpointSettingsCommand"
-  let make = (~engineName, ~marker=?, ~maxRecords=?, ()) =>
-    new({marker: marker, maxRecords: maxRecords, engineName: engineName})
+  let make = (~engineName, ~marker=?, ~maxRecords=?, ()) => new({marker, maxRecords, engineName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeConnections = {
   type t
   @ocaml.doc("<p></p>")
@@ -5211,11 +5122,9 @@ module DescribeConnections = {
     marker: option<string_>,
   }
   @module("@aws-sdk/client-dms") @new external new: request => t = "DescribeConnectionsCommand"
-  let make = (~marker=?, ~maxRecords=?, ~filters=?, ()) =>
-    new({marker: marker, maxRecords: maxRecords, filters: filters})
+  let make = (~marker=?, ~maxRecords=?, ~filters=?, ()) => new({marker, maxRecords, filters})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeCertificates = {
   type t
   type request = {
@@ -5243,11 +5152,9 @@ module DescribeCertificates = {
     @ocaml.doc("<p>The pagination token.</p>") @as("Marker") marker: option<string_>,
   }
   @module("@aws-sdk/client-dms") @new external new: request => t = "DescribeCertificatesCommand"
-  let make = (~marker=?, ~maxRecords=?, ~filters=?, ()) =>
-    new({marker: marker, maxRecords: maxRecords, filters: filters})
+  let make = (~marker=?, ~maxRecords=?, ~filters=?, ()) => new({marker, maxRecords, filters})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteEndpoint = {
   type t
   @ocaml.doc("<p></p>")
@@ -5266,7 +5173,6 @@ module DeleteEndpoint = {
   let make = (~endpointArn, ()) => new({endpointArn: endpointArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateEndpoint = {
   type t
   @ocaml.doc("<p></p>")
@@ -5511,44 +5417,43 @@ module CreateEndpoint = {
     (),
   ) =>
     new({
-      gcpMySQLSettings: gcpMySQLSettings,
-      redisSettings: redisSettings,
-      docDbSettings: docDbSettings,
-      resourceIdentifier: resourceIdentifier,
-      ibmdb2Settings: ibmdb2Settings,
-      microsoftSQLServerSettings: microsoftSQLServerSettings,
-      sybaseSettings: sybaseSettings,
-      oracleSettings: oracleSettings,
-      mySQLSettings: mySQLSettings,
-      postgreSQLSettings: postgreSQLSettings,
-      redshiftSettings: redshiftSettings,
-      neptuneSettings: neptuneSettings,
-      elasticsearchSettings: elasticsearchSettings,
-      kafkaSettings: kafkaSettings,
-      kinesisSettings: kinesisSettings,
-      mongoDbSettings: mongoDbSettings,
-      dmsTransferSettings: dmsTransferSettings,
-      s3Settings: s3Settings,
-      dynamoDbSettings: dynamoDbSettings,
-      externalTableDefinition: externalTableDefinition,
-      serviceAccessRoleArn: serviceAccessRoleArn,
-      sslMode: sslMode,
-      certificateArn: certificateArn,
-      tags: tags,
-      kmsKeyId: kmsKeyId,
-      extraConnectionAttributes: extraConnectionAttributes,
-      databaseName: databaseName,
-      port: port,
-      serverName: serverName,
-      password: password,
-      username: username,
-      engineName: engineName,
-      endpointType: endpointType,
-      endpointIdentifier: endpointIdentifier,
+      gcpMySQLSettings,
+      redisSettings,
+      docDbSettings,
+      resourceIdentifier,
+      ibmdb2Settings,
+      microsoftSQLServerSettings,
+      sybaseSettings,
+      oracleSettings,
+      mySQLSettings,
+      postgreSQLSettings,
+      redshiftSettings,
+      neptuneSettings,
+      elasticsearchSettings,
+      kafkaSettings,
+      kinesisSettings,
+      mongoDbSettings,
+      dmsTransferSettings,
+      s3Settings,
+      dynamoDbSettings,
+      externalTableDefinition,
+      serviceAccessRoleArn,
+      sslMode,
+      certificateArn,
+      tags,
+      kmsKeyId,
+      extraConnectionAttributes,
+      databaseName,
+      port,
+      serverName,
+      password,
+      username,
+      engineName,
+      endpointType,
+      endpointIdentifier,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ApplyPendingMaintenanceAction = {
   type t
   @ocaml.doc("<p></p>")
@@ -5593,14 +5498,9 @@ module ApplyPendingMaintenanceAction = {
   @module("@aws-sdk/client-dms") @new
   external new: request => t = "ApplyPendingMaintenanceActionCommand"
   let make = (~optInType, ~applyAction, ~replicationInstanceArn, ()) =>
-    new({
-      optInType: optInType,
-      applyAction: applyAction,
-      replicationInstanceArn: replicationInstanceArn,
-    })
+    new({optInType, applyAction, replicationInstanceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ModifyReplicationSubnetGroup = {
   type t
   @ocaml.doc("<p></p>")
@@ -5625,15 +5525,9 @@ module ModifyReplicationSubnetGroup = {
     ~replicationSubnetGroupIdentifier,
     ~replicationSubnetGroupDescription=?,
     (),
-  ) =>
-    new({
-      subnetIds: subnetIds,
-      replicationSubnetGroupDescription: replicationSubnetGroupDescription,
-      replicationSubnetGroupIdentifier: replicationSubnetGroupIdentifier,
-    })
+  ) => new({subnetIds, replicationSubnetGroupDescription, replicationSubnetGroupIdentifier})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribePendingMaintenanceActions = {
   type t
   @ocaml.doc("<p></p>")
@@ -5668,15 +5562,9 @@ module DescribePendingMaintenanceActions = {
   @module("@aws-sdk/client-dms") @new
   external new: request => t = "DescribePendingMaintenanceActionsCommand"
   let make = (~maxRecords=?, ~marker=?, ~filters=?, ~replicationInstanceArn=?, ()) =>
-    new({
-      maxRecords: maxRecords,
-      marker: marker,
-      filters: filters,
-      replicationInstanceArn: replicationInstanceArn,
-    })
+    new({maxRecords, marker, filters, replicationInstanceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeEndpoints = {
   type t
   @ocaml.doc("<p></p>")
@@ -5708,11 +5596,9 @@ module DescribeEndpoints = {
     marker: option<string_>,
   }
   @module("@aws-sdk/client-dms") @new external new: request => t = "DescribeEndpointsCommand"
-  let make = (~marker=?, ~maxRecords=?, ~filters=?, ()) =>
-    new({marker: marker, maxRecords: maxRecords, filters: filters})
+  let make = (~marker=?, ~maxRecords=?, ~filters=?, ()) => new({marker, maxRecords, filters})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateReplicationSubnetGroup = {
   type t
   @ocaml.doc("<p></p>")
@@ -5747,16 +5633,9 @@ module CreateReplicationSubnetGroup = {
     ~replicationSubnetGroupIdentifier,
     ~tags=?,
     (),
-  ) =>
-    new({
-      tags: tags,
-      subnetIds: subnetIds,
-      replicationSubnetGroupDescription: replicationSubnetGroupDescription,
-      replicationSubnetGroupIdentifier: replicationSubnetGroupIdentifier,
-    })
+  ) => new({tags, subnetIds, replicationSubnetGroupDescription, replicationSubnetGroupIdentifier})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module RebootReplicationInstance = {
   type t
   type request = {
@@ -5783,14 +5662,9 @@ module RebootReplicationInstance = {
   @module("@aws-sdk/client-dms") @new
   external new: request => t = "RebootReplicationInstanceCommand"
   let make = (~replicationInstanceArn, ~forcePlannedFailover=?, ~forceFailover=?, ()) =>
-    new({
-      forcePlannedFailover: forcePlannedFailover,
-      forceFailover: forceFailover,
-      replicationInstanceArn: replicationInstanceArn,
-    })
+    new({forcePlannedFailover, forceFailover, replicationInstanceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ModifyReplicationInstance = {
   type t
   @ocaml.doc("<p></p>")
@@ -5891,21 +5765,20 @@ module ModifyReplicationInstance = {
     (),
   ) =>
     new({
-      replicationInstanceIdentifier: replicationInstanceIdentifier,
-      autoMinorVersionUpgrade: autoMinorVersionUpgrade,
-      allowMajorVersionUpgrade: allowMajorVersionUpgrade,
-      engineVersion: engineVersion,
-      multiAZ: multiAZ,
-      preferredMaintenanceWindow: preferredMaintenanceWindow,
-      vpcSecurityGroupIds: vpcSecurityGroupIds,
-      replicationInstanceClass: replicationInstanceClass,
-      applyImmediately: applyImmediately,
-      allocatedStorage: allocatedStorage,
-      replicationInstanceArn: replicationInstanceArn,
+      replicationInstanceIdentifier,
+      autoMinorVersionUpgrade,
+      allowMajorVersionUpgrade,
+      engineVersion,
+      multiAZ,
+      preferredMaintenanceWindow,
+      vpcSecurityGroupIds,
+      replicationInstanceClass,
+      applyImmediately,
+      allocatedStorage,
+      replicationInstanceArn,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeReplicationSubnetGroups = {
   type t
   @ocaml.doc("<p></p>")
@@ -5940,11 +5813,9 @@ module DescribeReplicationSubnetGroups = {
   }
   @module("@aws-sdk/client-dms") @new
   external new: request => t = "DescribeReplicationSubnetGroupsCommand"
-  let make = (~marker=?, ~maxRecords=?, ~filters=?, ()) =>
-    new({marker: marker, maxRecords: maxRecords, filters: filters})
+  let make = (~marker=?, ~maxRecords=?, ~filters=?, ()) => new({marker, maxRecords, filters})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteReplicationInstance = {
   type t
   @ocaml.doc("<p></p>")
@@ -5963,7 +5834,6 @@ module DeleteReplicationInstance = {
   let make = (~replicationInstanceArn, ()) => new({replicationInstanceArn: replicationInstanceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateReplicationInstance = {
   type t
   @ocaml.doc("<p></p>")
@@ -6100,25 +5970,24 @@ module CreateReplicationInstance = {
     (),
   ) =>
     new({
-      resourceIdentifier: resourceIdentifier,
-      dnsNameServers: dnsNameServers,
-      publiclyAccessible: publiclyAccessible,
-      kmsKeyId: kmsKeyId,
-      tags: tags,
-      autoMinorVersionUpgrade: autoMinorVersionUpgrade,
-      engineVersion: engineVersion,
-      multiAZ: multiAZ,
-      preferredMaintenanceWindow: preferredMaintenanceWindow,
-      replicationSubnetGroupIdentifier: replicationSubnetGroupIdentifier,
-      availabilityZone: availabilityZone,
-      vpcSecurityGroupIds: vpcSecurityGroupIds,
-      replicationInstanceClass: replicationInstanceClass,
-      allocatedStorage: allocatedStorage,
-      replicationInstanceIdentifier: replicationInstanceIdentifier,
+      resourceIdentifier,
+      dnsNameServers,
+      publiclyAccessible,
+      kmsKeyId,
+      tags,
+      autoMinorVersionUpgrade,
+      engineVersion,
+      multiAZ,
+      preferredMaintenanceWindow,
+      replicationSubnetGroupIdentifier,
+      availabilityZone,
+      vpcSecurityGroupIds,
+      replicationInstanceClass,
+      allocatedStorage,
+      replicationInstanceIdentifier,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeReplicationInstances = {
   type t
   @ocaml.doc("<p></p>")
@@ -6153,7 +6022,6 @@ module DescribeReplicationInstances = {
   }
   @module("@aws-sdk/client-dms") @new
   external new: request => t = "DescribeReplicationInstancesCommand"
-  let make = (~marker=?, ~maxRecords=?, ~filters=?, ()) =>
-    new({marker: marker, maxRecords: maxRecords, filters: filters})
+  let make = (~marker=?, ~maxRecords=?, ~filters=?, ()) => new({marker, maxRecords, filters})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

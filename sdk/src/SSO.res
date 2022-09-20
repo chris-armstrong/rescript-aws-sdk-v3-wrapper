@@ -87,7 +87,6 @@ module Logout = {
   let make = (~accessToken, ()) => new({accessToken: accessToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module GetRoleCredentials = {
   type t
   type request = {
@@ -105,11 +104,9 @@ module GetRoleCredentials = {
   }
   @module("@aws-sdk/client-awsssoportal") @new
   external new: request => t = "GetRoleCredentialsCommand"
-  let make = (~accessToken, ~accountId, ~roleName, ()) =>
-    new({accessToken: accessToken, accountId: accountId, roleName: roleName})
+  let make = (~accessToken, ~accountId, ~roleName, ()) => new({accessToken, accountId, roleName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListAccounts = {
   type t
   type request = {
@@ -133,10 +130,9 @@ module ListAccounts = {
   }
   @module("@aws-sdk/client-awsssoportal") @new external new: request => t = "ListAccountsCommand"
   let make = (~accessToken, ~maxResults=?, ~nextToken=?, ()) =>
-    new({accessToken: accessToken, maxResults: maxResults, nextToken: nextToken})
+    new({accessToken, maxResults, nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListAccountRoles = {
   type t
   type request = {
@@ -163,11 +159,6 @@ module ListAccountRoles = {
   @module("@aws-sdk/client-awsssoportal") @new
   external new: request => t = "ListAccountRolesCommand"
   let make = (~accountId, ~accessToken, ~maxResults=?, ~nextToken=?, ()) =>
-    new({
-      accountId: accountId,
-      accessToken: accessToken,
-      maxResults: maxResults,
-      nextToken: nextToken,
-    })
+    new({accountId, accessToken, maxResults, nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

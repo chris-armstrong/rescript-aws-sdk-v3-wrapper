@@ -110,10 +110,9 @@ module PutUsers = {
   }
   type response = {.}
   @module("@aws-sdk/client-personalize") @new external new: request => t = "PutUsersCommand"
-  let make = (~users, ~datasetArn, ()) => new({users: users, datasetArn: datasetArn})
+  let make = (~users, ~datasetArn, ()) => new({users, datasetArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module PutItems = {
   type t
   type request = {
@@ -125,10 +124,9 @@ module PutItems = {
   }
   type response = {.}
   @module("@aws-sdk/client-personalize") @new external new: request => t = "PutItemsCommand"
-  let make = (~items, ~datasetArn, ()) => new({items: items, datasetArn: datasetArn})
+  let make = (~items, ~datasetArn, ()) => new({items, datasetArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module PutEvents = {
   type t
   type request = {
@@ -146,6 +144,6 @@ module PutEvents = {
   type response = {.}
   @module("@aws-sdk/client-personalize") @new external new: request => t = "PutEventsCommand"
   let make = (~eventList, ~sessionId, ~trackingId, ~userId=?, ()) =>
-    new({eventList: eventList, sessionId: sessionId, userId: userId, trackingId: trackingId})
+    new({eventList, sessionId, userId, trackingId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }

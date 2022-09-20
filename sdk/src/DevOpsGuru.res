@@ -1922,7 +1922,6 @@ module UpdateServiceIntegration = {
   let make = (~serviceIntegration, ()) => new({serviceIntegration: serviceIntegration})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module UpdateEventSourcesConfig = {
   type t
   type request = {
@@ -1935,7 +1934,6 @@ module UpdateEventSourcesConfig = {
   let make = (~eventSources=?, ()) => new({eventSources: eventSources})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module RemoveNotificationChannel = {
   type t
   type request = {
@@ -1948,7 +1946,6 @@ module RemoveNotificationChannel = {
   let make = (~id, ()) => new({id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module PutFeedback = {
   type t
   type request = {
@@ -1961,7 +1958,6 @@ module PutFeedback = {
   let make = (~insightFeedback=?, ()) => new({insightFeedback: insightFeedback})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DescribeServiceIntegration = {
   type t
   type request = {.}
@@ -1971,7 +1967,6 @@ module DescribeServiceIntegration = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeOrganizationOverview = {
   type t
   type request = {
@@ -2003,15 +1998,9 @@ module DescribeOrganizationOverview = {
   @module("@aws-sdk/client-devops-guru") @new
   external new: request => t = "DescribeOrganizationOverviewCommand"
   let make = (~fromTime, ~organizationalUnitIds=?, ~accountIds=?, ~toTime=?, ()) =>
-    new({
-      organizationalUnitIds: organizationalUnitIds,
-      accountIds: accountIds,
-      toTime: toTime,
-      fromTime: fromTime,
-    })
+    new({organizationalUnitIds, accountIds, toTime, fromTime})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeOrganizationHealth = {
   type t
   type request = {
@@ -2041,10 +2030,9 @@ module DescribeOrganizationHealth = {
   @module("@aws-sdk/client-devops-guru") @new
   external new: request => t = "DescribeOrganizationHealthCommand"
   let make = (~organizationalUnitIds=?, ~accountIds=?, ()) =>
-    new({organizationalUnitIds: organizationalUnitIds, accountIds: accountIds})
+    new({organizationalUnitIds, accountIds})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeFeedback = {
   type t
   type request = {
@@ -2057,7 +2045,6 @@ module DescribeFeedback = {
   let make = (~insightId=?, ()) => new({insightId: insightId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeEventSourcesConfig = {
   type t
   type request = {.}
@@ -2070,7 +2057,6 @@ module DescribeEventSourcesConfig = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeAccountOverview = {
   type t
   type request = {
@@ -2101,10 +2087,9 @@ module DescribeAccountOverview = {
   }
   @module("@aws-sdk/client-devops-guru") @new
   external new: request => t = "DescribeAccountOverviewCommand"
-  let make = (~fromTime, ~toTime=?, ()) => new({toTime: toTime, fromTime: fromTime})
+  let make = (~fromTime, ~toTime=?, ()) => new({toTime, fromTime})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeAccountHealth = {
   type t
   type request = {.}
@@ -2131,7 +2116,6 @@ module DescribeAccountHealth = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module AddNotificationChannel = {
   type t
   type request = {
@@ -2150,7 +2134,6 @@ module AddNotificationChannel = {
   let make = (~config, ()) => new({config: config})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeResourceCollectionHealth = {
   type t
   type request = {
@@ -2218,11 +2201,9 @@ module DescribeResourceCollectionHealth = {
   }
   @module("@aws-sdk/client-devops-guru") @new
   external new: request => t = "DescribeResourceCollectionHealthCommand"
-  let make = (~resourceCollectionType, ~nextToken=?, ()) =>
-    new({nextToken: nextToken, resourceCollectionType: resourceCollectionType})
+  let make = (~resourceCollectionType, ~nextToken=?, ()) => new({nextToken, resourceCollectionType})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeOrganizationResourceCollectionHealth = {
   type t
   type request = {
@@ -2308,15 +2289,14 @@ module DescribeOrganizationResourceCollectionHealth = {
     (),
   ) =>
     new({
-      maxResults: maxResults,
-      nextToken: nextToken,
-      organizationalUnitIds: organizationalUnitIds,
-      accountIds: accountIds,
-      organizationResourceCollectionType: organizationResourceCollectionType,
+      maxResults,
+      nextToken,
+      organizationalUnitIds,
+      accountIds,
+      organizationResourceCollectionType,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateResourceCollection = {
   type t
   type request = {
@@ -2329,11 +2309,9 @@ module UpdateResourceCollection = {
   type response = {.}
   @module("@aws-sdk/client-devops-guru") @new
   external new: request => t = "UpdateResourceCollectionCommand"
-  let make = (~resourceCollection, ~action, ()) =>
-    new({resourceCollection: resourceCollection, action: action})
+  let make = (~resourceCollection, ~action, ()) => new({resourceCollection, action})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module StartCostEstimation = {
   type t
   type request = {
@@ -2349,11 +2327,9 @@ module StartCostEstimation = {
   type response = {.}
   @module("@aws-sdk/client-devops-guru") @new
   external new: request => t = "StartCostEstimationCommand"
-  let make = (~resourceCollection, ~clientToken=?, ()) =>
-    new({clientToken: clientToken, resourceCollection: resourceCollection})
+  let make = (~resourceCollection, ~clientToken=?, ()) => new({clientToken, resourceCollection})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module ListNotificationChannels = {
   type t
   type request = {
@@ -2376,7 +2352,6 @@ module ListNotificationChannels = {
   let make = (~nextToken=?, ()) => new({nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetResourceCollection = {
   type t
   type request = {
@@ -2403,11 +2378,9 @@ module GetResourceCollection = {
   }
   @module("@aws-sdk/client-devops-guru") @new
   external new: request => t = "GetResourceCollectionCommand"
-  let make = (~resourceCollectionType, ~nextToken=?, ()) =>
-    new({nextToken: nextToken, resourceCollectionType: resourceCollectionType})
+  let make = (~resourceCollectionType, ~nextToken=?, ()) => new({nextToken, resourceCollectionType})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetCostEstimation = {
   type t
   type request = {
@@ -2447,7 +2420,6 @@ module GetCostEstimation = {
   let make = (~nextToken=?, ()) => new({nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeInsight = {
   type t
   type request = {
@@ -2468,10 +2440,9 @@ module DescribeInsight = {
     proactiveInsight: option<proactiveInsight>,
   }
   @module("@aws-sdk/client-devops-guru") @new external new: request => t = "DescribeInsightCommand"
-  let make = (~id, ~accountId=?, ()) => new({accountId: accountId, id: id})
+  let make = (~id, ~accountId=?, ()) => new({accountId, id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module SearchOrganizationInsights = {
   type t
   type request = {
@@ -2512,17 +2483,9 @@ module SearchOrganizationInsights = {
   @module("@aws-sdk/client-devops-guru") @new
   external new: request => t = "SearchOrganizationInsightsCommand"
   let make = (~type_, ~startTimeRange, ~accountIds, ~nextToken=?, ~maxResults=?, ~filters=?, ()) =>
-    new({
-      type_: type_,
-      nextToken: nextToken,
-      maxResults: maxResults,
-      filters: filters,
-      startTimeRange: startTimeRange,
-      accountIds: accountIds,
-    })
+    new({type_, nextToken, maxResults, filters, startTimeRange, accountIds})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module SearchInsights = {
   type t
   type request = {
@@ -2559,16 +2522,9 @@ module SearchInsights = {
   }
   @module("@aws-sdk/client-devops-guru") @new external new: request => t = "SearchInsightsCommand"
   let make = (~type_, ~startTimeRange, ~nextToken=?, ~maxResults=?, ~filters=?, ()) =>
-    new({
-      type_: type_,
-      nextToken: nextToken,
-      maxResults: maxResults,
-      filters: filters,
-      startTimeRange: startTimeRange,
-    })
+    new({type_, nextToken, maxResults, filters, startTimeRange})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListOrganizationInsights = {
   type t
   type request = {
@@ -2609,17 +2565,9 @@ module ListOrganizationInsights = {
     ~accountIds=?,
     ~maxResults=?,
     (),
-  ) =>
-    new({
-      nextToken: nextToken,
-      organizationalUnitIds: organizationalUnitIds,
-      accountIds: accountIds,
-      maxResults: maxResults,
-      statusFilter: statusFilter,
-    })
+  ) => new({nextToken, organizationalUnitIds, accountIds, maxResults, statusFilter})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListInsights = {
   type t
   type request = {
@@ -2648,10 +2596,9 @@ module ListInsights = {
   }
   @module("@aws-sdk/client-devops-guru") @new external new: request => t = "ListInsightsCommand"
   let make = (~statusFilter, ~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken: nextToken, maxResults: maxResults, statusFilter: statusFilter})
+    new({nextToken, maxResults, statusFilter})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListEvents = {
   type t
   type request = {
@@ -2679,10 +2626,9 @@ module ListEvents = {
   }
   @module("@aws-sdk/client-devops-guru") @new external new: request => t = "ListEventsCommand"
   let make = (~filters, ~accountId=?, ~nextToken=?, ~maxResults=?, ()) =>
-    new({accountId: accountId, nextToken: nextToken, maxResults: maxResults, filters: filters})
+    new({accountId, nextToken, maxResults, filters})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListRecommendations = {
   type t
   type request = {
@@ -2708,10 +2654,9 @@ module ListRecommendations = {
   @module("@aws-sdk/client-devops-guru") @new
   external new: request => t = "ListRecommendationsCommand"
   let make = (~insightId, ~accountId=?, ~locale=?, ~nextToken=?, ()) =>
-    new({accountId: accountId, locale: locale, nextToken: nextToken, insightId: insightId})
+    new({accountId, locale, nextToken, insightId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeAnomaly = {
   type t
   type request = {
@@ -2732,10 +2677,9 @@ module DescribeAnomaly = {
     proactiveAnomaly: option<proactiveAnomaly>,
   }
   @module("@aws-sdk/client-devops-guru") @new external new: request => t = "DescribeAnomalyCommand"
-  let make = (~id, ~accountId=?, ()) => new({accountId: accountId, id: id})
+  let make = (~id, ~accountId=?, ()) => new({accountId, id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListAnomaliesForInsight = {
   type t
   type request = {
@@ -2774,12 +2718,6 @@ module ListAnomaliesForInsight = {
   @module("@aws-sdk/client-devops-guru") @new
   external new: request => t = "ListAnomaliesForInsightCommand"
   let make = (~insightId, ~accountId=?, ~nextToken=?, ~maxResults=?, ~startTimeRange=?, ()) =>
-    new({
-      accountId: accountId,
-      nextToken: nextToken,
-      maxResults: maxResults,
-      startTimeRange: startTimeRange,
-      insightId: insightId,
-    })
+    new({accountId, nextToken, maxResults, startTimeRange, insightId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

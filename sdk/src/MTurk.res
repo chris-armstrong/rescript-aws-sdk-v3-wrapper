@@ -727,10 +727,9 @@ module UpdateHITTypeOfHIT = {
   type response = {.}
   @module("@aws-sdk/client-mturk-requester") @new
   external new: request => t = "UpdateHITTypeOfHITCommand"
-  let make = (~hittypeId, ~hitid, ()) => new({hittypeId: hittypeId, hitid: hitid})
+  let make = (~hittypeId, ~hitid, ()) => new({hittypeId, hitid})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module UpdateHITReviewStatus = {
   type t
   type request = {
@@ -760,10 +759,9 @@ module UpdateHITReviewStatus = {
   type response = {.}
   @module("@aws-sdk/client-mturk-requester") @new
   external new: request => t = "UpdateHITReviewStatusCommand"
-  let make = (~hitid, ~revert=?, ()) => new({revert: revert, hitid: hitid})
+  let make = (~hitid, ~revert=?, ()) => new({revert, hitid})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module UpdateExpirationForHIT = {
   type t
   type request = {
@@ -781,10 +779,9 @@ module UpdateExpirationForHIT = {
   type response = {.}
   @module("@aws-sdk/client-mturk-requester") @new
   external new: request => t = "UpdateExpirationForHITCommand"
-  let make = (~expireAt, ~hitid, ()) => new({expireAt: expireAt, hitid: hitid})
+  let make = (~expireAt, ~hitid, ()) => new({expireAt, hitid})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module SendBonus = {
   type t
   type request = {
@@ -815,16 +812,9 @@ module SendBonus = {
   type response = {.}
   @module("@aws-sdk/client-mturk-requester") @new external new: request => t = "SendBonusCommand"
   let make = (~reason, ~assignmentId, ~bonusAmount, ~workerId, ~uniqueRequestToken=?, ()) =>
-    new({
-      uniqueRequestToken: uniqueRequestToken,
-      reason: reason,
-      assignmentId: assignmentId,
-      bonusAmount: bonusAmount,
-      workerId: workerId,
-    })
+    new({uniqueRequestToken, reason, assignmentId, bonusAmount, workerId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module RejectQualificationRequest = {
   type t
   type request = {
@@ -843,11 +833,9 @@ module RejectQualificationRequest = {
   type response = {.}
   @module("@aws-sdk/client-mturk-requester") @new
   external new: request => t = "RejectQualificationRequestCommand"
-  let make = (~qualificationRequestId, ~reason=?, ()) =>
-    new({reason: reason, qualificationRequestId: qualificationRequestId})
+  let make = (~qualificationRequestId, ~reason=?, ()) => new({reason, qualificationRequestId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module RejectAssignment = {
   type t
   type request = {
@@ -865,11 +853,9 @@ module RejectAssignment = {
   type response = {.}
   @module("@aws-sdk/client-mturk-requester") @new
   external new: request => t = "RejectAssignmentCommand"
-  let make = (~requesterFeedback, ~assignmentId, ()) =>
-    new({requesterFeedback: requesterFeedback, assignmentId: assignmentId})
+  let make = (~requesterFeedback, ~assignmentId, ()) => new({requesterFeedback, assignmentId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module GetFileUploadURL = {
   type t
   type request = {
@@ -891,11 +877,9 @@ module GetFileUploadURL = {
   }
   @module("@aws-sdk/client-mturk-requester") @new
   external new: request => t = "GetFileUploadURLCommand"
-  let make = (~questionIdentifier, ~assignmentId, ()) =>
-    new({questionIdentifier: questionIdentifier, assignmentId: assignmentId})
+  let make = (~questionIdentifier, ~assignmentId, ()) => new({questionIdentifier, assignmentId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetAccountBalance = {
   type t
   type request = {.}
@@ -908,7 +892,6 @@ module GetAccountBalance = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DisassociateQualificationFromWorker = {
   type t
   type request = {
@@ -928,10 +911,9 @@ module DisassociateQualificationFromWorker = {
   @module("@aws-sdk/client-mturk-requester") @new
   external new: request => t = "DisassociateQualificationFromWorkerCommand"
   let make = (~qualificationTypeId, ~workerId, ~reason=?, ()) =>
-    new({reason: reason, qualificationTypeId: qualificationTypeId, workerId: workerId})
+    new({reason, qualificationTypeId, workerId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteWorkerBlock = {
   type t
   type request = {
@@ -945,10 +927,9 @@ module DeleteWorkerBlock = {
   type response = {.}
   @module("@aws-sdk/client-mturk-requester") @new
   external new: request => t = "DeleteWorkerBlockCommand"
-  let make = (~workerId, ~reason=?, ()) => new({reason: reason, workerId: workerId})
+  let make = (~workerId, ~reason=?, ()) => new({reason, workerId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteQualificationType = {
   type t
   type request = {
@@ -961,7 +942,6 @@ module DeleteQualificationType = {
   let make = (~qualificationTypeId, ()) => new({qualificationTypeId: qualificationTypeId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteHIT = {
   type t
   type request = {
@@ -972,7 +952,6 @@ module DeleteHIT = {
   let make = (~hitid, ()) => new({hitid: hitid})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module CreateWorkerBlock = {
   type t
   type request = {
@@ -986,10 +965,9 @@ module CreateWorkerBlock = {
   type response = {.}
   @module("@aws-sdk/client-mturk-requester") @new
   external new: request => t = "CreateWorkerBlockCommand"
-  let make = (~reason, ~workerId, ()) => new({reason: reason, workerId: workerId})
+  let make = (~reason, ~workerId, ()) => new({reason, workerId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module CreateAdditionalAssignmentsForHIT = {
   type t
   type request = {
@@ -1012,14 +990,9 @@ module CreateAdditionalAssignmentsForHIT = {
   @module("@aws-sdk/client-mturk-requester") @new
   external new: request => t = "CreateAdditionalAssignmentsForHITCommand"
   let make = (~numberOfAdditionalAssignments, ~hitid, ~uniqueRequestToken=?, ()) =>
-    new({
-      uniqueRequestToken: uniqueRequestToken,
-      numberOfAdditionalAssignments: numberOfAdditionalAssignments,
-      hitid: hitid,
-    })
+    new({uniqueRequestToken, numberOfAdditionalAssignments, hitid})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module AssociateQualificationWithWorker = {
   type t
   type request = {
@@ -1046,15 +1019,9 @@ module AssociateQualificationWithWorker = {
   @module("@aws-sdk/client-mturk-requester") @new
   external new: request => t = "AssociateQualificationWithWorkerCommand"
   let make = (~workerId, ~qualificationTypeId, ~sendNotification=?, ~integerValue=?, ()) =>
-    new({
-      sendNotification: sendNotification,
-      integerValue: integerValue,
-      workerId: workerId,
-      qualificationTypeId: qualificationTypeId,
-    })
+    new({sendNotification, integerValue, workerId, qualificationTypeId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module ApproveAssignment = {
   type t
   type request = {
@@ -1078,14 +1045,9 @@ module ApproveAssignment = {
   @module("@aws-sdk/client-mturk-requester") @new
   external new: request => t = "ApproveAssignmentCommand"
   let make = (~assignmentId, ~overrideRejection=?, ~requesterFeedback=?, ()) =>
-    new({
-      overrideRejection: overrideRejection,
-      requesterFeedback: requesterFeedback,
-      assignmentId: assignmentId,
-    })
+    new({overrideRejection, requesterFeedback, assignmentId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module AcceptQualificationRequest = {
   type t
   type request = {
@@ -1105,10 +1067,9 @@ module AcceptQualificationRequest = {
   @module("@aws-sdk/client-mturk-requester") @new
   external new: request => t = "AcceptQualificationRequestCommand"
   let make = (~qualificationRequestId, ~integerValue=?, ()) =>
-    new({integerValue: integerValue, qualificationRequestId: qualificationRequestId})
+    new({integerValue, qualificationRequestId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module UpdateQualificationType = {
   type t
   type request = {
@@ -1173,19 +1134,18 @@ module UpdateQualificationType = {
     (),
   ) =>
     new({
-      autoGrantedValue: autoGrantedValue,
-      autoGranted: autoGranted,
-      retryDelayInSeconds: retryDelayInSeconds,
-      testDurationInSeconds: testDurationInSeconds,
-      answerKey: answerKey,
-      test: test,
-      qualificationTypeStatus: qualificationTypeStatus,
-      description: description,
-      qualificationTypeId: qualificationTypeId,
+      autoGrantedValue,
+      autoGranted,
+      retryDelayInSeconds,
+      testDurationInSeconds,
+      answerKey,
+      test,
+      qualificationTypeStatus,
+      description,
+      qualificationTypeId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetQualificationType = {
   type t
   type request = {
@@ -1201,7 +1161,6 @@ module GetQualificationType = {
   let make = (~qualificationTypeId, ()) => new({qualificationTypeId: qualificationTypeId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateQualificationType = {
   type t
   type request = {
@@ -1298,20 +1257,19 @@ module CreateQualificationType = {
     (),
   ) =>
     new({
-      autoGrantedValue: autoGrantedValue,
-      autoGranted: autoGranted,
-      testDurationInSeconds: testDurationInSeconds,
-      answerKey: answerKey,
-      test: test,
-      retryDelayInSeconds: retryDelayInSeconds,
-      qualificationTypeStatus: qualificationTypeStatus,
-      description: description,
-      keywords: keywords,
-      name: name,
+      autoGrantedValue,
+      autoGranted,
+      testDurationInSeconds,
+      answerKey,
+      test,
+      retryDelayInSeconds,
+      qualificationTypeStatus,
+      description,
+      keywords,
+      name,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateNotificationSettings = {
   type t
   type request = {
@@ -1337,11 +1295,9 @@ module UpdateNotificationSettings = {
   type response = {.}
   @module("@aws-sdk/client-mturk-requester") @new
   external new: request => t = "UpdateNotificationSettingsCommand"
-  let make = (~hittypeId, ~active=?, ~notification=?, ()) =>
-    new({active: active, notification: notification, hittypeId: hittypeId})
+  let make = (~hittypeId, ~active=?, ~notification=?, ()) => new({active, notification, hittypeId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module SendTestEventNotification = {
   type t
   type request = {
@@ -1364,11 +1320,9 @@ module SendTestEventNotification = {
   type response = {.}
   @module("@aws-sdk/client-mturk-requester") @new
   external new: request => t = "SendTestEventNotificationCommand"
-  let make = (~testEventType, ~notification, ()) =>
-    new({testEventType: testEventType, notification: notification})
+  let make = (~testEventType, ~notification, ()) => new({testEventType, notification})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module NotifyWorkers = {
   type t
   type request = {
@@ -1396,11 +1350,9 @@ module NotifyWorkers = {
   }
   @module("@aws-sdk/client-mturk-requester") @new
   external new: request => t = "NotifyWorkersCommand"
-  let make = (~workerIds, ~messageText, ~subject, ()) =>
-    new({workerIds: workerIds, messageText: messageText, subject: subject})
+  let make = (~workerIds, ~messageText, ~subject, ()) => new({workerIds, messageText, subject})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListWorkerBlocks = {
   type t
   type request = {
@@ -1421,11 +1373,9 @@ module ListWorkerBlocks = {
   }
   @module("@aws-sdk/client-mturk-requester") @new
   external new: request => t = "ListWorkerBlocksCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListQualificationTypes = {
   type t
   type request = {
@@ -1479,17 +1429,9 @@ module ListQualificationTypes = {
     ~mustBeOwnedByCaller=?,
     ~query=?,
     (),
-  ) =>
-    new({
-      maxResults: maxResults,
-      nextToken: nextToken,
-      mustBeOwnedByCaller: mustBeOwnedByCaller,
-      mustBeRequestable: mustBeRequestable,
-      query: query,
-    })
+  ) => new({maxResults, nextToken, mustBeOwnedByCaller, mustBeRequestable, query})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListQualificationRequests = {
   type t
   type request = {
@@ -1517,10 +1459,9 @@ module ListQualificationRequests = {
   @module("@aws-sdk/client-mturk-requester") @new
   external new: request => t = "ListQualificationRequestsCommand"
   let make = (~maxResults=?, ~nextToken=?, ~qualificationTypeId=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, qualificationTypeId: qualificationTypeId})
+    new({maxResults, nextToken, qualificationTypeId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListBonusPayments = {
   type t
   type request = {
@@ -1556,10 +1497,9 @@ module ListBonusPayments = {
   @module("@aws-sdk/client-mturk-requester") @new
   external new: request => t = "ListBonusPaymentsCommand"
   let make = (~maxResults=?, ~nextToken=?, ~assignmentId=?, ~hitid=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, assignmentId: assignmentId, hitid: hitid})
+    new({maxResults, nextToken, assignmentId, hitid})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListAssignmentsForHIT = {
   type t
   type request = {
@@ -1586,15 +1526,9 @@ module ListAssignmentsForHIT = {
   @module("@aws-sdk/client-mturk-requester") @new
   external new: request => t = "ListAssignmentsForHITCommand"
   let make = (~hitid, ~assignmentStatuses=?, ~maxResults=?, ~nextToken=?, ()) =>
-    new({
-      assignmentStatuses: assignmentStatuses,
-      maxResults: maxResults,
-      nextToken: nextToken,
-      hitid: hitid,
-    })
+    new({assignmentStatuses, maxResults, nextToken, hitid})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetQualificationScore = {
   type t
   type request = {
@@ -1613,11 +1547,9 @@ module GetQualificationScore = {
   }
   @module("@aws-sdk/client-mturk-requester") @new
   external new: request => t = "GetQualificationScoreCommand"
-  let make = (~workerId, ~qualificationTypeId, ()) =>
-    new({workerId: workerId, qualificationTypeId: qualificationTypeId})
+  let make = (~workerId, ~qualificationTypeId, ()) => new({workerId, qualificationTypeId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListWorkersWithQualificationType = {
   type t
   type request = {
@@ -1653,15 +1585,9 @@ module ListWorkersWithQualificationType = {
   @module("@aws-sdk/client-mturk-requester") @new
   external new: request => t = "ListWorkersWithQualificationTypeCommand"
   let make = (~qualificationTypeId, ~maxResults=?, ~nextToken=?, ~status=?, ()) =>
-    new({
-      maxResults: maxResults,
-      nextToken: nextToken,
-      status: status,
-      qualificationTypeId: qualificationTypeId,
-    })
+    new({maxResults, nextToken, status, qualificationTypeId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateHITType = {
   type t
   type request = {
@@ -1735,17 +1661,16 @@ module CreateHITType = {
     (),
   ) =>
     new({
-      qualificationRequirements: qualificationRequirements,
-      description: description,
-      keywords: keywords,
-      title: title,
-      reward: reward,
-      assignmentDurationInSeconds: assignmentDurationInSeconds,
-      autoApprovalDelayInSeconds: autoApprovalDelayInSeconds,
+      qualificationRequirements,
+      description,
+      keywords,
+      title,
+      reward,
+      assignmentDurationInSeconds,
+      autoApprovalDelayInSeconds,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetHIT = {
   type t
   type request = {
@@ -1758,7 +1683,6 @@ module GetHIT = {
   let make = (~hitid, ()) => new({hitid: hitid})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetAssignment = {
   type t
   type request = {
@@ -1781,7 +1705,6 @@ module GetAssignment = {
   let make = (~assignmentId, ()) => new({assignmentId: assignmentId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListReviewableHITs = {
   type t
   type request = {
@@ -1817,10 +1740,9 @@ module ListReviewableHITs = {
   @module("@aws-sdk/client-mturk-requester") @new
   external new: request => t = "ListReviewableHITsCommand"
   let make = (~maxResults=?, ~nextToken=?, ~status=?, ~hittypeId=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, status: status, hittypeId: hittypeId})
+    new({maxResults, nextToken, status, hittypeId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListReviewPolicyResultsForHIT = {
   type t
   type request = {
@@ -1882,18 +1804,9 @@ module ListReviewPolicyResultsForHIT = {
     ~retrieveActions=?,
     ~policyLevels=?,
     (),
-  ) =>
-    new({
-      maxResults: maxResults,
-      nextToken: nextToken,
-      retrieveResults: retrieveResults,
-      retrieveActions: retrieveActions,
-      policyLevels: policyLevels,
-      hitid: hitid,
-    })
+  ) => new({maxResults, nextToken, retrieveResults, retrieveActions, policyLevels, hitid})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListHITsForQualificationType = {
   type t
   type request = {
@@ -1921,10 +1834,9 @@ module ListHITsForQualificationType = {
   @module("@aws-sdk/client-mturk-requester") @new
   external new: request => t = "ListHITsForQualificationTypeCommand"
   let make = (~qualificationTypeId, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, qualificationTypeId: qualificationTypeId})
+    new({maxResults, nextToken, qualificationTypeId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListHITs = {
   type t
   type request = {
@@ -1941,11 +1853,9 @@ module ListHITs = {
     @as("NextToken") nextToken: option<paginationToken>,
   }
   @module("@aws-sdk/client-mturk-requester") @new external new: request => t = "ListHITsCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateHITWithHITType = {
   type t
   type request = {
@@ -2061,20 +1971,19 @@ module CreateHITWithHITType = {
     (),
   ) =>
     new({
-      hitlayoutParameters: hitlayoutParameters,
-      hitlayoutId: hitlayoutId,
-      hitreviewPolicy: hitreviewPolicy,
-      assignmentReviewPolicy: assignmentReviewPolicy,
-      uniqueRequestToken: uniqueRequestToken,
-      requesterAnnotation: requesterAnnotation,
-      question: question,
-      lifetimeInSeconds: lifetimeInSeconds,
-      maxAssignments: maxAssignments,
-      hittypeId: hittypeId,
+      hitlayoutParameters,
+      hitlayoutId,
+      hitreviewPolicy,
+      assignmentReviewPolicy,
+      uniqueRequestToken,
+      requesterAnnotation,
+      question,
+      lifetimeInSeconds,
+      maxAssignments,
+      hittypeId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateHIT = {
   type t
   type request = {
@@ -2245,22 +2154,22 @@ module CreateHIT = {
     (),
   ) =>
     new({
-      hitlayoutParameters: hitlayoutParameters,
-      hitlayoutId: hitlayoutId,
-      hitreviewPolicy: hitreviewPolicy,
-      assignmentReviewPolicy: assignmentReviewPolicy,
-      uniqueRequestToken: uniqueRequestToken,
-      qualificationRequirements: qualificationRequirements,
-      requesterAnnotation: requesterAnnotation,
-      question: question,
-      description: description,
-      keywords: keywords,
-      title: title,
-      reward: reward,
-      assignmentDurationInSeconds: assignmentDurationInSeconds,
-      lifetimeInSeconds: lifetimeInSeconds,
-      autoApprovalDelayInSeconds: autoApprovalDelayInSeconds,
-      maxAssignments: maxAssignments,
+      hitlayoutParameters,
+      hitlayoutId,
+      hitreviewPolicy,
+      assignmentReviewPolicy,
+      uniqueRequestToken,
+      qualificationRequirements,
+      requesterAnnotation,
+      question,
+      description,
+      keywords,
+      title,
+      reward,
+      assignmentDurationInSeconds,
+      lifetimeInSeconds,
+      autoApprovalDelayInSeconds,
+      maxAssignments,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

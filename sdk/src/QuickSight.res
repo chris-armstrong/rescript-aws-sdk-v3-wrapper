@@ -2875,11 +2875,9 @@ module UpdateFolder = {
     @ocaml.doc("<p>The HTTP status of the request.</p>") @as("Status") status: option<statusCode>,
   }
   @module("@aws-sdk/client-quicksight") @new external new: request => t = "UpdateFolderCommand"
-  let make = (~name, ~folderId, ~awsAccountId, ()) =>
-    new({name: name, folderId: folderId, awsAccountId: awsAccountId})
+  let make = (~name, ~folderId, ~awsAccountId, ()) => new({name, folderId, awsAccountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateDashboardPublishedVersion = {
   type t
   type request = {
@@ -2904,10 +2902,9 @@ module UpdateDashboardPublishedVersion = {
   @module("@aws-sdk/client-quicksight") @new
   external new: request => t = "UpdateDashboardPublishedVersionCommand"
   let make = (~versionNumber, ~dashboardId, ~awsAccountId, ()) =>
-    new({versionNumber: versionNumber, dashboardId: dashboardId, awsAccountId: awsAccountId})
+    new({versionNumber, dashboardId, awsAccountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateAccountSettings = {
   type t
   type request = {
@@ -2934,14 +2931,9 @@ module UpdateAccountSettings = {
   @module("@aws-sdk/client-quicksight") @new
   external new: request => t = "UpdateAccountSettingsCommand"
   let make = (~defaultNamespace, ~awsAccountId, ~notificationEmail=?, ()) =>
-    new({
-      notificationEmail: notificationEmail,
-      defaultNamespace: defaultNamespace,
-      awsAccountId: awsAccountId,
-    })
+    new({notificationEmail, defaultNamespace, awsAccountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module RestoreAnalysis = {
   type t
   type request = {
@@ -2964,11 +2956,9 @@ module RestoreAnalysis = {
     @ocaml.doc("<p>The HTTP status of the request.</p>") @as("Status") status: option<statusCode>,
   }
   @module("@aws-sdk/client-quicksight") @new external new: request => t = "RestoreAnalysisCommand"
-  let make = (~analysisId, ~awsAccountId, ()) =>
-    new({analysisId: analysisId, awsAccountId: awsAccountId})
+  let make = (~analysisId, ~awsAccountId, ()) => new({analysisId, awsAccountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetSessionEmbedUrl = {
   type t
   type request = {
@@ -3053,15 +3043,9 @@ module GetSessionEmbedUrl = {
   @module("@aws-sdk/client-quicksight") @new
   external new: request => t = "GetSessionEmbedUrlCommand"
   let make = (~awsAccountId, ~userArn=?, ~sessionLifetimeInMinutes=?, ~entryPoint=?, ()) =>
-    new({
-      userArn: userArn,
-      sessionLifetimeInMinutes: sessionLifetimeInMinutes,
-      entryPoint: entryPoint,
-      awsAccountId: awsAccountId,
-    })
+    new({userArn, sessionLifetimeInMinutes, entryPoint, awsAccountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteUserByPrincipalId = {
   type t
   @ocaml.doc("<p></p>")
@@ -3083,10 +3067,9 @@ module DeleteUserByPrincipalId = {
   @module("@aws-sdk/client-quicksight") @new
   external new: request => t = "DeleteUserByPrincipalIdCommand"
   let make = (~namespace, ~awsAccountId, ~principalId, ()) =>
-    new({namespace: namespace, awsAccountId: awsAccountId, principalId: principalId})
+    new({namespace, awsAccountId, principalId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteUser = {
   type t
   type request = {
@@ -3106,11 +3089,9 @@ module DeleteUser = {
     requestId: option<string_>,
   }
   @module("@aws-sdk/client-quicksight") @new external new: request => t = "DeleteUserCommand"
-  let make = (~namespace, ~awsAccountId, ~userName, ()) =>
-    new({namespace: namespace, awsAccountId: awsAccountId, userName: userName})
+  let make = (~namespace, ~awsAccountId, ~userName, ()) => new({namespace, awsAccountId, userName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteThemeAlias = {
   type t
   type request = {
@@ -3139,11 +3120,9 @@ module DeleteThemeAlias = {
     aliasName: option<aliasName>,
   }
   @module("@aws-sdk/client-quicksight") @new external new: request => t = "DeleteThemeAliasCommand"
-  let make = (~aliasName, ~themeId, ~awsAccountId, ()) =>
-    new({aliasName: aliasName, themeId: themeId, awsAccountId: awsAccountId})
+  let make = (~aliasName, ~themeId, ~awsAccountId, ()) => new({aliasName, themeId, awsAccountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteTheme = {
   type t
   type request = {
@@ -3171,10 +3150,9 @@ module DeleteTheme = {
   }
   @module("@aws-sdk/client-quicksight") @new external new: request => t = "DeleteThemeCommand"
   let make = (~themeId, ~awsAccountId, ~versionNumber=?, ()) =>
-    new({versionNumber: versionNumber, themeId: themeId, awsAccountId: awsAccountId})
+    new({versionNumber, themeId, awsAccountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteTemplateAlias = {
   type t
   type request = {
@@ -3205,10 +3183,9 @@ module DeleteTemplateAlias = {
   @module("@aws-sdk/client-quicksight") @new
   external new: request => t = "DeleteTemplateAliasCommand"
   let make = (~aliasName, ~templateId, ~awsAccountId, ()) =>
-    new({aliasName: aliasName, templateId: templateId, awsAccountId: awsAccountId})
+    new({aliasName, templateId, awsAccountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteTemplate = {
   type t
   type request = {
@@ -3236,10 +3213,9 @@ module DeleteTemplate = {
   }
   @module("@aws-sdk/client-quicksight") @new external new: request => t = "DeleteTemplateCommand"
   let make = (~templateId, ~awsAccountId, ~versionNumber=?, ()) =>
-    new({versionNumber: versionNumber, templateId: templateId, awsAccountId: awsAccountId})
+    new({versionNumber, templateId, awsAccountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteNamespace = {
   type t
   type request = {
@@ -3257,11 +3233,9 @@ module DeleteNamespace = {
     requestId: option<string_>,
   }
   @module("@aws-sdk/client-quicksight") @new external new: request => t = "DeleteNamespaceCommand"
-  let make = (~namespace, ~awsAccountId, ()) =>
-    new({namespace: namespace, awsAccountId: awsAccountId})
+  let make = (~namespace, ~awsAccountId, ()) => new({namespace, awsAccountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteIAMPolicyAssignment = {
   type t
   type request = {
@@ -3285,10 +3259,9 @@ module DeleteIAMPolicyAssignment = {
   @module("@aws-sdk/client-quicksight") @new
   external new: request => t = "DeleteIAMPolicyAssignmentCommand"
   let make = (~namespace, ~assignmentName, ~awsAccountId, ()) =>
-    new({namespace: namespace, assignmentName: assignmentName, awsAccountId: awsAccountId})
+    new({namespace, assignmentName, awsAccountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteGroupMembership = {
   type t
   type request = {
@@ -3314,15 +3287,9 @@ module DeleteGroupMembership = {
   @module("@aws-sdk/client-quicksight") @new
   external new: request => t = "DeleteGroupMembershipCommand"
   let make = (~namespace, ~awsAccountId, ~groupName, ~memberName, ()) =>
-    new({
-      namespace: namespace,
-      awsAccountId: awsAccountId,
-      groupName: groupName,
-      memberName: memberName,
-    })
+    new({namespace, awsAccountId, groupName, memberName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteGroup = {
   type t
   type request = {
@@ -3342,10 +3309,9 @@ module DeleteGroup = {
   }
   @module("@aws-sdk/client-quicksight") @new external new: request => t = "DeleteGroupCommand"
   let make = (~namespace, ~awsAccountId, ~groupName, ()) =>
-    new({namespace: namespace, awsAccountId: awsAccountId, groupName: groupName})
+    new({namespace, awsAccountId, groupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteFolderMembership = {
   type t
   type request = {
@@ -3371,15 +3337,9 @@ module DeleteFolderMembership = {
   @module("@aws-sdk/client-quicksight") @new
   external new: request => t = "DeleteFolderMembershipCommand"
   let make = (~memberType, ~memberId, ~folderId, ~awsAccountId, ()) =>
-    new({
-      memberType: memberType,
-      memberId: memberId,
-      folderId: folderId,
-      awsAccountId: awsAccountId,
-    })
+    new({memberType, memberId, folderId, awsAccountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteFolder = {
   type t
   type request = {
@@ -3398,10 +3358,9 @@ module DeleteFolder = {
     @ocaml.doc("<p>The HTTP status of the request.</p>") @as("Status") status: option<statusCode>,
   }
   @module("@aws-sdk/client-quicksight") @new external new: request => t = "DeleteFolderCommand"
-  let make = (~folderId, ~awsAccountId, ()) => new({folderId: folderId, awsAccountId: awsAccountId})
+  let make = (~folderId, ~awsAccountId, ()) => new({folderId, awsAccountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteDataSource = {
   type t
   type request = {
@@ -3427,11 +3386,9 @@ module DeleteDataSource = {
     arn: option<arn>,
   }
   @module("@aws-sdk/client-quicksight") @new external new: request => t = "DeleteDataSourceCommand"
-  let make = (~dataSourceId, ~awsAccountId, ()) =>
-    new({dataSourceId: dataSourceId, awsAccountId: awsAccountId})
+  let make = (~dataSourceId, ~awsAccountId, ()) => new({dataSourceId, awsAccountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteDataSet = {
   type t
   type request = {
@@ -3455,11 +3412,9 @@ module DeleteDataSet = {
     @ocaml.doc("<p>The Amazon Resource Name (ARN) of the dataset.</p>") @as("Arn") arn: option<arn>,
   }
   @module("@aws-sdk/client-quicksight") @new external new: request => t = "DeleteDataSetCommand"
-  let make = (~dataSetId, ~awsAccountId, ()) =>
-    new({dataSetId: dataSetId, awsAccountId: awsAccountId})
+  let make = (~dataSetId, ~awsAccountId, ()) => new({dataSetId, awsAccountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteDashboard = {
   type t
   type request = {
@@ -3486,10 +3441,9 @@ module DeleteDashboard = {
   }
   @module("@aws-sdk/client-quicksight") @new external new: request => t = "DeleteDashboardCommand"
   let make = (~dashboardId, ~awsAccountId, ~versionNumber=?, ()) =>
-    new({versionNumber: versionNumber, dashboardId: dashboardId, awsAccountId: awsAccountId})
+    new({versionNumber, dashboardId, awsAccountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteAnalysis = {
   type t
   type request = {
@@ -3530,16 +3484,9 @@ module DeleteAnalysis = {
     ~forceDeleteWithoutRecovery=?,
     ~recoveryWindowInDays=?,
     (),
-  ) =>
-    new({
-      forceDeleteWithoutRecovery: forceDeleteWithoutRecovery,
-      recoveryWindowInDays: recoveryWindowInDays,
-      analysisId: analysisId,
-      awsAccountId: awsAccountId,
-    })
+  ) => new({forceDeleteWithoutRecovery, recoveryWindowInDays, analysisId, awsAccountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteAccountCustomization = {
   type t
   type request = {
@@ -3560,11 +3507,9 @@ module DeleteAccountCustomization = {
   }
   @module("@aws-sdk/client-quicksight") @new
   external new: request => t = "DeleteAccountCustomizationCommand"
-  let make = (~awsAccountId, ~namespace=?, ()) =>
-    new({namespace: namespace, awsAccountId: awsAccountId})
+  let make = (~awsAccountId, ~namespace=?, ()) => new({namespace, awsAccountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateIngestion = {
   type t
   type request = {
@@ -3589,15 +3534,9 @@ module CreateIngestion = {
   }
   @module("@aws-sdk/client-quicksight") @new external new: request => t = "CreateIngestionCommand"
   let make = (~awsAccountId, ~ingestionId, ~dataSetId, ~ingestionType=?, ()) =>
-    new({
-      ingestionType: ingestionType,
-      awsAccountId: awsAccountId,
-      ingestionId: ingestionId,
-      dataSetId: dataSetId,
-    })
+    new({ingestionType, awsAccountId, ingestionId, dataSetId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CancelIngestion = {
   type t
   type request = {
@@ -3618,10 +3557,9 @@ module CancelIngestion = {
   }
   @module("@aws-sdk/client-quicksight") @new external new: request => t = "CancelIngestionCommand"
   let make = (~ingestionId, ~dataSetId, ~awsAccountId, ()) =>
-    new({ingestionId: ingestionId, dataSetId: dataSetId, awsAccountId: awsAccountId})
+    new({ingestionId, dataSetId, awsAccountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateUser = {
   type t
   type request = {
@@ -3742,20 +3680,19 @@ module UpdateUser = {
     (),
   ) =>
     new({
-      externalLoginId: externalLoginId,
-      customFederationProviderUrl: customFederationProviderUrl,
-      externalLoginFederationProviderType: externalLoginFederationProviderType,
-      unapplyCustomPermissions: unapplyCustomPermissions,
-      customPermissionsName: customPermissionsName,
-      role: role,
-      email: email,
-      namespace: namespace,
-      awsAccountId: awsAccountId,
-      userName: userName,
+      externalLoginId,
+      customFederationProviderUrl,
+      externalLoginFederationProviderType,
+      unapplyCustomPermissions,
+      customPermissionsName,
+      role,
+      email,
+      namespace,
+      awsAccountId,
+      userName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateThemeAlias = {
   type t
   type request = {
@@ -3780,15 +3717,9 @@ module UpdateThemeAlias = {
   }
   @module("@aws-sdk/client-quicksight") @new external new: request => t = "UpdateThemeAliasCommand"
   let make = (~themeVersionNumber, ~aliasName, ~themeId, ~awsAccountId, ()) =>
-    new({
-      themeVersionNumber: themeVersionNumber,
-      aliasName: aliasName,
-      themeId: themeId,
-      awsAccountId: awsAccountId,
-    })
+    new({themeVersionNumber, aliasName, themeId, awsAccountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateTemplateAlias = {
   type t
   type request = {
@@ -3818,15 +3749,9 @@ module UpdateTemplateAlias = {
   @module("@aws-sdk/client-quicksight") @new
   external new: request => t = "UpdateTemplateAliasCommand"
   let make = (~templateVersionNumber, ~aliasName, ~templateId, ~awsAccountId, ()) =>
-    new({
-      templateVersionNumber: templateVersionNumber,
-      aliasName: aliasName,
-      templateId: templateId,
-      awsAccountId: awsAccountId,
-    })
+    new({templateVersionNumber, aliasName, templateId, awsAccountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateIpRestriction = {
   type t
   type request = {
@@ -3852,10 +3777,9 @@ module UpdateIpRestriction = {
   @module("@aws-sdk/client-quicksight") @new
   external new: request => t = "UpdateIpRestrictionCommand"
   let make = (~awsAccountId, ~enabled=?, ~ipRestrictionRuleMap=?, ()) =>
-    new({enabled: enabled, ipRestrictionRuleMap: ipRestrictionRuleMap, awsAccountId: awsAccountId})
+    new({enabled, ipRestrictionRuleMap, awsAccountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateGroup = {
   type t
   type request = {
@@ -3878,15 +3802,9 @@ module UpdateGroup = {
   }
   @module("@aws-sdk/client-quicksight") @new external new: request => t = "UpdateGroupCommand"
   let make = (~namespace, ~awsAccountId, ~groupName, ~description=?, ()) =>
-    new({
-      namespace: namespace,
-      awsAccountId: awsAccountId,
-      description: description,
-      groupName: groupName,
-    })
+    new({namespace, awsAccountId, description, groupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateAccountCustomization = {
   type t
   type request = {
@@ -3928,14 +3846,9 @@ module UpdateAccountCustomization = {
   @module("@aws-sdk/client-quicksight") @new
   external new: request => t = "UpdateAccountCustomizationCommand"
   let make = (~accountCustomization, ~awsAccountId, ~namespace=?, ()) =>
-    new({
-      accountCustomization: accountCustomization,
-      namespace: namespace,
-      awsAccountId: awsAccountId,
-    })
+    new({accountCustomization, namespace, awsAccountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UntagResource = {
   type t
   type request = {
@@ -3954,10 +3867,9 @@ module UntagResource = {
     requestId: option<string_>,
   }
   @module("@aws-sdk/client-quicksight") @new external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
+  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys, resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module RegisterUser = {
   type t
   type request = {
@@ -4114,22 +4026,21 @@ module RegisterUser = {
     (),
   ) =>
     new({
-      externalLoginId: externalLoginId,
-      customFederationProviderUrl: customFederationProviderUrl,
-      externalLoginFederationProviderType: externalLoginFederationProviderType,
-      customPermissionsName: customPermissionsName,
-      userName: userName,
-      namespace: namespace,
-      awsAccountId: awsAccountId,
-      sessionName: sessionName,
-      iamArn: iamArn,
-      userRole: userRole,
-      email: email,
-      identityType: identityType,
+      externalLoginId,
+      customFederationProviderUrl,
+      externalLoginFederationProviderType,
+      customPermissionsName,
+      userName,
+      namespace,
+      awsAccountId,
+      sessionName,
+      iamArn,
+      userRole,
+      email,
+      identityType,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetDashboardEmbedUrl = {
   type t
   type request = {
@@ -4227,20 +4138,19 @@ module GetDashboardEmbedUrl = {
     (),
   ) =>
     new({
-      additionalDashboardIds: additionalDashboardIds,
-      namespace: namespace,
-      userArn: userArn,
-      statePersistenceEnabled: statePersistenceEnabled,
-      resetDisabled: resetDisabled,
-      undoRedoDisabled: undoRedoDisabled,
-      sessionLifetimeInMinutes: sessionLifetimeInMinutes,
-      identityType: identityType,
-      dashboardId: dashboardId,
-      awsAccountId: awsAccountId,
+      additionalDashboardIds,
+      namespace,
+      userArn,
+      statePersistenceEnabled,
+      resetDisabled,
+      undoRedoDisabled,
+      sessionLifetimeInMinutes,
+      identityType,
+      dashboardId,
+      awsAccountId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeUser = {
   type t
   type request = {
@@ -4261,11 +4171,9 @@ module DescribeUser = {
     @ocaml.doc("<p>The user name.</p>") @as("User") user: option<user>,
   }
   @module("@aws-sdk/client-quicksight") @new external new: request => t = "DescribeUserCommand"
-  let make = (~namespace, ~awsAccountId, ~userName, ()) =>
-    new({namespace: namespace, awsAccountId: awsAccountId, userName: userName})
+  let make = (~namespace, ~awsAccountId, ~userName, ()) => new({namespace, awsAccountId, userName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeThemeAlias = {
   type t
   type request = {
@@ -4286,11 +4194,9 @@ module DescribeThemeAlias = {
   }
   @module("@aws-sdk/client-quicksight") @new
   external new: request => t = "DescribeThemeAliasCommand"
-  let make = (~aliasName, ~themeId, ~awsAccountId, ()) =>
-    new({aliasName: aliasName, themeId: themeId, awsAccountId: awsAccountId})
+  let make = (~aliasName, ~themeId, ~awsAccountId, ()) => new({aliasName, themeId, awsAccountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeTemplateAlias = {
   type t
   type request = {
@@ -4317,10 +4223,9 @@ module DescribeTemplateAlias = {
   @module("@aws-sdk/client-quicksight") @new
   external new: request => t = "DescribeTemplateAliasCommand"
   let make = (~aliasName, ~templateId, ~awsAccountId, ()) =>
-    new({aliasName: aliasName, templateId: templateId, awsAccountId: awsAccountId})
+    new({aliasName, templateId, awsAccountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeIpRestriction = {
   type t
   type request = {
@@ -4346,7 +4251,6 @@ module DescribeIpRestriction = {
   let make = (~awsAccountId, ()) => new({awsAccountId: awsAccountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeGroupMembership = {
   type t
   type request = {
@@ -4371,15 +4275,9 @@ module DescribeGroupMembership = {
   @module("@aws-sdk/client-quicksight") @new
   external new: request => t = "DescribeGroupMembershipCommand"
   let make = (~namespace, ~awsAccountId, ~groupName, ~memberName, ()) =>
-    new({
-      namespace: namespace,
-      awsAccountId: awsAccountId,
-      groupName: groupName,
-      memberName: memberName,
-    })
+    new({namespace, awsAccountId, groupName, memberName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeGroup = {
   type t
   type request = {
@@ -4400,10 +4298,9 @@ module DescribeGroup = {
   }
   @module("@aws-sdk/client-quicksight") @new external new: request => t = "DescribeGroupCommand"
   let make = (~namespace, ~awsAccountId, ~groupName, ()) =>
-    new({namespace: namespace, awsAccountId: awsAccountId, groupName: groupName})
+    new({namespace, awsAccountId, groupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeAccountSettings = {
   type t
   type request = {
@@ -4431,7 +4328,6 @@ module DescribeAccountSettings = {
   let make = (~awsAccountId, ()) => new({awsAccountId: awsAccountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeAccountCustomization = {
   type t
   type request = {
@@ -4474,10 +4370,9 @@ module DescribeAccountCustomization = {
   @module("@aws-sdk/client-quicksight") @new
   external new: request => t = "DescribeAccountCustomizationCommand"
   let make = (~awsAccountId, ~resolved=?, ~namespace=?, ()) =>
-    new({resolved: resolved, namespace: namespace, awsAccountId: awsAccountId})
+    new({resolved, namespace, awsAccountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateThemeAlias = {
   type t
   type request = {
@@ -4504,15 +4399,9 @@ module CreateThemeAlias = {
   }
   @module("@aws-sdk/client-quicksight") @new external new: request => t = "CreateThemeAliasCommand"
   let make = (~themeVersionNumber, ~aliasName, ~themeId, ~awsAccountId, ()) =>
-    new({
-      themeVersionNumber: themeVersionNumber,
-      aliasName: aliasName,
-      themeId: themeId,
-      awsAccountId: awsAccountId,
-    })
+    new({themeVersionNumber, aliasName, themeId, awsAccountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateTemplateAlias = {
   type t
   type request = {
@@ -4541,15 +4430,9 @@ module CreateTemplateAlias = {
   @module("@aws-sdk/client-quicksight") @new
   external new: request => t = "CreateTemplateAliasCommand"
   let make = (~templateVersionNumber, ~aliasName, ~templateId, ~awsAccountId, ()) =>
-    new({
-      templateVersionNumber: templateVersionNumber,
-      aliasName: aliasName,
-      templateId: templateId,
-      awsAccountId: awsAccountId,
-    })
+    new({templateVersionNumber, aliasName, templateId, awsAccountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateGroupMembership = {
   type t
   type request = {
@@ -4574,15 +4457,9 @@ module CreateGroupMembership = {
   @module("@aws-sdk/client-quicksight") @new
   external new: request => t = "CreateGroupMembershipCommand"
   let make = (~namespace, ~awsAccountId, ~groupName, ~memberName, ()) =>
-    new({
-      namespace: namespace,
-      awsAccountId: awsAccountId,
-      groupName: groupName,
-      memberName: memberName,
-    })
+    new({namespace, awsAccountId, groupName, memberName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateGroup = {
   type t
   @ocaml.doc("<p>The request object for this operation. </p>")
@@ -4607,15 +4484,9 @@ module CreateGroup = {
   }
   @module("@aws-sdk/client-quicksight") @new external new: request => t = "CreateGroupCommand"
   let make = (~namespace, ~awsAccountId, ~groupName, ~description=?, ()) =>
-    new({
-      namespace: namespace,
-      awsAccountId: awsAccountId,
-      description: description,
-      groupName: groupName,
-    })
+    new({namespace, awsAccountId, description, groupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateFolderMembership = {
   type t
   type request = {
@@ -4641,15 +4512,9 @@ module CreateFolderMembership = {
   @module("@aws-sdk/client-quicksight") @new
   external new: request => t = "CreateFolderMembershipCommand"
   let make = (~memberType, ~memberId, ~folderId, ~awsAccountId, ()) =>
-    new({
-      memberType: memberType,
-      memberId: memberId,
-      folderId: folderId,
-      awsAccountId: awsAccountId,
-    })
+    new({memberType, memberId, folderId, awsAccountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateIAMPolicyAssignment = {
   type t
   type request = {
@@ -4740,18 +4605,9 @@ module UpdateIAMPolicyAssignment = {
     ~policyArn=?,
     ~assignmentStatus=?,
     (),
-  ) =>
-    new({
-      identities: identities,
-      policyArn: policyArn,
-      assignmentStatus: assignmentStatus,
-      namespace: namespace,
-      assignmentName: assignmentName,
-      awsAccountId: awsAccountId,
-    })
+  ) => new({identities, policyArn, assignmentStatus, namespace, assignmentName, awsAccountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module TagResource = {
   type t
   type request = {
@@ -4770,10 +4626,9 @@ module TagResource = {
     requestId: option<string_>,
   }
   @module("@aws-sdk/client-quicksight") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
+  let make = (~tags, ~resourceArn, ()) => new({tags, resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module SearchGroups = {
   type t
   type request = {
@@ -4808,16 +4663,9 @@ module SearchGroups = {
   }
   @module("@aws-sdk/client-quicksight") @new external new: request => t = "SearchGroupsCommand"
   let make = (~filters, ~namespace, ~awsAccountId, ~maxResults=?, ~nextToken=?, ()) =>
-    new({
-      filters: filters,
-      namespace: namespace,
-      maxResults: maxResults,
-      nextToken: nextToken,
-      awsAccountId: awsAccountId,
-    })
+    new({filters, namespace, maxResults, nextToken, awsAccountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module SearchFolders = {
   type t
   type request = {
@@ -4854,15 +4702,9 @@ module SearchFolders = {
   }
   @module("@aws-sdk/client-quicksight") @new external new: request => t = "SearchFoldersCommand"
   let make = (~filters, ~awsAccountId, ~maxResults=?, ~nextToken=?, ()) =>
-    new({
-      maxResults: maxResults,
-      nextToken: nextToken,
-      filters: filters,
-      awsAccountId: awsAccountId,
-    })
+    new({maxResults, nextToken, filters, awsAccountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module SearchDashboards = {
   type t
   type request = {
@@ -4900,15 +4742,9 @@ module SearchDashboards = {
   }
   @module("@aws-sdk/client-quicksight") @new external new: request => t = "SearchDashboardsCommand"
   let make = (~filters, ~awsAccountId, ~maxResults=?, ~nextToken=?, ()) =>
-    new({
-      maxResults: maxResults,
-      nextToken: nextToken,
-      filters: filters,
-      awsAccountId: awsAccountId,
-    })
+    new({maxResults, nextToken, filters, awsAccountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module SearchAnalyses = {
   type t
   type request = {
@@ -4941,15 +4777,9 @@ module SearchAnalyses = {
   }
   @module("@aws-sdk/client-quicksight") @new external new: request => t = "SearchAnalysesCommand"
   let make = (~filters, ~awsAccountId, ~maxResults=?, ~nextToken=?, ()) =>
-    new({
-      maxResults: maxResults,
-      nextToken: nextToken,
-      filters: filters,
-      awsAccountId: awsAccountId,
-    })
+    new({maxResults, nextToken, filters, awsAccountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListUsers = {
   type t
   type request = {
@@ -4978,15 +4808,9 @@ module ListUsers = {
   }
   @module("@aws-sdk/client-quicksight") @new external new: request => t = "ListUsersCommand"
   let make = (~namespace, ~awsAccountId, ~maxResults=?, ~nextToken=?, ()) =>
-    new({
-      namespace: namespace,
-      maxResults: maxResults,
-      nextToken: nextToken,
-      awsAccountId: awsAccountId,
-    })
+    new({namespace, maxResults, nextToken, awsAccountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListUserGroups = {
   type t
   type request = {
@@ -5021,16 +4845,9 @@ module ListUserGroups = {
   }
   @module("@aws-sdk/client-quicksight") @new external new: request => t = "ListUserGroupsCommand"
   let make = (~namespace, ~awsAccountId, ~userName, ~maxResults=?, ~nextToken=?, ()) =>
-    new({
-      maxResults: maxResults,
-      nextToken: nextToken,
-      namespace: namespace,
-      awsAccountId: awsAccountId,
-      userName: userName,
-    })
+    new({maxResults, nextToken, namespace, awsAccountId, userName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListThemes = {
   type t
   type request = {
@@ -5078,10 +4895,9 @@ module ListThemes = {
   }
   @module("@aws-sdk/client-quicksight") @new external new: request => t = "ListThemesCommand"
   let make = (~awsAccountId, ~type_=?, ~maxResults=?, ~nextToken=?, ()) =>
-    new({type_: type_, maxResults: maxResults, nextToken: nextToken, awsAccountId: awsAccountId})
+    new({type_, maxResults, nextToken, awsAccountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListThemeVersions = {
   type t
   type request = {
@@ -5114,15 +4930,9 @@ module ListThemeVersions = {
   }
   @module("@aws-sdk/client-quicksight") @new external new: request => t = "ListThemeVersionsCommand"
   let make = (~themeId, ~awsAccountId, ~maxResults=?, ~nextToken=?, ()) =>
-    new({
-      maxResults: maxResults,
-      nextToken: nextToken,
-      themeId: themeId,
-      awsAccountId: awsAccountId,
-    })
+    new({maxResults, nextToken, themeId, awsAccountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListThemeAliases = {
   type t
   type request = {
@@ -5155,15 +4965,9 @@ module ListThemeAliases = {
   }
   @module("@aws-sdk/client-quicksight") @new external new: request => t = "ListThemeAliasesCommand"
   let make = (~themeId, ~awsAccountId, ~maxResults=?, ~nextToken=?, ()) =>
-    new({
-      maxResults: maxResults,
-      nextToken: nextToken,
-      themeId: themeId,
-      awsAccountId: awsAccountId,
-    })
+    new({maxResults, nextToken, themeId, awsAccountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListTemplates = {
   type t
   type request = {
@@ -5195,10 +4999,9 @@ module ListTemplates = {
   }
   @module("@aws-sdk/client-quicksight") @new external new: request => t = "ListTemplatesCommand"
   let make = (~awsAccountId, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, awsAccountId: awsAccountId})
+    new({maxResults, nextToken, awsAccountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListTemplateVersions = {
   type t
   type request = {
@@ -5235,15 +5038,9 @@ module ListTemplateVersions = {
   @module("@aws-sdk/client-quicksight") @new
   external new: request => t = "ListTemplateVersionsCommand"
   let make = (~templateId, ~awsAccountId, ~maxResults=?, ~nextToken=?, ()) =>
-    new({
-      maxResults: maxResults,
-      nextToken: nextToken,
-      templateId: templateId,
-      awsAccountId: awsAccountId,
-    })
+    new({maxResults, nextToken, templateId, awsAccountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListTemplateAliases = {
   type t
   type request = {
@@ -5278,15 +5075,9 @@ module ListTemplateAliases = {
   @module("@aws-sdk/client-quicksight") @new
   external new: request => t = "ListTemplateAliasesCommand"
   let make = (~templateId, ~awsAccountId, ~maxResults=?, ~nextToken=?, ()) =>
-    new({
-      maxResults: maxResults,
-      nextToken: nextToken,
-      templateId: templateId,
-      awsAccountId: awsAccountId,
-    })
+    new({maxResults, nextToken, templateId, awsAccountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListTagsForResource = {
   type t
   type request = {
@@ -5310,7 +5101,6 @@ module ListTagsForResource = {
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListIAMPolicyAssignmentsForUser = {
   type t
   type request = {
@@ -5342,16 +5132,9 @@ module ListIAMPolicyAssignmentsForUser = {
   @module("@aws-sdk/client-quicksight") @new
   external new: request => t = "ListIAMPolicyAssignmentsForUserCommand"
   let make = (~namespace, ~userName, ~awsAccountId, ~maxResults=?, ~nextToken=?, ()) =>
-    new({
-      namespace: namespace,
-      maxResults: maxResults,
-      nextToken: nextToken,
-      userName: userName,
-      awsAccountId: awsAccountId,
-    })
+    new({namespace, maxResults, nextToken, userName, awsAccountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListIAMPolicyAssignments = {
   type t
   type request = {
@@ -5387,16 +5170,9 @@ module ListIAMPolicyAssignments = {
   @module("@aws-sdk/client-quicksight") @new
   external new: request => t = "ListIAMPolicyAssignmentsCommand"
   let make = (~namespace, ~awsAccountId, ~maxResults=?, ~nextToken=?, ~assignmentStatus=?, ()) =>
-    new({
-      maxResults: maxResults,
-      nextToken: nextToken,
-      namespace: namespace,
-      assignmentStatus: assignmentStatus,
-      awsAccountId: awsAccountId,
-    })
+    new({maxResults, nextToken, namespace, assignmentStatus, awsAccountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListGroups = {
   type t
   type request = {
@@ -5423,15 +5199,9 @@ module ListGroups = {
   }
   @module("@aws-sdk/client-quicksight") @new external new: request => t = "ListGroupsCommand"
   let make = (~namespace, ~awsAccountId, ~maxResults=?, ~nextToken=?, ()) =>
-    new({
-      namespace: namespace,
-      maxResults: maxResults,
-      nextToken: nextToken,
-      awsAccountId: awsAccountId,
-    })
+    new({namespace, maxResults, nextToken, awsAccountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListGroupMemberships = {
   type t
   type request = {
@@ -5465,16 +5235,9 @@ module ListGroupMemberships = {
   @module("@aws-sdk/client-quicksight") @new
   external new: request => t = "ListGroupMembershipsCommand"
   let make = (~namespace, ~awsAccountId, ~groupName, ~maxResults=?, ~nextToken=?, ()) =>
-    new({
-      namespace: namespace,
-      awsAccountId: awsAccountId,
-      maxResults: maxResults,
-      nextToken: nextToken,
-      groupName: groupName,
-    })
+    new({namespace, awsAccountId, maxResults, nextToken, groupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListFolders = {
   type t
   type request = {
@@ -5506,10 +5269,9 @@ module ListFolders = {
   }
   @module("@aws-sdk/client-quicksight") @new external new: request => t = "ListFoldersCommand"
   let make = (~awsAccountId, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, awsAccountId: awsAccountId})
+    new({maxResults, nextToken, awsAccountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListFolderMembers = {
   type t
   type request = {
@@ -5542,15 +5304,9 @@ module ListFolderMembers = {
   }
   @module("@aws-sdk/client-quicksight") @new external new: request => t = "ListFolderMembersCommand"
   let make = (~folderId, ~awsAccountId, ~maxResults=?, ~nextToken=?, ()) =>
-    new({
-      maxResults: maxResults,
-      nextToken: nextToken,
-      folderId: folderId,
-      awsAccountId: awsAccountId,
-    })
+    new({maxResults, nextToken, folderId, awsAccountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListDashboards = {
   type t
   type request = {
@@ -5582,10 +5338,9 @@ module ListDashboards = {
   }
   @module("@aws-sdk/client-quicksight") @new external new: request => t = "ListDashboardsCommand"
   let make = (~awsAccountId, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, awsAccountId: awsAccountId})
+    new({maxResults, nextToken, awsAccountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListDashboardVersions = {
   type t
   type request = {
@@ -5619,15 +5374,9 @@ module ListDashboardVersions = {
   @module("@aws-sdk/client-quicksight") @new
   external new: request => t = "ListDashboardVersionsCommand"
   let make = (~dashboardId, ~awsAccountId, ~maxResults=?, ~nextToken=?, ()) =>
-    new({
-      maxResults: maxResults,
-      nextToken: nextToken,
-      dashboardId: dashboardId,
-      awsAccountId: awsAccountId,
-    })
+    new({maxResults, nextToken, dashboardId, awsAccountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListAnalyses = {
   type t
   type request = {
@@ -5653,10 +5402,9 @@ module ListAnalyses = {
   }
   @module("@aws-sdk/client-quicksight") @new external new: request => t = "ListAnalysesCommand"
   let make = (~awsAccountId, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, awsAccountId: awsAccountId})
+    new({maxResults, nextToken, awsAccountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GenerateEmbedUrlForRegisteredUser = {
   type t
   type request = {
@@ -5689,15 +5437,9 @@ module GenerateEmbedUrlForRegisteredUser = {
   @module("@aws-sdk/client-quicksight") @new
   external new: request => t = "GenerateEmbedUrlForRegisteredUserCommand"
   let make = (~experienceConfiguration, ~userArn, ~awsAccountId, ~sessionLifetimeInMinutes=?, ()) =>
-    new({
-      experienceConfiguration: experienceConfiguration,
-      userArn: userArn,
-      sessionLifetimeInMinutes: sessionLifetimeInMinutes,
-      awsAccountId: awsAccountId,
-    })
+    new({experienceConfiguration, userArn, sessionLifetimeInMinutes, awsAccountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GenerateEmbedUrlForAnonymousUser = {
   type t
   type request = {
@@ -5748,16 +5490,15 @@ module GenerateEmbedUrlForAnonymousUser = {
     (),
   ) =>
     new({
-      experienceConfiguration: experienceConfiguration,
-      authorizedResourceArns: authorizedResourceArns,
-      sessionTags: sessionTags,
-      namespace: namespace,
-      sessionLifetimeInMinutes: sessionLifetimeInMinutes,
-      awsAccountId: awsAccountId,
+      experienceConfiguration,
+      authorizedResourceArns,
+      sessionTags,
+      namespace,
+      sessionLifetimeInMinutes,
+      awsAccountId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeNamespace = {
   type t
   type request = {
@@ -5781,11 +5522,9 @@ module DescribeNamespace = {
     namespace: option<namespaceInfoV2>,
   }
   @module("@aws-sdk/client-quicksight") @new external new: request => t = "DescribeNamespaceCommand"
-  let make = (~namespace, ~awsAccountId, ()) =>
-    new({namespace: namespace, awsAccountId: awsAccountId})
+  let make = (~namespace, ~awsAccountId, ()) => new({namespace, awsAccountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeIngestion = {
   type t
   type request = {
@@ -5804,10 +5543,9 @@ module DescribeIngestion = {
   }
   @module("@aws-sdk/client-quicksight") @new external new: request => t = "DescribeIngestionCommand"
   let make = (~ingestionId, ~dataSetId, ~awsAccountId, ()) =>
-    new({ingestionId: ingestionId, dataSetId: dataSetId, awsAccountId: awsAccountId})
+    new({ingestionId, dataSetId, awsAccountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeFolder = {
   type t
   type request = {
@@ -5823,10 +5561,9 @@ module DescribeFolder = {
     @ocaml.doc("<p>The HTTP status of the request.</p>") @as("Status") status: option<statusCode>,
   }
   @module("@aws-sdk/client-quicksight") @new external new: request => t = "DescribeFolderCommand"
-  let make = (~folderId, ~awsAccountId, ()) => new({folderId: folderId, awsAccountId: awsAccountId})
+  let make = (~folderId, ~awsAccountId, ()) => new({folderId, awsAccountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateNamespace = {
   type t
   type request = {
@@ -5874,15 +5611,9 @@ module CreateNamespace = {
   }
   @module("@aws-sdk/client-quicksight") @new external new: request => t = "CreateNamespaceCommand"
   let make = (~identityStore, ~namespace, ~awsAccountId, ~tags=?, ()) =>
-    new({
-      tags: tags,
-      identityStore: identityStore,
-      namespace: namespace,
-      awsAccountId: awsAccountId,
-    })
+    new({tags, identityStore, namespace, awsAccountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateIAMPolicyAssignment = {
   type t
   type request = {
@@ -5977,18 +5708,9 @@ module CreateIAMPolicyAssignment = {
     ~identities=?,
     ~policyArn=?,
     (),
-  ) =>
-    new({
-      namespace: namespace,
-      identities: identities,
-      policyArn: policyArn,
-      assignmentStatus: assignmentStatus,
-      assignmentName: assignmentName,
-      awsAccountId: awsAccountId,
-    })
+  ) => new({namespace, identities, policyArn, assignmentStatus, assignmentName, awsAccountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateAccountCustomization = {
   type t
   type request = {
@@ -6039,15 +5761,9 @@ module CreateAccountCustomization = {
   @module("@aws-sdk/client-quicksight") @new
   external new: request => t = "CreateAccountCustomizationCommand"
   let make = (~accountCustomization, ~awsAccountId, ~tags=?, ~namespace=?, ()) =>
-    new({
-      tags: tags,
-      accountCustomization: accountCustomization,
-      namespace: namespace,
-      awsAccountId: awsAccountId,
-    })
+    new({tags, accountCustomization, namespace, awsAccountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateThemePermissions = {
   type t
   type request = {
@@ -6077,15 +5793,9 @@ module UpdateThemePermissions = {
   @module("@aws-sdk/client-quicksight") @new
   external new: request => t = "UpdateThemePermissionsCommand"
   let make = (~themeId, ~awsAccountId, ~revokePermissions=?, ~grantPermissions=?, ()) =>
-    new({
-      revokePermissions: revokePermissions,
-      grantPermissions: grantPermissions,
-      themeId: themeId,
-      awsAccountId: awsAccountId,
-    })
+    new({revokePermissions, grantPermissions, themeId, awsAccountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateTemplatePermissions = {
   type t
   type request = {
@@ -6116,15 +5826,9 @@ module UpdateTemplatePermissions = {
   @module("@aws-sdk/client-quicksight") @new
   external new: request => t = "UpdateTemplatePermissionsCommand"
   let make = (~templateId, ~awsAccountId, ~revokePermissions=?, ~grantPermissions=?, ()) =>
-    new({
-      revokePermissions: revokePermissions,
-      grantPermissions: grantPermissions,
-      templateId: templateId,
-      awsAccountId: awsAccountId,
-    })
+    new({revokePermissions, grantPermissions, templateId, awsAccountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateFolderPermissions = {
   type t
   type request = {
@@ -6154,15 +5858,9 @@ module UpdateFolderPermissions = {
   @module("@aws-sdk/client-quicksight") @new
   external new: request => t = "UpdateFolderPermissionsCommand"
   let make = (~folderId, ~awsAccountId, ~revokePermissions=?, ~grantPermissions=?, ()) =>
-    new({
-      revokePermissions: revokePermissions,
-      grantPermissions: grantPermissions,
-      folderId: folderId,
-      awsAccountId: awsAccountId,
-    })
+    new({revokePermissions, grantPermissions, folderId, awsAccountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateDataSourcePermissions = {
   type t
   type request = {
@@ -6195,15 +5893,9 @@ module UpdateDataSourcePermissions = {
   @module("@aws-sdk/client-quicksight") @new
   external new: request => t = "UpdateDataSourcePermissionsCommand"
   let make = (~dataSourceId, ~awsAccountId, ~revokePermissions=?, ~grantPermissions=?, ()) =>
-    new({
-      revokePermissions: revokePermissions,
-      grantPermissions: grantPermissions,
-      dataSourceId: dataSourceId,
-      awsAccountId: awsAccountId,
-    })
+    new({revokePermissions, grantPermissions, dataSourceId, awsAccountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateDataSetPermissions = {
   type t
   type request = {
@@ -6234,15 +5926,9 @@ module UpdateDataSetPermissions = {
   @module("@aws-sdk/client-quicksight") @new
   external new: request => t = "UpdateDataSetPermissionsCommand"
   let make = (~dataSetId, ~awsAccountId, ~revokePermissions=?, ~grantPermissions=?, ()) =>
-    new({
-      revokePermissions: revokePermissions,
-      grantPermissions: grantPermissions,
-      dataSetId: dataSetId,
-      awsAccountId: awsAccountId,
-    })
+    new({revokePermissions, grantPermissions, dataSetId, awsAccountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateAnalysisPermissions = {
   type t
   type request = {
@@ -6280,15 +5966,9 @@ module UpdateAnalysisPermissions = {
   @module("@aws-sdk/client-quicksight") @new
   external new: request => t = "UpdateAnalysisPermissionsCommand"
   let make = (~analysisId, ~awsAccountId, ~revokePermissions=?, ~grantPermissions=?, ()) =>
-    new({
-      revokePermissions: revokePermissions,
-      grantPermissions: grantPermissions,
-      analysisId: analysisId,
-      awsAccountId: awsAccountId,
-    })
+    new({revokePermissions, grantPermissions, analysisId, awsAccountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListNamespaces = {
   type t
   type request = {
@@ -6318,10 +5998,9 @@ module ListNamespaces = {
   }
   @module("@aws-sdk/client-quicksight") @new external new: request => t = "ListNamespacesCommand"
   let make = (~awsAccountId, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, awsAccountId: awsAccountId})
+    new({maxResults, nextToken, awsAccountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListIngestions = {
   type t
   type request = {
@@ -6350,15 +6029,9 @@ module ListIngestions = {
   }
   @module("@aws-sdk/client-quicksight") @new external new: request => t = "ListIngestionsCommand"
   let make = (~awsAccountId, ~dataSetId, ~maxResults=?, ~nextToken=?, ()) =>
-    new({
-      maxResults: maxResults,
-      awsAccountId: awsAccountId,
-      nextToken: nextToken,
-      dataSetId: dataSetId,
-    })
+    new({maxResults, awsAccountId, nextToken, dataSetId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListDataSets = {
   type t
   type request = {
@@ -6386,10 +6059,9 @@ module ListDataSets = {
   }
   @module("@aws-sdk/client-quicksight") @new external new: request => t = "ListDataSetsCommand"
   let make = (~awsAccountId, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, awsAccountId: awsAccountId})
+    new({maxResults, nextToken, awsAccountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeThemePermissions = {
   type t
   type request = {
@@ -6415,10 +6087,9 @@ module DescribeThemePermissions = {
   }
   @module("@aws-sdk/client-quicksight") @new
   external new: request => t = "DescribeThemePermissionsCommand"
-  let make = (~themeId, ~awsAccountId, ()) => new({themeId: themeId, awsAccountId: awsAccountId})
+  let make = (~themeId, ~awsAccountId, ()) => new({themeId, awsAccountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeTemplatePermissions = {
   type t
   type request = {
@@ -6444,11 +6115,9 @@ module DescribeTemplatePermissions = {
   }
   @module("@aws-sdk/client-quicksight") @new
   external new: request => t = "DescribeTemplatePermissionsCommand"
-  let make = (~templateId, ~awsAccountId, ()) =>
-    new({templateId: templateId, awsAccountId: awsAccountId})
+  let make = (~templateId, ~awsAccountId, ()) => new({templateId, awsAccountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeIAMPolicyAssignment = {
   type t
   type request = {
@@ -6473,10 +6142,9 @@ module DescribeIAMPolicyAssignment = {
   @module("@aws-sdk/client-quicksight") @new
   external new: request => t = "DescribeIAMPolicyAssignmentCommand"
   let make = (~namespace, ~assignmentName, ~awsAccountId, ()) =>
-    new({namespace: namespace, assignmentName: assignmentName, awsAccountId: awsAccountId})
+    new({namespace, assignmentName, awsAccountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeFolderResolvedPermissions = {
   type t
   type request = {
@@ -6497,10 +6165,9 @@ module DescribeFolderResolvedPermissions = {
   }
   @module("@aws-sdk/client-quicksight") @new
   external new: request => t = "DescribeFolderResolvedPermissionsCommand"
-  let make = (~folderId, ~awsAccountId, ()) => new({folderId: folderId, awsAccountId: awsAccountId})
+  let make = (~folderId, ~awsAccountId, ()) => new({folderId, awsAccountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeFolderPermissions = {
   type t
   type request = {
@@ -6521,10 +6188,9 @@ module DescribeFolderPermissions = {
   }
   @module("@aws-sdk/client-quicksight") @new
   external new: request => t = "DescribeFolderPermissionsCommand"
-  let make = (~folderId, ~awsAccountId, ()) => new({folderId: folderId, awsAccountId: awsAccountId})
+  let make = (~folderId, ~awsAccountId, ()) => new({folderId, awsAccountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeDataSourcePermissions = {
   type t
   type request = {
@@ -6552,11 +6218,9 @@ module DescribeDataSourcePermissions = {
   }
   @module("@aws-sdk/client-quicksight") @new
   external new: request => t = "DescribeDataSourcePermissionsCommand"
-  let make = (~dataSourceId, ~awsAccountId, ()) =>
-    new({dataSourceId: dataSourceId, awsAccountId: awsAccountId})
+  let make = (~dataSourceId, ~awsAccountId, ()) => new({dataSourceId, awsAccountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeDataSetPermissions = {
   type t
   type request = {
@@ -6584,11 +6248,9 @@ module DescribeDataSetPermissions = {
   }
   @module("@aws-sdk/client-quicksight") @new
   external new: request => t = "DescribeDataSetPermissionsCommand"
-  let make = (~dataSetId, ~awsAccountId, ()) =>
-    new({dataSetId: dataSetId, awsAccountId: awsAccountId})
+  let make = (~dataSetId, ~awsAccountId, ()) => new({dataSetId, awsAccountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeAnalysisPermissions = {
   type t
   type request = {
@@ -6619,11 +6281,9 @@ module DescribeAnalysisPermissions = {
   }
   @module("@aws-sdk/client-quicksight") @new
   external new: request => t = "DescribeAnalysisPermissionsCommand"
-  let make = (~analysisId, ~awsAccountId, ()) =>
-    new({analysisId: analysisId, awsAccountId: awsAccountId})
+  let make = (~analysisId, ~awsAccountId, ()) => new({analysisId, awsAccountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeAnalysis = {
   type t
   type request = {
@@ -6646,11 +6306,9 @@ module DescribeAnalysis = {
     analysis: option<analysis>,
   }
   @module("@aws-sdk/client-quicksight") @new external new: request => t = "DescribeAnalysisCommand"
-  let make = (~analysisId, ~awsAccountId, ()) =>
-    new({analysisId: analysisId, awsAccountId: awsAccountId})
+  let make = (~analysisId, ~awsAccountId, ()) => new({analysisId, awsAccountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateFolder = {
   type t
   type request = {
@@ -6696,19 +6354,9 @@ module CreateFolder = {
     ~folderType=?,
     ~name=?,
     (),
-  ) =>
-    new({
-      tags: tags,
-      permissions: permissions,
-      parentFolderArn: parentFolderArn,
-      folderType: folderType,
-      name: name,
-      folderId: folderId,
-      awsAccountId: awsAccountId,
-    })
+  ) => new({tags, permissions, parentFolderArn, folderType, name, folderId, awsAccountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateTheme = {
   type t
   type request = {
@@ -6754,18 +6402,9 @@ module UpdateTheme = {
     ~versionDescription=?,
     ~name=?,
     (),
-  ) =>
-    new({
-      configuration: configuration,
-      versionDescription: versionDescription,
-      baseThemeId: baseThemeId,
-      name: name,
-      themeId: themeId,
-      awsAccountId: awsAccountId,
-    })
+  ) => new({configuration, versionDescription, baseThemeId, name, themeId, awsAccountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateTemplate = {
   type t
   type request = {
@@ -6814,16 +6453,9 @@ module UpdateTemplate = {
   }
   @module("@aws-sdk/client-quicksight") @new external new: request => t = "UpdateTemplateCommand"
   let make = (~sourceEntity, ~templateId, ~awsAccountId, ~name=?, ~versionDescription=?, ()) =>
-    new({
-      name: name,
-      versionDescription: versionDescription,
-      sourceEntity: sourceEntity,
-      templateId: templateId,
-      awsAccountId: awsAccountId,
-    })
+    new({name, versionDescription, sourceEntity, templateId, awsAccountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateDashboardPermissions = {
   type t
   type request = {
@@ -6872,16 +6504,15 @@ module UpdateDashboardPermissions = {
     (),
   ) =>
     new({
-      revokeLinkPermissions: revokeLinkPermissions,
-      grantLinkPermissions: grantLinkPermissions,
-      revokePermissions: revokePermissions,
-      grantPermissions: grantPermissions,
-      dashboardId: dashboardId,
-      awsAccountId: awsAccountId,
+      revokeLinkPermissions,
+      grantLinkPermissions,
+      revokePermissions,
+      grantPermissions,
+      dashboardId,
+      awsAccountId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateDashboard = {
   type t
   type request = {
@@ -6974,18 +6605,17 @@ module UpdateDashboard = {
     (),
   ) =>
     new({
-      themeArn: themeArn,
-      dashboardPublishOptions: dashboardPublishOptions,
-      versionDescription: versionDescription,
-      parameters: parameters,
-      sourceEntity: sourceEntity,
-      name: name,
-      dashboardId: dashboardId,
-      awsAccountId: awsAccountId,
+      themeArn,
+      dashboardPublishOptions,
+      versionDescription,
+      parameters,
+      sourceEntity,
+      name,
+      dashboardId,
+      awsAccountId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateAnalysis = {
   type t
   type request = {
@@ -7029,17 +6659,9 @@ module UpdateAnalysis = {
   }
   @module("@aws-sdk/client-quicksight") @new external new: request => t = "UpdateAnalysisCommand"
   let make = (~sourceEntity, ~name, ~analysisId, ~awsAccountId, ~themeArn=?, ~parameters=?, ()) =>
-    new({
-      themeArn: themeArn,
-      sourceEntity: sourceEntity,
-      parameters: parameters,
-      name: name,
-      analysisId: analysisId,
-      awsAccountId: awsAccountId,
-    })
+    new({themeArn, sourceEntity, parameters, name, analysisId, awsAccountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeDashboardPermissions = {
   type t
   type request = {
@@ -7070,11 +6692,9 @@ module DescribeDashboardPermissions = {
   }
   @module("@aws-sdk/client-quicksight") @new
   external new: request => t = "DescribeDashboardPermissionsCommand"
-  let make = (~dashboardId, ~awsAccountId, ()) =>
-    new({dashboardId: dashboardId, awsAccountId: awsAccountId})
+  let make = (~dashboardId, ~awsAccountId, ()) => new({dashboardId, awsAccountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeDashboard = {
   type t
   type request = {
@@ -7099,15 +6719,9 @@ module DescribeDashboard = {
   }
   @module("@aws-sdk/client-quicksight") @new external new: request => t = "DescribeDashboardCommand"
   let make = (~dashboardId, ~awsAccountId, ~aliasName=?, ~versionNumber=?, ()) =>
-    new({
-      aliasName: aliasName,
-      versionNumber: versionNumber,
-      dashboardId: dashboardId,
-      awsAccountId: awsAccountId,
-    })
+    new({aliasName, versionNumber, dashboardId, awsAccountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateTheme = {
   type t
   type request = {
@@ -7169,18 +6783,17 @@ module CreateTheme = {
     (),
   ) =>
     new({
-      tags: tags,
-      permissions: permissions,
-      configuration: configuration,
-      versionDescription: versionDescription,
-      baseThemeId: baseThemeId,
-      name: name,
-      themeId: themeId,
-      awsAccountId: awsAccountId,
+      tags,
+      permissions,
+      configuration,
+      versionDescription,
+      baseThemeId,
+      name,
+      themeId,
+      awsAccountId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateTemplate = {
   type t
   type request = {
@@ -7245,19 +6858,9 @@ module CreateTemplate = {
     ~permissions=?,
     ~name=?,
     (),
-  ) =>
-    new({
-      versionDescription: versionDescription,
-      tags: tags,
-      sourceEntity: sourceEntity,
-      permissions: permissions,
-      name: name,
-      templateId: templateId,
-      awsAccountId: awsAccountId,
-    })
+  ) => new({versionDescription, tags, sourceEntity, permissions, name, templateId, awsAccountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateDashboard = {
   type t
   type request = {
@@ -7366,20 +6969,19 @@ module CreateDashboard = {
     (),
   ) =>
     new({
-      themeArn: themeArn,
-      dashboardPublishOptions: dashboardPublishOptions,
-      versionDescription: versionDescription,
-      tags: tags,
-      sourceEntity: sourceEntity,
-      permissions: permissions,
-      parameters: parameters,
-      name: name,
-      dashboardId: dashboardId,
-      awsAccountId: awsAccountId,
+      themeArn,
+      dashboardPublishOptions,
+      versionDescription,
+      tags,
+      sourceEntity,
+      permissions,
+      parameters,
+      name,
+      dashboardId,
+      awsAccountId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateAnalysis = {
   type t
   type request = {
@@ -7442,20 +7044,9 @@ module CreateAnalysis = {
     ~permissions=?,
     ~parameters=?,
     (),
-  ) =>
-    new({
-      tags: tags,
-      themeArn: themeArn,
-      sourceEntity: sourceEntity,
-      permissions: permissions,
-      parameters: parameters,
-      name: name,
-      analysisId: analysisId,
-      awsAccountId: awsAccountId,
-    })
+  ) => new({tags, themeArn, sourceEntity, permissions, parameters, name, analysisId, awsAccountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeDataSource = {
   type t
   type request = {
@@ -7476,11 +7067,9 @@ module DescribeDataSource = {
   }
   @module("@aws-sdk/client-quicksight") @new
   external new: request => t = "DescribeDataSourceCommand"
-  let make = (~dataSourceId, ~awsAccountId, ()) =>
-    new({dataSourceId: dataSourceId, awsAccountId: awsAccountId})
+  let make = (~dataSourceId, ~awsAccountId, ()) => new({dataSourceId, awsAccountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateDataSource = {
   type t
   type request = {
@@ -7536,17 +7125,16 @@ module UpdateDataSource = {
     (),
   ) =>
     new({
-      sslProperties: sslProperties,
-      vpcConnectionProperties: vpcConnectionProperties,
-      credentials: credentials,
-      dataSourceParameters: dataSourceParameters,
-      name: name,
-      dataSourceId: dataSourceId,
-      awsAccountId: awsAccountId,
+      sslProperties,
+      vpcConnectionProperties,
+      credentials,
+      dataSourceParameters,
+      name,
+      dataSourceId,
+      awsAccountId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListDataSources = {
   type t
   type request = {
@@ -7574,10 +7162,9 @@ module ListDataSources = {
   }
   @module("@aws-sdk/client-quicksight") @new external new: request => t = "ListDataSourcesCommand"
   let make = (~awsAccountId, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, awsAccountId: awsAccountId})
+    new({maxResults, nextToken, awsAccountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeTheme = {
   type t
   type request = {
@@ -7607,15 +7194,9 @@ module DescribeTheme = {
   }
   @module("@aws-sdk/client-quicksight") @new external new: request => t = "DescribeThemeCommand"
   let make = (~themeId, ~awsAccountId, ~aliasName=?, ~versionNumber=?, ()) =>
-    new({
-      aliasName: aliasName,
-      versionNumber: versionNumber,
-      themeId: themeId,
-      awsAccountId: awsAccountId,
-    })
+    new({aliasName, versionNumber, themeId, awsAccountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateDataSource = {
   type t
   type request = {
@@ -7687,20 +7268,19 @@ module CreateDataSource = {
     (),
   ) =>
     new({
-      tags: tags,
-      sslProperties: sslProperties,
-      vpcConnectionProperties: vpcConnectionProperties,
-      permissions: permissions,
-      credentials: credentials,
-      dataSourceParameters: dataSourceParameters,
-      type_: type_,
-      name: name,
-      dataSourceId: dataSourceId,
-      awsAccountId: awsAccountId,
+      tags,
+      sslProperties,
+      vpcConnectionProperties,
+      permissions,
+      credentials,
+      dataSourceParameters,
+      type_,
+      name,
+      dataSourceId,
+      awsAccountId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateDataSet = {
   type t
   type request = {
@@ -7782,22 +7362,21 @@ module UpdateDataSet = {
     (),
   ) =>
     new({
-      dataSetUsageConfiguration: dataSetUsageConfiguration,
-      columnLevelPermissionRules: columnLevelPermissionRules,
-      rowLevelPermissionTagConfiguration: rowLevelPermissionTagConfiguration,
-      rowLevelPermissionDataSet: rowLevelPermissionDataSet,
-      fieldFolders: fieldFolders,
-      columnGroups: columnGroups,
-      importMode: importMode,
-      logicalTableMap: logicalTableMap,
-      physicalTableMap: physicalTableMap,
-      name: name,
-      dataSetId: dataSetId,
-      awsAccountId: awsAccountId,
+      dataSetUsageConfiguration,
+      columnLevelPermissionRules,
+      rowLevelPermissionTagConfiguration,
+      rowLevelPermissionDataSet,
+      fieldFolders,
+      columnGroups,
+      importMode,
+      logicalTableMap,
+      physicalTableMap,
+      name,
+      dataSetId,
+      awsAccountId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeTemplate = {
   type t
   type request = {
@@ -7828,15 +7407,9 @@ module DescribeTemplate = {
   }
   @module("@aws-sdk/client-quicksight") @new external new: request => t = "DescribeTemplateCommand"
   let make = (~templateId, ~awsAccountId, ~aliasName=?, ~versionNumber=?, ()) =>
-    new({
-      aliasName: aliasName,
-      versionNumber: versionNumber,
-      templateId: templateId,
-      awsAccountId: awsAccountId,
-    })
+    new({aliasName, versionNumber, templateId, awsAccountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateDataSet = {
   type t
   type request = {
@@ -7928,24 +7501,23 @@ module CreateDataSet = {
     (),
   ) =>
     new({
-      dataSetUsageConfiguration: dataSetUsageConfiguration,
-      tags: tags,
-      columnLevelPermissionRules: columnLevelPermissionRules,
-      rowLevelPermissionTagConfiguration: rowLevelPermissionTagConfiguration,
-      rowLevelPermissionDataSet: rowLevelPermissionDataSet,
-      permissions: permissions,
-      fieldFolders: fieldFolders,
-      columnGroups: columnGroups,
-      importMode: importMode,
-      logicalTableMap: logicalTableMap,
-      physicalTableMap: physicalTableMap,
-      name: name,
-      dataSetId: dataSetId,
-      awsAccountId: awsAccountId,
+      dataSetUsageConfiguration,
+      tags,
+      columnLevelPermissionRules,
+      rowLevelPermissionTagConfiguration,
+      rowLevelPermissionDataSet,
+      permissions,
+      fieldFolders,
+      columnGroups,
+      importMode,
+      logicalTableMap,
+      physicalTableMap,
+      name,
+      dataSetId,
+      awsAccountId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeDataSet = {
   type t
   type request = {
@@ -7964,7 +7536,6 @@ module DescribeDataSet = {
     @ocaml.doc("<p>Information on the dataset.</p>") @as("DataSet") dataSet: option<dataSet>,
   }
   @module("@aws-sdk/client-quicksight") @new external new: request => t = "DescribeDataSetCommand"
-  let make = (~dataSetId, ~awsAccountId, ()) =>
-    new({dataSetId: dataSetId, awsAccountId: awsAccountId})
+  let make = (~dataSetId, ~awsAccountId, ()) => new({dataSetId, awsAccountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

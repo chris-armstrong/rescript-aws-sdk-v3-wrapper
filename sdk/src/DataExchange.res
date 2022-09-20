@@ -737,10 +737,9 @@ module UpdateRevision = {
   }
   @module("@aws-sdk/client-dataexchange") @new external new: request => t = "UpdateRevisionCommand"
   let make = (~revisionId, ~dataSetId, ~finalized=?, ~comment=?, ()) =>
-    new({revisionId: revisionId, finalized: finalized, dataSetId: dataSetId, comment: comment})
+    new({revisionId, finalized, dataSetId, comment})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module StartJob = {
   type t
   type request = {
@@ -751,7 +750,6 @@ module StartJob = {
   let make = (~jobId, ()) => new({jobId: jobId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module RevokeRevision = {
   type t
   @ocaml.doc("<p>The request body for RevokeRevision.</p>")
@@ -803,10 +801,9 @@ module RevokeRevision = {
   }
   @module("@aws-sdk/client-dataexchange") @new external new: request => t = "RevokeRevisionCommand"
   let make = (~revocationComment, ~revisionId, ~dataSetId, ()) =>
-    new({revocationComment: revocationComment, revisionId: revisionId, dataSetId: dataSetId})
+    new({revocationComment, revisionId, dataSetId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteRevision = {
   type t
   type request = {
@@ -816,10 +813,9 @@ module DeleteRevision = {
   }
   type response = {.}
   @module("@aws-sdk/client-dataexchange") @new external new: request => t = "DeleteRevisionCommand"
-  let make = (~revisionId, ~dataSetId, ()) => new({revisionId: revisionId, dataSetId: dataSetId})
+  let make = (~revisionId, ~dataSetId, ()) => new({revisionId, dataSetId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteEventAction = {
   type t
   type request = {
@@ -832,7 +828,6 @@ module DeleteEventAction = {
   let make = (~eventActionId, ()) => new({eventActionId: eventActionId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteDataSet = {
   type t
   type request = {
@@ -843,7 +838,6 @@ module DeleteDataSet = {
   let make = (~dataSetId, ()) => new({dataSetId: dataSetId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteAsset = {
   type t
   type request = {
@@ -854,11 +848,9 @@ module DeleteAsset = {
   }
   type response = {.}
   @module("@aws-sdk/client-dataexchange") @new external new: request => t = "DeleteAssetCommand"
-  let make = (~revisionId, ~dataSetId, ~assetId, ()) =>
-    new({revisionId: revisionId, dataSetId: dataSetId, assetId: assetId})
+  let make = (~revisionId, ~dataSetId, ~assetId, ()) => new({revisionId, dataSetId, assetId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module CancelJob = {
   type t
   type request = {
@@ -869,7 +861,6 @@ module CancelJob = {
   let make = (~jobId, ()) => new({jobId: jobId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module UpdateDataSet = {
   type t
   @ocaml.doc("<p>The request body for UpdateDataSet.</p>")
@@ -910,11 +901,9 @@ module UpdateDataSet = {
     @ocaml.doc("<p>The ARN for the data set.</p>") @as("Arn") arn: option<arn>,
   }
   @module("@aws-sdk/client-dataexchange") @new external new: request => t = "UpdateDataSetCommand"
-  let make = (~dataSetId, ~name=?, ~description=?, ()) =>
-    new({name: name, description: description, dataSetId: dataSetId})
+  let make = (~dataSetId, ~name=?, ~description=?, ()) => new({name, description, dataSetId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UntagResource = {
   type t
   type request = {
@@ -925,10 +914,9 @@ module UntagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-dataexchange") @new external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
+  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys, resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module TagResource = {
   type t
   @ocaml.doc("<p>The request body for TagResource.</p>")
@@ -941,10 +929,9 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-dataexchange") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
+  let make = (~tags, ~resourceArn, ()) => new({tags, resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module SendApiAsset = {
   type t
   @ocaml.doc("<p>The request body for SendApiAsset.</p>")
@@ -996,19 +983,9 @@ module SendApiAsset = {
     ~body=?,
     (),
   ) =>
-    new({
-      revisionId: revisionId,
-      path: path,
-      method: method,
-      requestHeaders: requestHeaders,
-      dataSetId: dataSetId,
-      assetId: assetId,
-      queryStringParameters: queryStringParameters,
-      body: body,
-    })
+    new({revisionId, path, method, requestHeaders, dataSetId, assetId, queryStringParameters, body})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListTagsForResource = {
   type t
   type request = {
@@ -1025,7 +1002,6 @@ module ListTagsForResource = {
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetRevision = {
   type t
   type request = {
@@ -1071,10 +1047,9 @@ module GetRevision = {
     @ocaml.doc("<p>The ARN for the revision.</p>") @as("Arn") arn: option<arn>,
   }
   @module("@aws-sdk/client-dataexchange") @new external new: request => t = "GetRevisionCommand"
-  let make = (~revisionId, ~dataSetId, ()) => new({revisionId: revisionId, dataSetId: dataSetId})
+  let make = (~revisionId, ~dataSetId, ()) => new({revisionId, dataSetId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetDataSet = {
   type t
   type request = {
@@ -1115,7 +1090,6 @@ module GetDataSet = {
   let make = (~dataSetId, ()) => new({dataSetId: dataSetId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateRevision = {
   type t
   @ocaml.doc("<p>The request body for CreateRevision.</p>")
@@ -1167,11 +1141,9 @@ module CreateRevision = {
     @ocaml.doc("<p>The ARN for the revision.</p>") @as("Arn") arn: option<arn>,
   }
   @module("@aws-sdk/client-dataexchange") @new external new: request => t = "CreateRevisionCommand"
-  let make = (~dataSetId, ~tags=?, ~comment=?, ()) =>
-    new({tags: tags, dataSetId: dataSetId, comment: comment})
+  let make = (~dataSetId, ~tags=?, ~comment=?, ()) => new({tags, dataSetId, comment})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateDataSet = {
   type t
   @ocaml.doc("<p>The request body for CreateDataSet.</p>")
@@ -1223,10 +1195,9 @@ module CreateDataSet = {
   }
   @module("@aws-sdk/client-dataexchange") @new external new: request => t = "CreateDataSetCommand"
   let make = (~name, ~description, ~assetType, ~tags=?, ()) =>
-    new({tags: tags, name: name, description: description, assetType: assetType})
+    new({tags, name, description, assetType})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateAsset = {
   type t
   @ocaml.doc("<p>The request body for UpdateAsset.</p>")
@@ -1273,10 +1244,9 @@ module UpdateAsset = {
   }
   @module("@aws-sdk/client-dataexchange") @new external new: request => t = "UpdateAssetCommand"
   let make = (~revisionId, ~name, ~dataSetId, ~assetId, ()) =>
-    new({revisionId: revisionId, name: name, dataSetId: dataSetId, assetId: assetId})
+    new({revisionId, name, dataSetId, assetId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListDataSetRevisions = {
   type t
   type request = {
@@ -1301,10 +1271,9 @@ module ListDataSetRevisions = {
   @module("@aws-sdk/client-dataexchange") @new
   external new: request => t = "ListDataSetRevisionsCommand"
   let make = (~dataSetId, ~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken: nextToken, maxResults: maxResults, dataSetId: dataSetId})
+    new({nextToken, maxResults, dataSetId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetAsset = {
   type t
   type request = {
@@ -1344,11 +1313,9 @@ module GetAsset = {
     @ocaml.doc("<p>The ARN for the asset.</p>") @as("Arn") arn: option<arn>,
   }
   @module("@aws-sdk/client-dataexchange") @new external new: request => t = "GetAssetCommand"
-  let make = (~revisionId, ~dataSetId, ~assetId, ()) =>
-    new({revisionId: revisionId, dataSetId: dataSetId, assetId: assetId})
+  let make = (~revisionId, ~dataSetId, ~assetId, ()) => new({revisionId, dataSetId, assetId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateEventAction = {
   type t
   @ocaml.doc("<p>The request body for UpdateEventAction.</p>")
@@ -1373,10 +1340,9 @@ module UpdateEventAction = {
   }
   @module("@aws-sdk/client-dataexchange") @new
   external new: request => t = "UpdateEventActionCommand"
-  let make = (~eventActionId, ~action=?, ()) => new({eventActionId: eventActionId, action: action})
+  let make = (~eventActionId, ~action=?, ()) => new({eventActionId, action})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListDataSets = {
   type t
   type request = {
@@ -1403,11 +1369,9 @@ module ListDataSets = {
     dataSets: option<listOfDataSetEntry>,
   }
   @module("@aws-sdk/client-dataexchange") @new external new: request => t = "ListDataSetsCommand"
-  let make = (~origin=?, ~nextToken=?, ~maxResults=?, ()) =>
-    new({origin: origin, nextToken: nextToken, maxResults: maxResults})
+  let make = (~origin=?, ~nextToken=?, ~maxResults=?, ()) => new({origin, nextToken, maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetEventAction = {
   type t
   type request = {
@@ -1432,7 +1396,6 @@ module GetEventAction = {
   let make = (~eventActionId, ()) => new({eventActionId: eventActionId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateEventAction = {
   type t
   @ocaml.doc("<p>The request body for CreateEventAction.</p>")
@@ -1456,10 +1419,9 @@ module CreateEventAction = {
   }
   @module("@aws-sdk/client-dataexchange") @new
   external new: request => t = "CreateEventActionCommand"
-  let make = (~event, ~action, ()) => new({event: event, action: action})
+  let make = (~event, ~action, ()) => new({event, action})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListRevisionAssets = {
   type t
   type request = {
@@ -1486,15 +1448,9 @@ module ListRevisionAssets = {
   @module("@aws-sdk/client-dataexchange") @new
   external new: request => t = "ListRevisionAssetsCommand"
   let make = (~revisionId, ~dataSetId, ~nextToken=?, ~maxResults=?, ()) =>
-    new({
-      revisionId: revisionId,
-      nextToken: nextToken,
-      maxResults: maxResults,
-      dataSetId: dataSetId,
-    })
+    new({revisionId, nextToken, maxResults, dataSetId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListEventActions = {
   type t
   type request = {
@@ -1520,10 +1476,9 @@ module ListEventActions = {
   @module("@aws-sdk/client-dataexchange") @new
   external new: request => t = "ListEventActionsCommand"
   let make = (~nextToken=?, ~maxResults=?, ~eventSourceId=?, ()) =>
-    new({nextToken: nextToken, maxResults: maxResults, eventSourceId: eventSourceId})
+    new({nextToken, maxResults, eventSourceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetJob = {
   type t
   type request = {
@@ -1548,7 +1503,6 @@ module GetJob = {
   let make = (~jobId, ()) => new({jobId: jobId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateJob = {
   type t
   @ocaml.doc("<p>The request body for CreateJob.</p>")
@@ -1573,10 +1527,9 @@ module CreateJob = {
     @ocaml.doc("<p>The ARN for the job.</p>") @as("Arn") arn: option<arn>,
   }
   @module("@aws-sdk/client-dataexchange") @new external new: request => t = "CreateJobCommand"
-  let make = (~type_, ~details, ()) => new({type_: type_, details: details})
+  let make = (~type_, ~details, ()) => new({type_, details})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListJobs = {
   type t
   type request = {
@@ -1602,11 +1555,6 @@ module ListJobs = {
   }
   @module("@aws-sdk/client-dataexchange") @new external new: request => t = "ListJobsCommand"
   let make = (~revisionId=?, ~nextToken=?, ~maxResults=?, ~dataSetId=?, ()) =>
-    new({
-      revisionId: revisionId,
-      nextToken: nextToken,
-      maxResults: maxResults,
-      dataSetId: dataSetId,
-    })
+    new({revisionId, nextToken, maxResults, dataSetId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

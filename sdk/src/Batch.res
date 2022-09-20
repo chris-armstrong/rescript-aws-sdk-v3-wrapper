@@ -1727,10 +1727,9 @@ module TerminateJob = {
   }
   type response = {.}
   @module("@aws-sdk/client-batch") @new external new: request => t = "TerminateJobCommand"
-  let make = (~reason, ~jobId, ()) => new({reason: reason, jobId: jobId})
+  let make = (~reason, ~jobId, ()) => new({reason, jobId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeregisterJobDefinition = {
   type t
   type request = {
@@ -1745,7 +1744,6 @@ module DeregisterJobDefinition = {
   let make = (~jobDefinition, ()) => new({jobDefinition: jobDefinition})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteSchedulingPolicy = {
   type t
   type request = {
@@ -1757,7 +1755,6 @@ module DeleteSchedulingPolicy = {
   let make = (~arn, ()) => new({arn: arn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteJobQueue = {
   type t
   @ocaml.doc("<p>Contains the parameters for <code>DeleteJobQueue</code>.</p>")
@@ -1770,7 +1767,6 @@ module DeleteJobQueue = {
   let make = (~jobQueue, ()) => new({jobQueue: jobQueue})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteComputeEnvironment = {
   type t
   @ocaml.doc("<p>Contains the parameters for <code>DeleteComputeEnvironment</code>.</p>")
@@ -1786,7 +1782,6 @@ module DeleteComputeEnvironment = {
   let make = (~computeEnvironment, ()) => new({computeEnvironment: computeEnvironment})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module CancelJob = {
   type t
   @ocaml.doc("<p>Contains the parameters for <code>CancelJob</code>.</p>")
@@ -1799,10 +1794,9 @@ module CancelJob = {
   }
   type response = {.}
   @module("@aws-sdk/client-batch") @new external new: request => t = "CancelJobCommand"
-  let make = (~reason, ~jobId, ()) => new({reason: reason, jobId: jobId})
+  let make = (~reason, ~jobId, ()) => new({reason, jobId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module UntagResource = {
   type t
   type request = {
@@ -1813,10 +1807,9 @@ module UntagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-batch") @new external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
+  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys, resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module TagResource = {
   type t
   type request = {
@@ -1830,10 +1823,9 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-batch") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
+  let make = (~tags, ~resourceArn, ()) => new({tags, resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module ListTagsForResource = {
   type t
   type request = {
@@ -1846,7 +1838,6 @@ module ListTagsForResource = {
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateJobQueue = {
   type t
   @ocaml.doc("<p>Contains the parameters for <code>UpdateJobQueue</code>.</p>")
@@ -1895,17 +1886,9 @@ module UpdateJobQueue = {
     ~schedulingPolicyArn=?,
     ~state=?,
     (),
-  ) =>
-    new({
-      computeEnvironmentOrder: computeEnvironmentOrder,
-      priority: priority,
-      schedulingPolicyArn: schedulingPolicyArn,
-      state: state,
-      jobQueue: jobQueue,
-    })
+  ) => new({computeEnvironmentOrder, priority, schedulingPolicyArn, state, jobQueue})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateComputeEnvironment = {
   type t
   @ocaml.doc("<p>Contains the parameters for <code>UpdateComputeEnvironment</code>.</p>")
@@ -1967,17 +1950,9 @@ module UpdateComputeEnvironment = {
     ~unmanagedvCpus=?,
     ~state=?,
     (),
-  ) =>
-    new({
-      serviceRole: serviceRole,
-      computeResources: computeResources,
-      unmanagedvCpus: unmanagedvCpus,
-      state: state,
-      computeEnvironment: computeEnvironment,
-    })
+  ) => new({serviceRole, computeResources, unmanagedvCpus, state, computeEnvironment})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListSchedulingPolicies = {
   type t
   type request = {
@@ -2009,11 +1984,9 @@ module ListSchedulingPolicies = {
     schedulingPolicies: option<schedulingPolicyListingDetailList>,
   }
   @module("@aws-sdk/client-batch") @new external new: request => t = "ListSchedulingPoliciesCommand"
-  let make = (~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken: nextToken, maxResults: maxResults})
+  let make = (~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateJobQueue = {
   type t
   @ocaml.doc("<p>Contains the parameters for <code>CreateJobQueue</code>.</p>")
@@ -2069,18 +2042,9 @@ module CreateJobQueue = {
     ~schedulingPolicyArn=?,
     ~state=?,
     (),
-  ) =>
-    new({
-      tags: tags,
-      computeEnvironmentOrder: computeEnvironmentOrder,
-      priority: priority,
-      schedulingPolicyArn: schedulingPolicyArn,
-      state: state,
-      jobQueueName: jobQueueName,
-    })
+  ) => new({tags, computeEnvironmentOrder, priority, schedulingPolicyArn, state, jobQueueName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateSchedulingPolicy = {
   type t
   type request = {
@@ -2090,10 +2054,9 @@ module UpdateSchedulingPolicy = {
   }
   type response = {.}
   @module("@aws-sdk/client-batch") @new external new: request => t = "UpdateSchedulingPolicyCommand"
-  let make = (~arn, ~fairsharePolicy=?, ()) => new({fairsharePolicy: fairsharePolicy, arn: arn})
+  let make = (~arn, ~fairsharePolicy=?, ()) => new({fairsharePolicy, arn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module ListJobs = {
   type t
   @ocaml.doc("<p>Contains the parameters for <code>ListJobs</code>.</p>")
@@ -2186,19 +2149,9 @@ module ListJobs = {
     ~arrayJobId=?,
     ~jobQueue=?,
     (),
-  ) =>
-    new({
-      filters: filters,
-      nextToken: nextToken,
-      maxResults: maxResults,
-      jobStatus: jobStatus,
-      multiNodeJobId: multiNodeJobId,
-      arrayJobId: arrayJobId,
-      jobQueue: jobQueue,
-    })
+  ) => new({filters, nextToken, maxResults, jobStatus, multiNodeJobId, arrayJobId, jobQueue})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateSchedulingPolicy = {
   type t
   type request = {
@@ -2223,11 +2176,9 @@ module CreateSchedulingPolicy = {
     @ocaml.doc("<p>The name of the scheduling policy.</p>") name: string_,
   }
   @module("@aws-sdk/client-batch") @new external new: request => t = "CreateSchedulingPolicyCommand"
-  let make = (~name, ~tags=?, ~fairsharePolicy=?, ()) =>
-    new({tags: tags, fairsharePolicy: fairsharePolicy, name: name})
+  let make = (~name, ~tags=?, ~fairsharePolicy=?, ()) => new({tags, fairsharePolicy, name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateComputeEnvironment = {
   type t
   @ocaml.doc("<p>Contains the parameters for <code>CreateComputeEnvironment</code>.</p>")
@@ -2306,18 +2257,9 @@ module CreateComputeEnvironment = {
     ~state=?,
     (),
   ) =>
-    new({
-      tags: tags,
-      serviceRole: serviceRole,
-      computeResources: computeResources,
-      unmanagedvCpus: unmanagedvCpus,
-      state: state,
-      type_: type_,
-      computeEnvironmentName: computeEnvironmentName,
-    })
+    new({tags, serviceRole, computeResources, unmanagedvCpus, state, type_, computeEnvironmentName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeJobQueues = {
   type t
   @ocaml.doc("<p>Contains the parameters for <code>DescribeJobQueues</code>.</p>")
@@ -2352,10 +2294,9 @@ module DescribeJobQueues = {
   }
   @module("@aws-sdk/client-batch") @new external new: request => t = "DescribeJobQueuesCommand"
   let make = (~nextToken=?, ~maxResults=?, ~jobQueues=?, ()) =>
-    new({nextToken: nextToken, maxResults: maxResults, jobQueues: jobQueues})
+    new({nextToken, maxResults, jobQueues})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeSchedulingPolicies = {
   type t
   type request = {
@@ -2371,7 +2312,6 @@ module DescribeSchedulingPolicies = {
   let make = (~arns, ()) => new({arns: arns})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeComputeEnvironments = {
   type t
   @ocaml.doc("<p>Contains the parameters for <code>DescribeComputeEnvironments</code>.</p>")
@@ -2410,10 +2350,9 @@ module DescribeComputeEnvironments = {
   @module("@aws-sdk/client-batch") @new
   external new: request => t = "DescribeComputeEnvironmentsCommand"
   let make = (~nextToken=?, ~maxResults=?, ~computeEnvironments=?, ()) =>
-    new({nextToken: nextToken, maxResults: maxResults, computeEnvironments: computeEnvironments})
+    new({nextToken, maxResults, computeEnvironments})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module SubmitJob = {
   type t
   @ocaml.doc("<p>Contains the parameters for <code>SubmitJob</code>.</p>")
@@ -2507,24 +2446,23 @@ module SubmitJob = {
     (),
   ) =>
     new({
-      tags: tags,
-      timeout: timeout,
-      propagateTags: propagateTags,
-      retryStrategy: retryStrategy,
-      nodeOverrides: nodeOverrides,
-      containerOverrides: containerOverrides,
-      parameters: parameters,
-      jobDefinition: jobDefinition,
-      dependsOn: dependsOn,
-      arrayProperties: arrayProperties,
-      schedulingPriorityOverride: schedulingPriorityOverride,
-      shareIdentifier: shareIdentifier,
-      jobQueue: jobQueue,
-      jobName: jobName,
+      tags,
+      timeout,
+      propagateTags,
+      retryStrategy,
+      nodeOverrides,
+      containerOverrides,
+      parameters,
+      jobDefinition,
+      dependsOn,
+      arrayProperties,
+      schedulingPriorityOverride,
+      shareIdentifier,
+      jobQueue,
+      jobName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module RegisterJobDefinition = {
   type t
   @ocaml.doc("<p>Contains the parameters for <code>RegisterJobDefinition</code>.</p>")
@@ -2609,21 +2547,20 @@ module RegisterJobDefinition = {
     (),
   ) =>
     new({
-      platformCapabilities: platformCapabilities,
-      tags: tags,
-      timeout: timeout,
-      propagateTags: propagateTags,
-      retryStrategy: retryStrategy,
-      nodeProperties: nodeProperties,
-      containerProperties: containerProperties,
-      schedulingPriority: schedulingPriority,
-      parameters: parameters,
-      type_: type_,
-      jobDefinitionName: jobDefinitionName,
+      platformCapabilities,
+      tags,
+      timeout,
+      propagateTags,
+      retryStrategy,
+      nodeProperties,
+      containerProperties,
+      schedulingPriority,
+      parameters,
+      type_,
+      jobDefinitionName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeJobs = {
   type t
   @ocaml.doc("<p>Contains the parameters for <code>DescribeJobs</code>.</p>")
@@ -2633,7 +2570,6 @@ module DescribeJobs = {
   let make = (~jobs, ()) => new({jobs: jobs})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeJobDefinitions = {
   type t
   @ocaml.doc("<p>Contains the parameters for <code>DescribeJobDefinitions</code>.</p>")
@@ -2678,13 +2614,6 @@ module DescribeJobDefinitions = {
     ~maxResults=?,
     ~jobDefinitions=?,
     (),
-  ) =>
-    new({
-      nextToken: nextToken,
-      status: status,
-      jobDefinitionName: jobDefinitionName,
-      maxResults: maxResults,
-      jobDefinitions: jobDefinitions,
-    })
+  ) => new({nextToken, status, jobDefinitionName, maxResults, jobDefinitions})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

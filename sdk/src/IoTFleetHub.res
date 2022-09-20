@@ -73,15 +73,9 @@ module UpdateApplication = {
   @module("@aws-sdk/client-iotfleethub") @new
   external new: request => t = "UpdateApplicationCommand"
   let make = (~applicationId, ~clientToken=?, ~applicationDescription=?, ~applicationName=?, ()) =>
-    new({
-      clientToken: clientToken,
-      applicationDescription: applicationDescription,
-      applicationName: applicationName,
-      applicationId: applicationId,
-    })
+    new({clientToken, applicationDescription, applicationName, applicationId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteApplication = {
   type t
   type request = {
@@ -93,11 +87,9 @@ module DeleteApplication = {
   type response = {.}
   @module("@aws-sdk/client-iotfleethub") @new
   external new: request => t = "DeleteApplicationCommand"
-  let make = (~applicationId, ~clientToken=?, ()) =>
-    new({clientToken: clientToken, applicationId: applicationId})
+  let make = (~applicationId, ~clientToken=?, ()) => new({clientToken, applicationId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module UntagResource = {
   type t
   type request = {
@@ -107,10 +99,9 @@ module UntagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-iotfleethub") @new external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
+  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys, resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module TagResource = {
   type t
   type request = {
@@ -119,10 +110,9 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-iotfleethub") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
+  let make = (~tags, ~resourceArn, ()) => new({tags, resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module ListTagsForResource = {
   type t
   type request = {@ocaml.doc("<p>The ARN of the resource.</p>") resourceArn: resourceArn}
@@ -134,7 +124,6 @@ module ListTagsForResource = {
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeApplication = {
   type t
   type request = {@ocaml.doc("<p>The unique Id of the web application.</p>") applicationId: id}
@@ -171,7 +160,6 @@ module DescribeApplication = {
   let make = (~applicationId, ()) => new({applicationId: applicationId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateApplication = {
   type t
   type request = {
@@ -199,16 +187,9 @@ module CreateApplication = {
   @module("@aws-sdk/client-iotfleethub") @new
   external new: request => t = "CreateApplicationCommand"
   let make = (~roleArn, ~applicationName, ~tags=?, ~clientToken=?, ~applicationDescription=?, ()) =>
-    new({
-      tags: tags,
-      roleArn: roleArn,
-      clientToken: clientToken,
-      applicationDescription: applicationDescription,
-      applicationName: applicationName,
-    })
+    new({tags, roleArn, clientToken, applicationDescription, applicationName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListApplications = {
   type t
   type request = {

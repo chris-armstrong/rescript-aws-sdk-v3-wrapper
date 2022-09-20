@@ -145,14 +145,9 @@ module UpdateIdentityProviderConfiguration = {
   @module("@aws-sdk/client-worklink") @new
   external new: request => t = "UpdateIdentityProviderConfigurationCommand"
   let make = (~identityProviderType, ~fleetArn, ~identityProviderSamlMetadata=?, ()) =>
-    new({
-      identityProviderSamlMetadata: identityProviderSamlMetadata,
-      identityProviderType: identityProviderType,
-      fleetArn: fleetArn,
-    })
+    new({identityProviderSamlMetadata, identityProviderType, fleetArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module UpdateFleetMetadata = {
   type t
   type request = {
@@ -170,14 +165,9 @@ module UpdateFleetMetadata = {
   type response = {.}
   @module("@aws-sdk/client-worklink") @new external new: request => t = "UpdateFleetMetadataCommand"
   let make = (~fleetArn, ~optimizeForEndUserLocation=?, ~displayName=?, ()) =>
-    new({
-      optimizeForEndUserLocation: optimizeForEndUserLocation,
-      displayName: displayName,
-      fleetArn: fleetArn,
-    })
+    new({optimizeForEndUserLocation, displayName, fleetArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module UpdateDomainMetadata = {
   type t
   type request = {
@@ -189,10 +179,9 @@ module UpdateDomainMetadata = {
   @module("@aws-sdk/client-worklink") @new
   external new: request => t = "UpdateDomainMetadataCommand"
   let make = (~domainName, ~fleetArn, ~displayName=?, ()) =>
-    new({displayName: displayName, domainName: domainName, fleetArn: fleetArn})
+    new({displayName, domainName, fleetArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module UpdateDevicePolicyConfiguration = {
   type t
   type request = {
@@ -206,11 +195,9 @@ module UpdateDevicePolicyConfiguration = {
   type response = {.}
   @module("@aws-sdk/client-worklink") @new
   external new: request => t = "UpdateDevicePolicyConfigurationCommand"
-  let make = (~fleetArn, ~deviceCaCertificate=?, ()) =>
-    new({deviceCaCertificate: deviceCaCertificate, fleetArn: fleetArn})
+  let make = (~fleetArn, ~deviceCaCertificate=?, ()) => new({deviceCaCertificate, fleetArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module UpdateAuditStreamConfiguration = {
   type t
   type request = {
@@ -222,11 +209,9 @@ module UpdateAuditStreamConfiguration = {
   type response = {.}
   @module("@aws-sdk/client-worklink") @new
   external new: request => t = "UpdateAuditStreamConfigurationCommand"
-  let make = (~fleetArn, ~auditStreamArn=?, ()) =>
-    new({auditStreamArn: auditStreamArn, fleetArn: fleetArn})
+  let make = (~fleetArn, ~auditStreamArn=?, ()) => new({auditStreamArn, fleetArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module SignOutUser = {
   type t
   type request = {
@@ -235,10 +220,9 @@ module SignOutUser = {
   }
   type response = {.}
   @module("@aws-sdk/client-worklink") @new external new: request => t = "SignOutUserCommand"
-  let make = (~username, ~fleetArn, ()) => new({username: username, fleetArn: fleetArn})
+  let make = (~username, ~fleetArn, ()) => new({username, fleetArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module RevokeDomainAccess = {
   type t
   type request = {
@@ -247,10 +231,9 @@ module RevokeDomainAccess = {
   }
   type response = {.}
   @module("@aws-sdk/client-worklink") @new external new: request => t = "RevokeDomainAccessCommand"
-  let make = (~domainName, ~fleetArn, ()) => new({domainName: domainName, fleetArn: fleetArn})
+  let make = (~domainName, ~fleetArn, ()) => new({domainName, fleetArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module RestoreDomainAccess = {
   type t
   type request = {
@@ -259,10 +242,9 @@ module RestoreDomainAccess = {
   }
   type response = {.}
   @module("@aws-sdk/client-worklink") @new external new: request => t = "RestoreDomainAccessCommand"
-  let make = (~domainName, ~fleetArn, ()) => new({domainName: domainName, fleetArn: fleetArn})
+  let make = (~domainName, ~fleetArn, ()) => new({domainName, fleetArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DisassociateWebsiteCertificateAuthority = {
   type t
   type request = {
@@ -272,10 +254,9 @@ module DisassociateWebsiteCertificateAuthority = {
   type response = {.}
   @module("@aws-sdk/client-worklink") @new
   external new: request => t = "DisassociateWebsiteCertificateAuthorityCommand"
-  let make = (~websiteCaId, ~fleetArn, ()) => new({websiteCaId: websiteCaId, fleetArn: fleetArn})
+  let make = (~websiteCaId, ~fleetArn, ()) => new({websiteCaId, fleetArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DisassociateWebsiteAuthorizationProvider = {
   type t
   type request = {
@@ -287,11 +268,9 @@ module DisassociateWebsiteAuthorizationProvider = {
   type response = {.}
   @module("@aws-sdk/client-worklink") @new
   external new: request => t = "DisassociateWebsiteAuthorizationProviderCommand"
-  let make = (~authorizationProviderId, ~fleetArn, ()) =>
-    new({authorizationProviderId: authorizationProviderId, fleetArn: fleetArn})
+  let make = (~authorizationProviderId, ~fleetArn, ()) => new({authorizationProviderId, fleetArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DisassociateDomain = {
   type t
   type request = {
@@ -300,10 +279,9 @@ module DisassociateDomain = {
   }
   type response = {.}
   @module("@aws-sdk/client-worklink") @new external new: request => t = "DisassociateDomainCommand"
-  let make = (~domainName, ~fleetArn, ()) => new({domainName: domainName, fleetArn: fleetArn})
+  let make = (~domainName, ~fleetArn, ()) => new({domainName, fleetArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DescribeWebsiteCertificateAuthority = {
   type t
   type request = {
@@ -321,10 +299,9 @@ module DescribeWebsiteCertificateAuthority = {
   }
   @module("@aws-sdk/client-worklink") @new
   external new: request => t = "DescribeWebsiteCertificateAuthorityCommand"
-  let make = (~websiteCaId, ~fleetArn, ()) => new({websiteCaId: websiteCaId, fleetArn: fleetArn})
+  let make = (~websiteCaId, ~fleetArn, ()) => new({websiteCaId, fleetArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeIdentityProviderConfiguration = {
   type t
   type request = {@ocaml.doc("<p>The ARN of the fleet.</p>") @as("FleetArn") fleetArn: fleetArn}
@@ -343,7 +320,6 @@ module DescribeIdentityProviderConfiguration = {
   let make = (~fleetArn, ()) => new({fleetArn: fleetArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeDomain = {
   type t
   type request = {
@@ -364,10 +340,9 @@ module DescribeDomain = {
     @ocaml.doc("<p>The name of the domain.</p>") @as("DomainName") domainName: option<domainName>,
   }
   @module("@aws-sdk/client-worklink") @new external new: request => t = "DescribeDomainCommand"
-  let make = (~domainName, ~fleetArn, ()) => new({domainName: domainName, fleetArn: fleetArn})
+  let make = (~domainName, ~fleetArn, ()) => new({domainName, fleetArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeDevicePolicyConfiguration = {
   type t
   type request = {@ocaml.doc("<p>The ARN of the fleet.</p>") @as("FleetArn") fleetArn: fleetArn}
@@ -383,7 +358,6 @@ module DescribeDevicePolicyConfiguration = {
   let make = (~fleetArn, ()) => new({fleetArn: fleetArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeDevice = {
   type t
   type request = {
@@ -413,10 +387,9 @@ module DescribeDevice = {
     status: option<deviceStatus>,
   }
   @module("@aws-sdk/client-worklink") @new external new: request => t = "DescribeDeviceCommand"
-  let make = (~deviceId, ~fleetArn, ()) => new({deviceId: deviceId, fleetArn: fleetArn})
+  let make = (~deviceId, ~fleetArn, ()) => new({deviceId, fleetArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeAuditStreamConfiguration = {
   type t
   type request = {@ocaml.doc("<p>The ARN of the fleet.</p>") @as("FleetArn") fleetArn: fleetArn}
@@ -432,7 +405,6 @@ module DescribeAuditStreamConfiguration = {
   let make = (~fleetArn, ()) => new({fleetArn: fleetArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteFleet = {
   type t
   type request = {@ocaml.doc("<p>The ARN of the fleet.</p>") @as("FleetArn") fleetArn: fleetArn}
@@ -441,7 +413,6 @@ module DeleteFleet = {
   let make = (~fleetArn, ()) => new({fleetArn: fleetArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module AssociateWebsiteCertificateAuthority = {
   type t
   type request = {
@@ -457,10 +428,9 @@ module AssociateWebsiteCertificateAuthority = {
   @module("@aws-sdk/client-worklink") @new
   external new: request => t = "AssociateWebsiteCertificateAuthorityCommand"
   let make = (~certificate, ~fleetArn, ~displayName=?, ()) =>
-    new({displayName: displayName, certificate: certificate, fleetArn: fleetArn})
+    new({displayName, certificate, fleetArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module AssociateWebsiteAuthorizationProvider = {
   type t
   type request = {
@@ -480,14 +450,9 @@ module AssociateWebsiteAuthorizationProvider = {
   @module("@aws-sdk/client-worklink") @new
   external new: request => t = "AssociateWebsiteAuthorizationProviderCommand"
   let make = (~authorizationProviderType, ~fleetArn, ~domainName=?, ()) =>
-    new({
-      domainName: domainName,
-      authorizationProviderType: authorizationProviderType,
-      fleetArn: fleetArn,
-    })
+    new({domainName, authorizationProviderType, fleetArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module AssociateDomain = {
   type t
   type request = {
@@ -505,15 +470,9 @@ module AssociateDomain = {
   type response = {.}
   @module("@aws-sdk/client-worklink") @new external new: request => t = "AssociateDomainCommand"
   let make = (~acmCertificateArn, ~domainName, ~fleetArn, ~displayName=?, ()) =>
-    new({
-      acmCertificateArn: acmCertificateArn,
-      displayName: displayName,
-      domainName: domainName,
-      fleetArn: fleetArn,
-    })
+    new({acmCertificateArn, displayName, domainName, fleetArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module UpdateCompanyNetworkConfiguration = {
   type t
   type request = {
@@ -533,15 +492,9 @@ module UpdateCompanyNetworkConfiguration = {
   @module("@aws-sdk/client-worklink") @new
   external new: request => t = "UpdateCompanyNetworkConfigurationCommand"
   let make = (~securityGroupIds, ~subnetIds, ~vpcId, ~fleetArn, ()) =>
-    new({
-      securityGroupIds: securityGroupIds,
-      subnetIds: subnetIds,
-      vpcId: vpcId,
-      fleetArn: fleetArn,
-    })
+    new({securityGroupIds, subnetIds, vpcId, fleetArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module UntagResource = {
   type t
   type request = {
@@ -552,10 +505,9 @@ module UntagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-worklink") @new external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
+  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys, resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module TagResource = {
   type t
   type request = {
@@ -566,10 +518,9 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-worklink") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
+  let make = (~tags, ~resourceArn, ()) => new({tags, resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module ListTagsForResource = {
   type t
   type request = {
@@ -584,7 +535,6 @@ module ListTagsForResource = {
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeFleetMetadata = {
   type t
   type request = {
@@ -615,7 +565,6 @@ module DescribeFleetMetadata = {
   let make = (~fleetArn, ()) => new({fleetArn: fleetArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeCompanyNetworkConfiguration = {
   type t
   type request = {@ocaml.doc("<p>The ARN of the fleet.</p>") @as("FleetArn") fleetArn: fleetArn}
@@ -636,7 +585,6 @@ module DescribeCompanyNetworkConfiguration = {
   let make = (~fleetArn, ()) => new({fleetArn: fleetArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateFleet = {
   type t
   type request = {
@@ -656,15 +604,9 @@ module CreateFleet = {
   }
   @module("@aws-sdk/client-worklink") @new external new: request => t = "CreateFleetCommand"
   let make = (~fleetName, ~tags=?, ~optimizeForEndUserLocation=?, ~displayName=?, ()) =>
-    new({
-      tags: tags,
-      optimizeForEndUserLocation: optimizeForEndUserLocation,
-      displayName: displayName,
-      fleetName: fleetName,
-    })
+    new({tags, optimizeForEndUserLocation, displayName, fleetName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListWebsiteCertificateAuthorities = {
   type t
   type request = {
@@ -687,11 +629,9 @@ module ListWebsiteCertificateAuthorities = {
   }
   @module("@aws-sdk/client-worklink") @new
   external new: request => t = "ListWebsiteCertificateAuthoritiesCommand"
-  let make = (~fleetArn, ~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken: nextToken, maxResults: maxResults, fleetArn: fleetArn})
+  let make = (~fleetArn, ~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults, fleetArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListWebsiteAuthorizationProviders = {
   type t
   type request = {
@@ -716,11 +656,9 @@ module ListWebsiteAuthorizationProviders = {
   }
   @module("@aws-sdk/client-worklink") @new
   external new: request => t = "ListWebsiteAuthorizationProvidersCommand"
-  let make = (~fleetArn, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, fleetArn: fleetArn})
+  let make = (~fleetArn, ~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken, fleetArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListDomains = {
   type t
   type request = {
@@ -742,11 +680,9 @@ module ListDomains = {
     domains: option<domainSummaryList>,
   }
   @module("@aws-sdk/client-worklink") @new external new: request => t = "ListDomainsCommand"
-  let make = (~fleetArn, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, fleetArn: fleetArn})
+  let make = (~fleetArn, ~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken, fleetArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListDevices = {
   type t
   type request = {
@@ -768,11 +704,9 @@ module ListDevices = {
     devices: option<deviceSummaryList>,
   }
   @module("@aws-sdk/client-worklink") @new external new: request => t = "ListDevicesCommand"
-  let make = (~fleetArn, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, fleetArn: fleetArn})
+  let make = (~fleetArn, ~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken, fleetArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListFleets = {
   type t
   type request = {
@@ -793,7 +727,6 @@ module ListFleets = {
     fleetSummaryList: option<fleetSummaryList>,
   }
   @module("@aws-sdk/client-worklink") @new external new: request => t = "ListFleetsCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

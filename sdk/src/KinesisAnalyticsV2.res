@@ -2057,11 +2057,9 @@ module StopApplication = {
   type response = {.}
   @module("@aws-sdk/client-kinesisanalytics") @new
   external new: request => t = "StopApplicationCommand"
-  let make = (~applicationName, ~force=?, ()) =>
-    new({force: force, applicationName: applicationName})
+  let make = (~applicationName, ~force=?, ()) => new({force, applicationName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteApplicationVpcConfiguration = {
   type t
   type request = {
@@ -2097,16 +2095,9 @@ module DeleteApplicationVpcConfiguration = {
     ~conditionalToken=?,
     ~currentApplicationVersionId=?,
     (),
-  ) =>
-    new({
-      conditionalToken: conditionalToken,
-      vpcConfigurationId: vpcConfigurationId,
-      currentApplicationVersionId: currentApplicationVersionId,
-      applicationName: applicationName,
-    })
+  ) => new({conditionalToken, vpcConfigurationId, currentApplicationVersionId, applicationName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteApplicationSnapshot = {
   type t
   type request = {
@@ -2124,14 +2115,9 @@ module DeleteApplicationSnapshot = {
   @module("@aws-sdk/client-kinesisanalytics") @new
   external new: request => t = "DeleteApplicationSnapshotCommand"
   let make = (~snapshotCreationTimestamp, ~snapshotName, ~applicationName, ()) =>
-    new({
-      snapshotCreationTimestamp: snapshotCreationTimestamp,
-      snapshotName: snapshotName,
-      applicationName: applicationName,
-    })
+    new({snapshotCreationTimestamp, snapshotName, applicationName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteApplicationReferenceDataSource = {
   type t
   type request = {
@@ -2159,14 +2145,9 @@ module DeleteApplicationReferenceDataSource = {
   @module("@aws-sdk/client-kinesisanalytics") @new
   external new: request => t = "DeleteApplicationReferenceDataSourceCommand"
   let make = (~referenceId, ~currentApplicationVersionId, ~applicationName, ()) =>
-    new({
-      referenceId: referenceId,
-      currentApplicationVersionId: currentApplicationVersionId,
-      applicationName: applicationName,
-    })
+    new({referenceId, currentApplicationVersionId, applicationName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteApplicationOutput = {
   type t
   type request = {
@@ -2196,14 +2177,9 @@ module DeleteApplicationOutput = {
   @module("@aws-sdk/client-kinesisanalytics") @new
   external new: request => t = "DeleteApplicationOutputCommand"
   let make = (~outputId, ~currentApplicationVersionId, ~applicationName, ()) =>
-    new({
-      outputId: outputId,
-      currentApplicationVersionId: currentApplicationVersionId,
-      applicationName: applicationName,
-    })
+    new({outputId, currentApplicationVersionId, applicationName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteApplicationInputProcessingConfiguration = {
   type t
   type request = {
@@ -2230,14 +2206,9 @@ module DeleteApplicationInputProcessingConfiguration = {
   @module("@aws-sdk/client-kinesisanalytics") @new
   external new: request => t = "DeleteApplicationInputProcessingConfigurationCommand"
   let make = (~inputId, ~currentApplicationVersionId, ~applicationName, ()) =>
-    new({
-      inputId: inputId,
-      currentApplicationVersionId: currentApplicationVersionId,
-      applicationName: applicationName,
-    })
+    new({inputId, currentApplicationVersionId, applicationName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteApplication = {
   type t
   type request = {
@@ -2250,11 +2221,9 @@ module DeleteApplication = {
   type response = {.}
   @module("@aws-sdk/client-kinesisanalytics") @new
   external new: request => t = "DeleteApplicationCommand"
-  let make = (~createTimestamp, ~applicationName, ()) =>
-    new({createTimestamp: createTimestamp, applicationName: applicationName})
+  let make = (~createTimestamp, ~applicationName, ()) => new({createTimestamp, applicationName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module CreateApplicationSnapshot = {
   type t
   type request = {
@@ -2266,11 +2235,9 @@ module CreateApplicationSnapshot = {
   type response = {.}
   @module("@aws-sdk/client-kinesisanalytics") @new
   external new: request => t = "CreateApplicationSnapshotCommand"
-  let make = (~snapshotName, ~applicationName, ()) =>
-    new({snapshotName: snapshotName, applicationName: applicationName})
+  let make = (~snapshotName, ~applicationName, ()) => new({snapshotName, applicationName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module CreateApplicationPresignedUrl = {
   type t
   type request = {
@@ -2291,14 +2258,9 @@ module CreateApplicationPresignedUrl = {
   @module("@aws-sdk/client-kinesisanalytics") @new
   external new: request => t = "CreateApplicationPresignedUrlCommand"
   let make = (~urlType, ~applicationName, ~sessionExpirationDurationInSeconds=?, ()) =>
-    new({
-      sessionExpirationDurationInSeconds: sessionExpirationDurationInSeconds,
-      urlType: urlType,
-      applicationName: applicationName,
-    })
+    new({sessionExpirationDurationInSeconds, urlType, applicationName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateApplicationMaintenanceConfiguration = {
   type t
   type request = {
@@ -2323,13 +2285,9 @@ module UpdateApplicationMaintenanceConfiguration = {
   @module("@aws-sdk/client-kinesisanalytics") @new
   external new: request => t = "UpdateApplicationMaintenanceConfigurationCommand"
   let make = (~applicationMaintenanceConfigurationUpdate, ~applicationName, ()) =>
-    new({
-      applicationMaintenanceConfigurationUpdate: applicationMaintenanceConfigurationUpdate,
-      applicationName: applicationName,
-    })
+    new({applicationMaintenanceConfigurationUpdate, applicationName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UntagResource = {
   type t
   type request = {
@@ -2345,10 +2303,9 @@ module UntagResource = {
   type response = {.}
   @module("@aws-sdk/client-kinesisanalytics") @new
   external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceARN, ()) => new({tagKeys: tagKeys, resourceARN: resourceARN})
+  let make = (~tagKeys, ~resourceARN, ()) => new({tagKeys, resourceARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DescribeApplicationSnapshot = {
   type t
   type request = {
@@ -2366,11 +2323,9 @@ module DescribeApplicationSnapshot = {
   }
   @module("@aws-sdk/client-kinesisanalytics") @new
   external new: request => t = "DescribeApplicationSnapshotCommand"
-  let make = (~snapshotName, ~applicationName, ()) =>
-    new({snapshotName: snapshotName, applicationName: applicationName})
+  let make = (~snapshotName, ~applicationName, ()) => new({snapshotName, applicationName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module TagResource = {
   type t
   type request = {
@@ -2380,10 +2335,9 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-kinesisanalytics") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceARN, ()) => new({tags: tags, resourceARN: resourceARN})
+  let make = (~tags, ~resourceARN, ()) => new({tags, resourceARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module ListTagsForResource = {
   type t
   type request = {
@@ -2399,7 +2353,6 @@ module ListTagsForResource = {
   let make = (~resourceARN, ()) => new({resourceARN: resourceARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListApplications = {
   type t
   type request = {
@@ -2425,10 +2378,9 @@ module ListApplications = {
   }
   @module("@aws-sdk/client-kinesisanalytics") @new
   external new: request => t = "ListApplicationsCommand"
-  let make = (~nextToken=?, ~limit=?, ()) => new({nextToken: nextToken, limit: limit})
+  let make = (~nextToken=?, ~limit=?, ()) => new({nextToken, limit})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListApplicationVersions = {
   type t
   type request = {
@@ -2457,10 +2409,9 @@ module ListApplicationVersions = {
   @module("@aws-sdk/client-kinesisanalytics") @new
   external new: request => t = "ListApplicationVersionsCommand"
   let make = (~applicationName, ~nextToken=?, ~limit=?, ()) =>
-    new({nextToken: nextToken, limit: limit, applicationName: applicationName})
+    new({nextToken, limit, applicationName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListApplicationSnapshots = {
   type t
   type request = {
@@ -2489,10 +2440,9 @@ module ListApplicationSnapshots = {
   @module("@aws-sdk/client-kinesisanalytics") @new
   external new: request => t = "ListApplicationSnapshotsCommand"
   let make = (~applicationName, ~nextToken=?, ~limit=?, ()) =>
-    new({nextToken: nextToken, limit: limit, applicationName: applicationName})
+    new({nextToken, limit, applicationName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteApplicationCloudWatchLoggingOption = {
   type t
   type request = {
@@ -2539,15 +2489,9 @@ module DeleteApplicationCloudWatchLoggingOption = {
     ~currentApplicationVersionId=?,
     (),
   ) =>
-    new({
-      conditionalToken: conditionalToken,
-      cloudWatchLoggingOptionId: cloudWatchLoggingOptionId,
-      currentApplicationVersionId: currentApplicationVersionId,
-      applicationName: applicationName,
-    })
+    new({conditionalToken, cloudWatchLoggingOptionId, currentApplicationVersionId, applicationName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module AddApplicationVpcConfiguration = {
   type t
   type request = {
@@ -2591,16 +2535,9 @@ module AddApplicationVpcConfiguration = {
     ~conditionalToken=?,
     ~currentApplicationVersionId=?,
     (),
-  ) =>
-    new({
-      conditionalToken: conditionalToken,
-      vpcConfiguration: vpcConfiguration,
-      currentApplicationVersionId: currentApplicationVersionId,
-      applicationName: applicationName,
-    })
+  ) => new({conditionalToken, vpcConfiguration, currentApplicationVersionId, applicationName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module AddApplicationInputProcessingConfiguration = {
   type t
   type request = {
@@ -2646,16 +2583,9 @@ module AddApplicationInputProcessingConfiguration = {
     ~currentApplicationVersionId,
     ~applicationName,
     (),
-  ) =>
-    new({
-      inputProcessingConfiguration: inputProcessingConfiguration,
-      inputId: inputId,
-      currentApplicationVersionId: currentApplicationVersionId,
-      applicationName: applicationName,
-    })
+  ) => new({inputProcessingConfiguration, inputId, currentApplicationVersionId, applicationName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module AddApplicationCloudWatchLoggingOption = {
   type t
   type request = {
@@ -2702,15 +2632,9 @@ module AddApplicationCloudWatchLoggingOption = {
     ~currentApplicationVersionId=?,
     (),
   ) =>
-    new({
-      conditionalToken: conditionalToken,
-      cloudWatchLoggingOption: cloudWatchLoggingOption,
-      currentApplicationVersionId: currentApplicationVersionId,
-      applicationName: applicationName,
-    })
+    new({conditionalToken, cloudWatchLoggingOption, currentApplicationVersionId, applicationName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module AddApplicationOutput = {
   type t
   type request = {
@@ -2750,14 +2674,9 @@ module AddApplicationOutput = {
   @module("@aws-sdk/client-kinesisanalytics") @new
   external new: request => t = "AddApplicationOutputCommand"
   let make = (~output, ~currentApplicationVersionId, ~applicationName, ()) =>
-    new({
-      output: output,
-      currentApplicationVersionId: currentApplicationVersionId,
-      applicationName: applicationName,
-    })
+    new({output, currentApplicationVersionId, applicationName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module StartApplication = {
   type t
   type request = {
@@ -2772,11 +2691,9 @@ module StartApplication = {
   type response = {.}
   @module("@aws-sdk/client-kinesisanalytics") @new
   external new: request => t = "StartApplicationCommand"
-  let make = (~applicationName, ~runConfiguration=?, ()) =>
-    new({runConfiguration: runConfiguration, applicationName: applicationName})
+  let make = (~applicationName, ~runConfiguration=?, ()) => new({runConfiguration, applicationName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DiscoverInputSchema = {
   type t
   type request = {
@@ -2827,15 +2744,14 @@ module DiscoverInputSchema = {
     (),
   ) =>
     new({
-      inputProcessingConfiguration: inputProcessingConfiguration,
-      s3Configuration: s3Configuration,
-      inputStartingPositionConfiguration: inputStartingPositionConfiguration,
-      serviceExecutionRole: serviceExecutionRole,
-      resourceARN: resourceARN,
+      inputProcessingConfiguration,
+      s3Configuration,
+      inputStartingPositionConfiguration,
+      serviceExecutionRole,
+      resourceARN,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module AddApplicationReferenceDataSource = {
   type t
   type request = {
@@ -2873,14 +2789,9 @@ module AddApplicationReferenceDataSource = {
   @module("@aws-sdk/client-kinesisanalytics") @new
   external new: request => t = "AddApplicationReferenceDataSourceCommand"
   let make = (~referenceDataSource, ~currentApplicationVersionId, ~applicationName, ()) =>
-    new({
-      referenceDataSource: referenceDataSource,
-      currentApplicationVersionId: currentApplicationVersionId,
-      applicationName: applicationName,
-    })
+    new({referenceDataSource, currentApplicationVersionId, applicationName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module AddApplicationInput = {
   type t
   type request = {
@@ -2909,14 +2820,9 @@ module AddApplicationInput = {
   @module("@aws-sdk/client-kinesisanalytics") @new
   external new: request => t = "AddApplicationInputCommand"
   let make = (~input, ~currentApplicationVersionId, ~applicationName, ()) =>
-    new({
-      input: input,
-      currentApplicationVersionId: currentApplicationVersionId,
-      applicationName: applicationName,
-    })
+    new({input, currentApplicationVersionId, applicationName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module UpdateApplication = {
   type t
   type request = {
@@ -2968,17 +2874,16 @@ module UpdateApplication = {
     (),
   ) =>
     new({
-      conditionalToken: conditionalToken,
-      cloudWatchLoggingOptionUpdates: cloudWatchLoggingOptionUpdates,
-      runConfigurationUpdate: runConfigurationUpdate,
-      serviceExecutionRoleUpdate: serviceExecutionRoleUpdate,
-      applicationConfigurationUpdate: applicationConfigurationUpdate,
-      currentApplicationVersionId: currentApplicationVersionId,
-      applicationName: applicationName,
+      conditionalToken,
+      cloudWatchLoggingOptionUpdates,
+      runConfigurationUpdate,
+      serviceExecutionRoleUpdate,
+      applicationConfigurationUpdate,
+      currentApplicationVersionId,
+      applicationName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module RollbackApplication = {
   type t
   type request = {
@@ -2993,13 +2898,9 @@ module RollbackApplication = {
   @module("@aws-sdk/client-kinesisanalytics") @new
   external new: request => t = "RollbackApplicationCommand"
   let make = (~currentApplicationVersionId, ~applicationName, ()) =>
-    new({
-      currentApplicationVersionId: currentApplicationVersionId,
-      applicationName: applicationName,
-    })
+    new({currentApplicationVersionId, applicationName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeApplicationVersion = {
   type t
   type request = {
@@ -3020,10 +2921,9 @@ module DescribeApplicationVersion = {
   @module("@aws-sdk/client-kinesisanalytics") @new
   external new: request => t = "DescribeApplicationVersionCommand"
   let make = (~applicationVersionId, ~applicationName, ()) =>
-    new({applicationVersionId: applicationVersionId, applicationName: applicationName})
+    new({applicationVersionId, applicationName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DescribeApplication = {
   type t
   type request = {
@@ -3044,10 +2944,9 @@ module DescribeApplication = {
   @module("@aws-sdk/client-kinesisanalytics") @new
   external new: request => t = "DescribeApplicationCommand"
   let make = (~applicationName, ~includeAdditionalDetails=?, ()) =>
-    new({includeAdditionalDetails: includeAdditionalDetails, applicationName: applicationName})
+    new({includeAdditionalDetails, applicationName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateApplication = {
   type t
   type request = {
@@ -3105,14 +3004,14 @@ module CreateApplication = {
     (),
   ) =>
     new({
-      applicationMode: applicationMode,
-      tags: tags,
-      cloudWatchLoggingOptions: cloudWatchLoggingOptions,
-      applicationConfiguration: applicationConfiguration,
-      serviceExecutionRole: serviceExecutionRole,
-      runtimeEnvironment: runtimeEnvironment,
-      applicationDescription: applicationDescription,
-      applicationName: applicationName,
+      applicationMode,
+      tags,
+      cloudWatchLoggingOptions,
+      applicationConfiguration,
+      serviceExecutionRole,
+      runtimeEnvironment,
+      applicationDescription,
+      applicationName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

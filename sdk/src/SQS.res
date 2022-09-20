@@ -499,10 +499,9 @@ module RemovePermission = {
   }
   type response = {.}
   @module("@aws-sdk/client-sqs") @new external new: request => t = "RemovePermissionCommand"
-  let make = (~label, ~queueUrl, ()) => new({label: label, queueUrl: queueUrl})
+  let make = (~label, ~queueUrl, ()) => new({label, queueUrl})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module PurgeQueue = {
   type t
   @ocaml.doc("<p></p>")
@@ -517,7 +516,6 @@ module PurgeQueue = {
   let make = (~queueUrl, ()) => new({queueUrl: queueUrl})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module GetQueueUrl = {
   type t
   @ocaml.doc("<p></p>")
@@ -537,11 +535,9 @@ module GetQueueUrl = {
     @ocaml.doc("<p>The URL of the queue.</p>") @as("QueueUrl") queueUrl: option<string_>,
   }
   @module("@aws-sdk/client-sqs") @new external new: request => t = "GetQueueUrlCommand"
-  let make = (~queueName, ~queueOwnerAWSAccountId=?, ()) =>
-    new({queueOwnerAWSAccountId: queueOwnerAWSAccountId, queueName: queueName})
+  let make = (~queueName, ~queueOwnerAWSAccountId=?, ()) => new({queueOwnerAWSAccountId, queueName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module DeleteQueue = {
   type t
   @ocaml.doc("<p></p>")
@@ -556,7 +552,6 @@ module DeleteQueue = {
   let make = (~queueUrl, ()) => new({queueUrl: queueUrl})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteMessage = {
   type t
   @ocaml.doc("<p></p>")
@@ -571,11 +566,9 @@ module DeleteMessage = {
   }
   type response = {.}
   @module("@aws-sdk/client-sqs") @new external new: request => t = "DeleteMessageCommand"
-  let make = (~receiptHandle, ~queueUrl, ()) =>
-    new({receiptHandle: receiptHandle, queueUrl: queueUrl})
+  let make = (~receiptHandle, ~queueUrl, ()) => new({receiptHandle, queueUrl})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module ChangeMessageVisibility = {
   type t
   type request = {
@@ -597,10 +590,9 @@ module ChangeMessageVisibility = {
   type response = {.}
   @module("@aws-sdk/client-sqs") @new external new: request => t = "ChangeMessageVisibilityCommand"
   let make = (~visibilityTimeout, ~receiptHandle, ~queueUrl, ()) =>
-    new({visibilityTimeout: visibilityTimeout, receiptHandle: receiptHandle, queueUrl: queueUrl})
+    new({visibilityTimeout, receiptHandle, queueUrl})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module UntagQueue = {
   type t
   type request = {
@@ -610,10 +602,9 @@ module UntagQueue = {
   }
   type response = {.}
   @module("@aws-sdk/client-sqs") @new external new: request => t = "UntagQueueCommand"
-  let make = (~tagKeys, ~queueUrl, ()) => new({tagKeys: tagKeys, queueUrl: queueUrl})
+  let make = (~tagKeys, ~queueUrl, ()) => new({tagKeys, queueUrl})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module TagQueue = {
   type t
   type request = {
@@ -623,10 +614,9 @@ module TagQueue = {
   }
   type response = {.}
   @module("@aws-sdk/client-sqs") @new external new: request => t = "TagQueueCommand"
-  let make = (~tags, ~queueUrl, ()) => new({tags: tags, queueUrl: queueUrl})
+  let make = (~tags, ~queueUrl, ()) => new({tags, queueUrl})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module SetQueueAttributes = {
   type t
   @ocaml.doc("<p></p>")
@@ -795,10 +785,9 @@ for FIFO queues</a>:</p>
   }
   type response = {.}
   @module("@aws-sdk/client-sqs") @new external new: request => t = "SetQueueAttributesCommand"
-  let make = (~attributes, ~queueUrl, ()) => new({attributes: attributes, queueUrl: queueUrl})
+  let make = (~attributes, ~queueUrl, ()) => new({attributes, queueUrl})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module ListQueues = {
   type t
   @ocaml.doc("<p></p>")
@@ -828,10 +817,9 @@ module ListQueues = {
   }
   @module("@aws-sdk/client-sqs") @new external new: request => t = "ListQueuesCommand"
   let make = (~maxResults=?, ~nextToken=?, ~queueNamePrefix=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, queueNamePrefix: queueNamePrefix})
+    new({maxResults, nextToken, queueNamePrefix})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListQueueTags = {
   type t
   type request = {@ocaml.doc("<p>The URL of the queue.</p>") @as("QueueUrl") queueUrl: string_}
@@ -843,7 +831,6 @@ module ListQueueTags = {
   let make = (~queueUrl, ()) => new({queueUrl: queueUrl})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ListDeadLetterSourceQueues = {
   type t
   @ocaml.doc("<p></p>")
@@ -872,11 +859,9 @@ module ListDeadLetterSourceQueues = {
   }
   @module("@aws-sdk/client-sqs") @new
   external new: request => t = "ListDeadLetterSourceQueuesCommand"
-  let make = (~queueUrl, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, queueUrl: queueUrl})
+  let make = (~queueUrl, ~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken, queueUrl})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module GetQueueAttributes = {
   type t
   @ocaml.doc("<p></p>")
@@ -1064,11 +1049,9 @@ for FIFO queues</a>:</p>
     attributes: option<queueAttributeMap>,
   }
   @module("@aws-sdk/client-sqs") @new external new: request => t = "GetQueueAttributesCommand"
-  let make = (~queueUrl, ~attributeNames=?, ()) =>
-    new({attributeNames: attributeNames, queueUrl: queueUrl})
+  let make = (~queueUrl, ~attributeNames=?, ()) => new({attributeNames, queueUrl})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module CreateQueue = {
   type t
   @ocaml.doc("<p></p>")
@@ -1289,11 +1272,9 @@ cross-account permissions to a role and a user name</a> in the <i>Amazon SQS Dev
     queueUrl: option<string_>,
   }
   @module("@aws-sdk/client-sqs") @new external new: request => t = "CreateQueueCommand"
-  let make = (~queueName, ~attributes=?, ~tags=?, ()) =>
-    new({attributes: attributes, tags: tags, queueName: queueName})
+  let make = (~queueName, ~attributes=?, ~tags=?, ()) => new({attributes, tags, queueName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module AddPermission = {
   type t
   @ocaml.doc("<p></p>")
@@ -1323,10 +1304,9 @@ module AddPermission = {
   type response = {.}
   @module("@aws-sdk/client-sqs") @new external new: request => t = "AddPermissionCommand"
   let make = (~actions, ~awsaccountIds, ~label, ~queueUrl, ()) =>
-    new({actions: actions, awsaccountIds: awsaccountIds, label: label, queueUrl: queueUrl})
+    new({actions, awsaccountIds, label, queueUrl})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
-
 module DeleteMessageBatch = {
   type t
   @ocaml.doc("<p></p>")
@@ -1356,10 +1336,9 @@ module DeleteMessageBatch = {
     successful: deleteMessageBatchResultEntryList,
   }
   @module("@aws-sdk/client-sqs") @new external new: request => t = "DeleteMessageBatchCommand"
-  let make = (~entries, ~queueUrl, ()) => new({entries: entries, queueUrl: queueUrl})
+  let make = (~entries, ~queueUrl, ()) => new({entries, queueUrl})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ChangeMessageVisibilityBatch = {
   type t
   @ocaml.doc("<p></p>")
@@ -1393,10 +1372,9 @@ module ChangeMessageVisibilityBatch = {
   }
   @module("@aws-sdk/client-sqs") @new
   external new: request => t = "ChangeMessageVisibilityBatchCommand"
-  let make = (~entries, ~queueUrl, ()) => new({entries: entries, queueUrl: queueUrl})
+  let make = (~entries, ~queueUrl, ()) => new({entries, queueUrl})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module SendMessage = {
   type t
   @ocaml.doc("<p></p>")
@@ -1562,17 +1540,16 @@ attribute to verify that Amazon SQS received the message correctly. Amazon SQS U
     (),
   ) =>
     new({
-      messageGroupId: messageGroupId,
-      messageDeduplicationId: messageDeduplicationId,
-      messageSystemAttributes: messageSystemAttributes,
-      messageAttributes: messageAttributes,
-      delaySeconds: delaySeconds,
-      messageBody: messageBody,
-      queueUrl: queueUrl,
+      messageGroupId,
+      messageDeduplicationId,
+      messageSystemAttributes,
+      messageAttributes,
+      delaySeconds,
+      messageBody,
+      queueUrl,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module SendMessageBatch = {
   type t
   @ocaml.doc("<p></p>")
@@ -1605,10 +1582,9 @@ module SendMessageBatch = {
     successful: sendMessageBatchResultEntryList,
   }
   @module("@aws-sdk/client-sqs") @new external new: request => t = "SendMessageBatchCommand"
-  let make = (~entries, ~queueUrl, ()) => new({entries: entries, queueUrl: queueUrl})
+  let make = (~entries, ~queueUrl, ()) => new({entries, queueUrl})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
-
 module ReceiveMessage = {
   type t
   @ocaml.doc("<p></p>")
@@ -1787,13 +1763,13 @@ module ReceiveMessage = {
     (),
   ) =>
     new({
-      receiveRequestAttemptId: receiveRequestAttemptId,
-      waitTimeSeconds: waitTimeSeconds,
-      visibilityTimeout: visibilityTimeout,
-      maxNumberOfMessages: maxNumberOfMessages,
-      messageAttributeNames: messageAttributeNames,
-      attributeNames: attributeNames,
-      queueUrl: queueUrl,
+      receiveRequestAttemptId,
+      waitTimeSeconds,
+      visibilityTimeout,
+      maxNumberOfMessages,
+      messageAttributeNames,
+      attributeNames,
+      queueUrl,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
