@@ -37,9 +37,9 @@ jobs:
         # to date by regenerating them and seeing if they have changed.
         run: |
           yarn regenerate
-          git diff --exit-code || echo "Run 'yarn generate' and commit the changes." && error 1
+          git diff --exit-code || (echo "Run 'yarn generate' and commit the changes." && exit 1)
 
       - name: Test formatting
         run: |
           yarn format          
-          git diff --exit-code || echo "Run 'yarn format' and commit the changes." && error 1
+          git diff --exit-code || (echo "Run 'yarn format' and commit the changes." && exit 1)
