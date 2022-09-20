@@ -78,7 +78,7 @@ let safeMemberName = name => {
       let upperpart = groups[1]
       let remaining = groups[2]
       switch (upperpart, remaining) {
-      | (Some(upperpart), Some(remaining)) => {
+      | (Some(Some(upperpart)), Some(Some(remaining))) => {
           let upperLength = String.length(upperpart)
           let first =
             upperLength > 0
