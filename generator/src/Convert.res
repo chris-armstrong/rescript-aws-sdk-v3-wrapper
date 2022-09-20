@@ -45,7 +45,8 @@ let findOperationalStructure = (structures, input) => {
     switch Js.Array2.find(structures, structure => structure.name == target) {
     | Some(structure) =>
       switch structure.descriptor {
-      | StructureShape(details) => Array.length(details.members) > 0 ? OperationStructure(details) : OperationStructureNone
+      | StructureShape(details) =>
+        Array.length(details.members) > 0 ? OperationStructure(details) : OperationStructureNone
       | _ => raise(UnexpectedStructure("expected structure type for " ++ target))
       }
     | None => OperationStructureRef(target)
@@ -61,8 +62,8 @@ let convert = (parsed: Result.t<array<Shape.t>, 'r>) => {
         name,
         descriptor,
       }): Dependencies.shapeWithTarget => {
-        name: name,
-        descriptor: descriptor,
+        name,
+        descriptor,
         targets: Dependencies.getTargets(descriptor),
         recursWith: None,
       })
@@ -142,12 +143,14 @@ let convert = (parsed: Result.t<array<Shape.t>, 'r>) => {
               codeSnippets,
               operationSnippets,
             ])->Array.joinWith("\n", x => x),
-            moduleName: moduleName,
+            moduleName,
           })
         }
+
       | None => Error("no service definition in file")
       }
     }
+
   | Error(y) => Error(`Unknown conversion error: ${y}`)
   }
 }

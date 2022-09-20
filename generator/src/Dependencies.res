@@ -81,8 +81,11 @@ let containsAll = (within, targets) => {
     Array.every(targets, target =>
       Array.some(within, item => {
         item.name == target ||
-          Option.mapWithDefault(item.recursWith, false, recursiveItems =>
-            Array.some(recursiveItems, recursiveItem => recursiveItem.name == target)
+          Option.mapWithDefault(
+            item.recursWith,
+            false,
+            recursiveItems =>
+              Array.some(recursiveItems, recursiveItem => recursiveItem.name == target),
           )
       })
     )
@@ -129,6 +132,7 @@ let rec findCycle = (chain: array<shapeWithTarget>, remaining: array<shapeWithTa
         Array.length(cycles) > 0 ? Some(Array.concatMany(cycles)) : None
       }
     }
+
   | None => None
   }
 }

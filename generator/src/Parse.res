@@ -39,11 +39,11 @@ let parseServiceTrait = traitResult => {
     cloudTrailEventSource,
     endpointPrefix,
   ) => Trait.ServiceTrait({
-    sdkId: sdkId,
-    arnNamespace: arnNamespace,
-    cloudFormationName: cloudFormationName,
-    cloudTrailEventSource: cloudTrailEventSource,
-    endpointPrefix: endpointPrefix,
+    sdkId,
+    arnNamespace,
+    cloudFormationName,
+    cloudTrailEventSource,
+    endpointPrefix,
   }))
 }
 
@@ -53,7 +53,7 @@ let parseEnumNameValue = (enum): Result.t<Trait.enumPair, jsonParseError> => {
   let value_ = obj_->field("value")->parseString
   map2(name_, value_, (name, value) => {
     open Trait
-    {name: name, value: value}
+    {name, value}
   })
 }
 
@@ -63,9 +63,9 @@ let parseArnReferenceTrait = (value): Result.t<Trait.t, jsonParseError> => {
   let service_ = optional(record->field("service"))->mapOptional(parseString)
   let resource_ = optional(record->field("resource"))->mapOptional(parseString)
   map3(type__, service_, resource_, (type_, service, resource) => Trait.AwsApiArnReferenceTrait({
-    type_: type_,
-    service: service,
-    resource: resource,
+    type_,
+    service,
+    resource,
   }))
 }
 
@@ -74,8 +74,8 @@ let parseReference = (value): Result.t<Trait.reference, jsonParseError> => {
   let resource = object->field("resource")->parseString
   let service = object->field("service")->optional->mapOptional(parseString)
   map2(resource, service, (resource, service): Trait.reference => {
-    resource: resource,
-    service: service,
+    resource,
+    service,
   })
 }
 
@@ -117,6 +117,7 @@ let parseTrait = (name, value: Result.t<jsonTreeRef, jsonParseError>) => {
       let max = optional(obj->field("max"))->mapOptional(parseInteger)
       map2(min, max, (min, max) => Trait.RangeTrait(min, max))
     }
+
   | "smithy.api#length" => {
       let record = value->parseObject
       map2(
@@ -125,6 +126,7 @@ let parseTrait = (name, value: Result.t<jsonTreeRef, jsonParseError>) => {
         (min, max) => Trait.LengthTrait(min, max),
       )
     }
+
   | "aws.protocols#awsJson1_0" => Ok(Trait.AwsProtocolAwsJson1_0Trait)
   | "aws.protocols#awsJson1_1" => Ok(Trait.AwsProtocolAwsJson1_1Trait)
   | "smithy.api#box" => Ok(Trait.BoxTrait)
@@ -144,10 +146,11 @@ let parseTrait = (name, value: Result.t<jsonTreeRef, jsonParseError>) => {
       let operation = obj->field("operation")->parseString
       let error = obj->field("error")->parseString
       map2(operation, error, (operation, error) => Trait.AwsApiClientEndpointDiscoveryTrait({
-        operation: operation,
-        error: error,
+        operation,
+        error,
       }))
     }
+
   | "aws.protocols#ec2QueryName" =>
     value->parseString->map(queryName => Trait.AwsProtocolEc2QueryNameTrait(queryName))
   | "aws.protocols#ec2Query" => Ok(Trait.AwsProtocolEc2QueryTrait)
@@ -172,6 +175,7 @@ let parseTrait = (name, value: Result.t<jsonTreeRef, jsonParseError>) => {
       | (Error(x), Error(_)) => Error(x)
       }
     }
+
   | "smithy.api#eventPayload" => Ok(Trait.EventPayloadTrait)
   | "smithy.api#http" => Ok(Trait.HttpTrait)
   | "smithy.api#idempotent" => Ok(Trait.IdempotentTrait)
@@ -197,7 +201,8 @@ let parseTrait = (name, value: Result.t<jsonTreeRef, jsonParseError>) => {
   | "aws.iam#actionPermissionDescription" => Ok(Trait.AwsIamActionPermissionDescriptionTrait)
   | "aws.iam#conditionKeys" => Ok(Trait.AwsIamConditionKeysTrait)
   | "aws.protocols#httpChecksum" => Ok(Trait.AwsProtocolsHttpChecksumTrait)
-  | "aws.customizations#s3UnwrappedXmlOutput" => Ok(Trait.AwsCustomizationsS3UnwrappedXmlOutputTrait)
+  | "aws.customizations#s3UnwrappedXmlOutput" =>
+    Ok(Trait.AwsCustomizationsS3UnwrappedXmlOutputTrait)
   | _ => raise(UnknownTrait(name))
   }
   traitValue
@@ -206,7 +211,7 @@ let parseTrait = (name, value: Result.t<jsonTreeRef, jsonParseError>) => {
 let parseListShape = shape => {
   let target_ = shape->field("member")->extractTargetSpec
   let traits_ = optional(shape->field("traits")->parseRecord(parseTrait))
-  map2(target_, traits_, (target, traits) => Shape.ListShape({target: target, traits: traits}))
+  map2(target_, traits_, (target, traits) => Shape.ListShape({target, traits}))
 }
 
 let parseMember = (name, value) => {
@@ -216,9 +221,9 @@ let parseMember = (name, value) => {
   map2(target_, traits_, (target, traits) => {
     open Shape
     {
-      name: name,
-      target: target,
-      traits: traits,
+      name,
+      target,
+      traits,
     }
   })
 }
@@ -230,8 +235,8 @@ let parseStructureShape = value => {
   let members = value->field("members")->parseMembers
   let traits = optional(value->field("traits")->parseRecord(parseTrait))
   map2(members, traits, (members, traits) => Shape.StructureShape({
-    members: members,
-    traits: traits,
+    members,
+    traits,
   }))
 }
 
@@ -254,7 +259,7 @@ let parseOperationShape = shape => {
     output: outputValue,
     errors: errorsValue,
     documentation: documentationValue,
-    traits: traits,
+    traits,
   }))
 }
 
@@ -267,9 +272,9 @@ let parseServiceShape = shapeDict => {
   let traits_ =
     optional(shapeDict->field("traits"))->mapOptional(traits => traits->parseRecord(parseTrait))
   map3(version_, operations_, traits_, (version, operations, traits) => Shape.ServiceShape({
-    version: version,
-    operations: operations,
-    traits: traits,
+    version,
+    operations,
+    traits,
   }))
 }
 
@@ -286,7 +291,7 @@ let parseMapKey = val => {
     optional(mapValue->field("traits"))->mapOptional(traits => parseRecord(traits, parseTrait))
   map2(target_, traits_, (target, traits) => {
     open Shape
-    {target: target, traits: traits}
+    {target, traits}
   })
 }
 
@@ -298,14 +303,14 @@ let parseMapShape = shapeDict => {
   map3(key_, value_, traits_, (key, value, traits) => Shape.MapShape({
     mapKey: key,
     mapValue: value,
-    traits: traits,
+    traits,
   }))
 }
 
 let parseUnionShape = value => {
   let members = value->field("members")->parseMembers
   let traits = optional(value->field("traits")->parseRecord(parseTrait))
-  map2(members, traits, (members, traits) => Shape.UnionShape({members: members, traits: traits}))
+  map2(members, traits, (members, traits) => Shape.UnionShape({members, traits}))
 }
 
 let parsePrimitive = shapeDict => {
@@ -321,7 +326,7 @@ let parseSetShape = shapeDict => {
   let target = shapeDict->field("member")->parseObject->field("target")->parseString
   let traits =
     optional(shapeDict->field("traits"))->mapOptional(traits => traits->parseRecord(parseTrait))
-  map2(target, traits, (target, traits) => Shape.SetShape({target: target, traits: traits}))
+  map2(target, traits, (target, traits) => Shape.SetShape({target, traits}))
 }
 
 let parseTimestampShape = shapeDict => {
@@ -355,7 +360,7 @@ let parseShape = (name, shape) => {
     }
     map(descriptor_, descriptor => {
       open Shape
-      {name: name, descriptor: descriptor}
+      {name, descriptor}
     })
   })
 }

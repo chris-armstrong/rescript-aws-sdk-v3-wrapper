@@ -89,10 +89,12 @@ let safeMemberName = name => {
               : ""
           (first ++ remaining)->stripLeadingNumbers->translateReserved->translateBadChars
         }
+
       // some error in regex application => return usual
       | _ => name->stripLeadingNumbers->translateReserved->translateBadChars
       }
     }
+
   | None => name->stripLeadingNumbers->translateReserved->translateBadChars
   }
 }

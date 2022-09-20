@@ -15,9 +15,7 @@ let generateFile = file => {
   let path = Path.join([modelsPath, file])
   Js.log(`Reading ${path}`)
   let parsed =
-    Fs.readFileSync(path)
-    ->NodeJs.Buffer.toString
-    ->Json.Decode.parseJson(Parse.parseModel)
+    Fs.readFileSync(path)->NodeJs.Buffer.toString->Json.Decode.parseJson(Parse.parseModel)
   let generated = switch parsed {
   | Ok(shapes) =>
     switch Convert.convert(Ok(shapes)) {
@@ -33,6 +31,7 @@ let generateFile = file => {
       Js.log2("Writing module", moduleName)
       Fs.writeFileSync(Path.join([outdir, `${moduleName}.res`]), Buffer.fromString(code))
     }
+
   | Error(error) => Js.log(`Unable to generate for file ${file}: ${error}`)
   }
 }

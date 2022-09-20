@@ -41,16 +41,15 @@ module Decode = {
     | Js.Exn.Error(payload) =>
       Error(SyntaxError(Js.Option.getWithDefault("unknown", Js.Exn.message(payload))))
     }
-    flatMap_result(treeResult, (. tree) => rootParser(Ok({tree: tree, path: "$"})))
+    flatMap_result(treeResult, (. tree) => rootParser(Ok({tree, path: "$"})))
   }
 
   type parser<'a> = Belt.Result.t<jsonTreeRef, jsonParseError> => Belt.Result.t<'a, jsonParseError>
 
   let parseObject = (x: Belt.Result.t<jsonTreeRef, jsonParseError>) =>
-    x
-    ->flatMap_result((. { tree, path }) =>
+    x->flatMap_result((. {tree, path}) =>
       switch decodeObject(tree) {
-      | Some(object) => Ok({object: object, path: path})
+      | Some(object) => Ok({object, path})
       | None => Error(NoValueError(path))
       }
     )
@@ -58,7 +57,7 @@ module Decode = {
   let parseRecord = (recordObject: Belt.Result.t<jsonTreeRef, jsonParseError>, recordParser) =>
     recordObject
     ->parseObject
-    ->flatMap_result((.{ object, path }) => {
+    ->flatMap_result((. {object, path}) => {
       Js.Array2.reduce(
         Js.Dict.entries(object),
         (records, (key, value)) =>
@@ -78,25 +77,21 @@ module Decode = {
     })
 
   let parseString = x =>
-    x
-    ->flatMap_result((. { tree, path }) =>
+    x->flatMap_result((. {tree, path}) =>
       switch decodeString(tree) {
       | Some(str) => Ok(str)
       | None => Error(WrongType(path, "string"))
       }
     )
   let parseNumber = x =>
-    x
-
-    ->flatMap_result((. { tree, path }) =>
+    x->flatMap_result((. {tree, path}) =>
       switch decodeNumber(tree) {
       | Some(str) => Ok(str)
       | None => Error(WrongType(path, "number"))
       }
     )
   let parseInteger = x =>
-    x
-    ->flatMap_result((. { tree, path }) =>
+    x->flatMap_result((. {tree, path}) =>
       switch decodeNumber(tree) {
       | Some(str) => Ok(Belt.Float.toInt(str))
       | None => Error(WrongType(path, "integer"))
@@ -104,8 +99,7 @@ module Decode = {
     )
 
   let parseArray = (arrayRef, itemParser) =>
-    arrayRef
-    ->flatMap_result((. { tree, path }) =>
+    arrayRef->flatMap_result((. {tree, path}) =>
       switch decodeArray(tree) {
       | Some(arr) =>
         Js.Array2.reducei(
@@ -125,8 +119,7 @@ module Decode = {
     )
 
   let field = (objectRef, fieldName) =>
-    objectRef
-    ->flatMap_result((. { object, path }) =>
+    objectRef->flatMap_result((. {object, path}) =>
       switch Js.Dict.get(object, fieldName) {
       | Some(fieldValue) => Ok({tree: fieldValue, path: `${path}.${fieldName}`})
       | None => Error(NoValueError(`${path}.${fieldName}`))
