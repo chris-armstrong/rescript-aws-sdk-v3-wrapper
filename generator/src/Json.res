@@ -41,7 +41,7 @@ module Decode = {
     | Js.Exn.Error(payload) =>
       Error(SyntaxError(Js.Option.getWithDefault("unknown", Js.Exn.message(payload))))
     }
-    flatMap_result(treeResult, (. tree) => rootParser(Ok({tree, path: "$"})))
+    flatMap_result(treeResult, (. tree) => rootParser(Ok({tree: tree, path: "$"})))
   }
 
   type parser<'a> = Belt.Result.t<jsonTreeRef, jsonParseError> => Belt.Result.t<'a, jsonParseError>
@@ -49,7 +49,7 @@ module Decode = {
   let parseObject = (x: Belt.Result.t<jsonTreeRef, jsonParseError>) =>
     x->flatMap_result((. {tree, path}) =>
       switch decodeObject(tree) {
-      | Some(object) => Ok({object, path})
+      | Some(object) => Ok({object: object, path: path})
       | None => Error(NoValueError(path))
       }
     )

@@ -62,8 +62,8 @@ let convert = (parsed: Result.t<array<Shape.t>, 'r>) => {
         name,
         descriptor,
       }): Dependencies.shapeWithTarget => {
-        name,
-        descriptor,
+        name: name,
+        descriptor: descriptor,
         targets: Dependencies.getTargets(descriptor),
         recursWith: None,
       })
@@ -143,7 +143,7 @@ let convert = (parsed: Result.t<array<Shape.t>, 'r>) => {
               codeSnippets,
               operationSnippets,
             ])->Array.joinWith("\n", x => x),
-            moduleName,
+            moduleName: moduleName,
           })
         }
 

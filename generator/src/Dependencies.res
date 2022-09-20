@@ -81,11 +81,8 @@ let containsAll = (within, targets) => {
     Array.every(targets, target =>
       Array.some(within, item => {
         item.name == target ||
-          Option.mapWithDefault(
-            item.recursWith,
-            false,
-            recursiveItems =>
-              Array.some(recursiveItems, recursiveItem => recursiveItem.name == target),
+          Option.mapWithDefault(item.recursWith, false, recursiveItems =>
+            Array.some(recursiveItems, recursiveItem => recursiveItem.name == target)
           )
       })
     )
