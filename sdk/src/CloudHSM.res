@@ -104,9 +104,10 @@ module ModifyLunaClient = {
     @ocaml.doc("<p>The ARN of the client.</p>") @as("ClientArn") clientArn: option<clientArn>,
   }
   @module("@aws-sdk/client-cloudhsm") @new external new: request => t = "ModifyLunaClientCommand"
-  let make = (~certificate, ~clientArn, ()) => new({certificate, clientArn})
+  let make = (~certificate, ~clientArn, ()) => new({certificate: certificate, clientArn: clientArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ModifyHsm = {
   type t
   @ocaml.doc("<p>Contains the inputs for the <a>ModifyHsm</a> operation.</p>")
@@ -133,9 +134,17 @@ module ModifyHsm = {
   type response = {@ocaml.doc("<p>The ARN of the HSM.</p>") @as("HsmArn") hsmArn: option<hsmArn>}
   @module("@aws-sdk/client-cloudhsm") @new external new: request => t = "ModifyHsmCommand"
   let make = (~hsmArn, ~syslogIp=?, ~externalId=?, ~iamRoleArn=?, ~eniIp=?, ~subnetId=?, ()) =>
-    new({syslogIp, externalId, iamRoleArn, eniIp, subnetId, hsmArn})
+    new({
+      syslogIp: syslogIp,
+      externalId: externalId,
+      iamRoleArn: iamRoleArn,
+      eniIp: eniIp,
+      subnetId: subnetId,
+      hsmArn: hsmArn,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeLunaClient = {
   type t
   type request = {
@@ -157,9 +166,10 @@ module DescribeLunaClient = {
   }
   @module("@aws-sdk/client-cloudhsm") @new external new: request => t = "DescribeLunaClientCommand"
   let make = (~certificateFingerprint=?, ~clientArn=?, ()) =>
-    new({certificateFingerprint, clientArn})
+    new({certificateFingerprint: certificateFingerprint, clientArn: clientArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteLunaClient = {
   type t
   type request = {
@@ -170,6 +180,7 @@ module DeleteLunaClient = {
   let make = (~clientArn, ()) => new({clientArn: clientArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteHsm = {
   type t
   @ocaml.doc("<p>Contains the inputs for the <a>DeleteHsm</a> operation.</p>")
@@ -180,6 +191,7 @@ module DeleteHsm = {
   let make = (~hsmArn, ()) => new({hsmArn: hsmArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteHapg = {
   type t
   @ocaml.doc("<p>Contains the inputs for the <a>DeleteHapg</a> action.</p>")
@@ -193,6 +205,7 @@ module DeleteHapg = {
   let make = (~hapgArn, ()) => new({hapgArn: hapgArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateLunaClient = {
   type t
   @ocaml.doc("<p>Contains the inputs for the <a>CreateLunaClient</a> action.</p>")
@@ -208,9 +221,10 @@ module CreateLunaClient = {
     @ocaml.doc("<p>The ARN of the client.</p>") @as("ClientArn") clientArn: option<clientArn>,
   }
   @module("@aws-sdk/client-cloudhsm") @new external new: request => t = "CreateLunaClientCommand"
-  let make = (~certificate, ~label=?, ()) => new({certificate, label})
+  let make = (~certificate, ~label=?, ()) => new({certificate: certificate, label: label})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateHsm = {
   type t
   @ocaml.doc("<p>Contains the inputs for the <code>CreateHsm</code> operation.</p>")
@@ -254,9 +268,19 @@ module CreateHsm = {
     ~eniIp=?,
     (),
   ) =>
-    new({syslogIp, clientToken, subscriptionType, externalId, iamRoleArn, eniIp, sshKey, subnetId})
+    new({
+      syslogIp: syslogIp,
+      clientToken: clientToken,
+      subscriptionType: subscriptionType,
+      externalId: externalId,
+      iamRoleArn: iamRoleArn,
+      eniIp: eniIp,
+      sshKey: sshKey,
+      subnetId: subnetId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateHapg = {
   type t
   @ocaml.doc("<p>Contains the inputs for the <a>CreateHapgRequest</a> action.</p>")
@@ -273,6 +297,7 @@ module CreateHapg = {
   let make = (~label, ()) => new({label: label})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module RemoveTagsFromResource = {
   type t
   type request = {
@@ -288,9 +313,11 @@ module RemoveTagsFromResource = {
   type response = {@ocaml.doc("<p>The status of the operation.</p>") @as("Status") status: string_}
   @module("@aws-sdk/client-cloudhsm") @new
   external new: request => t = "RemoveTagsFromResourceCommand"
-  let make = (~tagKeyList, ~resourceArn, ()) => new({tagKeyList, resourceArn})
+  let make = (~tagKeyList, ~resourceArn, ()) =>
+    new({tagKeyList: tagKeyList, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ModifyHapg = {
   type t
   type request = {
@@ -309,9 +336,10 @@ module ModifyHapg = {
   }
   @module("@aws-sdk/client-cloudhsm") @new external new: request => t = "ModifyHapgCommand"
   let make = (~hapgArn, ~partitionSerialList=?, ~label=?, ()) =>
-    new({partitionSerialList, label, hapgArn})
+    new({partitionSerialList: partitionSerialList, label: label, hapgArn: hapgArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListLunaClients = {
   type t
   type request = {
@@ -331,6 +359,7 @@ module ListLunaClients = {
   let make = (~nextToken=?, ()) => new({nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListHsms = {
   type t
   type request = {
@@ -352,6 +381,7 @@ module ListHsms = {
   let make = (~nextToken=?, ()) => new({nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListHapgs = {
   type t
   type request = {
@@ -372,6 +402,7 @@ module ListHapgs = {
   let make = (~nextToken=?, ()) => new({nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListAvailableZones = {
   type t
   type request = {.}
@@ -384,6 +415,7 @@ module ListAvailableZones = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetConfig = {
   type t
   type request = {
@@ -404,9 +436,10 @@ module GetConfig = {
   }
   @module("@aws-sdk/client-cloudhsm") @new external new: request => t = "GetConfigCommand"
   let make = (~hapgList, ~clientVersion, ~clientArn, ()) =>
-    new({hapgList, clientVersion, clientArn})
+    new({hapgList: hapgList, clientVersion: clientVersion, clientArn: clientArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeHsm = {
   type t
   @ocaml.doc("<p>Contains the inputs for the <a>DescribeHsm</a> operation.</p>")
@@ -464,9 +497,11 @@ module DescribeHsm = {
     @ocaml.doc("<p>The ARN of the HSM.</p>") @as("HsmArn") hsmArn: option<hsmArn>,
   }
   @module("@aws-sdk/client-cloudhsm") @new external new: request => t = "DescribeHsmCommand"
-  let make = (~hsmSerialNumber=?, ~hsmArn=?, ()) => new({hsmSerialNumber, hsmArn})
+  let make = (~hsmSerialNumber=?, ~hsmArn=?, ()) =>
+    new({hsmSerialNumber: hsmSerialNumber, hsmArn: hsmArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeHapg = {
   type t
   @ocaml.doc("<p>Contains the inputs for the <a>DescribeHapg</a> action.</p>")
@@ -501,6 +536,7 @@ module DescribeHapg = {
   let make = (~hapgArn, ()) => new({hapgArn: hapgArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListTagsForResource = {
   type t
   type request = {
@@ -513,6 +549,7 @@ module ListTagsForResource = {
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module AddTagsToResource = {
   type t
   type request = {
@@ -523,6 +560,6 @@ module AddTagsToResource = {
   }
   type response = {@ocaml.doc("<p>The status of the operation.</p>") @as("Status") status: string_}
   @module("@aws-sdk/client-cloudhsm") @new external new: request => t = "AddTagsToResourceCommand"
-  let make = (~tagList_, ~resourceArn, ()) => new({tagList_, resourceArn})
+  let make = (~tagList_, ~resourceArn, ()) => new({tagList_: tagList_, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

@@ -141,9 +141,10 @@ module UpdateHypervisor = {
   @module("@aws-sdk/client-backup-gateway") @new
   external new: request => t = "UpdateHypervisorCommand"
   let make = (~hypervisorArn, ~password=?, ~username=?, ~host=?, ()) =>
-    new({password, username, host, hypervisorArn})
+    new({password: password, username: username, host: host, hypervisorArn: hypervisorArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateGatewayInformation = {
   type t
   type request = {
@@ -159,9 +160,11 @@ module UpdateGatewayInformation = {
   }
   @module("@aws-sdk/client-backup-gateway") @new
   external new: request => t = "UpdateGatewayInformationCommand"
-  let make = (~gatewayArn, ~gatewayDisplayName=?, ()) => new({gatewayDisplayName, gatewayArn})
+  let make = (~gatewayArn, ~gatewayDisplayName=?, ()) =>
+    new({gatewayDisplayName: gatewayDisplayName, gatewayArn: gatewayArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module TestHypervisorConfiguration = {
   type t
   type request = {
@@ -181,9 +184,10 @@ module TestHypervisorConfiguration = {
   @module("@aws-sdk/client-backup-gateway") @new
   external new: request => t = "TestHypervisorConfigurationCommand"
   let make = (~host, ~gatewayArn, ~password=?, ~username=?, ()) =>
-    new({password, username, host, gatewayArn})
+    new({password: password, username: username, host: host, gatewayArn: gatewayArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module PutMaintenanceStartTime = {
   type t
   type request = {
@@ -212,9 +216,16 @@ module PutMaintenanceStartTime = {
   @module("@aws-sdk/client-backup-gateway") @new
   external new: request => t = "PutMaintenanceStartTimeCommand"
   let make = (~minuteOfHour, ~hourOfDay, ~gatewayArn, ~dayOfMonth=?, ~dayOfWeek=?, ()) =>
-    new({dayOfMonth, dayOfWeek, minuteOfHour, hourOfDay, gatewayArn})
+    new({
+      dayOfMonth: dayOfMonth,
+      dayOfWeek: dayOfWeek,
+      minuteOfHour: minuteOfHour,
+      hourOfDay: hourOfDay,
+      gatewayArn: gatewayArn,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DisassociateGatewayFromServer = {
   type t
   type request = {
@@ -232,6 +243,7 @@ module DisassociateGatewayFromServer = {
   let make = (~gatewayArn, ()) => new({gatewayArn: gatewayArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteHypervisor = {
   type t
   type request = {
@@ -249,6 +261,7 @@ module DeleteHypervisor = {
   let make = (~hypervisorArn, ()) => new({hypervisorArn: hypervisorArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteGateway = {
   type t
   type request = {
@@ -264,6 +277,7 @@ module DeleteGateway = {
   let make = (~gatewayArn, ()) => new({gatewayArn: gatewayArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module AssociateGatewayToServer = {
   type t
   type request = {
@@ -283,9 +297,10 @@ module AssociateGatewayToServer = {
   }
   @module("@aws-sdk/client-backup-gateway") @new
   external new: request => t = "AssociateGatewayToServerCommand"
-  let make = (~serverArn, ~gatewayArn, ()) => new({serverArn, gatewayArn})
+  let make = (~serverArn, ~gatewayArn, ()) => new({serverArn: serverArn, gatewayArn: gatewayArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UntagResource = {
   type t
   type request = {
@@ -301,9 +316,10 @@ module UntagResource = {
     resourceARN: option<resourceArn>,
   }
   @module("@aws-sdk/client-backup-gateway") @new external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceARN, ()) => new({tagKeys, resourceARN})
+  let make = (~tagKeys, ~resourceARN, ()) => new({tagKeys: tagKeys, resourceARN: resourceARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module TagResource = {
   type t
   type request = {
@@ -317,9 +333,10 @@ module TagResource = {
     resourceARN: option<resourceArn>,
   }
   @module("@aws-sdk/client-backup-gateway") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceARN, ()) => new({tags, resourceARN})
+  let make = (~tags, ~resourceARN, ()) => new({tags: tags, resourceARN: resourceARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListVirtualMachines = {
   type t
   type request = {
@@ -346,9 +363,11 @@ module ListVirtualMachines = {
   }
   @module("@aws-sdk/client-backup-gateway") @new
   external new: request => t = "ListVirtualMachinesCommand"
-  let make = (~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults})
+  let make = (~nextToken=?, ~maxResults=?, ()) =>
+    new({nextToken: nextToken, maxResults: maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListTagsForResource = {
   type t
   type request = {
@@ -367,6 +386,7 @@ module ListTagsForResource = {
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListHypervisors = {
   type t
   type request = {
@@ -393,9 +413,11 @@ module ListHypervisors = {
   }
   @module("@aws-sdk/client-backup-gateway") @new
   external new: request => t = "ListHypervisorsCommand"
-  let make = (~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults})
+  let make = (~nextToken=?, ~maxResults=?, ()) =>
+    new({nextToken: nextToken, maxResults: maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListGateways = {
   type t
   type request = {
@@ -418,9 +440,11 @@ module ListGateways = {
     @ocaml.doc("<p>A list of your gateways.</p>") @as("Gateways") gateways: option<gateways>,
   }
   @module("@aws-sdk/client-backup-gateway") @new external new: request => t = "ListGatewaysCommand"
-  let make = (~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults})
+  let make = (~nextToken=?, ~maxResults=?, ()) =>
+    new({nextToken: nextToken, maxResults: maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ImportHypervisorConfiguration = {
   type t
   type request = {
@@ -446,9 +470,17 @@ module ImportHypervisorConfiguration = {
   @module("@aws-sdk/client-backup-gateway") @new
   external new: request => t = "ImportHypervisorConfigurationCommand"
   let make = (~host, ~name, ~tags=?, ~kmsKeyArn=?, ~password=?, ~username=?, ()) =>
-    new({tags, kmsKeyArn, password, username, host, name})
+    new({
+      tags: tags,
+      kmsKeyArn: kmsKeyArn,
+      password: password,
+      username: username,
+      host: host,
+      name: name,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateGateway = {
   type t
   type request = {
@@ -469,6 +501,11 @@ module CreateGateway = {
   }
   @module("@aws-sdk/client-backup-gateway") @new external new: request => t = "CreateGatewayCommand"
   let make = (~gatewayType, ~gatewayDisplayName, ~activationKey, ~tags=?, ()) =>
-    new({tags, gatewayType, gatewayDisplayName, activationKey})
+    new({
+      tags: tags,
+      gatewayType: gatewayType,
+      gatewayDisplayName: gatewayDisplayName,
+      activationKey: activationKey,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

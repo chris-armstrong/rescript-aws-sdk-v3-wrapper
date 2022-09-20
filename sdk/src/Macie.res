@@ -123,6 +123,7 @@ module DisassociateMemberAccount = {
   let make = (~memberAccountId, ()) => new({memberAccountId: memberAccountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module AssociateMemberAccount = {
   type t
   type request = {
@@ -135,6 +136,7 @@ module AssociateMemberAccount = {
   let make = (~memberAccountId, ()) => new({memberAccountId: memberAccountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ListMemberAccounts = {
   type t
   type request = {
@@ -159,9 +161,11 @@ module ListMemberAccounts = {
     memberAccounts: option<memberAccounts>,
   }
   @module("@aws-sdk/client-macie") @new external new: request => t = "ListMemberAccountsCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateS3Resources = {
   type t
   type request = {
@@ -179,9 +183,10 @@ module UpdateS3Resources = {
   }
   @module("@aws-sdk/client-macie") @new external new: request => t = "UpdateS3ResourcesCommand"
   let make = (~s3ResourcesUpdate, ~memberAccountId=?, ()) =>
-    new({s3ResourcesUpdate, memberAccountId})
+    new({s3ResourcesUpdate: s3ResourcesUpdate, memberAccountId: memberAccountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListS3Resources = {
   type t
   type request = {
@@ -210,9 +215,10 @@ module ListS3Resources = {
   }
   @module("@aws-sdk/client-macie") @new external new: request => t = "ListS3ResourcesCommand"
   let make = (~maxResults=?, ~nextToken=?, ~memberAccountId=?, ()) =>
-    new({maxResults, nextToken, memberAccountId})
+    new({maxResults: maxResults, nextToken: nextToken, memberAccountId: memberAccountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DisassociateS3Resources = {
   type t
   type request = {
@@ -232,9 +238,10 @@ module DisassociateS3Resources = {
   @module("@aws-sdk/client-macie") @new
   external new: request => t = "DisassociateS3ResourcesCommand"
   let make = (~associatedS3Resources, ~memberAccountId=?, ()) =>
-    new({associatedS3Resources, memberAccountId})
+    new({associatedS3Resources: associatedS3Resources, memberAccountId: memberAccountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module AssociateS3Resources = {
   type t
   type request = {
@@ -251,6 +258,7 @@ module AssociateS3Resources = {
     failedS3Resources: option<failedS3Resources>,
   }
   @module("@aws-sdk/client-macie") @new external new: request => t = "AssociateS3ResourcesCommand"
-  let make = (~s3Resources, ~memberAccountId=?, ()) => new({s3Resources, memberAccountId})
+  let make = (~s3Resources, ~memberAccountId=?, ()) =>
+    new({s3Resources: s3Resources, memberAccountId: memberAccountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

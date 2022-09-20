@@ -1009,9 +1009,10 @@ module GetRepositoryEndpoint = {
   @module("@aws-sdk/client-codeartifact") @new
   external new: request => t = "GetRepositoryEndpointCommand"
   let make = (~format, ~repository, ~domain, ~domainOwner=?, ()) =>
-    new({format, repository, domainOwner, domain})
+    new({format: format, repository: repository, domainOwner: domainOwner, domain: domain})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetPackageVersionReadme = {
   type t
   type request = {
@@ -1154,9 +1155,19 @@ module GetPackageVersionReadme = {
     ~namespace=?,
     ~domainOwner=?,
     (),
-  ) => new({packageVersion, package, namespace, format, repository, domainOwner, domain})
+  ) =>
+    new({
+      packageVersion: packageVersion,
+      package: package,
+      namespace: namespace,
+      format: format,
+      repository: repository,
+      domainOwner: domainOwner,
+      domain: domain,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetPackageVersionAsset = {
   type t
   type request = {
@@ -1264,18 +1275,19 @@ module GetPackageVersionAsset = {
     (),
   ) =>
     new({
-      packageVersionRevision,
-      asset,
-      packageVersion,
-      package,
-      namespace,
-      format,
-      repository,
-      domainOwner,
-      domain,
+      packageVersionRevision: packageVersionRevision,
+      asset: asset,
+      packageVersion: packageVersion,
+      package: package,
+      namespace: namespace,
+      format: format,
+      repository: repository,
+      domainOwner: domainOwner,
+      domain: domain,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetAuthorizationToken = {
   type t
   type request = {
@@ -1307,9 +1319,10 @@ module GetAuthorizationToken = {
   @module("@aws-sdk/client-codeartifact") @new
   external new: request => t = "GetAuthorizationTokenCommand"
   let make = (~domain, ~durationSeconds=?, ~domainOwner=?, ()) =>
-    new({durationSeconds, domainOwner, domain})
+    new({durationSeconds: durationSeconds, domainOwner: domainOwner, domain: domain})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UntagResource = {
   type t
   type request = {
@@ -1322,9 +1335,10 @@ module UntagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-codeartifact") @new external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys, resourceArn})
+  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module PutRepositoryPermissionsPolicy = {
   type t
   type request = {
@@ -1356,9 +1370,16 @@ module PutRepositoryPermissionsPolicy = {
   @module("@aws-sdk/client-codeartifact") @new
   external new: request => t = "PutRepositoryPermissionsPolicyCommand"
   let make = (~policyDocument, ~repository, ~domain, ~policyRevision=?, ~domainOwner=?, ()) =>
-    new({policyDocument, policyRevision, repository, domainOwner, domain})
+    new({
+      policyDocument: policyDocument,
+      policyRevision: policyRevision,
+      repository: repository,
+      domainOwner: domainOwner,
+      domain: domain,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module PutDomainPermissionsPolicy = {
   type t
   type request = {
@@ -1387,9 +1408,15 @@ module PutDomainPermissionsPolicy = {
   @module("@aws-sdk/client-codeartifact") @new
   external new: request => t = "PutDomainPermissionsPolicyCommand"
   let make = (~policyDocument, ~domain, ~policyRevision=?, ~domainOwner=?, ()) =>
-    new({policyDocument, policyRevision, domainOwner, domain})
+    new({
+      policyDocument: policyDocument,
+      policyRevision: policyRevision,
+      domainOwner: domainOwner,
+      domain: domain,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetRepositoryPermissionsPolicy = {
   type t
   type request = {
@@ -1415,9 +1442,11 @@ module GetRepositoryPermissionsPolicy = {
   }
   @module("@aws-sdk/client-codeartifact") @new
   external new: request => t = "GetRepositoryPermissionsPolicyCommand"
-  let make = (~repository, ~domain, ~domainOwner=?, ()) => new({repository, domainOwner, domain})
+  let make = (~repository, ~domain, ~domainOwner=?, ()) =>
+    new({repository: repository, domainOwner: domainOwner, domain: domain})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetDomainPermissionsPolicy = {
   type t
   type request = {
@@ -1439,9 +1468,10 @@ module GetDomainPermissionsPolicy = {
   }
   @module("@aws-sdk/client-codeartifact") @new
   external new: request => t = "GetDomainPermissionsPolicyCommand"
-  let make = (~domain, ~domainOwner=?, ()) => new({domainOwner, domain})
+  let make = (~domain, ~domainOwner=?, ()) => new({domainOwner: domainOwner, domain: domain})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeDomain = {
   type t
   type request = {
@@ -1457,9 +1487,10 @@ module DescribeDomain = {
   }
   type response = {domain: option<domainDescription>}
   @module("@aws-sdk/client-codeartifact") @new external new: request => t = "DescribeDomainCommand"
-  let make = (~domain, ~domainOwner=?, ()) => new({domainOwner, domain})
+  let make = (~domain, ~domainOwner=?, ()) => new({domainOwner: domainOwner, domain: domain})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteRepositoryPermissionsPolicy = {
   type t
   type request = {
@@ -1491,9 +1522,15 @@ module DeleteRepositoryPermissionsPolicy = {
   @module("@aws-sdk/client-codeartifact") @new
   external new: request => t = "DeleteRepositoryPermissionsPolicyCommand"
   let make = (~repository, ~domain, ~policyRevision=?, ~domainOwner=?, ()) =>
-    new({policyRevision, repository, domainOwner, domain})
+    new({
+      policyRevision: policyRevision,
+      repository: repository,
+      domainOwner: domainOwner,
+      domain: domain,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteDomainPermissionsPolicy = {
   type t
   type request = {
@@ -1521,9 +1558,10 @@ module DeleteDomainPermissionsPolicy = {
   @module("@aws-sdk/client-codeartifact") @new
   external new: request => t = "DeleteDomainPermissionsPolicyCommand"
   let make = (~domain, ~policyRevision=?, ~domainOwner=?, ()) =>
-    new({policyRevision, domainOwner, domain})
+    new({policyRevision: policyRevision, domainOwner: domainOwner, domain: domain})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteDomain = {
   type t
   type request = {
@@ -1544,9 +1582,10 @@ module DeleteDomain = {
     domain: option<domainDescription>,
   }
   @module("@aws-sdk/client-codeartifact") @new external new: request => t = "DeleteDomainCommand"
-  let make = (~domain, ~domainOwner=?, ()) => new({domainOwner, domain})
+  let make = (~domain, ~domainOwner=?, ()) => new({domainOwner: domainOwner, domain: domain})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdatePackageVersionsStatus = {
   type t
   type request = {
@@ -1655,19 +1694,20 @@ module UpdatePackageVersionsStatus = {
     (),
   ) =>
     new({
-      targetStatus,
-      expectedStatus,
-      versionRevisions,
-      versions,
-      package,
-      namespace,
-      format,
-      repository,
-      domainOwner,
-      domain,
+      targetStatus: targetStatus,
+      expectedStatus: expectedStatus,
+      versionRevisions: versionRevisions,
+      versions: versions,
+      package: package,
+      namespace: namespace,
+      format: format,
+      repository: repository,
+      domainOwner: domainOwner,
+      domain: domain,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module TagResource = {
   type t
   type request = {
@@ -1679,9 +1719,10 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-codeartifact") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceArn, ()) => new({tags, resourceArn})
+  let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ListTagsForResource = {
   type t
   type request = {
@@ -1697,6 +1738,7 @@ module ListTagsForResource = {
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListRepositoriesInDomain = {
   type t
   type request = {
@@ -1747,9 +1789,18 @@ module ListRepositoriesInDomain = {
     ~administratorAccount=?,
     ~domainOwner=?,
     (),
-  ) => new({nextToken, maxResults, repositoryPrefix, administratorAccount, domainOwner, domain})
+  ) =>
+    new({
+      nextToken: nextToken,
+      maxResults: maxResults,
+      repositoryPrefix: repositoryPrefix,
+      administratorAccount: administratorAccount,
+      domainOwner: domainOwner,
+      domain: domain,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListRepositories = {
   type t
   type request = {
@@ -1779,9 +1830,10 @@ module ListRepositories = {
   @module("@aws-sdk/client-codeartifact") @new
   external new: request => t = "ListRepositoriesCommand"
   let make = (~nextToken=?, ~maxResults=?, ~repositoryPrefix=?, ()) =>
-    new({nextToken, maxResults, repositoryPrefix})
+    new({nextToken: nextToken, maxResults: maxResults, repositoryPrefix: repositoryPrefix})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListPackages = {
   type t
   type request = {
@@ -1879,9 +1931,19 @@ module ListPackages = {
     ~domainOwner=?,
     (),
   ) =>
-    new({nextToken, maxResults, packagePrefix, namespace, format, repository, domainOwner, domain})
+    new({
+      nextToken: nextToken,
+      maxResults: maxResults,
+      packagePrefix: packagePrefix,
+      namespace: namespace,
+      format: format,
+      repository: repository,
+      domainOwner: domainOwner,
+      domain: domain,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListPackageVersions = {
   type t
   type request = {
@@ -2083,19 +2145,20 @@ module ListPackageVersions = {
     (),
   ) =>
     new({
-      nextToken,
-      maxResults,
-      sortBy,
-      status,
-      package,
-      namespace,
-      format,
-      repository,
-      domainOwner,
-      domain,
+      nextToken: nextToken,
+      maxResults: maxResults,
+      sortBy: sortBy,
+      status: status,
+      package: package,
+      namespace: namespace,
+      format: format,
+      repository: repository,
+      domainOwner: domainOwner,
+      domain: domain,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListPackageVersionDependencies = {
   type t
   type request = {
@@ -2247,9 +2310,20 @@ module ListPackageVersionDependencies = {
     ~namespace=?,
     ~domainOwner=?,
     (),
-  ) => new({nextToken, packageVersion, package, namespace, format, repository, domainOwner, domain})
+  ) =>
+    new({
+      nextToken: nextToken,
+      packageVersion: packageVersion,
+      package: package,
+      namespace: namespace,
+      format: format,
+      repository: repository,
+      domainOwner: domainOwner,
+      domain: domain,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListDomains = {
   type t
   type request = {
@@ -2273,9 +2347,11 @@ module ListDomains = {
     domains: option<domainSummaryList>,
   }
   @module("@aws-sdk/client-codeartifact") @new external new: request => t = "ListDomainsCommand"
-  let make = (~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults})
+  let make = (~nextToken=?, ~maxResults=?, ()) =>
+    new({nextToken: nextToken, maxResults: maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DisposePackageVersions = {
   type t
   type request = {
@@ -2438,18 +2514,19 @@ module DisposePackageVersions = {
     (),
   ) =>
     new({
-      expectedStatus,
-      versionRevisions,
-      versions,
-      package,
-      namespace,
-      format,
-      repository,
-      domainOwner,
-      domain,
+      expectedStatus: expectedStatus,
+      versionRevisions: versionRevisions,
+      versions: versions,
+      package: package,
+      namespace: namespace,
+      format: format,
+      repository: repository,
+      domainOwner: domainOwner,
+      domain: domain,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeletePackageVersions = {
   type t
   type request = {
@@ -2605,9 +2682,20 @@ module DeletePackageVersions = {
     ~namespace=?,
     ~domainOwner=?,
     (),
-  ) => new({expectedStatus, versions, package, namespace, format, repository, domainOwner, domain})
+  ) =>
+    new({
+      expectedStatus: expectedStatus,
+      versions: versions,
+      package: package,
+      namespace: namespace,
+      format: format,
+      repository: repository,
+      domainOwner: domainOwner,
+      domain: domain,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateDomain = {
   type t
   type request = {
@@ -2637,9 +2725,11 @@ module CreateDomain = {
     domain: option<domainDescription>,
   }
   @module("@aws-sdk/client-codeartifact") @new external new: request => t = "CreateDomainCommand"
-  let make = (~domain, ~tags=?, ~encryptionKey=?, ()) => new({tags, encryptionKey, domain})
+  let make = (~domain, ~tags=?, ~encryptionKey=?, ()) =>
+    new({tags: tags, encryptionKey: encryptionKey, domain: domain})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CopyPackageVersions = {
   type t
   type request = {
@@ -2800,20 +2890,21 @@ module CopyPackageVersions = {
     (),
   ) =>
     new({
-      includeFromUpstream,
-      allowOverwrite,
-      versionRevisions,
-      versions,
-      package,
-      namespace,
-      format,
-      destinationRepository,
-      sourceRepository,
-      domainOwner,
-      domain,
+      includeFromUpstream: includeFromUpstream,
+      allowOverwrite: allowOverwrite,
+      versionRevisions: versionRevisions,
+      versions: versions,
+      package: package,
+      namespace: namespace,
+      format: format,
+      destinationRepository: destinationRepository,
+      sourceRepository: sourceRepository,
+      domainOwner: domainOwner,
+      domain: domain,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateRepository = {
   type t
   type request = {
@@ -2848,9 +2939,16 @@ module UpdateRepository = {
   @module("@aws-sdk/client-codeartifact") @new
   external new: request => t = "UpdateRepositoryCommand"
   let make = (~repository, ~domain, ~upstreams=?, ~description=?, ~domainOwner=?, ()) =>
-    new({upstreams, description, repository, domainOwner, domain})
+    new({
+      upstreams: upstreams,
+      description: description,
+      repository: repository,
+      domainOwner: domainOwner,
+      domain: domain,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListPackageVersionAssets = {
   type t
   type request = {
@@ -2992,18 +3090,19 @@ module ListPackageVersionAssets = {
     (),
   ) =>
     new({
-      nextToken,
-      maxResults,
-      packageVersion,
-      package,
-      namespace,
-      format,
-      repository,
-      domainOwner,
-      domain,
+      nextToken: nextToken,
+      maxResults: maxResults,
+      packageVersion: packageVersion,
+      package: package,
+      namespace: namespace,
+      format: format,
+      repository: repository,
+      domainOwner: domainOwner,
+      domain: domain,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DisassociateExternalConnection = {
   type t
   type request = {
@@ -3031,9 +3130,15 @@ module DisassociateExternalConnection = {
   @module("@aws-sdk/client-codeartifact") @new
   external new: request => t = "DisassociateExternalConnectionCommand"
   let make = (~externalConnection, ~repository, ~domain, ~domainOwner=?, ()) =>
-    new({externalConnection, repository, domainOwner, domain})
+    new({
+      externalConnection: externalConnection,
+      repository: repository,
+      domainOwner: domainOwner,
+      domain: domain,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeRepository = {
   type t
   type request = {
@@ -3059,9 +3164,11 @@ module DescribeRepository = {
   }
   @module("@aws-sdk/client-codeartifact") @new
   external new: request => t = "DescribeRepositoryCommand"
-  let make = (~repository, ~domain, ~domainOwner=?, ()) => new({repository, domainOwner, domain})
+  let make = (~repository, ~domain, ~domainOwner=?, ()) =>
+    new({repository: repository, domainOwner: domainOwner, domain: domain})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribePackageVersion = {
   type t
   type request = {
@@ -3144,9 +3251,19 @@ module DescribePackageVersion = {
     ~namespace=?,
     ~domainOwner=?,
     (),
-  ) => new({packageVersion, package, namespace, format, repository, domainOwner, domain})
+  ) =>
+    new({
+      packageVersion: packageVersion,
+      package: package,
+      namespace: namespace,
+      format: format,
+      repository: repository,
+      domainOwner: domainOwner,
+      domain: domain,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteRepository = {
   type t
   type request = {
@@ -3169,9 +3286,11 @@ module DeleteRepository = {
   }
   @module("@aws-sdk/client-codeartifact") @new
   external new: request => t = "DeleteRepositoryCommand"
-  let make = (~repository, ~domain, ~domainOwner=?, ()) => new({repository, domainOwner, domain})
+  let make = (~repository, ~domain, ~domainOwner=?, ()) =>
+    new({repository: repository, domainOwner: domainOwner, domain: domain})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateRepository = {
   type t
   type request = {
@@ -3204,9 +3323,17 @@ module CreateRepository = {
   @module("@aws-sdk/client-codeartifact") @new
   external new: request => t = "CreateRepositoryCommand"
   let make = (~repository, ~domain, ~tags=?, ~upstreams=?, ~description=?, ~domainOwner=?, ()) =>
-    new({tags, upstreams, description, repository, domainOwner, domain})
+    new({
+      tags: tags,
+      upstreams: upstreams,
+      description: description,
+      repository: repository,
+      domainOwner: domainOwner,
+      domain: domain,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module AssociateExternalConnection = {
   type t
   type request = {
@@ -3266,6 +3393,11 @@ module AssociateExternalConnection = {
   @module("@aws-sdk/client-codeartifact") @new
   external new: request => t = "AssociateExternalConnectionCommand"
   let make = (~externalConnection, ~repository, ~domain, ~domainOwner=?, ()) =>
-    new({externalConnection, repository, domainOwner, domain})
+    new({
+      externalConnection: externalConnection,
+      repository: repository,
+      domainOwner: domainOwner,
+      domain: domain,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

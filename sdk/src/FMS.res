@@ -1694,9 +1694,11 @@ module PutNotificationChannel = {
   }
   type response = {.}
   @module("@aws-sdk/client-fms") @new external new: request => t = "PutNotificationChannelCommand"
-  let make = (~snsRoleName, ~snsTopicArn, ()) => new({snsRoleName, snsTopicArn})
+  let make = (~snsRoleName, ~snsTopicArn, ()) =>
+    new({snsRoleName: snsRoleName, snsTopicArn: snsTopicArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module GetThirdPartyFirewallAssociationStatus = {
   type t
   type request = {
@@ -1752,6 +1754,7 @@ module GetThirdPartyFirewallAssociationStatus = {
   let make = (~thirdPartyFirewall, ()) => new({thirdPartyFirewall: thirdPartyFirewall})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetProtectionStatus = {
   type t
   type request = {
@@ -1833,9 +1836,18 @@ module GetProtectionStatus = {
     ~startTime=?,
     ~memberAccountId=?,
     (),
-  ) => new({maxResults, nextToken, endTime, startTime, memberAccountId, policyId})
+  ) =>
+    new({
+      maxResults: maxResults,
+      nextToken: nextToken,
+      endTime: endTime,
+      startTime: startTime,
+      memberAccountId: memberAccountId,
+      policyId: policyId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetNotificationChannel = {
   type t
   type request = {.}
@@ -1850,6 +1862,7 @@ module GetNotificationChannel = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetAdminAccount = {
   type t
   type request = {.}
@@ -1868,6 +1881,7 @@ module GetAdminAccount = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DisassociateThirdPartyFirewall = {
   type t
   type request = {
@@ -1886,6 +1900,7 @@ module DisassociateThirdPartyFirewall = {
   let make = (~thirdPartyFirewall, ()) => new({thirdPartyFirewall: thirdPartyFirewall})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DisassociateAdminAccount = {
   type t
   type request = {.}
@@ -1894,6 +1909,7 @@ module DisassociateAdminAccount = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteProtocolsList = {
   type t
   type request = {
@@ -1907,6 +1923,7 @@ module DeleteProtocolsList = {
   let make = (~listId, ()) => new({listId: listId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeletePolicy = {
   type t
   type request = {
@@ -1950,9 +1967,10 @@ module DeletePolicy = {
   type response = {.}
   @module("@aws-sdk/client-fms") @new external new: request => t = "DeletePolicyCommand"
   let make = (~policyId, ~deleteAllPolicyResources=?, ()) =>
-    new({deleteAllPolicyResources, policyId})
+    new({deleteAllPolicyResources: deleteAllPolicyResources, policyId: policyId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteNotificationChannel = {
   type t
   type request = {.}
@@ -1962,6 +1980,7 @@ module DeleteNotificationChannel = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteAppsList = {
   type t
   type request = {
@@ -1975,6 +1994,7 @@ module DeleteAppsList = {
   let make = (~listId, ()) => new({listId: listId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module AssociateThirdPartyFirewall = {
   type t
   type request = {
@@ -2013,6 +2033,7 @@ module AssociateThirdPartyFirewall = {
   let make = (~thirdPartyFirewall, ()) => new({thirdPartyFirewall: thirdPartyFirewall})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module AssociateAdminAccount = {
   type t
   type request = {
@@ -2028,6 +2049,7 @@ module AssociateAdminAccount = {
   let make = (~adminAccount, ()) => new({adminAccount: adminAccount})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UntagResource = {
   type t
   type request = {
@@ -2041,9 +2063,10 @@ module UntagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-fms") @new external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys, resourceArn})
+  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ListMemberAccounts = {
   type t
   type request = {
@@ -2074,9 +2097,11 @@ module ListMemberAccounts = {
     memberAccounts: option<memberAccounts>,
   }
   @module("@aws-sdk/client-fms") @new external new: request => t = "ListMemberAccountsCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module TagResource = {
   type t
   type request = {
@@ -2089,9 +2114,10 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-fms") @new external new: request => t = "TagResourceCommand"
-  let make = (~tagList_, ~resourceArn, ()) => new({tagList_, resourceArn})
+  let make = (~tagList_, ~resourceArn, ()) => new({tagList_: tagList_, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ListThirdPartyFirewallFirewallPolicies = {
   type t
   type request = {
@@ -2127,9 +2153,10 @@ third-party firewall vendor is associated with. Each <code>ThirdPartyFirewallFir
   @module("@aws-sdk/client-fms") @new
   external new: request => t = "ListThirdPartyFirewallFirewallPoliciesCommand"
   let make = (~maxResults, ~thirdPartyFirewall, ~nextToken=?, ()) =>
-    new({maxResults, nextToken, thirdPartyFirewall})
+    new({maxResults: maxResults, nextToken: nextToken, thirdPartyFirewall: thirdPartyFirewall})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListTagsForResource = {
   type t
   type request = {
@@ -2147,6 +2174,7 @@ module ListTagsForResource = {
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListPolicies = {
   type t
   type request = {
@@ -2178,9 +2206,11 @@ module ListPolicies = {
     policyList: option<policySummaryList>,
   }
   @module("@aws-sdk/client-fms") @new external new: request => t = "ListPoliciesCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module PutProtocolsList = {
   type t
   type request = {
@@ -2198,9 +2228,11 @@ module PutProtocolsList = {
     protocolsList: option<protocolsListData>,
   }
   @module("@aws-sdk/client-fms") @new external new: request => t = "PutProtocolsListCommand"
-  let make = (~protocolsList, ~tagList_=?, ()) => new({tagList_, protocolsList})
+  let make = (~protocolsList, ~tagList_=?, ()) =>
+    new({tagList_: tagList_, protocolsList: protocolsList})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListProtocolsLists = {
   type t
   type request = {
@@ -2232,9 +2264,10 @@ module ListProtocolsLists = {
   }
   @module("@aws-sdk/client-fms") @new external new: request => t = "ListProtocolsListsCommand"
   let make = (~maxResults, ~nextToken=?, ~defaultLists=?, ()) =>
-    new({maxResults, nextToken, defaultLists})
+    new({maxResults: maxResults, nextToken: nextToken, defaultLists: defaultLists})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetProtocolsList = {
   type t
   type request = {
@@ -2258,9 +2291,10 @@ module GetProtocolsList = {
     protocolsList: option<protocolsListData>,
   }
   @module("@aws-sdk/client-fms") @new external new: request => t = "GetProtocolsListCommand"
-  let make = (~listId, ~defaultList=?, ()) => new({defaultList, listId})
+  let make = (~listId, ~defaultList=?, ()) => new({defaultList: defaultList, listId: listId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module PutPolicy = {
   type t
   type request = {
@@ -2276,9 +2310,10 @@ module PutPolicy = {
     policy: option<policy>,
   }
   @module("@aws-sdk/client-fms") @new external new: request => t = "PutPolicyCommand"
-  let make = (~policy, ~tagList_=?, ()) => new({tagList_, policy})
+  let make = (~policy, ~tagList_=?, ()) => new({tagList_: tagList_, policy: policy})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module PutAppsList = {
   type t
   type request = {
@@ -2295,9 +2330,10 @@ module PutAppsList = {
     appsList: option<appsListData>,
   }
   @module("@aws-sdk/client-fms") @new external new: request => t = "PutAppsListCommand"
-  let make = (~appsList, ~tagList_=?, ()) => new({tagList_, appsList})
+  let make = (~appsList, ~tagList_=?, ()) => new({tagList_: tagList_, appsList: appsList})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListComplianceStatus = {
   type t
   type request = {
@@ -2335,9 +2371,11 @@ module ListComplianceStatus = {
     policyComplianceStatusList: option<policyComplianceStatusList>,
   }
   @module("@aws-sdk/client-fms") @new external new: request => t = "ListComplianceStatusCommand"
-  let make = (~policyId, ~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken, policyId})
+  let make = (~policyId, ~maxResults=?, ~nextToken=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken, policyId: policyId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListAppsLists = {
   type t
   type request = {
@@ -2368,9 +2406,10 @@ module ListAppsLists = {
   }
   @module("@aws-sdk/client-fms") @new external new: request => t = "ListAppsListsCommand"
   let make = (~maxResults, ~nextToken=?, ~defaultLists=?, ()) =>
-    new({maxResults, nextToken, defaultLists})
+    new({maxResults: maxResults, nextToken: nextToken, defaultLists: defaultLists})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetPolicy = {
   type t
   type request = {
@@ -2388,6 +2427,7 @@ module GetPolicy = {
   let make = (~policyId, ()) => new({policyId: policyId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetComplianceDetail = {
   type t
   type request = {
@@ -2408,9 +2448,11 @@ module GetComplianceDetail = {
     policyComplianceDetail: option<policyComplianceDetail>,
   }
   @module("@aws-sdk/client-fms") @new external new: request => t = "GetComplianceDetailCommand"
-  let make = (~memberAccount, ~policyId, ()) => new({memberAccount, policyId})
+  let make = (~memberAccount, ~policyId, ()) =>
+    new({memberAccount: memberAccount, policyId: policyId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetAppsList = {
   type t
   type request = {
@@ -2433,9 +2475,10 @@ module GetAppsList = {
     appsList: option<appsListData>,
   }
   @module("@aws-sdk/client-fms") @new external new: request => t = "GetAppsListCommand"
-  let make = (~listId, ~defaultList=?, ()) => new({defaultList, listId})
+  let make = (~listId, ~defaultList=?, ()) => new({defaultList: defaultList, listId: listId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetViolationDetails = {
   type t
   type request = {
@@ -2466,6 +2509,11 @@ module GetViolationDetails = {
   }
   @module("@aws-sdk/client-fms") @new external new: request => t = "GetViolationDetailsCommand"
   let make = (~resourceType, ~resourceId, ~memberAccount, ~policyId, ()) =>
-    new({resourceType, resourceId, memberAccount, policyId})
+    new({
+      resourceType: resourceType,
+      resourceId: resourceId,
+      memberAccount: memberAccount,
+      policyId: policyId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

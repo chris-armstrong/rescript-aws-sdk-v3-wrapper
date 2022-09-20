@@ -181,18 +181,19 @@ module UpdateJobExecution = {
     (),
   ) =>
     new({
-      executionNumber,
-      includeJobDocument,
-      includeJobExecutionState,
-      expectedVersion,
-      stepTimeoutInMinutes,
-      statusDetails,
-      status,
-      thingName,
-      jobId,
+      executionNumber: executionNumber,
+      includeJobDocument: includeJobDocument,
+      includeJobExecutionState: includeJobExecutionState,
+      expectedVersion: expectedVersion,
+      stepTimeoutInMinutes: stepTimeoutInMinutes,
+      statusDetails: statusDetails,
+      status: status,
+      thingName: thingName,
+      jobId: jobId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module StartNextPendingJobExecution = {
   type t
   type request = {
@@ -213,9 +214,14 @@ module StartNextPendingJobExecution = {
   @module("@aws-sdk/client-iot-jobs-data") @new
   external new: request => t = "StartNextPendingJobExecutionCommand"
   let make = (~thingName, ~stepTimeoutInMinutes=?, ~statusDetails=?, ()) =>
-    new({stepTimeoutInMinutes, statusDetails, thingName})
+    new({
+      stepTimeoutInMinutes: stepTimeoutInMinutes,
+      statusDetails: statusDetails,
+      thingName: thingName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetPendingJobExecutions = {
   type t
   type request = {
@@ -232,6 +238,7 @@ module GetPendingJobExecutions = {
   let make = (~thingName, ()) => new({thingName: thingName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeJobExecution = {
   type t
   type request = {
@@ -253,6 +260,11 @@ module DescribeJobExecution = {
   @module("@aws-sdk/client-iot-jobs-data") @new
   external new: request => t = "DescribeJobExecutionCommand"
   let make = (~thingName, ~jobId, ~executionNumber=?, ~includeJobDocument=?, ()) =>
-    new({executionNumber, includeJobDocument, thingName, jobId})
+    new({
+      executionNumber: executionNumber,
+      includeJobDocument: includeJobDocument,
+      thingName: thingName,
+      jobId: jobId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

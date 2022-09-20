@@ -2102,9 +2102,16 @@ module UpdateEndpoint = {
     ~desiredInferenceUnits=?,
     ~desiredModelArn=?,
     (),
-  ) => new({desiredDataAccessRoleArn, desiredInferenceUnits, desiredModelArn, endpointArn})
+  ) =>
+    new({
+      desiredDataAccessRoleArn: desiredDataAccessRoleArn,
+      desiredInferenceUnits: desiredInferenceUnits,
+      desiredModelArn: desiredModelArn,
+      endpointArn: endpointArn,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module StopTrainingEntityRecognizer = {
   type t
   type request = {
@@ -2119,6 +2126,7 @@ module StopTrainingEntityRecognizer = {
   let make = (~entityRecognizerArn, ()) => new({entityRecognizerArn: entityRecognizerArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module StopTrainingDocumentClassifier = {
   type t
   type request = {
@@ -2133,6 +2141,7 @@ module StopTrainingDocumentClassifier = {
   let make = (~documentClassifierArn, ()) => new({documentClassifierArn: documentClassifierArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module StopTargetedSentimentDetectionJob = {
   type t
   type request = {
@@ -2155,6 +2164,7 @@ module StopTargetedSentimentDetectionJob = {
   let make = (~jobId, ()) => new({jobId: jobId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module StopSentimentDetectionJob = {
   type t
   type request = {
@@ -2175,6 +2185,7 @@ module StopSentimentDetectionJob = {
   let make = (~jobId, ()) => new({jobId: jobId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module StopPiiEntitiesDetectionJob = {
   type t
   type request = {
@@ -2192,6 +2203,7 @@ module StopPiiEntitiesDetectionJob = {
   let make = (~jobId, ()) => new({jobId: jobId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module StopKeyPhrasesDetectionJob = {
   type t
   type request = {
@@ -2212,6 +2224,7 @@ module StopKeyPhrasesDetectionJob = {
   let make = (~jobId, ()) => new({jobId: jobId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module StopEventsDetectionJob = {
   type t
   type request = {
@@ -2229,6 +2242,7 @@ module StopEventsDetectionJob = {
   let make = (~jobId, ()) => new({jobId: jobId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module StopEntitiesDetectionJob = {
   type t
   type request = {
@@ -2249,6 +2263,7 @@ module StopEntitiesDetectionJob = {
   let make = (~jobId, ()) => new({jobId: jobId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module StopDominantLanguageDetectionJob = {
   type t
   type request = {
@@ -2269,6 +2284,7 @@ module StopDominantLanguageDetectionJob = {
   let make = (~jobId, ()) => new({jobId: jobId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module PutResourcePolicy = {
   type t
   type request = {
@@ -2303,9 +2319,14 @@ module PutResourcePolicy = {
   }
   @module("@aws-sdk/client-comprehend") @new external new: request => t = "PutResourcePolicyCommand"
   let make = (~resourcePolicy, ~resourceArn, ~policyRevisionId=?, ()) =>
-    new({policyRevisionId, resourcePolicy, resourceArn})
+    new({
+      policyRevisionId: policyRevisionId,
+      resourcePolicy: resourcePolicy,
+      resourceArn: resourceArn,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeResourcePolicy = {
   type t
   type request = {
@@ -2330,6 +2351,7 @@ module DescribeResourcePolicy = {
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteResourcePolicy = {
   type t
   type request = {
@@ -2344,9 +2366,11 @@ module DeleteResourcePolicy = {
   type response = {.}
   @module("@aws-sdk/client-comprehend") @new
   external new: request => t = "DeleteResourcePolicyCommand"
-  let make = (~resourceArn, ~policyRevisionId=?, ()) => new({policyRevisionId, resourceArn})
+  let make = (~resourceArn, ~policyRevisionId=?, ()) =>
+    new({policyRevisionId: policyRevisionId, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteEntityRecognizer = {
   type t
   type request = {
@@ -2360,6 +2384,7 @@ module DeleteEntityRecognizer = {
   let make = (~entityRecognizerArn, ()) => new({entityRecognizerArn: entityRecognizerArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteEndpoint = {
   type t
   type request = {
@@ -2372,6 +2397,7 @@ module DeleteEndpoint = {
   let make = (~endpointArn, ()) => new({endpointArn: endpointArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteDocumentClassifier = {
   type t
   type request = {
@@ -2385,6 +2411,7 @@ module DeleteDocumentClassifier = {
   let make = (~documentClassifierArn, ()) => new({documentClassifierArn: documentClassifierArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UntagResource = {
   type t
   type request = {
@@ -2401,9 +2428,10 @@ module UntagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-comprehend") @new external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys, resourceArn})
+  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DetectSentiment = {
   type t
   type request = {
@@ -2427,9 +2455,10 @@ module DetectSentiment = {
     sentiment: option<sentimentType>,
   }
   @module("@aws-sdk/client-comprehend") @new external new: request => t = "DetectSentimentCommand"
-  let make = (~languageCode, ~text, ()) => new({languageCode, text})
+  let make = (~languageCode, ~text, ()) => new({languageCode: languageCode, text: text})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeEndpoint = {
   type t
   type request = {
@@ -2446,6 +2475,7 @@ module DescribeEndpoint = {
   let make = (~endpointArn, ()) => new({endpointArn: endpointArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module TagResource = {
   type t
   type request = {
@@ -2460,9 +2490,10 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-comprehend") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceArn, ()) => new({tags, resourceArn})
+  let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ListTagsForResource = {
   type t
   type request = {
@@ -2488,6 +2519,7 @@ module ListTagsForResource = {
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListEntityRecognizerSummaries = {
   type t
   type request = {
@@ -2505,9 +2537,11 @@ module ListEntityRecognizerSummaries = {
   }
   @module("@aws-sdk/client-comprehend") @new
   external new: request => t = "ListEntityRecognizerSummariesCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListEndpoints = {
   type t
   type request = {
@@ -2531,9 +2565,11 @@ module ListEndpoints = {
     endpointPropertiesList: option<endpointPropertiesList>,
   }
   @module("@aws-sdk/client-comprehend") @new external new: request => t = "ListEndpointsCommand"
-  let make = (~maxResults=?, ~nextToken=?, ~filter=?, ()) => new({maxResults, nextToken, filter})
+  let make = (~maxResults=?, ~nextToken=?, ~filter=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken, filter: filter})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListDocumentClassifierSummaries = {
   type t
   type request = {
@@ -2552,9 +2588,11 @@ module ListDocumentClassifierSummaries = {
   }
   @module("@aws-sdk/client-comprehend") @new
   external new: request => t = "ListDocumentClassifierSummariesCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ImportModel = {
   type t
   type request = {
@@ -2612,9 +2650,18 @@ module ImportModel = {
     ~versionName=?,
     ~modelName=?,
     (),
-  ) => new({tags, dataAccessRoleArn, modelKmsKeyId, versionName, modelName, sourceModelArn})
+  ) =>
+    new({
+      tags: tags,
+      dataAccessRoleArn: dataAccessRoleArn,
+      modelKmsKeyId: modelKmsKeyId,
+      versionName: versionName,
+      modelName: modelName,
+      sourceModelArn: sourceModelArn,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DetectPiiEntities = {
   type t
   type request = {
@@ -2633,9 +2680,10 @@ module DetectPiiEntities = {
     entities: option<listOfPiiEntities>,
   }
   @module("@aws-sdk/client-comprehend") @new external new: request => t = "DetectPiiEntitiesCommand"
-  let make = (~languageCode, ~text, ()) => new({languageCode, text})
+  let make = (~languageCode, ~text, ()) => new({languageCode: languageCode, text: text})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DetectKeyPhrases = {
   type t
   type request = {
@@ -2657,9 +2705,10 @@ module DetectKeyPhrases = {
     keyPhrases: option<listOfKeyPhrases>,
   }
   @module("@aws-sdk/client-comprehend") @new external new: request => t = "DetectKeyPhrasesCommand"
-  let make = (~languageCode, ~text, ()) => new({languageCode, text})
+  let make = (~languageCode, ~text, ()) => new({languageCode: languageCode, text: text})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DetectEntities = {
   type t
   type request = {
@@ -2693,9 +2742,11 @@ module DetectEntities = {
     entities: option<listOfEntities>,
   }
   @module("@aws-sdk/client-comprehend") @new external new: request => t = "DetectEntitiesCommand"
-  let make = (~text, ~endpointArn=?, ~languageCode=?, ()) => new({endpointArn, languageCode, text})
+  let make = (~text, ~endpointArn=?, ~languageCode=?, ()) =>
+    new({endpointArn: endpointArn, languageCode: languageCode, text: text})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DetectDominantLanguage = {
   type t
   type request = {
@@ -2717,6 +2768,7 @@ module DetectDominantLanguage = {
   let make = (~text, ()) => new({text: text})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateEndpoint = {
   type t
   type request = {
@@ -2765,15 +2817,16 @@ module CreateEndpoint = {
     (),
   ) =>
     new({
-      dataAccessRoleArn,
-      tags,
-      clientRequestToken,
-      desiredInferenceUnits,
-      modelArn,
-      endpointName,
+      dataAccessRoleArn: dataAccessRoleArn,
+      tags: tags,
+      clientRequestToken: clientRequestToken,
+      desiredInferenceUnits: desiredInferenceUnits,
+      modelArn: modelArn,
+      endpointName: endpointName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ContainsPiiEntities = {
   type t
   type request = {
@@ -2792,9 +2845,10 @@ module ContainsPiiEntities = {
   }
   @module("@aws-sdk/client-comprehend") @new
   external new: request => t = "ContainsPiiEntitiesCommand"
-  let make = (~languageCode, ~text, ()) => new({languageCode, text})
+  let make = (~languageCode, ~text, ()) => new({languageCode: languageCode, text: text})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ClassifyDocument = {
   type t
   type request = {
@@ -2817,9 +2871,10 @@ module ClassifyDocument = {
     classes: option<listOfClasses>,
   }
   @module("@aws-sdk/client-comprehend") @new external new: request => t = "ClassifyDocumentCommand"
-  let make = (~endpointArn, ~text, ()) => new({endpointArn, text})
+  let make = (~endpointArn, ~text, ()) => new({endpointArn: endpointArn, text: text})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module StartTopicsDetectionJob = {
   type t
   type request = {
@@ -2921,18 +2976,19 @@ module StartTopicsDetectionJob = {
     (),
   ) =>
     new({
-      tags,
-      vpcConfig,
-      volumeKmsKeyId,
-      clientRequestToken,
-      numberOfTopics,
-      jobName,
-      dataAccessRoleArn,
-      outputDataConfig,
-      inputDataConfig,
+      tags: tags,
+      vpcConfig: vpcConfig,
+      volumeKmsKeyId: volumeKmsKeyId,
+      clientRequestToken: clientRequestToken,
+      numberOfTopics: numberOfTopics,
+      jobName: jobName,
+      dataAccessRoleArn: dataAccessRoleArn,
+      outputDataConfig: outputDataConfig,
+      inputDataConfig: inputDataConfig,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module StartTargetedSentimentDetectionJob = {
   type t
   type request = {
@@ -3025,18 +3081,19 @@ module StartTargetedSentimentDetectionJob = {
     (),
   ) =>
     new({
-      tags,
-      vpcConfig,
-      volumeKmsKeyId,
-      clientRequestToken,
-      languageCode,
-      jobName,
-      dataAccessRoleArn,
-      outputDataConfig,
-      inputDataConfig,
+      tags: tags,
+      vpcConfig: vpcConfig,
+      volumeKmsKeyId: volumeKmsKeyId,
+      clientRequestToken: clientRequestToken,
+      languageCode: languageCode,
+      jobName: jobName,
+      dataAccessRoleArn: dataAccessRoleArn,
+      outputDataConfig: outputDataConfig,
+      inputDataConfig: inputDataConfig,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module StartSentimentDetectionJob = {
   type t
   type request = {
@@ -3135,18 +3192,19 @@ module StartSentimentDetectionJob = {
     (),
   ) =>
     new({
-      tags,
-      vpcConfig,
-      volumeKmsKeyId,
-      clientRequestToken,
-      languageCode,
-      jobName,
-      dataAccessRoleArn,
-      outputDataConfig,
-      inputDataConfig,
+      tags: tags,
+      vpcConfig: vpcConfig,
+      volumeKmsKeyId: volumeKmsKeyId,
+      clientRequestToken: clientRequestToken,
+      languageCode: languageCode,
+      jobName: jobName,
+      dataAccessRoleArn: dataAccessRoleArn,
+      outputDataConfig: outputDataConfig,
+      inputDataConfig: inputDataConfig,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module StartPiiEntitiesDetectionJob = {
   type t
   type request = {
@@ -3216,18 +3274,19 @@ module StartPiiEntitiesDetectionJob = {
     (),
   ) =>
     new({
-      tags,
-      clientRequestToken,
-      languageCode,
-      jobName,
-      dataAccessRoleArn,
-      redactionConfig,
-      mode,
-      outputDataConfig,
-      inputDataConfig,
+      tags: tags,
+      clientRequestToken: clientRequestToken,
+      languageCode: languageCode,
+      jobName: jobName,
+      dataAccessRoleArn: dataAccessRoleArn,
+      redactionConfig: redactionConfig,
+      mode: mode,
+      outputDataConfig: outputDataConfig,
+      inputDataConfig: inputDataConfig,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module StartKeyPhrasesDetectionJob = {
   type t
   type request = {
@@ -3327,18 +3386,19 @@ module StartKeyPhrasesDetectionJob = {
     (),
   ) =>
     new({
-      tags,
-      vpcConfig,
-      volumeKmsKeyId,
-      clientRequestToken,
-      languageCode,
-      jobName,
-      dataAccessRoleArn,
-      outputDataConfig,
-      inputDataConfig,
+      tags: tags,
+      vpcConfig: vpcConfig,
+      volumeKmsKeyId: volumeKmsKeyId,
+      clientRequestToken: clientRequestToken,
+      languageCode: languageCode,
+      jobName: jobName,
+      dataAccessRoleArn: dataAccessRoleArn,
+      outputDataConfig: outputDataConfig,
+      inputDataConfig: inputDataConfig,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module StartEventsDetectionJob = {
   type t
   type request = {
@@ -3402,17 +3462,18 @@ module StartEventsDetectionJob = {
     (),
   ) =>
     new({
-      tags,
-      targetEventTypes,
-      clientRequestToken,
-      languageCode,
-      jobName,
-      dataAccessRoleArn,
-      outputDataConfig,
-      inputDataConfig,
+      tags: tags,
+      targetEventTypes: targetEventTypes,
+      clientRequestToken: clientRequestToken,
+      languageCode: languageCode,
+      jobName: jobName,
+      dataAccessRoleArn: dataAccessRoleArn,
+      outputDataConfig: outputDataConfig,
+      inputDataConfig: inputDataConfig,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module StartEntitiesDetectionJob = {
   type t
   type request = {
@@ -3526,19 +3587,20 @@ module StartEntitiesDetectionJob = {
     (),
   ) =>
     new({
-      tags,
-      vpcConfig,
-      volumeKmsKeyId,
-      clientRequestToken,
-      languageCode,
-      entityRecognizerArn,
-      jobName,
-      dataAccessRoleArn,
-      outputDataConfig,
-      inputDataConfig,
+      tags: tags,
+      vpcConfig: vpcConfig,
+      volumeKmsKeyId: volumeKmsKeyId,
+      clientRequestToken: clientRequestToken,
+      languageCode: languageCode,
+      entityRecognizerArn: entityRecognizerArn,
+      jobName: jobName,
+      dataAccessRoleArn: dataAccessRoleArn,
+      outputDataConfig: outputDataConfig,
+      inputDataConfig: inputDataConfig,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module StartDominantLanguageDetectionJob = {
   type t
   type request = {
@@ -3632,17 +3694,18 @@ module StartDominantLanguageDetectionJob = {
     (),
   ) =>
     new({
-      tags,
-      vpcConfig,
-      volumeKmsKeyId,
-      clientRequestToken,
-      jobName,
-      dataAccessRoleArn,
-      outputDataConfig,
-      inputDataConfig,
+      tags: tags,
+      vpcConfig: vpcConfig,
+      volumeKmsKeyId: volumeKmsKeyId,
+      clientRequestToken: clientRequestToken,
+      jobName: jobName,
+      dataAccessRoleArn: dataAccessRoleArn,
+      outputDataConfig: outputDataConfig,
+      inputDataConfig: inputDataConfig,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module StartDocumentClassificationJob = {
   type t
   type request = {
@@ -3749,18 +3812,19 @@ module StartDocumentClassificationJob = {
     (),
   ) =>
     new({
-      tags,
-      vpcConfig,
-      volumeKmsKeyId,
-      clientRequestToken,
-      dataAccessRoleArn,
-      outputDataConfig,
-      inputDataConfig,
-      documentClassifierArn,
-      jobName,
+      tags: tags,
+      vpcConfig: vpcConfig,
+      volumeKmsKeyId: volumeKmsKeyId,
+      clientRequestToken: clientRequestToken,
+      dataAccessRoleArn: dataAccessRoleArn,
+      outputDataConfig: outputDataConfig,
+      inputDataConfig: inputDataConfig,
+      documentClassifierArn: documentClassifierArn,
+      jobName: jobName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DetectSyntax = {
   type t
   type request = {
@@ -3782,9 +3846,10 @@ module DetectSyntax = {
     syntaxTokens: option<listOfSyntaxTokens>,
   }
   @module("@aws-sdk/client-comprehend") @new external new: request => t = "DetectSyntaxCommand"
-  let make = (~languageCode, ~text, ()) => new({languageCode, text})
+  let make = (~languageCode, ~text, ()) => new({languageCode: languageCode, text: text})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module BatchDetectSentiment = {
   type t
   type request = {
@@ -3814,9 +3879,10 @@ module BatchDetectSentiment = {
   }
   @module("@aws-sdk/client-comprehend") @new
   external new: request => t = "BatchDetectSentimentCommand"
-  let make = (~languageCode, ~textList, ()) => new({languageCode, textList})
+  let make = (~languageCode, ~textList, ()) => new({languageCode: languageCode, textList: textList})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeTopicsDetectionJob = {
   type t
   type request = {
@@ -3833,6 +3899,7 @@ module DescribeTopicsDetectionJob = {
   let make = (~jobId, ()) => new({jobId: jobId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeTargetedSentimentDetectionJob = {
   type t
   type request = {
@@ -3853,6 +3920,7 @@ module DescribeTargetedSentimentDetectionJob = {
   let make = (~jobId, ()) => new({jobId: jobId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeSentimentDetectionJob = {
   type t
   type request = {
@@ -3873,6 +3941,7 @@ module DescribeSentimentDetectionJob = {
   let make = (~jobId, ()) => new({jobId: jobId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribePiiEntitiesDetectionJob = {
   type t
   type request = {
@@ -3890,6 +3959,7 @@ module DescribePiiEntitiesDetectionJob = {
   let make = (~jobId, ()) => new({jobId: jobId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeKeyPhrasesDetectionJob = {
   type t
   type request = {
@@ -3909,6 +3979,7 @@ module DescribeKeyPhrasesDetectionJob = {
   let make = (~jobId, ()) => new({jobId: jobId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeEventsDetectionJob = {
   type t
   type request = {
@@ -3926,6 +3997,7 @@ module DescribeEventsDetectionJob = {
   let make = (~jobId, ()) => new({jobId: jobId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeEntitiesDetectionJob = {
   type t
   type request = {
@@ -3946,6 +4018,7 @@ module DescribeEntitiesDetectionJob = {
   let make = (~jobId, ()) => new({jobId: jobId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeDominantLanguageDetectionJob = {
   type t
   type request = {
@@ -3965,6 +4038,7 @@ module DescribeDominantLanguageDetectionJob = {
   let make = (~jobId, ()) => new({jobId: jobId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeDocumentClassificationJob = {
   type t
   type request = {
@@ -3984,6 +4058,7 @@ module DescribeDocumentClassificationJob = {
   let make = (~jobId, ()) => new({jobId: jobId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateEntityRecognizer = {
   type t
   type request = {
@@ -4097,20 +4172,21 @@ module CreateEntityRecognizer = {
     (),
   ) =>
     new({
-      modelPolicy,
-      modelKmsKeyId,
-      vpcConfig,
-      volumeKmsKeyId,
-      languageCode,
-      clientRequestToken,
-      inputDataConfig,
-      tags,
-      dataAccessRoleArn,
-      versionName,
-      recognizerName,
+      modelPolicy: modelPolicy,
+      modelKmsKeyId: modelKmsKeyId,
+      vpcConfig: vpcConfig,
+      volumeKmsKeyId: volumeKmsKeyId,
+      languageCode: languageCode,
+      clientRequestToken: clientRequestToken,
+      inputDataConfig: inputDataConfig,
+      tags: tags,
+      dataAccessRoleArn: dataAccessRoleArn,
+      versionName: versionName,
+      recognizerName: recognizerName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateDocumentClassifier = {
   type t
   type request = {
@@ -4232,22 +4308,23 @@ module CreateDocumentClassifier = {
     (),
   ) =>
     new({
-      modelPolicy,
-      modelKmsKeyId,
-      mode,
-      vpcConfig,
-      volumeKmsKeyId,
-      languageCode,
-      clientRequestToken,
-      outputDataConfig,
-      inputDataConfig,
-      tags,
-      dataAccessRoleArn,
-      versionName,
-      documentClassifierName,
+      modelPolicy: modelPolicy,
+      modelKmsKeyId: modelKmsKeyId,
+      mode: mode,
+      vpcConfig: vpcConfig,
+      volumeKmsKeyId: volumeKmsKeyId,
+      languageCode: languageCode,
+      clientRequestToken: clientRequestToken,
+      outputDataConfig: outputDataConfig,
+      inputDataConfig: inputDataConfig,
+      tags: tags,
+      dataAccessRoleArn: dataAccessRoleArn,
+      versionName: versionName,
+      documentClassifierName: documentClassifierName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module BatchDetectKeyPhrases = {
   type t
   type request = {
@@ -4277,9 +4354,10 @@ module BatchDetectKeyPhrases = {
   }
   @module("@aws-sdk/client-comprehend") @new
   external new: request => t = "BatchDetectKeyPhrasesCommand"
-  let make = (~languageCode, ~textList, ()) => new({languageCode, textList})
+  let make = (~languageCode, ~textList, ()) => new({languageCode: languageCode, textList: textList})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module BatchDetectEntities = {
   type t
   type request = {
@@ -4309,9 +4387,10 @@ module BatchDetectEntities = {
   }
   @module("@aws-sdk/client-comprehend") @new
   external new: request => t = "BatchDetectEntitiesCommand"
-  let make = (~languageCode, ~textList, ()) => new({languageCode, textList})
+  let make = (~languageCode, ~textList, ()) => new({languageCode: languageCode, textList: textList})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module BatchDetectDominantLanguage = {
   type t
   type request = {
@@ -4340,6 +4419,7 @@ module BatchDetectDominantLanguage = {
   let make = (~textList, ()) => new({textList: textList})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListTopicsDetectionJobs = {
   type t
   type request = {
@@ -4362,9 +4442,11 @@ module ListTopicsDetectionJobs = {
   }
   @module("@aws-sdk/client-comprehend") @new
   external new: request => t = "ListTopicsDetectionJobsCommand"
-  let make = (~maxResults=?, ~nextToken=?, ~filter=?, ()) => new({maxResults, nextToken, filter})
+  let make = (~maxResults=?, ~nextToken=?, ~filter=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken, filter: filter})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListTargetedSentimentDetectionJobs = {
   type t
   type request = {
@@ -4389,9 +4471,11 @@ module ListTargetedSentimentDetectionJobs = {
   }
   @module("@aws-sdk/client-comprehend") @new
   external new: request => t = "ListTargetedSentimentDetectionJobsCommand"
-  let make = (~maxResults=?, ~nextToken=?, ~filter=?, ()) => new({maxResults, nextToken, filter})
+  let make = (~maxResults=?, ~nextToken=?, ~filter=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken, filter: filter})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListSentimentDetectionJobs = {
   type t
   type request = {
@@ -4414,9 +4498,11 @@ module ListSentimentDetectionJobs = {
   }
   @module("@aws-sdk/client-comprehend") @new
   external new: request => t = "ListSentimentDetectionJobsCommand"
-  let make = (~maxResults=?, ~nextToken=?, ~filter=?, ()) => new({maxResults, nextToken, filter})
+  let make = (~maxResults=?, ~nextToken=?, ~filter=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken, filter: filter})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListPiiEntitiesDetectionJobs = {
   type t
   type request = {
@@ -4438,9 +4524,11 @@ module ListPiiEntitiesDetectionJobs = {
   }
   @module("@aws-sdk/client-comprehend") @new
   external new: request => t = "ListPiiEntitiesDetectionJobsCommand"
-  let make = (~maxResults=?, ~nextToken=?, ~filter=?, ()) => new({maxResults, nextToken, filter})
+  let make = (~maxResults=?, ~nextToken=?, ~filter=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken, filter: filter})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListKeyPhrasesDetectionJobs = {
   type t
   type request = {
@@ -4463,9 +4551,11 @@ module ListKeyPhrasesDetectionJobs = {
   }
   @module("@aws-sdk/client-comprehend") @new
   external new: request => t = "ListKeyPhrasesDetectionJobsCommand"
-  let make = (~maxResults=?, ~nextToken=?, ~filter=?, ()) => new({maxResults, nextToken, filter})
+  let make = (~maxResults=?, ~nextToken=?, ~filter=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken, filter: filter})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListEventsDetectionJobs = {
   type t
   type request = {
@@ -4487,9 +4577,11 @@ module ListEventsDetectionJobs = {
   }
   @module("@aws-sdk/client-comprehend") @new
   external new: request => t = "ListEventsDetectionJobsCommand"
-  let make = (~maxResults=?, ~nextToken=?, ~filter=?, ()) => new({maxResults, nextToken, filter})
+  let make = (~maxResults=?, ~nextToken=?, ~filter=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken, filter: filter})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListEntitiesDetectionJobs = {
   type t
   type request = {
@@ -4512,9 +4604,11 @@ module ListEntitiesDetectionJobs = {
   }
   @module("@aws-sdk/client-comprehend") @new
   external new: request => t = "ListEntitiesDetectionJobsCommand"
-  let make = (~maxResults=?, ~nextToken=?, ~filter=?, ()) => new({maxResults, nextToken, filter})
+  let make = (~maxResults=?, ~nextToken=?, ~filter=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken, filter: filter})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListDominantLanguageDetectionJobs = {
   type t
   type request = {
@@ -4537,9 +4631,11 @@ module ListDominantLanguageDetectionJobs = {
   }
   @module("@aws-sdk/client-comprehend") @new
   external new: request => t = "ListDominantLanguageDetectionJobsCommand"
-  let make = (~maxResults=?, ~nextToken=?, ~filter=?, ()) => new({maxResults, nextToken, filter})
+  let make = (~maxResults=?, ~nextToken=?, ~filter=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken, filter: filter})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListDocumentClassificationJobs = {
   type t
   type request = {
@@ -4562,9 +4658,11 @@ module ListDocumentClassificationJobs = {
   }
   @module("@aws-sdk/client-comprehend") @new
   external new: request => t = "ListDocumentClassificationJobsCommand"
-  let make = (~maxResults=?, ~nextToken=?, ~filter=?, ()) => new({maxResults, nextToken, filter})
+  let make = (~maxResults=?, ~nextToken=?, ~filter=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken, filter: filter})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeEntityRecognizer = {
   type t
   type request = {
@@ -4582,6 +4680,7 @@ module DescribeEntityRecognizer = {
   let make = (~entityRecognizerArn, ()) => new({entityRecognizerArn: entityRecognizerArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeDocumentClassifier = {
   type t
   type request = {
@@ -4602,6 +4701,7 @@ module DescribeDocumentClassifier = {
   let make = (~documentClassifierArn, ()) => new({documentClassifierArn: documentClassifierArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module BatchDetectSyntax = {
   type t
   type request = {
@@ -4631,9 +4731,10 @@ module BatchDetectSyntax = {
     resultList: listOfDetectSyntaxResult,
   }
   @module("@aws-sdk/client-comprehend") @new external new: request => t = "BatchDetectSyntaxCommand"
-  let make = (~languageCode, ~textList, ()) => new({languageCode, textList})
+  let make = (~languageCode, ~textList, ()) => new({languageCode: languageCode, textList: textList})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListEntityRecognizers = {
   type t
   type request = {
@@ -4657,9 +4758,11 @@ module ListEntityRecognizers = {
   }
   @module("@aws-sdk/client-comprehend") @new
   external new: request => t = "ListEntityRecognizersCommand"
-  let make = (~maxResults=?, ~nextToken=?, ~filter=?, ()) => new({maxResults, nextToken, filter})
+  let make = (~maxResults=?, ~nextToken=?, ~filter=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken, filter: filter})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListDocumentClassifiers = {
   type t
   type request = {
@@ -4682,6 +4785,7 @@ module ListDocumentClassifiers = {
   }
   @module("@aws-sdk/client-comprehend") @new
   external new: request => t = "ListDocumentClassifiersCommand"
-  let make = (~maxResults=?, ~nextToken=?, ~filter=?, ()) => new({maxResults, nextToken, filter})
+  let make = (~maxResults=?, ~nextToken=?, ~filter=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken, filter: filter})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

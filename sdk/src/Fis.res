@@ -521,9 +521,10 @@ module UntagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-fis") @new external new: request => t = "UntagResourceCommand"
-  let make = (~resourceArn, ~tagKeys=?, ()) => new({tagKeys, resourceArn})
+  let make = (~resourceArn, ~tagKeys=?, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module TagResource = {
   type t
   type request = {
@@ -532,9 +533,10 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-fis") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceArn, ()) => new({tags, resourceArn})
+  let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ListTagsForResource = {
   type t
   type request = {
@@ -545,6 +547,7 @@ module ListTagsForResource = {
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListTargetResourceTypes = {
   type t
   type request = {
@@ -563,9 +566,11 @@ module ListTargetResourceTypes = {
     targetResourceTypes: option<targetResourceTypeSummaryList>,
   }
   @module("@aws-sdk/client-fis") @new external new: request => t = "ListTargetResourceTypesCommand"
-  let make = (~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults})
+  let make = (~nextToken=?, ~maxResults=?, ()) =>
+    new({nextToken: nextToken, maxResults: maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListExperiments = {
   type t
   type request = {
@@ -583,9 +588,11 @@ module ListExperiments = {
     @ocaml.doc("<p>The experiments.</p>") experiments: option<experimentSummaryList>,
   }
   @module("@aws-sdk/client-fis") @new external new: request => t = "ListExperimentsCommand"
-  let make = (~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults})
+  let make = (~nextToken=?, ~maxResults=?, ()) =>
+    new({nextToken: nextToken, maxResults: maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListExperimentTemplates = {
   type t
   type request = {
@@ -604,9 +611,11 @@ module ListExperimentTemplates = {
     experimentTemplates: option<experimentTemplateSummaryList>,
   }
   @module("@aws-sdk/client-fis") @new external new: request => t = "ListExperimentTemplatesCommand"
-  let make = (~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults})
+  let make = (~nextToken=?, ~maxResults=?, ()) =>
+    new({nextToken: nextToken, maxResults: maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetTargetResourceType = {
   type t
   type request = {@ocaml.doc("<p>The resource type.</p>") resourceType: targetResourceTypeId}
@@ -618,6 +627,7 @@ module GetTargetResourceType = {
   let make = (~resourceType, ()) => new({resourceType: resourceType})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetAction = {
   type t
   type request = {@ocaml.doc("<p>The ID of the action.</p>") id: actionId}
@@ -626,6 +636,7 @@ module GetAction = {
   let make = (~id, ()) => new({id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListActions = {
   type t
   type request = {
@@ -643,9 +654,11 @@ module ListActions = {
     @ocaml.doc("<p>The actions.</p>") actions: option<actionSummaryList>,
   }
   @module("@aws-sdk/client-fis") @new external new: request => t = "ListActionsCommand"
-  let make = (~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults})
+  let make = (~nextToken=?, ~maxResults=?, ()) =>
+    new({nextToken: nextToken, maxResults: maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateExperimentTemplate = {
   type t
   type request = {
@@ -679,9 +692,19 @@ module UpdateExperimentTemplate = {
     ~stopConditions=?,
     ~description=?,
     (),
-  ) => new({logConfiguration, roleArn, actions, targets, stopConditions, description, id})
+  ) =>
+    new({
+      logConfiguration: logConfiguration,
+      roleArn: roleArn,
+      actions: actions,
+      targets: targets,
+      stopConditions: stopConditions,
+      description: description,
+      id: id,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module StopExperiment = {
   type t
   type request = {@ocaml.doc("<p>The ID of the experiment.</p>") id: experimentId}
@@ -692,6 +715,7 @@ module StopExperiment = {
   let make = (~id, ()) => new({id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module StartExperiment = {
   type t
   type request = {
@@ -708,9 +732,10 @@ module StartExperiment = {
   }
   @module("@aws-sdk/client-fis") @new external new: request => t = "StartExperimentCommand"
   let make = (~experimentTemplateId, ~clientToken, ~tags=?, ()) =>
-    new({tags, experimentTemplateId, clientToken})
+    new({tags: tags, experimentTemplateId: experimentTemplateId, clientToken: clientToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetExperimentTemplate = {
   type t
   type request = {@ocaml.doc("<p>The ID of the experiment template.</p>") id: experimentTemplateId}
@@ -722,6 +747,7 @@ module GetExperimentTemplate = {
   let make = (~id, ()) => new({id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetExperiment = {
   type t
   type request = {@ocaml.doc("<p>The ID of the experiment.</p>") id: experimentId}
@@ -732,6 +758,7 @@ module GetExperiment = {
   let make = (~id, ()) => new({id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteExperimentTemplate = {
   type t
   type request = {@ocaml.doc("<p>The ID of the experiment template.</p>") id: experimentTemplateId}
@@ -743,6 +770,7 @@ module DeleteExperimentTemplate = {
   let make = (~id, ()) => new({id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateExperimentTemplate = {
   type t
   type request = {
@@ -783,14 +811,14 @@ module CreateExperimentTemplate = {
     (),
   ) =>
     new({
-      logConfiguration,
-      tags,
-      roleArn,
-      actions,
-      targets,
-      stopConditions,
-      description,
-      clientToken,
+      logConfiguration: logConfiguration,
+      tags: tags,
+      roleArn: roleArn,
+      actions: actions,
+      targets: targets,
+      stopConditions: stopConditions,
+      description: description,
+      clientToken: clientToken,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

@@ -714,9 +714,15 @@ module UpdateFailbackReplicationConfiguration = {
   @module("@aws-sdk/client-drs") @new
   external new: request => t = "UpdateFailbackReplicationConfigurationCommand"
   let make = (~recoveryInstanceID, ~usePrivateIP=?, ~bandwidthThrottling=?, ~name=?, ()) =>
-    new({usePrivateIP, bandwidthThrottling, name, recoveryInstanceID})
+    new({
+      usePrivateIP: usePrivateIP,
+      bandwidthThrottling: bandwidthThrottling,
+      name: name,
+      recoveryInstanceID: recoveryInstanceID,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module StopFailback = {
   type t
   type request = {
@@ -728,6 +734,7 @@ module StopFailback = {
   let make = (~recoveryInstanceID, ()) => new({recoveryInstanceID: recoveryInstanceID})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module GetLaunchConfiguration = {
   type t
   type request = {
@@ -763,6 +770,7 @@ module GetLaunchConfiguration = {
   let make = (~sourceServerID, ()) => new({sourceServerID: sourceServerID})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetFailbackReplicationConfiguration = {
   type t
   type request = {
@@ -789,6 +797,7 @@ module GetFailbackReplicationConfiguration = {
   let make = (~recoveryInstanceID, ()) => new({recoveryInstanceID: recoveryInstanceID})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DisconnectRecoveryInstance = {
   type t
   type request = {
@@ -801,6 +810,7 @@ module DisconnectRecoveryInstance = {
   let make = (~recoveryInstanceID, ()) => new({recoveryInstanceID: recoveryInstanceID})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteSourceServer = {
   type t
   type request = {
@@ -811,6 +821,7 @@ module DeleteSourceServer = {
   let make = (~sourceServerID, ()) => new({sourceServerID: sourceServerID})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteReplicationConfigurationTemplate = {
   type t
   type request = {
@@ -824,6 +835,7 @@ module DeleteReplicationConfigurationTemplate = {
     new({replicationConfigurationTemplateID: replicationConfigurationTemplateID})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteRecoveryInstance = {
   type t
   type request = {
@@ -835,6 +847,7 @@ module DeleteRecoveryInstance = {
   let make = (~recoveryInstanceID, ()) => new({recoveryInstanceID: recoveryInstanceID})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteJob = {
   type t
   type request = {@ocaml.doc("<p>The ID of the Job to be deleted.</p>") jobID: jobID}
@@ -843,6 +856,7 @@ module DeleteJob = {
   let make = (~jobID, ()) => new({jobID: jobID})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateReplicationConfigurationTemplate = {
   type t
   type request = {
@@ -908,24 +922,25 @@ module UpdateReplicationConfigurationTemplate = {
     (),
   ) =>
     new({
-      pitPolicy,
-      stagingAreaTags,
-      createPublicIP,
-      dataPlaneRouting,
-      bandwidthThrottling,
-      ebsEncryptionKeyArn,
-      ebsEncryption,
-      defaultLargeStagingDiskType,
-      useDedicatedReplicationServer,
-      replicationServerInstanceType,
-      replicationServersSecurityGroupsIDs,
-      associateDefaultSecurityGroup,
-      stagingAreaSubnetId,
-      arn,
-      replicationConfigurationTemplateID,
+      pitPolicy: pitPolicy,
+      stagingAreaTags: stagingAreaTags,
+      createPublicIP: createPublicIP,
+      dataPlaneRouting: dataPlaneRouting,
+      bandwidthThrottling: bandwidthThrottling,
+      ebsEncryptionKeyArn: ebsEncryptionKeyArn,
+      ebsEncryption: ebsEncryption,
+      defaultLargeStagingDiskType: defaultLargeStagingDiskType,
+      useDedicatedReplicationServer: useDedicatedReplicationServer,
+      replicationServerInstanceType: replicationServerInstanceType,
+      replicationServersSecurityGroupsIDs: replicationServersSecurityGroupsIDs,
+      associateDefaultSecurityGroup: associateDefaultSecurityGroup,
+      stagingAreaSubnetId: stagingAreaSubnetId,
+      arn: arn,
+      replicationConfigurationTemplateID: replicationConfigurationTemplateID,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateReplicationConfiguration = {
   type t
   type request = {
@@ -1038,25 +1053,26 @@ module UpdateReplicationConfiguration = {
     (),
   ) =>
     new({
-      pitPolicy,
-      stagingAreaTags,
-      createPublicIP,
-      dataPlaneRouting,
-      bandwidthThrottling,
-      ebsEncryptionKeyArn,
-      ebsEncryption,
-      replicatedDisks,
-      defaultLargeStagingDiskType,
-      useDedicatedReplicationServer,
-      replicationServerInstanceType,
-      replicationServersSecurityGroupsIDs,
-      associateDefaultSecurityGroup,
-      stagingAreaSubnetId,
-      name,
-      sourceServerID,
+      pitPolicy: pitPolicy,
+      stagingAreaTags: stagingAreaTags,
+      createPublicIP: createPublicIP,
+      dataPlaneRouting: dataPlaneRouting,
+      bandwidthThrottling: bandwidthThrottling,
+      ebsEncryptionKeyArn: ebsEncryptionKeyArn,
+      ebsEncryption: ebsEncryption,
+      replicatedDisks: replicatedDisks,
+      defaultLargeStagingDiskType: defaultLargeStagingDiskType,
+      useDedicatedReplicationServer: useDedicatedReplicationServer,
+      replicationServerInstanceType: replicationServerInstanceType,
+      replicationServersSecurityGroupsIDs: replicationServersSecurityGroupsIDs,
+      associateDefaultSecurityGroup: associateDefaultSecurityGroup,
+      stagingAreaSubnetId: stagingAreaSubnetId,
+      name: name,
+      sourceServerID: sourceServerID,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateLaunchConfiguration = {
   type t
   type request = {
@@ -1118,16 +1134,17 @@ module UpdateLaunchConfiguration = {
     (),
   ) =>
     new({
-      licensing,
-      copyTags,
-      copyPrivateIp,
-      targetInstanceTypeRightSizingMethod,
-      launchDisposition,
-      name,
-      sourceServerID,
+      licensing: licensing,
+      copyTags: copyTags,
+      copyPrivateIp: copyPrivateIp,
+      targetInstanceTypeRightSizingMethod: targetInstanceTypeRightSizingMethod,
+      launchDisposition: launchDisposition,
+      name: name,
+      sourceServerID: sourceServerID,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UntagResource = {
   type t
   type request = {
@@ -1136,9 +1153,10 @@ module UntagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-drs") @new external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys, resourceArn})
+  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module TagResource = {
   type t
   type request = {
@@ -1148,9 +1166,10 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-drs") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceArn, ()) => new({tags, resourceArn})
+  let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ListTagsForResource = {
   type t
   type request = {
@@ -1161,6 +1180,7 @@ module ListTagsForResource = {
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module InitializeService = {
   type t
   type request = {.}
@@ -1169,6 +1189,7 @@ module InitializeService = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module GetReplicationConfiguration = {
   type t
   type request = {
@@ -1224,6 +1245,7 @@ module GetReplicationConfiguration = {
   let make = (~sourceServerID, ()) => new({sourceServerID: sourceServerID})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateReplicationConfigurationTemplate = {
   type t
   type request = {
@@ -1289,23 +1311,24 @@ module CreateReplicationConfigurationTemplate = {
     (),
   ) =>
     new({
-      tags,
-      pitPolicy,
-      stagingAreaTags,
-      createPublicIP,
-      dataPlaneRouting,
-      bandwidthThrottling,
-      ebsEncryptionKeyArn,
-      ebsEncryption,
-      defaultLargeStagingDiskType,
-      useDedicatedReplicationServer,
-      replicationServerInstanceType,
-      replicationServersSecurityGroupsIDs,
-      associateDefaultSecurityGroup,
-      stagingAreaSubnetId,
+      tags: tags,
+      pitPolicy: pitPolicy,
+      stagingAreaTags: stagingAreaTags,
+      createPublicIP: createPublicIP,
+      dataPlaneRouting: dataPlaneRouting,
+      bandwidthThrottling: bandwidthThrottling,
+      ebsEncryptionKeyArn: ebsEncryptionKeyArn,
+      ebsEncryption: ebsEncryption,
+      defaultLargeStagingDiskType: defaultLargeStagingDiskType,
+      useDedicatedReplicationServer: useDedicatedReplicationServer,
+      replicationServerInstanceType: replicationServerInstanceType,
+      replicationServersSecurityGroupsIDs: replicationServersSecurityGroupsIDs,
+      associateDefaultSecurityGroup: associateDefaultSecurityGroup,
+      stagingAreaSubnetId: stagingAreaSubnetId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module TerminateRecoveryInstances = {
   type t
   type request = {
@@ -1320,6 +1343,7 @@ module TerminateRecoveryInstances = {
   let make = (~recoveryInstanceIDs, ()) => new({recoveryInstanceIDs: recoveryInstanceIDs})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module StartRecovery = {
   type t
   type request = {
@@ -1331,9 +1355,11 @@ module StartRecovery = {
   }
   type response = {@ocaml.doc("<p>The Recovery Job.</p>") job: option<job>}
   @module("@aws-sdk/client-drs") @new external new: request => t = "StartRecoveryCommand"
-  let make = (~sourceServers, ~tags=?, ~isDrill=?, ()) => new({tags, isDrill, sourceServers})
+  let make = (~sourceServers, ~tags=?, ~isDrill=?, ()) =>
+    new({tags: tags, isDrill: isDrill, sourceServers: sourceServers})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module StartFailbackLaunch = {
   type t
   type request = {
@@ -1344,9 +1370,11 @@ module StartFailbackLaunch = {
   }
   type response = {@ocaml.doc("<p>The failback launch Job.</p>") job: option<job>}
   @module("@aws-sdk/client-drs") @new external new: request => t = "StartFailbackLaunchCommand"
-  let make = (~recoveryInstanceIDs, ~tags=?, ()) => new({tags, recoveryInstanceIDs})
+  let make = (~recoveryInstanceIDs, ~tags=?, ()) =>
+    new({tags: tags, recoveryInstanceIDs: recoveryInstanceIDs})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeRecoverySnapshots = {
   type t
   type request = {
@@ -1369,9 +1397,16 @@ module DescribeRecoverySnapshots = {
   @module("@aws-sdk/client-drs") @new
   external new: request => t = "DescribeRecoverySnapshotsCommand"
   let make = (~sourceServerID, ~nextToken=?, ~maxResults=?, ~order=?, ~filters=?, ()) =>
-    new({nextToken, maxResults, order, filters, sourceServerID})
+    new({
+      nextToken: nextToken,
+      maxResults: maxResults,
+      order: order,
+      filters: filters,
+      sourceServerID: sourceServerID,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeJobLogItems = {
   type t
   type request = {
@@ -1387,9 +1422,11 @@ module DescribeJobLogItems = {
     @ocaml.doc("<p>An array of Job log items.</p>") items: option<jobLogs>,
   }
   @module("@aws-sdk/client-drs") @new external new: request => t = "DescribeJobLogItemsCommand"
-  let make = (~jobID, ~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults, jobID})
+  let make = (~jobID, ~nextToken=?, ~maxResults=?, ()) =>
+    new({nextToken: nextToken, maxResults: maxResults, jobID: jobID})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module RetryDataReplication = {
   type t
   type request = {
@@ -1401,6 +1438,7 @@ module RetryDataReplication = {
   let make = (~sourceServerID, ()) => new({sourceServerID: sourceServerID})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DisconnectSourceServer = {
   type t
   type request = {
@@ -1411,6 +1449,7 @@ module DisconnectSourceServer = {
   let make = (~sourceServerID, ()) => new({sourceServerID: sourceServerID})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeReplicationConfigurationTemplates = {
   type t
   type request = {
@@ -1432,9 +1471,14 @@ module DescribeReplicationConfigurationTemplates = {
   @module("@aws-sdk/client-drs") @new
   external new: request => t = "DescribeReplicationConfigurationTemplatesCommand"
   let make = (~replicationConfigurationTemplateIDs, ~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken, maxResults, replicationConfigurationTemplateIDs})
+    new({
+      nextToken: nextToken,
+      maxResults: maxResults,
+      replicationConfigurationTemplateIDs: replicationConfigurationTemplateIDs,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeJobs = {
   type t
   type request = {
@@ -1449,9 +1493,11 @@ module DescribeJobs = {
     @ocaml.doc("<p>An array of Jobs.</p>") items: option<jobsList>,
   }
   @module("@aws-sdk/client-drs") @new external new: request => t = "DescribeJobsCommand"
-  let make = (~filters, ~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults, filters})
+  let make = (~filters, ~nextToken=?, ~maxResults=?, ()) =>
+    new({nextToken: nextToken, maxResults: maxResults, filters: filters})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeSourceServers = {
   type t
   type request = {
@@ -1468,9 +1514,11 @@ module DescribeSourceServers = {
     @ocaml.doc("<p>An array of Source Servers.</p>") items: option<sourceServersList>,
   }
   @module("@aws-sdk/client-drs") @new external new: request => t = "DescribeSourceServersCommand"
-  let make = (~filters, ~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults, filters})
+  let make = (~filters, ~nextToken=?, ~maxResults=?, ()) =>
+    new({nextToken: nextToken, maxResults: maxResults, filters: filters})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeRecoveryInstances = {
   type t
   type request = {
@@ -1489,6 +1537,7 @@ module DescribeRecoveryInstances = {
   }
   @module("@aws-sdk/client-drs") @new
   external new: request => t = "DescribeRecoveryInstancesCommand"
-  let make = (~filters, ~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults, filters})
+  let make = (~filters, ~nextToken=?, ~maxResults=?, ()) =>
+    new({nextToken: nextToken, maxResults: maxResults, filters: filters})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

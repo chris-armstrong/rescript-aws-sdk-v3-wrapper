@@ -51,9 +51,10 @@ module SendSerialConsoleSSHPublicKey = {
   @module("@aws-sdk/client-ec2-instance-connect") @new
   external new: request => t = "SendSerialConsoleSSHPublicKeyCommand"
   let make = (~sshpublicKey, ~instanceId, ~serialPort=?, ()) =>
-    new({sshpublicKey, serialPort, instanceId})
+    new({sshpublicKey: sshpublicKey, serialPort: serialPort, instanceId: instanceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module SendSSHPublicKey = {
   type t
   type request = {
@@ -84,6 +85,11 @@ module SendSSHPublicKey = {
   @module("@aws-sdk/client-ec2-instance-connect") @new
   external new: request => t = "SendSSHPublicKeyCommand"
   let make = (~sshpublicKey, ~instanceOSUser, ~instanceId, ~availabilityZone=?, ()) =>
-    new({availabilityZone, sshpublicKey, instanceOSUser, instanceId})
+    new({
+      availabilityZone: availabilityZone,
+      sshpublicKey: sshpublicKey,
+      instanceOSUser: instanceOSUser,
+      instanceId: instanceId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

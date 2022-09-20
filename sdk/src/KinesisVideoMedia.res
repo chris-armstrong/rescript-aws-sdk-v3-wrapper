@@ -187,6 +187,6 @@ module GetMedia = {
   }
   @module("@aws-sdk/client-kinesisvideo") @new external new: request => t = "GetMediaCommand"
   let make = (~startSelector, ~streamARN=?, ~streamName=?, ()) =>
-    new({startSelector, streamARN, streamName})
+    new({startSelector: startSelector, streamARN: streamARN, streamName: streamName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

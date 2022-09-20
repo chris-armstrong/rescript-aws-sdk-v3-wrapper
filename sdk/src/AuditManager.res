@@ -1117,6 +1117,7 @@ module GetAccountStatus = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetInsights = {
   type t
   type request = {.}
@@ -1128,6 +1129,7 @@ module GetInsights = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ValidateAssessmentReportIntegrity = {
   type t
   type request = {
@@ -1157,6 +1159,7 @@ module ValidateAssessmentReportIntegrity = {
   let make = (~s3RelativePath, ()) => new({s3RelativePath: s3RelativePath})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateAssessmentFrameworkShare = {
   type t
   type request = {
@@ -1175,9 +1178,11 @@ module UpdateAssessmentFrameworkShare = {
   }
   @module("@aws-sdk/client-auditmanager") @new
   external new: request => t = "UpdateAssessmentFrameworkShareCommand"
-  let make = (~action, ~requestType, ~requestId, ()) => new({action, requestType, requestId})
+  let make = (~action, ~requestType, ~requestId, ()) =>
+    new({action: action, requestType: requestType, requestId: requestId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UntagResource = {
   type t
   type request = {
@@ -1187,9 +1192,10 @@ module UntagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-auditmanager") @new external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys, resourceArn})
+  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module TagResource = {
   type t
   type request = {
@@ -1199,9 +1205,10 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-auditmanager") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceArn, ()) => new({tags, resourceArn})
+  let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module StartAssessmentFrameworkShare = {
   type t
   type request = {
@@ -1222,9 +1229,15 @@ module StartAssessmentFrameworkShare = {
   @module("@aws-sdk/client-auditmanager") @new
   external new: request => t = "StartAssessmentFrameworkShareCommand"
   let make = (~destinationRegion, ~destinationAccount, ~frameworkId, ~comment=?, ()) =>
-    new({comment, destinationRegion, destinationAccount, frameworkId})
+    new({
+      comment: comment,
+      destinationRegion: destinationRegion,
+      destinationAccount: destinationAccount,
+      frameworkId: frameworkId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module RegisterOrganizationAdminAccount = {
   type t
   type request = {
@@ -1242,6 +1255,7 @@ module RegisterOrganizationAdminAccount = {
   let make = (~adminAccountId, ()) => new({adminAccountId: adminAccountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module RegisterAccount = {
   type t
   type request = {
@@ -1254,9 +1268,11 @@ module RegisterAccount = {
     status: option<accountStatus>,
   }
   @module("@aws-sdk/client-auditmanager") @new external new: request => t = "RegisterAccountCommand"
-  let make = (~delegatedAdminAccount=?, ~kmsKey=?, ()) => new({delegatedAdminAccount, kmsKey})
+  let make = (~delegatedAdminAccount=?, ~kmsKey=?, ()) =>
+    new({delegatedAdminAccount: delegatedAdminAccount, kmsKey: kmsKey})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListTagsForResource = {
   type t
   type request = {
@@ -1272,6 +1288,7 @@ module ListTagsForResource = {
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListNotifications = {
   type t
   type request = {
@@ -1289,9 +1306,11 @@ module ListNotifications = {
   }
   @module("@aws-sdk/client-auditmanager") @new
   external new: request => t = "ListNotificationsCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListKeywordsForDataSource = {
   type t
   type request = {
@@ -1312,9 +1331,11 @@ module ListKeywordsForDataSource = {
   }
   @module("@aws-sdk/client-auditmanager") @new
   external new: request => t = "ListKeywordsForDataSourceCommand"
-  let make = (~source, ~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken, source})
+  let make = (~source, ~maxResults=?, ~nextToken=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken, source: source})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListControls = {
   type t
   type request = {
@@ -1336,9 +1357,10 @@ module ListControls = {
   }
   @module("@aws-sdk/client-auditmanager") @new external new: request => t = "ListControlsCommand"
   let make = (~controlType, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults, nextToken, controlType})
+    new({maxResults: maxResults, nextToken: nextToken, controlType: controlType})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListAssessmentReports = {
   type t
   type request = {
@@ -1358,9 +1380,11 @@ module ListAssessmentReports = {
   }
   @module("@aws-sdk/client-auditmanager") @new
   external new: request => t = "ListAssessmentReportsCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListAssessmentFrameworks = {
   type t
   type request = {
@@ -1384,9 +1408,10 @@ module ListAssessmentFrameworks = {
   @module("@aws-sdk/client-auditmanager") @new
   external new: request => t = "ListAssessmentFrameworksCommand"
   let make = (~frameworkType, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults, nextToken, frameworkType})
+    new({maxResults: maxResults, nextToken: nextToken, frameworkType: frameworkType})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListAssessmentFrameworkShareRequests = {
   type t
   type request = {
@@ -1411,9 +1436,10 @@ module ListAssessmentFrameworkShareRequests = {
   @module("@aws-sdk/client-auditmanager") @new
   external new: request => t = "ListAssessmentFrameworkShareRequestsCommand"
   let make = (~requestType, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults, nextToken, requestType})
+    new({maxResults: maxResults, nextToken: nextToken, requestType: requestType})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetServicesInScope = {
   type t
   type request = {.}
@@ -1426,6 +1452,7 @@ module GetServicesInScope = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetOrganizationAdminAccount = {
   type t
   type request = {.}
@@ -1440,6 +1467,7 @@ module GetOrganizationAdminAccount = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetInsightsByAssessment = {
   type t
   type request = {
@@ -1455,6 +1483,7 @@ module GetInsightsByAssessment = {
   let make = (~assessmentId, ()) => new({assessmentId: assessmentId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetEvidenceFoldersByAssessmentControl = {
   type t
   type request = {
@@ -1478,9 +1507,16 @@ module GetEvidenceFoldersByAssessmentControl = {
   @module("@aws-sdk/client-auditmanager") @new
   external new: request => t = "GetEvidenceFoldersByAssessmentControlCommand"
   let make = (~controlId, ~controlSetId, ~assessmentId, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults, nextToken, controlId, controlSetId, assessmentId})
+    new({
+      maxResults: maxResults,
+      nextToken: nextToken,
+      controlId: controlId,
+      controlSetId: controlSetId,
+      assessmentId: assessmentId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetEvidenceFoldersByAssessment = {
   type t
   type request = {
@@ -1502,9 +1538,10 @@ module GetEvidenceFoldersByAssessment = {
   @module("@aws-sdk/client-auditmanager") @new
   external new: request => t = "GetEvidenceFoldersByAssessmentCommand"
   let make = (~assessmentId, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults, nextToken, assessmentId})
+    new({maxResults: maxResults, nextToken: nextToken, assessmentId: assessmentId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetEvidenceFolder = {
   type t
   type request = {
@@ -1520,9 +1557,14 @@ module GetEvidenceFolder = {
   @module("@aws-sdk/client-auditmanager") @new
   external new: request => t = "GetEvidenceFolderCommand"
   let make = (~evidenceFolderId, ~controlSetId, ~assessmentId, ()) =>
-    new({evidenceFolderId, controlSetId, assessmentId})
+    new({
+      evidenceFolderId: evidenceFolderId,
+      controlSetId: controlSetId,
+      assessmentId: assessmentId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetDelegations = {
   type t
   type request = {
@@ -1542,9 +1584,11 @@ module GetDelegations = {
     delegations: option<delegationMetadataList>,
   }
   @module("@aws-sdk/client-auditmanager") @new external new: request => t = "GetDelegationsCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetChangeLogs = {
   type t
   type request = {
@@ -1566,9 +1610,16 @@ module GetChangeLogs = {
   }
   @module("@aws-sdk/client-auditmanager") @new external new: request => t = "GetChangeLogsCommand"
   let make = (~assessmentId, ~maxResults=?, ~nextToken=?, ~controlId=?, ~controlSetId=?, ()) =>
-    new({maxResults, nextToken, controlId, controlSetId, assessmentId})
+    new({
+      maxResults: maxResults,
+      nextToken: nextToken,
+      controlId: controlId,
+      controlSetId: controlSetId,
+      assessmentId: assessmentId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetAssessmentReportUrl = {
   type t
   type request = {
@@ -1579,9 +1630,11 @@ module GetAssessmentReportUrl = {
   type response = {preSignedUrl: option<url>}
   @module("@aws-sdk/client-auditmanager") @new
   external new: request => t = "GetAssessmentReportUrlCommand"
-  let make = (~assessmentId, ~assessmentReportId, ()) => new({assessmentId, assessmentReportId})
+  let make = (~assessmentId, ~assessmentReportId, ()) =>
+    new({assessmentId: assessmentId, assessmentReportId: assessmentReportId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DisassociateAssessmentReportEvidenceFolder = {
   type t
   type request = {
@@ -1592,9 +1645,11 @@ module DisassociateAssessmentReportEvidenceFolder = {
   type response = {.}
   @module("@aws-sdk/client-auditmanager") @new
   external new: request => t = "DisassociateAssessmentReportEvidenceFolderCommand"
-  let make = (~evidenceFolderId, ~assessmentId, ()) => new({evidenceFolderId, assessmentId})
+  let make = (~evidenceFolderId, ~assessmentId, ()) =>
+    new({evidenceFolderId: evidenceFolderId, assessmentId: assessmentId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeregisterOrganizationAdminAccount = {
   type t
   type request = {
@@ -1607,6 +1662,7 @@ module DeregisterOrganizationAdminAccount = {
   let make = (~adminAccountId=?, ()) => new({adminAccountId: adminAccountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeregisterAccount = {
   type t
   type request = {.}
@@ -1618,6 +1674,7 @@ module DeregisterAccount = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteControl = {
   type t
   type request = {@ocaml.doc("<p> The unique identifier for the control. </p>") controlId: uuid}
@@ -1626,6 +1683,7 @@ module DeleteControl = {
   let make = (~controlId, ()) => new({controlId: controlId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteAssessmentReport = {
   type t
   type request = {
@@ -1636,9 +1694,11 @@ module DeleteAssessmentReport = {
   type response = {.}
   @module("@aws-sdk/client-auditmanager") @new
   external new: request => t = "DeleteAssessmentReportCommand"
-  let make = (~assessmentReportId, ~assessmentId, ()) => new({assessmentReportId, assessmentId})
+  let make = (~assessmentReportId, ~assessmentId, ()) =>
+    new({assessmentReportId: assessmentReportId, assessmentId: assessmentId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteAssessmentFrameworkShare = {
   type t
   type request = {
@@ -1651,9 +1711,10 @@ module DeleteAssessmentFrameworkShare = {
   type response = {.}
   @module("@aws-sdk/client-auditmanager") @new
   external new: request => t = "DeleteAssessmentFrameworkShareCommand"
-  let make = (~requestType, ~requestId, ()) => new({requestType, requestId})
+  let make = (~requestType, ~requestId, ()) => new({requestType: requestType, requestId: requestId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteAssessmentFramework = {
   type t
   type request = {@ocaml.doc("<p> The identifier for the custom framework. </p>") frameworkId: uuid}
@@ -1663,6 +1724,7 @@ module DeleteAssessmentFramework = {
   let make = (~frameworkId, ()) => new({frameworkId: frameworkId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteAssessment = {
   type t
   type request = {@ocaml.doc("<p> The identifier for the assessment. </p>") assessmentId: uuid}
@@ -1672,6 +1734,7 @@ module DeleteAssessment = {
   let make = (~assessmentId, ()) => new({assessmentId: assessmentId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module CreateAssessmentReport = {
   type t
   type request = {
@@ -1687,9 +1750,11 @@ module CreateAssessmentReport = {
   }
   @module("@aws-sdk/client-auditmanager") @new
   external new: request => t = "CreateAssessmentReportCommand"
-  let make = (~assessmentId, ~name, ~description=?, ()) => new({assessmentId, description, name})
+  let make = (~assessmentId, ~name, ~description=?, ()) =>
+    new({assessmentId: assessmentId, description: description, name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module BatchDisassociateAssessmentReportEvidence = {
   type t
   type request = {
@@ -1707,9 +1772,10 @@ module BatchDisassociateAssessmentReportEvidence = {
   @module("@aws-sdk/client-auditmanager") @new
   external new: request => t = "BatchDisassociateAssessmentReportEvidenceCommand"
   let make = (~evidenceIds, ~evidenceFolderId, ~assessmentId, ()) =>
-    new({evidenceIds, evidenceFolderId, assessmentId})
+    new({evidenceIds: evidenceIds, evidenceFolderId: evidenceFolderId, assessmentId: assessmentId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module BatchDeleteDelegationByAssessment = {
   type t
   type request = {
@@ -1723,9 +1789,11 @@ module BatchDeleteDelegationByAssessment = {
   }
   @module("@aws-sdk/client-auditmanager") @new
   external new: request => t = "BatchDeleteDelegationByAssessmentCommand"
-  let make = (~assessmentId, ~delegationIds, ()) => new({assessmentId, delegationIds})
+  let make = (~assessmentId, ~delegationIds, ()) =>
+    new({assessmentId: assessmentId, delegationIds: delegationIds})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module BatchAssociateAssessmentReportEvidence = {
   type t
   type request = {
@@ -1743,9 +1811,10 @@ module BatchAssociateAssessmentReportEvidence = {
   @module("@aws-sdk/client-auditmanager") @new
   external new: request => t = "BatchAssociateAssessmentReportEvidenceCommand"
   let make = (~evidenceIds, ~evidenceFolderId, ~assessmentId, ()) =>
-    new({evidenceIds, evidenceFolderId, assessmentId})
+    new({evidenceIds: evidenceIds, evidenceFolderId: evidenceFolderId, assessmentId: assessmentId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module AssociateAssessmentReportEvidenceFolder = {
   type t
   type request = {
@@ -1756,9 +1825,11 @@ module AssociateAssessmentReportEvidenceFolder = {
   type response = {.}
   @module("@aws-sdk/client-auditmanager") @new
   external new: request => t = "AssociateAssessmentReportEvidenceFolderCommand"
-  let make = (~evidenceFolderId, ~assessmentId, ()) => new({evidenceFolderId, assessmentId})
+  let make = (~evidenceFolderId, ~assessmentId, ()) =>
+    new({evidenceFolderId: evidenceFolderId, assessmentId: assessmentId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateSettings = {
   type t
   type request = {
@@ -1778,9 +1849,16 @@ module UpdateSettings = {
     ~defaultAssessmentReportsDestination=?,
     ~snsTopic=?,
     (),
-  ) => new({kmsKey, defaultProcessOwners, defaultAssessmentReportsDestination, snsTopic})
+  ) =>
+    new({
+      kmsKey: kmsKey,
+      defaultProcessOwners: defaultProcessOwners,
+      defaultAssessmentReportsDestination: defaultAssessmentReportsDestination,
+      snsTopic: snsTopic,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateAssessmentControl = {
   type t
   type request = {
@@ -1799,9 +1877,16 @@ module UpdateAssessmentControl = {
   @module("@aws-sdk/client-auditmanager") @new
   external new: request => t = "UpdateAssessmentControlCommand"
   let make = (~controlId, ~controlSetId, ~assessmentId, ~commentBody=?, ~controlStatus=?, ()) =>
-    new({commentBody, controlStatus, controlId, controlSetId, assessmentId})
+    new({
+      commentBody: commentBody,
+      controlStatus: controlStatus,
+      controlId: controlId,
+      controlSetId: controlSetId,
+      assessmentId: assessmentId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListControlInsightsByControlDomain = {
   type t
   type request = {
@@ -1823,9 +1908,10 @@ module ListControlInsightsByControlDomain = {
   @module("@aws-sdk/client-auditmanager") @new
   external new: request => t = "ListControlInsightsByControlDomainCommand"
   let make = (~controlDomainId, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults, nextToken, controlDomainId})
+    new({maxResults: maxResults, nextToken: nextToken, controlDomainId: controlDomainId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListControlDomainInsightsByAssessment = {
   type t
   type request = {
@@ -1847,9 +1933,10 @@ module ListControlDomainInsightsByAssessment = {
   @module("@aws-sdk/client-auditmanager") @new
   external new: request => t = "ListControlDomainInsightsByAssessmentCommand"
   let make = (~assessmentId, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults, nextToken, assessmentId})
+    new({maxResults: maxResults, nextToken: nextToken, assessmentId: assessmentId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListControlDomainInsights = {
   type t
   type request = {
@@ -1869,9 +1956,11 @@ module ListControlDomainInsights = {
   }
   @module("@aws-sdk/client-auditmanager") @new
   external new: request => t = "ListControlDomainInsightsCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListAssessmentControlInsightsByControlDomain = {
   type t
   type request = {
@@ -1894,9 +1983,15 @@ module ListAssessmentControlInsightsByControlDomain = {
   @module("@aws-sdk/client-auditmanager") @new
   external new: request => t = "ListAssessmentControlInsightsByControlDomainCommand"
   let make = (~assessmentId, ~controlDomainId, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults, nextToken, assessmentId, controlDomainId})
+    new({
+      maxResults: maxResults,
+      nextToken: nextToken,
+      assessmentId: assessmentId,
+      controlDomainId: controlDomainId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetSettings = {
   type t
   type request = {
@@ -1911,6 +2006,7 @@ module GetSettings = {
   let make = (~attribute, ()) => new({attribute: attribute})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetEvidence = {
   type t
   type request = {
@@ -1926,9 +2022,15 @@ module GetEvidence = {
   }
   @module("@aws-sdk/client-auditmanager") @new external new: request => t = "GetEvidenceCommand"
   let make = (~evidenceId, ~evidenceFolderId, ~controlSetId, ~assessmentId, ()) =>
-    new({evidenceId, evidenceFolderId, controlSetId, assessmentId})
+    new({
+      evidenceId: evidenceId,
+      evidenceFolderId: evidenceFolderId,
+      controlSetId: controlSetId,
+      assessmentId: assessmentId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module BatchImportEvidenceToAssessmentControl = {
   type t
   type request = {
@@ -1945,9 +2047,15 @@ module BatchImportEvidenceToAssessmentControl = {
   @module("@aws-sdk/client-auditmanager") @new
   external new: request => t = "BatchImportEvidenceToAssessmentControlCommand"
   let make = (~manualEvidence, ~controlId, ~controlSetId, ~assessmentId, ()) =>
-    new({manualEvidence, controlId, controlSetId, assessmentId})
+    new({
+      manualEvidence: manualEvidence,
+      controlId: controlId,
+      controlSetId: controlSetId,
+      assessmentId: assessmentId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module BatchCreateDelegationByAssessment = {
   type t
   type request = {
@@ -1965,9 +2073,10 @@ module BatchCreateDelegationByAssessment = {
   @module("@aws-sdk/client-auditmanager") @new
   external new: request => t = "BatchCreateDelegationByAssessmentCommand"
   let make = (~assessmentId, ~createDelegationRequests, ()) =>
-    new({assessmentId, createDelegationRequests})
+    new({assessmentId: assessmentId, createDelegationRequests: createDelegationRequests})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateControl = {
   type t
   type request = {
@@ -2001,16 +2110,17 @@ module UpdateControl = {
     (),
   ) =>
     new({
-      controlMappingSources,
-      actionPlanInstructions,
-      actionPlanTitle,
-      testingInformation,
-      description,
-      name,
-      controlId,
+      controlMappingSources: controlMappingSources,
+      actionPlanInstructions: actionPlanInstructions,
+      actionPlanTitle: actionPlanTitle,
+      testingInformation: testingInformation,
+      description: description,
+      name: name,
+      controlId: controlId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListAssessments = {
   type t
   type request = {
@@ -2029,9 +2139,11 @@ module ListAssessments = {
     assessmentMetadata: option<listAssessmentMetadata>,
   }
   @module("@aws-sdk/client-auditmanager") @new external new: request => t = "ListAssessmentsCommand"
-  let make = (~maxResults=?, ~nextToken=?, ~status=?, ()) => new({maxResults, nextToken, status})
+  let make = (~maxResults=?, ~nextToken=?, ~status=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken, status: status})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetEvidenceByEvidenceFolder = {
   type t
   type request = {
@@ -2056,9 +2168,16 @@ module GetEvidenceByEvidenceFolder = {
   @module("@aws-sdk/client-auditmanager") @new
   external new: request => t = "GetEvidenceByEvidenceFolderCommand"
   let make = (~evidenceFolderId, ~controlSetId, ~assessmentId, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults, nextToken, evidenceFolderId, controlSetId, assessmentId})
+    new({
+      maxResults: maxResults,
+      nextToken: nextToken,
+      evidenceFolderId: evidenceFolderId,
+      controlSetId: controlSetId,
+      assessmentId: assessmentId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetControl = {
   type t
   type request = {@ocaml.doc("<p> The identifier for the control. </p>") controlId: uuid}
@@ -2070,6 +2189,7 @@ module GetControl = {
   let make = (~controlId, ()) => new({controlId: controlId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateControl = {
   type t
   type request = {
@@ -2101,16 +2221,17 @@ module CreateControl = {
     (),
   ) =>
     new({
-      tags,
-      controlMappingSources,
-      actionPlanInstructions,
-      actionPlanTitle,
-      testingInformation,
-      description,
-      name,
+      tags: tags,
+      controlMappingSources: controlMappingSources,
+      actionPlanInstructions: actionPlanInstructions,
+      actionPlanTitle: actionPlanTitle,
+      testingInformation: testingInformation,
+      description: description,
+      name: name,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateAssessmentControlSetStatus = {
   type t
   type request = {
@@ -2129,9 +2250,10 @@ module UpdateAssessmentControlSetStatus = {
   @module("@aws-sdk/client-auditmanager") @new
   external new: request => t = "UpdateAssessmentControlSetStatusCommand"
   let make = (~comment, ~status, ~controlSetId, ~assessmentId, ()) =>
-    new({comment, status, controlSetId, assessmentId})
+    new({comment: comment, status: status, controlSetId: controlSetId, assessmentId: assessmentId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateAssessmentStatus = {
   type t
   type request = {
@@ -2145,9 +2267,10 @@ module UpdateAssessmentStatus = {
   }
   @module("@aws-sdk/client-auditmanager") @new
   external new: request => t = "UpdateAssessmentStatusCommand"
-  let make = (~status, ~assessmentId, ()) => new({status, assessmentId})
+  let make = (~status, ~assessmentId, ()) => new({status: status, assessmentId: assessmentId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateAssessmentFramework = {
   type t
   type request = {
@@ -2165,9 +2288,16 @@ module UpdateAssessmentFramework = {
   @module("@aws-sdk/client-auditmanager") @new
   external new: request => t = "UpdateAssessmentFrameworkCommand"
   let make = (~controlSets, ~name, ~frameworkId, ~complianceType=?, ~description=?, ()) =>
-    new({controlSets, complianceType, description, name, frameworkId})
+    new({
+      controlSets: controlSets,
+      complianceType: complianceType,
+      description: description,
+      name: name,
+      frameworkId: frameworkId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateAssessment = {
   type t
   type request = {
@@ -2199,15 +2329,16 @@ module UpdateAssessment = {
     (),
   ) =>
     new({
-      roles,
-      assessmentReportsDestination,
-      scope,
-      assessmentDescription,
-      assessmentName,
-      assessmentId,
+      roles: roles,
+      assessmentReportsDestination: assessmentReportsDestination,
+      scope: scope,
+      assessmentDescription: assessmentDescription,
+      assessmentName: assessmentName,
+      assessmentId: assessmentId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetAssessmentFramework = {
   type t
   type request = {@ocaml.doc("<p> The identifier for the framework. </p>") frameworkId: uuid}
@@ -2220,6 +2351,7 @@ module GetAssessmentFramework = {
   let make = (~frameworkId, ()) => new({frameworkId: frameworkId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetAssessment = {
   type t
   type request = {
@@ -2233,6 +2365,7 @@ module GetAssessment = {
   let make = (~assessmentId, ()) => new({assessmentId: assessmentId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateAssessmentFramework = {
   type t
   type request = {
@@ -2254,9 +2387,16 @@ module CreateAssessmentFramework = {
   @module("@aws-sdk/client-auditmanager") @new
   external new: request => t = "CreateAssessmentFrameworkCommand"
   let make = (~controlSets, ~name, ~tags=?, ~complianceType=?, ~description=?, ()) =>
-    new({tags, controlSets, complianceType, description, name})
+    new({
+      tags: tags,
+      controlSets: controlSets,
+      complianceType: complianceType,
+      description: description,
+      name: name,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateAssessment = {
   type t
   type request = {
@@ -2287,6 +2427,15 @@ module CreateAssessment = {
     ~tags=?,
     ~description=?,
     (),
-  ) => new({tags, frameworkId, roles, scope, assessmentReportsDestination, description, name})
+  ) =>
+    new({
+      tags: tags,
+      frameworkId: frameworkId,
+      roles: roles,
+      scope: scope,
+      assessmentReportsDestination: assessmentReportsDestination,
+      description: description,
+      name: name,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

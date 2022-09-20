@@ -486,9 +486,10 @@ module UntagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-honeycode") @new external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys, resourceArn})
+  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module TagResource = {
   type t
   type request = {
@@ -497,9 +498,10 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-honeycode") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceArn, ()) => new({tags, resourceArn})
+  let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ListTagsForResource = {
   type t
   type request = {
@@ -511,6 +513,7 @@ module ListTagsForResource = {
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListTables = {
   type t
   type request = {
@@ -549,9 +552,10 @@ module ListTables = {
   }
   @module("@aws-sdk/client-honeycode") @new external new: request => t = "ListTablesCommand"
   let make = (~workbookId, ~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken, maxResults, workbookId})
+    new({nextToken: nextToken, maxResults: maxResults, workbookId: workbookId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListTableColumns = {
   type t
   type request = {
@@ -592,9 +596,11 @@ module ListTableColumns = {
     tableColumns: tableColumns,
   }
   @module("@aws-sdk/client-honeycode") @new external new: request => t = "ListTableColumnsCommand"
-  let make = (~tableId, ~workbookId, ~nextToken=?, ()) => new({nextToken, tableId, workbookId})
+  let make = (~tableId, ~workbookId, ~nextToken=?, ()) =>
+    new({nextToken: nextToken, tableId: tableId, workbookId: workbookId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module InvokeScreenAutomation = {
   type t
   type request = {
@@ -643,9 +649,19 @@ module InvokeScreenAutomation = {
     ~rowId=?,
     ~variables=?,
     (),
-  ) => new({clientRequestToken, rowId, variables, screenAutomationId, screenId, appId, workbookId})
+  ) =>
+    new({
+      clientRequestToken: clientRequestToken,
+      rowId: rowId,
+      variables: variables,
+      screenAutomationId: screenAutomationId,
+      screenId: screenId,
+      appId: appId,
+      workbookId: workbookId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module BatchDeleteTableRows = {
   type t
   type request = {
@@ -693,9 +709,15 @@ module BatchDeleteTableRows = {
   @module("@aws-sdk/client-honeycode") @new
   external new: request => t = "BatchDeleteTableRowsCommand"
   let make = (~rowIds, ~tableId, ~workbookId, ~clientRequestToken=?, ()) =>
-    new({clientRequestToken, rowIds, tableId, workbookId})
+    new({
+      clientRequestToken: clientRequestToken,
+      rowIds: rowIds,
+      tableId: tableId,
+      workbookId: workbookId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module StartTableDataImportJob = {
   type t
   type request = {
@@ -757,9 +779,17 @@ module StartTableDataImportJob = {
     ~workbookId,
     (),
   ) =>
-    new({clientRequestToken, importOptions, destinationTableId, dataFormat, dataSource, workbookId})
+    new({
+      clientRequestToken: clientRequestToken,
+      importOptions: importOptions,
+      destinationTableId: destinationTableId,
+      dataFormat: dataFormat,
+      dataSource: dataSource,
+      workbookId: workbookId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module QueryTableRows = {
   type t
   type request = {
@@ -810,9 +840,16 @@ module QueryTableRows = {
   }
   @module("@aws-sdk/client-honeycode") @new external new: request => t = "QueryTableRowsCommand"
   let make = (~filterFormula, ~tableId, ~workbookId, ~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken, maxResults, filterFormula, tableId, workbookId})
+    new({
+      nextToken: nextToken,
+      maxResults: maxResults,
+      filterFormula: filterFormula,
+      tableId: tableId,
+      workbookId: workbookId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListTableRows = {
   type t
   type request = {
@@ -871,9 +908,16 @@ module ListTableRows = {
   }
   @module("@aws-sdk/client-honeycode") @new external new: request => t = "ListTableRowsCommand"
   let make = (~tableId, ~workbookId, ~nextToken=?, ~maxResults=?, ~rowIds=?, ()) =>
-    new({nextToken, maxResults, rowIds, tableId, workbookId})
+    new({
+      nextToken: nextToken,
+      maxResults: maxResults,
+      rowIds: rowIds,
+      tableId: tableId,
+      workbookId: workbookId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeTableDataImportJob = {
   type t
   type request = {
@@ -913,9 +957,11 @@ module DescribeTableDataImportJob = {
   }
   @module("@aws-sdk/client-honeycode") @new
   external new: request => t = "DescribeTableDataImportJobCommand"
-  let make = (~jobId, ~tableId, ~workbookId, ()) => new({jobId, tableId, workbookId})
+  let make = (~jobId, ~tableId, ~workbookId, ()) =>
+    new({jobId: jobId, tableId: tableId, workbookId: workbookId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module BatchUpsertTableRows = {
   type t
   type request = {
@@ -973,9 +1019,15 @@ module BatchUpsertTableRows = {
   @module("@aws-sdk/client-honeycode") @new
   external new: request => t = "BatchUpsertTableRowsCommand"
   let make = (~rowsToUpsert, ~tableId, ~workbookId, ~clientRequestToken=?, ()) =>
-    new({clientRequestToken, rowsToUpsert, tableId, workbookId})
+    new({
+      clientRequestToken: clientRequestToken,
+      rowsToUpsert: rowsToUpsert,
+      tableId: tableId,
+      workbookId: workbookId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module BatchUpdateTableRows = {
   type t
   type request = {
@@ -1028,9 +1080,15 @@ module BatchUpdateTableRows = {
   @module("@aws-sdk/client-honeycode") @new
   external new: request => t = "BatchUpdateTableRowsCommand"
   let make = (~rowsToUpdate, ~tableId, ~workbookId, ~clientRequestToken=?, ()) =>
-    new({clientRequestToken, rowsToUpdate, tableId, workbookId})
+    new({
+      clientRequestToken: clientRequestToken,
+      rowsToUpdate: rowsToUpdate,
+      tableId: tableId,
+      workbookId: workbookId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module BatchCreateTableRows = {
   type t
   type request = {
@@ -1084,9 +1142,15 @@ module BatchCreateTableRows = {
   @module("@aws-sdk/client-honeycode") @new
   external new: request => t = "BatchCreateTableRowsCommand"
   let make = (~rowsToCreate, ~tableId, ~workbookId, ~clientRequestToken=?, ()) =>
-    new({clientRequestToken, rowsToCreate, tableId, workbookId})
+    new({
+      clientRequestToken: clientRequestToken,
+      rowsToCreate: rowsToCreate,
+      tableId: tableId,
+      workbookId: workbookId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetScreenData = {
   type t
   type request = {
@@ -1133,6 +1197,13 @@ module GetScreenData = {
   }
   @module("@aws-sdk/client-honeycode") @new external new: request => t = "GetScreenDataCommand"
   let make = (~screenId, ~appId, ~workbookId, ~nextToken=?, ~maxResults=?, ~variables=?, ()) =>
-    new({nextToken, maxResults, variables, screenId, appId, workbookId})
+    new({
+      nextToken: nextToken,
+      maxResults: maxResults,
+      variables: variables,
+      screenId: screenId,
+      appId: appId,
+      workbookId: workbookId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

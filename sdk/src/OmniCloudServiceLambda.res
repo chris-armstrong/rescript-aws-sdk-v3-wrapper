@@ -566,9 +566,10 @@ module UpdateDeviceMetadata = {
   type response = {@ocaml.doc("<p>The device's ID.</p>") @as("DeviceId") deviceId: option<deviceId>}
   @module("@aws-sdk/client-panorama") @new
   external new: request => t = "UpdateDeviceMetadataCommand"
-  let make = (~deviceId, ~description=?, ()) => new({description, deviceId})
+  let make = (~deviceId, ~description=?, ()) => new({description: description, deviceId: deviceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UntagResource = {
   type t
   type request = {
@@ -577,9 +578,10 @@ module UntagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-panorama") @new external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys, resourceArn})
+  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module TagResource = {
   type t
   type request = {
@@ -588,9 +590,10 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-panorama") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceArn, ()) => new({tags, resourceArn})
+  let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module RemoveApplicationInstance = {
   type t
   type request = {
@@ -603,6 +606,7 @@ module RemoveApplicationInstance = {
   let make = (~applicationInstanceId, ()) => new({applicationInstanceId: applicationInstanceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module RegisterPackageVersion = {
   type t
   type request = {
@@ -619,9 +623,16 @@ module RegisterPackageVersion = {
   @module("@aws-sdk/client-panorama") @new
   external new: request => t = "RegisterPackageVersionCommand"
   let make = (~patchVersion, ~packageVersion, ~packageId, ~markLatest=?, ~ownerAccount=?, ()) =>
-    new({markLatest, patchVersion, packageVersion, packageId, ownerAccount})
+    new({
+      markLatest: markLatest,
+      patchVersion: patchVersion,
+      packageVersion: packageVersion,
+      packageId: packageId,
+      ownerAccount: ownerAccount,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ListTagsForResource = {
   type t
   type request = {
@@ -632,6 +643,7 @@ module ListTagsForResource = {
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListPackageImportJobs = {
   type t
   type request = {
@@ -653,9 +665,11 @@ module ListPackageImportJobs = {
   }
   @module("@aws-sdk/client-panorama") @new
   external new: request => t = "ListPackageImportJobsCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListNodes = {
   type t
   type request = {
@@ -695,9 +709,18 @@ module ListNodes = {
     ~category=?,
     (),
   ) =>
-    new({maxResults, nextToken, patchVersion, packageVersion, packageName, ownerAccount, category})
+    new({
+      maxResults: maxResults,
+      nextToken: nextToken,
+      patchVersion: patchVersion,
+      packageVersion: packageVersion,
+      packageName: packageName,
+      ownerAccount: ownerAccount,
+      category: category,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListNodeFromTemplateJobs = {
   type t
   type request = {
@@ -721,9 +744,11 @@ module ListNodeFromTemplateJobs = {
   }
   @module("@aws-sdk/client-panorama") @new
   external new: request => t = "ListNodeFromTemplateJobsCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListDevicesJobs = {
   type t
   type request = {
@@ -746,9 +771,10 @@ module ListDevicesJobs = {
   }
   @module("@aws-sdk/client-panorama") @new external new: request => t = "ListDevicesJobsCommand"
   let make = (~maxResults=?, ~nextToken=?, ~deviceId=?, ()) =>
-    new({maxResults, nextToken, deviceId})
+    new({maxResults: maxResults, nextToken: nextToken, deviceId: deviceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListDevices = {
   type t
   type request = {
@@ -768,9 +794,11 @@ module ListDevices = {
     @ocaml.doc("<p>A list of devices.</p>") @as("Devices") devices: deviceList,
   }
   @module("@aws-sdk/client-panorama") @new external new: request => t = "ListDevicesCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListApplicationInstanceNodeInstances = {
   type t
   type request = {
@@ -795,9 +823,14 @@ module ListApplicationInstanceNodeInstances = {
   @module("@aws-sdk/client-panorama") @new
   external new: request => t = "ListApplicationInstanceNodeInstancesCommand"
   let make = (~applicationInstanceId, ~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken, maxResults, applicationInstanceId})
+    new({
+      nextToken: nextToken,
+      maxResults: maxResults,
+      applicationInstanceId: applicationInstanceId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListApplicationInstanceDependencies = {
   type t
   type request = {
@@ -824,9 +857,14 @@ module ListApplicationInstanceDependencies = {
   @module("@aws-sdk/client-panorama") @new
   external new: request => t = "ListApplicationInstanceDependenciesCommand"
   let make = (~applicationInstanceId, ~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken, maxResults, applicationInstanceId})
+    new({
+      nextToken: nextToken,
+      maxResults: maxResults,
+      applicationInstanceId: applicationInstanceId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribePackageVersion = {
   type t
   type request = {
@@ -860,9 +898,15 @@ module DescribePackageVersion = {
   @module("@aws-sdk/client-panorama") @new
   external new: request => t = "DescribePackageVersionCommand"
   let make = (~packageVersion, ~packageId, ~patchVersion=?, ~ownerAccount=?, ()) =>
-    new({patchVersion, packageVersion, packageId, ownerAccount})
+    new({
+      patchVersion: patchVersion,
+      packageVersion: packageVersion,
+      packageId: packageId,
+      ownerAccount: ownerAccount,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribePackage = {
   type t
   type request = {@ocaml.doc("<p>The package's ID.</p>") @as("PackageId") packageId: nodePackageId}
@@ -885,6 +929,7 @@ module DescribePackage = {
   let make = (~packageId, ()) => new({packageId: packageId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeDeviceJob = {
   type t
   type request = {@ocaml.doc("<p>The job's ID.</p>") @as("JobId") jobId: jobId}
@@ -905,6 +950,7 @@ module DescribeDeviceJob = {
   let make = (~jobId, ()) => new({jobId: jobId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeApplicationInstanceDetails = {
   type t
   type request = {
@@ -937,6 +983,7 @@ module DescribeApplicationInstanceDetails = {
   let make = (~applicationInstanceId, ()) => new({applicationInstanceId: applicationInstanceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeApplicationInstance = {
   type t
   type request = {
@@ -978,6 +1025,7 @@ module DescribeApplicationInstance = {
   let make = (~applicationInstanceId, ()) => new({applicationInstanceId: applicationInstanceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeregisterPackageVersion = {
   type t
   type request = {
@@ -1001,9 +1049,17 @@ module DeregisterPackageVersion = {
     ~updatedLatestPatchVersion=?,
     ~ownerAccount=?,
     (),
-  ) => new({updatedLatestPatchVersion, patchVersion, packageVersion, packageId, ownerAccount})
+  ) =>
+    new({
+      updatedLatestPatchVersion: updatedLatestPatchVersion,
+      patchVersion: patchVersion,
+      packageVersion: packageVersion,
+      packageId: packageId,
+      ownerAccount: ownerAccount,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeletePackage = {
   type t
   type request = {
@@ -1015,9 +1071,11 @@ module DeletePackage = {
   }
   type response = {.}
   @module("@aws-sdk/client-panorama") @new external new: request => t = "DeletePackageCommand"
-  let make = (~packageId, ~forceDelete=?, ()) => new({forceDelete, packageId})
+  let make = (~packageId, ~forceDelete=?, ()) =>
+    new({forceDelete: forceDelete, packageId: packageId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteDevice = {
   type t
   type request = {@ocaml.doc("<p>The device's ID.</p>") @as("DeviceId") deviceId: deviceId}
@@ -1026,6 +1084,7 @@ module DeleteDevice = {
   let make = (~deviceId, ()) => new({deviceId: deviceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreatePackage = {
   type t
   type request = {
@@ -1039,9 +1098,10 @@ module CreatePackage = {
     @ocaml.doc("<p>The package's ID.</p>") @as("PackageId") packageId: option<nodePackageId>,
   }
   @module("@aws-sdk/client-panorama") @new external new: request => t = "CreatePackageCommand"
-  let make = (~packageName, ~tags=?, ()) => new({tags, packageName})
+  let make = (~packageName, ~tags=?, ()) => new({tags: tags, packageName: packageName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateJobForDevices = {
   type t
   type request = {
@@ -1053,9 +1113,10 @@ module CreateJobForDevices = {
   type response = {@ocaml.doc("<p>A list of jobs.</p>") @as("Jobs") jobs: jobList}
   @module("@aws-sdk/client-panorama") @new external new: request => t = "CreateJobForDevicesCommand"
   let make = (~jobType, ~deviceJobConfig, ~deviceIds, ()) =>
-    new({jobType, deviceJobConfig, deviceIds})
+    new({jobType: jobType, deviceJobConfig: deviceJobConfig, deviceIds: deviceIds})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateApplicationInstance = {
   type t
   type request = {
@@ -1096,17 +1157,18 @@ module CreateApplicationInstance = {
     (),
   ) =>
     new({
-      tags,
-      defaultRuntimeContextDevice,
-      runtimeRoleArn,
-      applicationInstanceIdToReplace,
-      manifestOverridesPayload,
-      manifestPayload,
-      description,
-      name,
+      tags: tags,
+      defaultRuntimeContextDevice: defaultRuntimeContextDevice,
+      runtimeRoleArn: runtimeRoleArn,
+      applicationInstanceIdToReplace: applicationInstanceIdToReplace,
+      manifestOverridesPayload: manifestOverridesPayload,
+      manifestPayload: manifestPayload,
+      description: description,
+      name: name,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListPackages = {
   type t
   type request = {
@@ -1126,9 +1188,11 @@ module ListPackages = {
     @ocaml.doc("<p>A list of packages.</p>") @as("Packages") packages: option<packageList>,
   }
   @module("@aws-sdk/client-panorama") @new external new: request => t = "ListPackagesCommand"
-  let make = (~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults})
+  let make = (~nextToken=?, ~maxResults=?, ()) =>
+    new({nextToken: nextToken, maxResults: maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListApplicationInstances = {
   type t
   type request = {
@@ -1157,9 +1221,15 @@ module ListApplicationInstances = {
   @module("@aws-sdk/client-panorama") @new
   external new: request => t = "ListApplicationInstancesCommand"
   let make = (~nextToken=?, ~maxResults=?, ~statusFilter=?, ~deviceId=?, ()) =>
-    new({nextToken, maxResults, statusFilter, deviceId})
+    new({
+      nextToken: nextToken,
+      maxResults: maxResults,
+      statusFilter: statusFilter,
+      deviceId: deviceId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribePackageImportJob = {
   type t
   type request = {@ocaml.doc("<p>The job's ID.</p>") @as("JobId") jobId: jobId}
@@ -1186,6 +1256,7 @@ module DescribePackageImportJob = {
   let make = (~jobId, ()) => new({jobId: jobId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeNodeFromTemplateJob = {
   type t
   type request = {@ocaml.doc("<p>The job's ID.</p>") @as("JobId") jobId: jobId}
@@ -1214,6 +1285,7 @@ module DescribeNodeFromTemplateJob = {
   let make = (~jobId, ()) => new({jobId: jobId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeNode = {
   type t
   type request = {
@@ -1242,9 +1314,10 @@ module DescribeNode = {
     @ocaml.doc("<p>The node's ID.</p>") @as("NodeId") nodeId: nodeId,
   }
   @module("@aws-sdk/client-panorama") @new external new: request => t = "DescribeNodeCommand"
-  let make = (~nodeId, ~ownerAccount=?, ()) => new({ownerAccount, nodeId})
+  let make = (~nodeId, ~ownerAccount=?, ()) => new({ownerAccount: ownerAccount, nodeId: nodeId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreatePackageImportJob = {
   type t
   type request = {
@@ -1263,9 +1336,16 @@ module CreatePackageImportJob = {
   @module("@aws-sdk/client-panorama") @new
   external new: request => t = "CreatePackageImportJobCommand"
   let make = (~clientToken, ~outputConfig, ~inputConfig, ~jobType, ~jobTags=?, ()) =>
-    new({jobTags, clientToken, outputConfig, inputConfig, jobType})
+    new({
+      jobTags: jobTags,
+      clientToken: clientToken,
+      outputConfig: outputConfig,
+      inputConfig: inputConfig,
+      jobType: jobType,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateNodeFromTemplateJob = {
   type t
   type request = {
@@ -1295,16 +1375,17 @@ module CreateNodeFromTemplateJob = {
     (),
   ) =>
     new({
-      jobTags,
-      templateParameters,
-      nodeDescription,
-      nodeName,
-      outputPackageVersion,
-      outputPackageName,
-      templateType,
+      jobTags: jobTags,
+      templateParameters: templateParameters,
+      nodeDescription: nodeDescription,
+      nodeName: nodeName,
+      outputPackageVersion: outputPackageVersion,
+      outputPackageName: outputPackageName,
+      templateType: templateType,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ProvisionDevice = {
   type t
   type request = {
@@ -1326,9 +1407,15 @@ module ProvisionDevice = {
   }
   @module("@aws-sdk/client-panorama") @new external new: request => t = "ProvisionDeviceCommand"
   let make = (~name, ~networkingConfiguration=?, ~tags=?, ~description=?, ()) =>
-    new({networkingConfiguration, tags, description, name})
+    new({
+      networkingConfiguration: networkingConfiguration,
+      tags: tags,
+      description: description,
+      name: name,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeDevice = {
   type t
   type request = {@ocaml.doc("<p>The device's ID.</p>") @as("DeviceId") deviceId: deviceId}

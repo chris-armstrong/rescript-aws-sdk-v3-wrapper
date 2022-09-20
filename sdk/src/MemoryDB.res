@@ -575,9 +575,14 @@ module ResetParameterGroup = {
   }
   @module("@aws-sdk/client-memorydb") @new external new: request => t = "ResetParameterGroupCommand"
   let make = (~parameterGroupName, ~parameterNames=?, ~allParameters=?, ()) =>
-    new({parameterNames, allParameters, parameterGroupName})
+    new({
+      parameterNames: parameterNames,
+      allParameters: allParameters,
+      parameterGroupName: parameterGroupName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListAllowedNodeTypeUpdates = {
   type t
   type request = {
@@ -599,6 +604,7 @@ module ListAllowedNodeTypeUpdates = {
   let make = (~clusterName, ()) => new({clusterName: clusterName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteParameterGroup = {
   type t
   type request = {
@@ -614,6 +620,7 @@ module DeleteParameterGroup = {
   let make = (~parameterGroupName, ()) => new({parameterGroupName: parameterGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateUser = {
   type t
   type request = {
@@ -629,9 +636,10 @@ module UpdateUser = {
   type response = {@ocaml.doc("<p>The updated user</p>") @as("User") user: option<user>}
   @module("@aws-sdk/client-memorydb") @new external new: request => t = "UpdateUserCommand"
   let make = (~userName, ~accessString=?, ~authenticationMode=?, ()) =>
-    new({accessString, authenticationMode, userName})
+    new({accessString: accessString, authenticationMode: authenticationMode, userName: userName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateParameterGroup = {
   type t
   type request = {
@@ -650,9 +658,10 @@ module UpdateParameterGroup = {
   @module("@aws-sdk/client-memorydb") @new
   external new: request => t = "UpdateParameterGroupCommand"
   let make = (~parameterNameValues, ~parameterGroupName, ()) =>
-    new({parameterNameValues, parameterGroupName})
+    new({parameterNameValues: parameterNameValues, parameterGroupName: parameterGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UntagResource = {
   type t
   type request = {
@@ -668,9 +677,10 @@ module UntagResource = {
     @ocaml.doc("<p>The list of tags removed</p>") @as("TagList") tagList_: option<tagList_>,
   }
   @module("@aws-sdk/client-memorydb") @new external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys, resourceArn})
+  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module TagResource = {
   type t
   type request = {
@@ -690,9 +700,10 @@ module TagResource = {
     tagList_: option<tagList_>,
   }
   @module("@aws-sdk/client-memorydb") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceArn, ()) => new({tags, resourceArn})
+  let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListTags = {
   type t
   type request = {
@@ -710,6 +721,7 @@ module ListTags = {
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeServiceUpdates = {
   type t
   type request = {
@@ -743,9 +755,16 @@ module DescribeServiceUpdates = {
   @module("@aws-sdk/client-memorydb") @new
   external new: request => t = "DescribeServiceUpdatesCommand"
   let make = (~nextToken=?, ~maxResults=?, ~status=?, ~clusterNames=?, ~serviceUpdateName=?, ()) =>
-    new({nextToken, maxResults, status, clusterNames, serviceUpdateName})
+    new({
+      nextToken: nextToken,
+      maxResults: maxResults,
+      status: status,
+      clusterNames: clusterNames,
+      serviceUpdateName: serviceUpdateName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeParameters = {
   type t
   type request = {
@@ -777,9 +796,10 @@ module DescribeParameters = {
   }
   @module("@aws-sdk/client-memorydb") @new external new: request => t = "DescribeParametersCommand"
   let make = (~parameterGroupName, ~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken, maxResults, parameterGroupName})
+    new({nextToken: nextToken, maxResults: maxResults, parameterGroupName: parameterGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeParameterGroups = {
   type t
   type request = {
@@ -812,9 +832,10 @@ module DescribeParameterGroups = {
   @module("@aws-sdk/client-memorydb") @new
   external new: request => t = "DescribeParameterGroupsCommand"
   let make = (~nextToken=?, ~maxResults=?, ~parameterGroupName=?, ()) =>
-    new({nextToken, maxResults, parameterGroupName})
+    new({nextToken: nextToken, maxResults: maxResults, parameterGroupName: parameterGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeEvents = {
   type t
   type request = {
@@ -873,9 +894,19 @@ module DescribeEvents = {
     ~sourceType=?,
     ~sourceName=?,
     (),
-  ) => new({nextToken, maxResults, duration, endTime, startTime, sourceType, sourceName})
+  ) =>
+    new({
+      nextToken: nextToken,
+      maxResults: maxResults,
+      duration: duration,
+      endTime: endTime,
+      startTime: startTime,
+      sourceType: sourceType,
+      sourceName: sourceName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeEngineVersions = {
   type t
   type request = {
@@ -921,9 +952,17 @@ module DescribeEngineVersions = {
     ~parameterGroupFamily=?,
     ~engineVersion=?,
     (),
-  ) => new({defaultOnly, nextToken, maxResults, parameterGroupFamily, engineVersion})
+  ) =>
+    new({
+      defaultOnly: defaultOnly,
+      nextToken: nextToken,
+      maxResults: maxResults,
+      parameterGroupFamily: parameterGroupFamily,
+      engineVersion: engineVersion,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteUser = {
   type t
   type request = {
@@ -936,6 +975,7 @@ module DeleteUser = {
   let make = (~userName, ()) => new({userName: userName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateUser = {
   type t
   type request = {
@@ -960,9 +1000,15 @@ module CreateUser = {
   type response = {@ocaml.doc("<p>The newly-created user.</p>") @as("User") user: option<user>}
   @module("@aws-sdk/client-memorydb") @new external new: request => t = "CreateUserCommand"
   let make = (~accessString, ~authenticationMode, ~userName, ~tags=?, ()) =>
-    new({tags, accessString, authenticationMode, userName})
+    new({
+      tags: tags,
+      accessString: accessString,
+      authenticationMode: authenticationMode,
+      userName: userName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateParameterGroup = {
   type t
   type request = {
@@ -988,9 +1034,15 @@ module CreateParameterGroup = {
   @module("@aws-sdk/client-memorydb") @new
   external new: request => t = "CreateParameterGroupCommand"
   let make = (~family, ~parameterGroupName, ~tags=?, ~description=?, ()) =>
-    new({tags, description, family, parameterGroupName})
+    new({
+      tags: tags,
+      description: description,
+      family: family,
+      parameterGroupName: parameterGroupName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateACL = {
   type t
   type request = {
@@ -1004,9 +1056,10 @@ module UpdateACL = {
   type response = {@ocaml.doc("<p>The updated Access Control List</p>") @as("ACL") acl: option<acl>}
   @module("@aws-sdk/client-memorydb") @new external new: request => t = "UpdateACLCommand"
   let make = (~aclname, ~userNamesToRemove=?, ~userNamesToAdd=?, ()) =>
-    new({userNamesToRemove, userNamesToAdd, aclname})
+    new({userNamesToRemove: userNamesToRemove, userNamesToAdd: userNamesToAdd, aclname: aclname})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeUsers = {
   type t
   type request = {
@@ -1034,9 +1087,10 @@ module DescribeUsers = {
   }
   @module("@aws-sdk/client-memorydb") @new external new: request => t = "DescribeUsersCommand"
   let make = (~nextToken=?, ~maxResults=?, ~filters=?, ~userName=?, ()) =>
-    new({nextToken, maxResults, filters, userName})
+    new({nextToken: nextToken, maxResults: maxResults, filters: filters, userName: userName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteACL = {
   type t
   type request = {
@@ -1051,6 +1105,7 @@ module DeleteACL = {
   let make = (~aclname, ()) => new({aclname: aclname})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateACL = {
   type t
   type request = {
@@ -1067,9 +1122,11 @@ module CreateACL = {
     @ocaml.doc("<p>The newly-created Access Control List.</p>") @as("ACL") acl: option<acl>,
   }
   @module("@aws-sdk/client-memorydb") @new external new: request => t = "CreateACLCommand"
-  let make = (~aclname, ~tags=?, ~userNames=?, ()) => new({tags, userNames, aclname})
+  let make = (~aclname, ~tags=?, ~userNames=?, ()) =>
+    new({tags: tags, userNames: userNames, aclname: aclname})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateSubnetGroup = {
   type t
   type request = {
@@ -1086,9 +1143,10 @@ module UpdateSubnetGroup = {
   }
   @module("@aws-sdk/client-memorydb") @new external new: request => t = "UpdateSubnetGroupCommand"
   let make = (~subnetGroupName, ~subnetIds=?, ~description=?, ()) =>
-    new({subnetIds, description, subnetGroupName})
+    new({subnetIds: subnetIds, description: description, subnetGroupName: subnetGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeACLs = {
   type t
   type request = {
@@ -1113,9 +1171,11 @@ module DescribeACLs = {
     @ocaml.doc("<p>The list of ACLs</p>") @as("ACLs") acls: option<acllist>,
   }
   @module("@aws-sdk/client-memorydb") @new external new: request => t = "DescribeACLsCommand"
-  let make = (~nextToken=?, ~maxResults=?, ~aclname=?, ()) => new({nextToken, maxResults, aclname})
+  let make = (~nextToken=?, ~maxResults=?, ~aclname=?, ()) =>
+    new({nextToken: nextToken, maxResults: maxResults, aclname: aclname})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteSubnetGroup = {
   type t
   type request = {
@@ -1130,6 +1190,7 @@ module DeleteSubnetGroup = {
   let make = (~subnetGroupName, ()) => new({subnetGroupName: subnetGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateSubnetGroup = {
   type t
   type request = {
@@ -1151,9 +1212,15 @@ module CreateSubnetGroup = {
   }
   @module("@aws-sdk/client-memorydb") @new external new: request => t = "CreateSubnetGroupCommand"
   let make = (~subnetIds, ~subnetGroupName, ~tags=?, ~description=?, ()) =>
-    new({tags, subnetIds, description, subnetGroupName})
+    new({
+      tags: tags,
+      subnetIds: subnetIds,
+      description: description,
+      subnetGroupName: subnetGroupName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeSubnetGroups = {
   type t
   type request = {
@@ -1185,9 +1252,10 @@ module DescribeSubnetGroups = {
   @module("@aws-sdk/client-memorydb") @new
   external new: request => t = "DescribeSubnetGroupsCommand"
   let make = (~nextToken=?, ~maxResults=?, ~subnetGroupName=?, ()) =>
-    new({nextToken, maxResults, subnetGroupName})
+    new({nextToken: nextToken, maxResults: maxResults, subnetGroupName: subnetGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteSnapshot = {
   type t
   type request = {
@@ -1202,6 +1270,7 @@ module DeleteSnapshot = {
   let make = (~snapshotName, ()) => new({snapshotName: snapshotName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateSnapshot = {
   type t
   type request = {
@@ -1222,9 +1291,10 @@ module CreateSnapshot = {
   }
   @module("@aws-sdk/client-memorydb") @new external new: request => t = "CreateSnapshotCommand"
   let make = (~snapshotName, ~clusterName, ~tags=?, ~kmsKeyId=?, ()) =>
-    new({tags, kmsKeyId, snapshotName, clusterName})
+    new({tags: tags, kmsKeyId: kmsKeyId, snapshotName: snapshotName, clusterName: clusterName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CopySnapshot = {
   type t
   type request = {
@@ -1268,9 +1338,17 @@ module CopySnapshot = {
     ~kmsKeyId=?,
     ~targetBucket=?,
     (),
-  ) => new({tags, kmsKeyId, targetBucket, targetSnapshotName, sourceSnapshotName})
+  ) =>
+    new({
+      tags: tags,
+      kmsKeyId: kmsKeyId,
+      targetBucket: targetBucket,
+      targetSnapshotName: targetSnapshotName,
+      sourceSnapshotName: sourceSnapshotName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateCluster = {
   type t
   type request = {
@@ -1336,23 +1414,24 @@ module UpdateCluster = {
     (),
   ) =>
     new({
-      aclname,
-      shardConfiguration,
-      replicaConfiguration,
-      engineVersion,
-      nodeType,
-      snapshotRetentionLimit,
-      snapshotWindow,
-      parameterGroupName,
-      snsTopicStatus,
-      snsTopicArn,
-      maintenanceWindow,
-      securityGroupIds,
-      description,
-      clusterName,
+      aclname: aclname,
+      shardConfiguration: shardConfiguration,
+      replicaConfiguration: replicaConfiguration,
+      engineVersion: engineVersion,
+      nodeType: nodeType,
+      snapshotRetentionLimit: snapshotRetentionLimit,
+      snapshotWindow: snapshotWindow,
+      parameterGroupName: parameterGroupName,
+      snsTopicStatus: snsTopicStatus,
+      snsTopicArn: snsTopicArn,
+      maintenanceWindow: maintenanceWindow,
+      securityGroupIds: securityGroupIds,
+      description: description,
+      clusterName: clusterName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module FailoverShard = {
   type t
   type request = {
@@ -1363,9 +1442,10 @@ module FailoverShard = {
     @ocaml.doc("<p>The cluster being failed over</p>") @as("Cluster") cluster: option<cluster>,
   }
   @module("@aws-sdk/client-memorydb") @new external new: request => t = "FailoverShardCommand"
-  let make = (~shardName, ~clusterName, ()) => new({shardName, clusterName})
+  let make = (~shardName, ~clusterName, ()) => new({shardName: shardName, clusterName: clusterName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeSnapshots = {
   type t
   type request = {
@@ -1421,9 +1501,18 @@ module DescribeSnapshots = {
     ~snapshotName=?,
     ~clusterName=?,
     (),
-  ) => new({showDetail, maxResults, nextToken, source, snapshotName, clusterName})
+  ) =>
+    new({
+      showDetail: showDetail,
+      maxResults: maxResults,
+      nextToken: nextToken,
+      source: source,
+      snapshotName: snapshotName,
+      clusterName: clusterName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteCluster = {
   type t
   type request = {
@@ -1440,9 +1529,11 @@ module DeleteCluster = {
     cluster: option<cluster>,
   }
   @module("@aws-sdk/client-memorydb") @new external new: request => t = "DeleteClusterCommand"
-  let make = (~clusterName, ~finalSnapshotName=?, ()) => new({finalSnapshotName, clusterName})
+  let make = (~clusterName, ~finalSnapshotName=?, ()) =>
+    new({finalSnapshotName: finalSnapshotName, clusterName: clusterName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateCluster = {
   type t
   type request = {
@@ -1557,30 +1648,31 @@ module CreateCluster = {
     (),
   ) =>
     new({
-      autoMinorVersionUpgrade,
-      engineVersion,
-      aclname,
-      snapshotWindow,
-      tags,
-      snapshotRetentionLimit,
-      snapshotName,
-      snapshotArns,
-      kmsKeyId,
-      tlsenabled,
-      snsTopicArn,
-      port,
-      maintenanceWindow,
-      securityGroupIds,
-      subnetGroupName,
-      numReplicasPerShard,
-      numShards,
-      description,
-      parameterGroupName,
-      nodeType,
-      clusterName,
+      autoMinorVersionUpgrade: autoMinorVersionUpgrade,
+      engineVersion: engineVersion,
+      aclname: aclname,
+      snapshotWindow: snapshotWindow,
+      tags: tags,
+      snapshotRetentionLimit: snapshotRetentionLimit,
+      snapshotName: snapshotName,
+      snapshotArns: snapshotArns,
+      kmsKeyId: kmsKeyId,
+      tlsenabled: tlsenabled,
+      snsTopicArn: snsTopicArn,
+      port: port,
+      maintenanceWindow: maintenanceWindow,
+      securityGroupIds: securityGroupIds,
+      subnetGroupName: subnetGroupName,
+      numReplicasPerShard: numReplicasPerShard,
+      numShards: numShards,
+      description: description,
+      parameterGroupName: parameterGroupName,
+      nodeType: nodeType,
+      clusterName: clusterName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeClusters = {
   type t
   type request = {
@@ -1611,9 +1703,15 @@ module DescribeClusters = {
   }
   @module("@aws-sdk/client-memorydb") @new external new: request => t = "DescribeClustersCommand"
   let make = (~showShardDetails=?, ~nextToken=?, ~maxResults=?, ~clusterName=?, ()) =>
-    new({showShardDetails, nextToken, maxResults, clusterName})
+    new({
+      showShardDetails: showShardDetails,
+      nextToken: nextToken,
+      maxResults: maxResults,
+      clusterName: clusterName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module BatchUpdateCluster = {
   type t
   type request = {
@@ -1630,6 +1728,7 @@ module BatchUpdateCluster = {
     processedClusters: option<clusterList>,
   }
   @module("@aws-sdk/client-memorydb") @new external new: request => t = "BatchUpdateClusterCommand"
-  let make = (~clusterNames, ~serviceUpdate=?, ()) => new({serviceUpdate, clusterNames})
+  let make = (~clusterNames, ~serviceUpdate=?, ()) =>
+    new({serviceUpdate: serviceUpdate, clusterNames: clusterNames})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

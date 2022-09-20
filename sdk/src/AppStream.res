@@ -1169,6 +1169,7 @@ module StopFleet = {
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module StartFleet = {
   type t
   type request = {@ocaml.doc("<p>The name of the fleet.</p>") @as("Name") name: string_}
@@ -1177,6 +1178,7 @@ module StartFleet = {
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ExpireSession = {
   type t
   type request = {
@@ -1188,6 +1190,7 @@ module ExpireSession = {
   let make = (~sessionId, ()) => new({sessionId: sessionId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module EnableUser = {
   type t
   type request = {
@@ -1204,9 +1207,11 @@ module EnableUser = {
   }
   type response = {.}
   @module("@aws-sdk/client-appstream") @new external new: request => t = "EnableUserCommand"
-  let make = (~authenticationType, ~userName, ()) => new({authenticationType, userName})
+  let make = (~authenticationType, ~userName, ()) =>
+    new({authenticationType: authenticationType, userName: userName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DisassociateFleet = {
   type t
   type request = {
@@ -1215,9 +1220,10 @@ module DisassociateFleet = {
   }
   type response = {.}
   @module("@aws-sdk/client-appstream") @new external new: request => t = "DisassociateFleetCommand"
-  let make = (~stackName, ~fleetName, ()) => new({stackName, fleetName})
+  let make = (~stackName, ~fleetName, ()) => new({stackName: stackName, fleetName: fleetName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DisassociateApplicationFromEntitlement = {
   type t
   type request = {
@@ -1233,9 +1239,14 @@ module DisassociateApplicationFromEntitlement = {
   @module("@aws-sdk/client-appstream") @new
   external new: request => t = "DisassociateApplicationFromEntitlementCommand"
   let make = (~applicationIdentifier, ~entitlementName, ~stackName, ()) =>
-    new({applicationIdentifier, entitlementName, stackName})
+    new({
+      applicationIdentifier: applicationIdentifier,
+      entitlementName: entitlementName,
+      stackName: stackName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DisassociateApplicationFleet = {
   type t
   type request = {
@@ -1245,9 +1256,11 @@ module DisassociateApplicationFleet = {
   type response = {.}
   @module("@aws-sdk/client-appstream") @new
   external new: request => t = "DisassociateApplicationFleetCommand"
-  let make = (~applicationArn, ~fleetName, ()) => new({applicationArn, fleetName})
+  let make = (~applicationArn, ~fleetName, ()) =>
+    new({applicationArn: applicationArn, fleetName: fleetName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DisableUser = {
   type t
   type request = {
@@ -1264,9 +1277,11 @@ module DisableUser = {
   }
   type response = {.}
   @module("@aws-sdk/client-appstream") @new external new: request => t = "DisableUserCommand"
-  let make = (~authenticationType, ~userName, ()) => new({authenticationType, userName})
+  let make = (~authenticationType, ~userName, ()) =>
+    new({authenticationType: authenticationType, userName: userName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteUser = {
   type t
   type request = {
@@ -1283,9 +1298,11 @@ module DeleteUser = {
   }
   type response = {.}
   @module("@aws-sdk/client-appstream") @new external new: request => t = "DeleteUserCommand"
-  let make = (~authenticationType, ~userName, ()) => new({authenticationType, userName})
+  let make = (~authenticationType, ~userName, ()) =>
+    new({authenticationType: authenticationType, userName: userName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteUsageReportSubscription = {
   type t
   type request = {.}
@@ -1295,6 +1312,7 @@ module DeleteUsageReportSubscription = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteStack = {
   type t
   type request = {@ocaml.doc("<p>The name of the stack.</p>") @as("Name") name: string_}
@@ -1303,6 +1321,7 @@ module DeleteStack = {
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteImagePermissions = {
   type t
   type request = {
@@ -1316,9 +1335,10 @@ module DeleteImagePermissions = {
   type response = {.}
   @module("@aws-sdk/client-appstream") @new
   external new: request => t = "DeleteImagePermissionsCommand"
-  let make = (~sharedAccountId, ~name, ()) => new({sharedAccountId, name})
+  let make = (~sharedAccountId, ~name, ()) => new({sharedAccountId: sharedAccountId, name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteFleet = {
   type t
   type request = {@ocaml.doc("<p>The name of the fleet.</p>") @as("Name") name: string_}
@@ -1327,6 +1347,7 @@ module DeleteFleet = {
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteEntitlement = {
   type t
   type request = {
@@ -1337,9 +1358,10 @@ module DeleteEntitlement = {
   }
   type response = {.}
   @module("@aws-sdk/client-appstream") @new external new: request => t = "DeleteEntitlementCommand"
-  let make = (~stackName, ~name, ()) => new({stackName, name})
+  let make = (~stackName, ~name, ()) => new({stackName: stackName, name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteDirectoryConfig = {
   type t
   type request = {
@@ -1352,6 +1374,7 @@ module DeleteDirectoryConfig = {
   let make = (~directoryName, ()) => new({directoryName: directoryName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteApplication = {
   type t
   type request = {@ocaml.doc("<p>The name of the application.</p>") @as("Name") name: name}
@@ -1360,6 +1383,7 @@ module DeleteApplication = {
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteAppBlock = {
   type t
   type request = {@ocaml.doc("<p>The name of the app block.</p>") @as("Name") name: name}
@@ -1368,6 +1392,7 @@ module DeleteAppBlock = {
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module CreateUser = {
   type t
   type request = {
@@ -1396,9 +1421,16 @@ module CreateUser = {
   type response = {.}
   @module("@aws-sdk/client-appstream") @new external new: request => t = "CreateUserCommand"
   let make = (~authenticationType, ~userName, ~lastName=?, ~firstName=?, ~messageAction=?, ()) =>
-    new({authenticationType, lastName, firstName, messageAction, userName})
+    new({
+      authenticationType: authenticationType,
+      lastName: lastName,
+      firstName: firstName,
+      messageAction: messageAction,
+      userName: userName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module CreateUsageReportSubscription = {
   type t
   type request = {.}
@@ -1420,6 +1452,7 @@ module CreateUsageReportSubscription = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateStreamingURL = {
   type t
   type request = {
@@ -1456,9 +1489,18 @@ module CreateStreamingURL = {
     ~validity=?,
     ~applicationId=?,
     (),
-  ) => new({sessionContext, validity, applicationId, userId, fleetName, stackName})
+  ) =>
+    new({
+      sessionContext: sessionContext,
+      validity: validity,
+      applicationId: applicationId,
+      userId: userId,
+      fleetName: fleetName,
+      stackName: stackName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateImageBuilderStreamingURL = {
   type t
   type request = {
@@ -1477,9 +1519,10 @@ module CreateImageBuilderStreamingURL = {
   }
   @module("@aws-sdk/client-appstream") @new
   external new: request => t = "CreateImageBuilderStreamingURLCommand"
-  let make = (~name, ~validity=?, ()) => new({validity, name})
+  let make = (~name, ~validity=?, ()) => new({validity: validity, name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CopyImage = {
   type t
   type request = {
@@ -1510,9 +1553,16 @@ module CopyImage = {
     ~sourceImageName,
     ~destinationImageDescription=?,
     (),
-  ) => new({destinationImageDescription, destinationRegion, destinationImageName, sourceImageName})
+  ) =>
+    new({
+      destinationImageDescription: destinationImageDescription,
+      destinationRegion: destinationRegion,
+      destinationImageName: destinationImageName,
+      sourceImageName: sourceImageName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module AssociateFleet = {
   type t
   type request = {
@@ -1521,9 +1571,10 @@ module AssociateFleet = {
   }
   type response = {.}
   @module("@aws-sdk/client-appstream") @new external new: request => t = "AssociateFleetCommand"
-  let make = (~stackName, ~fleetName, ()) => new({stackName, fleetName})
+  let make = (~stackName, ~fleetName, ()) => new({stackName: stackName, fleetName: fleetName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module AssociateApplicationToEntitlement = {
   type t
   type request = {
@@ -1536,9 +1587,14 @@ module AssociateApplicationToEntitlement = {
   @module("@aws-sdk/client-appstream") @new
   external new: request => t = "AssociateApplicationToEntitlementCommand"
   let make = (~applicationIdentifier, ~entitlementName, ~stackName, ()) =>
-    new({applicationIdentifier, entitlementName, stackName})
+    new({
+      applicationIdentifier: applicationIdentifier,
+      entitlementName: entitlementName,
+      stackName: stackName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateImagePermissions = {
   type t
   type request = {
@@ -1555,9 +1611,10 @@ module UpdateImagePermissions = {
   @module("@aws-sdk/client-appstream") @new
   external new: request => t = "UpdateImagePermissionsCommand"
   let make = (~imagePermissions, ~sharedAccountId, ~name, ()) =>
-    new({imagePermissions, sharedAccountId, name})
+    new({imagePermissions: imagePermissions, sharedAccountId: sharedAccountId, name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UntagResource = {
   type t
   type request = {
@@ -1568,9 +1625,10 @@ module UntagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-appstream") @new external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys, resourceArn})
+  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module TagResource = {
   type t
   type request = {
@@ -1587,9 +1645,10 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-appstream") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceArn, ()) => new({tags, resourceArn})
+  let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ListTagsForResource = {
   type t
   type request = {
@@ -1604,6 +1663,7 @@ module ListTagsForResource = {
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListAssociatedStacks = {
   type t
   type request = {
@@ -1624,9 +1684,10 @@ module ListAssociatedStacks = {
   }
   @module("@aws-sdk/client-appstream") @new
   external new: request => t = "ListAssociatedStacksCommand"
-  let make = (~fleetName, ~nextToken=?, ()) => new({nextToken, fleetName})
+  let make = (~fleetName, ~nextToken=?, ()) => new({nextToken: nextToken, fleetName: fleetName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListAssociatedFleets = {
   type t
   type request = {
@@ -1647,9 +1708,10 @@ module ListAssociatedFleets = {
   }
   @module("@aws-sdk/client-appstream") @new
   external new: request => t = "ListAssociatedFleetsCommand"
-  let make = (~stackName, ~nextToken=?, ()) => new({nextToken, stackName})
+  let make = (~stackName, ~nextToken=?, ()) => new({nextToken: nextToken, stackName: stackName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module AssociateApplicationFleet = {
   type t
   type request = {
@@ -1665,9 +1727,11 @@ module AssociateApplicationFleet = {
   }
   @module("@aws-sdk/client-appstream") @new
   external new: request => t = "AssociateApplicationFleetCommand"
-  let make = (~applicationArn, ~fleetName, ()) => new({applicationArn, fleetName})
+  let make = (~applicationArn, ~fleetName, ()) =>
+    new({applicationArn: applicationArn, fleetName: fleetName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateDirectoryConfig = {
   type t
   type request = {
@@ -1693,9 +1757,15 @@ module UpdateDirectoryConfig = {
     ~serviceAccountCredentials=?,
     ~organizationalUnitDistinguishedNames=?,
     (),
-  ) => new({serviceAccountCredentials, organizationalUnitDistinguishedNames, directoryName})
+  ) =>
+    new({
+      serviceAccountCredentials: serviceAccountCredentials,
+      organizationalUnitDistinguishedNames: organizationalUnitDistinguishedNames,
+      directoryName: directoryName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateApplication = {
   type t
   type request = {
@@ -1738,18 +1808,19 @@ module UpdateApplication = {
     (),
   ) =>
     new({
-      attributesToDelete,
-      appBlockArn,
-      launchParameters,
-      workingDirectory,
-      launchPath,
-      iconS3Location,
-      description,
-      displayName,
-      name,
+      attributesToDelete: attributesToDelete,
+      appBlockArn: appBlockArn,
+      launchParameters: launchParameters,
+      workingDirectory: workingDirectory,
+      launchPath: launchPath,
+      iconS3Location: iconS3Location,
+      description: description,
+      displayName: displayName,
+      name: name,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListEntitledApplications = {
   type t
   type request = {
@@ -1777,9 +1848,15 @@ module ListEntitledApplications = {
   @module("@aws-sdk/client-appstream") @new
   external new: request => t = "ListEntitledApplicationsCommand"
   let make = (~entitlementName, ~stackName, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults, nextToken, entitlementName, stackName})
+    new({
+      maxResults: maxResults,
+      nextToken: nextToken,
+      entitlementName: entitlementName,
+      stackName: stackName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeUsers = {
   type t
   type request = {
@@ -1807,9 +1884,10 @@ module DescribeUsers = {
   }
   @module("@aws-sdk/client-appstream") @new external new: request => t = "DescribeUsersCommand"
   let make = (~authenticationType, ~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken, maxResults, authenticationType})
+    new({nextToken: nextToken, maxResults: maxResults, authenticationType: authenticationType})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeUserStackAssociations = {
   type t
   type request = {
@@ -1847,9 +1925,16 @@ module DescribeUserStackAssociations = {
   @module("@aws-sdk/client-appstream") @new
   external new: request => t = "DescribeUserStackAssociationsCommand"
   let make = (~nextToken=?, ~maxResults=?, ~authenticationType=?, ~userName=?, ~stackName=?, ()) =>
-    new({nextToken, maxResults, authenticationType, userName, stackName})
+    new({
+      nextToken: nextToken,
+      maxResults: maxResults,
+      authenticationType: authenticationType,
+      userName: userName,
+      stackName: stackName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeApplicationFleetAssociations = {
   type t
   type request = {
@@ -1875,9 +1960,15 @@ module DescribeApplicationFleetAssociations = {
   @module("@aws-sdk/client-appstream") @new
   external new: request => t = "DescribeApplicationFleetAssociationsCommand"
   let make = (~nextToken=?, ~maxResults=?, ~applicationArn=?, ~fleetName=?, ()) =>
-    new({nextToken, maxResults, applicationArn, fleetName})
+    new({
+      nextToken: nextToken,
+      maxResults: maxResults,
+      applicationArn: applicationArn,
+      fleetName: fleetName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateDirectoryConfig = {
   type t
   type request = {
@@ -1904,9 +1995,15 @@ module CreateDirectoryConfig = {
     ~directoryName,
     ~serviceAccountCredentials=?,
     (),
-  ) => new({serviceAccountCredentials, organizationalUnitDistinguishedNames, directoryName})
+  ) =>
+    new({
+      serviceAccountCredentials: serviceAccountCredentials,
+      organizationalUnitDistinguishedNames: organizationalUnitDistinguishedNames,
+      directoryName: directoryName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateApplication = {
   type t
   type request = {
@@ -1961,20 +2058,21 @@ module CreateApplication = {
     (),
   ) =>
     new({
-      tags,
-      appBlockArn,
-      instanceFamilies,
-      platforms,
-      launchParameters,
-      workingDirectory,
-      launchPath,
-      iconS3Location,
-      description,
-      displayName,
-      name,
+      tags: tags,
+      appBlockArn: appBlockArn,
+      instanceFamilies: instanceFamilies,
+      platforms: platforms,
+      launchParameters: launchParameters,
+      workingDirectory: workingDirectory,
+      launchPath: launchPath,
+      iconS3Location: iconS3Location,
+      description: description,
+      displayName: displayName,
+      name: name,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateFleet = {
   type t
   type request = {
@@ -2197,29 +2295,30 @@ module UpdateFleet = {
     (),
   ) =>
     new({
-      usbDeviceFilterStrings,
-      maxConcurrentSessions,
-      platform,
-      streamView,
-      iamRoleArn,
-      attributesToDelete,
-      idleDisconnectTimeoutInSeconds,
-      domainJoinInfo,
-      enableDefaultInternetAccess,
-      displayName,
-      description,
-      deleteVpcConfig,
-      disconnectTimeoutInSeconds,
-      maxUserDurationInSeconds,
-      vpcConfig,
-      computeCapacity,
-      instanceType,
-      name,
-      imageArn,
-      imageName,
+      usbDeviceFilterStrings: usbDeviceFilterStrings,
+      maxConcurrentSessions: maxConcurrentSessions,
+      platform: platform,
+      streamView: streamView,
+      iamRoleArn: iamRoleArn,
+      attributesToDelete: attributesToDelete,
+      idleDisconnectTimeoutInSeconds: idleDisconnectTimeoutInSeconds,
+      domainJoinInfo: domainJoinInfo,
+      enableDefaultInternetAccess: enableDefaultInternetAccess,
+      displayName: displayName,
+      description: description,
+      deleteVpcConfig: deleteVpcConfig,
+      disconnectTimeoutInSeconds: disconnectTimeoutInSeconds,
+      maxUserDurationInSeconds: maxUserDurationInSeconds,
+      vpcConfig: vpcConfig,
+      computeCapacity: computeCapacity,
+      instanceType: instanceType,
+      name: name,
+      imageArn: imageArn,
+      imageName: imageName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateEntitlement = {
   type t
   type request = {
@@ -2240,9 +2339,16 @@ module UpdateEntitlement = {
   }
   @module("@aws-sdk/client-appstream") @new external new: request => t = "UpdateEntitlementCommand"
   let make = (~stackName, ~name, ~attributes=?, ~appVisibility=?, ~description=?, ()) =>
-    new({attributes, appVisibility, description, stackName, name})
+    new({
+      attributes: attributes,
+      appVisibility: appVisibility,
+      description: description,
+      stackName: stackName,
+      name: name,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module StopImageBuilder = {
   type t
   type request = {@ocaml.doc("<p>The name of the image builder.</p>") @as("Name") name: string_}
@@ -2254,6 +2360,7 @@ module StopImageBuilder = {
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module StartImageBuilder = {
   type t
   type request = {
@@ -2269,9 +2376,11 @@ module StartImageBuilder = {
     imageBuilder: option<imageBuilder>,
   }
   @module("@aws-sdk/client-appstream") @new external new: request => t = "StartImageBuilderCommand"
-  let make = (~name, ~appstreamAgentVersion=?, ()) => new({appstreamAgentVersion, name})
+  let make = (~name, ~appstreamAgentVersion=?, ()) =>
+    new({appstreamAgentVersion: appstreamAgentVersion, name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeSessions = {
   type t
   type request = {
@@ -2318,9 +2427,18 @@ module DescribeSessions = {
     ~nextToken=?,
     ~userId=?,
     (),
-  ) => new({authenticationType, limit, nextToken, userId, fleetName, stackName})
+  ) =>
+    new({
+      authenticationType: authenticationType,
+      limit: limit,
+      nextToken: nextToken,
+      userId: userId,
+      fleetName: fleetName,
+      stackName: stackName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeImagePermissions = {
   type t
   type request = {
@@ -2356,9 +2474,15 @@ module DescribeImagePermissions = {
   @module("@aws-sdk/client-appstream") @new
   external new: request => t = "DescribeImagePermissionsCommand"
   let make = (~name, ~nextToken=?, ~sharedAwsAccountIds=?, ~maxResults=?, ()) =>
-    new({nextToken, sharedAwsAccountIds, maxResults, name})
+    new({
+      nextToken: nextToken,
+      sharedAwsAccountIds: sharedAwsAccountIds,
+      maxResults: maxResults,
+      name: name,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeDirectoryConfigs = {
   type t
   type request = {
@@ -2387,9 +2511,10 @@ module DescribeDirectoryConfigs = {
   @module("@aws-sdk/client-appstream") @new
   external new: request => t = "DescribeDirectoryConfigsCommand"
   let make = (~nextToken=?, ~maxResults=?, ~directoryNames=?, ()) =>
-    new({nextToken, maxResults, directoryNames})
+    new({nextToken: nextToken, maxResults: maxResults, directoryNames: directoryNames})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeApplications = {
   type t
   type request = {
@@ -2411,9 +2536,11 @@ module DescribeApplications = {
   }
   @module("@aws-sdk/client-appstream") @new
   external new: request => t = "DescribeApplicationsCommand"
-  let make = (~maxResults=?, ~nextToken=?, ~arns=?, ()) => new({maxResults, nextToken, arns})
+  let make = (~maxResults=?, ~nextToken=?, ~arns=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken, arns: arns})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteImageBuilder = {
   type t
   type request = {@ocaml.doc("<p>The name of the image builder.</p>") @as("Name") name: name}
@@ -2425,6 +2552,7 @@ module DeleteImageBuilder = {
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateImageBuilder = {
   type t
   type request = {
@@ -2602,22 +2730,23 @@ module CreateImageBuilder = {
     (),
   ) =>
     new({
-      accessEndpoints,
-      tags,
-      appstreamAgentVersion,
-      domainJoinInfo,
-      enableDefaultInternetAccess,
-      iamRoleArn,
-      vpcConfig,
-      displayName,
-      description,
-      instanceType,
-      imageArn,
-      imageName,
-      name,
+      accessEndpoints: accessEndpoints,
+      tags: tags,
+      appstreamAgentVersion: appstreamAgentVersion,
+      domainJoinInfo: domainJoinInfo,
+      enableDefaultInternetAccess: enableDefaultInternetAccess,
+      iamRoleArn: iamRoleArn,
+      vpcConfig: vpcConfig,
+      displayName: displayName,
+      description: description,
+      instanceType: instanceType,
+      imageArn: imageArn,
+      imageName: imageName,
+      name: name,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateFleet = {
   type t
   type request = {
@@ -2863,29 +2992,30 @@ module CreateFleet = {
     (),
   ) =>
     new({
-      usbDeviceFilterStrings,
-      maxConcurrentSessions,
-      platform,
-      streamView,
-      iamRoleArn,
-      idleDisconnectTimeoutInSeconds,
-      tags,
-      domainJoinInfo,
-      enableDefaultInternetAccess,
-      displayName,
-      description,
-      disconnectTimeoutInSeconds,
-      maxUserDurationInSeconds,
-      vpcConfig,
-      computeCapacity,
-      fleetType,
-      instanceType,
-      imageArn,
-      imageName,
-      name,
+      usbDeviceFilterStrings: usbDeviceFilterStrings,
+      maxConcurrentSessions: maxConcurrentSessions,
+      platform: platform,
+      streamView: streamView,
+      iamRoleArn: iamRoleArn,
+      idleDisconnectTimeoutInSeconds: idleDisconnectTimeoutInSeconds,
+      tags: tags,
+      domainJoinInfo: domainJoinInfo,
+      enableDefaultInternetAccess: enableDefaultInternetAccess,
+      displayName: displayName,
+      description: description,
+      disconnectTimeoutInSeconds: disconnectTimeoutInSeconds,
+      maxUserDurationInSeconds: maxUserDurationInSeconds,
+      vpcConfig: vpcConfig,
+      computeCapacity: computeCapacity,
+      fleetType: fleetType,
+      instanceType: instanceType,
+      imageArn: imageArn,
+      imageName: imageName,
+      name: name,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateEntitlement = {
   type t
   type request = {
@@ -2905,9 +3035,16 @@ module CreateEntitlement = {
   }
   @module("@aws-sdk/client-appstream") @new external new: request => t = "CreateEntitlementCommand"
   let make = (~attributes, ~appVisibility, ~stackName, ~name, ~description=?, ()) =>
-    new({attributes, appVisibility, description, stackName, name})
+    new({
+      attributes: attributes,
+      appVisibility: appVisibility,
+      description: description,
+      stackName: stackName,
+      name: name,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateAppBlock = {
   type t
   type request = {
@@ -2933,9 +3070,18 @@ module CreateAppBlock = {
     ~displayName=?,
     ~description=?,
     (),
-  ) => new({tags, setupScriptDetails, sourceS3Location, displayName, description, name})
+  ) =>
+    new({
+      tags: tags,
+      setupScriptDetails: setupScriptDetails,
+      sourceS3Location: sourceS3Location,
+      displayName: displayName,
+      description: description,
+      name: name,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module BatchDisassociateUserStack = {
   type t
   type request = {
@@ -2951,6 +3097,7 @@ module BatchDisassociateUserStack = {
   let make = (~userStackAssociations, ()) => new({userStackAssociations: userStackAssociations})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module BatchAssociateUserStack = {
   type t
   type request = {
@@ -2966,6 +3113,7 @@ module BatchAssociateUserStack = {
   let make = (~userStackAssociations, ()) => new({userStackAssociations: userStackAssociations})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateStack = {
   type t
   type request = {
@@ -3030,21 +3178,22 @@ module UpdateStack = {
     (),
   ) =>
     new({
-      embedHostDomains,
-      accessEndpoints,
-      applicationSettings,
-      userSettings,
-      attributesToDelete,
-      feedbackURL,
-      redirectURL,
-      deleteStorageConnectors,
-      storageConnectors,
-      name,
-      description,
-      displayName,
+      embedHostDomains: embedHostDomains,
+      accessEndpoints: accessEndpoints,
+      applicationSettings: applicationSettings,
+      userSettings: userSettings,
+      attributesToDelete: attributesToDelete,
+      feedbackURL: feedbackURL,
+      redirectURL: redirectURL,
+      deleteStorageConnectors: deleteStorageConnectors,
+      storageConnectors: storageConnectors,
+      name: name,
+      description: description,
+      displayName: displayName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeUsageReportSubscriptions = {
   type t
   type request = {
@@ -3068,9 +3217,11 @@ module DescribeUsageReportSubscriptions = {
   }
   @module("@aws-sdk/client-appstream") @new
   external new: request => t = "DescribeUsageReportSubscriptionsCommand"
-  let make = (~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults})
+  let make = (~nextToken=?, ~maxResults=?, ()) =>
+    new({nextToken: nextToken, maxResults: maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeImageBuilders = {
   type t
   type request = {
@@ -3095,9 +3246,11 @@ module DescribeImageBuilders = {
   }
   @module("@aws-sdk/client-appstream") @new
   external new: request => t = "DescribeImageBuildersCommand"
-  let make = (~nextToken=?, ~maxResults=?, ~names=?, ()) => new({nextToken, maxResults, names})
+  let make = (~nextToken=?, ~maxResults=?, ~names=?, ()) =>
+    new({nextToken: nextToken, maxResults: maxResults, names: names})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeFleets = {
   type t
   type request = {
@@ -3118,9 +3271,10 @@ module DescribeFleets = {
     @ocaml.doc("<p>Information about the fleets.</p>") @as("Fleets") fleets: option<fleetList>,
   }
   @module("@aws-sdk/client-appstream") @new external new: request => t = "DescribeFleetsCommand"
-  let make = (~nextToken=?, ~names=?, ()) => new({nextToken, names})
+  let make = (~nextToken=?, ~names=?, ()) => new({nextToken: nextToken, names: names})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeEntitlements = {
   type t
   type request = {
@@ -3147,9 +3301,10 @@ module DescribeEntitlements = {
   @module("@aws-sdk/client-appstream") @new
   external new: request => t = "DescribeEntitlementsCommand"
   let make = (~stackName, ~maxResults=?, ~nextToken=?, ~name=?, ()) =>
-    new({maxResults, nextToken, stackName, name})
+    new({maxResults: maxResults, nextToken: nextToken, stackName: stackName, name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeAppBlocks = {
   type t
   type request = {
@@ -3169,9 +3324,11 @@ module DescribeAppBlocks = {
     @ocaml.doc("<p>The app blocks in the list.</p>") @as("AppBlocks") appBlocks: option<appBlocks>,
   }
   @module("@aws-sdk/client-appstream") @new external new: request => t = "DescribeAppBlocksCommand"
-  let make = (~maxResults=?, ~nextToken=?, ~arns=?, ()) => new({maxResults, nextToken, arns})
+  let make = (~maxResults=?, ~nextToken=?, ~arns=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken, arns: arns})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteImage = {
   type t
   type request = {@ocaml.doc("<p>The name of the image.</p>") @as("Name") name: name}
@@ -3182,6 +3339,7 @@ module DeleteImage = {
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateUpdatedImage = {
   type t
   type request = {
@@ -3221,15 +3379,16 @@ module CreateUpdatedImage = {
     (),
   ) =>
     new({
-      dryRun,
-      newImageTags,
-      newImageDisplayName,
-      newImageDescription,
-      newImageName,
-      existingImageName,
+      dryRun: dryRun,
+      newImageTags: newImageTags,
+      newImageDisplayName: newImageDisplayName,
+      newImageDescription: newImageDescription,
+      newImageName: newImageName,
+      existingImageName: existingImageName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateStack = {
   type t
   type request = {
@@ -3298,20 +3457,21 @@ module CreateStack = {
     (),
   ) =>
     new({
-      embedHostDomains,
-      accessEndpoints,
-      tags,
-      applicationSettings,
-      userSettings,
-      feedbackURL,
-      redirectURL,
-      storageConnectors,
-      displayName,
-      description,
-      name,
+      embedHostDomains: embedHostDomains,
+      accessEndpoints: accessEndpoints,
+      tags: tags,
+      applicationSettings: applicationSettings,
+      userSettings: userSettings,
+      feedbackURL: feedbackURL,
+      redirectURL: redirectURL,
+      storageConnectors: storageConnectors,
+      displayName: displayName,
+      description: description,
+      name: name,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeStacks = {
   type t
   type request = {
@@ -3332,9 +3492,10 @@ module DescribeStacks = {
     @ocaml.doc("<p>Information about the stacks.</p>") @as("Stacks") stacks: option<stackList>,
   }
   @module("@aws-sdk/client-appstream") @new external new: request => t = "DescribeStacksCommand"
-  let make = (~nextToken=?, ~names=?, ()) => new({nextToken, names})
+  let make = (~nextToken=?, ~names=?, ()) => new({nextToken: nextToken, names: names})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeImages = {
   type t
   type request = {
@@ -3362,6 +3523,6 @@ module DescribeImages = {
   }
   @module("@aws-sdk/client-appstream") @new external new: request => t = "DescribeImagesCommand"
   let make = (~maxResults=?, ~nextToken=?, ~type_=?, ~arns=?, ~names=?, ()) =>
-    new({maxResults, nextToken, type_, arns, names})
+    new({maxResults: maxResults, nextToken: nextToken, type_: type_, arns: arns, names: names})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

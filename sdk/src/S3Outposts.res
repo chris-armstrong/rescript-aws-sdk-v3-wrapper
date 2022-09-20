@@ -76,9 +76,10 @@ module DeleteEndpoint = {
   }
   type response = {.}
   @module("@aws-sdk/client-s3-outposts") @new external new: request => t = "DeleteEndpointCommand"
-  let make = (~outpostId, ~endpointId, ()) => new({outpostId, endpointId})
+  let make = (~outpostId, ~endpointId, ()) => new({outpostId: outpostId, endpointId: endpointId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module CreateEndpoint = {
   type t
   type request = {
@@ -118,9 +119,17 @@ module CreateEndpoint = {
     ~customerOwnedIpv4Pool=?,
     ~accessType=?,
     (),
-  ) => new({customerOwnedIpv4Pool, accessType, securityGroupId, subnetId, outpostId})
+  ) =>
+    new({
+      customerOwnedIpv4Pool: customerOwnedIpv4Pool,
+      accessType: accessType,
+      securityGroupId: securityGroupId,
+      subnetId: subnetId,
+      outpostId: outpostId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListSharedEndpoints = {
   type t
   type request = {
@@ -148,9 +157,10 @@ module ListSharedEndpoints = {
   @module("@aws-sdk/client-s3-outposts") @new
   external new: request => t = "ListSharedEndpointsCommand"
   let make = (~outpostId, ~maxResults=?, ~nextToken=?, ()) =>
-    new({outpostId, maxResults, nextToken})
+    new({outpostId: outpostId, maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListEndpoints = {
   type t
   type request = {
@@ -172,6 +182,7 @@ module ListEndpoints = {
     endpoints: option<endpoints>,
   }
   @module("@aws-sdk/client-s3-outposts") @new external new: request => t = "ListEndpointsCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

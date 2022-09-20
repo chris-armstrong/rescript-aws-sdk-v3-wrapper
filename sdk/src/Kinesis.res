@@ -961,9 +961,10 @@ module UpdateShardCount = {
   }
   @module("@aws-sdk/client-kinesis") @new external new: request => t = "UpdateShardCountCommand"
   let make = (~scalingType, ~targetShardCount, ~streamName, ()) =>
-    new({scalingType, targetShardCount, streamName})
+    new({scalingType: scalingType, targetShardCount: targetShardCount, streamName: streamName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module StopStreamEncryption = {
   type t
   type request = {
@@ -1009,9 +1010,11 @@ module StopStreamEncryption = {
   }
   type response = {.}
   @module("@aws-sdk/client-kinesis") @new external new: request => t = "StopStreamEncryptionCommand"
-  let make = (~keyId, ~encryptionType, ~streamName, ()) => new({keyId, encryptionType, streamName})
+  let make = (~keyId, ~encryptionType, ~streamName, ()) =>
+    new({keyId: keyId, encryptionType: encryptionType, streamName: streamName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module StartStreamEncryption = {
   type t
   type request = {
@@ -1058,9 +1061,11 @@ module StartStreamEncryption = {
   type response = {.}
   @module("@aws-sdk/client-kinesis") @new
   external new: request => t = "StartStreamEncryptionCommand"
-  let make = (~keyId, ~encryptionType, ~streamName, ()) => new({keyId, encryptionType, streamName})
+  let make = (~keyId, ~encryptionType, ~streamName, ()) =>
+    new({keyId: keyId, encryptionType: encryptionType, streamName: streamName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module SplitShard = {
   type t
   @ocaml.doc("<p>Represents the input for <code>SplitShard</code>.</p>")
@@ -1082,9 +1087,14 @@ module SplitShard = {
   type response = {.}
   @module("@aws-sdk/client-kinesis") @new external new: request => t = "SplitShardCommand"
   let make = (~newStartingHashKey, ~shardToSplit, ~streamName, ()) =>
-    new({newStartingHashKey, shardToSplit, streamName})
+    new({
+      newStartingHashKey: newStartingHashKey,
+      shardToSplit: shardToSplit,
+      streamName: streamName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module PutRecord = {
   type t
   @ocaml.doc("<p>Represents the input for <code>PutRecord</code>.</p>")
@@ -1151,9 +1161,17 @@ module PutRecord = {
     ~sequenceNumberForOrdering=?,
     ~explicitHashKey=?,
     (),
-  ) => new({sequenceNumberForOrdering, explicitHashKey, partitionKey, data, streamName})
+  ) =>
+    new({
+      sequenceNumberForOrdering: sequenceNumberForOrdering,
+      explicitHashKey: explicitHashKey,
+      partitionKey: partitionKey,
+      data: data,
+      streamName: streamName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module MergeShards = {
   type t
   @ocaml.doc("<p>Represents the input for <code>MergeShards</code>.</p>")
@@ -1170,9 +1188,14 @@ module MergeShards = {
   type response = {.}
   @module("@aws-sdk/client-kinesis") @new external new: request => t = "MergeShardsCommand"
   let make = (~adjacentShardToMerge, ~shardToMerge, ~streamName, ()) =>
-    new({adjacentShardToMerge, shardToMerge, streamName})
+    new({
+      adjacentShardToMerge: adjacentShardToMerge,
+      shardToMerge: shardToMerge,
+      streamName: streamName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module IncreaseStreamRetentionPeriod = {
   type t
   @ocaml.doc("<p>Represents the input for <a>IncreaseStreamRetentionPeriod</a>.</p>")
@@ -1186,9 +1209,11 @@ module IncreaseStreamRetentionPeriod = {
   type response = {.}
   @module("@aws-sdk/client-kinesis") @new
   external new: request => t = "IncreaseStreamRetentionPeriodCommand"
-  let make = (~retentionPeriodHours, ~streamName, ()) => new({retentionPeriodHours, streamName})
+  let make = (~retentionPeriodHours, ~streamName, ()) =>
+    new({retentionPeriodHours: retentionPeriodHours, streamName: streamName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module GetShardIterator = {
   type t
   @ocaml.doc("<p>Represents the input for <code>GetShardIterator</code>.</p>")
@@ -1262,9 +1287,17 @@ module GetShardIterator = {
     ~timestamp_=?,
     ~startingSequenceNumber=?,
     (),
-  ) => new({timestamp_, startingSequenceNumber, shardIteratorType, shardId, streamName})
+  ) =>
+    new({
+      timestamp_: timestamp_,
+      startingSequenceNumber: startingSequenceNumber,
+      shardIteratorType: shardIteratorType,
+      shardId: shardId,
+      streamName: streamName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeLimits = {
   type t
   type request = {.}
@@ -1284,6 +1317,7 @@ module DescribeLimits = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeregisterStreamConsumer = {
   type t
   type request = {
@@ -1306,9 +1340,10 @@ module DeregisterStreamConsumer = {
   @module("@aws-sdk/client-kinesis") @new
   external new: request => t = "DeregisterStreamConsumerCommand"
   let make = (~consumerARN=?, ~consumerName=?, ~streamARN=?, ()) =>
-    new({consumerARN, consumerName, streamARN})
+    new({consumerARN: consumerARN, consumerName: consumerName, streamARN: streamARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteStream = {
   type t
   @ocaml.doc("<p>Represents the input for <a>DeleteStream</a>.</p>")
@@ -1323,9 +1358,10 @@ module DeleteStream = {
   type response = {.}
   @module("@aws-sdk/client-kinesis") @new external new: request => t = "DeleteStreamCommand"
   let make = (~streamName, ~enforceConsumerDeletion=?, ()) =>
-    new({enforceConsumerDeletion, streamName})
+    new({enforceConsumerDeletion: enforceConsumerDeletion, streamName: streamName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DecreaseStreamRetentionPeriod = {
   type t
   @ocaml.doc("<p>Represents the input for <a>DecreaseStreamRetentionPeriod</a>.</p>")
@@ -1339,9 +1375,11 @@ module DecreaseStreamRetentionPeriod = {
   type response = {.}
   @module("@aws-sdk/client-kinesis") @new
   external new: request => t = "DecreaseStreamRetentionPeriodCommand"
-  let make = (~retentionPeriodHours, ~streamName, ()) => new({retentionPeriodHours, streamName})
+  let make = (~retentionPeriodHours, ~streamName, ()) =>
+    new({retentionPeriodHours: retentionPeriodHours, streamName: streamName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateStreamMode = {
   type t
   type request = {
@@ -1357,9 +1395,11 @@ module UpdateStreamMode = {
   }
   type response = {.}
   @module("@aws-sdk/client-kinesis") @new external new: request => t = "UpdateStreamModeCommand"
-  let make = (~streamModeDetails, ~streamARN, ()) => new({streamModeDetails, streamARN})
+  let make = (~streamModeDetails, ~streamARN, ()) =>
+    new({streamModeDetails: streamModeDetails, streamARN: streamARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module RemoveTagsFromStream = {
   type t
   @ocaml.doc("<p>Represents the input for <code>RemoveTagsFromStream</code>.</p>")
@@ -1371,9 +1411,10 @@ module RemoveTagsFromStream = {
   }
   type response = {.}
   @module("@aws-sdk/client-kinesis") @new external new: request => t = "RemoveTagsFromStreamCommand"
-  let make = (~tagKeys, ~streamName, ()) => new({tagKeys, streamName})
+  let make = (~tagKeys, ~streamName, ()) => new({tagKeys: tagKeys, streamName: streamName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module RegisterStreamConsumer = {
   type t
   type request = {
@@ -1395,9 +1436,11 @@ module RegisterStreamConsumer = {
   }
   @module("@aws-sdk/client-kinesis") @new
   external new: request => t = "RegisterStreamConsumerCommand"
-  let make = (~consumerName, ~streamARN, ()) => new({consumerName, streamARN})
+  let make = (~consumerName, ~streamARN, ()) =>
+    new({consumerName: consumerName, streamARN: streamARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListStreams = {
   type t
   @ocaml.doc("<p>Represents the input for <code>ListStreams</code>.</p>")
@@ -1421,9 +1464,11 @@ module ListStreams = {
     streamNames: streamNameList,
   }
   @module("@aws-sdk/client-kinesis") @new external new: request => t = "ListStreamsCommand"
-  let make = (~exclusiveStartStreamName=?, ~limit=?, ()) => new({exclusiveStartStreamName, limit})
+  let make = (~exclusiveStartStreamName=?, ~limit=?, ()) =>
+    new({exclusiveStartStreamName: exclusiveStartStreamName, limit: limit})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module EnableEnhancedMonitoring = {
   type t
   @ocaml.doc("<p>Represents the input for <a>EnableEnhancedMonitoring</a>.</p>")
@@ -1499,9 +1544,11 @@ module EnableEnhancedMonitoring = {
   }
   @module("@aws-sdk/client-kinesis") @new
   external new: request => t = "EnableEnhancedMonitoringCommand"
-  let make = (~shardLevelMetrics, ~streamName, ()) => new({shardLevelMetrics, streamName})
+  let make = (~shardLevelMetrics, ~streamName, ()) =>
+    new({shardLevelMetrics: shardLevelMetrics, streamName: streamName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DisableEnhancedMonitoring = {
   type t
   @ocaml.doc("<p>Represents the input for <a>DisableEnhancedMonitoring</a>.</p>")
@@ -1579,9 +1626,11 @@ module DisableEnhancedMonitoring = {
   }
   @module("@aws-sdk/client-kinesis") @new
   external new: request => t = "DisableEnhancedMonitoringCommand"
-  let make = (~shardLevelMetrics, ~streamName, ()) => new({shardLevelMetrics, streamName})
+  let make = (~shardLevelMetrics, ~streamName, ()) =>
+    new({shardLevelMetrics: shardLevelMetrics, streamName: streamName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeStreamConsumer = {
   type t
   type request = {
@@ -1604,9 +1653,10 @@ module DescribeStreamConsumer = {
   @module("@aws-sdk/client-kinesis") @new
   external new: request => t = "DescribeStreamConsumerCommand"
   let make = (~consumerARN=?, ~consumerName=?, ~streamARN=?, ()) =>
-    new({consumerARN, consumerName, streamARN})
+    new({consumerARN: consumerARN, consumerName: consumerName, streamARN: streamARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateStream = {
   type t
   @ocaml.doc("<p>Represents the input for <code>CreateStream</code>.</p>")
@@ -1632,9 +1682,10 @@ module CreateStream = {
   type response = {.}
   @module("@aws-sdk/client-kinesis") @new external new: request => t = "CreateStreamCommand"
   let make = (~streamName, ~streamModeDetails=?, ~shardCount=?, ()) =>
-    new({streamModeDetails, shardCount, streamName})
+    new({streamModeDetails: streamModeDetails, shardCount: shardCount, streamName: streamName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module AddTagsToStream = {
   type t
   @ocaml.doc("<p>Represents the input for <code>AddTagsToStream</code>.</p>")
@@ -1645,9 +1696,10 @@ module AddTagsToStream = {
   }
   type response = {.}
   @module("@aws-sdk/client-kinesis") @new external new: request => t = "AddTagsToStreamCommand"
-  let make = (~tags, ~streamName, ()) => new({tags, streamName})
+  let make = (~tags, ~streamName, ()) => new({tags: tags, streamName: streamName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module PutRecords = {
   type t
   @ocaml.doc("<p>A <code>PutRecords</code> request.</p>")
@@ -1687,9 +1739,10 @@ module PutRecords = {
     failedRecordCount: option<positiveIntegerObject>,
   }
   @module("@aws-sdk/client-kinesis") @new external new: request => t = "PutRecordsCommand"
-  let make = (~streamName, ~records, ()) => new({streamName, records})
+  let make = (~streamName, ~records, ()) => new({streamName: streamName, records: records})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListTagsForStream = {
   type t
   @ocaml.doc("<p>Represents the input for <code>ListTagsForStream</code>.</p>")
@@ -1721,9 +1774,10 @@ module ListTagsForStream = {
   }
   @module("@aws-sdk/client-kinesis") @new external new: request => t = "ListTagsForStreamCommand"
   let make = (~streamName, ~limit=?, ~exclusiveStartTagKey=?, ()) =>
-    new({limit, exclusiveStartTagKey, streamName})
+    new({limit: limit, exclusiveStartTagKey: exclusiveStartTagKey, streamName: streamName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListStreamConsumers = {
   type t
   type request = {
@@ -1794,9 +1848,15 @@ module ListStreamConsumers = {
   }
   @module("@aws-sdk/client-kinesis") @new external new: request => t = "ListStreamConsumersCommand"
   let make = (~streamARN, ~streamCreationTimestamp=?, ~maxResults=?, ~nextToken=?, ()) =>
-    new({streamCreationTimestamp, maxResults, nextToken, streamARN})
+    new({
+      streamCreationTimestamp: streamCreationTimestamp,
+      maxResults: maxResults,
+      nextToken: nextToken,
+      streamARN: streamARN,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListShards = {
   type t
   type request = {
@@ -1908,15 +1968,16 @@ module ListShards = {
     (),
   ) =>
     new({
-      shardFilter,
-      streamCreationTimestamp,
-      maxResults,
-      exclusiveStartShardId,
-      nextToken,
-      streamName,
+      shardFilter: shardFilter,
+      streamCreationTimestamp: streamCreationTimestamp,
+      maxResults: maxResults,
+      exclusiveStartShardId: exclusiveStartShardId,
+      nextToken: nextToken,
+      streamName: streamName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetRecords = {
   type t
   @ocaml.doc("<p>Represents the input for <a>GetRecords</a>.</p>")
@@ -1953,9 +2014,10 @@ module GetRecords = {
     records: recordList,
   }
   @module("@aws-sdk/client-kinesis") @new external new: request => t = "GetRecordsCommand"
-  let make = (~shardIterator, ~limit=?, ()) => new({limit, shardIterator})
+  let make = (~shardIterator, ~limit=?, ()) => new({limit: limit, shardIterator: shardIterator})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeStreamSummary = {
   type t
   type request = {
@@ -1973,6 +2035,7 @@ module DescribeStreamSummary = {
   let make = (~streamName, ()) => new({streamName: streamName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeStream = {
   type t
   @ocaml.doc("<p>Represents the input for <code>DescribeStream</code>.</p>")
@@ -2002,9 +2065,10 @@ module DescribeStream = {
   }
   @module("@aws-sdk/client-kinesis") @new external new: request => t = "DescribeStreamCommand"
   let make = (~streamName, ~exclusiveStartShardId=?, ~limit=?, ()) =>
-    new({exclusiveStartShardId, limit, streamName})
+    new({exclusiveStartShardId: exclusiveStartShardId, limit: limit, streamName: streamName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module SubscribeToShard = {
   type t
   type request = {
@@ -2028,6 +2092,6 @@ module SubscribeToShard = {
   }
   @module("@aws-sdk/client-kinesis") @new external new: request => t = "SubscribeToShardCommand"
   let make = (~startingPosition, ~shardId, ~consumerARN, ()) =>
-    new({startingPosition, shardId, consumerARN})
+    new({startingPosition: startingPosition, shardId: shardId, consumerARN: consumerARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

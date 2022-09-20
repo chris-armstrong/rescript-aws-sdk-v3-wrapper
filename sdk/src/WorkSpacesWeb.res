@@ -470,16 +470,17 @@ module UpdateUserSettings = {
     (),
   ) =>
     new({
-      clientToken,
-      printAllowed,
-      uploadAllowed,
-      downloadAllowed,
-      pasteAllowed,
-      copyAllowed,
-      userSettingsArn,
+      clientToken: clientToken,
+      printAllowed: printAllowed,
+      uploadAllowed: uploadAllowed,
+      downloadAllowed: downloadAllowed,
+      pasteAllowed: pasteAllowed,
+      copyAllowed: copyAllowed,
+      userSettingsArn: userSettingsArn,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateTrustStore = {
   type t
   type request = {
@@ -500,9 +501,15 @@ module UpdateTrustStore = {
   @module("@aws-sdk/client-workspaces-web") @new
   external new: request => t = "UpdateTrustStoreCommand"
   let make = (~trustStoreArn, ~clientToken=?, ~certificatesToDelete=?, ~certificatesToAdd=?, ()) =>
-    new({clientToken, certificatesToDelete, certificatesToAdd, trustStoreArn})
+    new({
+      clientToken: clientToken,
+      certificatesToDelete: certificatesToDelete,
+      certificatesToAdd: certificatesToAdd,
+      trustStoreArn: trustStoreArn,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdatePortal = {
   type t
   type request = {
@@ -514,9 +521,11 @@ module UpdatePortal = {
   }
   type response = {@ocaml.doc("<p>The web portal.</p>") portal: option<portal>}
   @module("@aws-sdk/client-workspaces-web") @new external new: request => t = "UpdatePortalCommand"
-  let make = (~portalArn, ~displayName=?, ()) => new({displayName, portalArn})
+  let make = (~portalArn, ~displayName=?, ()) =>
+    new({displayName: displayName, portalArn: portalArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateNetworkSettings = {
   type t
   type request = {
@@ -548,9 +557,17 @@ module UpdateNetworkSettings = {
     ~subnetIds=?,
     ~vpcId=?,
     (),
-  ) => new({clientToken, securityGroupIds, subnetIds, vpcId, networkSettingsArn})
+  ) =>
+    new({
+      clientToken: clientToken,
+      securityGroupIds: securityGroupIds,
+      subnetIds: subnetIds,
+      vpcId: vpcId,
+      networkSettingsArn: networkSettingsArn,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateIdentityProvider = {
   type t
   type request = {
@@ -581,14 +598,15 @@ module UpdateIdentityProvider = {
     (),
   ) =>
     new({
-      clientToken,
-      identityProviderDetails,
-      identityProviderType,
-      identityProviderName,
-      identityProviderArn,
+      clientToken: clientToken,
+      identityProviderDetails: identityProviderDetails,
+      identityProviderType: identityProviderType,
+      identityProviderName: identityProviderName,
+      identityProviderArn: identityProviderArn,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateBrowserSettings = {
   type t
   type request = {
@@ -608,9 +626,14 @@ module UpdateBrowserSettings = {
   @module("@aws-sdk/client-workspaces-web") @new
   external new: request => t = "UpdateBrowserSettingsCommand"
   let make = (~browserSettingsArn, ~clientToken=?, ~browserPolicy=?, ()) =>
-    new({clientToken, browserPolicy, browserSettingsArn})
+    new({
+      clientToken: clientToken,
+      browserPolicy: browserPolicy,
+      browserSettingsArn: browserSettingsArn,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UntagResource = {
   type t
   type request = {
@@ -619,9 +642,10 @@ module UntagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-workspaces-web") @new external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys, resourceArn})
+  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module TagResource = {
   type t
   type request = {
@@ -637,9 +661,11 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-workspaces-web") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceArn, ~clientToken=?, ()) => new({clientToken, tags, resourceArn})
+  let make = (~tags, ~resourceArn, ~clientToken=?, ()) =>
+    new({clientToken: clientToken, tags: tags, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ListUserSettings = {
   type t
   type request = {
@@ -659,9 +685,11 @@ module ListUserSettings = {
   }
   @module("@aws-sdk/client-workspaces-web") @new
   external new: request => t = "ListUserSettingsCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListTrustStores = {
   type t
   type request = {
@@ -681,9 +709,11 @@ module ListTrustStores = {
   }
   @module("@aws-sdk/client-workspaces-web") @new
   external new: request => t = "ListTrustStoresCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListTrustStoreCertificates = {
   type t
   type request = {
@@ -706,9 +736,10 @@ module ListTrustStoreCertificates = {
   @module("@aws-sdk/client-workspaces-web") @new
   external new: request => t = "ListTrustStoreCertificatesCommand"
   let make = (~trustStoreArn, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults, nextToken, trustStoreArn})
+    new({maxResults: maxResults, nextToken: nextToken, trustStoreArn: trustStoreArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListTagsForResource = {
   type t
   type request = {@ocaml.doc("<p>The ARN of the resource.</p>") resourceArn: arn}
@@ -718,6 +749,7 @@ module ListTagsForResource = {
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListPortals = {
   type t
   type request = {
@@ -736,9 +768,11 @@ module ListPortals = {
     @ocaml.doc("<p>The portals in the list.</p>") portals: option<portalList>,
   }
   @module("@aws-sdk/client-workspaces-web") @new external new: request => t = "ListPortalsCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListNetworkSettings = {
   type t
   type request = {
@@ -758,9 +792,11 @@ module ListNetworkSettings = {
   }
   @module("@aws-sdk/client-workspaces-web") @new
   external new: request => t = "ListNetworkSettingsCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListIdentityProviders = {
   type t
   type request = {
@@ -782,9 +818,10 @@ module ListIdentityProviders = {
   @module("@aws-sdk/client-workspaces-web") @new
   external new: request => t = "ListIdentityProvidersCommand"
   let make = (~portalArn, ~maxResults=?, ~nextToken=?, ()) =>
-    new({portalArn, maxResults, nextToken})
+    new({portalArn: portalArn, maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListBrowserSettings = {
   type t
   type request = {
@@ -804,9 +841,11 @@ module ListBrowserSettings = {
   }
   @module("@aws-sdk/client-workspaces-web") @new
   external new: request => t = "ListBrowserSettingsCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetUserSettings = {
   type t
   type request = {@ocaml.doc("<p>The ARN of the user settings.</p>") userSettingsArn: arn}
@@ -816,6 +855,7 @@ module GetUserSettings = {
   let make = (~userSettingsArn, ()) => new({userSettingsArn: userSettingsArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetTrustStoreCertificate = {
   type t
   type request = {
@@ -830,9 +870,11 @@ module GetTrustStoreCertificate = {
   }
   @module("@aws-sdk/client-workspaces-web") @new
   external new: request => t = "GetTrustStoreCertificateCommand"
-  let make = (~thumbprint, ~trustStoreArn, ()) => new({thumbprint, trustStoreArn})
+  let make = (~thumbprint, ~trustStoreArn, ()) =>
+    new({thumbprint: thumbprint, trustStoreArn: trustStoreArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetTrustStore = {
   type t
   type request = {@ocaml.doc("<p>The ARN of the trust store.</p>") trustStoreArn: arn}
@@ -841,6 +883,7 @@ module GetTrustStore = {
   let make = (~trustStoreArn, ()) => new({trustStoreArn: trustStoreArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetPortalServiceProviderMetadata = {
   type t
   type request = {@ocaml.doc("<p>The ARN of the web portal.</p>") portalArn: arn}
@@ -854,6 +897,7 @@ module GetPortalServiceProviderMetadata = {
   let make = (~portalArn, ()) => new({portalArn: portalArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetPortal = {
   type t
   type request = {@ocaml.doc("<p>The ARN of the web portal.</p>") portalArn: arn}
@@ -862,6 +906,7 @@ module GetPortal = {
   let make = (~portalArn, ()) => new({portalArn: portalArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetNetworkSettings = {
   type t
   type request = {@ocaml.doc("<p>The ARN of the network settings.</p>") networkSettingsArn: arn}
@@ -873,6 +918,7 @@ module GetNetworkSettings = {
   let make = (~networkSettingsArn, ()) => new({networkSettingsArn: networkSettingsArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetIdentityProvider = {
   type t
   type request = {@ocaml.doc("<p>The ARN of the identity provider.</p>") identityProviderArn: arn}
@@ -884,6 +930,7 @@ module GetIdentityProvider = {
   let make = (~identityProviderArn, ()) => new({identityProviderArn: identityProviderArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetBrowserSettings = {
   type t
   type request = {@ocaml.doc("<p>The ARN of the browser settings.</p>") browserSettingsArn: arn}
@@ -895,6 +942,7 @@ module GetBrowserSettings = {
   let make = (~browserSettingsArn, ()) => new({browserSettingsArn: browserSettingsArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DisassociateUserSettings = {
   type t
   type request = {@ocaml.doc("<p>The ARN of the web portal.</p>") portalArn: arn}
@@ -904,6 +952,7 @@ module DisassociateUserSettings = {
   let make = (~portalArn, ()) => new({portalArn: portalArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DisassociateTrustStore = {
   type t
   type request = {@ocaml.doc("<p>The ARN of the web portal.</p>") portalArn: arn}
@@ -913,6 +962,7 @@ module DisassociateTrustStore = {
   let make = (~portalArn, ()) => new({portalArn: portalArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DisassociateNetworkSettings = {
   type t
   type request = {@ocaml.doc("<p>The ARN of the web portal.</p>") portalArn: arn}
@@ -922,6 +972,7 @@ module DisassociateNetworkSettings = {
   let make = (~portalArn, ()) => new({portalArn: portalArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DisassociateBrowserSettings = {
   type t
   type request = {@ocaml.doc("<p>The ARN of the web portal.</p>") portalArn: arn}
@@ -931,6 +982,7 @@ module DisassociateBrowserSettings = {
   let make = (~portalArn, ()) => new({portalArn: portalArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteUserSettings = {
   type t
   type request = {@ocaml.doc("<p>The ARN of the user settings.</p>") userSettingsArn: arn}
@@ -940,6 +992,7 @@ module DeleteUserSettings = {
   let make = (~userSettingsArn, ()) => new({userSettingsArn: userSettingsArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteTrustStore = {
   type t
   type request = {@ocaml.doc("<p>The ARN of the trust store.</p>") trustStoreArn: arn}
@@ -949,6 +1002,7 @@ module DeleteTrustStore = {
   let make = (~trustStoreArn, ()) => new({trustStoreArn: trustStoreArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeletePortal = {
   type t
   type request = {@ocaml.doc("<p>The ARN of the web portal.</p>") portalArn: arn}
@@ -957,6 +1011,7 @@ module DeletePortal = {
   let make = (~portalArn, ()) => new({portalArn: portalArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteNetworkSettings = {
   type t
   type request = {@ocaml.doc("<p>The ARN of the network settings.</p>") networkSettingsArn: arn}
@@ -966,6 +1021,7 @@ module DeleteNetworkSettings = {
   let make = (~networkSettingsArn, ()) => new({networkSettingsArn: networkSettingsArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteIdentityProvider = {
   type t
   type request = {@ocaml.doc("<p>The ARN of the identity provider.</p>") identityProviderArn: arn}
@@ -975,6 +1031,7 @@ module DeleteIdentityProvider = {
   let make = (~identityProviderArn, ()) => new({identityProviderArn: identityProviderArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteBrowserSettings = {
   type t
   type request = {@ocaml.doc("<p>The ARN of the browser settings.</p>") browserSettingsArn: arn}
@@ -984,6 +1041,7 @@ module DeleteBrowserSettings = {
   let make = (~browserSettingsArn, ()) => new({browserSettingsArn: browserSettingsArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module CreateUserSettings = {
   type t
   type request = {
@@ -1025,16 +1083,17 @@ module CreateUserSettings = {
     (),
   ) =>
     new({
-      clientToken,
-      tags,
-      printAllowed,
-      uploadAllowed,
-      downloadAllowed,
-      pasteAllowed,
-      copyAllowed,
+      clientToken: clientToken,
+      tags: tags,
+      printAllowed: printAllowed,
+      uploadAllowed: uploadAllowed,
+      downloadAllowed: downloadAllowed,
+      pasteAllowed: pasteAllowed,
+      copyAllowed: copyAllowed,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateTrustStore = {
   type t
   type request = {
@@ -1054,9 +1113,10 @@ module CreateTrustStore = {
   @module("@aws-sdk/client-workspaces-web") @new
   external new: request => t = "CreateTrustStoreCommand"
   let make = (~certificateList, ~clientToken=?, ~tags=?, ()) =>
-    new({clientToken, tags, certificateList})
+    new({clientToken: clientToken, tags: tags, certificateList: certificateList})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreatePortal = {
   type t
   type request = {
@@ -1093,9 +1153,17 @@ module CreatePortal = {
     ~tags=?,
     ~displayName=?,
     (),
-  ) => new({clientToken, additionalEncryptionContext, customerManagedKey, tags, displayName})
+  ) =>
+    new({
+      clientToken: clientToken,
+      additionalEncryptionContext: additionalEncryptionContext,
+      customerManagedKey: customerManagedKey,
+      tags: tags,
+      displayName: displayName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateNetworkSettings = {
   type t
   type request = {
@@ -1124,9 +1192,16 @@ module CreateNetworkSettings = {
   @module("@aws-sdk/client-workspaces-web") @new
   external new: request => t = "CreateNetworkSettingsCommand"
   let make = (~securityGroupIds, ~subnetIds, ~vpcId, ~clientToken=?, ~tags=?, ()) =>
-    new({clientToken, tags, securityGroupIds, subnetIds, vpcId})
+    new({
+      clientToken: clientToken,
+      tags: tags,
+      securityGroupIds: securityGroupIds,
+      subnetIds: subnetIds,
+      vpcId: vpcId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateIdentityProvider = {
   type t
   type request = {
@@ -1307,14 +1382,15 @@ module CreateIdentityProvider = {
     (),
   ) =>
     new({
-      clientToken,
-      identityProviderDetails,
-      identityProviderType,
-      identityProviderName,
-      portalArn,
+      clientToken: clientToken,
+      identityProviderDetails: identityProviderDetails,
+      identityProviderType: identityProviderType,
+      identityProviderName: identityProviderName,
+      portalArn: portalArn,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateBrowserSettings = {
   type t
   type request = {
@@ -1346,9 +1422,17 @@ module CreateBrowserSettings = {
     ~customerManagedKey=?,
     ~tags=?,
     (),
-  ) => new({clientToken, browserPolicy, additionalEncryptionContext, customerManagedKey, tags})
+  ) =>
+    new({
+      clientToken: clientToken,
+      browserPolicy: browserPolicy,
+      additionalEncryptionContext: additionalEncryptionContext,
+      customerManagedKey: customerManagedKey,
+      tags: tags,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module AssociateUserSettings = {
   type t
   type request = {
@@ -1361,9 +1445,11 @@ module AssociateUserSettings = {
   }
   @module("@aws-sdk/client-workspaces-web") @new
   external new: request => t = "AssociateUserSettingsCommand"
-  let make = (~userSettingsArn, ~portalArn, ()) => new({userSettingsArn, portalArn})
+  let make = (~userSettingsArn, ~portalArn, ()) =>
+    new({userSettingsArn: userSettingsArn, portalArn: portalArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module AssociateTrustStore = {
   type t
   type request = {
@@ -1376,9 +1462,11 @@ module AssociateTrustStore = {
   }
   @module("@aws-sdk/client-workspaces-web") @new
   external new: request => t = "AssociateTrustStoreCommand"
-  let make = (~trustStoreArn, ~portalArn, ()) => new({trustStoreArn, portalArn})
+  let make = (~trustStoreArn, ~portalArn, ()) =>
+    new({trustStoreArn: trustStoreArn, portalArn: portalArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module AssociateNetworkSettings = {
   type t
   type request = {
@@ -1391,9 +1479,11 @@ module AssociateNetworkSettings = {
   }
   @module("@aws-sdk/client-workspaces-web") @new
   external new: request => t = "AssociateNetworkSettingsCommand"
-  let make = (~networkSettingsArn, ~portalArn, ()) => new({networkSettingsArn, portalArn})
+  let make = (~networkSettingsArn, ~portalArn, ()) =>
+    new({networkSettingsArn: networkSettingsArn, portalArn: portalArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module AssociateBrowserSettings = {
   type t
   type request = {
@@ -1406,6 +1496,7 @@ module AssociateBrowserSettings = {
   }
   @module("@aws-sdk/client-workspaces-web") @new
   external new: request => t = "AssociateBrowserSettingsCommand"
-  let make = (~browserSettingsArn, ~portalArn, ()) => new({browserSettingsArn, portalArn})
+  let make = (~browserSettingsArn, ~portalArn, ()) =>
+    new({browserSettingsArn: browserSettingsArn, portalArn: portalArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

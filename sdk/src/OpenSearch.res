@@ -1894,9 +1894,14 @@ module PurchaseReservedInstanceOffering = {
   @module("@aws-sdk/client-es") @new
   external new: request => t = "PurchaseReservedInstanceOfferingCommand"
   let make = (~reservationName, ~reservedInstanceOfferingId, ~instanceCount=?, ()) =>
-    new({instanceCount, reservationName, reservedInstanceOfferingId})
+    new({
+      instanceCount: instanceCount,
+      reservationName: reservationName,
+      reservedInstanceOfferingId: reservedInstanceOfferingId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetUpgradeStatus = {
   type t
   @ocaml.doc("<p>
@@ -1947,6 +1952,7 @@ module GetUpgradeStatus = {
   let make = (~domainName, ()) => new({domainName: domainName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpgradeDomain = {
   type t
   @ocaml.doc("<p>
@@ -1993,9 +1999,15 @@ module UpgradeDomain = {
   }
   @module("@aws-sdk/client-es") @new external new: request => t = "UpgradeDomainCommand"
   let make = (~targetVersion, ~domainName, ~advancedOptions=?, ~performCheckOnly=?, ()) =>
-    new({advancedOptions, performCheckOnly, targetVersion, domainName})
+    new({
+      advancedOptions: advancedOptions,
+      performCheckOnly: performCheckOnly,
+      targetVersion: targetVersion,
+      domainName: domainName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module StartServiceSoftwareUpdate = {
   type t
   @ocaml.doc("<p>Container for the parameters to the
@@ -2024,6 +2036,7 @@ module StartServiceSoftwareUpdate = {
   let make = (~domainName, ()) => new({domainName: domainName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module RemoveTags = {
   type t
   @ocaml.doc("<p>Container for the parameters to the
@@ -2045,9 +2058,10 @@ module RemoveTags = {
   }
   type response = {.}
   @module("@aws-sdk/client-es") @new external new: request => t = "RemoveTagsCommand"
-  let make = (~tagKeys, ~arn, ()) => new({tagKeys, arn})
+  let make = (~tagKeys, ~arn, ()) => new({tagKeys: tagKeys, arn: arn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ListVersions = {
   type t
   @ocaml.doc("<p>
@@ -2094,9 +2108,11 @@ module ListVersions = {
     @as("Versions") versions: option<versionList>,
   }
   @module("@aws-sdk/client-es") @new external new: request => t = "ListVersionsCommand"
-  let make = (~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults})
+  let make = (~nextToken=?, ~maxResults=?, ()) =>
+    new({nextToken: nextToken, maxResults: maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CancelServiceSoftwareUpdate = {
   type t
   @ocaml.doc("<p>Container for the parameters to the
@@ -2125,6 +2141,7 @@ module CancelServiceSoftwareUpdate = {
   let make = (~domainName, ()) => new({domainName: domainName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdatePackage = {
   type t
   @ocaml.doc("<p>
@@ -2160,9 +2177,15 @@ module UpdatePackage = {
   }
   @module("@aws-sdk/client-es") @new external new: request => t = "UpdatePackageCommand"
   let make = (~packageSource, ~packageID, ~commitMessage=?, ~packageDescription=?, ()) =>
-    new({commitMessage, packageDescription, packageSource, packageID})
+    new({
+      commitMessage: commitMessage,
+      packageDescription: packageDescription,
+      packageSource: packageSource,
+      packageID: packageID,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListTags = {
   type t
   @ocaml.doc("<p>Container for the parameters to the
@@ -2191,6 +2214,7 @@ module ListTags = {
   let make = (~arn, ()) => new({arn: arn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListDomainNames = {
   type t
   @ocaml.doc(
@@ -2214,6 +2238,7 @@ module ListDomainNames = {
   let make = (~engineType=?, ()) => new({engineType: engineType})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetPackageVersionHistory = {
   type t
   @ocaml.doc("<p>
@@ -2251,9 +2276,10 @@ module GetPackageVersionHistory = {
   }
   @module("@aws-sdk/client-es") @new external new: request => t = "GetPackageVersionHistoryCommand"
   let make = (~packageID, ~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken, maxResults, packageID})
+    new({nextToken: nextToken, maxResults: maxResults, packageID: packageID})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DissociatePackage = {
   type t
   @ocaml.doc("<p>
@@ -2287,9 +2313,10 @@ module DissociatePackage = {
     domainPackageDetails: option<domainPackageDetails>,
   }
   @module("@aws-sdk/client-es") @new external new: request => t = "DissociatePackageCommand"
-  let make = (~domainName, ~packageID, ()) => new({domainName, packageID})
+  let make = (~domainName, ~packageID, ()) => new({domainName: domainName, packageID: packageID})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeletePackage = {
   type t
   @ocaml.doc("<p>
@@ -2323,6 +2350,7 @@ module DeletePackage = {
   let make = (~packageID, ()) => new({packageID: packageID})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreatePackage = {
   type t
   @ocaml.doc("<p>
@@ -2359,9 +2387,15 @@ module CreatePackage = {
   }
   @module("@aws-sdk/client-es") @new external new: request => t = "CreatePackageCommand"
   let make = (~packageSource, ~packageType, ~packageName, ~packageDescription=?, ()) =>
-    new({packageSource, packageDescription, packageType, packageName})
+    new({
+      packageSource: packageSource,
+      packageDescription: packageDescription,
+      packageType: packageType,
+      packageName: packageName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateOutboundConnection = {
   type t
   @ocaml.doc("<p>Container for the parameters to the
@@ -2435,9 +2469,14 @@ module CreateOutboundConnection = {
   }
   @module("@aws-sdk/client-es") @new external new: request => t = "CreateOutboundConnectionCommand"
   let make = (~connectionAlias, ~remoteDomainInfo, ~localDomainInfo, ()) =>
-    new({connectionAlias, remoteDomainInfo, localDomainInfo})
+    new({
+      connectionAlias: connectionAlias,
+      remoteDomainInfo: remoteDomainInfo,
+      localDomainInfo: localDomainInfo,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module AssociatePackage = {
   type t
   @ocaml.doc("<p>
@@ -2471,9 +2510,10 @@ module AssociatePackage = {
     domainPackageDetails: option<domainPackageDetails>,
   }
   @module("@aws-sdk/client-es") @new external new: request => t = "AssociatePackageCommand"
-  let make = (~domainName, ~packageID, ()) => new({domainName, packageID})
+  let make = (~domainName, ~packageID, ()) => new({domainName: domainName, packageID: packageID})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module AddTags = {
   type t
   @ocaml.doc("<p>Container for the parameters to the
@@ -2494,9 +2534,10 @@ module AddTags = {
   }
   type response = {.}
   @module("@aws-sdk/client-es") @new external new: request => t = "AddTagsCommand"
-  let make = (~tagList_, ~arn, ()) => new({tagList_, arn})
+  let make = (~tagList_, ~arn, ()) => new({tagList_: tagList_, arn: arn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module RejectInboundConnection = {
   type t
   @ocaml.doc("<p>Container for the parameters to the
@@ -2529,6 +2570,7 @@ module RejectInboundConnection = {
   let make = (~connectionId, ()) => new({connectionId: connectionId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListPackagesForDomain = {
   type t
   @ocaml.doc("<p>
@@ -2570,9 +2612,10 @@ module ListPackagesForDomain = {
   }
   @module("@aws-sdk/client-es") @new external new: request => t = "ListPackagesForDomainCommand"
   let make = (~domainName, ~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken, maxResults, domainName})
+    new({nextToken: nextToken, maxResults: maxResults, domainName: domainName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListInstanceTypeDetails = {
   type t
   type request = {
@@ -2587,9 +2630,15 @@ module ListInstanceTypeDetails = {
   }
   @module("@aws-sdk/client-es") @new external new: request => t = "ListInstanceTypeDetailsCommand"
   let make = (~engineVersion, ~nextToken=?, ~maxResults=?, ~domainName=?, ()) =>
-    new({nextToken, maxResults, domainName, engineVersion})
+    new({
+      nextToken: nextToken,
+      maxResults: maxResults,
+      domainName: domainName,
+      engineVersion: engineVersion,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListDomainsForPackage = {
   type t
   @ocaml.doc("<p>
@@ -2626,9 +2675,10 @@ module ListDomainsForPackage = {
   }
   @module("@aws-sdk/client-es") @new external new: request => t = "ListDomainsForPackageCommand"
   let make = (~packageID, ~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken, maxResults, packageID})
+    new({nextToken: nextToken, maxResults: maxResults, packageID: packageID})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetCompatibleVersions = {
   type t
   @ocaml.doc("<p>
@@ -2661,6 +2711,7 @@ module GetCompatibleVersions = {
   let make = (~domainName=?, ()) => new({domainName: domainName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribePackages = {
   type t
   @ocaml.doc("<p>
@@ -2698,9 +2749,11 @@ module DescribePackages = {
     packageDetailsList: option<packageDetailsList>,
   }
   @module("@aws-sdk/client-es") @new external new: request => t = "DescribePackagesCommand"
-  let make = (~nextToken=?, ~maxResults=?, ~filters=?, ()) => new({nextToken, maxResults, filters})
+  let make = (~nextToken=?, ~maxResults=?, ~filters=?, ()) =>
+    new({nextToken: nextToken, maxResults: maxResults, filters: filters})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeDomainChangeProgress = {
   type t
   @ocaml.doc("<p>Container for the parameters to the <code>DescribeDomainChangeProgress</code> operation. Specifies the
@@ -2727,9 +2780,10 @@ module DescribeDomainChangeProgress = {
   }
   @module("@aws-sdk/client-es") @new
   external new: request => t = "DescribeDomainChangeProgressCommand"
-  let make = (~domainName, ~changeId=?, ()) => new({changeId, domainName})
+  let make = (~domainName, ~changeId=?, ()) => new({changeId: changeId, domainName: domainName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteOutboundConnection = {
   type t
   @ocaml.doc("<p>Container for the parameters to the
@@ -2763,6 +2817,7 @@ module DeleteOutboundConnection = {
   let make = (~connectionId, ()) => new({connectionId: connectionId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteInboundConnection = {
   type t
   @ocaml.doc("<p>Container for the parameters to the
@@ -2795,6 +2850,7 @@ module DeleteInboundConnection = {
   let make = (~connectionId, ()) => new({connectionId: connectionId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module AcceptInboundConnection = {
   type t
   @ocaml.doc("<p>Container for the parameters to the
@@ -2827,6 +2883,7 @@ module AcceptInboundConnection = {
   let make = (~connectionId, ()) => new({connectionId: connectionId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeReservedInstances = {
   type t
   @ocaml.doc("<p>Container for parameters to
@@ -2860,9 +2917,10 @@ module DescribeReservedInstances = {
   }
   @module("@aws-sdk/client-es") @new external new: request => t = "DescribeReservedInstancesCommand"
   let make = (~nextToken=?, ~maxResults=?, ~reservedInstanceId=?, ()) =>
-    new({nextToken, maxResults, reservedInstanceId})
+    new({nextToken: nextToken, maxResults: maxResults, reservedInstanceId: reservedInstanceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeReservedInstanceOfferings = {
   type t
   @ocaml.doc("<p>Container for parameters to
@@ -2898,9 +2956,14 @@ module DescribeReservedInstanceOfferings = {
   @module("@aws-sdk/client-es") @new
   external new: request => t = "DescribeReservedInstanceOfferingsCommand"
   let make = (~nextToken=?, ~maxResults=?, ~reservedInstanceOfferingId=?, ()) =>
-    new({nextToken, maxResults, reservedInstanceOfferingId})
+    new({
+      nextToken: nextToken,
+      maxResults: maxResults,
+      reservedInstanceOfferingId: reservedInstanceOfferingId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeOutboundConnections = {
   type t
   @ocaml.doc("<p>Container for the parameters to the
@@ -2961,9 +3024,11 @@ module DescribeOutboundConnections = {
   }
   @module("@aws-sdk/client-es") @new
   external new: request => t = "DescribeOutboundConnectionsCommand"
-  let make = (~nextToken=?, ~maxResults=?, ~filters=?, ()) => new({nextToken, maxResults, filters})
+  let make = (~nextToken=?, ~maxResults=?, ~filters=?, ()) =>
+    new({nextToken: nextToken, maxResults: maxResults, filters: filters})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeInboundConnections = {
   type t
   @ocaml.doc("<p>Container for the parameters to the
@@ -3023,9 +3088,11 @@ module DescribeInboundConnections = {
   }
   @module("@aws-sdk/client-es") @new
   external new: request => t = "DescribeInboundConnectionsCommand"
-  let make = (~nextToken=?, ~maxResults=?, ~filters=?, ()) => new({nextToken, maxResults, filters})
+  let make = (~nextToken=?, ~maxResults=?, ~filters=?, ()) =>
+    new({nextToken: nextToken, maxResults: maxResults, filters: filters})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeDomainAutoTunes = {
   type t
   @ocaml.doc("<p>Container for the parameters to the <code>DescribeDomainAutoTunes</code> operation.
@@ -3061,9 +3128,10 @@ module DescribeDomainAutoTunes = {
   }
   @module("@aws-sdk/client-es") @new external new: request => t = "DescribeDomainAutoTunesCommand"
   let make = (~domainName, ~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken, maxResults, domainName})
+    new({nextToken: nextToken, maxResults: maxResults, domainName: domainName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeDomain = {
   type t
   @ocaml.doc("<p>Container for the parameters to the
@@ -3087,6 +3155,7 @@ module DescribeDomain = {
   let make = (~domainName, ()) => new({domainName: domainName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteDomain = {
   type t
   @ocaml.doc("<p>Container for the parameters to the
@@ -3110,6 +3179,7 @@ module DeleteDomain = {
   let make = (~domainName, ()) => new({domainName: domainName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateDomain = {
   type t
   type request = {
@@ -3210,25 +3280,26 @@ module CreateDomain = {
     (),
   ) =>
     new({
-      autoTuneOptions,
-      tagList_,
-      advancedSecurityOptions,
-      domainEndpointOptions,
-      logPublishingOptions,
-      advancedOptions,
-      nodeToNodeEncryptionOptions,
-      encryptionAtRestOptions,
-      cognitoOptions,
-      vpcoptions,
-      snapshotOptions,
-      accessPolicies,
-      ebsoptions,
-      clusterConfig,
-      engineVersion,
-      domainName,
+      autoTuneOptions: autoTuneOptions,
+      tagList_: tagList_,
+      advancedSecurityOptions: advancedSecurityOptions,
+      domainEndpointOptions: domainEndpointOptions,
+      logPublishingOptions: logPublishingOptions,
+      advancedOptions: advancedOptions,
+      nodeToNodeEncryptionOptions: nodeToNodeEncryptionOptions,
+      encryptionAtRestOptions: encryptionAtRestOptions,
+      cognitoOptions: cognitoOptions,
+      vpcoptions: vpcoptions,
+      snapshotOptions: snapshotOptions,
+      accessPolicies: accessPolicies,
+      ebsoptions: ebsoptions,
+      clusterConfig: clusterConfig,
+      engineVersion: engineVersion,
+      domainName: domainName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetUpgradeHistory = {
   type t
   @ocaml.doc("<p>
@@ -3272,9 +3343,10 @@ module GetUpgradeHistory = {
   }
   @module("@aws-sdk/client-es") @new external new: request => t = "GetUpgradeHistoryCommand"
   let make = (~domainName, ~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken, maxResults, domainName})
+    new({nextToken: nextToken, maxResults: maxResults, domainName: domainName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeDomains = {
   type t
   @ocaml.doc("<p>Container for the parameters to the
@@ -3300,6 +3372,7 @@ module DescribeDomains = {
   let make = (~domainNames, ()) => new({domainNames: domainNames})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateDomainConfig = {
   type t
   @ocaml.doc("<p>Container for the parameters to the
@@ -3393,24 +3466,25 @@ module UpdateDomainConfig = {
     (),
   ) =>
     new({
-      dryRun,
-      autoTuneOptions,
-      advancedSecurityOptions,
-      nodeToNodeEncryptionOptions,
-      domainEndpointOptions,
-      encryptionAtRestOptions,
-      logPublishingOptions,
-      accessPolicies,
-      advancedOptions,
-      cognitoOptions,
-      vpcoptions,
-      snapshotOptions,
-      ebsoptions,
-      clusterConfig,
-      domainName,
+      dryRun: dryRun,
+      autoTuneOptions: autoTuneOptions,
+      advancedSecurityOptions: advancedSecurityOptions,
+      nodeToNodeEncryptionOptions: nodeToNodeEncryptionOptions,
+      domainEndpointOptions: domainEndpointOptions,
+      encryptionAtRestOptions: encryptionAtRestOptions,
+      logPublishingOptions: logPublishingOptions,
+      accessPolicies: accessPolicies,
+      advancedOptions: advancedOptions,
+      cognitoOptions: cognitoOptions,
+      vpcoptions: vpcoptions,
+      snapshotOptions: snapshotOptions,
+      ebsoptions: ebsoptions,
+      clusterConfig: clusterConfig,
+      domainName: domainName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeDomainConfig = {
   type t
   @ocaml.doc("<p>Container for the parameters to the <code>DescribeDomainConfig</code> operation. Specifies the
@@ -3433,6 +3507,7 @@ module DescribeDomainConfig = {
   let make = (~domainName, ()) => new({domainName: domainName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeInstanceTypeLimits = {
   type t
   @ocaml.doc("<p>
@@ -3483,6 +3558,6 @@ module DescribeInstanceTypeLimits = {
   @module("@aws-sdk/client-es") @new
   external new: request => t = "DescribeInstanceTypeLimitsCommand"
   let make = (~engineVersion, ~instanceType, ~domainName=?, ()) =>
-    new({engineVersion, instanceType, domainName})
+    new({engineVersion: engineVersion, instanceType: instanceType, domainName: domainName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

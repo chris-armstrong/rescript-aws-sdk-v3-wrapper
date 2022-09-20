@@ -548,9 +548,14 @@ module PutFileSystemPolicy = {
   @module("@aws-sdk/client-elasticfilesystem") @new
   external new: request => t = "PutFileSystemPolicyCommand"
   let make = (~policy, ~fileSystemId, ~bypassPolicyLockoutSafetyCheck=?, ()) =>
-    new({bypassPolicyLockoutSafetyCheck, policy, fileSystemId})
+    new({
+      bypassPolicyLockoutSafetyCheck: bypassPolicyLockoutSafetyCheck,
+      policy: policy,
+      fileSystemId: fileSystemId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeFileSystemPolicy = {
   type t
   type request = {
@@ -575,6 +580,7 @@ module DescribeFileSystemPolicy = {
   let make = (~fileSystemId, ()) => new({fileSystemId: fileSystemId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteReplicationConfiguration = {
   type t
   type request = {
@@ -588,6 +594,7 @@ module DeleteReplicationConfiguration = {
   let make = (~sourceFileSystemId, ()) => new({sourceFileSystemId: sourceFileSystemId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteMountTarget = {
   type t
   @ocaml.doc("<p></p>")
@@ -601,6 +608,7 @@ module DeleteMountTarget = {
   let make = (~mountTargetId, ()) => new({mountTargetId: mountTargetId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteFileSystemPolicy = {
   type t
   type request = {
@@ -616,6 +624,7 @@ module DeleteFileSystemPolicy = {
   let make = (~fileSystemId, ()) => new({fileSystemId: fileSystemId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteFileSystem = {
   type t
   @ocaml.doc("<p></p>")
@@ -629,6 +638,7 @@ module DeleteFileSystem = {
   let make = (~fileSystemId, ()) => new({fileSystemId: fileSystemId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteAccessPoint = {
   type t
   type request = {
@@ -641,6 +651,7 @@ module DeleteAccessPoint = {
   let make = (~accessPointId, ()) => new({accessPointId: accessPointId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UntagResource = {
   type t
   type request = {
@@ -655,9 +666,10 @@ module UntagResource = {
   type response = {.}
   @module("@aws-sdk/client-elasticfilesystem") @new
   external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceId, ()) => new({tagKeys, resourceId})
+  let make = (~tagKeys, ~resourceId, ()) => new({tagKeys: tagKeys, resourceId: resourceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module PutBackupPolicy = {
   type t
   type request = {
@@ -677,9 +689,11 @@ module PutBackupPolicy = {
   }
   @module("@aws-sdk/client-elasticfilesystem") @new
   external new: request => t = "PutBackupPolicyCommand"
-  let make = (~backupPolicy, ~fileSystemId, ()) => new({backupPolicy, fileSystemId})
+  let make = (~backupPolicy, ~fileSystemId, ()) =>
+    new({backupPolicy: backupPolicy, fileSystemId: fileSystemId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ModifyMountTargetSecurityGroups = {
   type t
   @ocaml.doc("<p></p>")
@@ -693,9 +707,11 @@ module ModifyMountTargetSecurityGroups = {
   type response = {.}
   @module("@aws-sdk/client-elasticfilesystem") @new
   external new: request => t = "ModifyMountTargetSecurityGroupsCommand"
-  let make = (~mountTargetId, ~securityGroups=?, ()) => new({securityGroups, mountTargetId})
+  let make = (~mountTargetId, ~securityGroups=?, ()) =>
+    new({securityGroups: securityGroups, mountTargetId: mountTargetId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DescribeMountTargetSecurityGroups = {
   type t
   @ocaml.doc("<p></p>")
@@ -713,6 +729,7 @@ module DescribeMountTargetSecurityGroups = {
   let make = (~mountTargetId, ()) => new({mountTargetId: mountTargetId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeBackupPolicy = {
   type t
   type request = {
@@ -734,6 +751,7 @@ module DescribeBackupPolicy = {
   let make = (~fileSystemId, ()) => new({fileSystemId: fileSystemId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteTags = {
   type t
   @ocaml.doc("<p></p>")
@@ -745,9 +763,10 @@ module DeleteTags = {
   }
   type response = {.}
   @module("@aws-sdk/client-elasticfilesystem") @new external new: request => t = "DeleteTagsCommand"
-  let make = (~tagKeys, ~fileSystemId, ()) => new({tagKeys, fileSystemId})
+  let make = (~tagKeys, ~fileSystemId, ()) => new({tagKeys: tagKeys, fileSystemId: fileSystemId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module CreateMountTarget = {
   type t
   @ocaml.doc("<p></p>")
@@ -771,9 +790,15 @@ module CreateMountTarget = {
   @module("@aws-sdk/client-elasticfilesystem") @new
   external new: request => t = "CreateMountTargetCommand"
   let make = (~subnetId, ~fileSystemId, ~securityGroups=?, ~ipAddress=?, ()) =>
-    new({securityGroups, ipAddress, subnetId, fileSystemId})
+    new({
+      securityGroups: securityGroups,
+      ipAddress: ipAddress,
+      subnetId: subnetId,
+      fileSystemId: fileSystemId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateFileSystem = {
   type t
   type request = {
@@ -796,9 +821,14 @@ module UpdateFileSystem = {
   @module("@aws-sdk/client-elasticfilesystem") @new
   external new: request => t = "UpdateFileSystemCommand"
   let make = (~fileSystemId, ~provisionedThroughputInMibps=?, ~throughputMode=?, ()) =>
-    new({provisionedThroughputInMibps, throughputMode, fileSystemId})
+    new({
+      provisionedThroughputInMibps: provisionedThroughputInMibps,
+      throughputMode: throughputMode,
+      fileSystemId: fileSystemId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module TagResource = {
   type t
   type request = {
@@ -813,9 +843,10 @@ module TagResource = {
   type response = {.}
   @module("@aws-sdk/client-elasticfilesystem") @new
   external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceId, ()) => new({tags, resourceId})
+  let make = (~tags, ~resourceId, ()) => new({tags: tags, resourceId: resourceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module PutLifecycleConfiguration = {
   type t
   type request = {
@@ -852,9 +883,11 @@ module PutLifecycleConfiguration = {
   }
   @module("@aws-sdk/client-elasticfilesystem") @new
   external new: request => t = "PutLifecycleConfigurationCommand"
-  let make = (~lifecyclePolicies, ~fileSystemId, ()) => new({lifecyclePolicies, fileSystemId})
+  let make = (~lifecyclePolicies, ~fileSystemId, ()) =>
+    new({lifecyclePolicies: lifecyclePolicies, fileSystemId: fileSystemId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module PutAccountPreferences = {
   type t
   type request = {
@@ -875,6 +908,7 @@ module PutAccountPreferences = {
   let make = (~resourceIdType, ()) => new({resourceIdType: resourceIdType})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListTagsForResource = {
   type t
   type request = {
@@ -905,9 +939,10 @@ module ListTagsForResource = {
   @module("@aws-sdk/client-elasticfilesystem") @new
   external new: request => t = "ListTagsForResourceCommand"
   let make = (~resourceId, ~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken, maxResults, resourceId})
+    new({nextToken: nextToken, maxResults: maxResults, resourceId: resourceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeTags = {
   type t
   @ocaml.doc("<p></p>")
@@ -944,9 +979,11 @@ module DescribeTags = {
   }
   @module("@aws-sdk/client-elasticfilesystem") @new
   external new: request => t = "DescribeTagsCommand"
-  let make = (~fileSystemId, ~marker=?, ~maxItems=?, ()) => new({fileSystemId, marker, maxItems})
+  let make = (~fileSystemId, ~marker=?, ~maxItems=?, ()) =>
+    new({fileSystemId: fileSystemId, marker: marker, maxItems: maxItems})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeMountTargets = {
   type t
   @ocaml.doc("<p></p>")
@@ -993,9 +1030,16 @@ module DescribeMountTargets = {
   @module("@aws-sdk/client-elasticfilesystem") @new
   external new: request => t = "DescribeMountTargetsCommand"
   let make = (~accessPointId=?, ~mountTargetId=?, ~fileSystemId=?, ~marker=?, ~maxItems=?, ()) =>
-    new({accessPointId, mountTargetId, fileSystemId, marker, maxItems})
+    new({
+      accessPointId: accessPointId,
+      mountTargetId: mountTargetId,
+      fileSystemId: fileSystemId,
+      marker: marker,
+      maxItems: maxItems,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeLifecycleConfiguration = {
   type t
   type request = {
@@ -1015,6 +1059,7 @@ module DescribeLifecycleConfiguration = {
   let make = (~fileSystemId, ()) => new({fileSystemId: fileSystemId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeAccountPreferences = {
   type t
   type request = {
@@ -1041,9 +1086,11 @@ module DescribeAccountPreferences = {
   }
   @module("@aws-sdk/client-elasticfilesystem") @new
   external new: request => t = "DescribeAccountPreferencesCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateTags = {
   type t
   @ocaml.doc("<p></p>")
@@ -1059,9 +1106,10 @@ module CreateTags = {
   }
   type response = {.}
   @module("@aws-sdk/client-elasticfilesystem") @new external new: request => t = "CreateTagsCommand"
-  let make = (~tags, ~fileSystemId, ()) => new({tags, fileSystemId})
+  let make = (~tags, ~fileSystemId, ()) => new({tags: tags, fileSystemId: fileSystemId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module CreateReplicationConfiguration = {
   type t
   type request = {
@@ -1078,9 +1126,11 @@ module CreateReplicationConfiguration = {
   type response = replicationConfigurationDescription
   @module("@aws-sdk/client-elasticfilesystem") @new
   external new: request => t = "CreateReplicationConfigurationCommand"
-  let make = (~destinations, ~sourceFileSystemId, ()) => new({destinations, sourceFileSystemId})
+  let make = (~destinations, ~sourceFileSystemId, ()) =>
+    new({destinations: destinations, sourceFileSystemId: sourceFileSystemId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateFileSystem = {
   type t
   type request = {
@@ -1199,18 +1249,19 @@ module CreateFileSystem = {
     (),
   ) =>
     new({
-      tags,
-      backup,
-      availabilityZoneName,
-      provisionedThroughputInMibps,
-      throughputMode,
-      kmsKeyId,
-      encrypted,
-      performanceMode,
-      creationToken,
+      tags: tags,
+      backup: backup,
+      availabilityZoneName: availabilityZoneName,
+      provisionedThroughputInMibps: provisionedThroughputInMibps,
+      throughputMode: throughputMode,
+      kmsKeyId: kmsKeyId,
+      encrypted: encrypted,
+      performanceMode: performanceMode,
+      creationToken: creationToken,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateAccessPoint = {
   type t
   type request = {
@@ -1246,9 +1297,16 @@ module CreateAccessPoint = {
   @module("@aws-sdk/client-elasticfilesystem") @new
   external new: request => t = "CreateAccessPointCommand"
   let make = (~fileSystemId, ~clientToken, ~rootDirectory=?, ~posixUser=?, ~tags=?, ()) =>
-    new({rootDirectory, posixUser, fileSystemId, tags, clientToken})
+    new({
+      rootDirectory: rootDirectory,
+      posixUser: posixUser,
+      fileSystemId: fileSystemId,
+      tags: tags,
+      clientToken: clientToken,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeReplicationConfigurations = {
   type t
   type request = {
@@ -1278,9 +1336,10 @@ module DescribeReplicationConfigurations = {
   @module("@aws-sdk/client-elasticfilesystem") @new
   external new: request => t = "DescribeReplicationConfigurationsCommand"
   let make = (~maxResults=?, ~nextToken=?, ~fileSystemId=?, ()) =>
-    new({maxResults, nextToken, fileSystemId})
+    new({maxResults: maxResults, nextToken: nextToken, fileSystemId: fileSystemId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeFileSystems = {
   type t
   @ocaml.doc("<p></p>")
@@ -1317,9 +1376,15 @@ module DescribeFileSystems = {
   @module("@aws-sdk/client-elasticfilesystem") @new
   external new: request => t = "DescribeFileSystemsCommand"
   let make = (~fileSystemId=?, ~creationToken=?, ~marker=?, ~maxItems=?, ()) =>
-    new({fileSystemId, creationToken, marker, maxItems})
+    new({
+      fileSystemId: fileSystemId,
+      creationToken: creationToken,
+      marker: marker,
+      maxItems: maxItems,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeAccessPoints = {
   type t
   type request = {
@@ -1355,6 +1420,11 @@ module DescribeAccessPoints = {
   @module("@aws-sdk/client-elasticfilesystem") @new
   external new: request => t = "DescribeAccessPointsCommand"
   let make = (~fileSystemId=?, ~accessPointId=?, ~nextToken=?, ~maxResults=?, ()) =>
-    new({fileSystemId, accessPointId, nextToken, maxResults})
+    new({
+      fileSystemId: fileSystemId,
+      accessPointId: accessPointId,
+      nextToken: nextToken,
+      maxResults: maxResults,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

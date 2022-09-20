@@ -742,9 +742,14 @@ module UpdateAssessmentTarget = {
   @module("@aws-sdk/client-inspector") @new
   external new: request => t = "UpdateAssessmentTargetCommand"
   let make = (~assessmentTargetName, ~assessmentTargetArn, ~resourceGroupArn=?, ()) =>
-    new({resourceGroupArn, assessmentTargetName, assessmentTargetArn})
+    new({
+      resourceGroupArn: resourceGroupArn,
+      assessmentTargetName: assessmentTargetName,
+      assessmentTargetArn: assessmentTargetArn,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UnsubscribeFromEvent = {
   type t
   type request = {
@@ -759,9 +764,11 @@ module UnsubscribeFromEvent = {
   type response = {.}
   @module("@aws-sdk/client-inspector") @new
   external new: request => t = "UnsubscribeFromEventCommand"
-  let make = (~topicArn, ~event, ~resourceArn, ()) => new({topicArn, event, resourceArn})
+  let make = (~topicArn, ~event, ~resourceArn, ()) =>
+    new({topicArn: topicArn, event: event, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module SubscribeToEvent = {
   type t
   type request = {
@@ -775,9 +782,11 @@ module SubscribeToEvent = {
   }
   type response = {.}
   @module("@aws-sdk/client-inspector") @new external new: request => t = "SubscribeToEventCommand"
-  let make = (~topicArn, ~event, ~resourceArn, ()) => new({topicArn, event, resourceArn})
+  let make = (~topicArn, ~event, ~resourceArn, ()) =>
+    new({topicArn: topicArn, event: event, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module StopAssessmentRun = {
   type t
   type request = {
@@ -790,9 +799,11 @@ module StopAssessmentRun = {
   }
   type response = {.}
   @module("@aws-sdk/client-inspector") @new external new: request => t = "StopAssessmentRunCommand"
-  let make = (~assessmentRunArn, ~stopAction=?, ()) => new({stopAction, assessmentRunArn})
+  let make = (~assessmentRunArn, ~stopAction=?, ()) =>
+    new({stopAction: stopAction, assessmentRunArn: assessmentRunArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module RegisterCrossAccountAccessRole = {
   type t
   type request = {
@@ -806,6 +817,7 @@ module RegisterCrossAccountAccessRole = {
   let make = (~roleArn, ()) => new({roleArn: roleArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DescribeCrossAccountAccessRole = {
   type t
   type request = {.}
@@ -824,6 +836,7 @@ module DescribeCrossAccountAccessRole = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateExclusionsPreview = {
   type t
   type request = {
@@ -842,6 +855,7 @@ module CreateExclusionsPreview = {
   let make = (~assessmentTemplateArn, ()) => new({assessmentTemplateArn: assessmentTemplateArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateAssessmentTarget = {
   type t
   type request = {
@@ -860,9 +874,10 @@ module CreateAssessmentTarget = {
   @module("@aws-sdk/client-inspector") @new
   external new: request => t = "CreateAssessmentTargetCommand"
   let make = (~assessmentTargetName, ~resourceGroupArn=?, ()) =>
-    new({resourceGroupArn, assessmentTargetName})
+    new({resourceGroupArn: resourceGroupArn, assessmentTargetName: assessmentTargetName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListRulesPackages = {
   type t
   type request = {
@@ -885,9 +900,11 @@ module ListRulesPackages = {
     rulesPackageArns: listReturnedArnList,
   }
   @module("@aws-sdk/client-inspector") @new external new: request => t = "ListRulesPackagesCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListExclusions = {
   type t
   type request = {
@@ -914,9 +931,10 @@ module ListExclusions = {
   }
   @module("@aws-sdk/client-inspector") @new external new: request => t = "ListExclusionsCommand"
   let make = (~assessmentRunArn, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults, nextToken, assessmentRunArn})
+    new({maxResults: maxResults, nextToken: nextToken, assessmentRunArn: assessmentRunArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListAssessmentTargets = {
   type t
   type request = {
@@ -947,9 +965,11 @@ module ListAssessmentTargets = {
   }
   @module("@aws-sdk/client-inspector") @new
   external new: request => t = "ListAssessmentTargetsCommand"
-  let make = (~maxResults=?, ~nextToken=?, ~filter=?, ()) => new({maxResults, nextToken, filter})
+  let make = (~maxResults=?, ~nextToken=?, ~filter=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken, filter: filter})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetAssessmentReport = {
   type t
   type request = {
@@ -974,9 +994,14 @@ module GetAssessmentReport = {
   @module("@aws-sdk/client-inspector") @new
   external new: request => t = "GetAssessmentReportCommand"
   let make = (~reportType, ~reportFileFormat, ~assessmentRunArn, ()) =>
-    new({reportType, reportFileFormat, assessmentRunArn})
+    new({
+      reportType: reportType,
+      reportFileFormat: reportFileFormat,
+      assessmentRunArn: assessmentRunArn,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteAssessmentTemplate = {
   type t
   type request = {
@@ -989,6 +1014,7 @@ module DeleteAssessmentTemplate = {
   let make = (~assessmentTemplateArn, ()) => new({assessmentTemplateArn: assessmentTemplateArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteAssessmentTarget = {
   type t
   type request = {
@@ -1001,6 +1027,7 @@ module DeleteAssessmentTarget = {
   let make = (~assessmentTargetArn, ()) => new({assessmentTargetArn: assessmentTargetArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteAssessmentRun = {
   type t
   type request = {
@@ -1013,6 +1040,7 @@ module DeleteAssessmentRun = {
   let make = (~assessmentRunArn, ()) => new({assessmentRunArn: assessmentRunArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module StartAssessmentRun = {
   type t
   type request = {
@@ -1028,9 +1056,10 @@ module StartAssessmentRun = {
   }
   @module("@aws-sdk/client-inspector") @new external new: request => t = "StartAssessmentRunCommand"
   let make = (~assessmentTemplateArn, ~assessmentRunName=?, ()) =>
-    new({assessmentRunName, assessmentTemplateArn})
+    new({assessmentRunName: assessmentRunName, assessmentTemplateArn: assessmentTemplateArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module SetTagsForResource = {
   type t
   type request = {
@@ -1042,9 +1071,10 @@ module SetTagsForResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-inspector") @new external new: request => t = "SetTagsForResourceCommand"
-  let make = (~resourceArn, ~tags=?, ()) => new({tags, resourceArn})
+  let make = (~resourceArn, ~tags=?, ()) => new({tags: tags, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module RemoveAttributesFromFindings = {
   type t
   type request = {
@@ -1061,9 +1091,11 @@ module RemoveAttributesFromFindings = {
   }
   @module("@aws-sdk/client-inspector") @new
   external new: request => t = "RemoveAttributesFromFindingsCommand"
-  let make = (~attributeKeys, ~findingArns, ()) => new({attributeKeys, findingArns})
+  let make = (~attributeKeys, ~findingArns, ()) =>
+    new({attributeKeys: attributeKeys, findingArns: findingArns})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module PreviewAgents = {
   type t
   type request = {
@@ -1088,9 +1120,10 @@ module PreviewAgents = {
   }
   @module("@aws-sdk/client-inspector") @new external new: request => t = "PreviewAgentsCommand"
   let make = (~previewAgentsArn, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults, nextToken, previewAgentsArn})
+    new({maxResults: maxResults, nextToken: nextToken, previewAgentsArn: previewAgentsArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListTagsForResource = {
   type t
   type request = {
@@ -1103,6 +1136,7 @@ module ListTagsForResource = {
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListAssessmentTemplates = {
   type t
   type request = {
@@ -1137,9 +1171,15 @@ module ListAssessmentTemplates = {
   @module("@aws-sdk/client-inspector") @new
   external new: request => t = "ListAssessmentTemplatesCommand"
   let make = (~maxResults=?, ~nextToken=?, ~filter=?, ~assessmentTargetArns=?, ()) =>
-    new({maxResults, nextToken, filter, assessmentTargetArns})
+    new({
+      maxResults: maxResults,
+      nextToken: nextToken,
+      filter: filter,
+      assessmentTargetArns: assessmentTargetArns,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListAssessmentRuns = {
   type t
   type request = {
@@ -1173,9 +1213,15 @@ module ListAssessmentRuns = {
   }
   @module("@aws-sdk/client-inspector") @new external new: request => t = "ListAssessmentRunsCommand"
   let make = (~maxResults=?, ~nextToken=?, ~filter=?, ~assessmentTemplateArns=?, ()) =>
-    new({maxResults, nextToken, filter, assessmentTemplateArns})
+    new({
+      maxResults: maxResults,
+      nextToken: nextToken,
+      filter: filter,
+      assessmentTemplateArns: assessmentTemplateArns,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetTelemetryMetadata = {
   type t
   type request = {
@@ -1189,6 +1235,7 @@ module GetTelemetryMetadata = {
   let make = (~assessmentRunArn, ()) => new({assessmentRunArn: assessmentRunArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeRulesPackages = {
   type t
   type request = {
@@ -1205,9 +1252,11 @@ module DescribeRulesPackages = {
   }
   @module("@aws-sdk/client-inspector") @new
   external new: request => t = "DescribeRulesPackagesCommand"
-  let make = (~rulesPackageArns, ~locale=?, ()) => new({locale, rulesPackageArns})
+  let make = (~rulesPackageArns, ~locale=?, ()) =>
+    new({locale: locale, rulesPackageArns: rulesPackageArns})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeAssessmentTargets = {
   type t
   type request = {
@@ -1226,6 +1275,7 @@ module DescribeAssessmentTargets = {
   let make = (~assessmentTargetArns, ()) => new({assessmentTargetArns: assessmentTargetArns})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateResourceGroup = {
   type t
   type request = {
@@ -1243,6 +1293,7 @@ module CreateResourceGroup = {
   let make = (~resourceGroupTags, ()) => new({resourceGroupTags: resourceGroupTags})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateAssessmentTemplate = {
   type t
   type request = {
@@ -1280,14 +1331,15 @@ module CreateAssessmentTemplate = {
     (),
   ) =>
     new({
-      userAttributesForFindings,
-      rulesPackageArns,
-      durationInSeconds,
-      assessmentTemplateName,
-      assessmentTargetArn,
+      userAttributesForFindings: userAttributesForFindings,
+      rulesPackageArns: rulesPackageArns,
+      durationInSeconds: durationInSeconds,
+      assessmentTemplateName: assessmentTemplateName,
+      assessmentTargetArn: assessmentTargetArn,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module AddAttributesToFindings = {
   type t
   type request = {
@@ -1303,9 +1355,11 @@ module AddAttributesToFindings = {
   }
   @module("@aws-sdk/client-inspector") @new
   external new: request => t = "AddAttributesToFindingsCommand"
-  let make = (~attributes, ~findingArns, ()) => new({attributes, findingArns})
+  let make = (~attributes, ~findingArns, ()) =>
+    new({attributes: attributes, findingArns: findingArns})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListFindings = {
   type t
   type request = {
@@ -1338,9 +1392,15 @@ module ListFindings = {
   }
   @module("@aws-sdk/client-inspector") @new external new: request => t = "ListFindingsCommand"
   let make = (~maxResults=?, ~nextToken=?, ~filter=?, ~assessmentRunArns=?, ()) =>
-    new({maxResults, nextToken, filter, assessmentRunArns})
+    new({
+      maxResults: maxResults,
+      nextToken: nextToken,
+      filter: filter,
+      assessmentRunArns: assessmentRunArns,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListEventSubscriptions = {
   type t
   type request = {
@@ -1368,9 +1428,10 @@ module ListEventSubscriptions = {
   @module("@aws-sdk/client-inspector") @new
   external new: request => t = "ListEventSubscriptionsCommand"
   let make = (~maxResults=?, ~nextToken=?, ~resourceArn=?, ()) =>
-    new({maxResults, nextToken, resourceArn})
+    new({maxResults: maxResults, nextToken: nextToken, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListAssessmentRunAgents = {
   type t
   type request = {
@@ -1403,9 +1464,15 @@ module ListAssessmentRunAgents = {
   @module("@aws-sdk/client-inspector") @new
   external new: request => t = "ListAssessmentRunAgentsCommand"
   let make = (~assessmentRunArn, ~maxResults=?, ~nextToken=?, ~filter=?, ()) =>
-    new({maxResults, nextToken, filter, assessmentRunArn})
+    new({
+      maxResults: maxResults,
+      nextToken: nextToken,
+      filter: filter,
+      assessmentRunArn: assessmentRunArn,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetExclusionsPreview = {
   type t
   type request = {
@@ -1440,9 +1507,16 @@ module GetExclusionsPreview = {
   @module("@aws-sdk/client-inspector") @new
   external new: request => t = "GetExclusionsPreviewCommand"
   let make = (~previewToken, ~assessmentTemplateArn, ~locale=?, ~maxResults=?, ~nextToken=?, ()) =>
-    new({locale, maxResults, nextToken, previewToken, assessmentTemplateArn})
+    new({
+      locale: locale,
+      maxResults: maxResults,
+      nextToken: nextToken,
+      previewToken: previewToken,
+      assessmentTemplateArn: assessmentTemplateArn,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeResourceGroups = {
   type t
   type request = {
@@ -1460,6 +1534,7 @@ module DescribeResourceGroups = {
   let make = (~resourceGroupArns, ()) => new({resourceGroupArns: resourceGroupArns})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeExclusions = {
   type t
   type request = {
@@ -1476,9 +1551,10 @@ module DescribeExclusions = {
     @ocaml.doc("<p>Information about the exclusions.</p>") exclusions: exclusionMap,
   }
   @module("@aws-sdk/client-inspector") @new external new: request => t = "DescribeExclusionsCommand"
-  let make = (~exclusionArns, ~locale=?, ()) => new({locale, exclusionArns})
+  let make = (~exclusionArns, ~locale=?, ()) => new({locale: locale, exclusionArns: exclusionArns})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeAssessmentTemplates = {
   type t
   type request = {assessmentTemplateArns: batchDescribeArnList}
@@ -1494,6 +1570,7 @@ module DescribeAssessmentTemplates = {
   let make = (~assessmentTemplateArns, ()) => new({assessmentTemplateArns: assessmentTemplateArns})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeAssessmentRuns = {
   type t
   type request = {
@@ -1511,6 +1588,7 @@ module DescribeAssessmentRuns = {
   let make = (~assessmentRunArns, ()) => new({assessmentRunArns: assessmentRunArns})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeFindings = {
   type t
   type request = {
@@ -1527,6 +1605,6 @@ module DescribeFindings = {
     @ocaml.doc("<p>Information about the finding.</p>") findings: findingList,
   }
   @module("@aws-sdk/client-inspector") @new external new: request => t = "DescribeFindingsCommand"
-  let make = (~findingArns, ~locale=?, ()) => new({locale, findingArns})
+  let make = (~findingArns, ~locale=?, ()) => new({locale: locale, findingArns: findingArns})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

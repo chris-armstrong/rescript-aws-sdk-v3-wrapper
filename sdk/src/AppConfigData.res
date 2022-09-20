@@ -147,13 +147,14 @@ module StartConfigurationSession = {
     (),
   ) =>
     new({
-      requiredMinimumPollIntervalInSeconds,
-      configurationProfileIdentifier,
-      environmentIdentifier,
-      applicationIdentifier,
+      requiredMinimumPollIntervalInSeconds: requiredMinimumPollIntervalInSeconds,
+      configurationProfileIdentifier: configurationProfileIdentifier,
+      environmentIdentifier: environmentIdentifier,
+      applicationIdentifier: applicationIdentifier,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetLatestConfiguration = {
   type t
   type request = {

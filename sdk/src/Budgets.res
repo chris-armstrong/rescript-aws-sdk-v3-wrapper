@@ -661,9 +661,15 @@ module ExecuteBudgetAction = {
   }
   @module("@aws-sdk/client-budgets") @new external new: request => t = "ExecuteBudgetActionCommand"
   let make = (~executionType, ~actionId, ~budgetName, ~accountId, ()) =>
-    new({executionType, actionId, budgetName, accountId})
+    new({
+      executionType: executionType,
+      actionId: actionId,
+      budgetName: budgetName,
+      accountId: accountId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteBudget = {
   type t
   @ocaml.doc("<p> Request of DeleteBudget </p>")
@@ -678,9 +684,10 @@ module DeleteBudget = {
   }
   type response = {.}
   @module("@aws-sdk/client-budgets") @new external new: request => t = "DeleteBudgetCommand"
-  let make = (~budgetName, ~accountId, ()) => new({budgetName, accountId})
+  let make = (~budgetName, ~accountId, ()) => new({budgetName: budgetName, accountId: accountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateSubscriber = {
   type t
   @ocaml.doc("<p> Request of UpdateSubscriber </p>")
@@ -705,9 +712,16 @@ module UpdateSubscriber = {
   type response = {.}
   @module("@aws-sdk/client-budgets") @new external new: request => t = "UpdateSubscriberCommand"
   let make = (~newSubscriber, ~oldSubscriber, ~notification, ~budgetName, ~accountId, ()) =>
-    new({newSubscriber, oldSubscriber, notification, budgetName, accountId})
+    new({
+      newSubscriber: newSubscriber,
+      oldSubscriber: oldSubscriber,
+      notification: notification,
+      budgetName: budgetName,
+      accountId: accountId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateNotification = {
   type t
   @ocaml.doc("<p> Request of UpdateNotification </p>")
@@ -730,9 +744,15 @@ module UpdateNotification = {
   type response = {.}
   @module("@aws-sdk/client-budgets") @new external new: request => t = "UpdateNotificationCommand"
   let make = (~newNotification, ~oldNotification, ~budgetName, ~accountId, ()) =>
-    new({newNotification, oldNotification, budgetName, accountId})
+    new({
+      newNotification: newNotification,
+      oldNotification: oldNotification,
+      budgetName: budgetName,
+      accountId: accountId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteSubscriber = {
   type t
   @ocaml.doc("<p> Request of DeleteSubscriber </p>")
@@ -753,9 +773,15 @@ module DeleteSubscriber = {
   type response = {.}
   @module("@aws-sdk/client-budgets") @new external new: request => t = "DeleteSubscriberCommand"
   let make = (~subscriber, ~notification, ~budgetName, ~accountId, ()) =>
-    new({subscriber, notification, budgetName, accountId})
+    new({
+      subscriber: subscriber,
+      notification: notification,
+      budgetName: budgetName,
+      accountId: accountId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteNotification = {
   type t
   @ocaml.doc("<p> Request of DeleteNotification </p>")
@@ -774,9 +800,10 @@ module DeleteNotification = {
   type response = {.}
   @module("@aws-sdk/client-budgets") @new external new: request => t = "DeleteNotificationCommand"
   let make = (~notification, ~budgetName, ~accountId, ()) =>
-    new({notification, budgetName, accountId})
+    new({notification: notification, budgetName: budgetName, accountId: accountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module CreateSubscriber = {
   type t
   @ocaml.doc("<p> Request of CreateSubscriber </p>")
@@ -801,9 +828,15 @@ module CreateSubscriber = {
   type response = {.}
   @module("@aws-sdk/client-budgets") @new external new: request => t = "CreateSubscriberCommand"
   let make = (~subscriber, ~notification, ~budgetName, ~accountId, ()) =>
-    new({subscriber, notification, budgetName, accountId})
+    new({
+      subscriber: subscriber,
+      notification: notification,
+      budgetName: budgetName,
+      accountId: accountId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DescribeSubscribersForNotification = {
   type t
   @ocaml.doc("<p> Request of DescribeSubscribersForNotification </p>")
@@ -843,9 +876,16 @@ module DescribeSubscribersForNotification = {
   @module("@aws-sdk/client-budgets") @new
   external new: request => t = "DescribeSubscribersForNotificationCommand"
   let make = (~notification, ~budgetName, ~accountId, ~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken, maxResults, notification, budgetName, accountId})
+    new({
+      nextToken: nextToken,
+      maxResults: maxResults,
+      notification: notification,
+      budgetName: budgetName,
+      accountId: accountId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeNotificationsForBudget = {
   type t
   @ocaml.doc("<p> Request of DescribeNotificationsForBudget </p>")
@@ -883,9 +923,15 @@ module DescribeNotificationsForBudget = {
   @module("@aws-sdk/client-budgets") @new
   external new: request => t = "DescribeNotificationsForBudgetCommand"
   let make = (~budgetName, ~accountId, ~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken, maxResults, budgetName, accountId})
+    new({
+      nextToken: nextToken,
+      maxResults: maxResults,
+      budgetName: budgetName,
+      accountId: accountId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateNotification = {
   type t
   @ocaml.doc("<p> Request of CreateNotification </p>")
@@ -911,9 +957,15 @@ module CreateNotification = {
   type response = {.}
   @module("@aws-sdk/client-budgets") @new external new: request => t = "CreateNotificationCommand"
   let make = (~subscribers, ~notification, ~budgetName, ~accountId, ()) =>
-    new({subscribers, notification, budgetName, accountId})
+    new({
+      subscribers: subscribers,
+      notification: notification,
+      budgetName: budgetName,
+      accountId: accountId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateBudget = {
   type t
   @ocaml.doc("<p> Request of UpdateBudget </p>")
@@ -928,9 +980,10 @@ module UpdateBudget = {
   }
   type response = {.}
   @module("@aws-sdk/client-budgets") @new external new: request => t = "UpdateBudgetCommand"
-  let make = (~newBudget, ~accountId, ()) => new({newBudget, accountId})
+  let make = (~newBudget, ~accountId, ()) => new({newBudget: newBudget, accountId: accountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DescribeBudget = {
   type t
   @ocaml.doc("<p> Request of DescribeBudget </p>")
@@ -948,9 +1001,10 @@ module DescribeBudget = {
     @ocaml.doc("<p>The description of the budget.</p>") @as("Budget") budget: option<budget>,
   }
   @module("@aws-sdk/client-budgets") @new external new: request => t = "DescribeBudgetCommand"
-  let make = (~budgetName, ~accountId, ()) => new({budgetName, accountId})
+  let make = (~budgetName, ~accountId, ()) => new({budgetName: budgetName, accountId: accountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateBudgetAction = {
   type t
   type request = {
@@ -999,18 +1053,19 @@ module CreateBudgetAction = {
     (),
   ) =>
     new({
-      subscribers,
-      approvalModel,
-      executionRoleArn,
-      definition,
-      actionThreshold,
-      actionType,
-      notificationType,
-      budgetName,
-      accountId,
+      subscribers: subscribers,
+      approvalModel: approvalModel,
+      executionRoleArn: executionRoleArn,
+      definition: definition,
+      actionThreshold: actionThreshold,
+      actionType: actionType,
+      notificationType: notificationType,
+      budgetName: budgetName,
+      accountId: accountId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateBudgetAction = {
   type t
   type request = {
@@ -1064,18 +1119,19 @@ module UpdateBudgetAction = {
     (),
   ) =>
     new({
-      subscribers,
-      approvalModel,
-      executionRoleArn,
-      definition,
-      actionThreshold,
-      notificationType,
-      actionId,
-      budgetName,
-      accountId,
+      subscribers: subscribers,
+      approvalModel: approvalModel,
+      executionRoleArn: executionRoleArn,
+      definition: definition,
+      actionThreshold: actionThreshold,
+      notificationType: notificationType,
+      actionId: actionId,
+      budgetName: budgetName,
+      accountId: accountId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeBudgets = {
   type t
   @ocaml.doc("<p> Request of DescribeBudgets </p>")
@@ -1107,9 +1163,10 @@ module DescribeBudgets = {
   }
   @module("@aws-sdk/client-budgets") @new external new: request => t = "DescribeBudgetsCommand"
   let make = (~accountId, ~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken, maxResults, accountId})
+    new({nextToken: nextToken, maxResults: maxResults, accountId: accountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeBudgetPerformanceHistory = {
   type t
   type request = {
@@ -1133,9 +1190,16 @@ module DescribeBudgetPerformanceHistory = {
   @module("@aws-sdk/client-budgets") @new
   external new: request => t = "DescribeBudgetPerformanceHistoryCommand"
   let make = (~budgetName, ~accountId, ~nextToken=?, ~maxResults=?, ~timePeriod=?, ()) =>
-    new({nextToken, maxResults, timePeriod, budgetName, accountId})
+    new({
+      nextToken: nextToken,
+      maxResults: maxResults,
+      timePeriod: timePeriod,
+      budgetName: budgetName,
+      accountId: accountId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeBudgetNotificationsForAccount = {
   type t
   type request = {
@@ -1158,9 +1222,10 @@ module DescribeBudgetNotificationsForAccount = {
   @module("@aws-sdk/client-budgets") @new
   external new: request => t = "DescribeBudgetNotificationsForAccountCommand"
   let make = (~accountId, ~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken, maxResults, accountId})
+    new({nextToken: nextToken, maxResults: maxResults, accountId: accountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeBudgetAction = {
   type t
   type request = {
@@ -1182,9 +1247,11 @@ module DescribeBudgetAction = {
     @as("AccountId") accountId: accountId,
   }
   @module("@aws-sdk/client-budgets") @new external new: request => t = "DescribeBudgetActionCommand"
-  let make = (~actionId, ~budgetName, ~accountId, ()) => new({actionId, budgetName, accountId})
+  let make = (~actionId, ~budgetName, ~accountId, ()) =>
+    new({actionId: actionId, budgetName: budgetName, accountId: accountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteBudgetAction = {
   type t
   type request = {
@@ -1202,9 +1269,11 @@ module DeleteBudgetAction = {
     @as("AccountId") accountId: accountId,
   }
   @module("@aws-sdk/client-budgets") @new external new: request => t = "DeleteBudgetActionCommand"
-  let make = (~actionId, ~budgetName, ~accountId, ()) => new({actionId, budgetName, accountId})
+  let make = (~actionId, ~budgetName, ~accountId, ()) =>
+    new({actionId: actionId, budgetName: budgetName, accountId: accountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateBudget = {
   type t
   @ocaml.doc("<p> Request of CreateBudget </p>")
@@ -1222,9 +1291,14 @@ module CreateBudget = {
   type response = {.}
   @module("@aws-sdk/client-budgets") @new external new: request => t = "CreateBudgetCommand"
   let make = (~budget, ~accountId, ~notificationsWithSubscribers=?, ()) =>
-    new({notificationsWithSubscribers, budget, accountId})
+    new({
+      notificationsWithSubscribers: notificationsWithSubscribers,
+      budget: budget,
+      accountId: accountId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DescribeBudgetActionsForBudget = {
   type t
   type request = {
@@ -1244,9 +1318,15 @@ module DescribeBudgetActionsForBudget = {
   @module("@aws-sdk/client-budgets") @new
   external new: request => t = "DescribeBudgetActionsForBudgetCommand"
   let make = (~budgetName, ~accountId, ~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken, maxResults, budgetName, accountId})
+    new({
+      nextToken: nextToken,
+      maxResults: maxResults,
+      budgetName: budgetName,
+      accountId: accountId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeBudgetActionsForAccount = {
   type t
   type request = {
@@ -1265,9 +1345,10 @@ module DescribeBudgetActionsForAccount = {
   @module("@aws-sdk/client-budgets") @new
   external new: request => t = "DescribeBudgetActionsForAccountCommand"
   let make = (~accountId, ~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken, maxResults, accountId})
+    new({nextToken: nextToken, maxResults: maxResults, accountId: accountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeBudgetActionHistories = {
   type t
   type request = {
@@ -1293,6 +1374,13 @@ module DescribeBudgetActionHistories = {
   @module("@aws-sdk/client-budgets") @new
   external new: request => t = "DescribeBudgetActionHistoriesCommand"
   let make = (~actionId, ~budgetName, ~accountId, ~nextToken=?, ~maxResults=?, ~timePeriod=?, ()) =>
-    new({nextToken, maxResults, timePeriod, actionId, budgetName, accountId})
+    new({
+      nextToken: nextToken,
+      maxResults: maxResults,
+      timePeriod: timePeriod,
+      actionId: actionId,
+      budgetName: budgetName,
+      accountId: accountId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

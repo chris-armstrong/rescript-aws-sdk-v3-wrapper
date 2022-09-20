@@ -246,9 +246,10 @@ module Unsubscribe = {
   }
   @module("@aws-sdk/client-codestar-notifications") @new
   external new: request => t = "UnsubscribeCommand"
-  let make = (~targetAddress, ~arn, ()) => new({targetAddress, arn})
+  let make = (~targetAddress, ~arn, ()) => new({targetAddress: targetAddress, arn: arn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteTarget = {
   type t
   type request = {
@@ -265,9 +266,10 @@ module DeleteTarget = {
   @module("@aws-sdk/client-codestar-notifications") @new
   external new: request => t = "DeleteTargetCommand"
   let make = (~targetAddress, ~forceUnsubscribeAll=?, ()) =>
-    new({forceUnsubscribeAll, targetAddress})
+    new({forceUnsubscribeAll: forceUnsubscribeAll, targetAddress: targetAddress})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteNotificationRule = {
   type t
   type request = {
@@ -284,6 +286,7 @@ module DeleteNotificationRule = {
   let make = (~arn, ()) => new({arn: arn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UntagResource = {
   type t
   type request = {
@@ -296,9 +299,10 @@ module UntagResource = {
   type response = {.}
   @module("@aws-sdk/client-codestar-notifications") @new
   external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~arn, ()) => new({tagKeys, arn})
+  let make = (~tagKeys, ~arn, ()) => new({tagKeys: tagKeys, arn: arn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module TagResource = {
   type t
   type request = {
@@ -316,9 +320,10 @@ module TagResource = {
   }
   @module("@aws-sdk/client-codestar-notifications") @new
   external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~arn, ()) => new({tags, arn})
+  let make = (~tags, ~arn, ()) => new({tags: tags, arn: arn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module Subscribe = {
   type t
   type request = {
@@ -342,9 +347,11 @@ module Subscribe = {
   }
   @module("@aws-sdk/client-codestar-notifications") @new
   external new: request => t = "SubscribeCommand"
-  let make = (~target, ~arn, ~clientRequestToken=?, ()) => new({clientRequestToken, target, arn})
+  let make = (~target, ~arn, ~clientRequestToken=?, ()) =>
+    new({clientRequestToken: clientRequestToken, target: target, arn: arn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListTagsForResource = {
   type t
   type request = {
@@ -360,6 +367,7 @@ module ListTagsForResource = {
   let make = (~arn, ()) => new({arn: arn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateNotificationRule = {
   type t
   type request = {
@@ -388,9 +396,17 @@ module UpdateNotificationRule = {
   @module("@aws-sdk/client-codestar-notifications") @new
   external new: request => t = "UpdateNotificationRuleCommand"
   let make = (~arn, ~detailType=?, ~targets=?, ~eventTypeIds=?, ~status=?, ~name=?, ()) =>
-    new({detailType, targets, eventTypeIds, status, name, arn})
+    new({
+      detailType: detailType,
+      targets: targets,
+      eventTypeIds: eventTypeIds,
+      status: status,
+      name: name,
+      arn: arn,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ListTargets = {
   type t
   type request = {
@@ -420,9 +436,11 @@ module ListTargets = {
   }
   @module("@aws-sdk/client-codestar-notifications") @new
   external new: request => t = "ListTargetsCommand"
-  let make = (~maxResults=?, ~nextToken=?, ~filters=?, ()) => new({maxResults, nextToken, filters})
+  let make = (~maxResults=?, ~nextToken=?, ~filters=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken, filters: filters})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListNotificationRules = {
   type t
   type request = {
@@ -456,9 +474,11 @@ module ListNotificationRules = {
   }
   @module("@aws-sdk/client-codestar-notifications") @new
   external new: request => t = "ListNotificationRulesCommand"
-  let make = (~maxResults=?, ~nextToken=?, ~filters=?, ()) => new({maxResults, nextToken, filters})
+  let make = (~maxResults=?, ~nextToken=?, ~filters=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken, filters: filters})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListEventTypes = {
   type t
   type request = {
@@ -487,9 +507,11 @@ module ListEventTypes = {
   }
   @module("@aws-sdk/client-codestar-notifications") @new
   external new: request => t = "ListEventTypesCommand"
-  let make = (~maxResults=?, ~nextToken=?, ~filters=?, ()) => new({maxResults, nextToken, filters})
+  let make = (~maxResults=?, ~nextToken=?, ~filters=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken, filters: filters})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeNotificationRule = {
   type t
   type request = {
@@ -538,6 +560,7 @@ module DescribeNotificationRule = {
   let make = (~arn, ()) => new({arn: arn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateNotificationRule = {
   type t
   type request = {
@@ -598,6 +621,16 @@ module CreateNotificationRule = {
     ~tags=?,
     ~clientRequestToken=?,
     (),
-  ) => new({status, tags, clientRequestToken, detailType, targets, resource, eventTypeIds, name})
+  ) =>
+    new({
+      status: status,
+      tags: tags,
+      clientRequestToken: clientRequestToken,
+      detailType: detailType,
+      targets: targets,
+      resource: resource,
+      eventTypeIds: eventTypeIds,
+      name: name,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

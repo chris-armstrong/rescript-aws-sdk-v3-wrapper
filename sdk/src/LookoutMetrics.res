@@ -600,9 +600,16 @@ module UpdateAnomalyDetector = {
     ~anomalyDetectorDescription=?,
     ~kmsKeyArn=?,
     (),
-  ) => new({anomalyDetectorConfig, anomalyDetectorDescription, kmsKeyArn, anomalyDetectorArn})
+  ) =>
+    new({
+      anomalyDetectorConfig: anomalyDetectorConfig,
+      anomalyDetectorDescription: anomalyDetectorDescription,
+      kmsKeyArn: kmsKeyArn,
+      anomalyDetectorArn: anomalyDetectorArn,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UntagResource = {
   type t
   type request = {
@@ -613,9 +620,10 @@ module UntagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-lookoutmetrics") @new external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys, resourceArn})
+  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module TagResource = {
   type t
   type request = {
@@ -629,9 +637,10 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-lookoutmetrics") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceArn, ()) => new({tags, resourceArn})
+  let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module PutFeedback = {
   type t
   type request = {
@@ -644,9 +653,13 @@ module PutFeedback = {
   type response = {.}
   @module("@aws-sdk/client-lookoutmetrics") @new external new: request => t = "PutFeedbackCommand"
   let make = (~anomalyGroupTimeSeriesFeedback, ~anomalyDetectorArn, ()) =>
-    new({anomalyGroupTimeSeriesFeedback, anomalyDetectorArn})
+    new({
+      anomalyGroupTimeSeriesFeedback: anomalyGroupTimeSeriesFeedback,
+      anomalyDetectorArn: anomalyDetectorArn,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ListTagsForResource = {
   type t
   type request = {
@@ -659,6 +672,7 @@ module ListTagsForResource = {
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListAnomalyGroupRelatedMetrics = {
   type t
   type request = {
@@ -695,9 +709,17 @@ module ListAnomalyGroupRelatedMetrics = {
     ~maxResults=?,
     ~relationshipTypeFilter=?,
     (),
-  ) => new({nextToken, maxResults, relationshipTypeFilter, anomalyGroupId, anomalyDetectorArn})
+  ) =>
+    new({
+      nextToken: nextToken,
+      maxResults: maxResults,
+      relationshipTypeFilter: relationshipTypeFilter,
+      anomalyGroupId: anomalyGroupId,
+      anomalyDetectorArn: anomalyDetectorArn,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetFeedback = {
   type t
   type request = {
@@ -728,9 +750,16 @@ module GetFeedback = {
     ~nextToken=?,
     ~maxResults=?,
     (),
-  ) => new({nextToken, maxResults, anomalyGroupTimeSeriesFeedback, anomalyDetectorArn})
+  ) =>
+    new({
+      nextToken: nextToken,
+      maxResults: maxResults,
+      anomalyGroupTimeSeriesFeedback: anomalyGroupTimeSeriesFeedback,
+      anomalyDetectorArn: anomalyDetectorArn,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeAnomalyDetector = {
   type t
   type request = {
@@ -766,6 +795,7 @@ module DescribeAnomalyDetector = {
   let make = (~anomalyDetectorArn, ()) => new({anomalyDetectorArn: anomalyDetectorArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeAnomalyDetectionExecutions = {
   type t
   type request = {
@@ -792,9 +822,15 @@ module DescribeAnomalyDetectionExecutions = {
   @module("@aws-sdk/client-lookoutmetrics") @new
   external new: request => t = "DescribeAnomalyDetectionExecutionsCommand"
   let make = (~anomalyDetectorArn, ~nextToken=?, ~maxResults=?, ~timestamp_=?, ()) =>
-    new({nextToken, maxResults, timestamp_, anomalyDetectorArn})
+    new({
+      nextToken: nextToken,
+      maxResults: maxResults,
+      timestamp_: timestamp_,
+      anomalyDetectorArn: anomalyDetectorArn,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteAnomalyDetector = {
   type t
   type request = {
@@ -807,6 +843,7 @@ module DeleteAnomalyDetector = {
   let make = (~anomalyDetectorArn, ()) => new({anomalyDetectorArn: anomalyDetectorArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteAlert = {
   type t
   type request = {
@@ -817,6 +854,7 @@ module DeleteAlert = {
   let make = (~alertArn, ()) => new({alertArn: alertArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeactivateAnomalyDetector = {
   type t
   type request = {
@@ -830,6 +868,7 @@ module DeactivateAnomalyDetector = {
   let make = (~anomalyDetectorArn, ()) => new({anomalyDetectorArn: anomalyDetectorArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module CreateAnomalyDetector = {
   type t
   type request = {
@@ -862,9 +901,16 @@ module CreateAnomalyDetector = {
     ~anomalyDetectorDescription=?,
     (),
   ) =>
-    new({tags, kmsKeyArn, anomalyDetectorConfig, anomalyDetectorDescription, anomalyDetectorName})
+    new({
+      tags: tags,
+      kmsKeyArn: kmsKeyArn,
+      anomalyDetectorConfig: anomalyDetectorConfig,
+      anomalyDetectorDescription: anomalyDetectorDescription,
+      anomalyDetectorName: anomalyDetectorName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateAlert = {
   type t
   type request = {
@@ -896,9 +942,17 @@ module CreateAlert = {
     ~alertDescription=?,
     (),
   ) =>
-    new({tags, action, anomalyDetectorArn, alertDescription, alertSensitivityThreshold, alertName})
+    new({
+      tags: tags,
+      action: action,
+      anomalyDetectorArn: anomalyDetectorArn,
+      alertDescription: alertDescription,
+      alertSensitivityThreshold: alertSensitivityThreshold,
+      alertName: alertName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module BackTestAnomalyDetector = {
   type t
   type request = {
@@ -912,6 +966,7 @@ module BackTestAnomalyDetector = {
   let make = (~anomalyDetectorArn, ()) => new({anomalyDetectorArn: anomalyDetectorArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ActivateAnomalyDetector = {
   type t
   type request = {
@@ -924,6 +979,7 @@ module ActivateAnomalyDetector = {
   let make = (~anomalyDetectorArn, ()) => new({anomalyDetectorArn: anomalyDetectorArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ListMetricSets = {
   type t
   type request = {
@@ -952,9 +1008,10 @@ module ListMetricSets = {
   @module("@aws-sdk/client-lookoutmetrics") @new
   external new: request => t = "ListMetricSetsCommand"
   let make = (~nextToken=?, ~maxResults=?, ~anomalyDetectorArn=?, ()) =>
-    new({nextToken, maxResults, anomalyDetectorArn})
+    new({nextToken: nextToken, maxResults: maxResults, anomalyDetectorArn: anomalyDetectorArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListAnomalyGroupSummaries = {
   type t
   type request = {
@@ -984,9 +1041,15 @@ module ListAnomalyGroupSummaries = {
   @module("@aws-sdk/client-lookoutmetrics") @new
   external new: request => t = "ListAnomalyGroupSummariesCommand"
   let make = (~sensitivityThreshold, ~anomalyDetectorArn, ~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken, maxResults, sensitivityThreshold, anomalyDetectorArn})
+    new({
+      nextToken: nextToken,
+      maxResults: maxResults,
+      sensitivityThreshold: sensitivityThreshold,
+      anomalyDetectorArn: anomalyDetectorArn,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListAnomalyDetectors = {
   type t
   type request = {
@@ -1008,9 +1071,11 @@ module ListAnomalyDetectors = {
   }
   @module("@aws-sdk/client-lookoutmetrics") @new
   external new: request => t = "ListAnomalyDetectorsCommand"
-  let make = (~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults})
+  let make = (~nextToken=?, ~maxResults=?, ()) =>
+    new({nextToken: nextToken, maxResults: maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListAlerts = {
   type t
   type request = {
@@ -1034,9 +1099,10 @@ module ListAlerts = {
   }
   @module("@aws-sdk/client-lookoutmetrics") @new external new: request => t = "ListAlertsCommand"
   let make = (~maxResults=?, ~nextToken=?, ~anomalyDetectorArn=?, ()) =>
-    new({maxResults, nextToken, anomalyDetectorArn})
+    new({maxResults: maxResults, nextToken: nextToken, anomalyDetectorArn: anomalyDetectorArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeAlert = {
   type t
   type request = {
@@ -1049,6 +1115,7 @@ module DescribeAlert = {
   let make = (~alertArn, ()) => new({alertArn: alertArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListAnomalyGroupTimeSeries = {
   type t
   type request = {
@@ -1081,9 +1148,16 @@ module ListAnomalyGroupTimeSeries = {
   @module("@aws-sdk/client-lookoutmetrics") @new
   external new: request => t = "ListAnomalyGroupTimeSeriesCommand"
   let make = (~metricName, ~anomalyGroupId, ~anomalyDetectorArn, ~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken, maxResults, metricName, anomalyGroupId, anomalyDetectorArn})
+    new({
+      nextToken: nextToken,
+      maxResults: maxResults,
+      metricName: metricName,
+      anomalyGroupId: anomalyGroupId,
+      anomalyDetectorArn: anomalyDetectorArn,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetSampleData = {
   type t
   type request = {
@@ -1099,6 +1173,7 @@ module GetSampleData = {
   let make = (~s3SourceConfig=?, ()) => new({s3SourceConfig: s3SourceConfig})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateMetricSet = {
   type t
   type request = {
@@ -1136,17 +1211,18 @@ module UpdateMetricSet = {
     (),
   ) =>
     new({
-      metricSource,
-      metricSetFrequency,
-      dimensionList,
-      timestampColumn,
-      offset,
-      metricList,
-      metricSetDescription,
-      metricSetArn,
+      metricSource: metricSource,
+      metricSetFrequency: metricSetFrequency,
+      dimensionList: dimensionList,
+      timestampColumn: timestampColumn,
+      offset: offset,
+      metricList: metricList,
+      metricSetDescription: metricSetDescription,
+      metricSetArn: metricSetArn,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeMetricSet = {
   type t
   type request = {
@@ -1191,6 +1267,7 @@ module DescribeMetricSet = {
   let make = (~metricSetArn, ()) => new({metricSetArn: metricSetArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateMetricSet = {
   type t
   type request = {
@@ -1248,20 +1325,21 @@ module CreateMetricSet = {
     (),
   ) =>
     new({
-      tags,
-      timezone,
-      metricSource,
-      metricSetFrequency,
-      dimensionList,
-      timestampColumn,
-      offset,
-      metricList,
-      metricSetDescription,
-      metricSetName,
-      anomalyDetectorArn,
+      tags: tags,
+      timezone: timezone,
+      metricSource: metricSource,
+      metricSetFrequency: metricSetFrequency,
+      dimensionList: dimensionList,
+      timestampColumn: timestampColumn,
+      offset: offset,
+      metricList: metricList,
+      metricSetDescription: metricSetDescription,
+      metricSetName: metricSetName,
+      anomalyDetectorArn: anomalyDetectorArn,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetAnomalyGroup = {
   type t
   type request = {
@@ -1276,6 +1354,7 @@ module GetAnomalyGroup = {
   }
   @module("@aws-sdk/client-lookoutmetrics") @new
   external new: request => t = "GetAnomalyGroupCommand"
-  let make = (~anomalyDetectorArn, ~anomalyGroupId, ()) => new({anomalyDetectorArn, anomalyGroupId})
+  let make = (~anomalyDetectorArn, ~anomalyGroupId, ()) =>
+    new({anomalyDetectorArn: anomalyDetectorArn, anomalyGroupId: anomalyGroupId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

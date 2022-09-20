@@ -353,6 +353,7 @@ module GetNamespaceDeletionStatus = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DissociateEntityFromThing = {
   type t
   type request = {
@@ -363,9 +364,10 @@ module DissociateEntityFromThing = {
   type response = {.}
   @module("@aws-sdk/client-iotthingsgraph") @new
   external new: request => t = "DissociateEntityFromThingCommand"
-  let make = (~entityType, ~thingName, ()) => new({entityType, thingName})
+  let make = (~entityType, ~thingName, ()) => new({entityType: entityType, thingName: thingName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DescribeNamespace = {
   type t
   type request = {
@@ -391,6 +393,7 @@ module DescribeNamespace = {
   let make = (~namespaceName=?, ()) => new({namespaceName: namespaceName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeprecateSystemTemplate = {
   type t
   type request = {
@@ -407,6 +410,7 @@ module DeprecateSystemTemplate = {
   let make = (~id, ()) => new({id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeprecateFlowTemplate = {
   type t
   type request = {
@@ -423,6 +427,7 @@ module DeprecateFlowTemplate = {
   let make = (~id, ()) => new({id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteSystemTemplate = {
   type t
   type request = {
@@ -439,6 +444,7 @@ module DeleteSystemTemplate = {
   let make = (~id, ()) => new({id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteSystemInstance = {
   type t
   type request = {@ocaml.doc("<p>The ID of the system instance to be deleted.</p>") id: option<urn>}
@@ -448,6 +454,7 @@ module DeleteSystemInstance = {
   let make = (~id=?, ()) => new({id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteNamespace = {
   type t
   type request = {.}
@@ -461,6 +468,7 @@ module DeleteNamespace = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteFlowTemplate = {
   type t
   type request = {
@@ -477,6 +485,7 @@ module DeleteFlowTemplate = {
   let make = (~id, ()) => new({id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module AssociateEntityToThing = {
   type t
   type request = {
@@ -497,9 +506,10 @@ module AssociateEntityToThing = {
   @module("@aws-sdk/client-iotthingsgraph") @new
   external new: request => t = "AssociateEntityToThingCommand"
   let make = (~entityId, ~thingName, ~namespaceVersion=?, ()) =>
-    new({namespaceVersion, entityId, thingName})
+    new({namespaceVersion: namespaceVersion, entityId: entityId, thingName: thingName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UploadEntityDefinitions = {
   type t
   type request = {
@@ -522,9 +532,14 @@ module UploadEntityDefinitions = {
   @module("@aws-sdk/client-iotthingsgraph") @new
   external new: request => t = "UploadEntityDefinitionsCommand"
   let make = (~deprecateExistingEntities=?, ~syncWithPublicNamespace=?, ~document=?, ()) =>
-    new({deprecateExistingEntities, syncWithPublicNamespace, document})
+    new({
+      deprecateExistingEntities: deprecateExistingEntities,
+      syncWithPublicNamespace: syncWithPublicNamespace,
+      document: document,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateSystemTemplate = {
   type t
   type request = {
@@ -549,9 +564,10 @@ module UpdateSystemTemplate = {
   @module("@aws-sdk/client-iotthingsgraph") @new
   external new: request => t = "UpdateSystemTemplateCommand"
   let make = (~definition, ~id, ~compatibleNamespaceVersion=?, ()) =>
-    new({compatibleNamespaceVersion, definition, id})
+    new({compatibleNamespaceVersion: compatibleNamespaceVersion, definition: definition, id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateFlowTemplate = {
   type t
   type request = {
@@ -577,9 +593,10 @@ module UpdateFlowTemplate = {
   @module("@aws-sdk/client-iotthingsgraph") @new
   external new: request => t = "UpdateFlowTemplateCommand"
   let make = (~definition, ~id, ~compatibleNamespaceVersion=?, ()) =>
-    new({compatibleNamespaceVersion, definition, id})
+    new({compatibleNamespaceVersion: compatibleNamespaceVersion, definition: definition, id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UntagResource = {
   type t
   type request = {
@@ -593,9 +610,10 @@ module UntagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-iotthingsgraph") @new external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys, resourceArn})
+  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UndeploySystemInstance = {
   type t
   type request = {
@@ -612,6 +630,7 @@ module UndeploySystemInstance = {
   let make = (~id=?, ()) => new({id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetUploadStatus = {
   type t
   type request = {
@@ -640,6 +659,7 @@ module GetUploadStatus = {
   let make = (~uploadId, ()) => new({uploadId: uploadId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeploySystemInstance = {
   type t
   type request = {
@@ -663,6 +683,7 @@ module DeploySystemInstance = {
   let make = (~id=?, ()) => new({id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateSystemTemplate = {
   type t
   type request = {
@@ -679,9 +700,10 @@ module CreateSystemTemplate = {
   @module("@aws-sdk/client-iotthingsgraph") @new
   external new: request => t = "CreateSystemTemplateCommand"
   let make = (~definition, ~compatibleNamespaceVersion=?, ()) =>
-    new({compatibleNamespaceVersion, definition})
+    new({compatibleNamespaceVersion: compatibleNamespaceVersion, definition: definition})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateFlowTemplate = {
   type t
   type request = {
@@ -698,9 +720,10 @@ module CreateFlowTemplate = {
   @module("@aws-sdk/client-iotthingsgraph") @new
   external new: request => t = "CreateFlowTemplateCommand"
   let make = (~definition, ~compatibleNamespaceVersion=?, ()) =>
-    new({compatibleNamespaceVersion, definition})
+    new({compatibleNamespaceVersion: compatibleNamespaceVersion, definition: definition})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module TagResource = {
   type t
   type request = {
@@ -710,9 +733,10 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-iotthingsgraph") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceArn, ()) => new({tags, resourceArn})
+  let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module SearchThings = {
   type t
   type request = {
@@ -742,9 +766,15 @@ module SearchThings = {
   }
   @module("@aws-sdk/client-iotthingsgraph") @new external new: request => t = "SearchThingsCommand"
   let make = (~entityId, ~namespaceVersion=?, ~maxResults=?, ~nextToken=?, ()) =>
-    new({namespaceVersion, maxResults, nextToken, entityId})
+    new({
+      namespaceVersion: namespaceVersion,
+      maxResults: maxResults,
+      nextToken: nextToken,
+      entityId: entityId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module SearchFlowExecutions = {
   type t
   type request = {
@@ -782,9 +812,18 @@ module SearchFlowExecutions = {
     ~startTime=?,
     ~flowExecutionId=?,
     (),
-  ) => new({maxResults, nextToken, endTime, startTime, flowExecutionId, systemInstanceId})
+  ) =>
+    new({
+      maxResults: maxResults,
+      nextToken: nextToken,
+      endTime: endTime,
+      startTime: startTime,
+      flowExecutionId: flowExecutionId,
+      systemInstanceId: systemInstanceId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListTagsForResource = {
   type t
   type request = {
@@ -805,9 +844,10 @@ module ListTagsForResource = {
   @module("@aws-sdk/client-iotthingsgraph") @new
   external new: request => t = "ListTagsForResourceCommand"
   let make = (~resourceArn, ~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken, resourceArn, maxResults})
+    new({nextToken: nextToken, resourceArn: resourceArn, maxResults: maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListFlowExecutionMessages = {
   type t
   type request = {
@@ -832,9 +872,10 @@ module ListFlowExecutionMessages = {
   @module("@aws-sdk/client-iotthingsgraph") @new
   external new: request => t = "ListFlowExecutionMessagesCommand"
   let make = (~flowExecutionId, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults, nextToken, flowExecutionId})
+    new({maxResults: maxResults, nextToken: nextToken, flowExecutionId: flowExecutionId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetSystemTemplateRevisions = {
   type t
   type request = {
@@ -863,9 +904,11 @@ module GetSystemTemplateRevisions = {
   }
   @module("@aws-sdk/client-iotthingsgraph") @new
   external new: request => t = "GetSystemTemplateRevisionsCommand"
-  let make = (~id, ~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken, id})
+  let make = (~id, ~maxResults=?, ~nextToken=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken, id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetSystemTemplate = {
   type t
   type request = {
@@ -884,9 +927,10 @@ module GetSystemTemplate = {
   }
   @module("@aws-sdk/client-iotthingsgraph") @new
   external new: request => t = "GetSystemTemplateCommand"
-  let make = (~id, ~revisionNumber=?, ()) => new({revisionNumber, id})
+  let make = (~id, ~revisionNumber=?, ()) => new({revisionNumber: revisionNumber, id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetFlowTemplateRevisions = {
   type t
   type request = {
@@ -913,9 +957,11 @@ module GetFlowTemplateRevisions = {
   }
   @module("@aws-sdk/client-iotthingsgraph") @new
   external new: request => t = "GetFlowTemplateRevisionsCommand"
-  let make = (~id, ~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken, id})
+  let make = (~id, ~maxResults=?, ~nextToken=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken, id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetFlowTemplate = {
   type t
   type request = {
@@ -934,9 +980,10 @@ module GetFlowTemplate = {
   }
   @module("@aws-sdk/client-iotthingsgraph") @new
   external new: request => t = "GetFlowTemplateCommand"
-  let make = (~id, ~revisionNumber=?, ()) => new({revisionNumber, id})
+  let make = (~id, ~revisionNumber=?, ()) => new({revisionNumber: revisionNumber, id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateSystemInstance = {
   type t
   type request = {
@@ -978,16 +1025,17 @@ module CreateSystemInstance = {
     (),
   ) =>
     new({
-      flowActionsRoleArn,
-      metricsConfiguration,
-      s3BucketName,
-      greengrassGroupName,
-      target,
-      definition,
-      tags,
+      flowActionsRoleArn: flowActionsRoleArn,
+      metricsConfiguration: metricsConfiguration,
+      s3BucketName: s3BucketName,
+      greengrassGroupName: greengrassGroupName,
+      target: target,
+      definition: definition,
+      tags: tags,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module SearchSystemTemplates = {
   type t
   type request = {
@@ -1014,9 +1062,11 @@ module SearchSystemTemplates = {
   }
   @module("@aws-sdk/client-iotthingsgraph") @new
   external new: request => t = "SearchSystemTemplatesCommand"
-  let make = (~maxResults=?, ~nextToken=?, ~filters=?, ()) => new({maxResults, nextToken, filters})
+  let make = (~maxResults=?, ~nextToken=?, ~filters=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken, filters: filters})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module SearchSystemInstances = {
   type t
   type request = {
@@ -1043,9 +1093,11 @@ module SearchSystemInstances = {
   }
   @module("@aws-sdk/client-iotthingsgraph") @new
   external new: request => t = "SearchSystemInstancesCommand"
-  let make = (~maxResults=?, ~nextToken=?, ~filters=?, ()) => new({maxResults, nextToken, filters})
+  let make = (~maxResults=?, ~nextToken=?, ~filters=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken, filters: filters})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module SearchFlowTemplates = {
   type t
   type request = {
@@ -1072,9 +1124,11 @@ module SearchFlowTemplates = {
   }
   @module("@aws-sdk/client-iotthingsgraph") @new
   external new: request => t = "SearchFlowTemplatesCommand"
-  let make = (~maxResults=?, ~nextToken=?, ~filters=?, ()) => new({maxResults, nextToken, filters})
+  let make = (~maxResults=?, ~nextToken=?, ~filters=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken, filters: filters})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module SearchEntities = {
   type t
   type request = {
@@ -1107,9 +1161,16 @@ module SearchEntities = {
   @module("@aws-sdk/client-iotthingsgraph") @new
   external new: request => t = "SearchEntitiesCommand"
   let make = (~entityTypes, ~namespaceVersion=?, ~maxResults=?, ~nextToken=?, ~filters=?, ()) =>
-    new({namespaceVersion, maxResults, nextToken, filters, entityTypes})
+    new({
+      namespaceVersion: namespaceVersion,
+      maxResults: maxResults,
+      nextToken: nextToken,
+      filters: filters,
+      entityTypes: entityTypes,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetSystemInstance = {
   type t
   type request = {
@@ -1129,6 +1190,7 @@ module GetSystemInstance = {
   let make = (~id, ()) => new({id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetEntities = {
   type t
   type request = {
@@ -1148,6 +1210,6 @@ module GetEntities = {
     descriptions: option<entityDescriptions>,
   }
   @module("@aws-sdk/client-iotthingsgraph") @new external new: request => t = "GetEntitiesCommand"
-  let make = (~ids, ~namespaceVersion=?, ()) => new({namespaceVersion, ids})
+  let make = (~ids, ~namespaceVersion=?, ()) => new({namespaceVersion: namespaceVersion, ids: ids})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

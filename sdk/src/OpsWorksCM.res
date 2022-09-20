@@ -555,6 +555,7 @@ module DeleteServer = {
   let make = (~serverName, ()) => new({serverName: serverName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteBackup = {
   type t
   type request = {
@@ -569,6 +570,7 @@ module DeleteBackup = {
   let make = (~backupId, ()) => new({backupId: backupId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UntagResource = {
   type t
   type request = {
@@ -581,9 +583,10 @@ module UntagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-opsworks-cm") @new external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys, resourceArn})
+  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module TagResource = {
   type t
   type request = {
@@ -616,9 +619,10 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-opsworks-cm") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceArn, ()) => new({tags, resourceArn})
+  let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ListTagsForResource = {
   type t
   type request = {
@@ -654,9 +658,10 @@ module ListTagsForResource = {
   @module("@aws-sdk/client-opsworks-cm") @new
   external new: request => t = "ListTagsForResourceCommand"
   let make = (~resourceArn, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults, nextToken, resourceArn})
+    new({maxResults: maxResults, nextToken: nextToken, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ExportServerEngineAttribute = {
   type t
   type request = {
@@ -706,9 +711,14 @@ module ExportServerEngineAttribute = {
   @module("@aws-sdk/client-opsworks-cm") @new
   external new: request => t = "ExportServerEngineAttributeCommand"
   let make = (~serverName, ~exportAttributeName, ~inputAttributes=?, ()) =>
-    new({inputAttributes, serverName, exportAttributeName})
+    new({
+      inputAttributes: inputAttributes,
+      serverName: serverName,
+      exportAttributeName: exportAttributeName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DisassociateNode = {
   type t
   type request = {
@@ -747,9 +757,10 @@ module DisassociateNode = {
   }
   @module("@aws-sdk/client-opsworks-cm") @new external new: request => t = "DisassociateNodeCommand"
   let make = (~nodeName, ~serverName, ~engineAttributes=?, ()) =>
-    new({engineAttributes, nodeName, serverName})
+    new({engineAttributes: engineAttributes, nodeName: nodeName, serverName: serverName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeNodeAssociationStatus = {
   type t
   type request = {
@@ -796,9 +807,10 @@ module DescribeNodeAssociationStatus = {
   @module("@aws-sdk/client-opsworks-cm") @new
   external new: request => t = "DescribeNodeAssociationStatusCommand"
   let make = (~serverName, ~nodeAssociationStatusToken, ()) =>
-    new({serverName, nodeAssociationStatusToken})
+    new({serverName: serverName, nodeAssociationStatusToken: nodeAssociationStatusToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeEvents = {
   type t
   type request = {
@@ -840,9 +852,10 @@ module DescribeEvents = {
   }
   @module("@aws-sdk/client-opsworks-cm") @new external new: request => t = "DescribeEventsCommand"
   let make = (~serverName, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults, nextToken, serverName})
+    new({maxResults: maxResults, nextToken: nextToken, serverName: serverName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeAccountAttributes = {
   type t
   type request = {.}
@@ -858,6 +871,7 @@ module DescribeAccountAttributes = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateBackup = {
   type t
   type request = {
@@ -897,9 +911,11 @@ module CreateBackup = {
     @ocaml.doc("<p>Backup created by request.</p>") @as("Backup") backup: option<backup>,
   }
   @module("@aws-sdk/client-opsworks-cm") @new external new: request => t = "CreateBackupCommand"
-  let make = (~serverName, ~tags=?, ~description=?, ()) => new({tags, description, serverName})
+  let make = (~serverName, ~tags=?, ~description=?, ()) =>
+    new({tags: tags, description: description, serverName: serverName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module AssociateNode = {
   type t
   type request = {
@@ -951,9 +967,10 @@ module AssociateNode = {
   }
   @module("@aws-sdk/client-opsworks-cm") @new external new: request => t = "AssociateNodeCommand"
   let make = (~engineAttributes, ~nodeName, ~serverName, ()) =>
-    new({engineAttributes, nodeName, serverName})
+    new({engineAttributes: engineAttributes, nodeName: nodeName, serverName: serverName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateServerEngineAttributes = {
   type t
   type request = {
@@ -979,9 +996,10 @@ module UpdateServerEngineAttributes = {
   @module("@aws-sdk/client-opsworks-cm") @new
   external new: request => t = "UpdateServerEngineAttributesCommand"
   let make = (~attributeName, ~serverName, ~attributeValue=?, ()) =>
-    new({attributeValue, attributeName, serverName})
+    new({attributeValue: attributeValue, attributeName: attributeName, serverName: serverName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateServer = {
   type t
   type request = {
@@ -1016,14 +1034,15 @@ module UpdateServer = {
     (),
   ) =>
     new({
-      preferredBackupWindow,
-      preferredMaintenanceWindow,
-      serverName,
-      backupRetentionCount,
-      disableAutomatedBackup,
+      preferredBackupWindow: preferredBackupWindow,
+      preferredMaintenanceWindow: preferredMaintenanceWindow,
+      serverName: serverName,
+      backupRetentionCount: backupRetentionCount,
+      disableAutomatedBackup: disableAutomatedBackup,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module StartMaintenance = {
   type t
   type request = {
@@ -1054,9 +1073,11 @@ module StartMaintenance = {
     server: option<server>,
   }
   @module("@aws-sdk/client-opsworks-cm") @new external new: request => t = "StartMaintenanceCommand"
-  let make = (~serverName, ~engineAttributes=?, ()) => new({engineAttributes, serverName})
+  let make = (~serverName, ~engineAttributes=?, ()) =>
+    new({engineAttributes: engineAttributes, serverName: serverName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module RestoreServer = {
   type t
   type request = {
@@ -1083,9 +1104,10 @@ module RestoreServer = {
   type response = {@as("Server") server: option<server>}
   @module("@aws-sdk/client-opsworks-cm") @new external new: request => t = "RestoreServerCommand"
   let make = (~serverName, ~backupId, ~keyPair=?, ~instanceType=?, ()) =>
-    new({keyPair, instanceType, serverName, backupId})
+    new({keyPair: keyPair, instanceType: instanceType, serverName: serverName, backupId: backupId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeBackups = {
   type t
   type request = {
@@ -1121,9 +1143,10 @@ module DescribeBackups = {
   }
   @module("@aws-sdk/client-opsworks-cm") @new external new: request => t = "DescribeBackupsCommand"
   let make = (~maxResults=?, ~nextToken=?, ~serverName=?, ~backupId=?, ()) =>
-    new({maxResults, nextToken, serverName, backupId})
+    new({maxResults: maxResults, nextToken: nextToken, serverName: serverName, backupId: backupId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateServer = {
   type t
   type request = {
@@ -1390,30 +1413,31 @@ module CreateServer = {
     (),
   ) =>
     new({
-      backupId,
-      tags,
-      subnetIds,
-      serviceRoleArn,
-      securityGroupIds,
-      preferredBackupWindow,
-      preferredMaintenanceWindow,
-      keyPair,
-      instanceType,
-      instanceProfileArn,
-      serverName,
-      backupRetentionCount,
-      engineAttributes,
-      engineVersion,
-      engineModel,
-      engine,
-      disableAutomatedBackup,
-      customPrivateKey,
-      customCertificate,
-      customDomain,
-      associatePublicIpAddress,
+      backupId: backupId,
+      tags: tags,
+      subnetIds: subnetIds,
+      serviceRoleArn: serviceRoleArn,
+      securityGroupIds: securityGroupIds,
+      preferredBackupWindow: preferredBackupWindow,
+      preferredMaintenanceWindow: preferredMaintenanceWindow,
+      keyPair: keyPair,
+      instanceType: instanceType,
+      instanceProfileArn: instanceProfileArn,
+      serverName: serverName,
+      backupRetentionCount: backupRetentionCount,
+      engineAttributes: engineAttributes,
+      engineVersion: engineVersion,
+      engineModel: engineModel,
+      engine: engine,
+      disableAutomatedBackup: disableAutomatedBackup,
+      customPrivateKey: customPrivateKey,
+      customCertificate: customCertificate,
+      customDomain: customDomain,
+      associatePublicIpAddress: associatePublicIpAddress,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeServers = {
   type t
   type request = {
@@ -1460,6 +1484,6 @@ module DescribeServers = {
   }
   @module("@aws-sdk/client-opsworks-cm") @new external new: request => t = "DescribeServersCommand"
   let make = (~maxResults=?, ~nextToken=?, ~serverName=?, ()) =>
-    new({maxResults, nextToken, serverName})
+    new({maxResults: maxResults, nextToken: nextToken, serverName: serverName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

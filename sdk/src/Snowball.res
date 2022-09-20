@@ -706,9 +706,14 @@ module UpdateLongTermPricing = {
   @module("@aws-sdk/client-snowball") @new
   external new: request => t = "UpdateLongTermPricingCommand"
   let make = (~longTermPricingId, ~isLongTermPricingAutoRenew=?, ~replacementJob=?, ()) =>
-    new({isLongTermPricingAutoRenew, replacementJob, longTermPricingId})
+    new({
+      isLongTermPricingAutoRenew: isLongTermPricingAutoRenew,
+      replacementJob: replacementJob,
+      longTermPricingId: longTermPricingId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateJobShipmentState = {
   type t
   type request = {
@@ -725,9 +730,10 @@ module UpdateJobShipmentState = {
   type response = {.}
   @module("@aws-sdk/client-snowball") @new
   external new: request => t = "UpdateJobShipmentStateCommand"
-  let make = (~shipmentState, ~jobId, ()) => new({shipmentState, jobId})
+  let make = (~shipmentState, ~jobId, ()) => new({shipmentState: shipmentState, jobId: jobId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module GetSoftwareUpdates = {
   type t
   type request = {
@@ -748,6 +754,7 @@ module GetSoftwareUpdates = {
   let make = (~jobId, ()) => new({jobId: jobId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetSnowballUsage = {
   type t
   type request = {.}
@@ -764,6 +771,7 @@ module GetSnowballUsage = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetJobUnlockCode = {
   type t
   type request = {
@@ -782,6 +790,7 @@ module GetJobUnlockCode = {
   let make = (~jobId, ()) => new({jobId: jobId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetJobManifest = {
   type t
   type request = {
@@ -800,6 +809,7 @@ module GetJobManifest = {
   let make = (~jobId, ()) => new({jobId: jobId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeReturnShippingLabel = {
   type t
   type request = {
@@ -826,6 +836,7 @@ module DescribeReturnShippingLabel = {
   let make = (~jobId, ()) => new({jobId: jobId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateReturnShippingLabel = {
   type t
   type request = {
@@ -848,9 +859,10 @@ module CreateReturnShippingLabel = {
   }
   @module("@aws-sdk/client-snowball") @new
   external new: request => t = "CreateReturnShippingLabelCommand"
-  let make = (~jobId, ~shippingOption=?, ()) => new({shippingOption, jobId})
+  let make = (~jobId, ~shippingOption=?, ()) => new({shippingOption: shippingOption, jobId: jobId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateLongTermPricing = {
   type t
   type request = {
@@ -874,9 +886,14 @@ module CreateLongTermPricing = {
   @module("@aws-sdk/client-snowball") @new
   external new: request => t = "CreateLongTermPricingCommand"
   let make = (~longTermPricingType, ~snowballType=?, ~isLongTermPricingAutoRenew=?, ()) =>
-    new({snowballType, isLongTermPricingAutoRenew, longTermPricingType})
+    new({
+      snowballType: snowballType,
+      isLongTermPricingAutoRenew: isLongTermPricingAutoRenew,
+      longTermPricingType: longTermPricingType,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CancelJob = {
   type t
   type request = {
@@ -890,6 +907,7 @@ module CancelJob = {
   let make = (~jobId, ()) => new({jobId: jobId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module CancelCluster = {
   type t
   type request = {
@@ -903,6 +921,7 @@ module CancelCluster = {
   let make = (~clusterId, ()) => new({clusterId: clusterId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DescribeAddress = {
   type t
   type request = {
@@ -919,6 +938,7 @@ module DescribeAddress = {
   let make = (~addressId, ()) => new({addressId: addressId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateAddress = {
   type t
   type request = {
@@ -936,6 +956,7 @@ module CreateAddress = {
   let make = (~address, ()) => new({address: address})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListJobs = {
   type t
   type request = {
@@ -960,9 +981,11 @@ module ListJobs = {
     jobListEntries: option<jobListEntryList>,
   }
   @module("@aws-sdk/client-snowball") @new external new: request => t = "ListJobsCommand"
-  let make = (~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults})
+  let make = (~nextToken=?, ~maxResults=?, ()) =>
+    new({nextToken: nextToken, maxResults: maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListCompatibleImages = {
   type t
   type request = {
@@ -988,9 +1011,11 @@ module ListCompatibleImages = {
   }
   @module("@aws-sdk/client-snowball") @new
   external new: request => t = "ListCompatibleImagesCommand"
-  let make = (~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults})
+  let make = (~nextToken=?, ~maxResults=?, ()) =>
+    new({nextToken: nextToken, maxResults: maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListClusters = {
   type t
   type request = {
@@ -1015,9 +1040,11 @@ module ListClusters = {
     clusterListEntries: option<clusterListEntryList>,
   }
   @module("@aws-sdk/client-snowball") @new external new: request => t = "ListClustersCommand"
-  let make = (~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults})
+  let make = (~nextToken=?, ~maxResults=?, ()) =>
+    new({nextToken: nextToken, maxResults: maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListClusterJobs = {
   type t
   type request = {
@@ -1047,9 +1074,10 @@ module ListClusterJobs = {
   }
   @module("@aws-sdk/client-snowball") @new external new: request => t = "ListClusterJobsCommand"
   let make = (~clusterId, ~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken, maxResults, clusterId})
+    new({nextToken: nextToken, maxResults: maxResults, clusterId: clusterId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeAddresses = {
   type t
   type request = {
@@ -1072,9 +1100,11 @@ module DescribeAddresses = {
     addresses: option<addressList>,
   }
   @module("@aws-sdk/client-snowball") @new external new: request => t = "DescribeAddressesCommand"
-  let make = (~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults})
+  let make = (~nextToken=?, ~maxResults=?, ()) =>
+    new({nextToken: nextToken, maxResults: maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListLongTermPricing = {
   type t
   type request = {
@@ -1097,9 +1127,11 @@ module ListLongTermPricing = {
     longTermPricingEntries: option<longTermPricingEntryList>,
   }
   @module("@aws-sdk/client-snowball") @new external new: request => t = "ListLongTermPricingCommand"
-  let make = (~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults})
+  let make = (~nextToken=?, ~maxResults=?, ()) =>
+    new({nextToken: nextToken, maxResults: maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateJob = {
   type t
   type request = {
@@ -1164,19 +1196,20 @@ module UpdateJob = {
     (),
   ) =>
     new({
-      forwardingAddressId,
-      snowballCapacityPreference,
-      description,
-      shippingOption,
-      addressId,
-      onDeviceServiceConfiguration,
-      resources,
-      notification,
-      roleARN,
-      jobId,
+      forwardingAddressId: forwardingAddressId,
+      snowballCapacityPreference: snowballCapacityPreference,
+      description: description,
+      shippingOption: shippingOption,
+      addressId: addressId,
+      onDeviceServiceConfiguration: onDeviceServiceConfiguration,
+      resources: resources,
+      notification: notification,
+      roleARN: roleARN,
+      jobId: jobId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateCluster = {
   type t
   type request = {
@@ -1227,18 +1260,19 @@ module UpdateCluster = {
     (),
   ) =>
     new({
-      forwardingAddressId,
-      notification,
-      shippingOption,
-      addressId,
-      onDeviceServiceConfiguration,
-      resources,
-      description,
-      roleARN,
-      clusterId,
+      forwardingAddressId: forwardingAddressId,
+      notification: notification,
+      shippingOption: shippingOption,
+      addressId: addressId,
+      onDeviceServiceConfiguration: onDeviceServiceConfiguration,
+      resources: resources,
+      description: description,
+      roleARN: roleARN,
+      clusterId: clusterId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module CreateJob = {
   type t
   type request = {
@@ -1396,26 +1430,27 @@ module CreateJob = {
     (),
   ) =>
     new({
-      longTermPricingId,
-      remoteManagement,
-      deviceConfiguration,
-      taxDocuments,
-      forwardingAddressId,
-      snowballType,
-      clusterId,
-      notification,
-      shippingOption,
-      snowballCapacityPreference,
-      roleARN,
-      kmsKeyARN,
-      addressId,
-      description,
-      onDeviceServiceConfiguration,
-      resources,
-      jobType,
+      longTermPricingId: longTermPricingId,
+      remoteManagement: remoteManagement,
+      deviceConfiguration: deviceConfiguration,
+      taxDocuments: taxDocuments,
+      forwardingAddressId: forwardingAddressId,
+      snowballType: snowballType,
+      clusterId: clusterId,
+      notification: notification,
+      shippingOption: shippingOption,
+      snowballCapacityPreference: snowballCapacityPreference,
+      roleARN: roleARN,
+      kmsKeyARN: kmsKeyARN,
+      addressId: addressId,
+      description: description,
+      onDeviceServiceConfiguration: onDeviceServiceConfiguration,
+      resources: resources,
+      jobType: jobType,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateCluster = {
   type t
   type request = {
@@ -1550,22 +1585,23 @@ module CreateCluster = {
     (),
   ) =>
     new({
-      remoteManagement,
-      taxDocuments,
-      forwardingAddressId,
-      notification,
-      shippingOption,
-      snowballType,
-      roleARN,
-      kmsKeyARN,
-      addressId,
-      description,
-      onDeviceServiceConfiguration,
-      resources,
-      jobType,
+      remoteManagement: remoteManagement,
+      taxDocuments: taxDocuments,
+      forwardingAddressId: forwardingAddressId,
+      notification: notification,
+      shippingOption: shippingOption,
+      snowballType: snowballType,
+      roleARN: roleARN,
+      kmsKeyARN: kmsKeyARN,
+      addressId: addressId,
+      description: description,
+      onDeviceServiceConfiguration: onDeviceServiceConfiguration,
+      resources: resources,
+      jobType: jobType,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeCluster = {
   type t
   type request = {
@@ -1582,6 +1618,7 @@ module DescribeCluster = {
   let make = (~clusterId, ()) => new({clusterId: clusterId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeJob = {
   type t
   type request = {

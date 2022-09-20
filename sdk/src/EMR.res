@@ -2487,9 +2487,16 @@ module UpdateStudioSessionMapping = {
   @module("@aws-sdk/client-elasticmapreduce") @new
   external new: request => t = "UpdateStudioSessionMappingCommand"
   let make = (~sessionPolicyArn, ~identityType, ~studioId, ~identityName=?, ~identityId=?, ()) =>
-    new({sessionPolicyArn, identityType, identityName, identityId, studioId})
+    new({
+      sessionPolicyArn: sessionPolicyArn,
+      identityType: identityType,
+      identityName: identityName,
+      identityId: identityId,
+      studioId: studioId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module StopNotebookExecution = {
   type t
   type request = {
@@ -2502,6 +2509,7 @@ module StopNotebookExecution = {
   let make = (~notebookExecutionId, ()) => new({notebookExecutionId: notebookExecutionId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module RemoveManagedScalingPolicy = {
   type t
   type request = {
@@ -2516,6 +2524,7 @@ module RemoveManagedScalingPolicy = {
   let make = (~clusterId, ()) => new({clusterId: clusterId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module RemoveAutoTerminationPolicy = {
   type t
   type request = {
@@ -2531,6 +2540,7 @@ module RemoveAutoTerminationPolicy = {
   let make = (~clusterId, ()) => new({clusterId: clusterId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module RemoveAutoScalingPolicy = {
   type t
   type request = {
@@ -2547,9 +2557,11 @@ module RemoveAutoScalingPolicy = {
   type response = {.}
   @module("@aws-sdk/client-elasticmapreduce") @new
   external new: request => t = "RemoveAutoScalingPolicyCommand"
-  let make = (~instanceGroupId, ~clusterId, ()) => new({instanceGroupId, clusterId})
+  let make = (~instanceGroupId, ~clusterId, ()) =>
+    new({instanceGroupId: instanceGroupId, clusterId: clusterId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ModifyCluster = {
   type t
   type request = {
@@ -2567,9 +2579,11 @@ module ModifyCluster = {
   }
   @module("@aws-sdk/client-elasticmapreduce") @new
   external new: request => t = "ModifyClusterCommand"
-  let make = (~clusterId, ~stepConcurrencyLevel=?, ()) => new({stepConcurrencyLevel, clusterId})
+  let make = (~clusterId, ~stepConcurrencyLevel=?, ()) =>
+    new({stepConcurrencyLevel: stepConcurrencyLevel, clusterId: clusterId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeSecurityConfiguration = {
   type t
   type request = {
@@ -2590,6 +2604,7 @@ module DescribeSecurityConfiguration = {
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteStudioSessionMapping = {
   type t
   type request = {
@@ -2615,9 +2630,15 @@ module DeleteStudioSessionMapping = {
   @module("@aws-sdk/client-elasticmapreduce") @new
   external new: request => t = "DeleteStudioSessionMappingCommand"
   let make = (~identityType, ~studioId, ~identityName=?, ~identityId=?, ()) =>
-    new({identityType, identityName, identityId, studioId})
+    new({
+      identityType: identityType,
+      identityName: identityName,
+      identityId: identityId,
+      studioId: studioId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteStudio = {
   type t
   type request = {
@@ -2630,6 +2651,7 @@ module DeleteStudio = {
   let make = (~studioId, ()) => new({studioId: studioId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteSecurityConfiguration = {
   type t
   type request = {
@@ -2641,6 +2663,7 @@ module DeleteSecurityConfiguration = {
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module CreateStudioSessionMapping = {
   type t
   type request = {
@@ -2670,9 +2693,16 @@ module CreateStudioSessionMapping = {
   @module("@aws-sdk/client-elasticmapreduce") @new
   external new: request => t = "CreateStudioSessionMappingCommand"
   let make = (~sessionPolicyArn, ~identityType, ~studioId, ~identityName=?, ~identityId=?, ()) =>
-    new({sessionPolicyArn, identityType, identityName, identityId, studioId})
+    new({
+      sessionPolicyArn: sessionPolicyArn,
+      identityType: identityType,
+      identityName: identityName,
+      identityId: identityId,
+      studioId: studioId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module CreateSecurityConfiguration = {
   type t
   type request = {
@@ -2692,9 +2722,11 @@ module CreateSecurityConfiguration = {
   }
   @module("@aws-sdk/client-elasticmapreduce") @new
   external new: request => t = "CreateSecurityConfigurationCommand"
-  let make = (~securityConfiguration, ~name, ()) => new({securityConfiguration, name})
+  let make = (~securityConfiguration, ~name, ()) =>
+    new({securityConfiguration: securityConfiguration, name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateStudio = {
   type t
   type request = {
@@ -2720,9 +2752,16 @@ module UpdateStudio = {
   @module("@aws-sdk/client-elasticmapreduce") @new
   external new: request => t = "UpdateStudioCommand"
   let make = (~studioId, ~defaultS3Location=?, ~subnetIds=?, ~description=?, ~name=?, ()) =>
-    new({defaultS3Location, subnetIds, description, name, studioId})
+    new({
+      defaultS3Location: defaultS3Location,
+      subnetIds: subnetIds,
+      description: description,
+      name: name,
+      studioId: studioId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module TerminateJobFlows = {
   type t
   @ocaml.doc("<p> Input to the <a>TerminateJobFlows</a> operation. </p>")
@@ -2736,6 +2775,7 @@ module TerminateJobFlows = {
   let make = (~jobFlowIds, ()) => new({jobFlowIds: jobFlowIds})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module SetVisibleToAllUsers = {
   type t
   @ocaml.doc("<p>The input to the SetVisibleToAllUsers action.</p>")
@@ -2751,9 +2791,11 @@ module SetVisibleToAllUsers = {
   type response = {.}
   @module("@aws-sdk/client-elasticmapreduce") @new
   external new: request => t = "SetVisibleToAllUsersCommand"
-  let make = (~visibleToAllUsers, ~jobFlowIds, ()) => new({visibleToAllUsers, jobFlowIds})
+  let make = (~visibleToAllUsers, ~jobFlowIds, ()) =>
+    new({visibleToAllUsers: visibleToAllUsers, jobFlowIds: jobFlowIds})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module SetTerminationProtection = {
   type t
   @ocaml.doc("<p> The input argument to the <a>TerminationProtection</a> operation. </p>")
@@ -2771,9 +2813,11 @@ module SetTerminationProtection = {
   type response = {.}
   @module("@aws-sdk/client-elasticmapreduce") @new
   external new: request => t = "SetTerminationProtectionCommand"
-  let make = (~terminationProtected, ~jobFlowIds, ()) => new({terminationProtected, jobFlowIds})
+  let make = (~terminationProtected, ~jobFlowIds, ()) =>
+    new({terminationProtected: terminationProtected, jobFlowIds: jobFlowIds})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module RemoveTags = {
   type t
   @ocaml.doc("<p>This input identifies an Amazon EMR resource and a list of tags to remove.</p>")
@@ -2787,9 +2831,10 @@ module RemoveTags = {
   }
   type response = {.}
   @module("@aws-sdk/client-elasticmapreduce") @new external new: request => t = "RemoveTagsCommand"
-  let make = (~tagKeys, ~resourceId, ()) => new({tagKeys, resourceId})
+  let make = (~tagKeys, ~resourceId, ()) => new({tagKeys: tagKeys, resourceId: resourceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module PutAutoTerminationPolicy = {
   type t
   type request = {
@@ -2805,9 +2850,11 @@ module PutAutoTerminationPolicy = {
   type response = {.}
   @module("@aws-sdk/client-elasticmapreduce") @new
   external new: request => t = "PutAutoTerminationPolicyCommand"
-  let make = (~clusterId, ~autoTerminationPolicy=?, ()) => new({autoTerminationPolicy, clusterId})
+  let make = (~clusterId, ~autoTerminationPolicy=?, ()) =>
+    new({autoTerminationPolicy: autoTerminationPolicy, clusterId: clusterId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ModifyInstanceFleet = {
   type t
   type request = {
@@ -2819,9 +2866,11 @@ module ModifyInstanceFleet = {
   type response = {.}
   @module("@aws-sdk/client-elasticmapreduce") @new
   external new: request => t = "ModifyInstanceFleetCommand"
-  let make = (~instanceFleet, ~clusterId, ()) => new({instanceFleet, clusterId})
+  let make = (~instanceFleet, ~clusterId, ()) =>
+    new({instanceFleet: instanceFleet, clusterId: clusterId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ListReleaseLabels = {
   type t
   type request = {
@@ -2852,9 +2901,11 @@ module ListReleaseLabels = {
   }
   @module("@aws-sdk/client-elasticmapreduce") @new
   external new: request => t = "ListReleaseLabelsCommand"
-  let make = (~maxResults=?, ~nextToken=?, ~filters=?, ()) => new({maxResults, nextToken, filters})
+  let make = (~maxResults=?, ~nextToken=?, ~filters=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken, filters: filters})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetStudioSessionMapping = {
   type t
   type request = {
@@ -2882,9 +2933,15 @@ module GetStudioSessionMapping = {
   @module("@aws-sdk/client-elasticmapreduce") @new
   external new: request => t = "GetStudioSessionMappingCommand"
   let make = (~identityType, ~studioId, ~identityName=?, ~identityId=?, ()) =>
-    new({identityType, identityName, identityId, studioId})
+    new({
+      identityType: identityType,
+      identityName: identityName,
+      identityId: identityId,
+      studioId: studioId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetAutoTerminationPolicy = {
   type t
   type request = {
@@ -2906,6 +2963,7 @@ module GetAutoTerminationPolicy = {
   let make = (~clusterId, ()) => new({clusterId: clusterId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module StartNotebookExecution = {
   type t
   type request = {
@@ -2963,17 +3021,18 @@ module StartNotebookExecution = {
     (),
   ) =>
     new({
-      tags,
-      notebookInstanceSecurityGroupId,
-      serviceRole,
-      executionEngine,
-      notebookParams,
-      notebookExecutionName,
-      relativePath,
-      editorId,
+      tags: tags,
+      notebookInstanceSecurityGroupId: notebookInstanceSecurityGroupId,
+      serviceRole: serviceRole,
+      executionEngine: executionEngine,
+      notebookParams: notebookParams,
+      notebookExecutionName: notebookExecutionName,
+      relativePath: relativePath,
+      editorId: editorId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module PutManagedScalingPolicy = {
   type t
   type request = {
@@ -2989,9 +3048,11 @@ module PutManagedScalingPolicy = {
   type response = {.}
   @module("@aws-sdk/client-elasticmapreduce") @new
   external new: request => t = "PutManagedScalingPolicyCommand"
-  let make = (~managedScalingPolicy, ~clusterId, ()) => new({managedScalingPolicy, clusterId})
+  let make = (~managedScalingPolicy, ~clusterId, ()) =>
+    new({managedScalingPolicy: managedScalingPolicy, clusterId: clusterId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ListStudios = {
   type t
   type request = {
@@ -3010,6 +3071,7 @@ module ListStudios = {
   let make = (~marker=?, ()) => new({marker: marker})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListStudioSessionMappings = {
   type t
   type request = {
@@ -3034,9 +3096,11 @@ module ListStudioSessionMappings = {
   }
   @module("@aws-sdk/client-elasticmapreduce") @new
   external new: request => t = "ListStudioSessionMappingsCommand"
-  let make = (~marker=?, ~identityType=?, ~studioId=?, ()) => new({marker, identityType, studioId})
+  let make = (~marker=?, ~identityType=?, ~studioId=?, ()) =>
+    new({marker: marker, identityType: identityType, studioId: studioId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListSecurityConfigurations = {
   type t
   type request = {
@@ -3059,6 +3123,7 @@ module ListSecurityConfigurations = {
   let make = (~marker=?, ()) => new({marker: marker})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListNotebookExecutions = {
   type t
   type request = {
@@ -3144,9 +3209,10 @@ module ListNotebookExecutions = {
   @module("@aws-sdk/client-elasticmapreduce") @new
   external new: request => t = "ListNotebookExecutionsCommand"
   let make = (~marker=?, ~to=?, ~from=?, ~status=?, ~editorId=?, ()) =>
-    new({marker, to, from, status, editorId})
+    new({marker: marker, to: to, from: from, status: status, editorId: editorId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetManagedScalingPolicy = {
   type t
   type request = {
@@ -3167,6 +3233,7 @@ module GetManagedScalingPolicy = {
   let make = (~clusterId, ()) => new({clusterId: clusterId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeReleaseLabel = {
   type t
   type request = {
@@ -3193,9 +3260,10 @@ module DescribeReleaseLabel = {
   @module("@aws-sdk/client-elasticmapreduce") @new
   external new: request => t = "DescribeReleaseLabelCommand"
   let make = (~maxResults=?, ~nextToken=?, ~releaseLabel=?, ()) =>
-    new({maxResults, nextToken, releaseLabel})
+    new({maxResults: maxResults, nextToken: nextToken, releaseLabel: releaseLabel})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateStudio = {
   type t
   type request = {
@@ -3281,22 +3349,23 @@ module CreateStudio = {
     (),
   ) =>
     new({
-      tags,
-      idpRelayStateParameterName,
-      idpAuthUrl,
-      defaultS3Location,
-      engineSecurityGroupId,
-      workspaceSecurityGroupId,
-      userRole,
-      serviceRole,
-      subnetIds,
-      vpcId,
-      authMode,
-      description,
-      name,
+      tags: tags,
+      idpRelayStateParameterName: idpRelayStateParameterName,
+      idpAuthUrl: idpAuthUrl,
+      defaultS3Location: defaultS3Location,
+      engineSecurityGroupId: engineSecurityGroupId,
+      workspaceSecurityGroupId: workspaceSecurityGroupId,
+      userRole: userRole,
+      serviceRole: serviceRole,
+      subnetIds: subnetIds,
+      vpcId: vpcId,
+      authMode: authMode,
+      description: description,
+      name: name,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CancelSteps = {
   type t
   @ocaml.doc("<p>The input argument to the <a>CancelSteps</a> operation.</p>")
@@ -3324,9 +3393,10 @@ module CancelSteps = {
   }
   @module("@aws-sdk/client-elasticmapreduce") @new external new: request => t = "CancelStepsCommand"
   let make = (~stepIds, ~clusterId, ~stepCancellationOption=?, ()) =>
-    new({stepCancellationOption, stepIds, clusterId})
+    new({stepCancellationOption: stepCancellationOption, stepIds: stepIds, clusterId: clusterId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module AddTags = {
   type t
   @ocaml.doc("<p>This input identifies an Amazon EMR resource and a list of tags to attach.</p>")
@@ -3343,9 +3413,10 @@ module AddTags = {
   }
   type response = {.}
   @module("@aws-sdk/client-elasticmapreduce") @new external new: request => t = "AddTagsCommand"
-  let make = (~tags, ~resourceId, ()) => new({tags, resourceId})
+  let make = (~tags, ~resourceId, ()) => new({tags: tags, resourceId: resourceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ListBootstrapActions = {
   type t
   @ocaml.doc("<p>This input determines which bootstrap actions to retrieve.</p>")
@@ -3366,9 +3437,10 @@ module ListBootstrapActions = {
   }
   @module("@aws-sdk/client-elasticmapreduce") @new
   external new: request => t = "ListBootstrapActionsCommand"
-  let make = (~clusterId, ~marker=?, ()) => new({marker, clusterId})
+  let make = (~clusterId, ~marker=?, ()) => new({marker: marker, clusterId: clusterId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeStudio = {
   type t
   type request = {
@@ -3382,6 +3454,7 @@ module DescribeStudio = {
   let make = (~studioId, ()) => new({studioId: studioId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeStep = {
   type t
   @ocaml.doc("<p>This input determines which step to describe.</p>")
@@ -3397,9 +3470,10 @@ module DescribeStep = {
   }
   @module("@aws-sdk/client-elasticmapreduce") @new
   external new: request => t = "DescribeStepCommand"
-  let make = (~stepId, ~clusterId, ()) => new({stepId, clusterId})
+  let make = (~stepId, ~clusterId, ()) => new({stepId: stepId, clusterId: clusterId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeNotebookExecution = {
   type t
   type request = {
@@ -3415,6 +3489,7 @@ module DescribeNotebookExecution = {
   let make = (~notebookExecutionId, ()) => new({notebookExecutionId: notebookExecutionId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListSteps = {
   type t
   @ocaml.doc("<p>This input determines which steps to list.</p>")
@@ -3448,9 +3523,10 @@ module ListSteps = {
   }
   @module("@aws-sdk/client-elasticmapreduce") @new external new: request => t = "ListStepsCommand"
   let make = (~clusterId, ~marker=?, ~stepIds=?, ~stepStates=?, ()) =>
-    new({marker, stepIds, stepStates, clusterId})
+    new({marker: marker, stepIds: stepIds, stepStates: stepStates, clusterId: clusterId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListInstances = {
   type t
   @ocaml.doc("<p>This input determines which instances to list.</p>")
@@ -3498,16 +3574,17 @@ module ListInstances = {
     (),
   ) =>
     new({
-      marker,
-      instanceStates,
-      instanceFleetType,
-      instanceFleetId,
-      instanceGroupTypes,
-      instanceGroupId,
-      clusterId,
+      marker: marker,
+      instanceStates: instanceStates,
+      instanceFleetType: instanceFleetType,
+      instanceFleetId: instanceFleetId,
+      instanceGroupTypes: instanceGroupTypes,
+      instanceGroupId: instanceGroupId,
+      clusterId: clusterId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListClusters = {
   type t
   @ocaml.doc("<p>This input determines how the ListClusters action filters the list of clusters that it
@@ -3541,9 +3618,15 @@ module ListClusters = {
   @module("@aws-sdk/client-elasticmapreduce") @new
   external new: request => t = "ListClustersCommand"
   let make = (~marker=?, ~clusterStates=?, ~createdBefore=?, ~createdAfter=?, ()) =>
-    new({marker, clusterStates, createdBefore, createdAfter})
+    new({
+      marker: marker,
+      clusterStates: clusterStates,
+      createdBefore: createdBefore,
+      createdAfter: createdAfter,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module AddJobFlowSteps = {
   type t
   @ocaml.doc("<p> The input argument to the <a>AddJobFlowSteps</a> operation. </p>")
@@ -3562,9 +3645,10 @@ module AddJobFlowSteps = {
   }
   @module("@aws-sdk/client-elasticmapreduce") @new
   external new: request => t = "AddJobFlowStepsCommand"
-  let make = (~steps, ~jobFlowId, ()) => new({steps, jobFlowId})
+  let make = (~steps, ~jobFlowId, ()) => new({steps: steps, jobFlowId: jobFlowId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module PutAutoScalingPolicy = {
   type t
   type request = {
@@ -3598,9 +3682,14 @@ module PutAutoScalingPolicy = {
   @module("@aws-sdk/client-elasticmapreduce") @new
   external new: request => t = "PutAutoScalingPolicyCommand"
   let make = (~autoScalingPolicy, ~instanceGroupId, ~clusterId, ()) =>
-    new({autoScalingPolicy, instanceGroupId, clusterId})
+    new({
+      autoScalingPolicy: autoScalingPolicy,
+      instanceGroupId: instanceGroupId,
+      clusterId: clusterId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeJobFlows = {
   type t
   @ocaml.doc("<p> The input for the <a>DescribeJobFlows</a> operation. </p>")
@@ -3625,9 +3714,15 @@ module DescribeJobFlows = {
   @module("@aws-sdk/client-elasticmapreduce") @new
   external new: request => t = "DescribeJobFlowsCommand"
   let make = (~jobFlowStates=?, ~jobFlowIds=?, ~createdBefore=?, ~createdAfter=?, ()) =>
-    new({jobFlowStates, jobFlowIds, createdBefore, createdAfter})
+    new({
+      jobFlowStates: jobFlowStates,
+      jobFlowIds: jobFlowIds,
+      createdBefore: createdBefore,
+      createdAfter: createdAfter,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module PutBlockPublicAccessConfiguration = {
   type t
   type request = {
@@ -3656,6 +3751,7 @@ module PutBlockPublicAccessConfiguration = {
     new({blockPublicAccessConfiguration: blockPublicAccessConfiguration})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module GetBlockPublicAccessConfiguration = {
   type t
   type request = {.}
@@ -3690,6 +3786,7 @@ module GetBlockPublicAccessConfiguration = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeCluster = {
   type t
   @ocaml.doc("<p>This input determines which cluster to describe.</p>")
@@ -3707,6 +3804,7 @@ module DescribeCluster = {
   let make = (~clusterId, ()) => new({clusterId: clusterId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ModifyInstanceGroups = {
   type t
   @ocaml.doc("<p>Change the size of some instance groups.</p>")
@@ -3719,9 +3817,11 @@ module ModifyInstanceGroups = {
   type response = {.}
   @module("@aws-sdk/client-elasticmapreduce") @new
   external new: request => t = "ModifyInstanceGroupsCommand"
-  let make = (~instanceGroups=?, ~clusterId=?, ()) => new({instanceGroups, clusterId})
+  let make = (~instanceGroups=?, ~clusterId=?, ()) =>
+    new({instanceGroups: instanceGroups, clusterId: clusterId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ListInstanceGroups = {
   type t
   @ocaml.doc("<p>This input determines which instance groups to retrieve.</p>")
@@ -3744,9 +3844,10 @@ module ListInstanceGroups = {
   }
   @module("@aws-sdk/client-elasticmapreduce") @new
   external new: request => t = "ListInstanceGroupsCommand"
-  let make = (~clusterId, ~marker=?, ()) => new({marker, clusterId})
+  let make = (~clusterId, ~marker=?, ()) => new({marker: marker, clusterId: clusterId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module AddInstanceGroups = {
   type t
   @ocaml.doc("<p>Input to an AddInstanceGroups call.</p>")
@@ -3768,9 +3869,11 @@ module AddInstanceGroups = {
   }
   @module("@aws-sdk/client-elasticmapreduce") @new
   external new: request => t = "AddInstanceGroupsCommand"
-  let make = (~jobFlowId, ~instanceGroups, ()) => new({jobFlowId, instanceGroups})
+  let make = (~jobFlowId, ~instanceGroups, ()) =>
+    new({jobFlowId: jobFlowId, instanceGroups: instanceGroups})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module AddInstanceFleet = {
   type t
   type request = {
@@ -3789,9 +3892,11 @@ module AddInstanceFleet = {
   }
   @module("@aws-sdk/client-elasticmapreduce") @new
   external new: request => t = "AddInstanceFleetCommand"
-  let make = (~instanceFleet, ~clusterId, ()) => new({instanceFleet, clusterId})
+  let make = (~instanceFleet, ~clusterId, ()) =>
+    new({instanceFleet: instanceFleet, clusterId: clusterId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListInstanceFleets = {
   type t
   type request = {
@@ -3811,9 +3916,10 @@ module ListInstanceFleets = {
   }
   @module("@aws-sdk/client-elasticmapreduce") @new
   external new: request => t = "ListInstanceFleetsCommand"
-  let make = (~clusterId, ~marker=?, ()) => new({marker, clusterId})
+  let make = (~clusterId, ~marker=?, ()) => new({marker: marker, clusterId: clusterId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module RunJobFlow = {
   type t
   @ocaml.doc("<p> Input to the <a>RunJobFlow</a> operation. </p>")
@@ -4044,34 +4150,34 @@ module RunJobFlow = {
     (),
   ) =>
     new({
-      autoTerminationPolicy,
-      placementGroupConfigs,
-      managedScalingPolicy,
-      stepConcurrencyLevel,
-      kerberosAttributes,
-      repoUpgradeOnBoot,
-      ebsRootVolumeSize,
-      customAmiId,
-      scaleDownBehavior,
-      autoScalingRole,
-      securityConfiguration,
-      tags,
-      serviceRole,
-      jobFlowRole,
-      visibleToAllUsers,
-      configurations,
-      applications,
-      newSupportedProducts,
-      supportedProducts,
-      bootstrapActions,
-      steps,
-      instances,
-      releaseLabel,
-      amiVersion,
-      additionalInfo,
-      logEncryptionKmsKeyId,
-      logUri,
-      name,
+      autoTerminationPolicy: autoTerminationPolicy,
+      placementGroupConfigs: placementGroupConfigs,
+      managedScalingPolicy: managedScalingPolicy,
+      stepConcurrencyLevel: stepConcurrencyLevel,
+      kerberosAttributes: kerberosAttributes,
+      repoUpgradeOnBoot: repoUpgradeOnBoot,
+      ebsRootVolumeSize: ebsRootVolumeSize,
+      customAmiId: customAmiId,
+      scaleDownBehavior: scaleDownBehavior,
+      autoScalingRole: autoScalingRole,
+      securityConfiguration: securityConfiguration,
+      tags: tags,
+      serviceRole: serviceRole,
+      jobFlowRole: jobFlowRole,
+      visibleToAllUsers: visibleToAllUsers,
+      configurations: configurations,
+      applications: applications,
+      newSupportedProducts: newSupportedProducts,
+      supportedProducts: supportedProducts,
+      bootstrapActions: bootstrapActions,
+      steps: steps,
+      instances: instances,
+      releaseLabel: releaseLabel,
+      amiVersion: amiVersion,
+      additionalInfo: additionalInfo,
+      logEncryptionKmsKeyId: logEncryptionKmsKeyId,
+      logUri: logUri,
+      name: name,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

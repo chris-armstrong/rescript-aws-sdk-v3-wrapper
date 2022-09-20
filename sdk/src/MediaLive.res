@@ -5178,9 +5178,10 @@ module DescribeInputDeviceThumbnail = {
   }
   @module("@aws-sdk/client-medialive") @new
   external new: request => t = "DescribeInputDeviceThumbnailCommand"
-  let make = (~accept, ~inputDeviceId, ()) => new({accept, inputDeviceId})
+  let make = (~accept, ~inputDeviceId, ()) => new({accept: accept, inputDeviceId: inputDeviceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteSchedule = {
   type t
   @ocaml.doc("Placeholder documentation for DeleteScheduleRequest")
@@ -5193,6 +5194,7 @@ module DeleteSchedule = {
   let make = (~channelId, ()) => new({channelId: channelId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteInputSecurityGroup = {
   type t
   @ocaml.doc("Placeholder documentation for DeleteInputSecurityGroupRequest")
@@ -5206,6 +5208,7 @@ module DeleteInputSecurityGroup = {
   let make = (~inputSecurityGroupId, ()) => new({inputSecurityGroupId: inputSecurityGroupId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteInput = {
   type t
   @ocaml.doc("Placeholder documentation for DeleteInputRequest")
@@ -5215,6 +5218,7 @@ module DeleteInput = {
   let make = (~inputId, ()) => new({inputId: inputId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ListTagsForResource = {
   type t
   @ocaml.doc("Placeholder documentation for ListTagsForResourceRequest")
@@ -5226,6 +5230,7 @@ module ListTagsForResource = {
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeReservation = {
   type t
   @ocaml.doc("Placeholder documentation for DescribeReservationRequest")
@@ -5282,6 +5287,7 @@ module DescribeReservation = {
   let make = (~reservationId, ()) => new({reservationId: reservationId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeOffering = {
   type t
   @ocaml.doc("Placeholder documentation for DescribeOfferingRequest")
@@ -5323,6 +5329,7 @@ module DescribeOffering = {
   let make = (~offeringId, ()) => new({offeringId: offeringId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteTags = {
   type t
   @ocaml.doc("Placeholder documentation for DeleteTagsRequest")
@@ -5332,9 +5339,10 @@ module DeleteTags = {
   }
   type response = {.}
   @module("@aws-sdk/client-medialive") @new external new: request => t = "DeleteTagsCommand"
-  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys, resourceArn})
+  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteReservation = {
   type t
   @ocaml.doc("Placeholder documentation for DeleteReservationRequest")
@@ -5390,6 +5398,7 @@ module DeleteReservation = {
   let make = (~reservationId, ()) => new({reservationId: reservationId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateTags = {
   type t
   @ocaml.doc("Placeholder documentation for CreateTagsRequest")
@@ -5399,9 +5408,10 @@ module CreateTags = {
   }
   type response = {.}
   @module("@aws-sdk/client-medialive") @new external new: request => t = "CreateTagsCommand"
-  let make = (~resourceArn, ~tags=?, ()) => new({tags, resourceArn})
+  let make = (~resourceArn, ~tags=?, ()) => new({tags: tags, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateReservation = {
   type t
   @ocaml.doc("Request to update a reservation")
@@ -5413,9 +5423,10 @@ module UpdateReservation = {
   @ocaml.doc("Placeholder documentation for UpdateReservationResponse")
   type response = {@as("Reservation") reservation: option<reservation>}
   @module("@aws-sdk/client-medialive") @new external new: request => t = "UpdateReservationCommand"
-  let make = (~reservationId, ~name=?, ()) => new({reservationId, name})
+  let make = (~reservationId, ~name=?, ()) => new({reservationId: reservationId, name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateInputDevice = {
   type t
   @ocaml.doc("A request to update an input device.")
@@ -5461,9 +5472,15 @@ module UpdateInputDevice = {
   }
   @module("@aws-sdk/client-medialive") @new external new: request => t = "UpdateInputDeviceCommand"
   let make = (~inputDeviceId, ~uhdDeviceSettings=?, ~name=?, ~hdDeviceSettings=?, ()) =>
-    new({uhdDeviceSettings, name, inputDeviceId, hdDeviceSettings})
+    new({
+      uhdDeviceSettings: uhdDeviceSettings,
+      name: name,
+      inputDeviceId: inputDeviceId,
+      hdDeviceSettings: hdDeviceSettings,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module TransferInputDevice = {
   type t
   @ocaml.doc("A request to transfer an input device.")
@@ -5484,9 +5501,15 @@ module TransferInputDevice = {
   @module("@aws-sdk/client-medialive") @new
   external new: request => t = "TransferInputDeviceCommand"
   let make = (~inputDeviceId, ~transferMessage=?, ~targetRegion=?, ~targetCustomerId=?, ()) =>
-    new({transferMessage, targetRegion, targetCustomerId, inputDeviceId})
+    new({
+      transferMessage: transferMessage,
+      targetRegion: targetRegion,
+      targetCustomerId: targetCustomerId,
+      inputDeviceId: inputDeviceId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module RejectInputDeviceTransfer = {
   type t
   @ocaml.doc("Placeholder documentation for RejectInputDeviceTransferRequest")
@@ -5501,6 +5524,7 @@ module RejectInputDeviceTransfer = {
   let make = (~inputDeviceId, ()) => new({inputDeviceId: inputDeviceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module PurchaseOffering = {
   type t
   @ocaml.doc("Placeholder documentation for PurchaseOfferingRequest")
@@ -5524,9 +5548,17 @@ module PurchaseOffering = {
   type response = {@as("Reservation") reservation: option<reservation>}
   @module("@aws-sdk/client-medialive") @new external new: request => t = "PurchaseOfferingCommand"
   let make = (~offeringId, ~count, ~tags=?, ~start=?, ~requestId=?, ~name=?, ()) =>
-    new({tags, start, requestId, offeringId, name, count})
+    new({
+      tags: tags,
+      start: start,
+      requestId: requestId,
+      offeringId: offeringId,
+      name: name,
+      count: count,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListMultiplexPrograms = {
   type t
   @ocaml.doc("Placeholder documentation for ListMultiplexProgramsRequest")
@@ -5548,9 +5580,10 @@ module ListMultiplexPrograms = {
   @module("@aws-sdk/client-medialive") @new
   external new: request => t = "ListMultiplexProgramsCommand"
   let make = (~multiplexId, ~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken, multiplexId, maxResults})
+    new({nextToken: nextToken, multiplexId: multiplexId, maxResults: maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListInputDeviceTransfers = {
   type t
   @ocaml.doc("Placeholder documentation for ListInputDeviceTransfersRequest")
@@ -5570,9 +5603,10 @@ module ListInputDeviceTransfers = {
   @module("@aws-sdk/client-medialive") @new
   external new: request => t = "ListInputDeviceTransfersCommand"
   let make = (~transferType, ~nextToken=?, ~maxResults=?, ()) =>
-    new({transferType, nextToken, maxResults})
+    new({transferType: transferType, nextToken: nextToken, maxResults: maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeInputSecurityGroup = {
   type t
   @ocaml.doc("Placeholder documentation for DescribeInputSecurityGroupRequest")
@@ -5597,6 +5631,7 @@ module DescribeInputSecurityGroup = {
   let make = (~inputSecurityGroupId, ()) => new({inputSecurityGroupId: inputSecurityGroupId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeInputDevice = {
   type t
   @ocaml.doc("Placeholder documentation for DescribeInputDeviceRequest")
@@ -5637,6 +5672,7 @@ module DescribeInputDevice = {
   let make = (~inputDeviceId, ()) => new({inputDeviceId: inputDeviceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ClaimDevice = {
   type t
   @ocaml.doc(
@@ -5650,6 +5686,7 @@ module ClaimDevice = {
   let make = (~id=?, ()) => new({id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module CancelInputDeviceTransfer = {
   type t
   @ocaml.doc("Placeholder documentation for CancelInputDeviceTransferRequest")
@@ -5664,6 +5701,7 @@ module CancelInputDeviceTransfer = {
   let make = (~inputDeviceId, ()) => new({inputDeviceId: inputDeviceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module BatchStop = {
   type t
   @ocaml.doc("A request to stop resources")
@@ -5679,9 +5717,11 @@ module BatchStop = {
     failed: option<__listOfBatchFailedResultModel>,
   }
   @module("@aws-sdk/client-medialive") @new external new: request => t = "BatchStopCommand"
-  let make = (~multiplexIds=?, ~channelIds=?, ()) => new({multiplexIds, channelIds})
+  let make = (~multiplexIds=?, ~channelIds=?, ()) =>
+    new({multiplexIds: multiplexIds, channelIds: channelIds})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module BatchStart = {
   type t
   @ocaml.doc("A request to start resources")
@@ -5697,9 +5737,11 @@ module BatchStart = {
     failed: option<__listOfBatchFailedResultModel>,
   }
   @module("@aws-sdk/client-medialive") @new external new: request => t = "BatchStartCommand"
-  let make = (~multiplexIds=?, ~channelIds=?, ()) => new({multiplexIds, channelIds})
+  let make = (~multiplexIds=?, ~channelIds=?, ()) =>
+    new({multiplexIds: multiplexIds, channelIds: channelIds})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module BatchDelete = {
   type t
   @ocaml.doc("A request to delete resources")
@@ -5719,9 +5761,15 @@ module BatchDelete = {
   }
   @module("@aws-sdk/client-medialive") @new external new: request => t = "BatchDeleteCommand"
   let make = (~multiplexIds=?, ~inputSecurityGroupIds=?, ~inputIds=?, ~channelIds=?, ()) =>
-    new({multiplexIds, inputSecurityGroupIds, inputIds, channelIds})
+    new({
+      multiplexIds: multiplexIds,
+      inputSecurityGroupIds: inputSecurityGroupIds,
+      inputIds: inputIds,
+      channelIds: channelIds,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module AcceptInputDeviceTransfer = {
   type t
   @ocaml.doc("Placeholder documentation for AcceptInputDeviceTransferRequest")
@@ -5736,6 +5784,7 @@ module AcceptInputDeviceTransfer = {
   let make = (~inputDeviceId, ()) => new({inputDeviceId: inputDeviceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateInputSecurityGroup = {
   type t
   @ocaml.doc(
@@ -5753,9 +5802,10 @@ module UpdateInputSecurityGroup = {
   @module("@aws-sdk/client-medialive") @new
   external new: request => t = "UpdateInputSecurityGroupCommand"
   let make = (~inputSecurityGroupId, ~whitelistRules=?, ~tags=?, ()) =>
-    new({whitelistRules, tags, inputSecurityGroupId})
+    new({whitelistRules: whitelistRules, tags: tags, inputSecurityGroupId: inputSecurityGroupId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module StopMultiplex = {
   type t
   @ocaml.doc("Placeholder documentation for StopMultiplexRequest")
@@ -5782,6 +5832,7 @@ module StopMultiplex = {
   let make = (~multiplexId, ()) => new({multiplexId: multiplexId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module StartMultiplex = {
   type t
   @ocaml.doc("Placeholder documentation for StartMultiplexRequest")
@@ -5808,6 +5859,7 @@ module StartMultiplex = {
   let make = (~multiplexId, ()) => new({multiplexId: multiplexId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListReservations = {
   type t
   @ocaml.doc("Placeholder documentation for ListReservationsRequest")
@@ -5856,19 +5908,20 @@ module ListReservations = {
     (),
   ) =>
     new({
-      videoQuality,
-      specialFeature,
-      resourceType,
-      resolution,
-      nextToken,
-      maximumFramerate,
-      maximumBitrate,
-      maxResults,
-      codec,
-      channelClass,
+      videoQuality: videoQuality,
+      specialFeature: specialFeature,
+      resourceType: resourceType,
+      resolution: resolution,
+      nextToken: nextToken,
+      maximumFramerate: maximumFramerate,
+      maximumBitrate: maximumBitrate,
+      maxResults: maxResults,
+      codec: codec,
+      channelClass: channelClass,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListOfferings = {
   type t
   @ocaml.doc("Placeholder documentation for ListOfferingsRequest")
@@ -5924,21 +5977,22 @@ module ListOfferings = {
     (),
   ) =>
     new({
-      videoQuality,
-      specialFeature,
-      resourceType,
-      resolution,
-      nextToken,
-      maximumFramerate,
-      maximumBitrate,
-      maxResults,
-      duration,
-      codec,
-      channelConfiguration,
-      channelClass,
+      videoQuality: videoQuality,
+      specialFeature: specialFeature,
+      resourceType: resourceType,
+      resolution: resolution,
+      nextToken: nextToken,
+      maximumFramerate: maximumFramerate,
+      maximumBitrate: maximumBitrate,
+      maxResults: maxResults,
+      duration: duration,
+      codec: codec,
+      channelConfiguration: channelConfiguration,
+      channelClass: channelClass,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListMultiplexes = {
   type t
   @ocaml.doc("Placeholder documentation for ListMultiplexesRequest")
@@ -5956,9 +6010,11 @@ module ListMultiplexes = {
     multiplexes: option<__listOfMultiplexSummary>,
   }
   @module("@aws-sdk/client-medialive") @new external new: request => t = "ListMultiplexesCommand"
-  let make = (~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults})
+  let make = (~nextToken=?, ~maxResults=?, ()) =>
+    new({nextToken: nextToken, maxResults: maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeMultiplexProgram = {
   type t
   @ocaml.doc("Placeholder documentation for DescribeMultiplexProgramRequest")
@@ -5985,9 +6041,11 @@ module DescribeMultiplexProgram = {
   }
   @module("@aws-sdk/client-medialive") @new
   external new: request => t = "DescribeMultiplexProgramCommand"
-  let make = (~programName, ~multiplexId, ()) => new({programName, multiplexId})
+  let make = (~programName, ~multiplexId, ()) =>
+    new({programName: programName, multiplexId: multiplexId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeMultiplex = {
   type t
   @ocaml.doc("Placeholder documentation for DescribeMultiplexRequest")
@@ -6014,6 +6072,7 @@ module DescribeMultiplex = {
   let make = (~multiplexId, ()) => new({multiplexId: multiplexId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeInput = {
   type t
   @ocaml.doc("Placeholder documentation for DescribeInputRequest")
@@ -6066,6 +6125,7 @@ SINGLE_PIPELINE - You can connect only one source to this input. If the ChannelC
   let make = (~inputId, ()) => new({inputId: inputId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteMultiplexProgram = {
   type t
   @ocaml.doc("Placeholder documentation for DeleteMultiplexProgramRequest")
@@ -6092,9 +6152,11 @@ module DeleteMultiplexProgram = {
   }
   @module("@aws-sdk/client-medialive") @new
   external new: request => t = "DeleteMultiplexProgramCommand"
-  let make = (~programName, ~multiplexId, ()) => new({programName, multiplexId})
+  let make = (~programName, ~multiplexId, ()) =>
+    new({programName: programName, multiplexId: multiplexId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteMultiplex = {
   type t
   @ocaml.doc("Placeholder documentation for DeleteMultiplexRequest")
@@ -6121,6 +6183,7 @@ module DeleteMultiplex = {
   let make = (~multiplexId, ()) => new({multiplexId: multiplexId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateInputSecurityGroup = {
   type t
   @ocaml.doc("The IPv4 CIDRs to whitelist for this Input Security Group")
@@ -6133,9 +6196,10 @@ module CreateInputSecurityGroup = {
   type response = {@as("SecurityGroup") securityGroup: option<inputSecurityGroup>}
   @module("@aws-sdk/client-medialive") @new
   external new: request => t = "CreateInputSecurityGroupCommand"
-  let make = (~whitelistRules=?, ~tags=?, ()) => new({whitelistRules, tags})
+  let make = (~whitelistRules=?, ~tags=?, ()) => new({whitelistRules: whitelistRules, tags: tags})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateMultiplexProgram = {
   type t
   @ocaml.doc("A request to update a program in a multiplex.")
@@ -6154,9 +6218,14 @@ module UpdateMultiplexProgram = {
   @module("@aws-sdk/client-medialive") @new
   external new: request => t = "UpdateMultiplexProgramCommand"
   let make = (~programName, ~multiplexId, ~multiplexProgramSettings=?, ()) =>
-    new({programName, multiplexProgramSettings, multiplexId})
+    new({
+      programName: programName,
+      multiplexProgramSettings: multiplexProgramSettings,
+      multiplexId: multiplexId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateMultiplex = {
   type t
   @ocaml.doc("A request to update a multiplex.")
@@ -6172,9 +6241,10 @@ module UpdateMultiplex = {
   }
   @module("@aws-sdk/client-medialive") @new external new: request => t = "UpdateMultiplexCommand"
   let make = (~multiplexId, ~name=?, ~multiplexSettings=?, ()) =>
-    new({name, multiplexSettings, multiplexId})
+    new({name: name, multiplexSettings: multiplexSettings, multiplexId: multiplexId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateInput = {
   type t
   @ocaml.doc("A request to update an input.")
@@ -6219,17 +6289,18 @@ separate Availability Zone as this ensures your EML input is redundant to AZ iss
     (),
   ) =>
     new({
-      sources,
-      roleArn,
-      name,
-      mediaConnectFlows,
-      inputSecurityGroups,
-      inputId,
-      inputDevices,
-      destinations,
+      sources: sources,
+      roleArn: roleArn,
+      name: name,
+      mediaConnectFlows: mediaConnectFlows,
+      inputSecurityGroups: inputSecurityGroups,
+      inputId: inputId,
+      inputDevices: inputDevices,
+      destinations: destinations,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListInputSecurityGroups = {
   type t
   @ocaml.doc("Placeholder documentation for ListInputSecurityGroupsRequest")
@@ -6245,9 +6316,11 @@ module ListInputSecurityGroups = {
   }
   @module("@aws-sdk/client-medialive") @new
   external new: request => t = "ListInputSecurityGroupsCommand"
-  let make = (~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults})
+  let make = (~nextToken=?, ~maxResults=?, ()) =>
+    new({nextToken: nextToken, maxResults: maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListInputDevices = {
   type t
   @ocaml.doc("Placeholder documentation for ListInputDevicesRequest")
@@ -6263,9 +6336,11 @@ module ListInputDevices = {
     inputDevices: option<__listOfInputDeviceSummary>,
   }
   @module("@aws-sdk/client-medialive") @new external new: request => t = "ListInputDevicesCommand"
-  let make = (~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults})
+  let make = (~nextToken=?, ~maxResults=?, ()) =>
+    new({nextToken: nextToken, maxResults: maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreatePartnerInput = {
   type t
   @ocaml.doc("A request to create a partner input")
@@ -6280,9 +6355,11 @@ exactly once in case of retries.")
   @ocaml.doc("Placeholder documentation for CreatePartnerInputResponse")
   type response = {@as("Input") input: option<input>}
   @module("@aws-sdk/client-medialive") @new external new: request => t = "CreatePartnerInputCommand"
-  let make = (~inputId, ~tags=?, ~requestId=?, ()) => new({tags, requestId, inputId})
+  let make = (~inputId, ~tags=?, ~requestId=?, ()) =>
+    new({tags: tags, requestId: requestId, inputId: inputId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateMultiplexProgram = {
   type t
   @ocaml.doc("A request to create a program in a multiplex.")
@@ -6305,9 +6382,15 @@ resources.")
   @module("@aws-sdk/client-medialive") @new
   external new: request => t = "CreateMultiplexProgramCommand"
   let make = (~requestId, ~programName, ~multiplexProgramSettings, ~multiplexId, ()) =>
-    new({requestId, programName, multiplexProgramSettings, multiplexId})
+    new({
+      requestId: requestId,
+      programName: programName,
+      multiplexProgramSettings: multiplexProgramSettings,
+      multiplexId: multiplexId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateMultiplex = {
   type t
   @ocaml.doc("A request to create a multiplex.")
@@ -6330,9 +6413,16 @@ resources.")
   }
   @module("@aws-sdk/client-medialive") @new external new: request => t = "CreateMultiplexCommand"
   let make = (~requestId, ~name, ~multiplexSettings, ~availabilityZones, ~tags=?, ()) =>
-    new({tags, requestId, name, multiplexSettings, availabilityZones})
+    new({
+      tags: tags,
+      requestId: requestId,
+      name: name,
+      multiplexSettings: multiplexSettings,
+      availabilityZones: availabilityZones,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateInput = {
   type t
   @ocaml.doc("The name of the input")
@@ -6386,20 +6476,21 @@ separate Availability Zone as this ensures your EML input is redundant to AZ iss
     (),
   ) =>
     new({
-      vpc,
-      type_,
-      tags,
-      sources,
-      roleArn,
-      requestId,
-      name,
-      mediaConnectFlows,
-      inputSecurityGroups,
-      inputDevices,
-      destinations,
+      vpc: vpc,
+      type_: type_,
+      tags: tags,
+      sources: sources,
+      roleArn: roleArn,
+      requestId: requestId,
+      name: name,
+      mediaConnectFlows: mediaConnectFlows,
+      inputSecurityGroups: inputSecurityGroups,
+      inputDevices: inputDevices,
+      destinations: destinations,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListInputs = {
   type t
   @ocaml.doc("Placeholder documentation for ListInputsRequest")
@@ -6413,9 +6504,11 @@ module ListInputs = {
     @as("Inputs") inputs: option<__listOfInput>,
   }
   @module("@aws-sdk/client-medialive") @new external new: request => t = "ListInputsCommand"
-  let make = (~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults})
+  let make = (~nextToken=?, ~maxResults=?, ()) =>
+    new({nextToken: nextToken, maxResults: maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeSchedule = {
   type t
   @ocaml.doc("Placeholder documentation for DescribeScheduleRequest")
@@ -6434,9 +6527,10 @@ module DescribeSchedule = {
   }
   @module("@aws-sdk/client-medialive") @new external new: request => t = "DescribeScheduleCommand"
   let make = (~channelId, ~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken, maxResults, channelId})
+    new({nextToken: nextToken, maxResults: maxResults, channelId: channelId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module StopChannel = {
   type t
   @ocaml.doc("Placeholder documentation for StopChannelRequest")
@@ -6487,6 +6581,7 @@ one destination per packager.")
   let make = (~channelId, ()) => new({channelId: channelId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module StartChannel = {
   type t
   @ocaml.doc("Placeholder documentation for StartChannelRequest")
@@ -6535,6 +6630,7 @@ one destination per packager.")
   let make = (~channelId, ()) => new({channelId: channelId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeChannel = {
   type t
   @ocaml.doc("Placeholder documentation for DescribeChannelRequest")
@@ -6583,6 +6679,7 @@ one destination per packager.")
   let make = (~channelId, ()) => new({channelId: channelId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteChannel = {
   type t
   @ocaml.doc("Placeholder documentation for DeleteChannelRequest")
@@ -6631,6 +6728,7 @@ one destination per packager.")
   let make = (~channelId, ()) => new({channelId: channelId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module BatchUpdateSchedule = {
   type t
   @ocaml.doc("List of actions to create and list of actions to delete.")
@@ -6651,9 +6749,11 @@ module BatchUpdateSchedule = {
   }
   @module("@aws-sdk/client-medialive") @new
   external new: request => t = "BatchUpdateScheduleCommand"
-  let make = (~channelId, ~deletes=?, ~creates=?, ()) => new({deletes, creates, channelId})
+  let make = (~channelId, ~deletes=?, ~creates=?, ()) =>
+    new({deletes: deletes, creates: creates, channelId: channelId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateChannelClass = {
   type t
   @ocaml.doc("Channel class that the channel should be updated to.")
@@ -6669,9 +6769,10 @@ module UpdateChannelClass = {
   type response = {@as("Channel") channel: option<channel>}
   @module("@aws-sdk/client-medialive") @new external new: request => t = "UpdateChannelClassCommand"
   let make = (~channelId, ~channelClass, ~destinations=?, ()) =>
-    new({destinations, channelId, channelClass})
+    new({destinations: destinations, channelId: channelId, channelClass: channelClass})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateChannel = {
   type t
   @ocaml.doc("A request to update a channel.")
@@ -6715,19 +6816,20 @@ module UpdateChannel = {
     (),
   ) =>
     new({
-      roleArn,
-      name,
-      maintenance,
-      logLevel,
-      inputSpecification,
-      inputAttachments,
-      encoderSettings,
-      destinations,
-      channelId,
-      cdiInputSpecification,
+      roleArn: roleArn,
+      name: name,
+      maintenance: maintenance,
+      logLevel: logLevel,
+      inputSpecification: inputSpecification,
+      inputAttachments: inputAttachments,
+      encoderSettings: encoderSettings,
+      destinations: destinations,
+      channelId: channelId,
+      cdiInputSpecification: cdiInputSpecification,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListChannels = {
   type t
   @ocaml.doc("Placeholder documentation for ListChannelsRequest")
@@ -6741,9 +6843,11 @@ module ListChannels = {
     @as("Channels") channels: option<__listOfChannelSummary>,
   }
   @module("@aws-sdk/client-medialive") @new external new: request => t = "ListChannelsCommand"
-  let make = (~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults})
+  let make = (~nextToken=?, ~maxResults=?, ()) =>
+    new({nextToken: nextToken, maxResults: maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateChannel = {
   type t
   @ocaml.doc("A request to create a channel")
@@ -6802,20 +6906,20 @@ creating multiple resources.")
     (),
   ) =>
     new({
-      vpc,
-      tags,
-      roleArn,
-      reserved,
-      requestId,
-      name,
-      maintenance,
-      logLevel,
-      inputSpecification,
-      inputAttachments,
-      encoderSettings,
-      destinations,
-      channelClass,
-      cdiInputSpecification,
+      vpc: vpc,
+      tags: tags,
+      roleArn: roleArn,
+      reserved: reserved,
+      requestId: requestId,
+      name: name,
+      maintenance: maintenance,
+      logLevel: logLevel,
+      inputSpecification: inputSpecification,
+      inputAttachments: inputAttachments,
+      encoderSettings: encoderSettings,
+      destinations: destinations,
+      channelClass: channelClass,
+      cdiInputSpecification: cdiInputSpecification,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

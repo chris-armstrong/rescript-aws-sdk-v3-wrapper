@@ -2718,9 +2718,14 @@ module SetInstanceHealth = {
   @module("@aws-sdk/client-autoscaling") @new
   external new: request => t = "SetInstanceHealthCommand"
   let make = (~healthStatus, ~instanceId, ~shouldRespectGracePeriod=?, ()) =>
-    new({shouldRespectGracePeriod, healthStatus, instanceId})
+    new({
+      shouldRespectGracePeriod: shouldRespectGracePeriod,
+      healthStatus: healthStatus,
+      instanceId: instanceId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module SetDesiredCapacity = {
   type t
   type request = {
@@ -2740,9 +2745,14 @@ module SetDesiredCapacity = {
   @module("@aws-sdk/client-autoscaling") @new
   external new: request => t = "SetDesiredCapacityCommand"
   let make = (~desiredCapacity, ~autoScalingGroupName, ~honorCooldown=?, ()) =>
-    new({honorCooldown, desiredCapacity, autoScalingGroupName})
+    new({
+      honorCooldown: honorCooldown,
+      desiredCapacity: desiredCapacity,
+      autoScalingGroupName: autoScalingGroupName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module RecordLifecycleActionHeartbeat = {
   type t
   type request = {
@@ -2767,9 +2777,16 @@ module RecordLifecycleActionHeartbeat = {
     ~instanceId=?,
     ~lifecycleActionToken=?,
     (),
-  ) => new({instanceId, lifecycleActionToken, autoScalingGroupName, lifecycleHookName})
+  ) =>
+    new({
+      instanceId: instanceId,
+      lifecycleActionToken: lifecycleActionToken,
+      autoScalingGroupName: autoScalingGroupName,
+      lifecycleHookName: lifecycleHookName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module PutScheduledUpdateGroupAction = {
   type t
   type request = {
@@ -2833,19 +2850,20 @@ module PutScheduledUpdateGroupAction = {
     (),
   ) =>
     new({
-      timeZone,
-      desiredCapacity,
-      maxSize,
-      minSize,
-      recurrence,
-      endTime,
-      startTime,
-      time,
-      scheduledActionName,
-      autoScalingGroupName,
+      timeZone: timeZone,
+      desiredCapacity: desiredCapacity,
+      maxSize: maxSize,
+      minSize: minSize,
+      recurrence: recurrence,
+      endTime: endTime,
+      startTime: startTime,
+      time: time,
+      scheduledActionName: scheduledActionName,
+      autoScalingGroupName: autoScalingGroupName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module PutLifecycleHook = {
   type t
   type request = {
@@ -2915,17 +2933,18 @@ module PutLifecycleHook = {
     (),
   ) =>
     new({
-      defaultResult,
-      heartbeatTimeout,
-      notificationMetadata,
-      notificationTargetARN,
-      roleARN,
-      lifecycleTransition,
-      autoScalingGroupName,
-      lifecycleHookName,
+      defaultResult: defaultResult,
+      heartbeatTimeout: heartbeatTimeout,
+      notificationMetadata: notificationMetadata,
+      notificationTargetARN: notificationTargetARN,
+      roleARN: roleARN,
+      lifecycleTransition: lifecycleTransition,
+      autoScalingGroupName: autoScalingGroupName,
+      lifecycleHookName: lifecycleHookName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ExecutePolicy = {
   type t
   type request = {
@@ -2965,9 +2984,17 @@ module ExecutePolicy = {
     ~honorCooldown=?,
     ~autoScalingGroupName=?,
     (),
-  ) => new({breachThreshold, metricValue, honorCooldown, policyName, autoScalingGroupName})
+  ) =>
+    new({
+      breachThreshold: breachThreshold,
+      metricValue: metricValue,
+      honorCooldown: honorCooldown,
+      policyName: policyName,
+      autoScalingGroupName: autoScalingGroupName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DescribeAccountLimits = {
   type t
   type request = {.}
@@ -2992,6 +3019,7 @@ module DescribeAccountLimits = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteWarmPool = {
   type t
   type request = {
@@ -3006,9 +3034,11 @@ module DeleteWarmPool = {
   }
   type response = {.}
   @module("@aws-sdk/client-autoscaling") @new external new: request => t = "DeleteWarmPoolCommand"
-  let make = (~autoScalingGroupName, ~forceDelete=?, ()) => new({forceDelete, autoScalingGroupName})
+  let make = (~autoScalingGroupName, ~forceDelete=?, ()) =>
+    new({forceDelete: forceDelete, autoScalingGroupName: autoScalingGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteScheduledAction = {
   type t
   type request = {
@@ -3021,9 +3051,10 @@ module DeleteScheduledAction = {
   @module("@aws-sdk/client-autoscaling") @new
   external new: request => t = "DeleteScheduledActionCommand"
   let make = (~scheduledActionName, ~autoScalingGroupName, ()) =>
-    new({scheduledActionName, autoScalingGroupName})
+    new({scheduledActionName: scheduledActionName, autoScalingGroupName: autoScalingGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeletePolicy = {
   type t
   type request = {
@@ -3034,9 +3065,11 @@ module DeletePolicy = {
   }
   type response = {.}
   @module("@aws-sdk/client-autoscaling") @new external new: request => t = "DeletePolicyCommand"
-  let make = (~policyName, ~autoScalingGroupName=?, ()) => new({policyName, autoScalingGroupName})
+  let make = (~policyName, ~autoScalingGroupName=?, ()) =>
+    new({policyName: policyName, autoScalingGroupName: autoScalingGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteNotificationConfiguration = {
   type t
   type request = {
@@ -3048,9 +3081,11 @@ module DeleteNotificationConfiguration = {
   type response = {.}
   @module("@aws-sdk/client-autoscaling") @new
   external new: request => t = "DeleteNotificationConfigurationCommand"
-  let make = (~topicARN, ~autoScalingGroupName, ()) => new({topicARN, autoScalingGroupName})
+  let make = (~topicARN, ~autoScalingGroupName, ()) =>
+    new({topicARN: topicARN, autoScalingGroupName: autoScalingGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteLifecycleHook = {
   type t
   type request = {
@@ -3063,9 +3098,10 @@ module DeleteLifecycleHook = {
   @module("@aws-sdk/client-autoscaling") @new
   external new: request => t = "DeleteLifecycleHookCommand"
   let make = (~autoScalingGroupName, ~lifecycleHookName, ()) =>
-    new({autoScalingGroupName, lifecycleHookName})
+    new({autoScalingGroupName: autoScalingGroupName, lifecycleHookName: lifecycleHookName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteLaunchConfiguration = {
   type t
   type request = {
@@ -3079,6 +3115,7 @@ module DeleteLaunchConfiguration = {
     new({launchConfigurationName: launchConfigurationName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteAutoScalingGroup = {
   type t
   type request = {
@@ -3093,9 +3130,11 @@ module DeleteAutoScalingGroup = {
   type response = {.}
   @module("@aws-sdk/client-autoscaling") @new
   external new: request => t = "DeleteAutoScalingGroupCommand"
-  let make = (~autoScalingGroupName, ~forceDelete=?, ()) => new({forceDelete, autoScalingGroupName})
+  let make = (~autoScalingGroupName, ~forceDelete=?, ()) =>
+    new({forceDelete: forceDelete, autoScalingGroupName: autoScalingGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module CompleteLifecycleAction = {
   type t
   type request = {
@@ -3127,14 +3166,15 @@ module CompleteLifecycleAction = {
     (),
   ) =>
     new({
-      instanceId,
-      lifecycleActionResult,
-      lifecycleActionToken,
-      autoScalingGroupName,
-      lifecycleHookName,
+      instanceId: instanceId,
+      lifecycleActionResult: lifecycleActionResult,
+      lifecycleActionToken: lifecycleActionToken,
+      autoScalingGroupName: autoScalingGroupName,
+      lifecycleHookName: lifecycleHookName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module CancelInstanceRefresh = {
   type t
   type request = {
@@ -3150,6 +3190,7 @@ module CancelInstanceRefresh = {
   let make = (~autoScalingGroupName, ()) => new({autoScalingGroupName: autoScalingGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module TerminateInstanceInAutoScalingGroup = {
   type t
   type request = {
@@ -3165,9 +3206,10 @@ module TerminateInstanceInAutoScalingGroup = {
   @module("@aws-sdk/client-autoscaling") @new
   external new: request => t = "TerminateInstanceInAutoScalingGroupCommand"
   let make = (~shouldDecrementDesiredCapacity, ~instanceId, ()) =>
-    new({shouldDecrementDesiredCapacity, instanceId})
+    new({shouldDecrementDesiredCapacity: shouldDecrementDesiredCapacity, instanceId: instanceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module SuspendProcesses = {
   type t
   type request = {
@@ -3228,9 +3270,10 @@ module SuspendProcesses = {
   type response = {.}
   @module("@aws-sdk/client-autoscaling") @new external new: request => t = "SuspendProcessesCommand"
   let make = (~autoScalingGroupName, ~scalingProcesses=?, ()) =>
-    new({scalingProcesses, autoScalingGroupName})
+    new({scalingProcesses: scalingProcesses, autoScalingGroupName: autoScalingGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module SetInstanceProtection = {
   type t
   type request = {
@@ -3248,9 +3291,14 @@ module SetInstanceProtection = {
   @module("@aws-sdk/client-autoscaling") @new
   external new: request => t = "SetInstanceProtectionCommand"
   let make = (~protectedFromScaleIn, ~autoScalingGroupName, ~instanceIds, ()) =>
-    new({protectedFromScaleIn, autoScalingGroupName, instanceIds})
+    new({
+      protectedFromScaleIn: protectedFromScaleIn,
+      autoScalingGroupName: autoScalingGroupName,
+      instanceIds: instanceIds,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ResumeProcesses = {
   type t
   type request = {
@@ -3311,9 +3359,10 @@ module ResumeProcesses = {
   type response = {.}
   @module("@aws-sdk/client-autoscaling") @new external new: request => t = "ResumeProcessesCommand"
   let make = (~autoScalingGroupName, ~scalingProcesses=?, ()) =>
-    new({scalingProcesses, autoScalingGroupName})
+    new({scalingProcesses: scalingProcesses, autoScalingGroupName: autoScalingGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module PutWarmPool = {
   type t
   type request = {
@@ -3364,9 +3413,16 @@ module PutWarmPool = {
     ~maxGroupPreparedCapacity=?,
     (),
   ) =>
-    new({instanceReusePolicy, poolState, minSize, maxGroupPreparedCapacity, autoScalingGroupName})
+    new({
+      instanceReusePolicy: instanceReusePolicy,
+      poolState: poolState,
+      minSize: minSize,
+      maxGroupPreparedCapacity: maxGroupPreparedCapacity,
+      autoScalingGroupName: autoScalingGroupName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module PutNotificationConfiguration = {
   type t
   type request = {
@@ -3383,9 +3439,14 @@ module PutNotificationConfiguration = {
   @module("@aws-sdk/client-autoscaling") @new
   external new: request => t = "PutNotificationConfigurationCommand"
   let make = (~notificationTypes, ~topicARN, ~autoScalingGroupName, ()) =>
-    new({notificationTypes, topicARN, autoScalingGroupName})
+    new({
+      notificationTypes: notificationTypes,
+      topicARN: topicARN,
+      autoScalingGroupName: autoScalingGroupName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module EnableMetricsCollection = {
   type t
   type request = {
@@ -3513,9 +3574,10 @@ module EnableMetricsCollection = {
   @module("@aws-sdk/client-autoscaling") @new
   external new: request => t = "EnableMetricsCollectionCommand"
   let make = (~granularity, ~autoScalingGroupName, ~metrics=?, ()) =>
-    new({granularity, metrics, autoScalingGroupName})
+    new({granularity: granularity, metrics: metrics, autoScalingGroupName: autoScalingGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DisableMetricsCollection = {
   type t
   type request = {
@@ -3631,9 +3693,11 @@ module DisableMetricsCollection = {
   type response = {.}
   @module("@aws-sdk/client-autoscaling") @new
   external new: request => t = "DisableMetricsCollectionCommand"
-  let make = (~autoScalingGroupName, ~metrics=?, ()) => new({metrics, autoScalingGroupName})
+  let make = (~autoScalingGroupName, ~metrics=?, ()) =>
+    new({metrics: metrics, autoScalingGroupName: autoScalingGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DetachLoadBalancers = {
   type t
   type request = {
@@ -3647,9 +3711,10 @@ module DetachLoadBalancers = {
   @module("@aws-sdk/client-autoscaling") @new
   external new: request => t = "DetachLoadBalancersCommand"
   let make = (~loadBalancerNames, ~autoScalingGroupName, ()) =>
-    new({loadBalancerNames, autoScalingGroupName})
+    new({loadBalancerNames: loadBalancerNames, autoScalingGroupName: autoScalingGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DetachLoadBalancerTargetGroups = {
   type t
   type request = {
@@ -3664,9 +3729,10 @@ module DetachLoadBalancerTargetGroups = {
   @module("@aws-sdk/client-autoscaling") @new
   external new: request => t = "DetachLoadBalancerTargetGroupsCommand"
   let make = (~targetGroupARNs, ~autoScalingGroupName, ()) =>
-    new({targetGroupARNs, autoScalingGroupName})
+    new({targetGroupARNs: targetGroupARNs, autoScalingGroupName: autoScalingGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DescribeTerminationPolicyTypes = {
   type t
   type request = {.}
@@ -3683,6 +3749,7 @@ module DescribeTerminationPolicyTypes = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeLifecycleHookTypes = {
   type t
   type request = {.}
@@ -3695,6 +3762,7 @@ module DescribeLifecycleHookTypes = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeAutoScalingNotificationTypes = {
   type t
   type request = {.}
@@ -3707,6 +3775,7 @@ module DescribeAutoScalingNotificationTypes = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module AttachLoadBalancers = {
   type t
   type request = {
@@ -3720,9 +3789,10 @@ module AttachLoadBalancers = {
   @module("@aws-sdk/client-autoscaling") @new
   external new: request => t = "AttachLoadBalancersCommand"
   let make = (~loadBalancerNames, ~autoScalingGroupName, ()) =>
-    new({loadBalancerNames, autoScalingGroupName})
+    new({loadBalancerNames: loadBalancerNames, autoScalingGroupName: autoScalingGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module AttachLoadBalancerTargetGroups = {
   type t
   type request = {
@@ -3737,9 +3807,10 @@ module AttachLoadBalancerTargetGroups = {
   @module("@aws-sdk/client-autoscaling") @new
   external new: request => t = "AttachLoadBalancerTargetGroupsCommand"
   let make = (~targetGroupARNs, ~autoScalingGroupName, ()) =>
-    new({targetGroupARNs, autoScalingGroupName})
+    new({targetGroupARNs: targetGroupARNs, autoScalingGroupName: autoScalingGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module AttachInstances = {
   type t
   type request = {
@@ -3751,9 +3822,11 @@ module AttachInstances = {
   }
   type response = {.}
   @module("@aws-sdk/client-autoscaling") @new external new: request => t = "AttachInstancesCommand"
-  let make = (~autoScalingGroupName, ~instanceIds=?, ()) => new({autoScalingGroupName, instanceIds})
+  let make = (~autoScalingGroupName, ~instanceIds=?, ()) =>
+    new({autoScalingGroupName: autoScalingGroupName, instanceIds: instanceIds})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ExitStandby = {
   type t
   type request = {
@@ -3771,9 +3844,11 @@ module ExitStandby = {
     activities: option<activities>,
   }
   @module("@aws-sdk/client-autoscaling") @new external new: request => t = "ExitStandbyCommand"
-  let make = (~autoScalingGroupName, ~instanceIds=?, ()) => new({autoScalingGroupName, instanceIds})
+  let make = (~autoScalingGroupName, ~instanceIds=?, ()) =>
+    new({autoScalingGroupName: autoScalingGroupName, instanceIds: instanceIds})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module EnterStandby = {
   type t
   type request = {
@@ -3794,9 +3869,14 @@ module EnterStandby = {
   }
   @module("@aws-sdk/client-autoscaling") @new external new: request => t = "EnterStandbyCommand"
   let make = (~shouldDecrementDesiredCapacity, ~autoScalingGroupName, ~instanceIds=?, ()) =>
-    new({shouldDecrementDesiredCapacity, autoScalingGroupName, instanceIds})
+    new({
+      shouldDecrementDesiredCapacity: shouldDecrementDesiredCapacity,
+      autoScalingGroupName: autoScalingGroupName,
+      instanceIds: instanceIds,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DetachInstances = {
   type t
   type request = {
@@ -3819,9 +3899,14 @@ module DetachInstances = {
   }
   @module("@aws-sdk/client-autoscaling") @new external new: request => t = "DetachInstancesCommand"
   let make = (~shouldDecrementDesiredCapacity, ~autoScalingGroupName, ~instanceIds=?, ()) =>
-    new({shouldDecrementDesiredCapacity, autoScalingGroupName, instanceIds})
+    new({
+      shouldDecrementDesiredCapacity: shouldDecrementDesiredCapacity,
+      autoScalingGroupName: autoScalingGroupName,
+      instanceIds: instanceIds,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeScheduledActions = {
   type t
   type request = {
@@ -3870,9 +3955,18 @@ module DescribeScheduledActions = {
     ~scheduledActionNames=?,
     ~autoScalingGroupName=?,
     (),
-  ) => new({maxRecords, nextToken, endTime, startTime, scheduledActionNames, autoScalingGroupName})
+  ) =>
+    new({
+      maxRecords: maxRecords,
+      nextToken: nextToken,
+      endTime: endTime,
+      startTime: startTime,
+      scheduledActionNames: scheduledActionNames,
+      autoScalingGroupName: autoScalingGroupName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeScalingProcessTypes = {
   type t
   type request = {.}
@@ -3885,6 +3979,7 @@ module DescribeScalingProcessTypes = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeScalingActivities = {
   type t
   type request = {
@@ -3932,9 +4027,17 @@ module DescribeScalingActivities = {
     ~autoScalingGroupName=?,
     ~activityIds=?,
     (),
-  ) => new({nextToken, maxRecords, includeDeletedGroups, autoScalingGroupName, activityIds})
+  ) =>
+    new({
+      nextToken: nextToken,
+      maxRecords: maxRecords,
+      includeDeletedGroups: includeDeletedGroups,
+      autoScalingGroupName: autoScalingGroupName,
+      activityIds: activityIds,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeNotificationConfigurations = {
   type t
   type request = {
@@ -3962,9 +4065,14 @@ module DescribeNotificationConfigurations = {
   @module("@aws-sdk/client-autoscaling") @new
   external new: request => t = "DescribeNotificationConfigurationsCommand"
   let make = (~maxRecords=?, ~nextToken=?, ~autoScalingGroupNames=?, ()) =>
-    new({maxRecords, nextToken, autoScalingGroupNames})
+    new({
+      maxRecords: maxRecords,
+      nextToken: nextToken,
+      autoScalingGroupNames: autoScalingGroupNames,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeMetricCollectionTypes = {
   type t
   type request = {.}
@@ -3978,6 +4086,7 @@ module DescribeMetricCollectionTypes = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeLoadBalancers = {
   type t
   type request = {
@@ -4005,9 +4114,10 @@ module DescribeLoadBalancers = {
   @module("@aws-sdk/client-autoscaling") @new
   external new: request => t = "DescribeLoadBalancersCommand"
   let make = (~autoScalingGroupName, ~maxRecords=?, ~nextToken=?, ()) =>
-    new({maxRecords, nextToken, autoScalingGroupName})
+    new({maxRecords: maxRecords, nextToken: nextToken, autoScalingGroupName: autoScalingGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeLoadBalancerTargetGroups = {
   type t
   type request = {
@@ -4035,9 +4145,10 @@ module DescribeLoadBalancerTargetGroups = {
   @module("@aws-sdk/client-autoscaling") @new
   external new: request => t = "DescribeLoadBalancerTargetGroupsCommand"
   let make = (~autoScalingGroupName, ~maxRecords=?, ~nextToken=?, ()) =>
-    new({maxRecords, nextToken, autoScalingGroupName})
+    new({maxRecords: maxRecords, nextToken: nextToken, autoScalingGroupName: autoScalingGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeLifecycleHooks = {
   type t
   type request = {
@@ -4055,9 +4166,10 @@ module DescribeLifecycleHooks = {
   @module("@aws-sdk/client-autoscaling") @new
   external new: request => t = "DescribeLifecycleHooksCommand"
   let make = (~autoScalingGroupName, ~lifecycleHookNames=?, ()) =>
-    new({lifecycleHookNames, autoScalingGroupName})
+    new({lifecycleHookNames: lifecycleHookNames, autoScalingGroupName: autoScalingGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeAdjustmentTypes = {
   type t
   type request = {.}
@@ -4070,6 +4182,7 @@ module DescribeAdjustmentTypes = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteTags = {
   type t
   type request = {@ocaml.doc("<p>One or more tags.</p>") @as("Tags") tags: tags}
@@ -4078,6 +4191,7 @@ module DeleteTags = {
   let make = (~tags, ()) => new({tags: tags})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module CreateOrUpdateTags = {
   type t
   type request = {@ocaml.doc("<p>One or more tags.</p>") @as("Tags") tags: tags}
@@ -4087,6 +4201,7 @@ module CreateOrUpdateTags = {
   let make = (~tags, ()) => new({tags: tags})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module BatchPutScheduledUpdateGroupAction = {
   type t
   type request = {
@@ -4105,9 +4220,13 @@ module BatchPutScheduledUpdateGroupAction = {
   @module("@aws-sdk/client-autoscaling") @new
   external new: request => t = "BatchPutScheduledUpdateGroupActionCommand"
   let make = (~scheduledUpdateGroupActions, ~autoScalingGroupName, ()) =>
-    new({scheduledUpdateGroupActions, autoScalingGroupName})
+    new({
+      scheduledUpdateGroupActions: scheduledUpdateGroupActions,
+      autoScalingGroupName: autoScalingGroupName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module BatchDeleteScheduledAction = {
   type t
   type request = {
@@ -4127,9 +4246,10 @@ module BatchDeleteScheduledAction = {
   @module("@aws-sdk/client-autoscaling") @new
   external new: request => t = "BatchDeleteScheduledActionCommand"
   let make = (~scheduledActionNames, ~autoScalingGroupName, ()) =>
-    new({scheduledActionNames, autoScalingGroupName})
+    new({scheduledActionNames: scheduledActionNames, autoScalingGroupName: autoScalingGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeWarmPool = {
   type t
   type request = {
@@ -4156,9 +4276,10 @@ module DescribeWarmPool = {
   }
   @module("@aws-sdk/client-autoscaling") @new external new: request => t = "DescribeWarmPoolCommand"
   let make = (~autoScalingGroupName, ~nextToken=?, ~maxRecords=?, ()) =>
-    new({nextToken, maxRecords, autoScalingGroupName})
+    new({nextToken: nextToken, maxRecords: maxRecords, autoScalingGroupName: autoScalingGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeTags = {
   type t
   type request = {
@@ -4185,9 +4306,11 @@ module DescribeTags = {
     @ocaml.doc("<p>One or more tags.</p>") @as("Tags") tags: option<tagDescriptionList>,
   }
   @module("@aws-sdk/client-autoscaling") @new external new: request => t = "DescribeTagsCommand"
-  let make = (~maxRecords=?, ~nextToken=?, ~filters=?, ()) => new({maxRecords, nextToken, filters})
+  let make = (~maxRecords=?, ~nextToken=?, ~filters=?, ()) =>
+    new({maxRecords: maxRecords, nextToken: nextToken, filters: filters})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeAutoScalingInstances = {
   type t
   type request = {
@@ -4218,9 +4341,10 @@ module DescribeAutoScalingInstances = {
   @module("@aws-sdk/client-autoscaling") @new
   external new: request => t = "DescribeAutoScalingInstancesCommand"
   let make = (~nextToken=?, ~maxRecords=?, ~instanceIds=?, ()) =>
-    new({nextToken, maxRecords, instanceIds})
+    new({nextToken: nextToken, maxRecords: maxRecords, instanceIds: instanceIds})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateLaunchConfiguration = {
   type t
   type request = {
@@ -4398,28 +4522,29 @@ module CreateLaunchConfiguration = {
     (),
   ) =>
     new({
-      metadataOptions,
-      placementTenancy,
-      associatePublicIpAddress,
-      ebsOptimized,
-      iamInstanceProfile,
-      spotPrice,
-      instanceMonitoring,
-      blockDeviceMappings,
-      ramdiskId,
-      kernelId,
-      instanceType,
-      instanceId,
-      userData,
-      classicLinkVPCSecurityGroups,
-      classicLinkVPCId,
-      securityGroups,
-      keyName,
-      imageId,
-      launchConfigurationName,
+      metadataOptions: metadataOptions,
+      placementTenancy: placementTenancy,
+      associatePublicIpAddress: associatePublicIpAddress,
+      ebsOptimized: ebsOptimized,
+      iamInstanceProfile: iamInstanceProfile,
+      spotPrice: spotPrice,
+      instanceMonitoring: instanceMonitoring,
+      blockDeviceMappings: blockDeviceMappings,
+      ramdiskId: ramdiskId,
+      kernelId: kernelId,
+      instanceType: instanceType,
+      instanceId: instanceId,
+      userData: userData,
+      classicLinkVPCSecurityGroups: classicLinkVPCSecurityGroups,
+      classicLinkVPCId: classicLinkVPCId,
+      securityGroups: securityGroups,
+      keyName: keyName,
+      imageId: imageId,
+      launchConfigurationName: launchConfigurationName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DescribeLaunchConfigurations = {
   type t
   type request = {
@@ -4450,9 +4575,14 @@ module DescribeLaunchConfigurations = {
   @module("@aws-sdk/client-autoscaling") @new
   external new: request => t = "DescribeLaunchConfigurationsCommand"
   let make = (~maxRecords=?, ~nextToken=?, ~launchConfigurationNames=?, ()) =>
-    new({maxRecords, nextToken, launchConfigurationNames})
+    new({
+      maxRecords: maxRecords,
+      nextToken: nextToken,
+      launchConfigurationNames: launchConfigurationNames,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateAutoScalingGroup = {
   type t
   type request = {
@@ -4595,29 +4725,30 @@ module UpdateAutoScalingGroup = {
     (),
   ) =>
     new({
-      desiredCapacityType,
-      context,
-      capacityRebalance,
-      maxInstanceLifetime,
-      serviceLinkedRoleARN,
-      newInstancesProtectedFromScaleIn,
-      terminationPolicies,
-      vpczoneIdentifier,
-      placementGroup,
-      healthCheckGracePeriod,
-      healthCheckType,
-      availabilityZones,
-      defaultCooldown,
-      desiredCapacity,
-      maxSize,
-      minSize,
-      mixedInstancesPolicy,
-      launchTemplate,
-      launchConfigurationName,
-      autoScalingGroupName,
+      desiredCapacityType: desiredCapacityType,
+      context: context,
+      capacityRebalance: capacityRebalance,
+      maxInstanceLifetime: maxInstanceLifetime,
+      serviceLinkedRoleARN: serviceLinkedRoleARN,
+      newInstancesProtectedFromScaleIn: newInstancesProtectedFromScaleIn,
+      terminationPolicies: terminationPolicies,
+      vpczoneIdentifier: vpczoneIdentifier,
+      placementGroup: placementGroup,
+      healthCheckGracePeriod: healthCheckGracePeriod,
+      healthCheckType: healthCheckType,
+      availabilityZones: availabilityZones,
+      defaultCooldown: defaultCooldown,
+      desiredCapacity: desiredCapacity,
+      maxSize: maxSize,
+      minSize: minSize,
+      mixedInstancesPolicy: mixedInstancesPolicy,
+      launchTemplate: launchTemplate,
+      launchConfigurationName: launchConfigurationName,
+      autoScalingGroupName: autoScalingGroupName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module CreateAutoScalingGroup = {
   type t
   type request = {
@@ -4826,34 +4957,35 @@ module CreateAutoScalingGroup = {
     (),
   ) =>
     new({
-      desiredCapacityType,
-      context,
-      maxInstanceLifetime,
-      serviceLinkedRoleARN,
-      tags,
-      lifecycleHookSpecificationList,
-      capacityRebalance,
-      newInstancesProtectedFromScaleIn,
-      terminationPolicies,
-      vpczoneIdentifier,
-      placementGroup,
-      healthCheckGracePeriod,
-      healthCheckType,
-      targetGroupARNs,
-      loadBalancerNames,
-      availabilityZones,
-      defaultCooldown,
-      desiredCapacity,
-      maxSize,
-      minSize,
-      instanceId,
-      mixedInstancesPolicy,
-      launchTemplate,
-      launchConfigurationName,
-      autoScalingGroupName,
+      desiredCapacityType: desiredCapacityType,
+      context: context,
+      maxInstanceLifetime: maxInstanceLifetime,
+      serviceLinkedRoleARN: serviceLinkedRoleARN,
+      tags: tags,
+      lifecycleHookSpecificationList: lifecycleHookSpecificationList,
+      capacityRebalance: capacityRebalance,
+      newInstancesProtectedFromScaleIn: newInstancesProtectedFromScaleIn,
+      terminationPolicies: terminationPolicies,
+      vpczoneIdentifier: vpczoneIdentifier,
+      placementGroup: placementGroup,
+      healthCheckGracePeriod: healthCheckGracePeriod,
+      healthCheckType: healthCheckType,
+      targetGroupARNs: targetGroupARNs,
+      loadBalancerNames: loadBalancerNames,
+      availabilityZones: availabilityZones,
+      defaultCooldown: defaultCooldown,
+      desiredCapacity: desiredCapacity,
+      maxSize: maxSize,
+      minSize: minSize,
+      instanceId: instanceId,
+      mixedInstancesPolicy: mixedInstancesPolicy,
+      launchTemplate: launchTemplate,
+      launchConfigurationName: launchConfigurationName,
+      autoScalingGroupName: autoScalingGroupName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module StartInstanceRefresh = {
   type t
   type request = {
@@ -4894,9 +5026,15 @@ module StartInstanceRefresh = {
   @module("@aws-sdk/client-autoscaling") @new
   external new: request => t = "StartInstanceRefreshCommand"
   let make = (~autoScalingGroupName, ~preferences=?, ~desiredConfiguration=?, ~strategy=?, ()) =>
-    new({preferences, desiredConfiguration, strategy, autoScalingGroupName})
+    new({
+      preferences: preferences,
+      desiredConfiguration: desiredConfiguration,
+      strategy: strategy,
+      autoScalingGroupName: autoScalingGroupName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeAutoScalingGroups = {
   type t
   type request = {
@@ -4930,9 +5068,15 @@ module DescribeAutoScalingGroups = {
   @module("@aws-sdk/client-autoscaling") @new
   external new: request => t = "DescribeAutoScalingGroupsCommand"
   let make = (~filters=?, ~maxRecords=?, ~nextToken=?, ~autoScalingGroupNames=?, ()) =>
-    new({filters, maxRecords, nextToken, autoScalingGroupNames})
+    new({
+      filters: filters,
+      maxRecords: maxRecords,
+      nextToken: nextToken,
+      autoScalingGroupNames: autoScalingGroupNames,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeInstanceRefreshes = {
   type t
   type request = {
@@ -4962,9 +5106,15 @@ module DescribeInstanceRefreshes = {
   @module("@aws-sdk/client-autoscaling") @new
   external new: request => t = "DescribeInstanceRefreshesCommand"
   let make = (~autoScalingGroupName, ~maxRecords=?, ~nextToken=?, ~instanceRefreshIds=?, ()) =>
-    new({maxRecords, nextToken, instanceRefreshIds, autoScalingGroupName})
+    new({
+      maxRecords: maxRecords,
+      nextToken: nextToken,
+      instanceRefreshIds: instanceRefreshIds,
+      autoScalingGroupName: autoScalingGroupName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module PutScalingPolicy = {
   type t
   type request = {
@@ -5133,23 +5283,24 @@ module PutScalingPolicy = {
     (),
   ) =>
     new({
-      predictiveScalingConfiguration,
-      enabled,
-      targetTrackingConfiguration,
-      estimatedInstanceWarmup,
-      stepAdjustments,
-      metricAggregationType,
-      cooldown,
-      scalingAdjustment,
-      minAdjustmentMagnitude,
-      minAdjustmentStep,
-      adjustmentType,
-      policyType,
-      policyName,
-      autoScalingGroupName,
+      predictiveScalingConfiguration: predictiveScalingConfiguration,
+      enabled: enabled,
+      targetTrackingConfiguration: targetTrackingConfiguration,
+      estimatedInstanceWarmup: estimatedInstanceWarmup,
+      stepAdjustments: stepAdjustments,
+      metricAggregationType: metricAggregationType,
+      cooldown: cooldown,
+      scalingAdjustment: scalingAdjustment,
+      minAdjustmentMagnitude: minAdjustmentMagnitude,
+      minAdjustmentStep: minAdjustmentStep,
+      adjustmentType: adjustmentType,
+      policyType: policyType,
+      policyName: policyName,
+      autoScalingGroupName: autoScalingGroupName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetPredictiveScalingForecast = {
   type t
   type request = {
@@ -5178,9 +5329,15 @@ module GetPredictiveScalingForecast = {
   @module("@aws-sdk/client-autoscaling") @new
   external new: request => t = "GetPredictiveScalingForecastCommand"
   let make = (~endTime, ~startTime, ~policyName, ~autoScalingGroupName, ()) =>
-    new({endTime, startTime, policyName, autoScalingGroupName})
+    new({
+      endTime: endTime,
+      startTime: startTime,
+      policyName: policyName,
+      autoScalingGroupName: autoScalingGroupName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribePolicies = {
   type t
   type request = {
@@ -5224,6 +5381,13 @@ module DescribePolicies = {
     ~policyNames=?,
     ~autoScalingGroupName=?,
     (),
-  ) => new({maxRecords, nextToken, policyTypes, policyNames, autoScalingGroupName})
+  ) =>
+    new({
+      maxRecords: maxRecords,
+      nextToken: nextToken,
+      policyTypes: policyTypes,
+      policyNames: policyNames,
+      autoScalingGroupName: autoScalingGroupName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

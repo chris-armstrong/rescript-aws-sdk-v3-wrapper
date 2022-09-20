@@ -1848,9 +1848,11 @@ module UpdateEmailIdentityPolicy = {
   type response = {.}
   @module("@aws-sdk/client-ses") @new
   external new: request => t = "UpdateEmailIdentityPolicyCommand"
-  let make = (~policy, ~policyName, ~emailIdentity, ()) => new({policy, policyName, emailIdentity})
+  let make = (~policy, ~policyName, ~emailIdentity, ()) =>
+    new({policy: policy, policyName: policyName, emailIdentity: emailIdentity})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateCustomVerificationEmailTemplate = {
   type t
   @ocaml.doc(
@@ -1893,15 +1895,16 @@ module UpdateCustomVerificationEmailTemplate = {
     (),
   ) =>
     new({
-      failureRedirectionURL,
-      successRedirectionURL,
-      templateContent,
-      templateSubject,
-      fromEmailAddress,
-      templateName,
+      failureRedirectionURL: failureRedirectionURL,
+      successRedirectionURL: successRedirectionURL,
+      templateContent: templateContent,
+      templateSubject: templateSubject,
+      fromEmailAddress: fromEmailAddress,
+      templateName: templateName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module TestRenderEmailTemplate = {
   type t
   @ocaml.doc("<p>>Represents a request to create a preview of the MIME content of an email when
@@ -1924,9 +1927,11 @@ module TestRenderEmailTemplate = {
     renderedTemplate: renderedEmailTemplate,
   }
   @module("@aws-sdk/client-ses") @new external new: request => t = "TestRenderEmailTemplateCommand"
-  let make = (~templateData, ~templateName, ()) => new({templateData, templateName})
+  let make = (~templateData, ~templateName, ()) =>
+    new({templateData: templateData, templateName: templateName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module SendCustomVerificationEmail = {
   type t
   @ocaml.doc("<p>Represents a request to send a custom verification email to a specified
@@ -1952,9 +1957,14 @@ module SendCustomVerificationEmail = {
   @module("@aws-sdk/client-ses") @new
   external new: request => t = "SendCustomVerificationEmailCommand"
   let make = (~templateName, ~emailAddress, ~configurationSetName=?, ()) =>
-    new({configurationSetName, templateName, emailAddress})
+    new({
+      configurationSetName: configurationSetName,
+      templateName: templateName,
+      emailAddress: emailAddress,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module PutSuppressedDestination = {
   type t
   @ocaml.doc(
@@ -1972,9 +1982,10 @@ module PutSuppressedDestination = {
   }
   type response = {.}
   @module("@aws-sdk/client-ses") @new external new: request => t = "PutSuppressedDestinationCommand"
-  let make = (~reason, ~emailAddress, ()) => new({reason, emailAddress})
+  let make = (~reason, ~emailAddress, ()) => new({reason: reason, emailAddress: emailAddress})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module PutEmailIdentityMailFromAttributes = {
   type t
   @ocaml.doc("<p>A request to configure the custom MAIL FROM domain for a verified identity.</p>")
@@ -2012,9 +2023,14 @@ module PutEmailIdentityMailFromAttributes = {
   @module("@aws-sdk/client-ses") @new
   external new: request => t = "PutEmailIdentityMailFromAttributesCommand"
   let make = (~emailIdentity, ~behaviorOnMxFailure=?, ~mailFromDomain=?, ()) =>
-    new({behaviorOnMxFailure, mailFromDomain, emailIdentity})
+    new({
+      behaviorOnMxFailure: behaviorOnMxFailure,
+      mailFromDomain: mailFromDomain,
+      emailIdentity: emailIdentity,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module PutEmailIdentityFeedbackAttributes = {
   type t
   @ocaml.doc("<p>A request to set the attributes that control how bounce and complaint events are
@@ -2036,9 +2052,10 @@ module PutEmailIdentityFeedbackAttributes = {
   @module("@aws-sdk/client-ses") @new
   external new: request => t = "PutEmailIdentityFeedbackAttributesCommand"
   let make = (~emailIdentity, ~emailForwardingEnabled=?, ()) =>
-    new({emailForwardingEnabled, emailIdentity})
+    new({emailForwardingEnabled: emailForwardingEnabled, emailIdentity: emailIdentity})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module PutEmailIdentityDkimAttributes = {
   type t
   @ocaml.doc("<p>A request to enable or disable DKIM signing of email that you send from an email
@@ -2055,9 +2072,11 @@ module PutEmailIdentityDkimAttributes = {
   type response = {.}
   @module("@aws-sdk/client-ses") @new
   external new: request => t = "PutEmailIdentityDkimAttributesCommand"
-  let make = (~emailIdentity, ~signingEnabled=?, ()) => new({signingEnabled, emailIdentity})
+  let make = (~emailIdentity, ~signingEnabled=?, ()) =>
+    new({signingEnabled: signingEnabled, emailIdentity: emailIdentity})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module PutEmailIdentityConfigurationSetAttributes = {
   type t
   @ocaml.doc("<p>A request to associate a configuration set with an email identity.</p>")
@@ -2073,9 +2092,10 @@ module PutEmailIdentityConfigurationSetAttributes = {
   @module("@aws-sdk/client-ses") @new
   external new: request => t = "PutEmailIdentityConfigurationSetAttributesCommand"
   let make = (~emailIdentity, ~configurationSetName=?, ()) =>
-    new({configurationSetName, emailIdentity})
+    new({configurationSetName: configurationSetName, emailIdentity: emailIdentity})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module PutDedicatedIpWarmupAttributes = {
   type t
   @ocaml.doc("<p>A request to change the warm-up attributes for a dedicated IP address. This operation
@@ -2094,9 +2114,10 @@ module PutDedicatedIpWarmupAttributes = {
   type response = {.}
   @module("@aws-sdk/client-ses") @new
   external new: request => t = "PutDedicatedIpWarmupAttributesCommand"
-  let make = (~warmupPercentage, ~ip, ()) => new({warmupPercentage, ip})
+  let make = (~warmupPercentage, ~ip, ()) => new({warmupPercentage: warmupPercentage, ip: ip})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module PutDedicatedIpInPool = {
   type t
   @ocaml.doc("<p>A request to move a dedicated IP address to a dedicated IP pool.</p>")
@@ -2112,9 +2133,11 @@ module PutDedicatedIpInPool = {
   }
   type response = {.}
   @module("@aws-sdk/client-ses") @new external new: request => t = "PutDedicatedIpInPoolCommand"
-  let make = (~destinationPoolName, ~ip, ()) => new({destinationPoolName, ip})
+  let make = (~destinationPoolName, ~ip, ()) =>
+    new({destinationPoolName: destinationPoolName, ip: ip})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module PutConfigurationSetTrackingOptions = {
   type t
   @ocaml.doc("<p>A request to add a custom domain for tracking open and click events to a configuration
@@ -2130,9 +2153,10 @@ module PutConfigurationSetTrackingOptions = {
   @module("@aws-sdk/client-ses") @new
   external new: request => t = "PutConfigurationSetTrackingOptionsCommand"
   let make = (~configurationSetName, ~customRedirectDomain=?, ()) =>
-    new({customRedirectDomain, configurationSetName})
+    new({customRedirectDomain: customRedirectDomain, configurationSetName: configurationSetName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module PutConfigurationSetSendingOptions = {
   type t
   @ocaml.doc("<p>A request to enable or disable the ability of Amazon SES to send emails that use a specific
@@ -2150,9 +2174,10 @@ module PutConfigurationSetSendingOptions = {
   @module("@aws-sdk/client-ses") @new
   external new: request => t = "PutConfigurationSetSendingOptionsCommand"
   let make = (~configurationSetName, ~sendingEnabled=?, ()) =>
-    new({sendingEnabled, configurationSetName})
+    new({sendingEnabled: sendingEnabled, configurationSetName: configurationSetName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module PutConfigurationSetReputationOptions = {
   type t
   @ocaml.doc("<p>A request to enable or disable tracking of reputation metrics for a configuration
@@ -2170,9 +2195,13 @@ module PutConfigurationSetReputationOptions = {
   @module("@aws-sdk/client-ses") @new
   external new: request => t = "PutConfigurationSetReputationOptionsCommand"
   let make = (~configurationSetName, ~reputationMetricsEnabled=?, ()) =>
-    new({reputationMetricsEnabled, configurationSetName})
+    new({
+      reputationMetricsEnabled: reputationMetricsEnabled,
+      configurationSetName: configurationSetName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module PutConfigurationSetDeliveryOptions = {
   type t
   @ocaml.doc("<p>A request to associate a configuration set with a dedicated IP pool.</p>")
@@ -2194,9 +2223,14 @@ module PutConfigurationSetDeliveryOptions = {
   @module("@aws-sdk/client-ses") @new
   external new: request => t = "PutConfigurationSetDeliveryOptionsCommand"
   let make = (~configurationSetName, ~sendingPoolName=?, ~tlsPolicy=?, ()) =>
-    new({sendingPoolName, tlsPolicy, configurationSetName})
+    new({
+      sendingPoolName: sendingPoolName,
+      tlsPolicy: tlsPolicy,
+      configurationSetName: configurationSetName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module PutAccountSendingAttributes = {
   type t
   @ocaml.doc("<p>A request to change the ability of your account to send email.</p>")
@@ -2216,6 +2250,7 @@ module PutAccountSendingAttributes = {
   let make = (~sendingEnabled=?, ()) => new({sendingEnabled: sendingEnabled})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module PutAccountDedicatedIpWarmupAttributes = {
   type t
   @ocaml.doc("<p>A request to enable or disable the automatic IP address warm-up feature.</p>")
@@ -2233,6 +2268,7 @@ module PutAccountDedicatedIpWarmupAttributes = {
   let make = (~autoWarmupEnabled=?, ()) => new({autoWarmupEnabled: autoWarmupEnabled})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module GetCustomVerificationEmailTemplate = {
   type t
   @ocaml.doc("<p>Represents a request to retrieve an existing custom verification email
@@ -2269,6 +2305,7 @@ module GetCustomVerificationEmailTemplate = {
   let make = (~templateName, ()) => new({templateName: templateName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteSuppressedDestination = {
   type t
   @ocaml.doc("<p>A request to remove an email address from the suppression list for your
@@ -2286,6 +2323,7 @@ module DeleteSuppressedDestination = {
   let make = (~emailAddress, ()) => new({emailAddress: emailAddress})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteEmailTemplate = {
   type t
   @ocaml.doc("<p>Represents a request to delete an email template. For more information, see the <a href=\"https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-personalized-email-api.html\">Amazon SES Developer
@@ -2299,6 +2337,7 @@ module DeleteEmailTemplate = {
   let make = (~templateName, ()) => new({templateName: templateName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteEmailIdentityPolicy = {
   type t
   @ocaml.doc("<p>Represents a request to delete a sending authorization policy for an identity. Sending
@@ -2316,9 +2355,11 @@ module DeleteEmailIdentityPolicy = {
   type response = {.}
   @module("@aws-sdk/client-ses") @new
   external new: request => t = "DeleteEmailIdentityPolicyCommand"
-  let make = (~policyName, ~emailIdentity, ()) => new({policyName, emailIdentity})
+  let make = (~policyName, ~emailIdentity, ()) =>
+    new({policyName: policyName, emailIdentity: emailIdentity})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteEmailIdentity = {
   type t
   @ocaml.doc("<p>A request to delete an existing email identity. When you delete an identity, you lose
@@ -2334,6 +2375,7 @@ module DeleteEmailIdentity = {
   let make = (~emailIdentity, ()) => new({emailIdentity: emailIdentity})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteDedicatedIpPool = {
   type t
   @ocaml.doc("<p>A request to delete a dedicated IP pool.</p>")
@@ -2346,6 +2388,7 @@ module DeleteDedicatedIpPool = {
   let make = (~poolName, ()) => new({poolName: poolName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteCustomVerificationEmailTemplate = {
   type t
   @ocaml.doc(
@@ -2362,6 +2405,7 @@ module DeleteCustomVerificationEmailTemplate = {
   let make = (~templateName, ()) => new({templateName: templateName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteContactList = {
   type t
   type request = {
@@ -2373,6 +2417,7 @@ module DeleteContactList = {
   let make = (~contactListName, ()) => new({contactListName: contactListName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteContact = {
   type t
   type request = {
@@ -2384,9 +2429,11 @@ module DeleteContact = {
   }
   type response = {.}
   @module("@aws-sdk/client-ses") @new external new: request => t = "DeleteContactCommand"
-  let make = (~emailAddress, ~contactListName, ()) => new({emailAddress, contactListName})
+  let make = (~emailAddress, ~contactListName, ()) =>
+    new({emailAddress: emailAddress, contactListName: contactListName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteConfigurationSetEventDestination = {
   type t
   @ocaml.doc("<p>A request to delete an event destination from a configuration set.</p>")
@@ -2402,9 +2449,10 @@ module DeleteConfigurationSetEventDestination = {
   @module("@aws-sdk/client-ses") @new
   external new: request => t = "DeleteConfigurationSetEventDestinationCommand"
   let make = (~eventDestinationName, ~configurationSetName, ()) =>
-    new({eventDestinationName, configurationSetName})
+    new({eventDestinationName: eventDestinationName, configurationSetName: configurationSetName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteConfigurationSet = {
   type t
   @ocaml.doc("<p>A request to delete a configuration set.</p>")
@@ -2417,6 +2465,7 @@ module DeleteConfigurationSet = {
   let make = (~configurationSetName, ()) => new({configurationSetName: configurationSetName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module CreateEmailIdentityPolicy = {
   type t
   @ocaml.doc("<p>Represents a request to create a sending authorization policy for an identity. Sending
@@ -2439,9 +2488,11 @@ module CreateEmailIdentityPolicy = {
   type response = {.}
   @module("@aws-sdk/client-ses") @new
   external new: request => t = "CreateEmailIdentityPolicyCommand"
-  let make = (~policy, ~policyName, ~emailIdentity, ()) => new({policy, policyName, emailIdentity})
+  let make = (~policy, ~policyName, ~emailIdentity, ()) =>
+    new({policy: policy, policyName: policyName, emailIdentity: emailIdentity})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module CreateCustomVerificationEmailTemplate = {
   type t
   @ocaml.doc("<p>Represents a request to create a custom verification email template.</p>")
@@ -2481,15 +2532,16 @@ module CreateCustomVerificationEmailTemplate = {
     (),
   ) =>
     new({
-      failureRedirectionURL,
-      successRedirectionURL,
-      templateContent,
-      templateSubject,
-      fromEmailAddress,
-      templateName,
+      failureRedirectionURL: failureRedirectionURL,
+      successRedirectionURL: successRedirectionURL,
+      templateContent: templateContent,
+      templateSubject: templateSubject,
+      fromEmailAddress: fromEmailAddress,
+      templateName: templateName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateEmailTemplate = {
   type t
   @ocaml.doc("<p>Represents a request to update an email template. For more information, see the <a href=\"https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-personalized-email-api.html\">Amazon SES
@@ -2504,9 +2556,11 @@ module UpdateEmailTemplate = {
   }
   type response = {.}
   @module("@aws-sdk/client-ses") @new external new: request => t = "UpdateEmailTemplateCommand"
-  let make = (~templateContent, ~templateName, ()) => new({templateContent, templateName})
+  let make = (~templateContent, ~templateName, ()) =>
+    new({templateContent: templateContent, templateName: templateName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UntagResource = {
   type t
   type request = {
@@ -2526,9 +2580,10 @@ module UntagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-ses") @new external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys, resourceArn})
+  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module PutEmailIdentityDkimSigningAttributes = {
   type t
   @ocaml.doc("<p>A request to change the DKIM attributes for an email identity.</p>")
@@ -2616,9 +2671,14 @@ module PutEmailIdentityDkimSigningAttributes = {
   @module("@aws-sdk/client-ses") @new
   external new: request => t = "PutEmailIdentityDkimSigningAttributesCommand"
   let make = (~signingAttributesOrigin, ~emailIdentity, ~signingAttributes=?, ()) =>
-    new({signingAttributes, signingAttributesOrigin, emailIdentity})
+    new({
+      signingAttributes: signingAttributes,
+      signingAttributesOrigin: signingAttributesOrigin,
+      emailIdentity: emailIdentity,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module PutConfigurationSetSuppressionOptions = {
   type t
   @ocaml.doc("<p>A request to change the account suppression list preferences for a specific
@@ -2652,9 +2712,10 @@ module PutConfigurationSetSuppressionOptions = {
   @module("@aws-sdk/client-ses") @new
   external new: request => t = "PutConfigurationSetSuppressionOptionsCommand"
   let make = (~configurationSetName, ~suppressedReasons=?, ()) =>
-    new({suppressedReasons, configurationSetName})
+    new({suppressedReasons: suppressedReasons, configurationSetName: configurationSetName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module PutAccountSuppressionAttributes = {
   type t
   @ocaml.doc("<p>A request to change your account's suppression preferences.</p>")
@@ -2685,6 +2746,7 @@ module PutAccountSuppressionAttributes = {
   let make = (~suppressedReasons=?, ()) => new({suppressedReasons: suppressedReasons})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module PutAccountDetails = {
   type t
   @ocaml.doc("<p>A request to submit new account details.</p>")
@@ -2729,15 +2791,16 @@ module PutAccountDetails = {
     (),
   ) =>
     new({
-      productionAccessEnabled,
-      additionalContactEmailAddresses,
-      useCaseDescription,
-      contactLanguage,
-      websiteURL,
-      mailType,
+      productionAccessEnabled: productionAccessEnabled,
+      additionalContactEmailAddresses: additionalContactEmailAddresses,
+      useCaseDescription: useCaseDescription,
+      contactLanguage: contactLanguage,
+      websiteURL: websiteURL,
+      mailType: mailType,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ListDedicatedIpPools = {
   type t
   @ocaml.doc("<p>A request to obtain a list of dedicated IP pools.</p>")
@@ -2766,9 +2829,10 @@ module ListDedicatedIpPools = {
     dedicatedIpPools: option<listOfDedicatedIpPools>,
   }
   @module("@aws-sdk/client-ses") @new external new: request => t = "ListDedicatedIpPoolsCommand"
-  let make = (~pageSize=?, ~nextToken=?, ()) => new({pageSize, nextToken})
+  let make = (~pageSize=?, ~nextToken=?, ()) => new({pageSize: pageSize, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListConfigurationSets = {
   type t
   @ocaml.doc("<p>A request to obtain a list of configuration sets for your Amazon SES account in the current
@@ -2801,9 +2865,10 @@ module ListConfigurationSets = {
     configurationSets: option<configurationSetNameList>,
   }
   @module("@aws-sdk/client-ses") @new external new: request => t = "ListConfigurationSetsCommand"
-  let make = (~pageSize=?, ~nextToken=?, ()) => new({pageSize, nextToken})
+  let make = (~pageSize=?, ~nextToken=?, ()) => new({pageSize: pageSize, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetEmailTemplate = {
   type t
   @ocaml.doc("<p>Represents a request to display the template object (which includes the subject line,
@@ -2825,6 +2890,7 @@ module GetEmailTemplate = {
   let make = (~templateName, ()) => new({templateName: templateName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetEmailIdentityPolicies = {
   type t
   @ocaml.doc("<p>A request to return the policies of an email identity.</p>")
@@ -2840,6 +2906,7 @@ module GetEmailIdentityPolicies = {
   let make = (~emailIdentity, ()) => new({emailIdentity: emailIdentity})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetDedicatedIp = {
   type t
   @ocaml.doc("<p>A request to obtain more information about a dedicated IP address.</p>")
@@ -2859,6 +2926,7 @@ module GetDedicatedIp = {
   let make = (~ip, ()) => new({ip: ip})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateEmailTemplate = {
   type t
   @ocaml.doc("<p>Represents a request to create an email template. For more information, see the <a href=\"https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-personalized-email-api.html\">Amazon SES
@@ -2873,9 +2941,11 @@ module CreateEmailTemplate = {
   }
   type response = {.}
   @module("@aws-sdk/client-ses") @new external new: request => t = "CreateEmailTemplateCommand"
-  let make = (~templateContent, ~templateName, ()) => new({templateContent, templateName})
+  let make = (~templateContent, ~templateName, ()) =>
+    new({templateContent: templateContent, templateName: templateName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateContactList = {
   type t
   type request = {
@@ -2891,9 +2961,10 @@ module UpdateContactList = {
   type response = {.}
   @module("@aws-sdk/client-ses") @new external new: request => t = "UpdateContactListCommand"
   let make = (~contactListName, ~description=?, ~topics=?, ()) =>
-    new({description, topics, contactListName})
+    new({description: description, topics: topics, contactListName: contactListName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateContact = {
   type t
   type request = {
@@ -2919,9 +2990,17 @@ module UpdateContact = {
     ~unsubscribeAll=?,
     ~topicPreferences=?,
     (),
-  ) => new({attributesData, unsubscribeAll, topicPreferences, emailAddress, contactListName})
+  ) =>
+    new({
+      attributesData: attributesData,
+      unsubscribeAll: unsubscribeAll,
+      topicPreferences: topicPreferences,
+      emailAddress: emailAddress,
+      contactListName: contactListName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module TagResource = {
   type t
   type request = {
@@ -2938,9 +3017,10 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-ses") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceArn, ()) => new({tags, resourceArn})
+  let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ListTagsForResource = {
   type t
   type request = {
@@ -2960,6 +3040,7 @@ module ListTagsForResource = {
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListSuppressedDestinations = {
   type t
   @ocaml.doc("<p>A request to obtain a list of email destinations that are on the suppression list for
@@ -3005,9 +3086,16 @@ module ListSuppressedDestinations = {
   @module("@aws-sdk/client-ses") @new
   external new: request => t = "ListSuppressedDestinationsCommand"
   let make = (~pageSize=?, ~nextToken=?, ~endDate=?, ~startDate=?, ~reasons=?, ()) =>
-    new({pageSize, nextToken, endDate, startDate, reasons})
+    new({
+      pageSize: pageSize,
+      nextToken: nextToken,
+      endDate: endDate,
+      startDate: startDate,
+      reasons: reasons,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListEmailTemplates = {
   type t
   @ocaml.doc("<p>Represents a request to list the email templates present in your Amazon SES account in the
@@ -3038,9 +3126,10 @@ module ListEmailTemplates = {
     templatesMetadata: option<emailTemplateMetadataList>,
   }
   @module("@aws-sdk/client-ses") @new external new: request => t = "ListEmailTemplatesCommand"
-  let make = (~pageSize=?, ~nextToken=?, ()) => new({pageSize, nextToken})
+  let make = (~pageSize=?, ~nextToken=?, ()) => new({pageSize: pageSize, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListEmailIdentities = {
   type t
   @ocaml.doc("<p>A request to list all of the email identities associated with your Amazon Web Services account. This
@@ -3074,9 +3163,10 @@ module ListEmailIdentities = {
     emailIdentities: option<identityInfoList>,
   }
   @module("@aws-sdk/client-ses") @new external new: request => t = "ListEmailIdentitiesCommand"
-  let make = (~pageSize=?, ~nextToken=?, ()) => new({pageSize, nextToken})
+  let make = (~pageSize=?, ~nextToken=?, ()) => new({pageSize: pageSize, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListDeliverabilityTestReports = {
   type t
   @ocaml.doc(
@@ -3112,9 +3202,10 @@ module ListDeliverabilityTestReports = {
   }
   @module("@aws-sdk/client-ses") @new
   external new: request => t = "ListDeliverabilityTestReportsCommand"
-  let make = (~pageSize=?, ~nextToken=?, ()) => new({pageSize, nextToken})
+  let make = (~pageSize=?, ~nextToken=?, ()) => new({pageSize: pageSize, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListCustomVerificationEmailTemplates = {
   type t
   @ocaml.doc("<p>Represents a request to list the existing custom verification email templates for your
@@ -3150,9 +3241,10 @@ module ListCustomVerificationEmailTemplates = {
   }
   @module("@aws-sdk/client-ses") @new
   external new: request => t = "ListCustomVerificationEmailTemplatesCommand"
-  let make = (~pageSize=?, ~nextToken=?, ()) => new({pageSize, nextToken})
+  let make = (~pageSize=?, ~nextToken=?, ()) => new({pageSize: pageSize, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListContactLists = {
   type t
   type request = {
@@ -3180,9 +3272,10 @@ module ListContactLists = {
     contactLists: option<listOfContactLists>,
   }
   @module("@aws-sdk/client-ses") @new external new: request => t = "ListContactListsCommand"
-  let make = (~nextToken=?, ~pageSize=?, ()) => new({nextToken, pageSize})
+  let make = (~nextToken=?, ~pageSize=?, ()) => new({nextToken: nextToken, pageSize: pageSize})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetSuppressedDestination = {
   type t
   @ocaml.doc("<p>A request to retrieve information about an email address that's on the suppression
@@ -3202,6 +3295,7 @@ module GetSuppressedDestination = {
   let make = (~emailAddress, ()) => new({emailAddress: emailAddress})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetImportJob = {
   type t
   @ocaml.doc("<p>Represents a request for information about an import job using the import job
@@ -3236,6 +3330,7 @@ module GetImportJob = {
   let make = (~jobId, ()) => new({jobId: jobId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetEmailIdentity = {
   type t
   @ocaml.doc("<p>A request to return details about an email identity.</p>")
@@ -3286,6 +3381,7 @@ module GetEmailIdentity = {
   let make = (~emailIdentity, ()) => new({emailIdentity: emailIdentity})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetDomainDeliverabilityCampaign = {
   type t
   @ocaml.doc("<p>Retrieve all the deliverability data for a specific campaign. This data is available
@@ -3311,6 +3407,7 @@ module GetDomainDeliverabilityCampaign = {
   let make = (~campaignId, ()) => new({campaignId: campaignId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetDedicatedIps = {
   type t
   @ocaml.doc("<p>A request to obtain more information about dedicated IP pools.</p>")
@@ -3344,9 +3441,11 @@ module GetDedicatedIps = {
     dedicatedIps: option<dedicatedIpList>,
   }
   @module("@aws-sdk/client-ses") @new external new: request => t = "GetDedicatedIpsCommand"
-  let make = (~pageSize=?, ~nextToken=?, ~poolName=?, ()) => new({pageSize, nextToken, poolName})
+  let make = (~pageSize=?, ~nextToken=?, ~poolName=?, ()) =>
+    new({pageSize: pageSize, nextToken: nextToken, poolName: poolName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetContactList = {
   type t
   type request = {
@@ -3375,6 +3474,7 @@ module GetContactList = {
   let make = (~contactListName, ()) => new({contactListName: contactListName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetContact = {
   type t
   type request = {
@@ -3408,9 +3508,11 @@ module GetContact = {
     contactListName: option<contactListName>,
   }
   @module("@aws-sdk/client-ses") @new external new: request => t = "GetContactCommand"
-  let make = (~emailAddress, ~contactListName, ()) => new({emailAddress, contactListName})
+  let make = (~emailAddress, ~contactListName, ()) =>
+    new({emailAddress: emailAddress, contactListName: contactListName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetConfigurationSet = {
   type t
   @ocaml.doc("<p>A request to obtain information about a configuration set.</p>")
@@ -3451,6 +3553,7 @@ module GetConfigurationSet = {
   let make = (~configurationSetName, ()) => new({configurationSetName: configurationSetName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetAccount = {
   type t
   type request = {.}
@@ -3516,6 +3619,7 @@ module GetAccount = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateImportJob = {
   type t
   @ocaml.doc("<p>Represents a request to create an import job from a data source for a data
@@ -3534,9 +3638,10 @@ module CreateImportJob = {
   }
   @module("@aws-sdk/client-ses") @new external new: request => t = "CreateImportJobCommand"
   let make = (~importDataSource, ~importDestination, ()) =>
-    new({importDataSource, importDestination})
+    new({importDataSource: importDataSource, importDestination: importDestination})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateEmailIdentity = {
   type t
   @ocaml.doc("<p>A request to begin the verification process for an email identity (an email address or
@@ -3581,9 +3686,15 @@ module CreateEmailIdentity = {
   }
   @module("@aws-sdk/client-ses") @new external new: request => t = "CreateEmailIdentityCommand"
   let make = (~emailIdentity, ~configurationSetName=?, ~dkimSigningAttributes=?, ~tags=?, ()) =>
-    new({configurationSetName, dkimSigningAttributes, tags, emailIdentity})
+    new({
+      configurationSetName: configurationSetName,
+      dkimSigningAttributes: dkimSigningAttributes,
+      tags: tags,
+      emailIdentity: emailIdentity,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateDedicatedIpPool = {
   type t
   @ocaml.doc("<p>A request to create a new dedicated IP pool.</p>")
@@ -3596,9 +3707,10 @@ module CreateDedicatedIpPool = {
   }
   type response = {.}
   @module("@aws-sdk/client-ses") @new external new: request => t = "CreateDedicatedIpPoolCommand"
-  let make = (~poolName, ~tags=?, ()) => new({tags, poolName})
+  let make = (~poolName, ~tags=?, ()) => new({tags: tags, poolName: poolName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module CreateContactList = {
   type t
   type request = {
@@ -3616,9 +3728,10 @@ module CreateContactList = {
   type response = {.}
   @module("@aws-sdk/client-ses") @new external new: request => t = "CreateContactListCommand"
   let make = (~contactListName, ~tags=?, ~description=?, ~topics=?, ()) =>
-    new({tags, description, topics, contactListName})
+    new({tags: tags, description: description, topics: topics, contactListName: contactListName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module CreateContact = {
   type t
   type request = {
@@ -3646,9 +3759,17 @@ module CreateContact = {
     ~unsubscribeAll=?,
     ~topicPreferences=?,
     (),
-  ) => new({attributesData, unsubscribeAll, topicPreferences, emailAddress, contactListName})
+  ) =>
+    new({
+      attributesData: attributesData,
+      unsubscribeAll: unsubscribeAll,
+      topicPreferences: topicPreferences,
+      emailAddress: emailAddress,
+      contactListName: contactListName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module CreateConfigurationSet = {
   type t
   @ocaml.doc("<p>A request to create a configuration set.</p>")
@@ -3692,16 +3813,17 @@ module CreateConfigurationSet = {
     (),
   ) =>
     new({
-      suppressionOptions,
-      tags,
-      sendingOptions,
-      reputationOptions,
-      deliveryOptions,
-      trackingOptions,
-      configurationSetName,
+      suppressionOptions: suppressionOptions,
+      tags: tags,
+      sendingOptions: sendingOptions,
+      reputationOptions: reputationOptions,
+      deliveryOptions: deliveryOptions,
+      trackingOptions: trackingOptions,
+      configurationSetName: configurationSetName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ListDomainDeliverabilityCampaigns = {
   type t
   @ocaml.doc("<p>Retrieve deliverability data for all the campaigns that used a specific domain to send
@@ -3749,9 +3871,16 @@ module ListDomainDeliverabilityCampaigns = {
   @module("@aws-sdk/client-ses") @new
   external new: request => t = "ListDomainDeliverabilityCampaignsCommand"
   let make = (~subscribedDomain, ~endDate, ~startDate, ~pageSize=?, ~nextToken=?, ()) =>
-    new({pageSize, nextToken, subscribedDomain, endDate, startDate})
+    new({
+      pageSize: pageSize,
+      nextToken: nextToken,
+      subscribedDomain: subscribedDomain,
+      endDate: endDate,
+      startDate: startDate,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetDeliverabilityTestReport = {
   type t
   @ocaml.doc("<p>A request to retrieve the results of a predictive inbox placement test.</p>")
@@ -3788,6 +3917,7 @@ module GetDeliverabilityTestReport = {
   let make = (~reportId, ()) => new({reportId: reportId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetBlacklistReports = {
   type t
   @ocaml.doc("<p>A request to retrieve a list of the blacklists that your dedicated IP addresses appear
@@ -3810,6 +3940,7 @@ module GetBlacklistReports = {
   let make = (~blacklistItemNames, ()) => new({blacklistItemNames: blacklistItemNames})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateConfigurationSetEventDestination = {
   type t
   @ocaml.doc("<p>A request to change the settings for an event destination for a configuration
@@ -3828,9 +3959,14 @@ module UpdateConfigurationSetEventDestination = {
   @module("@aws-sdk/client-ses") @new
   external new: request => t = "UpdateConfigurationSetEventDestinationCommand"
   let make = (~eventDestination, ~eventDestinationName, ~configurationSetName, ()) =>
-    new({eventDestination, eventDestinationName, configurationSetName})
+    new({
+      eventDestination: eventDestination,
+      eventDestinationName: eventDestinationName,
+      configurationSetName: configurationSetName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module SendEmail = {
   type t
   @ocaml.doc("<p>Represents a request to send a single formatted email using Amazon SES. For more
@@ -3927,19 +4063,20 @@ module SendEmail = {
     (),
   ) =>
     new({
-      listManagementOptions,
-      configurationSetName,
-      emailTags,
-      content,
-      feedbackForwardingEmailAddressIdentityArn,
-      feedbackForwardingEmailAddress,
-      replyToAddresses,
-      destination,
-      fromEmailAddressIdentityArn,
-      fromEmailAddress,
+      listManagementOptions: listManagementOptions,
+      configurationSetName: configurationSetName,
+      emailTags: emailTags,
+      content: content,
+      feedbackForwardingEmailAddressIdentityArn: feedbackForwardingEmailAddressIdentityArn,
+      feedbackForwardingEmailAddress: feedbackForwardingEmailAddress,
+      replyToAddresses: replyToAddresses,
+      destination: destination,
+      fromEmailAddressIdentityArn: fromEmailAddressIdentityArn,
+      fromEmailAddress: fromEmailAddress,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module SendBulkEmail = {
   type t
   @ocaml.doc("<p>Represents a request to send email messages to multiple destinations using Amazon SES. For
@@ -4020,18 +4157,19 @@ module SendBulkEmail = {
     (),
   ) =>
     new({
-      configurationSetName,
-      bulkEmailEntries,
-      defaultContent,
-      defaultEmailTags,
-      feedbackForwardingEmailAddressIdentityArn,
-      feedbackForwardingEmailAddress,
-      replyToAddresses,
-      fromEmailAddressIdentityArn,
-      fromEmailAddress,
+      configurationSetName: configurationSetName,
+      bulkEmailEntries: bulkEmailEntries,
+      defaultContent: defaultContent,
+      defaultEmailTags: defaultEmailTags,
+      feedbackForwardingEmailAddressIdentityArn: feedbackForwardingEmailAddressIdentityArn,
+      feedbackForwardingEmailAddress: feedbackForwardingEmailAddress,
+      replyToAddresses: replyToAddresses,
+      fromEmailAddressIdentityArn: fromEmailAddressIdentityArn,
+      fromEmailAddress: fromEmailAddress,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module PutDeliverabilityDashboardOption = {
   type t
   @ocaml.doc("<p>Enable or disable the Deliverability dashboard. When you enable the Deliverability dashboard, you gain
@@ -4054,9 +4192,10 @@ module PutDeliverabilityDashboardOption = {
   @module("@aws-sdk/client-ses") @new
   external new: request => t = "PutDeliverabilityDashboardOptionCommand"
   let make = (~dashboardEnabled, ~subscribedDomains=?, ()) =>
-    new({subscribedDomains, dashboardEnabled})
+    new({subscribedDomains: subscribedDomains, dashboardEnabled: dashboardEnabled})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ListImportJobs = {
   type t
   @ocaml.doc("<p>Represents a request to list all of the import jobs for a data destination within the
@@ -4092,9 +4231,10 @@ module ListImportJobs = {
   }
   @module("@aws-sdk/client-ses") @new external new: request => t = "ListImportJobsCommand"
   let make = (~pageSize=?, ~nextToken=?, ~importDestinationType=?, ()) =>
-    new({pageSize, nextToken, importDestinationType})
+    new({pageSize: pageSize, nextToken: nextToken, importDestinationType: importDestinationType})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListContacts = {
   type t
   type request = {
@@ -4127,9 +4267,15 @@ module ListContacts = {
   }
   @module("@aws-sdk/client-ses") @new external new: request => t = "ListContactsCommand"
   let make = (~contactListName, ~nextToken=?, ~pageSize=?, ~filter=?, ()) =>
-    new({nextToken, pageSize, filter, contactListName})
+    new({
+      nextToken: nextToken,
+      pageSize: pageSize,
+      filter: filter,
+      contactListName: contactListName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetDomainStatisticsReport = {
   type t
   @ocaml.doc("<p>A request to obtain deliverability metrics for a domain.</p>")
@@ -4163,9 +4309,11 @@ module GetDomainStatisticsReport = {
   }
   @module("@aws-sdk/client-ses") @new
   external new: request => t = "GetDomainStatisticsReportCommand"
-  let make = (~endDate, ~startDate, ~domain, ()) => new({endDate, startDate, domain})
+  let make = (~endDate, ~startDate, ~domain, ()) =>
+    new({endDate: endDate, startDate: startDate, domain: domain})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetDeliverabilityDashboardOptions = {
   type t
   type request = {.}
@@ -4202,6 +4350,7 @@ module GetDeliverabilityDashboardOptions = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateDeliverabilityTestReport = {
   type t
   @ocaml.doc("<p>A request to perform a predictive inbox placement test. Predictive inbox placement tests can help you predict how your messages will
@@ -4246,9 +4395,10 @@ module CreateDeliverabilityTestReport = {
   @module("@aws-sdk/client-ses") @new
   external new: request => t = "CreateDeliverabilityTestReportCommand"
   let make = (~content, ~fromEmailAddress, ~tags=?, ~reportName=?, ()) =>
-    new({tags, content, fromEmailAddress, reportName})
+    new({tags: tags, content: content, fromEmailAddress: fromEmailAddress, reportName: reportName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateConfigurationSetEventDestination = {
   type t
   @ocaml.doc("<p>A request to add an event destination to a configuration set.</p>")
@@ -4265,9 +4415,14 @@ module CreateConfigurationSetEventDestination = {
   @module("@aws-sdk/client-ses") @new
   external new: request => t = "CreateConfigurationSetEventDestinationCommand"
   let make = (~eventDestination, ~eventDestinationName, ~configurationSetName, ()) =>
-    new({eventDestination, eventDestinationName, configurationSetName})
+    new({
+      eventDestination: eventDestination,
+      eventDestinationName: eventDestinationName,
+      configurationSetName: configurationSetName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module GetConfigurationSetEventDestinations = {
   type t
   @ocaml.doc("<p>A request to obtain information about the event destinations for a configuration

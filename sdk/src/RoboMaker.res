@@ -1130,6 +1130,7 @@ module RestartSimulationJob = {
   let make = (~job, ()) => new({job: job})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module RegisterRobot = {
   type t
   type request = {
@@ -1142,9 +1143,10 @@ module RegisterRobot = {
     fleet: option<arn>,
   }
   @module("@aws-sdk/client-robomaker") @new external new: request => t = "RegisterRobotCommand"
-  let make = (~robot, ~fleet, ()) => new({robot, fleet})
+  let make = (~robot, ~fleet, ()) => new({robot: robot, fleet: fleet})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetWorldTemplateBody = {
   type t
   type request = {
@@ -1156,9 +1158,11 @@ module GetWorldTemplateBody = {
   type response = {@ocaml.doc("<p>The world template body.</p>") templateBody: option<json>}
   @module("@aws-sdk/client-robomaker") @new
   external new: request => t = "GetWorldTemplateBodyCommand"
-  let make = (~generationJob=?, ~template=?, ()) => new({generationJob, template})
+  let make = (~generationJob=?, ~template=?, ()) =>
+    new({generationJob: generationJob, template: template})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeregisterRobot = {
   type t
   type request = {
@@ -1170,9 +1174,10 @@ module DeregisterRobot = {
     @ocaml.doc("<p>The Amazon Resource Name (ARN) of the fleet.</p>") fleet: option<arn>,
   }
   @module("@aws-sdk/client-robomaker") @new external new: request => t = "DeregisterRobotCommand"
-  let make = (~robot, ~fleet, ()) => new({robot, fleet})
+  let make = (~robot, ~fleet, ()) => new({robot: robot, fleet: fleet})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteWorldTemplate = {
   type t
   type request = {
@@ -1185,6 +1190,7 @@ module DeleteWorldTemplate = {
   let make = (~template, ()) => new({template: template})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteSimulationApplication = {
   type t
   type request = {
@@ -1196,9 +1202,11 @@ module DeleteSimulationApplication = {
   type response = {.}
   @module("@aws-sdk/client-robomaker") @new
   external new: request => t = "DeleteSimulationApplicationCommand"
-  let make = (~application, ~applicationVersion=?, ()) => new({applicationVersion, application})
+  let make = (~application, ~applicationVersion=?, ()) =>
+    new({applicationVersion: applicationVersion, application: application})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteRobotApplication = {
   type t
   type request = {
@@ -1210,9 +1218,11 @@ module DeleteRobotApplication = {
   type response = {.}
   @module("@aws-sdk/client-robomaker") @new
   external new: request => t = "DeleteRobotApplicationCommand"
-  let make = (~application, ~applicationVersion=?, ()) => new({applicationVersion, application})
+  let make = (~application, ~applicationVersion=?, ()) =>
+    new({applicationVersion: applicationVersion, application: application})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteRobot = {
   type t
   type request = {@ocaml.doc("<p>The Amazon Resource Name (ARN) of the robot.</p>") robot: arn}
@@ -1221,6 +1231,7 @@ module DeleteRobot = {
   let make = (~robot, ()) => new({robot: robot})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteFleet = {
   type t
   type request = {@ocaml.doc("<p>The Amazon Resource Name (ARN) of the fleet.</p>") fleet: arn}
@@ -1229,6 +1240,7 @@ module DeleteFleet = {
   let make = (~fleet, ()) => new({fleet: fleet})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module CancelWorldGenerationJob = {
   type t
   type request = {
@@ -1241,6 +1253,7 @@ module CancelWorldGenerationJob = {
   let make = (~job, ()) => new({job: job})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module CancelWorldExportJob = {
   type t
   type request = {
@@ -1252,6 +1265,7 @@ module CancelWorldExportJob = {
   let make = (~job, ()) => new({job: job})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module CancelSimulationJobBatch = {
   type t
   type request = {@ocaml.doc("<p>The id of the batch to cancel.</p>") batch: arn}
@@ -1261,6 +1275,7 @@ module CancelSimulationJobBatch = {
   let make = (~batch, ()) => new({batch: batch})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module CancelSimulationJob = {
   type t
   type request = {@ocaml.doc("<p>The simulation job ARN to cancel.</p>") job: arn}
@@ -1270,6 +1285,7 @@ module CancelSimulationJob = {
   let make = (~job, ()) => new({job: job})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module CancelDeploymentJob = {
   type t
   type request = {@ocaml.doc("<p>The deployment job ARN to cancel.</p>") job: arn}
@@ -1279,6 +1295,7 @@ module CancelDeploymentJob = {
   let make = (~job, ()) => new({job: job})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateWorldTemplate = {
   type t
   type request = {
@@ -1303,9 +1320,15 @@ module UpdateWorldTemplate = {
   @module("@aws-sdk/client-robomaker") @new
   external new: request => t = "UpdateWorldTemplateCommand"
   let make = (~template, ~templateLocation=?, ~templateBody=?, ~name=?, ()) =>
-    new({templateLocation, templateBody, name, template})
+    new({
+      templateLocation: templateLocation,
+      templateBody: templateBody,
+      name: name,
+      template: template,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UntagResource = {
   type t
   type request = {
@@ -1318,9 +1341,10 @@ module UntagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-robomaker") @new external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys, resourceArn})
+  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module TagResource = {
   type t
   type request = {
@@ -1335,9 +1359,10 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-robomaker") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceArn, ()) => new({tags, resourceArn})
+  let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ListTagsForResource = {
   type t
   type request = {
@@ -1352,6 +1377,7 @@ module ListTagsForResource = {
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeWorldTemplate = {
   type t
   type request = {
@@ -1382,6 +1408,7 @@ module DescribeWorldTemplate = {
   let make = (~template, ()) => new({template: template})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeWorldExportJob = {
   type t
   type request = {
@@ -1470,6 +1497,7 @@ module DescribeWorldExportJob = {
   let make = (~job, ()) => new({job: job})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeWorld = {
   type t
   type request = {
@@ -1495,6 +1523,7 @@ module DescribeWorld = {
   let make = (~world, ()) => new({world: world})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeRobot = {
   type t
   type request = {
@@ -1519,6 +1548,7 @@ module DescribeRobot = {
   let make = (~robot, ()) => new({robot: robot})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateWorldTemplate = {
   type t
   type request = {
@@ -1550,9 +1580,16 @@ module CreateWorldTemplate = {
   @module("@aws-sdk/client-robomaker") @new
   external new: request => t = "CreateWorldTemplateCommand"
   let make = (~tags=?, ~templateLocation=?, ~templateBody=?, ~name=?, ~clientRequestToken=?, ()) =>
-    new({tags, templateLocation, templateBody, name, clientRequestToken})
+    new({
+      tags: tags,
+      templateLocation: templateLocation,
+      templateBody: templateBody,
+      name: name,
+      clientRequestToken: clientRequestToken,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateWorldGenerationJob = {
   type t
   type request = {
@@ -1650,9 +1687,16 @@ module CreateWorldGenerationJob = {
   @module("@aws-sdk/client-robomaker") @new
   external new: request => t = "CreateWorldGenerationJobCommand"
   let make = (~worldCount, ~template, ~worldTags=?, ~tags=?, ~clientRequestToken=?, ()) =>
-    new({worldTags, tags, worldCount, template, clientRequestToken})
+    new({
+      worldTags: worldTags,
+      tags: tags,
+      worldCount: worldCount,
+      template: template,
+      clientRequestToken: clientRequestToken,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateWorldExportJob = {
   type t
   type request = {
@@ -1749,9 +1793,16 @@ module CreateWorldExportJob = {
   @module("@aws-sdk/client-robomaker") @new
   external new: request => t = "CreateWorldExportJobCommand"
   let make = (~iamRole, ~outputLocation, ~worlds, ~tags=?, ~clientRequestToken=?, ()) =>
-    new({tags, iamRole, outputLocation, worlds, clientRequestToken})
+    new({
+      tags: tags,
+      iamRole: iamRole,
+      outputLocation: outputLocation,
+      worlds: worlds,
+      clientRequestToken: clientRequestToken,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateRobot = {
   type t
   type request = {
@@ -1775,9 +1826,10 @@ module CreateRobot = {
   }
   @module("@aws-sdk/client-robomaker") @new external new: request => t = "CreateRobotCommand"
   let make = (~greengrassGroupId, ~architecture, ~name, ~tags=?, ()) =>
-    new({tags, greengrassGroupId, architecture, name})
+    new({tags: tags, greengrassGroupId: greengrassGroupId, architecture: architecture, name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateFleet = {
   type t
   type request = {
@@ -1793,9 +1845,10 @@ module CreateFleet = {
     @ocaml.doc("<p>The Amazon Resource Name (ARN) of the fleet.</p>") arn: option<arn>,
   }
   @module("@aws-sdk/client-robomaker") @new external new: request => t = "CreateFleetCommand"
-  let make = (~name, ~tags=?, ()) => new({tags, name})
+  let make = (~name, ~tags=?, ()) => new({tags: tags, name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module BatchDeleteWorlds = {
   type t
   type request = {
@@ -1811,6 +1864,7 @@ module BatchDeleteWorlds = {
   let make = (~worlds, ()) => new({worlds: worlds})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateSimulationApplication = {
   type t
   type request = {
@@ -1864,16 +1918,17 @@ module UpdateSimulationApplication = {
     (),
   ) =>
     new({
-      environment,
-      currentRevisionId,
-      renderingEngine,
-      robotSoftwareSuite,
-      simulationSoftwareSuite,
-      sources,
-      application,
+      environment: environment,
+      currentRevisionId: currentRevisionId,
+      renderingEngine: renderingEngine,
+      robotSoftwareSuite: robotSoftwareSuite,
+      simulationSoftwareSuite: simulationSoftwareSuite,
+      sources: sources,
+      application: application,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateRobotApplication = {
   type t
   type request = {
@@ -1910,9 +1965,17 @@ module UpdateRobotApplication = {
     ~currentRevisionId=?,
     ~sources=?,
     (),
-  ) => new({environment, currentRevisionId, robotSoftwareSuite, sources, application})
+  ) =>
+    new({
+      environment: environment,
+      currentRevisionId: currentRevisionId,
+      robotSoftwareSuite: robotSoftwareSuite,
+      sources: sources,
+      application: application,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListWorldTemplates = {
   type t
   type request = {
@@ -1942,9 +2005,11 @@ module ListWorldTemplates = {
     templateSummaries: option<templateSummaries>,
   }
   @module("@aws-sdk/client-robomaker") @new external new: request => t = "ListWorldTemplatesCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeSimulationApplication = {
   type t
   type request = {
@@ -1981,9 +2046,11 @@ module DescribeSimulationApplication = {
   }
   @module("@aws-sdk/client-robomaker") @new
   external new: request => t = "DescribeSimulationApplicationCommand"
-  let make = (~application, ~applicationVersion=?, ()) => new({applicationVersion, application})
+  let make = (~application, ~applicationVersion=?, ()) =>
+    new({applicationVersion: applicationVersion, application: application})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeRobotApplication = {
   type t
   type request = {
@@ -2014,9 +2081,11 @@ module DescribeRobotApplication = {
   }
   @module("@aws-sdk/client-robomaker") @new
   external new: request => t = "DescribeRobotApplicationCommand"
-  let make = (~application, ~applicationVersion=?, ()) => new({applicationVersion, application})
+  let make = (~application, ~applicationVersion=?, ()) =>
+    new({applicationVersion: applicationVersion, application: application})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeFleet = {
   type t
   type request = {@ocaml.doc("<p>The Amazon Resource Name (ARN) of the fleet.</p>") fleet: arn}
@@ -2037,6 +2106,7 @@ module DescribeFleet = {
   let make = (~fleet, ()) => new({fleet: fleet})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateSimulationApplicationVersion = {
   type t
   type request = {
@@ -2076,9 +2146,15 @@ module CreateSimulationApplicationVersion = {
   @module("@aws-sdk/client-robomaker") @new
   external new: request => t = "CreateSimulationApplicationVersionCommand"
   let make = (~application, ~imageDigest=?, ~s3Etags=?, ~currentRevisionId=?, ()) =>
-    new({imageDigest, s3Etags, currentRevisionId, application})
+    new({
+      imageDigest: imageDigest,
+      s3Etags: s3Etags,
+      currentRevisionId: currentRevisionId,
+      application: application,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateSimulationApplication = {
   type t
   type request = {
@@ -2135,16 +2211,17 @@ module CreateSimulationApplication = {
     (),
   ) =>
     new({
-      environment,
-      tags,
-      renderingEngine,
-      robotSoftwareSuite,
-      simulationSoftwareSuite,
-      sources,
-      name,
+      environment: environment,
+      tags: tags,
+      renderingEngine: renderingEngine,
+      robotSoftwareSuite: robotSoftwareSuite,
+      simulationSoftwareSuite: simulationSoftwareSuite,
+      sources: sources,
+      name: name,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateRobotApplicationVersion = {
   type t
   type request = {
@@ -2178,9 +2255,15 @@ module CreateRobotApplicationVersion = {
   @module("@aws-sdk/client-robomaker") @new
   external new: request => t = "CreateRobotApplicationVersionCommand"
   let make = (~application, ~imageDigest=?, ~s3Etags=?, ~currentRevisionId=?, ()) =>
-    new({imageDigest, s3Etags, currentRevisionId, application})
+    new({
+      imageDigest: imageDigest,
+      s3Etags: s3Etags,
+      currentRevisionId: currentRevisionId,
+      application: application,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateRobotApplication = {
   type t
   type request = {
@@ -2214,9 +2297,16 @@ module CreateRobotApplication = {
   @module("@aws-sdk/client-robomaker") @new
   external new: request => t = "CreateRobotApplicationCommand"
   let make = (~robotSoftwareSuite, ~name, ~environment=?, ~tags=?, ~sources=?, ()) =>
-    new({environment, tags, robotSoftwareSuite, sources, name})
+    new({
+      environment: environment,
+      tags: tags,
+      robotSoftwareSuite: robotSoftwareSuite,
+      sources: sources,
+      name: name,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListWorlds = {
   type t
   type request = {
@@ -2247,9 +2337,11 @@ module ListWorlds = {
     @ocaml.doc("<p>Summary information for worlds.</p>") worldSummaries: option<worldSummaries>,
   }
   @module("@aws-sdk/client-robomaker") @new external new: request => t = "ListWorldsCommand"
-  let make = (~filters=?, ~maxResults=?, ~nextToken=?, ()) => new({filters, maxResults, nextToken})
+  let make = (~filters=?, ~maxResults=?, ~nextToken=?, ()) =>
+    new({filters: filters, maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListWorldGenerationJobs = {
   type t
   type request = {
@@ -2283,9 +2375,11 @@ module ListWorldGenerationJobs = {
   }
   @module("@aws-sdk/client-robomaker") @new
   external new: request => t = "ListWorldGenerationJobsCommand"
-  let make = (~filters=?, ~maxResults=?, ~nextToken=?, ()) => new({filters, maxResults, nextToken})
+  let make = (~filters=?, ~maxResults=?, ~nextToken=?, ()) =>
+    new({filters: filters, maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListWorldExportJobs = {
   type t
   type request = {
@@ -2319,9 +2413,11 @@ module ListWorldExportJobs = {
   }
   @module("@aws-sdk/client-robomaker") @new
   external new: request => t = "ListWorldExportJobsCommand"
-  let make = (~filters=?, ~maxResults=?, ~nextToken=?, ()) => new({filters, maxResults, nextToken})
+  let make = (~filters=?, ~maxResults=?, ~nextToken=?, ()) =>
+    new({filters: filters, maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListSimulationJobs = {
   type t
   type request = {
@@ -2358,9 +2454,11 @@ module ListSimulationJobs = {
     simulationJobSummaries: simulationJobSummaries,
   }
   @module("@aws-sdk/client-robomaker") @new external new: request => t = "ListSimulationJobsCommand"
-  let make = (~filters=?, ~maxResults=?, ~nextToken=?, ()) => new({filters, maxResults, nextToken})
+  let make = (~filters=?, ~maxResults=?, ~nextToken=?, ()) =>
+    new({filters: filters, maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListSimulationJobBatches = {
   type t
   type request = {
@@ -2390,9 +2488,11 @@ module ListSimulationJobBatches = {
   }
   @module("@aws-sdk/client-robomaker") @new
   external new: request => t = "ListSimulationJobBatchesCommand"
-  let make = (~filters=?, ~maxResults=?, ~nextToken=?, ()) => new({filters, maxResults, nextToken})
+  let make = (~filters=?, ~maxResults=?, ~nextToken=?, ()) =>
+    new({filters: filters, maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListSimulationApplications = {
   type t
   type request = {
@@ -2432,9 +2532,15 @@ module ListSimulationApplications = {
   @module("@aws-sdk/client-robomaker") @new
   external new: request => t = "ListSimulationApplicationsCommand"
   let make = (~filters=?, ~maxResults=?, ~nextToken=?, ~versionQualifier=?, ()) =>
-    new({filters, maxResults, nextToken, versionQualifier})
+    new({
+      filters: filters,
+      maxResults: maxResults,
+      nextToken: nextToken,
+      versionQualifier: versionQualifier,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListRobots = {
   type t
   type request = {
@@ -2470,9 +2576,11 @@ module ListRobots = {
     robots: option<robots>,
   }
   @module("@aws-sdk/client-robomaker") @new external new: request => t = "ListRobotsCommand"
-  let make = (~filters=?, ~maxResults=?, ~nextToken=?, ()) => new({filters, maxResults, nextToken})
+  let make = (~filters=?, ~maxResults=?, ~nextToken=?, ()) =>
+    new({filters: filters, maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListRobotApplications = {
   type t
   type request = {
@@ -2512,9 +2620,15 @@ module ListRobotApplications = {
   @module("@aws-sdk/client-robomaker") @new
   external new: request => t = "ListRobotApplicationsCommand"
   let make = (~filters=?, ~maxResults=?, ~nextToken=?, ~versionQualifier=?, ()) =>
-    new({filters, maxResults, nextToken, versionQualifier})
+    new({
+      filters: filters,
+      maxResults: maxResults,
+      nextToken: nextToken,
+      versionQualifier: versionQualifier,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListFleets = {
   type t
   type request = {
@@ -2552,9 +2666,11 @@ module ListFleets = {
     fleetDetails: option<fleets>,
   }
   @module("@aws-sdk/client-robomaker") @new external new: request => t = "ListFleetsCommand"
-  let make = (~filters=?, ~maxResults=?, ~nextToken=?, ()) => new({filters, maxResults, nextToken})
+  let make = (~filters=?, ~maxResults=?, ~nextToken=?, ()) =>
+    new({filters: filters, maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module SyncDeploymentJob = {
   type t
   type request = {
@@ -2640,9 +2756,11 @@ module SyncDeploymentJob = {
     arn: option<arn>,
   }
   @module("@aws-sdk/client-robomaker") @new external new: request => t = "SyncDeploymentJobCommand"
-  let make = (~fleet, ~clientRequestToken, ()) => new({fleet, clientRequestToken})
+  let make = (~fleet, ~clientRequestToken, ()) =>
+    new({fleet: fleet, clientRequestToken: clientRequestToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeWorldGenerationJob = {
   type t
   type request = {
@@ -2735,6 +2853,7 @@ module DescribeWorldGenerationJob = {
   let make = (~job, ()) => new({job: job})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeDeploymentJob = {
   type t
   type request = {
@@ -2765,6 +2884,7 @@ module DescribeDeploymentJob = {
   let make = (~job, ()) => new({job: job})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateDeploymentJob = {
   type t
   type request = {
@@ -2864,9 +2984,17 @@ module CreateDeploymentJob = {
     ~tags=?,
     ~deploymentConfig=?,
     (),
-  ) => new({tags, deploymentApplicationConfigs, fleet, clientRequestToken, deploymentConfig})
+  ) =>
+    new({
+      tags: tags,
+      deploymentApplicationConfigs: deploymentApplicationConfigs,
+      fleet: fleet,
+      clientRequestToken: clientRequestToken,
+      deploymentConfig: deploymentConfig,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListDeploymentJobs = {
   type t
   type request = {
@@ -2902,9 +3030,11 @@ module ListDeploymentJobs = {
     deploymentJobs: option<deploymentJobs>,
   }
   @module("@aws-sdk/client-robomaker") @new external new: request => t = "ListDeploymentJobsCommand"
-  let make = (~maxResults=?, ~nextToken=?, ~filters=?, ()) => new({maxResults, nextToken, filters})
+  let make = (~maxResults=?, ~nextToken=?, ~filters=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken, filters: filters})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeSimulationJob = {
   type t
   type request = {
@@ -3021,6 +3151,7 @@ module DescribeSimulationJob = {
   let make = (~job, ()) => new({job: job})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateSimulationJob = {
   type t
   type request = {
@@ -3187,21 +3318,22 @@ module CreateSimulationJob = {
     (),
   ) =>
     new({
-      compute,
-      vpcConfig,
-      tags,
-      dataSources,
-      simulationApplications,
-      robotApplications,
-      failureBehavior,
-      iamRole,
-      maxJobDurationInSeconds,
-      loggingConfig,
-      outputLocation,
-      clientRequestToken,
+      compute: compute,
+      vpcConfig: vpcConfig,
+      tags: tags,
+      dataSources: dataSources,
+      simulationApplications: simulationApplications,
+      robotApplications: robotApplications,
+      failureBehavior: failureBehavior,
+      iamRole: iamRole,
+      maxJobDurationInSeconds: maxJobDurationInSeconds,
+      loggingConfig: loggingConfig,
+      outputLocation: outputLocation,
+      clientRequestToken: clientRequestToken,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module BatchDescribeSimulationJob = {
   type t
   type request = {
@@ -3218,6 +3350,7 @@ module BatchDescribeSimulationJob = {
   let make = (~jobs, ()) => new({jobs: jobs})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module StartSimulationJobBatch = {
   type t
   type request = {
@@ -3310,9 +3443,15 @@ module StartSimulationJobBatch = {
   @module("@aws-sdk/client-robomaker") @new
   external new: request => t = "StartSimulationJobBatchCommand"
   let make = (~createSimulationJobRequests, ~tags=?, ~batchPolicy=?, ~clientRequestToken=?, ()) =>
-    new({tags, createSimulationJobRequests, batchPolicy, clientRequestToken})
+    new({
+      tags: tags,
+      createSimulationJobRequests: createSimulationJobRequests,
+      batchPolicy: batchPolicy,
+      clientRequestToken: clientRequestToken,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeSimulationJobBatch = {
   type t
   type request = {@ocaml.doc("<p>The id of the batch to describe.</p>") batch: arn}

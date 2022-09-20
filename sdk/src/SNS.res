@@ -328,9 +328,11 @@ module VerifySMSSandboxPhoneNumber = {
   type response = {.}
   @module("@aws-sdk/client-sns") @new
   external new: request => t = "VerifySMSSandboxPhoneNumberCommand"
-  let make = (~oneTimePassword, ~phoneNumber, ()) => new({oneTimePassword, phoneNumber})
+  let make = (~oneTimePassword, ~phoneNumber, ()) =>
+    new({oneTimePassword: oneTimePassword, phoneNumber: phoneNumber})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module Unsubscribe = {
   type t
   @ocaml.doc("<p>Input for Unsubscribe action.</p>")
@@ -343,6 +345,7 @@ module Unsubscribe = {
   let make = (~subscriptionArn, ()) => new({subscriptionArn: subscriptionArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module SetTopicAttributes = {
   type t
   @ocaml.doc("<p>Input for SetTopicAttributes action.</p>")
@@ -415,9 +418,10 @@ module SetTopicAttributes = {
   type response = {.}
   @module("@aws-sdk/client-sns") @new external new: request => t = "SetTopicAttributesCommand"
   let make = (~attributeName, ~topicArn, ~attributeValue=?, ()) =>
-    new({attributeValue, attributeName, topicArn})
+    new({attributeValue: attributeValue, attributeName: attributeName, topicArn: topicArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module SetSubscriptionAttributes = {
   type t
   @ocaml.doc("<p>Input for SetSubscriptionAttributes action.</p>")
@@ -483,9 +487,14 @@ module SetSubscriptionAttributes = {
   @module("@aws-sdk/client-sns") @new
   external new: request => t = "SetSubscriptionAttributesCommand"
   let make = (~attributeName, ~subscriptionArn, ~attributeValue=?, ()) =>
-    new({attributeValue, attributeName, subscriptionArn})
+    new({
+      attributeValue: attributeValue,
+      attributeName: attributeName,
+      subscriptionArn: subscriptionArn,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module RemovePermission = {
   type t
   @ocaml.doc("<p>Input for RemovePermission action.</p>")
@@ -498,9 +507,10 @@ module RemovePermission = {
   }
   type response = {.}
   @module("@aws-sdk/client-sns") @new external new: request => t = "RemovePermissionCommand"
-  let make = (~label, ~topicArn, ()) => new({label, topicArn})
+  let make = (~label, ~topicArn, ()) => new({label: label, topicArn: topicArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module OptInPhoneNumber = {
   type t
   @ocaml.doc("<p>Input for the OptInPhoneNumber action.</p>")
@@ -512,6 +522,7 @@ module OptInPhoneNumber = {
   let make = (~phoneNumber, ()) => new({phoneNumber: phoneNumber})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module GetSMSSandboxAccountStatus = {
   type t
   type request = {.}
@@ -527,6 +538,7 @@ module GetSMSSandboxAccountStatus = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteTopic = {
   type t
   type request = {
@@ -538,6 +550,7 @@ module DeleteTopic = {
   let make = (~topicArn, ()) => new({topicArn: topicArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteSMSSandboxPhoneNumber = {
   type t
   type request = {
@@ -550,6 +563,7 @@ module DeleteSMSSandboxPhoneNumber = {
   let make = (~phoneNumber, ()) => new({phoneNumber: phoneNumber})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeletePlatformApplication = {
   type t
   @ocaml.doc("<p>Input for DeletePlatformApplication action.</p>")
@@ -564,6 +578,7 @@ module DeletePlatformApplication = {
   let make = (~platformApplicationArn, ()) => new({platformApplicationArn: platformApplicationArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteEndpoint = {
   type t
   @ocaml.doc("<p>Input for DeleteEndpoint action.</p>")
@@ -575,6 +590,7 @@ module DeleteEndpoint = {
   let make = (~endpointArn, ()) => new({endpointArn: endpointArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module CreateSMSSandboxPhoneNumber = {
   type t
   type request = {
@@ -590,9 +606,11 @@ module CreateSMSSandboxPhoneNumber = {
   type response = {.}
   @module("@aws-sdk/client-sns") @new
   external new: request => t = "CreateSMSSandboxPhoneNumberCommand"
-  let make = (~phoneNumber, ~languageCode=?, ()) => new({languageCode, phoneNumber})
+  let make = (~phoneNumber, ~languageCode=?, ()) =>
+    new({languageCode: languageCode, phoneNumber: phoneNumber})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ConfirmSubscription = {
   type t
   @ocaml.doc("<p>Input for ConfirmSubscription action.</p>")
@@ -619,9 +637,10 @@ module ConfirmSubscription = {
   }
   @module("@aws-sdk/client-sns") @new external new: request => t = "ConfirmSubscriptionCommand"
   let make = (~token, ~topicArn, ~authenticateOnUnsubscribe=?, ()) =>
-    new({authenticateOnUnsubscribe, token, topicArn})
+    new({authenticateOnUnsubscribe: authenticateOnUnsubscribe, token: token, topicArn: topicArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CheckIfPhoneNumberIsOptedOut = {
   type t
   @ocaml.doc("<p>The input for the <code>CheckIfPhoneNumberIsOptedOut</code> action.</p>")
@@ -651,6 +670,7 @@ module CheckIfPhoneNumberIsOptedOut = {
   let make = (~phoneNumber, ()) => new({phoneNumber: phoneNumber})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UntagResource = {
   type t
   type request = {
@@ -661,9 +681,10 @@ module UntagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-sns") @new external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys, resourceArn})
+  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module Subscribe = {
   type t
   @ocaml.doc("<p>Input for Subscribe action.</p>")
@@ -835,9 +856,16 @@ module Subscribe = {
   }
   @module("@aws-sdk/client-sns") @new external new: request => t = "SubscribeCommand"
   let make = (~protocol, ~topicArn, ~returnSubscriptionArn=?, ~attributes=?, ~endpoint=?, ()) =>
-    new({returnSubscriptionArn, attributes, endpoint, protocol, topicArn})
+    new({
+      returnSubscriptionArn: returnSubscriptionArn,
+      attributes: attributes,
+      endpoint: endpoint,
+      protocol: protocol,
+      topicArn: topicArn,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module SetSMSAttributes = {
   type t
   @ocaml.doc("<p>The input for the SetSMSAttributes action.</p>")
@@ -934,6 +962,7 @@ module SetSMSAttributes = {
   let make = (~attributes, ()) => new({attributes: attributes})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module SetPlatformApplicationAttributes = {
   type t
   @ocaml.doc("<p>Input for SetPlatformApplicationAttributes action.</p>")
@@ -1039,9 +1068,11 @@ module SetPlatformApplicationAttributes = {
   type response = {.}
   @module("@aws-sdk/client-sns") @new
   external new: request => t = "SetPlatformApplicationAttributesCommand"
-  let make = (~attributes, ~platformApplicationArn, ()) => new({attributes, platformApplicationArn})
+  let make = (~attributes, ~platformApplicationArn, ()) =>
+    new({attributes: attributes, platformApplicationArn: platformApplicationArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module SetEndpointAttributes = {
   type t
   @ocaml.doc("<p>Input for SetEndpointAttributes action.</p>")
@@ -1076,9 +1107,11 @@ module SetEndpointAttributes = {
   }
   type response = {.}
   @module("@aws-sdk/client-sns") @new external new: request => t = "SetEndpointAttributesCommand"
-  let make = (~attributes, ~endpointArn, ()) => new({attributes, endpointArn})
+  let make = (~attributes, ~endpointArn, ()) =>
+    new({attributes: attributes, endpointArn: endpointArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ListPhoneNumbersOptedOut = {
   type t
   @ocaml.doc("<p>The input for the <code>ListPhoneNumbersOptedOut</code> action.</p>")
@@ -1102,6 +1135,7 @@ module ListPhoneNumbersOptedOut = {
   let make = (~nextToken=?, ()) => new({nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetTopicAttributes = {
   type t
   @ocaml.doc("<p>Input for GetTopicAttributes action.</p>")
@@ -1208,6 +1242,7 @@ module GetTopicAttributes = {
   let make = (~topicArn, ()) => new({topicArn: topicArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetSubscriptionAttributes = {
   type t
   @ocaml.doc("<p>Input for GetSubscriptionAttributes.</p>")
@@ -1304,6 +1339,7 @@ module GetSubscriptionAttributes = {
   let make = (~subscriptionArn, ()) => new({subscriptionArn: subscriptionArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetSMSAttributes = {
   type t
   @ocaml.doc("<p>The input for the <code>GetSMSAttributes</code> request.</p>")
@@ -1323,6 +1359,7 @@ module GetSMSAttributes = {
   let make = (~attributes=?, ()) => new({attributes: attributes})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetPlatformApplicationAttributes = {
   type t
   @ocaml.doc("<p>Input for GetPlatformApplicationAttributes action.</p>")
@@ -1377,6 +1414,7 @@ module GetPlatformApplicationAttributes = {
   let make = (~platformApplicationArn, ()) => new({platformApplicationArn: platformApplicationArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetEndpointAttributes = {
   type t
   @ocaml.doc("<p>Input for GetEndpointAttributes action.</p>")
@@ -1419,6 +1457,7 @@ module GetEndpointAttributes = {
   let make = (~endpointArn, ()) => new({endpointArn: endpointArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreatePlatformEndpoint = {
   type t
   @ocaml.doc("<p>Input for CreatePlatformEndpoint action.</p>")
@@ -1451,9 +1490,15 @@ module CreatePlatformEndpoint = {
   }
   @module("@aws-sdk/client-sns") @new external new: request => t = "CreatePlatformEndpointCommand"
   let make = (~token, ~platformApplicationArn, ~attributes=?, ~customUserData=?, ()) =>
-    new({attributes, customUserData, token, platformApplicationArn})
+    new({
+      attributes: attributes,
+      customUserData: customUserData,
+      token: token,
+      platformApplicationArn: platformApplicationArn,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreatePlatformApplication = {
   type t
   @ocaml.doc("<p>Input for CreatePlatformApplication action.</p>")
@@ -1480,9 +1525,11 @@ module CreatePlatformApplication = {
   }
   @module("@aws-sdk/client-sns") @new
   external new: request => t = "CreatePlatformApplicationCommand"
-  let make = (~attributes, ~platform, ~name, ()) => new({attributes, platform, name})
+  let make = (~attributes, ~platform, ~name, ()) =>
+    new({attributes: attributes, platform: platform, name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module AddPermission = {
   type t
   type request = {
@@ -1504,9 +1551,10 @@ module AddPermission = {
   type response = {.}
   @module("@aws-sdk/client-sns") @new external new: request => t = "AddPermissionCommand"
   let make = (~actionName, ~awsaccountId, ~label, ~topicArn, ()) =>
-    new({actionName, awsaccountId, label, topicArn})
+    new({actionName: actionName, awsaccountId: awsaccountId, label: label, topicArn: topicArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module TagResource = {
   type t
   type request = {
@@ -1519,9 +1567,10 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-sns") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceArn, ()) => new({tags, resourceArn})
+  let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module Publish = {
   type t
   @ocaml.doc("<p>Input for Publish action.</p>")
@@ -1688,18 +1737,19 @@ module Publish = {
     (),
   ) =>
     new({
-      messageGroupId,
-      messageDeduplicationId,
-      messageAttributes,
-      messageStructure,
-      subject,
-      message,
-      phoneNumber,
-      targetArn,
-      topicArn,
+      messageGroupId: messageGroupId,
+      messageDeduplicationId: messageDeduplicationId,
+      messageAttributes: messageAttributes,
+      messageStructure: messageStructure,
+      subject: subject,
+      message: message,
+      phoneNumber: phoneNumber,
+      targetArn: targetArn,
+      topicArn: topicArn,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListTopics = {
   type t
   type request = {
@@ -1719,6 +1769,7 @@ module ListTopics = {
   let make = (~nextToken=?, ()) => new({nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListTagsForResource = {
   type t
   type request = {
@@ -1733,6 +1784,7 @@ module ListTagsForResource = {
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListSubscriptionsByTopic = {
   type t
   @ocaml.doc("<p>Input for ListSubscriptionsByTopic action.</p>")
@@ -1756,9 +1808,10 @@ module ListSubscriptionsByTopic = {
     subscriptions: option<subscriptionsList>,
   }
   @module("@aws-sdk/client-sns") @new external new: request => t = "ListSubscriptionsByTopicCommand"
-  let make = (~topicArn, ~nextToken=?, ()) => new({nextToken, topicArn})
+  let make = (~topicArn, ~nextToken=?, ()) => new({nextToken: nextToken, topicArn: topicArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListSubscriptions = {
   type t
   @ocaml.doc("<p>Input for ListSubscriptions action.</p>")
@@ -1780,6 +1833,7 @@ module ListSubscriptions = {
   let make = (~nextToken=?, ()) => new({nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListSMSSandboxPhoneNumbers = {
   type t
   type request = {
@@ -1802,9 +1856,11 @@ module ListSMSSandboxPhoneNumbers = {
   }
   @module("@aws-sdk/client-sns") @new
   external new: request => t = "ListSMSSandboxPhoneNumbersCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateTopic = {
   type t
   @ocaml.doc("<p>Input for CreateTopic action.</p>")
@@ -1904,9 +1960,11 @@ module CreateTopic = {
     topicArn: option<topicARN>,
   }
   @module("@aws-sdk/client-sns") @new external new: request => t = "CreateTopicCommand"
-  let make = (~name, ~tags=?, ~attributes=?, ()) => new({tags, attributes, name})
+  let make = (~name, ~tags=?, ~attributes=?, ()) =>
+    new({tags: tags, attributes: attributes, name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListPlatformApplications = {
   type t
   @ocaml.doc("<p>Input for ListPlatformApplications action.</p>")
@@ -1932,6 +1990,7 @@ module ListPlatformApplications = {
   let make = (~nextToken=?, ()) => new({nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListOriginationNumbers = {
   type t
   type request = {
@@ -1954,9 +2013,11 @@ module ListOriginationNumbers = {
     nextToken: option<nextToken>,
   }
   @module("@aws-sdk/client-sns") @new external new: request => t = "ListOriginationNumbersCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListEndpointsByPlatformApplication = {
   type t
   @ocaml.doc("<p>Input for ListEndpointsByPlatformApplication action.</p>")
@@ -1981,9 +2042,11 @@ module ListEndpointsByPlatformApplication = {
   }
   @module("@aws-sdk/client-sns") @new
   external new: request => t = "ListEndpointsByPlatformApplicationCommand"
-  let make = (~platformApplicationArn, ~nextToken=?, ()) => new({nextToken, platformApplicationArn})
+  let make = (~platformApplicationArn, ~nextToken=?, ()) =>
+    new({nextToken: nextToken, platformApplicationArn: platformApplicationArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module PublishBatch = {
   type t
   type request = {
@@ -2004,6 +2067,6 @@ module PublishBatch = {
   }
   @module("@aws-sdk/client-sns") @new external new: request => t = "PublishBatchCommand"
   let make = (~publishBatchRequestEntries, ~topicArn, ()) =>
-    new({publishBatchRequestEntries, topicArn})
+    new({publishBatchRequestEntries: publishBatchRequestEntries, topicArn: topicArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

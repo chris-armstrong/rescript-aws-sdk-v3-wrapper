@@ -302,9 +302,17 @@ Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web
     ~sessionDuration=?,
     ~description=?,
     (),
-  ) => new({relayState, sessionDuration, description, permissionSetArn, instanceArn})
+  ) =>
+    new({
+      relayState: relayState,
+      sessionDuration: sessionDuration,
+      description: description,
+      permissionSetArn: permissionSetArn,
+      instanceArn: instanceArn,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module PutInlinePolicyToPermissionSet = {
   type t
   type request = {
@@ -322,9 +330,10 @@ Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web
   @module("@aws-sdk/client-sso") @new
   external new: request => t = "PutInlinePolicyToPermissionSetCommand"
   let make = (~inlinePolicy, ~permissionSetArn, ~instanceArn, ()) =>
-    new({inlinePolicy, permissionSetArn, instanceArn})
+    new({inlinePolicy: inlinePolicy, permissionSetArn: permissionSetArn, instanceArn: instanceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module GetInlinePolicyForPermissionSet = {
   type t
   type request = {
@@ -342,9 +351,11 @@ Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web
   }
   @module("@aws-sdk/client-sso") @new
   external new: request => t = "GetInlinePolicyForPermissionSetCommand"
-  let make = (~permissionSetArn, ~instanceArn, ()) => new({permissionSetArn, instanceArn})
+  let make = (~permissionSetArn, ~instanceArn, ()) =>
+    new({permissionSetArn: permissionSetArn, instanceArn: instanceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DetachManagedPolicyFromPermissionSet = {
   type t
   type request = {
@@ -364,9 +375,14 @@ Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web
   @module("@aws-sdk/client-sso") @new
   external new: request => t = "DetachManagedPolicyFromPermissionSetCommand"
   let make = (~managedPolicyArn, ~permissionSetArn, ~instanceArn, ()) =>
-    new({managedPolicyArn, permissionSetArn, instanceArn})
+    new({
+      managedPolicyArn: managedPolicyArn,
+      permissionSetArn: permissionSetArn,
+      instanceArn: instanceArn,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeletePermissionSet = {
   type t
   type request = {
@@ -380,9 +396,11 @@ Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web
   }
   type response = {.}
   @module("@aws-sdk/client-sso") @new external new: request => t = "DeletePermissionSetCommand"
-  let make = (~permissionSetArn, ~instanceArn, ()) => new({permissionSetArn, instanceArn})
+  let make = (~permissionSetArn, ~instanceArn, ()) =>
+    new({permissionSetArn: permissionSetArn, instanceArn: instanceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteInstanceAccessControlAttributeConfiguration = {
   type t
   type request = {
@@ -396,6 +414,7 @@ module DeleteInstanceAccessControlAttributeConfiguration = {
   let make = (~instanceArn, ()) => new({instanceArn: instanceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteInlinePolicyFromPermissionSet = {
   type t
   type request = {
@@ -410,9 +429,11 @@ Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web
   type response = {.}
   @module("@aws-sdk/client-sso") @new
   external new: request => t = "DeleteInlinePolicyFromPermissionSetCommand"
-  let make = (~permissionSetArn, ~instanceArn, ()) => new({permissionSetArn, instanceArn})
+  let make = (~permissionSetArn, ~instanceArn, ()) =>
+    new({permissionSetArn: permissionSetArn, instanceArn: instanceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module AttachManagedPolicyToPermissionSet = {
   type t
   type request = {
@@ -432,9 +453,14 @@ Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web
   @module("@aws-sdk/client-sso") @new
   external new: request => t = "AttachManagedPolicyToPermissionSetCommand"
   let make = (~managedPolicyArn, ~permissionSetArn, ~instanceArn, ()) =>
-    new({managedPolicyArn, permissionSetArn, instanceArn})
+    new({
+      managedPolicyArn: managedPolicyArn,
+      permissionSetArn: permissionSetArn,
+      instanceArn: instanceArn,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UntagResource = {
   type t
   type request = {
@@ -449,9 +475,11 @@ Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web
   }
   type response = {.}
   @module("@aws-sdk/client-sso") @new external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceArn, ~instanceArn, ()) => new({tagKeys, resourceArn, instanceArn})
+  let make = (~tagKeys, ~resourceArn, ~instanceArn, ()) =>
+    new({tagKeys: tagKeys, resourceArn: resourceArn, instanceArn: instanceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ProvisionPermissionSet = {
   type t
   type request = {
@@ -476,9 +504,15 @@ Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web
   }
   @module("@aws-sdk/client-sso") @new external new: request => t = "ProvisionPermissionSetCommand"
   let make = (~targetType, ~permissionSetArn, ~instanceArn, ~targetId=?, ()) =>
-    new({targetType, targetId, permissionSetArn, instanceArn})
+    new({
+      targetType: targetType,
+      targetId: targetId,
+      permissionSetArn: permissionSetArn,
+      instanceArn: instanceArn,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListPermissionSetsProvisionedToAccount = {
   type t
   type request = {
@@ -516,9 +550,16 @@ Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web
   @module("@aws-sdk/client-sso") @new
   external new: request => t = "ListPermissionSetsProvisionedToAccountCommand"
   let make = (~accountId, ~instanceArn, ~nextToken=?, ~maxResults=?, ~provisioningStatus=?, ()) =>
-    new({nextToken, maxResults, provisioningStatus, accountId, instanceArn})
+    new({
+      nextToken: nextToken,
+      maxResults: maxResults,
+      provisioningStatus: provisioningStatus,
+      accountId: accountId,
+      instanceArn: instanceArn,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListPermissionSets = {
   type t
   type request = {
@@ -547,9 +588,10 @@ Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web
   }
   @module("@aws-sdk/client-sso") @new external new: request => t = "ListPermissionSetsCommand"
   let make = (~instanceArn, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults, nextToken, instanceArn})
+    new({maxResults: maxResults, nextToken: nextToken, instanceArn: instanceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListAccountsForProvisionedPermissionSet = {
   type t
   type request = {
@@ -591,9 +633,17 @@ Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web
     ~maxResults=?,
     ~provisioningStatus=?,
     (),
-  ) => new({nextToken, maxResults, provisioningStatus, permissionSetArn, instanceArn})
+  ) =>
+    new({
+      nextToken: nextToken,
+      maxResults: maxResults,
+      provisioningStatus: provisioningStatus,
+      permissionSetArn: permissionSetArn,
+      instanceArn: instanceArn,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribePermissionSetProvisioningStatus = {
   type t
   type request = {
@@ -614,9 +664,13 @@ Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web
   @module("@aws-sdk/client-sso") @new
   external new: request => t = "DescribePermissionSetProvisioningStatusCommand"
   let make = (~provisionPermissionSetRequestId, ~instanceArn, ()) =>
-    new({provisionPermissionSetRequestId, instanceArn})
+    new({
+      provisionPermissionSetRequestId: provisionPermissionSetRequestId,
+      instanceArn: instanceArn,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribePermissionSet = {
   type t
   type request = {
@@ -633,9 +687,11 @@ Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web
     permissionSet: option<permissionSet>,
   }
   @module("@aws-sdk/client-sso") @new external new: request => t = "DescribePermissionSetCommand"
-  let make = (~permissionSetArn, ~instanceArn, ()) => new({permissionSetArn, instanceArn})
+  let make = (~permissionSetArn, ~instanceArn, ()) =>
+    new({permissionSetArn: permissionSetArn, instanceArn: instanceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeAccountAssignmentDeletionStatus = {
   type t
   type request = {
@@ -655,9 +711,13 @@ Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web
   @module("@aws-sdk/client-sso") @new
   external new: request => t = "DescribeAccountAssignmentDeletionStatusCommand"
   let make = (~accountAssignmentDeletionRequestId, ~instanceArn, ()) =>
-    new({accountAssignmentDeletionRequestId, instanceArn})
+    new({
+      accountAssignmentDeletionRequestId: accountAssignmentDeletionRequestId,
+      instanceArn: instanceArn,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeAccountAssignmentCreationStatus = {
   type t
   type request = {
@@ -677,9 +737,13 @@ Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web
   @module("@aws-sdk/client-sso") @new
   external new: request => t = "DescribeAccountAssignmentCreationStatusCommand"
   let make = (~accountAssignmentCreationRequestId, ~instanceArn, ()) =>
-    new({accountAssignmentCreationRequestId, instanceArn})
+    new({
+      accountAssignmentCreationRequestId: accountAssignmentCreationRequestId,
+      instanceArn: instanceArn,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteAccountAssignment = {
   type t
   type request = {
@@ -720,9 +784,18 @@ Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web
     ~targetId,
     ~instanceArn,
     (),
-  ) => new({principalId, principalType, permissionSetArn, targetType, targetId, instanceArn})
+  ) =>
+    new({
+      principalId: principalId,
+      principalType: principalType,
+      permissionSetArn: permissionSetArn,
+      targetType: targetType,
+      targetId: targetId,
+      instanceArn: instanceArn,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateAccountAssignment = {
   type t
   type request = {
@@ -764,9 +837,18 @@ Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web
     ~targetId,
     ~instanceArn,
     (),
-  ) => new({principalId, principalType, permissionSetArn, targetType, targetId, instanceArn})
+  ) =>
+    new({
+      principalId: principalId,
+      principalType: principalType,
+      permissionSetArn: permissionSetArn,
+      targetType: targetType,
+      targetId: targetId,
+      instanceArn: instanceArn,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module TagResource = {
   type t
   type request = {
@@ -781,9 +863,11 @@ Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web
   }
   type response = {.}
   @module("@aws-sdk/client-sso") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceArn, ~instanceArn, ()) => new({tags, resourceArn, instanceArn})
+  let make = (~tags, ~resourceArn, ~instanceArn, ()) =>
+    new({tags: tags, resourceArn: resourceArn, instanceArn: instanceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ListTagsForResource = {
   type t
   type request = {
@@ -810,9 +894,10 @@ Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web
   }
   @module("@aws-sdk/client-sso") @new external new: request => t = "ListTagsForResourceCommand"
   let make = (~resourceArn, ~instanceArn, ~nextToken=?, ()) =>
-    new({nextToken, resourceArn, instanceArn})
+    new({nextToken: nextToken, resourceArn: resourceArn, instanceArn: instanceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListPermissionSetProvisioningStatus = {
   type t
   type request = {
@@ -844,9 +929,10 @@ Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web
   @module("@aws-sdk/client-sso") @new
   external new: request => t = "ListPermissionSetProvisioningStatusCommand"
   let make = (~instanceArn, ~filter=?, ~nextToken=?, ~maxResults=?, ()) =>
-    new({filter, nextToken, maxResults, instanceArn})
+    new({filter: filter, nextToken: nextToken, maxResults: maxResults, instanceArn: instanceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListManagedPoliciesInPermissionSet = {
   type t
   type request = {
@@ -880,9 +966,15 @@ Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web
   @module("@aws-sdk/client-sso") @new
   external new: request => t = "ListManagedPoliciesInPermissionSetCommand"
   let make = (~permissionSetArn, ~instanceArn, ~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken, maxResults, permissionSetArn, instanceArn})
+    new({
+      nextToken: nextToken,
+      maxResults: maxResults,
+      permissionSetArn: permissionSetArn,
+      instanceArn: instanceArn,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListInstances = {
   type t
   type request = {
@@ -905,9 +997,11 @@ module ListInstances = {
     instances: option<instanceList>,
   }
   @module("@aws-sdk/client-sso") @new external new: request => t = "ListInstancesCommand"
-  let make = (~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults})
+  let make = (~nextToken=?, ~maxResults=?, ()) =>
+    new({nextToken: nextToken, maxResults: maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListAccountAssignments = {
   type t
   type request = {
@@ -946,9 +1040,16 @@ Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web
   }
   @module("@aws-sdk/client-sso") @new external new: request => t = "ListAccountAssignmentsCommand"
   let make = (~permissionSetArn, ~accountId, ~instanceArn, ~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken, maxResults, permissionSetArn, accountId, instanceArn})
+    new({
+      nextToken: nextToken,
+      maxResults: maxResults,
+      permissionSetArn: permissionSetArn,
+      accountId: accountId,
+      instanceArn: instanceArn,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListAccountAssignmentDeletionStatus = {
   type t
   type request = {
@@ -980,9 +1081,10 @@ Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web
   @module("@aws-sdk/client-sso") @new
   external new: request => t = "ListAccountAssignmentDeletionStatusCommand"
   let make = (~instanceArn, ~filter=?, ~nextToken=?, ~maxResults=?, ()) =>
-    new({filter, nextToken, maxResults, instanceArn})
+    new({filter: filter, nextToken: nextToken, maxResults: maxResults, instanceArn: instanceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListAccountAssignmentCreationStatus = {
   type t
   type request = {
@@ -1014,9 +1116,10 @@ Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web
   @module("@aws-sdk/client-sso") @new
   external new: request => t = "ListAccountAssignmentCreationStatusCommand"
   let make = (~instanceArn, ~filter=?, ~nextToken=?, ~maxResults=?, ()) =>
-    new({filter, nextToken, maxResults, instanceArn})
+    new({filter: filter, nextToken: nextToken, maxResults: maxResults, instanceArn: instanceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreatePermissionSet = {
   type t
   type request = {
@@ -1052,9 +1155,18 @@ Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web
     ~sessionDuration=?,
     ~description=?,
     (),
-  ) => new({tags, relayState, sessionDuration, instanceArn, description, name})
+  ) =>
+    new({
+      tags: tags,
+      relayState: relayState,
+      sessionDuration: sessionDuration,
+      instanceArn: instanceArn,
+      description: description,
+      name: name,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateInstanceAccessControlAttributeConfiguration = {
   type t
   type request = {
@@ -1069,9 +1181,13 @@ module UpdateInstanceAccessControlAttributeConfiguration = {
   @module("@aws-sdk/client-sso") @new
   external new: request => t = "UpdateInstanceAccessControlAttributeConfigurationCommand"
   let make = (~instanceAccessControlAttributeConfiguration, ~instanceArn, ()) =>
-    new({instanceAccessControlAttributeConfiguration, instanceArn})
+    new({
+      instanceAccessControlAttributeConfiguration: instanceAccessControlAttributeConfiguration,
+      instanceArn: instanceArn,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DescribeInstanceAccessControlAttributeConfiguration = {
   type t
   type request = {
@@ -1097,6 +1213,7 @@ module DescribeInstanceAccessControlAttributeConfiguration = {
   let make = (~instanceArn, ()) => new({instanceArn: instanceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateInstanceAccessControlAttributeConfiguration = {
   type t
   type request = {
@@ -1116,6 +1233,9 @@ module CreateInstanceAccessControlAttributeConfiguration = {
   @module("@aws-sdk/client-sso") @new
   external new: request => t = "CreateInstanceAccessControlAttributeConfigurationCommand"
   let make = (~instanceAccessControlAttributeConfiguration, ~instanceArn, ()) =>
-    new({instanceAccessControlAttributeConfiguration, instanceArn})
+    new({
+      instanceAccessControlAttributeConfiguration: instanceAccessControlAttributeConfiguration,
+      instanceArn: instanceArn,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }

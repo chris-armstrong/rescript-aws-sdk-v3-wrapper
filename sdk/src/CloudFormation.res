@@ -2739,9 +2739,10 @@ module UpdateTerminationProtection = {
   @module("@aws-sdk/client-cloudformation") @new
   external new: request => t = "UpdateTerminationProtectionCommand"
   let make = (~stackName, ~enableTerminationProtection, ()) =>
-    new({stackName, enableTerminationProtection})
+    new({stackName: stackName, enableTerminationProtection: enableTerminationProtection})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module TestType = {
   type t
   type request = {
@@ -2798,9 +2799,16 @@ module TestType = {
   }
   @module("@aws-sdk/client-cloudformation") @new external new: request => t = "TestTypeCommand"
   let make = (~logDeliveryBucket=?, ~versionId=?, ~typeName=?, ~type_=?, ~arn=?, ()) =>
-    new({logDeliveryBucket, versionId, typeName, type_, arn})
+    new({
+      logDeliveryBucket: logDeliveryBucket,
+      versionId: versionId,
+      typeName: typeName,
+      type_: type_,
+      arn: arn,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module StopStackSetOperation = {
   type t
   type request = {
@@ -2835,9 +2843,10 @@ module StopStackSetOperation = {
   @module("@aws-sdk/client-cloudformation") @new
   external new: request => t = "StopStackSetOperationCommand"
   let make = (~operationId, ~stackSetName, ~callAs=?, ()) =>
-    new({callAs, operationId, stackSetName})
+    new({callAs: callAs, operationId: operationId, stackSetName: stackSetName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module SignalResource = {
   type t
   @ocaml.doc("<p>The input for the <a>SignalResource</a> action.</p>")
@@ -2864,9 +2873,15 @@ module SignalResource = {
   @module("@aws-sdk/client-cloudformation") @new
   external new: request => t = "SignalResourceCommand"
   let make = (~status, ~uniqueId, ~logicalResourceId, ~stackName, ()) =>
-    new({status, uniqueId, logicalResourceId, stackName})
+    new({
+      status: status,
+      uniqueId: uniqueId,
+      logicalResourceId: logicalResourceId,
+      stackName: stackName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module SetTypeDefaultVersion = {
   type t
   type request = {
@@ -2896,9 +2911,10 @@ module SetTypeDefaultVersion = {
   @module("@aws-sdk/client-cloudformation") @new
   external new: request => t = "SetTypeDefaultVersionCommand"
   let make = (~versionId=?, ~typeName=?, ~type_=?, ~arn=?, ()) =>
-    new({versionId, typeName, type_, arn})
+    new({versionId: versionId, typeName: typeName, type_: type_, arn: arn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module SetTypeConfiguration = {
   type t
   type request = {
@@ -2942,9 +2958,16 @@ module SetTypeConfiguration = {
   @module("@aws-sdk/client-cloudformation") @new
   external new: request => t = "SetTypeConfigurationCommand"
   let make = (~configuration, ~type_=?, ~typeName=?, ~configurationAlias=?, ~typeArn=?, ()) =>
-    new({type_, typeName, configurationAlias, configuration, typeArn})
+    new({
+      type_: type_,
+      typeName: typeName,
+      configurationAlias: configurationAlias,
+      configuration: configuration,
+      typeArn: typeArn,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module SetStackPolicy = {
   type t
   @ocaml.doc("<p>The input for the <a>SetStackPolicy</a> action.</p>")
@@ -2969,9 +2992,10 @@ module SetStackPolicy = {
   @module("@aws-sdk/client-cloudformation") @new
   external new: request => t = "SetStackPolicyCommand"
   let make = (~stackName, ~stackPolicyURL=?, ~stackPolicyBody=?, ()) =>
-    new({stackPolicyURL, stackPolicyBody, stackName})
+    new({stackPolicyURL: stackPolicyURL, stackPolicyBody: stackPolicyBody, stackName: stackName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module RollbackStack = {
   type t
   type request = {
@@ -2990,9 +3014,10 @@ module RollbackStack = {
   }
   @module("@aws-sdk/client-cloudformation") @new external new: request => t = "RollbackStackCommand"
   let make = (~stackName, ~clientRequestToken=?, ~roleARN=?, ()) =>
-    new({clientRequestToken, roleARN, stackName})
+    new({clientRequestToken: clientRequestToken, roleARN: roleARN, stackName: stackName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module RegisterPublisher = {
   type t
   type request = {
@@ -3019,9 +3044,10 @@ module RegisterPublisher = {
   @module("@aws-sdk/client-cloudformation") @new
   external new: request => t = "RegisterPublisherCommand"
   let make = (~connectionArn=?, ~acceptTermsAndConditions=?, ()) =>
-    new({connectionArn, acceptTermsAndConditions})
+    new({connectionArn: connectionArn, acceptTermsAndConditions: acceptTermsAndConditions})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module RecordHandlerProgress = {
   type t
   type request = {
@@ -3075,16 +3101,17 @@ module RecordHandlerProgress = {
     (),
   ) =>
     new({
-      clientRequestToken,
-      resourceModel,
-      errorCode,
-      statusMessage,
-      currentOperationStatus,
-      operationStatus,
-      bearerToken,
+      clientRequestToken: clientRequestToken,
+      resourceModel: resourceModel,
+      errorCode: errorCode,
+      statusMessage: statusMessage,
+      currentOperationStatus: currentOperationStatus,
+      operationStatus: operationStatus,
+      bearerToken: bearerToken,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module PublishType = {
   type t
   type request = {
@@ -3126,9 +3153,10 @@ module PublishType = {
   }
   @module("@aws-sdk/client-cloudformation") @new external new: request => t = "PublishTypeCommand"
   let make = (~publicVersionNumber=?, ~typeName=?, ~arn=?, ~type_=?, ()) =>
-    new({publicVersionNumber, typeName, arn, type_})
+    new({publicVersionNumber: publicVersionNumber, typeName: typeName, arn: arn, type_: type_})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetStackPolicy = {
   type t
   @ocaml.doc("<p>The input for the <a>GetStackPolicy</a> action.</p>")
@@ -3150,6 +3178,7 @@ module GetStackPolicy = {
   let make = (~stackName, ()) => new({stackName: stackName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ExecuteChangeSet = {
   type t
   @ocaml.doc("<p>The input for the <a>ExecuteChangeSet</a> action.</p>")
@@ -3179,9 +3208,15 @@ module ExecuteChangeSet = {
   @module("@aws-sdk/client-cloudformation") @new
   external new: request => t = "ExecuteChangeSetCommand"
   let make = (~changeSetName, ~disableRollback=?, ~clientRequestToken=?, ~stackName=?, ()) =>
-    new({disableRollback, clientRequestToken, stackName, changeSetName})
+    new({
+      disableRollback: disableRollback,
+      clientRequestToken: clientRequestToken,
+      stackName: stackName,
+      changeSetName: changeSetName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DescribeTypeRegistration = {
   type t
   type request = {
@@ -3216,6 +3251,7 @@ module DescribeTypeRegistration = {
   let make = (~registrationToken, ()) => new({registrationToken: registrationToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeStackDriftDetectionStatus = {
   type t
   type request = {
@@ -3302,6 +3338,7 @@ module DescribeStackDriftDetectionStatus = {
   let make = (~stackDriftDetectionId, ()) => new({stackDriftDetectionId: stackDriftDetectionId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribePublisher = {
   type t
   type request = {
@@ -3332,6 +3369,7 @@ module DescribePublisher = {
   let make = (~publisherId=?, ()) => new({publisherId: publisherId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeregisterType = {
   type t
   type request = {
@@ -3360,9 +3398,10 @@ module DeregisterType = {
   @module("@aws-sdk/client-cloudformation") @new
   external new: request => t = "DeregisterTypeCommand"
   let make = (~versionId=?, ~typeName=?, ~type_=?, ~arn=?, ()) =>
-    new({versionId, typeName, type_, arn})
+    new({versionId: versionId, typeName: typeName, type_: type_, arn: arn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteStackSet = {
   type t
   type request = {
@@ -3393,9 +3432,10 @@ module DeleteStackSet = {
   type response = {.}
   @module("@aws-sdk/client-cloudformation") @new
   external new: request => t = "DeleteStackSetCommand"
-  let make = (~stackSetName, ~callAs=?, ()) => new({callAs, stackSetName})
+  let make = (~stackSetName, ~callAs=?, ()) => new({callAs: callAs, stackSetName: stackSetName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteChangeSet = {
   type t
   @ocaml.doc("<p>The input for the <a>DeleteChangeSet</a> action.</p>")
@@ -3413,9 +3453,11 @@ module DeleteChangeSet = {
   type response = {.}
   @module("@aws-sdk/client-cloudformation") @new
   external new: request => t = "DeleteChangeSetCommand"
-  let make = (~changeSetName, ~stackName=?, ()) => new({stackName, changeSetName})
+  let make = (~changeSetName, ~stackName=?, ()) =>
+    new({stackName: stackName, changeSetName: changeSetName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeactivateType = {
   type t
   type request = {
@@ -3439,9 +3481,11 @@ module DeactivateType = {
   type response = {.}
   @module("@aws-sdk/client-cloudformation") @new
   external new: request => t = "DeactivateTypeCommand"
-  let make = (~arn=?, ~type_=?, ~typeName=?, ()) => new({arn, type_, typeName})
+  let make = (~arn=?, ~type_=?, ~typeName=?, ()) =>
+    new({arn: arn, type_: type_, typeName: typeName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module CancelUpdateStack = {
   type t
   @ocaml.doc("<p>The input for the <a>CancelUpdateStack</a> action.</p>")
@@ -3460,9 +3504,11 @@ module CancelUpdateStack = {
   type response = {.}
   @module("@aws-sdk/client-cloudformation") @new
   external new: request => t = "CancelUpdateStackCommand"
-  let make = (~stackName, ~clientRequestToken=?, ()) => new({clientRequestToken, stackName})
+  let make = (~stackName, ~clientRequestToken=?, ()) =>
+    new({clientRequestToken: clientRequestToken, stackName: stackName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module RegisterType = {
   type t
   type request = {
@@ -3579,15 +3625,16 @@ module RegisterType = {
     (),
   ) =>
     new({
-      clientRequestToken,
-      executionRoleArn,
-      loggingConfig,
-      schemaHandlerPackage,
-      typeName,
-      type_,
+      clientRequestToken: clientRequestToken,
+      executionRoleArn: executionRoleArn,
+      loggingConfig: loggingConfig,
+      schemaHandlerPackage: schemaHandlerPackage,
+      typeName: typeName,
+      type_: type_,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListTypeRegistrations = {
   type t
   type request = {
@@ -3649,9 +3696,18 @@ module ListTypeRegistrations = {
     ~typeName=?,
     ~type_=?,
     (),
-  ) => new({nextToken, maxResults, registrationStatusFilter, typeArn, typeName, type_})
+  ) =>
+    new({
+      nextToken: nextToken,
+      maxResults: maxResults,
+      registrationStatusFilter: registrationStatusFilter,
+      typeArn: typeArn,
+      typeName: typeName,
+      type_: type_,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListImports = {
   type t
   type request = {
@@ -3676,9 +3732,10 @@ module ListImports = {
     imports: option<imports>,
   }
   @module("@aws-sdk/client-cloudformation") @new external new: request => t = "ListImportsCommand"
-  let make = (~exportName, ~nextToken=?, ()) => new({nextToken, exportName})
+  let make = (~exportName, ~nextToken=?, ()) => new({nextToken: nextToken, exportName: exportName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetTemplate = {
   type t
   @ocaml.doc("<p>The input for a <a>GetTemplate</a> action.</p>")
@@ -3728,9 +3785,10 @@ module GetTemplate = {
   }
   @module("@aws-sdk/client-cloudformation") @new external new: request => t = "GetTemplateCommand"
   let make = (~templateStage=?, ~changeSetName=?, ~stackName=?, ()) =>
-    new({templateStage, changeSetName, stackName})
+    new({templateStage: templateStage, changeSetName: changeSetName, stackName: stackName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DetectStackDrift = {
   type t
   type request = {
@@ -3750,9 +3808,11 @@ module DetectStackDrift = {
   }
   @module("@aws-sdk/client-cloudformation") @new
   external new: request => t = "DetectStackDriftCommand"
-  let make = (~stackName, ~logicalResourceIds=?, ()) => new({logicalResourceIds, stackName})
+  let make = (~stackName, ~logicalResourceIds=?, ()) =>
+    new({logicalResourceIds: logicalResourceIds, stackName: stackName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteStack = {
   type t
   @ocaml.doc("<p>The input for <a>DeleteStack</a> action.</p>")
@@ -3795,9 +3855,15 @@ module DeleteStack = {
   type response = {.}
   @module("@aws-sdk/client-cloudformation") @new external new: request => t = "DeleteStackCommand"
   let make = (~stackName, ~clientRequestToken=?, ~roleARN=?, ~retainResources=?, ()) =>
-    new({clientRequestToken, roleARN, retainResources, stackName})
+    new({
+      clientRequestToken: clientRequestToken,
+      roleARN: roleARN,
+      retainResources: retainResources,
+      stackName: stackName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ContinueUpdateRollback = {
   type t
   @ocaml.doc("<p>The input for the <a>ContinueUpdateRollback</a> action.</p>")
@@ -3865,9 +3931,15 @@ module ContinueUpdateRollback = {
   @module("@aws-sdk/client-cloudformation") @new
   external new: request => t = "ContinueUpdateRollbackCommand"
   let make = (~stackName, ~clientRequestToken=?, ~resourcesToSkip=?, ~roleARN=?, ()) =>
-    new({clientRequestToken, resourcesToSkip, roleARN, stackName})
+    new({
+      clientRequestToken: clientRequestToken,
+      resourcesToSkip: resourcesToSkip,
+      roleARN: roleARN,
+      stackName: stackName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ActivateType = {
   type t
   type request = {
@@ -3957,19 +4029,20 @@ module ActivateType = {
     (),
   ) =>
     new({
-      majorVersion,
-      versionBump,
-      executionRoleArn,
-      loggingConfig,
-      autoUpdate,
-      typeNameAlias,
-      typeName,
-      publisherId,
-      publicTypeArn,
-      type_,
+      majorVersion: majorVersion,
+      versionBump: versionBump,
+      executionRoleArn: executionRoleArn,
+      loggingConfig: loggingConfig,
+      autoUpdate: autoUpdate,
+      typeNameAlias: typeNameAlias,
+      typeName: typeName,
+      publisherId: publisherId,
+      publicTypeArn: publicTypeArn,
+      type_: type_,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ValidateTemplate = {
   type t
   @ocaml.doc("<p>The input for <a>ValidateTemplate</a> action.</p>")
@@ -4015,9 +4088,11 @@ module ValidateTemplate = {
   }
   @module("@aws-sdk/client-cloudformation") @new
   external new: request => t = "ValidateTemplateCommand"
-  let make = (~templateURL=?, ~templateBody=?, ()) => new({templateURL, templateBody})
+  let make = (~templateURL=?, ~templateBody=?, ()) =>
+    new({templateURL: templateURL, templateBody: templateBody})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateStackSet = {
   type t
   type request = {
@@ -4333,28 +4408,29 @@ module UpdateStackSet = {
     (),
   ) =>
     new({
-      managedExecution,
-      callAs,
-      regions,
-      accounts,
-      operationId,
-      autoDeployment,
-      permissionModel,
-      deploymentTargets,
-      executionRoleName,
-      administrationRoleARN,
-      operationPreferences,
-      tags,
-      capabilities,
-      parameters,
-      usePreviousTemplate,
-      templateURL,
-      templateBody,
-      description,
-      stackSetName,
+      managedExecution: managedExecution,
+      callAs: callAs,
+      regions: regions,
+      accounts: accounts,
+      operationId: operationId,
+      autoDeployment: autoDeployment,
+      permissionModel: permissionModel,
+      deploymentTargets: deploymentTargets,
+      executionRoleName: executionRoleName,
+      administrationRoleARN: administrationRoleARN,
+      operationPreferences: operationPreferences,
+      tags: tags,
+      capabilities: capabilities,
+      parameters: parameters,
+      usePreviousTemplate: usePreviousTemplate,
+      templateURL: templateURL,
+      templateBody: templateBody,
+      description: description,
+      stackSetName: stackSetName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateStackInstances = {
   type t
   type request = {
@@ -4466,17 +4542,18 @@ module UpdateStackInstances = {
     (),
   ) =>
     new({
-      callAs,
-      operationId,
-      operationPreferences,
-      parameterOverrides,
-      regions,
-      deploymentTargets,
-      accounts,
-      stackSetName,
+      callAs: callAs,
+      operationId: operationId,
+      operationPreferences: operationPreferences,
+      parameterOverrides: parameterOverrides,
+      regions: regions,
+      deploymentTargets: deploymentTargets,
+      accounts: accounts,
+      stackSetName: stackSetName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListTypes = {
   type t
   type request = {
@@ -4593,9 +4670,19 @@ module ListTypes = {
     ~provisioningType=?,
     ~visibility=?,
     (),
-  ) => new({nextToken, maxResults, filters, type_, deprecatedStatus, provisioningType, visibility})
+  ) =>
+    new({
+      nextToken: nextToken,
+      maxResults: maxResults,
+      filters: filters,
+      type_: type_,
+      deprecatedStatus: deprecatedStatus,
+      provisioningType: provisioningType,
+      visibility: visibility,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListTypeVersions = {
   type t
   type request = {
@@ -4674,9 +4761,19 @@ module ListTypeVersions = {
     ~typeName=?,
     ~type_=?,
     (),
-  ) => new({publisherId, deprecatedStatus, nextToken, maxResults, arn, typeName, type_})
+  ) =>
+    new({
+      publisherId: publisherId,
+      deprecatedStatus: deprecatedStatus,
+      nextToken: nextToken,
+      maxResults: maxResults,
+      arn: arn,
+      typeName: typeName,
+      type_: type_,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListStackSetOperations = {
   type t
   type request = {
@@ -4733,9 +4830,10 @@ module ListStackSetOperations = {
   @module("@aws-sdk/client-cloudformation") @new
   external new: request => t = "ListStackSetOperationsCommand"
   let make = (~stackSetName, ~callAs=?, ~maxResults=?, ~nextToken=?, ()) =>
-    new({callAs, maxResults, nextToken, stackSetName})
+    new({callAs: callAs, maxResults: maxResults, nextToken: nextToken, stackSetName: stackSetName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListExports = {
   type t
   type request = {
@@ -4756,6 +4854,7 @@ module ListExports = {
   let make = (~nextToken=?, ()) => new({nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListChangeSets = {
   type t
   @ocaml.doc("<p>The input for the <a>ListChangeSets</a> action.</p>")
@@ -4782,9 +4881,10 @@ module ListChangeSets = {
   }
   @module("@aws-sdk/client-cloudformation") @new
   external new: request => t = "ListChangeSetsCommand"
-  let make = (~stackName, ~nextToken=?, ()) => new({nextToken, stackName})
+  let make = (~stackName, ~nextToken=?, ()) => new({nextToken: nextToken, stackName: stackName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ImportStacksToStackSet = {
   type t
   type request = {
@@ -4840,16 +4940,17 @@ module ImportStacksToStackSet = {
     (),
   ) =>
     new({
-      callAs,
-      operationId,
-      operationPreferences,
-      organizationalUnitIds,
-      stackIdsUrl,
-      stackIds,
-      stackSetName,
+      callAs: callAs,
+      operationId: operationId,
+      operationPreferences: operationPreferences,
+      organizationalUnitIds: organizationalUnitIds,
+      stackIdsUrl: stackIdsUrl,
+      stackIds: stackIds,
+      stackSetName: stackSetName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module EstimateTemplateCost = {
   type t
   @ocaml.doc("<p>The input for an <a>EstimateTemplateCost</a> action.</p>")
@@ -4883,9 +4984,10 @@ module EstimateTemplateCost = {
   @module("@aws-sdk/client-cloudformation") @new
   external new: request => t = "EstimateTemplateCostCommand"
   let make = (~parameters=?, ~templateURL=?, ~templateBody=?, ()) =>
-    new({parameters, templateURL, templateBody})
+    new({parameters: parameters, templateURL: templateURL, templateBody: templateBody})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DetectStackSetDrift = {
   type t
   type request = {
@@ -4931,9 +5033,15 @@ module DetectStackSetDrift = {
   @module("@aws-sdk/client-cloudformation") @new
   external new: request => t = "DetectStackSetDriftCommand"
   let make = (~stackSetName, ~callAs=?, ~operationId=?, ~operationPreferences=?, ()) =>
-    new({callAs, operationId, operationPreferences, stackSetName})
+    new({
+      callAs: callAs,
+      operationId: operationId,
+      operationPreferences: operationPreferences,
+      stackSetName: stackSetName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeStackResource = {
   type t
   @ocaml.doc("<p>The input for <a>DescribeStackResource</a> action.</p>")
@@ -4966,9 +5074,11 @@ module DescribeStackResource = {
   }
   @module("@aws-sdk/client-cloudformation") @new
   external new: request => t = "DescribeStackResourceCommand"
-  let make = (~logicalResourceId, ~stackName, ()) => new({logicalResourceId, stackName})
+  let make = (~logicalResourceId, ~stackName, ()) =>
+    new({logicalResourceId: logicalResourceId, stackName: stackName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeStackEvents = {
   type t
   @ocaml.doc("<p>The input for <a>DescribeStackEvents</a> action.</p>")
@@ -5002,9 +5112,10 @@ module DescribeStackEvents = {
   }
   @module("@aws-sdk/client-cloudformation") @new
   external new: request => t = "DescribeStackEventsCommand"
-  let make = (~nextToken=?, ~stackName=?, ()) => new({nextToken, stackName})
+  let make = (~nextToken=?, ~stackName=?, ()) => new({nextToken: nextToken, stackName: stackName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeAccountLimits = {
   type t
   @ocaml.doc("<p>The input for the <a>DescribeAccountLimits</a> action.</p>")
@@ -5029,6 +5140,7 @@ module DescribeAccountLimits = {
   let make = (~nextToken=?, ()) => new({nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteStackInstances = {
   type t
   type request = {
@@ -5109,17 +5221,18 @@ module DeleteStackInstances = {
     (),
   ) =>
     new({
-      callAs,
-      operationId,
-      retainStacks,
-      operationPreferences,
-      regions,
-      deploymentTargets,
-      accounts,
-      stackSetName,
+      callAs: callAs,
+      operationId: operationId,
+      retainStacks: retainStacks,
+      operationPreferences: operationPreferences,
+      regions: regions,
+      deploymentTargets: deploymentTargets,
+      accounts: accounts,
+      stackSetName: stackSetName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateStackSet = {
   type t
   type request = {
@@ -5356,24 +5469,25 @@ module CreateStackSet = {
     (),
   ) =>
     new({
-      managedExecution,
-      clientRequestToken,
-      callAs,
-      autoDeployment,
-      permissionModel,
-      executionRoleName,
-      administrationRoleARN,
-      tags,
-      capabilities,
-      parameters,
-      stackId,
-      templateURL,
-      templateBody,
-      description,
-      stackSetName,
+      managedExecution: managedExecution,
+      clientRequestToken: clientRequestToken,
+      callAs: callAs,
+      autoDeployment: autoDeployment,
+      permissionModel: permissionModel,
+      executionRoleName: executionRoleName,
+      administrationRoleARN: administrationRoleARN,
+      tags: tags,
+      capabilities: capabilities,
+      parameters: parameters,
+      stackId: stackId,
+      templateURL: templateURL,
+      templateBody: templateBody,
+      description: description,
+      stackSetName: stackSetName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateStackInstances = {
   type t
   type request = {
@@ -5479,17 +5593,18 @@ module CreateStackInstances = {
     (),
   ) =>
     new({
-      callAs,
-      operationId,
-      operationPreferences,
-      parameterOverrides,
-      regions,
-      deploymentTargets,
-      accounts,
-      stackSetName,
+      callAs: callAs,
+      operationId: operationId,
+      operationPreferences: operationPreferences,
+      parameterOverrides: parameterOverrides,
+      regions: regions,
+      deploymentTargets: deploymentTargets,
+      accounts: accounts,
+      stackSetName: stackSetName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateStack = {
   type t
   @ocaml.doc("<p>The input for an <a>UpdateStack</a> action.</p>")
@@ -5746,26 +5861,27 @@ module UpdateStack = {
     (),
   ) =>
     new({
-      clientRequestToken,
-      disableRollback,
-      tags,
-      notificationARNs,
-      stackPolicyURL,
-      stackPolicyBody,
-      rollbackConfiguration,
-      roleARN,
-      resourceTypes,
-      capabilities,
-      parameters,
-      stackPolicyDuringUpdateURL,
-      stackPolicyDuringUpdateBody,
-      usePreviousTemplate,
-      templateURL,
-      templateBody,
-      stackName,
+      clientRequestToken: clientRequestToken,
+      disableRollback: disableRollback,
+      tags: tags,
+      notificationARNs: notificationARNs,
+      stackPolicyURL: stackPolicyURL,
+      stackPolicyBody: stackPolicyBody,
+      rollbackConfiguration: rollbackConfiguration,
+      roleARN: roleARN,
+      resourceTypes: resourceTypes,
+      capabilities: capabilities,
+      parameters: parameters,
+      stackPolicyDuringUpdateURL: stackPolicyDuringUpdateURL,
+      stackPolicyDuringUpdateBody: stackPolicyDuringUpdateBody,
+      usePreviousTemplate: usePreviousTemplate,
+      templateURL: templateURL,
+      templateBody: templateBody,
+      stackName: stackName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListStacks = {
   type t
   @ocaml.doc("<p>The input for <a>ListStacks</a> action.</p>")
@@ -5791,9 +5907,11 @@ module ListStacks = {
     stackSummaries: option<stackSummaries>,
   }
   @module("@aws-sdk/client-cloudformation") @new external new: request => t = "ListStacksCommand"
-  let make = (~stackStatusFilter=?, ~nextToken=?, ()) => new({stackStatusFilter, nextToken})
+  let make = (~stackStatusFilter=?, ~nextToken=?, ()) =>
+    new({stackStatusFilter: stackStatusFilter, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListStackSets = {
   type t
   type request = {
@@ -5849,9 +5967,10 @@ module ListStackSets = {
   }
   @module("@aws-sdk/client-cloudformation") @new external new: request => t = "ListStackSetsCommand"
   let make = (~callAs=?, ~status=?, ~maxResults=?, ~nextToken=?, ()) =>
-    new({callAs, status, maxResults, nextToken})
+    new({callAs: callAs, status: status, maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListStackSetOperationResults = {
   type t
   type request = {
@@ -5910,9 +6029,16 @@ module ListStackSetOperationResults = {
   @module("@aws-sdk/client-cloudformation") @new
   external new: request => t = "ListStackSetOperationResultsCommand"
   let make = (~operationId, ~stackSetName, ~callAs=?, ~maxResults=?, ~nextToken=?, ()) =>
-    new({callAs, maxResults, nextToken, operationId, stackSetName})
+    new({
+      callAs: callAs,
+      maxResults: maxResults,
+      nextToken: nextToken,
+      operationId: operationId,
+      stackSetName: stackSetName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListStackResources = {
   type t
   @ocaml.doc("<p>The input for the <a>ListStackResource</a> action.</p>")
@@ -5948,9 +6074,10 @@ module ListStackResources = {
   }
   @module("@aws-sdk/client-cloudformation") @new
   external new: request => t = "ListStackResourcesCommand"
-  let make = (~stackName, ~nextToken=?, ()) => new({nextToken, stackName})
+  let make = (~stackName, ~nextToken=?, ()) => new({nextToken: nextToken, stackName: stackName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListStackInstances = {
   type t
   type request = {
@@ -6026,16 +6153,17 @@ module ListStackInstances = {
     (),
   ) =>
     new({
-      callAs,
-      stackInstanceRegion,
-      stackInstanceAccount,
-      filters,
-      maxResults,
-      nextToken,
-      stackSetName,
+      callAs: callAs,
+      stackInstanceRegion: stackInstanceRegion,
+      stackInstanceAccount: stackInstanceAccount,
+      filters: filters,
+      maxResults: maxResults,
+      nextToken: nextToken,
+      stackSetName: stackSetName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DetectStackResourceDrift = {
   type t
   type request = {
@@ -6054,9 +6182,11 @@ module DetectStackResourceDrift = {
   }
   @module("@aws-sdk/client-cloudformation") @new
   external new: request => t = "DetectStackResourceDriftCommand"
-  let make = (~logicalResourceId, ~stackName, ()) => new({logicalResourceId, stackName})
+  let make = (~logicalResourceId, ~stackName, ()) =>
+    new({logicalResourceId: logicalResourceId, stackName: stackName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeType = {
   type t
   type request = {
@@ -6335,9 +6465,18 @@ module DescribeType = {
     ~typeName=?,
     ~type_=?,
     (),
-  ) => new({publicVersionNumber, publisherId, versionId, arn, typeName, type_})
+  ) =>
+    new({
+      publicVersionNumber: publicVersionNumber,
+      publisherId: publisherId,
+      versionId: versionId,
+      arn: arn,
+      typeName: typeName,
+      type_: type_,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeStackSetOperation = {
   type t
   type request = {
@@ -6373,9 +6512,10 @@ module DescribeStackSetOperation = {
   @module("@aws-sdk/client-cloudformation") @new
   external new: request => t = "DescribeStackSetOperationCommand"
   let make = (~operationId, ~stackSetName, ~callAs=?, ()) =>
-    new({callAs, operationId, stackSetName})
+    new({callAs: callAs, operationId: operationId, stackSetName: stackSetName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeStackSet = {
   type t
   type request = {
@@ -6407,9 +6547,10 @@ module DescribeStackSet = {
   }
   @module("@aws-sdk/client-cloudformation") @new
   external new: request => t = "DescribeStackSetCommand"
-  let make = (~stackSetName, ~callAs=?, ()) => new({callAs, stackSetName})
+  let make = (~stackSetName, ~callAs=?, ()) => new({callAs: callAs, stackSetName: stackSetName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeStackResources = {
   type t
   @ocaml.doc("<p>The input for <a>DescribeStackResources</a> action.</p>")
@@ -6454,9 +6595,14 @@ module DescribeStackResources = {
   @module("@aws-sdk/client-cloudformation") @new
   external new: request => t = "DescribeStackResourcesCommand"
   let make = (~physicalResourceId=?, ~logicalResourceId=?, ~stackName=?, ()) =>
-    new({physicalResourceId, logicalResourceId, stackName})
+    new({
+      physicalResourceId: physicalResourceId,
+      logicalResourceId: logicalResourceId,
+      stackName: stackName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeStackInstance = {
   type t
   type request = {
@@ -6499,9 +6645,15 @@ module DescribeStackInstance = {
   @module("@aws-sdk/client-cloudformation") @new
   external new: request => t = "DescribeStackInstanceCommand"
   let make = (~stackInstanceRegion, ~stackInstanceAccount, ~stackSetName, ~callAs=?, ()) =>
-    new({callAs, stackInstanceRegion, stackInstanceAccount, stackSetName})
+    new({
+      callAs: callAs,
+      stackInstanceRegion: stackInstanceRegion,
+      stackInstanceAccount: stackInstanceAccount,
+      stackSetName: stackSetName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateStack = {
   type t
   @ocaml.doc("<p>The input for <a>CreateStack</a> action.</p>")
@@ -6766,26 +6918,27 @@ module CreateStack = {
     (),
   ) =>
     new({
-      enableTerminationProtection,
-      clientRequestToken,
-      tags,
-      stackPolicyURL,
-      stackPolicyBody,
-      onFailure,
-      roleARN,
-      resourceTypes,
-      capabilities,
-      notificationARNs,
-      timeoutInMinutes,
-      rollbackConfiguration,
-      disableRollback,
-      parameters,
-      templateURL,
-      templateBody,
-      stackName,
+      enableTerminationProtection: enableTerminationProtection,
+      clientRequestToken: clientRequestToken,
+      tags: tags,
+      stackPolicyURL: stackPolicyURL,
+      stackPolicyBody: stackPolicyBody,
+      onFailure: onFailure,
+      roleARN: roleARN,
+      resourceTypes: resourceTypes,
+      capabilities: capabilities,
+      notificationARNs: notificationARNs,
+      timeoutInMinutes: timeoutInMinutes,
+      rollbackConfiguration: rollbackConfiguration,
+      disableRollback: disableRollback,
+      parameters: parameters,
+      templateURL: templateURL,
+      templateBody: templateBody,
+      stackName: stackName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateChangeSet = {
   type t
   @ocaml.doc("<p>The input for the <a>CreateChangeSet</a> action.</p>")
@@ -7015,26 +7168,27 @@ module CreateChangeSet = {
     (),
   ) =>
     new({
-      includeNestedStacks,
-      resourcesToImport,
-      changeSetType,
-      description,
-      clientToken,
-      changeSetName,
-      tags,
-      notificationARNs,
-      rollbackConfiguration,
-      roleARN,
-      resourceTypes,
-      capabilities,
-      parameters,
-      usePreviousTemplate,
-      templateURL,
-      templateBody,
-      stackName,
+      includeNestedStacks: includeNestedStacks,
+      resourcesToImport: resourcesToImport,
+      changeSetType: changeSetType,
+      description: description,
+      clientToken: clientToken,
+      changeSetName: changeSetName,
+      tags: tags,
+      notificationARNs: notificationARNs,
+      rollbackConfiguration: rollbackConfiguration,
+      roleARN: roleARN,
+      resourceTypes: resourceTypes,
+      capabilities: capabilities,
+      parameters: parameters,
+      usePreviousTemplate: usePreviousTemplate,
+      templateURL: templateURL,
+      templateBody: templateBody,
+      stackName: stackName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module BatchDescribeTypeConfigurations = {
   type t
   type request = {
@@ -7062,6 +7216,7 @@ module BatchDescribeTypeConfigurations = {
     new({typeConfigurationIdentifiers: typeConfigurationIdentifiers})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetTemplateSummary = {
   type t
   @ocaml.doc("<p>The input for the <a>GetTemplateSummary</a> action.</p>")
@@ -7165,9 +7320,16 @@ module GetTemplateSummary = {
   @module("@aws-sdk/client-cloudformation") @new
   external new: request => t = "GetTemplateSummaryCommand"
   let make = (~callAs=?, ~stackSetName=?, ~stackName=?, ~templateURL=?, ~templateBody=?, ()) =>
-    new({callAs, stackSetName, stackName, templateURL, templateBody})
+    new({
+      callAs: callAs,
+      stackSetName: stackSetName,
+      stackName: stackName,
+      templateURL: templateURL,
+      templateBody: templateBody,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeStackResourceDrifts = {
   type t
   type request = {
@@ -7230,9 +7392,15 @@ module DescribeStackResourceDrifts = {
   @module("@aws-sdk/client-cloudformation") @new
   external new: request => t = "DescribeStackResourceDriftsCommand"
   let make = (~stackName, ~maxResults=?, ~nextToken=?, ~stackResourceDriftStatusFilters=?, ()) =>
-    new({maxResults, nextToken, stackResourceDriftStatusFilters, stackName})
+    new({
+      maxResults: maxResults,
+      nextToken: nextToken,
+      stackResourceDriftStatusFilters: stackResourceDriftStatusFilters,
+      stackName: stackName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeChangeSetHooks = {
   type t
   type request = {
@@ -7270,9 +7438,15 @@ module DescribeChangeSetHooks = {
   @module("@aws-sdk/client-cloudformation") @new
   external new: request => t = "DescribeChangeSetHooksCommand"
   let make = (~changeSetName, ~logicalResourceId=?, ~nextToken=?, ~stackName=?, ()) =>
-    new({logicalResourceId, nextToken, stackName, changeSetName})
+    new({
+      logicalResourceId: logicalResourceId,
+      nextToken: nextToken,
+      stackName: stackName,
+      changeSetName: changeSetName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeStacks = {
   type t
   @ocaml.doc("<p>The input for <a>DescribeStacks</a> action.</p>")
@@ -7305,9 +7479,10 @@ module DescribeStacks = {
   }
   @module("@aws-sdk/client-cloudformation") @new
   external new: request => t = "DescribeStacksCommand"
-  let make = (~nextToken=?, ~stackName=?, ()) => new({nextToken, stackName})
+  let make = (~nextToken=?, ~stackName=?, ()) => new({nextToken: nextToken, stackName: stackName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeChangeSet = {
   type t
   @ocaml.doc("<p>The input for the <a>DescribeChangeSet</a> action.</p>")
@@ -7401,6 +7576,6 @@ module DescribeChangeSet = {
   @module("@aws-sdk/client-cloudformation") @new
   external new: request => t = "DescribeChangeSetCommand"
   let make = (~changeSetName, ~nextToken=?, ~stackName=?, ()) =>
-    new({nextToken, stackName, changeSetName})
+    new({nextToken: nextToken, stackName: stackName, changeSetName: changeSetName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

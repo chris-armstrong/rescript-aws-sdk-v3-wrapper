@@ -816,9 +816,10 @@ module StartSchemaCreation = {
     status: option<schemaStatus>,
   }
   @module("@aws-sdk/client-appsync") @new external new: request => t = "StartSchemaCreationCommand"
-  let make = (~definition, ~apiId, ()) => new({definition, apiId})
+  let make = (~definition, ~apiId, ()) => new({definition: definition, apiId: apiId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetSchemaCreationStatus = {
   type t
   type request = {@ocaml.doc("<p>The API ID.</p>") apiId: string_}
@@ -834,6 +835,7 @@ module GetSchemaCreationStatus = {
   let make = (~apiId, ()) => new({apiId: apiId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetIntrospectionSchema = {
   type t
   type request = {
@@ -852,9 +854,11 @@ module GetIntrospectionSchema = {
   }
   @module("@aws-sdk/client-appsync") @new
   external new: request => t = "GetIntrospectionSchemaCommand"
-  let make = (~format, ~apiId, ~includeDirectives=?, ()) => new({includeDirectives, format, apiId})
+  let make = (~format, ~apiId, ~includeDirectives=?, ()) =>
+    new({includeDirectives: includeDirectives, format: format, apiId: apiId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module FlushApiCache = {
   type t
   @ocaml.doc("<p>Represents the input of a <code>FlushApiCache</code> operation.</p>")
@@ -864,6 +868,7 @@ module FlushApiCache = {
   let make = (~apiId, ()) => new({apiId: apiId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DisassociateApi = {
   type t
   type request = {@ocaml.doc("<p>The domain name.</p>") domainName: domainName}
@@ -872,6 +877,7 @@ module DisassociateApi = {
   let make = (~domainName, ()) => new({domainName: domainName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteType = {
   type t
   type request = {
@@ -880,9 +886,10 @@ module DeleteType = {
   }
   type response = {.}
   @module("@aws-sdk/client-appsync") @new external new: request => t = "DeleteTypeCommand"
-  let make = (~typeName, ~apiId, ()) => new({typeName, apiId})
+  let make = (~typeName, ~apiId, ()) => new({typeName: typeName, apiId: apiId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteResolver = {
   type t
   type request = {
@@ -892,9 +899,11 @@ module DeleteResolver = {
   }
   type response = {.}
   @module("@aws-sdk/client-appsync") @new external new: request => t = "DeleteResolverCommand"
-  let make = (~fieldName, ~typeName, ~apiId, ()) => new({fieldName, typeName, apiId})
+  let make = (~fieldName, ~typeName, ~apiId, ()) =>
+    new({fieldName: fieldName, typeName: typeName, apiId: apiId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteGraphqlApi = {
   type t
   type request = {@ocaml.doc("<p>The API ID.</p>") apiId: string_}
@@ -903,6 +912,7 @@ module DeleteGraphqlApi = {
   let make = (~apiId, ()) => new({apiId: apiId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteFunction = {
   type t
   type request = {
@@ -911,9 +921,10 @@ module DeleteFunction = {
   }
   type response = {.}
   @module("@aws-sdk/client-appsync") @new external new: request => t = "DeleteFunctionCommand"
-  let make = (~functionId, ~apiId, ()) => new({functionId, apiId})
+  let make = (~functionId, ~apiId, ()) => new({functionId: functionId, apiId: apiId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteDomainName = {
   type t
   type request = {@ocaml.doc("<p>The domain name.</p>") domainName: domainName}
@@ -922,6 +933,7 @@ module DeleteDomainName = {
   let make = (~domainName, ()) => new({domainName: domainName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteDataSource = {
   type t
   type request = {
@@ -930,9 +942,10 @@ module DeleteDataSource = {
   }
   type response = {.}
   @module("@aws-sdk/client-appsync") @new external new: request => t = "DeleteDataSourceCommand"
-  let make = (~name, ~apiId, ()) => new({name, apiId})
+  let make = (~name, ~apiId, ()) => new({name: name, apiId: apiId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteApiKey = {
   type t
   type request = {
@@ -941,9 +954,10 @@ module DeleteApiKey = {
   }
   type response = {.}
   @module("@aws-sdk/client-appsync") @new external new: request => t = "DeleteApiKeyCommand"
-  let make = (~id, ~apiId, ()) => new({id, apiId})
+  let make = (~id, ~apiId, ()) => new({id: id, apiId: apiId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteApiCache = {
   type t
   @ocaml.doc("<p>Represents the input of a <code>DeleteApiCache</code> operation.</p>")
@@ -953,6 +967,7 @@ module DeleteApiCache = {
   let make = (~apiId, ()) => new({apiId: apiId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateType = {
   type t
   type request = {
@@ -966,9 +981,10 @@ module UpdateType = {
   }
   @module("@aws-sdk/client-appsync") @new external new: request => t = "UpdateTypeCommand"
   let make = (~format, ~typeName, ~apiId, ~definition=?, ()) =>
-    new({format, definition, typeName, apiId})
+    new({format: format, definition: definition, typeName: typeName, apiId: apiId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateDomainName = {
   type t
   type request = {
@@ -981,9 +997,11 @@ module UpdateDomainName = {
     domainNameConfig: option<domainNameConfig>,
   }
   @module("@aws-sdk/client-appsync") @new external new: request => t = "UpdateDomainNameCommand"
-  let make = (~domainName, ~description=?, ()) => new({description, domainName})
+  let make = (~domainName, ~description=?, ()) =>
+    new({description: description, domainName: domainName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateApiKey = {
   type t
   type request = {
@@ -996,9 +1014,11 @@ module UpdateApiKey = {
   }
   type response = {@ocaml.doc("<p>The API key.</p>") apiKey: option<apiKey>}
   @module("@aws-sdk/client-appsync") @new external new: request => t = "UpdateApiKeyCommand"
-  let make = (~id, ~apiId, ~expires=?, ~description=?, ()) => new({expires, description, id, apiId})
+  let make = (~id, ~apiId, ~expires=?, ~description=?, ()) =>
+    new({expires: expires, description: description, id: id, apiId: apiId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateApiCache = {
   type t
   @ocaml.doc("<p>Represents the input of a <code>UpdateApiCache</code> operation.</p>")
@@ -1104,9 +1124,10 @@ module UpdateApiCache = {
   }
   @module("@aws-sdk/client-appsync") @new external new: request => t = "UpdateApiCacheCommand"
   let make = (~type_, ~apiCachingBehavior, ~ttl, ~apiId, ()) =>
-    new({type_, apiCachingBehavior, ttl, apiId})
+    new({type_: type_, apiCachingBehavior: apiCachingBehavior, ttl: ttl, apiId: apiId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UntagResource = {
   type t
   type request = {
@@ -1116,9 +1137,10 @@ module UntagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-appsync") @new external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys, resourceArn})
+  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module TagResource = {
   type t
   type request = {
@@ -1128,9 +1150,10 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-appsync") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceArn, ()) => new({tags, resourceArn})
+  let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ListTagsForResource = {
   type t
   type request = {
@@ -1142,6 +1165,7 @@ module ListTagsForResource = {
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetType = {
   type t
   type request = {
@@ -1153,9 +1177,11 @@ module GetType = {
     @ocaml.doc("<p>The <code>Type</code> object.</p>") @as("type") type_: option<type_>,
   }
   @module("@aws-sdk/client-appsync") @new external new: request => t = "GetTypeCommand"
-  let make = (~format, ~typeName, ~apiId, ()) => new({format, typeName, apiId})
+  let make = (~format, ~typeName, ~apiId, ()) =>
+    new({format: format, typeName: typeName, apiId: apiId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetDomainName = {
   type t
   type request = {@ocaml.doc("<p>The domain name.</p>") domainName: domainName}
@@ -1167,6 +1193,7 @@ module GetDomainName = {
   let make = (~domainName, ()) => new({domainName: domainName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetApiCache = {
   type t
   @ocaml.doc("<p>Represents the input of a <code>GetApiCache</code> operation.</p>")
@@ -1179,6 +1206,7 @@ module GetApiCache = {
   let make = (~apiId, ()) => new({apiId: apiId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetApiAssociation = {
   type t
   type request = {@ocaml.doc("<p>The domain name.</p>") domainName: domainName}
@@ -1190,6 +1218,7 @@ module GetApiAssociation = {
   let make = (~domainName, ()) => new({domainName: domainName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateType = {
   type t
   type request = {
@@ -1204,9 +1233,11 @@ module CreateType = {
     @ocaml.doc("<p>The <code>Type</code> object.</p>") @as("type") type_: option<type_>,
   }
   @module("@aws-sdk/client-appsync") @new external new: request => t = "CreateTypeCommand"
-  let make = (~format, ~definition, ~apiId, ()) => new({format, definition, apiId})
+  let make = (~format, ~definition, ~apiId, ()) =>
+    new({format: format, definition: definition, apiId: apiId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateDomainName = {
   type t
   type request = {
@@ -1224,9 +1255,10 @@ module CreateDomainName = {
   }
   @module("@aws-sdk/client-appsync") @new external new: request => t = "CreateDomainNameCommand"
   let make = (~certificateArn, ~domainName, ~description=?, ()) =>
-    new({description, certificateArn, domainName})
+    new({description: description, certificateArn: certificateArn, domainName: domainName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateApiKey = {
   type t
   type request = {
@@ -1239,9 +1271,11 @@ module CreateApiKey = {
   }
   type response = {@ocaml.doc("<p>The API key.</p>") apiKey: option<apiKey>}
   @module("@aws-sdk/client-appsync") @new external new: request => t = "CreateApiKeyCommand"
-  let make = (~apiId, ~expires=?, ~description=?, ()) => new({expires, description, apiId})
+  let make = (~apiId, ~expires=?, ~description=?, ()) =>
+    new({expires: expires, description: description, apiId: apiId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateApiCache = {
   type t
   @ocaml.doc("<p>Represents the input of a <code>CreateApiCache</code> operation.</p>")
@@ -1362,9 +1396,17 @@ module CreateApiCache = {
     ~transitEncryptionEnabled=?,
     (),
   ) =>
-    new({type_, apiCachingBehavior, atRestEncryptionEnabled, transitEncryptionEnabled, ttl, apiId})
+    new({
+      type_: type_,
+      apiCachingBehavior: apiCachingBehavior,
+      atRestEncryptionEnabled: atRestEncryptionEnabled,
+      transitEncryptionEnabled: transitEncryptionEnabled,
+      ttl: ttl,
+      apiId: apiId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module AssociateApi = {
   type t
   type request = {
@@ -1376,9 +1418,10 @@ module AssociateApi = {
     apiAssociation: option<apiAssociation>,
   }
   @module("@aws-sdk/client-appsync") @new external new: request => t = "AssociateApiCommand"
-  let make = (~apiId, ~domainName, ()) => new({apiId, domainName})
+  let make = (~apiId, ~domainName, ()) => new({apiId: apiId, domainName: domainName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListTypes = {
   type t
   type request = {
@@ -1398,9 +1441,10 @@ module ListTypes = {
   }
   @module("@aws-sdk/client-appsync") @new external new: request => t = "ListTypesCommand"
   let make = (~format, ~apiId, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults, nextToken, format, apiId})
+    new({maxResults: maxResults, nextToken: nextToken, format: format, apiId: apiId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListDomainNames = {
   type t
   type request = {
@@ -1414,9 +1458,11 @@ module ListDomainNames = {
     domainNameConfigs: option<domainNameConfigs>,
   }
   @module("@aws-sdk/client-appsync") @new external new: request => t = "ListDomainNamesCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListApiKeys = {
   type t
   type request = {
@@ -1434,9 +1480,11 @@ module ListApiKeys = {
     @ocaml.doc("<p>The <code>ApiKey</code> objects.</p>") apiKeys: option<apiKeys>,
   }
   @module("@aws-sdk/client-appsync") @new external new: request => t = "ListApiKeysCommand"
-  let make = (~apiId, ~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken, apiId})
+  let make = (~apiId, ~maxResults=?, ~nextToken=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken, apiId: apiId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateResolver = {
   type t
   type request = {
@@ -1500,20 +1548,21 @@ module UpdateResolver = {
     (),
   ) =>
     new({
-      maxBatchSize,
-      cachingConfig,
-      syncConfig,
-      pipelineConfig,
-      kind,
-      responseMappingTemplate,
-      requestMappingTemplate,
-      dataSourceName,
-      fieldName,
-      typeName,
-      apiId,
+      maxBatchSize: maxBatchSize,
+      cachingConfig: cachingConfig,
+      syncConfig: syncConfig,
+      pipelineConfig: pipelineConfig,
+      kind: kind,
+      responseMappingTemplate: responseMappingTemplate,
+      requestMappingTemplate: requestMappingTemplate,
+      dataSourceName: dataSourceName,
+      fieldName: fieldName,
+      typeName: typeName,
+      apiId: apiId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateFunction = {
   type t
   type request = {
@@ -1555,19 +1604,20 @@ module UpdateFunction = {
     (),
   ) =>
     new({
-      maxBatchSize,
-      syncConfig,
-      functionVersion,
-      responseMappingTemplate,
-      requestMappingTemplate,
-      dataSourceName,
-      functionId,
-      description,
-      name,
-      apiId,
+      maxBatchSize: maxBatchSize,
+      syncConfig: syncConfig,
+      functionVersion: functionVersion,
+      responseMappingTemplate: responseMappingTemplate,
+      requestMappingTemplate: requestMappingTemplate,
+      dataSourceName: dataSourceName,
+      functionId: functionId,
+      description: description,
+      name: name,
+      apiId: apiId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetResolver = {
   type t
   type request = {
@@ -1579,9 +1629,11 @@ module GetResolver = {
     @ocaml.doc("<p>The <code>Resolver</code> object.</p>") resolver: option<resolver>,
   }
   @module("@aws-sdk/client-appsync") @new external new: request => t = "GetResolverCommand"
-  let make = (~fieldName, ~typeName, ~apiId, ()) => new({fieldName, typeName, apiId})
+  let make = (~fieldName, ~typeName, ~apiId, ()) =>
+    new({fieldName: fieldName, typeName: typeName, apiId: apiId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetFunction = {
   type t
   type request = {
@@ -1593,9 +1645,10 @@ module GetFunction = {
     functionConfiguration: option<functionConfiguration>,
   }
   @module("@aws-sdk/client-appsync") @new external new: request => t = "GetFunctionCommand"
-  let make = (~functionId, ~apiId, ()) => new({functionId, apiId})
+  let make = (~functionId, ~apiId, ()) => new({functionId: functionId, apiId: apiId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateResolver = {
   type t
   type request = {
@@ -1661,20 +1714,21 @@ module CreateResolver = {
     (),
   ) =>
     new({
-      maxBatchSize,
-      cachingConfig,
-      syncConfig,
-      pipelineConfig,
-      kind,
-      responseMappingTemplate,
-      requestMappingTemplate,
-      dataSourceName,
-      fieldName,
-      typeName,
-      apiId,
+      maxBatchSize: maxBatchSize,
+      cachingConfig: cachingConfig,
+      syncConfig: syncConfig,
+      pipelineConfig: pipelineConfig,
+      kind: kind,
+      responseMappingTemplate: responseMappingTemplate,
+      requestMappingTemplate: requestMappingTemplate,
+      dataSourceName: dataSourceName,
+      fieldName: fieldName,
+      typeName: typeName,
+      apiId: apiId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateFunction = {
   type t
   type request = {
@@ -1717,18 +1771,19 @@ module CreateFunction = {
     (),
   ) =>
     new({
-      maxBatchSize,
-      syncConfig,
-      functionVersion,
-      responseMappingTemplate,
-      requestMappingTemplate,
-      dataSourceName,
-      description,
-      name,
-      apiId,
+      maxBatchSize: maxBatchSize,
+      syncConfig: syncConfig,
+      functionVersion: functionVersion,
+      responseMappingTemplate: responseMappingTemplate,
+      requestMappingTemplate: requestMappingTemplate,
+      dataSourceName: dataSourceName,
+      description: description,
+      name: name,
+      apiId: apiId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateGraphqlApi = {
   type t
   type request = {
@@ -1771,18 +1826,19 @@ module UpdateGraphqlApi = {
     (),
   ) =>
     new({
-      lambdaAuthorizerConfig,
-      xrayEnabled,
-      additionalAuthenticationProviders,
-      openIDConnectConfig,
-      userPoolConfig,
-      authenticationType,
-      logConfig,
-      name,
-      apiId,
+      lambdaAuthorizerConfig: lambdaAuthorizerConfig,
+      xrayEnabled: xrayEnabled,
+      additionalAuthenticationProviders: additionalAuthenticationProviders,
+      openIDConnectConfig: openIDConnectConfig,
+      userPoolConfig: userPoolConfig,
+      authenticationType: authenticationType,
+      logConfig: logConfig,
+      name: name,
+      apiId: apiId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateDataSource = {
   type t
   type request = {
@@ -1825,20 +1881,21 @@ module UpdateDataSource = {
     (),
   ) =>
     new({
-      relationalDatabaseConfig,
-      httpConfig,
-      openSearchServiceConfig,
-      elasticsearchConfig,
-      lambdaConfig,
-      dynamodbConfig,
-      serviceRoleArn,
-      type_,
-      description,
-      name,
-      apiId,
+      relationalDatabaseConfig: relationalDatabaseConfig,
+      httpConfig: httpConfig,
+      openSearchServiceConfig: openSearchServiceConfig,
+      elasticsearchConfig: elasticsearchConfig,
+      lambdaConfig: lambdaConfig,
+      dynamodbConfig: dynamodbConfig,
+      serviceRoleArn: serviceRoleArn,
+      type_: type_,
+      description: description,
+      name: name,
+      apiId: apiId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListResolversByFunction = {
   type t
   type request = {
@@ -1858,9 +1915,10 @@ module ListResolversByFunction = {
   @module("@aws-sdk/client-appsync") @new
   external new: request => t = "ListResolversByFunctionCommand"
   let make = (~functionId, ~apiId, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults, nextToken, functionId, apiId})
+    new({maxResults: maxResults, nextToken: nextToken, functionId: functionId, apiId: apiId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListResolvers = {
   type t
   type request = {
@@ -1880,9 +1938,10 @@ module ListResolvers = {
   }
   @module("@aws-sdk/client-appsync") @new external new: request => t = "ListResolversCommand"
   let make = (~typeName, ~apiId, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults, nextToken, typeName, apiId})
+    new({maxResults: maxResults, nextToken: nextToken, typeName: typeName, apiId: apiId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListFunctions = {
   type t
   type request = {
@@ -1900,9 +1959,11 @@ module ListFunctions = {
     @ocaml.doc("<p>A list of <code>Function</code> objects.</p>") functions: option<functions>,
   }
   @module("@aws-sdk/client-appsync") @new external new: request => t = "ListFunctionsCommand"
-  let make = (~apiId, ~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken, apiId})
+  let make = (~apiId, ~maxResults=?, ~nextToken=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken, apiId: apiId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetGraphqlApi = {
   type t
   type request = {@ocaml.doc("<p>The API ID for the GraphQL API.</p>") apiId: string_}
@@ -1913,6 +1974,7 @@ module GetGraphqlApi = {
   let make = (~apiId, ()) => new({apiId: apiId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetDataSource = {
   type t
   type request = {
@@ -1923,9 +1985,10 @@ module GetDataSource = {
     @ocaml.doc("<p>The <code>DataSource</code> object.</p>") dataSource: option<dataSource>,
   }
   @module("@aws-sdk/client-appsync") @new external new: request => t = "GetDataSourceCommand"
-  let make = (~name, ~apiId, ()) => new({name, apiId})
+  let make = (~name, ~apiId, ()) => new({name: name, apiId: apiId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateGraphqlApi = {
   type t
   type request = {
@@ -1962,18 +2025,19 @@ module CreateGraphqlApi = {
     (),
   ) =>
     new({
-      lambdaAuthorizerConfig,
-      xrayEnabled,
-      additionalAuthenticationProviders,
-      tags,
-      openIDConnectConfig,
-      userPoolConfig,
-      authenticationType,
-      logConfig,
-      name,
+      lambdaAuthorizerConfig: lambdaAuthorizerConfig,
+      xrayEnabled: xrayEnabled,
+      additionalAuthenticationProviders: additionalAuthenticationProviders,
+      tags: tags,
+      openIDConnectConfig: openIDConnectConfig,
+      userPoolConfig: userPoolConfig,
+      authenticationType: authenticationType,
+      logConfig: logConfig,
+      name: name,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateDataSource = {
   type t
   type request = {
@@ -2016,20 +2080,21 @@ module CreateDataSource = {
     (),
   ) =>
     new({
-      relationalDatabaseConfig,
-      httpConfig,
-      openSearchServiceConfig,
-      elasticsearchConfig,
-      lambdaConfig,
-      dynamodbConfig,
-      serviceRoleArn,
-      type_,
-      description,
-      name,
-      apiId,
+      relationalDatabaseConfig: relationalDatabaseConfig,
+      httpConfig: httpConfig,
+      openSearchServiceConfig: openSearchServiceConfig,
+      elasticsearchConfig: elasticsearchConfig,
+      lambdaConfig: lambdaConfig,
+      dynamodbConfig: dynamodbConfig,
+      serviceRoleArn: serviceRoleArn,
+      type_: type_,
+      description: description,
+      name: name,
+      apiId: apiId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListGraphqlApis = {
   type t
   type request = {
@@ -2046,9 +2111,11 @@ module ListGraphqlApis = {
     @ocaml.doc("<p>The <code>GraphqlApi</code> objects.</p>") graphqlApis: option<graphqlApis>,
   }
   @module("@aws-sdk/client-appsync") @new external new: request => t = "ListGraphqlApisCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListDataSources = {
   type t
   type request = {
@@ -2066,6 +2133,7 @@ module ListDataSources = {
     @ocaml.doc("<p>The <code>DataSource</code> objects.</p>") dataSources: option<dataSources>,
   }
   @module("@aws-sdk/client-appsync") @new external new: request => t = "ListDataSourcesCommand"
-  let make = (~apiId, ~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken, apiId})
+  let make = (~apiId, ~maxResults=?, ~nextToken=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken, apiId: apiId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

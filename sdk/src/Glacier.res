@@ -602,9 +602,17 @@ module UploadMultipartPart = {
   }
   @module("@aws-sdk/client-glacier") @new external new: request => t = "UploadMultipartPartCommand"
   let make = (~uploadId, ~vaultName, ~accountId, ~body=?, ~range=?, ~checksum=?, ()) =>
-    new({body, range, checksum, uploadId, vaultName, accountId})
+    new({
+      body: body,
+      range: range,
+      checksum: checksum,
+      uploadId: uploadId,
+      vaultName: vaultName,
+      accountId: accountId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UploadArchive = {
   type t
   @ocaml.doc("<p>Provides options to add an archive to a vault.</p>")
@@ -635,9 +643,16 @@ module UploadArchive = {
   }
   @module("@aws-sdk/client-glacier") @new external new: request => t = "UploadArchiveCommand"
   let make = (~accountId, ~vaultName, ~body=?, ~checksum=?, ~archiveDescription=?, ()) =>
-    new({body, checksum, archiveDescription, accountId, vaultName})
+    new({
+      body: body,
+      checksum: checksum,
+      archiveDescription: archiveDescription,
+      accountId: accountId,
+      vaultName: vaultName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module PurchaseProvisionedCapacity = {
   type t
   type request = {
@@ -656,6 +671,7 @@ module PurchaseProvisionedCapacity = {
   let make = (~accountId, ()) => new({accountId: accountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module InitiateMultipartUpload = {
   type t
   @ocaml.doc("<p>Provides options for initiating a multipart upload to an Amazon S3 Glacier
@@ -688,9 +704,15 @@ module InitiateMultipartUpload = {
   @module("@aws-sdk/client-glacier") @new
   external new: request => t = "InitiateMultipartUploadCommand"
   let make = (~vaultName, ~accountId, ~partSize=?, ~archiveDescription=?, ()) =>
-    new({partSize, archiveDescription, vaultName, accountId})
+    new({
+      partSize: partSize,
+      archiveDescription: archiveDescription,
+      vaultName: vaultName,
+      accountId: accountId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetVaultLock = {
   type t
   @ocaml.doc("<p>The input values for <code>GetVaultLock</code>.</p>")
@@ -723,9 +745,10 @@ module GetVaultLock = {
     policy: option<string_>,
   }
   @module("@aws-sdk/client-glacier") @new external new: request => t = "GetVaultLockCommand"
-  let make = (~vaultName, ~accountId, ()) => new({vaultName, accountId})
+  let make = (~vaultName, ~accountId, ()) => new({vaultName: vaultName, accountId: accountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetJobOutput = {
   type t
   @ocaml.doc("<p>Provides options for downloading output of an Amazon S3 Glacier job.</p>")
@@ -821,9 +844,10 @@ module GetJobOutput = {
   }
   @module("@aws-sdk/client-glacier") @new external new: request => t = "GetJobOutputCommand"
   let make = (~jobId, ~vaultName, ~accountId, ~range=?, ()) =>
-    new({range, jobId, vaultName, accountId})
+    new({range: range, jobId: jobId, vaultName: vaultName, accountId: accountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeVault = {
   type t
   @ocaml.doc("<p>Provides options for retrieving metadata for a specific vault in Amazon
@@ -839,9 +863,10 @@ module DescribeVault = {
   }
   type response = describeVaultOutput
   @module("@aws-sdk/client-glacier") @new external new: request => t = "DescribeVaultCommand"
-  let make = (~vaultName, ~accountId, ()) => new({vaultName, accountId})
+  let make = (~vaultName, ~accountId, ()) => new({vaultName: vaultName, accountId: accountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteVaultNotifications = {
   type t
   @ocaml.doc("<p>Provides options for deleting a vault notification configuration from an Amazon
@@ -858,9 +883,10 @@ module DeleteVaultNotifications = {
   type response = {.}
   @module("@aws-sdk/client-glacier") @new
   external new: request => t = "DeleteVaultNotificationsCommand"
-  let make = (~vaultName, ~accountId, ()) => new({vaultName, accountId})
+  let make = (~vaultName, ~accountId, ()) => new({vaultName: vaultName, accountId: accountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteVaultAccessPolicy = {
   type t
   @ocaml.doc("<p>DeleteVaultAccessPolicy input.</p>")
@@ -876,9 +902,10 @@ module DeleteVaultAccessPolicy = {
   type response = {.}
   @module("@aws-sdk/client-glacier") @new
   external new: request => t = "DeleteVaultAccessPolicyCommand"
-  let make = (~vaultName, ~accountId, ()) => new({vaultName, accountId})
+  let make = (~vaultName, ~accountId, ()) => new({vaultName: vaultName, accountId: accountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteVault = {
   type t
   @ocaml.doc("<p>Provides options for deleting a vault from Amazon S3 Glacier.</p>")
@@ -893,9 +920,10 @@ module DeleteVault = {
   }
   type response = {.}
   @module("@aws-sdk/client-glacier") @new external new: request => t = "DeleteVaultCommand"
-  let make = (~vaultName, ~accountId, ()) => new({vaultName, accountId})
+  let make = (~vaultName, ~accountId, ()) => new({vaultName: vaultName, accountId: accountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteArchive = {
   type t
   @ocaml.doc("<p>Provides options for deleting an archive from an Amazon S3 Glacier vault.</p>")
@@ -911,9 +939,11 @@ module DeleteArchive = {
   }
   type response = {.}
   @module("@aws-sdk/client-glacier") @new external new: request => t = "DeleteArchiveCommand"
-  let make = (~archiveId, ~vaultName, ~accountId, ()) => new({archiveId, vaultName, accountId})
+  let make = (~archiveId, ~vaultName, ~accountId, ()) =>
+    new({archiveId: archiveId, vaultName: vaultName, accountId: accountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module CreateVault = {
   type t
   @ocaml.doc("<p>Provides options to create a vault.</p>")
@@ -931,9 +961,10 @@ module CreateVault = {
     @ocaml.doc("<p>The URI of the vault that was created.</p>") location: option<string_>,
   }
   @module("@aws-sdk/client-glacier") @new external new: request => t = "CreateVaultCommand"
-  let make = (~vaultName, ~accountId, ()) => new({vaultName, accountId})
+  let make = (~vaultName, ~accountId, ()) => new({vaultName: vaultName, accountId: accountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CompleteVaultLock = {
   type t
   @ocaml.doc("<p>The input values for <code>CompleteVaultLock</code>.</p>")
@@ -952,9 +983,11 @@ module CompleteVaultLock = {
   }
   type response = {.}
   @module("@aws-sdk/client-glacier") @new external new: request => t = "CompleteVaultLockCommand"
-  let make = (~lockId, ~vaultName, ~accountId, ()) => new({lockId, vaultName, accountId})
+  let make = (~lockId, ~vaultName, ~accountId, ()) =>
+    new({lockId: lockId, vaultName: vaultName, accountId: accountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module CompleteMultipartUpload = {
   type t
   @ocaml.doc("<p>Provides options to complete a multipart upload operation. This informs Amazon
@@ -994,9 +1027,16 @@ module CompleteMultipartUpload = {
   @module("@aws-sdk/client-glacier") @new
   external new: request => t = "CompleteMultipartUploadCommand"
   let make = (~uploadId, ~vaultName, ~accountId, ~checksum=?, ~archiveSize=?, ()) =>
-    new({checksum, archiveSize, uploadId, vaultName, accountId})
+    new({
+      checksum: checksum,
+      archiveSize: archiveSize,
+      uploadId: uploadId,
+      vaultName: vaultName,
+      accountId: accountId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module AbortVaultLock = {
   type t
   @ocaml.doc("<p>The input values for <code>AbortVaultLock</code>.</p>")
@@ -1011,9 +1051,10 @@ module AbortVaultLock = {
   }
   type response = {.}
   @module("@aws-sdk/client-glacier") @new external new: request => t = "AbortVaultLockCommand"
-  let make = (~vaultName, ~accountId, ()) => new({vaultName, accountId})
+  let make = (~vaultName, ~accountId, ()) => new({vaultName: vaultName, accountId: accountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module AbortMultipartUpload = {
   type t
   @ocaml.doc("<p>Provides options to abort a multipart upload identified by the upload ID.</p>
@@ -1033,9 +1074,11 @@ module AbortMultipartUpload = {
   }
   type response = {.}
   @module("@aws-sdk/client-glacier") @new external new: request => t = "AbortMultipartUploadCommand"
-  let make = (~uploadId, ~vaultName, ~accountId, ()) => new({uploadId, vaultName, accountId})
+  let make = (~uploadId, ~vaultName, ~accountId, ()) =>
+    new({uploadId: uploadId, vaultName: vaultName, accountId: accountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module SetVaultAccessPolicy = {
   type t
   @ocaml.doc("<p>SetVaultAccessPolicy input.</p>")
@@ -1052,9 +1095,11 @@ module SetVaultAccessPolicy = {
   }
   type response = {.}
   @module("@aws-sdk/client-glacier") @new external new: request => t = "SetVaultAccessPolicyCommand"
-  let make = (~vaultName, ~accountId, ~policy=?, ()) => new({policy, vaultName, accountId})
+  let make = (~vaultName, ~accountId, ~policy=?, ()) =>
+    new({policy: policy, vaultName: vaultName, accountId: accountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module RemoveTagsFromVault = {
   type t
   @ocaml.doc("<p>The input value for <code>RemoveTagsFromVaultInput</code>.</p>")
@@ -1072,9 +1117,11 @@ module RemoveTagsFromVault = {
   }
   type response = {.}
   @module("@aws-sdk/client-glacier") @new external new: request => t = "RemoveTagsFromVaultCommand"
-  let make = (~vaultName, ~accountId, ~tagKeys=?, ()) => new({tagKeys, vaultName, accountId})
+  let make = (~vaultName, ~accountId, ~tagKeys=?, ()) =>
+    new({tagKeys: tagKeys, vaultName: vaultName, accountId: accountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ListTagsForVault = {
   type t
   @ocaml.doc("<p>The input value for <code>ListTagsForVaultInput</code>.</p>")
@@ -1094,9 +1141,10 @@ module ListTagsForVault = {
     tags: option<tagMap>,
   }
   @module("@aws-sdk/client-glacier") @new external new: request => t = "ListTagsForVaultCommand"
-  let make = (~vaultName, ~accountId, ()) => new({vaultName, accountId})
+  let make = (~vaultName, ~accountId, ()) => new({vaultName: vaultName, accountId: accountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module InitiateVaultLock = {
   type t
   @ocaml.doc("<p>The input values for <code>InitiateVaultLock</code>.</p>")
@@ -1118,9 +1166,11 @@ module InitiateVaultLock = {
     lockId: option<string_>,
   }
   @module("@aws-sdk/client-glacier") @new external new: request => t = "InitiateVaultLockCommand"
-  let make = (~vaultName, ~accountId, ~policy=?, ()) => new({policy, vaultName, accountId})
+  let make = (~vaultName, ~accountId, ~policy=?, ()) =>
+    new({policy: policy, vaultName: vaultName, accountId: accountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetVaultAccessPolicy = {
   type t
   @ocaml.doc("<p>Input for GetVaultAccessPolicy.</p>")
@@ -1139,9 +1189,10 @@ module GetVaultAccessPolicy = {
     policy: option<vaultAccessPolicy>,
   }
   @module("@aws-sdk/client-glacier") @new external new: request => t = "GetVaultAccessPolicyCommand"
-  let make = (~vaultName, ~accountId, ()) => new({vaultName, accountId})
+  let make = (~vaultName, ~accountId, ()) => new({vaultName: vaultName, accountId: accountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module AddTagsToVault = {
   type t
   @ocaml.doc("<p>The input values for <code>AddTagsToVault</code>.</p>")
@@ -1160,9 +1211,11 @@ module AddTagsToVault = {
   }
   type response = {.}
   @module("@aws-sdk/client-glacier") @new external new: request => t = "AddTagsToVaultCommand"
-  let make = (~vaultName, ~accountId, ~tags=?, ()) => new({tags, vaultName, accountId})
+  let make = (~vaultName, ~accountId, ~tags=?, ()) =>
+    new({tags: tags, vaultName: vaultName, accountId: accountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module SetVaultNotifications = {
   type t
   @ocaml.doc("<p>Provides options to configure notifications that will be sent when specific events
@@ -1182,9 +1235,14 @@ module SetVaultNotifications = {
   @module("@aws-sdk/client-glacier") @new
   external new: request => t = "SetVaultNotificationsCommand"
   let make = (~vaultName, ~accountId, ~vaultNotificationConfig=?, ()) =>
-    new({vaultNotificationConfig, vaultName, accountId})
+    new({
+      vaultNotificationConfig: vaultNotificationConfig,
+      vaultName: vaultName,
+      accountId: accountId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ListVaults = {
   type t
   @ocaml.doc("<p>Provides options to retrieve the vault list owned by the calling user's account. The
@@ -1213,9 +1271,11 @@ module ListVaults = {
     @ocaml.doc("<p>List of vaults.</p>") @as("VaultList") vaultList: option<vaultList>,
   }
   @module("@aws-sdk/client-glacier") @new external new: request => t = "ListVaultsCommand"
-  let make = (~accountId, ~limit=?, ~marker=?, ()) => new({limit, marker, accountId})
+  let make = (~accountId, ~limit=?, ~marker=?, ()) =>
+    new({limit: limit, marker: marker, accountId: accountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListProvisionedCapacity = {
   type t
   type request = {
@@ -1235,6 +1295,7 @@ module ListProvisionedCapacity = {
   let make = (~accountId, ()) => new({accountId: accountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListParts = {
   type t
   @ocaml.doc("<p>Provides options for retrieving a list of parts of an archive that have been uploaded
@@ -1291,9 +1352,16 @@ module ListParts = {
   }
   @module("@aws-sdk/client-glacier") @new external new: request => t = "ListPartsCommand"
   let make = (~uploadId, ~vaultName, ~accountId, ~limit=?, ~marker=?, ()) =>
-    new({limit, marker, uploadId, vaultName, accountId})
+    new({
+      limit: limit,
+      marker: marker,
+      uploadId: uploadId,
+      vaultName: vaultName,
+      accountId: accountId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListMultipartUploads = {
   type t
   @ocaml.doc("<p>Provides options for retrieving list of in-progress multipart uploads for an Amazon
@@ -1327,9 +1395,10 @@ module ListMultipartUploads = {
   }
   @module("@aws-sdk/client-glacier") @new external new: request => t = "ListMultipartUploadsCommand"
   let make = (~vaultName, ~accountId, ~marker=?, ~limit=?, ()) =>
-    new({marker, limit, vaultName, accountId})
+    new({marker: marker, limit: limit, vaultName: vaultName, accountId: accountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetVaultNotifications = {
   type t
   @ocaml.doc("<p>Provides options for retrieving the notification configuration set on an Amazon
@@ -1350,9 +1419,10 @@ module GetVaultNotifications = {
   }
   @module("@aws-sdk/client-glacier") @new
   external new: request => t = "GetVaultNotificationsCommand"
-  let make = (~vaultName, ~accountId, ()) => new({vaultName, accountId})
+  let make = (~vaultName, ~accountId, ()) => new({vaultName: vaultName, accountId: accountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module SetDataRetrievalPolicy = {
   type t
   @ocaml.doc("<p>SetDataRetrievalPolicy input.</p>")
@@ -1369,9 +1439,10 @@ module SetDataRetrievalPolicy = {
   type response = {.}
   @module("@aws-sdk/client-glacier") @new
   external new: request => t = "SetDataRetrievalPolicyCommand"
-  let make = (~accountId, ~policy=?, ()) => new({policy, accountId})
+  let make = (~accountId, ~policy=?, ()) => new({policy: policy, accountId: accountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module GetDataRetrievalPolicy = {
   type t
   @ocaml.doc("<p>Input for GetDataRetrievalPolicy.</p>")
@@ -1394,6 +1465,7 @@ module GetDataRetrievalPolicy = {
   let make = (~accountId, ()) => new({accountId: accountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeJob = {
   type t
   @ocaml.doc("<p>Provides options for retrieving a job description.</p>")
@@ -1409,9 +1481,11 @@ module DescribeJob = {
   }
   type response = glacierJobDescription
   @module("@aws-sdk/client-glacier") @new external new: request => t = "DescribeJobCommand"
-  let make = (~jobId, ~vaultName, ~accountId, ()) => new({jobId, vaultName, accountId})
+  let make = (~jobId, ~vaultName, ~accountId, ()) =>
+    new({jobId: jobId, vaultName: vaultName, accountId: accountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module InitiateJob = {
   type t
   @ocaml.doc("<p>Provides options for initiating an Amazon S3 Glacier job.</p>")
@@ -1435,9 +1509,10 @@ module InitiateJob = {
   }
   @module("@aws-sdk/client-glacier") @new external new: request => t = "InitiateJobCommand"
   let make = (~vaultName, ~accountId, ~jobParameters=?, ()) =>
-    new({jobParameters, vaultName, accountId})
+    new({jobParameters: jobParameters, vaultName: vaultName, accountId: accountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListJobs = {
   type t
   @ocaml.doc("<p>Provides options for retrieving a job list for an Amazon S3 Glacier vault.</p>")
@@ -1481,6 +1556,13 @@ module ListJobs = {
   }
   @module("@aws-sdk/client-glacier") @new external new: request => t = "ListJobsCommand"
   let make = (~vaultName, ~accountId, ~completed=?, ~statuscode=?, ~marker=?, ~limit=?, ()) =>
-    new({completed, statuscode, marker, limit, vaultName, accountId})
+    new({
+      completed: completed,
+      statuscode: statuscode,
+      marker: marker,
+      limit: limit,
+      vaultName: vaultName,
+      accountId: accountId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

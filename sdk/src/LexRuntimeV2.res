@@ -1256,18 +1256,19 @@ module RecognizeUtterance = {
     (),
   ) =>
     new({
-      inputStream,
-      responseContentType,
-      requestContentType,
-      requestAttributes,
-      sessionState,
-      sessionId,
-      localeId,
-      botAliasId,
-      botId,
+      inputStream: inputStream,
+      responseContentType: responseContentType,
+      requestContentType: requestContentType,
+      requestAttributes: requestAttributes,
+      sessionState: sessionState,
+      sessionId: sessionId,
+      localeId: localeId,
+      botAliasId: botAliasId,
+      botId: botId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteSession = {
   type t
   type request = {
@@ -1290,9 +1291,10 @@ module DeleteSession = {
   }
   @module("@aws-sdk/client-lex") @new external new: request => t = "DeleteSessionCommand"
   let make = (~sessionId, ~localeId, ~botAliasId, ~botId, ()) =>
-    new({sessionId, localeId, botAliasId, botId})
+    new({sessionId: sessionId, localeId: localeId, botAliasId: botAliasId, botId: botId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module PutSession = {
   type t
   type request = {
@@ -1364,17 +1366,18 @@ module PutSession = {
     (),
   ) =>
     new({
-      responseContentType,
-      requestAttributes,
-      sessionState,
-      messages,
-      sessionId,
-      localeId,
-      botAliasId,
-      botId,
+      responseContentType: responseContentType,
+      requestAttributes: requestAttributes,
+      sessionState: sessionState,
+      messages: messages,
+      sessionId: sessionId,
+      localeId: localeId,
+      botAliasId: botAliasId,
+      botId: botId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module RecognizeText = {
   type t
   type request = {
@@ -1427,9 +1430,19 @@ module RecognizeText = {
     ~requestAttributes=?,
     ~sessionState=?,
     (),
-  ) => new({requestAttributes, sessionState, text, sessionId, localeId, botAliasId, botId})
+  ) =>
+    new({
+      requestAttributes: requestAttributes,
+      sessionState: sessionState,
+      text: text,
+      sessionId: sessionId,
+      localeId: localeId,
+      botAliasId: botAliasId,
+      botId: botId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetSession = {
   type t
   type request = {
@@ -1463,9 +1476,10 @@ module GetSession = {
   }
   @module("@aws-sdk/client-lex") @new external new: request => t = "GetSessionCommand"
   let make = (~sessionId, ~localeId, ~botAliasId, ~botId, ()) =>
-    new({sessionId, localeId, botAliasId, botId})
+    new({sessionId: sessionId, localeId: localeId, botAliasId: botAliasId, botId: botId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module StartConversation = {
   type t
   type request = {
@@ -1500,6 +1514,14 @@ module StartConversation = {
     ~botId,
     ~conversationMode=?,
     (),
-  ) => new({requestEventStream, conversationMode, sessionId, localeId, botAliasId, botId})
+  ) =>
+    new({
+      requestEventStream: requestEventStream,
+      conversationMode: conversationMode,
+      sessionId: sessionId,
+      localeId: localeId,
+      botAliasId: botAliasId,
+      botId: botId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

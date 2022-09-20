@@ -880,9 +880,14 @@ module RevokeCertificate = {
   type response = {.}
   @module("@aws-sdk/client-acm-pca") @new external new: request => t = "RevokeCertificateCommand"
   let make = (~revocationReason, ~certificateSerial, ~certificateAuthorityArn, ()) =>
-    new({revocationReason, certificateSerial, certificateAuthorityArn})
+    new({
+      revocationReason: revocationReason,
+      certificateSerial: certificateSerial,
+      certificateAuthorityArn: certificateAuthorityArn,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module RestoreCertificateAuthority = {
   type t
   type request = {
@@ -901,6 +906,7 @@ module RestoreCertificateAuthority = {
     new({certificateAuthorityArn: certificateAuthorityArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module PutPolicy = {
   type t
   type request = {
@@ -919,9 +925,10 @@ module PutPolicy = {
   }
   type response = {.}
   @module("@aws-sdk/client-acm-pca") @new external new: request => t = "PutPolicyCommand"
-  let make = (~policy, ~resourceArn, ()) => new({policy, resourceArn})
+  let make = (~policy, ~resourceArn, ()) => new({policy: policy, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ImportCertificateAuthorityCertificate = {
   type t
   type request = {
@@ -949,9 +956,14 @@ module ImportCertificateAuthorityCertificate = {
   @module("@aws-sdk/client-acm-pca") @new
   external new: request => t = "ImportCertificateAuthorityCertificateCommand"
   let make = (~certificate, ~certificateAuthorityArn, ~certificateChain=?, ()) =>
-    new({certificateChain, certificate, certificateAuthorityArn})
+    new({
+      certificateChain: certificateChain,
+      certificate: certificate,
+      certificateAuthorityArn: certificateAuthorityArn,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module GetPolicy = {
   type t
   type request = {
@@ -970,6 +982,7 @@ module GetPolicy = {
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetCertificateAuthorityCsr = {
   type t
   type request = {
@@ -993,6 +1006,7 @@ module GetCertificateAuthorityCsr = {
     new({certificateAuthorityArn: certificateAuthorityArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetCertificateAuthorityCertificate = {
   type t
   type request = {
@@ -1020,6 +1034,7 @@ module GetCertificateAuthorityCertificate = {
     new({certificateAuthorityArn: certificateAuthorityArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetCertificate = {
   type t
   type request = {
@@ -1051,9 +1066,10 @@ module GetCertificate = {
   }
   @module("@aws-sdk/client-acm-pca") @new external new: request => t = "GetCertificateCommand"
   let make = (~certificateArn, ~certificateAuthorityArn, ()) =>
-    new({certificateArn, certificateAuthorityArn})
+    new({certificateArn: certificateArn, certificateAuthorityArn: certificateAuthorityArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeCertificateAuthorityAuditReport = {
   type t
   type request = {
@@ -1088,9 +1104,10 @@ module DescribeCertificateAuthorityAuditReport = {
   @module("@aws-sdk/client-acm-pca") @new
   external new: request => t = "DescribeCertificateAuthorityAuditReportCommand"
   let make = (~auditReportId, ~certificateAuthorityArn, ()) =>
-    new({auditReportId, certificateAuthorityArn})
+    new({auditReportId: auditReportId, certificateAuthorityArn: certificateAuthorityArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeletePolicy = {
   type t
   type request = {
@@ -1106,6 +1123,7 @@ module DeletePolicy = {
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeletePermission = {
   type t
   type request = {
@@ -1129,9 +1147,14 @@ module DeletePermission = {
   type response = {.}
   @module("@aws-sdk/client-acm-pca") @new external new: request => t = "DeletePermissionCommand"
   let make = (~principal, ~certificateAuthorityArn, ~sourceAccount=?, ()) =>
-    new({sourceAccount, principal, certificateAuthorityArn})
+    new({
+      sourceAccount: sourceAccount,
+      principal: principal,
+      certificateAuthorityArn: certificateAuthorityArn,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteCertificateAuthority = {
   type t
   type request = {
@@ -1151,9 +1174,13 @@ module DeleteCertificateAuthority = {
   @module("@aws-sdk/client-acm-pca") @new
   external new: request => t = "DeleteCertificateAuthorityCommand"
   let make = (~certificateAuthorityArn, ~permanentDeletionTimeInDays=?, ()) =>
-    new({permanentDeletionTimeInDays, certificateAuthorityArn})
+    new({
+      permanentDeletionTimeInDays: permanentDeletionTimeInDays,
+      certificateAuthorityArn: certificateAuthorityArn,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module CreateCertificateAuthorityAuditReport = {
   type t
   type request = {
@@ -1184,9 +1211,14 @@ module CreateCertificateAuthorityAuditReport = {
   @module("@aws-sdk/client-acm-pca") @new
   external new: request => t = "CreateCertificateAuthorityAuditReportCommand"
   let make = (~auditReportResponseFormat, ~s3BucketName, ~certificateAuthorityArn, ()) =>
-    new({auditReportResponseFormat, s3BucketName, certificateAuthorityArn})
+    new({
+      auditReportResponseFormat: auditReportResponseFormat,
+      s3BucketName: s3BucketName,
+      certificateAuthorityArn: certificateAuthorityArn,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreatePermission = {
   type t
   type request = {
@@ -1213,9 +1245,15 @@ module CreatePermission = {
   type response = {.}
   @module("@aws-sdk/client-acm-pca") @new external new: request => t = "CreatePermissionCommand"
   let make = (~actions, ~principal, ~certificateAuthorityArn, ~sourceAccount=?, ()) =>
-    new({actions, sourceAccount, principal, certificateAuthorityArn})
+    new({
+      actions: actions,
+      sourceAccount: sourceAccount,
+      principal: principal,
+      certificateAuthorityArn: certificateAuthorityArn,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateCertificateAuthority = {
   type t
   type request = {
@@ -1240,9 +1278,14 @@ module UpdateCertificateAuthority = {
   @module("@aws-sdk/client-acm-pca") @new
   external new: request => t = "UpdateCertificateAuthorityCommand"
   let make = (~certificateAuthorityArn, ~status=?, ~revocationConfiguration=?, ()) =>
-    new({status, revocationConfiguration, certificateAuthorityArn})
+    new({
+      status: status,
+      revocationConfiguration: revocationConfiguration,
+      certificateAuthorityArn: certificateAuthorityArn,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UntagCertificateAuthority = {
   type t
   type request = {
@@ -1258,9 +1301,11 @@ module UntagCertificateAuthority = {
   type response = {.}
   @module("@aws-sdk/client-acm-pca") @new
   external new: request => t = "UntagCertificateAuthorityCommand"
-  let make = (~tags, ~certificateAuthorityArn, ()) => new({tags, certificateAuthorityArn})
+  let make = (~tags, ~certificateAuthorityArn, ()) =>
+    new({tags: tags, certificateAuthorityArn: certificateAuthorityArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module TagCertificateAuthority = {
   type t
   type request = {
@@ -1276,9 +1321,11 @@ module TagCertificateAuthority = {
   type response = {.}
   @module("@aws-sdk/client-acm-pca") @new
   external new: request => t = "TagCertificateAuthorityCommand"
-  let make = (~tags, ~certificateAuthorityArn, ()) => new({tags, certificateAuthorityArn})
+  let make = (~tags, ~certificateAuthorityArn, ()) =>
+    new({tags: tags, certificateAuthorityArn: certificateAuthorityArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ListTags = {
   type t
   type request = {
@@ -1311,9 +1358,14 @@ module ListTags = {
   }
   @module("@aws-sdk/client-acm-pca") @new external new: request => t = "ListTagsCommand"
   let make = (~certificateAuthorityArn, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults, nextToken, certificateAuthorityArn})
+    new({
+      maxResults: maxResults,
+      nextToken: nextToken,
+      certificateAuthorityArn: certificateAuthorityArn,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListPermissions = {
   type t
   type request = {
@@ -1347,9 +1399,14 @@ module ListPermissions = {
   }
   @module("@aws-sdk/client-acm-pca") @new external new: request => t = "ListPermissionsCommand"
   let make = (~certificateAuthorityArn, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults, nextToken, certificateAuthorityArn})
+    new({
+      maxResults: maxResults,
+      nextToken: nextToken,
+      certificateAuthorityArn: certificateAuthorityArn,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module IssueCertificate = {
   type t
   type request = {
@@ -1471,17 +1528,18 @@ module IssueCertificate = {
     (),
   ) =>
     new({
-      idempotencyToken,
-      validityNotBefore,
-      validity,
-      templateArn,
-      signingAlgorithm,
-      csr,
-      certificateAuthorityArn,
-      apiPassthrough,
+      idempotencyToken: idempotencyToken,
+      validityNotBefore: validityNotBefore,
+      validity: validity,
+      templateArn: templateArn,
+      signingAlgorithm: signingAlgorithm,
+      csr: csr,
+      certificateAuthorityArn: certificateAuthorityArn,
+      apiPassthrough: apiPassthrough,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateCertificateAuthority = {
   type t
   type request = {
@@ -1545,15 +1603,16 @@ module CreateCertificateAuthority = {
     (),
   ) =>
     new({
-      tags,
-      keyStorageSecurityStandard,
-      idempotencyToken,
-      certificateAuthorityType,
-      revocationConfiguration,
-      certificateAuthorityConfiguration,
+      tags: tags,
+      keyStorageSecurityStandard: keyStorageSecurityStandard,
+      idempotencyToken: idempotencyToken,
+      certificateAuthorityType: certificateAuthorityType,
+      revocationConfiguration: revocationConfiguration,
+      certificateAuthorityConfiguration: certificateAuthorityConfiguration,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeCertificateAuthority = {
   type t
   type request = {
@@ -1577,6 +1636,7 @@ module DescribeCertificateAuthority = {
     new({certificateAuthorityArn: certificateAuthorityArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListCertificateAuthorities = {
   type t
   type request = {
@@ -1609,6 +1669,6 @@ module ListCertificateAuthorities = {
   @module("@aws-sdk/client-acm-pca") @new
   external new: request => t = "ListCertificateAuthoritiesCommand"
   let make = (~resourceOwner=?, ~maxResults=?, ~nextToken=?, ()) =>
-    new({resourceOwner, maxResults, nextToken})
+    new({resourceOwner: resourceOwner, maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

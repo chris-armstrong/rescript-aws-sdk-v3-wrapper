@@ -731,9 +731,10 @@ module DeleteScalingPlan = {
   @module("@aws-sdk/client-autoscaling-plans") @new
   external new: request => t = "DeleteScalingPlanCommand"
   let make = (~scalingPlanVersion, ~scalingPlanName, ()) =>
-    new({scalingPlanVersion, scalingPlanName})
+    new({scalingPlanVersion: scalingPlanVersion, scalingPlanName: scalingPlanName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module GetScalingPlanResourceForecastData = {
   type t
   type request = {
@@ -810,17 +811,18 @@ module GetScalingPlanResourceForecastData = {
     (),
   ) =>
     new({
-      endTime,
-      startTime,
-      forecastDataType,
-      scalableDimension,
-      resourceId,
-      serviceNamespace,
-      scalingPlanVersion,
-      scalingPlanName,
+      endTime: endTime,
+      startTime: startTime,
+      forecastDataType: forecastDataType,
+      scalableDimension: scalableDimension,
+      resourceId: resourceId,
+      serviceNamespace: serviceNamespace,
+      scalingPlanVersion: scalingPlanVersion,
+      scalingPlanName: scalingPlanName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateScalingPlan = {
   type t
   type request = {
@@ -848,9 +850,16 @@ module UpdateScalingPlan = {
     ~scalingInstructions=?,
     ~applicationSource=?,
     (),
-  ) => new({scalingInstructions, applicationSource, scalingPlanVersion, scalingPlanName})
+  ) =>
+    new({
+      scalingInstructions: scalingInstructions,
+      applicationSource: applicationSource,
+      scalingPlanVersion: scalingPlanVersion,
+      scalingPlanName: scalingPlanName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module CreateScalingPlan = {
   type t
   type request = {
@@ -877,9 +886,14 @@ module CreateScalingPlan = {
   @module("@aws-sdk/client-autoscaling-plans") @new
   external new: request => t = "CreateScalingPlanCommand"
   let make = (~scalingInstructions, ~applicationSource, ~scalingPlanName, ()) =>
-    new({scalingInstructions, applicationSource, scalingPlanName})
+    new({
+      scalingInstructions: scalingInstructions,
+      applicationSource: applicationSource,
+      scalingPlanName: scalingPlanName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeScalingPlanResources = {
   type t
   type request = {
@@ -907,9 +921,15 @@ module DescribeScalingPlanResources = {
   @module("@aws-sdk/client-autoscaling-plans") @new
   external new: request => t = "DescribeScalingPlanResourcesCommand"
   let make = (~scalingPlanVersion, ~scalingPlanName, ~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken, maxResults, scalingPlanVersion, scalingPlanName})
+    new({
+      nextToken: nextToken,
+      maxResults: maxResults,
+      scalingPlanVersion: scalingPlanVersion,
+      scalingPlanName: scalingPlanName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeScalingPlans = {
   type t
   type request = {
@@ -953,6 +973,13 @@ module DescribeScalingPlans = {
     ~scalingPlanVersion=?,
     ~scalingPlanNames=?,
     (),
-  ) => new({nextToken, maxResults, applicationSources, scalingPlanVersion, scalingPlanNames})
+  ) =>
+    new({
+      nextToken: nextToken,
+      maxResults: maxResults,
+      applicationSources: applicationSources,
+      scalingPlanVersion: scalingPlanVersion,
+      scalingPlanNames: scalingPlanNames,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

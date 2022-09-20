@@ -2842,6 +2842,7 @@ module StopConfigurationRecorder = {
     new({configurationRecorderName: configurationRecorderName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module StartConfigurationRecorder = {
   type t
   @ocaml.doc("<p>The input for the <a>StartConfigurationRecorder</a>
@@ -2859,6 +2860,7 @@ module StartConfigurationRecorder = {
     new({configurationRecorderName: configurationRecorderName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module GetOrganizationCustomRulePolicy = {
   type t
   type request = {
@@ -2879,6 +2881,7 @@ module GetOrganizationCustomRulePolicy = {
     new({organizationConfigRuleName: organizationConfigRuleName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetCustomRulePolicy = {
   type t
   type request = {
@@ -2896,6 +2899,7 @@ module GetCustomRulePolicy = {
   let make = (~configRuleName=?, ()) => new({configRuleName: configRuleName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeliverConfigSnapshot = {
   type t
   @ocaml.doc("<p>The input for the <a>DeliverConfigSnapshot</a>
@@ -2915,6 +2919,7 @@ module DeliverConfigSnapshot = {
   let make = (~deliveryChannelName, ()) => new({deliveryChannelName: deliveryChannelName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteStoredQuery = {
   type t
   type request = {
@@ -2926,6 +2931,7 @@ module DeleteStoredQuery = {
   let make = (~queryName, ()) => new({queryName: queryName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteRetentionConfiguration = {
   type t
   type request = {
@@ -2940,6 +2946,7 @@ module DeleteRetentionConfiguration = {
     new({retentionConfigurationName: retentionConfigurationName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteResourceConfig = {
   type t
   type request = {
@@ -2950,9 +2957,11 @@ module DeleteResourceConfig = {
   }
   type response = {.}
   @module("@aws-sdk/client-config") @new external new: request => t = "DeleteResourceConfigCommand"
-  let make = (~resourceId, ~resourceType, ()) => new({resourceId, resourceType})
+  let make = (~resourceId, ~resourceType, ()) =>
+    new({resourceId: resourceId, resourceType: resourceType})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteRemediationConfiguration = {
   type t
   type request = {
@@ -2966,9 +2975,11 @@ module DeleteRemediationConfiguration = {
   type response = {.}
   @module("@aws-sdk/client-config") @new
   external new: request => t = "DeleteRemediationConfigurationCommand"
-  let make = (~configRuleName, ~resourceType=?, ()) => new({resourceType, configRuleName})
+  let make = (~configRuleName, ~resourceType=?, ()) =>
+    new({resourceType: resourceType, configRuleName: configRuleName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeletePendingAggregationRequest = {
   type t
   type request = {
@@ -2983,9 +2994,10 @@ module DeletePendingAggregationRequest = {
   @module("@aws-sdk/client-config") @new
   external new: request => t = "DeletePendingAggregationRequestCommand"
   let make = (~requesterAwsRegion, ~requesterAccountId, ()) =>
-    new({requesterAwsRegion, requesterAccountId})
+    new({requesterAwsRegion: requesterAwsRegion, requesterAccountId: requesterAccountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteOrganizationConformancePack = {
   type t
   type request = {
@@ -3000,6 +3012,7 @@ module DeleteOrganizationConformancePack = {
     new({organizationConformancePackName: organizationConformancePackName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteOrganizationConfigRule = {
   type t
   type request = {
@@ -3014,6 +3027,7 @@ module DeleteOrganizationConfigRule = {
     new({organizationConfigRuleName: organizationConfigRuleName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteEvaluationResults = {
   type t
   @ocaml.doc("<p></p>")
@@ -3029,6 +3043,7 @@ module DeleteEvaluationResults = {
   let make = (~configRuleName, ()) => new({configRuleName: configRuleName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteDeliveryChannel = {
   type t
   @ocaml.doc("<p>The input for the <a>DeleteDeliveryChannel</a>
@@ -3043,6 +3058,7 @@ module DeleteDeliveryChannel = {
   let make = (~deliveryChannelName, ()) => new({deliveryChannelName: deliveryChannelName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteConformancePack = {
   type t
   type request = {
@@ -3054,6 +3070,7 @@ module DeleteConformancePack = {
   let make = (~conformancePackName, ()) => new({conformancePackName: conformancePackName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteConfigurationRecorder = {
   type t
   @ocaml.doc("<p>The request object for the
@@ -3072,6 +3089,7 @@ module DeleteConfigurationRecorder = {
     new({configurationRecorderName: configurationRecorderName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteConfigurationAggregator = {
   type t
   type request = {
@@ -3086,6 +3104,7 @@ module DeleteConfigurationAggregator = {
     new({configurationAggregatorName: configurationAggregatorName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteConfigRule = {
   type t
   @ocaml.doc("<p></p>")
@@ -3100,6 +3119,7 @@ module DeleteConfigRule = {
   let make = (~configRuleName, ()) => new({configRuleName: configRuleName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteAggregationAuthorization = {
   type t
   type request = {
@@ -3115,9 +3135,10 @@ module DeleteAggregationAuthorization = {
   @module("@aws-sdk/client-config") @new
   external new: request => t = "DeleteAggregationAuthorizationCommand"
   let make = (~authorizedAwsRegion, ~authorizedAccountId, ()) =>
-    new({authorizedAwsRegion, authorizedAccountId})
+    new({authorizedAwsRegion: authorizedAwsRegion, authorizedAccountId: authorizedAccountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UntagResource = {
   type t
   type request = {
@@ -3130,9 +3151,10 @@ module UntagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-config") @new external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys, resourceArn})
+  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module StartConfigRulesEvaluation = {
   type t
   @ocaml.doc("<p></p>")
@@ -3148,6 +3170,7 @@ module StartConfigRulesEvaluation = {
   let make = (~configRuleNames=?, ()) => new({configRuleNames: configRuleNames})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module PutRetentionConfiguration = {
   type t
   type request = {
@@ -3169,6 +3192,7 @@ module PutRetentionConfiguration = {
   let make = (~retentionPeriodInDays, ()) => new({retentionPeriodInDays: retentionPeriodInDays})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module PutResourceConfig = {
   type t
   type request = {
@@ -3203,9 +3227,18 @@ module PutResourceConfig = {
     ~tags=?,
     ~resourceName=?,
     (),
-  ) => new({tags, configuration, resourceName, resourceId, schemaVersionId, resourceType})
+  ) =>
+    new({
+      tags: tags,
+      configuration: configuration,
+      resourceName: resourceName,
+      resourceId: resourceId,
+      schemaVersionId: schemaVersionId,
+      resourceType: resourceType,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module PutExternalEvaluation = {
   type t
   type request = {
@@ -3219,9 +3252,11 @@ module PutExternalEvaluation = {
   }
   type response = {.}
   @module("@aws-sdk/client-config") @new external new: request => t = "PutExternalEvaluationCommand"
-  let make = (~externalEvaluation, ~configRuleName, ()) => new({externalEvaluation, configRuleName})
+  let make = (~externalEvaluation, ~configRuleName, ()) =>
+    new({externalEvaluation: externalEvaluation, configRuleName: configRuleName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module GetStoredQuery = {
   type t
   type request = {@ocaml.doc("<p>The name of the query.</p>") @as("QueryName") queryName: queryName}
@@ -3233,6 +3268,7 @@ module GetStoredQuery = {
   let make = (~queryName, ()) => new({queryName: queryName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module TagResource = {
   type t
   type request = {
@@ -3245,9 +3281,10 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-config") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceArn, ()) => new({tags, resourceArn})
+  let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module StartRemediationExecution = {
   type t
   type request = {
@@ -3274,9 +3311,11 @@ module StartRemediationExecution = {
   }
   @module("@aws-sdk/client-config") @new
   external new: request => t = "StartRemediationExecutionCommand"
-  let make = (~resourceKeys, ~configRuleName, ()) => new({resourceKeys, configRuleName})
+  let make = (~resourceKeys, ~configRuleName, ()) =>
+    new({resourceKeys: resourceKeys, configRuleName: configRuleName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module PutStoredQuery = {
   type t
   type request = {
@@ -3297,9 +3336,10 @@ module PutStoredQuery = {
     queryArn: option<queryArn>,
   }
   @module("@aws-sdk/client-config") @new external new: request => t = "PutStoredQueryCommand"
-  let make = (~storedQuery, ~tags=?, ()) => new({tags, storedQuery})
+  let make = (~storedQuery, ~tags=?, ()) => new({tags: tags, storedQuery: storedQuery})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module PutOrganizationConformancePack = {
   type t
   type request = {
@@ -3356,16 +3396,17 @@ module PutOrganizationConformancePack = {
     (),
   ) =>
     new({
-      excludedAccounts,
-      conformancePackInputParameters,
-      deliveryS3KeyPrefix,
-      deliveryS3Bucket,
-      templateBody,
-      templateS3Uri,
-      organizationConformancePackName,
+      excludedAccounts: excludedAccounts,
+      conformancePackInputParameters: conformancePackInputParameters,
+      deliveryS3KeyPrefix: deliveryS3KeyPrefix,
+      deliveryS3Bucket: deliveryS3Bucket,
+      templateBody: templateBody,
+      templateS3Uri: templateS3Uri,
+      organizationConformancePackName: organizationConformancePackName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module PutOrganizationConfigRule = {
   type t
   type request = {
@@ -3405,14 +3446,15 @@ module PutOrganizationConfigRule = {
     (),
   ) =>
     new({
-      organizationCustomPolicyRuleMetadata,
-      excludedAccounts,
-      organizationCustomRuleMetadata,
-      organizationManagedRuleMetadata,
-      organizationConfigRuleName,
+      organizationCustomPolicyRuleMetadata: organizationCustomPolicyRuleMetadata,
+      excludedAccounts: excludedAccounts,
+      organizationCustomRuleMetadata: organizationCustomRuleMetadata,
+      organizationManagedRuleMetadata: organizationManagedRuleMetadata,
+      organizationConfigRuleName: organizationConfigRuleName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module PutEvaluations = {
   type t
   @ocaml.doc("<p></p>")
@@ -3450,9 +3492,10 @@ module PutEvaluations = {
   }
   @module("@aws-sdk/client-config") @new external new: request => t = "PutEvaluationsCommand"
   let make = (~resultToken, ~testMode=?, ~evaluations=?, ()) =>
-    new({testMode, resultToken, evaluations})
+    new({testMode: testMode, resultToken: resultToken, evaluations: evaluations})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module PutDeliveryChannel = {
   type t
   @ocaml.doc("<p>The input for the <a>PutDeliveryChannel</a>
@@ -3469,6 +3512,7 @@ module PutDeliveryChannel = {
   let make = (~deliveryChannel, ()) => new({deliveryChannel: deliveryChannel})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module PutConformancePack = {
   type t
   type request = {
@@ -3517,15 +3561,16 @@ module PutConformancePack = {
     (),
   ) =>
     new({
-      conformancePackInputParameters,
-      deliveryS3KeyPrefix,
-      deliveryS3Bucket,
-      templateBody,
-      templateS3Uri,
-      conformancePackName,
+      conformancePackInputParameters: conformancePackInputParameters,
+      deliveryS3KeyPrefix: deliveryS3KeyPrefix,
+      deliveryS3Bucket: deliveryS3Bucket,
+      templateBody: templateBody,
+      templateS3Uri: templateS3Uri,
+      conformancePackName: conformancePackName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module PutAggregationAuthorization = {
   type t
   type request = {
@@ -3547,9 +3592,14 @@ module PutAggregationAuthorization = {
   @module("@aws-sdk/client-config") @new
   external new: request => t = "PutAggregationAuthorizationCommand"
   let make = (~authorizedAwsRegion, ~authorizedAccountId, ~tags=?, ()) =>
-    new({tags, authorizedAwsRegion, authorizedAccountId})
+    new({
+      tags: tags,
+      authorizedAwsRegion: authorizedAwsRegion,
+      authorizedAccountId: authorizedAccountId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListTagsForResource = {
   type t
   type request = {
@@ -3578,9 +3628,11 @@ module ListTagsForResource = {
     @ocaml.doc("<p>The tags for the resource.</p>") @as("Tags") tags: option<tagList_>,
   }
   @module("@aws-sdk/client-config") @new external new: request => t = "ListTagsForResourceCommand"
-  let make = (~resourceArn, ~nextToken=?, ~limit=?, ()) => new({nextToken, limit, resourceArn})
+  let make = (~resourceArn, ~nextToken=?, ~limit=?, ()) =>
+    new({nextToken: nextToken, limit: limit, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListStoredQueries = {
   type t
   type request = {
@@ -3604,9 +3656,11 @@ module ListStoredQueries = {
     storedQueryMetadata: option<storedQueryMetadataList>,
   }
   @module("@aws-sdk/client-config") @new external new: request => t = "ListStoredQueriesCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListDiscoveredResources = {
   type t
   @ocaml.doc("<p></p>")
@@ -3653,9 +3707,18 @@ module ListDiscoveredResources = {
     ~resourceName=?,
     ~resourceIds=?,
     (),
-  ) => new({nextToken, includeDeletedResources, limit, resourceName, resourceIds, resourceType})
+  ) =>
+    new({
+      nextToken: nextToken,
+      includeDeletedResources: includeDeletedResources,
+      limit: limit,
+      resourceName: resourceName,
+      resourceIds: resourceIds,
+      resourceType: resourceType,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListAggregateDiscoveredResources = {
   type t
   type request = {
@@ -3698,9 +3761,17 @@ module ListAggregateDiscoveredResources = {
     ~limit=?,
     ~filters=?,
     (),
-  ) => new({nextToken, limit, filters, resourceType, configurationAggregatorName})
+  ) =>
+    new({
+      nextToken: nextToken,
+      limit: limit,
+      filters: filters,
+      resourceType: resourceType,
+      configurationAggregatorName: configurationAggregatorName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetOrganizationConformancePackDetailedStatus = {
   type t
   type request = {
@@ -3737,9 +3808,15 @@ module GetOrganizationConformancePackDetailedStatus = {
   @module("@aws-sdk/client-config") @new
   external new: request => t = "GetOrganizationConformancePackDetailedStatusCommand"
   let make = (~organizationConformancePackName, ~nextToken=?, ~limit=?, ~filters=?, ()) =>
-    new({nextToken, limit, filters, organizationConformancePackName})
+    new({
+      nextToken: nextToken,
+      limit: limit,
+      filters: filters,
+      organizationConformancePackName: organizationConformancePackName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetOrganizationConfigRuleDetailedStatus = {
   type t
   type request = {
@@ -3774,9 +3851,15 @@ module GetOrganizationConfigRuleDetailedStatus = {
   @module("@aws-sdk/client-config") @new
   external new: request => t = "GetOrganizationConfigRuleDetailedStatusCommand"
   let make = (~organizationConfigRuleName, ~nextToken=?, ~limit=?, ~filters=?, ()) =>
-    new({nextToken, limit, filters, organizationConfigRuleName})
+    new({
+      nextToken: nextToken,
+      limit: limit,
+      filters: filters,
+      organizationConfigRuleName: organizationConfigRuleName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetDiscoveredResourceCounts = {
   type t
   type request = {
@@ -3845,9 +3928,10 @@ module GetDiscoveredResourceCounts = {
   @module("@aws-sdk/client-config") @new
   external new: request => t = "GetDiscoveredResourceCountsCommand"
   let make = (~nextToken=?, ~limit=?, ~resourceTypes=?, ()) =>
-    new({nextToken, limit, resourceTypes})
+    new({nextToken: nextToken, limit: limit, resourceTypes: resourceTypes})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetConformancePackComplianceSummary = {
   type t
   type request = {
@@ -3874,9 +3958,10 @@ module GetConformancePackComplianceSummary = {
   @module("@aws-sdk/client-config") @new
   external new: request => t = "GetConformancePackComplianceSummaryCommand"
   let make = (~conformancePackNames, ~nextToken=?, ~limit=?, ()) =>
-    new({nextToken, limit, conformancePackNames})
+    new({nextToken: nextToken, limit: limit, conformancePackNames: conformancePackNames})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetComplianceSummaryByConfigRule = {
   type t
   type request = {.}
@@ -3893,6 +3978,7 @@ module GetComplianceSummaryByConfigRule = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetAggregateDiscoveredResourceCounts = {
   type t
   type request = {
@@ -3944,9 +4030,17 @@ module GetAggregateDiscoveredResourceCounts = {
     ~groupByKey=?,
     ~filters=?,
     (),
-  ) => new({nextToken, limit, groupByKey, filters, configurationAggregatorName})
+  ) =>
+    new({
+      nextToken: nextToken,
+      limit: limit,
+      groupByKey: groupByKey,
+      filters: filters,
+      configurationAggregatorName: configurationAggregatorName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeRetentionConfigurations = {
   type t
   type request = {
@@ -3977,9 +4071,10 @@ module DescribeRetentionConfigurations = {
   @module("@aws-sdk/client-config") @new
   external new: request => t = "DescribeRetentionConfigurationsCommand"
   let make = (~nextToken=?, ~retentionConfigurationNames=?, ()) =>
-    new({nextToken, retentionConfigurationNames})
+    new({nextToken: nextToken, retentionConfigurationNames: retentionConfigurationNames})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeRemediationExceptions = {
   type t
   type request = {
@@ -4014,9 +4109,15 @@ module DescribeRemediationExceptions = {
   @module("@aws-sdk/client-config") @new
   external new: request => t = "DescribeRemediationExceptionsCommand"
   let make = (~configRuleName, ~nextToken=?, ~limit=?, ~resourceKeys=?, ()) =>
-    new({nextToken, limit, resourceKeys, configRuleName})
+    new({
+      nextToken: nextToken,
+      limit: limit,
+      resourceKeys: resourceKeys,
+      configRuleName: configRuleName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribePendingAggregationRequests = {
   type t
   type request = {
@@ -4041,9 +4142,10 @@ module DescribePendingAggregationRequests = {
   }
   @module("@aws-sdk/client-config") @new
   external new: request => t = "DescribePendingAggregationRequestsCommand"
-  let make = (~nextToken=?, ~limit=?, ()) => new({nextToken, limit})
+  let make = (~nextToken=?, ~limit=?, ()) => new({nextToken: nextToken, limit: limit})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeOrganizationConformancePackStatuses = {
   type t
   type request = {
@@ -4074,9 +4176,14 @@ module DescribeOrganizationConformancePackStatuses = {
   @module("@aws-sdk/client-config") @new
   external new: request => t = "DescribeOrganizationConformancePackStatusesCommand"
   let make = (~nextToken=?, ~limit=?, ~organizationConformancePackNames=?, ()) =>
-    new({nextToken, limit, organizationConformancePackNames})
+    new({
+      nextToken: nextToken,
+      limit: limit,
+      organizationConformancePackNames: organizationConformancePackNames,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeOrganizationConfigRuleStatuses = {
   type t
   type request = {
@@ -4109,9 +4216,14 @@ module DescribeOrganizationConfigRuleStatuses = {
   @module("@aws-sdk/client-config") @new
   external new: request => t = "DescribeOrganizationConfigRuleStatusesCommand"
   let make = (~nextToken=?, ~limit=?, ~organizationConfigRuleNames=?, ()) =>
-    new({nextToken, limit, organizationConfigRuleNames})
+    new({
+      nextToken: nextToken,
+      limit: limit,
+      organizationConfigRuleNames: organizationConfigRuleNames,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeConformancePackStatus = {
   type t
   type request = {
@@ -4139,9 +4251,10 @@ module DescribeConformancePackStatus = {
   @module("@aws-sdk/client-config") @new
   external new: request => t = "DescribeConformancePackStatusCommand"
   let make = (~nextToken=?, ~limit=?, ~conformancePackNames=?, ()) =>
-    new({nextToken, limit, conformancePackNames})
+    new({nextToken: nextToken, limit: limit, conformancePackNames: conformancePackNames})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeConfigurationRecorderStatus = {
   type t
   @ocaml.doc("<p>The input for the <a>DescribeConfigurationRecorderStatus</a>
@@ -4167,6 +4280,7 @@ module DescribeConfigurationRecorderStatus = {
     new({configurationRecorderNames: configurationRecorderNames})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeConfigurationAggregatorSourcesStatus = {
   type t
   type request = {
@@ -4213,9 +4327,15 @@ module DescribeConfigurationAggregatorSourcesStatus = {
   @module("@aws-sdk/client-config") @new
   external new: request => t = "DescribeConfigurationAggregatorSourcesStatusCommand"
   let make = (~configurationAggregatorName, ~limit=?, ~nextToken=?, ~updateStatus=?, ()) =>
-    new({limit, nextToken, updateStatus, configurationAggregatorName})
+    new({
+      limit: limit,
+      nextToken: nextToken,
+      updateStatus: updateStatus,
+      configurationAggregatorName: configurationAggregatorName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeConfigRuleEvaluationStatus = {
   type t
   @ocaml.doc("<p></p>")
@@ -4255,9 +4375,10 @@ module DescribeConfigRuleEvaluationStatus = {
   @module("@aws-sdk/client-config") @new
   external new: request => t = "DescribeConfigRuleEvaluationStatusCommand"
   let make = (~limit=?, ~nextToken=?, ~configRuleNames=?, ()) =>
-    new({limit, nextToken, configRuleNames})
+    new({limit: limit, nextToken: nextToken, configRuleNames: configRuleNames})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeAggregationAuthorizations = {
   type t
   type request = {
@@ -4283,9 +4404,10 @@ module DescribeAggregationAuthorizations = {
   }
   @module("@aws-sdk/client-config") @new
   external new: request => t = "DescribeAggregationAuthorizationsCommand"
-  let make = (~nextToken=?, ~limit=?, ()) => new({nextToken, limit})
+  let make = (~nextToken=?, ~limit=?, ()) => new({nextToken: nextToken, limit: limit})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module SelectResourceConfig = {
   type t
   type request = {
@@ -4311,9 +4433,11 @@ module SelectResourceConfig = {
     results: option<results>,
   }
   @module("@aws-sdk/client-config") @new external new: request => t = "SelectResourceConfigCommand"
-  let make = (~expression, ~nextToken=?, ~limit=?, ()) => new({nextToken, limit, expression})
+  let make = (~expression, ~nextToken=?, ~limit=?, ()) =>
+    new({nextToken: nextToken, limit: limit, expression: expression})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module SelectAggregateResourceConfig = {
   type t
   type request = {
@@ -4353,9 +4477,17 @@ module SelectAggregateResourceConfig = {
     ~maxResults=?,
     ~limit=?,
     (),
-  ) => new({nextToken, maxResults, limit, configurationAggregatorName, expression})
+  ) =>
+    new({
+      nextToken: nextToken,
+      maxResults: maxResults,
+      limit: limit,
+      configurationAggregatorName: configurationAggregatorName,
+      expression: expression,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module PutConfigurationRecorder = {
   type t
   @ocaml.doc("<p>The input for the <a>PutConfigurationRecorder</a>
@@ -4372,6 +4504,7 @@ module PutConfigurationRecorder = {
   let make = (~configurationRecorder, ()) => new({configurationRecorder: configurationRecorder})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module GetAggregateResourceConfig = {
   type t
   type request = {
@@ -4388,9 +4521,13 @@ module GetAggregateResourceConfig = {
   @module("@aws-sdk/client-config") @new
   external new: request => t = "GetAggregateResourceConfigCommand"
   let make = (~resourceIdentifier, ~configurationAggregatorName, ()) =>
-    new({resourceIdentifier, configurationAggregatorName})
+    new({
+      resourceIdentifier: resourceIdentifier,
+      configurationAggregatorName: configurationAggregatorName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetAggregateConformancePackComplianceSummary = {
   type t
   type request = {
@@ -4446,9 +4583,17 @@ module GetAggregateConformancePackComplianceSummary = {
     ~groupByKey=?,
     ~filters=?,
     (),
-  ) => new({nextToken, limit, groupByKey, filters, configurationAggregatorName})
+  ) =>
+    new({
+      nextToken: nextToken,
+      limit: limit,
+      groupByKey: groupByKey,
+      filters: filters,
+      configurationAggregatorName: configurationAggregatorName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeDeliveryChannels = {
   type t
   @ocaml.doc("<p>The input for the <a>DescribeDeliveryChannels</a>
@@ -4470,6 +4615,7 @@ module DescribeDeliveryChannels = {
   let make = (~deliveryChannelNames=?, ()) => new({deliveryChannelNames: deliveryChannelNames})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeDeliveryChannelStatus = {
   type t
   @ocaml.doc("<p>The input for the <a>DeliveryChannelStatus</a>
@@ -4490,6 +4636,7 @@ module DescribeDeliveryChannelStatus = {
   let make = (~deliveryChannelNames=?, ()) => new({deliveryChannelNames: deliveryChannelNames})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeConformancePackCompliance = {
   type t
   type request = {
@@ -4523,9 +4670,15 @@ module DescribeConformancePackCompliance = {
   @module("@aws-sdk/client-config") @new
   external new: request => t = "DescribeConformancePackComplianceCommand"
   let make = (~conformancePackName, ~nextToken=?, ~limit=?, ~filters=?, ()) =>
-    new({nextToken, limit, filters, conformancePackName})
+    new({
+      nextToken: nextToken,
+      limit: limit,
+      filters: filters,
+      conformancePackName: conformancePackName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeAggregateComplianceByConformancePacks = {
   type t
   type request = {
@@ -4561,9 +4714,15 @@ module DescribeAggregateComplianceByConformancePacks = {
   @module("@aws-sdk/client-config") @new
   external new: request => t = "DescribeAggregateComplianceByConformancePacksCommand"
   let make = (~configurationAggregatorName, ~nextToken=?, ~limit=?, ~filters=?, ()) =>
-    new({nextToken, limit, filters, configurationAggregatorName})
+    new({
+      nextToken: nextToken,
+      limit: limit,
+      filters: filters,
+      configurationAggregatorName: configurationAggregatorName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module BatchGetResourceConfig = {
   type t
   type request = {
@@ -4590,6 +4749,7 @@ module BatchGetResourceConfig = {
   let make = (~resourceKeys, ()) => new({resourceKeys: resourceKeys})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module BatchGetAggregateResourceConfig = {
   type t
   type request = {
@@ -4613,9 +4773,13 @@ module BatchGetAggregateResourceConfig = {
   @module("@aws-sdk/client-config") @new
   external new: request => t = "BatchGetAggregateResourceConfigCommand"
   let make = (~resourceIdentifiers, ~configurationAggregatorName, ()) =>
-    new({resourceIdentifiers, configurationAggregatorName})
+    new({
+      resourceIdentifiers: resourceIdentifiers,
+      configurationAggregatorName: configurationAggregatorName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module PutRemediationExceptions = {
   type t
   type request = {
@@ -4645,9 +4809,15 @@ module PutRemediationExceptions = {
   @module("@aws-sdk/client-config") @new
   external new: request => t = "PutRemediationExceptionsCommand"
   let make = (~resourceKeys, ~configRuleName, ~expirationTime=?, ~message=?, ()) =>
-    new({expirationTime, message, resourceKeys, configRuleName})
+    new({
+      expirationTime: expirationTime,
+      message: message,
+      resourceKeys: resourceKeys,
+      configRuleName: configRuleName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module PutConfigurationAggregator = {
   type t
   type request = {
@@ -4678,13 +4848,14 @@ module PutConfigurationAggregator = {
     (),
   ) =>
     new({
-      tags,
-      organizationAggregationSource,
-      accountAggregationSources,
-      configurationAggregatorName,
+      tags: tags,
+      organizationAggregationSource: organizationAggregationSource,
+      accountAggregationSources: accountAggregationSources,
+      configurationAggregatorName: configurationAggregatorName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module PutConfigRule = {
   type t
   type request = {
@@ -4694,9 +4865,10 @@ module PutConfigRule = {
   }
   type response = {.}
   @module("@aws-sdk/client-config") @new external new: request => t = "PutConfigRuleCommand"
-  let make = (~configRule, ~tags=?, ()) => new({tags, configRule})
+  let make = (~configRule, ~tags=?, ()) => new({tags: tags, configRule: configRule})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module GetResourceConfigHistory = {
   type t
   @ocaml.doc("<p>The input for the <a>GetResourceConfigHistory</a>
@@ -4748,9 +4920,19 @@ module GetResourceConfigHistory = {
     ~earlierTime=?,
     ~laterTime=?,
     (),
-  ) => new({nextToken, limit, chronologicalOrder, earlierTime, laterTime, resourceId, resourceType})
+  ) =>
+    new({
+      nextToken: nextToken,
+      limit: limit,
+      chronologicalOrder: chronologicalOrder,
+      earlierTime: earlierTime,
+      laterTime: laterTime,
+      resourceId: resourceId,
+      resourceType: resourceType,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetConformancePackComplianceDetails = {
   type t
   type request = {
@@ -4784,9 +4966,15 @@ module GetConformancePackComplianceDetails = {
   @module("@aws-sdk/client-config") @new
   external new: request => t = "GetConformancePackComplianceDetailsCommand"
   let make = (~conformancePackName, ~nextToken=?, ~limit=?, ~filters=?, ()) =>
-    new({nextToken, limit, filters, conformancePackName})
+    new({
+      nextToken: nextToken,
+      limit: limit,
+      filters: filters,
+      conformancePackName: conformancePackName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetComplianceSummaryByResourceType = {
   type t
   @ocaml.doc("<p></p>")
@@ -4815,6 +5003,7 @@ module GetComplianceSummaryByResourceType = {
   let make = (~resourceTypes=?, ()) => new({resourceTypes: resourceTypes})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetComplianceDetailsByResource = {
   type t
   @ocaml.doc("<p></p>")
@@ -4854,9 +5043,15 @@ module GetComplianceDetailsByResource = {
   @module("@aws-sdk/client-config") @new
   external new: request => t = "GetComplianceDetailsByResourceCommand"
   let make = (~resourceId, ~resourceType, ~nextToken=?, ~complianceTypes=?, ()) =>
-    new({nextToken, complianceTypes, resourceId, resourceType})
+    new({
+      nextToken: nextToken,
+      complianceTypes: complianceTypes,
+      resourceId: resourceId,
+      resourceType: resourceType,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetComplianceDetailsByConfigRule = {
   type t
   @ocaml.doc("<p></p>")
@@ -4896,9 +5091,15 @@ module GetComplianceDetailsByConfigRule = {
   @module("@aws-sdk/client-config") @new
   external new: request => t = "GetComplianceDetailsByConfigRuleCommand"
   let make = (~configRuleName, ~nextToken=?, ~limit=?, ~complianceTypes=?, ()) =>
-    new({nextToken, limit, complianceTypes, configRuleName})
+    new({
+      nextToken: nextToken,
+      limit: limit,
+      complianceTypes: complianceTypes,
+      configRuleName: configRuleName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetAggregateConfigRuleComplianceSummary = {
   type t
   type request = {
@@ -4941,9 +5142,17 @@ module GetAggregateConfigRuleComplianceSummary = {
     ~groupByKey=?,
     ~filters=?,
     (),
-  ) => new({nextToken, limit, groupByKey, filters, configurationAggregatorName})
+  ) =>
+    new({
+      nextToken: nextToken,
+      limit: limit,
+      groupByKey: groupByKey,
+      filters: filters,
+      configurationAggregatorName: configurationAggregatorName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetAggregateComplianceDetailsByConfigRule = {
   type t
   type request = {
@@ -5001,16 +5210,17 @@ module GetAggregateComplianceDetailsByConfigRule = {
     (),
   ) =>
     new({
-      nextToken,
-      limit,
-      complianceType,
-      awsRegion,
-      accountId,
-      configRuleName,
-      configurationAggregatorName,
+      nextToken: nextToken,
+      limit: limit,
+      complianceType: complianceType,
+      awsRegion: awsRegion,
+      accountId: accountId,
+      configRuleName: configRuleName,
+      configurationAggregatorName: configurationAggregatorName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeRemediationExecutionStatus = {
   type t
   type request = {
@@ -5045,9 +5255,15 @@ module DescribeRemediationExecutionStatus = {
   @module("@aws-sdk/client-config") @new
   external new: request => t = "DescribeRemediationExecutionStatusCommand"
   let make = (~configRuleName, ~nextToken=?, ~limit=?, ~resourceKeys=?, ()) =>
-    new({nextToken, limit, resourceKeys, configRuleName})
+    new({
+      nextToken: nextToken,
+      limit: limit,
+      resourceKeys: resourceKeys,
+      configRuleName: configRuleName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeOrganizationConformancePacks = {
   type t
   type request = {
@@ -5075,9 +5291,14 @@ module DescribeOrganizationConformancePacks = {
   @module("@aws-sdk/client-config") @new
   external new: request => t = "DescribeOrganizationConformancePacksCommand"
   let make = (~nextToken=?, ~limit=?, ~organizationConformancePackNames=?, ()) =>
-    new({nextToken, limit, organizationConformancePackNames})
+    new({
+      nextToken: nextToken,
+      limit: limit,
+      organizationConformancePackNames: organizationConformancePackNames,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeOrganizationConfigRules = {
   type t
   type request = {
@@ -5110,9 +5331,14 @@ module DescribeOrganizationConfigRules = {
   @module("@aws-sdk/client-config") @new
   external new: request => t = "DescribeOrganizationConfigRulesCommand"
   let make = (~nextToken=?, ~limit=?, ~organizationConfigRuleNames=?, ()) =>
-    new({nextToken, limit, organizationConfigRuleNames})
+    new({
+      nextToken: nextToken,
+      limit: limit,
+      organizationConfigRuleNames: organizationConfigRuleNames,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeConformancePacks = {
   type t
   type request = {
@@ -5142,9 +5368,10 @@ module DescribeConformancePacks = {
   @module("@aws-sdk/client-config") @new
   external new: request => t = "DescribeConformancePacksCommand"
   let make = (~nextToken=?, ~limit=?, ~conformancePackNames=?, ()) =>
-    new({nextToken, limit, conformancePackNames})
+    new({nextToken: nextToken, limit: limit, conformancePackNames: conformancePackNames})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeConfigurationRecorders = {
   type t
   @ocaml.doc("<p>The input for the <a>DescribeConfigurationRecorders</a> action.</p>")
@@ -5165,6 +5392,7 @@ module DescribeConfigurationRecorders = {
     new({configurationRecorderNames: configurationRecorderNames})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeComplianceByResource = {
   type t
   @ocaml.doc("<p></p>")
@@ -5210,9 +5438,16 @@ module DescribeComplianceByResource = {
   @module("@aws-sdk/client-config") @new
   external new: request => t = "DescribeComplianceByResourceCommand"
   let make = (~nextToken=?, ~limit=?, ~complianceTypes=?, ~resourceId=?, ~resourceType=?, ()) =>
-    new({nextToken, limit, complianceTypes, resourceId, resourceType})
+    new({
+      nextToken: nextToken,
+      limit: limit,
+      complianceTypes: complianceTypes,
+      resourceId: resourceId,
+      resourceType: resourceType,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeComplianceByConfigRule = {
   type t
   @ocaml.doc("<p></p>")
@@ -5245,9 +5480,10 @@ module DescribeComplianceByConfigRule = {
   @module("@aws-sdk/client-config") @new
   external new: request => t = "DescribeComplianceByConfigRuleCommand"
   let make = (~nextToken=?, ~complianceTypes=?, ~configRuleNames=?, ()) =>
-    new({nextToken, complianceTypes, configRuleNames})
+    new({nextToken: nextToken, complianceTypes: complianceTypes, configRuleNames: configRuleNames})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeAggregateComplianceByConfigRules = {
   type t
   type request = {
@@ -5282,9 +5518,15 @@ module DescribeAggregateComplianceByConfigRules = {
   @module("@aws-sdk/client-config") @new
   external new: request => t = "DescribeAggregateComplianceByConfigRulesCommand"
   let make = (~configurationAggregatorName, ~nextToken=?, ~limit=?, ~filters=?, ()) =>
-    new({nextToken, limit, filters, configurationAggregatorName})
+    new({
+      nextToken: nextToken,
+      limit: limit,
+      filters: filters,
+      configurationAggregatorName: configurationAggregatorName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteRemediationExceptions = {
   type t
   type request = {
@@ -5308,9 +5550,11 @@ module DeleteRemediationExceptions = {
   }
   @module("@aws-sdk/client-config") @new
   external new: request => t = "DeleteRemediationExceptionsCommand"
-  let make = (~resourceKeys, ~configRuleName, ()) => new({resourceKeys, configRuleName})
+  let make = (~resourceKeys, ~configRuleName, ()) =>
+    new({resourceKeys: resourceKeys, configRuleName: configRuleName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeConfigurationAggregators = {
   type t
   type request = {
@@ -5338,9 +5582,14 @@ module DescribeConfigurationAggregators = {
   @module("@aws-sdk/client-config") @new
   external new: request => t = "DescribeConfigurationAggregatorsCommand"
   let make = (~limit=?, ~nextToken=?, ~configurationAggregatorNames=?, ()) =>
-    new({limit, nextToken, configurationAggregatorNames})
+    new({
+      limit: limit,
+      nextToken: nextToken,
+      configurationAggregatorNames: configurationAggregatorNames,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeConfigRules = {
   type t
   @ocaml.doc("<p></p>")
@@ -5366,9 +5615,11 @@ module DescribeConfigRules = {
     configRules: option<configRules>,
   }
   @module("@aws-sdk/client-config") @new external new: request => t = "DescribeConfigRulesCommand"
-  let make = (~nextToken=?, ~configRuleNames=?, ()) => new({nextToken, configRuleNames})
+  let make = (~nextToken=?, ~configRuleNames=?, ()) =>
+    new({nextToken: nextToken, configRuleNames: configRuleNames})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeRemediationConfigurations = {
   type t
   type request = {
@@ -5388,6 +5639,7 @@ module DescribeRemediationConfigurations = {
   let make = (~configRuleNames, ()) => new({configRuleNames: configRuleNames})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module PutRemediationConfigurations = {
   type t
   type request = {

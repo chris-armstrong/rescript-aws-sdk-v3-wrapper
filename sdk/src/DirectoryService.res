@@ -900,6 +900,7 @@ module VerifyTrust = {
   let make = (~trustId, ()) => new({trustId: trustId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateTrust = {
   type t
   type request = {
@@ -913,9 +914,11 @@ module UpdateTrust = {
     @as("RequestId") requestId: option<requestId>,
   }
   @module("@aws-sdk/client-ds") @new external new: request => t = "UpdateTrustCommand"
-  let make = (~trustId, ~selectiveAuth=?, ()) => new({selectiveAuth, trustId})
+  let make = (~trustId, ~selectiveAuth=?, ()) =>
+    new({selectiveAuth: selectiveAuth, trustId: trustId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateNumberOfDomainControllers = {
   type t
   type request = {
@@ -930,9 +933,11 @@ module UpdateNumberOfDomainControllers = {
   type response = {.}
   @module("@aws-sdk/client-ds") @new
   external new: request => t = "UpdateNumberOfDomainControllersCommand"
-  let make = (~desiredNumber, ~directoryId, ()) => new({desiredNumber, directoryId})
+  let make = (~desiredNumber, ~directoryId, ()) =>
+    new({desiredNumber: desiredNumber, directoryId: directoryId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module StartSchemaExtension = {
   type t
   type request = {
@@ -959,9 +964,15 @@ module StartSchemaExtension = {
   }
   @module("@aws-sdk/client-ds") @new external new: request => t = "StartSchemaExtensionCommand"
   let make = (~description, ~ldifContent, ~createSnapshotBeforeSchemaExtension, ~directoryId, ()) =>
-    new({description, ldifContent, createSnapshotBeforeSchemaExtension, directoryId})
+    new({
+      description: description,
+      ldifContent: ldifContent,
+      createSnapshotBeforeSchemaExtension: createSnapshotBeforeSchemaExtension,
+      directoryId: directoryId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module RestoreFromSnapshot = {
   type t
   @ocaml.doc(
@@ -976,6 +987,7 @@ module RestoreFromSnapshot = {
   let make = (~snapshotId, ()) => new({snapshotId: snapshotId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ResetUserPassword = {
   type t
   type request = {
@@ -991,9 +1003,10 @@ module ResetUserPassword = {
   type response = {.}
   @module("@aws-sdk/client-ds") @new external new: request => t = "ResetUserPasswordCommand"
   let make = (~newPassword, ~userName, ~directoryId, ()) =>
-    new({newPassword, userName, directoryId})
+    new({newPassword: newPassword, userName: userName, directoryId: directoryId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module RemoveRegion = {
   type t
   type request = {
@@ -1008,6 +1021,7 @@ module RemoveRegion = {
   let make = (~directoryId, ()) => new({directoryId: directoryId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module RejectSharedDirectory = {
   type t
   type request = {
@@ -1025,6 +1039,7 @@ module RejectSharedDirectory = {
   let make = (~sharedDirectoryId, ()) => new({sharedDirectoryId: sharedDirectoryId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module RegisterEventTopic = {
   type t
   @ocaml.doc("<p>Registers a new event topic.</p>")
@@ -1039,9 +1054,10 @@ module RegisterEventTopic = {
   }
   type response = {.}
   @module("@aws-sdk/client-ds") @new external new: request => t = "RegisterEventTopicCommand"
-  let make = (~topicName, ~directoryId, ()) => new({topicName, directoryId})
+  let make = (~topicName, ~directoryId, ()) => new({topicName: topicName, directoryId: directoryId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module EnableSso = {
   type t
   @ocaml.doc("<p>Contains the inputs for the <a>EnableSso</a> operation.</p>")
@@ -1067,9 +1083,11 @@ module EnableSso = {
   }
   type response = {.}
   @module("@aws-sdk/client-ds") @new external new: request => t = "EnableSsoCommand"
-  let make = (~directoryId, ~password=?, ~userName=?, ()) => new({password, userName, directoryId})
+  let make = (~directoryId, ~password=?, ~userName=?, ()) =>
+    new({password: password, userName: userName, directoryId: directoryId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module EnableLDAPS = {
   type t
   type request = {
@@ -1082,9 +1100,10 @@ module EnableLDAPS = {
   }
   type response = {.}
   @module("@aws-sdk/client-ds") @new external new: request => t = "EnableLDAPSCommand"
-  let make = (~type_, ~directoryId, ()) => new({type_, directoryId})
+  let make = (~type_, ~directoryId, ()) => new({type_: type_, directoryId: directoryId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module EnableClientAuthentication = {
   type t
   type request = {
@@ -1100,9 +1119,10 @@ module EnableClientAuthentication = {
   type response = {.}
   @module("@aws-sdk/client-ds") @new
   external new: request => t = "EnableClientAuthenticationCommand"
-  let make = (~type_, ~directoryId, ()) => new({type_, directoryId})
+  let make = (~type_, ~directoryId, ()) => new({type_: type_, directoryId: directoryId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DisableSso = {
   type t
   @ocaml.doc("<p>Contains the inputs for the <a>DisableSso</a> operation.</p>")
@@ -1128,9 +1148,11 @@ module DisableSso = {
   }
   type response = {.}
   @module("@aws-sdk/client-ds") @new external new: request => t = "DisableSsoCommand"
-  let make = (~directoryId, ~password=?, ~userName=?, ()) => new({password, userName, directoryId})
+  let make = (~directoryId, ~password=?, ~userName=?, ()) =>
+    new({password: password, userName: userName, directoryId: directoryId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DisableRadius = {
   type t
   @ocaml.doc("<p>Contains the inputs for the <a>DisableRadius</a> operation.</p>")
@@ -1144,6 +1166,7 @@ module DisableRadius = {
   let make = (~directoryId, ()) => new({directoryId: directoryId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DisableLDAPS = {
   type t
   type request = {
@@ -1156,9 +1179,10 @@ module DisableLDAPS = {
   }
   type response = {.}
   @module("@aws-sdk/client-ds") @new external new: request => t = "DisableLDAPSCommand"
-  let make = (~type_, ~directoryId, ()) => new({type_, directoryId})
+  let make = (~type_, ~directoryId, ()) => new({type_: type_, directoryId: directoryId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DisableClientAuthentication = {
   type t
   type request = {
@@ -1173,9 +1197,10 @@ module DisableClientAuthentication = {
   type response = {.}
   @module("@aws-sdk/client-ds") @new
   external new: request => t = "DisableClientAuthenticationCommand"
-  let make = (~type_, ~directoryId, ()) => new({type_, directoryId})
+  let make = (~type_, ~directoryId, ()) => new({type_: type_, directoryId: directoryId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeregisterEventTopic = {
   type t
   @ocaml.doc(
@@ -1193,9 +1218,10 @@ module DeregisterEventTopic = {
   }
   type response = {.}
   @module("@aws-sdk/client-ds") @new external new: request => t = "DeregisterEventTopicCommand"
-  let make = (~topicName, ~directoryId, ()) => new({topicName, directoryId})
+  let make = (~topicName, ~directoryId, ()) => new({topicName: topicName, directoryId: directoryId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeregisterCertificate = {
   type t
   type request = {
@@ -1206,9 +1232,11 @@ module DeregisterCertificate = {
   }
   type response = {.}
   @module("@aws-sdk/client-ds") @new external new: request => t = "DeregisterCertificateCommand"
-  let make = (~certificateId, ~directoryId, ()) => new({certificateId, directoryId})
+  let make = (~certificateId, ~directoryId, ()) =>
+    new({certificateId: certificateId, directoryId: directoryId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteTrust = {
   type t
   @ocaml.doc("<p>Deletes the local side of an existing trust relationship between the Managed Microsoft AD
@@ -1227,9 +1255,13 @@ module DeleteTrust = {
   }
   @module("@aws-sdk/client-ds") @new external new: request => t = "DeleteTrustCommand"
   let make = (~trustId, ~deleteAssociatedConditionalForwarder=?, ()) =>
-    new({deleteAssociatedConditionalForwarder, trustId})
+    new({
+      deleteAssociatedConditionalForwarder: deleteAssociatedConditionalForwarder,
+      trustId: trustId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteSnapshot = {
   type t
   @ocaml.doc("<p>Contains the inputs for the <a>DeleteSnapshot</a> operation.</p>")
@@ -1247,6 +1279,7 @@ module DeleteSnapshot = {
   let make = (~snapshotId, ()) => new({snapshotId: snapshotId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteLogSubscription = {
   type t
   type request = {
@@ -1259,6 +1292,7 @@ module DeleteLogSubscription = {
   let make = (~directoryId, ()) => new({directoryId: directoryId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteDirectory = {
   type t
   @ocaml.doc("<p>Contains the inputs for the <a>DeleteDirectory</a> operation.</p>")
@@ -1275,6 +1309,7 @@ module DeleteDirectory = {
   let make = (~directoryId, ()) => new({directoryId: directoryId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteConditionalForwarder = {
   type t
   @ocaml.doc("<p>Deletes a conditional forwarder.</p>")
@@ -1290,9 +1325,11 @@ module DeleteConditionalForwarder = {
   type response = {.}
   @module("@aws-sdk/client-ds") @new
   external new: request => t = "DeleteConditionalForwarderCommand"
-  let make = (~remoteDomainName, ~directoryId, ()) => new({remoteDomainName, directoryId})
+  let make = (~remoteDomainName, ~directoryId, ()) =>
+    new({remoteDomainName: remoteDomainName, directoryId: directoryId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module CreateSnapshot = {
   type t
   @ocaml.doc("<p>Contains the inputs for the <a>CreateSnapshot</a> operation.</p>")
@@ -1309,9 +1346,10 @@ module CreateSnapshot = {
     snapshotId: option<snapshotId>,
   }
   @module("@aws-sdk/client-ds") @new external new: request => t = "CreateSnapshotCommand"
-  let make = (~directoryId, ~name=?, ()) => new({name, directoryId})
+  let make = (~directoryId, ~name=?, ()) => new({name: name, directoryId: directoryId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateLogSubscription = {
   type t
   type request = {
@@ -1326,9 +1364,11 @@ module CreateLogSubscription = {
   }
   type response = {.}
   @module("@aws-sdk/client-ds") @new external new: request => t = "CreateLogSubscriptionCommand"
-  let make = (~logGroupName, ~directoryId, ()) => new({logGroupName, directoryId})
+  let make = (~logGroupName, ~directoryId, ()) =>
+    new({logGroupName: logGroupName, directoryId: directoryId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module CreateAlias = {
   type t
   @ocaml.doc("<p>Contains the inputs for the <a>CreateAlias</a> operation.</p>")
@@ -1349,9 +1389,10 @@ module CreateAlias = {
     directoryId: option<directoryId>,
   }
   @module("@aws-sdk/client-ds") @new external new: request => t = "CreateAliasCommand"
-  let make = (~alias, ~directoryId, ()) => new({alias, directoryId})
+  let make = (~alias, ~directoryId, ()) => new({alias: alias, directoryId: directoryId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CancelSchemaExtension = {
   type t
   type request = {
@@ -1364,9 +1405,11 @@ module CancelSchemaExtension = {
   }
   type response = {.}
   @module("@aws-sdk/client-ds") @new external new: request => t = "CancelSchemaExtensionCommand"
-  let make = (~schemaExtensionId, ~directoryId, ()) => new({schemaExtensionId, directoryId})
+  let make = (~schemaExtensionId, ~directoryId, ()) =>
+    new({schemaExtensionId: schemaExtensionId, directoryId: directoryId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateConditionalForwarder = {
   type t
   @ocaml.doc("<p>Updates a conditional forwarder.</p>")
@@ -1388,9 +1431,10 @@ module UpdateConditionalForwarder = {
   @module("@aws-sdk/client-ds") @new
   external new: request => t = "UpdateConditionalForwarderCommand"
   let make = (~dnsIpAddrs, ~remoteDomainName, ~directoryId, ()) =>
-    new({dnsIpAddrs, remoteDomainName, directoryId})
+    new({dnsIpAddrs: dnsIpAddrs, remoteDomainName: remoteDomainName, directoryId: directoryId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UnshareDirectory = {
   type t
   type request = {
@@ -1410,9 +1454,11 @@ module UnshareDirectory = {
     sharedDirectoryId: option<directoryId>,
   }
   @module("@aws-sdk/client-ds") @new external new: request => t = "UnshareDirectoryCommand"
-  let make = (~unshareTarget, ~directoryId, ()) => new({unshareTarget, directoryId})
+  let make = (~unshareTarget, ~directoryId, ()) =>
+    new({unshareTarget: unshareTarget, directoryId: directoryId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ShareDirectory = {
   type t
   type request = {
@@ -1444,9 +1490,15 @@ module ShareDirectory = {
   }
   @module("@aws-sdk/client-ds") @new external new: request => t = "ShareDirectoryCommand"
   let make = (~shareMethod, ~shareTarget, ~directoryId, ~shareNotes=?, ()) =>
-    new({shareMethod, shareTarget, shareNotes, directoryId})
+    new({
+      shareMethod: shareMethod,
+      shareTarget: shareTarget,
+      shareNotes: shareNotes,
+      directoryId: directoryId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module RemoveTagsFromResource = {
   type t
   type request = {
@@ -1458,9 +1510,10 @@ module RemoveTagsFromResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-ds") @new external new: request => t = "RemoveTagsFromResourceCommand"
-  let make = (~tagKeys, ~resourceId, ()) => new({tagKeys, resourceId})
+  let make = (~tagKeys, ~resourceId, ()) => new({tagKeys: tagKeys, resourceId: resourceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module RemoveIpRoutes = {
   type t
   type request = {
@@ -1472,9 +1525,10 @@ module RemoveIpRoutes = {
   }
   type response = {.}
   @module("@aws-sdk/client-ds") @new external new: request => t = "RemoveIpRoutesCommand"
-  let make = (~cidrIps, ~directoryId, ()) => new({cidrIps, directoryId})
+  let make = (~cidrIps, ~directoryId, ()) => new({cidrIps: cidrIps, directoryId: directoryId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module RegisterCertificate = {
   type t
   type request = {
@@ -1500,9 +1554,15 @@ module RegisterCertificate = {
   }
   @module("@aws-sdk/client-ds") @new external new: request => t = "RegisterCertificateCommand"
   let make = (~certificateData, ~directoryId, ~clientCertAuthSettings=?, ~type_=?, ()) =>
-    new({clientCertAuthSettings, type_, certificateData, directoryId})
+    new({
+      clientCertAuthSettings: clientCertAuthSettings,
+      type_: type_,
+      certificateData: certificateData,
+      directoryId: directoryId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetSnapshotLimits = {
   type t
   @ocaml.doc("<p>Contains the inputs for the <a>GetSnapshotLimits</a> operation.</p>")
@@ -1522,6 +1582,7 @@ module GetSnapshotLimits = {
   let make = (~directoryId, ()) => new({directoryId: directoryId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetDirectoryLimits = {
   type t
   type request = {.}
@@ -1536,6 +1597,7 @@ module GetDirectoryLimits = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateTrust = {
   type t
   @ocaml.doc("<p>Directory Service for Microsoft Active Directory allows you to configure trust relationships. For
@@ -1587,16 +1649,17 @@ module CreateTrust = {
     (),
   ) =>
     new({
-      selectiveAuth,
-      conditionalForwarderIpAddrs,
-      trustType,
-      trustDirection,
-      trustPassword,
-      remoteDomainName,
-      directoryId,
+      selectiveAuth: selectiveAuth,
+      conditionalForwarderIpAddrs: conditionalForwarderIpAddrs,
+      trustType: trustType,
+      trustDirection: trustDirection,
+      trustPassword: trustPassword,
+      remoteDomainName: remoteDomainName,
+      directoryId: directoryId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateConditionalForwarder = {
   type t
   @ocaml.doc("<p>Initiates the creation of a conditional forwarder for your Directory Service for Microsoft Active
@@ -1619,9 +1682,10 @@ module CreateConditionalForwarder = {
   @module("@aws-sdk/client-ds") @new
   external new: request => t = "CreateConditionalForwarderCommand"
   let make = (~dnsIpAddrs, ~remoteDomainName, ~directoryId, ()) =>
-    new({dnsIpAddrs, remoteDomainName, directoryId})
+    new({dnsIpAddrs: dnsIpAddrs, remoteDomainName: remoteDomainName, directoryId: directoryId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module AcceptSharedDirectory = {
   type t
   type request = {
@@ -1639,6 +1703,7 @@ module AcceptSharedDirectory = {
   let make = (~sharedDirectoryId, ()) => new({sharedDirectoryId: sharedDirectoryId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateRadius = {
   type t
   @ocaml.doc("<p>Contains the inputs for the <a>UpdateRadius</a> operation.</p>")
@@ -1654,9 +1719,11 @@ module UpdateRadius = {
   }
   type response = {.}
   @module("@aws-sdk/client-ds") @new external new: request => t = "UpdateRadiusCommand"
-  let make = (~radiusSettings, ~directoryId, ()) => new({radiusSettings, directoryId})
+  let make = (~radiusSettings, ~directoryId, ()) =>
+    new({radiusSettings: radiusSettings, directoryId: directoryId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ListTagsForResource = {
   type t
   type request = {
@@ -1672,9 +1739,11 @@ module ListTagsForResource = {
     tags: option<tags>,
   }
   @module("@aws-sdk/client-ds") @new external new: request => t = "ListTagsForResourceCommand"
-  let make = (~resourceId, ~limit=?, ~nextToken=?, ()) => new({limit, nextToken, resourceId})
+  let make = (~resourceId, ~limit=?, ~nextToken=?, ()) =>
+    new({limit: limit, nextToken: nextToken, resourceId: resourceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListSchemaExtensions = {
   type t
   type request = {
@@ -1699,9 +1768,11 @@ module ListSchemaExtensions = {
     schemaExtensionsInfo: option<schemaExtensionsInfo>,
   }
   @module("@aws-sdk/client-ds") @new external new: request => t = "ListSchemaExtensionsCommand"
-  let make = (~directoryId, ~limit=?, ~nextToken=?, ()) => new({limit, nextToken, directoryId})
+  let make = (~directoryId, ~limit=?, ~nextToken=?, ()) =>
+    new({limit: limit, nextToken: nextToken, directoryId: directoryId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListLogSubscriptions = {
   type t
   type request = {
@@ -1725,9 +1796,11 @@ module ListLogSubscriptions = {
     logSubscriptions: option<logSubscriptions>,
   }
   @module("@aws-sdk/client-ds") @new external new: request => t = "ListLogSubscriptionsCommand"
-  let make = (~limit=?, ~nextToken=?, ~directoryId=?, ()) => new({limit, nextToken, directoryId})
+  let make = (~limit=?, ~nextToken=?, ~directoryId=?, ()) =>
+    new({limit: limit, nextToken: nextToken, directoryId: directoryId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListIpRoutes = {
   type t
   type request = {
@@ -1754,9 +1827,11 @@ module ListIpRoutes = {
     ipRoutesInfo: option<ipRoutesInfo>,
   }
   @module("@aws-sdk/client-ds") @new external new: request => t = "ListIpRoutesCommand"
-  let make = (~directoryId, ~limit=?, ~nextToken=?, ()) => new({limit, nextToken, directoryId})
+  let make = (~directoryId, ~limit=?, ~nextToken=?, ()) =>
+    new({limit: limit, nextToken: nextToken, directoryId: directoryId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListCertificates = {
   type t
   type request = {
@@ -1782,9 +1857,11 @@ module ListCertificates = {
     nextToken: option<nextToken>,
   }
   @module("@aws-sdk/client-ds") @new external new: request => t = "ListCertificatesCommand"
-  let make = (~directoryId, ~limit=?, ~nextToken=?, ()) => new({limit, nextToken, directoryId})
+  let make = (~directoryId, ~limit=?, ~nextToken=?, ()) =>
+    new({limit: limit, nextToken: nextToken, directoryId: directoryId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module EnableRadius = {
   type t
   @ocaml.doc("<p>Contains the inputs for the <a>EnableRadius</a> operation.</p>")
@@ -1798,9 +1875,11 @@ module EnableRadius = {
   }
   type response = {.}
   @module("@aws-sdk/client-ds") @new external new: request => t = "EnableRadiusCommand"
-  let make = (~radiusSettings, ~directoryId, ()) => new({radiusSettings, directoryId})
+  let make = (~radiusSettings, ~directoryId, ()) =>
+    new({radiusSettings: radiusSettings, directoryId: directoryId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DescribeTrusts = {
   type t
   @ocaml.doc("<p>Describes the trust relationships for a particular Managed Microsoft AD directory. If no input
@@ -1839,9 +1918,10 @@ module DescribeTrusts = {
   }
   @module("@aws-sdk/client-ds") @new external new: request => t = "DescribeTrustsCommand"
   let make = (~limit=?, ~nextToken=?, ~trustIds=?, ~directoryId=?, ()) =>
-    new({limit, nextToken, trustIds, directoryId})
+    new({limit: limit, nextToken: nextToken, trustIds: trustIds, directoryId: directoryId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeSnapshots = {
   type t
   @ocaml.doc("<p>Contains the inputs for the <a>DescribeSnapshots</a> operation.</p>")
@@ -1876,9 +1956,10 @@ module DescribeSnapshots = {
   }
   @module("@aws-sdk/client-ds") @new external new: request => t = "DescribeSnapshotsCommand"
   let make = (~limit=?, ~nextToken=?, ~snapshotIds=?, ~directoryId=?, ()) =>
-    new({limit, nextToken, snapshotIds, directoryId})
+    new({limit: limit, nextToken: nextToken, snapshotIds: snapshotIds, directoryId: directoryId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeSharedDirectories = {
   type t
   type request = {
@@ -1906,9 +1987,15 @@ module DescribeSharedDirectories = {
   }
   @module("@aws-sdk/client-ds") @new external new: request => t = "DescribeSharedDirectoriesCommand"
   let make = (~ownerDirectoryId, ~limit=?, ~nextToken=?, ~sharedDirectoryIds=?, ()) =>
-    new({limit, nextToken, sharedDirectoryIds, ownerDirectoryId})
+    new({
+      limit: limit,
+      nextToken: nextToken,
+      sharedDirectoryIds: sharedDirectoryIds,
+      ownerDirectoryId: ownerDirectoryId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeLDAPSSettings = {
   type t
   type request = {
@@ -1936,9 +2023,10 @@ module DescribeLDAPSSettings = {
   }
   @module("@aws-sdk/client-ds") @new external new: request => t = "DescribeLDAPSSettingsCommand"
   let make = (~directoryId, ~limit=?, ~nextToken=?, ~type_=?, ()) =>
-    new({limit, nextToken, type_, directoryId})
+    new({limit: limit, nextToken: nextToken, type_: type_, directoryId: directoryId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeEventTopics = {
   type t
   @ocaml.doc("<p>Describes event topics.</p>")
@@ -1962,9 +2050,11 @@ module DescribeEventTopics = {
     eventTopics: option<eventTopics>,
   }
   @module("@aws-sdk/client-ds") @new external new: request => t = "DescribeEventTopicsCommand"
-  let make = (~topicNames=?, ~directoryId=?, ()) => new({topicNames, directoryId})
+  let make = (~topicNames=?, ~directoryId=?, ()) =>
+    new({topicNames: topicNames, directoryId: directoryId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeDomainControllers = {
   type t
   type request = {
@@ -1995,9 +2085,15 @@ module DescribeDomainControllers = {
   }
   @module("@aws-sdk/client-ds") @new external new: request => t = "DescribeDomainControllersCommand"
   let make = (~directoryId, ~limit=?, ~nextToken=?, ~domainControllerIds=?, ()) =>
-    new({limit, nextToken, domainControllerIds, directoryId})
+    new({
+      limit: limit,
+      nextToken: nextToken,
+      domainControllerIds: domainControllerIds,
+      directoryId: directoryId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeClientAuthenticationSettings = {
   type t
   type request = {
@@ -2034,9 +2130,10 @@ module DescribeClientAuthenticationSettings = {
   @module("@aws-sdk/client-ds") @new
   external new: request => t = "DescribeClientAuthenticationSettingsCommand"
   let make = (~directoryId, ~limit=?, ~nextToken=?, ~type_=?, ()) =>
-    new({limit, nextToken, type_, directoryId})
+    new({limit: limit, nextToken: nextToken, type_: type_, directoryId: directoryId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeCertificate = {
   type t
   type request = {
@@ -2052,9 +2149,11 @@ module DescribeCertificate = {
     certificate: option<certificate>,
   }
   @module("@aws-sdk/client-ds") @new external new: request => t = "DescribeCertificateCommand"
-  let make = (~certificateId, ~directoryId, ()) => new({certificateId, directoryId})
+  let make = (~certificateId, ~directoryId, ()) =>
+    new({certificateId: certificateId, directoryId: directoryId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateMicrosoftAD = {
   type t
   @ocaml.doc("<p>Creates an Managed Microsoft AD directory.</p>")
@@ -2104,9 +2203,19 @@ module CreateMicrosoftAD = {
     ~description=?,
     ~shortName=?,
     (),
-  ) => new({tags, edition, vpcSettings, description, password, shortName, name})
+  ) =>
+    new({
+      tags: tags,
+      edition: edition,
+      vpcSettings: vpcSettings,
+      description: description,
+      password: password,
+      shortName: shortName,
+      name: name,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateDirectory = {
   type t
   @ocaml.doc("<p>Contains the inputs for the <a>CreateDirectory</a> operation. </p>")
@@ -2167,9 +2276,18 @@ module CreateDirectory = {
   }
   @module("@aws-sdk/client-ds") @new external new: request => t = "CreateDirectoryCommand"
   let make = (~size, ~password, ~name, ~tags=?, ~vpcSettings=?, ~description=?, ~shortName=?, ()) =>
-    new({tags, vpcSettings, size, description, password, shortName, name})
+    new({
+      tags: tags,
+      vpcSettings: vpcSettings,
+      size: size,
+      description: description,
+      password: password,
+      shortName: shortName,
+      name: name,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ConnectDirectory = {
   type t
   @ocaml.doc("<p>Contains the inputs for the <a>ConnectDirectory</a> operation.</p>")
@@ -2207,9 +2325,19 @@ module ConnectDirectory = {
     ~description=?,
     ~shortName=?,
     (),
-  ) => new({tags, connectSettings, size, description, password, shortName, name})
+  ) =>
+    new({
+      tags: tags,
+      connectSettings: connectSettings,
+      size: size,
+      description: description,
+      password: password,
+      shortName: shortName,
+      name: name,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module AddTagsToResource = {
   type t
   type request = {
@@ -2220,9 +2348,10 @@ module AddTagsToResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-ds") @new external new: request => t = "AddTagsToResourceCommand"
-  let make = (~tags, ~resourceId, ()) => new({tags, resourceId})
+  let make = (~tags, ~resourceId, ()) => new({tags: tags, resourceId: resourceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module AddRegion = {
   type t
   type request = {
@@ -2240,9 +2369,10 @@ module AddRegion = {
   type response = {.}
   @module("@aws-sdk/client-ds") @new external new: request => t = "AddRegionCommand"
   let make = (~vpcsettings, ~regionName, ~directoryId, ()) =>
-    new({vpcsettings, regionName, directoryId})
+    new({vpcsettings: vpcsettings, regionName: regionName, directoryId: directoryId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module AddIpRoutes = {
   type t
   type request = {
@@ -2328,9 +2458,14 @@ module AddIpRoutes = {
   type response = {.}
   @module("@aws-sdk/client-ds") @new external new: request => t = "AddIpRoutesCommand"
   let make = (~ipRoutes, ~directoryId, ~updateSecurityGroupForDirectoryControllers=?, ()) =>
-    new({updateSecurityGroupForDirectoryControllers, ipRoutes, directoryId})
+    new({
+      updateSecurityGroupForDirectoryControllers: updateSecurityGroupForDirectoryControllers,
+      ipRoutes: ipRoutes,
+      directoryId: directoryId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DescribeConditionalForwarders = {
   type t
   @ocaml.doc("<p>Describes a conditional forwarder.</p>")
@@ -2353,9 +2488,11 @@ module DescribeConditionalForwarders = {
   }
   @module("@aws-sdk/client-ds") @new
   external new: request => t = "DescribeConditionalForwardersCommand"
-  let make = (~directoryId, ~remoteDomainNames=?, ()) => new({remoteDomainNames, directoryId})
+  let make = (~directoryId, ~remoteDomainNames=?, ()) =>
+    new({remoteDomainNames: remoteDomainNames, directoryId: directoryId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateComputer = {
   type t
   @ocaml.doc("<p>Contains the inputs for the <a>CreateComputer</a> operation.</p>")
@@ -2396,14 +2533,15 @@ module CreateComputer = {
     (),
   ) =>
     new({
-      computerAttributes,
-      organizationalUnitDistinguishedName,
-      password,
-      computerName,
-      directoryId,
+      computerAttributes: computerAttributes,
+      organizationalUnitDistinguishedName: organizationalUnitDistinguishedName,
+      password: password,
+      computerName: computerName,
+      directoryId: directoryId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeRegions = {
   type t
   type request = {
@@ -2432,9 +2570,10 @@ module DescribeRegions = {
   }
   @module("@aws-sdk/client-ds") @new external new: request => t = "DescribeRegionsCommand"
   let make = (~directoryId, ~nextToken=?, ~regionName=?, ()) =>
-    new({nextToken, regionName, directoryId})
+    new({nextToken: nextToken, regionName: regionName, directoryId: directoryId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeDirectories = {
   type t
   @ocaml.doc("<p>Contains the inputs for the <a>DescribeDirectories</a> operation.</p>")
@@ -2470,6 +2609,7 @@ module DescribeDirectories = {
     directoryDescriptions: option<directoryDescriptions>,
   }
   @module("@aws-sdk/client-ds") @new external new: request => t = "DescribeDirectoriesCommand"
-  let make = (~limit=?, ~nextToken=?, ~directoryIds=?, ()) => new({limit, nextToken, directoryIds})
+  let make = (~limit=?, ~nextToken=?, ~directoryIds=?, ()) =>
+    new({limit: limit, nextToken: nextToken, directoryIds: directoryIds})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

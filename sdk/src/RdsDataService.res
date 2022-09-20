@@ -325,9 +325,10 @@ module RollbackTransaction = {
   }
   @module("@aws-sdk/client-rds-data") @new external new: request => t = "RollbackTransactionCommand"
   let make = (~transactionId, ~secretArn, ~resourceArn, ()) =>
-    new({transactionId, secretArn, resourceArn})
+    new({transactionId: transactionId, secretArn: secretArn, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CommitTransaction = {
   type t
   @ocaml.doc("<p>The request parameters represent the input of a commit transaction request.</p>")
@@ -345,9 +346,10 @@ module CommitTransaction = {
   }
   @module("@aws-sdk/client-rds-data") @new external new: request => t = "CommitTransactionCommand"
   let make = (~transactionId, ~secretArn, ~resourceArn, ()) =>
-    new({transactionId, secretArn, resourceArn})
+    new({transactionId: transactionId, secretArn: secretArn, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module BeginTransaction = {
   type t
   @ocaml.doc("<p>The request parameters represent the input of a request to start a SQL
@@ -368,9 +370,10 @@ module BeginTransaction = {
   }
   @module("@aws-sdk/client-rds-data") @new external new: request => t = "BeginTransactionCommand"
   let make = (~secretArn, ~resourceArn, ~schema=?, ~database=?, ()) =>
-    new({schema, database, secretArn, resourceArn})
+    new({schema: schema, database: database, secretArn: secretArn, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ExecuteStatement = {
   type t
   @ocaml.doc("<p>The request parameters represent the input of a request to run a SQL statement against
@@ -444,19 +447,20 @@ module ExecuteStatement = {
     (),
   ) =>
     new({
-      resultSetOptions,
-      continueAfterTimeout,
-      includeResultMetadata,
-      transactionId,
-      parameters,
-      schema,
-      database,
-      sql,
-      secretArn,
-      resourceArn,
+      resultSetOptions: resultSetOptions,
+      continueAfterTimeout: continueAfterTimeout,
+      includeResultMetadata: includeResultMetadata,
+      transactionId: transactionId,
+      parameters: parameters,
+      schema: schema,
+      database: database,
+      sql: sql,
+      secretArn: secretArn,
+      resourceArn: resourceArn,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module BatchExecuteStatement = {
   type t
   @ocaml.doc("<p>The request parameters represent the input of a SQL statement over an array of
@@ -508,9 +512,19 @@ module BatchExecuteStatement = {
     ~schema=?,
     ~database=?,
     (),
-  ) => new({transactionId, parameterSets, schema, database, sql, secretArn, resourceArn})
+  ) =>
+    new({
+      transactionId: transactionId,
+      parameterSets: parameterSets,
+      schema: schema,
+      database: database,
+      sql: sql,
+      secretArn: secretArn,
+      resourceArn: resourceArn,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ExecuteSql = {
   type t
   @ocaml.doc("<p>The request parameters represent the input of a request to run one or more SQL
@@ -543,6 +557,13 @@ module ExecuteSql = {
     ~schema=?,
     ~database=?,
     (),
-  ) => new({schema, database, sqlStatements, awsSecretStoreArn, dbClusterOrInstanceArn})
+  ) =>
+    new({
+      schema: schema,
+      database: database,
+      sqlStatements: sqlStatements,
+      awsSecretStoreArn: awsSecretStoreArn,
+      dbClusterOrInstanceArn: dbClusterOrInstanceArn,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

@@ -766,6 +766,7 @@ module DeleteListener = {
   let make = (~listenerArn, ()) => new({listenerArn: listenerArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteEndpointGroup = {
   type t
   type request = {
@@ -779,6 +780,7 @@ module DeleteEndpointGroup = {
   let make = (~endpointGroupArn, ()) => new({endpointGroupArn: endpointGroupArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteCustomRoutingListener = {
   type t
   type request = {
@@ -792,6 +794,7 @@ module DeleteCustomRoutingListener = {
   let make = (~listenerArn, ()) => new({listenerArn: listenerArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteCustomRoutingEndpointGroup = {
   type t
   type request = {
@@ -805,6 +808,7 @@ module DeleteCustomRoutingEndpointGroup = {
   let make = (~endpointGroupArn, ()) => new({endpointGroupArn: endpointGroupArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteCustomRoutingAccelerator = {
   type t
   type request = {
@@ -818,6 +822,7 @@ module DeleteCustomRoutingAccelerator = {
   let make = (~acceleratorArn, ()) => new({acceleratorArn: acceleratorArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteAccelerator = {
   type t
   type request = {
@@ -830,6 +835,7 @@ module DeleteAccelerator = {
   let make = (~acceleratorArn, ()) => new({acceleratorArn: acceleratorArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateCustomRoutingAcceleratorAttributes = {
   type t
   type request = {
@@ -864,9 +870,15 @@ module UpdateCustomRoutingAcceleratorAttributes = {
   @module("@aws-sdk/client-globalaccelerator") @new
   external new: request => t = "UpdateCustomRoutingAcceleratorAttributesCommand"
   let make = (~acceleratorArn, ~flowLogsS3Prefix=?, ~flowLogsS3Bucket=?, ~flowLogsEnabled=?, ()) =>
-    new({flowLogsS3Prefix, flowLogsS3Bucket, flowLogsEnabled, acceleratorArn})
+    new({
+      flowLogsS3Prefix: flowLogsS3Prefix,
+      flowLogsS3Bucket: flowLogsS3Bucket,
+      flowLogsEnabled: flowLogsEnabled,
+      acceleratorArn: acceleratorArn,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateAcceleratorAttributes = {
   type t
   type request = {
@@ -899,9 +911,15 @@ module UpdateAcceleratorAttributes = {
   @module("@aws-sdk/client-globalaccelerator") @new
   external new: request => t = "UpdateAcceleratorAttributesCommand"
   let make = (~acceleratorArn, ~flowLogsS3Prefix=?, ~flowLogsS3Bucket=?, ~flowLogsEnabled=?, ()) =>
-    new({flowLogsS3Prefix, flowLogsS3Bucket, flowLogsEnabled, acceleratorArn})
+    new({
+      flowLogsS3Prefix: flowLogsS3Prefix,
+      flowLogsS3Bucket: flowLogsS3Bucket,
+      flowLogsEnabled: flowLogsEnabled,
+      acceleratorArn: acceleratorArn,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UntagResource = {
   type t
   type request = {
@@ -917,9 +935,10 @@ module UntagResource = {
   type response = {.}
   @module("@aws-sdk/client-globalaccelerator") @new
   external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys, resourceArn})
+  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module RemoveCustomRoutingEndpoints = {
   type t
   type request = {
@@ -936,9 +955,11 @@ module RemoveCustomRoutingEndpoints = {
   type response = {.}
   @module("@aws-sdk/client-globalaccelerator") @new
   external new: request => t = "RemoveCustomRoutingEndpointsCommand"
-  let make = (~endpointGroupArn, ~endpointIds, ()) => new({endpointGroupArn, endpointIds})
+  let make = (~endpointGroupArn, ~endpointIds, ()) =>
+    new({endpointGroupArn: endpointGroupArn, endpointIds: endpointIds})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DescribeCustomRoutingAcceleratorAttributes = {
   type t
   type request = {
@@ -958,6 +979,7 @@ module DescribeCustomRoutingAcceleratorAttributes = {
   let make = (~acceleratorArn, ()) => new({acceleratorArn: acceleratorArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeAcceleratorAttributes = {
   type t
   type request = {
@@ -976,6 +998,7 @@ module DescribeAcceleratorAttributes = {
   let make = (~acceleratorArn, ()) => new({acceleratorArn: acceleratorArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DenyCustomRoutingTraffic = {
   type t
   type request = {
@@ -1019,14 +1042,15 @@ module DenyCustomRoutingTraffic = {
     (),
   ) =>
     new({
-      denyAllTrafficToEndpoint,
-      destinationPorts,
-      destinationAddresses,
-      endpointId,
-      endpointGroupArn,
+      denyAllTrafficToEndpoint: denyAllTrafficToEndpoint,
+      destinationPorts: destinationPorts,
+      destinationAddresses: destinationAddresses,
+      endpointId: endpointId,
+      endpointGroupArn: endpointGroupArn,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module AllowCustomRoutingTraffic = {
   type t
   type request = {
@@ -1073,14 +1097,15 @@ module AllowCustomRoutingTraffic = {
     (),
   ) =>
     new({
-      allowAllTrafficToEndpoint,
-      destinationPorts,
-      destinationAddresses,
-      endpointId,
-      endpointGroupArn,
+      allowAllTrafficToEndpoint: allowAllTrafficToEndpoint,
+      destinationPorts: destinationPorts,
+      destinationAddresses: destinationAddresses,
+      endpointId: endpointId,
+      endpointGroupArn: endpointGroupArn,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module TagResource = {
   type t
   type request = {
@@ -1098,9 +1123,10 @@ module TagResource = {
   type response = {.}
   @module("@aws-sdk/client-globalaccelerator") @new
   external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceArn, ()) => new({tags, resourceArn})
+  let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ListTagsForResource = {
   type t
   type request = {
@@ -1118,6 +1144,7 @@ module ListTagsForResource = {
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module AddCustomRoutingEndpoints = {
   type t
   type request = {
@@ -1143,9 +1170,10 @@ module AddCustomRoutingEndpoints = {
   @module("@aws-sdk/client-globalaccelerator") @new
   external new: request => t = "AddCustomRoutingEndpointsCommand"
   let make = (~endpointGroupArn, ~endpointConfigurations, ()) =>
-    new({endpointGroupArn, endpointConfigurations})
+    new({endpointGroupArn: endpointGroupArn, endpointConfigurations: endpointConfigurations})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module WithdrawByoipCidr = {
   type t
   type request = {
@@ -1160,6 +1188,7 @@ module WithdrawByoipCidr = {
   let make = (~cidr, ()) => new({cidr: cidr})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateListener = {
   type t
   type request = {
@@ -1196,9 +1225,15 @@ module UpdateListener = {
   @module("@aws-sdk/client-globalaccelerator") @new
   external new: request => t = "UpdateListenerCommand"
   let make = (~listenerArn, ~clientAffinity=?, ~protocol=?, ~portRanges=?, ()) =>
-    new({clientAffinity, protocol, portRanges, listenerArn})
+    new({
+      clientAffinity: clientAffinity,
+      protocol: protocol,
+      portRanges: portRanges,
+      listenerArn: listenerArn,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateEndpointGroup = {
   type t
   type request = {
@@ -1268,18 +1303,19 @@ module UpdateEndpointGroup = {
     (),
   ) =>
     new({
-      portOverrides,
-      thresholdCount,
-      healthCheckIntervalSeconds,
-      healthCheckPath,
-      healthCheckProtocol,
-      healthCheckPort,
-      trafficDialPercentage,
-      endpointConfigurations,
-      endpointGroupArn,
+      portOverrides: portOverrides,
+      thresholdCount: thresholdCount,
+      healthCheckIntervalSeconds: healthCheckIntervalSeconds,
+      healthCheckPath: healthCheckPath,
+      healthCheckProtocol: healthCheckProtocol,
+      healthCheckPort: healthCheckPort,
+      trafficDialPercentage: trafficDialPercentage,
+      endpointConfigurations: endpointConfigurations,
+      endpointGroupArn: endpointGroupArn,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateCustomRoutingListener = {
   type t
   type request = {
@@ -1300,9 +1336,11 @@ module UpdateCustomRoutingListener = {
   }
   @module("@aws-sdk/client-globalaccelerator") @new
   external new: request => t = "UpdateCustomRoutingListenerCommand"
-  let make = (~portRanges, ~listenerArn, ()) => new({portRanges, listenerArn})
+  let make = (~portRanges, ~listenerArn, ()) =>
+    new({portRanges: portRanges, listenerArn: listenerArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ProvisionByoipCidr = {
   type t
   type request = {
@@ -1323,9 +1361,11 @@ module ProvisionByoipCidr = {
   }
   @module("@aws-sdk/client-globalaccelerator") @new
   external new: request => t = "ProvisionByoipCidrCommand"
-  let make = (~cidrAuthorizationContext, ~cidr, ()) => new({cidrAuthorizationContext, cidr})
+  let make = (~cidrAuthorizationContext, ~cidr, ()) =>
+    new({cidrAuthorizationContext: cidrAuthorizationContext, cidr: cidr})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListCustomRoutingPortMappings = {
   type t
   type request = {
@@ -1362,9 +1402,15 @@ module ListCustomRoutingPortMappings = {
   @module("@aws-sdk/client-globalaccelerator") @new
   external new: request => t = "ListCustomRoutingPortMappingsCommand"
   let make = (~acceleratorArn, ~nextToken=?, ~maxResults=?, ~endpointGroupArn=?, ()) =>
-    new({nextToken, maxResults, endpointGroupArn, acceleratorArn})
+    new({
+      nextToken: nextToken,
+      maxResults: maxResults,
+      endpointGroupArn: endpointGroupArn,
+      acceleratorArn: acceleratorArn,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeListener = {
   type t
   type request = {
@@ -1380,6 +1426,7 @@ module DescribeListener = {
   let make = (~listenerArn, ()) => new({listenerArn: listenerArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeEndpointGroup = {
   type t
   type request = {
@@ -1396,6 +1443,7 @@ module DescribeEndpointGroup = {
   let make = (~endpointGroupArn, ()) => new({endpointGroupArn: endpointGroupArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeCustomRoutingListener = {
   type t
   type request = {
@@ -1413,6 +1461,7 @@ module DescribeCustomRoutingListener = {
   let make = (~listenerArn, ()) => new({listenerArn: listenerArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeprovisionByoipCidr = {
   type t
   type request = {
@@ -1430,6 +1479,7 @@ module DeprovisionByoipCidr = {
   let make = (~cidr, ()) => new({cidr: cidr})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateListener = {
   type t
   type request = {
@@ -1469,9 +1519,16 @@ module CreateListener = {
   @module("@aws-sdk/client-globalaccelerator") @new
   external new: request => t = "CreateListenerCommand"
   let make = (~idempotencyToken, ~protocol, ~portRanges, ~acceleratorArn, ~clientAffinity=?, ()) =>
-    new({idempotencyToken, clientAffinity, protocol, portRanges, acceleratorArn})
+    new({
+      idempotencyToken: idempotencyToken,
+      clientAffinity: clientAffinity,
+      protocol: protocol,
+      portRanges: portRanges,
+      acceleratorArn: acceleratorArn,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateEndpointGroup = {
   type t
   type request = {
@@ -1547,20 +1604,21 @@ module CreateEndpointGroup = {
     (),
   ) =>
     new({
-      portOverrides,
-      idempotencyToken,
-      thresholdCount,
-      healthCheckIntervalSeconds,
-      healthCheckPath,
-      healthCheckProtocol,
-      healthCheckPort,
-      trafficDialPercentage,
-      endpointConfigurations,
-      endpointGroupRegion,
-      listenerArn,
+      portOverrides: portOverrides,
+      idempotencyToken: idempotencyToken,
+      thresholdCount: thresholdCount,
+      healthCheckIntervalSeconds: healthCheckIntervalSeconds,
+      healthCheckPath: healthCheckPath,
+      healthCheckProtocol: healthCheckProtocol,
+      healthCheckPort: healthCheckPort,
+      trafficDialPercentage: trafficDialPercentage,
+      endpointConfigurations: endpointConfigurations,
+      endpointGroupRegion: endpointGroupRegion,
+      listenerArn: listenerArn,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateCustomRoutingListener = {
   type t
   type request = {
@@ -1587,9 +1645,14 @@ module CreateCustomRoutingListener = {
   @module("@aws-sdk/client-globalaccelerator") @new
   external new: request => t = "CreateCustomRoutingListenerCommand"
   let make = (~idempotencyToken, ~portRanges, ~acceleratorArn, ()) =>
-    new({idempotencyToken, portRanges, acceleratorArn})
+    new({
+      idempotencyToken: idempotencyToken,
+      portRanges: portRanges,
+      acceleratorArn: acceleratorArn,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module AdvertiseByoipCidr = {
   type t
   type request = {
@@ -1607,6 +1670,7 @@ module AdvertiseByoipCidr = {
   let make = (~cidr, ()) => new({cidr: cidr})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateCustomRoutingAccelerator = {
   type t
   type request = {
@@ -1632,9 +1696,15 @@ module UpdateCustomRoutingAccelerator = {
   @module("@aws-sdk/client-globalaccelerator") @new
   external new: request => t = "UpdateCustomRoutingAcceleratorCommand"
   let make = (~acceleratorArn, ~enabled=?, ~ipAddressType=?, ~name=?, ()) =>
-    new({enabled, ipAddressType, name, acceleratorArn})
+    new({
+      enabled: enabled,
+      ipAddressType: ipAddressType,
+      name: name,
+      acceleratorArn: acceleratorArn,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateAccelerator = {
   type t
   type request = {
@@ -1659,9 +1729,15 @@ module UpdateAccelerator = {
   @module("@aws-sdk/client-globalaccelerator") @new
   external new: request => t = "UpdateAcceleratorCommand"
   let make = (~acceleratorArn, ~enabled=?, ~ipAddressType=?, ~name=?, ()) =>
-    new({enabled, ipAddressType, name, acceleratorArn})
+    new({
+      enabled: enabled,
+      ipAddressType: ipAddressType,
+      name: name,
+      acceleratorArn: acceleratorArn,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListListeners = {
   type t
   type request = {
@@ -1693,9 +1769,10 @@ module ListListeners = {
   @module("@aws-sdk/client-globalaccelerator") @new
   external new: request => t = "ListListenersCommand"
   let make = (~acceleratorArn, ~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken, maxResults, acceleratorArn})
+    new({nextToken: nextToken, maxResults: maxResults, acceleratorArn: acceleratorArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListEndpointGroups = {
   type t
   type request = {
@@ -1725,9 +1802,10 @@ module ListEndpointGroups = {
   @module("@aws-sdk/client-globalaccelerator") @new
   external new: request => t = "ListEndpointGroupsCommand"
   let make = (~listenerArn, ~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken, maxResults, listenerArn})
+    new({nextToken: nextToken, maxResults: maxResults, listenerArn: listenerArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListCustomRoutingPortMappingsByDestination = {
   type t
   type request = {
@@ -1763,9 +1841,15 @@ module ListCustomRoutingPortMappingsByDestination = {
   @module("@aws-sdk/client-globalaccelerator") @new
   external new: request => t = "ListCustomRoutingPortMappingsByDestinationCommand"
   let make = (~destinationAddress, ~endpointId, ~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken, maxResults, destinationAddress, endpointId})
+    new({
+      nextToken: nextToken,
+      maxResults: maxResults,
+      destinationAddress: destinationAddress,
+      endpointId: endpointId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListCustomRoutingListeners = {
   type t
   type request = {
@@ -1795,9 +1879,10 @@ module ListCustomRoutingListeners = {
   @module("@aws-sdk/client-globalaccelerator") @new
   external new: request => t = "ListCustomRoutingListenersCommand"
   let make = (~acceleratorArn, ~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken, maxResults, acceleratorArn})
+    new({nextToken: nextToken, maxResults: maxResults, acceleratorArn: acceleratorArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListByoipCidrs = {
   type t
   type request = {
@@ -1816,9 +1901,11 @@ module ListByoipCidrs = {
   }
   @module("@aws-sdk/client-globalaccelerator") @new
   external new: request => t = "ListByoipCidrsCommand"
-  let make = (~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults})
+  let make = (~nextToken=?, ~maxResults=?, ()) =>
+    new({nextToken: nextToken, maxResults: maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeCustomRoutingEndpointGroup = {
   type t
   type request = {
@@ -1836,6 +1923,7 @@ module DescribeCustomRoutingEndpointGroup = {
   let make = (~endpointGroupArn, ()) => new({endpointGroupArn: endpointGroupArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeCustomRoutingAccelerator = {
   type t
   type request = {
@@ -1852,6 +1940,7 @@ module DescribeCustomRoutingAccelerator = {
   let make = (~acceleratorArn, ()) => new({acceleratorArn: acceleratorArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeAccelerator = {
   type t
   type request = {
@@ -1868,6 +1957,7 @@ module DescribeAccelerator = {
   let make = (~acceleratorArn, ()) => new({acceleratorArn: acceleratorArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateCustomRoutingEndpointGroup = {
   type t
   type request = {
@@ -1904,9 +1994,16 @@ module CreateCustomRoutingEndpointGroup = {
     ~endpointGroupRegion,
     ~listenerArn,
     (),
-  ) => new({idempotencyToken, destinationConfigurations, endpointGroupRegion, listenerArn})
+  ) =>
+    new({
+      idempotencyToken: idempotencyToken,
+      destinationConfigurations: destinationConfigurations,
+      endpointGroupRegion: endpointGroupRegion,
+      listenerArn: listenerArn,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateCustomRoutingAccelerator = {
   type t
   type request = {
@@ -1956,9 +2053,18 @@ module CreateCustomRoutingAccelerator = {
     ~ipAddresses=?,
     ~ipAddressType=?,
     (),
-  ) => new({tags, idempotencyToken, enabled, ipAddresses, ipAddressType, name})
+  ) =>
+    new({
+      tags: tags,
+      idempotencyToken: idempotencyToken,
+      enabled: enabled,
+      ipAddresses: ipAddresses,
+      ipAddressType: ipAddressType,
+      name: name,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateAccelerator = {
   type t
   type request = {
@@ -2011,9 +2117,18 @@ module CreateAccelerator = {
     ~ipAddresses=?,
     ~ipAddressType=?,
     (),
-  ) => new({tags, idempotencyToken, enabled, ipAddresses, ipAddressType, name})
+  ) =>
+    new({
+      tags: tags,
+      idempotencyToken: idempotencyToken,
+      enabled: enabled,
+      ipAddresses: ipAddresses,
+      ipAddressType: ipAddressType,
+      name: name,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListCustomRoutingEndpointGroups = {
   type t
   type request = {
@@ -2046,9 +2161,10 @@ module ListCustomRoutingEndpointGroups = {
   @module("@aws-sdk/client-globalaccelerator") @new
   external new: request => t = "ListCustomRoutingEndpointGroupsCommand"
   let make = (~listenerArn, ~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken, maxResults, listenerArn})
+    new({nextToken: nextToken, maxResults: maxResults, listenerArn: listenerArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListCustomRoutingAccelerators = {
   type t
   type request = {
@@ -2075,9 +2191,11 @@ module ListCustomRoutingAccelerators = {
   }
   @module("@aws-sdk/client-globalaccelerator") @new
   external new: request => t = "ListCustomRoutingAcceleratorsCommand"
-  let make = (~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults})
+  let make = (~nextToken=?, ~maxResults=?, ()) =>
+    new({nextToken: nextToken, maxResults: maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListAccelerators = {
   type t
   type request = {
@@ -2103,6 +2221,7 @@ module ListAccelerators = {
   }
   @module("@aws-sdk/client-globalaccelerator") @new
   external new: request => t = "ListAcceleratorsCommand"
-  let make = (~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults})
+  let make = (~nextToken=?, ~maxResults=?, ()) =>
+    new({nextToken: nextToken, maxResults: maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

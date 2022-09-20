@@ -1509,9 +1509,15 @@ module UpdateJobStatus = {
   }
   @module("@aws-sdk/client-s3") @new external new: request => t = "UpdateJobStatusCommand"
   let make = (~requestedJobStatus, ~jobId, ~accountId, ~statusUpdateReason=?, ()) =>
-    new({statusUpdateReason, requestedJobStatus, jobId, accountId})
+    new({
+      statusUpdateReason: statusUpdateReason,
+      requestedJobStatus: requestedJobStatus,
+      jobId: jobId,
+      accountId: accountId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateJobPriority = {
   type t
   type request = {
@@ -1532,9 +1538,11 @@ module UpdateJobPriority = {
     jobId: jobId,
   }
   @module("@aws-sdk/client-s3") @new external new: request => t = "UpdateJobPriorityCommand"
-  let make = (~priority, ~jobId, ~accountId, ()) => new({priority, jobId, accountId})
+  let make = (~priority, ~jobId, ~accountId, ()) =>
+    new({priority: priority, jobId: jobId, accountId: accountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module PutBucketPolicy = {
   type t
   type request = {
@@ -1557,9 +1565,15 @@ module PutBucketPolicy = {
   type response = {.}
   @module("@aws-sdk/client-s3") @new external new: request => t = "PutBucketPolicyCommand"
   let make = (~policy, ~bucket, ~accountId, ~confirmRemoveSelfBucketAccess=?, ()) =>
-    new({policy, confirmRemoveSelfBucketAccess, bucket, accountId})
+    new({
+      policy: policy,
+      confirmRemoveSelfBucketAccess: confirmRemoveSelfBucketAccess,
+      bucket: bucket,
+      accountId: accountId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module PutAccessPointPolicyForObjectLambda = {
   type t
   type request = {
@@ -1576,9 +1590,11 @@ module PutAccessPointPolicyForObjectLambda = {
   type response = {.}
   @module("@aws-sdk/client-s3") @new
   external new: request => t = "PutAccessPointPolicyForObjectLambdaCommand"
-  let make = (~policy, ~name, ~accountId, ()) => new({policy, name, accountId})
+  let make = (~policy, ~name, ~accountId, ()) =>
+    new({policy: policy, name: name, accountId: accountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module PutAccessPointPolicy = {
   type t
   type request = {
@@ -1600,9 +1616,11 @@ module PutAccessPointPolicy = {
   }
   type response = {.}
   @module("@aws-sdk/client-s3") @new external new: request => t = "PutAccessPointPolicyCommand"
-  let make = (~policy, ~name, ~accountId, ()) => new({policy, name, accountId})
+  let make = (~policy, ~name, ~accountId, ()) =>
+    new({policy: policy, name: name, accountId: accountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module GetBucketPolicy = {
   type t
   type request = {
@@ -1618,9 +1636,10 @@ module GetBucketPolicy = {
     @ocaml.doc("<p>The policy of the Outposts bucket.</p>") @as("Policy") policy: option<policy>,
   }
   @module("@aws-sdk/client-s3") @new external new: request => t = "GetBucketPolicyCommand"
-  let make = (~bucket, ~accountId, ()) => new({bucket, accountId})
+  let make = (~bucket, ~accountId, ()) => new({bucket: bucket, accountId: accountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetBucket = {
   type t
   type request = {
@@ -1640,9 +1659,10 @@ module GetBucket = {
     @ocaml.doc("<p>The Outposts bucket requested.</p>") @as("Bucket") bucket: option<bucketName>,
   }
   @module("@aws-sdk/client-s3") @new external new: request => t = "GetBucketCommand"
-  let make = (~bucket, ~accountId, ()) => new({bucket, accountId})
+  let make = (~bucket, ~accountId, ()) => new({bucket: bucket, accountId: accountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetAccessPointPolicyForObjectLambda = {
   type t
   type request = {
@@ -1660,9 +1680,10 @@ module GetAccessPointPolicyForObjectLambda = {
   }
   @module("@aws-sdk/client-s3") @new
   external new: request => t = "GetAccessPointPolicyForObjectLambdaCommand"
-  let make = (~name, ~accountId, ()) => new({name, accountId})
+  let make = (~name, ~accountId, ()) => new({name: name, accountId: accountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetAccessPointPolicy = {
   type t
   type request = {
@@ -1681,9 +1702,10 @@ module GetAccessPointPolicy = {
     policy: option<policy>,
   }
   @module("@aws-sdk/client-s3") @new external new: request => t = "GetAccessPointPolicyCommand"
-  let make = (~name, ~accountId, ()) => new({name, accountId})
+  let make = (~name, ~accountId, ()) => new({name: name, accountId: accountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteStorageLensConfigurationTagging = {
   type t
   type request = {
@@ -1694,9 +1716,10 @@ module DeleteStorageLensConfigurationTagging = {
   type response = {.}
   @module("@aws-sdk/client-s3") @new
   external new: request => t = "DeleteStorageLensConfigurationTaggingCommand"
-  let make = (~accountId, ~configId, ()) => new({accountId, configId})
+  let make = (~accountId, ~configId, ()) => new({accountId: accountId, configId: configId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteStorageLensConfiguration = {
   type t
   type request = {
@@ -1707,9 +1730,10 @@ module DeleteStorageLensConfiguration = {
   type response = {.}
   @module("@aws-sdk/client-s3") @new
   external new: request => t = "DeleteStorageLensConfigurationCommand"
-  let make = (~accountId, ~configId, ()) => new({accountId, configId})
+  let make = (~accountId, ~configId, ()) => new({accountId: accountId, configId: configId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeletePublicAccessBlock = {
   type t
   type request = {
@@ -1723,6 +1747,7 @@ module DeletePublicAccessBlock = {
   let make = (~accountId, ()) => new({accountId: accountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteJobTagging = {
   type t
   type request = {
@@ -1737,9 +1762,10 @@ module DeleteJobTagging = {
   }
   type response = {.}
   @module("@aws-sdk/client-s3") @new external new: request => t = "DeleteJobTaggingCommand"
-  let make = (~jobId, ~accountId, ()) => new({jobId, accountId})
+  let make = (~jobId, ~accountId, ()) => new({jobId: jobId, accountId: accountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteBucketTagging = {
   type t
   type request = {
@@ -1756,9 +1782,10 @@ module DeleteBucketTagging = {
   }
   type response = {.}
   @module("@aws-sdk/client-s3") @new external new: request => t = "DeleteBucketTaggingCommand"
-  let make = (~bucket, ~accountId, ()) => new({bucket, accountId})
+  let make = (~bucket, ~accountId, ()) => new({bucket: bucket, accountId: accountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteBucketPolicy = {
   type t
   type request = {
@@ -1772,9 +1799,10 @@ module DeleteBucketPolicy = {
   }
   type response = {.}
   @module("@aws-sdk/client-s3") @new external new: request => t = "DeleteBucketPolicyCommand"
-  let make = (~bucket, ~accountId, ()) => new({bucket, accountId})
+  let make = (~bucket, ~accountId, ()) => new({bucket: bucket, accountId: accountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteBucketLifecycleConfiguration = {
   type t
   type request = {
@@ -1789,9 +1817,10 @@ module DeleteBucketLifecycleConfiguration = {
   type response = {.}
   @module("@aws-sdk/client-s3") @new
   external new: request => t = "DeleteBucketLifecycleConfigurationCommand"
-  let make = (~bucket, ~accountId, ()) => new({bucket, accountId})
+  let make = (~bucket, ~accountId, ()) => new({bucket: bucket, accountId: accountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteBucket = {
   type t
   type request = {
@@ -1805,9 +1834,10 @@ module DeleteBucket = {
   }
   type response = {.}
   @module("@aws-sdk/client-s3") @new external new: request => t = "DeleteBucketCommand"
-  let make = (~bucket, ~accountId, ()) => new({bucket, accountId})
+  let make = (~bucket, ~accountId, ()) => new({bucket: bucket, accountId: accountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteAccessPointPolicyForObjectLambda = {
   type t
   type request = {
@@ -1825,9 +1855,10 @@ module DeleteAccessPointPolicyForObjectLambda = {
   type response = {.}
   @module("@aws-sdk/client-s3") @new
   external new: request => t = "DeleteAccessPointPolicyForObjectLambdaCommand"
-  let make = (~name, ~accountId, ()) => new({name, accountId})
+  let make = (~name, ~accountId, ()) => new({name: name, accountId: accountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteAccessPointPolicy = {
   type t
   type request = {
@@ -1842,9 +1873,10 @@ module DeleteAccessPointPolicy = {
   }
   type response = {.}
   @module("@aws-sdk/client-s3") @new external new: request => t = "DeleteAccessPointPolicyCommand"
-  let make = (~name, ~accountId, ()) => new({name, accountId})
+  let make = (~name, ~accountId, ()) => new({name: name, accountId: accountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteAccessPointForObjectLambda = {
   type t
   type request = {
@@ -1859,9 +1891,10 @@ module DeleteAccessPointForObjectLambda = {
   type response = {.}
   @module("@aws-sdk/client-s3") @new
   external new: request => t = "DeleteAccessPointForObjectLambdaCommand"
-  let make = (~name, ~accountId, ()) => new({name, accountId})
+  let make = (~name, ~accountId, ()) => new({name: name, accountId: accountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteAccessPoint = {
   type t
   type request = {
@@ -1876,9 +1909,10 @@ module DeleteAccessPoint = {
   }
   type response = {.}
   @module("@aws-sdk/client-s3") @new external new: request => t = "DeleteAccessPointCommand"
-  let make = (~name, ~accountId, ()) => new({name, accountId})
+  let make = (~name, ~accountId, ()) => new({name: name, accountId: accountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module PutPublicAccessBlock = {
   type t
   type request = {
@@ -1894,9 +1928,10 @@ module PutPublicAccessBlock = {
   type response = {.}
   @module("@aws-sdk/client-s3") @new external new: request => t = "PutPublicAccessBlockCommand"
   let make = (~accountId, ~publicAccessBlockConfiguration, ()) =>
-    new({accountId, publicAccessBlockConfiguration})
+    new({accountId: accountId, publicAccessBlockConfiguration: publicAccessBlockConfiguration})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module PutMultiRegionAccessPointPolicy = {
   type t
   type request = {
@@ -1923,9 +1958,11 @@ module PutMultiRegionAccessPointPolicy = {
   }
   @module("@aws-sdk/client-s3") @new
   external new: request => t = "PutMultiRegionAccessPointPolicyCommand"
-  let make = (~details, ~clientToken, ~accountId, ()) => new({details, clientToken, accountId})
+  let make = (~details, ~clientToken, ~accountId, ()) =>
+    new({details: details, clientToken: clientToken, accountId: accountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetPublicAccessBlock = {
   type t
   type request = {
@@ -1944,6 +1981,7 @@ module GetPublicAccessBlock = {
   let make = (~accountId, ()) => new({accountId: accountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetMultiRegionAccessPointPolicyStatus = {
   type t
   type request = {
@@ -1961,9 +1999,10 @@ module GetMultiRegionAccessPointPolicyStatus = {
   type response = {@as("Established") established: option<policyStatus>}
   @module("@aws-sdk/client-s3") @new
   external new: request => t = "GetMultiRegionAccessPointPolicyStatusCommand"
-  let make = (~name, ~accountId, ()) => new({name, accountId})
+  let make = (~name, ~accountId, ()) => new({name: name, accountId: accountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetAccessPointPolicyStatusForObjectLambda = {
   type t
   type request = {
@@ -1978,9 +2017,10 @@ module GetAccessPointPolicyStatusForObjectLambda = {
   type response = {@as("PolicyStatus") policyStatus: option<policyStatus>}
   @module("@aws-sdk/client-s3") @new
   external new: request => t = "GetAccessPointPolicyStatusForObjectLambdaCommand"
-  let make = (~name, ~accountId, ()) => new({name, accountId})
+  let make = (~name, ~accountId, ()) => new({name: name, accountId: accountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetAccessPointPolicyStatus = {
   type t
   type request = {
@@ -1998,9 +2038,10 @@ module GetAccessPointPolicyStatus = {
   }
   @module("@aws-sdk/client-s3") @new
   external new: request => t = "GetAccessPointPolicyStatusCommand"
-  let make = (~name, ~accountId, ()) => new({name, accountId})
+  let make = (~name, ~accountId, ()) => new({name: name, accountId: accountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetAccessPointForObjectLambda = {
   type t
   type request = {
@@ -2027,9 +2068,10 @@ module GetAccessPointForObjectLambda = {
   }
   @module("@aws-sdk/client-s3") @new
   external new: request => t = "GetAccessPointForObjectLambdaCommand"
-  let make = (~name, ~accountId, ()) => new({name, accountId})
+  let make = (~name, ~accountId, ()) => new({name: name, accountId: accountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetAccessPoint = {
   type t
   type request = {
@@ -2076,9 +2118,10 @@ module GetAccessPoint = {
     name: option<accessPointName>,
   }
   @module("@aws-sdk/client-s3") @new external new: request => t = "GetAccessPointCommand"
-  let make = (~name, ~accountId, ()) => new({name, accountId})
+  let make = (~name, ~accountId, ()) => new({name: name, accountId: accountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteMultiRegionAccessPoint = {
   type t
   type request = {
@@ -2103,9 +2146,11 @@ module DeleteMultiRegionAccessPoint = {
   }
   @module("@aws-sdk/client-s3") @new
   external new: request => t = "DeleteMultiRegionAccessPointCommand"
-  let make = (~details, ~clientToken, ~accountId, ()) => new({details, clientToken, accountId})
+  let make = (~details, ~clientToken, ~accountId, ()) =>
+    new({details: details, clientToken: clientToken, accountId: accountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateBucket = {
   type t
   type request = {
@@ -2189,19 +2234,20 @@ module CreateBucket = {
     (),
   ) =>
     new({
-      outpostId,
-      objectLockEnabledForBucket,
-      grantWriteACP,
-      grantWrite,
-      grantReadACP,
-      grantRead,
-      grantFullControl,
-      createBucketConfiguration,
-      bucket,
-      acl,
+      outpostId: outpostId,
+      objectLockEnabledForBucket: objectLockEnabledForBucket,
+      grantWriteACP: grantWriteACP,
+      grantWrite: grantWrite,
+      grantReadACP: grantReadACP,
+      grantRead: grantRead,
+      grantFullControl: grantFullControl,
+      createBucketConfiguration: createBucketConfiguration,
+      bucket: bucket,
+      acl: acl,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateAccessPoint = {
   type t
   type request = {
@@ -2245,9 +2291,17 @@ module CreateAccessPoint = {
     ~publicAccessBlockConfiguration=?,
     ~vpcConfiguration=?,
     (),
-  ) => new({publicAccessBlockConfiguration, vpcConfiguration, bucket, name, accountId})
+  ) =>
+    new({
+      publicAccessBlockConfiguration: publicAccessBlockConfiguration,
+      vpcConfiguration: vpcConfiguration,
+      bucket: bucket,
+      name: name,
+      accountId: accountId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module PutStorageLensConfigurationTagging = {
   type t
   type request = {
@@ -2264,9 +2318,11 @@ module PutStorageLensConfigurationTagging = {
   type response = {.}
   @module("@aws-sdk/client-s3") @new
   external new: request => t = "PutStorageLensConfigurationTaggingCommand"
-  let make = (~tags, ~accountId, ~configId, ()) => new({tags, accountId, configId})
+  let make = (~tags, ~accountId, ~configId, ()) =>
+    new({tags: tags, accountId: accountId, configId: configId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module PutJobTagging = {
   type t
   type request = {
@@ -2283,9 +2339,11 @@ module PutJobTagging = {
   }
   type response = {.}
   @module("@aws-sdk/client-s3") @new external new: request => t = "PutJobTaggingCommand"
-  let make = (~tags, ~jobId, ~accountId, ()) => new({tags, jobId, accountId})
+  let make = (~tags, ~jobId, ~accountId, ()) =>
+    new({tags: tags, jobId: jobId, accountId: accountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ListStorageLensConfigurations = {
   type t
   type request = {
@@ -2305,9 +2363,10 @@ module ListStorageLensConfigurations = {
   }
   @module("@aws-sdk/client-s3") @new
   external new: request => t = "ListStorageLensConfigurationsCommand"
-  let make = (~accountId, ~nextToken=?, ()) => new({nextToken, accountId})
+  let make = (~accountId, ~nextToken=?, ()) => new({nextToken: nextToken, accountId: accountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListRegionalBuckets = {
   type t
   type request = {
@@ -2334,9 +2393,10 @@ module ListRegionalBuckets = {
   }
   @module("@aws-sdk/client-s3") @new external new: request => t = "ListRegionalBucketsCommand"
   let make = (~accountId, ~outpostId=?, ~maxResults=?, ~nextToken=?, ()) =>
-    new({outpostId, maxResults, nextToken, accountId})
+    new({outpostId: outpostId, maxResults: maxResults, nextToken: nextToken, accountId: accountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListAccessPointsForObjectLambda = {
   type t
   type request = {
@@ -2370,9 +2430,10 @@ module ListAccessPointsForObjectLambda = {
   @module("@aws-sdk/client-s3") @new
   external new: request => t = "ListAccessPointsForObjectLambdaCommand"
   let make = (~accountId, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults, nextToken, accountId})
+    new({maxResults: maxResults, nextToken: nextToken, accountId: accountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetStorageLensConfigurationTagging = {
   type t
   type request = {
@@ -2386,9 +2447,10 @@ module GetStorageLensConfigurationTagging = {
   }
   @module("@aws-sdk/client-s3") @new
   external new: request => t = "GetStorageLensConfigurationTaggingCommand"
-  let make = (~accountId, ~configId, ()) => new({accountId, configId})
+  let make = (~accountId, ~configId, ()) => new({accountId: accountId, configId: configId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetMultiRegionAccessPointPolicy = {
   type t
   type request = {
@@ -2410,9 +2472,10 @@ module GetMultiRegionAccessPointPolicy = {
   }
   @module("@aws-sdk/client-s3") @new
   external new: request => t = "GetMultiRegionAccessPointPolicyCommand"
-  let make = (~name, ~accountId, ()) => new({name, accountId})
+  let make = (~name, ~accountId, ()) => new({name: name, accountId: accountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetJobTagging = {
   type t
   type request = {
@@ -2430,9 +2493,10 @@ module GetJobTagging = {
     tags: option<s3TagSet>,
   }
   @module("@aws-sdk/client-s3") @new external new: request => t = "GetJobTaggingCommand"
-  let make = (~jobId, ~accountId, ()) => new({jobId, accountId})
+  let make = (~jobId, ~accountId, ()) => new({jobId: jobId, accountId: accountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetBucketTagging = {
   type t
   type request = {
@@ -2448,9 +2512,10 @@ module GetBucketTagging = {
     @ocaml.doc("<p>The tags set of the Outposts bucket.</p>") @as("TagSet") tagSet: s3TagSet,
   }
   @module("@aws-sdk/client-s3") @new external new: request => t = "GetBucketTaggingCommand"
-  let make = (~bucket, ~accountId, ()) => new({bucket, accountId})
+  let make = (~bucket, ~accountId, ()) => new({bucket: bucket, accountId: accountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module PutBucketTagging = {
   type t
   type request = {
@@ -2465,9 +2530,11 @@ module PutBucketTagging = {
   }
   type response = {.}
   @module("@aws-sdk/client-s3") @new external new: request => t = "PutBucketTaggingCommand"
-  let make = (~tagging, ~bucket, ~accountId, ()) => new({tagging, bucket, accountId})
+  let make = (~tagging, ~bucket, ~accountId, ()) =>
+    new({tagging: tagging, bucket: bucket, accountId: accountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ListAccessPoints = {
   type t
   type request = {
@@ -2506,9 +2573,10 @@ module ListAccessPoints = {
   }
   @module("@aws-sdk/client-s3") @new external new: request => t = "ListAccessPointsCommand"
   let make = (~accountId, ~maxResults=?, ~nextToken=?, ~bucket=?, ()) =>
-    new({maxResults, nextToken, bucket, accountId})
+    new({maxResults: maxResults, nextToken: nextToken, bucket: bucket, accountId: accountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetMultiRegionAccessPoint = {
   type t
   type request = {
@@ -2532,9 +2600,10 @@ module GetMultiRegionAccessPoint = {
     accessPoint: option<multiRegionAccessPointReport>,
   }
   @module("@aws-sdk/client-s3") @new external new: request => t = "GetMultiRegionAccessPointCommand"
-  let make = (~name, ~accountId, ()) => new({name, accountId})
+  let make = (~name, ~accountId, ()) => new({name: name, accountId: accountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateMultiRegionAccessPoint = {
   type t
   type request = {
@@ -2558,9 +2627,11 @@ module CreateMultiRegionAccessPoint = {
   }
   @module("@aws-sdk/client-s3") @new
   external new: request => t = "CreateMultiRegionAccessPointCommand"
-  let make = (~details, ~clientToken, ~accountId, ()) => new({details, clientToken, accountId})
+  let make = (~details, ~clientToken, ~accountId, ()) =>
+    new({details: details, clientToken: clientToken, accountId: accountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListMultiRegionAccessPoints = {
   type t
   type request = {
@@ -2587,9 +2658,10 @@ module ListMultiRegionAccessPoints = {
   @module("@aws-sdk/client-s3") @new
   external new: request => t = "ListMultiRegionAccessPointsCommand"
   let make = (~accountId, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults, nextToken, accountId})
+    new({maxResults: maxResults, nextToken: nextToken, accountId: accountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListJobs = {
   type t
   type request = {
@@ -2626,9 +2698,15 @@ module ListJobs = {
   }
   @module("@aws-sdk/client-s3") @new external new: request => t = "ListJobsCommand"
   let make = (~accountId, ~maxResults=?, ~nextToken=?, ~jobStatuses=?, ()) =>
-    new({maxResults, nextToken, jobStatuses, accountId})
+    new({
+      maxResults: maxResults,
+      nextToken: nextToken,
+      jobStatuses: jobStatuses,
+      accountId: accountId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module PutAccessPointConfigurationForObjectLambda = {
   type t
   type request = {
@@ -2645,9 +2723,11 @@ module PutAccessPointConfigurationForObjectLambda = {
   type response = {.}
   @module("@aws-sdk/client-s3") @new
   external new: request => t = "PutAccessPointConfigurationForObjectLambdaCommand"
-  let make = (~configuration, ~name, ~accountId, ()) => new({configuration, name, accountId})
+  let make = (~configuration, ~name, ~accountId, ()) =>
+    new({configuration: configuration, name: name, accountId: accountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module GetAccessPointConfigurationForObjectLambda = {
   type t
   type request = {
@@ -2668,9 +2748,10 @@ module GetAccessPointConfigurationForObjectLambda = {
   }
   @module("@aws-sdk/client-s3") @new
   external new: request => t = "GetAccessPointConfigurationForObjectLambdaCommand"
-  let make = (~name, ~accountId, ()) => new({name, accountId})
+  let make = (~name, ~accountId, ()) => new({name: name, accountId: accountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeMultiRegionAccessPointOperation = {
   type t
   type request = {
@@ -2692,9 +2773,11 @@ module DescribeMultiRegionAccessPointOperation = {
   }
   @module("@aws-sdk/client-s3") @new
   external new: request => t = "DescribeMultiRegionAccessPointOperationCommand"
-  let make = (~requestTokenARN, ~accountId, ()) => new({requestTokenARN, accountId})
+  let make = (~requestTokenARN, ~accountId, ()) =>
+    new({requestTokenARN: requestTokenARN, accountId: accountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateAccessPointForObjectLambda = {
   type t
   type request = {
@@ -2716,9 +2799,11 @@ module CreateAccessPointForObjectLambda = {
   }
   @module("@aws-sdk/client-s3") @new
   external new: request => t = "CreateAccessPointForObjectLambdaCommand"
-  let make = (~configuration, ~name, ~accountId, ()) => new({configuration, name, accountId})
+  let make = (~configuration, ~name, ~accountId, ()) =>
+    new({configuration: configuration, name: name, accountId: accountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module PutStorageLensConfiguration = {
   type t
   type request = {
@@ -2738,9 +2823,15 @@ module PutStorageLensConfiguration = {
   @module("@aws-sdk/client-s3") @new
   external new: request => t = "PutStorageLensConfigurationCommand"
   let make = (~storageLensConfiguration, ~accountId, ~configId, ~tags=?, ()) =>
-    new({tags, storageLensConfiguration, accountId, configId})
+    new({
+      tags: tags,
+      storageLensConfiguration: storageLensConfiguration,
+      accountId: accountId,
+      configId: configId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module GetStorageLensConfiguration = {
   type t
   type request = {
@@ -2755,9 +2846,10 @@ module GetStorageLensConfiguration = {
   }
   @module("@aws-sdk/client-s3") @new
   external new: request => t = "GetStorageLensConfigurationCommand"
-  let make = (~accountId, ~configId, ()) => new({accountId, configId})
+  let make = (~accountId, ~configId, ()) => new({accountId: accountId, configId: configId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetBucketLifecycleConfiguration = {
   type t
   type request = {
@@ -2775,9 +2867,10 @@ module GetBucketLifecycleConfiguration = {
   }
   @module("@aws-sdk/client-s3") @new
   external new: request => t = "GetBucketLifecycleConfigurationCommand"
-  let make = (~bucket, ~accountId, ()) => new({bucket, accountId})
+  let make = (~bucket, ~accountId, ()) => new({bucket: bucket, accountId: accountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module PutBucketLifecycleConfiguration = {
   type t
   type request = {
@@ -2793,9 +2886,10 @@ module PutBucketLifecycleConfiguration = {
   @module("@aws-sdk/client-s3") @new
   external new: request => t = "PutBucketLifecycleConfigurationCommand"
   let make = (~bucket, ~accountId, ~lifecycleConfiguration=?, ()) =>
-    new({lifecycleConfiguration, bucket, accountId})
+    new({lifecycleConfiguration: lifecycleConfiguration, bucket: bucket, accountId: accountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module CreateJob = {
   type t
   type request = {
@@ -2863,20 +2957,21 @@ module CreateJob = {
     (),
   ) =>
     new({
-      manifestGenerator,
-      tags,
-      roleArn,
-      priority,
-      description,
-      manifest,
-      clientRequestToken,
-      report,
-      operation,
-      confirmationRequired,
-      accountId,
+      manifestGenerator: manifestGenerator,
+      tags: tags,
+      roleArn: roleArn,
+      priority: priority,
+      description: description,
+      manifest: manifest,
+      clientRequestToken: clientRequestToken,
+      report: report,
+      operation: operation,
+      confirmationRequired: confirmationRequired,
+      accountId: accountId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeJob = {
   type t
   type request = {
@@ -2895,6 +2990,6 @@ module DescribeJob = {
     job: option<jobDescriptor>,
   }
   @module("@aws-sdk/client-s3") @new external new: request => t = "DescribeJobCommand"
-  let make = (~jobId, ~accountId, ()) => new({jobId, accountId})
+  let make = (~jobId, ~accountId, ()) => new({jobId: jobId, accountId: accountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

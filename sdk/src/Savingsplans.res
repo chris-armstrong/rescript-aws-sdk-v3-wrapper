@@ -274,6 +274,7 @@ module DeleteQueuedSavingsPlan = {
   let make = (~savingsPlanId, ()) => new({savingsPlanId: savingsPlanId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UntagResource = {
   type t
   type request = {
@@ -283,9 +284,10 @@ module UntagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-savingsplans") @new external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys, resourceArn})
+  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module TagResource = {
   type t
   type request = {
@@ -298,9 +300,10 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-savingsplans") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceArn, ()) => new({tags, resourceArn})
+  let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ListTagsForResource = {
   type t
   type request = {
@@ -313,6 +316,7 @@ module ListTagsForResource = {
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateSavingsPlan = {
   type t
   type request = {
@@ -347,9 +351,17 @@ module CreateSavingsPlan = {
     ~upfrontPaymentAmount=?,
     (),
   ) =>
-    new({tags, clientToken, purchaseTime, upfrontPaymentAmount, commitment, savingsPlanOfferingId})
+    new({
+      tags: tags,
+      clientToken: clientToken,
+      purchaseTime: purchaseTime,
+      upfrontPaymentAmount: upfrontPaymentAmount,
+      commitment: commitment,
+      savingsPlanOfferingId: savingsPlanOfferingId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeSavingsPlans = {
   type t
   type request = {
@@ -379,9 +391,18 @@ module DescribeSavingsPlans = {
     ~savingsPlanIds=?,
     ~savingsPlanArns=?,
     (),
-  ) => new({filters, states, maxResults, nextToken, savingsPlanIds, savingsPlanArns})
+  ) =>
+    new({
+      filters: filters,
+      states: states,
+      maxResults: maxResults,
+      nextToken: nextToken,
+      savingsPlanIds: savingsPlanIds,
+      savingsPlanArns: savingsPlanArns,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeSavingsPlansOfferings = {
   type t
   type request = {
@@ -429,22 +450,23 @@ module DescribeSavingsPlansOfferings = {
     (),
   ) =>
     new({
-      maxResults,
-      nextToken,
-      filters,
-      operations,
-      usageTypes,
-      serviceCodes,
-      descriptions,
-      currencies,
-      durations,
-      planTypes,
-      productType,
-      paymentOptions,
-      offeringIds,
+      maxResults: maxResults,
+      nextToken: nextToken,
+      filters: filters,
+      operations: operations,
+      usageTypes: usageTypes,
+      serviceCodes: serviceCodes,
+      descriptions: descriptions,
+      currencies: currencies,
+      durations: durations,
+      planTypes: planTypes,
+      productType: productType,
+      paymentOptions: paymentOptions,
+      offeringIds: offeringIds,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeSavingsPlansOfferingRates = {
   type t
   type request = {
@@ -487,19 +509,20 @@ module DescribeSavingsPlansOfferingRates = {
     (),
   ) =>
     new({
-      maxResults,
-      nextToken,
-      filters,
-      operations,
-      usageTypes,
-      serviceCodes,
-      products,
-      savingsPlanTypes,
-      savingsPlanPaymentOptions,
-      savingsPlanOfferingIds,
+      maxResults: maxResults,
+      nextToken: nextToken,
+      filters: filters,
+      operations: operations,
+      usageTypes: usageTypes,
+      serviceCodes: serviceCodes,
+      products: products,
+      savingsPlanTypes: savingsPlanTypes,
+      savingsPlanPaymentOptions: savingsPlanPaymentOptions,
+      savingsPlanOfferingIds: savingsPlanOfferingIds,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeSavingsPlanRates = {
   type t
   type request = {
@@ -521,6 +544,11 @@ module DescribeSavingsPlanRates = {
   @module("@aws-sdk/client-savingsplans") @new
   external new: request => t = "DescribeSavingsPlanRatesCommand"
   let make = (~savingsPlanId, ~maxResults=?, ~nextToken=?, ~filters=?, ()) =>
-    new({maxResults, nextToken, filters, savingsPlanId})
+    new({
+      maxResults: maxResults,
+      nextToken: nextToken,
+      filters: filters,
+      savingsPlanId: savingsPlanId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

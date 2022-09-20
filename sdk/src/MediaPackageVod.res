@@ -297,6 +297,7 @@ module DeletePackagingGroup = {
   let make = (~id, ()) => new({id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeletePackagingConfiguration = {
   type t
   type request = {
@@ -310,6 +311,7 @@ module DeletePackagingConfiguration = {
   let make = (~id, ()) => new({id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteAsset = {
   type t
   type request = {
@@ -320,6 +322,7 @@ module DeleteAsset = {
   let make = (~id, ()) => new({id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdatePackagingGroup = {
   type t
   @ocaml.doc("A MediaPackage VOD PackagingGroup resource configuration.")
@@ -339,9 +342,10 @@ module UpdatePackagingGroup = {
   }
   @module("@aws-sdk/client-mediapackage-vod") @new
   external new: request => t = "UpdatePackagingGroupCommand"
-  let make = (~id, ~authorization=?, ()) => new({id, authorization})
+  let make = (~id, ~authorization=?, ()) => new({id: id, authorization: authorization})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UntagResource = {
   type t
   type request = {
@@ -356,9 +360,10 @@ module UntagResource = {
   type response = {.}
   @module("@aws-sdk/client-mediapackage-vod") @new
   external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys, resourceArn})
+  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module TagResource = {
   type t
   type request = {
@@ -371,9 +376,10 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-mediapackage-vod") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceArn, ()) => new({tags, resourceArn})
+  let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ListTagsForResource = {
   type t
   type request = {
@@ -392,6 +398,7 @@ module ListTagsForResource = {
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribePackagingGroup = {
   type t
   type request = {
@@ -412,6 +419,7 @@ module DescribePackagingGroup = {
   let make = (~id, ()) => new({id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreatePackagingGroup = {
   type t
   @ocaml.doc("A new MediaPackage VOD PackagingGroup resource configuration.")
@@ -434,9 +442,10 @@ module CreatePackagingGroup = {
   @module("@aws-sdk/client-mediapackage-vod") @new
   external new: request => t = "CreatePackagingGroupCommand"
   let make = (~id, ~tags=?, ~egressAccessLogs=?, ~authorization=?, ()) =>
-    new({tags, id, egressAccessLogs, authorization})
+    new({tags: tags, id: id, egressAccessLogs: egressAccessLogs, authorization: authorization})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ConfigureLogs = {
   type t
   @ocaml.doc("The option to configure log subscription.")
@@ -456,9 +465,10 @@ module ConfigureLogs = {
   }
   @module("@aws-sdk/client-mediapackage-vod") @new
   external new: request => t = "ConfigureLogsCommand"
-  let make = (~id, ~egressAccessLogs=?, ()) => new({id, egressAccessLogs})
+  let make = (~id, ~egressAccessLogs=?, ()) => new({id: id, egressAccessLogs: egressAccessLogs})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeAsset = {
   type t
   type request = {
@@ -485,6 +495,7 @@ module DescribeAsset = {
   let make = (~id, ()) => new({id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateAsset = {
   type t
   @ocaml.doc("A new MediaPackage VOD Asset configuration.")
@@ -517,9 +528,17 @@ module CreateAsset = {
   }
   @module("@aws-sdk/client-mediapackage-vod") @new external new: request => t = "CreateAssetCommand"
   let make = (~sourceRoleArn, ~sourceArn, ~packagingGroupId, ~id, ~tags=?, ~resourceId=?, ()) =>
-    new({tags, sourceRoleArn, sourceArn, resourceId, packagingGroupId, id})
+    new({
+      tags: tags,
+      sourceRoleArn: sourceRoleArn,
+      sourceArn: sourceArn,
+      resourceId: resourceId,
+      packagingGroupId: packagingGroupId,
+      id: id,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListPackagingGroups = {
   type t
   type request = {
@@ -538,9 +557,11 @@ module ListPackagingGroups = {
   }
   @module("@aws-sdk/client-mediapackage-vod") @new
   external new: request => t = "ListPackagingGroupsCommand"
-  let make = (~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults})
+  let make = (~nextToken=?, ~maxResults=?, ()) =>
+    new({nextToken: nextToken, maxResults: maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListAssets = {
   type t
   type request = {
@@ -562,9 +583,10 @@ module ListAssets = {
   }
   @module("@aws-sdk/client-mediapackage-vod") @new external new: request => t = "ListAssetsCommand"
   let make = (~packagingGroupId=?, ~nextToken=?, ~maxResults=?, ()) =>
-    new({packagingGroupId, nextToken, maxResults})
+    new({packagingGroupId: packagingGroupId, nextToken: nextToken, maxResults: maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribePackagingConfiguration = {
   type t
   type request = {
@@ -587,6 +609,7 @@ module DescribePackagingConfiguration = {
   let make = (~id, ()) => new({id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreatePackagingConfiguration = {
   type t
   @ocaml.doc("A new MediaPackage VOD PackagingConfiguration resource configuration.")
@@ -621,9 +644,19 @@ module CreatePackagingConfiguration = {
     ~dashPackage=?,
     ~cmafPackage=?,
     (),
-  ) => new({tags, packagingGroupId, mssPackage, id, hlsPackage, dashPackage, cmafPackage})
+  ) =>
+    new({
+      tags: tags,
+      packagingGroupId: packagingGroupId,
+      mssPackage: mssPackage,
+      id: id,
+      hlsPackage: hlsPackage,
+      dashPackage: dashPackage,
+      cmafPackage: cmafPackage,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListPackagingConfigurations = {
   type t
   type request = {
@@ -649,6 +682,6 @@ module ListPackagingConfigurations = {
   @module("@aws-sdk/client-mediapackage-vod") @new
   external new: request => t = "ListPackagingConfigurationsCommand"
   let make = (~packagingGroupId=?, ~nextToken=?, ~maxResults=?, ()) =>
-    new({packagingGroupId, nextToken, maxResults})
+    new({packagingGroupId: packagingGroupId, nextToken: nextToken, maxResults: maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

@@ -112,9 +112,18 @@ module PutObject = {
     ~cacheControl=?,
     ~contentType=?,
     (),
-  ) => new({uploadAvailability, storageClass, cacheControl, contentType, path, body})
+  ) =>
+    new({
+      uploadAvailability: uploadAvailability,
+      storageClass: storageClass,
+      cacheControl: cacheControl,
+      contentType: contentType,
+      path: path,
+      body: body,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetObject = {
   type t
   type request = {
@@ -166,9 +175,10 @@ module GetObject = {
     @ocaml.doc("<p>The bytes of the object. </p>") @as("Body") body: option<payloadBlob>,
   }
   @module("@aws-sdk/client-mediastore") @new external new: request => t = "GetObjectCommand"
-  let make = (~path, ~range=?, ()) => new({range, path})
+  let make = (~path, ~range=?, ()) => new({range: range, path: path})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeObject = {
   type t
   type request = {
@@ -196,6 +206,7 @@ module DescribeObject = {
   let make = (~path, ()) => new({path: path})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteObject = {
   type t
   type request = {
@@ -209,6 +220,7 @@ module DeleteObject = {
   let make = (~path, ()) => new({path: path})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ListItems = {
   type t
   type request = {
@@ -248,6 +260,7 @@ module ListItems = {
     items: option<itemList>,
   }
   @module("@aws-sdk/client-mediastore") @new external new: request => t = "ListItemsCommand"
-  let make = (~nextToken=?, ~maxResults=?, ~path=?, ()) => new({nextToken, maxResults, path})
+  let make = (~nextToken=?, ~maxResults=?, ~path=?, ()) =>
+    new({nextToken: nextToken, maxResults: maxResults, path: path})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

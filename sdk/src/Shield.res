@@ -564,6 +564,7 @@ module GetSubscriptionState = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DisassociateDRTRole = {
   type t
   type request = {.}
@@ -572,6 +573,7 @@ module DisassociateDRTRole = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DisassociateDRTLogBucket = {
   type t
   type request = {
@@ -585,6 +587,7 @@ module DisassociateDRTLogBucket = {
   let make = (~logBucket, ()) => new({logBucket: logBucket})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteSubscription = {
   type t
   type request = {.}
@@ -593,6 +596,7 @@ module DeleteSubscription = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteProtectionGroup = {
   type t
   type request = {
@@ -607,6 +611,7 @@ module DeleteProtectionGroup = {
   let make = (~protectionGroupId, ()) => new({protectionGroupId: protectionGroupId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteProtection = {
   type t
   type request = {
@@ -620,6 +625,7 @@ module DeleteProtection = {
   let make = (~protectionId, ()) => new({protectionId: protectionId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module CreateSubscription = {
   type t
   type request = {.}
@@ -628,6 +634,7 @@ module CreateSubscription = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ListResourcesInProtectionGroup = {
   type t
   type request = {
@@ -670,9 +677,10 @@ module ListResourcesInProtectionGroup = {
   @module("@aws-sdk/client-shield") @new
   external new: request => t = "ListResourcesInProtectionGroupCommand"
   let make = (~protectionGroupId, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults, nextToken, protectionGroupId})
+    new({maxResults: maxResults, nextToken: nextToken, protectionGroupId: protectionGroupId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeDRTAccess = {
   type t
   type request = {.}
@@ -689,6 +697,7 @@ module DescribeDRTAccess = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateSubscription = {
   type t
   type request = {
@@ -703,6 +712,7 @@ module UpdateSubscription = {
   let make = (~autoRenew=?, ()) => new({autoRenew: autoRenew})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateProtectionGroup = {
   type t
   type request = {
@@ -743,9 +753,16 @@ module UpdateProtectionGroup = {
   type response = {.}
   @module("@aws-sdk/client-shield") @new external new: request => t = "UpdateProtectionGroupCommand"
   let make = (~pattern, ~aggregation, ~protectionGroupId, ~members=?, ~resourceType=?, ()) =>
-    new({members, resourceType, pattern, aggregation, protectionGroupId})
+    new({
+      members: members,
+      resourceType: resourceType,
+      pattern: pattern,
+      aggregation: aggregation,
+      protectionGroupId: protectionGroupId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateEmergencyContactSettings = {
   type t
   type request = {
@@ -760,6 +777,7 @@ module UpdateEmergencyContactSettings = {
   let make = (~emergencyContactList=?, ()) => new({emergencyContactList: emergencyContactList})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateApplicationLayerAutomaticResponse = {
   type t
   type request = {
@@ -774,9 +792,10 @@ module UpdateApplicationLayerAutomaticResponse = {
   type response = {.}
   @module("@aws-sdk/client-shield") @new
   external new: request => t = "UpdateApplicationLayerAutomaticResponseCommand"
-  let make = (~action, ~resourceArn, ()) => new({action, resourceArn})
+  let make = (~action, ~resourceArn, ()) => new({action: action, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UntagResource = {
   type t
   type request = {
@@ -791,9 +810,10 @@ module UntagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-shield") @new external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceARN, ()) => new({tagKeys, resourceARN})
+  let make = (~tagKeys, ~resourceARN, ()) => new({tagKeys: tagKeys, resourceARN: resourceARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module TagResource = {
   type t
   type request = {
@@ -807,9 +827,10 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-shield") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceARN, ()) => new({tags, resourceARN})
+  let make = (~tags, ~resourceARN, ()) => new({tags: tags, resourceARN: resourceARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ListTagsForResource = {
   type t
   type request = {
@@ -826,6 +847,7 @@ module ListTagsForResource = {
   let make = (~resourceARN, ()) => new({resourceARN: resourceARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module EnableProactiveEngagement = {
   type t
   type request = {.}
@@ -835,6 +857,7 @@ module EnableProactiveEngagement = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module EnableApplicationLayerAutomaticResponse = {
   type t
   type request = {
@@ -849,9 +872,10 @@ module EnableApplicationLayerAutomaticResponse = {
   type response = {.}
   @module("@aws-sdk/client-shield") @new
   external new: request => t = "EnableApplicationLayerAutomaticResponseCommand"
-  let make = (~action, ~resourceArn, ()) => new({action, resourceArn})
+  let make = (~action, ~resourceArn, ()) => new({action: action, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DisassociateHealthCheck = {
   type t
   type request = {
@@ -869,9 +893,11 @@ module DisassociateHealthCheck = {
   type response = {.}
   @module("@aws-sdk/client-shield") @new
   external new: request => t = "DisassociateHealthCheckCommand"
-  let make = (~healthCheckArn, ~protectionId, ()) => new({healthCheckArn, protectionId})
+  let make = (~healthCheckArn, ~protectionId, ()) =>
+    new({healthCheckArn: healthCheckArn, protectionId: protectionId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DisableProactiveEngagement = {
   type t
   type request = {.}
@@ -881,6 +907,7 @@ module DisableProactiveEngagement = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DisableApplicationLayerAutomaticResponse = {
   type t
   type request = {
@@ -893,6 +920,7 @@ module DisableApplicationLayerAutomaticResponse = {
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DescribeProtectionGroup = {
   type t
   type request = {
@@ -914,6 +942,7 @@ module DescribeProtectionGroup = {
   let make = (~protectionGroupId, ()) => new({protectionGroupId: protectionGroupId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeEmergencyContactSettings = {
   type t
   type request = {.}
@@ -929,6 +958,7 @@ module DescribeEmergencyContactSettings = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateProtectionGroup = {
   type t
   type request = {
@@ -978,9 +1008,18 @@ module CreateProtectionGroup = {
     ~members=?,
     ~resourceType=?,
     (),
-  ) => new({tags, members, resourceType, pattern, aggregation, protectionGroupId})
+  ) =>
+    new({
+      tags: tags,
+      members: members,
+      resourceType: resourceType,
+      pattern: pattern,
+      aggregation: aggregation,
+      protectionGroupId: protectionGroupId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module CreateProtection = {
   type t
   type request = {
@@ -1036,9 +1075,11 @@ module CreateProtection = {
     protectionId: option<protectionId>,
   }
   @module("@aws-sdk/client-shield") @new external new: request => t = "CreateProtectionCommand"
-  let make = (~resourceArn, ~name, ~tags=?, ()) => new({tags, resourceArn, name})
+  let make = (~resourceArn, ~name, ~tags=?, ()) =>
+    new({tags: tags, resourceArn: resourceArn, name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module AssociateProactiveEngagementDetails = {
   type t
   type request = {
@@ -1056,6 +1097,7 @@ module AssociateProactiveEngagementDetails = {
   let make = (~emergencyContactList, ()) => new({emergencyContactList: emergencyContactList})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module AssociateHealthCheck = {
   type t
   type request = {
@@ -1072,9 +1114,11 @@ module AssociateHealthCheck = {
   }
   type response = {.}
   @module("@aws-sdk/client-shield") @new external new: request => t = "AssociateHealthCheckCommand"
-  let make = (~healthCheckArn, ~protectionId, ()) => new({healthCheckArn, protectionId})
+  let make = (~healthCheckArn, ~protectionId, ()) =>
+    new({healthCheckArn: healthCheckArn, protectionId: protectionId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module AssociateDRTRole = {
   type t
   type request = {
@@ -1088,6 +1132,7 @@ module AssociateDRTRole = {
   let make = (~roleArn, ()) => new({roleArn: roleArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module AssociateDRTLogBucket = {
   type t
   type request = {
@@ -1100,6 +1145,7 @@ module AssociateDRTLogBucket = {
   let make = (~logBucket, ()) => new({logBucket: logBucket})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ListProtectionGroups = {
   type t
   type request = {
@@ -1131,9 +1177,11 @@ module ListProtectionGroups = {
     @ocaml.doc("<p></p>") @as("ProtectionGroups") protectionGroups: protectionGroups,
   }
   @module("@aws-sdk/client-shield") @new external new: request => t = "ListProtectionGroupsCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeProtection = {
   type t
   type request = {
@@ -1151,9 +1199,11 @@ module DescribeProtection = {
     protection: option<protection>,
   }
   @module("@aws-sdk/client-shield") @new external new: request => t = "DescribeProtectionCommand"
-  let make = (~resourceArn=?, ~protectionId=?, ()) => new({resourceArn, protectionId})
+  let make = (~resourceArn=?, ~protectionId=?, ()) =>
+    new({resourceArn: resourceArn, protectionId: protectionId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListProtections = {
   type t
   type request = {
@@ -1186,9 +1236,11 @@ module ListProtections = {
     protections: option<protections>,
   }
   @module("@aws-sdk/client-shield") @new external new: request => t = "ListProtectionsCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListAttacks = {
   type t
   type request = {
@@ -1234,9 +1286,16 @@ module ListAttacks = {
   }
   @module("@aws-sdk/client-shield") @new external new: request => t = "ListAttacksCommand"
   let make = (~maxResults=?, ~nextToken=?, ~endTime=?, ~startTime=?, ~resourceArns=?, ()) =>
-    new({maxResults, nextToken, endTime, startTime, resourceArns})
+    new({
+      maxResults: maxResults,
+      nextToken: nextToken,
+      endTime: endTime,
+      startTime: startTime,
+      resourceArns: resourceArns,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeAttackStatistics = {
   type t
   type request = {.}
@@ -1251,6 +1310,7 @@ module DescribeAttackStatistics = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeSubscription = {
   type t
   type request = {.}
@@ -1263,6 +1323,7 @@ module DescribeSubscription = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeAttack = {
   type t
   type request = {

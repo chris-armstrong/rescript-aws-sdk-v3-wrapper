@@ -1558,9 +1558,14 @@ module RejectPortfolioShare = {
   @module("@aws-sdk/client-servicecatalog") @new
   external new: request => t = "RejectPortfolioShareCommand"
   let make = (~portfolioId, ~portfolioShareType=?, ~acceptLanguage=?, ()) =>
-    new({portfolioShareType, portfolioId, acceptLanguage})
+    new({
+      portfolioShareType: portfolioShareType,
+      portfolioId: portfolioId,
+      acceptLanguage: acceptLanguage,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module GetAWSOrganizationsAccessStatus = {
   type t
   type request = {.}
@@ -1573,6 +1578,7 @@ module GetAWSOrganizationsAccessStatus = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module EnableAWSOrganizationsAccess = {
   type t
   type request = {.}
@@ -1582,6 +1588,7 @@ module EnableAWSOrganizationsAccess = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DisassociateTagOptionFromResource = {
   type t
   type request = {
@@ -1591,9 +1598,11 @@ module DisassociateTagOptionFromResource = {
   type response = {.}
   @module("@aws-sdk/client-servicecatalog") @new
   external new: request => t = "DisassociateTagOptionFromResourceCommand"
-  let make = (~tagOptionId, ~resourceId, ()) => new({tagOptionId, resourceId})
+  let make = (~tagOptionId, ~resourceId, ()) =>
+    new({tagOptionId: tagOptionId, resourceId: resourceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DisassociateServiceActionFromProvisioningArtifact = {
   type t
   type request = {
@@ -1632,9 +1641,15 @@ module DisassociateServiceActionFromProvisioningArtifact = {
   @module("@aws-sdk/client-servicecatalog") @new
   external new: request => t = "DisassociateServiceActionFromProvisioningArtifactCommand"
   let make = (~serviceActionId, ~provisioningArtifactId, ~productId, ~acceptLanguage=?, ()) =>
-    new({acceptLanguage, serviceActionId, provisioningArtifactId, productId})
+    new({
+      acceptLanguage: acceptLanguage,
+      serviceActionId: serviceActionId,
+      provisioningArtifactId: provisioningArtifactId,
+      productId: productId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DisassociateProductFromPortfolio = {
   type t
   type request = {
@@ -1662,9 +1677,10 @@ module DisassociateProductFromPortfolio = {
   @module("@aws-sdk/client-servicecatalog") @new
   external new: request => t = "DisassociateProductFromPortfolioCommand"
   let make = (~portfolioId, ~productId, ~acceptLanguage=?, ()) =>
-    new({portfolioId, productId, acceptLanguage})
+    new({portfolioId: portfolioId, productId: productId, acceptLanguage: acceptLanguage})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DisassociatePrincipalFromPortfolio = {
   type t
   type request = {
@@ -1693,9 +1709,10 @@ module DisassociatePrincipalFromPortfolio = {
   @module("@aws-sdk/client-servicecatalog") @new
   external new: request => t = "DisassociatePrincipalFromPortfolioCommand"
   let make = (~principalARN, ~portfolioId, ~acceptLanguage=?, ()) =>
-    new({principalARN, portfolioId, acceptLanguage})
+    new({principalARN: principalARN, portfolioId: portfolioId, acceptLanguage: acceptLanguage})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DisassociateBudgetFromResource = {
   type t
   type request = {
@@ -1710,9 +1727,10 @@ module DisassociateBudgetFromResource = {
   type response = {.}
   @module("@aws-sdk/client-servicecatalog") @new
   external new: request => t = "DisassociateBudgetFromResourceCommand"
-  let make = (~resourceId, ~budgetName, ()) => new({resourceId, budgetName})
+  let make = (~resourceId, ~budgetName, ()) => new({resourceId: resourceId, budgetName: budgetName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DisableAWSOrganizationsAccess = {
   type t
   type request = {.}
@@ -1722,6 +1740,7 @@ module DisableAWSOrganizationsAccess = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DescribeCopyProductStatus = {
   type t
   type request = {
@@ -1757,9 +1776,11 @@ module DescribeCopyProductStatus = {
   }
   @module("@aws-sdk/client-servicecatalog") @new
   external new: request => t = "DescribeCopyProductStatusCommand"
-  let make = (~copyProductToken, ~acceptLanguage=?, ()) => new({copyProductToken, acceptLanguage})
+  let make = (~copyProductToken, ~acceptLanguage=?, ()) =>
+    new({copyProductToken: copyProductToken, acceptLanguage: acceptLanguage})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteTagOption = {
   type t
   type request = {@ocaml.doc("<p>The TagOption identifier.</p>") @as("Id") id: tagOptionId}
@@ -1769,6 +1790,7 @@ module DeleteTagOption = {
   let make = (~id, ()) => new({id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteServiceAction = {
   type t
   type request = {
@@ -1798,9 +1820,10 @@ module DeleteServiceAction = {
   type response = {.}
   @module("@aws-sdk/client-servicecatalog") @new
   external new: request => t = "DeleteServiceActionCommand"
-  let make = (~id, ~acceptLanguage=?, ()) => new({acceptLanguage, id})
+  let make = (~id, ~acceptLanguage=?, ()) => new({acceptLanguage: acceptLanguage, id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteProvisioningArtifact = {
   type t
   type request = {
@@ -1829,9 +1852,14 @@ module DeleteProvisioningArtifact = {
   @module("@aws-sdk/client-servicecatalog") @new
   external new: request => t = "DeleteProvisioningArtifactCommand"
   let make = (~provisioningArtifactId, ~productId, ~acceptLanguage=?, ()) =>
-    new({provisioningArtifactId, productId, acceptLanguage})
+    new({
+      provisioningArtifactId: provisioningArtifactId,
+      productId: productId,
+      acceptLanguage: acceptLanguage,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteProvisionedProductPlan = {
   type t
   type request = {
@@ -1862,9 +1890,10 @@ module DeleteProvisionedProductPlan = {
   @module("@aws-sdk/client-servicecatalog") @new
   external new: request => t = "DeleteProvisionedProductPlanCommand"
   let make = (~planId, ~ignoreErrors=?, ~acceptLanguage=?, ()) =>
-    new({ignoreErrors, planId, acceptLanguage})
+    new({ignoreErrors: ignoreErrors, planId: planId, acceptLanguage: acceptLanguage})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteProduct = {
   type t
   type request = {
@@ -1889,9 +1918,10 @@ module DeleteProduct = {
   }
   type response = {.}
   @module("@aws-sdk/client-servicecatalog") @new external new: request => t = "DeleteProductCommand"
-  let make = (~id, ~acceptLanguage=?, ()) => new({id, acceptLanguage})
+  let make = (~id, ~acceptLanguage=?, ()) => new({id: id, acceptLanguage: acceptLanguage})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeletePortfolio = {
   type t
   type request = {
@@ -1917,9 +1947,10 @@ module DeletePortfolio = {
   type response = {.}
   @module("@aws-sdk/client-servicecatalog") @new
   external new: request => t = "DeletePortfolioCommand"
-  let make = (~id, ~acceptLanguage=?, ()) => new({id, acceptLanguage})
+  let make = (~id, ~acceptLanguage=?, ()) => new({id: id, acceptLanguage: acceptLanguage})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteConstraint = {
   type t
   type request = {
@@ -1945,9 +1976,10 @@ module DeleteConstraint = {
   type response = {.}
   @module("@aws-sdk/client-servicecatalog") @new
   external new: request => t = "DeleteConstraintCommand"
-  let make = (~id, ~acceptLanguage=?, ()) => new({id, acceptLanguage})
+  let make = (~id, ~acceptLanguage=?, ()) => new({id: id, acceptLanguage: acceptLanguage})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module AssociateTagOptionWithResource = {
   type t
   type request = {
@@ -1957,9 +1989,11 @@ module AssociateTagOptionWithResource = {
   type response = {.}
   @module("@aws-sdk/client-servicecatalog") @new
   external new: request => t = "AssociateTagOptionWithResourceCommand"
-  let make = (~tagOptionId, ~resourceId, ()) => new({tagOptionId, resourceId})
+  let make = (~tagOptionId, ~resourceId, ()) =>
+    new({tagOptionId: tagOptionId, resourceId: resourceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module AssociateServiceActionWithProvisioningArtifact = {
   type t
   type request = {
@@ -1998,9 +2032,15 @@ module AssociateServiceActionWithProvisioningArtifact = {
   @module("@aws-sdk/client-servicecatalog") @new
   external new: request => t = "AssociateServiceActionWithProvisioningArtifactCommand"
   let make = (~serviceActionId, ~provisioningArtifactId, ~productId, ~acceptLanguage=?, ()) =>
-    new({acceptLanguage, serviceActionId, provisioningArtifactId, productId})
+    new({
+      acceptLanguage: acceptLanguage,
+      serviceActionId: serviceActionId,
+      provisioningArtifactId: provisioningArtifactId,
+      productId: productId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module AssociateProductWithPortfolio = {
   type t
   type request = {
@@ -2030,9 +2070,15 @@ module AssociateProductWithPortfolio = {
   @module("@aws-sdk/client-servicecatalog") @new
   external new: request => t = "AssociateProductWithPortfolioCommand"
   let make = (~portfolioId, ~productId, ~sourcePortfolioId=?, ~acceptLanguage=?, ()) =>
-    new({sourcePortfolioId, portfolioId, productId, acceptLanguage})
+    new({
+      sourcePortfolioId: sourcePortfolioId,
+      portfolioId: portfolioId,
+      productId: productId,
+      acceptLanguage: acceptLanguage,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module AssociatePrincipalWithPortfolio = {
   type t
   type request = {
@@ -2064,9 +2110,15 @@ module AssociatePrincipalWithPortfolio = {
   @module("@aws-sdk/client-servicecatalog") @new
   external new: request => t = "AssociatePrincipalWithPortfolioCommand"
   let make = (~principalType, ~principalARN, ~portfolioId, ~acceptLanguage=?, ()) =>
-    new({principalType, principalARN, portfolioId, acceptLanguage})
+    new({
+      principalType: principalType,
+      principalARN: principalARN,
+      portfolioId: portfolioId,
+      acceptLanguage: acceptLanguage,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module AssociateBudgetWithResource = {
   type t
   type request = {
@@ -2079,9 +2131,10 @@ module AssociateBudgetWithResource = {
   type response = {.}
   @module("@aws-sdk/client-servicecatalog") @new
   external new: request => t = "AssociateBudgetWithResourceCommand"
-  let make = (~resourceId, ~budgetName, ()) => new({resourceId, budgetName})
+  let make = (~resourceId, ~budgetName, ()) => new({resourceId: resourceId, budgetName: budgetName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module AcceptPortfolioShare = {
   type t
   type request = {
@@ -2128,9 +2181,14 @@ module AcceptPortfolioShare = {
   @module("@aws-sdk/client-servicecatalog") @new
   external new: request => t = "AcceptPortfolioShareCommand"
   let make = (~portfolioId, ~portfolioShareType=?, ~acceptLanguage=?, ()) =>
-    new({portfolioShareType, portfolioId, acceptLanguage})
+    new({
+      portfolioShareType: portfolioShareType,
+      portfolioId: portfolioId,
+      acceptLanguage: acceptLanguage,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateTagOption = {
   type t
   type request = {
@@ -2144,9 +2202,10 @@ module UpdateTagOption = {
   }
   @module("@aws-sdk/client-servicecatalog") @new
   external new: request => t = "UpdateTagOptionCommand"
-  let make = (~id, ~active=?, ~value=?, ()) => new({active, value, id})
+  let make = (~id, ~active=?, ~value=?, ()) => new({active: active, value: value, id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateProvisioningArtifact = {
   type t
   type request = {
@@ -2205,9 +2264,19 @@ module UpdateProvisioningArtifact = {
     ~name=?,
     ~acceptLanguage=?,
     (),
-  ) => new({guidance, active, description, name, provisioningArtifactId, productId, acceptLanguage})
+  ) =>
+    new({
+      guidance: guidance,
+      active: active,
+      description: description,
+      name: name,
+      provisioningArtifactId: provisioningArtifactId,
+      productId: productId,
+      acceptLanguage: acceptLanguage,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateProvisionedProductProperties = {
   type t
   type request = {
@@ -2274,9 +2343,16 @@ module UpdateProvisionedProductProperties = {
     ~provisionedProductId,
     ~acceptLanguage=?,
     (),
-  ) => new({idempotencyToken, provisionedProductProperties, provisionedProductId, acceptLanguage})
+  ) =>
+    new({
+      idempotencyToken: idempotencyToken,
+      provisionedProductProperties: provisionedProductProperties,
+      provisionedProductId: provisionedProductId,
+      acceptLanguage: acceptLanguage,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdatePortfolioShare = {
   type t
   type request = {
@@ -2333,9 +2409,17 @@ module UpdatePortfolioShare = {
     ~accountId=?,
     ~acceptLanguage=?,
     (),
-  ) => new({shareTagOptions, organizationNode, accountId, portfolioId, acceptLanguage})
+  ) =>
+    new({
+      shareTagOptions: shareTagOptions,
+      organizationNode: organizationNode,
+      accountId: accountId,
+      portfolioId: portfolioId,
+      acceptLanguage: acceptLanguage,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateConstraint = {
   type t
   type request = {
@@ -2424,9 +2508,10 @@ module UpdateConstraint = {
   @module("@aws-sdk/client-servicecatalog") @new
   external new: request => t = "UpdateConstraintCommand"
   let make = (~id, ~parameters=?, ~description=?, ~acceptLanguage=?, ()) =>
-    new({parameters, description, id, acceptLanguage})
+    new({parameters: parameters, description: description, id: id, acceptLanguage: acceptLanguage})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListPortfolioAccess = {
   type t
   type request = {
@@ -2480,9 +2565,17 @@ module ListPortfolioAccess = {
     ~organizationParentId=?,
     ~acceptLanguage=?,
     (),
-  ) => new({pageSize, pageToken, organizationParentId, portfolioId, acceptLanguage})
+  ) =>
+    new({
+      pageSize: pageSize,
+      pageToken: pageToken,
+      organizationParentId: organizationParentId,
+      portfolioId: portfolioId,
+      acceptLanguage: acceptLanguage,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeTagOption = {
   type t
   type request = {@ocaml.doc("<p>The TagOption identifier.</p>") @as("Id") id: tagOptionId}
@@ -2495,6 +2588,7 @@ module DescribeTagOption = {
   let make = (~id, ()) => new({id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeProvisioningArtifact = {
   type t
   type request = {
@@ -2544,15 +2638,16 @@ module DescribeProvisioningArtifact = {
     (),
   ) =>
     new({
-      verbose,
-      productName,
-      provisioningArtifactName,
-      productId,
-      provisioningArtifactId,
-      acceptLanguage,
+      verbose: verbose,
+      productName: productName,
+      provisioningArtifactName: provisioningArtifactName,
+      productId: productId,
+      provisioningArtifactId: provisioningArtifactId,
+      acceptLanguage: acceptLanguage,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeConstraint = {
   type t
   type request = {
@@ -2584,9 +2679,10 @@ module DescribeConstraint = {
   }
   @module("@aws-sdk/client-servicecatalog") @new
   external new: request => t = "DescribeConstraintCommand"
-  let make = (~id, ~acceptLanguage=?, ()) => new({id, acceptLanguage})
+  let make = (~id, ~acceptLanguage=?, ()) => new({id: id, acceptLanguage: acceptLanguage})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeletePortfolioShare = {
   type t
   type request = {
@@ -2623,9 +2719,15 @@ module DeletePortfolioShare = {
   @module("@aws-sdk/client-servicecatalog") @new
   external new: request => t = "DeletePortfolioShareCommand"
   let make = (~portfolioId, ~organizationNode=?, ~accountId=?, ~acceptLanguage=?, ()) =>
-    new({organizationNode, accountId, portfolioId, acceptLanguage})
+    new({
+      organizationNode: organizationNode,
+      accountId: accountId,
+      portfolioId: portfolioId,
+      acceptLanguage: acceptLanguage,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateTagOption = {
   type t
   type request = {
@@ -2638,9 +2740,10 @@ module CreateTagOption = {
   }
   @module("@aws-sdk/client-servicecatalog") @new
   external new: request => t = "CreateTagOptionCommand"
-  let make = (~value, ~key, ()) => new({value, key})
+  let make = (~value, ~key, ()) => new({value: value, key: key})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreatePortfolioShare = {
   type t
   type request = {
@@ -2695,9 +2798,17 @@ module CreatePortfolioShare = {
     ~accountId=?,
     ~acceptLanguage=?,
     (),
-  ) => new({shareTagOptions, organizationNode, accountId, portfolioId, acceptLanguage})
+  ) =>
+    new({
+      shareTagOptions: shareTagOptions,
+      organizationNode: organizationNode,
+      accountId: accountId,
+      portfolioId: portfolioId,
+      acceptLanguage: acceptLanguage,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateConstraint = {
   type t
   type request = {
@@ -2830,9 +2941,18 @@ module CreateConstraint = {
     ~acceptLanguage=?,
     (),
   ) =>
-    new({idempotencyToken, description, type_, parameters, productId, portfolioId, acceptLanguage})
+    new({
+      idempotencyToken: idempotencyToken,
+      description: description,
+      type_: type_,
+      parameters: parameters,
+      productId: productId,
+      portfolioId: portfolioId,
+      acceptLanguage: acceptLanguage,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateServiceAction = {
   type t
   type request = {
@@ -2868,9 +2988,16 @@ module UpdateServiceAction = {
   @module("@aws-sdk/client-servicecatalog") @new
   external new: request => t = "UpdateServiceActionCommand"
   let make = (~id, ~acceptLanguage=?, ~description=?, ~definition=?, ~name=?, ()) =>
-    new({acceptLanguage, description, definition, name, id})
+    new({
+      acceptLanguage: acceptLanguage,
+      description: description,
+      definition: definition,
+      name: name,
+      id: id,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateProduct = {
   type t
   type request = {
@@ -2931,20 +3058,21 @@ module UpdateProduct = {
     (),
   ) =>
     new({
-      removeTags,
-      addTags,
-      supportUrl,
-      supportEmail,
-      supportDescription,
-      distributor,
-      description,
-      owner,
-      name,
-      id,
-      acceptLanguage,
+      removeTags: removeTags,
+      addTags: addTags,
+      supportUrl: supportUrl,
+      supportEmail: supportEmail,
+      supportDescription: supportDescription,
+      distributor: distributor,
+      description: description,
+      owner: owner,
+      name: name,
+      id: id,
+      acceptLanguage: acceptLanguage,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdatePortfolio = {
   type t
   type request = {
@@ -2992,9 +3120,19 @@ module UpdatePortfolio = {
     ~displayName=?,
     ~acceptLanguage=?,
     (),
-  ) => new({removeTags, addTags, providerName, description, displayName, id, acceptLanguage})
+  ) =>
+    new({
+      removeTags: removeTags,
+      addTags: addTags,
+      providerName: providerName,
+      description: description,
+      displayName: displayName,
+      id: id,
+      acceptLanguage: acceptLanguage,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ScanProvisionedProducts = {
   type t
   type request = {
@@ -3040,9 +3178,15 @@ module ScanProvisionedProducts = {
   @module("@aws-sdk/client-servicecatalog") @new
   external new: request => t = "ScanProvisionedProductsCommand"
   let make = (~pageToken=?, ~pageSize=?, ~accessLevelFilter=?, ~acceptLanguage=?, ()) =>
-    new({pageToken, pageSize, accessLevelFilter, acceptLanguage})
+    new({
+      pageToken: pageToken,
+      pageSize: pageSize,
+      accessLevelFilter: accessLevelFilter,
+      acceptLanguage: acceptLanguage,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListTagOptions = {
   type t
   type request = {
@@ -3070,9 +3214,11 @@ module ListTagOptions = {
   }
   @module("@aws-sdk/client-servicecatalog") @new
   external new: request => t = "ListTagOptionsCommand"
-  let make = (~pageToken=?, ~pageSize=?, ~filters=?, ()) => new({pageToken, pageSize, filters})
+  let make = (~pageToken=?, ~pageSize=?, ~filters=?, ()) =>
+    new({pageToken: pageToken, pageSize: pageSize, filters: filters})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListStackInstancesForProvisionedProduct = {
   type t
   type request = {
@@ -3115,9 +3261,15 @@ module ListStackInstancesForProvisionedProduct = {
   @module("@aws-sdk/client-servicecatalog") @new
   external new: request => t = "ListStackInstancesForProvisionedProductCommand"
   let make = (~provisionedProductId, ~pageSize=?, ~pageToken=?, ~acceptLanguage=?, ()) =>
-    new({pageSize, pageToken, provisionedProductId, acceptLanguage})
+    new({
+      pageSize: pageSize,
+      pageToken: pageToken,
+      provisionedProductId: provisionedProductId,
+      acceptLanguage: acceptLanguage,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListServiceActionsForProvisioningArtifact = {
   type t
   type request = {
@@ -3175,9 +3327,17 @@ module ListServiceActionsForProvisioningArtifact = {
     ~pageToken=?,
     ~pageSize=?,
     (),
-  ) => new({acceptLanguage, pageToken, pageSize, provisioningArtifactId, productId})
+  ) =>
+    new({
+      acceptLanguage: acceptLanguage,
+      pageToken: pageToken,
+      pageSize: pageSize,
+      provisioningArtifactId: provisioningArtifactId,
+      productId: productId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListServiceActions = {
   type t
   type request = {
@@ -3221,9 +3381,10 @@ module ListServiceActions = {
   @module("@aws-sdk/client-servicecatalog") @new
   external new: request => t = "ListServiceActionsCommand"
   let make = (~pageToken=?, ~pageSize=?, ~acceptLanguage=?, ()) =>
-    new({pageToken, pageSize, acceptLanguage})
+    new({pageToken: pageToken, pageSize: pageSize, acceptLanguage: acceptLanguage})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListResourcesForTagOption = {
   type t
   type request = {
@@ -3263,9 +3424,15 @@ module ListResourcesForTagOption = {
   @module("@aws-sdk/client-servicecatalog") @new
   external new: request => t = "ListResourcesForTagOptionCommand"
   let make = (~tagOptionId, ~pageToken=?, ~pageSize=?, ~resourceType=?, ()) =>
-    new({pageToken, pageSize, resourceType, tagOptionId})
+    new({
+      pageToken: pageToken,
+      pageSize: pageSize,
+      resourceType: resourceType,
+      tagOptionId: tagOptionId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListProvisioningArtifacts = {
   type t
   type request = {
@@ -3300,9 +3467,11 @@ module ListProvisioningArtifacts = {
   }
   @module("@aws-sdk/client-servicecatalog") @new
   external new: request => t = "ListProvisioningArtifactsCommand"
-  let make = (~productId, ~acceptLanguage=?, ()) => new({productId, acceptLanguage})
+  let make = (~productId, ~acceptLanguage=?, ()) =>
+    new({productId: productId, acceptLanguage: acceptLanguage})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListProvisionedProductPlans = {
   type t
   type request = {
@@ -3356,9 +3525,17 @@ module ListProvisionedProductPlans = {
     ~provisionProductId=?,
     ~acceptLanguage=?,
     (),
-  ) => new({accessLevelFilter, pageToken, pageSize, provisionProductId, acceptLanguage})
+  ) =>
+    new({
+      accessLevelFilter: accessLevelFilter,
+      pageToken: pageToken,
+      pageSize: pageSize,
+      provisionProductId: provisionProductId,
+      acceptLanguage: acceptLanguage,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListPrincipalsForPortfolio = {
   type t
   type request = {
@@ -3401,9 +3578,15 @@ module ListPrincipalsForPortfolio = {
   @module("@aws-sdk/client-servicecatalog") @new
   external new: request => t = "ListPrincipalsForPortfolioCommand"
   let make = (~portfolioId, ~pageToken=?, ~pageSize=?, ~acceptLanguage=?, ()) =>
-    new({pageToken, pageSize, portfolioId, acceptLanguage})
+    new({
+      pageToken: pageToken,
+      pageSize: pageSize,
+      portfolioId: portfolioId,
+      acceptLanguage: acceptLanguage,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListPortfoliosForProduct = {
   type t
   type request = {
@@ -3445,9 +3628,15 @@ module ListPortfoliosForProduct = {
   @module("@aws-sdk/client-servicecatalog") @new
   external new: request => t = "ListPortfoliosForProductCommand"
   let make = (~productId, ~pageSize=?, ~pageToken=?, ~acceptLanguage=?, ()) =>
-    new({pageSize, pageToken, productId, acceptLanguage})
+    new({
+      pageSize: pageSize,
+      pageToken: pageToken,
+      productId: productId,
+      acceptLanguage: acceptLanguage,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListPortfolios = {
   type t
   type request = {
@@ -3488,9 +3677,10 @@ module ListPortfolios = {
   @module("@aws-sdk/client-servicecatalog") @new
   external new: request => t = "ListPortfoliosCommand"
   let make = (~pageSize=?, ~pageToken=?, ~acceptLanguage=?, ()) =>
-    new({pageSize, pageToken, acceptLanguage})
+    new({pageSize: pageSize, pageToken: pageToken, acceptLanguage: acceptLanguage})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListOrganizationPortfolioAccess = {
   type t
   type request = {
@@ -3557,9 +3747,17 @@ module ListOrganizationPortfolioAccess = {
     ~pageToken=?,
     ~acceptLanguage=?,
     (),
-  ) => new({pageSize, pageToken, organizationNodeType, portfolioId, acceptLanguage})
+  ) =>
+    new({
+      pageSize: pageSize,
+      pageToken: pageToken,
+      organizationNodeType: organizationNodeType,
+      portfolioId: portfolioId,
+      acceptLanguage: acceptLanguage,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListConstraintsForPortfolio = {
   type t
   type request = {
@@ -3602,9 +3800,16 @@ module ListConstraintsForPortfolio = {
   @module("@aws-sdk/client-servicecatalog") @new
   external new: request => t = "ListConstraintsForPortfolioCommand"
   let make = (~portfolioId, ~pageToken=?, ~pageSize=?, ~productId=?, ~acceptLanguage=?, ()) =>
-    new({pageToken, pageSize, productId, portfolioId, acceptLanguage})
+    new({
+      pageToken: pageToken,
+      pageSize: pageSize,
+      productId: productId,
+      portfolioId: portfolioId,
+      acceptLanguage: acceptLanguage,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListBudgetsForResource = {
   type t
   type request = {
@@ -3646,9 +3851,15 @@ module ListBudgetsForResource = {
   @module("@aws-sdk/client-servicecatalog") @new
   external new: request => t = "ListBudgetsForResourceCommand"
   let make = (~resourceId, ~pageToken=?, ~pageSize=?, ~acceptLanguage=?, ()) =>
-    new({pageToken, pageSize, resourceId, acceptLanguage})
+    new({
+      pageToken: pageToken,
+      pageSize: pageSize,
+      resourceId: resourceId,
+      acceptLanguage: acceptLanguage,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListAcceptedPortfolioShares = {
   type t
   type request = {
@@ -3707,9 +3918,15 @@ module ListAcceptedPortfolioShares = {
   @module("@aws-sdk/client-servicecatalog") @new
   external new: request => t = "ListAcceptedPortfolioSharesCommand"
   let make = (~portfolioShareType=?, ~pageSize=?, ~pageToken=?, ~acceptLanguage=?, ()) =>
-    new({portfolioShareType, pageSize, pageToken, acceptLanguage})
+    new({
+      portfolioShareType: portfolioShareType,
+      pageSize: pageSize,
+      pageToken: pageToken,
+      acceptLanguage: acceptLanguage,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetProvisionedProductOutputs = {
   type t
   type request = {
@@ -3772,15 +3989,16 @@ module GetProvisionedProductOutputs = {
     (),
   ) =>
     new({
-      pageToken,
-      pageSize,
-      outputKeys,
-      provisionedProductName,
-      provisionedProductId,
-      acceptLanguage,
+      pageToken: pageToken,
+      pageSize: pageSize,
+      outputKeys: outputKeys,
+      provisionedProductName: provisionedProductName,
+      provisionedProductId: provisionedProductId,
+      acceptLanguage: acceptLanguage,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeServiceAction = {
   type t
   type request = {
@@ -3810,9 +4028,10 @@ module DescribeServiceAction = {
   }
   @module("@aws-sdk/client-servicecatalog") @new
   external new: request => t = "DescribeServiceActionCommand"
-  let make = (~id, ~acceptLanguage=?, ()) => new({acceptLanguage, id})
+  let make = (~id, ~acceptLanguage=?, ()) => new({acceptLanguage: acceptLanguage, id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeProvisionedProduct = {
   type t
   @ocaml.doc("DescribeProvisionedProductAPI input structure.
@@ -3861,9 +4080,11 @@ module DescribeProvisionedProduct = {
   }
   @module("@aws-sdk/client-servicecatalog") @new
   external new: request => t = "DescribeProvisionedProductCommand"
-  let make = (~name=?, ~id=?, ~acceptLanguage=?, ()) => new({name, id, acceptLanguage})
+  let make = (~name=?, ~id=?, ~acceptLanguage=?, ()) =>
+    new({name: name, id: id, acceptLanguage: acceptLanguage})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeProductView = {
   type t
   type request = {
@@ -3895,9 +4116,10 @@ module DescribeProductView = {
   }
   @module("@aws-sdk/client-servicecatalog") @new
   external new: request => t = "DescribeProductViewCommand"
-  let make = (~id, ~acceptLanguage=?, ()) => new({id, acceptLanguage})
+  let make = (~id, ~acceptLanguage=?, ()) => new({id: id, acceptLanguage: acceptLanguage})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeProduct = {
   type t
   type request = {
@@ -3934,9 +4156,11 @@ module DescribeProduct = {
   }
   @module("@aws-sdk/client-servicecatalog") @new
   external new: request => t = "DescribeProductCommand"
-  let make = (~name=?, ~id=?, ~acceptLanguage=?, ()) => new({name, id, acceptLanguage})
+  let make = (~name=?, ~id=?, ~acceptLanguage=?, ()) =>
+    new({name: name, id: id, acceptLanguage: acceptLanguage})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribePortfolioShares = {
   type t
   type request = {
@@ -3970,9 +4194,10 @@ module DescribePortfolioShares = {
   @module("@aws-sdk/client-servicecatalog") @new
   external new: request => t = "DescribePortfolioSharesCommand"
   let make = (~type_, ~portfolioId, ~pageSize=?, ~pageToken=?, ()) =>
-    new({pageSize, pageToken, type_, portfolioId})
+    new({pageSize: pageSize, pageToken: pageToken, type_: type_, portfolioId: portfolioId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribePortfolio = {
   type t
   type request = {
@@ -4008,9 +4233,10 @@ module DescribePortfolio = {
   }
   @module("@aws-sdk/client-servicecatalog") @new
   external new: request => t = "DescribePortfolioCommand"
-  let make = (~id, ~acceptLanguage=?, ()) => new({id, acceptLanguage})
+  let make = (~id, ~acceptLanguage=?, ()) => new({id: id, acceptLanguage: acceptLanguage})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateServiceAction = {
   type t
   type request = {
@@ -4084,9 +4310,18 @@ module CreateServiceAction = {
     ~acceptLanguage=?,
     ~description=?,
     (),
-  ) => new({idempotencyToken, acceptLanguage, description, definition, definitionType, name})
+  ) =>
+    new({
+      idempotencyToken: idempotencyToken,
+      acceptLanguage: acceptLanguage,
+      description: description,
+      definition: definition,
+      definitionType: definitionType,
+      name: name,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateProvisioningArtifact = {
   type t
   type request = {
@@ -4138,9 +4373,15 @@ module CreateProvisioningArtifact = {
   @module("@aws-sdk/client-servicecatalog") @new
   external new: request => t = "CreateProvisioningArtifactCommand"
   let make = (~idempotencyToken, ~parameters, ~productId, ~acceptLanguage=?, ()) =>
-    new({idempotencyToken, parameters, productId, acceptLanguage})
+    new({
+      idempotencyToken: idempotencyToken,
+      parameters: parameters,
+      productId: productId,
+      acceptLanguage: acceptLanguage,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateProvisionedProductPlan = {
   type t
   type request = {
@@ -4221,20 +4462,21 @@ module CreateProvisionedProductPlan = {
     (),
   ) =>
     new({
-      tags,
-      idempotencyToken,
-      provisioningParameters,
-      provisioningArtifactId,
-      provisionedProductName,
-      productId,
-      pathId,
-      notificationArns,
-      planType,
-      planName,
-      acceptLanguage,
+      tags: tags,
+      idempotencyToken: idempotencyToken,
+      provisioningParameters: provisioningParameters,
+      provisioningArtifactId: provisioningArtifactId,
+      provisionedProductName: provisionedProductName,
+      productId: productId,
+      pathId: pathId,
+      notificationArns: notificationArns,
+      planType: planType,
+      planName: planName,
+      acceptLanguage: acceptLanguage,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateProduct = {
   type t
   type request = {
@@ -4306,21 +4548,22 @@ module CreateProduct = {
     (),
   ) =>
     new({
-      idempotencyToken,
-      provisioningArtifactParameters,
-      tags,
-      productType,
-      supportUrl,
-      supportEmail,
-      supportDescription,
-      distributor,
-      description,
-      owner,
-      name,
-      acceptLanguage,
+      idempotencyToken: idempotencyToken,
+      provisioningArtifactParameters: provisioningArtifactParameters,
+      tags: tags,
+      productType: productType,
+      supportUrl: supportUrl,
+      supportEmail: supportEmail,
+      supportDescription: supportDescription,
+      distributor: distributor,
+      description: description,
+      owner: owner,
+      name: name,
+      acceptLanguage: acceptLanguage,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreatePortfolio = {
   type t
   type request = {
@@ -4369,9 +4612,18 @@ module CreatePortfolio = {
     ~description=?,
     ~acceptLanguage=?,
     (),
-  ) => new({idempotencyToken, tags, providerName, description, displayName, acceptLanguage})
+  ) =>
+    new({
+      idempotencyToken: idempotencyToken,
+      tags: tags,
+      providerName: providerName,
+      description: description,
+      displayName: displayName,
+      acceptLanguage: acceptLanguage,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CopyProduct = {
   type t
   type request = {
@@ -4433,16 +4685,17 @@ module CopyProduct = {
     (),
   ) =>
     new({
-      idempotencyToken,
-      copyOptions,
-      sourceProvisioningArtifactIdentifiers,
-      targetProductName,
-      targetProductId,
-      sourceProductArn,
-      acceptLanguage,
+      idempotencyToken: idempotencyToken,
+      copyOptions: copyOptions,
+      sourceProvisioningArtifactIdentifiers: sourceProvisioningArtifactIdentifiers,
+      targetProductName: targetProductName,
+      targetProductId: targetProductId,
+      sourceProductArn: sourceProductArn,
+      acceptLanguage: acceptLanguage,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module BatchDisassociateServiceActionFromProvisioningArtifact = {
   type t
   type request = {
@@ -4479,9 +4732,10 @@ module BatchDisassociateServiceActionFromProvisioningArtifact = {
   @module("@aws-sdk/client-servicecatalog") @new
   external new: request => t = "BatchDisassociateServiceActionFromProvisioningArtifactCommand"
   let make = (~serviceActionAssociations, ~acceptLanguage=?, ()) =>
-    new({acceptLanguage, serviceActionAssociations})
+    new({acceptLanguage: acceptLanguage, serviceActionAssociations: serviceActionAssociations})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module BatchAssociateServiceActionWithProvisioningArtifact = {
   type t
   type request = {
@@ -4518,9 +4772,10 @@ module BatchAssociateServiceActionWithProvisioningArtifact = {
   @module("@aws-sdk/client-servicecatalog") @new
   external new: request => t = "BatchAssociateServiceActionWithProvisioningArtifactCommand"
   let make = (~serviceActionAssociations, ~acceptLanguage=?, ()) =>
-    new({acceptLanguage, serviceActionAssociations})
+    new({acceptLanguage: acceptLanguage, serviceActionAssociations: serviceActionAssociations})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateProvisionedProduct = {
   type t
   type request = {
@@ -4613,22 +4868,23 @@ module UpdateProvisionedProduct = {
     (),
   ) =>
     new({
-      updateToken,
-      tags,
-      provisioningPreferences,
-      provisioningParameters,
-      pathName,
-      pathId,
-      provisioningArtifactName,
-      provisioningArtifactId,
-      productName,
-      productId,
-      provisionedProductId,
-      provisionedProductName,
-      acceptLanguage,
+      updateToken: updateToken,
+      tags: tags,
+      provisioningPreferences: provisioningPreferences,
+      provisioningParameters: provisioningParameters,
+      pathName: pathName,
+      pathId: pathId,
+      provisioningArtifactName: provisioningArtifactName,
+      provisioningArtifactId: provisioningArtifactId,
+      productName: productName,
+      productId: productId,
+      provisionedProductId: provisionedProductId,
+      provisionedProductName: provisionedProductName,
+      acceptLanguage: acceptLanguage,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module TerminateProvisionedProduct = {
   type t
   type request = {
@@ -4690,15 +4946,16 @@ module TerminateProvisionedProduct = {
     (),
   ) =>
     new({
-      retainPhysicalResources,
-      acceptLanguage,
-      ignoreErrors,
-      terminateToken,
-      provisionedProductId,
-      provisionedProductName,
+      retainPhysicalResources: retainPhysicalResources,
+      acceptLanguage: acceptLanguage,
+      ignoreErrors: ignoreErrors,
+      terminateToken: terminateToken,
+      provisionedProductId: provisionedProductId,
+      provisionedProductName: provisionedProductName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module SearchProductsAsAdmin = {
   type t
   type request = {
@@ -4763,17 +5020,18 @@ module SearchProductsAsAdmin = {
     (),
   ) =>
     new({
-      productSource,
-      pageSize,
-      pageToken,
-      sortOrder,
-      sortBy,
-      filters,
-      portfolioId,
-      acceptLanguage,
+      productSource: productSource,
+      pageSize: pageSize,
+      pageToken: pageToken,
+      sortOrder: sortOrder,
+      sortBy: sortBy,
+      filters: filters,
+      portfolioId: portfolioId,
+      acceptLanguage: acceptLanguage,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module SearchProducts = {
   type t
   type request = {
@@ -4833,9 +5091,18 @@ module SearchProducts = {
     ~filters=?,
     ~acceptLanguage=?,
     (),
-  ) => new({pageToken, sortOrder, sortBy, pageSize, filters, acceptLanguage})
+  ) =>
+    new({
+      pageToken: pageToken,
+      sortOrder: sortOrder,
+      sortBy: sortBy,
+      pageSize: pageSize,
+      filters: filters,
+      acceptLanguage: acceptLanguage,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ProvisionProduct = {
   type t
   type request = {
@@ -4926,22 +5193,23 @@ module ProvisionProduct = {
     (),
   ) =>
     new({
-      provisionToken,
-      notificationArns,
-      tags,
-      provisioningPreferences,
-      provisioningParameters,
-      provisionedProductName,
-      pathName,
-      pathId,
-      provisioningArtifactName,
-      provisioningArtifactId,
-      productName,
-      productId,
-      acceptLanguage,
+      provisionToken: provisionToken,
+      notificationArns: notificationArns,
+      tags: tags,
+      provisioningPreferences: provisioningPreferences,
+      provisioningParameters: provisioningParameters,
+      provisionedProductName: provisionedProductName,
+      pathName: pathName,
+      pathId: pathId,
+      provisioningArtifactName: provisioningArtifactName,
+      provisioningArtifactId: provisioningArtifactId,
+      productName: productName,
+      productId: productId,
+      acceptLanguage: acceptLanguage,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListProvisioningArtifactsForServiceAction = {
   type t
   type request = {
@@ -4990,9 +5258,15 @@ module ListProvisioningArtifactsForServiceAction = {
   @module("@aws-sdk/client-servicecatalog") @new
   external new: request => t = "ListProvisioningArtifactsForServiceActionCommand"
   let make = (~serviceActionId, ~acceptLanguage=?, ~pageToken=?, ~pageSize=?, ()) =>
-    new({acceptLanguage, pageToken, pageSize, serviceActionId})
+    new({
+      acceptLanguage: acceptLanguage,
+      pageToken: pageToken,
+      pageSize: pageSize,
+      serviceActionId: serviceActionId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ImportAsProvisionedProduct = {
   type t
   type request = {
@@ -5042,15 +5316,16 @@ module ImportAsProvisionedProduct = {
     (),
   ) =>
     new({
-      idempotencyToken,
-      physicalId,
-      provisionedProductName,
-      provisioningArtifactId,
-      productId,
-      acceptLanguage,
+      idempotencyToken: idempotencyToken,
+      physicalId: physicalId,
+      provisionedProductName: provisionedProductName,
+      provisioningArtifactId: provisioningArtifactId,
+      productId: productId,
+      acceptLanguage: acceptLanguage,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ExecuteProvisionedProductServiceAction = {
   type t
   type request = {
@@ -5103,9 +5378,17 @@ module ExecuteProvisionedProductServiceAction = {
     ~parameters=?,
     ~acceptLanguage=?,
     (),
-  ) => new({parameters, acceptLanguage, executeToken, serviceActionId, provisionedProductId})
+  ) =>
+    new({
+      parameters: parameters,
+      acceptLanguage: acceptLanguage,
+      executeToken: executeToken,
+      serviceActionId: serviceActionId,
+      provisionedProductId: provisionedProductId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ExecuteProvisionedProductPlan = {
   type t
   type request = {
@@ -5140,9 +5423,10 @@ module ExecuteProvisionedProductPlan = {
   @module("@aws-sdk/client-servicecatalog") @new
   external new: request => t = "ExecuteProvisionedProductPlanCommand"
   let make = (~idempotencyToken, ~planId, ~acceptLanguage=?, ()) =>
-    new({idempotencyToken, planId, acceptLanguage})
+    new({idempotencyToken: idempotencyToken, planId: planId, acceptLanguage: acceptLanguage})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeServiceActionExecutionParameters = {
   type t
   type request = {
@@ -5175,9 +5459,14 @@ module DescribeServiceActionExecutionParameters = {
   @module("@aws-sdk/client-servicecatalog") @new
   external new: request => t = "DescribeServiceActionExecutionParametersCommand"
   let make = (~serviceActionId, ~provisionedProductId, ~acceptLanguage=?, ()) =>
-    new({acceptLanguage, serviceActionId, provisionedProductId})
+    new({
+      acceptLanguage: acceptLanguage,
+      serviceActionId: serviceActionId,
+      provisionedProductId: provisionedProductId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeRecord = {
   type t
   type request = {
@@ -5226,9 +5515,10 @@ module DescribeRecord = {
   @module("@aws-sdk/client-servicecatalog") @new
   external new: request => t = "DescribeRecordCommand"
   let make = (~id, ~pageSize=?, ~pageToken=?, ~acceptLanguage=?, ()) =>
-    new({pageSize, pageToken, id, acceptLanguage})
+    new({pageSize: pageSize, pageToken: pageToken, id: id, acceptLanguage: acceptLanguage})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeProductAsAdmin = {
   type t
   type request = {
@@ -5279,9 +5569,10 @@ module DescribeProductAsAdmin = {
   @module("@aws-sdk/client-servicecatalog") @new
   external new: request => t = "DescribeProductAsAdminCommand"
   let make = (~sourcePortfolioId=?, ~name=?, ~id=?, ~acceptLanguage=?, ()) =>
-    new({sourcePortfolioId, name, id, acceptLanguage})
+    new({sourcePortfolioId: sourcePortfolioId, name: name, id: id, acceptLanguage: acceptLanguage})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module SearchProvisionedProducts = {
   type t
   type request = {
@@ -5355,9 +5646,19 @@ module SearchProvisionedProducts = {
     ~accessLevelFilter=?,
     ~acceptLanguage=?,
     (),
-  ) => new({pageToken, pageSize, sortOrder, sortBy, filters, accessLevelFilter, acceptLanguage})
+  ) =>
+    new({
+      pageToken: pageToken,
+      pageSize: pageSize,
+      sortOrder: sortOrder,
+      sortBy: sortBy,
+      filters: filters,
+      accessLevelFilter: accessLevelFilter,
+      acceptLanguage: acceptLanguage,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListRecordHistory = {
   type t
   type request = {
@@ -5411,9 +5712,17 @@ module ListRecordHistory = {
     ~accessLevelFilter=?,
     ~acceptLanguage=?,
     (),
-  ) => new({pageToken, pageSize, searchFilter, accessLevelFilter, acceptLanguage})
+  ) =>
+    new({
+      pageToken: pageToken,
+      pageSize: pageSize,
+      searchFilter: searchFilter,
+      accessLevelFilter: accessLevelFilter,
+      acceptLanguage: acceptLanguage,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListLaunchPaths = {
   type t
   type request = {
@@ -5455,9 +5764,15 @@ module ListLaunchPaths = {
   @module("@aws-sdk/client-servicecatalog") @new
   external new: request => t = "ListLaunchPathsCommand"
   let make = (~productId, ~pageToken=?, ~pageSize=?, ~acceptLanguage=?, ()) =>
-    new({pageToken, pageSize, productId, acceptLanguage})
+    new({
+      pageToken: pageToken,
+      pageSize: pageSize,
+      productId: productId,
+      acceptLanguage: acceptLanguage,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeProvisioningParameters = {
   type t
   type request = {
@@ -5540,16 +5855,17 @@ module DescribeProvisioningParameters = {
     (),
   ) =>
     new({
-      pathName,
-      pathId,
-      provisioningArtifactName,
-      provisioningArtifactId,
-      productName,
-      productId,
-      acceptLanguage,
+      pathName: pathName,
+      pathId: pathId,
+      provisioningArtifactName: provisioningArtifactName,
+      provisioningArtifactId: provisioningArtifactId,
+      productName: productName,
+      productId: productId,
+      acceptLanguage: acceptLanguage,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribePortfolioShareStatus = {
   type t
   type request = {
@@ -5581,6 +5897,7 @@ module DescribePortfolioShareStatus = {
   let make = (~portfolioShareToken, ()) => new({portfolioShareToken: portfolioShareToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeProvisionedProductPlan = {
   type t
   type request = {
@@ -5627,6 +5944,6 @@ module DescribeProvisionedProductPlan = {
   @module("@aws-sdk/client-servicecatalog") @new
   external new: request => t = "DescribeProvisionedProductPlanCommand"
   let make = (~planId, ~pageToken=?, ~pageSize=?, ~acceptLanguage=?, ()) =>
-    new({pageToken, pageSize, planId, acceptLanguage})
+    new({pageToken: pageToken, pageSize: pageSize, planId: planId, acceptLanguage: acceptLanguage})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

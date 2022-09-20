@@ -15012,9 +15012,10 @@ module StartVpcEndpointServicePrivateDnsVerification = {
   }
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "StartVpcEndpointServicePrivateDnsVerificationCommand"
-  let make = (~serviceId, ~dryRun=?, ()) => new({serviceId, dryRun})
+  let make = (~serviceId, ~dryRun=?, ()) => new({serviceId: serviceId, dryRun: dryRun})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module SendDiagnosticInterrupt = {
   type t
   type request = {
@@ -15027,9 +15028,10 @@ module SendDiagnosticInterrupt = {
   }
   type response = {.}
   @module("@aws-sdk/client-ec2") @new external new: request => t = "SendDiagnosticInterruptCommand"
-  let make = (~instanceId, ~dryRun=?, ()) => new({dryRun, instanceId})
+  let make = (~instanceId, ~dryRun=?, ()) => new({dryRun: dryRun, instanceId: instanceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module RestoreSnapshotTier = {
   type t
   type request = {
@@ -15070,9 +15072,15 @@ module RestoreSnapshotTier = {
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "RestoreSnapshotTierCommand"
   let make = (~snapshotId, ~dryRun=?, ~permanentRestore=?, ~temporaryRestoreDays=?, ()) =>
-    new({dryRun, permanentRestore, temporaryRestoreDays, snapshotId})
+    new({
+      dryRun: dryRun,
+      permanentRestore: permanentRestore,
+      temporaryRestoreDays: temporaryRestoreDays,
+      snapshotId: snapshotId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module RestoreSnapshotFromRecycleBin = {
   type t
   type request = {
@@ -15109,9 +15117,10 @@ module RestoreSnapshotFromRecycleBin = {
   }
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "RestoreSnapshotFromRecycleBinCommand"
-  let make = (~snapshotId, ~dryRun=?, ()) => new({dryRun, snapshotId})
+  let make = (~snapshotId, ~dryRun=?, ()) => new({dryRun: dryRun, snapshotId: snapshotId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module RestoreImageFromRecycleBin = {
   type t
   type request = {
@@ -15131,9 +15140,10 @@ module RestoreImageFromRecycleBin = {
   }
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "RestoreImageFromRecycleBinCommand"
-  let make = (~imageId, ~dryRun=?, ()) => new({dryRun, imageId})
+  let make = (~imageId, ~dryRun=?, ()) => new({dryRun: dryRun, imageId: imageId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module RestoreAddressToClassic = {
   type t
   type request = {
@@ -15149,9 +15159,10 @@ module RestoreAddressToClassic = {
     @ocaml.doc("<p>The Elastic IP address.</p>") @as("PublicIp") publicIp: option<string_>,
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "RestoreAddressToClassicCommand"
-  let make = (~publicIp, ~dryRun=?, ()) => new({publicIp, dryRun})
+  let make = (~publicIp, ~dryRun=?, ()) => new({publicIp: publicIp, dryRun: dryRun})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ResetSnapshotAttribute = {
   type t
   type request = {
@@ -15168,9 +15179,11 @@ module ResetSnapshotAttribute = {
   }
   type response = {.}
   @module("@aws-sdk/client-ec2") @new external new: request => t = "ResetSnapshotAttributeCommand"
-  let make = (~snapshotId, ~attribute, ~dryRun=?, ()) => new({dryRun, snapshotId, attribute})
+  let make = (~snapshotId, ~attribute, ~dryRun=?, ()) =>
+    new({dryRun: dryRun, snapshotId: snapshotId, attribute: attribute})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ResetNetworkInterfaceAttribute = {
   type t
   @ocaml.doc("<p>Contains the parameters for ResetNetworkInterfaceAttribute.</p>")
@@ -15192,9 +15205,10 @@ module ResetNetworkInterfaceAttribute = {
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "ResetNetworkInterfaceAttributeCommand"
   let make = (~networkInterfaceId, ~sourceDestCheck=?, ~dryRun=?, ()) =>
-    new({sourceDestCheck, networkInterfaceId, dryRun})
+    new({sourceDestCheck: sourceDestCheck, networkInterfaceId: networkInterfaceId, dryRun: dryRun})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ResetInstanceAttribute = {
   type t
   type request = {
@@ -15214,9 +15228,11 @@ module ResetInstanceAttribute = {
   }
   type response = {.}
   @module("@aws-sdk/client-ec2") @new external new: request => t = "ResetInstanceAttributeCommand"
-  let make = (~instanceId, ~attribute, ~dryRun=?, ()) => new({instanceId, dryRun, attribute})
+  let make = (~instanceId, ~attribute, ~dryRun=?, ()) =>
+    new({instanceId: instanceId, dryRun: dryRun, attribute: attribute})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ResetImageAttribute = {
   type t
   @ocaml.doc("<p>Contains the parameters for ResetImageAttribute.</p>")
@@ -15235,9 +15251,11 @@ module ResetImageAttribute = {
   }
   type response = {.}
   @module("@aws-sdk/client-ec2") @new external new: request => t = "ResetImageAttributeCommand"
-  let make = (~imageId, ~attribute, ~dryRun=?, ()) => new({dryRun, imageId, attribute})
+  let make = (~imageId, ~attribute, ~dryRun=?, ()) =>
+    new({dryRun: dryRun, imageId: imageId, attribute: attribute})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ResetFpgaImageAttribute = {
   type t
   type request = {
@@ -15256,9 +15274,11 @@ module ResetFpgaImageAttribute = {
     return: option<boolean_>,
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "ResetFpgaImageAttributeCommand"
-  let make = (~fpgaImageId, ~attribute=?, ~dryRun=?, ()) => new({attribute, fpgaImageId, dryRun})
+  let make = (~fpgaImageId, ~attribute=?, ~dryRun=?, ()) =>
+    new({attribute: attribute, fpgaImageId: fpgaImageId, dryRun: dryRun})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ResetEbsDefaultKmsKeyId = {
   type t
   type request = {
@@ -15279,6 +15299,7 @@ module ResetEbsDefaultKmsKeyId = {
   let make = (~dryRun=?, ()) => new({dryRun: dryRun})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ReplaceRoute = {
   type t
   type request = {
@@ -15353,26 +15374,27 @@ module ReplaceRoute = {
     (),
   ) =>
     new({
-      coreNetworkArn,
-      vpcPeeringConnectionId,
-      routeTableId,
-      networkInterfaceId,
-      carrierGatewayId,
-      localGatewayId,
-      transitGatewayId,
-      natGatewayId,
-      localTarget,
-      instanceId,
-      gatewayId,
-      egressOnlyInternetGatewayId,
-      vpcEndpointId,
-      dryRun,
-      destinationPrefixListId,
-      destinationIpv6CidrBlock,
-      destinationCidrBlock,
+      coreNetworkArn: coreNetworkArn,
+      vpcPeeringConnectionId: vpcPeeringConnectionId,
+      routeTableId: routeTableId,
+      networkInterfaceId: networkInterfaceId,
+      carrierGatewayId: carrierGatewayId,
+      localGatewayId: localGatewayId,
+      transitGatewayId: transitGatewayId,
+      natGatewayId: natGatewayId,
+      localTarget: localTarget,
+      instanceId: instanceId,
+      gatewayId: gatewayId,
+      egressOnlyInternetGatewayId: egressOnlyInternetGatewayId,
+      vpcEndpointId: vpcEndpointId,
+      dryRun: dryRun,
+      destinationPrefixListId: destinationPrefixListId,
+      destinationIpv6CidrBlock: destinationIpv6CidrBlock,
+      destinationCidrBlock: destinationCidrBlock,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ReplaceNetworkAclAssociation = {
   type t
   type request = {
@@ -15397,9 +15419,10 @@ module ReplaceNetworkAclAssociation = {
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "ReplaceNetworkAclAssociationCommand"
   let make = (~networkAclId, ~associationId, ~dryRun=?, ()) =>
-    new({networkAclId, dryRun, associationId})
+    new({networkAclId: networkAclId, dryRun: dryRun, associationId: associationId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ReleaseIpamPoolAllocation = {
   type t
   type request = {
@@ -15422,9 +15445,15 @@ module ReleaseIpamPoolAllocation = {
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "ReleaseIpamPoolAllocationCommand"
   let make = (~ipamPoolAllocationId, ~cidr, ~ipamPoolId, ~dryRun=?, ()) =>
-    new({ipamPoolAllocationId, cidr, ipamPoolId, dryRun})
+    new({
+      ipamPoolAllocationId: ipamPoolAllocationId,
+      cidr: cidr,
+      ipamPoolId: ipamPoolId,
+      dryRun: dryRun,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ReleaseAddress = {
   type t
   type request = {
@@ -15449,9 +15478,15 @@ module ReleaseAddress = {
   type response = {.}
   @module("@aws-sdk/client-ec2") @new external new: request => t = "ReleaseAddressCommand"
   let make = (~dryRun=?, ~networkBorderGroup=?, ~publicIp=?, ~allocationId=?, ()) =>
-    new({dryRun, networkBorderGroup, publicIp, allocationId})
+    new({
+      dryRun: dryRun,
+      networkBorderGroup: networkBorderGroup,
+      publicIp: publicIp,
+      allocationId: allocationId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module RejectVpcPeeringConnection = {
   type t
   type request = {
@@ -15472,9 +15507,11 @@ module RejectVpcPeeringConnection = {
   }
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "RejectVpcPeeringConnectionCommand"
-  let make = (~vpcPeeringConnectionId, ~dryRun=?, ()) => new({vpcPeeringConnectionId, dryRun})
+  let make = (~vpcPeeringConnectionId, ~dryRun=?, ()) =>
+    new({vpcPeeringConnectionId: vpcPeeringConnectionId, dryRun: dryRun})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module MoveAddressToVpc = {
   type t
   type request = {
@@ -15492,9 +15529,10 @@ module MoveAddressToVpc = {
     allocationId: option<string_>,
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "MoveAddressToVpcCommand"
-  let make = (~publicIp, ~dryRun=?, ()) => new({publicIp, dryRun})
+  let make = (~publicIp, ~dryRun=?, ()) => new({publicIp: publicIp, dryRun: dryRun})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ModifyVpcTenancy = {
   type t
   type request = {
@@ -15514,9 +15552,11 @@ module ModifyVpcTenancy = {
     returnValue: option<boolean_>,
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "ModifyVpcTenancyCommand"
-  let make = (~instanceTenancy, ~vpcId, ~dryRun=?, ()) => new({dryRun, instanceTenancy, vpcId})
+  let make = (~instanceTenancy, ~vpcId, ~dryRun=?, ()) =>
+    new({dryRun: dryRun, instanceTenancy: instanceTenancy, vpcId: vpcId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ModifyVpcEndpointServicePayerResponsibility = {
   type t
   type request = {
@@ -15542,9 +15582,10 @@ module ModifyVpcEndpointServicePayerResponsibility = {
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "ModifyVpcEndpointServicePayerResponsibilityCommand"
   let make = (~payerResponsibility, ~serviceId, ~dryRun=?, ()) =>
-    new({payerResponsibility, serviceId, dryRun})
+    new({payerResponsibility: payerResponsibility, serviceId: serviceId, dryRun: dryRun})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ModifySnapshotTier = {
   type t
   type request = {
@@ -15565,9 +15606,11 @@ module ModifySnapshotTier = {
     @ocaml.doc("<p>The ID of the snapshot.</p>") @as("SnapshotId") snapshotId: option<string_>,
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "ModifySnapshotTierCommand"
-  let make = (~snapshotId, ~dryRun=?, ~storageTier=?, ()) => new({dryRun, storageTier, snapshotId})
+  let make = (~snapshotId, ~dryRun=?, ~storageTier=?, ()) =>
+    new({dryRun: dryRun, storageTier: storageTier, snapshotId: snapshotId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ModifyPrivateDnsNameOptions = {
   type t
   type request = {
@@ -15610,14 +15653,15 @@ module ModifyPrivateDnsNameOptions = {
     (),
   ) =>
     new({
-      enableResourceNameDnsAAAARecord,
-      enableResourceNameDnsARecord,
-      privateDnsHostnameType,
-      instanceId,
-      dryRun,
+      enableResourceNameDnsAAAARecord: enableResourceNameDnsAAAARecord,
+      enableResourceNameDnsARecord: enableResourceNameDnsARecord,
+      privateDnsHostnameType: privateDnsHostnameType,
+      instanceId: instanceId,
+      dryRun: dryRun,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ModifyInstancePlacement = {
   type t
   type request = {
@@ -15670,9 +15714,18 @@ module ModifyInstancePlacement = {
     ~affinity=?,
     (),
   ) =>
-    new({hostResourceGroupArn, partitionNumber, tenancy, instanceId, hostId, groupName, affinity})
+    new({
+      hostResourceGroupArn: hostResourceGroupArn,
+      partitionNumber: partitionNumber,
+      tenancy: tenancy,
+      instanceId: instanceId,
+      hostId: hostId,
+      groupName: groupName,
+      affinity: affinity,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ModifyInstanceMaintenanceOptions = {
   type t
   type request = {
@@ -15698,9 +15751,10 @@ module ModifyInstanceMaintenanceOptions = {
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "ModifyInstanceMaintenanceOptionsCommand"
   let make = (~instanceId, ~dryRun=?, ~autoRecovery=?, ()) =>
-    new({dryRun, autoRecovery, instanceId})
+    new({dryRun: dryRun, autoRecovery: autoRecovery, instanceId: instanceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ModifyIdentityIdFormat = {
   type t
   type request = {
@@ -15730,9 +15784,10 @@ module ModifyIdentityIdFormat = {
   type response = {.}
   @module("@aws-sdk/client-ec2") @new external new: request => t = "ModifyIdentityIdFormatCommand"
   let make = (~useLongIds, ~resource, ~principalArn, ()) =>
-    new({useLongIds, resource, principalArn})
+    new({useLongIds: useLongIds, resource: resource, principalArn: principalArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ModifyIdFormat = {
   type t
   type request = {
@@ -15756,9 +15811,10 @@ module ModifyIdFormat = {
   }
   type response = {.}
   @module("@aws-sdk/client-ec2") @new external new: request => t = "ModifyIdFormatCommand"
-  let make = (~useLongIds, ~resource, ()) => new({useLongIds, resource})
+  let make = (~useLongIds, ~resource, ()) => new({useLongIds: useLongIds, resource: resource})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ModifyEbsDefaultKmsKeyId = {
   type t
   type request = {
@@ -15799,9 +15855,10 @@ module ModifyEbsDefaultKmsKeyId = {
     kmsKeyId: option<string_>,
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "ModifyEbsDefaultKmsKeyIdCommand"
-  let make = (~kmsKeyId, ~dryRun=?, ()) => new({dryRun, kmsKeyId})
+  let make = (~kmsKeyId, ~dryRun=?, ()) => new({dryRun: dryRun, kmsKeyId: kmsKeyId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ModifyCapacityReservationFleet = {
   type t
   type request = {
@@ -15854,9 +15911,17 @@ module ModifyCapacityReservationFleet = {
     ~endDate=?,
     ~totalTargetCapacity=?,
     (),
-  ) => new({removeEndDate, dryRun, endDate, totalTargetCapacity, capacityReservationFleetId})
+  ) =>
+    new({
+      removeEndDate: removeEndDate,
+      dryRun: dryRun,
+      endDate: endDate,
+      totalTargetCapacity: totalTargetCapacity,
+      capacityReservationFleetId: capacityReservationFleetId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ModifyCapacityReservation = {
   type t
   type request = {
@@ -15925,16 +15990,17 @@ module ModifyCapacityReservation = {
     (),
   ) =>
     new({
-      additionalInfo,
-      dryRun,
-      accept,
-      endDateType,
-      endDate,
-      instanceCount,
-      capacityReservationId,
+      additionalInfo: additionalInfo,
+      dryRun: dryRun,
+      accept: accept,
+      endDateType: endDateType,
+      endDate: endDate,
+      instanceCount: instanceCount,
+      capacityReservationId: capacityReservationId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ModifyAvailabilityZoneGroup = {
   type t
   type request = {
@@ -15959,9 +16025,11 @@ module ModifyAvailabilityZoneGroup = {
   }
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "ModifyAvailabilityZoneGroupCommand"
-  let make = (~optInStatus, ~groupName, ~dryRun=?, ()) => new({dryRun, optInStatus, groupName})
+  let make = (~optInStatus, ~groupName, ~dryRun=?, ()) =>
+    new({dryRun: dryRun, optInStatus: optInStatus, groupName: groupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ImportClientVpnClientCertificateRevocationList = {
   type t
   type request = {
@@ -15990,9 +16058,14 @@ module ImportClientVpnClientCertificateRevocationList = {
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "ImportClientVpnClientCertificateRevocationListCommand"
   let make = (~certificateRevocationList, ~clientVpnEndpointId, ~dryRun=?, ()) =>
-    new({dryRun, certificateRevocationList, clientVpnEndpointId})
+    new({
+      dryRun: dryRun,
+      certificateRevocationList: certificateRevocationList,
+      clientVpnEndpointId: clientVpnEndpointId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetVpnConnectionDeviceSampleConfiguration = {
   type t
   type request = {
@@ -16030,9 +16103,16 @@ module GetVpnConnectionDeviceSampleConfiguration = {
     ~dryRun=?,
     ~internetKeyExchangeVersion=?,
     (),
-  ) => new({dryRun, internetKeyExchangeVersion, vpnConnectionDeviceTypeId, vpnConnectionId})
+  ) =>
+    new({
+      dryRun: dryRun,
+      internetKeyExchangeVersion: internetKeyExchangeVersion,
+      vpnConnectionDeviceTypeId: vpnConnectionDeviceTypeId,
+      vpnConnectionId: vpnConnectionId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetSerialConsoleAccessStatus = {
   type t
   type request = {
@@ -16054,6 +16134,7 @@ module GetSerialConsoleAccessStatus = {
   let make = (~dryRun=?, ()) => new({dryRun: dryRun})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetPasswordData = {
   type t
   type request = {
@@ -16075,9 +16156,10 @@ module GetPasswordData = {
     instanceId: option<string_>,
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "GetPasswordDataCommand"
-  let make = (~instanceId, ~dryRun=?, ()) => new({dryRun, instanceId})
+  let make = (~instanceId, ~dryRun=?, ()) => new({dryRun: dryRun, instanceId: instanceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetEbsEncryptionByDefault = {
   type t
   type request = {
@@ -16097,6 +16179,7 @@ module GetEbsEncryptionByDefault = {
   let make = (~dryRun=?, ()) => new({dryRun: dryRun})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetEbsDefaultKmsKeyId = {
   type t
   type request = {
@@ -16117,6 +16200,7 @@ module GetEbsDefaultKmsKeyId = {
   let make = (~dryRun=?, ()) => new({dryRun: dryRun})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetConsoleScreenshot = {
   type t
   type request = {
@@ -16137,9 +16221,11 @@ module GetConsoleScreenshot = {
     imageData: option<string_>,
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "GetConsoleScreenshotCommand"
-  let make = (~instanceId, ~wakeUp=?, ~dryRun=?, ()) => new({wakeUp, instanceId, dryRun})
+  let make = (~instanceId, ~wakeUp=?, ~dryRun=?, ()) =>
+    new({wakeUp: wakeUp, instanceId: instanceId, dryRun: dryRun})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetConsoleOutput = {
   type t
   type request = {
@@ -16164,9 +16250,11 @@ module GetConsoleOutput = {
     @ocaml.doc("<p>The ID of the instance.</p>") @as("InstanceId") instanceId: option<string_>,
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "GetConsoleOutputCommand"
-  let make = (~instanceId, ~latest=?, ~dryRun=?, ()) => new({latest, dryRun, instanceId})
+  let make = (~instanceId, ~latest=?, ~dryRun=?, ()) =>
+    new({latest: latest, dryRun: dryRun, instanceId: instanceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ExportClientVpnClientConfiguration = {
   type t
   type request = {
@@ -16185,9 +16273,11 @@ module ExportClientVpnClientConfiguration = {
   }
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "ExportClientVpnClientConfigurationCommand"
-  let make = (~clientVpnEndpointId, ~dryRun=?, ()) => new({dryRun, clientVpnEndpointId})
+  let make = (~clientVpnEndpointId, ~dryRun=?, ()) =>
+    new({dryRun: dryRun, clientVpnEndpointId: clientVpnEndpointId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module EnableVpcClassicLinkDnsSupport = {
   type t
   type request = {@ocaml.doc("<p>The ID of the VPC.</p>") @as("VpcId") vpcId: option<vpcId>}
@@ -16203,6 +16293,7 @@ module EnableVpcClassicLinkDnsSupport = {
   let make = (~vpcId=?, ()) => new({vpcId: vpcId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module EnableVpcClassicLink = {
   type t
   type request = {
@@ -16221,9 +16312,10 @@ module EnableVpcClassicLink = {
     return: option<boolean_>,
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "EnableVpcClassicLinkCommand"
-  let make = (~vpcId, ~dryRun=?, ()) => new({vpcId, dryRun})
+  let make = (~vpcId, ~dryRun=?, ()) => new({vpcId: vpcId, dryRun: dryRun})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module EnableVolumeIO = {
   type t
   type request = {
@@ -16236,9 +16328,10 @@ module EnableVolumeIO = {
   }
   type response = {.}
   @module("@aws-sdk/client-ec2") @new external new: request => t = "EnableVolumeIOCommand"
-  let make = (~volumeId, ~dryRun=?, ()) => new({volumeId, dryRun})
+  let make = (~volumeId, ~dryRun=?, ()) => new({volumeId: volumeId, dryRun: dryRun})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module EnableVgwRoutePropagation = {
   type t
   @ocaml.doc("<p>Contains the parameters for EnableVgwRoutePropagation.</p>")
@@ -16262,9 +16355,11 @@ module EnableVgwRoutePropagation = {
   type response = {.}
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "EnableVgwRoutePropagationCommand"
-  let make = (~routeTableId, ~gatewayId, ~dryRun=?, ()) => new({dryRun, routeTableId, gatewayId})
+  let make = (~routeTableId, ~gatewayId, ~dryRun=?, ()) =>
+    new({dryRun: dryRun, routeTableId: routeTableId, gatewayId: gatewayId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module EnableSerialConsoleAccess = {
   type t
   type request = {
@@ -16286,6 +16381,7 @@ module EnableSerialConsoleAccess = {
   let make = (~dryRun=?, ()) => new({dryRun: dryRun})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module EnableIpamOrganizationAdminAccount = {
   type t
   type request = {
@@ -16306,9 +16402,11 @@ module EnableIpamOrganizationAdminAccount = {
   }
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "EnableIpamOrganizationAdminAccountCommand"
-  let make = (~delegatedAdminAccountId, ~dryRun=?, ()) => new({delegatedAdminAccountId, dryRun})
+  let make = (~delegatedAdminAccountId, ~dryRun=?, ()) =>
+    new({delegatedAdminAccountId: delegatedAdminAccountId, dryRun: dryRun})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module EnableImageDeprecation = {
   type t
   type request = {
@@ -16335,9 +16433,11 @@ module EnableImageDeprecation = {
     return: option<boolean_>,
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "EnableImageDeprecationCommand"
-  let make = (~deprecateAt, ~imageId, ~dryRun=?, ()) => new({dryRun, deprecateAt, imageId})
+  let make = (~deprecateAt, ~imageId, ~dryRun=?, ()) =>
+    new({dryRun: dryRun, deprecateAt: deprecateAt, imageId: imageId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module EnableEbsEncryptionByDefault = {
   type t
   type request = {
@@ -16356,6 +16456,7 @@ module EnableEbsEncryptionByDefault = {
   let make = (~dryRun=?, ()) => new({dryRun: dryRun})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DisassociateTrunkInterface = {
   type t
   type request = {
@@ -16387,9 +16488,10 @@ module DisassociateTrunkInterface = {
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "DisassociateTrunkInterfaceCommand"
   let make = (~associationId, ~dryRun=?, ~clientToken=?, ()) =>
-    new({dryRun, clientToken, associationId})
+    new({dryRun: dryRun, clientToken: clientToken, associationId: associationId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DisassociateRouteTable = {
   type t
   type request = {
@@ -16406,9 +16508,10 @@ module DisassociateRouteTable = {
   }
   type response = {.}
   @module("@aws-sdk/client-ec2") @new external new: request => t = "DisassociateRouteTableCommand"
-  let make = (~associationId, ~dryRun=?, ()) => new({dryRun, associationId})
+  let make = (~associationId, ~dryRun=?, ()) => new({dryRun: dryRun, associationId: associationId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DisassociateEnclaveCertificateIamRole = {
   type t
   type request = {
@@ -16433,9 +16536,10 @@ module DisassociateEnclaveCertificateIamRole = {
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "DisassociateEnclaveCertificateIamRoleCommand"
   let make = (~dryRun=?, ~roleArn=?, ~certificateArn=?, ()) =>
-    new({dryRun, roleArn, certificateArn})
+    new({dryRun: dryRun, roleArn: roleArn, certificateArn: certificateArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DisassociateAddress = {
   type t
   type request = {
@@ -16453,9 +16557,10 @@ module DisassociateAddress = {
   type response = {.}
   @module("@aws-sdk/client-ec2") @new external new: request => t = "DisassociateAddressCommand"
   let make = (~dryRun=?, ~publicIp=?, ~associationId=?, ()) =>
-    new({dryRun, publicIp, associationId})
+    new({dryRun: dryRun, publicIp: publicIp, associationId: associationId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DisableVpcClassicLinkDnsSupport = {
   type t
   type request = {@ocaml.doc("<p>The ID of the VPC.</p>") @as("VpcId") vpcId: option<vpcId>}
@@ -16471,6 +16576,7 @@ module DisableVpcClassicLinkDnsSupport = {
   let make = (~vpcId=?, ()) => new({vpcId: vpcId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DisableVpcClassicLink = {
   type t
   type request = {
@@ -16489,9 +16595,10 @@ module DisableVpcClassicLink = {
     return: option<boolean_>,
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "DisableVpcClassicLinkCommand"
-  let make = (~vpcId, ~dryRun=?, ()) => new({vpcId, dryRun})
+  let make = (~vpcId, ~dryRun=?, ()) => new({vpcId: vpcId, dryRun: dryRun})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DisableVgwRoutePropagation = {
   type t
   @ocaml.doc("<p>Contains the parameters for DisableVgwRoutePropagation.</p>")
@@ -16509,9 +16616,11 @@ module DisableVgwRoutePropagation = {
   type response = {.}
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "DisableVgwRoutePropagationCommand"
-  let make = (~routeTableId, ~gatewayId, ~dryRun=?, ()) => new({dryRun, routeTableId, gatewayId})
+  let make = (~routeTableId, ~gatewayId, ~dryRun=?, ()) =>
+    new({dryRun: dryRun, routeTableId: routeTableId, gatewayId: gatewayId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DisableSerialConsoleAccess = {
   type t
   type request = {
@@ -16533,6 +16642,7 @@ module DisableSerialConsoleAccess = {
   let make = (~dryRun=?, ()) => new({dryRun: dryRun})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DisableIpamOrganizationAdminAccount = {
   type t
   type request = {
@@ -16553,9 +16663,11 @@ module DisableIpamOrganizationAdminAccount = {
   }
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "DisableIpamOrganizationAdminAccountCommand"
-  let make = (~delegatedAdminAccountId, ~dryRun=?, ()) => new({delegatedAdminAccountId, dryRun})
+  let make = (~delegatedAdminAccountId, ~dryRun=?, ()) =>
+    new({delegatedAdminAccountId: delegatedAdminAccountId, dryRun: dryRun})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DisableImageDeprecation = {
   type t
   type request = {
@@ -16574,9 +16686,10 @@ module DisableImageDeprecation = {
     return: option<boolean_>,
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "DisableImageDeprecationCommand"
-  let make = (~imageId, ~dryRun=?, ()) => new({dryRun, imageId})
+  let make = (~imageId, ~dryRun=?, ()) => new({dryRun: dryRun, imageId: imageId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DisableEbsEncryptionByDefault = {
   type t
   type request = {
@@ -16595,6 +16708,7 @@ module DisableEbsEncryptionByDefault = {
   let make = (~dryRun=?, ()) => new({dryRun: dryRun})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DetachVpnGateway = {
   type t
   @ocaml.doc("<p>Contains the parameters for DetachVpnGateway.</p>")
@@ -16611,9 +16725,11 @@ module DetachVpnGateway = {
   }
   type response = {.}
   @module("@aws-sdk/client-ec2") @new external new: request => t = "DetachVpnGatewayCommand"
-  let make = (~vpnGatewayId, ~vpcId, ~dryRun=?, ()) => new({dryRun, vpnGatewayId, vpcId})
+  let make = (~vpnGatewayId, ~vpcId, ~dryRun=?, ()) =>
+    new({dryRun: dryRun, vpnGatewayId: vpnGatewayId, vpcId: vpcId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DetachVolume = {
   type t
   type request = {
@@ -16641,9 +16757,10 @@ module DetachVolume = {
   type response = volumeAttachment
   @module("@aws-sdk/client-ec2") @new external new: request => t = "DetachVolumeCommand"
   let make = (~volumeId, ~dryRun=?, ~instanceId=?, ~force=?, ~device=?, ()) =>
-    new({dryRun, volumeId, instanceId, force, device})
+    new({dryRun: dryRun, volumeId: volumeId, instanceId: instanceId, force: force, device: device})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DetachNetworkInterface = {
   type t
   @ocaml.doc("<p>Contains the parameters for DetachNetworkInterface.</p>")
@@ -16678,9 +16795,11 @@ module DetachNetworkInterface = {
   }
   type response = {.}
   @module("@aws-sdk/client-ec2") @new external new: request => t = "DetachNetworkInterfaceCommand"
-  let make = (~attachmentId, ~force=?, ~dryRun=?, ()) => new({force, dryRun, attachmentId})
+  let make = (~attachmentId, ~force=?, ~dryRun=?, ()) =>
+    new({force: force, dryRun: dryRun, attachmentId: attachmentId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DetachInternetGateway = {
   type t
   type request = {
@@ -16695,9 +16814,11 @@ module DetachInternetGateway = {
   }
   type response = {.}
   @module("@aws-sdk/client-ec2") @new external new: request => t = "DetachInternetGatewayCommand"
-  let make = (~vpcId, ~internetGatewayId, ~dryRun=?, ()) => new({vpcId, internetGatewayId, dryRun})
+  let make = (~vpcId, ~internetGatewayId, ~dryRun=?, ()) =>
+    new({vpcId: vpcId, internetGatewayId: internetGatewayId, dryRun: dryRun})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DetachClassicLinkVpc = {
   type t
   type request = {
@@ -16719,9 +16840,11 @@ module DetachClassicLinkVpc = {
     return: option<boolean_>,
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "DetachClassicLinkVpcCommand"
-  let make = (~vpcId, ~instanceId, ~dryRun=?, ()) => new({vpcId, instanceId, dryRun})
+  let make = (~vpcId, ~instanceId, ~dryRun=?, ()) =>
+    new({vpcId: vpcId, instanceId: instanceId, dryRun: dryRun})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeregisterImage = {
   type t
   @ocaml.doc("<p>Contains the parameters for DeregisterImage.</p>")
@@ -16735,9 +16858,10 @@ module DeregisterImage = {
   }
   type response = {.}
   @module("@aws-sdk/client-ec2") @new external new: request => t = "DeregisterImageCommand"
-  let make = (~imageId, ~dryRun=?, ()) => new({dryRun, imageId})
+  let make = (~imageId, ~dryRun=?, ()) => new({dryRun: dryRun, imageId: imageId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteVpnGateway = {
   type t
   @ocaml.doc("<p>Contains the parameters for DeleteVpnGateway.</p>")
@@ -16753,9 +16877,10 @@ module DeleteVpnGateway = {
   }
   type response = {.}
   @module("@aws-sdk/client-ec2") @new external new: request => t = "DeleteVpnGatewayCommand"
-  let make = (~vpnGatewayId, ~dryRun=?, ()) => new({dryRun, vpnGatewayId})
+  let make = (~vpnGatewayId, ~dryRun=?, ()) => new({dryRun: dryRun, vpnGatewayId: vpnGatewayId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteVpnConnectionRoute = {
   type t
   @ocaml.doc("<p>Contains the parameters for DeleteVpnConnectionRoute.</p>")
@@ -16769,9 +16894,10 @@ module DeleteVpnConnectionRoute = {
   type response = {.}
   @module("@aws-sdk/client-ec2") @new external new: request => t = "DeleteVpnConnectionRouteCommand"
   let make = (~vpnConnectionId, ~destinationCidrBlock, ()) =>
-    new({vpnConnectionId, destinationCidrBlock})
+    new({vpnConnectionId: vpnConnectionId, destinationCidrBlock: destinationCidrBlock})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteVpnConnection = {
   type t
   @ocaml.doc("<p>Contains the parameters for DeleteVpnConnection.</p>")
@@ -16787,9 +16913,11 @@ module DeleteVpnConnection = {
   }
   type response = {.}
   @module("@aws-sdk/client-ec2") @new external new: request => t = "DeleteVpnConnectionCommand"
-  let make = (~vpnConnectionId, ~dryRun=?, ()) => new({dryRun, vpnConnectionId})
+  let make = (~vpnConnectionId, ~dryRun=?, ()) =>
+    new({dryRun: dryRun, vpnConnectionId: vpnConnectionId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteVpcPeeringConnection = {
   type t
   type request = {
@@ -16810,9 +16938,11 @@ module DeleteVpcPeeringConnection = {
   }
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "DeleteVpcPeeringConnectionCommand"
-  let make = (~vpcPeeringConnectionId, ~dryRun=?, ()) => new({vpcPeeringConnectionId, dryRun})
+  let make = (~vpcPeeringConnectionId, ~dryRun=?, ()) =>
+    new({vpcPeeringConnectionId: vpcPeeringConnectionId, dryRun: dryRun})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteVpc = {
   type t
   type request = {
@@ -16825,9 +16955,10 @@ module DeleteVpc = {
   }
   type response = {.}
   @module("@aws-sdk/client-ec2") @new external new: request => t = "DeleteVpcCommand"
-  let make = (~vpcId, ~dryRun=?, ()) => new({dryRun, vpcId})
+  let make = (~vpcId, ~dryRun=?, ()) => new({dryRun: dryRun, vpcId: vpcId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteVolume = {
   type t
   type request = {
@@ -16840,9 +16971,10 @@ module DeleteVolume = {
   }
   type response = {.}
   @module("@aws-sdk/client-ec2") @new external new: request => t = "DeleteVolumeCommand"
-  let make = (~volumeId, ~dryRun=?, ()) => new({dryRun, volumeId})
+  let make = (~volumeId, ~dryRun=?, ()) => new({dryRun: dryRun, volumeId: volumeId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteTrafficMirrorTarget = {
   type t
   type request = {
@@ -16860,9 +16992,11 @@ module DeleteTrafficMirrorTarget = {
   }
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "DeleteTrafficMirrorTargetCommand"
-  let make = (~trafficMirrorTargetId, ~dryRun=?, ()) => new({dryRun, trafficMirrorTargetId})
+  let make = (~trafficMirrorTargetId, ~dryRun=?, ()) =>
+    new({dryRun: dryRun, trafficMirrorTargetId: trafficMirrorTargetId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteTrafficMirrorSession = {
   type t
   type request = {
@@ -16880,9 +17014,11 @@ module DeleteTrafficMirrorSession = {
   }
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "DeleteTrafficMirrorSessionCommand"
-  let make = (~trafficMirrorSessionId, ~dryRun=?, ()) => new({dryRun, trafficMirrorSessionId})
+  let make = (~trafficMirrorSessionId, ~dryRun=?, ()) =>
+    new({dryRun: dryRun, trafficMirrorSessionId: trafficMirrorSessionId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteTrafficMirrorFilterRule = {
   type t
   type request = {
@@ -16900,9 +17036,11 @@ module DeleteTrafficMirrorFilterRule = {
   }
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "DeleteTrafficMirrorFilterRuleCommand"
-  let make = (~trafficMirrorFilterRuleId, ~dryRun=?, ()) => new({dryRun, trafficMirrorFilterRuleId})
+  let make = (~trafficMirrorFilterRuleId, ~dryRun=?, ()) =>
+    new({dryRun: dryRun, trafficMirrorFilterRuleId: trafficMirrorFilterRuleId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteTrafficMirrorFilter = {
   type t
   type request = {
@@ -16920,9 +17058,11 @@ module DeleteTrafficMirrorFilter = {
   }
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "DeleteTrafficMirrorFilterCommand"
-  let make = (~trafficMirrorFilterId, ~dryRun=?, ()) => new({dryRun, trafficMirrorFilterId})
+  let make = (~trafficMirrorFilterId, ~dryRun=?, ()) =>
+    new({dryRun: dryRun, trafficMirrorFilterId: trafficMirrorFilterId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteSubnet = {
   type t
   type request = {
@@ -16935,9 +17075,10 @@ module DeleteSubnet = {
   }
   type response = {.}
   @module("@aws-sdk/client-ec2") @new external new: request => t = "DeleteSubnetCommand"
-  let make = (~subnetId, ~dryRun=?, ()) => new({dryRun, subnetId})
+  let make = (~subnetId, ~dryRun=?, ()) => new({dryRun: dryRun, subnetId: subnetId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteSpotDatafeedSubscription = {
   type t
   @ocaml.doc("<p>Contains the parameters for DeleteSpotDatafeedSubscription.</p>")
@@ -16955,6 +17096,7 @@ module DeleteSpotDatafeedSubscription = {
   let make = (~dryRun=?, ()) => new({dryRun: dryRun})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteSnapshot = {
   type t
   type request = {
@@ -16967,9 +17109,10 @@ module DeleteSnapshot = {
   }
   type response = {.}
   @module("@aws-sdk/client-ec2") @new external new: request => t = "DeleteSnapshotCommand"
-  let make = (~snapshotId, ~dryRun=?, ()) => new({dryRun, snapshotId})
+  let make = (~snapshotId, ~dryRun=?, ()) => new({dryRun: dryRun, snapshotId: snapshotId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteSecurityGroup = {
   type t
   type request = {
@@ -16988,9 +17131,11 @@ module DeleteSecurityGroup = {
   }
   type response = {.}
   @module("@aws-sdk/client-ec2") @new external new: request => t = "DeleteSecurityGroupCommand"
-  let make = (~dryRun=?, ~groupName=?, ~groupId=?, ()) => new({dryRun, groupName, groupId})
+  let make = (~dryRun=?, ~groupName=?, ~groupId=?, ()) =>
+    new({dryRun: dryRun, groupName: groupName, groupId: groupId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteRouteTable = {
   type t
   type request = {
@@ -17003,9 +17148,10 @@ module DeleteRouteTable = {
   }
   type response = {.}
   @module("@aws-sdk/client-ec2") @new external new: request => t = "DeleteRouteTableCommand"
-  let make = (~routeTableId, ~dryRun=?, ()) => new({routeTableId, dryRun})
+  let make = (~routeTableId, ~dryRun=?, ()) => new({routeTableId: routeTableId, dryRun: dryRun})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteRoute = {
   type t
   type request = {
@@ -17039,14 +17185,15 @@ module DeleteRoute = {
     (),
   ) =>
     new({
-      routeTableId,
-      dryRun,
-      destinationPrefixListId,
-      destinationIpv6CidrBlock,
-      destinationCidrBlock,
+      routeTableId: routeTableId,
+      dryRun: dryRun,
+      destinationPrefixListId: destinationPrefixListId,
+      destinationIpv6CidrBlock: destinationIpv6CidrBlock,
+      destinationCidrBlock: destinationCidrBlock,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeletePublicIpv4Pool = {
   type t
   type request = {
@@ -17064,9 +17211,10 @@ module DeletePublicIpv4Pool = {
     returnValue: option<boolean_>,
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "DeletePublicIpv4PoolCommand"
-  let make = (~poolId, ~dryRun=?, ()) => new({poolId, dryRun})
+  let make = (~poolId, ~dryRun=?, ()) => new({poolId: poolId, dryRun: dryRun})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeletePlacementGroup = {
   type t
   type request = {
@@ -17080,9 +17228,10 @@ module DeletePlacementGroup = {
   }
   type response = {.}
   @module("@aws-sdk/client-ec2") @new external new: request => t = "DeletePlacementGroupCommand"
-  let make = (~groupName, ~dryRun=?, ()) => new({groupName, dryRun})
+  let make = (~groupName, ~dryRun=?, ()) => new({groupName: groupName, dryRun: dryRun})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteNetworkInterfacePermission = {
   type t
   @ocaml.doc("<p>Contains the parameters for DeleteNetworkInterfacePermission.</p>")
@@ -17111,9 +17260,10 @@ module DeleteNetworkInterfacePermission = {
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "DeleteNetworkInterfacePermissionCommand"
   let make = (~networkInterfacePermissionId, ~dryRun=?, ~force=?, ()) =>
-    new({dryRun, force, networkInterfacePermissionId})
+    new({dryRun: dryRun, force: force, networkInterfacePermissionId: networkInterfacePermissionId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteNetworkInterface = {
   type t
   @ocaml.doc("<p>Contains the parameters for DeleteNetworkInterface.</p>")
@@ -17128,9 +17278,11 @@ module DeleteNetworkInterface = {
   }
   type response = {.}
   @module("@aws-sdk/client-ec2") @new external new: request => t = "DeleteNetworkInterfaceCommand"
-  let make = (~networkInterfaceId, ~dryRun=?, ()) => new({networkInterfaceId, dryRun})
+  let make = (~networkInterfaceId, ~dryRun=?, ()) =>
+    new({networkInterfaceId: networkInterfaceId, dryRun: dryRun})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteNetworkInsightsPath = {
   type t
   type request = {
@@ -17148,9 +17300,11 @@ module DeleteNetworkInsightsPath = {
   }
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "DeleteNetworkInsightsPathCommand"
-  let make = (~networkInsightsPathId, ~dryRun=?, ()) => new({networkInsightsPathId, dryRun})
+  let make = (~networkInsightsPathId, ~dryRun=?, ()) =>
+    new({networkInsightsPathId: networkInsightsPathId, dryRun: dryRun})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteNetworkInsightsAnalysis = {
   type t
   type request = {
@@ -17168,9 +17322,11 @@ module DeleteNetworkInsightsAnalysis = {
   }
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "DeleteNetworkInsightsAnalysisCommand"
-  let make = (~networkInsightsAnalysisId, ~dryRun=?, ()) => new({networkInsightsAnalysisId, dryRun})
+  let make = (~networkInsightsAnalysisId, ~dryRun=?, ()) =>
+    new({networkInsightsAnalysisId: networkInsightsAnalysisId, dryRun: dryRun})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteNetworkInsightsAccessScopeAnalysis = {
   type t
   type request = {
@@ -17191,9 +17347,13 @@ module DeleteNetworkInsightsAccessScopeAnalysis = {
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "DeleteNetworkInsightsAccessScopeAnalysisCommand"
   let make = (~networkInsightsAccessScopeAnalysisId, ~dryRun=?, ()) =>
-    new({dryRun, networkInsightsAccessScopeAnalysisId})
+    new({
+      dryRun: dryRun,
+      networkInsightsAccessScopeAnalysisId: networkInsightsAccessScopeAnalysisId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteNetworkInsightsAccessScope = {
   type t
   type request = {
@@ -17212,9 +17372,10 @@ module DeleteNetworkInsightsAccessScope = {
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "DeleteNetworkInsightsAccessScopeCommand"
   let make = (~networkInsightsAccessScopeId, ~dryRun=?, ()) =>
-    new({networkInsightsAccessScopeId, dryRun})
+    new({networkInsightsAccessScopeId: networkInsightsAccessScopeId, dryRun: dryRun})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteNetworkAclEntry = {
   type t
   type request = {
@@ -17232,9 +17393,10 @@ module DeleteNetworkAclEntry = {
   type response = {.}
   @module("@aws-sdk/client-ec2") @new external new: request => t = "DeleteNetworkAclEntryCommand"
   let make = (~ruleNumber, ~networkAclId, ~egress, ~dryRun=?, ()) =>
-    new({ruleNumber, networkAclId, egress, dryRun})
+    new({ruleNumber: ruleNumber, networkAclId: networkAclId, egress: egress, dryRun: dryRun})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteNetworkAcl = {
   type t
   type request = {
@@ -17247,9 +17409,10 @@ module DeleteNetworkAcl = {
   }
   type response = {.}
   @module("@aws-sdk/client-ec2") @new external new: request => t = "DeleteNetworkAclCommand"
-  let make = (~networkAclId, ~dryRun=?, ()) => new({networkAclId, dryRun})
+  let make = (~networkAclId, ~dryRun=?, ()) => new({networkAclId: networkAclId, dryRun: dryRun})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteNatGateway = {
   type t
   type request = {
@@ -17265,9 +17428,10 @@ module DeleteNatGateway = {
     natGatewayId: option<string_>,
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "DeleteNatGatewayCommand"
-  let make = (~natGatewayId, ~dryRun=?, ()) => new({natGatewayId, dryRun})
+  let make = (~natGatewayId, ~dryRun=?, ()) => new({natGatewayId: natGatewayId, dryRun: dryRun})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteKeyPair = {
   type t
   type request = {
@@ -17281,9 +17445,11 @@ module DeleteKeyPair = {
   }
   type response = {.}
   @module("@aws-sdk/client-ec2") @new external new: request => t = "DeleteKeyPairCommand"
-  let make = (~dryRun=?, ~keyPairId=?, ~keyName=?, ()) => new({dryRun, keyPairId, keyName})
+  let make = (~dryRun=?, ~keyPairId=?, ~keyName=?, ()) =>
+    new({dryRun: dryRun, keyPairId: keyPairId, keyName: keyName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteInternetGateway = {
   type t
   type request = {
@@ -17297,9 +17463,11 @@ module DeleteInternetGateway = {
   }
   type response = {.}
   @module("@aws-sdk/client-ec2") @new external new: request => t = "DeleteInternetGatewayCommand"
-  let make = (~internetGatewayId, ~dryRun=?, ()) => new({internetGatewayId, dryRun})
+  let make = (~internetGatewayId, ~dryRun=?, ()) =>
+    new({internetGatewayId: internetGatewayId, dryRun: dryRun})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteFpgaImage = {
   type t
   type request = {
@@ -17316,9 +17484,10 @@ module DeleteFpgaImage = {
     return: option<boolean_>,
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "DeleteFpgaImageCommand"
-  let make = (~fpgaImageId, ~dryRun=?, ()) => new({fpgaImageId, dryRun})
+  let make = (~fpgaImageId, ~dryRun=?, ()) => new({fpgaImageId: fpgaImageId, dryRun: dryRun})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteEgressOnlyInternetGateway = {
   type t
   type request = {
@@ -17341,9 +17510,10 @@ module DeleteEgressOnlyInternetGateway = {
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "DeleteEgressOnlyInternetGatewayCommand"
   let make = (~egressOnlyInternetGatewayId, ~dryRun=?, ()) =>
-    new({egressOnlyInternetGatewayId, dryRun})
+    new({egressOnlyInternetGatewayId: egressOnlyInternetGatewayId, dryRun: dryRun})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteDhcpOptions = {
   type t
   type request = {
@@ -17357,9 +17527,10 @@ module DeleteDhcpOptions = {
   }
   type response = {.}
   @module("@aws-sdk/client-ec2") @new external new: request => t = "DeleteDhcpOptionsCommand"
-  let make = (~dhcpOptionsId, ~dryRun=?, ()) => new({dryRun, dhcpOptionsId})
+  let make = (~dhcpOptionsId, ~dryRun=?, ()) => new({dryRun: dryRun, dhcpOptionsId: dhcpOptionsId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteCustomerGateway = {
   type t
   @ocaml.doc("<p>Contains the parameters for DeleteCustomerGateway.</p>")
@@ -17375,9 +17546,11 @@ module DeleteCustomerGateway = {
   }
   type response = {.}
   @module("@aws-sdk/client-ec2") @new external new: request => t = "DeleteCustomerGatewayCommand"
-  let make = (~customerGatewayId, ~dryRun=?, ()) => new({dryRun, customerGatewayId})
+  let make = (~customerGatewayId, ~dryRun=?, ()) =>
+    new({dryRun: dryRun, customerGatewayId: customerGatewayId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module CreateVpnConnectionRoute = {
   type t
   @ocaml.doc("<p>Contains the parameters for CreateVpnConnectionRoute.</p>")
@@ -17391,9 +17564,10 @@ module CreateVpnConnectionRoute = {
   type response = {.}
   @module("@aws-sdk/client-ec2") @new external new: request => t = "CreateVpnConnectionRouteCommand"
   let make = (~vpnConnectionId, ~destinationCidrBlock, ()) =>
-    new({vpnConnectionId, destinationCidrBlock})
+    new({vpnConnectionId: vpnConnectionId, destinationCidrBlock: destinationCidrBlock})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module CreateRoute = {
   type t
   type request = {
@@ -17479,25 +17653,26 @@ module CreateRoute = {
     (),
   ) =>
     new({
-      coreNetworkArn,
-      vpcPeeringConnectionId,
-      routeTableId,
-      networkInterfaceId,
-      carrierGatewayId,
-      localGatewayId,
-      transitGatewayId,
-      natGatewayId,
-      instanceId,
-      gatewayId,
-      egressOnlyInternetGatewayId,
-      vpcEndpointId,
-      dryRun,
-      destinationPrefixListId,
-      destinationIpv6CidrBlock,
-      destinationCidrBlock,
+      coreNetworkArn: coreNetworkArn,
+      vpcPeeringConnectionId: vpcPeeringConnectionId,
+      routeTableId: routeTableId,
+      networkInterfaceId: networkInterfaceId,
+      carrierGatewayId: carrierGatewayId,
+      localGatewayId: localGatewayId,
+      transitGatewayId: transitGatewayId,
+      natGatewayId: natGatewayId,
+      instanceId: instanceId,
+      gatewayId: gatewayId,
+      egressOnlyInternetGatewayId: egressOnlyInternetGatewayId,
+      vpcEndpointId: vpcEndpointId,
+      dryRun: dryRun,
+      destinationPrefixListId: destinationPrefixListId,
+      destinationIpv6CidrBlock: destinationIpv6CidrBlock,
+      destinationCidrBlock: destinationCidrBlock,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CopyImage = {
   type t
   @ocaml.doc("<p>Contains the parameters for CopyImage.</p>")
@@ -17579,18 +17754,19 @@ module CopyImage = {
     (),
   ) =>
     new({
-      dryRun,
-      destinationOutpostArn,
-      sourceRegion,
-      sourceImageId,
-      name,
-      kmsKeyId,
-      encrypted,
-      description,
-      clientToken,
+      dryRun: dryRun,
+      destinationOutpostArn: destinationOutpostArn,
+      sourceRegion: sourceRegion,
+      sourceImageId: sourceImageId,
+      name: name,
+      kmsKeyId: kmsKeyId,
+      encrypted: encrypted,
+      description: description,
+      clientToken: clientToken,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CopyFpgaImage = {
   type t
   type request = {
@@ -17625,9 +17801,18 @@ module CopyFpgaImage = {
     ~description=?,
     ~dryRun=?,
     (),
-  ) => new({clientToken, sourceRegion, name, description, sourceFpgaImageId, dryRun})
+  ) =>
+    new({
+      clientToken: clientToken,
+      sourceRegion: sourceRegion,
+      name: name,
+      description: description,
+      sourceFpgaImageId: sourceFpgaImageId,
+      dryRun: dryRun,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ConfirmProductInstance = {
   type t
   type request = {
@@ -17652,9 +17837,11 @@ module ConfirmProductInstance = {
     ownerId: option<string_>,
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "ConfirmProductInstanceCommand"
-  let make = (~productCode, ~instanceId, ~dryRun=?, ()) => new({dryRun, productCode, instanceId})
+  let make = (~productCode, ~instanceId, ~dryRun=?, ()) =>
+    new({dryRun: dryRun, productCode: productCode, instanceId: instanceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CancelImportTask = {
   type t
   type request = {
@@ -17679,9 +17866,10 @@ module CancelImportTask = {
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "CancelImportTaskCommand"
   let make = (~importTaskId=?, ~dryRun=?, ~cancelReason=?, ()) =>
-    new({importTaskId, dryRun, cancelReason})
+    new({importTaskId: importTaskId, dryRun: dryRun, cancelReason: cancelReason})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CancelExportTask = {
   type t
   type request = {
@@ -17696,6 +17884,7 @@ module CancelExportTask = {
   let make = (~exportTaskId, ()) => new({exportTaskId: exportTaskId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module CancelConversionTask = {
   type t
   type request = {
@@ -17712,9 +17901,10 @@ module CancelConversionTask = {
   type response = {.}
   @module("@aws-sdk/client-ec2") @new external new: request => t = "CancelConversionTaskCommand"
   let make = (~conversionTaskId, ~reasonMessage=?, ~dryRun=?, ()) =>
-    new({reasonMessage, dryRun, conversionTaskId})
+    new({reasonMessage: reasonMessage, dryRun: dryRun, conversionTaskId: conversionTaskId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module CancelCapacityReservation = {
   type t
   type request = {
@@ -17736,9 +17926,11 @@ module CancelCapacityReservation = {
   }
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "CancelCapacityReservationCommand"
-  let make = (~capacityReservationId, ~dryRun=?, ()) => new({dryRun, capacityReservationId})
+  let make = (~capacityReservationId, ~dryRun=?, ()) =>
+    new({dryRun: dryRun, capacityReservationId: capacityReservationId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module AttachVolume = {
   type t
   type request = {
@@ -17759,9 +17951,10 @@ module AttachVolume = {
   type response = volumeAttachment
   @module("@aws-sdk/client-ec2") @new external new: request => t = "AttachVolumeCommand"
   let make = (~volumeId, ~instanceId, ~device, ~dryRun=?, ()) =>
-    new({dryRun, volumeId, instanceId, device})
+    new({dryRun: dryRun, volumeId: volumeId, instanceId: instanceId, device: device})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module AttachNetworkInterface = {
   type t
   @ocaml.doc("<p>Contains the parameters for AttachNetworkInterface.</p>")
@@ -17792,9 +17985,16 @@ module AttachNetworkInterface = {
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "AttachNetworkInterfaceCommand"
   let make = (~networkInterfaceId, ~instanceId, ~deviceIndex, ~networkCardIndex=?, ~dryRun=?, ()) =>
-    new({networkCardIndex, networkInterfaceId, instanceId, dryRun, deviceIndex})
+    new({
+      networkCardIndex: networkCardIndex,
+      networkInterfaceId: networkInterfaceId,
+      instanceId: instanceId,
+      dryRun: dryRun,
+      deviceIndex: deviceIndex,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module AttachInternetGateway = {
   type t
   type request = {
@@ -17809,9 +18009,11 @@ module AttachInternetGateway = {
   }
   type response = {.}
   @module("@aws-sdk/client-ec2") @new external new: request => t = "AttachInternetGatewayCommand"
-  let make = (~vpcId, ~internetGatewayId, ~dryRun=?, ()) => new({vpcId, internetGatewayId, dryRun})
+  let make = (~vpcId, ~internetGatewayId, ~dryRun=?, ()) =>
+    new({vpcId: vpcId, internetGatewayId: internetGatewayId, dryRun: dryRun})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module AssociateEnclaveCertificateIamRole = {
   type t
   type request = {
@@ -17843,9 +18045,10 @@ module AssociateEnclaveCertificateIamRole = {
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "AssociateEnclaveCertificateIamRoleCommand"
   let make = (~dryRun=?, ~roleArn=?, ~certificateArn=?, ()) =>
-    new({dryRun, roleArn, certificateArn})
+    new({dryRun: dryRun, roleArn: roleArn, certificateArn: certificateArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module AssociateDhcpOptions = {
   type t
   type request = {
@@ -17862,9 +18065,11 @@ module AssociateDhcpOptions = {
   }
   type response = {.}
   @module("@aws-sdk/client-ec2") @new external new: request => t = "AssociateDhcpOptionsCommand"
-  let make = (~vpcId, ~dhcpOptionsId, ~dryRun=?, ()) => new({dryRun, vpcId, dhcpOptionsId})
+  let make = (~vpcId, ~dhcpOptionsId, ~dryRun=?, ()) =>
+    new({dryRun: dryRun, vpcId: vpcId, dhcpOptionsId: dhcpOptionsId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module AssociateAddress = {
   type t
   type request = {
@@ -17920,16 +18125,17 @@ module AssociateAddress = {
     (),
   ) =>
     new({
-      privateIpAddress,
-      networkInterfaceId,
-      dryRun,
-      allowReassociation,
-      publicIp,
-      instanceId,
-      allocationId,
+      privateIpAddress: privateIpAddress,
+      networkInterfaceId: networkInterfaceId,
+      dryRun: dryRun,
+      allowReassociation: allowReassociation,
+      publicIp: publicIp,
+      instanceId: instanceId,
+      allocationId: allocationId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module WithdrawByoipCidr = {
   type t
   type request = {
@@ -17945,9 +18151,10 @@ module WithdrawByoipCidr = {
     byoipCidr: option<byoipCidr>,
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "WithdrawByoipCidrCommand"
-  let make = (~cidr, ~dryRun=?, ()) => new({dryRun, cidr})
+  let make = (~cidr, ~dryRun=?, ()) => new({dryRun: dryRun, cidr: cidr})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UnassignPrivateIpAddresses = {
   type t
   @ocaml.doc("<p>Contains the parameters for UnassignPrivateIpAddresses.</p>")
@@ -17967,9 +18174,14 @@ module UnassignPrivateIpAddresses = {
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "UnassignPrivateIpAddressesCommand"
   let make = (~networkInterfaceId, ~ipv4Prefixes=?, ~privateIpAddresses=?, ()) =>
-    new({ipv4Prefixes, privateIpAddresses, networkInterfaceId})
+    new({
+      ipv4Prefixes: ipv4Prefixes,
+      privateIpAddresses: privateIpAddresses,
+      networkInterfaceId: networkInterfaceId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UnassignIpv6Addresses = {
   type t
   type request = {
@@ -17994,9 +18206,14 @@ module UnassignIpv6Addresses = {
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "UnassignIpv6AddressesCommand"
   let make = (~networkInterfaceId, ~ipv6Prefixes=?, ~ipv6Addresses=?, ()) =>
-    new({networkInterfaceId, ipv6Prefixes, ipv6Addresses})
+    new({
+      networkInterfaceId: networkInterfaceId,
+      ipv6Prefixes: ipv6Prefixes,
+      ipv6Addresses: ipv6Addresses,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module RevokeClientVpnIngress = {
   type t
   type request = {
@@ -18034,9 +18251,17 @@ module RevokeClientVpnIngress = {
     ~revokeAllGroups=?,
     ~accessGroupId=?,
     (),
-  ) => new({dryRun, revokeAllGroups, accessGroupId, targetNetworkCidr, clientVpnEndpointId})
+  ) =>
+    new({
+      dryRun: dryRun,
+      revokeAllGroups: revokeAllGroups,
+      accessGroupId: accessGroupId,
+      targetNetworkCidr: targetNetworkCidr,
+      clientVpnEndpointId: clientVpnEndpointId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ReportInstanceStatus = {
   type t
   type request = {
@@ -18114,9 +18339,19 @@ module ReportInstanceStatus = {
     ~dryRun=?,
     ~description=?,
     (),
-  ) => new({status, startTime, reasonCodes, instances, endTime, dryRun, description})
+  ) =>
+    new({
+      status: status,
+      startTime: startTime,
+      reasonCodes: reasonCodes,
+      instances: instances,
+      endTime: endTime,
+      dryRun: dryRun,
+      description: description,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ReplaceRouteTableAssociation = {
   type t
   type request = {
@@ -18140,9 +18375,10 @@ module ReplaceRouteTableAssociation = {
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "ReplaceRouteTableAssociationCommand"
   let make = (~routeTableId, ~associationId, ~dryRun=?, ()) =>
-    new({routeTableId, dryRun, associationId})
+    new({routeTableId: routeTableId, dryRun: dryRun, associationId: associationId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ReplaceNetworkAclEntry = {
   type t
   type request = {
@@ -18202,19 +18438,20 @@ module ReplaceNetworkAclEntry = {
     (),
   ) =>
     new({
-      ruleNumber,
-      ruleAction,
-      protocol,
-      portRange,
-      networkAclId,
-      ipv6CidrBlock,
-      icmpTypeCode,
-      egress,
-      dryRun,
-      cidrBlock,
+      ruleNumber: ruleNumber,
+      ruleAction: ruleAction,
+      protocol: protocol,
+      portRange: portRange,
+      networkAclId: networkAclId,
+      ipv6CidrBlock: ipv6CidrBlock,
+      icmpTypeCode: icmpTypeCode,
+      egress: egress,
+      dryRun: dryRun,
+      cidrBlock: cidrBlock,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module RebootInstances = {
   type t
   type request = {
@@ -18227,9 +18464,10 @@ module RebootInstances = {
   }
   type response = {.}
   @module("@aws-sdk/client-ec2") @new external new: request => t = "RebootInstancesCommand"
-  let make = (~instanceIds, ~dryRun=?, ()) => new({dryRun, instanceIds})
+  let make = (~instanceIds, ~dryRun=?, ()) => new({dryRun: dryRun, instanceIds: instanceIds})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module PurchaseReservedInstancesOffering = {
   type t
   @ocaml.doc("<p>Contains the parameters for PurchaseReservedInstancesOffering.</p>")
@@ -18272,9 +18510,17 @@ module PurchaseReservedInstancesOffering = {
     ~limitPrice=?,
     ~dryRun=?,
     (),
-  ) => new({purchaseTime, limitPrice, dryRun, reservedInstancesOfferingId, instanceCount})
+  ) =>
+    new({
+      purchaseTime: purchaseTime,
+      limitPrice: limitPrice,
+      dryRun: dryRun,
+      reservedInstancesOfferingId: reservedInstancesOfferingId,
+      instanceCount: instanceCount,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ProvisionPublicIpv4PoolCidr = {
   type t
   type request = {
@@ -18303,9 +18549,10 @@ module ProvisionPublicIpv4PoolCidr = {
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "ProvisionPublicIpv4PoolCidrCommand"
   let make = (~netmaskLength, ~poolId, ~ipamPoolId, ~dryRun=?, ()) =>
-    new({netmaskLength, poolId, ipamPoolId, dryRun})
+    new({netmaskLength: netmaskLength, poolId: poolId, ipamPoolId: ipamPoolId, dryRun: dryRun})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module MoveByoipCidrToIpam = {
   type t
   type request = {
@@ -18323,9 +18570,10 @@ module MoveByoipCidrToIpam = {
   type response = {@as("ByoipCidr") byoipCidr: option<byoipCidr>}
   @module("@aws-sdk/client-ec2") @new external new: request => t = "MoveByoipCidrToIpamCommand"
   let make = (~ipamPoolOwner, ~ipamPoolId, ~cidr, ~dryRun=?, ()) =>
-    new({ipamPoolOwner, ipamPoolId, cidr, dryRun})
+    new({ipamPoolOwner: ipamPoolOwner, ipamPoolId: ipamPoolId, cidr: cidr, dryRun: dryRun})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ModifyVpcPeeringConnectionOptions = {
   type t
   type request = {
@@ -18361,13 +18609,14 @@ module ModifyVpcPeeringConnectionOptions = {
     (),
   ) =>
     new({
-      vpcPeeringConnectionId,
-      requesterPeeringConnectionOptions,
-      dryRun,
-      accepterPeeringConnectionOptions,
+      vpcPeeringConnectionId: vpcPeeringConnectionId,
+      requesterPeeringConnectionOptions: requesterPeeringConnectionOptions,
+      dryRun: dryRun,
+      accepterPeeringConnectionOptions: accepterPeeringConnectionOptions,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ModifyVpcEndpointServicePermissions = {
   type t
   type request = {
@@ -18397,9 +18646,15 @@ module ModifyVpcEndpointServicePermissions = {
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "ModifyVpcEndpointServicePermissionsCommand"
   let make = (~serviceId, ~removeAllowedPrincipals=?, ~addAllowedPrincipals=?, ~dryRun=?, ()) =>
-    new({removeAllowedPrincipals, addAllowedPrincipals, serviceId, dryRun})
+    new({
+      removeAllowedPrincipals: removeAllowedPrincipals,
+      addAllowedPrincipals: addAllowedPrincipals,
+      serviceId: serviceId,
+      dryRun: dryRun,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ModifyVpcEndpointServiceConfiguration = {
   type t
   type request = {
@@ -18463,18 +18718,19 @@ module ModifyVpcEndpointServiceConfiguration = {
     (),
   ) =>
     new({
-      removeGatewayLoadBalancerArns,
-      addGatewayLoadBalancerArns,
-      removeNetworkLoadBalancerArns,
-      addNetworkLoadBalancerArns,
-      acceptanceRequired,
-      removePrivateDnsName,
-      privateDnsName,
-      serviceId,
-      dryRun,
+      removeGatewayLoadBalancerArns: removeGatewayLoadBalancerArns,
+      addGatewayLoadBalancerArns: addGatewayLoadBalancerArns,
+      removeNetworkLoadBalancerArns: removeNetworkLoadBalancerArns,
+      addNetworkLoadBalancerArns: addNetworkLoadBalancerArns,
+      acceptanceRequired: acceptanceRequired,
+      removePrivateDnsName: removePrivateDnsName,
+      privateDnsName: privateDnsName,
+      serviceId: serviceId,
+      dryRun: dryRun,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ModifyVpcEndpointConnectionNotification = {
   type t
   type request = {
@@ -18508,9 +18764,16 @@ module ModifyVpcEndpointConnectionNotification = {
     ~connectionNotificationArn=?,
     ~dryRun=?,
     (),
-  ) => new({connectionEvents, connectionNotificationArn, connectionNotificationId, dryRun})
+  ) =>
+    new({
+      connectionEvents: connectionEvents,
+      connectionNotificationArn: connectionNotificationArn,
+      connectionNotificationId: connectionNotificationId,
+      dryRun: dryRun,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ModifyVpcEndpoint = {
   type t
   @ocaml.doc("<p>Contains the parameters for ModifyVpcEndpoint.</p>")
@@ -18587,20 +18850,21 @@ module ModifyVpcEndpoint = {
     (),
   ) =>
     new({
-      privateDnsEnabled,
-      removeSecurityGroupIds,
-      addSecurityGroupIds,
-      removeSubnetIds,
-      addSubnetIds,
-      removeRouteTableIds,
-      addRouteTableIds,
-      policyDocument,
-      resetPolicy,
-      vpcEndpointId,
-      dryRun,
+      privateDnsEnabled: privateDnsEnabled,
+      removeSecurityGroupIds: removeSecurityGroupIds,
+      addSecurityGroupIds: addSecurityGroupIds,
+      removeSubnetIds: removeSubnetIds,
+      addSubnetIds: addSubnetIds,
+      removeRouteTableIds: removeRouteTableIds,
+      addRouteTableIds: addRouteTableIds,
+      policyDocument: policyDocument,
+      resetPolicy: resetPolicy,
+      vpcEndpointId: vpcEndpointId,
+      dryRun: dryRun,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ModifyVpcAttribute = {
   type t
   type request = {
@@ -18621,9 +18885,10 @@ module ModifyVpcAttribute = {
   type response = {.}
   @module("@aws-sdk/client-ec2") @new external new: request => t = "ModifyVpcAttributeCommand"
   let make = (~vpcId, ~enableDnsSupport=?, ~enableDnsHostnames=?, ()) =>
-    new({vpcId, enableDnsSupport, enableDnsHostnames})
+    new({vpcId: vpcId, enableDnsSupport: enableDnsSupport, enableDnsHostnames: enableDnsHostnames})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ModifyVolumeAttribute = {
   type t
   type request = {
@@ -18639,9 +18904,11 @@ module ModifyVolumeAttribute = {
   }
   type response = {.}
   @module("@aws-sdk/client-ec2") @new external new: request => t = "ModifyVolumeAttributeCommand"
-  let make = (~volumeId, ~dryRun=?, ~autoEnableIO=?, ()) => new({dryRun, volumeId, autoEnableIO})
+  let make = (~volumeId, ~dryRun=?, ~autoEnableIO=?, ()) =>
+    new({dryRun: dryRun, volumeId: volumeId, autoEnableIO: autoEnableIO})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ModifyVolume = {
   type t
   type request = {
@@ -18729,9 +18996,19 @@ module ModifyVolume = {
     ~size=?,
     ~dryRun=?,
     (),
-  ) => new({multiAttachEnabled, throughput, iops, volumeType, size, volumeId, dryRun})
+  ) =>
+    new({
+      multiAttachEnabled: multiAttachEnabled,
+      throughput: throughput,
+      iops: iops,
+      volumeType: volumeType,
+      size: size,
+      volumeId: volumeId,
+      dryRun: dryRun,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ModifySubnetAttribute = {
   type t
   type request = {
@@ -18810,20 +19087,21 @@ module ModifySubnetAttribute = {
     (),
   ) =>
     new({
-      disableLniAtDeviceIndex,
-      enableLniAtDeviceIndex,
-      enableResourceNameDnsAAAARecordOnLaunch,
-      enableResourceNameDnsARecordOnLaunch,
-      privateDnsHostnameTypeOnLaunch,
-      enableDns64,
-      customerOwnedIpv4Pool,
-      mapCustomerOwnedIpOnLaunch,
-      subnetId,
-      mapPublicIpOnLaunch,
-      assignIpv6AddressOnCreation,
+      disableLniAtDeviceIndex: disableLniAtDeviceIndex,
+      enableLniAtDeviceIndex: enableLniAtDeviceIndex,
+      enableResourceNameDnsAAAARecordOnLaunch: enableResourceNameDnsAAAARecordOnLaunch,
+      enableResourceNameDnsARecordOnLaunch: enableResourceNameDnsARecordOnLaunch,
+      privateDnsHostnameTypeOnLaunch: privateDnsHostnameTypeOnLaunch,
+      enableDns64: enableDns64,
+      customerOwnedIpv4Pool: customerOwnedIpv4Pool,
+      mapCustomerOwnedIpOnLaunch: mapCustomerOwnedIpOnLaunch,
+      subnetId: subnetId,
+      mapPublicIpOnLaunch: mapPublicIpOnLaunch,
+      assignIpv6AddressOnCreation: assignIpv6AddressOnCreation,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ModifyNetworkInterfaceAttribute = {
   type t
   @ocaml.doc("<p>Contains the parameters for ModifyNetworkInterfaceAttribute.</p>")
@@ -18867,9 +19145,18 @@ module ModifyNetworkInterfaceAttribute = {
     ~description=?,
     ~attachment=?,
     (),
-  ) => new({sourceDestCheck, networkInterfaceId, groups, dryRun, description, attachment})
+  ) =>
+    new({
+      sourceDestCheck: sourceDestCheck,
+      networkInterfaceId: networkInterfaceId,
+      groups: groups,
+      dryRun: dryRun,
+      description: description,
+      attachment: attachment,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ModifyInstanceMetadataOptions = {
   type t
   type request = {
@@ -18935,16 +19222,17 @@ module ModifyInstanceMetadataOptions = {
     (),
   ) =>
     new({
-      instanceMetadataTags,
-      httpProtocolIpv6,
-      dryRun,
-      httpEndpoint,
-      httpPutResponseHopLimit,
-      httpTokens,
-      instanceId,
+      instanceMetadataTags: instanceMetadataTags,
+      httpProtocolIpv6: httpProtocolIpv6,
+      dryRun: dryRun,
+      httpEndpoint: httpEndpoint,
+      httpPutResponseHopLimit: httpPutResponseHopLimit,
+      httpTokens: httpTokens,
+      instanceId: instanceId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ModifyInstanceEventStartTime = {
   type t
   type request = {
@@ -18965,9 +19253,15 @@ module ModifyInstanceEventStartTime = {
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "ModifyInstanceEventStartTimeCommand"
   let make = (~notBefore, ~instanceEventId, ~instanceId, ~dryRun=?, ()) =>
-    new({notBefore, instanceEventId, instanceId, dryRun})
+    new({
+      notBefore: notBefore,
+      instanceEventId: instanceEventId,
+      instanceId: instanceId,
+      dryRun: dryRun,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ModifyDefaultCreditSpecification = {
   type t
   type request = {
@@ -18992,9 +19286,10 @@ module ModifyDefaultCreditSpecification = {
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "ModifyDefaultCreditSpecificationCommand"
   let make = (~cpuCredits, ~instanceFamily, ~dryRun=?, ()) =>
-    new({cpuCredits, instanceFamily, dryRun})
+    new({cpuCredits: cpuCredits, instanceFamily: instanceFamily, dryRun: dryRun})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetDefaultCreditSpecification = {
   type t
   type request = {
@@ -19013,9 +19308,11 @@ module GetDefaultCreditSpecification = {
   }
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "GetDefaultCreditSpecificationCommand"
-  let make = (~instanceFamily, ~dryRun=?, ()) => new({instanceFamily, dryRun})
+  let make = (~instanceFamily, ~dryRun=?, ()) =>
+    new({instanceFamily: instanceFamily, dryRun: dryRun})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ExportClientVpnClientCertificateRevocationList = {
   type t
   type request = {
@@ -19036,9 +19333,11 @@ module ExportClientVpnClientCertificateRevocationList = {
   }
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "ExportClientVpnClientCertificateRevocationListCommand"
-  let make = (~clientVpnEndpointId, ~dryRun=?, ()) => new({dryRun, clientVpnEndpointId})
+  let make = (~clientVpnEndpointId, ~dryRun=?, ()) =>
+    new({dryRun: dryRun, clientVpnEndpointId: clientVpnEndpointId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module EnableTransitGatewayRouteTablePropagation = {
   type t
   type request = {
@@ -19059,9 +19358,14 @@ module EnableTransitGatewayRouteTablePropagation = {
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "EnableTransitGatewayRouteTablePropagationCommand"
   let make = (~transitGatewayAttachmentId, ~transitGatewayRouteTableId, ~dryRun=?, ()) =>
-    new({dryRun, transitGatewayAttachmentId, transitGatewayRouteTableId})
+    new({
+      dryRun: dryRun,
+      transitGatewayAttachmentId: transitGatewayAttachmentId,
+      transitGatewayRouteTableId: transitGatewayRouteTableId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module EnableFastLaunch = {
   type t
   type request = {
@@ -19140,9 +19444,17 @@ module EnableFastLaunch = {
     ~resourceType=?,
     (),
   ) =>
-    new({dryRun, maxParallelLaunches, launchTemplate, snapshotConfiguration, resourceType, imageId})
+    new({
+      dryRun: dryRun,
+      maxParallelLaunches: maxParallelLaunches,
+      launchTemplate: launchTemplate,
+      snapshotConfiguration: snapshotConfiguration,
+      resourceType: resourceType,
+      imageId: imageId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DisassociateTransitGatewayRouteTable = {
   type t
   type request = {
@@ -19164,9 +19476,14 @@ module DisassociateTransitGatewayRouteTable = {
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "DisassociateTransitGatewayRouteTableCommand"
   let make = (~transitGatewayAttachmentId, ~transitGatewayRouteTableId, ~dryRun=?, ()) =>
-    new({dryRun, transitGatewayAttachmentId, transitGatewayRouteTableId})
+    new({
+      dryRun: dryRun,
+      transitGatewayAttachmentId: transitGatewayAttachmentId,
+      transitGatewayRouteTableId: transitGatewayRouteTableId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DisassociateClientVpnTargetNetwork = {
   type t
   type request = {
@@ -19192,9 +19509,10 @@ module DisassociateClientVpnTargetNetwork = {
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "DisassociateClientVpnTargetNetworkCommand"
   let make = (~associationId, ~clientVpnEndpointId, ~dryRun=?, ()) =>
-    new({dryRun, associationId, clientVpnEndpointId})
+    new({dryRun: dryRun, associationId: associationId, clientVpnEndpointId: clientVpnEndpointId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DisableTransitGatewayRouteTablePropagation = {
   type t
   type request = {
@@ -19215,9 +19533,14 @@ module DisableTransitGatewayRouteTablePropagation = {
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "DisableTransitGatewayRouteTablePropagationCommand"
   let make = (~transitGatewayAttachmentId, ~transitGatewayRouteTableId, ~dryRun=?, ()) =>
-    new({dryRun, transitGatewayAttachmentId, transitGatewayRouteTableId})
+    new({
+      dryRun: dryRun,
+      transitGatewayAttachmentId: transitGatewayAttachmentId,
+      transitGatewayRouteTableId: transitGatewayRouteTableId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DisableFastLaunch = {
   type t
   type request = {
@@ -19270,9 +19593,11 @@ module DisableFastLaunch = {
     imageId: option<imageId>,
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "DisableFastLaunchCommand"
-  let make = (~imageId, ~dryRun=?, ~force=?, ()) => new({dryRun, force, imageId})
+  let make = (~imageId, ~dryRun=?, ~force=?, ()) =>
+    new({dryRun: dryRun, force: force, imageId: imageId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeVpcAttribute = {
   type t
   type request = {
@@ -19299,9 +19624,11 @@ module DescribeVpcAttribute = {
     @ocaml.doc("<p>The ID of the VPC.</p>") @as("VpcId") vpcId: option<string_>,
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "DescribeVpcAttributeCommand"
-  let make = (~vpcId, ~attribute, ~dryRun=?, ()) => new({dryRun, vpcId, attribute})
+  let make = (~vpcId, ~attribute, ~dryRun=?, ()) =>
+    new({dryRun: dryRun, vpcId: vpcId, attribute: attribute})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeprovisionPublicIpv4PoolCidr = {
   type t
   type request = {
@@ -19323,9 +19650,10 @@ module DeprovisionPublicIpv4PoolCidr = {
   }
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "DeprovisionPublicIpv4PoolCidrCommand"
-  let make = (~cidr, ~poolId, ~dryRun=?, ()) => new({cidr, poolId, dryRun})
+  let make = (~cidr, ~poolId, ~dryRun=?, ()) => new({cidr: cidr, poolId: poolId, dryRun: dryRun})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeprovisionByoipCidr = {
   type t
   type request = {
@@ -19344,9 +19672,10 @@ module DeprovisionByoipCidr = {
     byoipCidr: option<byoipCidr>,
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "DeprovisionByoipCidrCommand"
-  let make = (~cidr, ~dryRun=?, ()) => new({dryRun, cidr})
+  let make = (~cidr, ~dryRun=?, ()) => new({dryRun: dryRun, cidr: cidr})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteLocalGatewayRoute = {
   type t
   type request = {
@@ -19368,9 +19697,14 @@ module DeleteLocalGatewayRoute = {
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "DeleteLocalGatewayRouteCommand"
   let make = (~localGatewayRouteTableId, ~destinationCidrBlock, ~dryRun=?, ()) =>
-    new({dryRun, localGatewayRouteTableId, destinationCidrBlock})
+    new({
+      dryRun: dryRun,
+      localGatewayRouteTableId: localGatewayRouteTableId,
+      destinationCidrBlock: destinationCidrBlock,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteInstanceEventWindow = {
   type t
   type request = {
@@ -19393,9 +19727,10 @@ module DeleteInstanceEventWindow = {
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "DeleteInstanceEventWindowCommand"
   let make = (~instanceEventWindowId, ~forceDelete=?, ~dryRun=?, ()) =>
-    new({instanceEventWindowId, forceDelete, dryRun})
+    new({instanceEventWindowId: instanceEventWindowId, forceDelete: forceDelete, dryRun: dryRun})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteClientVpnRoute = {
   type t
   type request = {
@@ -19419,9 +19754,15 @@ module DeleteClientVpnRoute = {
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "DeleteClientVpnRouteCommand"
   let make = (~destinationCidrBlock, ~clientVpnEndpointId, ~dryRun=?, ~targetVpcSubnetId=?, ()) =>
-    new({dryRun, destinationCidrBlock, targetVpcSubnetId, clientVpnEndpointId})
+    new({
+      dryRun: dryRun,
+      destinationCidrBlock: destinationCidrBlock,
+      targetVpcSubnetId: targetVpcSubnetId,
+      clientVpnEndpointId: clientVpnEndpointId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteClientVpnEndpoint = {
   type t
   type request = {
@@ -19438,9 +19779,11 @@ module DeleteClientVpnEndpoint = {
     status: option<clientVpnEndpointStatus>,
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "DeleteClientVpnEndpointCommand"
-  let make = (~clientVpnEndpointId, ~dryRun=?, ()) => new({dryRun, clientVpnEndpointId})
+  let make = (~clientVpnEndpointId, ~dryRun=?, ()) =>
+    new({dryRun: dryRun, clientVpnEndpointId: clientVpnEndpointId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateNetworkAclEntry = {
   type t
   type request = {
@@ -19503,19 +19846,20 @@ module CreateNetworkAclEntry = {
     (),
   ) =>
     new({
-      ruleNumber,
-      ruleAction,
-      protocol,
-      portRange,
-      networkAclId,
-      ipv6CidrBlock,
-      icmpTypeCode,
-      egress,
-      dryRun,
-      cidrBlock,
+      ruleNumber: ruleNumber,
+      ruleAction: ruleAction,
+      protocol: protocol,
+      portRange: portRange,
+      networkAclId: networkAclId,
+      ipv6CidrBlock: ipv6CidrBlock,
+      icmpTypeCode: icmpTypeCode,
+      egress: egress,
+      dryRun: dryRun,
+      cidrBlock: cidrBlock,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module CreateLocalGatewayRoute = {
   type t
   type request = {
@@ -19546,13 +19890,14 @@ module CreateLocalGatewayRoute = {
     (),
   ) =>
     new({
-      dryRun,
-      localGatewayVirtualInterfaceGroupId,
-      localGatewayRouteTableId,
-      destinationCidrBlock,
+      dryRun: dryRun,
+      localGatewayVirtualInterfaceGroupId: localGatewayVirtualInterfaceGroupId,
+      localGatewayRouteTableId: localGatewayRouteTableId,
+      destinationCidrBlock: destinationCidrBlock,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateClientVpnRoute = {
   type t
   type request = {
@@ -19610,15 +19955,16 @@ module CreateClientVpnRoute = {
     (),
   ) =>
     new({
-      dryRun,
-      clientToken,
-      description,
-      targetVpcSubnetId,
-      destinationCidrBlock,
-      clientVpnEndpointId,
+      dryRun: dryRun,
+      clientToken: clientToken,
+      description: description,
+      targetVpcSubnetId: targetVpcSubnetId,
+      destinationCidrBlock: destinationCidrBlock,
+      clientVpnEndpointId: clientVpnEndpointId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module AuthorizeClientVpnIngress = {
   type t
   type request = {
@@ -19669,16 +20015,17 @@ module AuthorizeClientVpnIngress = {
     (),
   ) =>
     new({
-      dryRun,
-      clientToken,
-      description,
-      authorizeAllGroups,
-      accessGroupId,
-      targetNetworkCidr,
-      clientVpnEndpointId,
+      dryRun: dryRun,
+      clientToken: clientToken,
+      description: description,
+      authorizeAllGroups: authorizeAllGroups,
+      accessGroupId: accessGroupId,
+      targetNetworkCidr: targetNetworkCidr,
+      clientVpnEndpointId: clientVpnEndpointId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module AttachVpnGateway = {
   type t
   @ocaml.doc("<p>Contains the parameters for AttachVpnGateway.</p>")
@@ -19699,9 +20046,11 @@ module AttachVpnGateway = {
     vpcAttachment: option<vpcAttachment>,
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "AttachVpnGatewayCommand"
-  let make = (~vpnGatewayId, ~vpcId, ~dryRun=?, ()) => new({dryRun, vpnGatewayId, vpcId})
+  let make = (~vpnGatewayId, ~vpcId, ~dryRun=?, ()) =>
+    new({dryRun: dryRun, vpnGatewayId: vpnGatewayId, vpcId: vpcId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module AttachClassicLinkVpc = {
   type t
   type request = {
@@ -19729,9 +20078,10 @@ module AttachClassicLinkVpc = {
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "AttachClassicLinkVpcCommand"
   let make = (~vpcId, ~instanceId, ~groups, ~dryRun=?, ()) =>
-    new({vpcId, instanceId, groups, dryRun})
+    new({vpcId: vpcId, instanceId: instanceId, groups: groups, dryRun: dryRun})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module AssociateTransitGatewayRouteTable = {
   type t
   type request = {
@@ -19753,9 +20103,14 @@ module AssociateTransitGatewayRouteTable = {
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "AssociateTransitGatewayRouteTableCommand"
   let make = (~transitGatewayAttachmentId, ~transitGatewayRouteTableId, ~dryRun=?, ()) =>
-    new({dryRun, transitGatewayAttachmentId, transitGatewayRouteTableId})
+    new({
+      dryRun: dryRun,
+      transitGatewayAttachmentId: transitGatewayAttachmentId,
+      transitGatewayRouteTableId: transitGatewayRouteTableId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module AssociateRouteTable = {
   type t
   type request = {
@@ -19779,9 +20134,10 @@ module AssociateRouteTable = {
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "AssociateRouteTableCommand"
   let make = (~routeTableId, ~gatewayId=?, ~subnetId=?, ~dryRun=?, ()) =>
-    new({gatewayId, subnetId, routeTableId, dryRun})
+    new({gatewayId: gatewayId, subnetId: subnetId, routeTableId: routeTableId, dryRun: dryRun})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module AssociateClientVpnTargetNetwork = {
   type t
   type request = {
@@ -19810,9 +20166,15 @@ module AssociateClientVpnTargetNetwork = {
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "AssociateClientVpnTargetNetworkCommand"
   let make = (~subnetId, ~clientVpnEndpointId, ~dryRun=?, ~clientToken=?, ()) =>
-    new({dryRun, clientToken, subnetId, clientVpnEndpointId})
+    new({
+      dryRun: dryRun,
+      clientToken: clientToken,
+      subnetId: subnetId,
+      clientVpnEndpointId: clientVpnEndpointId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module AssignIpv6Addresses = {
   type t
   type request = {
@@ -19860,9 +20222,17 @@ module AssignIpv6Addresses = {
     ~ipv6Addresses=?,
     ~ipv6AddressCount=?,
     (),
-  ) => new({networkInterfaceId, ipv6Prefixes, ipv6PrefixCount, ipv6Addresses, ipv6AddressCount})
+  ) =>
+    new({
+      networkInterfaceId: networkInterfaceId,
+      ipv6Prefixes: ipv6Prefixes,
+      ipv6PrefixCount: ipv6PrefixCount,
+      ipv6Addresses: ipv6Addresses,
+      ipv6AddressCount: ipv6AddressCount,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ApplySecurityGroupsToClientVpnTargetNetwork = {
   type t
   type request = {
@@ -19888,9 +20258,15 @@ module ApplySecurityGroupsToClientVpnTargetNetwork = {
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "ApplySecurityGroupsToClientVpnTargetNetworkCommand"
   let make = (~securityGroupIds, ~vpcId, ~clientVpnEndpointId, ~dryRun=?, ()) =>
-    new({dryRun, securityGroupIds, vpcId, clientVpnEndpointId})
+    new({
+      dryRun: dryRun,
+      securityGroupIds: securityGroupIds,
+      vpcId: vpcId,
+      clientVpnEndpointId: clientVpnEndpointId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module AllocateIpamPoolCidr = {
   type t
   type request = {
@@ -19956,17 +20332,18 @@ module AllocateIpamPoolCidr = {
     (),
   ) =>
     new({
-      disallowedCidrs,
-      previewNextCidr,
-      description,
-      clientToken,
-      netmaskLength,
-      cidr,
-      ipamPoolId,
-      dryRun,
+      disallowedCidrs: disallowedCidrs,
+      previewNextCidr: previewNextCidr,
+      description: description,
+      clientToken: clientToken,
+      netmaskLength: netmaskLength,
+      cidr: cidr,
+      ipamPoolId: ipamPoolId,
+      dryRun: dryRun,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module AdvertiseByoipCidr = {
   type t
   type request = {
@@ -19985,9 +20362,10 @@ module AdvertiseByoipCidr = {
     byoipCidr: option<byoipCidr>,
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "AdvertiseByoipCidrCommand"
-  let make = (~cidr, ~dryRun=?, ()) => new({dryRun, cidr})
+  let make = (~cidr, ~dryRun=?, ()) => new({dryRun: dryRun, cidr: cidr})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ResetAddressAttribute = {
   type t
   type request = {
@@ -20006,9 +20384,11 @@ module ResetAddressAttribute = {
     address: option<addressAttribute>,
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "ResetAddressAttributeCommand"
-  let make = (~attribute, ~allocationId, ~dryRun=?, ()) => new({dryRun, attribute, allocationId})
+  let make = (~attribute, ~allocationId, ~dryRun=?, ()) =>
+    new({dryRun: dryRun, attribute: attribute, allocationId: allocationId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ReplaceIamInstanceProfileAssociation = {
   type t
   type request = {
@@ -20025,9 +20405,11 @@ module ReplaceIamInstanceProfileAssociation = {
   }
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "ReplaceIamInstanceProfileAssociationCommand"
-  let make = (~associationId, ~iamInstanceProfile, ()) => new({associationId, iamInstanceProfile})
+  let make = (~associationId, ~iamInstanceProfile, ()) =>
+    new({associationId: associationId, iamInstanceProfile: iamInstanceProfile})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module RegisterTransitGatewayMulticastGroupSources = {
   type t
   type request = {
@@ -20061,9 +20443,16 @@ module RegisterTransitGatewayMulticastGroupSources = {
     ~groupIpAddress=?,
     ~transitGatewayMulticastDomainId=?,
     (),
-  ) => new({dryRun, networkInterfaceIds, groupIpAddress, transitGatewayMulticastDomainId})
+  ) =>
+    new({
+      dryRun: dryRun,
+      networkInterfaceIds: networkInterfaceIds,
+      groupIpAddress: groupIpAddress,
+      transitGatewayMulticastDomainId: transitGatewayMulticastDomainId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module RegisterTransitGatewayMulticastGroupMembers = {
   type t
   type request = {
@@ -20097,9 +20486,16 @@ module RegisterTransitGatewayMulticastGroupMembers = {
     ~groupIpAddress=?,
     ~transitGatewayMulticastDomainId=?,
     (),
-  ) => new({dryRun, networkInterfaceIds, groupIpAddress, transitGatewayMulticastDomainId})
+  ) =>
+    new({
+      dryRun: dryRun,
+      networkInterfaceIds: networkInterfaceIds,
+      groupIpAddress: groupIpAddress,
+      transitGatewayMulticastDomainId: transitGatewayMulticastDomainId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module RegisterInstanceEventNotificationAttributes = {
   type t
   type request = {
@@ -20117,9 +20513,11 @@ module RegisterInstanceEventNotificationAttributes = {
   }
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "RegisterInstanceEventNotificationAttributesCommand"
-  let make = (~instanceTagAttribute=?, ~dryRun=?, ()) => new({instanceTagAttribute, dryRun})
+  let make = (~instanceTagAttribute=?, ~dryRun=?, ()) =>
+    new({instanceTagAttribute: instanceTagAttribute, dryRun: dryRun})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ProvisionIpamPoolCidr = {
   type t
   type request = {
@@ -20145,9 +20543,15 @@ module ProvisionIpamPoolCidr = {
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "ProvisionIpamPoolCidrCommand"
   let make = (~ipamPoolId, ~cidrAuthorizationContext=?, ~cidr=?, ~dryRun=?, ()) =>
-    new({cidrAuthorizationContext, cidr, ipamPoolId, dryRun})
+    new({
+      cidrAuthorizationContext: cidrAuthorizationContext,
+      cidr: cidr,
+      ipamPoolId: ipamPoolId,
+      dryRun: dryRun,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ModifyTransitGatewayPrefixListReference = {
   type t
   type request = {
@@ -20182,9 +20586,16 @@ module ModifyTransitGatewayPrefixListReference = {
     ~transitGatewayAttachmentId=?,
     (),
   ) =>
-    new({dryRun, blackhole, transitGatewayAttachmentId, prefixListId, transitGatewayRouteTableId})
+    new({
+      dryRun: dryRun,
+      blackhole: blackhole,
+      transitGatewayAttachmentId: transitGatewayAttachmentId,
+      prefixListId: prefixListId,
+      transitGatewayRouteTableId: transitGatewayRouteTableId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ModifyTrafficMirrorFilterRule = {
   type t
   type request = {
@@ -20246,21 +20657,22 @@ module ModifyTrafficMirrorFilterRule = {
     (),
   ) =>
     new({
-      dryRun,
-      removeFields,
-      description,
-      sourceCidrBlock,
-      destinationCidrBlock,
-      protocol,
-      sourcePortRange,
-      destinationPortRange,
-      ruleAction,
-      ruleNumber,
-      trafficDirection,
-      trafficMirrorFilterRuleId,
+      dryRun: dryRun,
+      removeFields: removeFields,
+      description: description,
+      sourceCidrBlock: sourceCidrBlock,
+      destinationCidrBlock: destinationCidrBlock,
+      protocol: protocol,
+      sourcePortRange: sourcePortRange,
+      destinationPortRange: destinationPortRange,
+      ruleAction: ruleAction,
+      ruleNumber: ruleNumber,
+      trafficDirection: trafficDirection,
+      trafficMirrorFilterRuleId: trafficMirrorFilterRuleId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ModifyReservedInstances = {
   type t
   @ocaml.doc("<p>Contains the parameters for ModifyReservedInstances.</p>")
@@ -20282,9 +20694,14 @@ module ModifyReservedInstances = {
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "ModifyReservedInstancesCommand"
   let make = (~targetConfigurations, ~reservedInstancesIds, ~clientToken=?, ()) =>
-    new({targetConfigurations, clientToken, reservedInstancesIds})
+    new({
+      targetConfigurations: targetConfigurations,
+      clientToken: clientToken,
+      reservedInstancesIds: reservedInstancesIds,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ModifyInstanceCapacityReservationAttributes = {
   type t
   type request = {
@@ -20309,9 +20726,14 @@ module ModifyInstanceCapacityReservationAttributes = {
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "ModifyInstanceCapacityReservationAttributesCommand"
   let make = (~capacityReservationSpecification, ~instanceId, ~dryRun=?, ()) =>
-    new({dryRun, capacityReservationSpecification, instanceId})
+    new({
+      dryRun: dryRun,
+      capacityReservationSpecification: capacityReservationSpecification,
+      instanceId: instanceId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ModifyClientVpnEndpoint = {
   type t
   type request = {
@@ -20416,23 +20838,24 @@ module ModifyClientVpnEndpoint = {
     (),
   ) =>
     new({
-      clientLoginBannerOptions,
-      sessionTimeoutHours,
-      clientConnectOptions,
-      selfServicePortal,
-      vpcId,
-      securityGroupIds,
-      dryRun,
-      splitTunnel,
-      description,
-      vpnPort,
-      dnsServers,
-      connectionLogOptions,
-      serverCertificateArn,
-      clientVpnEndpointId,
+      clientLoginBannerOptions: clientLoginBannerOptions,
+      sessionTimeoutHours: sessionTimeoutHours,
+      clientConnectOptions: clientConnectOptions,
+      selfServicePortal: selfServicePortal,
+      vpcId: vpcId,
+      securityGroupIds: securityGroupIds,
+      dryRun: dryRun,
+      splitTunnel: splitTunnel,
+      description: description,
+      vpnPort: vpnPort,
+      dnsServers: dnsServers,
+      connectionLogOptions: connectionLogOptions,
+      serverCertificateArn: serverCertificateArn,
+      clientVpnEndpointId: clientVpnEndpointId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ModifyAddressAttribute = {
   type t
   type request = {
@@ -20452,9 +20875,10 @@ module ModifyAddressAttribute = {
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "ModifyAddressAttributeCommand"
   let make = (~allocationId, ~dryRun=?, ~domainName=?, ()) =>
-    new({dryRun, domainName, allocationId})
+    new({dryRun: dryRun, domainName: domainName, allocationId: allocationId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListSnapshotsInRecycleBin = {
   type t
   type request = {
@@ -20486,9 +20910,10 @@ module ListSnapshotsInRecycleBin = {
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "ListSnapshotsInRecycleBinCommand"
   let make = (~dryRun=?, ~snapshotIds=?, ~nextToken=?, ~maxResults=?, ()) =>
-    new({dryRun, snapshotIds, nextToken, maxResults})
+    new({dryRun: dryRun, snapshotIds: snapshotIds, nextToken: nextToken, maxResults: maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListImagesInRecycleBin = {
   type t
   type request = {
@@ -20523,9 +20948,10 @@ module ListImagesInRecycleBin = {
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "ListImagesInRecycleBinCommand"
   let make = (~dryRun=?, ~maxResults=?, ~nextToken=?, ~imageIds=?, ()) =>
-    new({dryRun, maxResults, nextToken, imageIds})
+    new({dryRun: dryRun, maxResults: maxResults, nextToken: nextToken, imageIds: imageIds})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetVpnConnectionDeviceTypes = {
   type t
   type request = {
@@ -20568,9 +20994,11 @@ module GetVpnConnectionDeviceTypes = {
   }
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "GetVpnConnectionDeviceTypesCommand"
-  let make = (~dryRun=?, ~nextToken=?, ~maxResults=?, ()) => new({dryRun, nextToken, maxResults})
+  let make = (~dryRun=?, ~nextToken=?, ~maxResults=?, ()) =>
+    new({dryRun: dryRun, nextToken: nextToken, maxResults: maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetManagedPrefixListEntries = {
   type t
   type request = {
@@ -20605,9 +21033,16 @@ module GetManagedPrefixListEntries = {
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "GetManagedPrefixListEntriesCommand"
   let make = (~prefixListId, ~nextToken=?, ~maxResults=?, ~targetVersion=?, ~dryRun=?, ()) =>
-    new({nextToken, maxResults, targetVersion, prefixListId, dryRun})
+    new({
+      nextToken: nextToken,
+      maxResults: maxResults,
+      targetVersion: targetVersion,
+      prefixListId: prefixListId,
+      dryRun: dryRun,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetManagedPrefixListAssociations = {
   type t
   type request = {
@@ -20637,9 +21072,10 @@ module GetManagedPrefixListAssociations = {
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "GetManagedPrefixListAssociationsCommand"
   let make = (~prefixListId, ~nextToken=?, ~maxResults=?, ~dryRun=?, ()) =>
-    new({nextToken, maxResults, prefixListId, dryRun})
+    new({nextToken: nextToken, maxResults: maxResults, prefixListId: prefixListId, dryRun: dryRun})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetIpamAddressHistory = {
   type t
   type request = {
@@ -20697,9 +21133,20 @@ module GetIpamAddressHistory = {
     ~vpcId=?,
     ~dryRun=?,
     (),
-  ) => new({nextToken, maxResults, endTime, startTime, vpcId, ipamScopeId, cidr, dryRun})
+  ) =>
+    new({
+      nextToken: nextToken,
+      maxResults: maxResults,
+      endTime: endTime,
+      startTime: startTime,
+      vpcId: vpcId,
+      ipamScopeId: ipamScopeId,
+      cidr: cidr,
+      dryRun: dryRun,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetInstanceTypesFromInstanceRequirements = {
   type t
   type request = {
@@ -20741,15 +21188,16 @@ module GetInstanceTypesFromInstanceRequirements = {
     (),
   ) =>
     new({
-      nextToken,
-      maxResults,
-      instanceRequirements,
-      virtualizationTypes,
-      architectureTypes,
-      dryRun,
+      nextToken: nextToken,
+      maxResults: maxResults,
+      instanceRequirements: instanceRequirements,
+      virtualizationTypes: virtualizationTypes,
+      architectureTypes: architectureTypes,
+      dryRun: dryRun,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetGroupsForCapacityReservation = {
   type t
   type request = {
@@ -20783,9 +21231,15 @@ module GetGroupsForCapacityReservation = {
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "GetGroupsForCapacityReservationCommand"
   let make = (~capacityReservationId, ~dryRun=?, ~maxResults=?, ~nextToken=?, ()) =>
-    new({dryRun, maxResults, nextToken, capacityReservationId})
+    new({
+      dryRun: dryRun,
+      maxResults: maxResults,
+      nextToken: nextToken,
+      capacityReservationId: capacityReservationId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetCapacityReservationUsage = {
   type t
   type request = {
@@ -20860,9 +21314,15 @@ module GetCapacityReservationUsage = {
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "GetCapacityReservationUsageCommand"
   let make = (~capacityReservationId, ~dryRun=?, ~maxResults=?, ~nextToken=?, ()) =>
-    new({dryRun, maxResults, nextToken, capacityReservationId})
+    new({
+      dryRun: dryRun,
+      maxResults: maxResults,
+      nextToken: nextToken,
+      capacityReservationId: capacityReservationId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetAssociatedIpv6PoolCidrs = {
   type t
   type request = {
@@ -20892,9 +21352,10 @@ module GetAssociatedIpv6PoolCidrs = {
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "GetAssociatedIpv6PoolCidrsCommand"
   let make = (~poolId, ~dryRun=?, ~maxResults=?, ~nextToken=?, ()) =>
-    new({dryRun, maxResults, nextToken, poolId})
+    new({dryRun: dryRun, maxResults: maxResults, nextToken: nextToken, poolId: poolId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetAssociatedEnclaveCertificateIamRoles = {
   type t
   type request = {
@@ -20914,9 +21375,11 @@ module GetAssociatedEnclaveCertificateIamRoles = {
   }
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "GetAssociatedEnclaveCertificateIamRolesCommand"
-  let make = (~dryRun=?, ~certificateArn=?, ()) => new({dryRun, certificateArn})
+  let make = (~dryRun=?, ~certificateArn=?, ()) =>
+    new({dryRun: dryRun, certificateArn: certificateArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DisassociateVpcCidrBlock = {
   type t
   type request = {
@@ -20936,6 +21399,7 @@ module DisassociateVpcCidrBlock = {
   let make = (~associationId, ()) => new({associationId: associationId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DisassociateSubnetCidrBlock = {
   type t
   type request = {
@@ -20953,6 +21417,7 @@ module DisassociateSubnetCidrBlock = {
   let make = (~associationId, ()) => new({associationId: associationId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DisassociateIamInstanceProfile = {
   type t
   type request = {
@@ -20969,6 +21434,7 @@ module DisassociateIamInstanceProfile = {
   let make = (~associationId, ()) => new({associationId: associationId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeVpcClassicLinkDnsSupport = {
   type t
   type request = {
@@ -20992,9 +21458,11 @@ module DescribeVpcClassicLinkDnsSupport = {
   }
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "DescribeVpcClassicLinkDnsSupportCommand"
-  let make = (~vpcIds=?, ~nextToken=?, ~maxResults=?, ()) => new({vpcIds, nextToken, maxResults})
+  let make = (~vpcIds=?, ~nextToken=?, ~maxResults=?, ()) =>
+    new({vpcIds: vpcIds, nextToken: nextToken, maxResults: maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeVolumeAttribute = {
   type t
   type request = {
@@ -21015,9 +21483,11 @@ module DescribeVolumeAttribute = {
     autoEnableIO: option<attributeBooleanValue>,
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "DescribeVolumeAttributeCommand"
-  let make = (~volumeId, ~attribute, ~dryRun=?, ()) => new({dryRun, volumeId, attribute})
+  let make = (~volumeId, ~attribute, ~dryRun=?, ()) =>
+    new({dryRun: dryRun, volumeId: volumeId, attribute: attribute})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeSpotFleetInstances = {
   type t
   @ocaml.doc("<p>Contains the parameters for DescribeSpotFleetInstances.</p>")
@@ -21054,9 +21524,15 @@ module DescribeSpotFleetInstances = {
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "DescribeSpotFleetInstancesCommand"
   let make = (~spotFleetRequestId, ~nextToken=?, ~maxResults=?, ~dryRun=?, ()) =>
-    new({spotFleetRequestId, nextToken, maxResults, dryRun})
+    new({
+      spotFleetRequestId: spotFleetRequestId,
+      nextToken: nextToken,
+      maxResults: maxResults,
+      dryRun: dryRun,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeSpotDatafeedSubscription = {
   type t
   @ocaml.doc("<p>Contains the parameters for DescribeSpotDatafeedSubscription.</p>")
@@ -21078,6 +21554,7 @@ module DescribeSpotDatafeedSubscription = {
   let make = (~dryRun=?, ()) => new({dryRun: dryRun})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeSnapshotAttribute = {
   type t
   type request = {
@@ -21101,9 +21578,11 @@ module DescribeSnapshotAttribute = {
   }
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "DescribeSnapshotAttributeCommand"
-  let make = (~snapshotId, ~attribute, ~dryRun=?, ()) => new({dryRun, snapshotId, attribute})
+  let make = (~snapshotId, ~attribute, ~dryRun=?, ()) =>
+    new({dryRun: dryRun, snapshotId: snapshotId, attribute: attribute})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeSecurityGroupReferences = {
   type t
   type request = {
@@ -21122,9 +21601,10 @@ module DescribeSecurityGroupReferences = {
   }
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "DescribeSecurityGroupReferencesCommand"
-  let make = (~groupId, ~dryRun=?, ()) => new({groupId, dryRun})
+  let make = (~groupId, ~dryRun=?, ()) => new({groupId: groupId, dryRun: dryRun})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeNetworkInterfaceAttribute = {
   type t
   @ocaml.doc("<p>Contains the parameters for DescribeNetworkInterfaceAttribute.</p>")
@@ -21157,9 +21637,10 @@ module DescribeNetworkInterfaceAttribute = {
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "DescribeNetworkInterfaceAttributeCommand"
   let make = (~networkInterfaceId, ~dryRun=?, ~attribute=?, ()) =>
-    new({networkInterfaceId, dryRun, attribute})
+    new({networkInterfaceId: networkInterfaceId, dryRun: dryRun, attribute: attribute})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeInstanceEventNotificationAttributes = {
   type t
   type request = {
@@ -21178,6 +21659,7 @@ module DescribeInstanceEventNotificationAttributes = {
   let make = (~dryRun=?, ()) => new({dryRun: dryRun})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeIdentityIdFormat = {
   type t
   type request = {
@@ -21208,9 +21690,11 @@ module DescribeIdentityIdFormat = {
     statuses: option<idFormatList>,
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "DescribeIdentityIdFormatCommand"
-  let make = (~principalArn, ~resource=?, ()) => new({resource, principalArn})
+  let make = (~principalArn, ~resource=?, ()) =>
+    new({resource: resource, principalArn: principalArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeIdFormat = {
   type t
   type request = {
@@ -21239,6 +21723,7 @@ module DescribeIdFormat = {
   let make = (~resource=?, ()) => new({resource: resource})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeByoipCidrs = {
   type t
   type request = {
@@ -21264,9 +21749,11 @@ module DescribeByoipCidrs = {
     byoipCidrs: option<byoipCidrSet>,
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "DescribeByoipCidrsCommand"
-  let make = (~maxResults, ~nextToken=?, ~dryRun=?, ()) => new({nextToken, maxResults, dryRun})
+  let make = (~maxResults, ~nextToken=?, ~dryRun=?, ()) =>
+    new({nextToken: nextToken, maxResults: maxResults, dryRun: dryRun})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeAggregateIdFormat = {
   type t
   type request = {
@@ -21290,6 +21777,7 @@ module DescribeAggregateIdFormat = {
   let make = (~dryRun=?, ()) => new({dryRun: dryRun})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeregisterTransitGatewayMulticastGroupSources = {
   type t
   type request = {
@@ -21321,9 +21809,16 @@ module DeregisterTransitGatewayMulticastGroupSources = {
     ~groupIpAddress=?,
     ~transitGatewayMulticastDomainId=?,
     (),
-  ) => new({dryRun, networkInterfaceIds, groupIpAddress, transitGatewayMulticastDomainId})
+  ) =>
+    new({
+      dryRun: dryRun,
+      networkInterfaceIds: networkInterfaceIds,
+      groupIpAddress: groupIpAddress,
+      transitGatewayMulticastDomainId: transitGatewayMulticastDomainId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeregisterTransitGatewayMulticastGroupMembers = {
   type t
   type request = {
@@ -21355,9 +21850,16 @@ module DeregisterTransitGatewayMulticastGroupMembers = {
     ~groupIpAddress=?,
     ~transitGatewayMulticastDomainId=?,
     (),
-  ) => new({dryRun, networkInterfaceIds, groupIpAddress, transitGatewayMulticastDomainId})
+  ) =>
+    new({
+      dryRun: dryRun,
+      networkInterfaceIds: networkInterfaceIds,
+      groupIpAddress: groupIpAddress,
+      transitGatewayMulticastDomainId: transitGatewayMulticastDomainId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeregisterInstanceEventNotificationAttributes = {
   type t
   type request = {
@@ -21375,9 +21877,11 @@ module DeregisterInstanceEventNotificationAttributes = {
   }
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "DeregisterInstanceEventNotificationAttributesCommand"
-  let make = (~instanceTagAttribute=?, ~dryRun=?, ()) => new({instanceTagAttribute, dryRun})
+  let make = (~instanceTagAttribute=?, ~dryRun=?, ()) =>
+    new({instanceTagAttribute: instanceTagAttribute, dryRun: dryRun})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeprovisionIpamPoolCidr = {
   type t
   type request = {
@@ -21397,9 +21901,11 @@ module DeprovisionIpamPoolCidr = {
     ipamPoolCidr: option<ipamPoolCidr>,
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "DeprovisionIpamPoolCidrCommand"
-  let make = (~ipamPoolId, ~cidr=?, ~dryRun=?, ()) => new({cidr, ipamPoolId, dryRun})
+  let make = (~ipamPoolId, ~cidr=?, ~dryRun=?, ()) =>
+    new({cidr: cidr, ipamPoolId: ipamPoolId, dryRun: dryRun})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteTransitGatewayPrefixListReference = {
   type t
   type request = {
@@ -21421,9 +21927,14 @@ module DeleteTransitGatewayPrefixListReference = {
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "DeleteTransitGatewayPrefixListReferenceCommand"
   let make = (~prefixListId, ~transitGatewayRouteTableId, ~dryRun=?, ()) =>
-    new({dryRun, prefixListId, transitGatewayRouteTableId})
+    new({
+      dryRun: dryRun,
+      prefixListId: prefixListId,
+      transitGatewayRouteTableId: transitGatewayRouteTableId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteTags = {
   type t
   type request = {
@@ -21449,9 +21960,11 @@ module DeleteTags = {
   }
   type response = {.}
   @module("@aws-sdk/client-ec2") @new external new: request => t = "DeleteTagsCommand"
-  let make = (~resources, ~tags=?, ~dryRun=?, ()) => new({tags, resources, dryRun})
+  let make = (~resources, ~tags=?, ~dryRun=?, ()) =>
+    new({tags: tags, resources: resources, dryRun: dryRun})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module CreateVpcEndpointConnectionNotification = {
   type t
   type request = {
@@ -21498,15 +22011,16 @@ module CreateVpcEndpointConnectionNotification = {
     (),
   ) =>
     new({
-      clientToken,
-      connectionEvents,
-      connectionNotificationArn,
-      vpcEndpointId,
-      serviceId,
-      dryRun,
+      clientToken: clientToken,
+      connectionEvents: connectionEvents,
+      connectionNotificationArn: connectionNotificationArn,
+      vpcEndpointId: vpcEndpointId,
+      serviceId: serviceId,
+      dryRun: dryRun,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateTransitGatewayPrefixListReference = {
   type t
   type request = {
@@ -21542,9 +22056,16 @@ module CreateTransitGatewayPrefixListReference = {
     ~transitGatewayAttachmentId=?,
     (),
   ) =>
-    new({dryRun, blackhole, transitGatewayAttachmentId, prefixListId, transitGatewayRouteTableId})
+    new({
+      dryRun: dryRun,
+      blackhole: blackhole,
+      transitGatewayAttachmentId: transitGatewayAttachmentId,
+      prefixListId: prefixListId,
+      transitGatewayRouteTableId: transitGatewayRouteTableId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateTrafficMirrorFilterRule = {
   type t
   type request = {
@@ -21613,21 +22134,22 @@ module CreateTrafficMirrorFilterRule = {
     (),
   ) =>
     new({
-      clientToken,
-      dryRun,
-      description,
-      sourceCidrBlock,
-      destinationCidrBlock,
-      protocol,
-      sourcePortRange,
-      destinationPortRange,
-      ruleAction,
-      ruleNumber,
-      trafficDirection,
-      trafficMirrorFilterId,
+      clientToken: clientToken,
+      dryRun: dryRun,
+      description: description,
+      sourceCidrBlock: sourceCidrBlock,
+      destinationCidrBlock: destinationCidrBlock,
+      protocol: protocol,
+      sourcePortRange: sourcePortRange,
+      destinationPortRange: destinationPortRange,
+      ruleAction: ruleAction,
+      ruleNumber: ruleNumber,
+      trafficDirection: trafficDirection,
+      trafficMirrorFilterId: trafficMirrorFilterId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateTags = {
   type t
   type request = {
@@ -21647,9 +22169,11 @@ module CreateTags = {
   }
   type response = {.}
   @module("@aws-sdk/client-ec2") @new external new: request => t = "CreateTagsCommand"
-  let make = (~tags, ~resources, ~dryRun=?, ()) => new({tags, resources, dryRun})
+  let make = (~tags, ~resources, ~dryRun=?, ()) =>
+    new({tags: tags, resources: resources, dryRun: dryRun})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module CreateStoreImageTask = {
   type t
   type request = {
@@ -21676,9 +22200,10 @@ module CreateStoreImageTask = {
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "CreateStoreImageTaskCommand"
   let make = (~bucket, ~imageId, ~dryRun=?, ~s3ObjectTags=?, ()) =>
-    new({dryRun, s3ObjectTags, bucket, imageId})
+    new({dryRun: dryRun, s3ObjectTags: s3ObjectTags, bucket: bucket, imageId: imageId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateSpotDatafeedSubscription = {
   type t
   @ocaml.doc("<p>Contains the parameters for CreateSpotDatafeedSubscription.</p>")
@@ -21704,9 +22229,11 @@ module CreateSpotDatafeedSubscription = {
   }
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "CreateSpotDatafeedSubscriptionCommand"
-  let make = (~bucket, ~prefix=?, ~dryRun=?, ()) => new({prefix, dryRun, bucket})
+  let make = (~bucket, ~prefix=?, ~dryRun=?, ()) =>
+    new({prefix: prefix, dryRun: dryRun, bucket: bucket})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateNetworkInterfacePermission = {
   type t
   @ocaml.doc("<p>Contains the parameters for CreateNetworkInterfacePermission.</p>")
@@ -21734,9 +22261,16 @@ module CreateNetworkInterfacePermission = {
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "CreateNetworkInterfacePermissionCommand"
   let make = (~permission, ~networkInterfaceId, ~dryRun=?, ~awsService=?, ~awsAccountId=?, ()) =>
-    new({dryRun, permission, awsService, awsAccountId, networkInterfaceId})
+    new({
+      dryRun: dryRun,
+      permission: permission,
+      awsService: awsService,
+      awsAccountId: awsAccountId,
+      networkInterfaceId: networkInterfaceId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CancelSpotInstanceRequests = {
   type t
   @ocaml.doc("<p>Contains the parameters for CancelSpotInstanceRequests.</p>")
@@ -21757,9 +22291,11 @@ module CancelSpotInstanceRequests = {
   }
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "CancelSpotInstanceRequestsCommand"
-  let make = (~spotInstanceRequestIds, ~dryRun=?, ()) => new({spotInstanceRequestIds, dryRun})
+  let make = (~spotInstanceRequestIds, ~dryRun=?, ()) =>
+    new({spotInstanceRequestIds: spotInstanceRequestIds, dryRun: dryRun})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module AssociateVpcCidrBlock = {
   type t
   type request = {
@@ -21828,19 +22364,20 @@ module AssociateVpcCidrBlock = {
     (),
   ) =>
     new({
-      ipv6NetmaskLength,
-      ipv6IpamPoolId,
-      ipv4NetmaskLength,
-      ipv4IpamPoolId,
-      ipv6CidrBlock,
-      ipv6Pool,
-      ipv6CidrBlockNetworkBorderGroup,
-      vpcId,
-      cidrBlock,
-      amazonProvidedIpv6CidrBlock,
+      ipv6NetmaskLength: ipv6NetmaskLength,
+      ipv6IpamPoolId: ipv6IpamPoolId,
+      ipv4NetmaskLength: ipv4NetmaskLength,
+      ipv4IpamPoolId: ipv4IpamPoolId,
+      ipv6CidrBlock: ipv6CidrBlock,
+      ipv6Pool: ipv6Pool,
+      ipv6CidrBlockNetworkBorderGroup: ipv6CidrBlockNetworkBorderGroup,
+      vpcId: vpcId,
+      cidrBlock: cidrBlock,
+      amazonProvidedIpv6CidrBlock: amazonProvidedIpv6CidrBlock,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module AssociateSubnetCidrBlock = {
   type t
   type request = {
@@ -21856,9 +22393,11 @@ module AssociateSubnetCidrBlock = {
     ipv6CidrBlockAssociation: option<subnetIpv6CidrBlockAssociation>,
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "AssociateSubnetCidrBlockCommand"
-  let make = (~subnetId, ~ipv6CidrBlock, ()) => new({subnetId, ipv6CidrBlock})
+  let make = (~subnetId, ~ipv6CidrBlock, ()) =>
+    new({subnetId: subnetId, ipv6CidrBlock: ipv6CidrBlock})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module AssociateIamInstanceProfile = {
   type t
   type request = {
@@ -21873,9 +22412,11 @@ module AssociateIamInstanceProfile = {
   }
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "AssociateIamInstanceProfileCommand"
-  let make = (~instanceId, ~iamInstanceProfile, ()) => new({instanceId, iamInstanceProfile})
+  let make = (~instanceId, ~iamInstanceProfile, ()) =>
+    new({instanceId: instanceId, iamInstanceProfile: iamInstanceProfile})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module AssignPrivateIpAddresses = {
   type t
   @ocaml.doc("<p>Contains the parameters for AssignPrivateIpAddresses.</p>")
@@ -21928,15 +22469,16 @@ module AssignPrivateIpAddresses = {
     (),
   ) =>
     new({
-      ipv4PrefixCount,
-      ipv4Prefixes,
-      secondaryPrivateIpAddressCount,
-      privateIpAddresses,
-      networkInterfaceId,
-      allowReassignment,
+      ipv4PrefixCount: ipv4PrefixCount,
+      ipv4Prefixes: ipv4Prefixes,
+      secondaryPrivateIpAddressCount: secondaryPrivateIpAddressCount,
+      privateIpAddresses: privateIpAddresses,
+      networkInterfaceId: networkInterfaceId,
+      allowReassignment: allowReassignment,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module AcceptReservedInstancesExchangeQuote = {
   type t
   @ocaml.doc("<p>Contains the parameters for accepting the quote.</p>")
@@ -21963,9 +22505,14 @@ module AcceptReservedInstancesExchangeQuote = {
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "AcceptReservedInstancesExchangeQuoteCommand"
   let make = (~reservedInstanceIds, ~targetConfigurations=?, ~dryRun=?, ()) =>
-    new({targetConfigurations, reservedInstanceIds, dryRun})
+    new({
+      targetConfigurations: targetConfigurations,
+      reservedInstanceIds: reservedInstanceIds,
+      dryRun: dryRun,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UnmonitorInstances = {
   type t
   type request = {
@@ -21982,9 +22529,10 @@ module UnmonitorInstances = {
     instanceMonitorings: option<instanceMonitoringList>,
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "UnmonitorInstancesCommand"
-  let make = (~instanceIds, ~dryRun=?, ()) => new({dryRun, instanceIds})
+  let make = (~instanceIds, ~dryRun=?, ()) => new({dryRun: dryRun, instanceIds: instanceIds})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module TerminateInstances = {
   type t
   type request = {
@@ -22004,9 +22552,10 @@ module TerminateInstances = {
     terminatingInstances: option<instanceStateChangeList>,
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "TerminateInstancesCommand"
-  let make = (~instanceIds, ~dryRun=?, ()) => new({dryRun, instanceIds})
+  let make = (~instanceIds, ~dryRun=?, ()) => new({dryRun: dryRun, instanceIds: instanceIds})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module TerminateClientVpnConnections = {
   type t
   type request = {
@@ -22036,9 +22585,15 @@ module TerminateClientVpnConnections = {
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "TerminateClientVpnConnectionsCommand"
   let make = (~clientVpnEndpointId, ~dryRun=?, ~username=?, ~connectionId=?, ()) =>
-    new({dryRun, username, connectionId, clientVpnEndpointId})
+    new({
+      dryRun: dryRun,
+      username: username,
+      connectionId: connectionId,
+      clientVpnEndpointId: clientVpnEndpointId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module StopInstances = {
   type t
   type request = {
@@ -22072,9 +22627,10 @@ module StopInstances = {
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "StopInstancesCommand"
   let make = (~instanceIds, ~force=?, ~dryRun=?, ~hibernate=?, ()) =>
-    new({force, dryRun, hibernate, instanceIds})
+    new({force: force, dryRun: dryRun, hibernate: hibernate, instanceIds: instanceIds})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module StartInstances = {
   type t
   type request = {
@@ -22093,9 +22649,10 @@ module StartInstances = {
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "StartInstancesCommand"
   let make = (~instanceIds, ~dryRun=?, ~additionalInfo=?, ()) =>
-    new({dryRun, additionalInfo, instanceIds})
+    new({dryRun: dryRun, additionalInfo: additionalInfo, instanceIds: instanceIds})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module SearchTransitGatewayMulticastGroups = {
   type t
   type request = {
@@ -22174,9 +22731,17 @@ module SearchTransitGatewayMulticastGroups = {
     ~filters=?,
     ~transitGatewayMulticastDomainId=?,
     (),
-  ) => new({dryRun, nextToken, maxResults, filters, transitGatewayMulticastDomainId})
+  ) =>
+    new({
+      dryRun: dryRun,
+      nextToken: nextToken,
+      maxResults: maxResults,
+      filters: filters,
+      transitGatewayMulticastDomainId: transitGatewayMulticastDomainId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module SearchLocalGatewayRoutes = {
   type t
   type request = {
@@ -22236,9 +22801,16 @@ module SearchLocalGatewayRoutes = {
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "SearchLocalGatewayRoutesCommand"
   let make = (~localGatewayRouteTableId, ~dryRun=?, ~nextToken=?, ~maxResults=?, ~filters=?, ()) =>
-    new({dryRun, nextToken, maxResults, filters, localGatewayRouteTableId})
+    new({
+      dryRun: dryRun,
+      nextToken: nextToken,
+      maxResults: maxResults,
+      filters: filters,
+      localGatewayRouteTableId: localGatewayRouteTableId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module RestoreManagedPrefixListVersion = {
   type t
   type request = {
@@ -22260,9 +22832,15 @@ module RestoreManagedPrefixListVersion = {
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "RestoreManagedPrefixListVersionCommand"
   let make = (~currentVersion, ~previousVersion, ~prefixListId, ~dryRun=?, ()) =>
-    new({currentVersion, previousVersion, prefixListId, dryRun})
+    new({
+      currentVersion: currentVersion,
+      previousVersion: previousVersion,
+      prefixListId: prefixListId,
+      dryRun: dryRun,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ReplaceTransitGatewayRoute = {
   type t
   type request = {
@@ -22299,14 +22877,15 @@ module ReplaceTransitGatewayRoute = {
     (),
   ) =>
     new({
-      dryRun,
-      blackhole,
-      transitGatewayAttachmentId,
-      transitGatewayRouteTableId,
-      destinationCidrBlock,
+      dryRun: dryRun,
+      blackhole: blackhole,
+      transitGatewayAttachmentId: transitGatewayAttachmentId,
+      transitGatewayRouteTableId: transitGatewayRouteTableId,
+      destinationCidrBlock: destinationCidrBlock,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ReleaseHosts = {
   type t
   type request = {
@@ -22326,6 +22905,7 @@ module ReleaseHosts = {
   let make = (~hostIds, ()) => new({hostIds: hostIds})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module RejectVpcEndpointConnections = {
   type t
   type request = {
@@ -22346,9 +22926,10 @@ module RejectVpcEndpointConnections = {
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "RejectVpcEndpointConnectionsCommand"
   let make = (~vpcEndpointIds, ~serviceId, ~dryRun=?, ()) =>
-    new({vpcEndpointIds, serviceId, dryRun})
+    new({vpcEndpointIds: vpcEndpointIds, serviceId: serviceId, dryRun: dryRun})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module RejectTransitGatewayVpcAttachment = {
   type t
   type request = {
@@ -22367,9 +22948,10 @@ module RejectTransitGatewayVpcAttachment = {
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "RejectTransitGatewayVpcAttachmentCommand"
   let make = (~transitGatewayAttachmentId, ~dryRun=?, ()) =>
-    new({dryRun, transitGatewayAttachmentId})
+    new({dryRun: dryRun, transitGatewayAttachmentId: transitGatewayAttachmentId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module RejectTransitGatewayPeeringAttachment = {
   type t
   type request = {
@@ -22390,9 +22972,10 @@ module RejectTransitGatewayPeeringAttachment = {
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "RejectTransitGatewayPeeringAttachmentCommand"
   let make = (~transitGatewayAttachmentId, ~dryRun=?, ()) =>
-    new({dryRun, transitGatewayAttachmentId})
+    new({dryRun: dryRun, transitGatewayAttachmentId: transitGatewayAttachmentId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module RejectTransitGatewayMulticastDomainAssociations = {
   type t
   type request = {
@@ -22423,9 +23006,16 @@ module RejectTransitGatewayMulticastDomainAssociations = {
     ~transitGatewayAttachmentId=?,
     ~transitGatewayMulticastDomainId=?,
     (),
-  ) => new({dryRun, subnetIds, transitGatewayAttachmentId, transitGatewayMulticastDomainId})
+  ) =>
+    new({
+      dryRun: dryRun,
+      subnetIds: subnetIds,
+      transitGatewayAttachmentId: transitGatewayAttachmentId,
+      transitGatewayMulticastDomainId: transitGatewayMulticastDomainId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module RegisterImage = {
   type t
   @ocaml.doc("<p>Contains the parameters for RegisterImage.</p>")
@@ -22514,23 +23104,24 @@ module RegisterImage = {
     (),
   ) =>
     new({
-      bootMode,
-      virtualizationType,
-      sriovNetSupport,
-      rootDeviceName,
-      ramdiskId,
-      billingProducts,
-      name,
-      kernelId,
-      enaSupport,
-      dryRun,
-      description,
-      blockDeviceMappings,
-      architecture,
-      imageLocation,
+      bootMode: bootMode,
+      virtualizationType: virtualizationType,
+      sriovNetSupport: sriovNetSupport,
+      rootDeviceName: rootDeviceName,
+      ramdiskId: ramdiskId,
+      billingProducts: billingProducts,
+      name: name,
+      kernelId: kernelId,
+      enaSupport: enaSupport,
+      dryRun: dryRun,
+      description: description,
+      blockDeviceMappings: blockDeviceMappings,
+      architecture: architecture,
+      imageLocation: imageLocation,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module MonitorInstances = {
   type t
   type request = {
@@ -22547,9 +23138,10 @@ module MonitorInstances = {
     instanceMonitorings: option<instanceMonitoringList>,
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "MonitorInstancesCommand"
-  let make = (~instanceIds, ~dryRun=?, ()) => new({dryRun, instanceIds})
+  let make = (~instanceIds, ~dryRun=?, ()) => new({dryRun: dryRun, instanceIds: instanceIds})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ModifyTransitGatewayVpcAttachment = {
   type t
   type request = {
@@ -22584,9 +23176,17 @@ module ModifyTransitGatewayVpcAttachment = {
     ~removeSubnetIds=?,
     ~addSubnetIds=?,
     (),
-  ) => new({dryRun, options, removeSubnetIds, addSubnetIds, transitGatewayAttachmentId})
+  ) =>
+    new({
+      dryRun: dryRun,
+      options: options,
+      removeSubnetIds: removeSubnetIds,
+      addSubnetIds: addSubnetIds,
+      transitGatewayAttachmentId: transitGatewayAttachmentId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ModifyTransitGateway = {
   type t
   type request = {
@@ -22605,9 +23205,15 @@ module ModifyTransitGateway = {
   type response = {@as("TransitGateway") transitGateway: option<transitGateway>}
   @module("@aws-sdk/client-ec2") @new external new: request => t = "ModifyTransitGatewayCommand"
   let make = (~transitGatewayId, ~dryRun=?, ~options=?, ~description=?, ()) =>
-    new({dryRun, options, description, transitGatewayId})
+    new({
+      dryRun: dryRun,
+      options: options,
+      description: description,
+      transitGatewayId: transitGatewayId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ModifyTrafficMirrorSession = {
   type t
   type request = {
@@ -22663,18 +23269,19 @@ module ModifyTrafficMirrorSession = {
     (),
   ) =>
     new({
-      dryRun,
-      removeFields,
-      description,
-      virtualNetworkId,
-      sessionNumber,
-      packetLength,
-      trafficMirrorFilterId,
-      trafficMirrorTargetId,
-      trafficMirrorSessionId,
+      dryRun: dryRun,
+      removeFields: removeFields,
+      description: description,
+      virtualNetworkId: virtualNetworkId,
+      sessionNumber: sessionNumber,
+      packetLength: packetLength,
+      trafficMirrorFilterId: trafficMirrorFilterId,
+      trafficMirrorTargetId: trafficMirrorTargetId,
+      trafficMirrorSessionId: trafficMirrorSessionId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ModifySnapshotAttribute = {
   type t
   type request = {
@@ -22711,9 +23318,18 @@ module ModifySnapshotAttribute = {
     ~attribute=?,
     (),
   ) =>
-    new({dryRun, userIds, snapshotId, operationType, groupNames, createVolumePermission, attribute})
+    new({
+      dryRun: dryRun,
+      userIds: userIds,
+      snapshotId: snapshotId,
+      operationType: operationType,
+      groupNames: groupNames,
+      createVolumePermission: createVolumePermission,
+      attribute: attribute,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ModifySecurityGroupRules = {
   type t
   type request = {
@@ -22736,9 +23352,10 @@ module ModifySecurityGroupRules = {
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "ModifySecurityGroupRulesCommand"
   let make = (~securityGroupRules, ~groupId, ~dryRun=?, ()) =>
-    new({dryRun, securityGroupRules, groupId})
+    new({dryRun: dryRun, securityGroupRules: securityGroupRules, groupId: groupId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ModifyManagedPrefixList = {
   type t
   type request = {
@@ -22781,16 +23398,17 @@ module ModifyManagedPrefixList = {
     (),
   ) =>
     new({
-      maxEntries,
-      removeEntries,
-      addEntries,
-      prefixListName,
-      currentVersion,
-      prefixListId,
-      dryRun,
+      maxEntries: maxEntries,
+      removeEntries: removeEntries,
+      addEntries: addEntries,
+      prefixListName: prefixListName,
+      currentVersion: currentVersion,
+      prefixListId: prefixListId,
+      dryRun: dryRun,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ModifyLaunchTemplate = {
   type t
   type request = {
@@ -22830,9 +23448,17 @@ module ModifyLaunchTemplate = {
     ~clientToken=?,
     ~dryRun=?,
     (),
-  ) => new({defaultVersion, launchTemplateName, launchTemplateId, clientToken, dryRun})
+  ) =>
+    new({
+      defaultVersion: defaultVersion,
+      launchTemplateName: launchTemplateName,
+      launchTemplateId: launchTemplateId,
+      clientToken: clientToken,
+      dryRun: dryRun,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ModifyIpamScope = {
   type t
   type request = {
@@ -22852,9 +23478,10 @@ module ModifyIpamScope = {
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "ModifyIpamScopeCommand"
   let make = (~ipamScopeId, ~description=?, ~dryRun=?, ()) =>
-    new({description, ipamScopeId, dryRun})
+    new({description: description, ipamScopeId: ipamScopeId, dryRun: dryRun})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ModifyIpamResourceCidr = {
   type t
   type request = {
@@ -22895,16 +23522,17 @@ module ModifyIpamResourceCidr = {
     (),
   ) =>
     new({
-      monitored,
-      destinationIpamScopeId,
-      currentIpamScopeId,
-      resourceRegion,
-      resourceCidr,
-      resourceId,
-      dryRun,
+      monitored: monitored,
+      destinationIpamScopeId: destinationIpamScopeId,
+      currentIpamScopeId: currentIpamScopeId,
+      resourceRegion: resourceRegion,
+      resourceCidr: resourceCidr,
+      resourceId: resourceId,
+      dryRun: dryRun,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ModifyIpamPool = {
   type t
   type request = {
@@ -22973,19 +23601,20 @@ module ModifyIpamPool = {
     (),
   ) =>
     new({
-      removeAllocationResourceTags,
-      addAllocationResourceTags,
-      clearAllocationDefaultNetmaskLength,
-      allocationDefaultNetmaskLength,
-      allocationMaxNetmaskLength,
-      allocationMinNetmaskLength,
-      autoImport,
-      description,
-      ipamPoolId,
-      dryRun,
+      removeAllocationResourceTags: removeAllocationResourceTags,
+      addAllocationResourceTags: addAllocationResourceTags,
+      clearAllocationDefaultNetmaskLength: clearAllocationDefaultNetmaskLength,
+      allocationDefaultNetmaskLength: allocationDefaultNetmaskLength,
+      allocationMaxNetmaskLength: allocationMaxNetmaskLength,
+      allocationMinNetmaskLength: allocationMinNetmaskLength,
+      autoImport: autoImport,
+      description: description,
+      ipamPoolId: ipamPoolId,
+      dryRun: dryRun,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ModifyIpam = {
   type t
   type request = {
@@ -23016,9 +23645,17 @@ module ModifyIpam = {
     ~description=?,
     ~dryRun=?,
     (),
-  ) => new({removeOperatingRegions, addOperatingRegions, description, ipamId, dryRun})
+  ) =>
+    new({
+      removeOperatingRegions: removeOperatingRegions,
+      addOperatingRegions: addOperatingRegions,
+      description: description,
+      ipamId: ipamId,
+      dryRun: dryRun,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ModifyInstanceCreditSpecification = {
   type t
   type request = {
@@ -23049,9 +23686,14 @@ module ModifyInstanceCreditSpecification = {
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "ModifyInstanceCreditSpecificationCommand"
   let make = (~instanceCreditSpecifications, ~clientToken=?, ~dryRun=?, ()) =>
-    new({instanceCreditSpecifications, clientToken, dryRun})
+    new({
+      instanceCreditSpecifications: instanceCreditSpecifications,
+      clientToken: clientToken,
+      dryRun: dryRun,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ModifyInstanceAttribute = {
   type t
   type request = {
@@ -23160,25 +23802,26 @@ module ModifyInstanceAttribute = {
     (),
   ) =>
     new({
-      value,
-      userData,
-      sriovNetSupport,
-      ramdisk,
-      kernel,
-      instanceType,
-      instanceInitiatedShutdownBehavior,
-      instanceId,
-      groups,
-      enaSupport,
-      ebsOptimized,
-      dryRun,
-      disableApiTermination,
-      blockDeviceMappings,
-      attribute,
-      sourceDestCheck,
+      value: value,
+      userData: userData,
+      sriovNetSupport: sriovNetSupport,
+      ramdisk: ramdisk,
+      kernel: kernel,
+      instanceType: instanceType,
+      instanceInitiatedShutdownBehavior: instanceInitiatedShutdownBehavior,
+      instanceId: instanceId,
+      groups: groups,
+      enaSupport: enaSupport,
+      ebsOptimized: ebsOptimized,
+      dryRun: dryRun,
+      disableApiTermination: disableApiTermination,
+      blockDeviceMappings: blockDeviceMappings,
+      attribute: attribute,
+      sourceDestCheck: sourceDestCheck,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ModifyImageAttribute = {
   type t
   @ocaml.doc("<p>Contains the parameters for ModifyImageAttribute.</p>")
@@ -23245,21 +23888,22 @@ module ModifyImageAttribute = {
     (),
   ) =>
     new({
-      organizationalUnitArns,
-      organizationArns,
-      dryRun,
-      value,
-      userIds,
-      userGroups,
-      productCodes,
-      operationType,
-      launchPermission,
-      imageId,
-      description,
-      attribute,
+      organizationalUnitArns: organizationalUnitArns,
+      organizationArns: organizationArns,
+      dryRun: dryRun,
+      value: value,
+      userIds: userIds,
+      userGroups: userGroups,
+      productCodes: productCodes,
+      operationType: operationType,
+      launchPermission: launchPermission,
+      imageId: imageId,
+      description: description,
+      attribute: attribute,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ModifyHosts = {
   type t
   type request = {
@@ -23309,9 +23953,17 @@ module ModifyHosts = {
     ~hostRecovery=?,
     ~autoPlacement=?,
     (),
-  ) => new({instanceFamily, instanceType, hostRecovery, hostIds, autoPlacement})
+  ) =>
+    new({
+      instanceFamily: instanceFamily,
+      instanceType: instanceType,
+      hostRecovery: hostRecovery,
+      hostIds: hostIds,
+      autoPlacement: autoPlacement,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ModifyFpgaImageAttribute = {
   type t
   type request = {
@@ -23363,19 +24015,20 @@ module ModifyFpgaImageAttribute = {
     (),
   ) =>
     new({
-      name,
-      description,
-      loadPermission,
-      productCodes,
-      userGroups,
-      userIds,
-      operationType,
-      attribute,
-      fpgaImageId,
-      dryRun,
+      name: name,
+      description: description,
+      loadPermission: loadPermission,
+      productCodes: productCodes,
+      userGroups: userGroups,
+      userIds: userIds,
+      operationType: operationType,
+      attribute: attribute,
+      fpgaImageId: fpgaImageId,
+      dryRun: dryRun,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetTransitGatewayRouteTablePropagations = {
   type t
   type request = {
@@ -23432,9 +24085,17 @@ module GetTransitGatewayRouteTablePropagations = {
     ~maxResults=?,
     ~filters=?,
     (),
-  ) => new({dryRun, nextToken, maxResults, filters, transitGatewayRouteTableId})
+  ) =>
+    new({
+      dryRun: dryRun,
+      nextToken: nextToken,
+      maxResults: maxResults,
+      filters: filters,
+      transitGatewayRouteTableId: transitGatewayRouteTableId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetTransitGatewayRouteTableAssociations = {
   type t
   type request = {
@@ -23490,9 +24151,17 @@ module GetTransitGatewayRouteTableAssociations = {
     ~maxResults=?,
     ~filters=?,
     (),
-  ) => new({dryRun, nextToken, maxResults, filters, transitGatewayRouteTableId})
+  ) =>
+    new({
+      dryRun: dryRun,
+      nextToken: nextToken,
+      maxResults: maxResults,
+      filters: filters,
+      transitGatewayRouteTableId: transitGatewayRouteTableId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetTransitGatewayPrefixListReferences = {
   type t
   type request = {
@@ -23565,9 +24234,17 @@ module GetTransitGatewayPrefixListReferences = {
     ~maxResults=?,
     ~filters=?,
     (),
-  ) => new({dryRun, nextToken, maxResults, filters, transitGatewayRouteTableId})
+  ) =>
+    new({
+      dryRun: dryRun,
+      nextToken: nextToken,
+      maxResults: maxResults,
+      filters: filters,
+      transitGatewayRouteTableId: transitGatewayRouteTableId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetTransitGatewayMulticastDomainAssociations = {
   type t
   type request = {
@@ -23634,9 +24311,17 @@ module GetTransitGatewayMulticastDomainAssociations = {
     ~filters=?,
     ~transitGatewayMulticastDomainId=?,
     (),
-  ) => new({dryRun, nextToken, maxResults, filters, transitGatewayMulticastDomainId})
+  ) =>
+    new({
+      dryRun: dryRun,
+      nextToken: nextToken,
+      maxResults: maxResults,
+      filters: filters,
+      transitGatewayMulticastDomainId: transitGatewayMulticastDomainId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetTransitGatewayAttachmentPropagations = {
   type t
   type request = {
@@ -23682,9 +24367,17 @@ module GetTransitGatewayAttachmentPropagations = {
     ~maxResults=?,
     ~filters=?,
     (),
-  ) => new({dryRun, nextToken, maxResults, filters, transitGatewayAttachmentId})
+  ) =>
+    new({
+      dryRun: dryRun,
+      nextToken: nextToken,
+      maxResults: maxResults,
+      filters: filters,
+      transitGatewayAttachmentId: transitGatewayAttachmentId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetSpotPlacementScores = {
   type t
   type request = {
@@ -23767,18 +24460,19 @@ module GetSpotPlacementScores = {
     (),
   ) =>
     new({
-      nextToken,
-      maxResults,
-      dryRun,
-      instanceRequirementsWithMetadata,
-      regionNames,
-      singleAvailabilityZone,
-      targetCapacityUnitType,
-      targetCapacity,
-      instanceTypes,
+      nextToken: nextToken,
+      maxResults: maxResults,
+      dryRun: dryRun,
+      instanceRequirementsWithMetadata: instanceRequirementsWithMetadata,
+      regionNames: regionNames,
+      singleAvailabilityZone: singleAvailabilityZone,
+      targetCapacityUnitType: targetCapacityUnitType,
+      targetCapacity: targetCapacity,
+      instanceTypes: instanceTypes,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetReservedInstancesExchangeQuote = {
   type t
   @ocaml.doc("<p>Contains the parameters for GetReservedInstanceExchangeQuote.</p>")
@@ -23829,9 +24523,14 @@ module GetReservedInstancesExchangeQuote = {
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "GetReservedInstancesExchangeQuoteCommand"
   let make = (~reservedInstanceIds, ~targetConfigurations=?, ~dryRun=?, ()) =>
-    new({targetConfigurations, reservedInstanceIds, dryRun})
+    new({
+      targetConfigurations: targetConfigurations,
+      reservedInstanceIds: reservedInstanceIds,
+      dryRun: dryRun,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetIpamPoolCidrs = {
   type t
   type request = {
@@ -23864,9 +24563,16 @@ module GetIpamPoolCidrs = {
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "GetIpamPoolCidrsCommand"
   let make = (~ipamPoolId, ~nextToken=?, ~maxResults=?, ~filters=?, ~dryRun=?, ()) =>
-    new({nextToken, maxResults, filters, ipamPoolId, dryRun})
+    new({
+      nextToken: nextToken,
+      maxResults: maxResults,
+      filters: filters,
+      ipamPoolId: ipamPoolId,
+      dryRun: dryRun,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetIpamPoolAllocations = {
   type t
   type request = {
@@ -23910,9 +24616,18 @@ module GetIpamPoolAllocations = {
     ~ipamPoolAllocationId=?,
     ~dryRun=?,
     (),
-  ) => new({nextToken, maxResults, filters, ipamPoolAllocationId, ipamPoolId, dryRun})
+  ) =>
+    new({
+      nextToken: nextToken,
+      maxResults: maxResults,
+      filters: filters,
+      ipamPoolAllocationId: ipamPoolAllocationId,
+      ipamPoolId: ipamPoolId,
+      dryRun: dryRun,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetHostReservationPurchasePreview = {
   type t
   type request = {
@@ -23941,9 +24656,10 @@ module GetHostReservationPurchasePreview = {
   }
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "GetHostReservationPurchasePreviewCommand"
-  let make = (~offeringId, ~hostIdSet, ()) => new({offeringId, hostIdSet})
+  let make = (~offeringId, ~hostIdSet, ()) => new({offeringId: offeringId, hostIdSet: hostIdSet})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetFlowLogsIntegrationTemplate = {
   type t
   type request = {
@@ -23968,9 +24684,15 @@ module GetFlowLogsIntegrationTemplate = {
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "GetFlowLogsIntegrationTemplateCommand"
   let make = (~integrateServices, ~configDeliveryS3DestinationArn, ~flowLogId, ~dryRun=?, ()) =>
-    new({integrateServices, configDeliveryS3DestinationArn, flowLogId, dryRun})
+    new({
+      integrateServices: integrateServices,
+      configDeliveryS3DestinationArn: configDeliveryS3DestinationArn,
+      flowLogId: flowLogId,
+      dryRun: dryRun,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetCoipPoolUsage = {
   type t
   type request = {
@@ -24018,9 +24740,16 @@ module GetCoipPoolUsage = {
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "GetCoipPoolUsageCommand"
   let make = (~poolId, ~dryRun=?, ~nextToken=?, ~maxResults=?, ~filters=?, ()) =>
-    new({dryRun, nextToken, maxResults, filters, poolId})
+    new({
+      dryRun: dryRun,
+      nextToken: nextToken,
+      maxResults: maxResults,
+      filters: filters,
+      poolId: poolId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ExportTransitGatewayRoutes = {
   type t
   type request = {
@@ -24084,9 +24813,15 @@ module ExportTransitGatewayRoutes = {
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "ExportTransitGatewayRoutesCommand"
   let make = (~s3Bucket, ~transitGatewayRouteTableId, ~dryRun=?, ~filters=?, ()) =>
-    new({dryRun, s3Bucket, filters, transitGatewayRouteTableId})
+    new({
+      dryRun: dryRun,
+      s3Bucket: s3Bucket,
+      filters: filters,
+      transitGatewayRouteTableId: transitGatewayRouteTableId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DisassociateTransitGatewayMulticastDomain = {
   type t
   type request = {
@@ -24115,9 +24850,16 @@ module DisassociateTransitGatewayMulticastDomain = {
     ~transitGatewayAttachmentId=?,
     ~transitGatewayMulticastDomainId=?,
     (),
-  ) => new({dryRun, subnetIds, transitGatewayAttachmentId, transitGatewayMulticastDomainId})
+  ) =>
+    new({
+      dryRun: dryRun,
+      subnetIds: subnetIds,
+      transitGatewayAttachmentId: transitGatewayAttachmentId,
+      transitGatewayMulticastDomainId: transitGatewayMulticastDomainId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeVpcEndpointServicePermissions = {
   type t
   type request = {
@@ -24164,9 +24906,16 @@ module DescribeVpcEndpointServicePermissions = {
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "DescribeVpcEndpointServicePermissionsCommand"
   let make = (~serviceId, ~nextToken=?, ~maxResults=?, ~filters=?, ~dryRun=?, ()) =>
-    new({nextToken, maxResults, filters, serviceId, dryRun})
+    new({
+      nextToken: nextToken,
+      maxResults: maxResults,
+      filters: filters,
+      serviceId: serviceId,
+      dryRun: dryRun,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeVpcEndpointConnectionNotifications = {
   type t
   type request = {
@@ -24234,9 +24983,17 @@ module DescribeVpcEndpointConnectionNotifications = {
     ~connectionNotificationId=?,
     ~dryRun=?,
     (),
-  ) => new({nextToken, maxResults, filters, connectionNotificationId, dryRun})
+  ) =>
+    new({
+      nextToken: nextToken,
+      maxResults: maxResults,
+      filters: filters,
+      connectionNotificationId: connectionNotificationId,
+      dryRun: dryRun,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeVolumesModifications = {
   type t
   type request = {
@@ -24316,9 +25073,16 @@ module DescribeVolumesModifications = {
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "DescribeVolumesModificationsCommand"
   let make = (~maxResults=?, ~nextToken=?, ~filters=?, ~volumeIds=?, ~dryRun=?, ()) =>
-    new({maxResults, nextToken, filters, volumeIds, dryRun})
+    new({
+      maxResults: maxResults,
+      nextToken: nextToken,
+      filters: filters,
+      volumeIds: volumeIds,
+      dryRun: dryRun,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeTags = {
   type t
   type request = {
@@ -24371,9 +25135,10 @@ module DescribeTags = {
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "DescribeTagsCommand"
   let make = (~nextToken=?, ~maxResults=?, ~filters=?, ~dryRun=?, ()) =>
-    new({nextToken, maxResults, filters, dryRun})
+    new({nextToken: nextToken, maxResults: maxResults, filters: filters, dryRun: dryRun})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeStoreImageTasks = {
   type t
   type request = {
@@ -24421,9 +25186,16 @@ module DescribeStoreImageTasks = {
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "DescribeStoreImageTasksCommand"
   let make = (~maxResults=?, ~nextToken=?, ~filters=?, ~dryRun=?, ~imageIds=?, ()) =>
-    new({maxResults, nextToken, filters, dryRun, imageIds})
+    new({
+      maxResults: maxResults,
+      nextToken: nextToken,
+      filters: filters,
+      dryRun: dryRun,
+      imageIds: imageIds,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeSpotPriceHistory = {
   type t
   @ocaml.doc("<p>Contains the parameters for DescribeSpotPriceHistory.</p>")
@@ -24520,18 +25292,19 @@ module DescribeSpotPriceHistory = {
     (),
   ) =>
     new({
-      startTime,
-      productDescriptions,
-      nextToken,
-      maxResults,
-      instanceTypes,
-      endTime,
-      dryRun,
-      availabilityZone,
-      filters,
+      startTime: startTime,
+      productDescriptions: productDescriptions,
+      nextToken: nextToken,
+      maxResults: maxResults,
+      instanceTypes: instanceTypes,
+      endTime: endTime,
+      dryRun: dryRun,
+      availabilityZone: availabilityZone,
+      filters: filters,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeSpotFleetRequestHistory = {
   type t
   @ocaml.doc("<p>Contains the parameters for DescribeSpotFleetRequestHistory.</p>")
@@ -24592,9 +25365,18 @@ module DescribeSpotFleetRequestHistory = {
     ~eventType=?,
     ~dryRun=?,
     (),
-  ) => new({startTime, spotFleetRequestId, nextToken, maxResults, eventType, dryRun})
+  ) =>
+    new({
+      startTime: startTime,
+      spotFleetRequestId: spotFleetRequestId,
+      nextToken: nextToken,
+      maxResults: maxResults,
+      eventType: eventType,
+      dryRun: dryRun,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeRegions = {
   type t
   type request = {
@@ -24637,9 +25419,10 @@ module DescribeRegions = {
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "DescribeRegionsCommand"
   let make = (~allRegions=?, ~dryRun=?, ~regionNames=?, ~filters=?, ()) =>
-    new({allRegions, dryRun, regionNames, filters})
+    new({allRegions: allRegions, dryRun: dryRun, regionNames: regionNames, filters: filters})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribePrefixLists = {
   type t
   type request = {
@@ -24681,9 +25464,16 @@ module DescribePrefixLists = {
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "DescribePrefixListsCommand"
   let make = (~prefixListIds=?, ~nextToken=?, ~maxResults=?, ~filters=?, ~dryRun=?, ()) =>
-    new({prefixListIds, nextToken, maxResults, filters, dryRun})
+    new({
+      prefixListIds: prefixListIds,
+      nextToken: nextToken,
+      maxResults: maxResults,
+      filters: filters,
+      dryRun: dryRun,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeNetworkInterfacePermissions = {
   type t
   @ocaml.doc("<p>Contains the parameters for DescribeNetworkInterfacePermissions.</p>")
@@ -24737,9 +25527,15 @@ module DescribeNetworkInterfacePermissions = {
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "DescribeNetworkInterfacePermissionsCommand"
   let make = (~maxResults=?, ~nextToken=?, ~filters=?, ~networkInterfacePermissionIds=?, ()) =>
-    new({maxResults, nextToken, filters, networkInterfacePermissionIds})
+    new({
+      maxResults: maxResults,
+      nextToken: nextToken,
+      filters: filters,
+      networkInterfacePermissionIds: networkInterfacePermissionIds,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeMovingAddresses = {
   type t
   type request = {
@@ -24781,9 +25577,16 @@ module DescribeMovingAddresses = {
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "DescribeMovingAddressesCommand"
   let make = (~publicIps=?, ~nextToken=?, ~maxResults=?, ~dryRun=?, ~filters=?, ()) =>
-    new({publicIps, nextToken, maxResults, dryRun, filters})
+    new({
+      publicIps: publicIps,
+      nextToken: nextToken,
+      maxResults: maxResults,
+      dryRun: dryRun,
+      filters: filters,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeInstanceTypeOfferings = {
   type t
   type request = {
@@ -24826,9 +25629,16 @@ module DescribeInstanceTypeOfferings = {
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "DescribeInstanceTypeOfferingsCommand"
   let make = (~nextToken=?, ~maxResults=?, ~filters=?, ~locationType=?, ~dryRun=?, ()) =>
-    new({nextToken, maxResults, filters, locationType, dryRun})
+    new({
+      nextToken: nextToken,
+      maxResults: maxResults,
+      filters: filters,
+      locationType: locationType,
+      dryRun: dryRun,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeInstanceCreditSpecifications = {
   type t
   type request = {
@@ -24872,9 +25682,16 @@ module DescribeInstanceCreditSpecifications = {
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "DescribeInstanceCreditSpecificationsCommand"
   let make = (~nextToken=?, ~maxResults=?, ~instanceIds=?, ~filters=?, ~dryRun=?, ()) =>
-    new({nextToken, maxResults, instanceIds, filters, dryRun})
+    new({
+      nextToken: nextToken,
+      maxResults: maxResults,
+      instanceIds: instanceIds,
+      filters: filters,
+      dryRun: dryRun,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeInstanceAttribute = {
   type t
   type request = {
@@ -24940,9 +25757,11 @@ module DescribeInstanceAttribute = {
   }
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "DescribeInstanceAttributeCommand"
-  let make = (~instanceId, ~attribute, ~dryRun=?, ()) => new({instanceId, dryRun, attribute})
+  let make = (~instanceId, ~attribute, ~dryRun=?, ()) =>
+    new({instanceId: instanceId, dryRun: dryRun, attribute: attribute})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeImageAttribute = {
   type t
   @ocaml.doc("<p>Contains the parameters for DescribeImageAttribute.</p>")
@@ -24991,9 +25810,11 @@ module DescribeImageAttribute = {
     blockDeviceMappings: option<blockDeviceMappingList>,
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "DescribeImageAttributeCommand"
-  let make = (~imageId, ~attribute, ~dryRun=?, ()) => new({dryRun, imageId, attribute})
+  let make = (~imageId, ~attribute, ~dryRun=?, ()) =>
+    new({dryRun: dryRun, imageId: imageId, attribute: attribute})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeIamInstanceProfileAssociations = {
   type t
   type request = {
@@ -25033,9 +25854,15 @@ module DescribeIamInstanceProfileAssociations = {
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "DescribeIamInstanceProfileAssociationsCommand"
   let make = (~nextToken=?, ~maxResults=?, ~filters=?, ~associationIds=?, ()) =>
-    new({nextToken, maxResults, filters, associationIds})
+    new({
+      nextToken: nextToken,
+      maxResults: maxResults,
+      filters: filters,
+      associationIds: associationIds,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeHostReservationOfferings = {
   type t
   type request = {
@@ -25095,9 +25922,18 @@ module DescribeHostReservationOfferings = {
     ~maxDuration=?,
     ~filter=?,
     (),
-  ) => new({offeringId, nextToken, minDuration, maxResults, maxDuration, filter})
+  ) =>
+    new({
+      offeringId: offeringId,
+      nextToken: nextToken,
+      minDuration: minDuration,
+      maxResults: maxResults,
+      maxDuration: maxDuration,
+      filter: filter,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeFpgaImageAttribute = {
   type t
   type request = {
@@ -25115,9 +25951,11 @@ module DescribeFpgaImageAttribute = {
   }
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "DescribeFpgaImageAttributeCommand"
-  let make = (~attribute, ~fpgaImageId, ~dryRun=?, ()) => new({attribute, fpgaImageId, dryRun})
+  let make = (~attribute, ~fpgaImageId, ~dryRun=?, ()) =>
+    new({attribute: attribute, fpgaImageId: fpgaImageId, dryRun: dryRun})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeFleetInstances = {
   type t
   type request = {
@@ -25155,9 +25993,16 @@ module DescribeFleetInstances = {
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "DescribeFleetInstancesCommand"
   let make = (~fleetId, ~filters=?, ~nextToken=?, ~maxResults=?, ~dryRun=?, ()) =>
-    new({filters, fleetId, nextToken, maxResults, dryRun})
+    new({
+      filters: filters,
+      fleetId: fleetId,
+      nextToken: nextToken,
+      maxResults: maxResults,
+      dryRun: dryRun,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeFleetHistory = {
   type t
   type request = {
@@ -25203,9 +26048,17 @@ module DescribeFleetHistory = {
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "DescribeFleetHistoryCommand"
   let make = (~startTime, ~fleetId, ~nextToken=?, ~maxResults=?, ~eventType=?, ~dryRun=?, ()) =>
-    new({startTime, fleetId, nextToken, maxResults, eventType, dryRun})
+    new({
+      startTime: startTime,
+      fleetId: fleetId,
+      nextToken: nextToken,
+      maxResults: maxResults,
+      eventType: eventType,
+      dryRun: dryRun,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeFastSnapshotRestores = {
   type t
   type request = {
@@ -25260,9 +26113,10 @@ module DescribeFastSnapshotRestores = {
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "DescribeFastSnapshotRestoresCommand"
   let make = (~dryRun=?, ~nextToken=?, ~maxResults=?, ~filters=?, ()) =>
-    new({dryRun, nextToken, maxResults, filters})
+    new({dryRun: dryRun, nextToken: nextToken, maxResults: maxResults, filters: filters})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeFastLaunchImages = {
   type t
   type request = {
@@ -25314,9 +26168,16 @@ module DescribeFastLaunchImages = {
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "DescribeFastLaunchImagesCommand"
   let make = (~dryRun=?, ~nextToken=?, ~maxResults=?, ~filters=?, ~imageIds=?, ()) =>
-    new({dryRun, nextToken, maxResults, filters, imageIds})
+    new({
+      dryRun: dryRun,
+      nextToken: nextToken,
+      maxResults: maxResults,
+      filters: filters,
+      imageIds: imageIds,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeClientVpnTargetNetworks = {
   type t
   type request = {
@@ -25374,9 +26235,18 @@ module DescribeClientVpnTargetNetworks = {
     ~maxResults=?,
     ~associationIds=?,
     (),
-  ) => new({dryRun, filters, nextToken, maxResults, associationIds, clientVpnEndpointId})
+  ) =>
+    new({
+      dryRun: dryRun,
+      filters: filters,
+      nextToken: nextToken,
+      maxResults: maxResults,
+      associationIds: associationIds,
+      clientVpnEndpointId: clientVpnEndpointId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeClientVpnRoutes = {
   type t
   type request = {
@@ -25423,9 +26293,16 @@ module DescribeClientVpnRoutes = {
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "DescribeClientVpnRoutesCommand"
   let make = (~clientVpnEndpointId, ~dryRun=?, ~nextToken=?, ~maxResults=?, ~filters=?, ()) =>
-    new({dryRun, nextToken, maxResults, filters, clientVpnEndpointId})
+    new({
+      dryRun: dryRun,
+      nextToken: nextToken,
+      maxResults: maxResults,
+      filters: filters,
+      clientVpnEndpointId: clientVpnEndpointId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeClientVpnConnections = {
   type t
   type request = {
@@ -25471,9 +26348,16 @@ module DescribeClientVpnConnections = {
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "DescribeClientVpnConnectionsCommand"
   let make = (~clientVpnEndpointId, ~dryRun=?, ~maxResults=?, ~nextToken=?, ~filters=?, ()) =>
-    new({dryRun, maxResults, nextToken, filters, clientVpnEndpointId})
+    new({
+      dryRun: dryRun,
+      maxResults: maxResults,
+      nextToken: nextToken,
+      filters: filters,
+      clientVpnEndpointId: clientVpnEndpointId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeClientVpnAuthorizationRules = {
   type t
   type request = {
@@ -25522,9 +26406,16 @@ module DescribeClientVpnAuthorizationRules = {
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "DescribeClientVpnAuthorizationRulesCommand"
   let make = (~clientVpnEndpointId, ~maxResults=?, ~filters=?, ~nextToken=?, ~dryRun=?, ()) =>
-    new({maxResults, filters, nextToken, dryRun, clientVpnEndpointId})
+    new({
+      maxResults: maxResults,
+      filters: filters,
+      nextToken: nextToken,
+      dryRun: dryRun,
+      clientVpnEndpointId: clientVpnEndpointId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeAddressesAttribute = {
   type t
   type request = {
@@ -25557,9 +26448,16 @@ module DescribeAddressesAttribute = {
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "DescribeAddressesAttributeCommand"
   let make = (~dryRun=?, ~maxResults=?, ~nextToken=?, ~attribute=?, ~allocationIds=?, ()) =>
-    new({dryRun, maxResults, nextToken, attribute, allocationIds})
+    new({
+      dryRun: dryRun,
+      maxResults: maxResults,
+      nextToken: nextToken,
+      attribute: attribute,
+      allocationIds: allocationIds,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteVpcEndpoints = {
   type t
   @ocaml.doc("<p>Contains the parameters for DeleteVpcEndpoints.</p>")
@@ -25579,9 +26477,11 @@ module DeleteVpcEndpoints = {
     unsuccessful: option<unsuccessfulItemSet>,
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "DeleteVpcEndpointsCommand"
-  let make = (~vpcEndpointIds, ~dryRun=?, ()) => new({vpcEndpointIds, dryRun})
+  let make = (~vpcEndpointIds, ~dryRun=?, ()) =>
+    new({vpcEndpointIds: vpcEndpointIds, dryRun: dryRun})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteVpcEndpointServiceConfigurations = {
   type t
   type request = {
@@ -25601,9 +26501,10 @@ module DeleteVpcEndpointServiceConfigurations = {
   }
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "DeleteVpcEndpointServiceConfigurationsCommand"
-  let make = (~serviceIds, ~dryRun=?, ()) => new({serviceIds, dryRun})
+  let make = (~serviceIds, ~dryRun=?, ()) => new({serviceIds: serviceIds, dryRun: dryRun})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteVpcEndpointConnectionNotifications = {
   type t
   type request = {
@@ -25623,9 +26524,11 @@ module DeleteVpcEndpointConnectionNotifications = {
   }
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "DeleteVpcEndpointConnectionNotificationsCommand"
-  let make = (~connectionNotificationIds, ~dryRun=?, ()) => new({connectionNotificationIds, dryRun})
+  let make = (~connectionNotificationIds, ~dryRun=?, ()) =>
+    new({connectionNotificationIds: connectionNotificationIds, dryRun: dryRun})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteTransitGatewayVpcAttachment = {
   type t
   type request = {
@@ -25645,9 +26548,10 @@ module DeleteTransitGatewayVpcAttachment = {
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "DeleteTransitGatewayVpcAttachmentCommand"
   let make = (~transitGatewayAttachmentId, ~dryRun=?, ()) =>
-    new({dryRun, transitGatewayAttachmentId})
+    new({dryRun: dryRun, transitGatewayAttachmentId: transitGatewayAttachmentId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteTransitGatewayRouteTable = {
   type t
   type request = {
@@ -25668,9 +26572,10 @@ module DeleteTransitGatewayRouteTable = {
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "DeleteTransitGatewayRouteTableCommand"
   let make = (~transitGatewayRouteTableId, ~dryRun=?, ()) =>
-    new({dryRun, transitGatewayRouteTableId})
+    new({dryRun: dryRun, transitGatewayRouteTableId: transitGatewayRouteTableId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteTransitGatewayRoute = {
   type t
   type request = {
@@ -25695,9 +26600,14 @@ module DeleteTransitGatewayRoute = {
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "DeleteTransitGatewayRouteCommand"
   let make = (~destinationCidrBlock, ~transitGatewayRouteTableId, ~dryRun=?, ()) =>
-    new({dryRun, destinationCidrBlock, transitGatewayRouteTableId})
+    new({
+      dryRun: dryRun,
+      destinationCidrBlock: destinationCidrBlock,
+      transitGatewayRouteTableId: transitGatewayRouteTableId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteTransitGatewayPeeringAttachment = {
   type t
   type request = {
@@ -25718,9 +26628,10 @@ module DeleteTransitGatewayPeeringAttachment = {
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "DeleteTransitGatewayPeeringAttachmentCommand"
   let make = (~transitGatewayAttachmentId, ~dryRun=?, ()) =>
-    new({dryRun, transitGatewayAttachmentId})
+    new({dryRun: dryRun, transitGatewayAttachmentId: transitGatewayAttachmentId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteTransitGatewayMulticastDomain = {
   type t
   type request = {
@@ -25741,9 +26652,10 @@ module DeleteTransitGatewayMulticastDomain = {
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "DeleteTransitGatewayMulticastDomainCommand"
   let make = (~transitGatewayMulticastDomainId, ~dryRun=?, ()) =>
-    new({dryRun, transitGatewayMulticastDomainId})
+    new({dryRun: dryRun, transitGatewayMulticastDomainId: transitGatewayMulticastDomainId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteTransitGatewayConnect = {
   type t
   type request = {
@@ -25763,9 +26675,10 @@ module DeleteTransitGatewayConnect = {
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "DeleteTransitGatewayConnectCommand"
   let make = (~transitGatewayAttachmentId, ~dryRun=?, ()) =>
-    new({dryRun, transitGatewayAttachmentId})
+    new({dryRun: dryRun, transitGatewayAttachmentId: transitGatewayAttachmentId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteTransitGateway = {
   type t
   type request = {
@@ -25782,9 +26695,11 @@ module DeleteTransitGateway = {
     transitGateway: option<transitGateway>,
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "DeleteTransitGatewayCommand"
-  let make = (~transitGatewayId, ~dryRun=?, ()) => new({dryRun, transitGatewayId})
+  let make = (~transitGatewayId, ~dryRun=?, ()) =>
+    new({dryRun: dryRun, transitGatewayId: transitGatewayId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteSubnetCidrReservation = {
   type t
   type request = {
@@ -25803,9 +26718,11 @@ module DeleteSubnetCidrReservation = {
   }
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "DeleteSubnetCidrReservationCommand"
-  let make = (~subnetCidrReservationId, ~dryRun=?, ()) => new({dryRun, subnetCidrReservationId})
+  let make = (~subnetCidrReservationId, ~dryRun=?, ()) =>
+    new({dryRun: dryRun, subnetCidrReservationId: subnetCidrReservationId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteQueuedReservedInstances = {
   type t
   type request = {
@@ -25827,9 +26744,11 @@ module DeleteQueuedReservedInstances = {
   }
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "DeleteQueuedReservedInstancesCommand"
-  let make = (~reservedInstancesIds, ~dryRun=?, ()) => new({reservedInstancesIds, dryRun})
+  let make = (~reservedInstancesIds, ~dryRun=?, ()) =>
+    new({reservedInstancesIds: reservedInstancesIds, dryRun: dryRun})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteManagedPrefixList = {
   type t
   type request = {
@@ -25846,9 +26765,10 @@ module DeleteManagedPrefixList = {
     prefixList: option<managedPrefixList>,
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "DeleteManagedPrefixListCommand"
-  let make = (~prefixListId, ~dryRun=?, ()) => new({prefixListId, dryRun})
+  let make = (~prefixListId, ~dryRun=?, ()) => new({prefixListId: prefixListId, dryRun: dryRun})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteLocalGatewayRouteTableVpcAssociation = {
   type t
   type request = {
@@ -25868,9 +26788,13 @@ module DeleteLocalGatewayRouteTableVpcAssociation = {
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "DeleteLocalGatewayRouteTableVpcAssociationCommand"
   let make = (~localGatewayRouteTableVpcAssociationId, ~dryRun=?, ()) =>
-    new({dryRun, localGatewayRouteTableVpcAssociationId})
+    new({
+      dryRun: dryRun,
+      localGatewayRouteTableVpcAssociationId: localGatewayRouteTableVpcAssociationId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteLaunchTemplateVersions = {
   type t
   type request = {
@@ -25909,9 +26833,15 @@ module DeleteLaunchTemplateVersions = {
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "DeleteLaunchTemplateVersionsCommand"
   let make = (~versions, ~launchTemplateName=?, ~launchTemplateId=?, ~dryRun=?, ()) =>
-    new({versions, launchTemplateName, launchTemplateId, dryRun})
+    new({
+      versions: versions,
+      launchTemplateName: launchTemplateName,
+      launchTemplateId: launchTemplateId,
+      dryRun: dryRun,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteLaunchTemplate = {
   type t
   type request = {
@@ -25936,9 +26866,14 @@ module DeleteLaunchTemplate = {
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "DeleteLaunchTemplateCommand"
   let make = (~launchTemplateName=?, ~launchTemplateId=?, ~dryRun=?, ()) =>
-    new({launchTemplateName, launchTemplateId, dryRun})
+    new({
+      launchTemplateName: launchTemplateName,
+      launchTemplateId: launchTemplateId,
+      dryRun: dryRun,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteIpamScope = {
   type t
   type request = {
@@ -25954,9 +26889,10 @@ module DeleteIpamScope = {
     ipamScope: option<ipamScope>,
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "DeleteIpamScopeCommand"
-  let make = (~ipamScopeId, ~dryRun=?, ()) => new({ipamScopeId, dryRun})
+  let make = (~ipamScopeId, ~dryRun=?, ()) => new({ipamScopeId: ipamScopeId, dryRun: dryRun})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteIpamPool = {
   type t
   type request = {
@@ -25972,9 +26908,10 @@ module DeleteIpamPool = {
     ipamPool: option<ipamPool>,
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "DeleteIpamPoolCommand"
-  let make = (~ipamPoolId, ~dryRun=?, ()) => new({ipamPoolId, dryRun})
+  let make = (~ipamPoolId, ~dryRun=?, ()) => new({ipamPoolId: ipamPoolId, dryRun: dryRun})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteIpam = {
   type t
   type request = {
@@ -26014,9 +26951,11 @@ module DeleteIpam = {
     ipam: option<ipam>,
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "DeleteIpamCommand"
-  let make = (~ipamId, ~cascade=?, ~dryRun=?, ()) => new({cascade, ipamId, dryRun})
+  let make = (~ipamId, ~cascade=?, ~dryRun=?, ()) =>
+    new({cascade: cascade, ipamId: ipamId, dryRun: dryRun})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteFlowLogs = {
   type t
   type request = {
@@ -26036,9 +26975,10 @@ module DeleteFlowLogs = {
     unsuccessful: option<unsuccessfulItemSet>,
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "DeleteFlowLogsCommand"
-  let make = (~flowLogIds, ~dryRun=?, ()) => new({flowLogIds, dryRun})
+  let make = (~flowLogIds, ~dryRun=?, ()) => new({flowLogIds: flowLogIds, dryRun: dryRun})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteFleets = {
   type t
   type request = {
@@ -26068,9 +27008,10 @@ module DeleteFleets = {
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "DeleteFleetsCommand"
   let make = (~terminateInstances, ~fleetIds, ~dryRun=?, ()) =>
-    new({terminateInstances, fleetIds, dryRun})
+    new({terminateInstances: terminateInstances, fleetIds: fleetIds, dryRun: dryRun})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteCarrierGateway = {
   type t
   type request = {
@@ -26087,9 +27028,11 @@ module DeleteCarrierGateway = {
     carrierGateway: option<carrierGateway>,
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "DeleteCarrierGatewayCommand"
-  let make = (~carrierGatewayId, ~dryRun=?, ()) => new({dryRun, carrierGatewayId})
+  let make = (~carrierGatewayId, ~dryRun=?, ()) =>
+    new({dryRun: dryRun, carrierGatewayId: carrierGatewayId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateTransitGatewayRoute = {
   type t
   type request = {
@@ -26125,14 +27068,15 @@ module CreateTransitGatewayRoute = {
     (),
   ) =>
     new({
-      dryRun,
-      blackhole,
-      transitGatewayAttachmentId,
-      transitGatewayRouteTableId,
-      destinationCidrBlock,
+      dryRun: dryRun,
+      blackhole: blackhole,
+      transitGatewayAttachmentId: transitGatewayAttachmentId,
+      transitGatewayRouteTableId: transitGatewayRouteTableId,
+      destinationCidrBlock: destinationCidrBlock,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CancelSpotFleetRequests = {
   type t
   @ocaml.doc("<p>Contains the parameters for CancelSpotFleetRequests.</p>")
@@ -26163,9 +27107,14 @@ module CancelSpotFleetRequests = {
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "CancelSpotFleetRequestsCommand"
   let make = (~terminateInstances, ~spotFleetRequestIds, ~dryRun=?, ()) =>
-    new({terminateInstances, spotFleetRequestIds, dryRun})
+    new({
+      terminateInstances: terminateInstances,
+      spotFleetRequestIds: spotFleetRequestIds,
+      dryRun: dryRun,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CancelCapacityReservationFleets = {
   type t
   type request = {
@@ -26193,9 +27142,10 @@ module CancelCapacityReservationFleets = {
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "CancelCapacityReservationFleetsCommand"
   let make = (~capacityReservationFleetIds, ~dryRun=?, ()) =>
-    new({capacityReservationFleetIds, dryRun})
+    new({capacityReservationFleetIds: capacityReservationFleetIds, dryRun: dryRun})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CancelBundleTask = {
   type t
   @ocaml.doc("<p>Contains the parameters for CancelBundleTask.</p>")
@@ -26213,9 +27163,10 @@ module CancelBundleTask = {
     bundleTask: option<bundleTask>,
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "CancelBundleTaskCommand"
-  let make = (~bundleId, ~dryRun=?, ()) => new({dryRun, bundleId})
+  let make = (~bundleId, ~dryRun=?, ()) => new({dryRun: dryRun, bundleId: bundleId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module BundleInstance = {
   type t
   @ocaml.doc("<p>Contains the parameters for BundleInstance.</p>")
@@ -26243,9 +27194,11 @@ module BundleInstance = {
     bundleTask: option<bundleTask>,
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "BundleInstanceCommand"
-  let make = (~storage, ~instanceId, ~dryRun=?, ()) => new({dryRun, storage, instanceId})
+  let make = (~storage, ~instanceId, ~dryRun=?, ()) =>
+    new({dryRun: dryRun, storage: storage, instanceId: instanceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module AssociateTrunkInterface = {
   type t
   type request = {
@@ -26289,9 +27242,18 @@ module AssociateTrunkInterface = {
     ~greKey=?,
     ~vlanId=?,
     (),
-  ) => new({dryRun, clientToken, greKey, vlanId, trunkInterfaceId, branchInterfaceId})
+  ) =>
+    new({
+      dryRun: dryRun,
+      clientToken: clientToken,
+      greKey: greKey,
+      vlanId: vlanId,
+      trunkInterfaceId: trunkInterfaceId,
+      branchInterfaceId: branchInterfaceId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module AssociateTransitGatewayMulticastDomain = {
   type t
   type request = {
@@ -26327,9 +27289,16 @@ module AssociateTransitGatewayMulticastDomain = {
     ~transitGatewayAttachmentId=?,
     ~transitGatewayMulticastDomainId=?,
     (),
-  ) => new({dryRun, subnetIds, transitGatewayAttachmentId, transitGatewayMulticastDomainId})
+  ) =>
+    new({
+      dryRun: dryRun,
+      subnetIds: subnetIds,
+      transitGatewayAttachmentId: transitGatewayAttachmentId,
+      transitGatewayMulticastDomainId: transitGatewayMulticastDomainId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module AcceptVpcEndpointConnections = {
   type t
   type request = {
@@ -26352,9 +27321,10 @@ module AcceptVpcEndpointConnections = {
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "AcceptVpcEndpointConnectionsCommand"
   let make = (~vpcEndpointIds, ~serviceId, ~dryRun=?, ()) =>
-    new({vpcEndpointIds, serviceId, dryRun})
+    new({vpcEndpointIds: vpcEndpointIds, serviceId: serviceId, dryRun: dryRun})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module AcceptTransitGatewayVpcAttachment = {
   type t
   type request = {
@@ -26373,9 +27343,10 @@ module AcceptTransitGatewayVpcAttachment = {
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "AcceptTransitGatewayVpcAttachmentCommand"
   let make = (~transitGatewayAttachmentId, ~dryRun=?, ()) =>
-    new({dryRun, transitGatewayAttachmentId})
+    new({dryRun: dryRun, transitGatewayAttachmentId: transitGatewayAttachmentId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module AcceptTransitGatewayPeeringAttachment = {
   type t
   type request = {
@@ -26395,9 +27366,10 @@ module AcceptTransitGatewayPeeringAttachment = {
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "AcceptTransitGatewayPeeringAttachmentCommand"
   let make = (~transitGatewayAttachmentId, ~dryRun=?, ()) =>
-    new({dryRun, transitGatewayAttachmentId})
+    new({dryRun: dryRun, transitGatewayAttachmentId: transitGatewayAttachmentId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module AcceptTransitGatewayMulticastDomainAssociations = {
   type t
   type request = {
@@ -26428,9 +27400,16 @@ module AcceptTransitGatewayMulticastDomainAssociations = {
     ~transitGatewayAttachmentId=?,
     ~transitGatewayMulticastDomainId=?,
     (),
-  ) => new({dryRun, subnetIds, transitGatewayAttachmentId, transitGatewayMulticastDomainId})
+  ) =>
+    new({
+      dryRun: dryRun,
+      subnetIds: subnetIds,
+      transitGatewayAttachmentId: transitGatewayAttachmentId,
+      transitGatewayMulticastDomainId: transitGatewayMulticastDomainId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateSecurityGroupRuleDescriptionsIngress = {
   type t
   type request = {
@@ -26473,9 +27452,17 @@ module UpdateSecurityGroupRuleDescriptionsIngress = {
     ~groupId=?,
     ~dryRun=?,
     (),
-  ) => new({securityGroupRuleDescriptions, ipPermissions, groupName, groupId, dryRun})
+  ) =>
+    new({
+      securityGroupRuleDescriptions: securityGroupRuleDescriptions,
+      ipPermissions: ipPermissions,
+      groupName: groupName,
+      groupId: groupId,
+      dryRun: dryRun,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateSecurityGroupRuleDescriptionsEgress = {
   type t
   type request = {
@@ -26518,9 +27505,17 @@ module UpdateSecurityGroupRuleDescriptionsEgress = {
     ~groupId=?,
     ~dryRun=?,
     (),
-  ) => new({securityGroupRuleDescriptions, ipPermissions, groupName, groupId, dryRun})
+  ) =>
+    new({
+      securityGroupRuleDescriptions: securityGroupRuleDescriptions,
+      ipPermissions: ipPermissions,
+      groupName: groupName,
+      groupId: groupId,
+      dryRun: dryRun,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module StartNetworkInsightsAccessScopeAnalysis = {
   type t
   type request = {
@@ -26546,9 +27541,15 @@ module StartNetworkInsightsAccessScopeAnalysis = {
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "StartNetworkInsightsAccessScopeAnalysisCommand"
   let make = (~clientToken, ~networkInsightsAccessScopeId, ~tagSpecifications=?, ~dryRun=?, ()) =>
-    new({clientToken, tagSpecifications, dryRun, networkInsightsAccessScopeId})
+    new({
+      clientToken: clientToken,
+      tagSpecifications: tagSpecifications,
+      dryRun: dryRun,
+      networkInsightsAccessScopeId: networkInsightsAccessScopeId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module SearchTransitGatewayRoutes = {
   type t
   type request = {
@@ -26621,9 +27622,15 @@ module SearchTransitGatewayRoutes = {
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "SearchTransitGatewayRoutesCommand"
   let make = (~filters, ~transitGatewayRouteTableId, ~dryRun=?, ~maxResults=?, ()) =>
-    new({dryRun, maxResults, filters, transitGatewayRouteTableId})
+    new({
+      dryRun: dryRun,
+      maxResults: maxResults,
+      filters: filters,
+      transitGatewayRouteTableId: transitGatewayRouteTableId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module RevokeSecurityGroupIngress = {
   type t
   type request = {
@@ -26706,20 +27713,21 @@ module RevokeSecurityGroupIngress = {
     (),
   ) =>
     new({
-      securityGroupRuleIds,
-      dryRun,
-      toPort,
-      sourceSecurityGroupOwnerId,
-      sourceSecurityGroupName,
-      ipProtocol,
-      ipPermissions,
-      groupName,
-      groupId,
-      fromPort,
-      cidrIp,
+      securityGroupRuleIds: securityGroupRuleIds,
+      dryRun: dryRun,
+      toPort: toPort,
+      sourceSecurityGroupOwnerId: sourceSecurityGroupOwnerId,
+      sourceSecurityGroupName: sourceSecurityGroupName,
+      ipProtocol: ipProtocol,
+      ipPermissions: ipPermissions,
+      groupName: groupName,
+      groupId: groupId,
+      fromPort: fromPort,
+      cidrIp: cidrIp,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module RevokeSecurityGroupEgress = {
   type t
   type request = {
@@ -26786,19 +27794,20 @@ module RevokeSecurityGroupEgress = {
     (),
   ) =>
     new({
-      sourceSecurityGroupOwnerId,
-      sourceSecurityGroupName,
-      toPort,
-      ipProtocol,
-      fromPort,
-      cidrIp,
-      securityGroupRuleIds,
-      ipPermissions,
-      groupId,
-      dryRun,
+      sourceSecurityGroupOwnerId: sourceSecurityGroupOwnerId,
+      sourceSecurityGroupName: sourceSecurityGroupName,
+      toPort: toPort,
+      ipProtocol: ipProtocol,
+      fromPort: fromPort,
+      cidrIp: cidrIp,
+      securityGroupRuleIds: securityGroupRuleIds,
+      ipPermissions: ipPermissions,
+      groupId: groupId,
+      dryRun: dryRun,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module PurchaseScheduledInstances = {
   type t
   @ocaml.doc("<p>Contains the parameters for PurchaseScheduledInstances.</p>")
@@ -26823,9 +27832,10 @@ module PurchaseScheduledInstances = {
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "PurchaseScheduledInstancesCommand"
   let make = (~purchaseRequests, ~dryRun=?, ~clientToken=?, ()) =>
-    new({purchaseRequests, dryRun, clientToken})
+    new({purchaseRequests: purchaseRequests, dryRun: dryRun, clientToken: clientToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module PurchaseHostReservation = {
   type t
   type request = {
@@ -26886,9 +27896,18 @@ module PurchaseHostReservation = {
     ~currencyCode=?,
     ~clientToken=?,
     (),
-  ) => new({tagSpecifications, offeringId, limitPrice, hostIdSet, currencyCode, clientToken})
+  ) =>
+    new({
+      tagSpecifications: tagSpecifications,
+      offeringId: offeringId,
+      limitPrice: limitPrice,
+      hostIdSet: hostIdSet,
+      currencyCode: currencyCode,
+      clientToken: clientToken,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ProvisionByoipCidr = {
   type t
   type request = {
@@ -26934,16 +27953,17 @@ module ProvisionByoipCidr = {
     (),
   ) =>
     new({
-      multiRegion,
-      poolTagSpecifications,
-      dryRun,
-      description,
-      publiclyAdvertisable,
-      cidrAuthorizationContext,
-      cidr,
+      multiRegion: multiRegion,
+      poolTagSpecifications: poolTagSpecifications,
+      dryRun: dryRun,
+      description: description,
+      publiclyAdvertisable: publiclyAdvertisable,
+      cidrAuthorizationContext: cidrAuthorizationContext,
+      cidr: cidr,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ModifyTrafficMirrorFilterNetworkServices = {
   type t
   type request = {
@@ -26976,9 +27996,16 @@ module ModifyTrafficMirrorFilterNetworkServices = {
     ~removeNetworkServices=?,
     ~addNetworkServices=?,
     (),
-  ) => new({dryRun, removeNetworkServices, addNetworkServices, trafficMirrorFilterId})
+  ) =>
+    new({
+      dryRun: dryRun,
+      removeNetworkServices: removeNetworkServices,
+      addNetworkServices: addNetworkServices,
+      trafficMirrorFilterId: trafficMirrorFilterId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ModifyInstanceEventWindow = {
   type t
   type request = {
@@ -27031,9 +28058,16 @@ module ModifyInstanceEventWindow = {
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "ModifyInstanceEventWindowCommand"
   let make = (~instanceEventWindowId, ~cronExpression=?, ~timeRanges=?, ~name=?, ~dryRun=?, ()) =>
-    new({cronExpression, timeRanges, instanceEventWindowId, name, dryRun})
+    new({
+      cronExpression: cronExpression,
+      timeRanges: timeRanges,
+      instanceEventWindowId: instanceEventWindowId,
+      name: name,
+      dryRun: dryRun,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ImportSnapshot = {
   type t
   type request = {
@@ -27110,18 +28144,19 @@ module ImportSnapshot = {
     (),
   ) =>
     new({
-      tagSpecifications,
-      roleName,
-      kmsKeyId,
-      encrypted,
-      dryRun,
-      diskContainer,
-      description,
-      clientToken,
-      clientData,
+      tagSpecifications: tagSpecifications,
+      roleName: roleName,
+      kmsKeyId: kmsKeyId,
+      encrypted: encrypted,
+      dryRun: dryRun,
+      diskContainer: diskContainer,
+      description: description,
+      clientToken: clientToken,
+      clientData: clientData,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ImportKeyPair = {
   type t
   type request = {
@@ -27152,9 +28187,15 @@ module ImportKeyPair = {
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "ImportKeyPairCommand"
   let make = (~publicKeyMaterial, ~keyName, ~tagSpecifications=?, ~dryRun=?, ()) =>
-    new({tagSpecifications, publicKeyMaterial, keyName, dryRun})
+    new({
+      tagSpecifications: tagSpecifications,
+      publicKeyMaterial: publicKeyMaterial,
+      keyName: keyName,
+      dryRun: dryRun,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ImportImage = {
   type t
   type request = {
@@ -27297,25 +28338,26 @@ module ImportImage = {
     (),
   ) =>
     new({
-      bootMode,
-      usageOperation,
-      tagSpecifications,
-      licenseSpecifications,
-      roleName,
-      platform,
-      licenseType,
-      kmsKeyId,
-      hypervisor,
-      encrypted,
-      dryRun,
-      diskContainers,
-      description,
-      clientToken,
-      clientData,
-      architecture,
+      bootMode: bootMode,
+      usageOperation: usageOperation,
+      tagSpecifications: tagSpecifications,
+      licenseSpecifications: licenseSpecifications,
+      roleName: roleName,
+      platform: platform,
+      licenseType: licenseType,
+      kmsKeyId: kmsKeyId,
+      hypervisor: hypervisor,
+      encrypted: encrypted,
+      dryRun: dryRun,
+      diskContainers: diskContainers,
+      description: description,
+      clientToken: clientToken,
+      clientData: clientData,
+      architecture: architecture,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetSubnetCidrReservations = {
   type t
   type request = {
@@ -27371,9 +28413,16 @@ module GetSubnetCidrReservations = {
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "GetSubnetCidrReservationsCommand"
   let make = (~subnetId, ~maxResults=?, ~nextToken=?, ~dryRun=?, ~filters=?, ()) =>
-    new({maxResults, nextToken, dryRun, subnetId, filters})
+    new({
+      maxResults: maxResults,
+      nextToken: nextToken,
+      dryRun: dryRun,
+      subnetId: subnetId,
+      filters: filters,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetIpamResourceCidrs = {
   type t
   type request = {
@@ -27427,19 +28476,20 @@ module GetIpamResourceCidrs = {
     (),
   ) =>
     new({
-      resourceOwner,
-      resourceTag,
-      resourceType,
-      resourceId,
-      ipamPoolId,
-      ipamScopeId,
-      nextToken,
-      maxResults,
-      filters,
-      dryRun,
+      resourceOwner: resourceOwner,
+      resourceTag: resourceTag,
+      resourceType: resourceType,
+      resourceId: resourceId,
+      ipamPoolId: ipamPoolId,
+      ipamScopeId: ipamScopeId,
+      nextToken: nextToken,
+      maxResults: maxResults,
+      filters: filters,
+      dryRun: dryRun,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ExportImage = {
   type t
   type request = {
@@ -27508,17 +28558,18 @@ module ExportImage = {
     (),
   ) =>
     new({
-      tagSpecifications,
-      roleName,
-      s3ExportLocation,
-      imageId,
-      dryRun,
-      diskImageFormat,
-      description,
-      clientToken,
+      tagSpecifications: tagSpecifications,
+      roleName: roleName,
+      s3ExportLocation: s3ExportLocation,
+      imageId: imageId,
+      dryRun: dryRun,
+      diskImageFormat: diskImageFormat,
+      description: description,
+      clientToken: clientToken,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DisassociateInstanceEventWindow = {
   type t
   type request = {
@@ -27540,9 +28591,14 @@ module DisassociateInstanceEventWindow = {
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "DisassociateInstanceEventWindowCommand"
   let make = (~associationTarget, ~instanceEventWindowId, ~dryRun=?, ()) =>
-    new({associationTarget, instanceEventWindowId, dryRun})
+    new({
+      associationTarget: associationTarget,
+      instanceEventWindowId: instanceEventWindowId,
+      dryRun: dryRun,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeVpnGateways = {
   type t
   @ocaml.doc("<p>Contains the parameters for DescribeVpnGateways.</p>")
@@ -27613,9 +28669,11 @@ module DescribeVpnGateways = {
     vpnGateways: option<vpnGatewayList>,
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "DescribeVpnGatewaysCommand"
-  let make = (~dryRun=?, ~vpnGatewayIds=?, ~filters=?, ()) => new({dryRun, vpnGatewayIds, filters})
+  let make = (~dryRun=?, ~vpnGatewayIds=?, ~filters=?, ()) =>
+    new({dryRun: dryRun, vpnGatewayIds: vpnGatewayIds, filters: filters})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeVpcEndpoints = {
   type t
   @ocaml.doc("<p>Contains the parameters for DescribeVpcEndpoints.</p>")
@@ -27685,9 +28743,16 @@ module DescribeVpcEndpoints = {
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "DescribeVpcEndpointsCommand"
   let make = (~nextToken=?, ~maxResults=?, ~filters=?, ~vpcEndpointIds=?, ~dryRun=?, ()) =>
-    new({nextToken, maxResults, filters, vpcEndpointIds, dryRun})
+    new({
+      nextToken: nextToken,
+      maxResults: maxResults,
+      filters: filters,
+      vpcEndpointIds: vpcEndpointIds,
+      dryRun: dryRun,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeVpcEndpointServices = {
   type t
   @ocaml.doc("<p>Contains the parameters for DescribeVpcEndpointServices.</p>")
@@ -27746,9 +28811,16 @@ module DescribeVpcEndpointServices = {
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "DescribeVpcEndpointServicesCommand"
   let make = (~nextToken=?, ~maxResults=?, ~filters=?, ~serviceNames=?, ~dryRun=?, ()) =>
-    new({nextToken, maxResults, filters, serviceNames, dryRun})
+    new({
+      nextToken: nextToken,
+      maxResults: maxResults,
+      filters: filters,
+      serviceNames: serviceNames,
+      dryRun: dryRun,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeVpcEndpointServiceConfigurations = {
   type t
   type request = {
@@ -27808,9 +28880,16 @@ module DescribeVpcEndpointServiceConfigurations = {
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "DescribeVpcEndpointServiceConfigurationsCommand"
   let make = (~nextToken=?, ~maxResults=?, ~filters=?, ~serviceIds=?, ~dryRun=?, ()) =>
-    new({nextToken, maxResults, filters, serviceIds, dryRun})
+    new({
+      nextToken: nextToken,
+      maxResults: maxResults,
+      filters: filters,
+      serviceIds: serviceIds,
+      dryRun: dryRun,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeVpcEndpointConnections = {
   type t
   type request = {
@@ -27867,9 +28946,10 @@ module DescribeVpcEndpointConnections = {
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "DescribeVpcEndpointConnectionsCommand"
   let make = (~nextToken=?, ~maxResults=?, ~filters=?, ~dryRun=?, ()) =>
-    new({nextToken, maxResults, filters, dryRun})
+    new({nextToken: nextToken, maxResults: maxResults, filters: filters, dryRun: dryRun})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeVpcClassicLink = {
   type t
   type request = {
@@ -27906,9 +28986,11 @@ module DescribeVpcClassicLink = {
     vpcs: option<vpcClassicLinkList>,
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "DescribeVpcClassicLinkCommand"
-  let make = (~vpcIds=?, ~dryRun=?, ~filters=?, ()) => new({vpcIds, dryRun, filters})
+  let make = (~vpcIds=?, ~dryRun=?, ~filters=?, ()) =>
+    new({vpcIds: vpcIds, dryRun: dryRun, filters: filters})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeVolumes = {
   type t
   type request = {
@@ -28035,9 +29117,16 @@ module DescribeVolumes = {
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "DescribeVolumesCommand"
   let make = (~nextToken=?, ~maxResults=?, ~dryRun=?, ~volumeIds=?, ~filters=?, ()) =>
-    new({nextToken, maxResults, dryRun, volumeIds, filters})
+    new({
+      nextToken: nextToken,
+      maxResults: maxResults,
+      dryRun: dryRun,
+      volumeIds: volumeIds,
+      filters: filters,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeTrunkInterfaceAssociations = {
   type t
   type request = {
@@ -28080,9 +29169,16 @@ module DescribeTrunkInterfaceAssociations = {
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "DescribeTrunkInterfaceAssociationsCommand"
   let make = (~maxResults=?, ~nextToken=?, ~filters=?, ~dryRun=?, ~associationIds=?, ()) =>
-    new({maxResults, nextToken, filters, dryRun, associationIds})
+    new({
+      maxResults: maxResults,
+      nextToken: nextToken,
+      filters: filters,
+      dryRun: dryRun,
+      associationIds: associationIds,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeTransitGateways = {
   type t
   type request = {
@@ -28162,9 +29258,16 @@ module DescribeTransitGateways = {
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "DescribeTransitGatewaysCommand"
   let make = (~dryRun=?, ~nextToken=?, ~maxResults=?, ~filters=?, ~transitGatewayIds=?, ()) =>
-    new({dryRun, nextToken, maxResults, filters, transitGatewayIds})
+    new({
+      dryRun: dryRun,
+      nextToken: nextToken,
+      maxResults: maxResults,
+      filters: filters,
+      transitGatewayIds: transitGatewayIds,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeTransitGatewayVpcAttachments = {
   type t
   type request = {
@@ -28221,9 +29324,17 @@ module DescribeTransitGatewayVpcAttachments = {
     ~filters=?,
     ~transitGatewayAttachmentIds=?,
     (),
-  ) => new({dryRun, nextToken, maxResults, filters, transitGatewayAttachmentIds})
+  ) =>
+    new({
+      dryRun: dryRun,
+      nextToken: nextToken,
+      maxResults: maxResults,
+      filters: filters,
+      transitGatewayAttachmentIds: transitGatewayAttachmentIds,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeTransitGatewayRouteTables = {
   type t
   type request = {
@@ -28288,9 +29399,17 @@ module DescribeTransitGatewayRouteTables = {
     ~filters=?,
     ~transitGatewayRouteTableIds=?,
     (),
-  ) => new({dryRun, nextToken, maxResults, filters, transitGatewayRouteTableIds})
+  ) =>
+    new({
+      dryRun: dryRun,
+      nextToken: nextToken,
+      maxResults: maxResults,
+      filters: filters,
+      transitGatewayRouteTableIds: transitGatewayRouteTableIds,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeTransitGatewayPeeringAttachments = {
   type t
   type request = {
@@ -28362,9 +29481,17 @@ module DescribeTransitGatewayPeeringAttachments = {
     ~filters=?,
     ~transitGatewayAttachmentIds=?,
     (),
-  ) => new({dryRun, nextToken, maxResults, filters, transitGatewayAttachmentIds})
+  ) =>
+    new({
+      dryRun: dryRun,
+      nextToken: nextToken,
+      maxResults: maxResults,
+      filters: filters,
+      transitGatewayAttachmentIds: transitGatewayAttachmentIds,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeTransitGatewayMulticastDomains = {
   type t
   type request = {
@@ -28419,9 +29546,17 @@ module DescribeTransitGatewayMulticastDomains = {
     ~filters=?,
     ~transitGatewayMulticastDomainIds=?,
     (),
-  ) => new({dryRun, nextToken, maxResults, filters, transitGatewayMulticastDomainIds})
+  ) =>
+    new({
+      dryRun: dryRun,
+      nextToken: nextToken,
+      maxResults: maxResults,
+      filters: filters,
+      transitGatewayMulticastDomainIds: transitGatewayMulticastDomainIds,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeTransitGatewayConnects = {
   type t
   type request = {
@@ -28488,9 +29623,17 @@ module DescribeTransitGatewayConnects = {
     ~filters=?,
     ~transitGatewayAttachmentIds=?,
     (),
-  ) => new({dryRun, nextToken, maxResults, filters, transitGatewayAttachmentIds})
+  ) =>
+    new({
+      dryRun: dryRun,
+      nextToken: nextToken,
+      maxResults: maxResults,
+      filters: filters,
+      transitGatewayAttachmentIds: transitGatewayAttachmentIds,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeTransitGatewayAttachments = {
   type t
   type request = {
@@ -28570,9 +29713,17 @@ module DescribeTransitGatewayAttachments = {
     ~filters=?,
     ~transitGatewayAttachmentIds=?,
     (),
-  ) => new({dryRun, nextToken, maxResults, filters, transitGatewayAttachmentIds})
+  ) =>
+    new({
+      dryRun: dryRun,
+      nextToken: nextToken,
+      maxResults: maxResults,
+      filters: filters,
+      transitGatewayAttachmentIds: transitGatewayAttachmentIds,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeTrafficMirrorTargets = {
   type t
   type request = {
@@ -28628,9 +29779,16 @@ module DescribeTrafficMirrorTargets = {
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "DescribeTrafficMirrorTargetsCommand"
   let make = (~nextToken=?, ~maxResults=?, ~filters=?, ~dryRun=?, ~trafficMirrorTargetIds=?, ()) =>
-    new({nextToken, maxResults, filters, dryRun, trafficMirrorTargetIds})
+    new({
+      nextToken: nextToken,
+      maxResults: maxResults,
+      filters: filters,
+      dryRun: dryRun,
+      trafficMirrorTargetIds: trafficMirrorTargetIds,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeTrafficMirrorSessions = {
   type t
   type request = {
@@ -28704,9 +29862,16 @@ module DescribeTrafficMirrorSessions = {
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "DescribeTrafficMirrorSessionsCommand"
   let make = (~nextToken=?, ~maxResults=?, ~filters=?, ~dryRun=?, ~trafficMirrorSessionIds=?, ()) =>
-    new({nextToken, maxResults, filters, dryRun, trafficMirrorSessionIds})
+    new({
+      nextToken: nextToken,
+      maxResults: maxResults,
+      filters: filters,
+      dryRun: dryRun,
+      trafficMirrorSessionIds: trafficMirrorSessionIds,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeSnapshots = {
   type t
   type request = {
@@ -28833,9 +29998,19 @@ module DescribeSnapshots = {
     ~maxResults=?,
     ~filters=?,
     (),
-  ) => new({dryRun, snapshotIds, restorableByUserIds, ownerIds, nextToken, maxResults, filters})
+  ) =>
+    new({
+      dryRun: dryRun,
+      snapshotIds: snapshotIds,
+      restorableByUserIds: restorableByUserIds,
+      ownerIds: ownerIds,
+      nextToken: nextToken,
+      maxResults: maxResults,
+      filters: filters,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeSnapshotTierStatus = {
   type t
   type request = {
@@ -28882,9 +30057,10 @@ module DescribeSnapshotTierStatus = {
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "DescribeSnapshotTierStatusCommand"
   let make = (~maxResults=?, ~nextToken=?, ~dryRun=?, ~filters=?, ()) =>
-    new({maxResults, nextToken, dryRun, filters})
+    new({maxResults: maxResults, nextToken: nextToken, dryRun: dryRun, filters: filters})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeSecurityGroupRules = {
   type t
   type request = {
@@ -28934,9 +30110,16 @@ module DescribeSecurityGroupRules = {
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "DescribeSecurityGroupRulesCommand"
   let make = (~maxResults=?, ~nextToken=?, ~dryRun=?, ~securityGroupRuleIds=?, ~filters=?, ()) =>
-    new({maxResults, nextToken, dryRun, securityGroupRuleIds, filters})
+    new({
+      maxResults: maxResults,
+      nextToken: nextToken,
+      dryRun: dryRun,
+      securityGroupRuleIds: securityGroupRuleIds,
+      filters: filters,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeScheduledInstances = {
   type t
   @ocaml.doc("<p>Contains the parameters for DescribeScheduledInstances.</p>")
@@ -29000,9 +30183,18 @@ module DescribeScheduledInstances = {
     ~filters=?,
     ~dryRun=?,
     (),
-  ) => new({slotStartTimeRange, scheduledInstanceIds, nextToken, maxResults, filters, dryRun})
+  ) =>
+    new({
+      slotStartTimeRange: slotStartTimeRange,
+      scheduledInstanceIds: scheduledInstanceIds,
+      nextToken: nextToken,
+      maxResults: maxResults,
+      filters: filters,
+      dryRun: dryRun,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeScheduledInstanceAvailability = {
   type t
   @ocaml.doc("<p>Contains the parameters for DescribeScheduledInstanceAvailability.</p>")
@@ -29081,17 +30273,18 @@ module DescribeScheduledInstanceAvailability = {
     (),
   ) =>
     new({
-      recurrence,
-      nextToken,
-      minSlotDurationInHours,
-      maxSlotDurationInHours,
-      maxResults,
-      firstSlotStartTimeRange,
-      filters,
-      dryRun,
+      recurrence: recurrence,
+      nextToken: nextToken,
+      minSlotDurationInHours: minSlotDurationInHours,
+      maxSlotDurationInHours: maxSlotDurationInHours,
+      maxResults: maxResults,
+      firstSlotStartTimeRange: firstSlotStartTimeRange,
+      filters: filters,
+      dryRun: dryRun,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeReservedInstancesOfferings = {
   type t
   @ocaml.doc("<p>Contains the parameters for DescribeReservedInstancesOfferings.</p>")
@@ -29249,24 +30442,25 @@ module DescribeReservedInstancesOfferings = {
     (),
   ) =>
     new({
-      offeringType,
-      nextToken,
-      maxResults,
-      instanceTenancy,
-      dryRun,
-      reservedInstancesOfferingIds,
-      productDescription,
-      offeringClass,
-      minDuration,
-      maxInstanceCount,
-      maxDuration,
-      instanceType,
-      includeMarketplace,
-      filters,
-      availabilityZone,
+      offeringType: offeringType,
+      nextToken: nextToken,
+      maxResults: maxResults,
+      instanceTenancy: instanceTenancy,
+      dryRun: dryRun,
+      reservedInstancesOfferingIds: reservedInstancesOfferingIds,
+      productDescription: productDescription,
+      offeringClass: offeringClass,
+      minDuration: minDuration,
+      maxInstanceCount: maxInstanceCount,
+      maxDuration: maxDuration,
+      instanceType: instanceType,
+      includeMarketplace: includeMarketplace,
+      filters: filters,
+      availabilityZone: availabilityZone,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeReservedInstancesListings = {
   type t
   @ocaml.doc("<p>Contains the parameters for DescribeReservedInstancesListings.</p>")
@@ -29308,9 +30502,14 @@ module DescribeReservedInstancesListings = {
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "DescribeReservedInstancesListingsCommand"
   let make = (~reservedInstancesListingId=?, ~reservedInstancesId=?, ~filters=?, ()) =>
-    new({reservedInstancesListingId, reservedInstancesId, filters})
+    new({
+      reservedInstancesListingId: reservedInstancesListingId,
+      reservedInstancesId: reservedInstancesId,
+      filters: filters,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeReservedInstances = {
   type t
   @ocaml.doc("<p>Contains the parameters for DescribeReservedInstances.</p>")
@@ -29416,9 +30615,17 @@ module DescribeReservedInstances = {
     ~offeringClass=?,
     ~filters=?,
     (),
-  ) => new({offeringType, dryRun, reservedInstancesIds, offeringClass, filters})
+  ) =>
+    new({
+      offeringType: offeringType,
+      dryRun: dryRun,
+      reservedInstancesIds: reservedInstancesIds,
+      offeringClass: offeringClass,
+      filters: filters,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeReplaceRootVolumeTasks = {
   type t
   type request = {
@@ -29465,9 +30672,17 @@ module DescribeReplaceRootVolumeTasks = {
     ~filters=?,
     ~replaceRootVolumeTaskIds=?,
     (),
-  ) => new({dryRun, nextToken, maxResults, filters, replaceRootVolumeTaskIds})
+  ) =>
+    new({
+      dryRun: dryRun,
+      nextToken: nextToken,
+      maxResults: maxResults,
+      filters: filters,
+      replaceRootVolumeTaskIds: replaceRootVolumeTaskIds,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribePublicIpv4Pools = {
   type t
   type request = {
@@ -29505,9 +30720,10 @@ module DescribePublicIpv4Pools = {
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "DescribePublicIpv4PoolsCommand"
   let make = (~filters=?, ~maxResults=?, ~nextToken=?, ~poolIds=?, ()) =>
-    new({filters, maxResults, nextToken, poolIds})
+    new({filters: filters, maxResults: maxResults, nextToken: nextToken, poolIds: poolIds})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribePrincipalIdFormat = {
   type t
   type request = {
@@ -29551,9 +30767,10 @@ module DescribePrincipalIdFormat = {
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "DescribePrincipalIdFormatCommand"
   let make = (~nextToken=?, ~maxResults=?, ~resources=?, ~dryRun=?, ()) =>
-    new({nextToken, maxResults, resources, dryRun})
+    new({nextToken: nextToken, maxResults: maxResults, resources: resources, dryRun: dryRun})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribePlacementGroups = {
   type t
   type request = {
@@ -29611,9 +30828,10 @@ module DescribePlacementGroups = {
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "DescribePlacementGroupsCommand"
   let make = (~groupIds=?, ~groupNames=?, ~dryRun=?, ~filters=?, ()) =>
-    new({groupIds, groupNames, dryRun, filters})
+    new({groupIds: groupIds, groupNames: groupNames, dryRun: dryRun, filters: filters})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeNetworkInsightsPaths = {
   type t
   type request = {
@@ -29663,9 +30881,16 @@ module DescribeNetworkInsightsPaths = {
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "DescribeNetworkInsightsPathsCommand"
   let make = (~nextToken=?, ~dryRun=?, ~maxResults=?, ~filters=?, ~networkInsightsPathIds=?, ()) =>
-    new({nextToken, dryRun, maxResults, filters, networkInsightsPathIds})
+    new({
+      nextToken: nextToken,
+      dryRun: dryRun,
+      maxResults: maxResults,
+      filters: filters,
+      networkInsightsPathIds: networkInsightsPathIds,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeNetworkInsightsAccessScopes = {
   type t
   type request = {
@@ -29702,9 +30927,17 @@ module DescribeNetworkInsightsAccessScopes = {
     ~filters=?,
     ~networkInsightsAccessScopeIds=?,
     (),
-  ) => new({nextToken, dryRun, maxResults, filters, networkInsightsAccessScopeIds})
+  ) =>
+    new({
+      nextToken: nextToken,
+      dryRun: dryRun,
+      maxResults: maxResults,
+      filters: filters,
+      networkInsightsAccessScopeIds: networkInsightsAccessScopeIds,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeNetworkInsightsAccessScopeAnalyses = {
   type t
   type request = {
@@ -29760,17 +30993,18 @@ module DescribeNetworkInsightsAccessScopeAnalyses = {
     (),
   ) =>
     new({
-      nextToken,
-      dryRun,
-      maxResults,
-      filters,
-      analysisStartTimeEnd,
-      analysisStartTimeBegin,
-      networkInsightsAccessScopeId,
-      networkInsightsAccessScopeAnalysisIds,
+      nextToken: nextToken,
+      dryRun: dryRun,
+      maxResults: maxResults,
+      filters: filters,
+      analysisStartTimeEnd: analysisStartTimeEnd,
+      analysisStartTimeBegin: analysisStartTimeBegin,
+      networkInsightsAccessScopeId: networkInsightsAccessScopeId,
+      networkInsightsAccessScopeAnalysisIds: networkInsightsAccessScopeAnalysisIds,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeNatGateways = {
   type t
   type request = {
@@ -29830,9 +31064,16 @@ module DescribeNatGateways = {
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "DescribeNatGatewaysCommand"
   let make = (~nextToken=?, ~natGatewayIds=?, ~maxResults=?, ~filter=?, ~dryRun=?, ()) =>
-    new({nextToken, natGatewayIds, maxResults, filter, dryRun})
+    new({
+      nextToken: nextToken,
+      natGatewayIds: natGatewayIds,
+      maxResults: maxResults,
+      filter: filter,
+      dryRun: dryRun,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeManagedPrefixLists = {
   type t
   type request = {
@@ -29879,9 +31120,16 @@ module DescribeManagedPrefixLists = {
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "DescribeManagedPrefixListsCommand"
   let make = (~prefixListIds=?, ~nextToken=?, ~maxResults=?, ~filters=?, ~dryRun=?, ()) =>
-    new({prefixListIds, nextToken, maxResults, filters, dryRun})
+    new({
+      prefixListIds: prefixListIds,
+      nextToken: nextToken,
+      maxResults: maxResults,
+      filters: filters,
+      dryRun: dryRun,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeLocalGateways = {
   type t
   type request = {
@@ -29931,9 +31179,16 @@ module DescribeLocalGateways = {
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "DescribeLocalGatewaysCommand"
   let make = (~dryRun=?, ~nextToken=?, ~maxResults=?, ~filters=?, ~localGatewayIds=?, ()) =>
-    new({dryRun, nextToken, maxResults, filters, localGatewayIds})
+    new({
+      dryRun: dryRun,
+      nextToken: nextToken,
+      maxResults: maxResults,
+      filters: filters,
+      localGatewayIds: localGatewayIds,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeLocalGatewayVirtualInterfaces = {
   type t
   type request = {
@@ -30012,9 +31267,17 @@ module DescribeLocalGatewayVirtualInterfaces = {
     ~filters=?,
     ~localGatewayVirtualInterfaceIds=?,
     (),
-  ) => new({dryRun, nextToken, maxResults, filters, localGatewayVirtualInterfaceIds})
+  ) =>
+    new({
+      dryRun: dryRun,
+      nextToken: nextToken,
+      maxResults: maxResults,
+      filters: filters,
+      localGatewayVirtualInterfaceIds: localGatewayVirtualInterfaceIds,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeLocalGatewayVirtualInterfaceGroups = {
   type t
   type request = {
@@ -30072,9 +31335,17 @@ module DescribeLocalGatewayVirtualInterfaceGroups = {
     ~filters=?,
     ~localGatewayVirtualInterfaceGroupIds=?,
     (),
-  ) => new({dryRun, nextToken, maxResults, filters, localGatewayVirtualInterfaceGroupIds})
+  ) =>
+    new({
+      dryRun: dryRun,
+      nextToken: nextToken,
+      maxResults: maxResults,
+      filters: filters,
+      localGatewayVirtualInterfaceGroupIds: localGatewayVirtualInterfaceGroupIds,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeLocalGatewayRouteTables = {
   type t
   type request = {
@@ -30141,9 +31412,17 @@ module DescribeLocalGatewayRouteTables = {
     ~filters=?,
     ~localGatewayRouteTableIds=?,
     (),
-  ) => new({dryRun, nextToken, maxResults, filters, localGatewayRouteTableIds})
+  ) =>
+    new({
+      dryRun: dryRun,
+      nextToken: nextToken,
+      maxResults: maxResults,
+      filters: filters,
+      localGatewayRouteTableIds: localGatewayRouteTableIds,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeLocalGatewayRouteTableVpcAssociations = {
   type t
   type request = {
@@ -30215,9 +31494,17 @@ module DescribeLocalGatewayRouteTableVpcAssociations = {
     ~filters=?,
     ~localGatewayRouteTableVpcAssociationIds=?,
     (),
-  ) => new({dryRun, nextToken, maxResults, filters, localGatewayRouteTableVpcAssociationIds})
+  ) =>
+    new({
+      dryRun: dryRun,
+      nextToken: nextToken,
+      maxResults: maxResults,
+      filters: filters,
+      localGatewayRouteTableVpcAssociationIds: localGatewayRouteTableVpcAssociationIds,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeLocalGatewayRouteTableVirtualInterfaceGroupAssociations = {
   type t
   type request = {
@@ -30297,14 +31584,15 @@ module DescribeLocalGatewayRouteTableVirtualInterfaceGroupAssociations = {
     (),
   ) =>
     new({
-      dryRun,
-      nextToken,
-      maxResults,
-      filters,
-      localGatewayRouteTableVirtualInterfaceGroupAssociationIds,
+      dryRun: dryRun,
+      nextToken: nextToken,
+      maxResults: maxResults,
+      filters: filters,
+      localGatewayRouteTableVirtualInterfaceGroupAssociationIds: localGatewayRouteTableVirtualInterfaceGroupAssociationIds,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeLaunchTemplates = {
   type t
   type request = {
@@ -30365,9 +31653,18 @@ module DescribeLaunchTemplates = {
     ~launchTemplateIds=?,
     ~dryRun=?,
     (),
-  ) => new({maxResults, nextToken, filters, launchTemplateNames, launchTemplateIds, dryRun})
+  ) =>
+    new({
+      maxResults: maxResults,
+      nextToken: nextToken,
+      filters: filters,
+      launchTemplateNames: launchTemplateNames,
+      launchTemplateIds: launchTemplateIds,
+      dryRun: dryRun,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeKeyPairs = {
   type t
   type request = {
@@ -30415,9 +31712,10 @@ module DescribeKeyPairs = {
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "DescribeKeyPairsCommand"
   let make = (~dryRun=?, ~keyPairIds=?, ~keyNames=?, ~filters=?, ()) =>
-    new({dryRun, keyPairIds, keyNames, filters})
+    new({dryRun: dryRun, keyPairIds: keyPairIds, keyNames: keyNames, filters: filters})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeIpv6Pools = {
   type t
   type request = {
@@ -30460,9 +31758,16 @@ module DescribeIpv6Pools = {
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "DescribeIpv6PoolsCommand"
   let make = (~filters=?, ~dryRun=?, ~maxResults=?, ~nextToken=?, ~poolIds=?, ()) =>
-    new({filters, dryRun, maxResults, nextToken, poolIds})
+    new({
+      filters: filters,
+      dryRun: dryRun,
+      maxResults: maxResults,
+      nextToken: nextToken,
+      poolIds: poolIds,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeIpams = {
   type t
   type request = {
@@ -30493,9 +31798,16 @@ module DescribeIpams = {
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "DescribeIpamsCommand"
   let make = (~ipamIds=?, ~nextToken=?, ~maxResults=?, ~filters=?, ~dryRun=?, ()) =>
-    new({ipamIds, nextToken, maxResults, filters, dryRun})
+    new({
+      ipamIds: ipamIds,
+      nextToken: nextToken,
+      maxResults: maxResults,
+      filters: filters,
+      dryRun: dryRun,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeIpamScopes = {
   type t
   type request = {
@@ -30527,9 +31839,16 @@ module DescribeIpamScopes = {
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "DescribeIpamScopesCommand"
   let make = (~ipamScopeIds=?, ~nextToken=?, ~maxResults=?, ~filters=?, ~dryRun=?, ()) =>
-    new({ipamScopeIds, nextToken, maxResults, filters, dryRun})
+    new({
+      ipamScopeIds: ipamScopeIds,
+      nextToken: nextToken,
+      maxResults: maxResults,
+      filters: filters,
+      dryRun: dryRun,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeIpamPools = {
   type t
   type request = {
@@ -30561,9 +31880,16 @@ module DescribeIpamPools = {
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "DescribeIpamPoolsCommand"
   let make = (~ipamPoolIds=?, ~nextToken=?, ~maxResults=?, ~filters=?, ~dryRun=?, ()) =>
-    new({ipamPoolIds, nextToken, maxResults, filters, dryRun})
+    new({
+      ipamPoolIds: ipamPoolIds,
+      nextToken: nextToken,
+      maxResults: maxResults,
+      filters: filters,
+      dryRun: dryRun,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeInternetGateways = {
   type t
   type request = {
@@ -30625,9 +31951,16 @@ module DescribeInternetGateways = {
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "DescribeInternetGatewaysCommand"
   let make = (~maxResults=?, ~nextToken=?, ~internetGatewayIds=?, ~dryRun=?, ~filters=?, ()) =>
-    new({maxResults, nextToken, internetGatewayIds, dryRun, filters})
+    new({
+      maxResults: maxResults,
+      nextToken: nextToken,
+      internetGatewayIds: internetGatewayIds,
+      dryRun: dryRun,
+      filters: filters,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeImportSnapshotTasks = {
   type t
   type request = {
@@ -30659,9 +31992,16 @@ module DescribeImportSnapshotTasks = {
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "DescribeImportSnapshotTasksCommand"
   let make = (~nextToken=?, ~maxResults=?, ~importTaskIds=?, ~filters=?, ~dryRun=?, ()) =>
-    new({nextToken, maxResults, importTaskIds, filters, dryRun})
+    new({
+      nextToken: nextToken,
+      maxResults: maxResults,
+      importTaskIds: importTaskIds,
+      filters: filters,
+      dryRun: dryRun,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeHostReservations = {
   type t
   type request = {
@@ -30716,9 +32056,15 @@ module DescribeHostReservations = {
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "DescribeHostReservationsCommand"
   let make = (~nextToken=?, ~maxResults=?, ~hostReservationIdSet=?, ~filter=?, ()) =>
-    new({nextToken, maxResults, hostReservationIdSet, filter})
+    new({
+      nextToken: nextToken,
+      maxResults: maxResults,
+      hostReservationIdSet: hostReservationIdSet,
+      filter: filter,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeFpgaImages = {
   type t
   type request = {
@@ -30799,9 +32145,17 @@ module DescribeFpgaImages = {
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "DescribeFpgaImagesCommand"
   let make = (~maxResults=?, ~nextToken=?, ~filters=?, ~owners=?, ~fpgaImageIds=?, ~dryRun=?, ()) =>
-    new({maxResults, nextToken, filters, owners, fpgaImageIds, dryRun})
+    new({
+      maxResults: maxResults,
+      nextToken: nextToken,
+      filters: filters,
+      owners: owners,
+      fpgaImageIds: fpgaImageIds,
+      dryRun: dryRun,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeFlowLogs = {
   type t
   type request = {
@@ -30874,9 +32228,16 @@ module DescribeFlowLogs = {
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "DescribeFlowLogsCommand"
   let make = (~nextToken=?, ~maxResults=?, ~flowLogIds=?, ~filter=?, ~dryRun=?, ()) =>
-    new({nextToken, maxResults, flowLogIds, filter, dryRun})
+    new({
+      nextToken: nextToken,
+      maxResults: maxResults,
+      flowLogIds: flowLogIds,
+      filter: filter,
+      dryRun: dryRun,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeExportTasks = {
   type t
   type request = {
@@ -30890,9 +32251,11 @@ module DescribeExportTasks = {
     exportTasks: option<exportTaskList>,
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "DescribeExportTasksCommand"
-  let make = (~filters=?, ~exportTaskIds=?, ()) => new({filters, exportTaskIds})
+  let make = (~filters=?, ~exportTaskIds=?, ()) =>
+    new({filters: filters, exportTaskIds: exportTaskIds})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeExportImageTasks = {
   type t
   type request = {
@@ -30922,9 +32285,16 @@ module DescribeExportImageTasks = {
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "DescribeExportImageTasksCommand"
   let make = (~nextToken=?, ~maxResults=?, ~exportImageTaskIds=?, ~filters=?, ~dryRun=?, ()) =>
-    new({nextToken, maxResults, exportImageTaskIds, filters, dryRun})
+    new({
+      nextToken: nextToken,
+      maxResults: maxResults,
+      exportImageTaskIds: exportImageTaskIds,
+      filters: filters,
+      dryRun: dryRun,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeElasticGpus = {
   type t
   type request = {
@@ -30988,9 +32358,16 @@ module DescribeElasticGpus = {
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "DescribeElasticGpusCommand"
   let make = (~nextToken=?, ~maxResults=?, ~filters=?, ~dryRun=?, ~elasticGpuIds=?, ()) =>
-    new({nextToken, maxResults, filters, dryRun, elasticGpuIds})
+    new({
+      nextToken: nextToken,
+      maxResults: maxResults,
+      filters: filters,
+      dryRun: dryRun,
+      elasticGpuIds: elasticGpuIds,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeEgressOnlyInternetGateways = {
   type t
   type request = {
@@ -31042,9 +32419,17 @@ module DescribeEgressOnlyInternetGateways = {
     ~egressOnlyInternetGatewayIds=?,
     ~dryRun=?,
     (),
-  ) => new({filters, nextToken, maxResults, egressOnlyInternetGatewayIds, dryRun})
+  ) =>
+    new({
+      filters: filters,
+      nextToken: nextToken,
+      maxResults: maxResults,
+      egressOnlyInternetGatewayIds: egressOnlyInternetGatewayIds,
+      dryRun: dryRun,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeCustomerGateways = {
   type t
   @ocaml.doc("<p>Contains the parameters for DescribeCustomerGateways.</p>")
@@ -31106,9 +32491,10 @@ module DescribeCustomerGateways = {
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "DescribeCustomerGatewaysCommand"
   let make = (~dryRun=?, ~filters=?, ~customerGatewayIds=?, ()) =>
-    new({dryRun, filters, customerGatewayIds})
+    new({dryRun: dryRun, filters: filters, customerGatewayIds: customerGatewayIds})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeCoipPools = {
   type t
   type request = {
@@ -31150,9 +32536,16 @@ module DescribeCoipPools = {
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "DescribeCoipPoolsCommand"
   let make = (~dryRun=?, ~nextToken=?, ~maxResults=?, ~filters=?, ~poolIds=?, ()) =>
-    new({dryRun, nextToken, maxResults, filters, poolIds})
+    new({
+      dryRun: dryRun,
+      nextToken: nextToken,
+      maxResults: maxResults,
+      filters: filters,
+      poolIds: poolIds,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeClassicLinkInstances = {
   type t
   type request = {
@@ -31219,9 +32612,16 @@ module DescribeClassicLinkInstances = {
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "DescribeClassicLinkInstancesCommand"
   let make = (~nextToken=?, ~maxResults=?, ~instanceIds=?, ~dryRun=?, ~filters=?, ()) =>
-    new({nextToken, maxResults, instanceIds, dryRun, filters})
+    new({
+      nextToken: nextToken,
+      maxResults: maxResults,
+      instanceIds: instanceIds,
+      dryRun: dryRun,
+      filters: filters,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeCarrierGateways = {
   type t
   type request = {
@@ -31281,9 +32681,16 @@ module DescribeCarrierGateways = {
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "DescribeCarrierGatewaysCommand"
   let make = (~dryRun=?, ~nextToken=?, ~maxResults=?, ~filters=?, ~carrierGatewayIds=?, ()) =>
-    new({dryRun, nextToken, maxResults, filters, carrierGatewayIds})
+    new({
+      dryRun: dryRun,
+      nextToken: nextToken,
+      maxResults: maxResults,
+      filters: filters,
+      carrierGatewayIds: carrierGatewayIds,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeCapacityReservations = {
   type t
   type request = {
@@ -31429,9 +32836,16 @@ module DescribeCapacityReservations = {
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "DescribeCapacityReservationsCommand"
   let make = (~dryRun=?, ~filters=?, ~maxResults=?, ~nextToken=?, ~capacityReservationIds=?, ()) =>
-    new({dryRun, filters, maxResults, nextToken, capacityReservationIds})
+    new({
+      dryRun: dryRun,
+      filters: filters,
+      maxResults: maxResults,
+      nextToken: nextToken,
+      capacityReservationIds: capacityReservationIds,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeCapacityReservationFleets = {
   type t
   type request = {
@@ -31493,9 +32907,17 @@ module DescribeCapacityReservationFleets = {
     ~nextToken=?,
     ~capacityReservationFleetIds=?,
     (),
-  ) => new({dryRun, filters, maxResults, nextToken, capacityReservationFleetIds})
+  ) =>
+    new({
+      dryRun: dryRun,
+      filters: filters,
+      maxResults: maxResults,
+      nextToken: nextToken,
+      capacityReservationFleetIds: capacityReservationFleetIds,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeBundleTasks = {
   type t
   type request = {
@@ -31560,9 +32982,11 @@ module DescribeBundleTasks = {
     bundleTasks: option<bundleTaskList>,
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "DescribeBundleTasksCommand"
-  let make = (~dryRun=?, ~filters=?, ~bundleIds=?, ()) => new({dryRun, filters, bundleIds})
+  let make = (~dryRun=?, ~filters=?, ~bundleIds=?, ()) =>
+    new({dryRun: dryRun, filters: filters, bundleIds: bundleIds})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeAvailabilityZones = {
   type t
   type request = {
@@ -31654,9 +33078,16 @@ module DescribeAvailabilityZones = {
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "DescribeAvailabilityZonesCommand"
   let make = (~dryRun=?, ~allAvailabilityZones=?, ~zoneIds=?, ~zoneNames=?, ~filters=?, ()) =>
-    new({dryRun, allAvailabilityZones, zoneIds, zoneNames, filters})
+    new({
+      dryRun: dryRun,
+      allAvailabilityZones: allAvailabilityZones,
+      zoneIds: zoneIds,
+      zoneNames: zoneNames,
+      filters: filters,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeAddresses = {
   type t
   type request = {
@@ -31730,9 +33161,10 @@ module DescribeAddresses = {
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "DescribeAddressesCommand"
   let make = (~dryRun=?, ~allocationIds=?, ~publicIps=?, ~filters=?, ()) =>
-    new({dryRun, allocationIds, publicIps, filters})
+    new({dryRun: dryRun, allocationIds: allocationIds, publicIps: publicIps, filters: filters})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeAccountAttributes = {
   type t
   type request = {
@@ -31750,9 +33182,11 @@ module DescribeAccountAttributes = {
   }
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "DescribeAccountAttributesCommand"
-  let make = (~dryRun=?, ~attributeNames=?, ()) => new({dryRun, attributeNames})
+  let make = (~dryRun=?, ~attributeNames=?, ()) =>
+    new({dryRun: dryRun, attributeNames: attributeNames})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteTransitGatewayConnectPeer = {
   type t
   type request = {
@@ -31772,9 +33206,10 @@ module DeleteTransitGatewayConnectPeer = {
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "DeleteTransitGatewayConnectPeerCommand"
   let make = (~transitGatewayConnectPeerId, ~dryRun=?, ()) =>
-    new({dryRun, transitGatewayConnectPeerId})
+    new({dryRun: dryRun, transitGatewayConnectPeerId: transitGatewayConnectPeerId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateVpnGateway = {
   type t
   @ocaml.doc("<p>Contains the parameters for CreateVpnGateway.</p>")
@@ -31807,9 +33242,16 @@ module CreateVpnGateway = {
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "CreateVpnGatewayCommand"
   let make = (~type_, ~dryRun=?, ~amazonSideAsn=?, ~tagSpecifications=?, ~availabilityZone=?, ()) =>
-    new({dryRun, amazonSideAsn, tagSpecifications, type_, availabilityZone})
+    new({
+      dryRun: dryRun,
+      amazonSideAsn: amazonSideAsn,
+      tagSpecifications: tagSpecifications,
+      type_: type_,
+      availabilityZone: availabilityZone,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateVpcPeeringConnection = {
   type t
   type request = {
@@ -31852,9 +33294,18 @@ module CreateVpcPeeringConnection = {
     ~peerOwnerId=?,
     ~dryRun=?,
     (),
-  ) => new({tagSpecifications, peerRegion, vpcId, peerVpcId, peerOwnerId, dryRun})
+  ) =>
+    new({
+      tagSpecifications: tagSpecifications,
+      peerRegion: peerRegion,
+      vpcId: vpcId,
+      peerVpcId: peerVpcId,
+      peerOwnerId: peerOwnerId,
+      dryRun: dryRun,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateVpcEndpointServiceConfiguration = {
   type t
   type request = {
@@ -31908,16 +33359,17 @@ module CreateVpcEndpointServiceConfiguration = {
     (),
   ) =>
     new({
-      tagSpecifications,
-      clientToken,
-      gatewayLoadBalancerArns,
-      networkLoadBalancerArns,
-      privateDnsName,
-      acceptanceRequired,
-      dryRun,
+      tagSpecifications: tagSpecifications,
+      clientToken: clientToken,
+      gatewayLoadBalancerArns: gatewayLoadBalancerArns,
+      networkLoadBalancerArns: networkLoadBalancerArns,
+      privateDnsName: privateDnsName,
+      acceptanceRequired: acceptanceRequired,
+      dryRun: dryRun,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateVpcEndpoint = {
   type t
   @ocaml.doc("<p>Contains the parameters for CreateVpcEndpoint.</p>")
@@ -32000,20 +33452,21 @@ module CreateVpcEndpoint = {
     (),
   ) =>
     new({
-      tagSpecifications,
-      privateDnsEnabled,
-      clientToken,
-      securityGroupIds,
-      subnetIds,
-      routeTableIds,
-      policyDocument,
-      serviceName,
-      vpcId,
-      vpcEndpointType,
-      dryRun,
+      tagSpecifications: tagSpecifications,
+      privateDnsEnabled: privateDnsEnabled,
+      clientToken: clientToken,
+      securityGroupIds: securityGroupIds,
+      subnetIds: subnetIds,
+      routeTableIds: routeTableIds,
+      policyDocument: policyDocument,
+      serviceName: serviceName,
+      vpcId: vpcId,
+      vpcEndpointType: vpcEndpointType,
+      dryRun: dryRun,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateVpc = {
   type t
   type request = {
@@ -32093,21 +33546,22 @@ module CreateVpc = {
     (),
   ) =>
     new({
-      tagSpecifications,
-      ipv6CidrBlockNetworkBorderGroup,
-      instanceTenancy,
-      dryRun,
-      ipv6NetmaskLength,
-      ipv6IpamPoolId,
-      ipv4NetmaskLength,
-      ipv4IpamPoolId,
-      ipv6CidrBlock,
-      ipv6Pool,
-      amazonProvidedIpv6CidrBlock,
-      cidrBlock,
+      tagSpecifications: tagSpecifications,
+      ipv6CidrBlockNetworkBorderGroup: ipv6CidrBlockNetworkBorderGroup,
+      instanceTenancy: instanceTenancy,
+      dryRun: dryRun,
+      ipv6NetmaskLength: ipv6NetmaskLength,
+      ipv6IpamPoolId: ipv6IpamPoolId,
+      ipv4NetmaskLength: ipv4NetmaskLength,
+      ipv4IpamPoolId: ipv4IpamPoolId,
+      ipv6CidrBlock: ipv6CidrBlock,
+      ipv6Pool: ipv6Pool,
+      amazonProvidedIpv6CidrBlock: amazonProvidedIpv6CidrBlock,
+      cidrBlock: cidrBlock,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateVolume = {
   type t
   type request = {
@@ -32277,22 +33731,23 @@ the volume origin (new or from a snapshot), starting encryption state, ownership
     (),
   ) =>
     new({
-      clientToken,
-      throughput,
-      multiAttachEnabled,
-      tagSpecifications,
-      dryRun,
-      volumeType,
-      snapshotId,
-      size,
-      outpostArn,
-      kmsKeyId,
-      iops,
-      encrypted,
-      availabilityZone,
+      clientToken: clientToken,
+      throughput: throughput,
+      multiAttachEnabled: multiAttachEnabled,
+      tagSpecifications: tagSpecifications,
+      dryRun: dryRun,
+      volumeType: volumeType,
+      snapshotId: snapshotId,
+      size: size,
+      outpostArn: outpostArn,
+      kmsKeyId: kmsKeyId,
+      iops: iops,
+      encrypted: encrypted,
+      availabilityZone: availabilityZone,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateTransitGatewayVpcAttachment = {
   type t
   type request = {
@@ -32328,9 +33783,18 @@ module CreateTransitGatewayVpcAttachment = {
     ~tagSpecifications=?,
     ~options=?,
     (),
-  ) => new({dryRun, tagSpecifications, options, subnetIds, vpcId, transitGatewayId})
+  ) =>
+    new({
+      dryRun: dryRun,
+      tagSpecifications: tagSpecifications,
+      options: options,
+      subnetIds: subnetIds,
+      vpcId: vpcId,
+      transitGatewayId: transitGatewayId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateTransitGatewayRouteTable = {
   type t
   type request = {
@@ -32353,9 +33817,10 @@ module CreateTransitGatewayRouteTable = {
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "CreateTransitGatewayRouteTableCommand"
   let make = (~transitGatewayId, ~dryRun=?, ~tagSpecifications=?, ()) =>
-    new({dryRun, tagSpecifications, transitGatewayId})
+    new({dryRun: dryRun, tagSpecifications: tagSpecifications, transitGatewayId: transitGatewayId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateTransitGatewayPeeringAttachment = {
   type t
   type request = {
@@ -32399,15 +33864,16 @@ module CreateTransitGatewayPeeringAttachment = {
     (),
   ) =>
     new({
-      dryRun,
-      tagSpecifications,
-      peerRegion,
-      peerAccountId,
-      peerTransitGatewayId,
-      transitGatewayId,
+      dryRun: dryRun,
+      tagSpecifications: tagSpecifications,
+      peerRegion: peerRegion,
+      peerAccountId: peerAccountId,
+      peerTransitGatewayId: peerTransitGatewayId,
+      transitGatewayId: transitGatewayId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateTransitGatewayMulticastDomain = {
   type t
   type request = {
@@ -32431,9 +33897,15 @@ module CreateTransitGatewayMulticastDomain = {
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "CreateTransitGatewayMulticastDomainCommand"
   let make = (~transitGatewayId, ~dryRun=?, ~tagSpecifications=?, ~options=?, ()) =>
-    new({dryRun, tagSpecifications, options, transitGatewayId})
+    new({
+      dryRun: dryRun,
+      tagSpecifications: tagSpecifications,
+      options: options,
+      transitGatewayId: transitGatewayId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateTransitGatewayConnectPeer = {
   type t
   type request = {
@@ -32483,16 +33955,17 @@ module CreateTransitGatewayConnectPeer = {
     (),
   ) =>
     new({
-      dryRun,
-      tagSpecifications,
-      insideCidrBlocks,
-      bgpOptions,
-      peerAddress,
-      transitGatewayAddress,
-      transitGatewayAttachmentId,
+      dryRun: dryRun,
+      tagSpecifications: tagSpecifications,
+      insideCidrBlocks: insideCidrBlocks,
+      bgpOptions: bgpOptions,
+      peerAddress: peerAddress,
+      transitGatewayAddress: transitGatewayAddress,
+      transitGatewayAttachmentId: transitGatewayAttachmentId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateTransitGatewayConnect = {
   type t
   type request = {
@@ -32523,9 +33996,16 @@ module CreateTransitGatewayConnect = {
     ~dryRun=?,
     ~tagSpecifications=?,
     (),
-  ) => new({dryRun, tagSpecifications, options, transportTransitGatewayAttachmentId})
+  ) =>
+    new({
+      dryRun: dryRun,
+      tagSpecifications: tagSpecifications,
+      options: options,
+      transportTransitGatewayAttachmentId: transportTransitGatewayAttachmentId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateTransitGateway = {
   type t
   type request = {
@@ -32547,9 +34027,15 @@ module CreateTransitGateway = {
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "CreateTransitGatewayCommand"
   let make = (~dryRun=?, ~tagSpecifications=?, ~options=?, ~description=?, ()) =>
-    new({dryRun, tagSpecifications, options, description})
+    new({
+      dryRun: dryRun,
+      tagSpecifications: tagSpecifications,
+      options: options,
+      description: description,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateTrafficMirrorTarget = {
   type t
   type request = {
@@ -32597,15 +34083,16 @@ module CreateTrafficMirrorTarget = {
     (),
   ) =>
     new({
-      clientToken,
-      dryRun,
-      tagSpecifications,
-      description,
-      networkLoadBalancerArn,
-      networkInterfaceId,
+      clientToken: clientToken,
+      dryRun: dryRun,
+      tagSpecifications: tagSpecifications,
+      description: description,
+      networkLoadBalancerArn: networkLoadBalancerArn,
+      networkInterfaceId: networkInterfaceId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateTrafficMirrorSession = {
   type t
   type request = {
@@ -32673,19 +34160,20 @@ module CreateTrafficMirrorSession = {
     (),
   ) =>
     new({
-      clientToken,
-      dryRun,
-      tagSpecifications,
-      description,
-      virtualNetworkId,
-      sessionNumber,
-      packetLength,
-      trafficMirrorFilterId,
-      trafficMirrorTargetId,
-      networkInterfaceId,
+      clientToken: clientToken,
+      dryRun: dryRun,
+      tagSpecifications: tagSpecifications,
+      description: description,
+      virtualNetworkId: virtualNetworkId,
+      sessionNumber: sessionNumber,
+      packetLength: packetLength,
+      trafficMirrorFilterId: trafficMirrorFilterId,
+      trafficMirrorTargetId: trafficMirrorTargetId,
+      networkInterfaceId: networkInterfaceId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateTrafficMirrorFilter = {
   type t
   type request = {
@@ -32716,9 +34204,15 @@ module CreateTrafficMirrorFilter = {
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "CreateTrafficMirrorFilterCommand"
   let make = (~clientToken=?, ~dryRun=?, ~tagSpecifications=?, ~description=?, ()) =>
-    new({clientToken, dryRun, tagSpecifications, description})
+    new({
+      clientToken: clientToken,
+      dryRun: dryRun,
+      tagSpecifications: tagSpecifications,
+      description: description,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateSubnetCidrReservation = {
   type t
   type request = {
@@ -32774,9 +34268,18 @@ module CreateSubnetCidrReservation = {
     ~description=?,
     ~tagSpecifications=?,
     (),
-  ) => new({dryRun, description, reservationType, cidr, subnetId, tagSpecifications})
+  ) =>
+    new({
+      dryRun: dryRun,
+      description: description,
+      reservationType: reservationType,
+      cidr: cidr,
+      subnetId: subnetId,
+      tagSpecifications: tagSpecifications,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateSubnet = {
   type t
   type request = {
@@ -32835,18 +34338,19 @@ module CreateSubnet = {
     (),
   ) =>
     new({
-      ipv6Native,
-      dryRun,
-      vpcId,
-      outpostArn,
-      ipv6CidrBlock,
-      cidrBlock,
-      availabilityZoneId,
-      availabilityZone,
-      tagSpecifications,
+      ipv6Native: ipv6Native,
+      dryRun: dryRun,
+      vpcId: vpcId,
+      outpostArn: outpostArn,
+      ipv6CidrBlock: ipv6CidrBlock,
+      cidrBlock: cidrBlock,
+      availabilityZoneId: availabilityZoneId,
+      availabilityZone: availabilityZone,
+      tagSpecifications: tagSpecifications,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateSnapshots = {
   type t
   type request = {
@@ -32905,15 +34409,16 @@ module CreateSnapshots = {
     (),
   ) =>
     new({
-      copyTagsFromSource,
-      dryRun,
-      tagSpecifications,
-      outpostArn,
-      instanceSpecification,
-      description,
+      copyTagsFromSource: copyTagsFromSource,
+      dryRun: dryRun,
+      tagSpecifications: tagSpecifications,
+      outpostArn: outpostArn,
+      instanceSpecification: instanceSpecification,
+      description: description,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateSnapshot = {
   type t
   type request = {
@@ -32952,9 +34457,16 @@ module CreateSnapshot = {
   type response = snapshot
   @module("@aws-sdk/client-ec2") @new external new: request => t = "CreateSnapshotCommand"
   let make = (~volumeId, ~dryRun=?, ~tagSpecifications=?, ~outpostArn=?, ~description=?, ()) =>
-    new({dryRun, tagSpecifications, volumeId, outpostArn, description})
+    new({
+      dryRun: dryRun,
+      tagSpecifications: tagSpecifications,
+      volumeId: volumeId,
+      outpostArn: outpostArn,
+      description: description,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateSecurityGroup = {
   type t
   type request = {
@@ -32988,9 +34500,16 @@ module CreateSecurityGroup = {
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "CreateSecurityGroupCommand"
   let make = (~groupName, ~description, ~dryRun=?, ~tagSpecifications=?, ~vpcId=?, ()) =>
-    new({dryRun, tagSpecifications, vpcId, groupName, description})
+    new({
+      dryRun: dryRun,
+      tagSpecifications: tagSpecifications,
+      vpcId: vpcId,
+      groupName: groupName,
+      description: description,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateRouteTable = {
   type t
   type request = {
@@ -33009,9 +34528,10 @@ module CreateRouteTable = {
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "CreateRouteTableCommand"
   let make = (~vpcId, ~tagSpecifications=?, ~dryRun=?, ()) =>
-    new({tagSpecifications, vpcId, dryRun})
+    new({tagSpecifications: tagSpecifications, vpcId: vpcId, dryRun: dryRun})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateRestoreImageTask = {
   type t
   type request = {
@@ -33048,9 +34568,16 @@ module CreateRestoreImageTask = {
   type response = {@ocaml.doc("<p>The AMI ID.</p>") @as("ImageId") imageId: option<string_>}
   @module("@aws-sdk/client-ec2") @new external new: request => t = "CreateRestoreImageTaskCommand"
   let make = (~objectKey, ~bucket, ~dryRun=?, ~tagSpecifications=?, ~name=?, ()) =>
-    new({dryRun, tagSpecifications, name, objectKey, bucket})
+    new({
+      dryRun: dryRun,
+      tagSpecifications: tagSpecifications,
+      name: name,
+      objectKey: objectKey,
+      bucket: bucket,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateReservedInstancesListing = {
   type t
   @ocaml.doc("<p>Contains the parameters for CreateReservedInstancesListing.</p>")
@@ -33082,9 +34609,15 @@ module CreateReservedInstancesListing = {
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "CreateReservedInstancesListingCommand"
   let make = (~reservedInstancesId, ~priceSchedules, ~instanceCount, ~clientToken, ()) =>
-    new({reservedInstancesId, priceSchedules, instanceCount, clientToken})
+    new({
+      reservedInstancesId: reservedInstancesId,
+      priceSchedules: priceSchedules,
+      instanceCount: instanceCount,
+      clientToken: clientToken,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateReplaceRootVolumeTask = {
   type t
   type request = {
@@ -33117,9 +34650,16 @@ module CreateReplaceRootVolumeTask = {
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "CreateReplaceRootVolumeTaskCommand"
   let make = (~instanceId, ~tagSpecifications=?, ~dryRun=?, ~clientToken=?, ~snapshotId=?, ()) =>
-    new({tagSpecifications, dryRun, clientToken, snapshotId, instanceId})
+    new({
+      tagSpecifications: tagSpecifications,
+      dryRun: dryRun,
+      clientToken: clientToken,
+      snapshotId: snapshotId,
+      instanceId: instanceId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreatePublicIpv4Pool = {
   type t
   type request = {
@@ -33138,9 +34678,11 @@ module CreatePublicIpv4Pool = {
     poolId: option<ipv4PoolEc2Id>,
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "CreatePublicIpv4PoolCommand"
-  let make = (~tagSpecifications=?, ~dryRun=?, ()) => new({tagSpecifications, dryRun})
+  let make = (~tagSpecifications=?, ~dryRun=?, ()) =>
+    new({tagSpecifications: tagSpecifications, dryRun: dryRun})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreatePlacementGroup = {
   type t
   type request = {
@@ -33166,9 +34708,16 @@ module CreatePlacementGroup = {
   type response = {@as("PlacementGroup") placementGroup: option<placementGroup>}
   @module("@aws-sdk/client-ec2") @new external new: request => t = "CreatePlacementGroupCommand"
   let make = (~tagSpecifications=?, ~partitionCount=?, ~strategy=?, ~groupName=?, ~dryRun=?, ()) =>
-    new({tagSpecifications, partitionCount, strategy, groupName, dryRun})
+    new({
+      tagSpecifications: tagSpecifications,
+      partitionCount: partitionCount,
+      strategy: strategy,
+      groupName: groupName,
+      dryRun: dryRun,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateNetworkInterface = {
   type t
   @ocaml.doc("<p>Contains the parameters for CreateNetworkInterface.</p>")
@@ -33276,25 +34825,26 @@ module CreateNetworkInterface = {
     (),
   ) =>
     new({
-      clientToken,
-      tagSpecifications,
-      subnetId,
-      interfaceType,
-      ipv6PrefixCount,
-      ipv6Prefixes,
-      ipv4PrefixCount,
-      ipv4Prefixes,
-      secondaryPrivateIpAddressCount,
-      privateIpAddresses,
-      privateIpAddress,
-      ipv6Addresses,
-      ipv6AddressCount,
-      groups,
-      dryRun,
-      description,
+      clientToken: clientToken,
+      tagSpecifications: tagSpecifications,
+      subnetId: subnetId,
+      interfaceType: interfaceType,
+      ipv6PrefixCount: ipv6PrefixCount,
+      ipv6Prefixes: ipv6Prefixes,
+      ipv4PrefixCount: ipv4PrefixCount,
+      ipv4Prefixes: ipv4Prefixes,
+      secondaryPrivateIpAddressCount: secondaryPrivateIpAddressCount,
+      privateIpAddresses: privateIpAddresses,
+      privateIpAddress: privateIpAddress,
+      ipv6Addresses: ipv6Addresses,
+      ipv6AddressCount: ipv6AddressCount,
+      groups: groups,
+      dryRun: dryRun,
+      description: description,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateNetworkInsightsPath = {
   type t
   type request = {
@@ -33347,18 +34897,19 @@ module CreateNetworkInsightsPath = {
     (),
   ) =>
     new({
-      clientToken,
-      dryRun,
-      tagSpecifications,
-      destinationPort,
-      protocol,
-      destination,
-      source,
-      destinationIp,
-      sourceIp,
+      clientToken: clientToken,
+      dryRun: dryRun,
+      tagSpecifications: tagSpecifications,
+      destinationPort: destinationPort,
+      protocol: protocol,
+      destination: destination,
+      source: source,
+      destinationIp: destinationIp,
+      sourceIp: sourceIp,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateNetworkAcl = {
   type t
   type request = {
@@ -33377,9 +34928,10 @@ module CreateNetworkAcl = {
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "CreateNetworkAclCommand"
   let make = (~vpcId, ~tagSpecifications=?, ~dryRun=?, ()) =>
-    new({tagSpecifications, vpcId, dryRun})
+    new({tagSpecifications: tagSpecifications, vpcId: vpcId, dryRun: dryRun})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateNatGateway = {
   type t
   type request = {
@@ -33426,9 +34978,18 @@ module CreateNatGateway = {
     ~clientToken=?,
     ~allocationId=?,
     (),
-  ) => new({connectivityType, tagSpecifications, subnetId, dryRun, clientToken, allocationId})
+  ) =>
+    new({
+      connectivityType: connectivityType,
+      tagSpecifications: tagSpecifications,
+      subnetId: subnetId,
+      dryRun: dryRun,
+      clientToken: clientToken,
+      allocationId: allocationId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateManagedPrefixList = {
   type t
   type request = {
@@ -33476,16 +35037,17 @@ module CreateManagedPrefixList = {
     (),
   ) =>
     new({
-      clientToken,
-      addressFamily,
-      tagSpecifications,
-      maxEntries,
-      entries,
-      prefixListName,
-      dryRun,
+      clientToken: clientToken,
+      addressFamily: addressFamily,
+      tagSpecifications: tagSpecifications,
+      maxEntries: maxEntries,
+      entries: entries,
+      prefixListName: prefixListName,
+      dryRun: dryRun,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateLocalGatewayRouteTableVpcAssociation = {
   type t
   type request = {
@@ -33509,9 +35071,15 @@ module CreateLocalGatewayRouteTableVpcAssociation = {
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "CreateLocalGatewayRouteTableVpcAssociationCommand"
   let make = (~vpcId, ~localGatewayRouteTableId, ~dryRun=?, ~tagSpecifications=?, ()) =>
-    new({dryRun, tagSpecifications, vpcId, localGatewayRouteTableId})
+    new({
+      dryRun: dryRun,
+      tagSpecifications: tagSpecifications,
+      vpcId: vpcId,
+      localGatewayRouteTableId: localGatewayRouteTableId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateKeyPair = {
   type t
   type request = {
@@ -33544,9 +35112,10 @@ module CreateKeyPair = {
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "CreateKeyPairCommand"
   let make = (~keyName, ~tagSpecifications=?, ~keyType=?, ~dryRun=?, ()) =>
-    new({tagSpecifications, keyType, dryRun, keyName})
+    new({tagSpecifications: tagSpecifications, keyType: keyType, dryRun: dryRun, keyName: keyName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateIpamScope = {
   type t
   type request = {
@@ -33575,9 +35144,16 @@ module CreateIpamScope = {
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "CreateIpamScopeCommand"
   let make = (~ipamId, ~clientToken=?, ~tagSpecifications=?, ~description=?, ~dryRun=?, ()) =>
-    new({clientToken, tagSpecifications, description, ipamId, dryRun})
+    new({
+      clientToken: clientToken,
+      tagSpecifications: tagSpecifications,
+      description: description,
+      ipamId: ipamId,
+      dryRun: dryRun,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateIpamPool = {
   type t
   type request = {
@@ -33676,24 +35252,25 @@ module CreateIpamPool = {
     (),
   ) =>
     new({
-      awsService,
-      clientToken,
-      tagSpecifications,
-      allocationResourceTags,
-      allocationDefaultNetmaskLength,
-      allocationMaxNetmaskLength,
-      allocationMinNetmaskLength,
-      publiclyAdvertisable,
-      autoImport,
-      addressFamily,
-      description,
-      sourceIpamPoolId,
-      locale,
-      ipamScopeId,
-      dryRun,
+      awsService: awsService,
+      clientToken: clientToken,
+      tagSpecifications: tagSpecifications,
+      allocationResourceTags: allocationResourceTags,
+      allocationDefaultNetmaskLength: allocationDefaultNetmaskLength,
+      allocationMaxNetmaskLength: allocationMaxNetmaskLength,
+      allocationMinNetmaskLength: allocationMinNetmaskLength,
+      publiclyAdvertisable: publiclyAdvertisable,
+      autoImport: autoImport,
+      addressFamily: addressFamily,
+      description: description,
+      sourceIpamPoolId: sourceIpamPoolId,
+      locale: locale,
+      ipamScopeId: ipamScopeId,
+      dryRun: dryRun,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateIpam = {
   type t
   type request = {
@@ -33731,9 +35308,17 @@ module CreateIpam = {
     ~description=?,
     ~dryRun=?,
     (),
-  ) => new({clientToken, tagSpecifications, operatingRegions, description, dryRun})
+  ) =>
+    new({
+      clientToken: clientToken,
+      tagSpecifications: tagSpecifications,
+      operatingRegions: operatingRegions,
+      description: description,
+      dryRun: dryRun,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateInternetGateway = {
   type t
   type request = {
@@ -33750,9 +35335,11 @@ module CreateInternetGateway = {
     internetGateway: option<internetGateway>,
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "CreateInternetGatewayCommand"
-  let make = (~dryRun=?, ~tagSpecifications=?, ()) => new({dryRun, tagSpecifications})
+  let make = (~dryRun=?, ~tagSpecifications=?, ()) =>
+    new({dryRun: dryRun, tagSpecifications: tagSpecifications})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateInstanceExportTask = {
   type t
   type request = {
@@ -33782,9 +35369,17 @@ module CreateInstanceExportTask = {
     ~tagSpecifications=?,
     ~description=?,
     (),
-  ) => new({tagSpecifications, targetEnvironment, instanceId, exportToS3Task, description})
+  ) =>
+    new({
+      tagSpecifications: tagSpecifications,
+      targetEnvironment: targetEnvironment,
+      instanceId: instanceId,
+      exportToS3Task: exportToS3Task,
+      description: description,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateInstanceEventWindow = {
   type t
   type request = {
@@ -33840,9 +35435,16 @@ module CreateInstanceEventWindow = {
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "CreateInstanceEventWindowCommand"
   let make = (~tagSpecifications=?, ~cronExpression=?, ~timeRanges=?, ~name=?, ~dryRun=?, ()) =>
-    new({tagSpecifications, cronExpression, timeRanges, name, dryRun})
+    new({
+      tagSpecifications: tagSpecifications,
+      cronExpression: cronExpression,
+      timeRanges: timeRanges,
+      name: name,
+      dryRun: dryRun,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateImage = {
   type t
   type request = {
@@ -33903,9 +35505,18 @@ module CreateImage = {
     ~blockDeviceMappings=?,
     (),
   ) =>
-    new({tagSpecifications, noReboot, name, instanceId, dryRun, description, blockDeviceMappings})
+    new({
+      tagSpecifications: tagSpecifications,
+      noReboot: noReboot,
+      name: name,
+      instanceId: instanceId,
+      dryRun: dryRun,
+      description: description,
+      blockDeviceMappings: blockDeviceMappings,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateFpgaImage = {
   type t
   type request = {
@@ -33949,16 +35560,17 @@ module CreateFpgaImage = {
     (),
   ) =>
     new({
-      tagSpecifications,
-      clientToken,
-      name,
-      description,
-      logsStorageLocation,
-      inputStorageLocation,
-      dryRun,
+      tagSpecifications: tagSpecifications,
+      clientToken: clientToken,
+      name: name,
+      description: description,
+      logsStorageLocation: logsStorageLocation,
+      inputStorageLocation: inputStorageLocation,
+      dryRun: dryRun,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateFlowLogs = {
   type t
   type request = {
@@ -34070,22 +35682,23 @@ module CreateFlowLogs = {
     (),
   ) =>
     new({
-      destinationOptions,
-      maxAggregationInterval,
-      tagSpecifications,
-      logFormat,
-      logDestination,
-      logDestinationType,
-      trafficType,
-      resourceType,
-      resourceIds,
-      logGroupName,
-      deliverLogsPermissionArn,
-      clientToken,
-      dryRun,
+      destinationOptions: destinationOptions,
+      maxAggregationInterval: maxAggregationInterval,
+      tagSpecifications: tagSpecifications,
+      logFormat: logFormat,
+      logDestination: logDestination,
+      logDestinationType: logDestinationType,
+      trafficType: trafficType,
+      resourceType: resourceType,
+      resourceIds: resourceIds,
+      logGroupName: logGroupName,
+      deliverLogsPermissionArn: deliverLogsPermissionArn,
+      clientToken: clientToken,
+      dryRun: dryRun,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateEgressOnlyInternetGateway = {
   type t
   type request = {
@@ -34118,9 +35731,15 @@ module CreateEgressOnlyInternetGateway = {
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "CreateEgressOnlyInternetGatewayCommand"
   let make = (~vpcId, ~tagSpecifications=?, ~dryRun=?, ~clientToken=?, ()) =>
-    new({tagSpecifications, vpcId, dryRun, clientToken})
+    new({
+      tagSpecifications: tagSpecifications,
+      vpcId: vpcId,
+      dryRun: dryRun,
+      clientToken: clientToken,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateDefaultVpc = {
   type t
   type request = {
@@ -34135,6 +35754,7 @@ module CreateDefaultVpc = {
   let make = (~dryRun=?, ()) => new({dryRun: dryRun})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateDefaultSubnet = {
   type t
   type request = {
@@ -34156,9 +35776,10 @@ module CreateDefaultSubnet = {
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "CreateDefaultSubnetCommand"
   let make = (~availabilityZone, ~ipv6Native=?, ~dryRun=?, ()) =>
-    new({ipv6Native, dryRun, availabilityZone})
+    new({ipv6Native: ipv6Native, dryRun: dryRun, availabilityZone: availabilityZone})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateCustomerGateway = {
   type t
   @ocaml.doc("<p>Contains the parameters for CreateCustomerGateway.</p>")
@@ -34206,9 +35827,19 @@ module CreateCustomerGateway = {
     ~certificateArn=?,
     ~publicIp=?,
     (),
-  ) => new({dryRun, deviceName, tagSpecifications, type_, certificateArn, publicIp, bgpAsn})
+  ) =>
+    new({
+      dryRun: dryRun,
+      deviceName: deviceName,
+      tagSpecifications: tagSpecifications,
+      type_: type_,
+      certificateArn: certificateArn,
+      publicIp: publicIp,
+      bgpAsn: bgpAsn,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateClientVpnEndpoint = {
   type t
   type request = {
@@ -34346,27 +35977,28 @@ module CreateClientVpnEndpoint = {
     (),
   ) =>
     new({
-      clientLoginBannerOptions,
-      sessionTimeoutHours,
-      clientConnectOptions,
-      selfServicePortal,
-      vpcId,
-      securityGroupIds,
-      tagSpecifications,
-      clientToken,
-      dryRun,
-      splitTunnel,
-      description,
-      vpnPort,
-      transportProtocol,
-      dnsServers,
-      connectionLogOptions,
-      authenticationOptions,
-      serverCertificateArn,
-      clientCidrBlock,
+      clientLoginBannerOptions: clientLoginBannerOptions,
+      sessionTimeoutHours: sessionTimeoutHours,
+      clientConnectOptions: clientConnectOptions,
+      selfServicePortal: selfServicePortal,
+      vpcId: vpcId,
+      securityGroupIds: securityGroupIds,
+      tagSpecifications: tagSpecifications,
+      clientToken: clientToken,
+      dryRun: dryRun,
+      splitTunnel: splitTunnel,
+      description: description,
+      vpnPort: vpnPort,
+      transportProtocol: transportProtocol,
+      dnsServers: dnsServers,
+      connectionLogOptions: connectionLogOptions,
+      authenticationOptions: authenticationOptions,
+      serverCertificateArn: serverCertificateArn,
+      clientCidrBlock: clientCidrBlock,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateCarrierGateway = {
   type t
   type request = {
@@ -34391,9 +36023,15 @@ module CreateCarrierGateway = {
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "CreateCarrierGatewayCommand"
   let make = (~vpcId, ~clientToken=?, ~dryRun=?, ~tagSpecifications=?, ()) =>
-    new({clientToken, dryRun, tagSpecifications, vpcId})
+    new({
+      clientToken: clientToken,
+      dryRun: dryRun,
+      tagSpecifications: tagSpecifications,
+      vpcId: vpcId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateCapacityReservationFleet = {
   type t
   type request = {
@@ -34515,18 +36153,19 @@ module CreateCapacityReservationFleet = {
     (),
   ) =>
     new({
-      dryRun,
-      tagSpecifications,
-      instanceMatchCriteria,
-      endDate,
-      totalTargetCapacity,
-      tenancy,
-      instanceTypeSpecifications,
-      clientToken,
-      allocationStrategy,
+      dryRun: dryRun,
+      tagSpecifications: tagSpecifications,
+      instanceMatchCriteria: instanceMatchCriteria,
+      endDate: endDate,
+      totalTargetCapacity: totalTargetCapacity,
+      tenancy: tenancy,
+      instanceTypeSpecifications: instanceTypeSpecifications,
+      clientToken: clientToken,
+      allocationStrategy: allocationStrategy,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateCapacityReservation = {
   type t
   type request = {
@@ -34674,25 +36313,26 @@ module CreateCapacityReservation = {
     (),
   ) =>
     new({
-      placementGroupArn,
-      outpostArn,
-      dryRun,
-      tagSpecifications,
-      instanceMatchCriteria,
-      endDateType,
-      endDate,
-      ephemeralStorage,
-      ebsOptimized,
-      instanceCount,
-      tenancy,
-      availabilityZoneId,
-      availabilityZone,
-      instancePlatform,
-      instanceType,
-      clientToken,
+      placementGroupArn: placementGroupArn,
+      outpostArn: outpostArn,
+      dryRun: dryRun,
+      tagSpecifications: tagSpecifications,
+      instanceMatchCriteria: instanceMatchCriteria,
+      endDateType: endDateType,
+      endDate: endDate,
+      ephemeralStorage: ephemeralStorage,
+      ebsOptimized: ebsOptimized,
+      instanceCount: instanceCount,
+      tenancy: tenancy,
+      availabilityZoneId: availabilityZoneId,
+      availabilityZone: availabilityZone,
+      instancePlatform: instancePlatform,
+      instanceType: instanceType,
+      clientToken: clientToken,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CopySnapshot = {
   type t
   type request = {
@@ -34794,19 +36434,20 @@ module CopySnapshot = {
     (),
   ) =>
     new({
-      dryRun,
-      tagSpecifications,
-      sourceSnapshotId,
-      sourceRegion,
-      presignedUrl,
-      kmsKeyId,
-      encrypted,
-      destinationRegion,
-      destinationOutpostArn,
-      description,
+      dryRun: dryRun,
+      tagSpecifications: tagSpecifications,
+      sourceSnapshotId: sourceSnapshotId,
+      sourceRegion: sourceRegion,
+      presignedUrl: presignedUrl,
+      kmsKeyId: kmsKeyId,
+      encrypted: encrypted,
+      destinationRegion: destinationRegion,
+      destinationOutpostArn: destinationOutpostArn,
+      description: description,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CancelReservedInstancesListing = {
   type t
   @ocaml.doc("<p>Contains the parameters for CancelReservedInstancesListing.</p>")
@@ -34825,6 +36466,7 @@ module CancelReservedInstancesListing = {
     new({reservedInstancesListingId: reservedInstancesListingId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module AuthorizeSecurityGroupIngress = {
   type t
   type request = {
@@ -34916,20 +36558,21 @@ module AuthorizeSecurityGroupIngress = {
     (),
   ) =>
     new({
-      tagSpecifications,
-      dryRun,
-      toPort,
-      sourceSecurityGroupOwnerId,
-      sourceSecurityGroupName,
-      ipProtocol,
-      ipPermissions,
-      groupName,
-      groupId,
-      fromPort,
-      cidrIp,
+      tagSpecifications: tagSpecifications,
+      dryRun: dryRun,
+      toPort: toPort,
+      sourceSecurityGroupOwnerId: sourceSecurityGroupOwnerId,
+      sourceSecurityGroupName: sourceSecurityGroupName,
+      ipProtocol: ipProtocol,
+      ipPermissions: ipPermissions,
+      groupName: groupName,
+      groupId: groupId,
+      fromPort: fromPort,
+      cidrIp: cidrIp,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module AuthorizeSecurityGroupEgress = {
   type t
   type request = {
@@ -34995,19 +36638,20 @@ module AuthorizeSecurityGroupEgress = {
     (),
   ) =>
     new({
-      sourceSecurityGroupOwnerId,
-      sourceSecurityGroupName,
-      toPort,
-      ipProtocol,
-      fromPort,
-      cidrIp,
-      tagSpecifications,
-      ipPermissions,
-      groupId,
-      dryRun,
+      sourceSecurityGroupOwnerId: sourceSecurityGroupOwnerId,
+      sourceSecurityGroupName: sourceSecurityGroupName,
+      toPort: toPort,
+      ipProtocol: ipProtocol,
+      fromPort: fromPort,
+      cidrIp: cidrIp,
+      tagSpecifications: tagSpecifications,
+      ipPermissions: ipPermissions,
+      groupId: groupId,
+      dryRun: dryRun,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module AssociateInstanceEventWindow = {
   type t
   type request = {
@@ -35029,9 +36673,14 @@ module AssociateInstanceEventWindow = {
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "AssociateInstanceEventWindowCommand"
   let make = (~associationTarget, ~instanceEventWindowId, ~dryRun=?, ()) =>
-    new({associationTarget, instanceEventWindowId, dryRun})
+    new({
+      associationTarget: associationTarget,
+      instanceEventWindowId: instanceEventWindowId,
+      dryRun: dryRun,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module AllocateHosts = {
   type t
   type request = {
@@ -35110,17 +36759,18 @@ module AllocateHosts = {
     (),
   ) =>
     new({
-      hostRecovery,
-      tagSpecifications,
-      quantity,
-      instanceFamily,
-      instanceType,
-      clientToken,
-      availabilityZone,
-      autoPlacement,
+      hostRecovery: hostRecovery,
+      tagSpecifications: tagSpecifications,
+      quantity: quantity,
+      instanceFamily: instanceFamily,
+      instanceType: instanceType,
+      clientToken: clientToken,
+      availabilityZone: availabilityZone,
+      autoPlacement: autoPlacement,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module AllocateAddress = {
   type t
   type request = {
@@ -35198,16 +36848,17 @@ module AllocateAddress = {
     (),
   ) =>
     new({
-      tagSpecifications,
-      dryRun,
-      customerOwnedIpv4Pool,
-      networkBorderGroup,
-      publicIpv4Pool,
-      address,
-      domain,
+      tagSpecifications: tagSpecifications,
+      dryRun: dryRun,
+      customerOwnedIpv4Pool: customerOwnedIpv4Pool,
+      networkBorderGroup: networkBorderGroup,
+      publicIpv4Pool: publicIpv4Pool,
+      address: address,
+      domain: domain,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module AcceptVpcPeeringConnection = {
   type t
   type request = {
@@ -35227,9 +36878,11 @@ module AcceptVpcPeeringConnection = {
   }
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "AcceptVpcPeeringConnectionCommand"
-  let make = (~vpcPeeringConnectionId=?, ~dryRun=?, ()) => new({vpcPeeringConnectionId, dryRun})
+  let make = (~vpcPeeringConnectionId=?, ~dryRun=?, ()) =>
+    new({vpcPeeringConnectionId: vpcPeeringConnectionId, dryRun: dryRun})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module RunScheduledInstances = {
   type t
   @ocaml.doc("<p>Contains the parameters for RunScheduledInstances.</p>")
@@ -35267,9 +36920,17 @@ module RunScheduledInstances = {
     ~dryRun=?,
     ~clientToken=?,
     (),
-  ) => new({scheduledInstanceId, launchSpecification, instanceCount, dryRun, clientToken})
+  ) =>
+    new({
+      scheduledInstanceId: scheduledInstanceId,
+      launchSpecification: launchSpecification,
+      instanceCount: instanceCount,
+      dryRun: dryRun,
+      clientToken: clientToken,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ImportVolume = {
   type t
   type request = {
@@ -35291,9 +36952,16 @@ module ImportVolume = {
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "ImportVolumeCommand"
   let make = (~volume, ~image, ~availabilityZone, ~dryRun=?, ~description=?, ()) =>
-    new({volume, image, dryRun, description, availabilityZone})
+    new({
+      volume: volume,
+      image: image,
+      dryRun: dryRun,
+      description: description,
+      availabilityZone: availabilityZone,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ImportInstance = {
   type t
   type request = {
@@ -35315,9 +36983,16 @@ module ImportInstance = {
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "ImportInstanceCommand"
   let make = (~platform, ~launchSpecification=?, ~dryRun=?, ~diskImages=?, ~description=?, ()) =>
-    new({platform, launchSpecification, dryRun, diskImages, description})
+    new({
+      platform: platform,
+      launchSpecification: launchSpecification,
+      dryRun: dryRun,
+      diskImages: diskImages,
+      description: description,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetLaunchTemplateData = {
   type t
   type request = {
@@ -35334,9 +37009,10 @@ module GetLaunchTemplateData = {
     launchTemplateData: option<responseLaunchTemplateData>,
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "GetLaunchTemplateDataCommand"
-  let make = (~instanceId, ~dryRun=?, ()) => new({instanceId, dryRun})
+  let make = (~instanceId, ~dryRun=?, ()) => new({instanceId: instanceId, dryRun: dryRun})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module EnableFastSnapshotRestores = {
   type t
   type request = {
@@ -35368,9 +37044,14 @@ module EnableFastSnapshotRestores = {
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "EnableFastSnapshotRestoresCommand"
   let make = (~sourceSnapshotIds, ~availabilityZones, ~dryRun=?, ()) =>
-    new({dryRun, sourceSnapshotIds, availabilityZones})
+    new({
+      dryRun: dryRun,
+      sourceSnapshotIds: sourceSnapshotIds,
+      availabilityZones: availabilityZones,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DisableFastSnapshotRestores = {
   type t
   type request = {
@@ -35403,9 +37084,14 @@ module DisableFastSnapshotRestores = {
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "DisableFastSnapshotRestoresCommand"
   let make = (~sourceSnapshotIds, ~availabilityZones, ~dryRun=?, ()) =>
-    new({dryRun, sourceSnapshotIds, availabilityZones})
+    new({
+      dryRun: dryRun,
+      sourceSnapshotIds: sourceSnapshotIds,
+      availabilityZones: availabilityZones,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeVpcs = {
   type t
   type request = {
@@ -35510,9 +37196,16 @@ module DescribeVpcs = {
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "DescribeVpcsCommand"
   let make = (~maxResults=?, ~nextToken=?, ~dryRun=?, ~vpcIds=?, ~filters=?, ()) =>
-    new({maxResults, nextToken, dryRun, vpcIds, filters})
+    new({
+      maxResults: maxResults,
+      nextToken: nextToken,
+      dryRun: dryRun,
+      vpcIds: vpcIds,
+      filters: filters,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeVpcPeeringConnections = {
   type t
   type request = {
@@ -35608,9 +37301,16 @@ module DescribeVpcPeeringConnections = {
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "DescribeVpcPeeringConnectionsCommand"
   let make = (~maxResults=?, ~nextToken=?, ~vpcPeeringConnectionIds=?, ~dryRun=?, ~filters=?, ()) =>
-    new({maxResults, nextToken, vpcPeeringConnectionIds, dryRun, filters})
+    new({
+      maxResults: maxResults,
+      nextToken: nextToken,
+      vpcPeeringConnectionIds: vpcPeeringConnectionIds,
+      dryRun: dryRun,
+      filters: filters,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeVolumeStatus = {
   type t
   type request = {
@@ -35714,9 +37414,16 @@ module DescribeVolumeStatus = {
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "DescribeVolumeStatusCommand"
   let make = (~dryRun=?, ~volumeIds=?, ~nextToken=?, ~maxResults=?, ~filters=?, ()) =>
-    new({dryRun, volumeIds, nextToken, maxResults, filters})
+    new({
+      dryRun: dryRun,
+      volumeIds: volumeIds,
+      nextToken: nextToken,
+      maxResults: maxResults,
+      filters: filters,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeTransitGatewayConnectPeers = {
   type t
   type request = {
@@ -35771,9 +37478,17 @@ module DescribeTransitGatewayConnectPeers = {
     ~filters=?,
     ~transitGatewayConnectPeerIds=?,
     (),
-  ) => new({dryRun, nextToken, maxResults, filters, transitGatewayConnectPeerIds})
+  ) =>
+    new({
+      dryRun: dryRun,
+      nextToken: nextToken,
+      maxResults: maxResults,
+      filters: filters,
+      transitGatewayConnectPeerIds: transitGatewayConnectPeerIds,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeTrafficMirrorFilters = {
   type t
   type request = {
@@ -35817,9 +37532,16 @@ module DescribeTrafficMirrorFilters = {
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "DescribeTrafficMirrorFiltersCommand"
   let make = (~nextToken=?, ~maxResults=?, ~filters=?, ~dryRun=?, ~trafficMirrorFilterIds=?, ()) =>
-    new({nextToken, maxResults, filters, dryRun, trafficMirrorFilterIds})
+    new({
+      nextToken: nextToken,
+      maxResults: maxResults,
+      filters: filters,
+      dryRun: dryRun,
+      trafficMirrorFilterIds: trafficMirrorFilterIds,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeSubnets = {
   type t
   type request = {
@@ -35935,9 +37657,16 @@ module DescribeSubnets = {
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "DescribeSubnetsCommand"
   let make = (~maxResults=?, ~nextToken=?, ~dryRun=?, ~subnetIds=?, ~filters=?, ()) =>
-    new({maxResults, nextToken, dryRun, subnetIds, filters})
+    new({
+      maxResults: maxResults,
+      nextToken: nextToken,
+      dryRun: dryRun,
+      subnetIds: subnetIds,
+      filters: filters,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeRouteTables = {
   type t
   type request = {
@@ -36073,9 +37802,16 @@ module DescribeRouteTables = {
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "DescribeRouteTablesCommand"
   let make = (~maxResults=?, ~nextToken=?, ~routeTableIds=?, ~dryRun=?, ~filters=?, ()) =>
-    new({maxResults, nextToken, routeTableIds, dryRun, filters})
+    new({
+      maxResults: maxResults,
+      nextToken: nextToken,
+      routeTableIds: routeTableIds,
+      dryRun: dryRun,
+      filters: filters,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeReservedInstancesModifications = {
   type t
   @ocaml.doc("<p>Contains the parameters for DescribeReservedInstancesModifications.</p>")
@@ -36157,9 +37893,14 @@ module DescribeReservedInstancesModifications = {
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "DescribeReservedInstancesModificationsCommand"
   let make = (~nextToken=?, ~reservedInstancesModificationIds=?, ~filters=?, ()) =>
-    new({nextToken, reservedInstancesModificationIds, filters})
+    new({
+      nextToken: nextToken,
+      reservedInstancesModificationIds: reservedInstancesModificationIds,
+      filters: filters,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeNetworkInterfaces = {
   type t
   @ocaml.doc("<p>Contains the parameters for DescribeNetworkInterfaces.</p>")
@@ -36360,9 +38101,16 @@ module DescribeNetworkInterfaces = {
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "DescribeNetworkInterfacesCommand"
   let make = (~maxResults=?, ~nextToken=?, ~networkInterfaceIds=?, ~dryRun=?, ~filters=?, ()) =>
-    new({maxResults, nextToken, networkInterfaceIds, dryRun, filters})
+    new({
+      maxResults: maxResults,
+      nextToken: nextToken,
+      networkInterfaceIds: networkInterfaceIds,
+      dryRun: dryRun,
+      filters: filters,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeNetworkAcls = {
   type t
   type request = {
@@ -36472,9 +38220,16 @@ module DescribeNetworkAcls = {
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "DescribeNetworkAclsCommand"
   let make = (~maxResults=?, ~nextToken=?, ~networkAclIds=?, ~dryRun=?, ~filters=?, ()) =>
-    new({maxResults, nextToken, networkAclIds, dryRun, filters})
+    new({
+      maxResults: maxResults,
+      nextToken: nextToken,
+      networkAclIds: networkAclIds,
+      dryRun: dryRun,
+      filters: filters,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeInstanceStatus = {
   type t
   type request = {
@@ -36599,9 +38354,18 @@ module DescribeInstanceStatus = {
     ~instanceIds=?,
     ~filters=?,
     (),
-  ) => new({includeAllInstances, dryRun, nextToken, maxResults, instanceIds, filters})
+  ) =>
+    new({
+      includeAllInstances: includeAllInstances,
+      dryRun: dryRun,
+      nextToken: nextToken,
+      maxResults: maxResults,
+      instanceIds: instanceIds,
+      filters: filters,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeInstanceEventWindows = {
   type t
   @ocaml.doc("<para>Describe instance event windows by InstanceEventWindow.</para>")
@@ -36689,9 +38453,16 @@ module DescribeInstanceEventWindows = {
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "DescribeInstanceEventWindowsCommand"
   let make = (~nextToken=?, ~maxResults=?, ~filters=?, ~instanceEventWindowIds=?, ~dryRun=?, ()) =>
-    new({nextToken, maxResults, filters, instanceEventWindowIds, dryRun})
+    new({
+      nextToken: nextToken,
+      maxResults: maxResults,
+      filters: filters,
+      instanceEventWindowIds: instanceEventWindowIds,
+      dryRun: dryRun,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeImportImageTasks = {
   type t
   type request = {
@@ -36723,9 +38494,16 @@ module DescribeImportImageTasks = {
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "DescribeImportImageTasksCommand"
   let make = (~nextToken=?, ~maxResults=?, ~importTaskIds=?, ~filters=?, ~dryRun=?, ()) =>
-    new({nextToken, maxResults, importTaskIds, filters, dryRun})
+    new({
+      nextToken: nextToken,
+      maxResults: maxResults,
+      importTaskIds: importTaskIds,
+      filters: filters,
+      dryRun: dryRun,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeImages = {
   type t
   type request = {
@@ -36935,9 +38713,18 @@ module DescribeImages = {
     ~filters=?,
     ~executableUsers=?,
     (),
-  ) => new({dryRun, includeDeprecated, owners, imageIds, filters, executableUsers})
+  ) =>
+    new({
+      dryRun: dryRun,
+      includeDeprecated: includeDeprecated,
+      owners: owners,
+      imageIds: imageIds,
+      filters: filters,
+      executableUsers: executableUsers,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeHosts = {
   type t
   type request = {
@@ -37004,9 +38791,10 @@ module DescribeHosts = {
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "DescribeHostsCommand"
   let make = (~nextToken=?, ~maxResults=?, ~hostIds=?, ~filter=?, ()) =>
-    new({nextToken, maxResults, hostIds, filter})
+    new({nextToken: nextToken, maxResults: maxResults, hostIds: hostIds, filter: filter})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeClientVpnEndpoints = {
   type t
   type request = {
@@ -37051,9 +38839,16 @@ module DescribeClientVpnEndpoints = {
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "DescribeClientVpnEndpointsCommand"
   let make = (~dryRun=?, ~filters=?, ~nextToken=?, ~maxResults=?, ~clientVpnEndpointIds=?, ()) =>
-    new({dryRun, filters, nextToken, maxResults, clientVpnEndpointIds})
+    new({
+      dryRun: dryRun,
+      filters: filters,
+      nextToken: nextToken,
+      maxResults: maxResults,
+      clientVpnEndpointIds: clientVpnEndpointIds,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateLaunchTemplate = {
   type t
   type request = {
@@ -37100,15 +38895,16 @@ module CreateLaunchTemplate = {
     (),
   ) =>
     new({
-      tagSpecifications,
-      launchTemplateData,
-      versionDescription,
-      launchTemplateName,
-      clientToken,
-      dryRun,
+      tagSpecifications: tagSpecifications,
+      launchTemplateData: launchTemplateData,
+      versionDescription: versionDescription,
+      launchTemplateName: launchTemplateName,
+      clientToken: clientToken,
+      dryRun: dryRun,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateDhcpOptions = {
   type t
   type request = {
@@ -37127,9 +38923,14 @@ module CreateDhcpOptions = {
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "CreateDhcpOptionsCommand"
   let make = (~dhcpConfigurations, ~dryRun=?, ~tagSpecifications=?, ()) =>
-    new({dryRun, tagSpecifications, dhcpConfigurations})
+    new({
+      dryRun: dryRun,
+      tagSpecifications: tagSpecifications,
+      dhcpConfigurations: dhcpConfigurations,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module StartNetworkInsightsAnalysis = {
   type t
   type request = {
@@ -37166,9 +38967,17 @@ module StartNetworkInsightsAnalysis = {
     ~dryRun=?,
     ~filterInArns=?,
     (),
-  ) => new({clientToken, tagSpecifications, dryRun, filterInArns, networkInsightsPathId})
+  ) =>
+    new({
+      clientToken: clientToken,
+      tagSpecifications: tagSpecifications,
+      dryRun: dryRun,
+      filterInArns: filterInArns,
+      networkInsightsPathId: networkInsightsPathId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ModifyVpnTunnelOptions = {
   type t
   type request = {
@@ -37189,9 +38998,15 @@ module ModifyVpnTunnelOptions = {
   type response = {@as("VpnConnection") vpnConnection: option<vpnConnection>}
   @module("@aws-sdk/client-ec2") @new external new: request => t = "ModifyVpnTunnelOptionsCommand"
   let make = (~tunnelOptions, ~vpnTunnelOutsideIpAddress, ~vpnConnectionId, ~dryRun=?, ()) =>
-    new({dryRun, tunnelOptions, vpnTunnelOutsideIpAddress, vpnConnectionId})
+    new({
+      dryRun: dryRun,
+      tunnelOptions: tunnelOptions,
+      vpnTunnelOutsideIpAddress: vpnTunnelOutsideIpAddress,
+      vpnConnectionId: vpnConnectionId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ModifyVpnTunnelCertificate = {
   type t
   type request = {
@@ -37211,9 +39026,14 @@ module ModifyVpnTunnelCertificate = {
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "ModifyVpnTunnelCertificateCommand"
   let make = (~vpnTunnelOutsideIpAddress, ~vpnConnectionId, ~dryRun=?, ()) =>
-    new({dryRun, vpnTunnelOutsideIpAddress, vpnConnectionId})
+    new({
+      dryRun: dryRun,
+      vpnTunnelOutsideIpAddress: vpnTunnelOutsideIpAddress,
+      vpnConnectionId: vpnConnectionId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ModifyVpnConnectionOptions = {
   type t
   type request = {
@@ -37258,15 +39078,16 @@ module ModifyVpnConnectionOptions = {
     (),
   ) =>
     new({
-      dryRun,
-      remoteIpv6NetworkCidr,
-      localIpv6NetworkCidr,
-      remoteIpv4NetworkCidr,
-      localIpv4NetworkCidr,
-      vpnConnectionId,
+      dryRun: dryRun,
+      remoteIpv6NetworkCidr: remoteIpv6NetworkCidr,
+      localIpv6NetworkCidr: localIpv6NetworkCidr,
+      remoteIpv4NetworkCidr: remoteIpv4NetworkCidr,
+      localIpv4NetworkCidr: localIpv4NetworkCidr,
+      vpnConnectionId: vpnConnectionId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ModifyVpnConnection = {
   type t
   type request = {
@@ -37297,9 +39118,17 @@ module ModifyVpnConnection = {
     ~customerGatewayId=?,
     ~transitGatewayId=?,
     (),
-  ) => new({dryRun, vpnGatewayId, customerGatewayId, transitGatewayId, vpnConnectionId})
+  ) =>
+    new({
+      dryRun: dryRun,
+      vpnGatewayId: vpnGatewayId,
+      customerGatewayId: customerGatewayId,
+      transitGatewayId: transitGatewayId,
+      vpnConnectionId: vpnConnectionId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ModifySpotFleetRequest = {
   type t
   @ocaml.doc("<p>Contains the parameters for ModifySpotFleetRequest.</p>")
@@ -37341,15 +39170,16 @@ module ModifySpotFleetRequest = {
     (),
   ) =>
     new({
-      context,
-      onDemandTargetCapacity,
-      targetCapacity,
-      spotFleetRequestId,
-      launchTemplateConfigs,
-      excessCapacityTerminationPolicy,
+      context: context,
+      onDemandTargetCapacity: onDemandTargetCapacity,
+      targetCapacity: targetCapacity,
+      spotFleetRequestId: spotFleetRequestId,
+      launchTemplateConfigs: launchTemplateConfigs,
+      excessCapacityTerminationPolicy: excessCapacityTerminationPolicy,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ModifyFleet = {
   type t
   type request = {
@@ -37386,15 +39216,16 @@ module ModifyFleet = {
     (),
   ) =>
     new({
-      context,
-      targetCapacitySpecification,
-      fleetId,
-      launchTemplateConfigs,
-      excessCapacityTerminationPolicy,
-      dryRun,
+      context: context,
+      targetCapacitySpecification: targetCapacitySpecification,
+      fleetId: fleetId,
+      launchTemplateConfigs: launchTemplateConfigs,
+      excessCapacityTerminationPolicy: excessCapacityTerminationPolicy,
+      dryRun: dryRun,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeStaleSecurityGroups = {
   type t
   type request = {
@@ -37427,9 +39258,10 @@ module DescribeStaleSecurityGroups = {
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "DescribeStaleSecurityGroupsCommand"
   let make = (~vpcId, ~nextToken=?, ~maxResults=?, ~dryRun=?, ()) =>
-    new({vpcId, nextToken, maxResults, dryRun})
+    new({vpcId: vpcId, nextToken: nextToken, maxResults: maxResults, dryRun: dryRun})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeSecurityGroups = {
   type t
   type request = {
@@ -37593,9 +39425,17 @@ module DescribeSecurityGroups = {
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "DescribeSecurityGroupsCommand"
   let make = (~maxResults=?, ~nextToken=?, ~dryRun=?, ~groupNames=?, ~groupIds=?, ~filters=?, ()) =>
-    new({maxResults, nextToken, dryRun, groupNames, groupIds, filters})
+    new({
+      maxResults: maxResults,
+      nextToken: nextToken,
+      dryRun: dryRun,
+      groupNames: groupNames,
+      groupIds: groupIds,
+      filters: filters,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeInstanceTypes = {
   type t
   type request = {
@@ -37855,9 +39695,16 @@ module DescribeInstanceTypes = {
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "DescribeInstanceTypesCommand"
   let make = (~nextToken=?, ~maxResults=?, ~filters=?, ~instanceTypes=?, ~dryRun=?, ()) =>
-    new({nextToken, maxResults, filters, instanceTypes, dryRun})
+    new({
+      nextToken: nextToken,
+      maxResults: maxResults,
+      filters: filters,
+      instanceTypes: instanceTypes,
+      dryRun: dryRun,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeDhcpOptions = {
   type t
   type request = {
@@ -37918,9 +39765,16 @@ module DescribeDhcpOptions = {
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "DescribeDhcpOptionsCommand"
   let make = (~maxResults=?, ~nextToken=?, ~dryRun=?, ~filters=?, ~dhcpOptionsIds=?, ()) =>
-    new({maxResults, nextToken, dryRun, filters, dhcpOptionsIds})
+    new({
+      maxResults: maxResults,
+      nextToken: nextToken,
+      dryRun: dryRun,
+      filters: filters,
+      dhcpOptionsIds: dhcpOptionsIds,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeConversionTasks = {
   type t
   type request = {
@@ -37937,9 +39791,11 @@ module DescribeConversionTasks = {
     conversionTasks: option<describeConversionTaskList>,
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "DescribeConversionTasksCommand"
-  let make = (~dryRun=?, ~conversionTaskIds=?, ()) => new({dryRun, conversionTaskIds})
+  let make = (~dryRun=?, ~conversionTaskIds=?, ()) =>
+    new({dryRun: dryRun, conversionTaskIds: conversionTaskIds})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateVpnConnection = {
   type t
   @ocaml.doc("<p>Contains the parameters for CreateVpnConnection.</p>")
@@ -37984,16 +39840,17 @@ module CreateVpnConnection = {
     (),
   ) =>
     new({
-      tagSpecifications,
-      options,
-      dryRun,
-      transitGatewayId,
-      vpnGatewayId,
-      type_,
-      customerGatewayId,
+      tagSpecifications: tagSpecifications,
+      options: options,
+      dryRun: dryRun,
+      transitGatewayId: transitGatewayId,
+      vpnGatewayId: vpnGatewayId,
+      type_: type_,
+      customerGatewayId: customerGatewayId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateLaunchTemplateVersion = {
   type t
   type request = {
@@ -38052,16 +39909,17 @@ module CreateLaunchTemplateVersion = {
     (),
   ) =>
     new({
-      launchTemplateData,
-      versionDescription,
-      sourceVersion,
-      launchTemplateName,
-      launchTemplateId,
-      clientToken,
-      dryRun,
+      launchTemplateData: launchTemplateData,
+      versionDescription: versionDescription,
+      sourceVersion: sourceVersion,
+      launchTemplateName: launchTemplateName,
+      launchTemplateId: launchTemplateId,
+      clientToken: clientToken,
+      dryRun: dryRun,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateFleet = {
   type t
   type request = {
@@ -38176,23 +40034,24 @@ module CreateFleet = {
     (),
   ) =>
     new({
-      context,
-      tagSpecifications,
-      replaceUnhealthyInstances,
-      validUntil,
-      validFrom,
-      type_,
-      terminateInstancesWithExpiration,
-      targetCapacitySpecification,
-      launchTemplateConfigs,
-      excessCapacityTerminationPolicy,
-      onDemandOptions,
-      spotOptions,
-      clientToken,
-      dryRun,
+      context: context,
+      tagSpecifications: tagSpecifications,
+      replaceUnhealthyInstances: replaceUnhealthyInstances,
+      validUntil: validUntil,
+      validFrom: validFrom,
+      type_: type_,
+      terminateInstancesWithExpiration: terminateInstancesWithExpiration,
+      targetCapacitySpecification: targetCapacitySpecification,
+      launchTemplateConfigs: launchTemplateConfigs,
+      excessCapacityTerminationPolicy: excessCapacityTerminationPolicy,
+      onDemandOptions: onDemandOptions,
+      spotOptions: spotOptions,
+      clientToken: clientToken,
+      dryRun: dryRun,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module RunInstances = {
   type t
   type request = {
@@ -38486,48 +40345,49 @@ module RunInstances = {
     (),
   ) =>
     new({
-      maintenanceOptions,
-      privateDnsNameOptions,
-      enclaveOptions,
-      metadataOptions,
-      licenseSpecifications,
-      hibernationOptions,
-      capacityReservationSpecification,
-      cpuOptions,
-      creditSpecification,
-      instanceMarketOptions,
-      launchTemplate,
-      tagSpecifications,
-      elasticInferenceAccelerators,
-      elasticGpuSpecification,
-      privateIpAddress,
-      networkInterfaces,
-      instanceInitiatedShutdownBehavior,
-      iamInstanceProfile,
-      ebsOptimized,
-      dryRun,
-      disableApiTermination,
-      clientToken,
-      additionalInfo,
-      userData,
-      subnetId,
-      securityGroups,
-      securityGroupIds,
-      ramdiskId,
-      placement,
-      monitoring,
-      minCount,
-      maxCount,
-      keyName,
-      kernelId,
-      ipv6Addresses,
-      ipv6AddressCount,
-      instanceType,
-      imageId,
-      blockDeviceMappings,
+      maintenanceOptions: maintenanceOptions,
+      privateDnsNameOptions: privateDnsNameOptions,
+      enclaveOptions: enclaveOptions,
+      metadataOptions: metadataOptions,
+      licenseSpecifications: licenseSpecifications,
+      hibernationOptions: hibernationOptions,
+      capacityReservationSpecification: capacityReservationSpecification,
+      cpuOptions: cpuOptions,
+      creditSpecification: creditSpecification,
+      instanceMarketOptions: instanceMarketOptions,
+      launchTemplate: launchTemplate,
+      tagSpecifications: tagSpecifications,
+      elasticInferenceAccelerators: elasticInferenceAccelerators,
+      elasticGpuSpecification: elasticGpuSpecification,
+      privateIpAddress: privateIpAddress,
+      networkInterfaces: networkInterfaces,
+      instanceInitiatedShutdownBehavior: instanceInitiatedShutdownBehavior,
+      iamInstanceProfile: iamInstanceProfile,
+      ebsOptimized: ebsOptimized,
+      dryRun: dryRun,
+      disableApiTermination: disableApiTermination,
+      clientToken: clientToken,
+      additionalInfo: additionalInfo,
+      userData: userData,
+      subnetId: subnetId,
+      securityGroups: securityGroups,
+      securityGroupIds: securityGroupIds,
+      ramdiskId: ramdiskId,
+      placement: placement,
+      monitoring: monitoring,
+      minCount: minCount,
+      maxCount: maxCount,
+      keyName: keyName,
+      kernelId: kernelId,
+      ipv6Addresses: ipv6Addresses,
+      ipv6AddressCount: ipv6AddressCount,
+      instanceType: instanceType,
+      imageId: imageId,
+      blockDeviceMappings: blockDeviceMappings,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module RequestSpotInstances = {
   type t
   @ocaml.doc("<p>Contains the parameters for RequestSpotInstances.</p>")
@@ -38642,22 +40502,23 @@ module RequestSpotInstances = {
     (),
   ) =>
     new({
-      instanceInterruptionBehavior,
-      tagSpecifications,
-      validUntil,
-      validFrom,
-      type_,
-      spotPrice,
-      launchSpecification,
-      launchGroup,
-      instanceCount,
-      dryRun,
-      clientToken,
-      blockDurationMinutes,
-      availabilityZoneGroup,
+      instanceInterruptionBehavior: instanceInterruptionBehavior,
+      tagSpecifications: tagSpecifications,
+      validUntil: validUntil,
+      validFrom: validFrom,
+      type_: type_,
+      spotPrice: spotPrice,
+      launchSpecification: launchSpecification,
+      launchGroup: launchGroup,
+      instanceCount: instanceCount,
+      dryRun: dryRun,
+      clientToken: clientToken,
+      blockDurationMinutes: blockDurationMinutes,
+      availabilityZoneGroup: availabilityZoneGroup,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module RequestSpotFleet = {
   type t
   @ocaml.doc("<p>Contains the parameters for RequestSpotFleet.</p>")
@@ -38677,9 +40538,11 @@ module RequestSpotFleet = {
     spotFleetRequestId: option<string_>,
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "RequestSpotFleetCommand"
-  let make = (~spotFleetRequestConfig, ~dryRun=?, ()) => new({spotFleetRequestConfig, dryRun})
+  let make = (~spotFleetRequestConfig, ~dryRun=?, ()) =>
+    new({spotFleetRequestConfig: spotFleetRequestConfig, dryRun: dryRun})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetNetworkInsightsAccessScopeContent = {
   type t
   type request = {
@@ -38698,9 +40561,10 @@ module GetNetworkInsightsAccessScopeContent = {
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "GetNetworkInsightsAccessScopeContentCommand"
   let make = (~networkInsightsAccessScopeId, ~dryRun=?, ()) =>
-    new({dryRun, networkInsightsAccessScopeId})
+    new({dryRun: dryRun, networkInsightsAccessScopeId: networkInsightsAccessScopeId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetNetworkInsightsAccessScopeAnalysisFindings = {
   type t
   type request = {
@@ -38737,9 +40601,15 @@ module GetNetworkInsightsAccessScopeAnalysisFindings = {
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "GetNetworkInsightsAccessScopeAnalysisFindingsCommand"
   let make = (~networkInsightsAccessScopeAnalysisId, ~dryRun=?, ~nextToken=?, ~maxResults=?, ()) =>
-    new({dryRun, nextToken, maxResults, networkInsightsAccessScopeAnalysisId})
+    new({
+      dryRun: dryRun,
+      nextToken: nextToken,
+      maxResults: maxResults,
+      networkInsightsAccessScopeAnalysisId: networkInsightsAccessScopeAnalysisId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeVpnConnections = {
   type t
   @ocaml.doc("<p>Contains the parameters for DescribeVpnConnections.</p>")
@@ -38827,9 +40697,10 @@ module DescribeVpnConnections = {
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "DescribeVpnConnectionsCommand"
   let make = (~dryRun=?, ~vpnConnectionIds=?, ~filters=?, ()) =>
-    new({dryRun, vpnConnectionIds, filters})
+    new({dryRun: dryRun, vpnConnectionIds: vpnConnectionIds, filters: filters})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeSpotInstanceRequests = {
   type t
   @ocaml.doc("<p>Contains the parameters for DescribeSpotInstanceRequests.</p>")
@@ -39060,9 +40931,16 @@ module DescribeSpotInstanceRequests = {
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "DescribeSpotInstanceRequestsCommand"
   let make = (~maxResults=?, ~nextToken=?, ~spotInstanceRequestIds=?, ~dryRun=?, ~filters=?, ()) =>
-    new({maxResults, nextToken, spotInstanceRequestIds, dryRun, filters})
+    new({
+      maxResults: maxResults,
+      nextToken: nextToken,
+      spotInstanceRequestIds: spotInstanceRequestIds,
+      dryRun: dryRun,
+      filters: filters,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeNetworkInsightsAnalyses = {
   type t
   type request = {
@@ -39126,17 +41004,18 @@ module DescribeNetworkInsightsAnalyses = {
     (),
   ) =>
     new({
-      nextToken,
-      dryRun,
-      maxResults,
-      filters,
-      analysisEndTime,
-      analysisStartTime,
-      networkInsightsPathId,
-      networkInsightsAnalysisIds,
+      nextToken: nextToken,
+      dryRun: dryRun,
+      maxResults: maxResults,
+      filters: filters,
+      analysisEndTime: analysisEndTime,
+      analysisStartTime: analysisStartTime,
+      networkInsightsPathId: networkInsightsPathId,
+      networkInsightsAnalysisIds: networkInsightsAnalysisIds,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeLaunchTemplateVersions = {
   type t
   type request = {
@@ -39279,18 +41158,19 @@ module DescribeLaunchTemplateVersions = {
     (),
   ) =>
     new({
-      filters,
-      maxResults,
-      nextToken,
-      maxVersion,
-      minVersion,
-      versions,
-      launchTemplateName,
-      launchTemplateId,
-      dryRun,
+      filters: filters,
+      maxResults: maxResults,
+      nextToken: nextToken,
+      maxVersion: maxVersion,
+      minVersion: minVersion,
+      versions: versions,
+      launchTemplateName: launchTemplateName,
+      launchTemplateId: launchTemplateId,
+      dryRun: dryRun,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateNetworkInsightsAccessScope = {
   type t
   type request = {
@@ -39319,9 +41199,16 @@ module CreateNetworkInsightsAccessScope = {
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "CreateNetworkInsightsAccessScopeCommand"
   let make = (~clientToken, ~dryRun=?, ~tagSpecifications=?, ~excludePaths=?, ~matchPaths=?, ()) =>
-    new({dryRun, tagSpecifications, clientToken, excludePaths, matchPaths})
+    new({
+      dryRun: dryRun,
+      tagSpecifications: tagSpecifications,
+      clientToken: clientToken,
+      excludePaths: excludePaths,
+      matchPaths: matchPaths,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeFleets = {
   type t
   type request = {
@@ -39386,9 +41273,16 @@ module DescribeFleets = {
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "DescribeFleetsCommand"
   let make = (~filters=?, ~fleetIds=?, ~nextToken=?, ~maxResults=?, ~dryRun=?, ()) =>
-    new({filters, fleetIds, nextToken, maxResults, dryRun})
+    new({
+      filters: filters,
+      fleetIds: fleetIds,
+      nextToken: nextToken,
+      maxResults: maxResults,
+      dryRun: dryRun,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeSpotFleetRequests = {
   type t
   @ocaml.doc("<p>Contains the parameters for DescribeSpotFleetRequests.</p>")
@@ -39422,9 +41316,15 @@ module DescribeSpotFleetRequests = {
   @module("@aws-sdk/client-ec2") @new
   external new: request => t = "DescribeSpotFleetRequestsCommand"
   let make = (~spotFleetRequestIds=?, ~nextToken=?, ~maxResults=?, ~dryRun=?, ()) =>
-    new({spotFleetRequestIds, nextToken, maxResults, dryRun})
+    new({
+      spotFleetRequestIds: spotFleetRequestIds,
+      nextToken: nextToken,
+      maxResults: maxResults,
+      dryRun: dryRun,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeInstances = {
   type t
   type request = {
@@ -39921,6 +41821,12 @@ module DescribeInstances = {
   }
   @module("@aws-sdk/client-ec2") @new external new: request => t = "DescribeInstancesCommand"
   let make = (~nextToken=?, ~maxResults=?, ~dryRun=?, ~instanceIds=?, ~filters=?, ()) =>
-    new({nextToken, maxResults, dryRun, instanceIds, filters})
+    new({
+      nextToken: nextToken,
+      maxResults: maxResults,
+      dryRun: dryRun,
+      instanceIds: instanceIds,
+      filters: filters,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

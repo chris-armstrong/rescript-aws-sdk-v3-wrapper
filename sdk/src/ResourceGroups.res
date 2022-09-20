@@ -477,9 +477,11 @@ module UpdateGroup = {
     group: option<group>,
   }
   @module("@aws-sdk/client-resource-groups") @new external new: request => t = "UpdateGroupCommand"
-  let make = (~description=?, ~group=?, ~groupName=?, ()) => new({description, group, groupName})
+  let make = (~description=?, ~group=?, ~groupName=?, ()) =>
+    new({description: description, group: group, groupName: groupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module Untag = {
   type t
   type request = {
@@ -496,9 +498,10 @@ module Untag = {
     arn: option<groupArn>,
   }
   @module("@aws-sdk/client-resource-groups") @new external new: request => t = "UntagCommand"
-  let make = (~keys, ~arn, ()) => new({keys, arn})
+  let make = (~keys, ~arn, ()) => new({keys: keys, arn: arn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module Tag = {
   type t
   type request = {
@@ -515,9 +518,10 @@ module Tag = {
     @ocaml.doc("<p>The ARN of the tagged resource.</p>") @as("Arn") arn: option<groupArn>,
   }
   @module("@aws-sdk/client-resource-groups") @new external new: request => t = "TagCommand"
-  let make = (~tags, ~arn, ()) => new({tags, arn})
+  let make = (~tags, ~arn, ()) => new({tags: tags, arn: arn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetTags = {
   type t
   type request = {
@@ -533,6 +537,7 @@ module GetTags = {
   let make = (~arn, ()) => new({arn: arn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetGroup = {
   type t
   type request = {
@@ -547,9 +552,10 @@ module GetGroup = {
     group: option<group>,
   }
   @module("@aws-sdk/client-resource-groups") @new external new: request => t = "GetGroupCommand"
-  let make = (~group=?, ~groupName=?, ()) => new({group, groupName})
+  let make = (~group=?, ~groupName=?, ()) => new({group: group, groupName: groupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteGroup = {
   type t
   type request = {
@@ -564,9 +570,10 @@ module DeleteGroup = {
     group: option<group>,
   }
   @module("@aws-sdk/client-resource-groups") @new external new: request => t = "DeleteGroupCommand"
-  let make = (~group=?, ~groupName=?, ()) => new({group, groupName})
+  let make = (~group=?, ~groupName=?, ()) => new({group: group, groupName: groupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateGroupQuery = {
   type t
   type request = {
@@ -592,9 +599,11 @@ module UpdateGroupQuery = {
   }
   @module("@aws-sdk/client-resource-groups") @new
   external new: request => t = "UpdateGroupQueryCommand"
-  let make = (~resourceQuery, ~group=?, ~groupName=?, ()) => new({resourceQuery, group, groupName})
+  let make = (~resourceQuery, ~group=?, ~groupName=?, ()) =>
+    new({resourceQuery: resourceQuery, group: group, groupName: groupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UngroupResources = {
   type t
   type request = {
@@ -626,9 +635,10 @@ module UngroupResources = {
   }
   @module("@aws-sdk/client-resource-groups") @new
   external new: request => t = "UngroupResourcesCommand"
-  let make = (~resourceArns, ~group, ()) => new({resourceArns, group})
+  let make = (~resourceArns, ~group, ()) => new({resourceArns: resourceArns, group: group})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module SearchResources = {
   type t
   type request = {
@@ -674,9 +684,10 @@ until the <code>NextToken</code> response element comes back as <code>null</code
   @module("@aws-sdk/client-resource-groups") @new
   external new: request => t = "SearchResourcesCommand"
   let make = (~resourceQuery, ~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken, maxResults, resourceQuery})
+    new({nextToken: nextToken, maxResults: maxResults, resourceQuery: resourceQuery})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GroupResources = {
   type t
   type request = {
@@ -706,9 +717,10 @@ module GroupResources = {
   }
   @module("@aws-sdk/client-resource-groups") @new
   external new: request => t = "GroupResourcesCommand"
-  let make = (~resourceArns, ~group, ()) => new({resourceArns, group})
+  let make = (~resourceArns, ~group, ()) => new({resourceArns: resourceArns, group: group})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetGroupQuery = {
   type t
   type request = {
@@ -726,9 +738,10 @@ module GetGroupQuery = {
   }
   @module("@aws-sdk/client-resource-groups") @new
   external new: request => t = "GetGroupQueryCommand"
-  let make = (~group=?, ~groupName=?, ()) => new({group, groupName})
+  let make = (~group=?, ~groupName=?, ()) => new({group: group, groupName: groupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListGroups = {
   type t
   type request = {
@@ -806,9 +819,11 @@ until the <code>NextToken</code> response element comes back as <code>null</code
     groupIdentifiers: option<groupIdentifierList>,
   }
   @module("@aws-sdk/client-resource-groups") @new external new: request => t = "ListGroupsCommand"
-  let make = (~nextToken=?, ~maxResults=?, ~filters=?, ()) => new({nextToken, maxResults, filters})
+  let make = (~nextToken=?, ~maxResults=?, ~filters=?, ()) =>
+    new({nextToken: nextToken, maxResults: maxResults, filters: filters})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListGroupResources = {
   type t
   type request = {
@@ -904,9 +919,16 @@ until the <code>NextToken</code> response element comes back as <code>null</code
   @module("@aws-sdk/client-resource-groups") @new
   external new: request => t = "ListGroupResourcesCommand"
   let make = (~nextToken=?, ~maxResults=?, ~filters=?, ~group=?, ~groupName=?, ()) =>
-    new({nextToken, maxResults, filters, group, groupName})
+    new({
+      nextToken: nextToken,
+      maxResults: maxResults,
+      filters: filters,
+      group: group,
+      groupName: groupName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module PutGroupConfiguration = {
   type t
   type request = {
@@ -929,9 +951,10 @@ module PutGroupConfiguration = {
   type response = {.}
   @module("@aws-sdk/client-resource-groups") @new
   external new: request => t = "PutGroupConfigurationCommand"
-  let make = (~configuration=?, ~group=?, ()) => new({configuration, group})
+  let make = (~configuration=?, ~group=?, ()) => new({configuration: configuration, group: group})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module GetGroupConfiguration = {
   type t
   type request = {
@@ -950,6 +973,7 @@ module GetGroupConfiguration = {
   let make = (~group=?, ()) => new({group: group})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateGroup = {
   type t
   type request = {
@@ -1003,6 +1027,12 @@ module CreateGroup = {
   }
   @module("@aws-sdk/client-resource-groups") @new external new: request => t = "CreateGroupCommand"
   let make = (~name, ~configuration=?, ~tags=?, ~resourceQuery=?, ~description=?, ()) =>
-    new({configuration, tags, resourceQuery, description, name})
+    new({
+      configuration: configuration,
+      tags: tags,
+      resourceQuery: resourceQuery,
+      description: description,
+      name: name,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

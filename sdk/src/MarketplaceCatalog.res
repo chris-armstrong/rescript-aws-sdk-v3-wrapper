@@ -270,9 +270,10 @@ module DescribeEntity = {
   }
   @module("@aws-sdk/client-aws-marketplace") @new
   external new: request => t = "DescribeEntityCommand"
-  let make = (~entityId, ~catalog, ()) => new({entityId, catalog})
+  let make = (~entityId, ~catalog, ()) => new({entityId: entityId, catalog: catalog})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CancelChangeSet = {
   type t
   type request = {
@@ -295,9 +296,10 @@ module CancelChangeSet = {
   }
   @module("@aws-sdk/client-aws-marketplace") @new
   external new: request => t = "CancelChangeSetCommand"
-  let make = (~changeSetId, ~catalog, ()) => new({changeSetId, catalog})
+  let make = (~changeSetId, ~catalog, ()) => new({changeSetId: changeSetId, catalog: catalog})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module StartChangeSet = {
   type t
   type request = {
@@ -325,9 +327,15 @@ module StartChangeSet = {
   @module("@aws-sdk/client-aws-marketplace") @new
   external new: request => t = "StartChangeSetCommand"
   let make = (~changeSet, ~catalog, ~clientRequestToken=?, ~changeSetName=?, ()) =>
-    new({clientRequestToken, changeSetName, changeSet, catalog})
+    new({
+      clientRequestToken: clientRequestToken,
+      changeSetName: changeSetName,
+      changeSet: changeSet,
+      catalog: catalog,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListEntities = {
   type t
   type request = {
@@ -363,9 +371,17 @@ module ListEntities = {
   }
   @module("@aws-sdk/client-aws-marketplace") @new external new: request => t = "ListEntitiesCommand"
   let make = (~entityType, ~catalog, ~maxResults=?, ~nextToken=?, ~sort=?, ~filterList=?, ()) =>
-    new({maxResults, nextToken, sort, filterList, entityType, catalog})
+    new({
+      maxResults: maxResults,
+      nextToken: nextToken,
+      sort: sort,
+      filterList: filterList,
+      entityType: entityType,
+      catalog: catalog,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListChangeSets = {
   type t
   type request = {
@@ -402,9 +418,16 @@ module ListChangeSets = {
   @module("@aws-sdk/client-aws-marketplace") @new
   external new: request => t = "ListChangeSetsCommand"
   let make = (~catalog, ~nextToken=?, ~maxResults=?, ~sort=?, ~filterList=?, ()) =>
-    new({nextToken, maxResults, sort, filterList, catalog})
+    new({
+      nextToken: nextToken,
+      maxResults: maxResults,
+      sort: sort,
+      filterList: filterList,
+      catalog: catalog,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeChangeSet = {
   type t
   type request = {
@@ -458,6 +481,6 @@ module DescribeChangeSet = {
   }
   @module("@aws-sdk/client-aws-marketplace") @new
   external new: request => t = "DescribeChangeSetCommand"
-  let make = (~changeSetId, ~catalog, ()) => new({changeSetId, catalog})
+  let make = (~changeSetId, ~catalog, ()) => new({changeSetId: changeSetId, catalog: catalog})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

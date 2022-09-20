@@ -95,6 +95,7 @@ module GetHomeRegion = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateHomeRegionControl = {
   type t
   type request = {
@@ -116,9 +117,11 @@ module CreateHomeRegionControl = {
     homeRegionControl: option<homeRegionControl>,
   }
   @module("@aws-sdk/client-mgh") @new external new: request => t = "CreateHomeRegionControlCommand"
-  let make = (~target, ~homeRegion, ~dryRun=?, ()) => new({dryRun, target, homeRegion})
+  let make = (~target, ~homeRegion, ~dryRun=?, ()) =>
+    new({dryRun: dryRun, target: target, homeRegion: homeRegion})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeHomeRegionControls = {
   type t
   type request = {
@@ -155,6 +158,12 @@ module DescribeHomeRegionControls = {
   @module("@aws-sdk/client-mgh") @new
   external new: request => t = "DescribeHomeRegionControlsCommand"
   let make = (~nextToken=?, ~maxResults=?, ~target=?, ~homeRegion=?, ~controlId=?, ()) =>
-    new({nextToken, maxResults, target, homeRegion, controlId})
+    new({
+      nextToken: nextToken,
+      maxResults: maxResults,
+      target: target,
+      homeRegion: homeRegion,
+      controlId: controlId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

@@ -497,9 +497,15 @@ module RemoveResourcePermission = {
   @module("@aws-sdk/client-workdocs") @new
   external new: request => t = "RemoveResourcePermissionCommand"
   let make = (~principalId, ~resourceId, ~principalType=?, ~authenticationToken=?, ()) =>
-    new({principalType, principalId, resourceId, authenticationToken})
+    new({
+      principalType: principalType,
+      principalId: principalId,
+      resourceId: resourceId,
+      authenticationToken: authenticationToken,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module RemoveAllResourcePermissions = {
   type t
   type request = {
@@ -513,9 +519,11 @@ module RemoveAllResourcePermissions = {
   type response = {.}
   @module("@aws-sdk/client-workdocs") @new
   external new: request => t = "RemoveAllResourcePermissionsCommand"
-  let make = (~resourceId, ~authenticationToken=?, ()) => new({resourceId, authenticationToken})
+  let make = (~resourceId, ~authenticationToken=?, ()) =>
+    new({resourceId: resourceId, authenticationToken: authenticationToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateFolder = {
   type t
   type request = {
@@ -542,9 +550,17 @@ module UpdateFolder = {
     ~name=?,
     ~authenticationToken=?,
     (),
-  ) => new({resourceState, parentFolderId, name, folderId, authenticationToken})
+  ) =>
+    new({
+      resourceState: resourceState,
+      parentFolderId: parentFolderId,
+      name: name,
+      folderId: folderId,
+      authenticationToken: authenticationToken,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateDocumentVersion = {
   type t
   type request = {
@@ -563,9 +579,15 @@ module UpdateDocumentVersion = {
   @module("@aws-sdk/client-workdocs") @new
   external new: request => t = "UpdateDocumentVersionCommand"
   let make = (~versionId, ~documentId, ~versionStatus=?, ~authenticationToken=?, ()) =>
-    new({versionStatus, versionId, documentId, authenticationToken})
+    new({
+      versionStatus: versionStatus,
+      versionId: versionId,
+      documentId: documentId,
+      authenticationToken: authenticationToken,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateDocument = {
   type t
   type request = {
@@ -592,9 +614,17 @@ module UpdateDocument = {
     ~name=?,
     ~authenticationToken=?,
     (),
-  ) => new({resourceState, parentFolderId, name, documentId, authenticationToken})
+  ) =>
+    new({
+      resourceState: resourceState,
+      parentFolderId: parentFolderId,
+      name: name,
+      documentId: documentId,
+      authenticationToken: authenticationToken,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteUser = {
   type t
   type request = {
@@ -606,9 +636,11 @@ module DeleteUser = {
   }
   type response = {.}
   @module("@aws-sdk/client-workdocs") @new external new: request => t = "DeleteUserCommand"
-  let make = (~userId, ~authenticationToken=?, ()) => new({userId, authenticationToken})
+  let make = (~userId, ~authenticationToken=?, ()) =>
+    new({userId: userId, authenticationToken: authenticationToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteNotificationSubscription = {
   type t
   type request = {
@@ -618,9 +650,11 @@ module DeleteNotificationSubscription = {
   type response = {.}
   @module("@aws-sdk/client-workdocs") @new
   external new: request => t = "DeleteNotificationSubscriptionCommand"
-  let make = (~organizationId, ~subscriptionId, ()) => new({organizationId, subscriptionId})
+  let make = (~organizationId, ~subscriptionId, ()) =>
+    new({organizationId: organizationId, subscriptionId: subscriptionId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteLabels = {
   type t
   type request = {
@@ -639,9 +673,15 @@ module DeleteLabels = {
   type response = {.}
   @module("@aws-sdk/client-workdocs") @new external new: request => t = "DeleteLabelsCommand"
   let make = (~resourceId, ~deleteAll=?, ~labels=?, ~authenticationToken=?, ()) =>
-    new({deleteAll, labels, authenticationToken, resourceId})
+    new({
+      deleteAll: deleteAll,
+      labels: labels,
+      authenticationToken: authenticationToken,
+      resourceId: resourceId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteFolderContents = {
   type t
   type request = {
@@ -655,9 +695,11 @@ module DeleteFolderContents = {
   type response = {.}
   @module("@aws-sdk/client-workdocs") @new
   external new: request => t = "DeleteFolderContentsCommand"
-  let make = (~folderId, ~authenticationToken=?, ()) => new({folderId, authenticationToken})
+  let make = (~folderId, ~authenticationToken=?, ()) =>
+    new({folderId: folderId, authenticationToken: authenticationToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteFolder = {
   type t
   type request = {
@@ -670,9 +712,11 @@ module DeleteFolder = {
   }
   type response = {.}
   @module("@aws-sdk/client-workdocs") @new external new: request => t = "DeleteFolderCommand"
-  let make = (~folderId, ~authenticationToken=?, ()) => new({folderId, authenticationToken})
+  let make = (~folderId, ~authenticationToken=?, ()) =>
+    new({folderId: folderId, authenticationToken: authenticationToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteDocument = {
   type t
   type request = {
@@ -685,9 +729,11 @@ module DeleteDocument = {
   }
   type response = {.}
   @module("@aws-sdk/client-workdocs") @new external new: request => t = "DeleteDocumentCommand"
-  let make = (~documentId, ~authenticationToken=?, ()) => new({documentId, authenticationToken})
+  let make = (~documentId, ~authenticationToken=?, ()) =>
+    new({documentId: documentId, authenticationToken: authenticationToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteCustomMetadata = {
   type t
   type request = {
@@ -713,9 +759,16 @@ module DeleteCustomMetadata = {
   @module("@aws-sdk/client-workdocs") @new
   external new: request => t = "DeleteCustomMetadataCommand"
   let make = (~resourceId, ~deleteAll=?, ~keys=?, ~versionId=?, ~authenticationToken=?, ()) =>
-    new({deleteAll, keys, versionId, resourceId, authenticationToken})
+    new({
+      deleteAll: deleteAll,
+      keys: keys,
+      versionId: versionId,
+      resourceId: resourceId,
+      authenticationToken: authenticationToken,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteComment = {
   type t
   type request = {
@@ -732,9 +785,15 @@ module DeleteComment = {
   type response = {.}
   @module("@aws-sdk/client-workdocs") @new external new: request => t = "DeleteCommentCommand"
   let make = (~commentId, ~versionId, ~documentId, ~authenticationToken=?, ()) =>
-    new({commentId, versionId, documentId, authenticationToken})
+    new({
+      commentId: commentId,
+      versionId: versionId,
+      documentId: documentId,
+      authenticationToken: authenticationToken,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeactivateUser = {
   type t
   type request = {
@@ -747,9 +806,11 @@ module DeactivateUser = {
   }
   type response = {.}
   @module("@aws-sdk/client-workdocs") @new external new: request => t = "DeactivateUserCommand"
-  let make = (~userId, ~authenticationToken=?, ()) => new({authenticationToken, userId})
+  let make = (~userId, ~authenticationToken=?, ()) =>
+    new({authenticationToken: authenticationToken, userId: userId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module CreateNotificationSubscription = {
   type t
   type request = {
@@ -771,9 +832,15 @@ module CreateNotificationSubscription = {
   @module("@aws-sdk/client-workdocs") @new
   external new: request => t = "CreateNotificationSubscriptionCommand"
   let make = (~subscriptionType, ~protocol, ~endpoint, ~organizationId, ()) =>
-    new({subscriptionType, protocol, endpoint, organizationId})
+    new({
+      subscriptionType: subscriptionType,
+      protocol: protocol,
+      endpoint: endpoint,
+      organizationId: organizationId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateLabels = {
   type t
   type request = {
@@ -788,9 +855,10 @@ module CreateLabels = {
   type response = {.}
   @module("@aws-sdk/client-workdocs") @new external new: request => t = "CreateLabelsCommand"
   let make = (~labels, ~resourceId, ~authenticationToken=?, ()) =>
-    new({authenticationToken, labels, resourceId})
+    new({authenticationToken: authenticationToken, labels: labels, resourceId: resourceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module CreateCustomMetadata = {
   type t
   type request = {
@@ -811,9 +879,15 @@ module CreateCustomMetadata = {
   @module("@aws-sdk/client-workdocs") @new
   external new: request => t = "CreateCustomMetadataCommand"
   let make = (~customMetadata, ~resourceId, ~versionId=?, ~authenticationToken=?, ()) =>
-    new({customMetadata, versionId, resourceId, authenticationToken})
+    new({
+      customMetadata: customMetadata,
+      versionId: versionId,
+      resourceId: resourceId,
+      authenticationToken: authenticationToken,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module AbortDocumentVersionUpload = {
   type t
   type request = {
@@ -829,9 +903,10 @@ module AbortDocumentVersionUpload = {
   @module("@aws-sdk/client-workdocs") @new
   external new: request => t = "AbortDocumentVersionUploadCommand"
   let make = (~versionId, ~documentId, ~authenticationToken=?, ()) =>
-    new({versionId, documentId, authenticationToken})
+    new({versionId: versionId, documentId: documentId, authenticationToken: authenticationToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module GetFolder = {
   type t
   type request = {
@@ -853,9 +928,14 @@ module GetFolder = {
   }
   @module("@aws-sdk/client-workdocs") @new external new: request => t = "GetFolderCommand"
   let make = (~folderId, ~includeCustomMetadata=?, ~authenticationToken=?, ()) =>
-    new({includeCustomMetadata, folderId, authenticationToken})
+    new({
+      includeCustomMetadata: includeCustomMetadata,
+      folderId: folderId,
+      authenticationToken: authenticationToken,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetDocumentVersion = {
   type t
   type request = {
@@ -889,9 +969,17 @@ module GetDocumentVersion = {
     ~fields=?,
     ~authenticationToken=?,
     (),
-  ) => new({includeCustomMetadata, fields, versionId, documentId, authenticationToken})
+  ) =>
+    new({
+      includeCustomMetadata: includeCustomMetadata,
+      fields: fields,
+      versionId: versionId,
+      documentId: documentId,
+      authenticationToken: authenticationToken,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeNotificationSubscriptions = {
   type t
   type request = {
@@ -913,9 +1001,11 @@ module DescribeNotificationSubscriptions = {
   }
   @module("@aws-sdk/client-workdocs") @new
   external new: request => t = "DescribeNotificationSubscriptionsCommand"
-  let make = (~organizationId, ~limit=?, ~marker=?, ()) => new({limit, marker, organizationId})
+  let make = (~organizationId, ~limit=?, ~marker=?, ()) =>
+    new({limit: limit, marker: marker, organizationId: organizationId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeGroups = {
   type t
   type request = {
@@ -944,9 +1034,16 @@ module DescribeGroups = {
   }
   @module("@aws-sdk/client-workdocs") @new external new: request => t = "DescribeGroupsCommand"
   let make = (~searchQuery, ~limit=?, ~marker=?, ~organizationId=?, ~authenticationToken=?, ()) =>
-    new({limit, marker, organizationId, searchQuery, authenticationToken})
+    new({
+      limit: limit,
+      marker: marker,
+      organizationId: organizationId,
+      searchQuery: searchQuery,
+      authenticationToken: authenticationToken,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateFolder = {
   type t
   type request = {
@@ -965,9 +1062,10 @@ module CreateFolder = {
   }
   @module("@aws-sdk/client-workdocs") @new external new: request => t = "CreateFolderCommand"
   let make = (~parentFolderId, ~name=?, ~authenticationToken=?, ()) =>
-    new({parentFolderId, name, authenticationToken})
+    new({parentFolderId: parentFolderId, name: name, authenticationToken: authenticationToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module AddResourcePermissions = {
   type t
   type request = {
@@ -990,9 +1088,15 @@ module AddResourcePermissions = {
   @module("@aws-sdk/client-workdocs") @new
   external new: request => t = "AddResourcePermissionsCommand"
   let make = (~principals, ~resourceId, ~notificationOptions=?, ~authenticationToken=?, ()) =>
-    new({notificationOptions, principals, resourceId, authenticationToken})
+    new({
+      notificationOptions: notificationOptions,
+      principals: principals,
+      resourceId: resourceId,
+      authenticationToken: authenticationToken,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateUser = {
   type t
   type request = {
@@ -1033,18 +1137,19 @@ module UpdateUser = {
     (),
   ) =>
     new({
-      grantPoweruserPrivileges,
-      locale,
-      timeZoneId,
-      storageRule,
-      type_,
-      surname,
-      givenName,
-      userId,
-      authenticationToken,
+      grantPoweruserPrivileges: grantPoweruserPrivileges,
+      locale: locale,
+      timeZoneId: timeZoneId,
+      storageRule: storageRule,
+      type_: type_,
+      surname: surname,
+      givenName: givenName,
+      userId: userId,
+      authenticationToken: authenticationToken,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module InitiateDocumentVersionUpload = {
   type t
   type request = {
@@ -1087,17 +1192,18 @@ module InitiateDocumentVersionUpload = {
     (),
   ) =>
     new({
-      parentFolderId,
-      documentSizeInBytes,
-      contentType,
-      contentModifiedTimestamp,
-      contentCreatedTimestamp,
-      name,
-      id,
-      authenticationToken,
+      parentFolderId: parentFolderId,
+      documentSizeInBytes: documentSizeInBytes,
+      contentType: contentType,
+      contentModifiedTimestamp: contentModifiedTimestamp,
+      contentCreatedTimestamp: contentCreatedTimestamp,
+      name: name,
+      id: id,
+      authenticationToken: authenticationToken,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetFolderPath = {
   type t
   type request = {
@@ -1120,9 +1226,16 @@ module GetFolderPath = {
   }
   @module("@aws-sdk/client-workdocs") @new external new: request => t = "GetFolderPathCommand"
   let make = (~folderId, ~marker=?, ~fields=?, ~limit=?, ~authenticationToken=?, ()) =>
-    new({marker, fields, limit, folderId, authenticationToken})
+    new({
+      marker: marker,
+      fields: fields,
+      limit: limit,
+      folderId: folderId,
+      authenticationToken: authenticationToken,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetDocumentPath = {
   type t
   type request = {
@@ -1145,9 +1258,16 @@ module GetDocumentPath = {
   }
   @module("@aws-sdk/client-workdocs") @new external new: request => t = "GetDocumentPathCommand"
   let make = (~documentId, ~marker=?, ~fields=?, ~limit=?, ~authenticationToken=?, ()) =>
-    new({marker, fields, limit, documentId, authenticationToken})
+    new({
+      marker: marker,
+      fields: fields,
+      limit: limit,
+      documentId: documentId,
+      authenticationToken: authenticationToken,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetDocument = {
   type t
   type request = {
@@ -1169,9 +1289,14 @@ module GetDocument = {
   }
   @module("@aws-sdk/client-workdocs") @new external new: request => t = "GetDocumentCommand"
   let make = (~documentId, ~includeCustomMetadata=?, ~authenticationToken=?, ()) =>
-    new({includeCustomMetadata, documentId, authenticationToken})
+    new({
+      includeCustomMetadata: includeCustomMetadata,
+      documentId: documentId,
+      authenticationToken: authenticationToken,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetCurrentUser = {
   type t
   type request = {
@@ -1183,6 +1308,7 @@ module GetCurrentUser = {
   let make = (~authenticationToken, ()) => new({authenticationToken: authenticationToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeRootFolders = {
   type t
   type request = {
@@ -1203,9 +1329,10 @@ module DescribeRootFolders = {
   }
   @module("@aws-sdk/client-workdocs") @new external new: request => t = "DescribeRootFoldersCommand"
   let make = (~authenticationToken, ~marker=?, ~limit=?, ()) =>
-    new({marker, limit, authenticationToken})
+    new({marker: marker, limit: limit, authenticationToken: authenticationToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeDocumentVersions = {
   type t
   type request = {
@@ -1248,9 +1375,18 @@ module DescribeDocumentVersions = {
     ~marker=?,
     ~authenticationToken=?,
     (),
-  ) => new({fields, include_, limit, marker, documentId, authenticationToken})
+  ) =>
+    new({
+      fields: fields,
+      include_: include_,
+      limit: limit,
+      marker: marker,
+      documentId: documentId,
+      authenticationToken: authenticationToken,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateUser = {
   type t
   type request = {
@@ -1288,18 +1424,19 @@ module CreateUser = {
     (),
   ) =>
     new({
-      authenticationToken,
-      storageRule,
-      timeZoneId,
-      password,
-      surname,
-      givenName,
-      emailAddress,
-      username,
-      organizationId,
+      authenticationToken: authenticationToken,
+      storageRule: storageRule,
+      timeZoneId: timeZoneId,
+      password: password,
+      surname: surname,
+      givenName: givenName,
+      emailAddress: emailAddress,
+      username: username,
+      organizationId: organizationId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ActivateUser = {
   type t
   type request = {
@@ -1312,9 +1449,11 @@ module ActivateUser = {
   }
   type response = {@ocaml.doc("<p>The user information.</p>") @as("User") user: option<user>}
   @module("@aws-sdk/client-workdocs") @new external new: request => t = "ActivateUserCommand"
-  let make = (~userId, ~authenticationToken=?, ()) => new({authenticationToken, userId})
+  let make = (~userId, ~authenticationToken=?, ()) =>
+    new({authenticationToken: authenticationToken, userId: userId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetResources = {
   type t
   type request = {
@@ -1350,9 +1489,16 @@ module GetResources = {
   }
   @module("@aws-sdk/client-workdocs") @new external new: request => t = "GetResourcesCommand"
   let make = (~marker=?, ~limit=?, ~collectionType=?, ~userId=?, ~authenticationToken=?, ()) =>
-    new({marker, limit, collectionType, userId, authenticationToken})
+    new({
+      marker: marker,
+      limit: limit,
+      collectionType: collectionType,
+      userId: userId,
+      authenticationToken: authenticationToken,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeUsers = {
   type t
   type request = {
@@ -1407,19 +1553,20 @@ module DescribeUsers = {
     (),
   ) =>
     new({
-      fields,
-      limit,
-      marker,
-      sort,
-      order,
-      include_,
-      query,
-      userIds,
-      organizationId,
-      authenticationToken,
+      fields: fields,
+      limit: limit,
+      marker: marker,
+      sort: sort,
+      order: order,
+      include_: include_,
+      query: query,
+      userIds: userIds,
+      organizationId: organizationId,
+      authenticationToken: authenticationToken,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeResourcePermissions = {
   type t
   type request = {
@@ -1448,9 +1595,16 @@ module DescribeResourcePermissions = {
   @module("@aws-sdk/client-workdocs") @new
   external new: request => t = "DescribeResourcePermissionsCommand"
   let make = (~resourceId, ~marker=?, ~limit=?, ~principalId=?, ~authenticationToken=?, ()) =>
-    new({marker, limit, principalId, resourceId, authenticationToken})
+    new({
+      marker: marker,
+      limit: limit,
+      principalId: principalId,
+      resourceId: resourceId,
+      authenticationToken: authenticationToken,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeFolderContents = {
   type t
   type request = {
@@ -1497,9 +1651,20 @@ module DescribeFolderContents = {
     ~sort=?,
     ~authenticationToken=?,
     (),
-  ) => new({include_, type_, marker, limit, order, sort, folderId, authenticationToken})
+  ) =>
+    new({
+      include_: include_,
+      type_: type_,
+      marker: marker,
+      limit: limit,
+      order: order,
+      sort: sort,
+      folderId: folderId,
+      authenticationToken: authenticationToken,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateComment = {
   type t
   type request = {
@@ -1542,17 +1707,18 @@ module CreateComment = {
     (),
   ) =>
     new({
-      notifyCollaborators,
-      visibility,
-      text,
-      threadId,
-      parentId,
-      versionId,
-      documentId,
-      authenticationToken,
+      notifyCollaborators: notifyCollaborators,
+      visibility: visibility,
+      text: text,
+      threadId: threadId,
+      parentId: parentId,
+      versionId: versionId,
+      documentId: documentId,
+      authenticationToken: authenticationToken,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeComments = {
   type t
   type request = {
@@ -1581,9 +1747,16 @@ module DescribeComments = {
   }
   @module("@aws-sdk/client-workdocs") @new external new: request => t = "DescribeCommentsCommand"
   let make = (~versionId, ~documentId, ~marker=?, ~limit=?, ~authenticationToken=?, ()) =>
-    new({marker, limit, versionId, documentId, authenticationToken})
+    new({
+      marker: marker,
+      limit: limit,
+      versionId: versionId,
+      documentId: documentId,
+      authenticationToken: authenticationToken,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeActivities = {
   type t
   type request = {
@@ -1649,16 +1822,16 @@ module DescribeActivities = {
     (),
   ) =>
     new({
-      marker,
-      limit,
-      includeIndirectActivities,
-      userId,
-      resourceId,
-      activityTypes,
-      organizationId,
-      endTime,
-      startTime,
-      authenticationToken,
+      marker: marker,
+      limit: limit,
+      includeIndirectActivities: includeIndirectActivities,
+      userId: userId,
+      resourceId: resourceId,
+      activityTypes: activityTypes,
+      organizationId: organizationId,
+      endTime: endTime,
+      startTime: startTime,
+      authenticationToken: authenticationToken,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

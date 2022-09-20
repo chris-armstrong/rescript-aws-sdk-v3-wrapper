@@ -2078,9 +2078,18 @@ module UpdatePartnerStatus = {
     ~accountId,
     ~statusMessage=?,
     (),
-  ) => new({statusMessage, status, partnerName, databaseName, clusterIdentifier, accountId})
+  ) =>
+    new({
+      statusMessage: statusMessage,
+      status: status,
+      partnerName: partnerName,
+      databaseName: databaseName,
+      clusterIdentifier: clusterIdentifier,
+      accountId: accountId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ModifyClusterSnapshotSchedule = {
   type t
   type request = {
@@ -2101,9 +2110,14 @@ module ModifyClusterSnapshotSchedule = {
   @module("@aws-sdk/client-redshift") @new
   external new: request => t = "ModifyClusterSnapshotScheduleCommand"
   let make = (~clusterIdentifier, ~disassociateSchedule=?, ~scheduleIdentifier=?, ()) =>
-    new({disassociateSchedule, scheduleIdentifier, clusterIdentifier})
+    new({
+      disassociateSchedule: disassociateSchedule,
+      scheduleIdentifier: scheduleIdentifier,
+      clusterIdentifier: clusterIdentifier,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ModifyAuthenticationProfile = {
   type t
   type request = {
@@ -2126,9 +2140,13 @@ module ModifyAuthenticationProfile = {
   @module("@aws-sdk/client-redshift") @new
   external new: request => t = "ModifyAuthenticationProfileCommand"
   let make = (~authenticationProfileContent, ~authenticationProfileName, ()) =>
-    new({authenticationProfileContent, authenticationProfileName})
+    new({
+      authenticationProfileContent: authenticationProfileContent,
+      authenticationProfileName: authenticationProfileName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module EnableLogging = {
   type t
   @ocaml.doc("<p></p>")
@@ -2201,9 +2219,10 @@ module EnableLogging = {
   }
   @module("@aws-sdk/client-redshift") @new external new: request => t = "EnableLoggingCommand"
   let make = (~bucketName, ~clusterIdentifier, ~s3KeyPrefix=?, ()) =>
-    new({s3KeyPrefix, bucketName, clusterIdentifier})
+    new({s3KeyPrefix: s3KeyPrefix, bucketName: bucketName, clusterIdentifier: clusterIdentifier})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DisableLogging = {
   type t
   @ocaml.doc("<p></p>")
@@ -2236,6 +2255,7 @@ module DisableLogging = {
   let make = (~clusterIdentifier, ()) => new({clusterIdentifier: clusterIdentifier})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeStorage = {
   type t
   type request = {.}
@@ -2251,6 +2271,7 @@ module DescribeStorage = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeLoggingStatus = {
   type t
   @ocaml.doc("<p></p>")
@@ -2284,6 +2305,7 @@ module DescribeLoggingStatus = {
   let make = (~clusterIdentifier, ()) => new({clusterIdentifier: clusterIdentifier})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteUsageLimit = {
   type t
   type request = {
@@ -2295,6 +2317,7 @@ module DeleteUsageLimit = {
   let make = (~usageLimitId, ()) => new({usageLimitId: usageLimitId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteSnapshotSchedule = {
   type t
   type request = {
@@ -2308,6 +2331,7 @@ module DeleteSnapshotSchedule = {
   let make = (~scheduleIdentifier, ()) => new({scheduleIdentifier: scheduleIdentifier})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteSnapshotCopyGrant = {
   type t
   @ocaml.doc("<p>The result of the <code>DeleteSnapshotCopyGrant</code> action.</p>")
@@ -2321,6 +2345,7 @@ module DeleteSnapshotCopyGrant = {
   let make = (~snapshotCopyGrantName, ()) => new({snapshotCopyGrantName: snapshotCopyGrantName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteScheduledAction = {
   type t
   type request = {
@@ -2333,6 +2358,7 @@ module DeleteScheduledAction = {
   let make = (~scheduledActionName, ()) => new({scheduledActionName: scheduledActionName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeletePartner = {
   type t
   type request = {
@@ -2356,9 +2382,15 @@ module DeletePartner = {
   }
   @module("@aws-sdk/client-redshift") @new external new: request => t = "DeletePartnerCommand"
   let make = (~partnerName, ~databaseName, ~clusterIdentifier, ~accountId, ()) =>
-    new({partnerName, databaseName, clusterIdentifier, accountId})
+    new({
+      partnerName: partnerName,
+      databaseName: databaseName,
+      clusterIdentifier: clusterIdentifier,
+      accountId: accountId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteHsmConfiguration = {
   type t
   @ocaml.doc("<p></p>")
@@ -2374,6 +2406,7 @@ module DeleteHsmConfiguration = {
     new({hsmConfigurationIdentifier: hsmConfigurationIdentifier})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteHsmClientCertificate = {
   type t
   @ocaml.doc("<p></p>")
@@ -2389,6 +2422,7 @@ module DeleteHsmClientCertificate = {
     new({hsmClientCertificateIdentifier: hsmClientCertificateIdentifier})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteEventSubscription = {
   type t
   @ocaml.doc("<p></p>")
@@ -2405,6 +2439,7 @@ module DeleteEventSubscription = {
   let make = (~subscriptionName, ()) => new({subscriptionName: subscriptionName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteClusterSubnetGroup = {
   type t
   @ocaml.doc("<p></p>")
@@ -2419,6 +2454,7 @@ module DeleteClusterSubnetGroup = {
   let make = (~clusterSubnetGroupName, ()) => new({clusterSubnetGroupName: clusterSubnetGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteClusterSecurityGroup = {
   type t
   @ocaml.doc("<p></p>")
@@ -2434,6 +2470,7 @@ module DeleteClusterSecurityGroup = {
     new({clusterSecurityGroupName: clusterSecurityGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteClusterParameterGroup = {
   type t
   @ocaml.doc("<p></p>")
@@ -2457,6 +2494,7 @@ module DeleteClusterParameterGroup = {
   let make = (~parameterGroupName, ()) => new({parameterGroupName: parameterGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteAuthenticationProfile = {
   type t
   type request = {
@@ -2475,6 +2513,7 @@ module DeleteAuthenticationProfile = {
     new({authenticationProfileName: authenticationProfileName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateAuthenticationProfile = {
   type t
   type request = {
@@ -2497,9 +2536,13 @@ module CreateAuthenticationProfile = {
   @module("@aws-sdk/client-redshift") @new
   external new: request => t = "CreateAuthenticationProfileCommand"
   let make = (~authenticationProfileContent, ~authenticationProfileName, ()) =>
-    new({authenticationProfileContent, authenticationProfileName})
+    new({
+      authenticationProfileContent: authenticationProfileContent,
+      authenticationProfileName: authenticationProfileName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module AddPartner = {
   type t
   type request = {
@@ -2523,9 +2566,15 @@ module AddPartner = {
   }
   @module("@aws-sdk/client-redshift") @new external new: request => t = "AddPartnerCommand"
   let make = (~partnerName, ~databaseName, ~clusterIdentifier, ~accountId, ()) =>
-    new({partnerName, databaseName, clusterIdentifier, accountId})
+    new({
+      partnerName: partnerName,
+      databaseName: databaseName,
+      clusterIdentifier: clusterIdentifier,
+      accountId: accountId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module RevokeEndpointAccess = {
   type t
   type request = {
@@ -2548,9 +2597,10 @@ module RevokeEndpointAccess = {
   @module("@aws-sdk/client-redshift") @new
   external new: request => t = "RevokeEndpointAccessCommand"
   let make = (~force=?, ~vpcIds=?, ~account=?, ~clusterIdentifier=?, ()) =>
-    new({force, vpcIds, account, clusterIdentifier})
+    new({force: force, vpcIds: vpcIds, account: account, clusterIdentifier: clusterIdentifier})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module RestoreTableFromClusterSnapshot = {
   type t
   @ocaml.doc("<p></p>")
@@ -2602,18 +2652,19 @@ module RestoreTableFromClusterSnapshot = {
     (),
   ) =>
     new({
-      enableCaseSensitiveIdentifier,
-      newTableName,
-      targetSchemaName,
-      targetDatabaseName,
-      sourceTableName,
-      sourceSchemaName,
-      sourceDatabaseName,
-      snapshotIdentifier,
-      clusterIdentifier,
+      enableCaseSensitiveIdentifier: enableCaseSensitiveIdentifier,
+      newTableName: newTableName,
+      targetSchemaName: targetSchemaName,
+      targetDatabaseName: targetDatabaseName,
+      sourceTableName: sourceTableName,
+      sourceSchemaName: sourceSchemaName,
+      sourceDatabaseName: sourceDatabaseName,
+      snapshotIdentifier: snapshotIdentifier,
+      clusterIdentifier: clusterIdentifier,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ModifyAquaConfiguration = {
   type t
   type request = {
@@ -2641,9 +2692,10 @@ module ModifyAquaConfiguration = {
   @module("@aws-sdk/client-redshift") @new
   external new: request => t = "ModifyAquaConfigurationCommand"
   let make = (~clusterIdentifier, ~aquaConfigurationStatus=?, ()) =>
-    new({aquaConfigurationStatus, clusterIdentifier})
+    new({aquaConfigurationStatus: aquaConfigurationStatus, clusterIdentifier: clusterIdentifier})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetClusterCredentials = {
   type t
   @ocaml.doc("<p>The request parameters to get cluster credentials.</p>")
@@ -2775,9 +2827,18 @@ module GetClusterCredentials = {
     ~durationSeconds=?,
     ~dbName=?,
     (),
-  ) => new({dbGroups, autoCreate, durationSeconds, clusterIdentifier, dbName, dbUser})
+  ) =>
+    new({
+      dbGroups: dbGroups,
+      autoCreate: autoCreate,
+      durationSeconds: durationSeconds,
+      clusterIdentifier: clusterIdentifier,
+      dbName: dbName,
+      dbUser: dbUser,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeResize = {
   type t
   @ocaml.doc("<p></p>")
@@ -2869,6 +2930,7 @@ module DescribeResize = {
   let make = (~clusterIdentifier, ()) => new({clusterIdentifier: clusterIdentifier})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteTags = {
   type t
   @ocaml.doc("<p>Contains the output from the <code>DeleteTags</code> action. </p>")
@@ -2881,9 +2943,10 @@ module DeleteTags = {
   }
   type response = {.}
   @module("@aws-sdk/client-redshift") @new external new: request => t = "DeleteTagsCommand"
-  let make = (~tagKeys, ~resourceName, ()) => new({tagKeys, resourceName})
+  let make = (~tagKeys, ~resourceName, ()) => new({tagKeys: tagKeys, resourceName: resourceName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module CancelResize = {
   type t
   type request = {
@@ -2972,6 +3035,7 @@ module CancelResize = {
   let make = (~clusterIdentifier, ()) => new({clusterIdentifier: clusterIdentifier})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module AuthorizeEndpointAccess = {
   type t
   type request = {
@@ -2988,9 +3052,10 @@ module AuthorizeEndpointAccess = {
   @module("@aws-sdk/client-redshift") @new
   external new: request => t = "AuthorizeEndpointAccessCommand"
   let make = (~account, ~vpcIds=?, ~clusterIdentifier=?, ()) =>
-    new({vpcIds, account, clusterIdentifier})
+    new({vpcIds: vpcIds, account: account, clusterIdentifier: clusterIdentifier})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ResetClusterParameterGroup = {
   type t
   @ocaml.doc("<p></p>")
@@ -3024,9 +3089,14 @@ module ResetClusterParameterGroup = {
   @module("@aws-sdk/client-redshift") @new
   external new: request => t = "ResetClusterParameterGroupCommand"
   let make = (~parameterGroupName, ~parameters=?, ~resetAllParameters=?, ()) =>
-    new({parameters, resetAllParameters, parameterGroupName})
+    new({
+      parameters: parameters,
+      resetAllParameters: resetAllParameters,
+      parameterGroupName: parameterGroupName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module RejectDataShare = {
   type t
   type request = {
@@ -3039,6 +3109,7 @@ module RejectDataShare = {
   let make = (~dataShareArn, ()) => new({dataShareArn: dataShareArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ModifyUsageLimit = {
   type t
   type request = {
@@ -3056,9 +3127,10 @@ module ModifyUsageLimit = {
   type response = usageLimit
   @module("@aws-sdk/client-redshift") @new external new: request => t = "ModifyUsageLimitCommand"
   let make = (~usageLimitId, ~breachAction=?, ~amount=?, ()) =>
-    new({breachAction, amount, usageLimitId})
+    new({breachAction: breachAction, amount: amount, usageLimitId: usageLimitId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ModifySnapshotSchedule = {
   type t
   type request = {
@@ -3074,9 +3146,10 @@ module ModifySnapshotSchedule = {
   @module("@aws-sdk/client-redshift") @new
   external new: request => t = "ModifySnapshotScheduleCommand"
   let make = (~scheduleDefinitions, ~scheduleIdentifier, ()) =>
-    new({scheduleDefinitions, scheduleIdentifier})
+    new({scheduleDefinitions: scheduleDefinitions, scheduleIdentifier: scheduleIdentifier})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ModifyScheduledAction = {
   type t
   type request = {
@@ -3126,17 +3199,18 @@ module ModifyScheduledAction = {
     (),
   ) =>
     new({
-      enable,
-      endTime,
-      startTime,
-      scheduledActionDescription,
-      iamRole,
-      schedule,
-      targetAction,
-      scheduledActionName,
+      enable: enable,
+      endTime: endTime,
+      startTime: startTime,
+      scheduledActionDescription: scheduledActionDescription,
+      iamRole: iamRole,
+      schedule: schedule,
+      targetAction: targetAction,
+      scheduledActionName: scheduledActionName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ModifyClusterParameterGroup = {
   type t
   @ocaml.doc("<p>Describes a modify cluster parameter group operation. </p>")
@@ -3164,9 +3238,11 @@ module ModifyClusterParameterGroup = {
   }
   @module("@aws-sdk/client-redshift") @new
   external new: request => t = "ModifyClusterParameterGroupCommand"
-  let make = (~parameters, ~parameterGroupName, ()) => new({parameters, parameterGroupName})
+  let make = (~parameters, ~parameterGroupName, ()) =>
+    new({parameters: parameters, parameterGroupName: parameterGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DisassociateDataShareConsumer = {
   type t
   type request = {
@@ -3191,9 +3267,15 @@ module DisassociateDataShareConsumer = {
   @module("@aws-sdk/client-redshift") @new
   external new: request => t = "DisassociateDataShareConsumerCommand"
   let make = (~dataShareArn, ~consumerRegion=?, ~consumerArn=?, ~disassociateEntireAccount=?, ()) =>
-    new({consumerRegion, consumerArn, disassociateEntireAccount, dataShareArn})
+    new({
+      consumerRegion: consumerRegion,
+      consumerArn: consumerArn,
+      disassociateEntireAccount: disassociateEntireAccount,
+      dataShareArn: dataShareArn,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeTableRestoreStatus = {
   type t
   @ocaml.doc("<p></p>")
@@ -3233,9 +3315,15 @@ module DescribeTableRestoreStatus = {
   @module("@aws-sdk/client-redshift") @new
   external new: request => t = "DescribeTableRestoreStatusCommand"
   let make = (~marker=?, ~maxRecords=?, ~tableRestoreRequestId=?, ~clusterIdentifier=?, ()) =>
-    new({marker, maxRecords, tableRestoreRequestId, clusterIdentifier})
+    new({
+      marker: marker,
+      maxRecords: maxRecords,
+      tableRestoreRequestId: tableRestoreRequestId,
+      clusterIdentifier: clusterIdentifier,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeReservedNodeExchangeStatus = {
   type t
   type request = {
@@ -3275,9 +3363,15 @@ module DescribeReservedNodeExchangeStatus = {
   @module("@aws-sdk/client-redshift") @new
   external new: request => t = "DescribeReservedNodeExchangeStatusCommand"
   let make = (~marker=?, ~maxRecords=?, ~reservedNodeExchangeRequestId=?, ~reservedNodeId=?, ()) =>
-    new({marker, maxRecords, reservedNodeExchangeRequestId, reservedNodeId})
+    new({
+      marker: marker,
+      maxRecords: maxRecords,
+      reservedNodeExchangeRequestId: reservedNodeExchangeRequestId,
+      reservedNodeId: reservedNodeId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribePartners = {
   type t
   type request = {
@@ -3305,9 +3399,15 @@ module DescribePartners = {
   }
   @module("@aws-sdk/client-redshift") @new external new: request => t = "DescribePartnersCommand"
   let make = (~clusterIdentifier, ~accountId, ~partnerName=?, ~databaseName=?, ()) =>
-    new({partnerName, databaseName, clusterIdentifier, accountId})
+    new({
+      partnerName: partnerName,
+      databaseName: databaseName,
+      clusterIdentifier: clusterIdentifier,
+      accountId: accountId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeClusterVersions = {
   type t
   @ocaml.doc("<p></p>")
@@ -3367,9 +3467,15 @@ module DescribeClusterVersions = {
   @module("@aws-sdk/client-redshift") @new
   external new: request => t = "DescribeClusterVersionsCommand"
   let make = (~marker=?, ~maxRecords=?, ~clusterParameterGroupFamily=?, ~clusterVersion=?, ()) =>
-    new({marker, maxRecords, clusterParameterGroupFamily, clusterVersion})
+    new({
+      marker: marker,
+      maxRecords: maxRecords,
+      clusterParameterGroupFamily: clusterParameterGroupFamily,
+      clusterVersion: clusterVersion,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeClusterParameters = {
   type t
   @ocaml.doc("<p></p>")
@@ -3421,9 +3527,15 @@ module DescribeClusterParameters = {
   @module("@aws-sdk/client-redshift") @new
   external new: request => t = "DescribeClusterParametersCommand"
   let make = (~parameterGroupName, ~marker=?, ~maxRecords=?, ~source=?, ()) =>
-    new({marker, maxRecords, source, parameterGroupName})
+    new({
+      marker: marker,
+      maxRecords: maxRecords,
+      source: source,
+      parameterGroupName: parameterGroupName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeAuthenticationProfiles = {
   type t
   type request = {
@@ -3443,6 +3555,7 @@ module DescribeAuthenticationProfiles = {
     new({authenticationProfileName: authenticationProfileName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeauthorizeDataShare = {
   type t
   type request = {
@@ -3459,9 +3572,11 @@ module DeauthorizeDataShare = {
   type response = dataShare
   @module("@aws-sdk/client-redshift") @new
   external new: request => t = "DeauthorizeDataShareCommand"
-  let make = (~consumerIdentifier, ~dataShareArn, ()) => new({consumerIdentifier, dataShareArn})
+  let make = (~consumerIdentifier, ~dataShareArn, ()) =>
+    new({consumerIdentifier: consumerIdentifier, dataShareArn: dataShareArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateUsageLimit = {
   type t
   type request = {
@@ -3503,9 +3618,19 @@ module CreateUsageLimit = {
     ~breachAction=?,
     ~period=?,
     (),
-  ) => new({tags, breachAction, period, amount, limitType, featureType, clusterIdentifier})
+  ) =>
+    new({
+      tags: tags,
+      breachAction: breachAction,
+      period: period,
+      amount: amount,
+      limitType: limitType,
+      featureType: featureType,
+      clusterIdentifier: clusterIdentifier,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateTags = {
   type t
   @ocaml.doc("<p>Contains the output from the <code>CreateTags</code> action. </p>")
@@ -3525,9 +3650,10 @@ module CreateTags = {
   }
   type response = {.}
   @module("@aws-sdk/client-redshift") @new external new: request => t = "CreateTagsCommand"
-  let make = (~tags, ~resourceName, ()) => new({tags, resourceName})
+  let make = (~tags, ~resourceName, ()) => new({tags: tags, resourceName: resourceName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module CreateSnapshotSchedule = {
   type t
   type request = {
@@ -3559,15 +3685,16 @@ module CreateSnapshotSchedule = {
     (),
   ) =>
     new({
-      nextInvocations,
-      dryRun,
-      tags,
-      scheduleDescription,
-      scheduleIdentifier,
-      scheduleDefinitions,
+      nextInvocations: nextInvocations,
+      dryRun: dryRun,
+      tags: tags,
+      scheduleDescription: scheduleDescription,
+      scheduleIdentifier: scheduleIdentifier,
+      scheduleDefinitions: scheduleDefinitions,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateScheduledAction = {
   type t
   type request = {
@@ -3620,17 +3747,18 @@ module CreateScheduledAction = {
     (),
   ) =>
     new({
-      enable,
-      endTime,
-      startTime,
-      scheduledActionDescription,
-      iamRole,
-      schedule,
-      targetAction,
-      scheduledActionName,
+      enable: enable,
+      endTime: endTime,
+      startTime: startTime,
+      scheduledActionDescription: scheduledActionDescription,
+      iamRole: iamRole,
+      schedule: schedule,
+      targetAction: targetAction,
+      scheduledActionName: scheduledActionName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module BatchModifyClusterSnapshots = {
   type t
   type request = {
@@ -3659,9 +3787,14 @@ module BatchModifyClusterSnapshots = {
   @module("@aws-sdk/client-redshift") @new
   external new: request => t = "BatchModifyClusterSnapshotsCommand"
   let make = (~snapshotIdentifierList, ~force=?, ~manualSnapshotRetentionPeriod=?, ()) =>
-    new({force, manualSnapshotRetentionPeriod, snapshotIdentifierList})
+    new({
+      force: force,
+      manualSnapshotRetentionPeriod: manualSnapshotRetentionPeriod,
+      snapshotIdentifierList: snapshotIdentifierList,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module BatchDeleteClusterSnapshots = {
   type t
   type request = {
@@ -3680,6 +3813,7 @@ module BatchDeleteClusterSnapshots = {
   let make = (~identifiers, ()) => new({identifiers: identifiers})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module AuthorizeDataShare = {
   type t
   type request = {
@@ -3695,9 +3829,11 @@ module AuthorizeDataShare = {
   }
   type response = dataShare
   @module("@aws-sdk/client-redshift") @new external new: request => t = "AuthorizeDataShareCommand"
-  let make = (~consumerIdentifier, ~dataShareArn, ()) => new({consumerIdentifier, dataShareArn})
+  let make = (~consumerIdentifier, ~dataShareArn, ()) =>
+    new({consumerIdentifier: consumerIdentifier, dataShareArn: dataShareArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module AssociateDataShareConsumer = {
   type t
   type request = {
@@ -3725,9 +3861,15 @@ module AssociateDataShareConsumer = {
   @module("@aws-sdk/client-redshift") @new
   external new: request => t = "AssociateDataShareConsumerCommand"
   let make = (~dataShareArn, ~consumerRegion=?, ~consumerArn=?, ~associateEntireAccount=?, ()) =>
-    new({consumerRegion, consumerArn, associateEntireAccount, dataShareArn})
+    new({
+      consumerRegion: consumerRegion,
+      consumerArn: consumerArn,
+      associateEntireAccount: associateEntireAccount,
+      dataShareArn: dataShareArn,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module RevokeSnapshotAccess = {
   type t
   @ocaml.doc("<p></p>")
@@ -3749,9 +3891,14 @@ module RevokeSnapshotAccess = {
   @module("@aws-sdk/client-redshift") @new
   external new: request => t = "RevokeSnapshotAccessCommand"
   let make = (~accountWithRestoreAccess, ~snapshotIdentifier, ~snapshotClusterIdentifier=?, ()) =>
-    new({accountWithRestoreAccess, snapshotClusterIdentifier, snapshotIdentifier})
+    new({
+      accountWithRestoreAccess: accountWithRestoreAccess,
+      snapshotClusterIdentifier: snapshotClusterIdentifier,
+      snapshotIdentifier: snapshotIdentifier,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module PurchaseReservedNodeOffering = {
   type t
   @ocaml.doc("<p></p>")
@@ -3768,9 +3915,11 @@ module PurchaseReservedNodeOffering = {
   type response = {@as("ReservedNode") reservedNode: option<reservedNode>}
   @module("@aws-sdk/client-redshift") @new
   external new: request => t = "PurchaseReservedNodeOfferingCommand"
-  let make = (~reservedNodeOfferingId, ~nodeCount=?, ()) => new({nodeCount, reservedNodeOfferingId})
+  let make = (~reservedNodeOfferingId, ~nodeCount=?, ()) =>
+    new({nodeCount: nodeCount, reservedNodeOfferingId: reservedNodeOfferingId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ModifyEventSubscription = {
   type t
   @ocaml.doc("<p></p>")
@@ -3826,9 +3975,18 @@ module ModifyEventSubscription = {
     ~snsTopicArn=?,
     (),
   ) =>
-    new({enabled, severity, eventCategories, sourceIds, sourceType, snsTopicArn, subscriptionName})
+    new({
+      enabled: enabled,
+      severity: severity,
+      eventCategories: eventCategories,
+      sourceIds: sourceIds,
+      sourceType: sourceType,
+      snsTopicArn: snsTopicArn,
+      subscriptionName: subscriptionName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ModifyEndpointAccess = {
   type t
   type request = {
@@ -3842,9 +4000,11 @@ module ModifyEndpointAccess = {
   type response = endpointAccess
   @module("@aws-sdk/client-redshift") @new
   external new: request => t = "ModifyEndpointAccessCommand"
-  let make = (~endpointName, ~vpcSecurityGroupIds=?, ()) => new({vpcSecurityGroupIds, endpointName})
+  let make = (~endpointName, ~vpcSecurityGroupIds=?, ()) =>
+    new({vpcSecurityGroupIds: vpcSecurityGroupIds, endpointName: endpointName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ModifyClusterSnapshot = {
   type t
   type request = {
@@ -3867,9 +4027,14 @@ module ModifyClusterSnapshot = {
   @module("@aws-sdk/client-redshift") @new
   external new: request => t = "ModifyClusterSnapshotCommand"
   let make = (~snapshotIdentifier, ~force=?, ~manualSnapshotRetentionPeriod=?, ()) =>
-    new({force, manualSnapshotRetentionPeriod, snapshotIdentifier})
+    new({
+      force: force,
+      manualSnapshotRetentionPeriod: manualSnapshotRetentionPeriod,
+      snapshotIdentifier: snapshotIdentifier,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeTags = {
   type t
   @ocaml.doc("<p></p>")
@@ -3966,9 +4131,18 @@ module DescribeTags = {
     ~resourceType=?,
     ~resourceName=?,
     (),
-  ) => new({tagValues, tagKeys, marker, maxRecords, resourceType, resourceName})
+  ) =>
+    new({
+      tagValues: tagValues,
+      tagKeys: tagKeys,
+      marker: marker,
+      maxRecords: maxRecords,
+      resourceType: resourceType,
+      resourceName: resourceName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeNodeConfigurationOptions = {
   type t
   type request = {
@@ -4037,16 +4211,17 @@ module DescribeNodeConfigurationOptions = {
     (),
   ) =>
     new({
-      maxRecords,
-      marker,
-      filters,
-      ownerAccount,
-      snapshotIdentifier,
-      clusterIdentifier,
-      actionType,
+      maxRecords: maxRecords,
+      marker: marker,
+      filters: filters,
+      ownerAccount: ownerAccount,
+      snapshotIdentifier: snapshotIdentifier,
+      clusterIdentifier: clusterIdentifier,
+      actionType: actionType,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeEvents = {
   type t
   @ocaml.doc("<p></p>")
@@ -4165,9 +4340,19 @@ module DescribeEvents = {
     ~sourceType=?,
     ~sourceIdentifier=?,
     (),
-  ) => new({marker, maxRecords, duration, endTime, startTime, sourceType, sourceIdentifier})
+  ) =>
+    new({
+      marker: marker,
+      maxRecords: maxRecords,
+      duration: duration,
+      endTime: endTime,
+      startTime: startTime,
+      sourceType: sourceType,
+      sourceIdentifier: sourceIdentifier,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeEndpointAuthorization = {
   type t
   type request = {
@@ -4207,9 +4392,16 @@ module DescribeEndpointAuthorization = {
   @module("@aws-sdk/client-redshift") @new
   external new: request => t = "DescribeEndpointAuthorizationCommand"
   let make = (~marker=?, ~maxRecords=?, ~grantee=?, ~account=?, ~clusterIdentifier=?, ()) =>
-    new({marker, maxRecords, grantee, account, clusterIdentifier})
+    new({
+      marker: marker,
+      maxRecords: maxRecords,
+      grantee: grantee,
+      account: account,
+      clusterIdentifier: clusterIdentifier,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeDefaultClusterParameters = {
   type t
   @ocaml.doc("<p></p>")
@@ -4240,9 +4432,10 @@ module DescribeDefaultClusterParameters = {
   @module("@aws-sdk/client-redshift") @new
   external new: request => t = "DescribeDefaultClusterParametersCommand"
   let make = (~parameterGroupFamily, ~marker=?, ~maxRecords=?, ()) =>
-    new({marker, maxRecords, parameterGroupFamily})
+    new({marker: marker, maxRecords: maxRecords, parameterGroupFamily: parameterGroupFamily})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteEndpointAccess = {
   type t
   type request = {
@@ -4255,6 +4448,7 @@ module DeleteEndpointAccess = {
   let make = (~endpointName, ()) => new({endpointName: endpointName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteClusterSnapshot = {
   type t
   type request = deleteClusterSnapshotMessage
@@ -4264,6 +4458,7 @@ module DeleteClusterSnapshot = {
 
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateSnapshotCopyGrant = {
   type t
   @ocaml.doc("<p>The result of the <code>CreateSnapshotCopyGrant</code> action.</p>")
@@ -4300,9 +4495,10 @@ module CreateSnapshotCopyGrant = {
   @module("@aws-sdk/client-redshift") @new
   external new: request => t = "CreateSnapshotCopyGrantCommand"
   let make = (~snapshotCopyGrantName, ~tags=?, ~kmsKeyId=?, ()) =>
-    new({tags, kmsKeyId, snapshotCopyGrantName})
+    new({tags: tags, kmsKeyId: kmsKeyId, snapshotCopyGrantName: snapshotCopyGrantName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateHsmConfiguration = {
   type t
   @ocaml.doc("<p></p>")
@@ -4343,16 +4539,17 @@ module CreateHsmConfiguration = {
     (),
   ) =>
     new({
-      tags,
-      hsmServerPublicCertificate,
-      hsmPartitionPassword,
-      hsmPartitionName,
-      hsmIpAddress,
-      description,
-      hsmConfigurationIdentifier,
+      tags: tags,
+      hsmServerPublicCertificate: hsmServerPublicCertificate,
+      hsmPartitionPassword: hsmPartitionPassword,
+      hsmPartitionName: hsmPartitionName,
+      hsmIpAddress: hsmIpAddress,
+      description: description,
+      hsmConfigurationIdentifier: hsmConfigurationIdentifier,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateHsmClientCertificate = {
   type t
   @ocaml.doc("<p></p>")
@@ -4367,9 +4564,10 @@ module CreateHsmClientCertificate = {
   @module("@aws-sdk/client-redshift") @new
   external new: request => t = "CreateHsmClientCertificateCommand"
   let make = (~hsmClientCertificateIdentifier, ~tags=?, ()) =>
-    new({tags, hsmClientCertificateIdentifier})
+    new({tags: tags, hsmClientCertificateIdentifier: hsmClientCertificateIdentifier})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateEventSubscription = {
   type t
   @ocaml.doc("<p></p>")
@@ -4444,17 +4642,18 @@ module CreateEventSubscription = {
     (),
   ) =>
     new({
-      tags,
-      enabled,
-      severity,
-      eventCategories,
-      sourceIds,
-      sourceType,
-      snsTopicArn,
-      subscriptionName,
+      tags: tags,
+      enabled: enabled,
+      severity: severity,
+      eventCategories: eventCategories,
+      sourceIds: sourceIds,
+      sourceType: sourceType,
+      snsTopicArn: snsTopicArn,
+      subscriptionName: subscriptionName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateEndpointAccess = {
   type t
   type request = {
@@ -4493,9 +4692,17 @@ module CreateEndpointAccess = {
     ~resourceOwner=?,
     ~clusterIdentifier=?,
     (),
-  ) => new({vpcSecurityGroupIds, subnetGroupName, endpointName, resourceOwner, clusterIdentifier})
+  ) =>
+    new({
+      vpcSecurityGroupIds: vpcSecurityGroupIds,
+      subnetGroupName: subnetGroupName,
+      endpointName: endpointName,
+      resourceOwner: resourceOwner,
+      clusterIdentifier: clusterIdentifier,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateClusterSnapshot = {
   type t
   @ocaml.doc("<p></p>")
@@ -4543,9 +4750,16 @@ module CreateClusterSnapshot = {
     ~tags=?,
     ~manualSnapshotRetentionPeriod=?,
     (),
-  ) => new({tags, manualSnapshotRetentionPeriod, clusterIdentifier, snapshotIdentifier})
+  ) =>
+    new({
+      tags: tags,
+      manualSnapshotRetentionPeriod: manualSnapshotRetentionPeriod,
+      clusterIdentifier: clusterIdentifier,
+      snapshotIdentifier: snapshotIdentifier,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateClusterParameterGroup = {
   type t
   @ocaml.doc("<p></p>")
@@ -4590,9 +4804,15 @@ module CreateClusterParameterGroup = {
   @module("@aws-sdk/client-redshift") @new
   external new: request => t = "CreateClusterParameterGroupCommand"
   let make = (~description, ~parameterGroupFamily, ~parameterGroupName, ~tags=?, ()) =>
-    new({tags, description, parameterGroupFamily, parameterGroupName})
+    new({
+      tags: tags,
+      description: description,
+      parameterGroupFamily: parameterGroupFamily,
+      parameterGroupName: parameterGroupName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CopyClusterSnapshot = {
   type t
   @ocaml.doc("<p></p>")
@@ -4656,13 +4876,14 @@ module CopyClusterSnapshot = {
     (),
   ) =>
     new({
-      manualSnapshotRetentionPeriod,
-      targetSnapshotIdentifier,
-      sourceSnapshotClusterIdentifier,
-      sourceSnapshotIdentifier,
+      manualSnapshotRetentionPeriod: manualSnapshotRetentionPeriod,
+      targetSnapshotIdentifier: targetSnapshotIdentifier,
+      sourceSnapshotClusterIdentifier: sourceSnapshotClusterIdentifier,
+      sourceSnapshotIdentifier: sourceSnapshotIdentifier,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module AuthorizeSnapshotAccess = {
   type t
   @ocaml.doc("<p></p>")
@@ -4685,9 +4906,14 @@ module AuthorizeSnapshotAccess = {
   @module("@aws-sdk/client-redshift") @new
   external new: request => t = "AuthorizeSnapshotAccessCommand"
   let make = (~accountWithRestoreAccess, ~snapshotIdentifier, ~snapshotClusterIdentifier=?, ()) =>
-    new({accountWithRestoreAccess, snapshotClusterIdentifier, snapshotIdentifier})
+    new({
+      accountWithRestoreAccess: accountWithRestoreAccess,
+      snapshotClusterIdentifier: snapshotClusterIdentifier,
+      snapshotIdentifier: snapshotIdentifier,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module AcceptReservedNodeExchange = {
   type t
   type request = {
@@ -4707,9 +4933,13 @@ module AcceptReservedNodeExchange = {
   @module("@aws-sdk/client-redshift") @new
   external new: request => t = "AcceptReservedNodeExchangeCommand"
   let make = (~targetReservedNodeOfferingId, ~reservedNodeId, ()) =>
-    new({targetReservedNodeOfferingId, reservedNodeId})
+    new({
+      targetReservedNodeOfferingId: targetReservedNodeOfferingId,
+      reservedNodeId: reservedNodeId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetReservedNodeExchangeOfferings = {
   type t
   @ocaml.doc("<p></p>")
@@ -4743,9 +4973,10 @@ module GetReservedNodeExchangeOfferings = {
   @module("@aws-sdk/client-redshift") @new
   external new: request => t = "GetReservedNodeExchangeOfferingsCommand"
   let make = (~reservedNodeId, ~marker=?, ~maxRecords=?, ()) =>
-    new({marker, maxRecords, reservedNodeId})
+    new({marker: marker, maxRecords: maxRecords, reservedNodeId: reservedNodeId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeUsageLimits = {
   type t
   type request = {
@@ -4814,9 +5045,19 @@ module DescribeUsageLimits = {
     ~clusterIdentifier=?,
     ~usageLimitId=?,
     (),
-  ) => new({tagValues, tagKeys, marker, maxRecords, featureType, clusterIdentifier, usageLimitId})
+  ) =>
+    new({
+      tagValues: tagValues,
+      tagKeys: tagKeys,
+      marker: marker,
+      maxRecords: maxRecords,
+      featureType: featureType,
+      clusterIdentifier: clusterIdentifier,
+      usageLimitId: usageLimitId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeSnapshotSchedules = {
   type t
   type request = {
@@ -4867,9 +5108,18 @@ module DescribeSnapshotSchedules = {
     ~scheduleIdentifier=?,
     ~clusterIdentifier=?,
     (),
-  ) => new({maxRecords, marker, tagValues, tagKeys, scheduleIdentifier, clusterIdentifier})
+  ) =>
+    new({
+      maxRecords: maxRecords,
+      marker: marker,
+      tagValues: tagValues,
+      tagKeys: tagKeys,
+      scheduleIdentifier: scheduleIdentifier,
+      clusterIdentifier: clusterIdentifier,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeSnapshotCopyGrants = {
   type t
   @ocaml.doc("<p>The result of the <code>DescribeSnapshotCopyGrants</code> action.</p>")
@@ -4927,9 +5177,16 @@ module DescribeSnapshotCopyGrants = {
   @module("@aws-sdk/client-redshift") @new
   external new: request => t = "DescribeSnapshotCopyGrantsCommand"
   let make = (~tagValues=?, ~tagKeys=?, ~marker=?, ~maxRecords=?, ~snapshotCopyGrantName=?, ()) =>
-    new({tagValues, tagKeys, marker, maxRecords, snapshotCopyGrantName})
+    new({
+      tagValues: tagValues,
+      tagKeys: tagKeys,
+      marker: marker,
+      maxRecords: maxRecords,
+      snapshotCopyGrantName: snapshotCopyGrantName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeScheduledActions = {
   type t
   type request = {
@@ -4995,17 +5252,18 @@ module DescribeScheduledActions = {
     (),
   ) =>
     new({
-      maxRecords,
-      marker,
-      filters,
-      active,
-      endTime,
-      startTime,
-      targetActionType,
-      scheduledActionName,
+      maxRecords: maxRecords,
+      marker: marker,
+      filters: filters,
+      active: active,
+      endTime: endTime,
+      startTime: startTime,
+      targetActionType: targetActionType,
+      scheduledActionName: scheduledActionName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeReservedNodes = {
   type t
   @ocaml.doc("<p></p>")
@@ -5045,9 +5303,10 @@ module DescribeReservedNodes = {
   @module("@aws-sdk/client-redshift") @new
   external new: request => t = "DescribeReservedNodesCommand"
   let make = (~marker=?, ~maxRecords=?, ~reservedNodeId=?, ()) =>
-    new({marker, maxRecords, reservedNodeId})
+    new({marker: marker, maxRecords: maxRecords, reservedNodeId: reservedNodeId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeReservedNodeOfferings = {
   type t
   @ocaml.doc("<p></p>")
@@ -5088,9 +5347,10 @@ module DescribeReservedNodeOfferings = {
   @module("@aws-sdk/client-redshift") @new
   external new: request => t = "DescribeReservedNodeOfferingsCommand"
   let make = (~marker=?, ~maxRecords=?, ~reservedNodeOfferingId=?, ()) =>
-    new({marker, maxRecords, reservedNodeOfferingId})
+    new({marker: marker, maxRecords: maxRecords, reservedNodeOfferingId: reservedNodeOfferingId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeHsmConfigurations = {
   type t
   @ocaml.doc("<p></p>")
@@ -5155,9 +5415,17 @@ module DescribeHsmConfigurations = {
     ~maxRecords=?,
     ~hsmConfigurationIdentifier=?,
     (),
-  ) => new({tagValues, tagKeys, marker, maxRecords, hsmConfigurationIdentifier})
+  ) =>
+    new({
+      tagValues: tagValues,
+      tagKeys: tagKeys,
+      marker: marker,
+      maxRecords: maxRecords,
+      hsmConfigurationIdentifier: hsmConfigurationIdentifier,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeHsmClientCertificates = {
   type t
   @ocaml.doc("<p></p>")
@@ -5224,9 +5492,17 @@ module DescribeHsmClientCertificates = {
     ~maxRecords=?,
     ~hsmClientCertificateIdentifier=?,
     (),
-  ) => new({tagValues, tagKeys, marker, maxRecords, hsmClientCertificateIdentifier})
+  ) =>
+    new({
+      tagValues: tagValues,
+      tagKeys: tagKeys,
+      marker: marker,
+      maxRecords: maxRecords,
+      hsmClientCertificateIdentifier: hsmClientCertificateIdentifier,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeEventSubscriptions = {
   type t
   @ocaml.doc("<p></p>")
@@ -5284,9 +5560,16 @@ module DescribeEventSubscriptions = {
   @module("@aws-sdk/client-redshift") @new
   external new: request => t = "DescribeEventSubscriptionsCommand"
   let make = (~tagValues=?, ~tagKeys=?, ~marker=?, ~maxRecords=?, ~subscriptionName=?, ()) =>
-    new({tagValues, tagKeys, marker, maxRecords, subscriptionName})
+    new({
+      tagValues: tagValues,
+      tagKeys: tagKeys,
+      marker: marker,
+      maxRecords: maxRecords,
+      subscriptionName: subscriptionName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeDataSharesForProducer = {
   type t
   type request = {
@@ -5329,9 +5612,10 @@ module DescribeDataSharesForProducer = {
   @module("@aws-sdk/client-redshift") @new
   external new: request => t = "DescribeDataSharesForProducerCommand"
   let make = (~marker=?, ~maxRecords=?, ~status=?, ~producerArn=?, ()) =>
-    new({marker, maxRecords, status, producerArn})
+    new({marker: marker, maxRecords: maxRecords, status: status, producerArn: producerArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeDataSharesForConsumer = {
   type t
   type request = {
@@ -5374,9 +5658,10 @@ module DescribeDataSharesForConsumer = {
   @module("@aws-sdk/client-redshift") @new
   external new: request => t = "DescribeDataSharesForConsumerCommand"
   let make = (~marker=?, ~maxRecords=?, ~status=?, ~consumerArn=?, ()) =>
-    new({marker, maxRecords, status, consumerArn})
+    new({marker: marker, maxRecords: maxRecords, status: status, consumerArn: consumerArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeDataShares = {
   type t
   type request = {
@@ -5405,9 +5690,10 @@ module DescribeDataShares = {
   }
   @module("@aws-sdk/client-redshift") @new external new: request => t = "DescribeDataSharesCommand"
   let make = (~marker=?, ~maxRecords=?, ~dataShareArn=?, ()) =>
-    new({marker, maxRecords, dataShareArn})
+    new({marker: marker, maxRecords: maxRecords, dataShareArn: dataShareArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeClusterSnapshots = {
   type t
   @ocaml.doc("<p></p>")
@@ -5540,21 +5826,22 @@ module DescribeClusterSnapshots = {
     (),
   ) =>
     new({
-      sortingEntities,
-      clusterExists,
-      tagValues,
-      tagKeys,
-      ownerAccount,
-      marker,
-      maxRecords,
-      endTime,
-      startTime,
-      snapshotType,
-      snapshotIdentifier,
-      clusterIdentifier,
+      sortingEntities: sortingEntities,
+      clusterExists: clusterExists,
+      tagValues: tagValues,
+      tagKeys: tagKeys,
+      ownerAccount: ownerAccount,
+      marker: marker,
+      maxRecords: maxRecords,
+      endTime: endTime,
+      startTime: startTime,
+      snapshotType: snapshotType,
+      snapshotIdentifier: snapshotIdentifier,
+      clusterIdentifier: clusterIdentifier,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeClusterParameterGroups = {
   type t
   @ocaml.doc("<p></p>")
@@ -5616,9 +5903,16 @@ module DescribeClusterParameterGroups = {
   @module("@aws-sdk/client-redshift") @new
   external new: request => t = "DescribeClusterParameterGroupsCommand"
   let make = (~tagValues=?, ~tagKeys=?, ~marker=?, ~maxRecords=?, ~parameterGroupName=?, ()) =>
-    new({tagValues, tagKeys, marker, maxRecords, parameterGroupName})
+    new({
+      tagValues: tagValues,
+      tagKeys: tagKeys,
+      marker: marker,
+      maxRecords: maxRecords,
+      parameterGroupName: parameterGroupName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeClusterDbRevisions = {
   type t
   type request = {
@@ -5660,9 +5954,10 @@ module DescribeClusterDbRevisions = {
   @module("@aws-sdk/client-redshift") @new
   external new: request => t = "DescribeClusterDbRevisionsCommand"
   let make = (~marker=?, ~maxRecords=?, ~clusterIdentifier=?, ()) =>
-    new({marker, maxRecords, clusterIdentifier})
+    new({marker: marker, maxRecords: maxRecords, clusterIdentifier: clusterIdentifier})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeAccountAttributes = {
   type t
   type request = {
@@ -5678,6 +5973,7 @@ module DescribeAccountAttributes = {
   let make = (~attributeNames=?, ()) => new({attributeNames: attributeNames})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module RevokeClusterSecurityGroupIngress = {
   type t
   @ocaml.doc("<p></p>")
@@ -5715,9 +6011,16 @@ module RevokeClusterSecurityGroupIngress = {
     ~ec2SecurityGroupName=?,
     ~cidrip=?,
     (),
-  ) => new({ec2SecurityGroupOwnerId, ec2SecurityGroupName, cidrip, clusterSecurityGroupName})
+  ) =>
+    new({
+      ec2SecurityGroupOwnerId: ec2SecurityGroupOwnerId,
+      ec2SecurityGroupName: ec2SecurityGroupName,
+      cidrip: cidrip,
+      clusterSecurityGroupName: clusterSecurityGroupName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetReservedNodeExchangeConfigurationOptions = {
   type t
   type request = {
@@ -5772,9 +6075,17 @@ module GetReservedNodeExchangeConfigurationOptions = {
     ~snapshotIdentifier=?,
     ~clusterIdentifier=?,
     (),
-  ) => new({marker, maxRecords, snapshotIdentifier, clusterIdentifier, actionType})
+  ) =>
+    new({
+      marker: marker,
+      maxRecords: maxRecords,
+      snapshotIdentifier: snapshotIdentifier,
+      clusterIdentifier: clusterIdentifier,
+      actionType: actionType,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeEventCategories = {
   type t
   @ocaml.doc("<p></p>")
@@ -5795,6 +6106,7 @@ module DescribeEventCategories = {
   let make = (~sourceType=?, ()) => new({sourceType: sourceType})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeEndpointAccess = {
   type t
   type request = {
@@ -5841,9 +6153,18 @@ module DescribeEndpointAccess = {
     ~resourceOwner=?,
     ~clusterIdentifier=?,
     (),
-  ) => new({marker, maxRecords, vpcId, endpointName, resourceOwner, clusterIdentifier})
+  ) =>
+    new({
+      marker: marker,
+      maxRecords: maxRecords,
+      vpcId: vpcId,
+      endpointName: endpointName,
+      resourceOwner: resourceOwner,
+      clusterIdentifier: clusterIdentifier,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateClusterSecurityGroup = {
   type t
   @ocaml.doc("<p></p>")
@@ -5874,9 +6195,10 @@ module CreateClusterSecurityGroup = {
   @module("@aws-sdk/client-redshift") @new
   external new: request => t = "CreateClusterSecurityGroupCommand"
   let make = (~description, ~clusterSecurityGroupName, ~tags=?, ()) =>
-    new({tags, description, clusterSecurityGroupName})
+    new({tags: tags, description: description, clusterSecurityGroupName: clusterSecurityGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module AuthorizeClusterSecurityGroupIngress = {
   type t
   @ocaml.doc("<p></p>")
@@ -5906,9 +6228,16 @@ module AuthorizeClusterSecurityGroupIngress = {
     ~ec2SecurityGroupName=?,
     ~cidrip=?,
     (),
-  ) => new({ec2SecurityGroupOwnerId, ec2SecurityGroupName, cidrip, clusterSecurityGroupName})
+  ) =>
+    new({
+      ec2SecurityGroupOwnerId: ec2SecurityGroupOwnerId,
+      ec2SecurityGroupName: ec2SecurityGroupName,
+      cidrip: cidrip,
+      clusterSecurityGroupName: clusterSecurityGroupName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module RotateEncryptionKey = {
   type t
   @ocaml.doc("<p></p>")
@@ -5925,6 +6254,7 @@ module RotateEncryptionKey = {
   let make = (~clusterIdentifier, ()) => new({clusterIdentifier: clusterIdentifier})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ResumeCluster = {
   type t
   type request = resumeClusterMessage
@@ -5933,6 +6263,7 @@ module ResumeCluster = {
 
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module RestoreFromClusterSnapshot = {
   type t
   @ocaml.doc("<p></p>")
@@ -6189,41 +6520,42 @@ module RestoreFromClusterSnapshot = {
     (),
   ) =>
     new({
-      encrypted,
-      targetReservedNodeOfferingId,
-      reservedNodeId,
-      defaultIamRoleArn,
-      aquaConfigurationStatus,
-      availabilityZoneRelocation,
-      numberOfNodes,
-      snapshotScheduleIdentifier,
-      maintenanceTrackName,
-      iamRoles,
-      additionalInfo,
-      enhancedVpcRouting,
-      nodeType,
-      kmsKeyId,
-      manualSnapshotRetentionPeriod,
-      automatedSnapshotRetentionPeriod,
-      preferredMaintenanceWindow,
-      vpcSecurityGroupIds,
-      clusterSecurityGroups,
-      clusterParameterGroupName,
-      elasticIp,
-      hsmConfigurationIdentifier,
-      hsmClientCertificateIdentifier,
-      ownerAccount,
-      publiclyAccessible,
-      clusterSubnetGroupName,
-      allowVersionUpgrade,
-      availabilityZone,
-      port,
-      snapshotClusterIdentifier,
-      snapshotIdentifier,
-      clusterIdentifier,
+      encrypted: encrypted,
+      targetReservedNodeOfferingId: targetReservedNodeOfferingId,
+      reservedNodeId: reservedNodeId,
+      defaultIamRoleArn: defaultIamRoleArn,
+      aquaConfigurationStatus: aquaConfigurationStatus,
+      availabilityZoneRelocation: availabilityZoneRelocation,
+      numberOfNodes: numberOfNodes,
+      snapshotScheduleIdentifier: snapshotScheduleIdentifier,
+      maintenanceTrackName: maintenanceTrackName,
+      iamRoles: iamRoles,
+      additionalInfo: additionalInfo,
+      enhancedVpcRouting: enhancedVpcRouting,
+      nodeType: nodeType,
+      kmsKeyId: kmsKeyId,
+      manualSnapshotRetentionPeriod: manualSnapshotRetentionPeriod,
+      automatedSnapshotRetentionPeriod: automatedSnapshotRetentionPeriod,
+      preferredMaintenanceWindow: preferredMaintenanceWindow,
+      vpcSecurityGroupIds: vpcSecurityGroupIds,
+      clusterSecurityGroups: clusterSecurityGroups,
+      clusterParameterGroupName: clusterParameterGroupName,
+      elasticIp: elasticIp,
+      hsmConfigurationIdentifier: hsmConfigurationIdentifier,
+      hsmClientCertificateIdentifier: hsmClientCertificateIdentifier,
+      ownerAccount: ownerAccount,
+      publiclyAccessible: publiclyAccessible,
+      clusterSubnetGroupName: clusterSubnetGroupName,
+      allowVersionUpgrade: allowVersionUpgrade,
+      availabilityZone: availabilityZone,
+      port: port,
+      snapshotClusterIdentifier: snapshotClusterIdentifier,
+      snapshotIdentifier: snapshotIdentifier,
+      clusterIdentifier: clusterIdentifier,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ResizeCluster = {
   type t
   type request = resizeClusterMessage
@@ -6232,6 +6564,7 @@ module ResizeCluster = {
 
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module RebootCluster = {
   type t
   @ocaml.doc("<p></p>")
@@ -6244,6 +6577,7 @@ module RebootCluster = {
   let make = (~clusterIdentifier, ()) => new({clusterIdentifier: clusterIdentifier})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module PauseCluster = {
   type t
   type request = pauseClusterMessage
@@ -6252,6 +6586,7 @@ module PauseCluster = {
 
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ModifySnapshotCopyRetentionPeriod = {
   type t
   @ocaml.doc("<p></p>")
@@ -6287,9 +6622,10 @@ module ModifySnapshotCopyRetentionPeriod = {
   @module("@aws-sdk/client-redshift") @new
   external new: request => t = "ModifySnapshotCopyRetentionPeriodCommand"
   let make = (~retentionPeriod, ~clusterIdentifier, ~manual=?, ()) =>
-    new({manual, retentionPeriod, clusterIdentifier})
+    new({manual: manual, retentionPeriod: retentionPeriod, clusterIdentifier: clusterIdentifier})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ModifyClusterSubnetGroup = {
   type t
   @ocaml.doc("<p></p>")
@@ -6307,9 +6643,14 @@ module ModifyClusterSubnetGroup = {
   @module("@aws-sdk/client-redshift") @new
   external new: request => t = "ModifyClusterSubnetGroupCommand"
   let make = (~subnetIds, ~clusterSubnetGroupName, ~description=?, ()) =>
-    new({subnetIds, description, clusterSubnetGroupName})
+    new({
+      subnetIds: subnetIds,
+      description: description,
+      clusterSubnetGroupName: clusterSubnetGroupName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ModifyClusterMaintenance = {
   type t
   type request = {
@@ -6346,15 +6687,16 @@ module ModifyClusterMaintenance = {
     (),
   ) =>
     new({
-      deferMaintenanceDuration,
-      deferMaintenanceEndTime,
-      deferMaintenanceStartTime,
-      deferMaintenanceIdentifier,
-      deferMaintenance,
-      clusterIdentifier,
+      deferMaintenanceDuration: deferMaintenanceDuration,
+      deferMaintenanceEndTime: deferMaintenanceEndTime,
+      deferMaintenanceStartTime: deferMaintenanceStartTime,
+      deferMaintenanceIdentifier: deferMaintenanceIdentifier,
+      deferMaintenance: deferMaintenance,
+      clusterIdentifier: clusterIdentifier,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ModifyClusterIamRoles = {
   type t
   @ocaml.doc("<p></p>")
@@ -6380,9 +6722,15 @@ module ModifyClusterIamRoles = {
   @module("@aws-sdk/client-redshift") @new
   external new: request => t = "ModifyClusterIamRolesCommand"
   let make = (~clusterIdentifier, ~defaultIamRoleArn=?, ~removeIamRoles=?, ~addIamRoles=?, ()) =>
-    new({defaultIamRoleArn, removeIamRoles, addIamRoles, clusterIdentifier})
+    new({
+      defaultIamRoleArn: defaultIamRoleArn,
+      removeIamRoles: removeIamRoles,
+      addIamRoles: addIamRoles,
+      clusterIdentifier: clusterIdentifier,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ModifyClusterDbRevision = {
   type t
   type request = {
@@ -6399,9 +6747,11 @@ module ModifyClusterDbRevision = {
   type response = {@as("Cluster") cluster: option<cluster>}
   @module("@aws-sdk/client-redshift") @new
   external new: request => t = "ModifyClusterDbRevisionCommand"
-  let make = (~revisionTarget, ~clusterIdentifier, ()) => new({revisionTarget, clusterIdentifier})
+  let make = (~revisionTarget, ~clusterIdentifier, ()) =>
+    new({revisionTarget: revisionTarget, clusterIdentifier: clusterIdentifier})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ModifyCluster = {
   type t
   @ocaml.doc("<p></p>")
@@ -6668,34 +7018,35 @@ in the <i>Amazon Redshift Cluster Management Guide</i>.</p>
     (),
   ) =>
     new({
-      port,
-      availabilityZone,
-      availabilityZoneRelocation,
-      kmsKeyId,
-      encrypted,
-      maintenanceTrackName,
-      enhancedVpcRouting,
-      elasticIp,
-      publiclyAccessible,
-      newClusterIdentifier,
-      hsmConfigurationIdentifier,
-      hsmClientCertificateIdentifier,
-      allowVersionUpgrade,
-      clusterVersion,
-      preferredMaintenanceWindow,
-      manualSnapshotRetentionPeriod,
-      automatedSnapshotRetentionPeriod,
-      clusterParameterGroupName,
-      masterUserPassword,
-      vpcSecurityGroupIds,
-      clusterSecurityGroups,
-      numberOfNodes,
-      nodeType,
-      clusterType,
-      clusterIdentifier,
+      port: port,
+      availabilityZone: availabilityZone,
+      availabilityZoneRelocation: availabilityZoneRelocation,
+      kmsKeyId: kmsKeyId,
+      encrypted: encrypted,
+      maintenanceTrackName: maintenanceTrackName,
+      enhancedVpcRouting: enhancedVpcRouting,
+      elasticIp: elasticIp,
+      publiclyAccessible: publiclyAccessible,
+      newClusterIdentifier: newClusterIdentifier,
+      hsmConfigurationIdentifier: hsmConfigurationIdentifier,
+      hsmClientCertificateIdentifier: hsmClientCertificateIdentifier,
+      allowVersionUpgrade: allowVersionUpgrade,
+      clusterVersion: clusterVersion,
+      preferredMaintenanceWindow: preferredMaintenanceWindow,
+      manualSnapshotRetentionPeriod: manualSnapshotRetentionPeriod,
+      automatedSnapshotRetentionPeriod: automatedSnapshotRetentionPeriod,
+      clusterParameterGroupName: clusterParameterGroupName,
+      masterUserPassword: masterUserPassword,
+      vpcSecurityGroupIds: vpcSecurityGroupIds,
+      clusterSecurityGroups: clusterSecurityGroups,
+      numberOfNodes: numberOfNodes,
+      nodeType: nodeType,
+      clusterType: clusterType,
+      clusterIdentifier: clusterIdentifier,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module EnableSnapshotCopy = {
   type t
   @ocaml.doc("<p></p>")
@@ -6739,14 +7090,15 @@ module EnableSnapshotCopy = {
     (),
   ) =>
     new({
-      manualSnapshotRetentionPeriod,
-      snapshotCopyGrantName,
-      retentionPeriod,
-      destinationRegion,
-      clusterIdentifier,
+      manualSnapshotRetentionPeriod: manualSnapshotRetentionPeriod,
+      snapshotCopyGrantName: snapshotCopyGrantName,
+      retentionPeriod: retentionPeriod,
+      destinationRegion: destinationRegion,
+      clusterIdentifier: clusterIdentifier,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DisableSnapshotCopy = {
   type t
   @ocaml.doc("<p></p>")
@@ -6763,6 +7115,7 @@ module DisableSnapshotCopy = {
   let make = (~clusterIdentifier, ()) => new({clusterIdentifier: clusterIdentifier})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeOrderableClusterOptions = {
   type t
   @ocaml.doc("<p></p>")
@@ -6813,9 +7166,15 @@ module DescribeOrderableClusterOptions = {
   @module("@aws-sdk/client-redshift") @new
   external new: request => t = "DescribeOrderableClusterOptionsCommand"
   let make = (~marker=?, ~maxRecords=?, ~nodeType=?, ~clusterVersion=?, ()) =>
-    new({marker, maxRecords, nodeType, clusterVersion})
+    new({
+      marker: marker,
+      maxRecords: maxRecords,
+      nodeType: nodeType,
+      clusterVersion: clusterVersion,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeClusterTracks = {
   type t
   type request = {
@@ -6847,9 +7206,10 @@ module DescribeClusterTracks = {
   @module("@aws-sdk/client-redshift") @new
   external new: request => t = "DescribeClusterTracksCommand"
   let make = (~marker=?, ~maxRecords=?, ~maintenanceTrackName=?, ()) =>
-    new({marker, maxRecords, maintenanceTrackName})
+    new({marker: marker, maxRecords: maxRecords, maintenanceTrackName: maintenanceTrackName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeClusterSecurityGroups = {
   type t
   @ocaml.doc("<p></p>")
@@ -6917,9 +7277,17 @@ module DescribeClusterSecurityGroups = {
     ~maxRecords=?,
     ~clusterSecurityGroupName=?,
     (),
-  ) => new({tagValues, tagKeys, marker, maxRecords, clusterSecurityGroupName})
+  ) =>
+    new({
+      tagValues: tagValues,
+      tagKeys: tagKeys,
+      marker: marker,
+      maxRecords: maxRecords,
+      clusterSecurityGroupName: clusterSecurityGroupName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteCluster = {
   type t
   @ocaml.doc("<p></p>")
@@ -6989,13 +7357,14 @@ module DeleteCluster = {
     (),
   ) =>
     new({
-      finalClusterSnapshotRetentionPeriod,
-      finalClusterSnapshotIdentifier,
-      skipFinalClusterSnapshot,
-      clusterIdentifier,
+      finalClusterSnapshotRetentionPeriod: finalClusterSnapshotRetentionPeriod,
+      finalClusterSnapshotIdentifier: finalClusterSnapshotIdentifier,
+      skipFinalClusterSnapshot: skipFinalClusterSnapshot,
+      clusterIdentifier: clusterIdentifier,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateClusterSubnetGroup = {
   type t
   @ocaml.doc("<p></p>")
@@ -7030,9 +7399,15 @@ module CreateClusterSubnetGroup = {
   @module("@aws-sdk/client-redshift") @new
   external new: request => t = "CreateClusterSubnetGroupCommand"
   let make = (~subnetIds, ~description, ~clusterSubnetGroupName, ~tags=?, ()) =>
-    new({tags, subnetIds, description, clusterSubnetGroupName})
+    new({
+      tags: tags,
+      subnetIds: subnetIds,
+      description: description,
+      clusterSubnetGroupName: clusterSubnetGroupName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateCluster = {
   type t
   @ocaml.doc("<p></p>")
@@ -7385,42 +7760,43 @@ module CreateCluster = {
     (),
   ) =>
     new({
-      defaultIamRoleArn,
-      aquaConfigurationStatus,
-      availabilityZoneRelocation,
-      snapshotScheduleIdentifier,
-      maintenanceTrackName,
-      iamRoles,
-      additionalInfo,
-      enhancedVpcRouting,
-      kmsKeyId,
-      tags,
-      elasticIp,
-      hsmConfigurationIdentifier,
-      hsmClientCertificateIdentifier,
-      encrypted,
-      publiclyAccessible,
-      numberOfNodes,
-      allowVersionUpgrade,
-      clusterVersion,
-      port,
-      manualSnapshotRetentionPeriod,
-      automatedSnapshotRetentionPeriod,
-      clusterParameterGroupName,
-      preferredMaintenanceWindow,
-      availabilityZone,
-      clusterSubnetGroupName,
-      vpcSecurityGroupIds,
-      clusterSecurityGroups,
-      masterUserPassword,
-      masterUsername,
-      nodeType,
-      clusterType,
-      clusterIdentifier,
-      dbname,
+      defaultIamRoleArn: defaultIamRoleArn,
+      aquaConfigurationStatus: aquaConfigurationStatus,
+      availabilityZoneRelocation: availabilityZoneRelocation,
+      snapshotScheduleIdentifier: snapshotScheduleIdentifier,
+      maintenanceTrackName: maintenanceTrackName,
+      iamRoles: iamRoles,
+      additionalInfo: additionalInfo,
+      enhancedVpcRouting: enhancedVpcRouting,
+      kmsKeyId: kmsKeyId,
+      tags: tags,
+      elasticIp: elasticIp,
+      hsmConfigurationIdentifier: hsmConfigurationIdentifier,
+      hsmClientCertificateIdentifier: hsmClientCertificateIdentifier,
+      encrypted: encrypted,
+      publiclyAccessible: publiclyAccessible,
+      numberOfNodes: numberOfNodes,
+      allowVersionUpgrade: allowVersionUpgrade,
+      clusterVersion: clusterVersion,
+      port: port,
+      manualSnapshotRetentionPeriod: manualSnapshotRetentionPeriod,
+      automatedSnapshotRetentionPeriod: automatedSnapshotRetentionPeriod,
+      clusterParameterGroupName: clusterParameterGroupName,
+      preferredMaintenanceWindow: preferredMaintenanceWindow,
+      availabilityZone: availabilityZone,
+      clusterSubnetGroupName: clusterSubnetGroupName,
+      vpcSecurityGroupIds: vpcSecurityGroupIds,
+      clusterSecurityGroups: clusterSecurityGroups,
+      masterUserPassword: masterUserPassword,
+      masterUsername: masterUsername,
+      nodeType: nodeType,
+      clusterType: clusterType,
+      clusterIdentifier: clusterIdentifier,
+      dbname: dbname,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeClusters = {
   type t
   @ocaml.doc("<p></p>")
@@ -7480,9 +7856,16 @@ module DescribeClusters = {
   }
   @module("@aws-sdk/client-redshift") @new external new: request => t = "DescribeClustersCommand"
   let make = (~tagValues=?, ~tagKeys=?, ~marker=?, ~maxRecords=?, ~clusterIdentifier=?, ()) =>
-    new({tagValues, tagKeys, marker, maxRecords, clusterIdentifier})
+    new({
+      tagValues: tagValues,
+      tagKeys: tagKeys,
+      marker: marker,
+      maxRecords: maxRecords,
+      clusterIdentifier: clusterIdentifier,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeClusterSubnetGroups = {
   type t
   @ocaml.doc("<p></p>")
@@ -7540,6 +7923,12 @@ module DescribeClusterSubnetGroups = {
   @module("@aws-sdk/client-redshift") @new
   external new: request => t = "DescribeClusterSubnetGroupsCommand"
   let make = (~tagValues=?, ~tagKeys=?, ~marker=?, ~maxRecords=?, ~clusterSubnetGroupName=?, ()) =>
-    new({tagValues, tagKeys, marker, maxRecords, clusterSubnetGroupName})
+    new({
+      tagValues: tagValues,
+      tagKeys: tagKeys,
+      marker: marker,
+      maxRecords: maxRecords,
+      clusterSubnetGroupName: clusterSubnetGroupName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

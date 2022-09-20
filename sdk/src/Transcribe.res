@@ -1304,9 +1304,14 @@ module UpdateMedicalVocabulary = {
   @module("@aws-sdk/client-transcribe") @new
   external new: request => t = "UpdateMedicalVocabularyCommand"
   let make = (~languageCode, ~vocabularyName, ~vocabularyFileUri=?, ()) =>
-    new({vocabularyFileUri, languageCode, vocabularyName})
+    new({
+      vocabularyFileUri: vocabularyFileUri,
+      languageCode: languageCode,
+      vocabularyName: vocabularyName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetVocabularyFilter = {
   type t
   type request = {
@@ -1334,6 +1339,7 @@ module GetVocabularyFilter = {
   let make = (~vocabularyFilterName, ()) => new({vocabularyFilterName: vocabularyFilterName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetVocabulary = {
   type t
   type request = {
@@ -1365,6 +1371,7 @@ module GetVocabulary = {
   let make = (~vocabularyName, ()) => new({vocabularyName: vocabularyName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetMedicalVocabulary = {
   type t
   type request = {
@@ -1404,6 +1411,7 @@ module GetMedicalVocabulary = {
   let make = (~vocabularyName, ()) => new({vocabularyName: vocabularyName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteVocabularyFilter = {
   type t
   type request = {
@@ -1418,6 +1426,7 @@ module DeleteVocabularyFilter = {
   let make = (~vocabularyFilterName, ()) => new({vocabularyFilterName: vocabularyFilterName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteVocabulary = {
   type t
   type request = {
@@ -1431,6 +1440,7 @@ module DeleteVocabulary = {
   let make = (~vocabularyName, ()) => new({vocabularyName: vocabularyName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteTranscriptionJob = {
   type t
   type request = {
@@ -1445,6 +1455,7 @@ module DeleteTranscriptionJob = {
   let make = (~transcriptionJobName, ()) => new({transcriptionJobName: transcriptionJobName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteMedicalVocabulary = {
   type t
   type request = {
@@ -1459,6 +1470,7 @@ module DeleteMedicalVocabulary = {
   let make = (~vocabularyName, ()) => new({vocabularyName: vocabularyName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteMedicalTranscriptionJob = {
   type t
   type request = {
@@ -1474,6 +1486,7 @@ module DeleteMedicalTranscriptionJob = {
     new({medicalTranscriptionJobName: medicalTranscriptionJobName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteLanguageModel = {
   type t
   type request = {
@@ -1487,6 +1500,7 @@ module DeleteLanguageModel = {
   let make = (~modelName, ()) => new({modelName: modelName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteCallAnalyticsJob = {
   type t
   type request = {
@@ -1501,6 +1515,7 @@ module DeleteCallAnalyticsJob = {
   let make = (~callAnalyticsJobName, ()) => new({callAnalyticsJobName: callAnalyticsJobName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteCallAnalyticsCategory = {
   type t
   type request = {
@@ -1515,6 +1530,7 @@ module DeleteCallAnalyticsCategory = {
   let make = (~categoryName, ()) => new({categoryName: categoryName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateVocabularyFilter = {
   type t
   type request = {
@@ -1554,9 +1570,14 @@ module UpdateVocabularyFilter = {
   @module("@aws-sdk/client-transcribe") @new
   external new: request => t = "UpdateVocabularyFilterCommand"
   let make = (~vocabularyFilterName, ~vocabularyFilterFileUri=?, ~words=?, ()) =>
-    new({vocabularyFilterFileUri, words, vocabularyFilterName})
+    new({
+      vocabularyFilterFileUri: vocabularyFilterFileUri,
+      words: words,
+      vocabularyFilterName: vocabularyFilterName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateVocabulary = {
   type t
   type request = {
@@ -1603,9 +1624,15 @@ module UpdateVocabulary = {
   }
   @module("@aws-sdk/client-transcribe") @new external new: request => t = "UpdateVocabularyCommand"
   let make = (~languageCode, ~vocabularyName, ~vocabularyFileUri=?, ~phrases=?, ()) =>
-    new({vocabularyFileUri, phrases, languageCode, vocabularyName})
+    new({
+      vocabularyFileUri: vocabularyFileUri,
+      phrases: phrases,
+      languageCode: languageCode,
+      vocabularyName: vocabularyName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UntagResource = {
   type t
   type request = {
@@ -1627,9 +1654,10 @@ module UntagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-transcribe") @new external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys, resourceArn})
+  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module TagResource = {
   type t
   type request = {
@@ -1649,9 +1677,10 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-transcribe") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceArn, ()) => new({tags, resourceArn})
+  let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ListVocabularyFilters = {
   type t
   type request = {
@@ -1687,9 +1716,10 @@ module ListVocabularyFilters = {
   @module("@aws-sdk/client-transcribe") @new
   external new: request => t = "ListVocabularyFiltersCommand"
   let make = (~nameContains=?, ~maxResults=?, ~nextToken=?, ()) =>
-    new({nameContains, maxResults, nextToken})
+    new({nameContains: nameContains, maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListVocabularies = {
   type t
   type request = {
@@ -1730,9 +1760,15 @@ module ListVocabularies = {
   }
   @module("@aws-sdk/client-transcribe") @new external new: request => t = "ListVocabulariesCommand"
   let make = (~nameContains=?, ~stateEquals=?, ~maxResults=?, ~nextToken=?, ()) =>
-    new({nameContains, stateEquals, maxResults, nextToken})
+    new({
+      nameContains: nameContains,
+      stateEquals: stateEquals,
+      maxResults: maxResults,
+      nextToken: nextToken,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListTagsForResource = {
   type t
   type request = {
@@ -1761,6 +1797,7 @@ module ListTagsForResource = {
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListMedicalVocabularies = {
   type t
   type request = {
@@ -1805,9 +1842,15 @@ module ListMedicalVocabularies = {
   @module("@aws-sdk/client-transcribe") @new
   external new: request => t = "ListMedicalVocabulariesCommand"
   let make = (~nameContains=?, ~stateEquals=?, ~maxResults=?, ~nextToken=?, ()) =>
-    new({nameContains, stateEquals, maxResults, nextToken})
+    new({
+      nameContains: nameContains,
+      stateEquals: stateEquals,
+      maxResults: maxResults,
+      nextToken: nextToken,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListMedicalTranscriptionJobs = {
   type t
   type request = {
@@ -1850,9 +1893,15 @@ module ListMedicalTranscriptionJobs = {
   @module("@aws-sdk/client-transcribe") @new
   external new: request => t = "ListMedicalTranscriptionJobsCommand"
   let make = (~maxResults=?, ~nextToken=?, ~jobNameContains=?, ~status=?, ()) =>
-    new({maxResults, nextToken, jobNameContains, status})
+    new({
+      maxResults: maxResults,
+      nextToken: nextToken,
+      jobNameContains: jobNameContains,
+      status: status,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListCallAnalyticsJobs = {
   type t
   type request = {
@@ -1896,9 +1945,15 @@ module ListCallAnalyticsJobs = {
   @module("@aws-sdk/client-transcribe") @new
   external new: request => t = "ListCallAnalyticsJobsCommand"
   let make = (~maxResults=?, ~nextToken=?, ~jobNameContains=?, ~status=?, ()) =>
-    new({maxResults, nextToken, jobNameContains, status})
+    new({
+      maxResults: maxResults,
+      nextToken: nextToken,
+      jobNameContains: jobNameContains,
+      status: status,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeLanguageModel = {
   type t
   type request = {
@@ -1917,6 +1972,7 @@ module DescribeLanguageModel = {
   let make = (~modelName, ()) => new({modelName: modelName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateVocabularyFilter = {
   type t
   type request = {
@@ -1971,9 +2027,17 @@ module CreateVocabularyFilter = {
     ~vocabularyFilterFileUri=?,
     ~words=?,
     (),
-  ) => new({tags, vocabularyFilterFileUri, words, languageCode, vocabularyFilterName})
+  ) =>
+    new({
+      tags: tags,
+      vocabularyFilterFileUri: vocabularyFilterFileUri,
+      words: words,
+      languageCode: languageCode,
+      vocabularyFilterName: vocabularyFilterName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateVocabulary = {
   type t
   type request = {
@@ -2028,9 +2092,16 @@ module CreateVocabulary = {
   }
   @module("@aws-sdk/client-transcribe") @new external new: request => t = "CreateVocabularyCommand"
   let make = (~languageCode, ~vocabularyName, ~tags=?, ~vocabularyFileUri=?, ~phrases=?, ()) =>
-    new({tags, vocabularyFileUri, phrases, languageCode, vocabularyName})
+    new({
+      tags: tags,
+      vocabularyFileUri: vocabularyFileUri,
+      phrases: phrases,
+      languageCode: languageCode,
+      vocabularyName: vocabularyName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateMedicalVocabulary = {
   type t
   type request = {
@@ -2083,9 +2154,15 @@ module CreateMedicalVocabulary = {
   @module("@aws-sdk/client-transcribe") @new
   external new: request => t = "CreateMedicalVocabularyCommand"
   let make = (~vocabularyFileUri, ~languageCode, ~vocabularyName, ~tags=?, ()) =>
-    new({tags, vocabularyFileUri, languageCode, vocabularyName})
+    new({
+      tags: tags,
+      vocabularyFileUri: vocabularyFileUri,
+      languageCode: languageCode,
+      vocabularyName: vocabularyName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateLanguageModel = {
   type t
   type request = {
@@ -2143,9 +2220,16 @@ module CreateLanguageModel = {
   @module("@aws-sdk/client-transcribe") @new
   external new: request => t = "CreateLanguageModelCommand"
   let make = (~inputDataConfig, ~modelName, ~baseModelName, ~languageCode, ~tags=?, ()) =>
-    new({tags, inputDataConfig, modelName, baseModelName, languageCode})
+    new({
+      tags: tags,
+      inputDataConfig: inputDataConfig,
+      modelName: modelName,
+      baseModelName: baseModelName,
+      languageCode: languageCode,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module StartTranscriptionJob = {
   type t
   type request = {
@@ -2312,27 +2396,28 @@ module StartTranscriptionJob = {
     (),
   ) =>
     new({
-      languageIdSettings,
-      tags,
-      subtitles,
-      languageOptions,
-      identifyLanguage,
-      contentRedaction,
-      jobExecutionSettings,
-      modelSettings,
-      settings,
-      kmsencryptionContext,
-      outputEncryptionKMSKeyId,
-      outputKey,
-      outputBucketName,
-      media,
-      mediaFormat,
-      mediaSampleRateHertz,
-      languageCode,
-      transcriptionJobName,
+      languageIdSettings: languageIdSettings,
+      tags: tags,
+      subtitles: subtitles,
+      languageOptions: languageOptions,
+      identifyLanguage: identifyLanguage,
+      contentRedaction: contentRedaction,
+      jobExecutionSettings: jobExecutionSettings,
+      modelSettings: modelSettings,
+      settings: settings,
+      kmsencryptionContext: kmsencryptionContext,
+      outputEncryptionKMSKeyId: outputEncryptionKMSKeyId,
+      outputKey: outputKey,
+      outputBucketName: outputBucketName,
+      media: media,
+      mediaFormat: mediaFormat,
+      mediaSampleRateHertz: mediaSampleRateHertz,
+      languageCode: languageCode,
+      transcriptionJobName: transcriptionJobName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module StartMedicalTranscriptionJob = {
   type t
   type request = {
@@ -2463,23 +2548,24 @@ module StartMedicalTranscriptionJob = {
     (),
   ) =>
     new({
-      tags,
-      type_,
-      specialty,
-      contentIdentificationType,
-      settings,
-      kmsencryptionContext,
-      outputEncryptionKMSKeyId,
-      outputKey,
-      outputBucketName,
-      media,
-      mediaFormat,
-      mediaSampleRateHertz,
-      languageCode,
-      medicalTranscriptionJobName,
+      tags: tags,
+      type_: type_,
+      specialty: specialty,
+      contentIdentificationType: contentIdentificationType,
+      settings: settings,
+      kmsencryptionContext: kmsencryptionContext,
+      outputEncryptionKMSKeyId: outputEncryptionKMSKeyId,
+      outputKey: outputKey,
+      outputBucketName: outputBucketName,
+      media: media,
+      mediaFormat: mediaFormat,
+      mediaSampleRateHertz: mediaSampleRateHertz,
+      languageCode: languageCode,
+      medicalTranscriptionJobName: medicalTranscriptionJobName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListLanguageModels = {
   type t
   type request = {
@@ -2518,9 +2604,15 @@ module ListLanguageModels = {
   @module("@aws-sdk/client-transcribe") @new
   external new: request => t = "ListLanguageModelsCommand"
   let make = (~maxResults=?, ~nextToken=?, ~nameContains=?, ~statusEquals=?, ()) =>
-    new({maxResults, nextToken, nameContains, statusEquals})
+    new({
+      maxResults: maxResults,
+      nextToken: nextToken,
+      nameContains: nameContains,
+      statusEquals: statusEquals,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetTranscriptionJob = {
   type t
   type request = {
@@ -2537,6 +2629,7 @@ module GetTranscriptionJob = {
   let make = (~transcriptionJobName, ()) => new({transcriptionJobName: transcriptionJobName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetMedicalTranscriptionJob = {
   type t
   type request = {
@@ -2564,6 +2657,7 @@ module GetMedicalTranscriptionJob = {
     new({medicalTranscriptionJobName: medicalTranscriptionJobName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module StartCallAnalyticsJob = {
   type t
   type request = {
@@ -2668,16 +2762,17 @@ module StartCallAnalyticsJob = {
     (),
   ) =>
     new({
-      channelDefinitions,
-      settings,
-      dataAccessRoleArn,
-      outputEncryptionKMSKeyId,
-      outputLocation,
-      media,
-      callAnalyticsJobName,
+      channelDefinitions: channelDefinitions,
+      settings: settings,
+      dataAccessRoleArn: dataAccessRoleArn,
+      outputEncryptionKMSKeyId: outputEncryptionKMSKeyId,
+      outputLocation: outputLocation,
+      media: media,
+      callAnalyticsJobName: callAnalyticsJobName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListTranscriptionJobs = {
   type t
   type request = {
@@ -2717,9 +2812,15 @@ module ListTranscriptionJobs = {
   @module("@aws-sdk/client-transcribe") @new
   external new: request => t = "ListTranscriptionJobsCommand"
   let make = (~maxResults=?, ~nextToken=?, ~jobNameContains=?, ~status=?, ()) =>
-    new({maxResults, nextToken, jobNameContains, status})
+    new({
+      maxResults: maxResults,
+      nextToken: nextToken,
+      jobNameContains: jobNameContains,
+      status: status,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetCallAnalyticsJob = {
   type t
   type request = {
@@ -2745,6 +2846,7 @@ module GetCallAnalyticsJob = {
   let make = (~callAnalyticsJobName, ()) => new({callAnalyticsJobName: callAnalyticsJobName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateCallAnalyticsCategory = {
   type t
   type request = {
@@ -2767,9 +2869,10 @@ module UpdateCallAnalyticsCategory = {
   }
   @module("@aws-sdk/client-transcribe") @new
   external new: request => t = "UpdateCallAnalyticsCategoryCommand"
-  let make = (~rules, ~categoryName, ()) => new({rules, categoryName})
+  let make = (~rules, ~categoryName, ()) => new({rules: rules, categoryName: categoryName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetCallAnalyticsCategory = {
   type t
   type request = {
@@ -2789,6 +2892,7 @@ module GetCallAnalyticsCategory = {
   let make = (~categoryName, ()) => new({categoryName: categoryName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateCallAnalyticsCategory = {
   type t
   type request = {
@@ -2817,9 +2921,10 @@ module CreateCallAnalyticsCategory = {
   }
   @module("@aws-sdk/client-transcribe") @new
   external new: request => t = "CreateCallAnalyticsCategoryCommand"
-  let make = (~rules, ~categoryName, ()) => new({rules, categoryName})
+  let make = (~rules, ~categoryName, ()) => new({rules: rules, categoryName: categoryName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListCallAnalyticsCategories = {
   type t
   type request = {
@@ -2848,6 +2953,7 @@ module ListCallAnalyticsCategories = {
   }
   @module("@aws-sdk/client-transcribe") @new
   external new: request => t = "ListCallAnalyticsCategoriesCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

@@ -1959,9 +1959,10 @@ module UntagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-appmesh") @new external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys, resourceArn})
+  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module TagResource = {
   type t
   type request = {
@@ -1974,9 +1975,10 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-appmesh") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceArn, ()) => new({tags, resourceArn})
+  let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ListVirtualServices = {
   type t
   type request = {
@@ -2011,9 +2013,10 @@ module ListVirtualServices = {
   }
   @module("@aws-sdk/client-appmesh") @new external new: request => t = "ListVirtualServicesCommand"
   let make = (~meshName, ~meshOwner=?, ~limit=?, ~nextToken=?, ()) =>
-    new({meshOwner, limit, nextToken, meshName})
+    new({meshOwner: meshOwner, limit: limit, nextToken: nextToken, meshName: meshName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListVirtualRouters = {
   type t
   type request = {
@@ -2048,9 +2051,10 @@ module ListVirtualRouters = {
   }
   @module("@aws-sdk/client-appmesh") @new external new: request => t = "ListVirtualRoutersCommand"
   let make = (~meshName, ~meshOwner=?, ~limit=?, ~nextToken=?, ()) =>
-    new({meshOwner, limit, nextToken, meshName})
+    new({meshOwner: meshOwner, limit: limit, nextToken: nextToken, meshName: meshName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListVirtualNodes = {
   type t
   type request = {
@@ -2085,9 +2089,10 @@ module ListVirtualNodes = {
   }
   @module("@aws-sdk/client-appmesh") @new external new: request => t = "ListVirtualNodesCommand"
   let make = (~meshName, ~meshOwner=?, ~limit=?, ~nextToken=?, ()) =>
-    new({meshOwner, limit, nextToken, meshName})
+    new({meshOwner: meshOwner, limit: limit, nextToken: nextToken, meshName: meshName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListVirtualGateways = {
   type t
   type request = {
@@ -2122,9 +2127,10 @@ module ListVirtualGateways = {
   }
   @module("@aws-sdk/client-appmesh") @new external new: request => t = "ListVirtualGatewaysCommand"
   let make = (~meshName, ~meshOwner=?, ~limit=?, ~nextToken=?, ()) =>
-    new({meshOwner, limit, nextToken, meshName})
+    new({meshOwner: meshOwner, limit: limit, nextToken: nextToken, meshName: meshName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListTagsForResource = {
   type t
   type request = {
@@ -2156,9 +2162,11 @@ module ListTagsForResource = {
     @ocaml.doc("<p>The tags for the resource.</p>") tags: tagList_,
   }
   @module("@aws-sdk/client-appmesh") @new external new: request => t = "ListTagsForResourceCommand"
-  let make = (~resourceArn, ~limit=?, ~nextToken=?, ()) => new({limit, nextToken, resourceArn})
+  let make = (~resourceArn, ~limit=?, ~nextToken=?, ()) =>
+    new({limit: limit, nextToken: nextToken, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListRoutes = {
   type t
   type request = {
@@ -2196,9 +2204,16 @@ module ListRoutes = {
   }
   @module("@aws-sdk/client-appmesh") @new external new: request => t = "ListRoutesCommand"
   let make = (~virtualRouterName, ~meshName, ~meshOwner=?, ~limit=?, ~nextToken=?, ()) =>
-    new({meshOwner, limit, nextToken, virtualRouterName, meshName})
+    new({
+      meshOwner: meshOwner,
+      limit: limit,
+      nextToken: nextToken,
+      virtualRouterName: virtualRouterName,
+      meshName: meshName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListMeshes = {
   type t
   type request = {
@@ -2230,9 +2245,10 @@ module ListMeshes = {
     @ocaml.doc("<p>The list of existing service meshes.</p>") meshes: meshList,
   }
   @module("@aws-sdk/client-appmesh") @new external new: request => t = "ListMeshesCommand"
-  let make = (~limit=?, ~nextToken=?, ()) => new({limit, nextToken})
+  let make = (~limit=?, ~nextToken=?, ()) => new({limit: limit, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListGatewayRoutes = {
   type t
   type request = {
@@ -2270,9 +2286,16 @@ module ListGatewayRoutes = {
   }
   @module("@aws-sdk/client-appmesh") @new external new: request => t = "ListGatewayRoutesCommand"
   let make = (~virtualGatewayName, ~meshName, ~meshOwner=?, ~limit=?, ~nextToken=?, ()) =>
-    new({meshOwner, limit, nextToken, virtualGatewayName, meshName})
+    new({
+      meshOwner: meshOwner,
+      limit: limit,
+      nextToken: nextToken,
+      virtualGatewayName: virtualGatewayName,
+      meshName: meshName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateMesh = {
   type t
   type request = {
@@ -2284,9 +2307,11 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.</p>")
   }
   type response = {mesh: meshData}
   @module("@aws-sdk/client-appmesh") @new external new: request => t = "UpdateMeshCommand"
-  let make = (~meshName, ~clientToken=?, ~spec=?, ()) => new({clientToken, spec, meshName})
+  let make = (~meshName, ~clientToken=?, ~spec=?, ()) =>
+    new({clientToken: clientToken, spec: spec, meshName: meshName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeMesh = {
   type t
   type request = {
@@ -2297,9 +2322,10 @@ module DescribeMesh = {
   }
   type response = {@ocaml.doc("<p>The full description of your service mesh.</p>") mesh: meshData}
   @module("@aws-sdk/client-appmesh") @new external new: request => t = "DescribeMeshCommand"
-  let make = (~meshName, ~meshOwner=?, ()) => new({meshOwner, meshName})
+  let make = (~meshName, ~meshOwner=?, ()) => new({meshOwner: meshOwner, meshName: meshName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteMesh = {
   type t
   type request = {
@@ -2310,6 +2336,7 @@ module DeleteMesh = {
   let make = (~meshName, ()) => new({meshName: meshName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateMesh = {
   type t
   type request = {
@@ -2330,9 +2357,10 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.</p>")
   }
   @module("@aws-sdk/client-appmesh") @new external new: request => t = "CreateMeshCommand"
   let make = (~meshName, ~clientToken=?, ~tags=?, ~spec=?, ()) =>
-    new({clientToken, tags, spec, meshName})
+    new({clientToken: clientToken, tags: tags, spec: spec, meshName: meshName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateVirtualService = {
   type t
   type request = {
@@ -2355,9 +2383,16 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.</p>")
   }
   @module("@aws-sdk/client-appmesh") @new external new: request => t = "UpdateVirtualServiceCommand"
   let make = (~spec, ~meshName, ~virtualServiceName, ~meshOwner=?, ~clientToken=?, ()) =>
-    new({meshOwner, clientToken, spec, meshName, virtualServiceName})
+    new({
+      meshOwner: meshOwner,
+      clientToken: clientToken,
+      spec: spec,
+      meshName: meshName,
+      virtualServiceName: virtualServiceName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeVirtualService = {
   type t
   type request = {
@@ -2376,9 +2411,10 @@ module DescribeVirtualService = {
   @module("@aws-sdk/client-appmesh") @new
   external new: request => t = "DescribeVirtualServiceCommand"
   let make = (~meshName, ~virtualServiceName, ~meshOwner=?, ()) =>
-    new({meshOwner, meshName, virtualServiceName})
+    new({meshOwner: meshOwner, meshName: meshName, virtualServiceName: virtualServiceName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteVirtualService = {
   type t
   type request = {
@@ -2394,9 +2430,10 @@ module DeleteVirtualService = {
   }
   @module("@aws-sdk/client-appmesh") @new external new: request => t = "DeleteVirtualServiceCommand"
   let make = (~meshName, ~virtualServiceName, ~meshOwner=?, ()) =>
-    new({meshOwner, meshName, virtualServiceName})
+    new({meshOwner: meshOwner, meshName: meshName, virtualServiceName: virtualServiceName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateVirtualService = {
   type t
   type request = {
@@ -2423,9 +2460,17 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.</p>")
   }
   @module("@aws-sdk/client-appmesh") @new external new: request => t = "CreateVirtualServiceCommand"
   let make = (~spec, ~meshName, ~virtualServiceName, ~meshOwner=?, ~clientToken=?, ~tags=?, ()) =>
-    new({meshOwner, clientToken, tags, spec, meshName, virtualServiceName})
+    new({
+      meshOwner: meshOwner,
+      clientToken: clientToken,
+      tags: tags,
+      spec: spec,
+      meshName: meshName,
+      virtualServiceName: virtualServiceName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateVirtualRouter = {
   type t
   type request = {
@@ -2449,9 +2494,16 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.</p>")
   }
   @module("@aws-sdk/client-appmesh") @new external new: request => t = "UpdateVirtualRouterCommand"
   let make = (~spec, ~meshName, ~virtualRouterName, ~meshOwner=?, ~clientToken=?, ()) =>
-    new({meshOwner, clientToken, spec, meshName, virtualRouterName})
+    new({
+      meshOwner: meshOwner,
+      clientToken: clientToken,
+      spec: spec,
+      meshName: meshName,
+      virtualRouterName: virtualRouterName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeVirtualRouter = {
   type t
   type request = {
@@ -2470,9 +2522,10 @@ module DescribeVirtualRouter = {
   @module("@aws-sdk/client-appmesh") @new
   external new: request => t = "DescribeVirtualRouterCommand"
   let make = (~meshName, ~virtualRouterName, ~meshOwner=?, ()) =>
-    new({meshOwner, meshName, virtualRouterName})
+    new({meshOwner: meshOwner, meshName: meshName, virtualRouterName: virtualRouterName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteVirtualRouter = {
   type t
   type request = {
@@ -2488,9 +2541,10 @@ module DeleteVirtualRouter = {
   }
   @module("@aws-sdk/client-appmesh") @new external new: request => t = "DeleteVirtualRouterCommand"
   let make = (~meshName, ~virtualRouterName, ~meshOwner=?, ()) =>
-    new({meshOwner, meshName, virtualRouterName})
+    new({meshOwner: meshOwner, meshName: meshName, virtualRouterName: virtualRouterName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateVirtualRouter = {
   type t
   type request = {
@@ -2517,9 +2571,17 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.</p>")
   }
   @module("@aws-sdk/client-appmesh") @new external new: request => t = "CreateVirtualRouterCommand"
   let make = (~spec, ~meshName, ~virtualRouterName, ~meshOwner=?, ~clientToken=?, ~tags=?, ()) =>
-    new({meshOwner, clientToken, tags, spec, meshName, virtualRouterName})
+    new({
+      meshOwner: meshOwner,
+      clientToken: clientToken,
+      tags: tags,
+      spec: spec,
+      meshName: meshName,
+      virtualRouterName: virtualRouterName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateRoute = {
   type t
   type request = {
@@ -2542,9 +2604,17 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.</p>")
   }
   @module("@aws-sdk/client-appmesh") @new external new: request => t = "UpdateRouteCommand"
   let make = (~spec, ~virtualRouterName, ~meshName, ~routeName, ~meshOwner=?, ~clientToken=?, ()) =>
-    new({meshOwner, clientToken, spec, virtualRouterName, meshName, routeName})
+    new({
+      meshOwner: meshOwner,
+      clientToken: clientToken,
+      spec: spec,
+      virtualRouterName: virtualRouterName,
+      meshName: meshName,
+      routeName: routeName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateGatewayRoute = {
   type t
   type request = {
@@ -2577,9 +2647,18 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.</p>")
     ~meshOwner=?,
     ~clientToken=?,
     (),
-  ) => new({meshOwner, clientToken, spec, virtualGatewayName, meshName, gatewayRouteName})
+  ) =>
+    new({
+      meshOwner: meshOwner,
+      clientToken: clientToken,
+      spec: spec,
+      virtualGatewayName: virtualGatewayName,
+      meshName: meshName,
+      gatewayRouteName: gatewayRouteName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeRoute = {
   type t
   type request = {
@@ -2595,9 +2674,15 @@ module DescribeRoute = {
   type response = {@ocaml.doc("<p>The full description of your route.</p>") route: routeData}
   @module("@aws-sdk/client-appmesh") @new external new: request => t = "DescribeRouteCommand"
   let make = (~virtualRouterName, ~meshName, ~routeName, ~meshOwner=?, ()) =>
-    new({virtualRouterName, meshOwner, meshName, routeName})
+    new({
+      virtualRouterName: virtualRouterName,
+      meshOwner: meshOwner,
+      meshName: meshName,
+      routeName: routeName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeGatewayRoute = {
   type t
   type request = {
@@ -2615,9 +2700,15 @@ module DescribeGatewayRoute = {
   }
   @module("@aws-sdk/client-appmesh") @new external new: request => t = "DescribeGatewayRouteCommand"
   let make = (~virtualGatewayName, ~meshName, ~gatewayRouteName, ~meshOwner=?, ()) =>
-    new({meshOwner, virtualGatewayName, meshName, gatewayRouteName})
+    new({
+      meshOwner: meshOwner,
+      virtualGatewayName: virtualGatewayName,
+      meshName: meshName,
+      gatewayRouteName: gatewayRouteName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteRoute = {
   type t
   type request = {
@@ -2633,9 +2724,15 @@ module DeleteRoute = {
   type response = {@ocaml.doc("<p>The route that was deleted.</p>") route: routeData}
   @module("@aws-sdk/client-appmesh") @new external new: request => t = "DeleteRouteCommand"
   let make = (~virtualRouterName, ~meshName, ~routeName, ~meshOwner=?, ()) =>
-    new({meshOwner, virtualRouterName, meshName, routeName})
+    new({
+      meshOwner: meshOwner,
+      virtualRouterName: virtualRouterName,
+      meshName: meshName,
+      routeName: routeName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteGatewayRoute = {
   type t
   type request = {
@@ -2653,9 +2750,15 @@ module DeleteGatewayRoute = {
   }
   @module("@aws-sdk/client-appmesh") @new external new: request => t = "DeleteGatewayRouteCommand"
   let make = (~virtualGatewayName, ~meshName, ~gatewayRouteName, ~meshOwner=?, ()) =>
-    new({meshOwner, virtualGatewayName, meshName, gatewayRouteName})
+    new({
+      meshOwner: meshOwner,
+      virtualGatewayName: virtualGatewayName,
+      meshName: meshName,
+      gatewayRouteName: gatewayRouteName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateRoute = {
   type t
   type request = {
@@ -2693,9 +2796,19 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.</p>")
     ~clientToken=?,
     ~tags=?,
     (),
-  ) => new({meshOwner, clientToken, tags, spec, virtualRouterName, meshName, routeName})
+  ) =>
+    new({
+      meshOwner: meshOwner,
+      clientToken: clientToken,
+      tags: tags,
+      spec: spec,
+      virtualRouterName: virtualRouterName,
+      meshName: meshName,
+      routeName: routeName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateGatewayRoute = {
   type t
   type request = {
@@ -2734,9 +2847,19 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.</p>")
     ~clientToken=?,
     ~tags=?,
     (),
-  ) => new({meshOwner, clientToken, tags, spec, virtualGatewayName, meshName, gatewayRouteName})
+  ) =>
+    new({
+      meshOwner: meshOwner,
+      clientToken: clientToken,
+      tags: tags,
+      spec: spec,
+      virtualGatewayName: virtualGatewayName,
+      meshName: meshName,
+      gatewayRouteName: gatewayRouteName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateVirtualGateway = {
   type t
   type request = {
@@ -2760,9 +2883,16 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.</p>")
   }
   @module("@aws-sdk/client-appmesh") @new external new: request => t = "UpdateVirtualGatewayCommand"
   let make = (~spec, ~meshName, ~virtualGatewayName, ~meshOwner=?, ~clientToken=?, ()) =>
-    new({meshOwner, clientToken, spec, meshName, virtualGatewayName})
+    new({
+      meshOwner: meshOwner,
+      clientToken: clientToken,
+      spec: spec,
+      meshName: meshName,
+      virtualGatewayName: virtualGatewayName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeVirtualGateway = {
   type t
   type request = {
@@ -2781,9 +2911,10 @@ module DescribeVirtualGateway = {
   @module("@aws-sdk/client-appmesh") @new
   external new: request => t = "DescribeVirtualGatewayCommand"
   let make = (~meshName, ~virtualGatewayName, ~meshOwner=?, ()) =>
-    new({meshOwner, meshName, virtualGatewayName})
+    new({meshOwner: meshOwner, meshName: meshName, virtualGatewayName: virtualGatewayName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteVirtualGateway = {
   type t
   type request = {
@@ -2800,9 +2931,10 @@ module DeleteVirtualGateway = {
   }
   @module("@aws-sdk/client-appmesh") @new external new: request => t = "DeleteVirtualGatewayCommand"
   let make = (~meshName, ~virtualGatewayName, ~meshOwner=?, ()) =>
-    new({meshOwner, meshName, virtualGatewayName})
+    new({meshOwner: meshOwner, meshName: meshName, virtualGatewayName: virtualGatewayName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateVirtualGateway = {
   type t
   type request = {
@@ -2829,9 +2961,17 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.</p>")
   }
   @module("@aws-sdk/client-appmesh") @new external new: request => t = "CreateVirtualGatewayCommand"
   let make = (~spec, ~meshName, ~virtualGatewayName, ~meshOwner=?, ~clientToken=?, ~tags=?, ()) =>
-    new({meshOwner, clientToken, tags, spec, meshName, virtualGatewayName})
+    new({
+      meshOwner: meshOwner,
+      clientToken: clientToken,
+      tags: tags,
+      spec: spec,
+      meshName: meshName,
+      virtualGatewayName: virtualGatewayName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateVirtualNode = {
   type t
   type request = {
@@ -2855,9 +2995,16 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.</p>")
   }
   @module("@aws-sdk/client-appmesh") @new external new: request => t = "UpdateVirtualNodeCommand"
   let make = (~spec, ~meshName, ~virtualNodeName, ~meshOwner=?, ~clientToken=?, ()) =>
-    new({meshOwner, clientToken, spec, meshName, virtualNodeName})
+    new({
+      meshOwner: meshOwner,
+      clientToken: clientToken,
+      spec: spec,
+      meshName: meshName,
+      virtualNodeName: virtualNodeName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeVirtualNode = {
   type t
   type request = {
@@ -2873,9 +3020,10 @@ module DescribeVirtualNode = {
   }
   @module("@aws-sdk/client-appmesh") @new external new: request => t = "DescribeVirtualNodeCommand"
   let make = (~meshName, ~virtualNodeName, ~meshOwner=?, ()) =>
-    new({meshOwner, meshName, virtualNodeName})
+    new({meshOwner: meshOwner, meshName: meshName, virtualNodeName: virtualNodeName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteVirtualNode = {
   type t
   @ocaml.doc("<p>Deletes a virtual node input.</p>")
@@ -2892,9 +3040,10 @@ module DeleteVirtualNode = {
   }
   @module("@aws-sdk/client-appmesh") @new external new: request => t = "DeleteVirtualNodeCommand"
   let make = (~meshName, ~virtualNodeName, ~meshOwner=?, ()) =>
-    new({meshOwner, meshName, virtualNodeName})
+    new({meshOwner: meshOwner, meshName: meshName, virtualNodeName: virtualNodeName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateVirtualNode = {
   type t
   type request = {
@@ -2921,6 +3070,13 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.</p>")
   }
   @module("@aws-sdk/client-appmesh") @new external new: request => t = "CreateVirtualNodeCommand"
   let make = (~spec, ~meshName, ~virtualNodeName, ~meshOwner=?, ~clientToken=?, ~tags=?, ()) =>
-    new({meshOwner, clientToken, tags, spec, meshName, virtualNodeName})
+    new({
+      meshOwner: meshOwner,
+      clientToken: clientToken,
+      tags: tags,
+      spec: spec,
+      meshName: meshName,
+      virtualNodeName: virtualNodeName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

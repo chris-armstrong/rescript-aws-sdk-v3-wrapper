@@ -541,9 +541,10 @@ module ResendValidationEmail = {
   type response = {.}
   @module("@aws-sdk/client-acm") @new external new: request => t = "ResendValidationEmailCommand"
   let make = (~validationDomain, ~domain, ~certificateArn, ()) =>
-    new({validationDomain, domain, certificateArn})
+    new({validationDomain: validationDomain, domain: domain, certificateArn: certificateArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module RenewCertificate = {
   type t
   type request = {
@@ -561,6 +562,7 @@ module RenewCertificate = {
   let make = (~certificateArn, ()) => new({certificateArn: certificateArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module GetCertificate = {
   type t
   type request = {
@@ -586,6 +588,7 @@ module GetCertificate = {
   let make = (~certificateArn, ()) => new({certificateArn: certificateArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ExportCertificate = {
   type t
   type request = {
@@ -617,9 +620,11 @@ module ExportCertificate = {
     certificate: option<certificateBody>,
   }
   @module("@aws-sdk/client-acm") @new external new: request => t = "ExportCertificateCommand"
-  let make = (~passphrase, ~certificateArn, ()) => new({passphrase, certificateArn})
+  let make = (~passphrase, ~certificateArn, ()) =>
+    new({passphrase: passphrase, certificateArn: certificateArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteCertificate = {
   type t
   type request = {
@@ -637,6 +642,7 @@ module DeleteCertificate = {
   let make = (~certificateArn, ()) => new({certificateArn: certificateArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateCertificateOptions = {
   type t
   type request = {
@@ -656,9 +662,11 @@ module UpdateCertificateOptions = {
   }
   type response = {.}
   @module("@aws-sdk/client-acm") @new external new: request => t = "UpdateCertificateOptionsCommand"
-  let make = (~options, ~certificateArn, ()) => new({options, certificateArn})
+  let make = (~options, ~certificateArn, ()) =>
+    new({options: options, certificateArn: certificateArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module PutAccountConfiguration = {
   type t
   type request = {
@@ -677,9 +685,11 @@ module PutAccountConfiguration = {
   }
   type response = {.}
   @module("@aws-sdk/client-acm") @new external new: request => t = "PutAccountConfigurationCommand"
-  let make = (~idempotencyToken, ~expiryEvents=?, ()) => new({idempotencyToken, expiryEvents})
+  let make = (~idempotencyToken, ~expiryEvents=?, ()) =>
+    new({idempotencyToken: idempotencyToken, expiryEvents: expiryEvents})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module GetAccountConfiguration = {
   type t
   type request = {.}
@@ -693,6 +703,7 @@ module GetAccountConfiguration = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module RequestCertificate = {
   type t
   type request = {
@@ -793,17 +804,18 @@ module RequestCertificate = {
     (),
   ) =>
     new({
-      tags,
-      certificateAuthorityArn,
-      options,
-      domainValidationOptions,
-      idempotencyToken,
-      subjectAlternativeNames,
-      validationMethod,
-      domainName,
+      tags: tags,
+      certificateAuthorityArn: certificateAuthorityArn,
+      options: options,
+      domainValidationOptions: domainValidationOptions,
+      idempotencyToken: idempotencyToken,
+      subjectAlternativeNames: subjectAlternativeNames,
+      validationMethod: validationMethod,
+      domainName: domainName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module RemoveTagsFromCertificate = {
   type t
   type request = {
@@ -823,9 +835,10 @@ module RemoveTagsFromCertificate = {
   type response = {.}
   @module("@aws-sdk/client-acm") @new
   external new: request => t = "RemoveTagsFromCertificateCommand"
-  let make = (~tags, ~certificateArn, ()) => new({tags, certificateArn})
+  let make = (~tags, ~certificateArn, ()) => new({tags: tags, certificateArn: certificateArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ListTagsForCertificate = {
   type t
   type request = {
@@ -846,6 +859,7 @@ module ListTagsForCertificate = {
   let make = (~certificateArn, ()) => new({certificateArn: certificateArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListCertificates = {
   type t
   type request = {
@@ -877,9 +891,15 @@ module ListCertificates = {
   }
   @module("@aws-sdk/client-acm") @new external new: request => t = "ListCertificatesCommand"
   let make = (~maxItems=?, ~nextToken=?, ~includes=?, ~certificateStatuses=?, ()) =>
-    new({maxItems, nextToken, includes, certificateStatuses})
+    new({
+      maxItems: maxItems,
+      nextToken: nextToken,
+      includes: includes,
+      certificateStatuses: certificateStatuses,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ImportCertificate = {
   type t
   type request = {
@@ -908,9 +928,16 @@ module ImportCertificate = {
   }
   @module("@aws-sdk/client-acm") @new external new: request => t = "ImportCertificateCommand"
   let make = (~privateKey, ~certificate, ~tags=?, ~certificateChain=?, ~certificateArn=?, ()) =>
-    new({tags, certificateChain, privateKey, certificate, certificateArn})
+    new({
+      tags: tags,
+      certificateChain: certificateChain,
+      privateKey: privateKey,
+      certificate: certificate,
+      certificateArn: certificateArn,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module AddTagsToCertificate = {
   type t
   type request = {
@@ -930,9 +957,10 @@ module AddTagsToCertificate = {
   }
   type response = {.}
   @module("@aws-sdk/client-acm") @new external new: request => t = "AddTagsToCertificateCommand"
-  let make = (~tags, ~certificateArn, ()) => new({tags, certificateArn})
+  let make = (~tags, ~certificateArn, ()) => new({tags: tags, certificateArn: certificateArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DescribeCertificate = {
   type t
   type request = {

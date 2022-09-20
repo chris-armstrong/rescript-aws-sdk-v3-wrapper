@@ -2758,9 +2758,17 @@ module UpdateManagedRuleSetVersionExpiryDate = {
   @module("@aws-sdk/client-wafv2") @new
   external new: request => t = "UpdateManagedRuleSetVersionExpiryDateCommand"
   let make = (~expiryTimestamp, ~versionToExpire, ~lockToken, ~id, ~scope, ~name, ()) =>
-    new({expiryTimestamp, versionToExpire, lockToken, id, scope, name})
+    new({
+      expiryTimestamp: expiryTimestamp,
+      versionToExpire: versionToExpire,
+      lockToken: lockToken,
+      id: id,
+      scope: scope,
+      name: name,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module PutPermissionPolicy = {
   type t
   type request = {
@@ -2796,9 +2804,10 @@ module PutPermissionPolicy = {
   }
   type response = {.}
   @module("@aws-sdk/client-wafv2") @new external new: request => t = "PutPermissionPolicyCommand"
-  let make = (~policy, ~resourceArn, ()) => new({policy, resourceArn})
+  let make = (~policy, ~resourceArn, ()) => new({policy: policy, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module GetPermissionPolicy = {
   type t
   type request = {
@@ -2815,6 +2824,7 @@ module GetPermissionPolicy = {
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GenerateMobileSdkReleaseUrl = {
   type t
   type request = {
@@ -2831,9 +2841,11 @@ module GenerateMobileSdkReleaseUrl = {
   }
   @module("@aws-sdk/client-wafv2") @new
   external new: request => t = "GenerateMobileSdkReleaseUrlCommand"
-  let make = (~releaseVersion, ~platform, ()) => new({releaseVersion, platform})
+  let make = (~releaseVersion, ~platform, ()) =>
+    new({releaseVersion: releaseVersion, platform: platform})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DisassociateWebACL = {
   type t
   type request = {
@@ -2865,6 +2877,7 @@ module DisassociateWebACL = {
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteWebACL = {
   type t
   type request = {
@@ -2898,9 +2911,11 @@ module DeleteWebACL = {
   }
   type response = {.}
   @module("@aws-sdk/client-wafv2") @new external new: request => t = "DeleteWebACLCommand"
-  let make = (~lockToken, ~id, ~scope, ~name, ()) => new({lockToken, id, scope, name})
+  let make = (~lockToken, ~id, ~scope, ~name, ()) =>
+    new({lockToken: lockToken, id: id, scope: scope, name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteRuleGroup = {
   type t
   type request = {
@@ -2934,9 +2949,11 @@ module DeleteRuleGroup = {
   }
   type response = {.}
   @module("@aws-sdk/client-wafv2") @new external new: request => t = "DeleteRuleGroupCommand"
-  let make = (~lockToken, ~id, ~scope, ~name, ()) => new({lockToken, id, scope, name})
+  let make = (~lockToken, ~id, ~scope, ~name, ()) =>
+    new({lockToken: lockToken, id: id, scope: scope, name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteRegexPatternSet = {
   type t
   type request = {
@@ -2968,9 +2985,11 @@ module DeleteRegexPatternSet = {
   }
   type response = {.}
   @module("@aws-sdk/client-wafv2") @new external new: request => t = "DeleteRegexPatternSetCommand"
-  let make = (~lockToken, ~id, ~scope, ~name, ()) => new({lockToken, id, scope, name})
+  let make = (~lockToken, ~id, ~scope, ~name, ()) =>
+    new({lockToken: lockToken, id: id, scope: scope, name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeletePermissionPolicy = {
   type t
   type request = {
@@ -2985,6 +3004,7 @@ module DeletePermissionPolicy = {
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteLoggingConfiguration = {
   type t
   type request = {
@@ -2999,6 +3019,7 @@ module DeleteLoggingConfiguration = {
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteIPSet = {
   type t
   type request = {
@@ -3032,9 +3053,11 @@ module DeleteIPSet = {
   }
   type response = {.}
   @module("@aws-sdk/client-wafv2") @new external new: request => t = "DeleteIPSetCommand"
-  let make = (~lockToken, ~id, ~scope, ~name, ()) => new({lockToken, id, scope, name})
+  let make = (~lockToken, ~id, ~scope, ~name, ()) =>
+    new({lockToken: lockToken, id: id, scope: scope, name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteFirewallManagerRuleGroups = {
   type t
   type request = {
@@ -3055,9 +3078,11 @@ module DeleteFirewallManagerRuleGroups = {
   }
   @module("@aws-sdk/client-wafv2") @new
   external new: request => t = "DeleteFirewallManagerRuleGroupsCommand"
-  let make = (~webACLLockToken, ~webACLArn, ()) => new({webACLLockToken, webACLArn})
+  let make = (~webACLLockToken, ~webACLArn, ()) =>
+    new({webACLLockToken: webACLLockToken, webACLArn: webACLArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module AssociateWebACL = {
   type t
   type request = {
@@ -3090,9 +3115,10 @@ module AssociateWebACL = {
   }
   type response = {.}
   @module("@aws-sdk/client-wafv2") @new external new: request => t = "AssociateWebACLCommand"
-  let make = (~resourceArn, ~webACLArn, ()) => new({resourceArn, webACLArn})
+  let make = (~resourceArn, ~webACLArn, ()) => new({resourceArn: resourceArn, webACLArn: webACLArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateIPSet = {
   type t
   type request = {
@@ -3174,9 +3200,17 @@ module UpdateIPSet = {
   }
   @module("@aws-sdk/client-wafv2") @new external new: request => t = "UpdateIPSetCommand"
   let make = (~lockToken, ~addresses, ~id, ~scope, ~name, ~description=?, ()) =>
-    new({lockToken, addresses, description, id, scope, name})
+    new({
+      lockToken: lockToken,
+      addresses: addresses,
+      description: description,
+      id: id,
+      scope: scope,
+      name: name,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UntagResource = {
   type t
   type request = {
@@ -3188,9 +3222,10 @@ module UntagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-wafv2") @new external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceARN, ()) => new({tagKeys, resourceARN})
+  let make = (~tagKeys, ~resourceARN, ()) => new({tagKeys: tagKeys, resourceARN: resourceARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ListResourcesForWebACL = {
   type t
   type request = {
@@ -3207,9 +3242,11 @@ module ListResourcesForWebACL = {
     resourceArns: option<resourceArns>,
   }
   @module("@aws-sdk/client-wafv2") @new external new: request => t = "ListResourcesForWebACLCommand"
-  let make = (~webACLArn, ~resourceType=?, ()) => new({resourceType, webACLArn})
+  let make = (~webACLArn, ~resourceType=?, ()) =>
+    new({resourceType: resourceType, webACLArn: webACLArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateRegexPatternSet = {
   type t
   type request = {
@@ -3252,9 +3289,17 @@ module UpdateRegexPatternSet = {
   }
   @module("@aws-sdk/client-wafv2") @new external new: request => t = "UpdateRegexPatternSetCommand"
   let make = (~lockToken, ~regularExpressionList, ~id, ~scope, ~name, ~description=?, ()) =>
-    new({lockToken, regularExpressionList, description, id, scope, name})
+    new({
+      lockToken: lockToken,
+      regularExpressionList: regularExpressionList,
+      description: description,
+      id: id,
+      scope: scope,
+      name: name,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module TagResource = {
   type t
   type request = {
@@ -3265,9 +3310,10 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-wafv2") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceARN, ()) => new({tags, resourceARN})
+  let make = (~tags, ~resourceARN, ()) => new({tags: tags, resourceARN: resourceARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module PutManagedRuleSetVersions = {
   type t
   type request = {
@@ -3316,9 +3362,17 @@ module PutManagedRuleSetVersions = {
   @module("@aws-sdk/client-wafv2") @new
   external new: request => t = "PutManagedRuleSetVersionsCommand"
   let make = (~lockToken, ~id, ~scope, ~name, ~versionsToPublish=?, ~recommendedVersion=?, ()) =>
-    new({versionsToPublish, recommendedVersion, lockToken, id, scope, name})
+    new({
+      versionsToPublish: versionsToPublish,
+      recommendedVersion: recommendedVersion,
+      lockToken: lockToken,
+      id: id,
+      scope: scope,
+      name: name,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListWebACLs = {
   type t
   type request = {
@@ -3354,9 +3408,11 @@ module ListWebACLs = {
     nextMarker: option<nextMarker>,
   }
   @module("@aws-sdk/client-wafv2") @new external new: request => t = "ListWebACLsCommand"
-  let make = (~scope, ~limit=?, ~nextMarker=?, ()) => new({limit, nextMarker, scope})
+  let make = (~scope, ~limit=?, ~nextMarker=?, ()) =>
+    new({limit: limit, nextMarker: nextMarker, scope: scope})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListRuleGroups = {
   type t
   type request = {
@@ -3392,9 +3448,11 @@ module ListRuleGroups = {
     nextMarker: option<nextMarker>,
   }
   @module("@aws-sdk/client-wafv2") @new external new: request => t = "ListRuleGroupsCommand"
-  let make = (~scope, ~limit=?, ~nextMarker=?, ()) => new({limit, nextMarker, scope})
+  let make = (~scope, ~limit=?, ~nextMarker=?, ()) =>
+    new({limit: limit, nextMarker: nextMarker, scope: scope})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListRegexPatternSets = {
   type t
   type request = {
@@ -3431,9 +3489,11 @@ module ListRegexPatternSets = {
     nextMarker: option<nextMarker>,
   }
   @module("@aws-sdk/client-wafv2") @new external new: request => t = "ListRegexPatternSetsCommand"
-  let make = (~scope, ~limit=?, ~nextMarker=?, ()) => new({limit, nextMarker, scope})
+  let make = (~scope, ~limit=?, ~nextMarker=?, ()) =>
+    new({limit: limit, nextMarker: nextMarker, scope: scope})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListMobileSdkReleases = {
   type t
   type request = {
@@ -3461,9 +3521,11 @@ module ListMobileSdkReleases = {
     releaseSummaries: option<releaseSummaries>,
   }
   @module("@aws-sdk/client-wafv2") @new external new: request => t = "ListMobileSdkReleasesCommand"
-  let make = (~platform, ~limit=?, ~nextMarker=?, ()) => new({limit, nextMarker, platform})
+  let make = (~platform, ~limit=?, ~nextMarker=?, ()) =>
+    new({limit: limit, nextMarker: nextMarker, platform: platform})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListManagedRuleSets = {
   type t
   type request = {
@@ -3500,9 +3562,11 @@ module ListManagedRuleSets = {
     nextMarker: option<nextMarker>,
   }
   @module("@aws-sdk/client-wafv2") @new external new: request => t = "ListManagedRuleSetsCommand"
-  let make = (~scope, ~limit=?, ~nextMarker=?, ()) => new({limit, nextMarker, scope})
+  let make = (~scope, ~limit=?, ~nextMarker=?, ()) =>
+    new({limit: limit, nextMarker: nextMarker, scope: scope})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListIPSets = {
   type t
   type request = {
@@ -3541,9 +3605,11 @@ module ListIPSets = {
     nextMarker: option<nextMarker>,
   }
   @module("@aws-sdk/client-wafv2") @new external new: request => t = "ListIPSetsCommand"
-  let make = (~scope, ~limit=?, ~nextMarker=?, ()) => new({limit, nextMarker, scope})
+  let make = (~scope, ~limit=?, ~nextMarker=?, ()) =>
+    new({limit: limit, nextMarker: nextMarker, scope: scope})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListAvailableManagedRuleGroups = {
   type t
   type request = {
@@ -3581,9 +3647,11 @@ module ListAvailableManagedRuleGroups = {
   }
   @module("@aws-sdk/client-wafv2") @new
   external new: request => t = "ListAvailableManagedRuleGroupsCommand"
-  let make = (~scope, ~limit=?, ~nextMarker=?, ()) => new({limit, nextMarker, scope})
+  let make = (~scope, ~limit=?, ~nextMarker=?, ()) =>
+    new({limit: limit, nextMarker: nextMarker, scope: scope})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListAvailableManagedRuleGroupVersions = {
   type t
   type request = {
@@ -3635,9 +3703,10 @@ module ListAvailableManagedRuleGroupVersions = {
   @module("@aws-sdk/client-wafv2") @new
   external new: request => t = "ListAvailableManagedRuleGroupVersionsCommand"
   let make = (~scope, ~name, ~vendorName, ~limit=?, ~nextMarker=?, ()) =>
-    new({limit, nextMarker, scope, name, vendorName})
+    new({limit: limit, nextMarker: nextMarker, scope: scope, name: name, vendorName: vendorName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetRateBasedStatementManagedKeys = {
   type t
   type request = {
@@ -3684,9 +3753,16 @@ inside a rule group. </p>")
   @module("@aws-sdk/client-wafv2") @new
   external new: request => t = "GetRateBasedStatementManagedKeysCommand"
   let make = (~ruleName, ~webACLId, ~webACLName, ~scope, ~ruleGroupRuleName=?, ()) =>
-    new({ruleName, ruleGroupRuleName, webACLId, webACLName, scope})
+    new({
+      ruleName: ruleName,
+      ruleGroupRuleName: ruleGroupRuleName,
+      webACLId: webACLId,
+      webACLName: webACLName,
+      scope: scope,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetIPSet = {
   type t
   type request = {
@@ -3722,9 +3798,10 @@ module GetIPSet = {
     @ocaml.doc("<p></p>") @as("IPSet") ipset: option<ipset>,
   }
   @module("@aws-sdk/client-wafv2") @new external new: request => t = "GetIPSetCommand"
-  let make = (~id, ~scope, ~name, ()) => new({id, scope, name})
+  let make = (~id, ~scope, ~name, ()) => new({id: id, scope: scope, name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateRegexPatternSet = {
   type t
   type request = {
@@ -3760,9 +3837,16 @@ module CreateRegexPatternSet = {
   }
   @module("@aws-sdk/client-wafv2") @new external new: request => t = "CreateRegexPatternSetCommand"
   let make = (~regularExpressionList, ~scope, ~name, ~tags=?, ~description=?, ()) =>
-    new({tags, regularExpressionList, description, scope, name})
+    new({
+      tags: tags,
+      regularExpressionList: regularExpressionList,
+      description: description,
+      scope: scope,
+      name: name,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateIPSet = {
   type t
   type request = {
@@ -3841,9 +3925,17 @@ module CreateIPSet = {
   }
   @module("@aws-sdk/client-wafv2") @new external new: request => t = "CreateIPSetCommand"
   let make = (~addresses, ~ipaddressVersion, ~scope, ~name, ~tags=?, ~description=?, ()) =>
-    new({tags, addresses, ipaddressVersion, description, scope, name})
+    new({
+      tags: tags,
+      addresses: addresses,
+      ipaddressVersion: ipaddressVersion,
+      description: description,
+      scope: scope,
+      name: name,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListTagsForResource = {
   type t
   type request = {
@@ -3871,9 +3963,11 @@ module ListTagsForResource = {
     nextMarker: option<nextMarker>,
   }
   @module("@aws-sdk/client-wafv2") @new external new: request => t = "ListTagsForResourceCommand"
-  let make = (~resourceARN, ~limit=?, ~nextMarker=?, ()) => new({resourceARN, limit, nextMarker})
+  let make = (~resourceARN, ~limit=?, ~nextMarker=?, ()) =>
+    new({resourceARN: resourceARN, limit: limit, nextMarker: nextMarker})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetRegexPatternSet = {
   type t
   type request = {
@@ -3907,9 +4001,10 @@ module GetRegexPatternSet = {
     @ocaml.doc("<p></p>") @as("RegexPatternSet") regexPatternSet: option<regexPatternSet>,
   }
   @module("@aws-sdk/client-wafv2") @new external new: request => t = "GetRegexPatternSetCommand"
-  let make = (~id, ~scope, ~name, ()) => new({id, scope, name})
+  let make = (~id, ~scope, ~name, ()) => new({id: id, scope: scope, name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetMobileSdkRelease = {
   type t
   type request = {
@@ -3926,9 +4021,11 @@ module GetMobileSdkRelease = {
     mobileSdkRelease: option<mobileSdkRelease>,
   }
   @module("@aws-sdk/client-wafv2") @new external new: request => t = "GetMobileSdkReleaseCommand"
-  let make = (~releaseVersion, ~platform, ()) => new({releaseVersion, platform})
+  let make = (~releaseVersion, ~platform, ()) =>
+    new({releaseVersion: releaseVersion, platform: platform})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetManagedRuleSet = {
   type t
   type request = {
@@ -3964,9 +4061,10 @@ module GetManagedRuleSet = {
     managedRuleSet: option<managedRuleSet>,
   }
   @module("@aws-sdk/client-wafv2") @new external new: request => t = "GetManagedRuleSetCommand"
-  let make = (~id, ~scope, ~name, ()) => new({id, scope, name})
+  let make = (~id, ~scope, ~name, ()) => new({id: id, scope: scope, name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetSampledRequests = {
   type t
   type request = {
@@ -4026,9 +4124,16 @@ module GetSampledRequests = {
   }
   @module("@aws-sdk/client-wafv2") @new external new: request => t = "GetSampledRequestsCommand"
   let make = (~maxItems, ~timeWindow, ~scope, ~ruleMetricName, ~webAclArn, ()) =>
-    new({maxItems, timeWindow, scope, ruleMetricName, webAclArn})
+    new({
+      maxItems: maxItems,
+      timeWindow: timeWindow,
+      scope: scope,
+      ruleMetricName: ruleMetricName,
+      webAclArn: webAclArn,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module PutLoggingConfiguration = {
   type t
   type request = {
@@ -4043,6 +4148,7 @@ module PutLoggingConfiguration = {
   let make = (~loggingConfiguration, ()) => new({loggingConfiguration: loggingConfiguration})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetLoggingConfiguration = {
   type t
   type request = {
@@ -4061,6 +4167,7 @@ module GetLoggingConfiguration = {
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeManagedRuleGroup = {
   type t
   type request = {
@@ -4141,9 +4248,10 @@ module DescribeManagedRuleGroup = {
   @module("@aws-sdk/client-wafv2") @new
   external new: request => t = "DescribeManagedRuleGroupCommand"
   let make = (~scope, ~name, ~vendorName, ~versionName=?, ()) =>
-    new({versionName, scope, name, vendorName})
+    new({versionName: versionName, scope: scope, name: name, vendorName: vendorName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListLoggingConfigurations = {
   type t
   type request = {
@@ -4181,9 +4289,11 @@ module ListLoggingConfigurations = {
   }
   @module("@aws-sdk/client-wafv2") @new
   external new: request => t = "ListLoggingConfigurationsCommand"
-  let make = (~scope, ~limit=?, ~nextMarker=?, ()) => new({limit, nextMarker, scope})
+  let make = (~scope, ~limit=?, ~nextMarker=?, ()) =>
+    new({limit: limit, nextMarker: nextMarker, scope: scope})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateWebACL = {
   type t
   type request = {
@@ -4268,19 +4378,20 @@ module UpdateWebACL = {
     (),
   ) =>
     new({
-      captchaConfig,
-      customResponseBodies,
-      lockToken,
-      visibilityConfig,
-      rules,
-      description,
-      defaultAction,
-      id,
-      scope,
-      name,
+      captchaConfig: captchaConfig,
+      customResponseBodies: customResponseBodies,
+      lockToken: lockToken,
+      visibilityConfig: visibilityConfig,
+      rules: rules,
+      description: description,
+      defaultAction: defaultAction,
+      id: id,
+      scope: scope,
+      name: name,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateRuleGroup = {
   type t
   type request = {
@@ -4351,9 +4462,20 @@ module UpdateRuleGroup = {
     ~rules=?,
     ~description=?,
     (),
-  ) => new({customResponseBodies, lockToken, visibilityConfig, rules, description, id, scope, name})
+  ) =>
+    new({
+      customResponseBodies: customResponseBodies,
+      lockToken: lockToken,
+      visibilityConfig: visibilityConfig,
+      rules: rules,
+      description: description,
+      id: id,
+      scope: scope,
+      name: name,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateWebACL = {
   type t
   type request = {
@@ -4429,18 +4551,19 @@ module CreateWebACL = {
     (),
   ) =>
     new({
-      captchaConfig,
-      customResponseBodies,
-      tags,
-      visibilityConfig,
-      rules,
-      description,
-      defaultAction,
-      scope,
-      name,
+      captchaConfig: captchaConfig,
+      customResponseBodies: customResponseBodies,
+      tags: tags,
+      visibilityConfig: visibilityConfig,
+      rules: rules,
+      description: description,
+      defaultAction: defaultAction,
+      scope: scope,
+      name: name,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateRuleGroup = {
   type t
   type request = {
@@ -4518,9 +4641,19 @@ module CreateRuleGroup = {
     ~description=?,
     (),
   ) =>
-    new({customResponseBodies, tags, visibilityConfig, rules, description, capacity, scope, name})
+    new({
+      customResponseBodies: customResponseBodies,
+      tags: tags,
+      visibilityConfig: visibilityConfig,
+      rules: rules,
+      description: description,
+      capacity: capacity,
+      scope: scope,
+      name: name,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CheckCapacity = {
   type t
   type request = {
@@ -4546,9 +4679,10 @@ module CheckCapacity = {
     capacity: option<consumedCapacity>,
   }
   @module("@aws-sdk/client-wafv2") @new external new: request => t = "CheckCapacityCommand"
-  let make = (~rules, ~scope, ()) => new({rules, scope})
+  let make = (~rules, ~scope, ()) => new({rules: rules, scope: scope})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetRuleGroup = {
   type t
   type request = {
@@ -4586,9 +4720,11 @@ module GetRuleGroup = {
     @ocaml.doc("<p></p>") @as("RuleGroup") ruleGroup: option<ruleGroup>,
   }
   @module("@aws-sdk/client-wafv2") @new external new: request => t = "GetRuleGroupCommand"
-  let make = (~arn=?, ~id=?, ~scope=?, ~name=?, ()) => new({arn, id, scope, name})
+  let make = (~arn=?, ~id=?, ~scope=?, ~name=?, ()) =>
+    new({arn: arn, id: id, scope: scope, name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetWebACLForResource = {
   type t
   type request = {
@@ -4605,6 +4741,7 @@ module GetWebACLForResource = {
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetWebACL = {
   type t
   type request = {
@@ -4648,6 +4785,6 @@ module GetWebACL = {
     webACL: option<webACL>,
   }
   @module("@aws-sdk/client-wafv2") @new external new: request => t = "GetWebACLCommand"
-  let make = (~id, ~scope, ~name, ()) => new({id, scope, name})
+  let make = (~id, ~scope, ~name, ()) => new({id: id, scope: scope, name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

@@ -228,9 +228,15 @@ module UnsubscribeFromDataset = {
   @module("@aws-sdk/client-cognito-sync") @new
   external new: request => t = "UnsubscribeFromDatasetCommand"
   let make = (~deviceId, ~datasetName, ~identityId, ~identityPoolId, ()) =>
-    new({deviceId, datasetName, identityId, identityPoolId})
+    new({
+      deviceId: deviceId,
+      datasetName: datasetName,
+      identityId: identityId,
+      identityPoolId: identityPoolId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module SubscribeToDataset = {
   type t
   @ocaml.doc("<p>A request to SubscribeToDatasetRequest.</p>")
@@ -249,9 +255,15 @@ module SubscribeToDataset = {
   @module("@aws-sdk/client-cognito-sync") @new
   external new: request => t = "SubscribeToDatasetCommand"
   let make = (~deviceId, ~datasetName, ~identityId, ~identityPoolId, ()) =>
-    new({deviceId, datasetName, identityId, identityPoolId})
+    new({
+      deviceId: deviceId,
+      datasetName: datasetName,
+      identityId: identityId,
+      identityPoolId: identityPoolId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module RegisterDevice = {
   type t
   @ocaml.doc("<p>A request to RegisterDevice.</p>")
@@ -272,9 +284,10 @@ module RegisterDevice = {
   }
   @module("@aws-sdk/client-cognito-sync") @new external new: request => t = "RegisterDeviceCommand"
   let make = (~token, ~platform, ~identityId, ~identityPoolId, ()) =>
-    new({token, platform, identityId, identityPoolId})
+    new({token: token, platform: platform, identityId: identityId, identityPoolId: identityPoolId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetBulkPublishDetails = {
   type t
   @ocaml.doc("The input for the GetBulkPublishDetails operation.")
@@ -318,6 +331,7 @@ module GetBulkPublishDetails = {
   let make = (~identityPoolId, ()) => new({identityPoolId: identityPoolId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module BulkPublish = {
   type t
   @ocaml.doc("The input for the BulkPublish operation.")
@@ -340,6 +354,7 @@ module BulkPublish = {
   let make = (~identityPoolId, ()) => new({identityPoolId: identityPoolId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module SetCognitoEvents = {
   type t
   @ocaml.doc("<p>A request to configure Cognito Events\"</p>\"")
@@ -352,9 +367,10 @@ module SetCognitoEvents = {
   type response = {.}
   @module("@aws-sdk/client-cognito-sync") @new
   external new: request => t = "SetCognitoEventsCommand"
-  let make = (~events, ~identityPoolId, ()) => new({events, identityPoolId})
+  let make = (~events, ~identityPoolId, ()) => new({events: events, identityPoolId: identityPoolId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module GetCognitoEvents = {
   type t
   @ocaml.doc("<p>A request for a list of the configured Cognito Events</p>")
@@ -372,6 +388,7 @@ module GetCognitoEvents = {
   let make = (~identityPoolId, ()) => new({identityPoolId: identityPoolId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeIdentityUsage = {
   type t
   @ocaml.doc("A request for information about the usage of
@@ -398,9 +415,11 @@ module DescribeIdentityUsage = {
   }
   @module("@aws-sdk/client-cognito-sync") @new
   external new: request => t = "DescribeIdentityUsageCommand"
-  let make = (~identityId, ~identityPoolId, ()) => new({identityId, identityPoolId})
+  let make = (~identityId, ~identityPoolId, ()) =>
+    new({identityId: identityId, identityPoolId: identityPoolId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeIdentityPoolUsage = {
   type t
   @ocaml.doc("A request for usage information about
@@ -425,6 +444,7 @@ module DescribeIdentityPoolUsage = {
   let make = (~identityPoolId, ()) => new({identityPoolId: identityPoolId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeDataset = {
   type t
   @ocaml.doc("A request for meta data about a dataset (creation
@@ -459,9 +479,10 @@ module DescribeDataset = {
   }
   @module("@aws-sdk/client-cognito-sync") @new external new: request => t = "DescribeDatasetCommand"
   let make = (~datasetName, ~identityId, ~identityPoolId, ()) =>
-    new({datasetName, identityId, identityPoolId})
+    new({datasetName: datasetName, identityId: identityId, identityPoolId: identityPoolId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteDataset = {
   type t
   @ocaml.doc("A request to delete the specific
@@ -496,9 +517,10 @@ module DeleteDataset = {
   }
   @module("@aws-sdk/client-cognito-sync") @new external new: request => t = "DeleteDatasetCommand"
   let make = (~datasetName, ~identityId, ~identityPoolId, ()) =>
-    new({datasetName, identityId, identityPoolId})
+    new({datasetName: datasetName, identityId: identityId, identityPoolId: identityPoolId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateRecords = {
   type t
   @ocaml.doc("A request to post updates to records or add and
@@ -555,16 +577,17 @@ module UpdateRecords = {
     (),
   ) =>
     new({
-      clientContext,
-      syncSessionToken,
-      recordPatches,
-      deviceId,
-      datasetName,
-      identityId,
-      identityPoolId,
+      clientContext: clientContext,
+      syncSessionToken: syncSessionToken,
+      recordPatches: recordPatches,
+      deviceId: deviceId,
+      datasetName: datasetName,
+      identityId: identityId,
+      identityPoolId: identityPoolId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module SetIdentityPoolConfiguration = {
   type t
   @ocaml.doc("<p>The input for the SetIdentityPoolConfiguration operation.</p>")
@@ -596,9 +619,10 @@ module SetIdentityPoolConfiguration = {
   @module("@aws-sdk/client-cognito-sync") @new
   external new: request => t = "SetIdentityPoolConfigurationCommand"
   let make = (~identityPoolId, ~cognitoStreams=?, ~pushSync=?, ()) =>
-    new({cognitoStreams, pushSync, identityPoolId})
+    new({cognitoStreams: cognitoStreams, pushSync: pushSync, identityPoolId: identityPoolId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListRecords = {
   type t
   @ocaml.doc("A request for a list of records.")
@@ -680,16 +704,17 @@ module ListRecords = {
     (),
   ) =>
     new({
-      syncSessionToken,
-      maxResults,
-      nextToken,
-      lastSyncCount,
-      datasetName,
-      identityId,
-      identityPoolId,
+      syncSessionToken: syncSessionToken,
+      maxResults: maxResults,
+      nextToken: nextToken,
+      lastSyncCount: lastSyncCount,
+      datasetName: datasetName,
+      identityId: identityId,
+      identityPoolId: identityPoolId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListIdentityPoolUsage = {
   type t
   @ocaml.doc("A request for usage information on an
@@ -726,9 +751,11 @@ module ListIdentityPoolUsage = {
   }
   @module("@aws-sdk/client-cognito-sync") @new
   external new: request => t = "ListIdentityPoolUsageCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListDatasets = {
   type t
   @ocaml.doc("Request for a list of datasets for an
@@ -765,9 +792,15 @@ module ListDatasets = {
   }
   @module("@aws-sdk/client-cognito-sync") @new external new: request => t = "ListDatasetsCommand"
   let make = (~identityId, ~identityPoolId, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults, nextToken, identityId, identityPoolId})
+    new({
+      maxResults: maxResults,
+      nextToken: nextToken,
+      identityId: identityId,
+      identityPoolId: identityPoolId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetIdentityPoolConfiguration = {
   type t
   @ocaml.doc("<p>The input for the GetIdentityPoolConfiguration operation.</p>")

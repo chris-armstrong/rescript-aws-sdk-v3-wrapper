@@ -116,6 +116,7 @@ module StopHumanLoop = {
   let make = (~humanLoopName, ()) => new({humanLoopName: humanLoopName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteHumanLoop = {
   type t
   type request = {
@@ -127,6 +128,7 @@ module DeleteHumanLoop = {
   let make = (~humanLoopName, ()) => new({humanLoopName: humanLoopName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DescribeHumanLoop = {
   type t
   type request = {
@@ -167,6 +169,7 @@ module DescribeHumanLoop = {
   let make = (~humanLoopName, ()) => new({humanLoopName: humanLoopName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module StartHumanLoop = {
   type t
   type request = {
@@ -190,9 +193,15 @@ module StartHumanLoop = {
   }
   @module("@aws-sdk/client-sagemaker") @new external new: request => t = "StartHumanLoopCommand"
   let make = (~humanLoopInput, ~flowDefinitionArn, ~humanLoopName, ~dataAttributes=?, ()) =>
-    new({dataAttributes, humanLoopInput, flowDefinitionArn, humanLoopName})
+    new({
+      dataAttributes: dataAttributes,
+      humanLoopInput: humanLoopInput,
+      flowDefinitionArn: flowDefinitionArn,
+      humanLoopName: humanLoopName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListHumanLoops = {
   type t
   type request = {
@@ -239,12 +248,12 @@ module ListHumanLoops = {
     (),
   ) =>
     new({
-      maxResults,
-      nextToken,
-      sortOrder,
-      flowDefinitionArn,
-      creationTimeBefore,
-      creationTimeAfter,
+      maxResults: maxResults,
+      nextToken: nextToken,
+      sortOrder: sortOrder,
+      flowDefinitionArn: flowDefinitionArn,
+      creationTimeBefore: creationTimeBefore,
+      creationTimeAfter: creationTimeAfter,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

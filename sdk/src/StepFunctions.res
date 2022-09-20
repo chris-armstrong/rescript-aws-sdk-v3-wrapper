@@ -637,9 +637,11 @@ module StopExecution = {
   }
   type response = {@ocaml.doc("<p>The date the execution is stopped.</p>") stopDate: timestamp_}
   @module("@aws-sdk/client-states") @new external new: request => t = "StopExecutionCommand"
-  let make = (~executionArn, ~cause=?, ~error=?, ()) => new({cause, error, executionArn})
+  let make = (~executionArn, ~cause=?, ~error=?, ()) =>
+    new({cause: cause, error: error, executionArn: executionArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module StartExecution = {
   type t
   type request = {
@@ -694,9 +696,10 @@ module StartExecution = {
   }
   @module("@aws-sdk/client-states") @new external new: request => t = "StartExecutionCommand"
   let make = (~stateMachineArn, ~traceHeader=?, ~input=?, ~name=?, ()) =>
-    new({traceHeader, input, name, stateMachineArn})
+    new({traceHeader: traceHeader, input: input, name: name, stateMachineArn: stateMachineArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module SendTaskSuccess = {
   type t
   type request = {
@@ -711,9 +714,10 @@ module SendTaskSuccess = {
   }
   type response = {.}
   @module("@aws-sdk/client-states") @new external new: request => t = "SendTaskSuccessCommand"
-  let make = (~output, ~taskToken, ()) => new({output, taskToken})
+  let make = (~output, ~taskToken, ()) => new({output: output, taskToken: taskToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module SendTaskHeartbeat = {
   type t
   type request = {
@@ -727,6 +731,7 @@ module SendTaskHeartbeat = {
   let make = (~taskToken, ()) => new({taskToken: taskToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module SendTaskFailure = {
   type t
   type request = {
@@ -740,9 +745,11 @@ module SendTaskFailure = {
   }
   type response = {.}
   @module("@aws-sdk/client-states") @new external new: request => t = "SendTaskFailureCommand"
-  let make = (~taskToken, ~cause=?, ~error=?, ()) => new({cause, error, taskToken})
+  let make = (~taskToken, ~cause=?, ~error=?, ()) =>
+    new({cause: cause, error: error, taskToken: taskToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module GetActivityTask = {
   type t
   type request = {
@@ -765,9 +772,11 @@ module GetActivityTask = {
     taskToken: option<taskToken>,
   }
   @module("@aws-sdk/client-states") @new external new: request => t = "GetActivityTaskCommand"
-  let make = (~activityArn, ~workerName=?, ()) => new({workerName, activityArn})
+  let make = (~activityArn, ~workerName=?, ()) =>
+    new({workerName: workerName, activityArn: activityArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeActivity = {
   type t
   type request = {
@@ -807,6 +816,7 @@ module DescribeActivity = {
   let make = (~activityArn, ()) => new({activityArn: activityArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteStateMachine = {
   type t
   type request = {
@@ -818,6 +828,7 @@ module DeleteStateMachine = {
   let make = (~stateMachineArn, ()) => new({stateMachineArn: stateMachineArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteActivity = {
   type t
   type request = {
@@ -828,6 +839,7 @@ module DeleteActivity = {
   let make = (~activityArn, ()) => new({activityArn: activityArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UntagResource = {
   type t
   type request = {
@@ -839,9 +851,10 @@ module UntagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-states") @new external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys, resourceArn})
+  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module StartSyncExecution = {
   type t
   type request = {
@@ -897,9 +910,10 @@ module StartSyncExecution = {
   }
   @module("@aws-sdk/client-states") @new external new: request => t = "StartSyncExecutionCommand"
   let make = (~stateMachineArn, ~traceHeader=?, ~input=?, ~name=?, ()) =>
-    new({traceHeader, input, name, stateMachineArn})
+    new({traceHeader: traceHeader, input: input, name: name, stateMachineArn: stateMachineArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeExecution = {
   type t
   type request = {
@@ -958,6 +972,7 @@ module DescribeExecution = {
   let make = (~executionArn, ()) => new({executionArn: executionArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module TagResource = {
   type t
   type request = {
@@ -971,9 +986,10 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-states") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceArn, ()) => new({tags, resourceArn})
+  let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ListTagsForResource = {
   type t
   type request = {
@@ -989,6 +1005,7 @@ module ListTagsForResource = {
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListStateMachines = {
   type t
   type request = {
@@ -1007,9 +1024,11 @@ module ListStateMachines = {
     stateMachines: stateMachineList,
   }
   @module("@aws-sdk/client-states") @new external new: request => t = "ListStateMachinesCommand"
-  let make = (~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults})
+  let make = (~nextToken=?, ~maxResults=?, ()) =>
+    new({nextToken: nextToken, maxResults: maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListExecutions = {
   type t
   type request = {
@@ -1036,9 +1055,15 @@ module ListExecutions = {
   }
   @module("@aws-sdk/client-states") @new external new: request => t = "ListExecutionsCommand"
   let make = (~stateMachineArn, ~nextToken=?, ~maxResults=?, ~statusFilter=?, ()) =>
-    new({nextToken, maxResults, statusFilter, stateMachineArn})
+    new({
+      nextToken: nextToken,
+      maxResults: maxResults,
+      statusFilter: statusFilter,
+      stateMachineArn: stateMachineArn,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListActivities = {
   type t
   type request = {
@@ -1057,9 +1082,11 @@ module ListActivities = {
     @ocaml.doc("<p>The list of activities.</p>") activities: activityList,
   }
   @module("@aws-sdk/client-states") @new external new: request => t = "ListActivitiesCommand"
-  let make = (~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults})
+  let make = (~nextToken=?, ~maxResults=?, ()) =>
+    new({nextToken: nextToken, maxResults: maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateActivity = {
   type t
   type request = {
@@ -1103,9 +1130,10 @@ module CreateActivity = {
     activityArn: arn,
   }
   @module("@aws-sdk/client-states") @new external new: request => t = "CreateActivityCommand"
-  let make = (~name, ~tags=?, ()) => new({tags, name})
+  let make = (~name, ~tags=?, ()) => new({tags: tags, name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateStateMachine = {
   type t
   type request = {
@@ -1133,9 +1161,17 @@ module UpdateStateMachine = {
     ~roleArn=?,
     ~definition=?,
     (),
-  ) => new({tracingConfiguration, loggingConfiguration, roleArn, definition, stateMachineArn})
+  ) =>
+    new({
+      tracingConfiguration: tracingConfiguration,
+      loggingConfiguration: loggingConfiguration,
+      roleArn: roleArn,
+      definition: definition,
+      stateMachineArn: stateMachineArn,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetExecutionHistory = {
   type t
   type request = {
@@ -1168,9 +1204,17 @@ module GetExecutionHistory = {
     ~reverseOrder=?,
     ~maxResults=?,
     (),
-  ) => new({includeExecutionData, nextToken, reverseOrder, maxResults, executionArn})
+  ) =>
+    new({
+      includeExecutionData: includeExecutionData,
+      nextToken: nextToken,
+      reverseOrder: reverseOrder,
+      maxResults: maxResults,
+      executionArn: executionArn,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeStateMachineForExecution = {
   type t
   type request = {
@@ -1205,6 +1249,7 @@ module DescribeStateMachineForExecution = {
   let make = (~executionArn, ()) => new({executionArn: executionArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeStateMachine = {
   type t
   type request = {
@@ -1260,6 +1305,7 @@ module DescribeStateMachine = {
   let make = (~stateMachineArn, ()) => new({stateMachineArn: stateMachineArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateStateMachine = {
   type t
   type request = {
@@ -1332,6 +1378,15 @@ module CreateStateMachine = {
     ~loggingConfiguration=?,
     ~type_=?,
     (),
-  ) => new({tracingConfiguration, tags, loggingConfiguration, type_, roleArn, definition, name})
+  ) =>
+    new({
+      tracingConfiguration: tracingConfiguration,
+      tags: tags,
+      loggingConfiguration: loggingConfiguration,
+      type_: type_,
+      roleArn: roleArn,
+      definition: definition,
+      name: name,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

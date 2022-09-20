@@ -174,9 +174,10 @@ module UntagResource = {
   type response = {.}
   @module("@aws-sdk/client-elastic-inference") @new
   external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys, resourceArn})
+  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module TagResource = {
   type t
   type request = {
@@ -192,9 +193,10 @@ module TagResource = {
   type response = {.}
   @module("@aws-sdk/client-elastic-inference") @new
   external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceArn, ()) => new({tags, resourceArn})
+  let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ListTagsForResource = {
   type t
   type request = {
@@ -214,6 +216,7 @@ module ListTagsForResource = {
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeAcceleratorOfferings = {
   type t
   type request = {
@@ -237,9 +240,11 @@ module DescribeAcceleratorOfferings = {
   }
   @module("@aws-sdk/client-elastic-inference") @new
   external new: request => t = "DescribeAcceleratorOfferingsCommand"
-  let make = (~locationType, ~acceleratorTypes=?, ()) => new({acceleratorTypes, locationType})
+  let make = (~locationType, ~acceleratorTypes=?, ()) =>
+    new({acceleratorTypes: acceleratorTypes, locationType: locationType})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeAccelerators = {
   type t
   type request = {
@@ -277,9 +282,15 @@ module DescribeAccelerators = {
   @module("@aws-sdk/client-elastic-inference") @new
   external new: request => t = "DescribeAcceleratorsCommand"
   let make = (~nextToken=?, ~maxResults=?, ~filters=?, ~acceleratorIds=?, ()) =>
-    new({nextToken, maxResults, filters, acceleratorIds})
+    new({
+      nextToken: nextToken,
+      maxResults: maxResults,
+      filters: filters,
+      acceleratorIds: acceleratorIds,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeAcceleratorTypes = {
   type t
   type request = {.}

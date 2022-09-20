@@ -353,9 +353,10 @@ module GetMediaForFragmentList = {
   @module("@aws-sdk/client-kinesisvideo") @new
   external new: request => t = "GetMediaForFragmentListCommand"
   let make = (~fragments, ~streamARN=?, ~streamName=?, ()) =>
-    new({fragments, streamARN, streamName})
+    new({fragments: fragments, streamARN: streamARN, streamName: streamName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListFragments = {
   type t
   type request = {
@@ -396,9 +397,16 @@ module ListFragments = {
   }
   @module("@aws-sdk/client-kinesisvideo") @new external new: request => t = "ListFragmentsCommand"
   let make = (~fragmentSelector=?, ~nextToken=?, ~maxResults=?, ~streamARN=?, ~streamName=?, ()) =>
-    new({fragmentSelector, nextToken, maxResults, streamARN, streamName})
+    new({
+      fragmentSelector: fragmentSelector,
+      nextToken: nextToken,
+      maxResults: maxResults,
+      streamARN: streamARN,
+      streamName: streamName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetHLSStreamingSessionURL = {
   type t
   type request = {
@@ -597,18 +605,19 @@ module GetHLSStreamingSessionURL = {
     (),
   ) =>
     new({
-      maxMediaPlaylistFragmentResults,
-      expires,
-      displayFragmentTimestamp,
-      discontinuityMode,
-      containerFormat,
-      hlsfragmentSelector,
-      playbackMode,
-      streamARN,
-      streamName,
+      maxMediaPlaylistFragmentResults: maxMediaPlaylistFragmentResults,
+      expires: expires,
+      displayFragmentTimestamp: displayFragmentTimestamp,
+      discontinuityMode: discontinuityMode,
+      containerFormat: containerFormat,
+      hlsfragmentSelector: hlsfragmentSelector,
+      playbackMode: playbackMode,
+      streamARN: streamARN,
+      streamName: streamName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetDASHStreamingSessionURL = {
   type t
   type request = {
@@ -767,17 +776,18 @@ module GetDASHStreamingSessionURL = {
     (),
   ) =>
     new({
-      maxManifestFragmentResults,
-      expires,
-      dashfragmentSelector,
-      displayFragmentNumber,
-      displayFragmentTimestamp,
-      playbackMode,
-      streamARN,
-      streamName,
+      maxManifestFragmentResults: maxManifestFragmentResults,
+      expires: expires,
+      dashfragmentSelector: dashfragmentSelector,
+      displayFragmentNumber: displayFragmentNumber,
+      displayFragmentTimestamp: displayFragmentTimestamp,
+      playbackMode: playbackMode,
+      streamARN: streamARN,
+      streamName: streamName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetClip = {
   type t
   type request = {
@@ -805,6 +815,6 @@ module GetClip = {
   }
   @module("@aws-sdk/client-kinesisvideo") @new external new: request => t = "GetClipCommand"
   let make = (~clipFragmentSelector, ~streamARN=?, ~streamName=?, ()) =>
-    new({clipFragmentSelector, streamARN, streamName})
+    new({clipFragmentSelector: clipFragmentSelector, streamARN: streamARN, streamName: streamName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

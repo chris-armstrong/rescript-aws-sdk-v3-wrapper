@@ -2611,9 +2611,10 @@ module PutPermissionPolicy = {
   type response = {.}
   @module("@aws-sdk/client-waf-regional") @new
   external new: request => t = "PutPermissionPolicyCommand"
-  let make = (~policy, ~resourceArn, ()) => new({policy, resourceArn})
+  let make = (~policy, ~resourceArn, ()) => new({policy: policy, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module GetPermissionPolicy = {
   type t
   type request = {
@@ -2632,6 +2633,7 @@ module GetPermissionPolicy = {
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetChangeTokenStatus = {
   type t
   type request = {
@@ -2650,6 +2652,7 @@ module GetChangeTokenStatus = {
   let make = (~changeToken, ()) => new({changeToken: changeToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetChangeToken = {
   type t
   type request = {.}
@@ -2663,6 +2666,7 @@ module GetChangeToken = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DisassociateWebACL = {
   type t
   type request = {
@@ -2689,6 +2693,7 @@ module DisassociateWebACL = {
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteXssMatchSet = {
   type t
   @ocaml.doc("<p>A request to delete an <a>XssMatchSet</a> from AWS WAF.</p>")
@@ -2710,9 +2715,11 @@ module DeleteXssMatchSet = {
   }
   @module("@aws-sdk/client-waf-regional") @new
   external new: request => t = "DeleteXssMatchSetCommand"
-  let make = (~changeToken, ~xssMatchSetId, ()) => new({changeToken, xssMatchSetId})
+  let make = (~changeToken, ~xssMatchSetId, ()) =>
+    new({changeToken: changeToken, xssMatchSetId: xssMatchSetId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteWebACL = {
   type t
   type request = {
@@ -2731,9 +2738,10 @@ module DeleteWebACL = {
     changeToken: option<changeToken>,
   }
   @module("@aws-sdk/client-waf-regional") @new external new: request => t = "DeleteWebACLCommand"
-  let make = (~changeToken, ~webACLId, ()) => new({changeToken, webACLId})
+  let make = (~changeToken, ~webACLId, ()) => new({changeToken: changeToken, webACLId: webACLId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteSqlInjectionMatchSet = {
   type t
   @ocaml.doc("<p>A request to delete a <a>SqlInjectionMatchSet</a> from AWS WAF.</p>")
@@ -2758,9 +2766,10 @@ module DeleteSqlInjectionMatchSet = {
   @module("@aws-sdk/client-waf-regional") @new
   external new: request => t = "DeleteSqlInjectionMatchSetCommand"
   let make = (~changeToken, ~sqlInjectionMatchSetId, ()) =>
-    new({changeToken, sqlInjectionMatchSetId})
+    new({changeToken: changeToken, sqlInjectionMatchSetId: sqlInjectionMatchSetId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteSizeConstraintSet = {
   type t
   type request = {
@@ -2780,9 +2789,11 @@ module DeleteSizeConstraintSet = {
   }
   @module("@aws-sdk/client-waf-regional") @new
   external new: request => t = "DeleteSizeConstraintSetCommand"
-  let make = (~changeToken, ~sizeConstraintSetId, ()) => new({changeToken, sizeConstraintSetId})
+  let make = (~changeToken, ~sizeConstraintSetId, ()) =>
+    new({changeToken: changeToken, sizeConstraintSetId: sizeConstraintSetId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteRuleGroup = {
   type t
   type request = {
@@ -2801,9 +2812,11 @@ module DeleteRuleGroup = {
     changeToken: option<changeToken>,
   }
   @module("@aws-sdk/client-waf-regional") @new external new: request => t = "DeleteRuleGroupCommand"
-  let make = (~changeToken, ~ruleGroupId, ()) => new({changeToken, ruleGroupId})
+  let make = (~changeToken, ~ruleGroupId, ()) =>
+    new({changeToken: changeToken, ruleGroupId: ruleGroupId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteRule = {
   type t
   type request = {
@@ -2822,9 +2835,10 @@ module DeleteRule = {
     changeToken: option<changeToken>,
   }
   @module("@aws-sdk/client-waf-regional") @new external new: request => t = "DeleteRuleCommand"
-  let make = (~changeToken, ~ruleId, ()) => new({changeToken, ruleId})
+  let make = (~changeToken, ~ruleId, ()) => new({changeToken: changeToken, ruleId: ruleId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteRegexPatternSet = {
   type t
   type request = {
@@ -2844,9 +2858,11 @@ module DeleteRegexPatternSet = {
   }
   @module("@aws-sdk/client-waf-regional") @new
   external new: request => t = "DeleteRegexPatternSetCommand"
-  let make = (~changeToken, ~regexPatternSetId, ()) => new({changeToken, regexPatternSetId})
+  let make = (~changeToken, ~regexPatternSetId, ()) =>
+    new({changeToken: changeToken, regexPatternSetId: regexPatternSetId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteRegexMatchSet = {
   type t
   type request = {
@@ -2866,9 +2882,11 @@ module DeleteRegexMatchSet = {
   }
   @module("@aws-sdk/client-waf-regional") @new
   external new: request => t = "DeleteRegexMatchSetCommand"
-  let make = (~changeToken, ~regexMatchSetId, ()) => new({changeToken, regexMatchSetId})
+  let make = (~changeToken, ~regexMatchSetId, ()) =>
+    new({changeToken: changeToken, regexMatchSetId: regexMatchSetId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteRateBasedRule = {
   type t
   type request = {
@@ -2890,9 +2908,10 @@ module DeleteRateBasedRule = {
   }
   @module("@aws-sdk/client-waf-regional") @new
   external new: request => t = "DeleteRateBasedRuleCommand"
-  let make = (~changeToken, ~ruleId, ()) => new({changeToken, ruleId})
+  let make = (~changeToken, ~ruleId, ()) => new({changeToken: changeToken, ruleId: ruleId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeletePermissionPolicy = {
   type t
   type request = {
@@ -2907,6 +2926,7 @@ module DeletePermissionPolicy = {
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteLoggingConfiguration = {
   type t
   type request = {
@@ -2922,6 +2942,7 @@ module DeleteLoggingConfiguration = {
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteIPSet = {
   type t
   type request = {
@@ -2940,9 +2961,10 @@ module DeleteIPSet = {
     changeToken: option<changeToken>,
   }
   @module("@aws-sdk/client-waf-regional") @new external new: request => t = "DeleteIPSetCommand"
-  let make = (~changeToken, ~ipsetId, ()) => new({changeToken, ipsetId})
+  let make = (~changeToken, ~ipsetId, ()) => new({changeToken: changeToken, ipsetId: ipsetId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteGeoMatchSet = {
   type t
   type request = {
@@ -2962,9 +2984,11 @@ module DeleteGeoMatchSet = {
   }
   @module("@aws-sdk/client-waf-regional") @new
   external new: request => t = "DeleteGeoMatchSetCommand"
-  let make = (~changeToken, ~geoMatchSetId, ()) => new({changeToken, geoMatchSetId})
+  let make = (~changeToken, ~geoMatchSetId, ()) =>
+    new({changeToken: changeToken, geoMatchSetId: geoMatchSetId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteByteMatchSet = {
   type t
   type request = {
@@ -2984,9 +3008,11 @@ module DeleteByteMatchSet = {
   }
   @module("@aws-sdk/client-waf-regional") @new
   external new: request => t = "DeleteByteMatchSetCommand"
-  let make = (~changeToken, ~byteMatchSetId, ()) => new({changeToken, byteMatchSetId})
+  let make = (~changeToken, ~byteMatchSetId, ()) =>
+    new({changeToken: changeToken, byteMatchSetId: byteMatchSetId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateWebACLMigrationStack = {
   type t
   type request = {
@@ -3022,9 +3048,14 @@ module CreateWebACLMigrationStack = {
   @module("@aws-sdk/client-waf-regional") @new
   external new: request => t = "CreateWebACLMigrationStackCommand"
   let make = (~ignoreUnsupportedType, ~s3BucketName, ~webACLId, ()) =>
-    new({ignoreUnsupportedType, s3BucketName, webACLId})
+    new({
+      ignoreUnsupportedType: ignoreUnsupportedType,
+      s3BucketName: s3BucketName,
+      webACLId: webACLId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module AssociateWebACL = {
   type t
   type request = {
@@ -3049,9 +3080,10 @@ module AssociateWebACL = {
   }
   type response = {.}
   @module("@aws-sdk/client-waf-regional") @new external new: request => t = "AssociateWebACLCommand"
-  let make = (~resourceArn, ~webACLId, ()) => new({resourceArn, webACLId})
+  let make = (~resourceArn, ~webACLId, ()) => new({resourceArn: resourceArn, webACLId: webACLId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UntagResource = {
   type t
   type request = {
@@ -3060,9 +3092,10 @@ module UntagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-waf-regional") @new external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceARN, ()) => new({tagKeys, resourceARN})
+  let make = (~tagKeys, ~resourceARN, ()) => new({tagKeys: tagKeys, resourceARN: resourceARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ListResourcesForWebACL = {
   type t
   type request = {
@@ -3086,9 +3119,11 @@ module ListResourcesForWebACL = {
   }
   @module("@aws-sdk/client-waf-regional") @new
   external new: request => t = "ListResourcesForWebACLCommand"
-  let make = (~webACLId, ~resourceType=?, ()) => new({resourceType, webACLId})
+  let make = (~webACLId, ~resourceType=?, ()) =>
+    new({resourceType: resourceType, webACLId: webACLId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetWebACLForResource = {
   type t
   type request = {
@@ -3121,6 +3156,7 @@ module GetWebACLForResource = {
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetRuleGroup = {
   type t
   type request = {
@@ -3140,6 +3176,7 @@ module GetRuleGroup = {
   let make = (~ruleGroupId, ()) => new({ruleGroupId: ruleGroupId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetRateBasedRuleManagedKeys = {
   type t
   type request = {
@@ -3162,9 +3199,10 @@ module GetRateBasedRuleManagedKeys = {
   }
   @module("@aws-sdk/client-waf-regional") @new
   external new: request => t = "GetRateBasedRuleManagedKeysCommand"
-  let make = (~ruleId, ~nextMarker=?, ()) => new({nextMarker, ruleId})
+  let make = (~ruleId, ~nextMarker=?, ()) => new({nextMarker: nextMarker, ruleId: ruleId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateRegexPatternSet = {
   type t
   type request = {
@@ -3190,9 +3228,10 @@ module UpdateRegexPatternSet = {
   @module("@aws-sdk/client-waf-regional") @new
   external new: request => t = "UpdateRegexPatternSetCommand"
   let make = (~changeToken, ~updates, ~regexPatternSetId, ()) =>
-    new({changeToken, updates, regexPatternSetId})
+    new({changeToken: changeToken, updates: updates, regexPatternSetId: regexPatternSetId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module TagResource = {
   type t
   type request = {
@@ -3201,9 +3240,10 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-waf-regional") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceARN, ()) => new({tags, resourceARN})
+  let make = (~tags, ~resourceARN, ()) => new({tags: tags, resourceARN: resourceARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ListXssMatchSets = {
   type t
   @ocaml.doc(
@@ -3235,9 +3275,10 @@ module ListXssMatchSets = {
   }
   @module("@aws-sdk/client-waf-regional") @new
   external new: request => t = "ListXssMatchSetsCommand"
-  let make = (~limit=?, ~nextMarker=?, ()) => new({limit, nextMarker})
+  let make = (~limit=?, ~nextMarker=?, ()) => new({limit: limit, nextMarker: nextMarker})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListWebACLs = {
   type t
   type request = {
@@ -3264,9 +3305,10 @@ module ListWebACLs = {
     nextMarker: option<nextMarker>,
   }
   @module("@aws-sdk/client-waf-regional") @new external new: request => t = "ListWebACLsCommand"
-  let make = (~limit=?, ~nextMarker=?, ()) => new({limit, nextMarker})
+  let make = (~limit=?, ~nextMarker=?, ()) => new({limit: limit, nextMarker: nextMarker})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListSubscribedRuleGroups = {
   type t
   type request = {
@@ -3294,9 +3336,10 @@ module ListSubscribedRuleGroups = {
   }
   @module("@aws-sdk/client-waf-regional") @new
   external new: request => t = "ListSubscribedRuleGroupsCommand"
-  let make = (~limit=?, ~nextMarker=?, ()) => new({limit, nextMarker})
+  let make = (~limit=?, ~nextMarker=?, ()) => new({limit: limit, nextMarker: nextMarker})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListSqlInjectionMatchSets = {
   type t
   @ocaml.doc(
@@ -3329,9 +3372,10 @@ module ListSqlInjectionMatchSets = {
   }
   @module("@aws-sdk/client-waf-regional") @new
   external new: request => t = "ListSqlInjectionMatchSetsCommand"
-  let make = (~limit=?, ~nextMarker=?, ()) => new({limit, nextMarker})
+  let make = (~limit=?, ~nextMarker=?, ()) => new({limit: limit, nextMarker: nextMarker})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListSizeConstraintSets = {
   type t
   type request = {
@@ -3359,9 +3403,10 @@ module ListSizeConstraintSets = {
   }
   @module("@aws-sdk/client-waf-regional") @new
   external new: request => t = "ListSizeConstraintSetsCommand"
-  let make = (~limit=?, ~nextMarker=?, ()) => new({limit, nextMarker})
+  let make = (~limit=?, ~nextMarker=?, ()) => new({limit: limit, nextMarker: nextMarker})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListRules = {
   type t
   type request = {
@@ -3386,9 +3431,10 @@ module ListRules = {
     nextMarker: option<nextMarker>,
   }
   @module("@aws-sdk/client-waf-regional") @new external new: request => t = "ListRulesCommand"
-  let make = (~limit=?, ~nextMarker=?, ()) => new({limit, nextMarker})
+  let make = (~limit=?, ~nextMarker=?, ()) => new({limit: limit, nextMarker: nextMarker})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListRuleGroups = {
   type t
   type request = {
@@ -3414,9 +3460,10 @@ module ListRuleGroups = {
     nextMarker: option<nextMarker>,
   }
   @module("@aws-sdk/client-waf-regional") @new external new: request => t = "ListRuleGroupsCommand"
-  let make = (~limit=?, ~nextMarker=?, ()) => new({limit, nextMarker})
+  let make = (~limit=?, ~nextMarker=?, ()) => new({limit: limit, nextMarker: nextMarker})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListRegexPatternSets = {
   type t
   type request = {
@@ -3444,9 +3491,10 @@ module ListRegexPatternSets = {
   }
   @module("@aws-sdk/client-waf-regional") @new
   external new: request => t = "ListRegexPatternSetsCommand"
-  let make = (~limit=?, ~nextMarker=?, ()) => new({limit, nextMarker})
+  let make = (~limit=?, ~nextMarker=?, ()) => new({limit: limit, nextMarker: nextMarker})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListRegexMatchSets = {
   type t
   type request = {
@@ -3474,9 +3522,10 @@ module ListRegexMatchSets = {
   }
   @module("@aws-sdk/client-waf-regional") @new
   external new: request => t = "ListRegexMatchSetsCommand"
-  let make = (~limit=?, ~nextMarker=?, ()) => new({limit, nextMarker})
+  let make = (~limit=?, ~nextMarker=?, ()) => new({limit: limit, nextMarker: nextMarker})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListRateBasedRules = {
   type t
   type request = {
@@ -3508,9 +3557,10 @@ module ListRateBasedRules = {
   }
   @module("@aws-sdk/client-waf-regional") @new
   external new: request => t = "ListRateBasedRulesCommand"
-  let make = (~limit=?, ~nextMarker=?, ()) => new({limit, nextMarker})
+  let make = (~limit=?, ~nextMarker=?, ()) => new({limit: limit, nextMarker: nextMarker})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListIPSets = {
   type t
   type request = {
@@ -3536,9 +3586,10 @@ module ListIPSets = {
     nextMarker: option<nextMarker>,
   }
   @module("@aws-sdk/client-waf-regional") @new external new: request => t = "ListIPSetsCommand"
-  let make = (~limit=?, ~nextMarker=?, ()) => new({limit, nextMarker})
+  let make = (~limit=?, ~nextMarker=?, ()) => new({limit: limit, nextMarker: nextMarker})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListGeoMatchSets = {
   type t
   type request = {
@@ -3566,9 +3617,10 @@ module ListGeoMatchSets = {
   }
   @module("@aws-sdk/client-waf-regional") @new
   external new: request => t = "ListGeoMatchSetsCommand"
-  let make = (~limit=?, ~nextMarker=?, ()) => new({limit, nextMarker})
+  let make = (~limit=?, ~nextMarker=?, ()) => new({limit: limit, nextMarker: nextMarker})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListByteMatchSets = {
   type t
   type request = {
@@ -3596,9 +3648,10 @@ module ListByteMatchSets = {
   }
   @module("@aws-sdk/client-waf-regional") @new
   external new: request => t = "ListByteMatchSetsCommand"
-  let make = (~limit=?, ~nextMarker=?, ()) => new({limit, nextMarker})
+  let make = (~limit=?, ~nextMarker=?, ()) => new({limit: limit, nextMarker: nextMarker})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetRegexPatternSet = {
   type t
   type request = {
@@ -3619,6 +3672,7 @@ module GetRegexPatternSet = {
   let make = (~regexPatternSetId, ()) => new({regexPatternSetId: regexPatternSetId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateRuleGroup = {
   type t
   type request = {
@@ -3644,9 +3698,10 @@ module CreateRuleGroup = {
   }
   @module("@aws-sdk/client-waf-regional") @new external new: request => t = "CreateRuleGroupCommand"
   let make = (~changeToken, ~metricName, ~name, ~tags=?, ()) =>
-    new({tags, changeToken, metricName, name})
+    new({tags: tags, changeToken: changeToken, metricName: metricName, name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateRegexPatternSet = {
   type t
   type request = {
@@ -3668,9 +3723,10 @@ module CreateRegexPatternSet = {
   }
   @module("@aws-sdk/client-waf-regional") @new
   external new: request => t = "CreateRegexPatternSetCommand"
-  let make = (~changeToken, ~name, ()) => new({changeToken, name})
+  let make = (~changeToken, ~name, ()) => new({changeToken: changeToken, name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateRule = {
   type t
   type request = {
@@ -3710,9 +3766,11 @@ module UpdateRule = {
     changeToken: option<changeToken>,
   }
   @module("@aws-sdk/client-waf-regional") @new external new: request => t = "UpdateRuleCommand"
-  let make = (~updates, ~changeToken, ~ruleId, ()) => new({updates, changeToken, ruleId})
+  let make = (~updates, ~changeToken, ~ruleId, ()) =>
+    new({updates: updates, changeToken: changeToken, ruleId: ruleId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateRateBasedRule = {
   type t
   type request = {
@@ -3744,9 +3802,10 @@ module UpdateRateBasedRule = {
   @module("@aws-sdk/client-waf-regional") @new
   external new: request => t = "UpdateRateBasedRuleCommand"
   let make = (~rateLimit, ~updates, ~changeToken, ~ruleId, ()) =>
-    new({rateLimit, updates, changeToken, ruleId})
+    new({rateLimit: rateLimit, updates: updates, changeToken: changeToken, ruleId: ruleId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateIPSet = {
   type t
   type request = {
@@ -3782,9 +3841,11 @@ module UpdateIPSet = {
     changeToken: option<changeToken>,
   }
   @module("@aws-sdk/client-waf-regional") @new external new: request => t = "UpdateIPSetCommand"
-  let make = (~updates, ~changeToken, ~ipsetId, ()) => new({updates, changeToken, ipsetId})
+  let make = (~updates, ~changeToken, ~ipsetId, ()) =>
+    new({updates: updates, changeToken: changeToken, ipsetId: ipsetId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateGeoMatchSet = {
   type t
   type request = {
@@ -3822,9 +3883,10 @@ module UpdateGeoMatchSet = {
   @module("@aws-sdk/client-waf-regional") @new
   external new: request => t = "UpdateGeoMatchSetCommand"
   let make = (~updates, ~changeToken, ~geoMatchSetId, ()) =>
-    new({updates, changeToken, geoMatchSetId})
+    new({updates: updates, changeToken: changeToken, geoMatchSetId: geoMatchSetId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module PutLoggingConfiguration = {
   type t
   type request = {
@@ -3849,6 +3911,7 @@ module PutLoggingConfiguration = {
   let make = (~loggingConfiguration, ()) => new({loggingConfiguration: loggingConfiguration})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListTagsForResource = {
   type t
   type request = {
@@ -3862,9 +3925,11 @@ module ListTagsForResource = {
   }
   @module("@aws-sdk/client-waf-regional") @new
   external new: request => t = "ListTagsForResourceCommand"
-  let make = (~resourceARN, ~limit=?, ~nextMarker=?, ()) => new({resourceARN, limit, nextMarker})
+  let make = (~resourceARN, ~limit=?, ~nextMarker=?, ()) =>
+    new({resourceARN: resourceARN, limit: limit, nextMarker: nextMarker})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetRule = {
   type t
   type request = {
@@ -3897,6 +3962,7 @@ module GetRule = {
   let make = (~ruleId, ()) => new({ruleId: ruleId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetRateBasedRule = {
   type t
   type request = {
@@ -3916,6 +3982,7 @@ module GetRateBasedRule = {
   let make = (~ruleId, ()) => new({ruleId: ruleId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetLoggingConfiguration = {
   type t
   type request = {
@@ -3935,6 +4002,7 @@ module GetLoggingConfiguration = {
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetIPSet = {
   type t
   type request = {
@@ -3966,6 +4034,7 @@ module GetIPSet = {
   let make = (~ipsetId, ()) => new({ipsetId: ipsetId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetGeoMatchSet = {
   type t
   type request = {
@@ -3985,6 +4054,7 @@ module GetGeoMatchSet = {
   let make = (~geoMatchSetId, ()) => new({geoMatchSetId: geoMatchSetId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateRule = {
   type t
   type request = {
@@ -4014,9 +4084,10 @@ module CreateRule = {
   }
   @module("@aws-sdk/client-waf-regional") @new external new: request => t = "CreateRuleCommand"
   let make = (~changeToken, ~metricName, ~name, ~tags=?, ()) =>
-    new({tags, changeToken, metricName, name})
+    new({tags: tags, changeToken: changeToken, metricName: metricName, name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateRateBasedRule = {
   type t
   type request = {
@@ -4064,9 +4135,17 @@ module CreateRateBasedRule = {
   @module("@aws-sdk/client-waf-regional") @new
   external new: request => t = "CreateRateBasedRuleCommand"
   let make = (~changeToken, ~rateLimit, ~rateKey, ~metricName, ~name, ~tags=?, ()) =>
-    new({tags, changeToken, rateLimit, rateKey, metricName, name})
+    new({
+      tags: tags,
+      changeToken: changeToken,
+      rateLimit: rateLimit,
+      rateKey: rateKey,
+      metricName: metricName,
+      name: name,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateIPSet = {
   type t
   type request = {
@@ -4089,9 +4168,10 @@ module CreateIPSet = {
     ipset: option<ipset>,
   }
   @module("@aws-sdk/client-waf-regional") @new external new: request => t = "CreateIPSetCommand"
-  let make = (~changeToken, ~name, ()) => new({changeToken, name})
+  let make = (~changeToken, ~name, ()) => new({changeToken: changeToken, name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateGeoMatchSet = {
   type t
   type request = {
@@ -4117,9 +4197,10 @@ module CreateGeoMatchSet = {
   }
   @module("@aws-sdk/client-waf-regional") @new
   external new: request => t = "CreateGeoMatchSetCommand"
-  let make = (~changeToken, ~name, ()) => new({changeToken, name})
+  let make = (~changeToken, ~name, ()) => new({changeToken: changeToken, name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateXssMatchSet = {
   type t
   @ocaml.doc("<p>A request to update an <a>XssMatchSet</a>.</p>")
@@ -4165,9 +4246,10 @@ module UpdateXssMatchSet = {
   @module("@aws-sdk/client-waf-regional") @new
   external new: request => t = "UpdateXssMatchSetCommand"
   let make = (~updates, ~changeToken, ~xssMatchSetId, ()) =>
-    new({updates, changeToken, xssMatchSetId})
+    new({updates: updates, changeToken: changeToken, xssMatchSetId: xssMatchSetId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateSqlInjectionMatchSet = {
   type t
   @ocaml.doc("<p>A request to update a <a>SqlInjectionMatchSet</a>.</p>")
@@ -4211,9 +4293,14 @@ module UpdateSqlInjectionMatchSet = {
   @module("@aws-sdk/client-waf-regional") @new
   external new: request => t = "UpdateSqlInjectionMatchSetCommand"
   let make = (~updates, ~changeToken, ~sqlInjectionMatchSetId, ()) =>
-    new({updates, changeToken, sqlInjectionMatchSetId})
+    new({
+      updates: updates,
+      changeToken: changeToken,
+      sqlInjectionMatchSetId: sqlInjectionMatchSetId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateSizeConstraintSet = {
   type t
   type request = {
@@ -4256,9 +4343,10 @@ module UpdateSizeConstraintSet = {
   @module("@aws-sdk/client-waf-regional") @new
   external new: request => t = "UpdateSizeConstraintSetCommand"
   let make = (~updates, ~changeToken, ~sizeConstraintSetId, ()) =>
-    new({updates, changeToken, sizeConstraintSetId})
+    new({updates: updates, changeToken: changeToken, sizeConstraintSetId: sizeConstraintSetId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateRegexMatchSet = {
   type t
   type request = {
@@ -4283,9 +4371,10 @@ module UpdateRegexMatchSet = {
   @module("@aws-sdk/client-waf-regional") @new
   external new: request => t = "UpdateRegexMatchSetCommand"
   let make = (~changeToken, ~updates, ~regexMatchSetId, ()) =>
-    new({changeToken, updates, regexMatchSetId})
+    new({changeToken: changeToken, updates: updates, regexMatchSetId: regexMatchSetId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateByteMatchSet = {
   type t
   type request = {
@@ -4328,9 +4417,10 @@ module UpdateByteMatchSet = {
   @module("@aws-sdk/client-waf-regional") @new
   external new: request => t = "UpdateByteMatchSetCommand"
   let make = (~updates, ~changeToken, ~byteMatchSetId, ()) =>
-    new({updates, changeToken, byteMatchSetId})
+    new({updates: updates, changeToken: changeToken, byteMatchSetId: byteMatchSetId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListLoggingConfigurations = {
   type t
   type request = {
@@ -4358,9 +4448,10 @@ module ListLoggingConfigurations = {
   }
   @module("@aws-sdk/client-waf-regional") @new
   external new: request => t = "ListLoggingConfigurationsCommand"
-  let make = (~limit=?, ~nextMarker=?, ()) => new({limit, nextMarker})
+  let make = (~limit=?, ~nextMarker=?, ()) => new({limit: limit, nextMarker: nextMarker})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListActivatedRulesInRuleGroup = {
   type t
   type request = {
@@ -4391,9 +4482,11 @@ module ListActivatedRulesInRuleGroup = {
   }
   @module("@aws-sdk/client-waf-regional") @new
   external new: request => t = "ListActivatedRulesInRuleGroupCommand"
-  let make = (~limit=?, ~nextMarker=?, ~ruleGroupId=?, ()) => new({limit, nextMarker, ruleGroupId})
+  let make = (~limit=?, ~nextMarker=?, ~ruleGroupId=?, ()) =>
+    new({limit: limit, nextMarker: nextMarker, ruleGroupId: ruleGroupId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetXssMatchSet = {
   type t
   @ocaml.doc("<p>A request to get an <a>XssMatchSet</a>.</p>")
@@ -4432,6 +4525,7 @@ module GetXssMatchSet = {
   let make = (~xssMatchSetId, ()) => new({xssMatchSetId: xssMatchSetId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetSqlInjectionMatchSet = {
   type t
   @ocaml.doc("<p>A request to get a <a>SqlInjectionMatchSet</a>.</p>")
@@ -4471,6 +4565,7 @@ module GetSqlInjectionMatchSet = {
   let make = (~sqlInjectionMatchSetId, ()) => new({sqlInjectionMatchSetId: sqlInjectionMatchSetId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetSizeConstraintSet = {
   type t
   type request = {
@@ -4509,6 +4604,7 @@ module GetSizeConstraintSet = {
   let make = (~sizeConstraintSetId, ()) => new({sizeConstraintSetId: sizeConstraintSetId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetRegexMatchSet = {
   type t
   type request = {
@@ -4529,6 +4625,7 @@ module GetRegexMatchSet = {
   let make = (~regexMatchSetId, ()) => new({regexMatchSetId: regexMatchSetId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetByteMatchSet = {
   type t
   type request = {
@@ -4566,6 +4663,7 @@ module GetByteMatchSet = {
   let make = (~byteMatchSetId, ()) => new({byteMatchSetId: byteMatchSetId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateXssMatchSet = {
   type t
   @ocaml.doc("<p>A request to create an <a>XssMatchSet</a>.</p>")
@@ -4588,9 +4686,10 @@ module CreateXssMatchSet = {
   }
   @module("@aws-sdk/client-waf-regional") @new
   external new: request => t = "CreateXssMatchSetCommand"
-  let make = (~changeToken, ~name, ()) => new({changeToken, name})
+  let make = (~changeToken, ~name, ()) => new({changeToken: changeToken, name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateSqlInjectionMatchSet = {
   type t
   @ocaml.doc("<p>A request to create a <a>SqlInjectionMatchSet</a>.</p>")
@@ -4614,9 +4713,10 @@ module CreateSqlInjectionMatchSet = {
   }
   @module("@aws-sdk/client-waf-regional") @new
   external new: request => t = "CreateSqlInjectionMatchSetCommand"
-  let make = (~changeToken, ~name, ()) => new({changeToken, name})
+  let make = (~changeToken, ~name, ()) => new({changeToken: changeToken, name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateSizeConstraintSet = {
   type t
   type request = {
@@ -4641,9 +4741,10 @@ module CreateSizeConstraintSet = {
   }
   @module("@aws-sdk/client-waf-regional") @new
   external new: request => t = "CreateSizeConstraintSetCommand"
-  let make = (~changeToken, ~name, ()) => new({changeToken, name})
+  let make = (~changeToken, ~name, ()) => new({changeToken: changeToken, name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateRegexMatchSet = {
   type t
   type request = {
@@ -4668,9 +4769,10 @@ module CreateRegexMatchSet = {
   }
   @module("@aws-sdk/client-waf-regional") @new
   external new: request => t = "CreateRegexMatchSetCommand"
-  let make = (~changeToken, ~name, ()) => new({changeToken, name})
+  let make = (~changeToken, ~name, ()) => new({changeToken: changeToken, name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateByteMatchSet = {
   type t
   type request = {
@@ -4693,9 +4795,10 @@ module CreateByteMatchSet = {
   }
   @module("@aws-sdk/client-waf-regional") @new
   external new: request => t = "CreateByteMatchSetCommand"
-  let make = (~changeToken, ~name, ()) => new({changeToken, name})
+  let make = (~changeToken, ~name, ()) => new({changeToken: changeToken, name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateWebACL = {
   type t
   type request = {
@@ -4747,9 +4850,15 @@ module UpdateWebACL = {
   }
   @module("@aws-sdk/client-waf-regional") @new external new: request => t = "UpdateWebACLCommand"
   let make = (~changeToken, ~webACLId, ~defaultAction=?, ~updates=?, ()) =>
-    new({defaultAction, updates, changeToken, webACLId})
+    new({
+      defaultAction: defaultAction,
+      updates: updates,
+      changeToken: changeToken,
+      webACLId: webACLId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateRuleGroup = {
   type t
   type request = {
@@ -4775,9 +4884,11 @@ module UpdateRuleGroup = {
     changeToken: option<changeToken>,
   }
   @module("@aws-sdk/client-waf-regional") @new external new: request => t = "UpdateRuleGroupCommand"
-  let make = (~changeToken, ~updates, ~ruleGroupId, ()) => new({changeToken, updates, ruleGroupId})
+  let make = (~changeToken, ~updates, ~ruleGroupId, ()) =>
+    new({changeToken: changeToken, updates: updates, ruleGroupId: ruleGroupId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetWebACL = {
   type t
   type request = {
@@ -4820,6 +4931,7 @@ module GetWebACL = {
   let make = (~webACLId, ()) => new({webACLId: webACLId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetSampledRequests = {
   type t
   type request = {
@@ -4873,9 +4985,10 @@ module GetSampledRequests = {
   @module("@aws-sdk/client-waf-regional") @new
   external new: request => t = "GetSampledRequestsCommand"
   let make = (~maxItems, ~timeWindow, ~ruleId, ~webAclId, ()) =>
-    new({maxItems, timeWindow, ruleId, webAclId})
+    new({maxItems: maxItems, timeWindow: timeWindow, ruleId: ruleId, webAclId: webAclId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateWebACL = {
   type t
   type request = {
@@ -4909,6 +5022,12 @@ module CreateWebACL = {
   }
   @module("@aws-sdk/client-waf-regional") @new external new: request => t = "CreateWebACLCommand"
   let make = (~changeToken, ~defaultAction, ~metricName, ~name, ~tags=?, ()) =>
-    new({tags, changeToken, defaultAction, metricName, name})
+    new({
+      tags: tags,
+      changeToken: changeToken,
+      defaultAction: defaultAction,
+      metricName: metricName,
+      name: name,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

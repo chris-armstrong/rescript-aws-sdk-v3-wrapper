@@ -3759,9 +3759,10 @@ module UpdateCrawlerSchedule = {
   }
   type response = {.}
   @module("@aws-sdk/client-glue") @new external new: request => t = "UpdateCrawlerScheduleCommand"
-  let make = (~crawlerName, ~schedule=?, ()) => new({schedule, crawlerName})
+  let make = (~crawlerName, ~schedule=?, ()) => new({schedule: schedule, crawlerName: crawlerName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateBlueprint = {
   type t
   type request = {
@@ -3778,9 +3779,10 @@ module UpdateBlueprint = {
   }
   @module("@aws-sdk/client-glue") @new external new: request => t = "UpdateBlueprintCommand"
   let make = (~blueprintLocation, ~name, ~description=?, ()) =>
-    new({blueprintLocation, description, name})
+    new({blueprintLocation: blueprintLocation, description: description, name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module StopWorkflowRun = {
   type t
   type request = {
@@ -3789,9 +3791,10 @@ module StopWorkflowRun = {
   }
   type response = {.}
   @module("@aws-sdk/client-glue") @new external new: request => t = "StopWorkflowRunCommand"
-  let make = (~runId, ~name, ()) => new({runId, name})
+  let make = (~runId, ~name, ()) => new({runId: runId, name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module StopTrigger = {
   type t
   type request = {
@@ -3805,6 +3808,7 @@ module StopTrigger = {
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module StopSession = {
   type t
   type request = {
@@ -3816,9 +3820,10 @@ module StopSession = {
     @ocaml.doc("<p>Returns the Id of the stopped session.</p>") @as("Id") id: option<nameString>,
   }
   @module("@aws-sdk/client-glue") @new external new: request => t = "StopSessionCommand"
-  let make = (~id, ~requestOrigin=?, ()) => new({requestOrigin, id})
+  let make = (~id, ~requestOrigin=?, ()) => new({requestOrigin: requestOrigin, id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module StopCrawlerSchedule = {
   type t
   type request = {
@@ -3830,6 +3835,7 @@ module StopCrawlerSchedule = {
   let make = (~crawlerName, ()) => new({crawlerName: crawlerName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module StopCrawler = {
   type t
   type request = {@ocaml.doc("<p>Name of the crawler to stop.</p>") @as("Name") name: nameString}
@@ -3838,6 +3844,7 @@ module StopCrawler = {
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module StartTrigger = {
   type t
   type request = {
@@ -3851,6 +3858,7 @@ module StartTrigger = {
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module StartMLLabelingSetGenerationTaskRun = {
   type t
   type request = {
@@ -3868,9 +3876,11 @@ module StartMLLabelingSetGenerationTaskRun = {
   }
   @module("@aws-sdk/client-glue") @new
   external new: request => t = "StartMLLabelingSetGenerationTaskRunCommand"
-  let make = (~outputS3Path, ~transformId, ()) => new({outputS3Path, transformId})
+  let make = (~outputS3Path, ~transformId, ()) =>
+    new({outputS3Path: outputS3Path, transformId: transformId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module StartMLEvaluationTaskRun = {
   type t
   type request = {
@@ -3886,6 +3896,7 @@ module StartMLEvaluationTaskRun = {
   let make = (~transformId, ()) => new({transformId: transformId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module StartImportLabelsTaskRun = {
   type t
   type request = {
@@ -3906,9 +3917,10 @@ module StartImportLabelsTaskRun = {
   @module("@aws-sdk/client-glue") @new
   external new: request => t = "StartImportLabelsTaskRunCommand"
   let make = (~inputS3Path, ~transformId, ~replaceAllLabels=?, ()) =>
-    new({replaceAllLabels, inputS3Path, transformId})
+    new({replaceAllLabels: replaceAllLabels, inputS3Path: inputS3Path, transformId: transformId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module StartExportLabelsTaskRun = {
   type t
   type request = {
@@ -3923,9 +3935,11 @@ module StartExportLabelsTaskRun = {
   }
   @module("@aws-sdk/client-glue") @new
   external new: request => t = "StartExportLabelsTaskRunCommand"
-  let make = (~outputS3Path, ~transformId, ()) => new({outputS3Path, transformId})
+  let make = (~outputS3Path, ~transformId, ()) =>
+    new({outputS3Path: outputS3Path, transformId: transformId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module StartCrawlerSchedule = {
   type t
   type request = {
@@ -3937,6 +3951,7 @@ module StartCrawlerSchedule = {
   let make = (~crawlerName, ()) => new({crawlerName: crawlerName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module StartCrawler = {
   type t
   type request = {@ocaml.doc("<p>Name of the crawler to start.</p>") @as("Name") name: nameString}
@@ -3945,6 +3960,7 @@ module StartCrawler = {
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module StartBlueprintRun = {
   type t
   type request = {
@@ -3961,9 +3977,10 @@ module StartBlueprintRun = {
   }
   @module("@aws-sdk/client-glue") @new external new: request => t = "StartBlueprintRunCommand"
   let make = (~roleArn, ~blueprintName, ~parameters=?, ()) =>
-    new({roleArn, parameters, blueprintName})
+    new({roleArn: roleArn, parameters: parameters, blueprintName: blueprintName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module RunStatement = {
   type t
   type request = {
@@ -3979,9 +3996,11 @@ module RunStatement = {
     id: option<integerValue>,
   }
   @module("@aws-sdk/client-glue") @new external new: request => t = "RunStatementCommand"
-  let make = (~code, ~sessionId, ~requestOrigin=?, ()) => new({requestOrigin, code, sessionId})
+  let make = (~code, ~sessionId, ~requestOrigin=?, ()) =>
+    new({requestOrigin: requestOrigin, code: code, sessionId: sessionId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module PutResourcePolicy = {
   type t
   type request = {
@@ -4030,9 +4049,17 @@ module PutResourcePolicy = {
     ~policyHashCondition=?,
     ~resourceArn=?,
     (),
-  ) => new({enableHybrid, policyExistsCondition, policyHashCondition, resourceArn, policyInJson})
+  ) =>
+    new({
+      enableHybrid: enableHybrid,
+      policyExistsCondition: policyExistsCondition,
+      policyHashCondition: policyHashCondition,
+      resourceArn: resourceArn,
+      policyInJson: policyInJson,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ImportCatalogToGlue = {
   type t
   type request = {
@@ -4047,6 +4074,7 @@ module ImportCatalogToGlue = {
   let make = (~catalogId=?, ()) => new({catalogId: catalogId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module GetResourcePolicy = {
   type t
   type request = {
@@ -4071,6 +4099,7 @@ module GetResourcePolicy = {
   let make = (~resourceArn=?, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteWorkflow = {
   type t
   type request = {
@@ -4084,6 +4113,7 @@ module DeleteWorkflow = {
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteUserDefinedFunction = {
   type t
   type request = {
@@ -4101,9 +4131,10 @@ module DeleteUserDefinedFunction = {
   @module("@aws-sdk/client-glue") @new
   external new: request => t = "DeleteUserDefinedFunctionCommand"
   let make = (~functionName, ~databaseName, ~catalogId=?, ()) =>
-    new({functionName, databaseName, catalogId})
+    new({functionName: functionName, databaseName: databaseName, catalogId: catalogId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteTrigger = {
   type t
   type request = {
@@ -4117,6 +4148,7 @@ module DeleteTrigger = {
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteTableVersion = {
   type t
   type request = {
@@ -4141,9 +4173,15 @@ module DeleteTableVersion = {
   type response = {.}
   @module("@aws-sdk/client-glue") @new external new: request => t = "DeleteTableVersionCommand"
   let make = (~versionId, ~tableName, ~databaseName, ~catalogId=?, ()) =>
-    new({versionId, tableName, databaseName, catalogId})
+    new({
+      versionId: versionId,
+      tableName: tableName,
+      databaseName: databaseName,
+      catalogId: catalogId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteTable = {
   type t
   type request = {
@@ -4166,9 +4204,15 @@ module DeleteTable = {
   type response = {.}
   @module("@aws-sdk/client-glue") @new external new: request => t = "DeleteTableCommand"
   let make = (~name, ~databaseName, ~transactionId=?, ~catalogId=?, ()) =>
-    new({transactionId, name, databaseName, catalogId})
+    new({
+      transactionId: transactionId,
+      name: name,
+      databaseName: databaseName,
+      catalogId: catalogId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteSession = {
   type t
   type request = {
@@ -4180,9 +4224,10 @@ module DeleteSession = {
     @ocaml.doc("<p>Returns the ID of the deleted session.</p>") @as("Id") id: option<nameString>,
   }
   @module("@aws-sdk/client-glue") @new external new: request => t = "DeleteSessionCommand"
-  let make = (~id, ~requestOrigin=?, ()) => new({requestOrigin, id})
+  let make = (~id, ~requestOrigin=?, ()) => new({requestOrigin: requestOrigin, id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteSecurityConfiguration = {
   type t
   type request = {
@@ -4195,6 +4240,7 @@ module DeleteSecurityConfiguration = {
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteResourcePolicy = {
   type t
   type request = {
@@ -4207,9 +4253,11 @@ module DeleteResourcePolicy = {
   }
   type response = {.}
   @module("@aws-sdk/client-glue") @new external new: request => t = "DeleteResourcePolicyCommand"
-  let make = (~resourceArn=?, ~policyHashCondition=?, ()) => new({resourceArn, policyHashCondition})
+  let make = (~resourceArn=?, ~policyHashCondition=?, ()) =>
+    new({resourceArn: resourceArn, policyHashCondition: policyHashCondition})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeletePartitionIndex = {
   type t
   type request = {
@@ -4231,9 +4279,15 @@ module DeletePartitionIndex = {
   type response = {.}
   @module("@aws-sdk/client-glue") @new external new: request => t = "DeletePartitionIndexCommand"
   let make = (~indexName, ~tableName, ~databaseName, ~catalogId=?, ()) =>
-    new({indexName, tableName, databaseName, catalogId})
+    new({
+      indexName: indexName,
+      tableName: tableName,
+      databaseName: databaseName,
+      catalogId: catalogId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteMLTransform = {
   type t
   type request = {
@@ -4248,6 +4302,7 @@ module DeleteMLTransform = {
   let make = (~transformId, ()) => new({transformId: transformId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteJob = {
   type t
   type request = {
@@ -4262,6 +4317,7 @@ module DeleteJob = {
   let make = (~jobName, ()) => new({jobName: jobName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteDevEndpoint = {
   type t
   type request = {
@@ -4273,6 +4329,7 @@ module DeleteDevEndpoint = {
   let make = (~endpointName, ()) => new({endpointName: endpointName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteDatabase = {
   type t
   type request = {
@@ -4287,9 +4344,10 @@ module DeleteDatabase = {
   }
   type response = {.}
   @module("@aws-sdk/client-glue") @new external new: request => t = "DeleteDatabaseCommand"
-  let make = (~name, ~catalogId=?, ()) => new({name, catalogId})
+  let make = (~name, ~catalogId=?, ()) => new({name: name, catalogId: catalogId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteCrawler = {
   type t
   type request = {
@@ -4300,6 +4358,7 @@ module DeleteCrawler = {
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteConnection = {
   type t
   type request = {
@@ -4312,9 +4371,11 @@ module DeleteConnection = {
   }
   type response = {.}
   @module("@aws-sdk/client-glue") @new external new: request => t = "DeleteConnectionCommand"
-  let make = (~connectionName, ~catalogId=?, ()) => new({connectionName, catalogId})
+  let make = (~connectionName, ~catalogId=?, ()) =>
+    new({connectionName: connectionName, catalogId: catalogId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteColumnStatisticsForTable = {
   type t
   type request = {
@@ -4332,9 +4393,15 @@ module DeleteColumnStatisticsForTable = {
   @module("@aws-sdk/client-glue") @new
   external new: request => t = "DeleteColumnStatisticsForTableCommand"
   let make = (~columnName, ~tableName, ~databaseName, ~catalogId=?, ()) =>
-    new({columnName, tableName, databaseName, catalogId})
+    new({
+      columnName: columnName,
+      tableName: tableName,
+      databaseName: databaseName,
+      catalogId: catalogId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteClassifier = {
   type t
   type request = {
@@ -4345,6 +4412,7 @@ module DeleteClassifier = {
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteBlueprint = {
   type t
   type request = {
@@ -4358,6 +4426,7 @@ module DeleteBlueprint = {
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CheckSchemaVersionValidity = {
   type t
   type request = {
@@ -4378,9 +4447,11 @@ module CheckSchemaVersionValidity = {
   }
   @module("@aws-sdk/client-glue") @new
   external new: request => t = "CheckSchemaVersionValidityCommand"
-  let make = (~schemaDefinition, ~dataFormat, ()) => new({schemaDefinition, dataFormat})
+  let make = (~schemaDefinition, ~dataFormat, ()) =>
+    new({schemaDefinition: schemaDefinition, dataFormat: dataFormat})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CancelStatement = {
   type t
   type request = {
@@ -4392,9 +4463,11 @@ module CancelStatement = {
   }
   type response = {.}
   @module("@aws-sdk/client-glue") @new external new: request => t = "CancelStatementCommand"
-  let make = (~id, ~sessionId, ~requestOrigin=?, ()) => new({requestOrigin, id, sessionId})
+  let make = (~id, ~sessionId, ~requestOrigin=?, ()) =>
+    new({requestOrigin: requestOrigin, id: id, sessionId: sessionId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module CancelMLTaskRun = {
   type t
   type request = {
@@ -4411,9 +4484,10 @@ module CancelMLTaskRun = {
     transformId: option<hashString>,
   }
   @module("@aws-sdk/client-glue") @new external new: request => t = "CancelMLTaskRunCommand"
-  let make = (~taskRunId, ~transformId, ()) => new({taskRunId, transformId})
+  let make = (~taskRunId, ~transformId, ()) => new({taskRunId: taskRunId, transformId: transformId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateWorkflow = {
   type t
   type request = {
@@ -4437,9 +4511,15 @@ module UpdateWorkflow = {
   }
   @module("@aws-sdk/client-glue") @new external new: request => t = "UpdateWorkflowCommand"
   let make = (~name, ~maxConcurrentRuns=?, ~defaultRunProperties=?, ~description=?, ()) =>
-    new({maxConcurrentRuns, defaultRunProperties, description, name})
+    new({
+      maxConcurrentRuns: maxConcurrentRuns,
+      defaultRunProperties: defaultRunProperties,
+      description: description,
+      name: name,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateSchema = {
   type t
   type request = {
@@ -4474,9 +4554,15 @@ module UpdateSchema = {
   }
   @module("@aws-sdk/client-glue") @new external new: request => t = "UpdateSchemaCommand"
   let make = (~schemaId, ~description=?, ~compatibility=?, ~schemaVersionNumber=?, ()) =>
-    new({description, compatibility, schemaVersionNumber, schemaId})
+    new({
+      description: description,
+      compatibility: compatibility,
+      schemaVersionNumber: schemaVersionNumber,
+      schemaId: schemaId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateRegistry = {
   type t
   type request = {
@@ -4498,9 +4584,11 @@ module UpdateRegistry = {
     registryName: option<schemaRegistryNameString>,
   }
   @module("@aws-sdk/client-glue") @new external new: request => t = "UpdateRegistryCommand"
-  let make = (~description, ~registryId, ()) => new({description, registryId})
+  let make = (~description, ~registryId, ()) =>
+    new({description: description, registryId: registryId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateDevEndpoint = {
   type t
   type request = {
@@ -4558,17 +4646,18 @@ module UpdateDevEndpoint = {
     (),
   ) =>
     new({
-      addArguments,
-      deleteArguments,
-      updateEtlLibraries,
-      customLibraries,
-      deletePublicKeys,
-      addPublicKeys,
-      publicKey,
-      endpointName,
+      addArguments: addArguments,
+      deleteArguments: deleteArguments,
+      updateEtlLibraries: updateEtlLibraries,
+      customLibraries: customLibraries,
+      deletePublicKeys: deletePublicKeys,
+      addPublicKeys: addPublicKeys,
+      publicKey: publicKey,
+      endpointName: endpointName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UntagResource = {
   type t
   type request = {
@@ -4582,9 +4671,11 @@ module UntagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-glue") @new external new: request => t = "UntagResourceCommand"
-  let make = (~tagsToRemove, ~resourceArn, ()) => new({tagsToRemove, resourceArn})
+  let make = (~tagsToRemove, ~resourceArn, ()) =>
+    new({tagsToRemove: tagsToRemove, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module TagResource = {
   type t
   type request = {
@@ -4596,9 +4687,10 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-glue") @new external new: request => t = "TagResourceCommand"
-  let make = (~tagsToAdd, ~resourceArn, ()) => new({tagsToAdd, resourceArn})
+  let make = (~tagsToAdd, ~resourceArn, ()) => new({tagsToAdd: tagsToAdd, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module StartWorkflowRun = {
   type t
   type request = {
@@ -4608,9 +4700,10 @@ module StartWorkflowRun = {
   }
   type response = {@ocaml.doc("<p>An Id for the new run.</p>") @as("RunId") runId: option<idString>}
   @module("@aws-sdk/client-glue") @new external new: request => t = "StartWorkflowRunCommand"
-  let make = (~name, ~runProperties=?, ()) => new({runProperties, name})
+  let make = (~name, ~runProperties=?, ()) => new({runProperties: runProperties, name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module StartJobRun = {
   type t
   type request = {
@@ -4704,19 +4797,20 @@ module StartJobRun = {
     (),
   ) =>
     new({
-      numberOfWorkers,
-      workerType,
-      notificationProperty,
-      securityConfiguration,
-      maxCapacity,
-      timeout,
-      allocatedCapacity,
-      arguments,
-      jobRunId,
-      jobName,
+      numberOfWorkers: numberOfWorkers,
+      workerType: workerType,
+      notificationProperty: notificationProperty,
+      securityConfiguration: securityConfiguration,
+      maxCapacity: maxCapacity,
+      timeout: timeout,
+      allocatedCapacity: allocatedCapacity,
+      arguments: arguments,
+      jobRunId: jobRunId,
+      jobName: jobName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ResumeWorkflowRun = {
   type t
   type request = {
@@ -4739,9 +4833,10 @@ module ResumeWorkflowRun = {
     runId: option<idString>,
   }
   @module("@aws-sdk/client-glue") @new external new: request => t = "ResumeWorkflowRunCommand"
-  let make = (~nodeIds, ~runId, ~name, ()) => new({nodeIds, runId, name})
+  let make = (~nodeIds, ~runId, ~name, ()) => new({nodeIds: nodeIds, runId: runId, name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ResetJobBookmark = {
   type t
   type request = {
@@ -4754,9 +4849,10 @@ module ResetJobBookmark = {
     jobBookmarkEntry: option<jobBookmarkEntry>,
   }
   @module("@aws-sdk/client-glue") @new external new: request => t = "ResetJobBookmarkCommand"
-  let make = (~jobName, ~runId=?, ()) => new({runId, jobName})
+  let make = (~jobName, ~runId=?, ()) => new({runId: runId, jobName: jobName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module RemoveSchemaVersionMetadata = {
   type t
   type request = {
@@ -4793,9 +4889,15 @@ module RemoveSchemaVersionMetadata = {
   @module("@aws-sdk/client-glue") @new
   external new: request => t = "RemoveSchemaVersionMetadataCommand"
   let make = (~metadataKeyValue, ~schemaVersionId=?, ~schemaVersionNumber=?, ~schemaId=?, ()) =>
-    new({metadataKeyValue, schemaVersionId, schemaVersionNumber, schemaId})
+    new({
+      metadataKeyValue: metadataKeyValue,
+      schemaVersionId: schemaVersionId,
+      schemaVersionNumber: schemaVersionNumber,
+      schemaId: schemaId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module RegisterSchemaVersion = {
   type t
   type request = {
@@ -4829,9 +4931,11 @@ module RegisterSchemaVersion = {
     schemaVersionId: option<schemaVersionIdString>,
   }
   @module("@aws-sdk/client-glue") @new external new: request => t = "RegisterSchemaVersionCommand"
-  let make = (~schemaDefinition, ~schemaId, ()) => new({schemaDefinition, schemaId})
+  let make = (~schemaDefinition, ~schemaId, ()) =>
+    new({schemaDefinition: schemaDefinition, schemaId: schemaId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module PutWorkflowRunProperties = {
   type t
   type request = {
@@ -4845,9 +4949,11 @@ module PutWorkflowRunProperties = {
   type response = {.}
   @module("@aws-sdk/client-glue") @new
   external new: request => t = "PutWorkflowRunPropertiesCommand"
-  let make = (~runProperties, ~runId, ~name, ()) => new({runProperties, runId, name})
+  let make = (~runProperties, ~runId, ~name, ()) =>
+    new({runProperties: runProperties, runId: runId, name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module PutSchemaVersionMetadata = {
   type t
   type request = {
@@ -4880,9 +4986,15 @@ module PutSchemaVersionMetadata = {
   @module("@aws-sdk/client-glue") @new
   external new: request => t = "PutSchemaVersionMetadataCommand"
   let make = (~metadataKeyValue, ~schemaVersionId=?, ~schemaVersionNumber=?, ~schemaId=?, ()) =>
-    new({metadataKeyValue, schemaVersionId, schemaVersionNumber, schemaId})
+    new({
+      metadataKeyValue: metadataKeyValue,
+      schemaVersionId: schemaVersionId,
+      schemaVersionNumber: schemaVersionNumber,
+      schemaId: schemaId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListWorkflows = {
   type t
   type request = {
@@ -4899,9 +5011,11 @@ module ListWorkflows = {
     workflows: option<workflowNames>,
   }
   @module("@aws-sdk/client-glue") @new external new: request => t = "ListWorkflowsCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListTriggers = {
   type t
   type request = {
@@ -4929,9 +5043,15 @@ module ListTriggers = {
   }
   @module("@aws-sdk/client-glue") @new external new: request => t = "ListTriggersCommand"
   let make = (~tags=?, ~maxResults=?, ~dependentJobName=?, ~nextToken=?, ()) =>
-    new({tags, maxResults, dependentJobName, nextToken})
+    new({
+      tags: tags,
+      maxResults: maxResults,
+      dependentJobName: dependentJobName,
+      nextToken: nextToken,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListJobs = {
   type t
   type request = {
@@ -4952,9 +5072,11 @@ module ListJobs = {
     jobNames: option<jobNameList>,
   }
   @module("@aws-sdk/client-glue") @new external new: request => t = "ListJobsCommand"
-  let make = (~tags=?, ~maxResults=?, ~nextToken=?, ()) => new({tags, maxResults, nextToken})
+  let make = (~tags=?, ~maxResults=?, ~nextToken=?, ()) =>
+    new({tags: tags, maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListDevEndpoints = {
   type t
   type request = {
@@ -4976,9 +5098,11 @@ module ListDevEndpoints = {
     devEndpointNames: option<devEndpointNameList>,
   }
   @module("@aws-sdk/client-glue") @new external new: request => t = "ListDevEndpointsCommand"
-  let make = (~tags=?, ~maxResults=?, ~nextToken=?, ()) => new({tags, maxResults, nextToken})
+  let make = (~tags=?, ~maxResults=?, ~nextToken=?, ()) =>
+    new({tags: tags, maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListCrawlers = {
   type t
   type request = {
@@ -5001,9 +5125,11 @@ module ListCrawlers = {
     crawlerNames: option<crawlerNameList>,
   }
   @module("@aws-sdk/client-glue") @new external new: request => t = "ListCrawlersCommand"
-  let make = (~tags=?, ~nextToken=?, ~maxResults=?, ()) => new({tags, nextToken, maxResults})
+  let make = (~tags=?, ~nextToken=?, ~maxResults=?, ()) =>
+    new({tags: tags, nextToken: nextToken, maxResults: maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListBlueprints = {
   type t
   type request = {
@@ -5022,9 +5148,11 @@ module ListBlueprints = {
     blueprints: option<blueprintNames>,
   }
   @module("@aws-sdk/client-glue") @new external new: request => t = "ListBlueprintsCommand"
-  let make = (~tags=?, ~maxResults=?, ~nextToken=?, ()) => new({tags, maxResults, nextToken})
+  let make = (~tags=?, ~maxResults=?, ~nextToken=?, ()) =>
+    new({tags: tags, maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetWorkflowRunProperties = {
   type t
   type request = {
@@ -5040,9 +5168,10 @@ module GetWorkflowRunProperties = {
   }
   @module("@aws-sdk/client-glue") @new
   external new: request => t = "GetWorkflowRunPropertiesCommand"
-  let make = (~runId, ~name, ()) => new({runId, name})
+  let make = (~runId, ~name, ()) => new({runId: runId, name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetTags = {
   type t
   type request = {
@@ -5055,6 +5184,7 @@ module GetTags = {
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetSchemaVersionsDiff = {
   type t
   type request = {
@@ -5092,9 +5222,16 @@ module GetSchemaVersionsDiff = {
     ~firstSchemaVersionNumber,
     ~schemaId,
     (),
-  ) => new({schemaDiffType, secondSchemaVersionNumber, firstSchemaVersionNumber, schemaId})
+  ) =>
+    new({
+      schemaDiffType: schemaDiffType,
+      secondSchemaVersionNumber: secondSchemaVersionNumber,
+      firstSchemaVersionNumber: firstSchemaVersionNumber,
+      schemaId: schemaId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetSchemaVersion = {
   type t
   type request = {
@@ -5139,9 +5276,14 @@ module GetSchemaVersion = {
   }
   @module("@aws-sdk/client-glue") @new external new: request => t = "GetSchemaVersionCommand"
   let make = (~schemaVersionNumber=?, ~schemaVersionId=?, ~schemaId=?, ()) =>
-    new({schemaVersionNumber, schemaVersionId, schemaId})
+    new({
+      schemaVersionNumber: schemaVersionNumber,
+      schemaVersionId: schemaVersionId,
+      schemaId: schemaId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetSchemaByDefinition = {
   type t
   type request = {
@@ -5176,9 +5318,11 @@ module GetSchemaByDefinition = {
     schemaVersionId: option<schemaVersionIdString>,
   }
   @module("@aws-sdk/client-glue") @new external new: request => t = "GetSchemaByDefinitionCommand"
-  let make = (~schemaDefinition, ~schemaId, ()) => new({schemaDefinition, schemaId})
+  let make = (~schemaDefinition, ~schemaId, ()) =>
+    new({schemaDefinition: schemaDefinition, schemaId: schemaId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetSchema = {
   type t
   type request = {
@@ -5238,6 +5382,7 @@ module GetSchema = {
   let make = (~schemaId, ()) => new({schemaId: schemaId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetRegistry = {
   type t
   type request = {
@@ -5264,6 +5409,7 @@ module GetRegistry = {
   let make = (~registryId, ()) => new({registryId: registryId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetJobBookmark = {
   type t
   type request = {
@@ -5277,9 +5423,10 @@ module GetJobBookmark = {
     jobBookmarkEntry: option<jobBookmarkEntry>,
   }
   @module("@aws-sdk/client-glue") @new external new: request => t = "GetJobBookmarkCommand"
-  let make = (~jobName, ~runId=?, ()) => new({runId, jobName})
+  let make = (~jobName, ~runId=?, ()) => new({runId: runId, jobName: jobName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetCatalogImportStatus = {
   type t
   type request = {
@@ -5297,6 +5444,7 @@ module GetCatalogImportStatus = {
   let make = (~catalogId=?, ()) => new({catalogId: catalogId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetBlueprintRun = {
   type t
   type request = {
@@ -5310,9 +5458,10 @@ module GetBlueprintRun = {
     blueprintRun: option<blueprintRun>,
   }
   @module("@aws-sdk/client-glue") @new external new: request => t = "GetBlueprintRunCommand"
-  let make = (~runId, ~blueprintName, ()) => new({runId, blueprintName})
+  let make = (~runId, ~blueprintName, ()) => new({runId: runId, blueprintName: blueprintName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteSchema = {
   type t
   type request = {
@@ -5334,6 +5483,7 @@ module DeleteSchema = {
   let make = (~schemaId, ()) => new({schemaId: schemaId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteRegistry = {
   type t
   type request = {
@@ -5359,6 +5509,7 @@ module DeleteRegistry = {
   let make = (~registryId, ()) => new({registryId: registryId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeletePartition = {
   type t
   type request = {
@@ -5379,9 +5530,15 @@ module DeletePartition = {
   type response = {.}
   @module("@aws-sdk/client-glue") @new external new: request => t = "DeletePartitionCommand"
   let make = (~partitionValues, ~tableName, ~databaseName, ~catalogId=?, ()) =>
-    new({partitionValues, tableName, databaseName, catalogId})
+    new({
+      partitionValues: partitionValues,
+      tableName: tableName,
+      databaseName: databaseName,
+      catalogId: catalogId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteColumnStatisticsForPartition = {
   type t
   type request = {
@@ -5402,9 +5559,16 @@ module DeleteColumnStatisticsForPartition = {
   @module("@aws-sdk/client-glue") @new
   external new: request => t = "DeleteColumnStatisticsForPartitionCommand"
   let make = (~columnName, ~partitionValues, ~tableName, ~databaseName, ~catalogId=?, ()) =>
-    new({columnName, partitionValues, tableName, databaseName, catalogId})
+    new({
+      columnName: columnName,
+      partitionValues: partitionValues,
+      tableName: tableName,
+      databaseName: databaseName,
+      catalogId: catalogId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module CreateWorkflow = {
   type t
   type request = {
@@ -5434,9 +5598,16 @@ module CreateWorkflow = {
   }
   @module("@aws-sdk/client-glue") @new external new: request => t = "CreateWorkflowCommand"
   let make = (~name, ~maxConcurrentRuns=?, ~tags=?, ~defaultRunProperties=?, ~description=?, ()) =>
-    new({maxConcurrentRuns, tags, defaultRunProperties, description, name})
+    new({
+      maxConcurrentRuns: maxConcurrentRuns,
+      tags: tags,
+      defaultRunProperties: defaultRunProperties,
+      description: description,
+      name: name,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateSchema = {
   type t
   type request = {
@@ -5560,9 +5731,19 @@ module CreateSchema = {
     ~compatibility=?,
     ~registryId=?,
     (),
-  ) => new({schemaDefinition, tags, description, compatibility, dataFormat, schemaName, registryId})
+  ) =>
+    new({
+      schemaDefinition: schemaDefinition,
+      tags: tags,
+      description: description,
+      compatibility: compatibility,
+      dataFormat: dataFormat,
+      schemaName: schemaName,
+      registryId: registryId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateRegistry = {
   type t
   type request = {
@@ -5593,9 +5774,11 @@ module CreateRegistry = {
     registryArn: option<glueResourceArn>,
   }
   @module("@aws-sdk/client-glue") @new external new: request => t = "CreateRegistryCommand"
-  let make = (~registryName, ~tags=?, ~description=?, ()) => new({tags, description, registryName})
+  let make = (~registryName, ~tags=?, ~description=?, ()) =>
+    new({tags: tags, description: description, registryName: registryName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateDevEndpoint = {
   type t
   type request = {
@@ -5789,24 +5972,25 @@ module CreateDevEndpoint = {
     (),
   ) =>
     new({
-      arguments,
-      tags,
-      securityConfiguration,
-      extraJarsS3Path,
-      extraPythonLibsS3Path,
-      numberOfWorkers,
-      glueVersion,
-      workerType,
-      numberOfNodes,
-      publicKeys,
-      publicKey,
-      subnetId,
-      securityGroupIds,
-      roleArn,
-      endpointName,
+      arguments: arguments,
+      tags: tags,
+      securityConfiguration: securityConfiguration,
+      extraJarsS3Path: extraJarsS3Path,
+      extraPythonLibsS3Path: extraPythonLibsS3Path,
+      numberOfWorkers: numberOfWorkers,
+      glueVersion: glueVersion,
+      workerType: workerType,
+      numberOfNodes: numberOfNodes,
+      publicKeys: publicKeys,
+      publicKey: publicKey,
+      subnetId: subnetId,
+      securityGroupIds: securityGroupIds,
+      roleArn: roleArn,
+      endpointName: endpointName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateBlueprint = {
   type t
   type request = {
@@ -5825,9 +6009,10 @@ module CreateBlueprint = {
   }
   @module("@aws-sdk/client-glue") @new external new: request => t = "CreateBlueprintCommand"
   let make = (~blueprintLocation, ~name, ~tags=?, ~description=?, ()) =>
-    new({tags, blueprintLocation, description, name})
+    new({tags: tags, blueprintLocation: blueprintLocation, description: description, name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateMLTransform = {
   type t
   type request = {
@@ -5912,20 +6097,21 @@ module UpdateMLTransform = {
     (),
   ) =>
     new({
-      maxRetries,
-      timeout,
-      numberOfWorkers,
-      workerType,
-      maxCapacity,
-      glueVersion,
-      role,
-      parameters,
-      description,
-      name,
-      transformId,
+      maxRetries: maxRetries,
+      timeout: timeout,
+      numberOfWorkers: numberOfWorkers,
+      workerType: workerType,
+      maxCapacity: maxCapacity,
+      glueVersion: glueVersion,
+      role: role,
+      parameters: parameters,
+      description: description,
+      name: name,
+      transformId: transformId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateClassifier = {
   type t
   type request = {
@@ -5945,9 +6131,15 @@ module UpdateClassifier = {
   type response = {.}
   @module("@aws-sdk/client-glue") @new external new: request => t = "UpdateClassifierCommand"
   let make = (~csvClassifier=?, ~jsonClassifier=?, ~xmlclassifier=?, ~grokClassifier=?, ()) =>
-    new({csvClassifier, jsonClassifier, xmlclassifier, grokClassifier})
+    new({
+      csvClassifier: csvClassifier,
+      jsonClassifier: jsonClassifier,
+      xmlclassifier: xmlclassifier,
+      grokClassifier: grokClassifier,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module PutDataCatalogEncryptionSettings = {
   type t
   type request = {
@@ -5962,9 +6154,10 @@ module PutDataCatalogEncryptionSettings = {
   @module("@aws-sdk/client-glue") @new
   external new: request => t = "PutDataCatalogEncryptionSettingsCommand"
   let make = (~dataCatalogEncryptionSettings, ~catalogId=?, ()) =>
-    new({dataCatalogEncryptionSettings, catalogId})
+    new({dataCatalogEncryptionSettings: dataCatalogEncryptionSettings, catalogId: catalogId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ListSchemas = {
   type t
   type request = {
@@ -5995,9 +6188,10 @@ module ListSchemas = {
   }
   @module("@aws-sdk/client-glue") @new external new: request => t = "ListSchemasCommand"
   let make = (~nextToken=?, ~maxResults=?, ~registryId=?, ()) =>
-    new({nextToken, maxResults, registryId})
+    new({nextToken: nextToken, maxResults: maxResults, registryId: registryId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListSchemaVersions = {
   type t
   type request = {
@@ -6033,9 +6227,11 @@ module ListSchemaVersions = {
     schemas: option<schemaVersionList>,
   }
   @module("@aws-sdk/client-glue") @new external new: request => t = "ListSchemaVersionsCommand"
-  let make = (~schemaId, ~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults, schemaId})
+  let make = (~schemaId, ~nextToken=?, ~maxResults=?, ()) =>
+    new({nextToken: nextToken, maxResults: maxResults, schemaId: schemaId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListRegistries = {
   type t
   type request = {
@@ -6060,9 +6256,11 @@ module ListRegistries = {
     registries: option<registryListDefinition>,
   }
   @module("@aws-sdk/client-glue") @new external new: request => t = "ListRegistriesCommand"
-  let make = (~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults})
+  let make = (~nextToken=?, ~maxResults=?, ()) =>
+    new({nextToken: nextToken, maxResults: maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetResourcePolicies = {
   type t
   type request = {
@@ -6084,9 +6282,11 @@ module GetResourcePolicies = {
     getResourcePoliciesResponseList: option<getResourcePoliciesResponseList>,
   }
   @module("@aws-sdk/client-glue") @new external new: request => t = "GetResourcePoliciesCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetMLTaskRun = {
   type t
   type request = {
@@ -6121,9 +6321,10 @@ module GetMLTaskRun = {
     transformId: option<hashString>,
   }
   @module("@aws-sdk/client-glue") @new external new: request => t = "GetMLTaskRunCommand"
-  let make = (~taskRunId, ~transformId, ()) => new({taskRunId, transformId})
+  let make = (~taskRunId, ~transformId, ()) => new({taskRunId: taskRunId, transformId: transformId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetDevEndpoint = {
   type t
   type request = {
@@ -6139,6 +6340,7 @@ module GetDevEndpoint = {
   let make = (~endpointName, ()) => new({endpointName: endpointName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetDataCatalogEncryptionSettings = {
   type t
   type request = {
@@ -6156,6 +6358,7 @@ module GetDataCatalogEncryptionSettings = {
   let make = (~catalogId=?, ()) => new({catalogId: catalogId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetCrawlerMetrics = {
   type t
   type request = {
@@ -6177,9 +6380,10 @@ module GetCrawlerMetrics = {
   }
   @module("@aws-sdk/client-glue") @new external new: request => t = "GetCrawlerMetricsCommand"
   let make = (~nextToken=?, ~maxResults=?, ~crawlerNameList=?, ()) =>
-    new({nextToken, maxResults, crawlerNameList})
+    new({nextToken: nextToken, maxResults: maxResults, crawlerNameList: crawlerNameList})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetBlueprintRuns = {
   type t
   type request = {
@@ -6198,9 +6402,10 @@ module GetBlueprintRuns = {
   }
   @module("@aws-sdk/client-glue") @new external new: request => t = "GetBlueprintRunsCommand"
   let make = (~blueprintName, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults, nextToken, blueprintName})
+    new({maxResults: maxResults, nextToken: nextToken, blueprintName: blueprintName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetBlueprint = {
   type t
   type request = {
@@ -6218,9 +6423,14 @@ module GetBlueprint = {
   }
   @module("@aws-sdk/client-glue") @new external new: request => t = "GetBlueprintCommand"
   let make = (~name, ~includeParameterSpec=?, ~includeBlueprint=?, ()) =>
-    new({includeParameterSpec, includeBlueprint, name})
+    new({
+      includeParameterSpec: includeParameterSpec,
+      includeBlueprint: includeBlueprint,
+      name: name,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreatePartitionIndex = {
   type t
   type request = {
@@ -6245,9 +6455,15 @@ module CreatePartitionIndex = {
   type response = {.}
   @module("@aws-sdk/client-glue") @new external new: request => t = "CreatePartitionIndexCommand"
   let make = (~partitionIndex, ~tableName, ~databaseName, ~catalogId=?, ()) =>
-    new({partitionIndex, tableName, databaseName, catalogId})
+    new({
+      partitionIndex: partitionIndex,
+      tableName: tableName,
+      databaseName: databaseName,
+      catalogId: catalogId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module CreateMLTransform = {
   type t
   type request = {
@@ -6390,22 +6606,23 @@ module CreateMLTransform = {
     (),
   ) =>
     new({
-      transformEncryption,
-      tags,
-      maxRetries,
-      timeout,
-      numberOfWorkers,
-      workerType,
-      maxCapacity,
-      glueVersion,
-      role,
-      parameters,
-      inputRecordTables,
-      description,
-      name,
+      transformEncryption: transformEncryption,
+      tags: tags,
+      maxRetries: maxRetries,
+      timeout: timeout,
+      numberOfWorkers: numberOfWorkers,
+      workerType: workerType,
+      maxCapacity: maxCapacity,
+      glueVersion: glueVersion,
+      role: role,
+      parameters: parameters,
+      inputRecordTables: inputRecordTables,
+      description: description,
+      name: name,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateJob = {
   type t
   type request = {
@@ -6548,28 +6765,29 @@ module CreateJob = {
     (),
   ) =>
     new({
-      workerType,
-      numberOfWorkers,
-      glueVersion,
-      notificationProperty,
-      tags,
-      securityConfiguration,
-      maxCapacity,
-      timeout,
-      allocatedCapacity,
-      maxRetries,
-      connections,
-      nonOverridableArguments,
-      defaultArguments,
-      command,
-      executionProperty,
-      role,
-      logUri,
-      description,
-      name,
+      workerType: workerType,
+      numberOfWorkers: numberOfWorkers,
+      glueVersion: glueVersion,
+      notificationProperty: notificationProperty,
+      tags: tags,
+      securityConfiguration: securityConfiguration,
+      maxCapacity: maxCapacity,
+      timeout: timeout,
+      allocatedCapacity: allocatedCapacity,
+      maxRetries: maxRetries,
+      connections: connections,
+      nonOverridableArguments: nonOverridableArguments,
+      defaultArguments: defaultArguments,
+      command: command,
+      executionProperty: executionProperty,
+      role: role,
+      logUri: logUri,
+      description: description,
+      name: name,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateClassifier = {
   type t
   type request = {
@@ -6593,9 +6811,15 @@ module CreateClassifier = {
   type response = {.}
   @module("@aws-sdk/client-glue") @new external new: request => t = "CreateClassifierCommand"
   let make = (~csvClassifier=?, ~jsonClassifier=?, ~xmlclassifier=?, ~grokClassifier=?, ()) =>
-    new({csvClassifier, jsonClassifier, xmlclassifier, grokClassifier})
+    new({
+      csvClassifier: csvClassifier,
+      jsonClassifier: jsonClassifier,
+      xmlclassifier: xmlclassifier,
+      grokClassifier: grokClassifier,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module BatchDeleteConnection = {
   type t
   type request = {
@@ -6617,9 +6841,11 @@ module BatchDeleteConnection = {
     succeeded: option<nameStringList>,
   }
   @module("@aws-sdk/client-glue") @new external new: request => t = "BatchDeleteConnectionCommand"
-  let make = (~connectionNameList, ~catalogId=?, ()) => new({connectionNameList, catalogId})
+  let make = (~connectionNameList, ~catalogId=?, ()) =>
+    new({connectionNameList: connectionNameList, catalogId: catalogId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateUserDefinedFunction = {
   type t
   type request = {
@@ -6641,9 +6867,15 @@ module UpdateUserDefinedFunction = {
   @module("@aws-sdk/client-glue") @new
   external new: request => t = "UpdateUserDefinedFunctionCommand"
   let make = (~functionInput, ~functionName, ~databaseName, ~catalogId=?, ()) =>
-    new({functionInput, functionName, databaseName, catalogId})
+    new({
+      functionInput: functionInput,
+      functionName: functionName,
+      databaseName: databaseName,
+      catalogId: catalogId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateJob = {
   type t
   type request = {
@@ -6658,9 +6890,10 @@ module UpdateJob = {
     jobName: option<nameString>,
   }
   @module("@aws-sdk/client-glue") @new external new: request => t = "UpdateJobCommand"
-  let make = (~jobUpdate, ~jobName, ()) => new({jobUpdate, jobName})
+  let make = (~jobUpdate, ~jobName, ()) => new({jobUpdate: jobUpdate, jobName: jobName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateConnection = {
   type t
   type request = {
@@ -6677,9 +6910,11 @@ module UpdateConnection = {
   }
   type response = {.}
   @module("@aws-sdk/client-glue") @new external new: request => t = "UpdateConnectionCommand"
-  let make = (~connectionInput, ~name, ~catalogId=?, ()) => new({connectionInput, name, catalogId})
+  let make = (~connectionInput, ~name, ~catalogId=?, ()) =>
+    new({connectionInput: connectionInput, name: name, catalogId: catalogId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ListMLTransforms = {
   type t
   type request = {
@@ -6712,9 +6947,10 @@ module ListMLTransforms = {
   }
   @module("@aws-sdk/client-glue") @new external new: request => t = "ListMLTransformsCommand"
   let make = (~tags=?, ~sort=?, ~filter=?, ~maxResults=?, ~nextToken=?, ()) =>
-    new({tags, sort, filter, maxResults, nextToken})
+    new({tags: tags, sort: sort, filter: filter, maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetUserDefinedFunction = {
   type t
   type request = {
@@ -6733,9 +6969,10 @@ module GetUserDefinedFunction = {
   }
   @module("@aws-sdk/client-glue") @new external new: request => t = "GetUserDefinedFunctionCommand"
   let make = (~functionName, ~databaseName, ~catalogId=?, ()) =>
-    new({functionName, databaseName, catalogId})
+    new({functionName: functionName, databaseName: databaseName, catalogId: catalogId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetStatement = {
   type t
   type request = {
@@ -6748,9 +6985,11 @@ module GetStatement = {
     @ocaml.doc("<p>Returns the statement.</p>") @as("Statement") statement: option<statement>,
   }
   @module("@aws-sdk/client-glue") @new external new: request => t = "GetStatementCommand"
-  let make = (~id, ~sessionId, ~requestOrigin=?, ()) => new({requestOrigin, id, sessionId})
+  let make = (~id, ~sessionId, ~requestOrigin=?, ()) =>
+    new({requestOrigin: requestOrigin, id: id, sessionId: sessionId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetSession = {
   type t
   type request = {
@@ -6763,9 +7002,10 @@ module GetSession = {
     session: option<session>,
   }
   @module("@aws-sdk/client-glue") @new external new: request => t = "GetSessionCommand"
-  let make = (~id, ~requestOrigin=?, ()) => new({requestOrigin, id})
+  let make = (~id, ~requestOrigin=?, ()) => new({requestOrigin: requestOrigin, id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetPlan = {
   type t
   type request = {
@@ -6808,9 +7048,18 @@ module GetPlan = {
     ~location=?,
     ~sinks=?,
     (),
-  ) => new({additionalPlanOptionsMap, language, location, sinks, source, mapping})
+  ) =>
+    new({
+      additionalPlanOptionsMap: additionalPlanOptionsMap,
+      language: language,
+      location: location,
+      sinks: sinks,
+      source: source,
+      mapping: mapping,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetMapping = {
   type t
   type request = {
@@ -6823,9 +7072,11 @@ module GetMapping = {
     mapping: mappingList,
   }
   @module("@aws-sdk/client-glue") @new external new: request => t = "GetMappingCommand"
-  let make = (~source, ~location=?, ~sinks=?, ()) => new({location, sinks, source})
+  let make = (~source, ~location=?, ~sinks=?, ()) =>
+    new({location: location, sinks: sinks, source: source})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetJobRun = {
   type t
   type request = {
@@ -6840,9 +7091,10 @@ module GetJobRun = {
   }
   @module("@aws-sdk/client-glue") @new external new: request => t = "GetJobRunCommand"
   let make = (~runId, ~jobName, ~predecessorsIncluded=?, ()) =>
-    new({predecessorsIncluded, runId, jobName})
+    new({predecessorsIncluded: predecessorsIncluded, runId: runId, jobName: jobName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetJob = {
   type t
   type request = {
@@ -6854,6 +7106,7 @@ module GetJob = {
   let make = (~jobName, ()) => new({jobName: jobName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetDevEndpoints = {
   type t
   type request = {
@@ -6871,9 +7124,11 @@ module GetDevEndpoints = {
     devEndpoints: option<devEndpointList>,
   }
   @module("@aws-sdk/client-glue") @new external new: request => t = "GetDevEndpointsCommand"
-  let make = (~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults})
+  let make = (~nextToken=?, ~maxResults=?, ()) =>
+    new({nextToken: nextToken, maxResults: maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetConnection = {
   type t
   type request = {
@@ -6896,9 +7151,11 @@ module GetConnection = {
     connection: option<connection>,
   }
   @module("@aws-sdk/client-glue") @new external new: request => t = "GetConnectionCommand"
-  let make = (~name, ~hidePassword=?, ~catalogId=?, ()) => new({hidePassword, name, catalogId})
+  let make = (~name, ~hidePassword=?, ~catalogId=?, ()) =>
+    new({hidePassword: hidePassword, name: name, catalogId: catalogId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetClassifier = {
   type t
   type request = {
@@ -6911,6 +7168,7 @@ module GetClassifier = {
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteSchemaVersions = {
   type t
   type request = {
@@ -6939,9 +7197,10 @@ module DeleteSchemaVersions = {
     schemaVersionErrors: option<schemaVersionErrorList>,
   }
   @module("@aws-sdk/client-glue") @new external new: request => t = "DeleteSchemaVersionsCommand"
-  let make = (~versions, ~schemaId, ()) => new({versions, schemaId})
+  let make = (~versions, ~schemaId, ()) => new({versions: versions, schemaId: schemaId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateUserDefinedFunction = {
   type t
   type request = {
@@ -6961,9 +7220,10 @@ module CreateUserDefinedFunction = {
   @module("@aws-sdk/client-glue") @new
   external new: request => t = "CreateUserDefinedFunctionCommand"
   let make = (~functionInput, ~databaseName, ~catalogId=?, ()) =>
-    new({functionInput, databaseName, catalogId})
+    new({functionInput: functionInput, databaseName: databaseName, catalogId: catalogId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module CreateTrigger = {
   type t
   type request = {
@@ -7017,19 +7277,20 @@ module CreateTrigger = {
     (),
   ) =>
     new({
-      eventBatchingCondition,
-      tags,
-      startOnCreation,
-      description,
-      actions,
-      predicate,
-      schedule,
-      type_,
-      workflowName,
-      name,
+      eventBatchingCondition: eventBatchingCondition,
+      tags: tags,
+      startOnCreation: startOnCreation,
+      description: description,
+      actions: actions,
+      predicate: predicate,
+      schedule: schedule,
+      type_: type_,
+      workflowName: workflowName,
+      name: name,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateSession = {
   type t
   @ocaml.doc("<p>Request to create a new session.</p>")
@@ -7095,24 +7356,25 @@ module CreateSession = {
     (),
   ) =>
     new({
-      requestOrigin,
-      tags,
-      glueVersion,
-      securityConfiguration,
-      workerType,
-      numberOfWorkers,
-      maxCapacity,
-      connections,
-      defaultArguments,
-      idleTimeout,
-      timeout,
-      command,
-      role,
-      description,
-      id,
+      requestOrigin: requestOrigin,
+      tags: tags,
+      glueVersion: glueVersion,
+      securityConfiguration: securityConfiguration,
+      workerType: workerType,
+      numberOfWorkers: numberOfWorkers,
+      maxCapacity: maxCapacity,
+      connections: connections,
+      defaultArguments: defaultArguments,
+      idleTimeout: idleTimeout,
+      timeout: timeout,
+      command: command,
+      role: role,
+      description: description,
+      id: id,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateSecurityConfiguration = {
   type t
   type request = {
@@ -7130,9 +7392,11 @@ module CreateSecurityConfiguration = {
   }
   @module("@aws-sdk/client-glue") @new
   external new: request => t = "CreateSecurityConfigurationCommand"
-  let make = (~encryptionConfiguration, ~name, ()) => new({encryptionConfiguration, name})
+  let make = (~encryptionConfiguration, ~name, ()) =>
+    new({encryptionConfiguration: encryptionConfiguration, name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateConnection = {
   type t
   type request = {
@@ -7149,9 +7413,10 @@ module CreateConnection = {
   type response = {.}
   @module("@aws-sdk/client-glue") @new external new: request => t = "CreateConnectionCommand"
   let make = (~connectionInput, ~tags=?, ~catalogId=?, ()) =>
-    new({tags, connectionInput, catalogId})
+    new({tags: tags, connectionInput: connectionInput, catalogId: catalogId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module BatchStopJobRun = {
   type t
   type request = {
@@ -7173,9 +7438,10 @@ module BatchStopJobRun = {
     successfulSubmissions: option<batchStopJobRunSuccessfulSubmissionList>,
   }
   @module("@aws-sdk/client-glue") @new external new: request => t = "BatchStopJobRunCommand"
-  let make = (~jobRunIds, ~jobName, ()) => new({jobRunIds, jobName})
+  let make = (~jobRunIds, ~jobName, ()) => new({jobRunIds: jobRunIds, jobName: jobName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module BatchGetDevEndpoints = {
   type t
   type request = {
@@ -7194,6 +7460,7 @@ module BatchGetDevEndpoints = {
   let make = (~devEndpointNames, ()) => new({devEndpointNames: devEndpointNames})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module BatchGetBlueprints = {
   type t
   type request = {
@@ -7217,9 +7484,14 @@ module BatchGetBlueprints = {
   }
   @module("@aws-sdk/client-glue") @new external new: request => t = "BatchGetBlueprintsCommand"
   let make = (~names, ~includeParameterSpec=?, ~includeBlueprint=?, ()) =>
-    new({includeParameterSpec, includeBlueprint, names})
+    new({
+      includeParameterSpec: includeParameterSpec,
+      includeBlueprint: includeBlueprint,
+      names: names,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module BatchDeleteTableVersion = {
   type t
   type request = {
@@ -7249,9 +7521,15 @@ module BatchDeleteTableVersion = {
   }
   @module("@aws-sdk/client-glue") @new external new: request => t = "BatchDeleteTableVersionCommand"
   let make = (~versionIds, ~tableName, ~databaseName, ~catalogId=?, ()) =>
-    new({versionIds, tableName, databaseName, catalogId})
+    new({
+      versionIds: versionIds,
+      tableName: tableName,
+      databaseName: databaseName,
+      catalogId: catalogId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module BatchDeleteTable = {
   type t
   type request = {
@@ -7276,9 +7554,15 @@ module BatchDeleteTable = {
   }
   @module("@aws-sdk/client-glue") @new external new: request => t = "BatchDeleteTableCommand"
   let make = (~tablesToDelete, ~databaseName, ~transactionId=?, ~catalogId=?, ()) =>
-    new({transactionId, tablesToDelete, databaseName, catalogId})
+    new({
+      transactionId: transactionId,
+      tablesToDelete: tablesToDelete,
+      databaseName: databaseName,
+      catalogId: catalogId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module BatchDeletePartition = {
   type t
   type request = {
@@ -7305,9 +7589,15 @@ module BatchDeletePartition = {
   }
   @module("@aws-sdk/client-glue") @new external new: request => t = "BatchDeletePartitionCommand"
   let make = (~partitionsToDelete, ~tableName, ~databaseName, ~catalogId=?, ()) =>
-    new({partitionsToDelete, tableName, databaseName, catalogId})
+    new({
+      partitionsToDelete: partitionsToDelete,
+      tableName: tableName,
+      databaseName: databaseName,
+      catalogId: catalogId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateTrigger = {
   type t
   type request = {
@@ -7319,9 +7609,10 @@ module UpdateTrigger = {
     @ocaml.doc("<p>The resulting trigger definition.</p>") @as("Trigger") trigger: option<trigger>,
   }
   @module("@aws-sdk/client-glue") @new external new: request => t = "UpdateTriggerCommand"
-  let make = (~triggerUpdate, ~name, ()) => new({triggerUpdate, name})
+  let make = (~triggerUpdate, ~name, ()) => new({triggerUpdate: triggerUpdate, name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateDatabase = {
   type t
   type request = {
@@ -7340,9 +7631,11 @@ module UpdateDatabase = {
   }
   type response = {.}
   @module("@aws-sdk/client-glue") @new external new: request => t = "UpdateDatabaseCommand"
-  let make = (~databaseInput, ~name, ~catalogId=?, ()) => new({databaseInput, name, catalogId})
+  let make = (~databaseInput, ~name, ~catalogId=?, ()) =>
+    new({databaseInput: databaseInput, name: name, catalogId: catalogId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateCrawler = {
   type t
   type request = {
@@ -7415,23 +7708,24 @@ module UpdateCrawler = {
     (),
   ) =>
     new({
-      crawlerSecurityConfiguration,
-      configuration,
-      lakeFormationConfiguration,
-      lineageConfiguration,
-      recrawlPolicy,
-      schemaChangePolicy,
-      tablePrefix,
-      classifiers,
-      schedule,
-      targets,
-      description,
-      databaseName,
-      role,
-      name,
+      crawlerSecurityConfiguration: crawlerSecurityConfiguration,
+      configuration: configuration,
+      lakeFormationConfiguration: lakeFormationConfiguration,
+      lineageConfiguration: lineageConfiguration,
+      recrawlPolicy: recrawlPolicy,
+      schemaChangePolicy: schemaChangePolicy,
+      tablePrefix: tablePrefix,
+      classifiers: classifiers,
+      schedule: schedule,
+      targets: targets,
+      description: description,
+      databaseName: databaseName,
+      role: role,
+      name: name,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module QuerySchemaVersionMetadata = {
   type t
   type request = {
@@ -7478,9 +7772,18 @@ module QuerySchemaVersionMetadata = {
     ~schemaVersionNumber=?,
     ~schemaId=?,
     (),
-  ) => new({nextToken, maxResults, metadataList, schemaVersionId, schemaVersionNumber, schemaId})
+  ) =>
+    new({
+      nextToken: nextToken,
+      maxResults: maxResults,
+      metadataList: metadataList,
+      schemaVersionId: schemaVersionId,
+      schemaVersionNumber: schemaVersionNumber,
+      schemaId: schemaId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListStatements = {
   type t
   type request = {
@@ -7496,9 +7799,10 @@ module ListStatements = {
   }
   @module("@aws-sdk/client-glue") @new external new: request => t = "ListStatementsCommand"
   let make = (~sessionId, ~nextToken=?, ~requestOrigin=?, ()) =>
-    new({nextToken, requestOrigin, sessionId})
+    new({nextToken: nextToken, requestOrigin: requestOrigin, sessionId: sessionId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListSessions = {
   type t
   type request = {
@@ -7524,9 +7828,10 @@ module ListSessions = {
   }
   @module("@aws-sdk/client-glue") @new external new: request => t = "ListSessionsCommand"
   let make = (~requestOrigin=?, ~tags=?, ~maxResults=?, ~nextToken=?, ()) =>
-    new({requestOrigin, tags, maxResults, nextToken})
+    new({requestOrigin: requestOrigin, tags: tags, maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetUserDefinedFunctions = {
   type t
   type request = {
@@ -7558,9 +7863,16 @@ module GetUserDefinedFunctions = {
   }
   @module("@aws-sdk/client-glue") @new external new: request => t = "GetUserDefinedFunctionsCommand"
   let make = (~pattern, ~maxResults=?, ~nextToken=?, ~databaseName=?, ~catalogId=?, ()) =>
-    new({maxResults, nextToken, pattern, databaseName, catalogId})
+    new({
+      maxResults: maxResults,
+      nextToken: nextToken,
+      pattern: pattern,
+      databaseName: databaseName,
+      catalogId: catalogId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetTrigger = {
   type t
   type request = {
@@ -7573,6 +7885,7 @@ module GetTrigger = {
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetSecurityConfiguration = {
   type t
   type request = {
@@ -7588,6 +7901,7 @@ module GetSecurityConfiguration = {
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetMLTransform = {
   type t
   type request = {
@@ -7685,6 +7999,7 @@ module GetMLTransform = {
   let make = (~transformId, ()) => new({transformId: transformId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetMLTaskRuns = {
   type t
   type request = {
@@ -7714,9 +8029,16 @@ module GetMLTaskRuns = {
   }
   @module("@aws-sdk/client-glue") @new external new: request => t = "GetMLTaskRunsCommand"
   let make = (~transformId, ~sort=?, ~filter=?, ~maxResults=?, ~nextToken=?, ()) =>
-    new({sort, filter, maxResults, nextToken, transformId})
+    new({
+      sort: sort,
+      filter: filter,
+      maxResults: maxResults,
+      nextToken: nextToken,
+      transformId: transformId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetJobs = {
   type t
   type request = {
@@ -7732,9 +8054,11 @@ module GetJobs = {
     @ocaml.doc("<p>A list of job definitions.</p>") @as("Jobs") jobs: option<jobList>,
   }
   @module("@aws-sdk/client-glue") @new external new: request => t = "GetJobsCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetJobRuns = {
   type t
   type request = {
@@ -7754,9 +8078,11 @@ module GetJobRuns = {
     jobRuns: option<jobRunList>,
   }
   @module("@aws-sdk/client-glue") @new external new: request => t = "GetJobRunsCommand"
-  let make = (~jobName, ~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken, jobName})
+  let make = (~jobName, ~maxResults=?, ~nextToken=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken, jobName: jobName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetDataflowGraph = {
   type t
   type request = {
@@ -7773,6 +8099,7 @@ module GetDataflowGraph = {
   let make = (~pythonScript=?, ()) => new({pythonScript: pythonScript})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetDatabase = {
   type t
   type request = {
@@ -7791,9 +8118,10 @@ module GetDatabase = {
     database: option<database>,
   }
   @module("@aws-sdk/client-glue") @new external new: request => t = "GetDatabaseCommand"
-  let make = (~name, ~catalogId=?, ()) => new({name, catalogId})
+  let make = (~name, ~catalogId=?, ()) => new({name: name, catalogId: catalogId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetConnections = {
   type t
   type request = {
@@ -7826,9 +8154,16 @@ module GetConnections = {
   }
   @module("@aws-sdk/client-glue") @new external new: request => t = "GetConnectionsCommand"
   let make = (~maxResults=?, ~nextToken=?, ~hidePassword=?, ~filter=?, ~catalogId=?, ()) =>
-    new({maxResults, nextToken, hidePassword, filter, catalogId})
+    new({
+      maxResults: maxResults,
+      nextToken: nextToken,
+      hidePassword: hidePassword,
+      filter: filter,
+      catalogId: catalogId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetClassifiers = {
   type t
   type request = {
@@ -7844,9 +8179,11 @@ module GetClassifiers = {
     classifiers: option<classifierList>,
   }
   @module("@aws-sdk/client-glue") @new external new: request => t = "GetClassifiersCommand"
-  let make = (~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults})
+  let make = (~nextToken=?, ~maxResults=?, ()) =>
+    new({nextToken: nextToken, maxResults: maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateScript = {
   type t
   type request = {
@@ -7863,9 +8200,11 @@ module CreateScript = {
     pythonScript: option<pythonScript>,
   }
   @module("@aws-sdk/client-glue") @new external new: request => t = "CreateScriptCommand"
-  let make = (~language=?, ~dagEdges=?, ~dagNodes=?, ()) => new({language, dagEdges, dagNodes})
+  let make = (~language=?, ~dagEdges=?, ~dagNodes=?, ()) =>
+    new({language: language, dagEdges: dagEdges, dagNodes: dagNodes})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateDatabase = {
   type t
   type request = {
@@ -7878,9 +8217,11 @@ module CreateDatabase = {
   }
   type response = {.}
   @module("@aws-sdk/client-glue") @new external new: request => t = "CreateDatabaseCommand"
-  let make = (~databaseInput, ~catalogId=?, ()) => new({databaseInput, catalogId})
+  let make = (~databaseInput, ~catalogId=?, ()) =>
+    new({databaseInput: databaseInput, catalogId: catalogId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module CreateCrawler = {
   type t
   type request = {
@@ -7959,24 +8300,25 @@ module CreateCrawler = {
     (),
   ) =>
     new({
-      tags,
-      crawlerSecurityConfiguration,
-      configuration,
-      lakeFormationConfiguration,
-      lineageConfiguration,
-      recrawlPolicy,
-      schemaChangePolicy,
-      tablePrefix,
-      classifiers,
-      schedule,
-      targets,
-      description,
-      databaseName,
-      role,
-      name,
+      tags: tags,
+      crawlerSecurityConfiguration: crawlerSecurityConfiguration,
+      configuration: configuration,
+      lakeFormationConfiguration: lakeFormationConfiguration,
+      lineageConfiguration: lineageConfiguration,
+      recrawlPolicy: recrawlPolicy,
+      schemaChangePolicy: schemaChangePolicy,
+      tablePrefix: tablePrefix,
+      classifiers: classifiers,
+      schedule: schedule,
+      targets: targets,
+      description: description,
+      databaseName: databaseName,
+      role: role,
+      name: name,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module BatchGetJobs = {
   type t
   type request = {
@@ -7994,6 +8336,7 @@ module BatchGetJobs = {
   let make = (~jobNames, ()) => new({jobNames: jobNames})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateTable = {
   type t
   type request = {
@@ -8029,9 +8372,18 @@ module UpdateTable = {
     ~skipArchive=?,
     ~catalogId=?,
     (),
-  ) => new({versionId, transactionId, skipArchive, tableInput, databaseName, catalogId})
+  ) =>
+    new({
+      versionId: versionId,
+      transactionId: transactionId,
+      skipArchive: skipArchive,
+      tableInput: tableInput,
+      databaseName: databaseName,
+      catalogId: catalogId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdatePartition = {
   type t
   type request = {
@@ -8058,9 +8410,16 @@ module UpdatePartition = {
   type response = {.}
   @module("@aws-sdk/client-glue") @new external new: request => t = "UpdatePartitionCommand"
   let make = (~partitionInput, ~partitionValueList, ~tableName, ~databaseName, ~catalogId=?, ()) =>
-    new({partitionInput, partitionValueList, tableName, databaseName, catalogId})
+    new({
+      partitionInput: partitionInput,
+      partitionValueList: partitionValueList,
+      tableName: tableName,
+      databaseName: databaseName,
+      catalogId: catalogId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module GetUnfilteredTableMetadata = {
   type t
   type request = {
@@ -8079,9 +8438,16 @@ module GetUnfilteredTableMetadata = {
   @module("@aws-sdk/client-glue") @new
   external new: request => t = "GetUnfilteredTableMetadataCommand"
   let make = (~supportedPermissionTypes, ~name, ~databaseName, ~catalogId, ~auditContext=?, ()) =>
-    new({supportedPermissionTypes, auditContext, name, databaseName, catalogId})
+    new({
+      supportedPermissionTypes: supportedPermissionTypes,
+      auditContext: auditContext,
+      name: name,
+      databaseName: databaseName,
+      catalogId: catalogId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetUnfilteredPartitionMetadata = {
   type t
   type request = {
@@ -8109,15 +8475,16 @@ module GetUnfilteredPartitionMetadata = {
     (),
   ) =>
     new({
-      supportedPermissionTypes,
-      auditContext,
-      partitionValues,
-      tableName,
-      databaseName,
-      catalogId,
+      supportedPermissionTypes: supportedPermissionTypes,
+      auditContext: auditContext,
+      partitionValues: partitionValues,
+      tableName: tableName,
+      databaseName: databaseName,
+      catalogId: catalogId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetTriggers = {
   type t
   type request = {
@@ -8140,9 +8507,10 @@ module GetTriggers = {
   }
   @module("@aws-sdk/client-glue") @new external new: request => t = "GetTriggersCommand"
   let make = (~maxResults=?, ~dependentJobName=?, ~nextToken=?, ()) =>
-    new({maxResults, dependentJobName, nextToken})
+    new({maxResults: maxResults, dependentJobName: dependentJobName, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetTable = {
   type t
   type request = {
@@ -8174,9 +8542,16 @@ module GetTable = {
   }
   @module("@aws-sdk/client-glue") @new external new: request => t = "GetTableCommand"
   let make = (~name, ~databaseName, ~queryAsOfTime=?, ~transactionId=?, ~catalogId=?, ()) =>
-    new({queryAsOfTime, transactionId, name, databaseName, catalogId})
+    new({
+      queryAsOfTime: queryAsOfTime,
+      transactionId: transactionId,
+      name: name,
+      databaseName: databaseName,
+      catalogId: catalogId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetSecurityConfigurations = {
   type t
   type request = {
@@ -8195,9 +8570,11 @@ module GetSecurityConfigurations = {
   }
   @module("@aws-sdk/client-glue") @new
   external new: request => t = "GetSecurityConfigurationsCommand"
-  let make = (~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults})
+  let make = (~nextToken=?, ~maxResults=?, ()) =>
+    new({nextToken: nextToken, maxResults: maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetPartition = {
   type t
   type request = {
@@ -8220,9 +8597,15 @@ module GetPartition = {
   }
   @module("@aws-sdk/client-glue") @new external new: request => t = "GetPartitionCommand"
   let make = (~partitionValues, ~tableName, ~databaseName, ~catalogId=?, ()) =>
-    new({partitionValues, tableName, databaseName, catalogId})
+    new({
+      partitionValues: partitionValues,
+      tableName: tableName,
+      databaseName: databaseName,
+      catalogId: catalogId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetDatabases = {
   type t
   type request = {
@@ -8259,9 +8642,15 @@ module GetDatabases = {
   }
   @module("@aws-sdk/client-glue") @new external new: request => t = "GetDatabasesCommand"
   let make = (~resourceShareType=?, ~maxResults=?, ~nextToken=?, ~catalogId=?, ()) =>
-    new({resourceShareType, maxResults, nextToken, catalogId})
+    new({
+      resourceShareType: resourceShareType,
+      maxResults: maxResults,
+      nextToken: nextToken,
+      catalogId: catalogId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetCrawler = {
   type t
   type request = {
@@ -8276,6 +8665,7 @@ module GetCrawler = {
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetColumnStatisticsForTable = {
   type t
   type request = {
@@ -8300,9 +8690,15 @@ module GetColumnStatisticsForTable = {
   @module("@aws-sdk/client-glue") @new
   external new: request => t = "GetColumnStatisticsForTableCommand"
   let make = (~columnNames, ~tableName, ~databaseName, ~catalogId=?, ()) =>
-    new({columnNames, tableName, databaseName, catalogId})
+    new({
+      columnNames: columnNames,
+      tableName: tableName,
+      databaseName: databaseName,
+      catalogId: catalogId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetColumnStatisticsForPartition = {
   type t
   type request = {
@@ -8330,9 +8726,16 @@ module GetColumnStatisticsForPartition = {
   @module("@aws-sdk/client-glue") @new
   external new: request => t = "GetColumnStatisticsForPartitionCommand"
   let make = (~columnNames, ~partitionValues, ~tableName, ~databaseName, ~catalogId=?, ()) =>
-    new({columnNames, partitionValues, tableName, databaseName, catalogId})
+    new({
+      columnNames: columnNames,
+      partitionValues: partitionValues,
+      tableName: tableName,
+      databaseName: databaseName,
+      catalogId: catalogId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateTable = {
   type t
   type request = {
@@ -8365,9 +8768,17 @@ module CreateTable = {
     ~partitionIndexes=?,
     ~catalogId=?,
     (),
-  ) => new({transactionId, partitionIndexes, tableInput, databaseName, catalogId})
+  ) =>
+    new({
+      transactionId: transactionId,
+      partitionIndexes: partitionIndexes,
+      tableInput: tableInput,
+      databaseName: databaseName,
+      catalogId: catalogId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module CreatePartition = {
   type t
   type request = {
@@ -8391,9 +8802,15 @@ module CreatePartition = {
   type response = {.}
   @module("@aws-sdk/client-glue") @new external new: request => t = "CreatePartitionCommand"
   let make = (~partitionInput, ~tableName, ~databaseName, ~catalogId=?, ()) =>
-    new({partitionInput, tableName, databaseName, catalogId})
+    new({
+      partitionInput: partitionInput,
+      tableName: tableName,
+      databaseName: databaseName,
+      catalogId: catalogId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module BatchGetTriggers = {
   type t
   type request = {
@@ -8413,6 +8830,7 @@ module BatchGetTriggers = {
   let make = (~triggerNames, ()) => new({triggerNames: triggerNames})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateColumnStatisticsForTable = {
   type t
   type request = {
@@ -8434,9 +8852,15 @@ module UpdateColumnStatisticsForTable = {
   @module("@aws-sdk/client-glue") @new
   external new: request => t = "UpdateColumnStatisticsForTableCommand"
   let make = (~columnStatisticsList, ~tableName, ~databaseName, ~catalogId=?, ()) =>
-    new({columnStatisticsList, tableName, databaseName, catalogId})
+    new({
+      columnStatisticsList: columnStatisticsList,
+      tableName: tableName,
+      databaseName: databaseName,
+      catalogId: catalogId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateColumnStatisticsForPartition = {
   type t
   type request = {
@@ -8467,9 +8891,17 @@ module UpdateColumnStatisticsForPartition = {
     ~databaseName,
     ~catalogId=?,
     (),
-  ) => new({columnStatisticsList, partitionValues, tableName, databaseName, catalogId})
+  ) =>
+    new({
+      columnStatisticsList: columnStatisticsList,
+      partitionValues: partitionValues,
+      tableName: tableName,
+      databaseName: databaseName,
+      catalogId: catalogId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module SearchTables = {
   type t
   type request = {
@@ -8531,9 +8963,19 @@ module SearchTables = {
     ~nextToken=?,
     ~catalogId=?,
     (),
-  ) => new({resourceShareType, maxResults, sortCriteria, searchText, filters, nextToken, catalogId})
+  ) =>
+    new({
+      resourceShareType: resourceShareType,
+      maxResults: maxResults,
+      sortCriteria: sortCriteria,
+      searchText: searchText,
+      filters: filters,
+      nextToken: nextToken,
+      catalogId: catalogId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetTables = {
   type t
   type request = {
@@ -8583,9 +9025,18 @@ module GetTables = {
     ~catalogId=?,
     (),
   ) =>
-    new({queryAsOfTime, transactionId, maxResults, nextToken, expression, databaseName, catalogId})
+    new({
+      queryAsOfTime: queryAsOfTime,
+      transactionId: transactionId,
+      maxResults: maxResults,
+      nextToken: nextToken,
+      expression: expression,
+      databaseName: databaseName,
+      catalogId: catalogId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetTableVersion = {
   type t
   type request = {
@@ -8613,9 +9064,15 @@ module GetTableVersion = {
   }
   @module("@aws-sdk/client-glue") @new external new: request => t = "GetTableVersionCommand"
   let make = (~tableName, ~databaseName, ~versionId=?, ~catalogId=?, ()) =>
-    new({versionId, tableName, databaseName, catalogId})
+    new({
+      versionId: versionId,
+      tableName: tableName,
+      databaseName: databaseName,
+      catalogId: catalogId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetPartitions = {
   type t
   type request = {
@@ -8782,19 +9239,20 @@ module GetPartitions = {
     (),
   ) =>
     new({
-      queryAsOfTime,
-      transactionId,
-      excludeColumnSchema,
-      maxResults,
-      segment,
-      nextToken,
-      expression,
-      tableName,
-      databaseName,
-      catalogId,
+      queryAsOfTime: queryAsOfTime,
+      transactionId: transactionId,
+      excludeColumnSchema: excludeColumnSchema,
+      maxResults: maxResults,
+      segment: segment,
+      nextToken: nextToken,
+      expression: expression,
+      tableName: tableName,
+      databaseName: databaseName,
+      catalogId: catalogId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetMLTransforms = {
   type t
   type request = {
@@ -8814,9 +9272,10 @@ module GetMLTransforms = {
   }
   @module("@aws-sdk/client-glue") @new external new: request => t = "GetMLTransformsCommand"
   let make = (~sort=?, ~filter=?, ~maxResults=?, ~nextToken=?, ()) =>
-    new({sort, filter, maxResults, nextToken})
+    new({sort: sort, filter: filter, maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetCrawlers = {
   type t
   type request = {
@@ -8833,9 +9292,11 @@ module GetCrawlers = {
     @ocaml.doc("<p>A list of crawler metadata.</p>") @as("Crawlers") crawlers: option<crawlerList>,
   }
   @module("@aws-sdk/client-glue") @new external new: request => t = "GetCrawlersCommand"
-  let make = (~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults})
+  let make = (~nextToken=?, ~maxResults=?, ()) =>
+    new({nextToken: nextToken, maxResults: maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module BatchGetPartition = {
   type t
   type request = {
@@ -8861,9 +9322,15 @@ module BatchGetPartition = {
   }
   @module("@aws-sdk/client-glue") @new external new: request => t = "BatchGetPartitionCommand"
   let make = (~partitionsToGet, ~tableName, ~databaseName, ~catalogId=?, ()) =>
-    new({partitionsToGet, tableName, databaseName, catalogId})
+    new({
+      partitionsToGet: partitionsToGet,
+      tableName: tableName,
+      databaseName: databaseName,
+      catalogId: catalogId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module BatchGetCrawlers = {
   type t
   type request = {
@@ -8882,6 +9349,7 @@ module BatchGetCrawlers = {
   let make = (~crawlerNames, ()) => new({crawlerNames: crawlerNames})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module BatchCreatePartition = {
   type t
   type request = {
@@ -8908,9 +9376,15 @@ module BatchCreatePartition = {
   }
   @module("@aws-sdk/client-glue") @new external new: request => t = "BatchCreatePartitionCommand"
   let make = (~partitionInputList, ~tableName, ~databaseName, ~catalogId=?, ()) =>
-    new({partitionInputList, tableName, databaseName, catalogId})
+    new({
+      partitionInputList: partitionInputList,
+      tableName: tableName,
+      databaseName: databaseName,
+      catalogId: catalogId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetUnfilteredPartitionsMetadata = {
   type t
   type request = {
@@ -8943,18 +9417,19 @@ module GetUnfilteredPartitionsMetadata = {
     (),
   ) =>
     new({
-      maxResults,
-      segment,
-      nextToken,
-      supportedPermissionTypes,
-      auditContext,
-      expression,
-      tableName,
-      databaseName,
-      catalogId,
+      maxResults: maxResults,
+      segment: segment,
+      nextToken: nextToken,
+      supportedPermissionTypes: supportedPermissionTypes,
+      auditContext: auditContext,
+      expression: expression,
+      tableName: tableName,
+      databaseName: databaseName,
+      catalogId: catalogId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetTableVersions = {
   type t
   type request = {
@@ -8988,9 +9463,16 @@ module GetTableVersions = {
   }
   @module("@aws-sdk/client-glue") @new external new: request => t = "GetTableVersionsCommand"
   let make = (~tableName, ~databaseName, ~maxResults=?, ~nextToken=?, ~catalogId=?, ()) =>
-    new({maxResults, nextToken, tableName, databaseName, catalogId})
+    new({
+      maxResults: maxResults,
+      nextToken: nextToken,
+      tableName: tableName,
+      databaseName: databaseName,
+      catalogId: catalogId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetPartitionIndexes = {
   type t
   type request = {
@@ -9019,9 +9501,15 @@ module GetPartitionIndexes = {
   }
   @module("@aws-sdk/client-glue") @new external new: request => t = "GetPartitionIndexesCommand"
   let make = (~tableName, ~databaseName, ~nextToken=?, ~catalogId=?, ()) =>
-    new({nextToken, tableName, databaseName, catalogId})
+    new({
+      nextToken: nextToken,
+      tableName: tableName,
+      databaseName: databaseName,
+      catalogId: catalogId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module BatchUpdatePartition = {
   type t
   type request = {
@@ -9051,9 +9539,10 @@ module BatchUpdatePartition = {
   }
   @module("@aws-sdk/client-glue") @new external new: request => t = "BatchUpdatePartitionCommand"
   let make = (~entries, ~tableName, ~databaseName, ~catalogId=?, ()) =>
-    new({entries, tableName, databaseName, catalogId})
+    new({entries: entries, tableName: tableName, databaseName: databaseName, catalogId: catalogId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetWorkflowRun = {
   type t
   type request = {
@@ -9067,9 +9556,11 @@ module GetWorkflowRun = {
     @ocaml.doc("<p>The requested workflow run metadata.</p>") @as("Run") run: option<workflowRun>,
   }
   @module("@aws-sdk/client-glue") @new external new: request => t = "GetWorkflowRunCommand"
-  let make = (~runId, ~name, ~includeGraph=?, ()) => new({includeGraph, runId, name})
+  let make = (~runId, ~name, ~includeGraph=?, ()) =>
+    new({includeGraph: includeGraph, runId: runId, name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetWorkflowRuns = {
   type t
   type request = {
@@ -9095,9 +9586,10 @@ module GetWorkflowRuns = {
   }
   @module("@aws-sdk/client-glue") @new external new: request => t = "GetWorkflowRunsCommand"
   let make = (~name, ~maxResults=?, ~nextToken=?, ~includeGraph=?, ()) =>
-    new({maxResults, nextToken, includeGraph, name})
+    new({maxResults: maxResults, nextToken: nextToken, includeGraph: includeGraph, name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetWorkflow = {
   type t
   type request = {
@@ -9113,9 +9605,10 @@ module GetWorkflow = {
     workflow: option<workflow>,
   }
   @module("@aws-sdk/client-glue") @new external new: request => t = "GetWorkflowCommand"
-  let make = (~name, ~includeGraph=?, ()) => new({includeGraph, name})
+  let make = (~name, ~includeGraph=?, ()) => new({includeGraph: includeGraph, name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module BatchGetWorkflows = {
   type t
   type request = {
@@ -9137,6 +9630,6 @@ module BatchGetWorkflows = {
     workflows: option<workflows>,
   }
   @module("@aws-sdk/client-glue") @new external new: request => t = "BatchGetWorkflowsCommand"
-  let make = (~names, ~includeGraph=?, ()) => new({includeGraph, names})
+  let make = (~names, ~includeGraph=?, ()) => new({includeGraph: includeGraph, names: names})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

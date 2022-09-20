@@ -580,6 +580,7 @@ module EnableHealthServiceAccessForOrganization = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DisableHealthServiceAccessForOrganization = {
   type t
   type request = {.}
@@ -589,6 +590,7 @@ module DisableHealthServiceAccessForOrganization = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DescribeHealthServiceStatusForOrganization = {
   type t
   type request = {.}
@@ -603,6 +605,7 @@ module DescribeHealthServiceStatusForOrganization = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeAffectedAccountsForOrganization = {
   type t
   type request = {
@@ -656,9 +659,11 @@ When all results have been returned, the response does not contain a pagination 
   }
   @module("@aws-sdk/client-health") @new
   external new: request => t = "DescribeAffectedAccountsForOrganizationCommand"
-  let make = (~eventArn, ~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken, eventArn})
+  let make = (~eventArn, ~maxResults=?, ~nextToken=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken, eventArn: eventArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeEventsForOrganization = {
   type t
   type request = {
@@ -690,9 +695,10 @@ When all results have been returned, the response does not contain a pagination 
   @module("@aws-sdk/client-health") @new
   external new: request => t = "DescribeEventsForOrganizationCommand"
   let make = (~locale=?, ~maxResults=?, ~nextToken=?, ~filter=?, ()) =>
-    new({locale, maxResults, nextToken, filter})
+    new({locale: locale, maxResults: maxResults, nextToken: nextToken, filter: filter})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeEventTypes = {
   type t
   type request = {
@@ -728,9 +734,10 @@ When all results have been returned, the response does not contain a pagination 
   }
   @module("@aws-sdk/client-health") @new external new: request => t = "DescribeEventTypesCommand"
   let make = (~maxResults=?, ~nextToken=?, ~locale=?, ~filter=?, ()) =>
-    new({maxResults, nextToken, locale, filter})
+    new({maxResults: maxResults, nextToken: nextToken, locale: locale, filter: filter})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeEntityAggregates = {
   type t
   type request = {
@@ -747,6 +754,7 @@ module DescribeEntityAggregates = {
   let make = (~eventArns=?, ()) => new({eventArns: eventArns})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeEvents = {
   type t
   type request = {
@@ -776,9 +784,10 @@ When all results have been returned, the response does not contain a pagination 
   }
   @module("@aws-sdk/client-health") @new external new: request => t = "DescribeEventsCommand"
   let make = (~locale=?, ~maxResults=?, ~nextToken=?, ~filter=?, ()) =>
-    new({locale, maxResults, nextToken, filter})
+    new({locale: locale, maxResults: maxResults, nextToken: nextToken, filter: filter})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeEventDetailsForOrganization = {
   type t
   type request = {
@@ -799,9 +808,10 @@ module DescribeEventDetailsForOrganization = {
   @module("@aws-sdk/client-health") @new
   external new: request => t = "DescribeEventDetailsForOrganizationCommand"
   let make = (~organizationEventDetailFilters, ~locale=?, ()) =>
-    new({locale, organizationEventDetailFilters})
+    new({locale: locale, organizationEventDetailFilters: organizationEventDetailFilters})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeEventDetails = {
   type t
   type request = {
@@ -820,9 +830,10 @@ module DescribeEventDetails = {
     successfulSet: option<describeEventDetailsSuccessfulSet>,
   }
   @module("@aws-sdk/client-health") @new external new: request => t = "DescribeEventDetailsCommand"
-  let make = (~eventArns, ~locale=?, ()) => new({locale, eventArns})
+  let make = (~eventArns, ~locale=?, ()) => new({locale: locale, eventArns: eventArns})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeEventAggregates = {
   type t
   type request = {
@@ -853,9 +864,15 @@ When all results have been returned, the response does not contain a pagination 
   @module("@aws-sdk/client-health") @new
   external new: request => t = "DescribeEventAggregatesCommand"
   let make = (~aggregateField, ~nextToken=?, ~maxResults=?, ~filter=?, ()) =>
-    new({nextToken, maxResults, aggregateField, filter})
+    new({
+      nextToken: nextToken,
+      maxResults: maxResults,
+      aggregateField: aggregateField,
+      filter: filter,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeAffectedEntitiesForOrganization = {
   type t
   type request = {
@@ -893,9 +910,15 @@ When all results have been returned, the response does not contain a pagination 
   @module("@aws-sdk/client-health") @new
   external new: request => t = "DescribeAffectedEntitiesForOrganizationCommand"
   let make = (~organizationEntityFilters, ~maxResults=?, ~nextToken=?, ~locale=?, ()) =>
-    new({maxResults, nextToken, locale, organizationEntityFilters})
+    new({
+      maxResults: maxResults,
+      nextToken: nextToken,
+      locale: locale,
+      organizationEntityFilters: organizationEntityFilters,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeAffectedEntities = {
   type t
   type request = {
@@ -926,6 +949,6 @@ When all results have been returned, the response does not contain a pagination 
   @module("@aws-sdk/client-health") @new
   external new: request => t = "DescribeAffectedEntitiesCommand"
   let make = (~filter, ~maxResults=?, ~nextToken=?, ~locale=?, ()) =>
-    new({maxResults, nextToken, locale, filter})
+    new({maxResults: maxResults, nextToken: nextToken, locale: locale, filter: filter})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

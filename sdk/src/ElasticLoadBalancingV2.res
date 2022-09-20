@@ -1413,9 +1413,11 @@ module SetIpAddressType = {
   }
   @module("@aws-sdk/client-elasticloadbalancing") @new
   external new: request => t = "SetIpAddressTypeCommand"
-  let make = (~ipAddressType, ~loadBalancerArn, ()) => new({ipAddressType, loadBalancerArn})
+  let make = (~ipAddressType, ~loadBalancerArn, ()) =>
+    new({ipAddressType: ipAddressType, loadBalancerArn: loadBalancerArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteTargetGroup = {
   type t
   type request = {
@@ -1428,6 +1430,7 @@ module DeleteTargetGroup = {
   let make = (~targetGroupArn, ()) => new({targetGroupArn: targetGroupArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteRule = {
   type t
   type request = {
@@ -1440,6 +1443,7 @@ module DeleteRule = {
   let make = (~ruleArn, ()) => new({ruleArn: ruleArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteLoadBalancer = {
   type t
   type request = {
@@ -1452,6 +1456,7 @@ module DeleteLoadBalancer = {
   let make = (~loadBalancerArn, ()) => new({loadBalancerArn: loadBalancerArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteListener = {
   type t
   type request = {
@@ -1464,6 +1469,7 @@ module DeleteListener = {
   let make = (~listenerArn, ()) => new({listenerArn: listenerArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module SetSecurityGroups = {
   type t
   type request = {
@@ -1479,9 +1485,11 @@ module SetSecurityGroups = {
   }
   @module("@aws-sdk/client-elasticloadbalancing") @new
   external new: request => t = "SetSecurityGroupsCommand"
-  let make = (~securityGroups, ~loadBalancerArn, ()) => new({securityGroups, loadBalancerArn})
+  let make = (~securityGroups, ~loadBalancerArn, ()) =>
+    new({securityGroups: securityGroups, loadBalancerArn: loadBalancerArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module RemoveTags = {
   type t
   type request = {
@@ -1492,9 +1500,10 @@ module RemoveTags = {
   type response = {.}
   @module("@aws-sdk/client-elasticloadbalancing") @new
   external new: request => t = "RemoveTagsCommand"
-  let make = (~tagKeys, ~resourceArns, ()) => new({tagKeys, resourceArns})
+  let make = (~tagKeys, ~resourceArns, ()) => new({tagKeys: tagKeys, resourceArns: resourceArns})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module RemoveListenerCertificates = {
   type t
   type request = {
@@ -1509,9 +1518,11 @@ module RemoveListenerCertificates = {
   type response = {.}
   @module("@aws-sdk/client-elasticloadbalancing") @new
   external new: request => t = "RemoveListenerCertificatesCommand"
-  let make = (~certificates, ~listenerArn, ()) => new({certificates, listenerArn})
+  let make = (~certificates, ~listenerArn, ()) =>
+    new({certificates: certificates, listenerArn: listenerArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module RegisterTargets = {
   type t
   type request = {
@@ -1522,9 +1533,11 @@ module RegisterTargets = {
   type response = {.}
   @module("@aws-sdk/client-elasticloadbalancing") @new
   external new: request => t = "RegisterTargetsCommand"
-  let make = (~targets, ~targetGroupArn, ()) => new({targets, targetGroupArn})
+  let make = (~targets, ~targetGroupArn, ()) =>
+    new({targets: targets, targetGroupArn: targetGroupArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ModifyTargetGroupAttributes = {
   type t
   type request = {
@@ -1538,9 +1551,11 @@ module ModifyTargetGroupAttributes = {
   }
   @module("@aws-sdk/client-elasticloadbalancing") @new
   external new: request => t = "ModifyTargetGroupAttributesCommand"
-  let make = (~attributes, ~targetGroupArn, ()) => new({attributes, targetGroupArn})
+  let make = (~attributes, ~targetGroupArn, ()) =>
+    new({attributes: attributes, targetGroupArn: targetGroupArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ModifyLoadBalancerAttributes = {
   type t
   type request = {
@@ -1555,9 +1570,11 @@ module ModifyLoadBalancerAttributes = {
   }
   @module("@aws-sdk/client-elasticloadbalancing") @new
   external new: request => t = "ModifyLoadBalancerAttributesCommand"
-  let make = (~attributes, ~loadBalancerArn, ()) => new({attributes, loadBalancerArn})
+  let make = (~attributes, ~loadBalancerArn, ()) =>
+    new({attributes: attributes, loadBalancerArn: loadBalancerArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeTargetGroupAttributes = {
   type t
   type request = {
@@ -1573,6 +1590,7 @@ module DescribeTargetGroupAttributes = {
   let make = (~targetGroupArn, ()) => new({targetGroupArn: targetGroupArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeLoadBalancerAttributes = {
   type t
   type request = {
@@ -1588,6 +1606,7 @@ module DescribeLoadBalancerAttributes = {
   let make = (~loadBalancerArn, ()) => new({loadBalancerArn: loadBalancerArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeListenerCertificates = {
   type t
   type request = {
@@ -1610,9 +1629,11 @@ module DescribeListenerCertificates = {
   }
   @module("@aws-sdk/client-elasticloadbalancing") @new
   external new: request => t = "DescribeListenerCertificatesCommand"
-  let make = (~listenerArn, ~pageSize=?, ~marker=?, ()) => new({pageSize, marker, listenerArn})
+  let make = (~listenerArn, ~pageSize=?, ~marker=?, ()) =>
+    new({pageSize: pageSize, marker: marker, listenerArn: listenerArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeAccountLimits = {
   type t
   type request = {
@@ -1632,9 +1653,10 @@ module DescribeAccountLimits = {
   }
   @module("@aws-sdk/client-elasticloadbalancing") @new
   external new: request => t = "DescribeAccountLimitsCommand"
-  let make = (~pageSize=?, ~marker=?, ()) => new({pageSize, marker})
+  let make = (~pageSize=?, ~marker=?, ()) => new({pageSize: pageSize, marker: marker})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeregisterTargets = {
   type t
   type request = {
@@ -1648,9 +1670,11 @@ module DeregisterTargets = {
   type response = {.}
   @module("@aws-sdk/client-elasticloadbalancing") @new
   external new: request => t = "DeregisterTargetsCommand"
-  let make = (~targets, ~targetGroupArn, ()) => new({targets, targetGroupArn})
+  let make = (~targets, ~targetGroupArn, ()) =>
+    new({targets: targets, targetGroupArn: targetGroupArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module AddTags = {
   type t
   type request = {
@@ -1660,9 +1684,10 @@ module AddTags = {
   }
   type response = {.}
   @module("@aws-sdk/client-elasticloadbalancing") @new external new: request => t = "AddTagsCommand"
-  let make = (~tags, ~resourceArns, ()) => new({tags, resourceArns})
+  let make = (~tags, ~resourceArns, ()) => new({tags: tags, resourceArns: resourceArns})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module AddListenerCertificates = {
   type t
   type request = {
@@ -1681,9 +1706,11 @@ module AddListenerCertificates = {
   }
   @module("@aws-sdk/client-elasticloadbalancing") @new
   external new: request => t = "AddListenerCertificatesCommand"
-  let make = (~certificates, ~listenerArn, ()) => new({certificates, listenerArn})
+  let make = (~certificates, ~listenerArn, ()) =>
+    new({certificates: certificates, listenerArn: listenerArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ModifyTargetGroup = {
   type t
   type request = {
@@ -1754,19 +1781,20 @@ module ModifyTargetGroup = {
     (),
   ) =>
     new({
-      matcher,
-      unhealthyThresholdCount,
-      healthyThresholdCount,
-      healthCheckTimeoutSeconds,
-      healthCheckIntervalSeconds,
-      healthCheckEnabled,
-      healthCheckPath,
-      healthCheckPort,
-      healthCheckProtocol,
-      targetGroupArn,
+      matcher: matcher,
+      unhealthyThresholdCount: unhealthyThresholdCount,
+      healthyThresholdCount: healthyThresholdCount,
+      healthCheckTimeoutSeconds: healthCheckTimeoutSeconds,
+      healthCheckIntervalSeconds: healthCheckIntervalSeconds,
+      healthCheckEnabled: healthCheckEnabled,
+      healthCheckPath: healthCheckPath,
+      healthCheckPort: healthCheckPort,
+      healthCheckProtocol: healthCheckProtocol,
+      targetGroupArn: targetGroupArn,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeTargetHealth = {
   type t
   type request = {
@@ -1781,9 +1809,11 @@ module DescribeTargetHealth = {
   }
   @module("@aws-sdk/client-elasticloadbalancing") @new
   external new: request => t = "DescribeTargetHealthCommand"
-  let make = (~targetGroupArn, ~targets=?, ()) => new({targets, targetGroupArn})
+  let make = (~targetGroupArn, ~targets=?, ()) =>
+    new({targets: targets, targetGroupArn: targetGroupArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeTargetGroups = {
   type t
   type request = {
@@ -1812,9 +1842,16 @@ module DescribeTargetGroups = {
   @module("@aws-sdk/client-elasticloadbalancing") @new
   external new: request => t = "DescribeTargetGroupsCommand"
   let make = (~pageSize=?, ~marker=?, ~names=?, ~targetGroupArns=?, ~loadBalancerArn=?, ()) =>
-    new({pageSize, marker, names, targetGroupArns, loadBalancerArn})
+    new({
+      pageSize: pageSize,
+      marker: marker,
+      names: names,
+      targetGroupArns: targetGroupArns,
+      loadBalancerArn: loadBalancerArn,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateTargetGroup = {
   type t
   type request = {
@@ -1961,26 +1998,27 @@ module CreateTargetGroup = {
     (),
   ) =>
     new({
-      ipAddressType,
-      tags,
-      targetType,
-      matcher,
-      unhealthyThresholdCount,
-      healthyThresholdCount,
-      healthCheckTimeoutSeconds,
-      healthCheckIntervalSeconds,
-      healthCheckPath,
-      healthCheckEnabled,
-      healthCheckPort,
-      healthCheckProtocol,
-      vpcId,
-      port,
-      protocolVersion,
-      protocol,
-      name,
+      ipAddressType: ipAddressType,
+      tags: tags,
+      targetType: targetType,
+      matcher: matcher,
+      unhealthyThresholdCount: unhealthyThresholdCount,
+      healthyThresholdCount: healthyThresholdCount,
+      healthCheckTimeoutSeconds: healthCheckTimeoutSeconds,
+      healthCheckIntervalSeconds: healthCheckIntervalSeconds,
+      healthCheckPath: healthCheckPath,
+      healthCheckEnabled: healthCheckEnabled,
+      healthCheckPort: healthCheckPort,
+      healthCheckProtocol: healthCheckProtocol,
+      vpcId: vpcId,
+      port: port,
+      protocolVersion: protocolVersion,
+      protocol: protocol,
+      name: name,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module SetSubnets = {
   type t
   type request = {
@@ -2028,9 +2066,15 @@ module SetSubnets = {
   @module("@aws-sdk/client-elasticloadbalancing") @new
   external new: request => t = "SetSubnetsCommand"
   let make = (~loadBalancerArn, ~ipAddressType=?, ~subnetMappings=?, ~subnets=?, ()) =>
-    new({ipAddressType, subnetMappings, subnets, loadBalancerArn})
+    new({
+      ipAddressType: ipAddressType,
+      subnetMappings: subnetMappings,
+      subnets: subnets,
+      loadBalancerArn: loadBalancerArn,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeTags = {
   type t
   type request = {
@@ -2048,6 +2092,7 @@ module DescribeTags = {
   let make = (~resourceArns, ()) => new({resourceArns: resourceArns})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeSSLPolicies = {
   type t
   type request = {
@@ -2074,9 +2119,10 @@ module DescribeSSLPolicies = {
   @module("@aws-sdk/client-elasticloadbalancing") @new
   external new: request => t = "DescribeSSLPoliciesCommand"
   let make = (~loadBalancerType=?, ~pageSize=?, ~marker=?, ~names=?, ()) =>
-    new({loadBalancerType, pageSize, marker, names})
+    new({loadBalancerType: loadBalancerType, pageSize: pageSize, marker: marker, names: names})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeLoadBalancers = {
   type t
   type request = {
@@ -2104,9 +2150,10 @@ module DescribeLoadBalancers = {
   @module("@aws-sdk/client-elasticloadbalancing") @new
   external new: request => t = "DescribeLoadBalancersCommand"
   let make = (~pageSize=?, ~marker=?, ~names=?, ~loadBalancerArns=?, ()) =>
-    new({pageSize, marker, names, loadBalancerArns})
+    new({pageSize: pageSize, marker: marker, names: names, loadBalancerArns: loadBalancerArns})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateLoadBalancer = {
   type t
   type request = {
@@ -2196,18 +2243,19 @@ module CreateLoadBalancer = {
     (),
   ) =>
     new({
-      customerOwnedIpv4Pool,
-      ipAddressType,
-      type_,
-      tags,
-      scheme,
-      securityGroups,
-      subnetMappings,
-      subnets,
-      name,
+      customerOwnedIpv4Pool: customerOwnedIpv4Pool,
+      ipAddressType: ipAddressType,
+      type_: type_,
+      tags: tags,
+      scheme: scheme,
+      securityGroups: securityGroups,
+      subnetMappings: subnetMappings,
+      subnets: subnets,
+      name: name,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module SetRulePriorities = {
   type t
   type request = {
@@ -2222,6 +2270,7 @@ module SetRulePriorities = {
   let make = (~rulePriorities, ()) => new({rulePriorities: rulePriorities})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ModifyRule = {
   type t
   type request = {
@@ -2235,9 +2284,11 @@ module ModifyRule = {
   }
   @module("@aws-sdk/client-elasticloadbalancing") @new
   external new: request => t = "ModifyRuleCommand"
-  let make = (~ruleArn, ~actions=?, ~conditions=?, ()) => new({actions, conditions, ruleArn})
+  let make = (~ruleArn, ~actions=?, ~conditions=?, ()) =>
+    new({actions: actions, conditions: conditions, ruleArn: ruleArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ModifyListener = {
   type t
   type request = {
@@ -2315,9 +2366,19 @@ module ModifyListener = {
     ~protocol=?,
     ~port=?,
     (),
-  ) => new({alpnPolicy, defaultActions, certificates, sslPolicy, protocol, port, listenerArn})
+  ) =>
+    new({
+      alpnPolicy: alpnPolicy,
+      defaultActions: defaultActions,
+      certificates: certificates,
+      sslPolicy: sslPolicy,
+      protocol: protocol,
+      port: port,
+      listenerArn: listenerArn,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeRules = {
   type t
   type request = {
@@ -2342,9 +2403,10 @@ module DescribeRules = {
   @module("@aws-sdk/client-elasticloadbalancing") @new
   external new: request => t = "DescribeRulesCommand"
   let make = (~pageSize=?, ~marker=?, ~ruleArns=?, ~listenerArn=?, ()) =>
-    new({pageSize, marker, ruleArns, listenerArn})
+    new({pageSize: pageSize, marker: marker, ruleArns: ruleArns, listenerArn: listenerArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeListeners = {
   type t
   type request = {
@@ -2370,9 +2432,15 @@ module DescribeListeners = {
   @module("@aws-sdk/client-elasticloadbalancing") @new
   external new: request => t = "DescribeListenersCommand"
   let make = (~pageSize=?, ~marker=?, ~listenerArns=?, ~loadBalancerArn=?, ()) =>
-    new({pageSize, marker, listenerArns, loadBalancerArn})
+    new({
+      pageSize: pageSize,
+      marker: marker,
+      listenerArns: listenerArns,
+      loadBalancerArn: loadBalancerArn,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateRule = {
   type t
   type request = {
@@ -2393,9 +2461,16 @@ module CreateRule = {
   @module("@aws-sdk/client-elasticloadbalancing") @new
   external new: request => t = "CreateRuleCommand"
   let make = (~actions, ~priority, ~conditions, ~listenerArn, ~tags=?, ()) =>
-    new({tags, actions, priority, conditions, listenerArn})
+    new({
+      tags: tags,
+      actions: actions,
+      priority: priority,
+      conditions: conditions,
+      listenerArn: listenerArn,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateListener = {
   type t
   type request = {
@@ -2478,14 +2553,14 @@ module CreateListener = {
     (),
   ) =>
     new({
-      tags,
-      alpnPolicy,
-      defaultActions,
-      certificates,
-      sslPolicy,
-      port,
-      protocol,
-      loadBalancerArn,
+      tags: tags,
+      alpnPolicy: alpnPolicy,
+      defaultActions: defaultActions,
+      certificates: certificates,
+      sslPolicy: sslPolicy,
+      port: port,
+      protocol: protocol,
+      loadBalancerArn: loadBalancerArn,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

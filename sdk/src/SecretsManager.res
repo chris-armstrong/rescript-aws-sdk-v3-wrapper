@@ -377,9 +377,15 @@ module UpdateSecretVersionStage = {
   @module("@aws-sdk/client-secretsmanager") @new
   external new: request => t = "UpdateSecretVersionStageCommand"
   let make = (~versionStage, ~secretId, ~moveToVersionId=?, ~removeFromVersionId=?, ()) =>
-    new({moveToVersionId, removeFromVersionId, versionStage, secretId})
+    new({
+      moveToVersionId: moveToVersionId,
+      removeFromVersionId: removeFromVersionId,
+      versionStage: versionStage,
+      secretId: secretId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateSecret = {
   type t
   type request = {
@@ -452,9 +458,18 @@ module UpdateSecret = {
     ~description=?,
     ~clientRequestToken=?,
     (),
-  ) => new({secretString, secretBinary, kmsKeyId, description, clientRequestToken, secretId})
+  ) =>
+    new({
+      secretString: secretString,
+      secretBinary: secretBinary,
+      kmsKeyId: kmsKeyId,
+      description: description,
+      clientRequestToken: clientRequestToken,
+      secretId: secretId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module StopReplicationToReplica = {
   type t
   type request = {
@@ -472,6 +487,7 @@ module StopReplicationToReplica = {
   let make = (~secretId, ()) => new({secretId: secretId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module RestoreSecret = {
   type t
   type request = {
@@ -491,6 +507,7 @@ module RestoreSecret = {
   let make = (~secretId, ()) => new({secretId: secretId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module PutResourcePolicy = {
   type t
   type request = {
@@ -517,9 +534,10 @@ module PutResourcePolicy = {
   @module("@aws-sdk/client-secretsmanager") @new
   external new: request => t = "PutResourcePolicyCommand"
   let make = (~resourcePolicy, ~secretId, ~blockPublicPolicy=?, ()) =>
-    new({blockPublicPolicy, resourcePolicy, secretId})
+    new({blockPublicPolicy: blockPublicPolicy, resourcePolicy: resourcePolicy, secretId: secretId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetResourcePolicy = {
   type t
   type request = {
@@ -547,6 +565,7 @@ module GetResourcePolicy = {
   let make = (~secretId, ()) => new({secretId: secretId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetRandomPassword = {
   type t
   type request = {
@@ -601,17 +620,18 @@ module GetRandomPassword = {
     (),
   ) =>
     new({
-      requireEachIncludedType,
-      includeSpace,
-      excludeLowercase,
-      excludeUppercase,
-      excludePunctuation,
-      excludeNumbers,
-      excludeCharacters,
-      passwordLength,
+      requireEachIncludedType: requireEachIncludedType,
+      includeSpace: includeSpace,
+      excludeLowercase: excludeLowercase,
+      excludeUppercase: excludeUppercase,
+      excludePunctuation: excludePunctuation,
+      excludeNumbers: excludeNumbers,
+      excludeCharacters: excludeCharacters,
+      passwordLength: passwordLength,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteSecret = {
   type t
   type request = {
@@ -652,9 +672,14 @@ module DeleteSecret = {
   }
   @module("@aws-sdk/client-secretsmanager") @new external new: request => t = "DeleteSecretCommand"
   let make = (~secretId, ~forceDeleteWithoutRecovery=?, ~recoveryWindowInDays=?, ()) =>
-    new({forceDeleteWithoutRecovery, recoveryWindowInDays, secretId})
+    new({
+      forceDeleteWithoutRecovery: forceDeleteWithoutRecovery,
+      recoveryWindowInDays: recoveryWindowInDays,
+      secretId: secretId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteResourcePolicy = {
   type t
   type request = {
@@ -677,6 +702,7 @@ module DeleteResourcePolicy = {
   let make = (~secretId, ()) => new({secretId: secretId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CancelRotateSecret = {
   type t
   type request = {
@@ -702,6 +728,7 @@ module CancelRotateSecret = {
   let make = (~secretId, ()) => new({secretId: secretId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UntagResource = {
   type t
   type request = {
@@ -721,9 +748,10 @@ module UntagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-secretsmanager") @new external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~secretId, ()) => new({tagKeys, secretId})
+  let make = (~tagKeys, ~secretId, ()) => new({tagKeys: tagKeys, secretId: secretId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module RotateSecret = {
   type t
   type request = {
@@ -777,9 +805,17 @@ module RotateSecret = {
     ~rotationLambdaARN=?,
     ~clientRequestToken=?,
     (),
-  ) => new({rotateImmediately, rotationRules, rotationLambdaARN, clientRequestToken, secretId})
+  ) =>
+    new({
+      rotateImmediately: rotateImmediately,
+      rotationRules: rotationRules,
+      rotationLambdaARN: rotationLambdaARN,
+      clientRequestToken: clientRequestToken,
+      secretId: secretId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module PutSecretValue = {
   type t
   type request = {
@@ -867,9 +903,17 @@ module PutSecretValue = {
     ~secretBinary=?,
     ~clientRequestToken=?,
     (),
-  ) => new({versionStages, secretString, secretBinary, clientRequestToken, secretId})
+  ) =>
+    new({
+      versionStages: versionStages,
+      secretString: secretString,
+      secretBinary: secretBinary,
+      clientRequestToken: clientRequestToken,
+      secretId: secretId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetSecretValue = {
   type t
   type request = {
@@ -927,9 +971,10 @@ module GetSecretValue = {
   @module("@aws-sdk/client-secretsmanager") @new
   external new: request => t = "GetSecretValueCommand"
   let make = (~secretId, ~versionStage=?, ~versionId=?, ()) =>
-    new({versionStage, versionId, secretId})
+    new({versionStage: versionStage, versionId: versionId, secretId: secretId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ValidateResourcePolicy = {
   type t
   type request = {
@@ -951,9 +996,11 @@ module ValidateResourcePolicy = {
   }
   @module("@aws-sdk/client-secretsmanager") @new
   external new: request => t = "ValidateResourcePolicyCommand"
-  let make = (~resourcePolicy, ~secretId=?, ()) => new({resourcePolicy, secretId})
+  let make = (~resourcePolicy, ~secretId=?, ()) =>
+    new({resourcePolicy: resourcePolicy, secretId: secretId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module TagResource = {
   type t
   type request = {
@@ -974,9 +1021,10 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-secretsmanager") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~secretId, ()) => new({tags, secretId})
+  let make = (~tags, ~secretId, ()) => new({tags: tags, secretId: secretId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ReplicateSecretToRegions = {
   type t
   type request = {
@@ -999,9 +1047,14 @@ module ReplicateSecretToRegions = {
   @module("@aws-sdk/client-secretsmanager") @new
   external new: request => t = "ReplicateSecretToRegionsCommand"
   let make = (~addReplicaRegions, ~secretId, ~forceOverwriteReplicaSecret=?, ()) =>
-    new({forceOverwriteReplicaSecret, addReplicaRegions, secretId})
+    new({
+      forceOverwriteReplicaSecret: forceOverwriteReplicaSecret,
+      addReplicaRegions: addReplicaRegions,
+      secretId: secretId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module RemoveRegionsFromReplication = {
   type t
   type request = {
@@ -1017,9 +1070,11 @@ module RemoveRegionsFromReplication = {
   }
   @module("@aws-sdk/client-secretsmanager") @new
   external new: request => t = "RemoveRegionsFromReplicationCommand"
-  let make = (~removeReplicaRegions, ~secretId, ()) => new({removeReplicaRegions, secretId})
+  let make = (~removeReplicaRegions, ~secretId, ()) =>
+    new({removeReplicaRegions: removeReplicaRegions, secretId: secretId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeSecret = {
   type t
   type request = {
@@ -1135,6 +1190,7 @@ module DescribeSecret = {
   let make = (~secretId, ()) => new({secretId: secretId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateSecret = {
   type t
   type request = {
@@ -1308,18 +1364,19 @@ module CreateSecret = {
     (),
   ) =>
     new({
-      forceOverwriteReplicaSecret,
-      addReplicaRegions,
-      tags,
-      secretString,
-      secretBinary,
-      kmsKeyId,
-      description,
-      clientRequestToken,
-      name,
+      forceOverwriteReplicaSecret: forceOverwriteReplicaSecret,
+      addReplicaRegions: addReplicaRegions,
+      tags: tags,
+      secretString: secretString,
+      secretBinary: secretBinary,
+      kmsKeyId: kmsKeyId,
+      description: description,
+      clientRequestToken: clientRequestToken,
+      name: name,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListSecretVersionIds = {
   type t
   type request = {
@@ -1359,9 +1416,15 @@ module ListSecretVersionIds = {
   @module("@aws-sdk/client-secretsmanager") @new
   external new: request => t = "ListSecretVersionIdsCommand"
   let make = (~secretId, ~includeDeprecated=?, ~nextToken=?, ~maxResults=?, ()) =>
-    new({includeDeprecated, nextToken, maxResults, secretId})
+    new({
+      includeDeprecated: includeDeprecated,
+      nextToken: nextToken,
+      maxResults: maxResults,
+      secretId: secretId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListSecrets = {
   type t
   type request = {
@@ -1394,6 +1457,6 @@ module ListSecrets = {
   }
   @module("@aws-sdk/client-secretsmanager") @new external new: request => t = "ListSecretsCommand"
   let make = (~sortOrder=?, ~filters=?, ~nextToken=?, ~maxResults=?, ()) =>
-    new({sortOrder, filters, nextToken, maxResults})
+    new({sortOrder: sortOrder, filters: filters, nextToken: nextToken, maxResults: maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

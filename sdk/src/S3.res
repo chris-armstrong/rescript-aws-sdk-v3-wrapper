@@ -4600,26 +4600,27 @@ module UploadPart = {
     (),
   ) =>
     new({
-      expectedBucketOwner,
-      requestPayer,
-      ssecustomerKeyMD5,
-      ssecustomerKey,
-      ssecustomerAlgorithm,
-      uploadId,
-      partNumber,
-      key,
-      checksumSHA256,
-      checksumSHA1,
-      checksumCRC32C,
-      checksumCRC32,
-      checksumAlgorithm,
-      contentMD5,
-      contentLength,
-      bucket,
-      body,
+      expectedBucketOwner: expectedBucketOwner,
+      requestPayer: requestPayer,
+      ssecustomerKeyMD5: ssecustomerKeyMD5,
+      ssecustomerKey: ssecustomerKey,
+      ssecustomerAlgorithm: ssecustomerAlgorithm,
+      uploadId: uploadId,
+      partNumber: partNumber,
+      key: key,
+      checksumSHA256: checksumSHA256,
+      checksumSHA1: checksumSHA1,
+      checksumCRC32C: checksumCRC32C,
+      checksumCRC32: checksumCRC32,
+      checksumAlgorithm: checksumAlgorithm,
+      contentMD5: contentMD5,
+      contentLength: contentLength,
+      bucket: bucket,
+      body: body,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module PutBucketPolicy = {
   type t
   type request = {
@@ -4660,15 +4661,16 @@ module PutBucketPolicy = {
     (),
   ) =>
     new({
-      expectedBucketOwner,
-      policy,
-      confirmRemoveSelfBucketAccess,
-      checksumAlgorithm,
-      contentMD5,
-      bucket,
+      expectedBucketOwner: expectedBucketOwner,
+      policy: policy,
+      confirmRemoveSelfBucketAccess: confirmRemoveSelfBucketAccess,
+      checksumAlgorithm: checksumAlgorithm,
+      contentMD5: contentMD5,
+      bucket: bucket,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module HeadBucket = {
   type t
   type request = {
@@ -4686,9 +4688,11 @@ module HeadBucket = {
   }
   type response = {.}
   @module("@aws-sdk/client-s3") @new external new: request => t = "HeadBucketCommand"
-  let make = (~bucket, ~expectedBucketOwner=?, ()) => new({expectedBucketOwner, bucket})
+  let make = (~bucket, ~expectedBucketOwner=?, ()) =>
+    new({expectedBucketOwner: expectedBucketOwner, bucket: bucket})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module GetObjectTorrent = {
   type t
   type request = {
@@ -4713,9 +4717,15 @@ module GetObjectTorrent = {
   }
   @module("@aws-sdk/client-s3") @new external new: request => t = "GetObjectTorrentCommand"
   let make = (~key, ~bucket, ~expectedBucketOwner=?, ~requestPayer=?, ()) =>
-    new({expectedBucketOwner, requestPayer, key, bucket})
+    new({
+      expectedBucketOwner: expectedBucketOwner,
+      requestPayer: requestPayer,
+      key: key,
+      bucket: bucket,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetBucketVersioning = {
   type t
   type request = {
@@ -4738,9 +4748,11 @@ module GetBucketVersioning = {
     status: option<bucketVersioningStatus>,
   }
   @module("@aws-sdk/client-s3") @new external new: request => t = "GetBucketVersioningCommand"
-  let make = (~bucket, ~expectedBucketOwner=?, ()) => new({expectedBucketOwner, bucket})
+  let make = (~bucket, ~expectedBucketOwner=?, ()) =>
+    new({expectedBucketOwner: expectedBucketOwner, bucket: bucket})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetBucketRequestPayment = {
   type t
   type request = {
@@ -4758,9 +4770,11 @@ module GetBucketRequestPayment = {
     payer: option<payer>,
   }
   @module("@aws-sdk/client-s3") @new external new: request => t = "GetBucketRequestPaymentCommand"
-  let make = (~bucket, ~expectedBucketOwner=?, ()) => new({expectedBucketOwner, bucket})
+  let make = (~bucket, ~expectedBucketOwner=?, ()) =>
+    new({expectedBucketOwner: expectedBucketOwner, bucket: bucket})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetBucketPolicy = {
   type t
   type request = {
@@ -4776,9 +4790,11 @@ module GetBucketPolicy = {
     @ocaml.doc("<p>The bucket policy as a JSON document.</p>") @as("Policy") policy: option<policy>,
   }
   @module("@aws-sdk/client-s3") @new external new: request => t = "GetBucketPolicyCommand"
-  let make = (~bucket, ~expectedBucketOwner=?, ()) => new({expectedBucketOwner, bucket})
+  let make = (~bucket, ~expectedBucketOwner=?, ()) =>
+    new({expectedBucketOwner: expectedBucketOwner, bucket: bucket})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetBucketLocation = {
   type t
   type request = {
@@ -4799,9 +4815,11 @@ module GetBucketLocation = {
     locationConstraint: option<bucketLocationConstraint>,
   }
   @module("@aws-sdk/client-s3") @new external new: request => t = "GetBucketLocationCommand"
-  let make = (~bucket, ~expectedBucketOwner=?, ()) => new({expectedBucketOwner, bucket})
+  let make = (~bucket, ~expectedBucketOwner=?, ()) =>
+    new({expectedBucketOwner: expectedBucketOwner, bucket: bucket})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetBucketAccelerateConfiguration = {
   type t
   type request = {
@@ -4820,9 +4838,11 @@ module GetBucketAccelerateConfiguration = {
   }
   @module("@aws-sdk/client-s3") @new
   external new: request => t = "GetBucketAccelerateConfigurationCommand"
-  let make = (~bucket, ~expectedBucketOwner=?, ()) => new({expectedBucketOwner, bucket})
+  let make = (~bucket, ~expectedBucketOwner=?, ()) =>
+    new({expectedBucketOwner: expectedBucketOwner, bucket: bucket})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeletePublicAccessBlock = {
   type t
   type request = {
@@ -4838,9 +4858,11 @@ module DeletePublicAccessBlock = {
   }
   type response = {.}
   @module("@aws-sdk/client-s3") @new external new: request => t = "DeletePublicAccessBlockCommand"
-  let make = (~bucket, ~expectedBucketOwner=?, ()) => new({expectedBucketOwner, bucket})
+  let make = (~bucket, ~expectedBucketOwner=?, ()) =>
+    new({expectedBucketOwner: expectedBucketOwner, bucket: bucket})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteObjectTagging = {
   type t
   type request = {
@@ -4870,9 +4892,10 @@ module DeleteObjectTagging = {
   }
   @module("@aws-sdk/client-s3") @new external new: request => t = "DeleteObjectTaggingCommand"
   let make = (~key, ~bucket, ~expectedBucketOwner=?, ~versionId=?, ()) =>
-    new({expectedBucketOwner, versionId, key, bucket})
+    new({expectedBucketOwner: expectedBucketOwner, versionId: versionId, key: key, bucket: bucket})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteObject = {
   type t
   type request = {
@@ -4925,9 +4948,18 @@ module DeleteObject = {
     ~mfa=?,
     (),
   ) =>
-    new({expectedBucketOwner, bypassGovernanceRetention, requestPayer, versionId, mfa, key, bucket})
+    new({
+      expectedBucketOwner: expectedBucketOwner,
+      bypassGovernanceRetention: bypassGovernanceRetention,
+      requestPayer: requestPayer,
+      versionId: versionId,
+      mfa: mfa,
+      key: key,
+      bucket: bucket,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteBucketWebsite = {
   type t
   type request = {
@@ -4942,9 +4974,11 @@ module DeleteBucketWebsite = {
   }
   type response = {.}
   @module("@aws-sdk/client-s3") @new external new: request => t = "DeleteBucketWebsiteCommand"
-  let make = (~bucket, ~expectedBucketOwner=?, ()) => new({expectedBucketOwner, bucket})
+  let make = (~bucket, ~expectedBucketOwner=?, ()) =>
+    new({expectedBucketOwner: expectedBucketOwner, bucket: bucket})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteBucketTagging = {
   type t
   type request = {
@@ -4958,9 +4992,11 @@ module DeleteBucketTagging = {
   }
   type response = {.}
   @module("@aws-sdk/client-s3") @new external new: request => t = "DeleteBucketTaggingCommand"
-  let make = (~bucket, ~expectedBucketOwner=?, ()) => new({expectedBucketOwner, bucket})
+  let make = (~bucket, ~expectedBucketOwner=?, ()) =>
+    new({expectedBucketOwner: expectedBucketOwner, bucket: bucket})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteBucketReplication = {
   type t
   type request = {
@@ -4973,9 +5009,11 @@ module DeleteBucketReplication = {
   }
   type response = {.}
   @module("@aws-sdk/client-s3") @new external new: request => t = "DeleteBucketReplicationCommand"
-  let make = (~bucket, ~expectedBucketOwner=?, ()) => new({expectedBucketOwner, bucket})
+  let make = (~bucket, ~expectedBucketOwner=?, ()) =>
+    new({expectedBucketOwner: expectedBucketOwner, bucket: bucket})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteBucketPolicy = {
   type t
   type request = {
@@ -4988,9 +5026,11 @@ module DeleteBucketPolicy = {
   }
   type response = {.}
   @module("@aws-sdk/client-s3") @new external new: request => t = "DeleteBucketPolicyCommand"
-  let make = (~bucket, ~expectedBucketOwner=?, ()) => new({expectedBucketOwner, bucket})
+  let make = (~bucket, ~expectedBucketOwner=?, ()) =>
+    new({expectedBucketOwner: expectedBucketOwner, bucket: bucket})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteBucketOwnershipControls = {
   type t
   type request = {
@@ -5008,9 +5048,11 @@ module DeleteBucketOwnershipControls = {
   type response = {.}
   @module("@aws-sdk/client-s3") @new
   external new: request => t = "DeleteBucketOwnershipControlsCommand"
-  let make = (~bucket, ~expectedBucketOwner=?, ()) => new({expectedBucketOwner, bucket})
+  let make = (~bucket, ~expectedBucketOwner=?, ()) =>
+    new({expectedBucketOwner: expectedBucketOwner, bucket: bucket})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteBucketMetricsConfiguration = {
   type t
   type request = {
@@ -5027,9 +5069,11 @@ module DeleteBucketMetricsConfiguration = {
   type response = {.}
   @module("@aws-sdk/client-s3") @new
   external new: request => t = "DeleteBucketMetricsConfigurationCommand"
-  let make = (~id, ~bucket, ~expectedBucketOwner=?, ()) => new({expectedBucketOwner, id, bucket})
+  let make = (~id, ~bucket, ~expectedBucketOwner=?, ()) =>
+    new({expectedBucketOwner: expectedBucketOwner, id: id, bucket: bucket})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteBucketLifecycle = {
   type t
   type request = {
@@ -5043,9 +5087,11 @@ module DeleteBucketLifecycle = {
   }
   type response = {.}
   @module("@aws-sdk/client-s3") @new external new: request => t = "DeleteBucketLifecycleCommand"
-  let make = (~bucket, ~expectedBucketOwner=?, ()) => new({expectedBucketOwner, bucket})
+  let make = (~bucket, ~expectedBucketOwner=?, ()) =>
+    new({expectedBucketOwner: expectedBucketOwner, bucket: bucket})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteBucketInventoryConfiguration = {
   type t
   type request = {
@@ -5063,9 +5109,11 @@ module DeleteBucketInventoryConfiguration = {
   type response = {.}
   @module("@aws-sdk/client-s3") @new
   external new: request => t = "DeleteBucketInventoryConfigurationCommand"
-  let make = (~id, ~bucket, ~expectedBucketOwner=?, ()) => new({expectedBucketOwner, id, bucket})
+  let make = (~id, ~bucket, ~expectedBucketOwner=?, ()) =>
+    new({expectedBucketOwner: expectedBucketOwner, id: id, bucket: bucket})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteBucketIntelligentTieringConfiguration = {
   type t
   type request = {
@@ -5080,9 +5128,10 @@ module DeleteBucketIntelligentTieringConfiguration = {
   type response = {.}
   @module("@aws-sdk/client-s3") @new
   external new: request => t = "DeleteBucketIntelligentTieringConfigurationCommand"
-  let make = (~id, ~bucket, ()) => new({id, bucket})
+  let make = (~id, ~bucket, ()) => new({id: id, bucket: bucket})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteBucketEncryption = {
   type t
   type request = {
@@ -5098,9 +5147,11 @@ module DeleteBucketEncryption = {
   }
   type response = {.}
   @module("@aws-sdk/client-s3") @new external new: request => t = "DeleteBucketEncryptionCommand"
-  let make = (~bucket, ~expectedBucketOwner=?, ()) => new({expectedBucketOwner, bucket})
+  let make = (~bucket, ~expectedBucketOwner=?, ()) =>
+    new({expectedBucketOwner: expectedBucketOwner, bucket: bucket})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteBucketCors = {
   type t
   type request = {
@@ -5117,9 +5168,11 @@ module DeleteBucketCors = {
   }
   type response = {.}
   @module("@aws-sdk/client-s3") @new external new: request => t = "DeleteBucketCorsCommand"
-  let make = (~bucket, ~expectedBucketOwner=?, ()) => new({expectedBucketOwner, bucket})
+  let make = (~bucket, ~expectedBucketOwner=?, ()) =>
+    new({expectedBucketOwner: expectedBucketOwner, bucket: bucket})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteBucketAnalyticsConfiguration = {
   type t
   type request = {
@@ -5137,9 +5190,11 @@ module DeleteBucketAnalyticsConfiguration = {
   type response = {.}
   @module("@aws-sdk/client-s3") @new
   external new: request => t = "DeleteBucketAnalyticsConfigurationCommand"
-  let make = (~id, ~bucket, ~expectedBucketOwner=?, ()) => new({expectedBucketOwner, id, bucket})
+  let make = (~id, ~bucket, ~expectedBucketOwner=?, ()) =>
+    new({expectedBucketOwner: expectedBucketOwner, id: id, bucket: bucket})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteBucket = {
   type t
   type request = {
@@ -5152,9 +5207,11 @@ module DeleteBucket = {
   }
   type response = {.}
   @module("@aws-sdk/client-s3") @new external new: request => t = "DeleteBucketCommand"
-  let make = (~bucket, ~expectedBucketOwner=?, ()) => new({expectedBucketOwner, bucket})
+  let make = (~bucket, ~expectedBucketOwner=?, ()) =>
+    new({expectedBucketOwner: expectedBucketOwner, bucket: bucket})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module AbortMultipartUpload = {
   type t
   type request = {
@@ -5178,9 +5235,16 @@ module AbortMultipartUpload = {
   type response = {@as("RequestCharged") requestCharged: option<requestCharged>}
   @module("@aws-sdk/client-s3") @new external new: request => t = "AbortMultipartUploadCommand"
   let make = (~uploadId, ~key, ~bucket, ~expectedBucketOwner=?, ~requestPayer=?, ()) =>
-    new({expectedBucketOwner, requestPayer, uploadId, key, bucket})
+    new({
+      expectedBucketOwner: expectedBucketOwner,
+      requestPayer: requestPayer,
+      uploadId: uploadId,
+      key: key,
+      bucket: bucket,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module WriteGetObjectResponse = {
   type t
   type request = {
@@ -5481,49 +5545,50 @@ module WriteGetObjectResponse = {
     (),
   ) =>
     new({
-      bucketKeyEnabled,
-      versionId,
-      tagCount,
-      storageClass,
-      ssecustomerKeyMD5,
-      ssekmskeyId,
-      ssecustomerAlgorithm,
-      serverSideEncryption,
-      restore,
-      requestCharged,
-      replicationStatus,
-      partsCount,
-      objectLockRetainUntilDate,
-      objectLockLegalHoldStatus,
-      objectLockMode,
-      metadata,
-      missingMeta,
-      lastModified,
-      expiration,
-      expires,
-      etag,
-      deleteMarker,
-      checksumSHA256,
-      checksumSHA1,
-      checksumCRC32C,
-      checksumCRC32,
-      contentType,
-      contentRange,
-      contentLength,
-      contentLanguage,
-      contentEncoding,
-      contentDisposition,
-      cacheControl,
-      acceptRanges,
-      errorMessage,
-      errorCode,
-      statusCode,
-      body,
-      requestToken,
-      requestRoute,
+      bucketKeyEnabled: bucketKeyEnabled,
+      versionId: versionId,
+      tagCount: tagCount,
+      storageClass: storageClass,
+      ssecustomerKeyMD5: ssecustomerKeyMD5,
+      ssekmskeyId: ssekmskeyId,
+      ssecustomerAlgorithm: ssecustomerAlgorithm,
+      serverSideEncryption: serverSideEncryption,
+      restore: restore,
+      requestCharged: requestCharged,
+      replicationStatus: replicationStatus,
+      partsCount: partsCount,
+      objectLockRetainUntilDate: objectLockRetainUntilDate,
+      objectLockLegalHoldStatus: objectLockLegalHoldStatus,
+      objectLockMode: objectLockMode,
+      metadata: metadata,
+      missingMeta: missingMeta,
+      lastModified: lastModified,
+      expiration: expiration,
+      expires: expires,
+      etag: etag,
+      deleteMarker: deleteMarker,
+      checksumSHA256: checksumSHA256,
+      checksumSHA1: checksumSHA1,
+      checksumCRC32C: checksumCRC32C,
+      checksumCRC32: checksumCRC32,
+      contentType: contentType,
+      contentRange: contentRange,
+      contentLength: contentLength,
+      contentLanguage: contentLanguage,
+      contentEncoding: contentEncoding,
+      contentDisposition: contentDisposition,
+      cacheControl: cacheControl,
+      acceptRanges: acceptRanges,
+      errorMessage: errorMessage,
+      errorCode: errorCode,
+      statusCode: statusCode,
+      body: body,
+      requestToken: requestToken,
+      requestRoute: requestRoute,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UploadPartCopy = {
   type t
   type request = {
@@ -5684,28 +5749,29 @@ module UploadPartCopy = {
     (),
   ) =>
     new({
-      expectedSourceBucketOwner,
-      expectedBucketOwner,
-      requestPayer,
-      copySourceSSECustomerKeyMD5,
-      copySourceSSECustomerKey,
-      copySourceSSECustomerAlgorithm,
-      ssecustomerKeyMD5,
-      ssecustomerKey,
-      ssecustomerAlgorithm,
-      uploadId,
-      partNumber,
-      key,
-      copySourceRange,
-      copySourceIfUnmodifiedSince,
-      copySourceIfNoneMatch,
-      copySourceIfModifiedSince,
-      copySourceIfMatch,
-      copySource,
-      bucket,
+      expectedSourceBucketOwner: expectedSourceBucketOwner,
+      expectedBucketOwner: expectedBucketOwner,
+      requestPayer: requestPayer,
+      copySourceSSECustomerKeyMD5: copySourceSSECustomerKeyMD5,
+      copySourceSSECustomerKey: copySourceSSECustomerKey,
+      copySourceSSECustomerAlgorithm: copySourceSSECustomerAlgorithm,
+      ssecustomerKeyMD5: ssecustomerKeyMD5,
+      ssecustomerKey: ssecustomerKey,
+      ssecustomerAlgorithm: ssecustomerAlgorithm,
+      uploadId: uploadId,
+      partNumber: partNumber,
+      key: key,
+      copySourceRange: copySourceRange,
+      copySourceIfUnmodifiedSince: copySourceIfUnmodifiedSince,
+      copySourceIfNoneMatch: copySourceIfNoneMatch,
+      copySourceIfModifiedSince: copySourceIfModifiedSince,
+      copySourceIfMatch: copySourceIfMatch,
+      copySource: copySource,
+      bucket: bucket,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module PutPublicAccessBlock = {
   type t
   type request = {
@@ -5748,14 +5814,15 @@ module PutPublicAccessBlock = {
     (),
   ) =>
     new({
-      expectedBucketOwner,
-      publicAccessBlockConfiguration,
-      checksumAlgorithm,
-      contentMD5,
-      bucket,
+      expectedBucketOwner: expectedBucketOwner,
+      publicAccessBlockConfiguration: publicAccessBlockConfiguration,
+      checksumAlgorithm: checksumAlgorithm,
+      contentMD5: contentMD5,
+      bucket: bucket,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module PutObjectRetention = {
   type t
   type request = {
@@ -5813,18 +5880,19 @@ module PutObjectRetention = {
     (),
   ) =>
     new({
-      expectedBucketOwner,
-      checksumAlgorithm,
-      contentMD5,
-      bypassGovernanceRetention,
-      versionId,
-      requestPayer,
-      retention,
-      key,
-      bucket,
+      expectedBucketOwner: expectedBucketOwner,
+      checksumAlgorithm: checksumAlgorithm,
+      contentMD5: contentMD5,
+      bypassGovernanceRetention: bypassGovernanceRetention,
+      versionId: versionId,
+      requestPayer: requestPayer,
+      retention: retention,
+      key: key,
+      bucket: bucket,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module PutObjectLegalHold = {
   type t
   type request = {
@@ -5876,17 +5944,18 @@ module PutObjectLegalHold = {
     (),
   ) =>
     new({
-      expectedBucketOwner,
-      checksumAlgorithm,
-      contentMD5,
-      versionId,
-      requestPayer,
-      legalHold,
-      key,
-      bucket,
+      expectedBucketOwner: expectedBucketOwner,
+      checksumAlgorithm: checksumAlgorithm,
+      contentMD5: contentMD5,
+      versionId: versionId,
+      requestPayer: requestPayer,
+      legalHold: legalHold,
+      key: key,
+      bucket: bucket,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module PutObject = {
   type t
   type request = {
@@ -6191,46 +6260,47 @@ module PutObject = {
     (),
   ) =>
     new({
-      expectedBucketOwner,
-      objectLockLegalHoldStatus,
-      objectLockRetainUntilDate,
-      objectLockMode,
-      tagging,
-      requestPayer,
-      bucketKeyEnabled,
-      ssekmsencryptionContext,
-      ssekmskeyId,
-      ssecustomerKeyMD5,
-      ssecustomerKey,
-      ssecustomerAlgorithm,
-      websiteRedirectLocation,
-      storageClass,
-      serverSideEncryption,
-      metadata,
-      key,
-      grantWriteACP,
-      grantReadACP,
-      grantRead,
-      grantFullControl,
-      expires,
-      checksumSHA256,
-      checksumSHA1,
-      checksumCRC32C,
-      checksumCRC32,
-      checksumAlgorithm,
-      contentType,
-      contentMD5,
-      contentLength,
-      contentLanguage,
-      contentEncoding,
-      contentDisposition,
-      cacheControl,
-      bucket,
-      body,
-      acl,
+      expectedBucketOwner: expectedBucketOwner,
+      objectLockLegalHoldStatus: objectLockLegalHoldStatus,
+      objectLockRetainUntilDate: objectLockRetainUntilDate,
+      objectLockMode: objectLockMode,
+      tagging: tagging,
+      requestPayer: requestPayer,
+      bucketKeyEnabled: bucketKeyEnabled,
+      ssekmsencryptionContext: ssekmsencryptionContext,
+      ssekmskeyId: ssekmskeyId,
+      ssecustomerKeyMD5: ssecustomerKeyMD5,
+      ssecustomerKey: ssecustomerKey,
+      ssecustomerAlgorithm: ssecustomerAlgorithm,
+      websiteRedirectLocation: websiteRedirectLocation,
+      storageClass: storageClass,
+      serverSideEncryption: serverSideEncryption,
+      metadata: metadata,
+      key: key,
+      grantWriteACP: grantWriteACP,
+      grantReadACP: grantReadACP,
+      grantRead: grantRead,
+      grantFullControl: grantFullControl,
+      expires: expires,
+      checksumSHA256: checksumSHA256,
+      checksumSHA1: checksumSHA1,
+      checksumCRC32C: checksumCRC32C,
+      checksumCRC32: checksumCRC32,
+      checksumAlgorithm: checksumAlgorithm,
+      contentType: contentType,
+      contentMD5: contentMD5,
+      contentLength: contentLength,
+      contentLanguage: contentLanguage,
+      contentEncoding: contentEncoding,
+      contentDisposition: contentDisposition,
+      cacheControl: cacheControl,
+      bucket: bucket,
+      body: body,
+      acl: acl,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module PutBucketVersioning = {
   type t
   type request = {
@@ -6274,9 +6344,17 @@ module PutBucketVersioning = {
     ~contentMD5=?,
     (),
   ) =>
-    new({expectedBucketOwner, versioningConfiguration, mfa, checksumAlgorithm, contentMD5, bucket})
+    new({
+      expectedBucketOwner: expectedBucketOwner,
+      versioningConfiguration: versioningConfiguration,
+      mfa: mfa,
+      checksumAlgorithm: checksumAlgorithm,
+      contentMD5: contentMD5,
+      bucket: bucket,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module PutBucketRequestPayment = {
   type t
   type request = {
@@ -6315,9 +6393,16 @@ module PutBucketRequestPayment = {
     ~contentMD5=?,
     (),
   ) =>
-    new({expectedBucketOwner, requestPaymentConfiguration, checksumAlgorithm, contentMD5, bucket})
+    new({
+      expectedBucketOwner: expectedBucketOwner,
+      requestPaymentConfiguration: requestPaymentConfiguration,
+      checksumAlgorithm: checksumAlgorithm,
+      contentMD5: contentMD5,
+      bucket: bucket,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module PutBucketAccelerateConfiguration = {
   type t
   type request = {
@@ -6351,9 +6436,16 @@ module PutBucketAccelerateConfiguration = {
     ~checksumAlgorithm=?,
     ~expectedBucketOwner=?,
     (),
-  ) => new({checksumAlgorithm, expectedBucketOwner, accelerateConfiguration, bucket})
+  ) =>
+    new({
+      checksumAlgorithm: checksumAlgorithm,
+      expectedBucketOwner: expectedBucketOwner,
+      accelerateConfiguration: accelerateConfiguration,
+      bucket: bucket,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module HeadObject = {
   type t
   type request = {
@@ -6633,24 +6725,25 @@ module HeadObject = {
     (),
   ) =>
     new({
-      checksumMode,
-      expectedBucketOwner,
-      partNumber,
-      requestPayer,
-      ssecustomerKeyMD5,
-      ssecustomerKey,
-      ssecustomerAlgorithm,
-      versionId,
-      range,
-      key,
-      ifUnmodifiedSince,
-      ifNoneMatch,
-      ifModifiedSince,
-      ifMatch,
-      bucket,
+      checksumMode: checksumMode,
+      expectedBucketOwner: expectedBucketOwner,
+      partNumber: partNumber,
+      requestPayer: requestPayer,
+      ssecustomerKeyMD5: ssecustomerKeyMD5,
+      ssecustomerKey: ssecustomerKey,
+      ssecustomerAlgorithm: ssecustomerAlgorithm,
+      versionId: versionId,
+      range: range,
+      key: key,
+      ifUnmodifiedSince: ifUnmodifiedSince,
+      ifNoneMatch: ifNoneMatch,
+      ifModifiedSince: ifModifiedSince,
+      ifMatch: ifMatch,
+      bucket: bucket,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetPublicAccessBlock = {
   type t
   type request = {
@@ -6671,9 +6764,11 @@ module GetPublicAccessBlock = {
     publicAccessBlockConfiguration: option<publicAccessBlockConfiguration>,
   }
   @module("@aws-sdk/client-s3") @new external new: request => t = "GetPublicAccessBlockCommand"
-  let make = (~bucket, ~expectedBucketOwner=?, ()) => new({expectedBucketOwner, bucket})
+  let make = (~bucket, ~expectedBucketOwner=?, ()) =>
+    new({expectedBucketOwner: expectedBucketOwner, bucket: bucket})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetObjectRetention = {
   type t
   type request = {
@@ -6702,9 +6797,16 @@ module GetObjectRetention = {
   }
   @module("@aws-sdk/client-s3") @new external new: request => t = "GetObjectRetentionCommand"
   let make = (~key, ~bucket, ~expectedBucketOwner=?, ~requestPayer=?, ~versionId=?, ()) =>
-    new({expectedBucketOwner, requestPayer, versionId, key, bucket})
+    new({
+      expectedBucketOwner: expectedBucketOwner,
+      requestPayer: requestPayer,
+      versionId: versionId,
+      key: key,
+      bucket: bucket,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetObjectLegalHold = {
   type t
   type request = {
@@ -6731,9 +6833,16 @@ module GetObjectLegalHold = {
   }
   @module("@aws-sdk/client-s3") @new external new: request => t = "GetObjectLegalHoldCommand"
   let make = (~key, ~bucket, ~expectedBucketOwner=?, ~requestPayer=?, ~versionId=?, ()) =>
-    new({expectedBucketOwner, requestPayer, versionId, key, bucket})
+    new({
+      expectedBucketOwner: expectedBucketOwner,
+      requestPayer: requestPayer,
+      versionId: versionId,
+      key: key,
+      bucket: bucket,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetObject = {
   type t
   type request = {
@@ -6978,30 +7087,31 @@ module GetObject = {
     (),
   ) =>
     new({
-      checksumMode,
-      expectedBucketOwner,
-      partNumber,
-      requestPayer,
-      ssecustomerKeyMD5,
-      ssecustomerKey,
-      ssecustomerAlgorithm,
-      versionId,
-      responseExpires,
-      responseContentType,
-      responseContentLanguage,
-      responseContentEncoding,
-      responseContentDisposition,
-      responseCacheControl,
-      range,
-      key,
-      ifUnmodifiedSince,
-      ifNoneMatch,
-      ifModifiedSince,
-      ifMatch,
-      bucket,
+      checksumMode: checksumMode,
+      expectedBucketOwner: expectedBucketOwner,
+      partNumber: partNumber,
+      requestPayer: requestPayer,
+      ssecustomerKeyMD5: ssecustomerKeyMD5,
+      ssecustomerKey: ssecustomerKey,
+      ssecustomerAlgorithm: ssecustomerAlgorithm,
+      versionId: versionId,
+      responseExpires: responseExpires,
+      responseContentType: responseContentType,
+      responseContentLanguage: responseContentLanguage,
+      responseContentEncoding: responseContentEncoding,
+      responseContentDisposition: responseContentDisposition,
+      responseCacheControl: responseCacheControl,
+      range: range,
+      key: key,
+      ifUnmodifiedSince: ifUnmodifiedSince,
+      ifNoneMatch: ifNoneMatch,
+      ifModifiedSince: ifModifiedSince,
+      ifMatch: ifMatch,
+      bucket: bucket,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetBucketPolicyStatus = {
   type t
   type request = {
@@ -7019,9 +7129,11 @@ module GetBucketPolicyStatus = {
     policyStatus: option<policyStatus>,
   }
   @module("@aws-sdk/client-s3") @new external new: request => t = "GetBucketPolicyStatusCommand"
-  let make = (~bucket, ~expectedBucketOwner=?, ()) => new({expectedBucketOwner, bucket})
+  let make = (~bucket, ~expectedBucketOwner=?, ()) =>
+    new({expectedBucketOwner: expectedBucketOwner, bucket: bucket})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateMultipartUpload = {
   type t
   type request = {
@@ -7245,39 +7357,40 @@ module CreateMultipartUpload = {
     (),
   ) =>
     new({
-      checksumAlgorithm,
-      expectedBucketOwner,
-      objectLockLegalHoldStatus,
-      objectLockRetainUntilDate,
-      objectLockMode,
-      tagging,
-      requestPayer,
-      bucketKeyEnabled,
-      ssekmsencryptionContext,
-      ssekmskeyId,
-      ssecustomerKeyMD5,
-      ssecustomerKey,
-      ssecustomerAlgorithm,
-      websiteRedirectLocation,
-      storageClass,
-      serverSideEncryption,
-      metadata,
-      key,
-      grantWriteACP,
-      grantReadACP,
-      grantRead,
-      grantFullControl,
-      expires,
-      contentType,
-      contentLanguage,
-      contentEncoding,
-      contentDisposition,
-      cacheControl,
-      bucket,
-      acl,
+      checksumAlgorithm: checksumAlgorithm,
+      expectedBucketOwner: expectedBucketOwner,
+      objectLockLegalHoldStatus: objectLockLegalHoldStatus,
+      objectLockRetainUntilDate: objectLockRetainUntilDate,
+      objectLockMode: objectLockMode,
+      tagging: tagging,
+      requestPayer: requestPayer,
+      bucketKeyEnabled: bucketKeyEnabled,
+      ssekmsencryptionContext: ssekmsencryptionContext,
+      ssekmskeyId: ssekmskeyId,
+      ssecustomerKeyMD5: ssecustomerKeyMD5,
+      ssecustomerKey: ssecustomerKey,
+      ssecustomerAlgorithm: ssecustomerAlgorithm,
+      websiteRedirectLocation: websiteRedirectLocation,
+      storageClass: storageClass,
+      serverSideEncryption: serverSideEncryption,
+      metadata: metadata,
+      key: key,
+      grantWriteACP: grantWriteACP,
+      grantReadACP: grantReadACP,
+      grantRead: grantRead,
+      grantFullControl: grantFullControl,
+      expires: expires,
+      contentType: contentType,
+      contentLanguage: contentLanguage,
+      contentEncoding: contentEncoding,
+      contentDisposition: contentDisposition,
+      cacheControl: cacheControl,
+      bucket: bucket,
+      acl: acl,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateBucket = {
   type t
   type request = {
@@ -7326,19 +7439,20 @@ module CreateBucket = {
     (),
   ) =>
     new({
-      objectOwnership,
-      objectLockEnabledForBucket,
-      grantWriteACP,
-      grantWrite,
-      grantReadACP,
-      grantRead,
-      grantFullControl,
-      createBucketConfiguration,
-      bucket,
-      acl,
+      objectOwnership: objectOwnership,
+      objectLockEnabledForBucket: objectLockEnabledForBucket,
+      grantWriteACP: grantWriteACP,
+      grantWrite: grantWrite,
+      grantReadACP: grantReadACP,
+      grantRead: grantRead,
+      grantFullControl: grantFullControl,
+      createBucketConfiguration: createBucketConfiguration,
+      bucket: bucket,
+      acl: acl,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CopyObject = {
   type t
   type request = {
@@ -7618,50 +7732,51 @@ module CopyObject = {
     (),
   ) =>
     new({
-      expectedSourceBucketOwner,
-      expectedBucketOwner,
-      objectLockLegalHoldStatus,
-      objectLockRetainUntilDate,
-      objectLockMode,
-      tagging,
-      requestPayer,
-      copySourceSSECustomerKeyMD5,
-      copySourceSSECustomerKey,
-      copySourceSSECustomerAlgorithm,
-      bucketKeyEnabled,
-      ssekmsencryptionContext,
-      ssekmskeyId,
-      ssecustomerKeyMD5,
-      ssecustomerKey,
-      ssecustomerAlgorithm,
-      websiteRedirectLocation,
-      storageClass,
-      serverSideEncryption,
-      taggingDirective,
-      metadataDirective,
-      metadata,
-      key,
-      grantWriteACP,
-      grantReadACP,
-      grantRead,
-      grantFullControl,
-      expires,
-      copySourceIfUnmodifiedSince,
-      copySourceIfNoneMatch,
-      copySourceIfModifiedSince,
-      copySourceIfMatch,
-      copySource,
-      contentType,
-      contentLanguage,
-      contentEncoding,
-      contentDisposition,
-      checksumAlgorithm,
-      cacheControl,
-      bucket,
-      acl,
+      expectedSourceBucketOwner: expectedSourceBucketOwner,
+      expectedBucketOwner: expectedBucketOwner,
+      objectLockLegalHoldStatus: objectLockLegalHoldStatus,
+      objectLockRetainUntilDate: objectLockRetainUntilDate,
+      objectLockMode: objectLockMode,
+      tagging: tagging,
+      requestPayer: requestPayer,
+      copySourceSSECustomerKeyMD5: copySourceSSECustomerKeyMD5,
+      copySourceSSECustomerKey: copySourceSSECustomerKey,
+      copySourceSSECustomerAlgorithm: copySourceSSECustomerAlgorithm,
+      bucketKeyEnabled: bucketKeyEnabled,
+      ssekmsencryptionContext: ssekmsencryptionContext,
+      ssekmskeyId: ssekmskeyId,
+      ssecustomerKeyMD5: ssecustomerKeyMD5,
+      ssecustomerKey: ssecustomerKey,
+      ssecustomerAlgorithm: ssecustomerAlgorithm,
+      websiteRedirectLocation: websiteRedirectLocation,
+      storageClass: storageClass,
+      serverSideEncryption: serverSideEncryption,
+      taggingDirective: taggingDirective,
+      metadataDirective: metadataDirective,
+      metadata: metadata,
+      key: key,
+      grantWriteACP: grantWriteACP,
+      grantReadACP: grantReadACP,
+      grantRead: grantRead,
+      grantFullControl: grantFullControl,
+      expires: expires,
+      copySourceIfUnmodifiedSince: copySourceIfUnmodifiedSince,
+      copySourceIfNoneMatch: copySourceIfNoneMatch,
+      copySourceIfModifiedSince: copySourceIfModifiedSince,
+      copySourceIfMatch: copySourceIfMatch,
+      copySource: copySource,
+      contentType: contentType,
+      contentLanguage: contentLanguage,
+      contentEncoding: contentEncoding,
+      contentDisposition: contentDisposition,
+      checksumAlgorithm: checksumAlgorithm,
+      cacheControl: cacheControl,
+      bucket: bucket,
+      acl: acl,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListParts = {
   type t
   type request = {
@@ -7789,19 +7904,20 @@ module ListParts = {
     (),
   ) =>
     new({
-      ssecustomerKeyMD5,
-      ssecustomerKey,
-      ssecustomerAlgorithm,
-      expectedBucketOwner,
-      requestPayer,
-      uploadId,
-      partNumberMarker,
-      maxParts,
-      key,
-      bucket,
+      ssecustomerKeyMD5: ssecustomerKeyMD5,
+      ssecustomerKey: ssecustomerKey,
+      ssecustomerAlgorithm: ssecustomerAlgorithm,
+      expectedBucketOwner: expectedBucketOwner,
+      requestPayer: requestPayer,
+      uploadId: uploadId,
+      partNumberMarker: partNumberMarker,
+      maxParts: maxParts,
+      key: key,
+      bucket: bucket,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListBuckets = {
   type t
   type request = {.}
@@ -7814,6 +7930,7 @@ module ListBuckets = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetObjectTagging = {
   type t
   type request = {
@@ -7843,9 +7960,16 @@ module GetObjectTagging = {
   }
   @module("@aws-sdk/client-s3") @new external new: request => t = "GetObjectTaggingCommand"
   let make = (~key, ~bucket, ~requestPayer=?, ~expectedBucketOwner=?, ~versionId=?, ()) =>
-    new({requestPayer, expectedBucketOwner, versionId, key, bucket})
+    new({
+      requestPayer: requestPayer,
+      expectedBucketOwner: expectedBucketOwner,
+      versionId: versionId,
+      key: key,
+      bucket: bucket,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetBucketTagging = {
   type t
   type request = {
@@ -7860,9 +7984,11 @@ module GetBucketTagging = {
   }
   type response = {@ocaml.doc("<p>Contains the tag set.</p>") @as("TagSet") tagSet: tagSet}
   @module("@aws-sdk/client-s3") @new external new: request => t = "GetBucketTaggingCommand"
-  let make = (~bucket, ~expectedBucketOwner=?, ()) => new({expectedBucketOwner, bucket})
+  let make = (~bucket, ~expectedBucketOwner=?, ()) =>
+    new({expectedBucketOwner: expectedBucketOwner, bucket: bucket})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module SelectObjectContent = {
   type t
   @ocaml.doc("<p>Request to filter the contents of an Amazon S3 object based on a simple Structured Query
@@ -7961,21 +8087,22 @@ module SelectObjectContent = {
     (),
   ) =>
     new({
-      expectedBucketOwner,
-      scanRange,
-      outputSerialization,
-      inputSerialization,
-      requestProgress,
-      expressionType,
-      expression,
-      ssecustomerKeyMD5,
-      ssecustomerKey,
-      ssecustomerAlgorithm,
-      key,
-      bucket,
+      expectedBucketOwner: expectedBucketOwner,
+      scanRange: scanRange,
+      outputSerialization: outputSerialization,
+      inputSerialization: inputSerialization,
+      requestProgress: requestProgress,
+      expressionType: expressionType,
+      expression: expression,
+      ssecustomerKeyMD5: ssecustomerKeyMD5,
+      ssecustomerKey: ssecustomerKey,
+      ssecustomerAlgorithm: ssecustomerAlgorithm,
+      key: key,
+      bucket: bucket,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module PutObjectTagging = {
   type t
   type request = {
@@ -8029,17 +8156,18 @@ module PutObjectTagging = {
     (),
   ) =>
     new({
-      requestPayer,
-      expectedBucketOwner,
-      tagging,
-      checksumAlgorithm,
-      contentMD5,
-      versionId,
-      key,
-      bucket,
+      requestPayer: requestPayer,
+      expectedBucketOwner: expectedBucketOwner,
+      tagging: tagging,
+      checksumAlgorithm: checksumAlgorithm,
+      contentMD5: contentMD5,
+      versionId: versionId,
+      key: key,
+      bucket: bucket,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module PutObjectLockConfiguration = {
   type t
   type request = {
@@ -8088,16 +8216,17 @@ module PutObjectLockConfiguration = {
     (),
   ) =>
     new({
-      expectedBucketOwner,
-      checksumAlgorithm,
-      contentMD5,
-      token,
-      requestPayer,
-      objectLockConfiguration,
-      bucket,
+      expectedBucketOwner: expectedBucketOwner,
+      checksumAlgorithm: checksumAlgorithm,
+      contentMD5: contentMD5,
+      token: token,
+      requestPayer: requestPayer,
+      objectLockConfiguration: objectLockConfiguration,
+      bucket: bucket,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module PutBucketTagging = {
   type t
   type request = {
@@ -8129,9 +8258,16 @@ module PutBucketTagging = {
   type response = {.}
   @module("@aws-sdk/client-s3") @new external new: request => t = "PutBucketTaggingCommand"
   let make = (~tagging, ~bucket, ~expectedBucketOwner=?, ~checksumAlgorithm=?, ~contentMD5=?, ()) =>
-    new({expectedBucketOwner, tagging, checksumAlgorithm, contentMD5, bucket})
+    new({
+      expectedBucketOwner: expectedBucketOwner,
+      tagging: tagging,
+      checksumAlgorithm: checksumAlgorithm,
+      contentMD5: contentMD5,
+      bucket: bucket,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module PutBucketOwnershipControls = {
   type t
   type request = {
@@ -8158,9 +8294,15 @@ module PutBucketOwnershipControls = {
   @module("@aws-sdk/client-s3") @new
   external new: request => t = "PutBucketOwnershipControlsCommand"
   let make = (~ownershipControls, ~bucket, ~expectedBucketOwner=?, ~contentMD5=?, ()) =>
-    new({ownershipControls, expectedBucketOwner, contentMD5, bucket})
+    new({
+      ownershipControls: ownershipControls,
+      expectedBucketOwner: expectedBucketOwner,
+      contentMD5: contentMD5,
+      bucket: bucket,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ListObjectsV2 = {
   type t
   type request = {
@@ -8299,19 +8441,20 @@ module ListObjectsV2 = {
     (),
   ) =>
     new({
-      expectedBucketOwner,
-      requestPayer,
-      startAfter,
-      fetchOwner,
-      continuationToken,
-      prefix,
-      maxKeys,
-      encodingType,
-      delimiter,
-      bucket,
+      expectedBucketOwner: expectedBucketOwner,
+      requestPayer: requestPayer,
+      startAfter: startAfter,
+      fetchOwner: fetchOwner,
+      continuationToken: continuationToken,
+      prefix: prefix,
+      maxKeys: maxKeys,
+      encodingType: encodingType,
+      delimiter: delimiter,
+      bucket: bucket,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListObjects = {
   type t
   type request = {
@@ -8410,17 +8553,18 @@ module ListObjects = {
     (),
   ) =>
     new({
-      expectedBucketOwner,
-      requestPayer,
-      prefix,
-      maxKeys,
-      marker,
-      encodingType,
-      delimiter,
-      bucket,
+      expectedBucketOwner: expectedBucketOwner,
+      requestPayer: requestPayer,
+      prefix: prefix,
+      maxKeys: maxKeys,
+      marker: marker,
+      encodingType: encodingType,
+      delimiter: delimiter,
+      bucket: bucket,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListObjectVersions = {
   type t
   type request = {
@@ -8528,17 +8672,18 @@ module ListObjectVersions = {
     (),
   ) =>
     new({
-      expectedBucketOwner,
-      versionIdMarker,
-      prefix,
-      maxKeys,
-      keyMarker,
-      encodingType,
-      delimiter,
-      bucket,
+      expectedBucketOwner: expectedBucketOwner,
+      versionIdMarker: versionIdMarker,
+      prefix: prefix,
+      maxKeys: maxKeys,
+      keyMarker: keyMarker,
+      encodingType: encodingType,
+      delimiter: delimiter,
+      bucket: bucket,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListMultipartUploads = {
   type t
   type request = {
@@ -8659,17 +8804,18 @@ module ListMultipartUploads = {
     (),
   ) =>
     new({
-      expectedBucketOwner,
-      uploadIdMarker,
-      prefix,
-      maxUploads,
-      keyMarker,
-      encodingType,
-      delimiter,
-      bucket,
+      expectedBucketOwner: expectedBucketOwner,
+      uploadIdMarker: uploadIdMarker,
+      prefix: prefix,
+      maxUploads: maxUploads,
+      keyMarker: keyMarker,
+      encodingType: encodingType,
+      delimiter: delimiter,
+      bucket: bucket,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetObjectLockConfiguration = {
   type t
   type request = {
@@ -8690,9 +8836,11 @@ module GetObjectLockConfiguration = {
   }
   @module("@aws-sdk/client-s3") @new
   external new: request => t = "GetObjectLockConfigurationCommand"
-  let make = (~bucket, ~expectedBucketOwner=?, ()) => new({expectedBucketOwner, bucket})
+  let make = (~bucket, ~expectedBucketOwner=?, ()) =>
+    new({expectedBucketOwner: expectedBucketOwner, bucket: bucket})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetObjectAttributes = {
   type t
   type request = {
@@ -8784,20 +8932,21 @@ module GetObjectAttributes = {
     (),
   ) =>
     new({
-      objectAttributes,
-      expectedBucketOwner,
-      requestPayer,
-      ssecustomerKeyMD5,
-      ssecustomerKey,
-      ssecustomerAlgorithm,
-      partNumberMarker,
-      maxParts,
-      versionId,
-      key,
-      bucket,
+      objectAttributes: objectAttributes,
+      expectedBucketOwner: expectedBucketOwner,
+      requestPayer: requestPayer,
+      ssecustomerKeyMD5: ssecustomerKeyMD5,
+      ssecustomerKey: ssecustomerKey,
+      ssecustomerAlgorithm: ssecustomerAlgorithm,
+      partNumberMarker: partNumberMarker,
+      maxParts: maxParts,
+      versionId: versionId,
+      key: key,
+      bucket: bucket,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetObjectAcl = {
   type t
   type request = {
@@ -8825,9 +8974,16 @@ module GetObjectAcl = {
   }
   @module("@aws-sdk/client-s3") @new external new: request => t = "GetObjectAclCommand"
   let make = (~key, ~bucket, ~expectedBucketOwner=?, ~requestPayer=?, ~versionId=?, ()) =>
-    new({expectedBucketOwner, requestPayer, versionId, key, bucket})
+    new({
+      expectedBucketOwner: expectedBucketOwner,
+      requestPayer: requestPayer,
+      versionId: versionId,
+      key: key,
+      bucket: bucket,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetBucketWebsite = {
   type t
   type request = {
@@ -8858,9 +9014,11 @@ module GetBucketWebsite = {
     redirectAllRequestsTo: option<redirectAllRequestsTo>,
   }
   @module("@aws-sdk/client-s3") @new external new: request => t = "GetBucketWebsiteCommand"
-  let make = (~bucket, ~expectedBucketOwner=?, ()) => new({expectedBucketOwner, bucket})
+  let make = (~bucket, ~expectedBucketOwner=?, ()) =>
+    new({expectedBucketOwner: expectedBucketOwner, bucket: bucket})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetBucketOwnershipControls = {
   type t
   type request = {
@@ -8882,9 +9040,11 @@ module GetBucketOwnershipControls = {
   }
   @module("@aws-sdk/client-s3") @new
   external new: request => t = "GetBucketOwnershipControlsCommand"
-  let make = (~bucket, ~expectedBucketOwner=?, ()) => new({expectedBucketOwner, bucket})
+  let make = (~bucket, ~expectedBucketOwner=?, ()) =>
+    new({expectedBucketOwner: expectedBucketOwner, bucket: bucket})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetBucketCors = {
   type t
   type request = {
@@ -8903,9 +9063,11 @@ module GetBucketCors = {
     corsrules: option<corsrules>,
   }
   @module("@aws-sdk/client-s3") @new external new: request => t = "GetBucketCorsCommand"
-  let make = (~bucket, ~expectedBucketOwner=?, ()) => new({expectedBucketOwner, bucket})
+  let make = (~bucket, ~expectedBucketOwner=?, ()) =>
+    new({expectedBucketOwner: expectedBucketOwner, bucket: bucket})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetBucketAcl = {
   type t
   type request = {
@@ -8923,9 +9085,11 @@ module GetBucketAcl = {
     owner: option<owner>,
   }
   @module("@aws-sdk/client-s3") @new external new: request => t = "GetBucketAclCommand"
-  let make = (~bucket, ~expectedBucketOwner=?, ()) => new({expectedBucketOwner, bucket})
+  let make = (~bucket, ~expectedBucketOwner=?, ()) =>
+    new({expectedBucketOwner: expectedBucketOwner, bucket: bucket})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteObjects = {
   type t
   type request = {
@@ -8987,16 +9151,17 @@ module DeleteObjects = {
     (),
   ) =>
     new({
-      checksumAlgorithm,
-      expectedBucketOwner,
-      bypassGovernanceRetention,
-      requestPayer,
-      mfa,
-      delete,
-      bucket,
+      checksumAlgorithm: checksumAlgorithm,
+      expectedBucketOwner: expectedBucketOwner,
+      bypassGovernanceRetention: bypassGovernanceRetention,
+      requestPayer: requestPayer,
+      mfa: mfa,
+      delete: delete,
+      bucket: bucket,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CompleteMultipartUpload = {
   type t
   type request = {
@@ -9151,22 +9316,23 @@ module CompleteMultipartUpload = {
     (),
   ) =>
     new({
-      ssecustomerKeyMD5,
-      ssecustomerKey,
-      ssecustomerAlgorithm,
-      expectedBucketOwner,
-      requestPayer,
-      checksumSHA256,
-      checksumSHA1,
-      checksumCRC32C,
-      checksumCRC32,
-      uploadId,
-      multipartUpload,
-      key,
-      bucket,
+      ssecustomerKeyMD5: ssecustomerKeyMD5,
+      ssecustomerKey: ssecustomerKey,
+      ssecustomerAlgorithm: ssecustomerAlgorithm,
+      expectedBucketOwner: expectedBucketOwner,
+      requestPayer: requestPayer,
+      checksumSHA256: checksumSHA256,
+      checksumSHA1: checksumSHA1,
+      checksumCRC32C: checksumCRC32C,
+      checksumCRC32: checksumCRC32,
+      uploadId: uploadId,
+      multipartUpload: multipartUpload,
+      key: key,
+      bucket: bucket,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module PutObjectAcl = {
   type t
   type request = {
@@ -9260,23 +9426,24 @@ module PutObjectAcl = {
     (),
   ) =>
     new({
-      expectedBucketOwner,
-      versionId,
-      requestPayer,
-      key,
-      grantWriteACP,
-      grantWrite,
-      grantReadACP,
-      grantRead,
-      grantFullControl,
-      checksumAlgorithm,
-      contentMD5,
-      bucket,
-      accessControlPolicy,
-      acl,
+      expectedBucketOwner: expectedBucketOwner,
+      versionId: versionId,
+      requestPayer: requestPayer,
+      key: key,
+      grantWriteACP: grantWriteACP,
+      grantWrite: grantWrite,
+      grantReadACP: grantReadACP,
+      grantRead: grantRead,
+      grantFullControl: grantFullControl,
+      checksumAlgorithm: checksumAlgorithm,
+      contentMD5: contentMD5,
+      bucket: bucket,
+      accessControlPolicy: accessControlPolicy,
+      acl: acl,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module PutBucketWebsite = {
   type t
   type request = {
@@ -9313,9 +9480,17 @@ module PutBucketWebsite = {
     ~checksumAlgorithm=?,
     ~contentMD5=?,
     (),
-  ) => new({expectedBucketOwner, websiteConfiguration, checksumAlgorithm, contentMD5, bucket})
+  ) =>
+    new({
+      expectedBucketOwner: expectedBucketOwner,
+      websiteConfiguration: websiteConfiguration,
+      checksumAlgorithm: checksumAlgorithm,
+      contentMD5: contentMD5,
+      bucket: bucket,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module PutBucketEncryption = {
   type t
   type request = {
@@ -9357,14 +9532,15 @@ module PutBucketEncryption = {
     (),
   ) =>
     new({
-      expectedBucketOwner,
-      serverSideEncryptionConfiguration,
-      checksumAlgorithm,
-      contentMD5,
-      bucket,
+      expectedBucketOwner: expectedBucketOwner,
+      serverSideEncryptionConfiguration: serverSideEncryptionConfiguration,
+      checksumAlgorithm: checksumAlgorithm,
+      contentMD5: contentMD5,
+      bucket: bucket,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module PutBucketCors = {
   type t
   type request = {
@@ -9408,9 +9584,17 @@ module PutBucketCors = {
     ~checksumAlgorithm=?,
     ~contentMD5=?,
     (),
-  ) => new({expectedBucketOwner, checksumAlgorithm, contentMD5, corsconfiguration, bucket})
+  ) =>
+    new({
+      expectedBucketOwner: expectedBucketOwner,
+      checksumAlgorithm: checksumAlgorithm,
+      contentMD5: contentMD5,
+      corsconfiguration: corsconfiguration,
+      bucket: bucket,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module PutBucketAcl = {
   type t
   type request = {
@@ -9477,20 +9661,21 @@ module PutBucketAcl = {
     (),
   ) =>
     new({
-      expectedBucketOwner,
-      grantWriteACP,
-      grantWrite,
-      grantReadACP,
-      grantRead,
-      grantFullControl,
-      checksumAlgorithm,
-      contentMD5,
-      bucket,
-      accessControlPolicy,
-      acl,
+      expectedBucketOwner: expectedBucketOwner,
+      grantWriteACP: grantWriteACP,
+      grantWrite: grantWrite,
+      grantReadACP: grantReadACP,
+      grantRead: grantRead,
+      grantFullControl: grantFullControl,
+      checksumAlgorithm: checksumAlgorithm,
+      contentMD5: contentMD5,
+      bucket: bucket,
+      accessControlPolicy: accessControlPolicy,
+      acl: acl,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module GetBucketLogging = {
   type t
   type request = {
@@ -9504,9 +9689,11 @@ module GetBucketLogging = {
   }
   type response = {@as("LoggingEnabled") loggingEnabled: option<loggingEnabled>}
   @module("@aws-sdk/client-s3") @new external new: request => t = "GetBucketLoggingCommand"
-  let make = (~bucket, ~expectedBucketOwner=?, ()) => new({expectedBucketOwner, bucket})
+  let make = (~bucket, ~expectedBucketOwner=?, ()) =>
+    new({expectedBucketOwner: expectedBucketOwner, bucket: bucket})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetBucketEncryption = {
   type t
   type request = {
@@ -9525,9 +9712,11 @@ module GetBucketEncryption = {
     serverSideEncryptionConfiguration: option<serverSideEncryptionConfiguration>,
   }
   @module("@aws-sdk/client-s3") @new external new: request => t = "GetBucketEncryptionCommand"
-  let make = (~bucket, ~expectedBucketOwner=?, ()) => new({expectedBucketOwner, bucket})
+  let make = (~bucket, ~expectedBucketOwner=?, ()) =>
+    new({expectedBucketOwner: expectedBucketOwner, bucket: bucket})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module PutBucketMetricsConfiguration = {
   type t
   type request = {
@@ -9547,9 +9736,15 @@ module PutBucketMetricsConfiguration = {
   @module("@aws-sdk/client-s3") @new
   external new: request => t = "PutBucketMetricsConfigurationCommand"
   let make = (~metricsConfiguration, ~id, ~bucket, ~expectedBucketOwner=?, ()) =>
-    new({expectedBucketOwner, metricsConfiguration, id, bucket})
+    new({
+      expectedBucketOwner: expectedBucketOwner,
+      metricsConfiguration: metricsConfiguration,
+      id: id,
+      bucket: bucket,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module PutBucketLogging = {
   type t
   type request = {
@@ -9586,9 +9781,17 @@ module PutBucketLogging = {
     ~checksumAlgorithm=?,
     ~contentMD5=?,
     (),
-  ) => new({expectedBucketOwner, checksumAlgorithm, contentMD5, bucketLoggingStatus, bucket})
+  ) =>
+    new({
+      expectedBucketOwner: expectedBucketOwner,
+      checksumAlgorithm: checksumAlgorithm,
+      contentMD5: contentMD5,
+      bucketLoggingStatus: bucketLoggingStatus,
+      bucket: bucket,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module PutBucketInventoryConfiguration = {
   type t
   type request = {
@@ -9609,9 +9812,15 @@ module PutBucketInventoryConfiguration = {
   @module("@aws-sdk/client-s3") @new
   external new: request => t = "PutBucketInventoryConfigurationCommand"
   let make = (~inventoryConfiguration, ~id, ~bucket, ~expectedBucketOwner=?, ()) =>
-    new({expectedBucketOwner, inventoryConfiguration, id, bucket})
+    new({
+      expectedBucketOwner: expectedBucketOwner,
+      inventoryConfiguration: inventoryConfiguration,
+      id: id,
+      bucket: bucket,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module PutBucketIntelligentTieringConfiguration = {
   type t
   type request = {
@@ -9630,9 +9839,10 @@ module PutBucketIntelligentTieringConfiguration = {
   @module("@aws-sdk/client-s3") @new
   external new: request => t = "PutBucketIntelligentTieringConfigurationCommand"
   let make = (~intelligentTieringConfiguration, ~id, ~bucket, ()) =>
-    new({intelligentTieringConfiguration, id, bucket})
+    new({intelligentTieringConfiguration: intelligentTieringConfiguration, id: id, bucket: bucket})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module PutBucketAnalyticsConfiguration = {
   type t
   type request = {
@@ -9654,9 +9864,15 @@ module PutBucketAnalyticsConfiguration = {
   @module("@aws-sdk/client-s3") @new
   external new: request => t = "PutBucketAnalyticsConfigurationCommand"
   let make = (~analyticsConfiguration, ~id, ~bucket, ~expectedBucketOwner=?, ()) =>
-    new({expectedBucketOwner, analyticsConfiguration, id, bucket})
+    new({
+      expectedBucketOwner: expectedBucketOwner,
+      analyticsConfiguration: analyticsConfiguration,
+      id: id,
+      bucket: bucket,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module GetBucketMetricsConfiguration = {
   type t
   type request = {
@@ -9676,9 +9892,11 @@ module GetBucketMetricsConfiguration = {
   }
   @module("@aws-sdk/client-s3") @new
   external new: request => t = "GetBucketMetricsConfigurationCommand"
-  let make = (~id, ~bucket, ~expectedBucketOwner=?, ()) => new({expectedBucketOwner, id, bucket})
+  let make = (~id, ~bucket, ~expectedBucketOwner=?, ()) =>
+    new({expectedBucketOwner: expectedBucketOwner, id: id, bucket: bucket})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetBucketInventoryConfiguration = {
   type t
   type request = {
@@ -9699,9 +9917,11 @@ module GetBucketInventoryConfiguration = {
   }
   @module("@aws-sdk/client-s3") @new
   external new: request => t = "GetBucketInventoryConfigurationCommand"
-  let make = (~id, ~bucket, ~expectedBucketOwner=?, ()) => new({expectedBucketOwner, id, bucket})
+  let make = (~id, ~bucket, ~expectedBucketOwner=?, ()) =>
+    new({expectedBucketOwner: expectedBucketOwner, id: id, bucket: bucket})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetBucketIntelligentTieringConfiguration = {
   type t
   type request = {
@@ -9720,9 +9940,10 @@ module GetBucketIntelligentTieringConfiguration = {
   }
   @module("@aws-sdk/client-s3") @new
   external new: request => t = "GetBucketIntelligentTieringConfigurationCommand"
-  let make = (~id, ~bucket, ()) => new({id, bucket})
+  let make = (~id, ~bucket, ()) => new({id: id, bucket: bucket})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetBucketAnalyticsConfiguration = {
   type t
   type request = {
@@ -9744,9 +9965,11 @@ module GetBucketAnalyticsConfiguration = {
   }
   @module("@aws-sdk/client-s3") @new
   external new: request => t = "GetBucketAnalyticsConfigurationCommand"
-  let make = (~id, ~bucket, ~expectedBucketOwner=?, ()) => new({expectedBucketOwner, id, bucket})
+  let make = (~id, ~bucket, ~expectedBucketOwner=?, ()) =>
+    new({expectedBucketOwner: expectedBucketOwner, id: id, bucket: bucket})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module RestoreObject = {
   type t
   type request = {
@@ -9796,16 +10019,17 @@ module RestoreObject = {
     (),
   ) =>
     new({
-      expectedBucketOwner,
-      checksumAlgorithm,
-      requestPayer,
-      restoreRequest,
-      versionId,
-      key,
-      bucket,
+      expectedBucketOwner: expectedBucketOwner,
+      checksumAlgorithm: checksumAlgorithm,
+      requestPayer: requestPayer,
+      restoreRequest: restoreRequest,
+      versionId: versionId,
+      key: key,
+      bucket: bucket,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListBucketMetricsConfigurations = {
   type t
   type request = {
@@ -9847,9 +10071,14 @@ module ListBucketMetricsConfigurations = {
   @module("@aws-sdk/client-s3") @new
   external new: request => t = "ListBucketMetricsConfigurationsCommand"
   let make = (~bucket, ~expectedBucketOwner=?, ~continuationToken=?, ()) =>
-    new({expectedBucketOwner, continuationToken, bucket})
+    new({
+      expectedBucketOwner: expectedBucketOwner,
+      continuationToken: continuationToken,
+      bucket: bucket,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListBucketInventoryConfigurations = {
   type t
   type request = {
@@ -9889,9 +10118,14 @@ module ListBucketInventoryConfigurations = {
   @module("@aws-sdk/client-s3") @new
   external new: request => t = "ListBucketInventoryConfigurationsCommand"
   let make = (~bucket, ~expectedBucketOwner=?, ~continuationToken=?, ()) =>
-    new({expectedBucketOwner, continuationToken, bucket})
+    new({
+      expectedBucketOwner: expectedBucketOwner,
+      continuationToken: continuationToken,
+      bucket: bucket,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListBucketIntelligentTieringConfigurations = {
   type t
   type request = {
@@ -9926,9 +10160,11 @@ module ListBucketIntelligentTieringConfigurations = {
   }
   @module("@aws-sdk/client-s3") @new
   external new: request => t = "ListBucketIntelligentTieringConfigurationsCommand"
-  let make = (~bucket, ~continuationToken=?, ()) => new({continuationToken, bucket})
+  let make = (~bucket, ~continuationToken=?, ()) =>
+    new({continuationToken: continuationToken, bucket: bucket})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListBucketAnalyticsConfigurations = {
   type t
   type request = {
@@ -9969,9 +10205,14 @@ module ListBucketAnalyticsConfigurations = {
   @module("@aws-sdk/client-s3") @new
   external new: request => t = "ListBucketAnalyticsConfigurationsCommand"
   let make = (~bucket, ~expectedBucketOwner=?, ~continuationToken=?, ()) =>
-    new({expectedBucketOwner, continuationToken, bucket})
+    new({
+      expectedBucketOwner: expectedBucketOwner,
+      continuationToken: continuationToken,
+      bucket: bucket,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetBucketNotificationConfiguration = {
   type t
   type request = {
@@ -9987,9 +10228,11 @@ module GetBucketNotificationConfiguration = {
   type response = notificationConfiguration
   @module("@aws-sdk/client-s3") @new
   external new: request => t = "GetBucketNotificationConfigurationCommand"
-  let make = (~bucket, ~expectedBucketOwner=?, ()) => new({expectedBucketOwner, bucket})
+  let make = (~bucket, ~expectedBucketOwner=?, ()) =>
+    new({expectedBucketOwner: expectedBucketOwner, bucket: bucket})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetBucketLifecycleConfiguration = {
   type t
   type request = {
@@ -10007,9 +10250,11 @@ module GetBucketLifecycleConfiguration = {
   }
   @module("@aws-sdk/client-s3") @new
   external new: request => t = "GetBucketLifecycleConfigurationCommand"
-  let make = (~bucket, ~expectedBucketOwner=?, ()) => new({expectedBucketOwner, bucket})
+  let make = (~bucket, ~expectedBucketOwner=?, ()) =>
+    new({expectedBucketOwner: expectedBucketOwner, bucket: bucket})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module PutBucketReplication = {
   type t
   type request = {
@@ -10051,15 +10296,16 @@ module PutBucketReplication = {
     (),
   ) =>
     new({
-      expectedBucketOwner,
-      token,
-      replicationConfiguration,
-      checksumAlgorithm,
-      contentMD5,
-      bucket,
+      expectedBucketOwner: expectedBucketOwner,
+      token: token,
+      replicationConfiguration: replicationConfiguration,
+      checksumAlgorithm: checksumAlgorithm,
+      contentMD5: contentMD5,
+      bucket: bucket,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module PutBucketNotificationConfiguration = {
   type t
   type request = {
@@ -10085,9 +10331,16 @@ module PutBucketNotificationConfiguration = {
     ~skipDestinationValidation=?,
     ~expectedBucketOwner=?,
     (),
-  ) => new({skipDestinationValidation, expectedBucketOwner, notificationConfiguration, bucket})
+  ) =>
+    new({
+      skipDestinationValidation: skipDestinationValidation,
+      expectedBucketOwner: expectedBucketOwner,
+      notificationConfiguration: notificationConfiguration,
+      bucket: bucket,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module PutBucketLifecycleConfiguration = {
   type t
   type request = {
@@ -10120,9 +10373,16 @@ module PutBucketLifecycleConfiguration = {
     ~lifecycleConfiguration=?,
     ~checksumAlgorithm=?,
     (),
-  ) => new({expectedBucketOwner, lifecycleConfiguration, checksumAlgorithm, bucket})
+  ) =>
+    new({
+      expectedBucketOwner: expectedBucketOwner,
+      lifecycleConfiguration: lifecycleConfiguration,
+      checksumAlgorithm: checksumAlgorithm,
+      bucket: bucket,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module GetBucketReplication = {
   type t
   type request = {
@@ -10138,6 +10398,7 @@ module GetBucketReplication = {
     @as("ReplicationConfiguration") replicationConfiguration: option<replicationConfiguration>,
   }
   @module("@aws-sdk/client-s3") @new external new: request => t = "GetBucketReplicationCommand"
-  let make = (~bucket, ~expectedBucketOwner=?, ()) => new({expectedBucketOwner, bucket})
+  let make = (~bucket, ~expectedBucketOwner=?, ()) =>
+    new({expectedBucketOwner: expectedBucketOwner, bucket: bucket})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

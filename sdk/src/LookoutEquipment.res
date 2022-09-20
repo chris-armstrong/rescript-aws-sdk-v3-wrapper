@@ -396,6 +396,7 @@ module StopInferenceScheduler = {
   let make = (~inferenceSchedulerName, ()) => new({inferenceSchedulerName: inferenceSchedulerName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module StartInferenceScheduler = {
   type t
   type request = {
@@ -425,6 +426,7 @@ module StartInferenceScheduler = {
   let make = (~inferenceSchedulerName, ()) => new({inferenceSchedulerName: inferenceSchedulerName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteModel = {
   type t
   type request = {
@@ -436,6 +438,7 @@ module DeleteModel = {
   let make = (~modelName, ()) => new({modelName: modelName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteInferenceScheduler = {
   type t
   type request = {
@@ -449,6 +452,7 @@ module DeleteInferenceScheduler = {
   let make = (~inferenceSchedulerName, ()) => new({inferenceSchedulerName: inferenceSchedulerName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteDataset = {
   type t
   type request = {
@@ -461,6 +465,7 @@ module DeleteDataset = {
   let make = (~datasetName, ()) => new({datasetName: datasetName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UntagResource = {
   type t
   type request = {
@@ -475,9 +480,10 @@ module UntagResource = {
   type response = {.}
   @module("@aws-sdk/client-lookoutequipment") @new
   external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys, resourceArn})
+  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateInferenceScheduler = {
   type t
   type request = {
@@ -526,15 +532,16 @@ module UpdateInferenceScheduler = {
     (),
   ) =>
     new({
-      roleArn,
-      dataOutputConfiguration,
-      dataInputConfiguration,
-      dataUploadFrequency,
-      dataDelayOffsetInMinutes,
-      inferenceSchedulerName,
+      roleArn: roleArn,
+      dataOutputConfiguration: dataOutputConfiguration,
+      dataInputConfiguration: dataInputConfiguration,
+      dataUploadFrequency: dataUploadFrequency,
+      dataDelayOffsetInMinutes: dataDelayOffsetInMinutes,
+      inferenceSchedulerName: inferenceSchedulerName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module TagResource = {
   type t
   type request = {
@@ -549,9 +556,10 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-lookoutequipment") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceArn, ()) => new({tags, resourceArn})
+  let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module StartDataIngestionJob = {
   type t
   type request = {
@@ -581,9 +589,15 @@ module StartDataIngestionJob = {
   @module("@aws-sdk/client-lookoutequipment") @new
   external new: request => t = "StartDataIngestionJobCommand"
   let make = (~clientToken, ~roleArn, ~ingestionInputConfiguration, ~datasetName, ()) =>
-    new({clientToken, roleArn, ingestionInputConfiguration, datasetName})
+    new({
+      clientToken: clientToken,
+      roleArn: roleArn,
+      ingestionInputConfiguration: ingestionInputConfiguration,
+      datasetName: datasetName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListTagsForResource = {
   type t
   type request = {
@@ -601,6 +615,7 @@ module ListTagsForResource = {
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListModels = {
   type t
   type request = {
@@ -636,9 +651,17 @@ module ListModels = {
     ~maxResults=?,
     ~nextToken=?,
     (),
-  ) => new({datasetNameBeginsWith, modelNameBeginsWith, status, maxResults, nextToken})
+  ) =>
+    new({
+      datasetNameBeginsWith: datasetNameBeginsWith,
+      modelNameBeginsWith: modelNameBeginsWith,
+      status: status,
+      maxResults: maxResults,
+      nextToken: nextToken,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListInferenceSchedulers = {
   type t
   type request = {
@@ -669,9 +692,15 @@ module ListInferenceSchedulers = {
   @module("@aws-sdk/client-lookoutequipment") @new
   external new: request => t = "ListInferenceSchedulersCommand"
   let make = (~modelName=?, ~inferenceSchedulerNameBeginsWith=?, ~maxResults=?, ~nextToken=?, ()) =>
-    new({modelName, inferenceSchedulerNameBeginsWith, maxResults, nextToken})
+    new({
+      modelName: modelName,
+      inferenceSchedulerNameBeginsWith: inferenceSchedulerNameBeginsWith,
+      maxResults: maxResults,
+      nextToken: nextToken,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListDatasets = {
   type t
   type request = {
@@ -698,9 +727,14 @@ module ListDatasets = {
   @module("@aws-sdk/client-lookoutequipment") @new
   external new: request => t = "ListDatasetsCommand"
   let make = (~datasetNameBeginsWith=?, ~maxResults=?, ~nextToken=?, ()) =>
-    new({datasetNameBeginsWith, maxResults, nextToken})
+    new({
+      datasetNameBeginsWith: datasetNameBeginsWith,
+      maxResults: maxResults,
+      nextToken: nextToken,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeModel = {
   type t
   type request = {
@@ -802,6 +836,7 @@ module DescribeModel = {
   let make = (~modelName, ()) => new({modelName: modelName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeInferenceScheduler = {
   type t
   type request = {
@@ -871,6 +906,7 @@ module DescribeInferenceScheduler = {
   let make = (~inferenceSchedulerName, ()) => new({inferenceSchedulerName: inferenceSchedulerName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeDataset = {
   type t
   type request = {
@@ -913,6 +949,7 @@ module DescribeDataset = {
   let make = (~datasetName, ()) => new({datasetName: datasetName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeDataIngestionJob = {
   type t
   type request = {
@@ -947,6 +984,7 @@ module DescribeDataIngestionJob = {
   let make = (~jobId, ()) => new({jobId: jobId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateModel = {
   type t
   type request = {
@@ -1036,23 +1074,24 @@ module CreateModel = {
     (),
   ) =>
     new({
-      offCondition,
-      tags,
-      serverSideKmsKeyId,
-      dataPreProcessingConfiguration,
-      roleArn,
-      evaluationDataEndTime,
-      evaluationDataStartTime,
-      trainingDataEndTime,
-      trainingDataStartTime,
-      clientToken,
-      labelsInputConfiguration,
-      datasetSchema,
-      datasetName,
-      modelName,
+      offCondition: offCondition,
+      tags: tags,
+      serverSideKmsKeyId: serverSideKmsKeyId,
+      dataPreProcessingConfiguration: dataPreProcessingConfiguration,
+      roleArn: roleArn,
+      evaluationDataEndTime: evaluationDataEndTime,
+      evaluationDataStartTime: evaluationDataStartTime,
+      trainingDataEndTime: trainingDataEndTime,
+      trainingDataStartTime: trainingDataStartTime,
+      clientToken: clientToken,
+      labelsInputConfiguration: labelsInputConfiguration,
+      datasetSchema: datasetSchema,
+      datasetName: datasetName,
+      modelName: modelName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateInferenceScheduler = {
   type t
   type request = {
@@ -1131,19 +1170,20 @@ module CreateInferenceScheduler = {
     (),
   ) =>
     new({
-      tags,
-      clientToken,
-      serverSideKmsKeyId,
-      roleArn,
-      dataOutputConfiguration,
-      dataInputConfiguration,
-      dataUploadFrequency,
-      dataDelayOffsetInMinutes,
-      inferenceSchedulerName,
-      modelName,
+      tags: tags,
+      clientToken: clientToken,
+      serverSideKmsKeyId: serverSideKmsKeyId,
+      roleArn: roleArn,
+      dataOutputConfiguration: dataOutputConfiguration,
+      dataInputConfiguration: dataInputConfiguration,
+      dataUploadFrequency: dataUploadFrequency,
+      dataDelayOffsetInMinutes: dataDelayOffsetInMinutes,
+      inferenceSchedulerName: inferenceSchedulerName,
+      modelName: modelName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateDataset = {
   type t
   type request = {
@@ -1179,9 +1219,16 @@ module CreateDataset = {
   @module("@aws-sdk/client-lookoutequipment") @new
   external new: request => t = "CreateDatasetCommand"
   let make = (~clientToken, ~datasetSchema, ~datasetName, ~tags=?, ~serverSideKmsKeyId=?, ()) =>
-    new({tags, clientToken, serverSideKmsKeyId, datasetSchema, datasetName})
+    new({
+      tags: tags,
+      clientToken: clientToken,
+      serverSideKmsKeyId: serverSideKmsKeyId,
+      datasetSchema: datasetSchema,
+      datasetName: datasetName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListInferenceExecutions = {
   type t
   type request = {
@@ -1229,15 +1276,16 @@ module ListInferenceExecutions = {
     (),
   ) =>
     new({
-      status,
-      dataEndTimeBefore,
-      dataStartTimeAfter,
-      inferenceSchedulerName,
-      maxResults,
-      nextToken,
+      status: status,
+      dataEndTimeBefore: dataEndTimeBefore,
+      dataStartTimeAfter: dataStartTimeAfter,
+      inferenceSchedulerName: inferenceSchedulerName,
+      maxResults: maxResults,
+      nextToken: nextToken,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListDataIngestionJobs = {
   type t
   type request = {
@@ -1267,6 +1315,6 @@ module ListDataIngestionJobs = {
   @module("@aws-sdk/client-lookoutequipment") @new
   external new: request => t = "ListDataIngestionJobsCommand"
   let make = (~status=?, ~maxResults=?, ~nextToken=?, ~datasetName=?, ()) =>
-    new({status, maxResults, nextToken, datasetName})
+    new({status: status, maxResults: maxResults, nextToken: nextToken, datasetName: datasetName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

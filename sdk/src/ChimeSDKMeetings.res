@@ -320,6 +320,7 @@ module StopMeetingTranscription = {
   let make = (~meetingId, ()) => new({meetingId: meetingId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteMeeting = {
   type t
   type request = {
@@ -330,6 +331,7 @@ module DeleteMeeting = {
   let make = (~meetingId, ()) => new({meetingId: meetingId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteAttendee = {
   type t
   type request = {
@@ -338,9 +340,10 @@ module DeleteAttendee = {
   }
   type response = {.}
   @module("@aws-sdk/client-chime") @new external new: request => t = "DeleteAttendeeCommand"
-  let make = (~attendeeId, ~meetingId, ()) => new({attendeeId, meetingId})
+  let make = (~attendeeId, ~meetingId, ()) => new({attendeeId: attendeeId, meetingId: meetingId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module GetAttendee = {
   type t
   type request = {
@@ -352,9 +355,10 @@ module GetAttendee = {
     attendee: option<attendee>,
   }
   @module("@aws-sdk/client-chime") @new external new: request => t = "GetAttendeeCommand"
-  let make = (~attendeeId, ~meetingId, ()) => new({attendeeId, meetingId})
+  let make = (~attendeeId, ~meetingId, ()) => new({attendeeId: attendeeId, meetingId: meetingId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateAttendee = {
   type t
   type request = {
@@ -371,9 +375,11 @@ module CreateAttendee = {
     attendee: option<attendee>,
   }
   @module("@aws-sdk/client-chime") @new external new: request => t = "CreateAttendeeCommand"
-  let make = (~externalUserId, ~meetingId, ()) => new({externalUserId, meetingId})
+  let make = (~externalUserId, ~meetingId, ()) =>
+    new({externalUserId: externalUserId, meetingId: meetingId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module StartMeetingTranscription = {
   type t
   type request = {
@@ -388,9 +394,10 @@ module StartMeetingTranscription = {
   @module("@aws-sdk/client-chime") @new
   external new: request => t = "StartMeetingTranscriptionCommand"
   let make = (~transcriptionConfiguration, ~meetingId, ()) =>
-    new({transcriptionConfiguration, meetingId})
+    new({transcriptionConfiguration: transcriptionConfiguration, meetingId: meetingId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ListAttendees = {
   type t
   type request = {
@@ -408,9 +415,10 @@ module ListAttendees = {
   }
   @module("@aws-sdk/client-chime") @new external new: request => t = "ListAttendeesCommand"
   let make = (~meetingId, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults, nextToken, meetingId})
+    new({maxResults: maxResults, nextToken: nextToken, meetingId: meetingId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module BatchCreateAttendee = {
   type t
   type request = {
@@ -432,9 +440,10 @@ module BatchCreateAttendee = {
     attendees: option<attendeeList>,
   }
   @module("@aws-sdk/client-chime") @new external new: request => t = "BatchCreateAttendeeCommand"
-  let make = (~attendees, ~meetingId, ()) => new({attendees, meetingId})
+  let make = (~attendees, ~meetingId, ()) => new({attendees: attendees, meetingId: meetingId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetMeeting = {
   type t
   type request = {
@@ -448,6 +457,7 @@ module GetMeeting = {
   let make = (~meetingId, ()) => new({meetingId: meetingId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateMeetingWithAttendees = {
   type t
   type request = {
@@ -532,17 +542,18 @@ module CreateMeetingWithAttendees = {
     (),
   ) =>
     new({
-      primaryMeetingId,
-      attendees,
-      notificationsConfiguration,
-      meetingFeatures,
-      externalMeetingId,
-      meetingHostId,
-      mediaRegion,
-      clientRequestToken,
+      primaryMeetingId: primaryMeetingId,
+      attendees: attendees,
+      notificationsConfiguration: notificationsConfiguration,
+      meetingFeatures: meetingFeatures,
+      externalMeetingId: externalMeetingId,
+      meetingHostId: meetingHostId,
+      mediaRegion: mediaRegion,
+      clientRequestToken: clientRequestToken,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateMeeting = {
   type t
   type request = {
@@ -614,13 +625,13 @@ module CreateMeeting = {
     (),
   ) =>
     new({
-      primaryMeetingId,
-      meetingFeatures,
-      notificationsConfiguration,
-      externalMeetingId,
-      meetingHostId,
-      mediaRegion,
-      clientRequestToken,
+      primaryMeetingId: primaryMeetingId,
+      meetingFeatures: meetingFeatures,
+      notificationsConfiguration: notificationsConfiguration,
+      externalMeetingId: externalMeetingId,
+      meetingHostId: meetingHostId,
+      mediaRegion: mediaRegion,
+      clientRequestToken: clientRequestToken,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

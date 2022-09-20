@@ -184,9 +184,19 @@ module PutSnapshotBlock = {
     ~snapshotId,
     ~progress=?,
     (),
-  ) => new({checksumAlgorithm, checksum, progress, dataLength, blockData, blockIndex, snapshotId})
+  ) =>
+    new({
+      checksumAlgorithm: checksumAlgorithm,
+      checksum: checksum,
+      progress: progress,
+      dataLength: dataLength,
+      blockData: blockData,
+      blockIndex: blockIndex,
+      snapshotId: snapshotId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetSnapshotBlock = {
   type t
   type request = {
@@ -226,9 +236,10 @@ module GetSnapshotBlock = {
   }
   @module("@aws-sdk/client-ebs") @new external new: request => t = "GetSnapshotBlockCommand"
   let make = (~blockToken, ~blockIndex, ~snapshotId, ()) =>
-    new({blockToken, blockIndex, snapshotId})
+    new({blockToken: blockToken, blockIndex: blockIndex, snapshotId: snapshotId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CompleteSnapshot = {
   type t
   type request = {
@@ -264,9 +275,17 @@ module CompleteSnapshot = {
     ~checksumAlgorithm=?,
     ~checksum=?,
     (),
-  ) => new({checksumAggregationMethod, checksumAlgorithm, checksum, changedBlocksCount, snapshotId})
+  ) =>
+    new({
+      checksumAggregationMethod: checksumAggregationMethod,
+      checksumAlgorithm: checksumAlgorithm,
+      checksum: checksum,
+      changedBlocksCount: changedBlocksCount,
+      snapshotId: snapshotId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module StartSnapshot = {
   type t
   type request = {
@@ -405,17 +424,18 @@ module StartSnapshot = {
     (),
   ) =>
     new({
-      timeout,
-      kmsKeyArn,
-      encrypted,
-      clientToken,
-      description,
-      tags,
-      parentSnapshotId,
-      volumeSize,
+      timeout: timeout,
+      kmsKeyArn: kmsKeyArn,
+      encrypted: encrypted,
+      clientToken: clientToken,
+      description: description,
+      tags: tags,
+      parentSnapshotId: parentSnapshotId,
+      volumeSize: volumeSize,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListSnapshotBlocks = {
   type t
   type request = {
@@ -460,9 +480,15 @@ module ListSnapshotBlocks = {
   }
   @module("@aws-sdk/client-ebs") @new external new: request => t = "ListSnapshotBlocksCommand"
   let make = (~snapshotId, ~startingBlockIndex=?, ~maxResults=?, ~nextToken=?, ()) =>
-    new({startingBlockIndex, maxResults, nextToken, snapshotId})
+    new({
+      startingBlockIndex: startingBlockIndex,
+      maxResults: maxResults,
+      nextToken: nextToken,
+      snapshotId: snapshotId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListChangedBlocks = {
   type t
   type request = {
@@ -526,6 +552,13 @@ module ListChangedBlocks = {
     ~nextToken=?,
     ~firstSnapshotId=?,
     (),
-  ) => new({startingBlockIndex, maxResults, nextToken, secondSnapshotId, firstSnapshotId})
+  ) =>
+    new({
+      startingBlockIndex: startingBlockIndex,
+      maxResults: maxResults,
+      nextToken: nextToken,
+      secondSnapshotId: secondSnapshotId,
+      firstSnapshotId: firstSnapshotId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

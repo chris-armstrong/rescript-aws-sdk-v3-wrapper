@@ -2351,9 +2351,14 @@ module UpdateProjectVisibility = {
   @module("@aws-sdk/client-codebuild") @new
   external new: request => t = "UpdateProjectVisibilityCommand"
   let make = (~projectVisibility, ~projectArn, ~resourceAccessRole=?, ()) =>
-    new({resourceAccessRole, projectVisibility, projectArn})
+    new({
+      resourceAccessRole: resourceAccessRole,
+      projectVisibility: projectVisibility,
+      projectArn: projectArn,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module PutResourcePolicy = {
   type t
   type request = {
@@ -2371,9 +2376,10 @@ module PutResourcePolicy = {
     resourceArn: option<nonEmptyString>,
   }
   @module("@aws-sdk/client-codebuild") @new external new: request => t = "PutResourcePolicyCommand"
-  let make = (~resourceArn, ~policy, ()) => new({resourceArn, policy})
+  let make = (~resourceArn, ~policy, ()) => new({resourceArn: resourceArn, policy: policy})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module InvalidateProjectCache = {
   type t
   type request = {
@@ -2386,6 +2392,7 @@ module InvalidateProjectCache = {
   let make = (~projectName, ()) => new({projectName: projectName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ImportSourceCredentials = {
   type t
   type request = {
@@ -2411,9 +2418,16 @@ module ImportSourceCredentials = {
   @module("@aws-sdk/client-codebuild") @new
   external new: request => t = "ImportSourceCredentialsCommand"
   let make = (~authType, ~serverType, ~token, ~shouldOverwrite=?, ~username=?, ()) =>
-    new({shouldOverwrite, authType, serverType, token, username})
+    new({
+      shouldOverwrite: shouldOverwrite,
+      authType: authType,
+      serverType: serverType,
+      token: token,
+      username: username,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetResourcePolicy = {
   type t
   type request = {
@@ -2430,6 +2444,7 @@ module GetResourcePolicy = {
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteWebhook = {
   type t
   type request = {@ocaml.doc("<p>The name of the CodeBuild project.</p>") projectName: projectName}
@@ -2438,6 +2453,7 @@ module DeleteWebhook = {
   let make = (~projectName, ()) => new({projectName: projectName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteSourceCredentials = {
   type t
   type request = {
@@ -2451,6 +2467,7 @@ module DeleteSourceCredentials = {
   let make = (~arn, ()) => new({arn: arn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteResourcePolicy = {
   type t
   type request = {
@@ -2463,6 +2480,7 @@ module DeleteResourcePolicy = {
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteReportGroup = {
   type t
   type request = {
@@ -2476,9 +2494,10 @@ module DeleteReportGroup = {
   }
   type response = {.}
   @module("@aws-sdk/client-codebuild") @new external new: request => t = "DeleteReportGroupCommand"
-  let make = (~arn, ~deleteReports=?, ()) => new({deleteReports, arn})
+  let make = (~arn, ~deleteReports=?, ()) => new({deleteReports: deleteReports, arn: arn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteReport = {
   type t
   type request = {
@@ -2492,6 +2511,7 @@ module DeleteReport = {
   let make = (~arn, ()) => new({arn: arn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteProject = {
   type t
   type request = {@ocaml.doc("<p>The name of the build project.</p>") name: nonEmptyString}
@@ -2500,6 +2520,7 @@ module DeleteProject = {
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ListSharedReportGroups = {
   type t
   type request = {
@@ -2556,9 +2577,10 @@ module ListSharedReportGroups = {
   @module("@aws-sdk/client-codebuild") @new
   external new: request => t = "ListSharedReportGroupsCommand"
   let make = (~maxResults=?, ~nextToken=?, ~sortBy=?, ~sortOrder=?, ()) =>
-    new({maxResults, nextToken, sortBy, sortOrder})
+    new({maxResults: maxResults, nextToken: nextToken, sortBy: sortBy, sortOrder: sortOrder})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListSharedProjects = {
   type t
   type request = {
@@ -2614,9 +2636,10 @@ module ListSharedProjects = {
   }
   @module("@aws-sdk/client-codebuild") @new external new: request => t = "ListSharedProjectsCommand"
   let make = (~nextToken=?, ~maxResults=?, ~sortOrder=?, ~sortBy=?, ()) =>
-    new({nextToken, maxResults, sortOrder, sortBy})
+    new({nextToken: nextToken, maxResults: maxResults, sortOrder: sortOrder, sortBy: sortBy})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListReportsForReportGroup = {
   type t
   type request = {
@@ -2663,9 +2686,16 @@ module ListReportsForReportGroup = {
   @module("@aws-sdk/client-codebuild") @new
   external new: request => t = "ListReportsForReportGroupCommand"
   let make = (~reportGroupArn, ~filter=?, ~maxResults=?, ~sortOrder=?, ~nextToken=?, ()) =>
-    new({filter, maxResults, sortOrder, nextToken, reportGroupArn})
+    new({
+      filter: filter,
+      maxResults: maxResults,
+      sortOrder: sortOrder,
+      nextToken: nextToken,
+      reportGroupArn: reportGroupArn,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListReports = {
   type t
   type request = {
@@ -2719,9 +2749,10 @@ module ListReports = {
   }
   @module("@aws-sdk/client-codebuild") @new external new: request => t = "ListReportsCommand"
   let make = (~filter=?, ~maxResults=?, ~nextToken=?, ~sortOrder=?, ()) =>
-    new({filter, maxResults, nextToken, sortOrder})
+    new({filter: filter, maxResults: maxResults, nextToken: nextToken, sortOrder: sortOrder})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListReportGroups = {
   type t
   type request = {
@@ -2779,9 +2810,10 @@ module ListReportGroups = {
   }
   @module("@aws-sdk/client-codebuild") @new external new: request => t = "ListReportGroupsCommand"
   let make = (~maxResults=?, ~nextToken=?, ~sortBy=?, ~sortOrder=?, ()) =>
-    new({maxResults, nextToken, sortBy, sortOrder})
+    new({maxResults: maxResults, nextToken: nextToken, sortBy: sortBy, sortOrder: sortOrder})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListProjects = {
   type t
   type request = {
@@ -2838,9 +2870,11 @@ module ListProjects = {
     nextToken: option<string_>,
   }
   @module("@aws-sdk/client-codebuild") @new external new: request => t = "ListProjectsCommand"
-  let make = (~nextToken=?, ~sortOrder=?, ~sortBy=?, ()) => new({nextToken, sortOrder, sortBy})
+  let make = (~nextToken=?, ~sortOrder=?, ~sortBy=?, ()) =>
+    new({nextToken: nextToken, sortOrder: sortOrder, sortBy: sortBy})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListBuildsForProject = {
   type t
   type request = {
@@ -2882,9 +2916,10 @@ module ListBuildsForProject = {
   @module("@aws-sdk/client-codebuild") @new
   external new: request => t = "ListBuildsForProjectCommand"
   let make = (~projectName, ~nextToken=?, ~sortOrder=?, ()) =>
-    new({nextToken, sortOrder, projectName})
+    new({nextToken: nextToken, sortOrder: sortOrder, projectName: projectName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListBuilds = {
   type t
   type request = {
@@ -2920,9 +2955,10 @@ module ListBuilds = {
     ids: option<buildIds>,
   }
   @module("@aws-sdk/client-codebuild") @new external new: request => t = "ListBuildsCommand"
-  let make = (~nextToken=?, ~sortOrder=?, ()) => new({nextToken, sortOrder})
+  let make = (~nextToken=?, ~sortOrder=?, ()) => new({nextToken: nextToken, sortOrder: sortOrder})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListBuildBatchesForProject = {
   type t
   type request = {
@@ -2962,9 +2998,16 @@ module ListBuildBatchesForProject = {
   @module("@aws-sdk/client-codebuild") @new
   external new: request => t = "ListBuildBatchesForProjectCommand"
   let make = (~nextToken=?, ~sortOrder=?, ~maxResults=?, ~filter=?, ~projectName=?, ()) =>
-    new({nextToken, sortOrder, maxResults, filter, projectName})
+    new({
+      nextToken: nextToken,
+      sortOrder: sortOrder,
+      maxResults: maxResults,
+      filter: filter,
+      projectName: projectName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListBuildBatches = {
   type t
   type request = {
@@ -2999,9 +3042,10 @@ module ListBuildBatches = {
   }
   @module("@aws-sdk/client-codebuild") @new external new: request => t = "ListBuildBatchesCommand"
   let make = (~nextToken=?, ~sortOrder=?, ~maxResults=?, ~filter=?, ()) =>
-    new({nextToken, sortOrder, maxResults, filter})
+    new({nextToken: nextToken, sortOrder: sortOrder, maxResults: maxResults, filter: filter})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListSourceCredentials = {
   type t
   type request = {.}
@@ -3016,6 +3060,7 @@ module ListSourceCredentials = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetReportGroupTrend = {
   type t
   type request = {
@@ -3095,9 +3140,10 @@ module GetReportGroupTrend = {
   @module("@aws-sdk/client-codebuild") @new
   external new: request => t = "GetReportGroupTrendCommand"
   let make = (~trendField, ~reportGroupArn, ~numOfReports=?, ()) =>
-    new({trendField, numOfReports, reportGroupArn})
+    new({trendField: trendField, numOfReports: numOfReports, reportGroupArn: reportGroupArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeTestCases = {
   type t
   type request = {
@@ -3139,9 +3185,10 @@ module DescribeTestCases = {
   }
   @module("@aws-sdk/client-codebuild") @new external new: request => t = "DescribeTestCasesCommand"
   let make = (~reportArn, ~filter=?, ~maxResults=?, ~nextToken=?, ()) =>
-    new({filter, maxResults, nextToken, reportArn})
+    new({filter: filter, maxResults: maxResults, nextToken: nextToken, reportArn: reportArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeCodeCoverages = {
   type t
   type request = {
@@ -3193,16 +3240,17 @@ module DescribeCodeCoverages = {
     (),
   ) =>
     new({
-      maxLineCoveragePercentage,
-      minLineCoveragePercentage,
-      sortBy,
-      sortOrder,
-      maxResults,
-      nextToken,
-      reportArn,
+      maxLineCoveragePercentage: maxLineCoveragePercentage,
+      minLineCoveragePercentage: minLineCoveragePercentage,
+      sortBy: sortBy,
+      sortOrder: sortOrder,
+      maxResults: maxResults,
+      nextToken: nextToken,
+      reportArn: reportArn,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteBuildBatch = {
   type t
   type request = {
@@ -3222,6 +3270,7 @@ module DeleteBuildBatch = {
   let make = (~id, ()) => new({id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module BatchDeleteBuilds = {
   type t
   type request = {@ocaml.doc("<p>The IDs of the builds to delete.</p>") ids: buildIds}
@@ -3235,6 +3284,7 @@ module BatchDeleteBuilds = {
   let make = (~ids, ()) => new({ids: ids})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateReportGroup = {
   type t
   type request = {
@@ -3272,9 +3322,11 @@ module UpdateReportGroup = {
     reportGroup: option<reportGroup>,
   }
   @module("@aws-sdk/client-codebuild") @new external new: request => t = "UpdateReportGroupCommand"
-  let make = (~arn, ~tags=?, ~exportConfig=?, ()) => new({tags, exportConfig, arn})
+  let make = (~arn, ~tags=?, ~exportConfig=?, ()) =>
+    new({tags: tags, exportConfig: exportConfig, arn: arn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateReportGroup = {
   type t
   type request = {
@@ -3305,9 +3357,11 @@ module CreateReportGroup = {
     reportGroup: option<reportGroup>,
   }
   @module("@aws-sdk/client-codebuild") @new external new: request => t = "CreateReportGroupCommand"
-  let make = (~exportConfig, ~type_, ~name, ~tags=?, ()) => new({tags, exportConfig, type_, name})
+  let make = (~exportConfig, ~type_, ~name, ~tags=?, ()) =>
+    new({tags: tags, exportConfig: exportConfig, type_: type_, name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateWebhook = {
   type t
   type request = {
@@ -3339,9 +3393,16 @@ module UpdateWebhook = {
   }
   @module("@aws-sdk/client-codebuild") @new external new: request => t = "UpdateWebhookCommand"
   let make = (~projectName, ~buildType=?, ~filterGroups=?, ~rotateSecret=?, ~branchFilter=?, ()) =>
-    new({buildType, filterGroups, rotateSecret, branchFilter, projectName})
+    new({
+      buildType: buildType,
+      filterGroups: filterGroups,
+      rotateSecret: rotateSecret,
+      branchFilter: branchFilter,
+      projectName: projectName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateWebhook = {
   type t
   type request = {
@@ -3371,9 +3432,15 @@ module CreateWebhook = {
   }
   @module("@aws-sdk/client-codebuild") @new external new: request => t = "CreateWebhookCommand"
   let make = (~projectName, ~buildType=?, ~filterGroups=?, ~branchFilter=?, ()) =>
-    new({buildType, filterGroups, branchFilter, projectName})
+    new({
+      buildType: buildType,
+      filterGroups: filterGroups,
+      branchFilter: branchFilter,
+      projectName: projectName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module BatchGetReports = {
   type t
   type request = {
@@ -3396,6 +3463,7 @@ module BatchGetReports = {
   let make = (~reportArns, ()) => new({reportArns: reportArns})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module BatchGetReportGroups = {
   type t
   type request = {
@@ -3419,6 +3487,7 @@ module BatchGetReportGroups = {
   let make = (~reportGroupArns, ()) => new({reportGroupArns: reportGroupArns})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateProject = {
   type t
   type request = {
@@ -3556,30 +3625,31 @@ module UpdateProject = {
     (),
   ) =>
     new({
-      concurrentBuildLimit,
-      buildBatchConfig,
-      fileSystemLocations,
-      logsConfig,
-      badgeEnabled,
-      vpcConfig,
-      tags,
-      encryptionKey,
-      queuedTimeoutInMinutes,
-      timeoutInMinutes,
-      serviceRole,
-      environment,
-      cache,
-      secondaryArtifacts,
-      artifacts,
-      secondarySourceVersions,
-      sourceVersion,
-      secondarySources,
-      source,
-      description,
-      name,
+      concurrentBuildLimit: concurrentBuildLimit,
+      buildBatchConfig: buildBatchConfig,
+      fileSystemLocations: fileSystemLocations,
+      logsConfig: logsConfig,
+      badgeEnabled: badgeEnabled,
+      vpcConfig: vpcConfig,
+      tags: tags,
+      encryptionKey: encryptionKey,
+      queuedTimeoutInMinutes: queuedTimeoutInMinutes,
+      timeoutInMinutes: timeoutInMinutes,
+      serviceRole: serviceRole,
+      environment: environment,
+      cache: cache,
+      secondaryArtifacts: secondaryArtifacts,
+      artifacts: artifacts,
+      secondarySourceVersions: secondarySourceVersions,
+      sourceVersion: sourceVersion,
+      secondarySources: secondarySources,
+      source: source,
+      description: description,
+      name: name,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module StopBuild = {
   type t
   type request = {@ocaml.doc("<p>The ID of the build.</p>") id: nonEmptyString}
@@ -3588,6 +3658,7 @@ module StopBuild = {
   let make = (~id, ()) => new({id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module StartBuild = {
   type t
   type request = {
@@ -3792,40 +3863,41 @@ have write access to the repo. If the user does not have write access, the build
     (),
   ) =>
     new({
-      debugSessionEnabled,
-      imagePullCredentialsTypeOverride,
-      registryCredentialOverride,
-      logsConfigOverride,
-      idempotencyToken,
-      encryptionKeyOverride,
-      queuedTimeoutInMinutesOverride,
-      timeoutInMinutesOverride,
-      privilegedModeOverride,
-      serviceRoleOverride,
-      cacheOverride,
-      certificateOverride,
-      computeTypeOverride,
-      imageOverride,
-      environmentTypeOverride,
-      buildStatusConfigOverride,
-      reportBuildStatusOverride,
-      insecureSslOverride,
-      buildspecOverride,
-      gitSubmodulesConfigOverride,
-      gitCloneDepthOverride,
-      sourceAuthOverride,
-      sourceLocationOverride,
-      sourceTypeOverride,
-      environmentVariablesOverride,
-      secondaryArtifactsOverride,
-      artifactsOverride,
-      sourceVersion,
-      secondarySourcesVersionOverride,
-      secondarySourcesOverride,
-      projectName,
+      debugSessionEnabled: debugSessionEnabled,
+      imagePullCredentialsTypeOverride: imagePullCredentialsTypeOverride,
+      registryCredentialOverride: registryCredentialOverride,
+      logsConfigOverride: logsConfigOverride,
+      idempotencyToken: idempotencyToken,
+      encryptionKeyOverride: encryptionKeyOverride,
+      queuedTimeoutInMinutesOverride: queuedTimeoutInMinutesOverride,
+      timeoutInMinutesOverride: timeoutInMinutesOverride,
+      privilegedModeOverride: privilegedModeOverride,
+      serviceRoleOverride: serviceRoleOverride,
+      cacheOverride: cacheOverride,
+      certificateOverride: certificateOverride,
+      computeTypeOverride: computeTypeOverride,
+      imageOverride: imageOverride,
+      environmentTypeOverride: environmentTypeOverride,
+      buildStatusConfigOverride: buildStatusConfigOverride,
+      reportBuildStatusOverride: reportBuildStatusOverride,
+      insecureSslOverride: insecureSslOverride,
+      buildspecOverride: buildspecOverride,
+      gitSubmodulesConfigOverride: gitSubmodulesConfigOverride,
+      gitCloneDepthOverride: gitCloneDepthOverride,
+      sourceAuthOverride: sourceAuthOverride,
+      sourceLocationOverride: sourceLocationOverride,
+      sourceTypeOverride: sourceTypeOverride,
+      environmentVariablesOverride: environmentVariablesOverride,
+      secondaryArtifactsOverride: secondaryArtifactsOverride,
+      artifactsOverride: artifactsOverride,
+      sourceVersion: sourceVersion,
+      secondarySourcesVersionOverride: secondarySourcesVersionOverride,
+      secondarySourcesOverride: secondarySourcesOverride,
+      projectName: projectName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module RetryBuild = {
   type t
   type request = {
@@ -3840,9 +3912,10 @@ module RetryBuild = {
   }
   type response = {build: option<build>}
   @module("@aws-sdk/client-codebuild") @new external new: request => t = "RetryBuildCommand"
-  let make = (~idempotencyToken=?, ~id=?, ()) => new({idempotencyToken, id})
+  let make = (~idempotencyToken=?, ~id=?, ()) => new({idempotencyToken: idempotencyToken, id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateProject = {
   type t
   type request = {
@@ -3973,30 +4046,31 @@ module CreateProject = {
     (),
   ) =>
     new({
-      concurrentBuildLimit,
-      buildBatchConfig,
-      fileSystemLocations,
-      logsConfig,
-      badgeEnabled,
-      vpcConfig,
-      tags,
-      encryptionKey,
-      queuedTimeoutInMinutes,
-      timeoutInMinutes,
-      serviceRole,
-      environment,
-      cache,
-      secondaryArtifacts,
-      artifacts,
-      secondarySourceVersions,
-      sourceVersion,
-      secondarySources,
-      source,
-      description,
-      name,
+      concurrentBuildLimit: concurrentBuildLimit,
+      buildBatchConfig: buildBatchConfig,
+      fileSystemLocations: fileSystemLocations,
+      logsConfig: logsConfig,
+      badgeEnabled: badgeEnabled,
+      vpcConfig: vpcConfig,
+      tags: tags,
+      encryptionKey: encryptionKey,
+      queuedTimeoutInMinutes: queuedTimeoutInMinutes,
+      timeoutInMinutes: timeoutInMinutes,
+      serviceRole: serviceRole,
+      environment: environment,
+      cache: cache,
+      secondaryArtifacts: secondaryArtifacts,
+      artifacts: artifacts,
+      secondarySourceVersions: secondarySourceVersions,
+      sourceVersion: sourceVersion,
+      secondarySources: secondarySources,
+      source: source,
+      description: description,
+      name: name,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module BatchGetProjects = {
   type t
   type request = {
@@ -4014,6 +4088,7 @@ module BatchGetProjects = {
   let make = (~names, ()) => new({names: names})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module BatchGetBuilds = {
   type t
   type request = {@ocaml.doc("<p>The IDs of the builds.</p>") ids: buildIds}
@@ -4026,6 +4101,7 @@ module BatchGetBuilds = {
   let make = (~ids, ()) => new({ids: ids})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module StopBuildBatch = {
   type t
   type request = {
@@ -4036,6 +4112,7 @@ module StopBuildBatch = {
   let make = (~id, ()) => new({id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module StartBuildBatch = {
   type t
   type request = {
@@ -4242,40 +4319,41 @@ module StartBuildBatch = {
     (),
   ) =>
     new({
-      debugSessionEnabled,
-      buildBatchConfigOverride,
-      imagePullCredentialsTypeOverride,
-      registryCredentialOverride,
-      logsConfigOverride,
-      idempotencyToken,
-      encryptionKeyOverride,
-      queuedTimeoutInMinutesOverride,
-      buildTimeoutInMinutesOverride,
-      privilegedModeOverride,
-      serviceRoleOverride,
-      cacheOverride,
-      certificateOverride,
-      computeTypeOverride,
-      imageOverride,
-      environmentTypeOverride,
-      reportBuildBatchStatusOverride,
-      insecureSslOverride,
-      buildspecOverride,
-      gitSubmodulesConfigOverride,
-      gitCloneDepthOverride,
-      sourceAuthOverride,
-      sourceLocationOverride,
-      sourceTypeOverride,
-      environmentVariablesOverride,
-      secondaryArtifactsOverride,
-      artifactsOverride,
-      sourceVersion,
-      secondarySourcesVersionOverride,
-      secondarySourcesOverride,
-      projectName,
+      debugSessionEnabled: debugSessionEnabled,
+      buildBatchConfigOverride: buildBatchConfigOverride,
+      imagePullCredentialsTypeOverride: imagePullCredentialsTypeOverride,
+      registryCredentialOverride: registryCredentialOverride,
+      logsConfigOverride: logsConfigOverride,
+      idempotencyToken: idempotencyToken,
+      encryptionKeyOverride: encryptionKeyOverride,
+      queuedTimeoutInMinutesOverride: queuedTimeoutInMinutesOverride,
+      buildTimeoutInMinutesOverride: buildTimeoutInMinutesOverride,
+      privilegedModeOverride: privilegedModeOverride,
+      serviceRoleOverride: serviceRoleOverride,
+      cacheOverride: cacheOverride,
+      certificateOverride: certificateOverride,
+      computeTypeOverride: computeTypeOverride,
+      imageOverride: imageOverride,
+      environmentTypeOverride: environmentTypeOverride,
+      reportBuildBatchStatusOverride: reportBuildBatchStatusOverride,
+      insecureSslOverride: insecureSslOverride,
+      buildspecOverride: buildspecOverride,
+      gitSubmodulesConfigOverride: gitSubmodulesConfigOverride,
+      gitCloneDepthOverride: gitCloneDepthOverride,
+      sourceAuthOverride: sourceAuthOverride,
+      sourceLocationOverride: sourceLocationOverride,
+      sourceTypeOverride: sourceTypeOverride,
+      environmentVariablesOverride: environmentVariablesOverride,
+      secondaryArtifactsOverride: secondaryArtifactsOverride,
+      artifactsOverride: artifactsOverride,
+      sourceVersion: sourceVersion,
+      secondarySourcesVersionOverride: secondarySourcesVersionOverride,
+      secondarySourcesOverride: secondarySourcesOverride,
+      projectName: projectName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module RetryBuildBatch = {
   type t
   type request = {
@@ -4293,9 +4371,10 @@ module RetryBuildBatch = {
   type response = {buildBatch: option<buildBatch>}
   @module("@aws-sdk/client-codebuild") @new external new: request => t = "RetryBuildBatchCommand"
   let make = (~retryType=?, ~idempotencyToken=?, ~id=?, ()) =>
-    new({retryType, idempotencyToken, id})
+    new({retryType: retryType, idempotencyToken: idempotencyToken, id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListCuratedEnvironmentImages = {
   type t
   type request = {.}
@@ -4309,6 +4388,7 @@ module ListCuratedEnvironmentImages = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module BatchGetBuildBatches = {
   type t
   type request = {

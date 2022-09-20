@@ -682,9 +682,14 @@ module UpdateBrokerType = {
   }
   @module("@aws-sdk/client-kafka") @new external new: request => t = "UpdateBrokerTypeCommand"
   let make = (~targetInstanceType, ~currentVersion, ~clusterArn, ()) =>
-    new({targetInstanceType, currentVersion, clusterArn})
+    new({
+      targetInstanceType: targetInstanceType,
+      currentVersion: currentVersion,
+      clusterArn: clusterArn,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateBrokerCount = {
   type t
   type request = {
@@ -711,9 +716,14 @@ module UpdateBrokerCount = {
   }
   @module("@aws-sdk/client-kafka") @new external new: request => t = "UpdateBrokerCountCommand"
   let make = (~targetNumberOfBrokerNodes, ~currentVersion, ~clusterArn, ()) =>
-    new({targetNumberOfBrokerNodes, currentVersion, clusterArn})
+    new({
+      targetNumberOfBrokerNodes: targetNumberOfBrokerNodes,
+      currentVersion: currentVersion,
+      clusterArn: clusterArn,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetBootstrapBrokers = {
   type t
   type request = {
@@ -756,6 +766,7 @@ module GetBootstrapBrokers = {
   let make = (~clusterArn, ()) => new({clusterArn: clusterArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeConfigurationRevision = {
   type t
   type request = {
@@ -783,9 +794,10 @@ module DescribeConfigurationRevision = {
   }
   @module("@aws-sdk/client-kafka") @new
   external new: request => t = "DescribeConfigurationRevisionCommand"
-  let make = (~revision, ~arn, ()) => new({revision, arn})
+  let make = (~revision, ~arn, ()) => new({revision: revision, arn: arn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteConfiguration = {
   type t
   type request = {
@@ -811,6 +823,7 @@ module DeleteConfiguration = {
   let make = (~arn, ()) => new({arn: arn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteCluster = {
   type t
   type request = {
@@ -830,9 +843,11 @@ module DeleteCluster = {
     clusterArn: option<__string>,
   }
   @module("@aws-sdk/client-kafka") @new external new: request => t = "DeleteClusterCommand"
-  let make = (~clusterArn, ~currentVersion=?, ()) => new({currentVersion, clusterArn})
+  let make = (~clusterArn, ~currentVersion=?, ()) =>
+    new({currentVersion: currentVersion, clusterArn: clusterArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateConfiguration = {
   type t
   type request = {
@@ -853,9 +868,10 @@ module UpdateConfiguration = {
   }
   @module("@aws-sdk/client-kafka") @new external new: request => t = "UpdateConfigurationCommand"
   let make = (~serverProperties, ~arn, ~description=?, ()) =>
-    new({serverProperties, description, arn})
+    new({serverProperties: serverProperties, description: description, arn: arn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateClusterKafkaVersion = {
   type t
   type request = {
@@ -881,9 +897,15 @@ module UpdateClusterKafkaVersion = {
   @module("@aws-sdk/client-kafka") @new
   external new: request => t = "UpdateClusterKafkaVersionCommand"
   let make = (~targetKafkaVersion, ~currentVersion, ~clusterArn, ~configurationInfo=?, ()) =>
-    new({targetKafkaVersion, currentVersion, configurationInfo, clusterArn})
+    new({
+      targetKafkaVersion: targetKafkaVersion,
+      currentVersion: currentVersion,
+      configurationInfo: configurationInfo,
+      clusterArn: clusterArn,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateClusterConfiguration = {
   type t
   type request = {
@@ -908,9 +930,14 @@ module UpdateClusterConfiguration = {
   @module("@aws-sdk/client-kafka") @new
   external new: request => t = "UpdateClusterConfigurationCommand"
   let make = (~currentVersion, ~configurationInfo, ~clusterArn, ()) =>
-    new({currentVersion, configurationInfo, clusterArn})
+    new({
+      currentVersion: currentVersion,
+      configurationInfo: configurationInfo,
+      clusterArn: clusterArn,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UntagResource = {
   type t
   type request = {
@@ -944,9 +971,10 @@ module UntagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-kafka") @new external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys, resourceArn})
+  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module TagResource = {
   type t
   type request = {
@@ -959,9 +987,10 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-kafka") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceArn, ()) => new({tags, resourceArn})
+  let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module RebootBroker = {
   type t
   @ocaml.doc("Reboots a node.")
@@ -983,9 +1012,10 @@ module RebootBroker = {
     clusterArn: option<__string>,
   }
   @module("@aws-sdk/client-kafka") @new external new: request => t = "RebootBrokerCommand"
-  let make = (~clusterArn, ~brokerIds, ()) => new({clusterArn, brokerIds})
+  let make = (~clusterArn, ~brokerIds, ()) => new({clusterArn: clusterArn, brokerIds: brokerIds})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListTagsForResource = {
   type t
   type request = {
@@ -1003,6 +1033,7 @@ module ListTagsForResource = {
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListScramSecrets = {
   type t
   type request = {
@@ -1018,9 +1049,10 @@ module ListScramSecrets = {
   }
   @module("@aws-sdk/client-kafka") @new external new: request => t = "ListScramSecretsCommand"
   let make = (~clusterArn, ~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken, maxResults, clusterArn})
+    new({nextToken: nextToken, maxResults: maxResults, clusterArn: clusterArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeConfiguration = {
   type t
   type request = {
@@ -1053,6 +1085,7 @@ module DescribeConfiguration = {
   let make = (~arn, ()) => new({arn: arn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateConfiguration = {
   type t
   type request = {
@@ -1083,9 +1116,15 @@ module CreateConfiguration = {
   }
   @module("@aws-sdk/client-kafka") @new external new: request => t = "CreateConfigurationCommand"
   let make = (~serverProperties, ~name, ~kafkaVersions=?, ~description=?, ()) =>
-    new({serverProperties, name, kafkaVersions, description})
+    new({
+      serverProperties: serverProperties,
+      name: name,
+      kafkaVersions: kafkaVersions,
+      description: description,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateConnectivity = {
   type t
   @ocaml.doc("Request body for UpdateConnectivity.")
@@ -1109,9 +1148,14 @@ module UpdateConnectivity = {
   }
   @module("@aws-sdk/client-kafka") @new external new: request => t = "UpdateConnectivityCommand"
   let make = (~currentVersion, ~connectivityInfo, ~clusterArn, ()) =>
-    new({currentVersion, connectivityInfo, clusterArn})
+    new({
+      currentVersion: currentVersion,
+      connectivityInfo: connectivityInfo,
+      clusterArn: clusterArn,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListKafkaVersions = {
   type t
   type request = {
@@ -1131,9 +1175,11 @@ module ListKafkaVersions = {
     @as("KafkaVersions") kafkaVersions: option<__listOfKafkaVersion>,
   }
   @module("@aws-sdk/client-kafka") @new external new: request => t = "ListKafkaVersionsCommand"
-  let make = (~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults})
+  let make = (~nextToken=?, ~maxResults=?, ()) =>
+    new({nextToken: nextToken, maxResults: maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListConfigurationRevisions = {
   type t
   type request = {
@@ -1159,9 +1205,11 @@ module ListConfigurationRevisions = {
   }
   @module("@aws-sdk/client-kafka") @new
   external new: request => t = "ListConfigurationRevisionsCommand"
-  let make = (~arn, ~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults, arn})
+  let make = (~arn, ~nextToken=?, ~maxResults=?, ()) =>
+    new({nextToken: nextToken, maxResults: maxResults, arn: arn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module BatchDisassociateScramSecret = {
   type t
   @ocaml.doc("<p>Disassociates sasl scram secrets to cluster.</p>")
@@ -1181,9 +1229,11 @@ module BatchDisassociateScramSecret = {
   }
   @module("@aws-sdk/client-kafka") @new
   external new: request => t = "BatchDisassociateScramSecretCommand"
-  let make = (~secretArnList, ~clusterArn, ()) => new({secretArnList, clusterArn})
+  let make = (~secretArnList, ~clusterArn, ()) =>
+    new({secretArnList: secretArnList, clusterArn: clusterArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module BatchAssociateScramSecret = {
   type t
   @ocaml.doc("<p>Associates sasl scram secrets to cluster.</p>")
@@ -1203,9 +1253,11 @@ module BatchAssociateScramSecret = {
   }
   @module("@aws-sdk/client-kafka") @new
   external new: request => t = "BatchAssociateScramSecretCommand"
-  let make = (~secretArnList, ~clusterArn, ()) => new({secretArnList, clusterArn})
+  let make = (~secretArnList, ~clusterArn, ()) =>
+    new({secretArnList: secretArnList, clusterArn: clusterArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateSecurity = {
   type t
   type request = {
@@ -1232,9 +1284,15 @@ module UpdateSecurity = {
   }
   @module("@aws-sdk/client-kafka") @new external new: request => t = "UpdateSecurityCommand"
   let make = (~currentVersion, ~clusterArn, ~encryptionInfo=?, ~clientAuthentication=?, ()) =>
-    new({encryptionInfo, currentVersion, clusterArn, clientAuthentication})
+    new({
+      encryptionInfo: encryptionInfo,
+      currentVersion: currentVersion,
+      clusterArn: clusterArn,
+      clientAuthentication: clientAuthentication,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateMonitoring = {
   type t
   @ocaml.doc("Request body for UpdateMonitoring.")
@@ -1271,9 +1329,17 @@ module UpdateMonitoring = {
     ~openMonitoring=?,
     ~enhancedMonitoring=?,
     (),
-  ) => new({loggingInfo, openMonitoring, enhancedMonitoring, currentVersion, clusterArn})
+  ) =>
+    new({
+      loggingInfo: loggingInfo,
+      openMonitoring: openMonitoring,
+      enhancedMonitoring: enhancedMonitoring,
+      currentVersion: currentVersion,
+      clusterArn: clusterArn,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateBrokerStorage = {
   type t
   type request = {
@@ -1300,9 +1366,14 @@ module UpdateBrokerStorage = {
   }
   @module("@aws-sdk/client-kafka") @new external new: request => t = "UpdateBrokerStorageCommand"
   let make = (~targetBrokerEBSVolumeInfo, ~currentVersion, ~clusterArn, ()) =>
-    new({targetBrokerEBSVolumeInfo, currentVersion, clusterArn})
+    new({
+      targetBrokerEBSVolumeInfo: targetBrokerEBSVolumeInfo,
+      currentVersion: currentVersion,
+      clusterArn: clusterArn,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListConfigurations = {
   type t
   type request = {
@@ -1325,9 +1396,11 @@ module ListConfigurations = {
     configurations: option<__listOfConfiguration>,
   }
   @module("@aws-sdk/client-kafka") @new external new: request => t = "ListConfigurationsCommand"
-  let make = (~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults})
+  let make = (~nextToken=?, ~maxResults=?, ()) =>
+    new({nextToken: nextToken, maxResults: maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetCompatibleKafkaVersions = {
   type t
   type request = {
@@ -1343,6 +1416,7 @@ module GetCompatibleKafkaVersions = {
   let make = (~clusterArn=?, ()) => new({clusterArn: clusterArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListNodes = {
   type t
   type request = {
@@ -1369,9 +1443,10 @@ module ListNodes = {
   }
   @module("@aws-sdk/client-kafka") @new external new: request => t = "ListNodesCommand"
   let make = (~clusterArn, ~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken, maxResults, clusterArn})
+    new({nextToken: nextToken, maxResults: maxResults, clusterArn: clusterArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateCluster = {
   type t
   type request = {
@@ -1431,20 +1506,21 @@ module CreateCluster = {
     (),
   ) =>
     new({
-      tags,
-      numberOfBrokerNodes,
-      loggingInfo,
-      kafkaVersion,
-      openMonitoring,
-      enhancedMonitoring,
-      encryptionInfo,
-      configurationInfo,
-      clusterName,
-      clientAuthentication,
-      brokerNodeGroupInfo,
+      tags: tags,
+      numberOfBrokerNodes: numberOfBrokerNodes,
+      loggingInfo: loggingInfo,
+      kafkaVersion: kafkaVersion,
+      openMonitoring: openMonitoring,
+      enhancedMonitoring: enhancedMonitoring,
+      encryptionInfo: encryptionInfo,
+      configurationInfo: configurationInfo,
+      clusterName: clusterName,
+      clientAuthentication: clientAuthentication,
+      brokerNodeGroupInfo: brokerNodeGroupInfo,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeClusterOperation = {
   type t
   type request = {
@@ -1463,6 +1539,7 @@ module DescribeClusterOperation = {
   let make = (~clusterOperationArn, ()) => new({clusterOperationArn: clusterOperationArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeCluster = {
   type t
   type request = {
@@ -1478,6 +1555,7 @@ module DescribeCluster = {
   let make = (~clusterArn, ()) => new({clusterArn: clusterArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateClusterV2 = {
   type t
   type request = {
@@ -1505,9 +1583,10 @@ module CreateClusterV2 = {
   }
   @module("@aws-sdk/client-kafka") @new external new: request => t = "CreateClusterV2Command"
   let make = (~clusterName, ~serverless=?, ~provisioned=?, ~tags=?, ()) =>
-    new({serverless, provisioned, tags, clusterName})
+    new({serverless: serverless, provisioned: provisioned, tags: tags, clusterName: clusterName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListClusters = {
   type t
   type request = {
@@ -1537,9 +1616,10 @@ module ListClusters = {
   }
   @module("@aws-sdk/client-kafka") @new external new: request => t = "ListClustersCommand"
   let make = (~nextToken=?, ~maxResults=?, ~clusterNameFilter=?, ()) =>
-    new({nextToken, maxResults, clusterNameFilter})
+    new({nextToken: nextToken, maxResults: maxResults, clusterNameFilter: clusterNameFilter})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListClusterOperations = {
   type t
   type request = {
@@ -1568,9 +1648,10 @@ module ListClusterOperations = {
   }
   @module("@aws-sdk/client-kafka") @new external new: request => t = "ListClusterOperationsCommand"
   let make = (~clusterArn, ~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken, maxResults, clusterArn})
+    new({nextToken: nextToken, maxResults: maxResults, clusterArn: clusterArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeClusterV2 = {
   type t
   type request = {
@@ -1585,6 +1666,7 @@ module DescribeClusterV2 = {
   let make = (~clusterArn, ()) => new({clusterArn: clusterArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListClustersV2 = {
   type t
   type request = {
@@ -1616,6 +1698,11 @@ module ListClustersV2 = {
   }
   @module("@aws-sdk/client-kafka") @new external new: request => t = "ListClustersV2Command"
   let make = (~nextToken=?, ~maxResults=?, ~clusterTypeFilter=?, ~clusterNameFilter=?, ()) =>
-    new({nextToken, maxResults, clusterTypeFilter, clusterNameFilter})
+    new({
+      nextToken: nextToken,
+      maxResults: maxResults,
+      clusterTypeFilter: clusterTypeFilter,
+      clusterNameFilter: clusterNameFilter,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

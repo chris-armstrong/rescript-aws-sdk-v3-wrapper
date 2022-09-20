@@ -1031,9 +1031,10 @@ module UntagResource = {
   type response = {.}
   @module("@aws-sdk/client-codeguru-reviewer") @new
   external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys, resourceArn})
+  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module TagResource = {
   type t
   type request = {
@@ -1070,9 +1071,10 @@ module TagResource = {
   type response = {.}
   @module("@aws-sdk/client-codeguru-reviewer") @new
   external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceArn, ()) => new({tags, resourceArn})
+  let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module PutRecommendationFeedback = {
   type t
   type request = {
@@ -1097,9 +1099,10 @@ module PutRecommendationFeedback = {
   @module("@aws-sdk/client-codeguru-reviewer") @new
   external new: request => t = "PutRecommendationFeedbackCommand"
   let make = (~reactions, ~recommendationId, ~codeReviewArn, ()) =>
-    new({reactions, recommendationId, codeReviewArn})
+    new({reactions: reactions, recommendationId: recommendationId, codeReviewArn: codeReviewArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ListTagsForResource = {
   type t
   type request = {
@@ -1140,6 +1143,7 @@ module ListTagsForResource = {
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListRepositoryAssociations = {
   type t
   type request = {
@@ -1246,9 +1250,17 @@ module ListRepositoryAssociations = {
   @module("@aws-sdk/client-codeguru-reviewer") @new
   external new: request => t = "ListRepositoryAssociationsCommand"
   let make = (~nextToken=?, ~maxResults=?, ~owners=?, ~names=?, ~states=?, ~providerTypes=?, ()) =>
-    new({nextToken, maxResults, owners, names, states, providerTypes})
+    new({
+      nextToken: nextToken,
+      maxResults: maxResults,
+      owners: owners,
+      names: names,
+      states: states,
+      providerTypes: providerTypes,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeRecommendationFeedback = {
   type t
   type request = {
@@ -1284,9 +1296,10 @@ module DescribeRecommendationFeedback = {
   @module("@aws-sdk/client-codeguru-reviewer") @new
   external new: request => t = "DescribeRecommendationFeedbackCommand"
   let make = (~recommendationId, ~codeReviewArn, ~userId=?, ()) =>
-    new({userId, recommendationId, codeReviewArn})
+    new({userId: userId, recommendationId: recommendationId, codeReviewArn: codeReviewArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListRecommendationFeedback = {
   type t
   type request = {
@@ -1337,9 +1350,16 @@ module ListRecommendationFeedback = {
   @module("@aws-sdk/client-codeguru-reviewer") @new
   external new: request => t = "ListRecommendationFeedbackCommand"
   let make = (~codeReviewArn, ~recommendationIds=?, ~userIds=?, ~maxResults=?, ~nextToken=?, ()) =>
-    new({recommendationIds, userIds, codeReviewArn, maxResults, nextToken})
+    new({
+      recommendationIds: recommendationIds,
+      userIds: userIds,
+      codeReviewArn: codeReviewArn,
+      maxResults: maxResults,
+      nextToken: nextToken,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DisassociateRepository = {
   type t
   type request = {
@@ -1384,6 +1404,7 @@ module DisassociateRepository = {
   let make = (~associationArn, ()) => new({associationArn: associationArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeRepositoryAssociation = {
   type t
   type request = {
@@ -1427,6 +1448,7 @@ module DescribeRepositoryAssociation = {
   let make = (~associationArn, ()) => new({associationArn: associationArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module AssociateRepository = {
   type t
   type request = {
@@ -1492,9 +1514,15 @@ module AssociateRepository = {
   @module("@aws-sdk/client-codeguru-reviewer") @new
   external new: request => t = "AssociateRepositoryCommand"
   let make = (~repository, ~kmskeyDetails=?, ~tags=?, ~clientRequestToken=?, ()) =>
-    new({kmskeyDetails, tags, clientRequestToken, repository})
+    new({
+      kmskeyDetails: kmskeyDetails,
+      tags: tags,
+      clientRequestToken: clientRequestToken,
+      repository: repository,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListRecommendations = {
   type t
   type request = {
@@ -1530,9 +1558,10 @@ module ListRecommendations = {
   @module("@aws-sdk/client-codeguru-reviewer") @new
   external new: request => t = "ListRecommendationsCommand"
   let make = (~codeReviewArn, ~maxResults=?, ~nextToken=?, ()) =>
-    new({codeReviewArn, maxResults, nextToken})
+    new({codeReviewArn: codeReviewArn, maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeCodeReview = {
   type t
   type request = {
@@ -1555,6 +1584,7 @@ module DescribeCodeReview = {
   let make = (~codeReviewArn, ()) => new({codeReviewArn: codeReviewArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListCodeReviews = {
   type t
   type request = {
@@ -1635,9 +1665,18 @@ module ListCodeReviews = {
     ~states=?,
     ~providerTypes=?,
     (),
-  ) => new({nextToken, maxResults, type_, repositoryNames, states, providerTypes})
+  ) =>
+    new({
+      nextToken: nextToken,
+      maxResults: maxResults,
+      type_: type_,
+      repositoryNames: repositoryNames,
+      states: states,
+      providerTypes: providerTypes,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateCodeReview = {
   type t
   type request = {
@@ -1682,6 +1721,11 @@ module CreateCodeReview = {
   @module("@aws-sdk/client-codeguru-reviewer") @new
   external new: request => t = "CreateCodeReviewCommand"
   let make = (~type_, ~repositoryAssociationArn, ~name, ~clientRequestToken=?, ()) =>
-    new({clientRequestToken, type_, repositoryAssociationArn, name})
+    new({
+      clientRequestToken: clientRequestToken,
+      type_: type_,
+      repositoryAssociationArn: repositoryAssociationArn,
+      name: name,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

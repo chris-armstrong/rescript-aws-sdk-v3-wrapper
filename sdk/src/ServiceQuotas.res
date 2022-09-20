@@ -218,6 +218,7 @@ module GetAssociationForServiceQuotaTemplate = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DisassociateServiceQuotaTemplate = {
   type t
   type request = {.}
@@ -227,6 +228,7 @@ module DisassociateServiceQuotaTemplate = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteServiceQuotaIncreaseRequestFromTemplate = {
   type t
   type request = {
@@ -237,9 +239,11 @@ module DeleteServiceQuotaIncreaseRequestFromTemplate = {
   type response = {.}
   @module("@aws-sdk/client-servicequotas") @new
   external new: request => t = "DeleteServiceQuotaIncreaseRequestFromTemplateCommand"
-  let make = (~awsRegion, ~quotaCode, ~serviceCode, ()) => new({awsRegion, quotaCode, serviceCode})
+  let make = (~awsRegion, ~quotaCode, ~serviceCode, ()) =>
+    new({awsRegion: awsRegion, quotaCode: quotaCode, serviceCode: serviceCode})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module AssociateServiceQuotaTemplate = {
   type t
   type request = {.}
@@ -249,6 +253,7 @@ module AssociateServiceQuotaTemplate = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UntagResource = {
   type t
   type request = {
@@ -262,9 +267,10 @@ module UntagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-servicequotas") @new external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceARN, ()) => new({tagKeys, resourceARN})
+  let make = (~tagKeys, ~resourceARN, ()) => new({tagKeys: tagKeys, resourceARN: resourceARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module RequestServiceQuotaIncrease = {
   type t
   type request = {
@@ -280,9 +286,10 @@ module RequestServiceQuotaIncrease = {
   @module("@aws-sdk/client-servicequotas") @new
   external new: request => t = "RequestServiceQuotaIncreaseCommand"
   let make = (~desiredValue, ~quotaCode, ~serviceCode, ()) =>
-    new({desiredValue, quotaCode, serviceCode})
+    new({desiredValue: desiredValue, quotaCode: quotaCode, serviceCode: serviceCode})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module PutServiceQuotaIncreaseRequestIntoTemplate = {
   type t
   type request = {
@@ -300,9 +307,15 @@ module PutServiceQuotaIncreaseRequestIntoTemplate = {
   @module("@aws-sdk/client-servicequotas") @new
   external new: request => t = "PutServiceQuotaIncreaseRequestIntoTemplateCommand"
   let make = (~desiredValue, ~awsRegion, ~serviceCode, ~quotaCode, ()) =>
-    new({desiredValue, awsRegion, serviceCode, quotaCode})
+    new({
+      desiredValue: desiredValue,
+      awsRegion: awsRegion,
+      serviceCode: serviceCode,
+      quotaCode: quotaCode,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetServiceQuotaIncreaseRequestFromTemplate = {
   type t
   type request = {
@@ -317,9 +330,11 @@ module GetServiceQuotaIncreaseRequestFromTemplate = {
   }
   @module("@aws-sdk/client-servicequotas") @new
   external new: request => t = "GetServiceQuotaIncreaseRequestFromTemplateCommand"
-  let make = (~awsRegion, ~quotaCode, ~serviceCode, ()) => new({awsRegion, quotaCode, serviceCode})
+  let make = (~awsRegion, ~quotaCode, ~serviceCode, ()) =>
+    new({awsRegion: awsRegion, quotaCode: quotaCode, serviceCode: serviceCode})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetRequestedServiceQuotaChange = {
   type t
   type request = {
@@ -335,6 +350,7 @@ module GetRequestedServiceQuotaChange = {
   let make = (~requestId, ()) => new({requestId: requestId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module TagResource = {
   type t
   type request = {
@@ -346,9 +362,10 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-servicequotas") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceARN, ()) => new({tags, resourceARN})
+  let make = (~tags, ~resourceARN, ()) => new({tags: tags, resourceARN: resourceARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ListTagsForResource = {
   type t
   type request = {
@@ -367,6 +384,7 @@ module ListTagsForResource = {
   let make = (~resourceARN, ()) => new({resourceARN: resourceARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListServices = {
   type t
   type request = {
@@ -386,9 +404,11 @@ module ListServices = {
     nextToken: option<nextToken>,
   }
   @module("@aws-sdk/client-servicequotas") @new external new: request => t = "ListServicesCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListServiceQuotaIncreaseRequestsInTemplate = {
   type t
   type request = {
@@ -414,9 +434,15 @@ module ListServiceQuotaIncreaseRequestsInTemplate = {
   @module("@aws-sdk/client-servicequotas") @new
   external new: request => t = "ListServiceQuotaIncreaseRequestsInTemplateCommand"
   let make = (~maxResults=?, ~nextToken=?, ~awsRegion=?, ~serviceCode=?, ()) =>
-    new({maxResults, nextToken, awsRegion, serviceCode})
+    new({
+      maxResults: maxResults,
+      nextToken: nextToken,
+      awsRegion: awsRegion,
+      serviceCode: serviceCode,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListRequestedServiceQuotaChangeHistoryByQuota = {
   type t
   type request = {
@@ -442,9 +468,16 @@ module ListRequestedServiceQuotaChangeHistoryByQuota = {
   @module("@aws-sdk/client-servicequotas") @new
   external new: request => t = "ListRequestedServiceQuotaChangeHistoryByQuotaCommand"
   let make = (~quotaCode, ~serviceCode, ~maxResults=?, ~nextToken=?, ~status=?, ()) =>
-    new({maxResults, nextToken, status, quotaCode, serviceCode})
+    new({
+      maxResults: maxResults,
+      nextToken: nextToken,
+      status: status,
+      quotaCode: quotaCode,
+      serviceCode: serviceCode,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListRequestedServiceQuotaChangeHistory = {
   type t
   type request = {
@@ -470,9 +503,10 @@ module ListRequestedServiceQuotaChangeHistory = {
   @module("@aws-sdk/client-servicequotas") @new
   external new: request => t = "ListRequestedServiceQuotaChangeHistoryCommand"
   let make = (~maxResults=?, ~nextToken=?, ~status=?, ~serviceCode=?, ()) =>
-    new({maxResults, nextToken, status, serviceCode})
+    new({maxResults: maxResults, nextToken: nextToken, status: status, serviceCode: serviceCode})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetServiceQuota = {
   type t
   type request = {
@@ -484,9 +518,10 @@ module GetServiceQuota = {
   }
   @module("@aws-sdk/client-servicequotas") @new
   external new: request => t = "GetServiceQuotaCommand"
-  let make = (~quotaCode, ~serviceCode, ()) => new({quotaCode, serviceCode})
+  let make = (~quotaCode, ~serviceCode, ()) => new({quotaCode: quotaCode, serviceCode: serviceCode})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetAWSDefaultServiceQuota = {
   type t
   type request = {
@@ -498,9 +533,10 @@ module GetAWSDefaultServiceQuota = {
   }
   @module("@aws-sdk/client-servicequotas") @new
   external new: request => t = "GetAWSDefaultServiceQuotaCommand"
-  let make = (~quotaCode, ~serviceCode, ()) => new({quotaCode, serviceCode})
+  let make = (~quotaCode, ~serviceCode, ()) => new({quotaCode: quotaCode, serviceCode: serviceCode})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListServiceQuotas = {
   type t
   type request = {
@@ -523,9 +559,10 @@ module ListServiceQuotas = {
   @module("@aws-sdk/client-servicequotas") @new
   external new: request => t = "ListServiceQuotasCommand"
   let make = (~serviceCode, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults, nextToken, serviceCode})
+    new({maxResults: maxResults, nextToken: nextToken, serviceCode: serviceCode})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListAWSDefaultServiceQuotas = {
   type t
   type request = {
@@ -548,6 +585,6 @@ module ListAWSDefaultServiceQuotas = {
   @module("@aws-sdk/client-servicequotas") @new
   external new: request => t = "ListAWSDefaultServiceQuotasCommand"
   let make = (~serviceCode, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults, nextToken, serviceCode})
+    new({maxResults: maxResults, nextToken: nextToken, serviceCode: serviceCode})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

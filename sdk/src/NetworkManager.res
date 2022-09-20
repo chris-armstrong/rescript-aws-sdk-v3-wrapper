@@ -1064,9 +1064,10 @@ module UpdateNetworkResourceMetadata = {
   @module("@aws-sdk/client-networkmanager") @new
   external new: request => t = "UpdateNetworkResourceMetadataCommand"
   let make = (~metadata, ~resourceArn, ~globalNetworkId, ()) =>
-    new({metadata, resourceArn, globalNetworkId})
+    new({metadata: metadata, resourceArn: resourceArn, globalNetworkId: globalNetworkId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UntagResource = {
   type t
   type request = {
@@ -1077,9 +1078,10 @@ module UntagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-networkmanager") @new external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys, resourceArn})
+  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module TagResource = {
   type t
   type request = {
@@ -1089,9 +1091,10 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-networkmanager") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceArn, ()) => new({tags, resourceArn})
+  let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module RegisterTransitGateway = {
   type t
   type request = {
@@ -1108,9 +1111,11 @@ module RegisterTransitGateway = {
   }
   @module("@aws-sdk/client-networkmanager") @new
   external new: request => t = "RegisterTransitGatewayCommand"
-  let make = (~transitGatewayArn, ~globalNetworkId, ()) => new({transitGatewayArn, globalNetworkId})
+  let make = (~transitGatewayArn, ~globalNetworkId, ()) =>
+    new({transitGatewayArn: transitGatewayArn, globalNetworkId: globalNetworkId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module PutResourcePolicy = {
   type t
   type request = {
@@ -1122,9 +1127,11 @@ module PutResourcePolicy = {
   type response = {.}
   @module("@aws-sdk/client-networkmanager") @new
   external new: request => t = "PutResourcePolicyCommand"
-  let make = (~resourceArn, ~policyDocument, ()) => new({resourceArn, policyDocument})
+  let make = (~resourceArn, ~policyDocument, ()) =>
+    new({resourceArn: resourceArn, policyDocument: policyDocument})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ListTagsForResource = {
   type t
   type request = {
@@ -1137,6 +1144,7 @@ module ListTagsForResource = {
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListCoreNetworkPolicyVersions = {
   type t
   type request = {
@@ -1156,9 +1164,10 @@ module ListCoreNetworkPolicyVersions = {
   @module("@aws-sdk/client-networkmanager") @new
   external new: request => t = "ListCoreNetworkPolicyVersionsCommand"
   let make = (~coreNetworkId, ~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken, maxResults, coreNetworkId})
+    new({nextToken: nextToken, maxResults: maxResults, coreNetworkId: coreNetworkId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetTransitGatewayConnectPeerAssociations = {
   type t
   type request = {
@@ -1187,9 +1196,16 @@ module GetTransitGatewayConnectPeerAssociations = {
     ~maxResults=?,
     ~transitGatewayConnectPeerArns=?,
     (),
-  ) => new({nextToken, maxResults, transitGatewayConnectPeerArns, globalNetworkId})
+  ) =>
+    new({
+      nextToken: nextToken,
+      maxResults: maxResults,
+      transitGatewayConnectPeerArns: transitGatewayConnectPeerArns,
+      globalNetworkId: globalNetworkId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetResourcePolicy = {
   type t
   type request = {
@@ -1204,6 +1220,7 @@ module GetResourcePolicy = {
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetNetworkResourceRelationships = {
   type t
   type request = {
@@ -1324,18 +1341,19 @@ module GetNetworkResourceRelationships = {
     (),
   ) =>
     new({
-      nextToken,
-      maxResults,
-      resourceArn,
-      resourceType,
-      accountId,
-      awsRegion,
-      registeredGatewayArn,
-      coreNetworkId,
-      globalNetworkId,
+      nextToken: nextToken,
+      maxResults: maxResults,
+      resourceArn: resourceArn,
+      resourceType: resourceType,
+      accountId: accountId,
+      awsRegion: awsRegion,
+      registeredGatewayArn: registeredGatewayArn,
+      coreNetworkId: coreNetworkId,
+      globalNetworkId: globalNetworkId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetNetworkResourceCounts = {
   type t
   type request = {
@@ -1434,9 +1452,15 @@ module GetNetworkResourceCounts = {
   @module("@aws-sdk/client-networkmanager") @new
   external new: request => t = "GetNetworkResourceCountsCommand"
   let make = (~globalNetworkId, ~nextToken=?, ~maxResults=?, ~resourceType=?, ()) =>
-    new({nextToken, maxResults, resourceType, globalNetworkId})
+    new({
+      nextToken: nextToken,
+      maxResults: maxResults,
+      resourceType: resourceType,
+      globalNetworkId: globalNetworkId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetLinkAssociations = {
   type t
   type request = {
@@ -1458,9 +1482,16 @@ module GetLinkAssociations = {
   @module("@aws-sdk/client-networkmanager") @new
   external new: request => t = "GetLinkAssociationsCommand"
   let make = (~globalNetworkId, ~nextToken=?, ~maxResults=?, ~linkId=?, ~deviceId=?, ()) =>
-    new({nextToken, maxResults, linkId, deviceId, globalNetworkId})
+    new({
+      nextToken: nextToken,
+      maxResults: maxResults,
+      linkId: linkId,
+      deviceId: deviceId,
+      globalNetworkId: globalNetworkId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetCustomerGatewayAssociations = {
   type t
   type request = {
@@ -1485,9 +1516,15 @@ module GetCustomerGatewayAssociations = {
   @module("@aws-sdk/client-networkmanager") @new
   external new: request => t = "GetCustomerGatewayAssociationsCommand"
   let make = (~globalNetworkId, ~nextToken=?, ~maxResults=?, ~customerGatewayArns=?, ()) =>
-    new({nextToken, maxResults, customerGatewayArns, globalNetworkId})
+    new({
+      nextToken: nextToken,
+      maxResults: maxResults,
+      customerGatewayArns: customerGatewayArns,
+      globalNetworkId: globalNetworkId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetConnectPeerAssociations = {
   type t
   type request = {
@@ -1510,9 +1547,15 @@ module GetConnectPeerAssociations = {
   @module("@aws-sdk/client-networkmanager") @new
   external new: request => t = "GetConnectPeerAssociationsCommand"
   let make = (~globalNetworkId, ~nextToken=?, ~maxResults=?, ~connectPeerIds=?, ()) =>
-    new({nextToken, maxResults, connectPeerIds, globalNetworkId})
+    new({
+      nextToken: nextToken,
+      maxResults: maxResults,
+      connectPeerIds: connectPeerIds,
+      globalNetworkId: globalNetworkId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ExecuteCoreNetworkChangeSet = {
   type t
   type request = {
@@ -1524,9 +1567,11 @@ module ExecuteCoreNetworkChangeSet = {
   type response = {.}
   @module("@aws-sdk/client-networkmanager") @new
   external new: request => t = "ExecuteCoreNetworkChangeSetCommand"
-  let make = (~policyVersionId, ~coreNetworkId, ()) => new({policyVersionId, coreNetworkId})
+  let make = (~policyVersionId, ~coreNetworkId, ()) =>
+    new({policyVersionId: policyVersionId, coreNetworkId: coreNetworkId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DisassociateTransitGatewayConnectPeer = {
   type t
   type request = {
@@ -1544,9 +1589,13 @@ module DisassociateTransitGatewayConnectPeer = {
   @module("@aws-sdk/client-networkmanager") @new
   external new: request => t = "DisassociateTransitGatewayConnectPeerCommand"
   let make = (~transitGatewayConnectPeerArn, ~globalNetworkId, ()) =>
-    new({transitGatewayConnectPeerArn, globalNetworkId})
+    new({
+      transitGatewayConnectPeerArn: transitGatewayConnectPeerArn,
+      globalNetworkId: globalNetworkId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DisassociateLink = {
   type t
   type request = {
@@ -1561,9 +1610,11 @@ module DisassociateLink = {
   }
   @module("@aws-sdk/client-networkmanager") @new
   external new: request => t = "DisassociateLinkCommand"
-  let make = (~linkId, ~deviceId, ~globalNetworkId, ()) => new({linkId, deviceId, globalNetworkId})
+  let make = (~linkId, ~deviceId, ~globalNetworkId, ()) =>
+    new({linkId: linkId, deviceId: deviceId, globalNetworkId: globalNetworkId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DisassociateCustomerGateway = {
   type t
   type request = {
@@ -1581,9 +1632,10 @@ module DisassociateCustomerGateway = {
   @module("@aws-sdk/client-networkmanager") @new
   external new: request => t = "DisassociateCustomerGatewayCommand"
   let make = (~customerGatewayArn, ~globalNetworkId, ()) =>
-    new({customerGatewayArn, globalNetworkId})
+    new({customerGatewayArn: customerGatewayArn, globalNetworkId: globalNetworkId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DisassociateConnectPeer = {
   type t
   type request = {
@@ -1599,9 +1651,11 @@ module DisassociateConnectPeer = {
   }
   @module("@aws-sdk/client-networkmanager") @new
   external new: request => t = "DisassociateConnectPeerCommand"
-  let make = (~connectPeerId, ~globalNetworkId, ()) => new({connectPeerId, globalNetworkId})
+  let make = (~connectPeerId, ~globalNetworkId, ()) =>
+    new({connectPeerId: connectPeerId, globalNetworkId: globalNetworkId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeregisterTransitGateway = {
   type t
   type request = {
@@ -1618,9 +1672,11 @@ module DeregisterTransitGateway = {
   }
   @module("@aws-sdk/client-networkmanager") @new
   external new: request => t = "DeregisterTransitGatewayCommand"
-  let make = (~transitGatewayArn, ~globalNetworkId, ()) => new({transitGatewayArn, globalNetworkId})
+  let make = (~transitGatewayArn, ~globalNetworkId, ()) =>
+    new({transitGatewayArn: transitGatewayArn, globalNetworkId: globalNetworkId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteResourcePolicy = {
   type t
   type request = {
@@ -1633,6 +1689,7 @@ module DeleteResourcePolicy = {
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module AssociateTransitGatewayConnectPeer = {
   type t
   type request = {
@@ -1652,9 +1709,15 @@ module AssociateTransitGatewayConnectPeer = {
   @module("@aws-sdk/client-networkmanager") @new
   external new: request => t = "AssociateTransitGatewayConnectPeerCommand"
   let make = (~deviceId, ~transitGatewayConnectPeerArn, ~globalNetworkId, ~linkId=?, ()) =>
-    new({linkId, deviceId, transitGatewayConnectPeerArn, globalNetworkId})
+    new({
+      linkId: linkId,
+      deviceId: deviceId,
+      transitGatewayConnectPeerArn: transitGatewayConnectPeerArn,
+      globalNetworkId: globalNetworkId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module AssociateLink = {
   type t
   type request = {
@@ -1668,9 +1731,11 @@ module AssociateLink = {
     linkAssociation: option<linkAssociation>,
   }
   @module("@aws-sdk/client-networkmanager") @new external new: request => t = "AssociateLinkCommand"
-  let make = (~linkId, ~deviceId, ~globalNetworkId, ()) => new({linkId, deviceId, globalNetworkId})
+  let make = (~linkId, ~deviceId, ~globalNetworkId, ()) =>
+    new({linkId: linkId, deviceId: deviceId, globalNetworkId: globalNetworkId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module AssociateCustomerGateway = {
   type t
   type request = {
@@ -1689,9 +1754,15 @@ module AssociateCustomerGateway = {
   @module("@aws-sdk/client-networkmanager") @new
   external new: request => t = "AssociateCustomerGatewayCommand"
   let make = (~deviceId, ~globalNetworkId, ~customerGatewayArn, ~linkId=?, ()) =>
-    new({linkId, deviceId, globalNetworkId, customerGatewayArn})
+    new({
+      linkId: linkId,
+      deviceId: deviceId,
+      globalNetworkId: globalNetworkId,
+      customerGatewayArn: customerGatewayArn,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module AssociateConnectPeer = {
   type t
   type request = {
@@ -1709,9 +1780,15 @@ module AssociateConnectPeer = {
   @module("@aws-sdk/client-networkmanager") @new
   external new: request => t = "AssociateConnectPeerCommand"
   let make = (~deviceId, ~connectPeerId, ~globalNetworkId, ~linkId=?, ()) =>
-    new({linkId, deviceId, connectPeerId, globalNetworkId})
+    new({
+      linkId: linkId,
+      deviceId: deviceId,
+      connectPeerId: connectPeerId,
+      globalNetworkId: globalNetworkId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateSite = {
   type t
   type request = {
@@ -1743,9 +1820,15 @@ module UpdateSite = {
   type response = {@ocaml.doc("<p>Information about the site.</p>") @as("Site") site: option<site>}
   @module("@aws-sdk/client-networkmanager") @new external new: request => t = "UpdateSiteCommand"
   let make = (~siteId, ~globalNetworkId, ~location=?, ~description=?, ()) =>
-    new({location, description, siteId, globalNetworkId})
+    new({
+      location: location,
+      description: description,
+      siteId: siteId,
+      globalNetworkId: globalNetworkId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateLink = {
   type t
   type request = {
@@ -1770,9 +1853,17 @@ module UpdateLink = {
   type response = {@ocaml.doc("<p>Information about the link.</p>") @as("Link") link: option<link>}
   @module("@aws-sdk/client-networkmanager") @new external new: request => t = "UpdateLinkCommand"
   let make = (~linkId, ~globalNetworkId, ~provider=?, ~bandwidth=?, ~type_=?, ~description=?, ()) =>
-    new({provider, bandwidth, type_, description, linkId, globalNetworkId})
+    new({
+      provider: provider,
+      bandwidth: bandwidth,
+      type_: type_,
+      description: description,
+      linkId: linkId,
+      globalNetworkId: globalNetworkId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateGlobalNetwork = {
   type t
   type request = {
@@ -1789,9 +1880,11 @@ module UpdateGlobalNetwork = {
   }
   @module("@aws-sdk/client-networkmanager") @new
   external new: request => t = "UpdateGlobalNetworkCommand"
-  let make = (~globalNetworkId, ~description=?, ()) => new({description, globalNetworkId})
+  let make = (~globalNetworkId, ~description=?, ()) =>
+    new({description: description, globalNetworkId: globalNetworkId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateDevice = {
   type t
   type request = {
@@ -1841,19 +1934,20 @@ module UpdateDevice = {
     (),
   ) =>
     new({
-      siteId,
-      location,
-      serialNumber,
-      model,
-      vendor,
-      type_,
-      description,
-      awslocation,
-      deviceId,
-      globalNetworkId,
+      siteId: siteId,
+      location: location,
+      serialNumber: serialNumber,
+      model: model,
+      vendor: vendor,
+      type_: type_,
+      description: description,
+      awslocation: awslocation,
+      deviceId: deviceId,
+      globalNetworkId: globalNetworkId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateConnection = {
   type t
   type request = {
@@ -1877,9 +1971,16 @@ module UpdateConnection = {
   @module("@aws-sdk/client-networkmanager") @new
   external new: request => t = "UpdateConnectionCommand"
   let make = (~connectionId, ~globalNetworkId, ~description=?, ~connectedLinkId=?, ~linkId=?, ()) =>
-    new({description, connectedLinkId, linkId, connectionId, globalNetworkId})
+    new({
+      description: description,
+      connectedLinkId: connectedLinkId,
+      linkId: linkId,
+      connectionId: connectionId,
+      globalNetworkId: globalNetworkId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module RestoreCoreNetworkPolicyVersion = {
   type t
   type request = {
@@ -1894,9 +1995,11 @@ module RestoreCoreNetworkPolicyVersion = {
   }
   @module("@aws-sdk/client-networkmanager") @new
   external new: request => t = "RestoreCoreNetworkPolicyVersionCommand"
-  let make = (~policyVersionId, ~coreNetworkId, ()) => new({policyVersionId, coreNetworkId})
+  let make = (~policyVersionId, ~coreNetworkId, ()) =>
+    new({policyVersionId: policyVersionId, coreNetworkId: coreNetworkId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module PutCoreNetworkPolicy = {
   type t
   type request = {
@@ -1924,9 +2027,17 @@ module PutCoreNetworkPolicy = {
     ~latestVersionId=?,
     ~description=?,
     (),
-  ) => new({clientToken, latestVersionId, description, policyDocument, coreNetworkId})
+  ) =>
+    new({
+      clientToken: clientToken,
+      latestVersionId: latestVersionId,
+      description: description,
+      policyDocument: policyDocument,
+      coreNetworkId: coreNetworkId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetTransitGatewayRegistrations = {
   type t
   type request = {
@@ -1950,9 +2061,15 @@ module GetTransitGatewayRegistrations = {
   @module("@aws-sdk/client-networkmanager") @new
   external new: request => t = "GetTransitGatewayRegistrationsCommand"
   let make = (~globalNetworkId, ~nextToken=?, ~maxResults=?, ~transitGatewayArns=?, ()) =>
-    new({nextToken, maxResults, transitGatewayArns, globalNetworkId})
+    new({
+      nextToken: nextToken,
+      maxResults: maxResults,
+      transitGatewayArns: transitGatewayArns,
+      globalNetworkId: globalNetworkId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetNetworkTelemetry = {
   type t
   type request = {
@@ -2073,18 +2190,19 @@ module GetNetworkTelemetry = {
     (),
   ) =>
     new({
-      nextToken,
-      maxResults,
-      resourceArn,
-      resourceType,
-      accountId,
-      awsRegion,
-      registeredGatewayArn,
-      coreNetworkId,
-      globalNetworkId,
+      nextToken: nextToken,
+      maxResults: maxResults,
+      resourceArn: resourceArn,
+      resourceType: resourceType,
+      accountId: accountId,
+      awsRegion: awsRegion,
+      registeredGatewayArn: registeredGatewayArn,
+      coreNetworkId: coreNetworkId,
+      globalNetworkId: globalNetworkId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetCoreNetworkPolicy = {
   type t
   type request = {
@@ -2102,9 +2220,10 @@ module GetCoreNetworkPolicy = {
   @module("@aws-sdk/client-networkmanager") @new
   external new: request => t = "GetCoreNetworkPolicyCommand"
   let make = (~coreNetworkId, ~alias=?, ~policyVersionId=?, ()) =>
-    new({alias, policyVersionId, coreNetworkId})
+    new({alias: alias, policyVersionId: policyVersionId, coreNetworkId: coreNetworkId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteSite = {
   type t
   type request = {
@@ -2114,9 +2233,11 @@ module DeleteSite = {
   }
   type response = {@ocaml.doc("<p>Information about the site.</p>") @as("Site") site: option<site>}
   @module("@aws-sdk/client-networkmanager") @new external new: request => t = "DeleteSiteCommand"
-  let make = (~siteId, ~globalNetworkId, ()) => new({siteId, globalNetworkId})
+  let make = (~siteId, ~globalNetworkId, ()) =>
+    new({siteId: siteId, globalNetworkId: globalNetworkId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteLink = {
   type t
   type request = {
@@ -2126,9 +2247,11 @@ module DeleteLink = {
   }
   type response = {@ocaml.doc("<p>Information about the link.</p>") @as("Link") link: option<link>}
   @module("@aws-sdk/client-networkmanager") @new external new: request => t = "DeleteLinkCommand"
-  let make = (~linkId, ~globalNetworkId, ()) => new({linkId, globalNetworkId})
+  let make = (~linkId, ~globalNetworkId, ()) =>
+    new({linkId: linkId, globalNetworkId: globalNetworkId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteGlobalNetwork = {
   type t
   type request = {
@@ -2144,6 +2267,7 @@ module DeleteGlobalNetwork = {
   let make = (~globalNetworkId, ()) => new({globalNetworkId: globalNetworkId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteDevice = {
   type t
   type request = {
@@ -2155,9 +2279,11 @@ module DeleteDevice = {
     @ocaml.doc("<p>Information about the device.</p>") @as("Device") device: option<device>,
   }
   @module("@aws-sdk/client-networkmanager") @new external new: request => t = "DeleteDeviceCommand"
-  let make = (~deviceId, ~globalNetworkId, ()) => new({deviceId, globalNetworkId})
+  let make = (~deviceId, ~globalNetworkId, ()) =>
+    new({deviceId: deviceId, globalNetworkId: globalNetworkId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteCoreNetworkPolicyVersion = {
   type t
   type request = {
@@ -2173,9 +2299,11 @@ module DeleteCoreNetworkPolicyVersion = {
   }
   @module("@aws-sdk/client-networkmanager") @new
   external new: request => t = "DeleteCoreNetworkPolicyVersionCommand"
-  let make = (~policyVersionId, ~coreNetworkId, ()) => new({policyVersionId, coreNetworkId})
+  let make = (~policyVersionId, ~coreNetworkId, ()) =>
+    new({policyVersionId: policyVersionId, coreNetworkId: coreNetworkId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteConnection = {
   type t
   type request = {
@@ -2189,9 +2317,11 @@ module DeleteConnection = {
   }
   @module("@aws-sdk/client-networkmanager") @new
   external new: request => t = "DeleteConnectionCommand"
-  let make = (~connectionId, ~globalNetworkId, ()) => new({connectionId, globalNetworkId})
+  let make = (~connectionId, ~globalNetworkId, ()) =>
+    new({connectionId: connectionId, globalNetworkId: globalNetworkId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateSite = {
   type t
   type request = {
@@ -2224,9 +2354,15 @@ module CreateSite = {
   type response = {@ocaml.doc("<p>Information about the site.</p>") @as("Site") site: option<site>}
   @module("@aws-sdk/client-networkmanager") @new external new: request => t = "CreateSiteCommand"
   let make = (~globalNetworkId, ~tags=?, ~location=?, ~description=?, ()) =>
-    new({tags, location, description, globalNetworkId})
+    new({
+      tags: tags,
+      location: location,
+      description: description,
+      globalNetworkId: globalNetworkId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateLink = {
   type t
   type request = {
@@ -2261,9 +2397,19 @@ module CreateLink = {
     ~type_=?,
     ~description=?,
     (),
-  ) => new({tags, siteId, provider, bandwidth, type_, description, globalNetworkId})
+  ) =>
+    new({
+      tags: tags,
+      siteId: siteId,
+      provider: provider,
+      bandwidth: bandwidth,
+      type_: type_,
+      description: description,
+      globalNetworkId: globalNetworkId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateGlobalNetwork = {
   type t
   type request = {
@@ -2280,9 +2426,10 @@ module CreateGlobalNetwork = {
   }
   @module("@aws-sdk/client-networkmanager") @new
   external new: request => t = "CreateGlobalNetworkCommand"
-  let make = (~tags=?, ~description=?, ()) => new({tags, description})
+  let make = (~tags=?, ~description=?, ()) => new({tags: tags, description: description})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateDevice = {
   type t
   type request = {
@@ -2333,19 +2480,20 @@ module CreateDevice = {
     (),
   ) =>
     new({
-      tags,
-      siteId,
-      location,
-      serialNumber,
-      model,
-      vendor,
-      type_,
-      description,
-      awslocation,
-      globalNetworkId,
+      tags: tags,
+      siteId: siteId,
+      location: location,
+      serialNumber: serialNumber,
+      model: model,
+      vendor: vendor,
+      type_: type_,
+      description: description,
+      awslocation: awslocation,
+      globalNetworkId: globalNetworkId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateConnection = {
   type t
   type request = {
@@ -2382,9 +2530,18 @@ module CreateConnection = {
     ~linkId=?,
     (),
   ) =>
-    new({tags, description, connectedLinkId, linkId, connectedDeviceId, deviceId, globalNetworkId})
+    new({
+      tags: tags,
+      description: description,
+      connectedLinkId: connectedLinkId,
+      linkId: linkId,
+      connectedDeviceId: connectedDeviceId,
+      deviceId: deviceId,
+      globalNetworkId: globalNetworkId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateCoreNetwork = {
   type t
   type request = {
@@ -2399,9 +2556,11 @@ module UpdateCoreNetwork = {
   }
   @module("@aws-sdk/client-networkmanager") @new
   external new: request => t = "UpdateCoreNetworkCommand"
-  let make = (~coreNetworkId, ~description=?, ()) => new({description, coreNetworkId})
+  let make = (~coreNetworkId, ~description=?, ()) =>
+    new({description: description, coreNetworkId: coreNetworkId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module RejectAttachment = {
   type t
   type request = {
@@ -2416,6 +2575,7 @@ module RejectAttachment = {
   let make = (~attachmentId, ()) => new({attachmentId: attachmentId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListCoreNetworks = {
   type t
   type request = {
@@ -2432,9 +2592,11 @@ module ListCoreNetworks = {
   }
   @module("@aws-sdk/client-networkmanager") @new
   external new: request => t = "ListCoreNetworksCommand"
-  let make = (~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults})
+  let make = (~nextToken=?, ~maxResults=?, ()) =>
+    new({nextToken: nextToken, maxResults: maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListConnectPeers = {
   type t
   type request = {
@@ -2456,9 +2618,15 @@ module ListConnectPeers = {
   @module("@aws-sdk/client-networkmanager") @new
   external new: request => t = "ListConnectPeersCommand"
   let make = (~nextToken=?, ~maxResults=?, ~connectAttachmentId=?, ~coreNetworkId=?, ()) =>
-    new({nextToken, maxResults, connectAttachmentId, coreNetworkId})
+    new({
+      nextToken: nextToken,
+      maxResults: maxResults,
+      connectAttachmentId: connectAttachmentId,
+      coreNetworkId: coreNetworkId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetSites = {
   type t
   type request = {
@@ -2478,9 +2646,15 @@ module GetSites = {
   }
   @module("@aws-sdk/client-networkmanager") @new external new: request => t = "GetSitesCommand"
   let make = (~globalNetworkId, ~nextToken=?, ~maxResults=?, ~siteIds=?, ()) =>
-    new({nextToken, maxResults, siteIds, globalNetworkId})
+    new({
+      nextToken: nextToken,
+      maxResults: maxResults,
+      siteIds: siteIds,
+      globalNetworkId: globalNetworkId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetNetworkRoutes = {
   type t
   type request = {
@@ -2539,19 +2713,20 @@ module GetNetworkRoutes = {
     (),
   ) =>
     new({
-      destinationFilters,
-      types,
-      states,
-      prefixListIds,
-      supernetOfMatches,
-      subnetOfMatches,
-      longestPrefixMatches,
-      exactCidrMatches,
-      routeTableIdentifier,
-      globalNetworkId,
+      destinationFilters: destinationFilters,
+      types: types,
+      states: states,
+      prefixListIds: prefixListIds,
+      supernetOfMatches: supernetOfMatches,
+      subnetOfMatches: subnetOfMatches,
+      longestPrefixMatches: longestPrefixMatches,
+      exactCidrMatches: exactCidrMatches,
+      routeTableIdentifier: routeTableIdentifier,
+      globalNetworkId: globalNetworkId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetNetworkResources = {
   type t
   type request = {
@@ -2672,18 +2847,19 @@ module GetNetworkResources = {
     (),
   ) =>
     new({
-      nextToken,
-      maxResults,
-      resourceArn,
-      resourceType,
-      accountId,
-      awsRegion,
-      registeredGatewayArn,
-      coreNetworkId,
-      globalNetworkId,
+      nextToken: nextToken,
+      maxResults: maxResults,
+      resourceArn: resourceArn,
+      resourceType: resourceType,
+      accountId: accountId,
+      awsRegion: awsRegion,
+      registeredGatewayArn: registeredGatewayArn,
+      coreNetworkId: coreNetworkId,
+      globalNetworkId: globalNetworkId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetLinks = {
   type t
   type request = {
@@ -2714,9 +2890,19 @@ module GetLinks = {
     ~siteId=?,
     ~linkIds=?,
     (),
-  ) => new({nextToken, maxResults, provider, type_, siteId, linkIds, globalNetworkId})
+  ) =>
+    new({
+      nextToken: nextToken,
+      maxResults: maxResults,
+      provider: provider,
+      type_: type_,
+      siteId: siteId,
+      linkIds: linkIds,
+      globalNetworkId: globalNetworkId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetDevices = {
   type t
   type request = {
@@ -2737,9 +2923,16 @@ module GetDevices = {
   }
   @module("@aws-sdk/client-networkmanager") @new external new: request => t = "GetDevicesCommand"
   let make = (~globalNetworkId, ~nextToken=?, ~maxResults=?, ~siteId=?, ~deviceIds=?, ()) =>
-    new({nextToken, maxResults, siteId, deviceIds, globalNetworkId})
+    new({
+      nextToken: nextToken,
+      maxResults: maxResults,
+      siteId: siteId,
+      deviceIds: deviceIds,
+      globalNetworkId: globalNetworkId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetCoreNetworkChangeSet = {
   type t
   type request = {
@@ -2761,9 +2954,15 @@ module GetCoreNetworkChangeSet = {
   @module("@aws-sdk/client-networkmanager") @new
   external new: request => t = "GetCoreNetworkChangeSetCommand"
   let make = (~policyVersionId, ~coreNetworkId, ~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken, maxResults, policyVersionId, coreNetworkId})
+    new({
+      nextToken: nextToken,
+      maxResults: maxResults,
+      policyVersionId: policyVersionId,
+      coreNetworkId: coreNetworkId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetCoreNetwork = {
   type t
   type request = {
@@ -2779,6 +2978,7 @@ module GetCoreNetwork = {
   let make = (~coreNetworkId, ()) => new({coreNetworkId: coreNetworkId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetConnections = {
   type t
   type request = {
@@ -2801,9 +3001,16 @@ module GetConnections = {
   @module("@aws-sdk/client-networkmanager") @new
   external new: request => t = "GetConnectionsCommand"
   let make = (~globalNetworkId, ~nextToken=?, ~maxResults=?, ~deviceId=?, ~connectionIds=?, ()) =>
-    new({nextToken, maxResults, deviceId, connectionIds, globalNetworkId})
+    new({
+      nextToken: nextToken,
+      maxResults: maxResults,
+      deviceId: deviceId,
+      connectionIds: connectionIds,
+      globalNetworkId: globalNetworkId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetConnectPeer = {
   type t
   type request = {
@@ -2819,6 +3026,7 @@ module GetConnectPeer = {
   let make = (~connectPeerId, ()) => new({connectPeerId: connectPeerId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeGlobalNetworks = {
   type t
   type request = {
@@ -2839,9 +3047,10 @@ module DescribeGlobalNetworks = {
   @module("@aws-sdk/client-networkmanager") @new
   external new: request => t = "DescribeGlobalNetworksCommand"
   let make = (~nextToken=?, ~maxResults=?, ~globalNetworkIds=?, ()) =>
-    new({nextToken, maxResults, globalNetworkIds})
+    new({nextToken: nextToken, maxResults: maxResults, globalNetworkIds: globalNetworkIds})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteCoreNetwork = {
   type t
   type request = {
@@ -2857,6 +3066,7 @@ module DeleteCoreNetwork = {
   let make = (~coreNetworkId, ()) => new({coreNetworkId: coreNetworkId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteConnectPeer = {
   type t
   type request = {
@@ -2872,6 +3082,7 @@ module DeleteConnectPeer = {
   let make = (~connectPeerId, ()) => new({connectPeerId: connectPeerId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteAttachment = {
   type t
   type request = {
@@ -2887,6 +3098,7 @@ module DeleteAttachment = {
   let make = (~attachmentId, ()) => new({attachmentId: attachmentId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateCoreNetwork = {
   type t
   type request = {
@@ -2909,9 +3121,16 @@ module CreateCoreNetwork = {
   @module("@aws-sdk/client-networkmanager") @new
   external new: request => t = "CreateCoreNetworkCommand"
   let make = (~globalNetworkId, ~clientToken=?, ~policyDocument=?, ~tags=?, ~description=?, ()) =>
-    new({clientToken, policyDocument, tags, description, globalNetworkId})
+    new({
+      clientToken: clientToken,
+      policyDocument: policyDocument,
+      tags: tags,
+      description: description,
+      globalNetworkId: globalNetworkId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateConnectPeer = {
   type t
   type request = {
@@ -2946,16 +3165,17 @@ module CreateConnectPeer = {
     (),
   ) =>
     new({
-      clientToken,
-      tags,
-      insideCidrBlocks,
-      bgpOptions,
-      peerAddress,
-      coreNetworkAddress,
-      connectAttachmentId,
+      clientToken: clientToken,
+      tags: tags,
+      insideCidrBlocks: insideCidrBlocks,
+      bgpOptions: bgpOptions,
+      peerAddress: peerAddress,
+      coreNetworkAddress: coreNetworkAddress,
+      connectAttachmentId: connectAttachmentId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module AcceptAttachment = {
   type t
   type request = {
@@ -2970,6 +3190,7 @@ module AcceptAttachment = {
   let make = (~attachmentId, ()) => new({attachmentId: attachmentId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateVpcAttachment = {
   type t
   type request = {
@@ -2988,9 +3209,15 @@ module UpdateVpcAttachment = {
   @module("@aws-sdk/client-networkmanager") @new
   external new: request => t = "UpdateVpcAttachmentCommand"
   let make = (~attachmentId, ~options=?, ~removeSubnetArns=?, ~addSubnetArns=?, ()) =>
-    new({options, removeSubnetArns, addSubnetArns, attachmentId})
+    new({
+      options: options,
+      removeSubnetArns: removeSubnetArns,
+      addSubnetArns: addSubnetArns,
+      attachmentId: attachmentId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module StartRouteAnalysis = {
   type t
   type request = {
@@ -3023,9 +3250,17 @@ module StartRouteAnalysis = {
     ~useMiddleboxes=?,
     ~includeReturnPath=?,
     (),
-  ) => new({useMiddleboxes, includeReturnPath, destination, source, globalNetworkId})
+  ) =>
+    new({
+      useMiddleboxes: useMiddleboxes,
+      includeReturnPath: includeReturnPath,
+      destination: destination,
+      source: source,
+      globalNetworkId: globalNetworkId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListAttachments = {
   type t
   type request = {
@@ -3057,9 +3292,18 @@ module ListAttachments = {
     ~attachmentType=?,
     ~coreNetworkId=?,
     (),
-  ) => new({nextToken, maxResults, state, edgeLocation, attachmentType, coreNetworkId})
+  ) =>
+    new({
+      nextToken: nextToken,
+      maxResults: maxResults,
+      state: state,
+      edgeLocation: edgeLocation,
+      attachmentType: attachmentType,
+      coreNetworkId: coreNetworkId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetVpcAttachment = {
   type t
   type request = {
@@ -3074,6 +3318,7 @@ module GetVpcAttachment = {
   let make = (~attachmentId, ()) => new({attachmentId: attachmentId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetSiteToSiteVpnAttachment = {
   type t
   type request = {
@@ -3088,6 +3333,7 @@ module GetSiteToSiteVpnAttachment = {
   let make = (~attachmentId, ()) => new({attachmentId: attachmentId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetRouteAnalysis = {
   type t
   type request = {
@@ -3102,9 +3348,11 @@ module GetRouteAnalysis = {
   }
   @module("@aws-sdk/client-networkmanager") @new
   external new: request => t = "GetRouteAnalysisCommand"
-  let make = (~routeAnalysisId, ~globalNetworkId, ()) => new({routeAnalysisId, globalNetworkId})
+  let make = (~routeAnalysisId, ~globalNetworkId, ()) =>
+    new({routeAnalysisId: routeAnalysisId, globalNetworkId: globalNetworkId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetConnectAttachment = {
   type t
   type request = {
@@ -3119,6 +3367,7 @@ module GetConnectAttachment = {
   let make = (~attachmentId, ()) => new({attachmentId: attachmentId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateVpcAttachment = {
   type t
   type request = {
@@ -3140,9 +3389,17 @@ module CreateVpcAttachment = {
   @module("@aws-sdk/client-networkmanager") @new
   external new: request => t = "CreateVpcAttachmentCommand"
   let make = (~subnetArns, ~vpcArn, ~coreNetworkId, ~clientToken=?, ~tags=?, ~options=?, ()) =>
-    new({clientToken, tags, options, subnetArns, vpcArn, coreNetworkId})
+    new({
+      clientToken: clientToken,
+      tags: tags,
+      options: options,
+      subnetArns: subnetArns,
+      vpcArn: vpcArn,
+      coreNetworkId: coreNetworkId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateSiteToSiteVpnAttachment = {
   type t
   type request = {
@@ -3164,9 +3421,15 @@ module CreateSiteToSiteVpnAttachment = {
   @module("@aws-sdk/client-networkmanager") @new
   external new: request => t = "CreateSiteToSiteVpnAttachmentCommand"
   let make = (~vpnConnectionArn, ~coreNetworkId, ~clientToken=?, ~tags=?, ()) =>
-    new({clientToken, tags, vpnConnectionArn, coreNetworkId})
+    new({
+      clientToken: clientToken,
+      tags: tags,
+      vpnConnectionArn: vpnConnectionArn,
+      coreNetworkId: coreNetworkId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateConnectAttachment = {
   type t
   type request = {
@@ -3199,6 +3462,14 @@ module CreateConnectAttachment = {
     ~clientToken=?,
     ~tags=?,
     (),
-  ) => new({clientToken, tags, options, transportAttachmentId, edgeLocation, coreNetworkId})
+  ) =>
+    new({
+      clientToken: clientToken,
+      tags: tags,
+      options: options,
+      transportAttachmentId: transportAttachmentId,
+      edgeLocation: edgeLocation,
+      coreNetworkId: coreNetworkId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

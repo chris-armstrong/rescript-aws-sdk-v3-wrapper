@@ -1160,9 +1160,16 @@ module UpdateThreatIntelSet = {
   @module("@aws-sdk/client-guardduty") @new
   external new: request => t = "UpdateThreatIntelSetCommand"
   let make = (~threatIntelSetId, ~detectorId, ~activate=?, ~location=?, ~name=?, ()) =>
-    new({activate, location, name, threatIntelSetId, detectorId})
+    new({
+      activate: activate,
+      location: location,
+      name: name,
+      threatIntelSetId: threatIntelSetId,
+      detectorId: detectorId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateIPSet = {
   type t
   type request = {
@@ -1187,9 +1194,16 @@ module UpdateIPSet = {
   type response = {.}
   @module("@aws-sdk/client-guardduty") @new external new: request => t = "UpdateIPSetCommand"
   let make = (~ipSetId, ~detectorId, ~activate=?, ~location=?, ~name=?, ()) =>
-    new({activate, location, name, ipSetId, detectorId})
+    new({
+      activate: activate,
+      location: location,
+      name: name,
+      ipSetId: ipSetId,
+      detectorId: detectorId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module GetInvitationsCount = {
   type t
   type request = {.}
@@ -1202,6 +1216,7 @@ module GetInvitationsCount = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module EnableOrganizationAdminAccount = {
   type t
   type request = {
@@ -1216,6 +1231,7 @@ module EnableOrganizationAdminAccount = {
   let make = (~adminAccountId, ()) => new({adminAccountId: adminAccountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DisassociateFromMasterAccount = {
   type t
   type request = {
@@ -1229,6 +1245,7 @@ module DisassociateFromMasterAccount = {
   let make = (~detectorId, ()) => new({detectorId: detectorId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DisableOrganizationAdminAccount = {
   type t
   type request = {
@@ -1243,6 +1260,7 @@ module DisableOrganizationAdminAccount = {
   let make = (~adminAccountId, ()) => new({adminAccountId: adminAccountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteThreatIntelSet = {
   type t
   type request = {
@@ -1256,9 +1274,11 @@ module DeleteThreatIntelSet = {
   type response = {.}
   @module("@aws-sdk/client-guardduty") @new
   external new: request => t = "DeleteThreatIntelSetCommand"
-  let make = (~threatIntelSetId, ~detectorId, ()) => new({threatIntelSetId, detectorId})
+  let make = (~threatIntelSetId, ~detectorId, ()) =>
+    new({threatIntelSetId: threatIntelSetId, detectorId: detectorId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeletePublishingDestination = {
   type t
   type request = {
@@ -1273,9 +1293,11 @@ module DeletePublishingDestination = {
   type response = {.}
   @module("@aws-sdk/client-guardduty") @new
   external new: request => t = "DeletePublishingDestinationCommand"
-  let make = (~destinationId, ~detectorId, ()) => new({destinationId, detectorId})
+  let make = (~destinationId, ~detectorId, ()) =>
+    new({destinationId: destinationId, detectorId: detectorId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteIPSet = {
   type t
   type request = {
@@ -1285,9 +1307,10 @@ module DeleteIPSet = {
   }
   type response = {.}
   @module("@aws-sdk/client-guardduty") @new external new: request => t = "DeleteIPSetCommand"
-  let make = (~ipSetId, ~detectorId, ()) => new({ipSetId, detectorId})
+  let make = (~ipSetId, ~detectorId, ()) => new({ipSetId: ipSetId, detectorId: detectorId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteFilter = {
   type t
   type request = {
@@ -1299,9 +1322,10 @@ module DeleteFilter = {
   }
   type response = {.}
   @module("@aws-sdk/client-guardduty") @new external new: request => t = "DeleteFilterCommand"
-  let make = (~filterName, ~detectorId, ()) => new({filterName, detectorId})
+  let make = (~filterName, ~detectorId, ()) => new({filterName: filterName, detectorId: detectorId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteDetector = {
   type t
   type request = {
@@ -1313,6 +1337,7 @@ module DeleteDetector = {
   let make = (~detectorId, ()) => new({detectorId: detectorId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module AcceptInvitation = {
   type t
   type request = {
@@ -1333,9 +1358,10 @@ module AcceptInvitation = {
   type response = {.}
   @module("@aws-sdk/client-guardduty") @new external new: request => t = "AcceptInvitationCommand"
   let make = (~invitationId, ~masterId, ~detectorId, ()) =>
-    new({invitationId, masterId, detectorId})
+    new({invitationId: invitationId, masterId: masterId, detectorId: detectorId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdatePublishingDestination = {
   type t
   type request = {
@@ -1355,9 +1381,14 @@ module UpdatePublishingDestination = {
   @module("@aws-sdk/client-guardduty") @new
   external new: request => t = "UpdatePublishingDestinationCommand"
   let make = (~destinationId, ~detectorId, ~destinationProperties=?, ()) =>
-    new({destinationProperties, destinationId, detectorId})
+    new({
+      destinationProperties: destinationProperties,
+      destinationId: destinationId,
+      detectorId: detectorId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateFindingsFeedback = {
   type t
   type request = {
@@ -1375,9 +1406,10 @@ module UpdateFindingsFeedback = {
   @module("@aws-sdk/client-guardduty") @new
   external new: request => t = "UpdateFindingsFeedbackCommand"
   let make = (~feedback, ~findingIds, ~detectorId, ~comments=?, ()) =>
-    new({comments, feedback, findingIds, detectorId})
+    new({comments: comments, feedback: feedback, findingIds: findingIds, detectorId: detectorId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UntagResource = {
   type t
   type request = {
@@ -1389,9 +1421,10 @@ module UntagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-guardduty") @new external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys, resourceArn})
+  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UnarchiveFindings = {
   type t
   type request = {
@@ -1403,9 +1436,10 @@ module UnarchiveFindings = {
   }
   type response = {.}
   @module("@aws-sdk/client-guardduty") @new external new: request => t = "UnarchiveFindingsCommand"
-  let make = (~findingIds, ~detectorId, ()) => new({findingIds, detectorId})
+  let make = (~findingIds, ~detectorId, ()) => new({findingIds: findingIds, detectorId: detectorId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module TagResource = {
   type t
   type request = {
@@ -1418,9 +1452,10 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-guardduty") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceArn, ()) => new({tags, resourceArn})
+  let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ListThreatIntelSets = {
   type t
   type request = {
@@ -1449,9 +1484,10 @@ module ListThreatIntelSets = {
   @module("@aws-sdk/client-guardduty") @new
   external new: request => t = "ListThreatIntelSetsCommand"
   let make = (~detectorId, ~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken, maxResults, detectorId})
+    new({nextToken: nextToken, maxResults: maxResults, detectorId: detectorId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListTagsForResource = {
   type t
   type request = {
@@ -1467,6 +1503,7 @@ module ListTagsForResource = {
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListIPSets = {
   type t
   type request = {
@@ -1493,9 +1530,10 @@ module ListIPSets = {
   }
   @module("@aws-sdk/client-guardduty") @new external new: request => t = "ListIPSetsCommand"
   let make = (~detectorId, ~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken, maxResults, detectorId})
+    new({nextToken: nextToken, maxResults: maxResults, detectorId: detectorId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListFilters = {
   type t
   type request = {
@@ -1522,9 +1560,10 @@ module ListFilters = {
   }
   @module("@aws-sdk/client-guardduty") @new external new: request => t = "ListFiltersCommand"
   let make = (~detectorId, ~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken, maxResults, detectorId})
+    new({nextToken: nextToken, maxResults: maxResults, detectorId: detectorId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListDetectors = {
   type t
   type request = {
@@ -1547,9 +1586,11 @@ module ListDetectors = {
     @ocaml.doc("<p>A list of detector IDs.</p>") @as("DetectorIds") detectorIds: detectorIds,
   }
   @module("@aws-sdk/client-guardduty") @new external new: request => t = "ListDetectorsCommand"
-  let make = (~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults})
+  let make = (~nextToken=?, ~maxResults=?, ()) =>
+    new({nextToken: nextToken, maxResults: maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetThreatIntelSet = {
   type t
   type request = {
@@ -1574,9 +1615,11 @@ module GetThreatIntelSet = {
     name: name,
   }
   @module("@aws-sdk/client-guardduty") @new external new: request => t = "GetThreatIntelSetCommand"
-  let make = (~threatIntelSetId, ~detectorId, ()) => new({threatIntelSetId, detectorId})
+  let make = (~threatIntelSetId, ~detectorId, ()) =>
+    new({threatIntelSetId: threatIntelSetId, detectorId: detectorId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetMasterAccount = {
   type t
   type request = {
@@ -1591,6 +1634,7 @@ module GetMasterAccount = {
   let make = (~detectorId, ()) => new({detectorId: detectorId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetIPSet = {
   type t
   type request = {
@@ -1610,9 +1654,10 @@ module GetIPSet = {
     @ocaml.doc("<p>The user-friendly name for the IPSet.</p>") @as("Name") name: name,
   }
   @module("@aws-sdk/client-guardduty") @new external new: request => t = "GetIPSetCommand"
-  let make = (~ipSetId, ~detectorId, ()) => new({ipSetId, detectorId})
+  let make = (~ipSetId, ~detectorId, ()) => new({ipSetId: ipSetId, detectorId: detectorId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribePublishingDestination = {
   type t
   type request = {
@@ -1643,9 +1688,11 @@ module DescribePublishingDestination = {
   }
   @module("@aws-sdk/client-guardduty") @new
   external new: request => t = "DescribePublishingDestinationCommand"
-  let make = (~destinationId, ~detectorId, ()) => new({destinationId, detectorId})
+  let make = (~destinationId, ~detectorId, ()) =>
+    new({destinationId: destinationId, detectorId: detectorId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateThreatIntelSet = {
   type t
   type request = {
@@ -1677,9 +1724,18 @@ module CreateThreatIntelSet = {
   @module("@aws-sdk/client-guardduty") @new
   external new: request => t = "CreateThreatIntelSetCommand"
   let make = (~activate, ~location, ~format, ~name, ~detectorId, ~tags=?, ~clientToken=?, ()) =>
-    new({tags, clientToken, activate, location, format, name, detectorId})
+    new({
+      tags: tags,
+      clientToken: clientToken,
+      activate: activate,
+      location: location,
+      format: format,
+      name: name,
+      detectorId: detectorId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateSampleFindings = {
   type t
   type request = {
@@ -1691,9 +1747,11 @@ module CreateSampleFindings = {
   type response = {.}
   @module("@aws-sdk/client-guardduty") @new
   external new: request => t = "CreateSampleFindingsCommand"
-  let make = (~detectorId, ~findingTypes=?, ()) => new({findingTypes, detectorId})
+  let make = (~detectorId, ~findingTypes=?, ()) =>
+    new({findingTypes: findingTypes, detectorId: detectorId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module CreatePublishingDestination = {
   type t
   type request = {
@@ -1720,9 +1778,15 @@ module CreatePublishingDestination = {
   @module("@aws-sdk/client-guardduty") @new
   external new: request => t = "CreatePublishingDestinationCommand"
   let make = (~destinationProperties, ~destinationType, ~detectorId, ~clientToken=?, ()) =>
-    new({clientToken, destinationProperties, destinationType, detectorId})
+    new({
+      clientToken: clientToken,
+      destinationProperties: destinationProperties,
+      destinationType: destinationType,
+      detectorId: detectorId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateIPSet = {
   type t
   type request = {
@@ -1752,9 +1816,18 @@ module CreateIPSet = {
   }
   @module("@aws-sdk/client-guardduty") @new external new: request => t = "CreateIPSetCommand"
   let make = (~activate, ~location, ~format, ~name, ~detectorId, ~tags=?, ~clientToken=?, ()) =>
-    new({tags, clientToken, activate, location, format, name, detectorId})
+    new({
+      tags: tags,
+      clientToken: clientToken,
+      activate: activate,
+      location: location,
+      format: format,
+      name: name,
+      detectorId: detectorId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ArchiveFindings = {
   type t
   type request = {
@@ -1767,9 +1840,10 @@ module ArchiveFindings = {
   }
   type response = {.}
   @module("@aws-sdk/client-guardduty") @new external new: request => t = "ArchiveFindingsCommand"
-  let make = (~findingIds, ~detectorId, ()) => new({findingIds, detectorId})
+  let make = (~findingIds, ~detectorId, ()) => new({findingIds: findingIds, detectorId: detectorId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module StopMonitoringMembers = {
   type t
   type request = {
@@ -1789,9 +1863,10 @@ module StopMonitoringMembers = {
   }
   @module("@aws-sdk/client-guardduty") @new
   external new: request => t = "StopMonitoringMembersCommand"
-  let make = (~accountIds, ~detectorId, ()) => new({accountIds, detectorId})
+  let make = (~accountIds, ~detectorId, ()) => new({accountIds: accountIds, detectorId: detectorId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module StartMonitoringMembers = {
   type t
   type request = {
@@ -1811,9 +1886,10 @@ module StartMonitoringMembers = {
   }
   @module("@aws-sdk/client-guardduty") @new
   external new: request => t = "StartMonitoringMembersCommand"
-  let make = (~accountIds, ~detectorId, ()) => new({accountIds, detectorId})
+  let make = (~accountIds, ~detectorId, ()) => new({accountIds: accountIds, detectorId: detectorId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListPublishingDestinations = {
   type t
   type request = {
@@ -1844,9 +1920,10 @@ module ListPublishingDestinations = {
   @module("@aws-sdk/client-guardduty") @new
   external new: request => t = "ListPublishingDestinationsCommand"
   let make = (~detectorId, ~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken, maxResults, detectorId})
+    new({nextToken: nextToken, maxResults: maxResults, detectorId: detectorId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListOrganizationAdminAccounts = {
   type t
   type request = {
@@ -1871,9 +1948,11 @@ module ListOrganizationAdminAccounts = {
   }
   @module("@aws-sdk/client-guardduty") @new
   external new: request => t = "ListOrganizationAdminAccountsCommand"
-  let make = (~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults})
+  let make = (~nextToken=?, ~maxResults=?, ()) =>
+    new({nextToken: nextToken, maxResults: maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListMembers = {
   type t
   type request = {
@@ -1904,9 +1983,15 @@ module ListMembers = {
   }
   @module("@aws-sdk/client-guardduty") @new external new: request => t = "ListMembersCommand"
   let make = (~detectorId, ~onlyAssociated=?, ~nextToken=?, ~maxResults=?, ()) =>
-    new({onlyAssociated, nextToken, maxResults, detectorId})
+    new({
+      onlyAssociated: onlyAssociated,
+      nextToken: nextToken,
+      maxResults: maxResults,
+      detectorId: detectorId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListInvitations = {
   type t
   type request = {
@@ -1930,9 +2015,11 @@ module ListInvitations = {
     invitations: option<invitations>,
   }
   @module("@aws-sdk/client-guardduty") @new external new: request => t = "ListInvitationsCommand"
-  let make = (~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults})
+  let make = (~nextToken=?, ~maxResults=?, ()) =>
+    new({nextToken: nextToken, maxResults: maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module InviteMembers = {
   type t
   type request = {
@@ -1962,9 +2049,15 @@ module InviteMembers = {
   }
   @module("@aws-sdk/client-guardduty") @new external new: request => t = "InviteMembersCommand"
   let make = (~accountIds, ~detectorId, ~message=?, ~disableEmailNotification=?, ()) =>
-    new({message, disableEmailNotification, accountIds, detectorId})
+    new({
+      message: message,
+      disableEmailNotification: disableEmailNotification,
+      accountIds: accountIds,
+      detectorId: detectorId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetMembers = {
   type t
   type request = {
@@ -1986,9 +2079,10 @@ module GetMembers = {
     @ocaml.doc("<p>A list of members.</p>") @as("Members") members: members,
   }
   @module("@aws-sdk/client-guardduty") @new external new: request => t = "GetMembersCommand"
-  let make = (~accountIds, ~detectorId, ()) => new({accountIds, detectorId})
+  let make = (~accountIds, ~detectorId, ()) => new({accountIds: accountIds, detectorId: detectorId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DisassociateMembers = {
   type t
   type request = {
@@ -2009,9 +2103,10 @@ module DisassociateMembers = {
   }
   @module("@aws-sdk/client-guardduty") @new
   external new: request => t = "DisassociateMembersCommand"
-  let make = (~accountIds, ~detectorId, ()) => new({accountIds, detectorId})
+  let make = (~accountIds, ~detectorId, ()) => new({accountIds: accountIds, detectorId: detectorId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteMembers = {
   type t
   type request = {
@@ -2030,9 +2125,10 @@ module DeleteMembers = {
     unprocessedAccounts: unprocessedAccounts,
   }
   @module("@aws-sdk/client-guardduty") @new external new: request => t = "DeleteMembersCommand"
-  let make = (~accountIds, ~detectorId, ()) => new({accountIds, detectorId})
+  let make = (~accountIds, ~detectorId, ()) => new({accountIds: accountIds, detectorId: detectorId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteInvitations = {
   type t
   type request = {
@@ -2051,6 +2147,7 @@ module DeleteInvitations = {
   let make = (~accountIds, ()) => new({accountIds: accountIds})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeclineInvitations = {
   type t
   type request = {
@@ -2069,6 +2166,7 @@ module DeclineInvitations = {
   let make = (~accountIds, ()) => new({accountIds: accountIds})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateMembers = {
   type t
   type request = {
@@ -2088,9 +2186,11 @@ module CreateMembers = {
     unprocessedAccounts: unprocessedAccounts,
   }
   @module("@aws-sdk/client-guardduty") @new external new: request => t = "CreateMembersCommand"
-  let make = (~accountDetails, ~detectorId, ()) => new({accountDetails, detectorId})
+  let make = (~accountDetails, ~detectorId, ()) =>
+    new({accountDetails: accountDetails, detectorId: detectorId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateOrganizationConfiguration = {
   type t
   type request = {
@@ -2109,9 +2209,10 @@ module UpdateOrganizationConfiguration = {
   @module("@aws-sdk/client-guardduty") @new
   external new: request => t = "UpdateOrganizationConfigurationCommand"
   let make = (~autoEnable, ~detectorId, ~dataSources=?, ()) =>
-    new({dataSources, autoEnable, detectorId})
+    new({dataSources: dataSources, autoEnable: autoEnable, detectorId: detectorId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateMemberDetectors = {
   type t
   type request = {
@@ -2131,9 +2232,10 @@ module UpdateMemberDetectors = {
   @module("@aws-sdk/client-guardduty") @new
   external new: request => t = "UpdateMemberDetectorsCommand"
   let make = (~accountIds, ~detectorId, ~dataSources=?, ()) =>
-    new({dataSources, accountIds, detectorId})
+    new({dataSources: dataSources, accountIds: accountIds, detectorId: detectorId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateDetector = {
   type t
   type request = {
@@ -2151,9 +2253,15 @@ module UpdateDetector = {
   type response = {.}
   @module("@aws-sdk/client-guardduty") @new external new: request => t = "UpdateDetectorCommand"
   let make = (~detectorId, ~dataSources=?, ~findingPublishingFrequency=?, ~enable=?, ()) =>
-    new({dataSources, findingPublishingFrequency, enable, detectorId})
+    new({
+      dataSources: dataSources,
+      findingPublishingFrequency: findingPublishingFrequency,
+      enable: enable,
+      detectorId: detectorId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module GetDetector = {
   type t
   type request = {
@@ -2178,6 +2286,7 @@ module GetDetector = {
   let make = (~detectorId, ()) => new({detectorId: detectorId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeOrganizationConfiguration = {
   type t
   type request = {
@@ -2205,6 +2314,7 @@ module DescribeOrganizationConfiguration = {
   let make = (~detectorId, ()) => new({detectorId: detectorId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateDetector = {
   type t
   type request = {
@@ -2234,9 +2344,17 @@ module CreateDetector = {
     ~findingPublishingFrequency=?,
     ~clientToken=?,
     (),
-  ) => new({tags, dataSources, findingPublishingFrequency, clientToken, enable})
+  ) =>
+    new({
+      tags: tags,
+      dataSources: dataSources,
+      findingPublishingFrequency: findingPublishingFrequency,
+      clientToken: clientToken,
+      enable: enable,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateFilter = {
   type t
   type request = {
@@ -2270,9 +2388,18 @@ module UpdateFilter = {
     ~action=?,
     ~description=?,
     (),
-  ) => new({findingCriteria, rank, action, description, filterName, detectorId})
+  ) =>
+    new({
+      findingCriteria: findingCriteria,
+      rank: rank,
+      action: action,
+      description: description,
+      filterName: filterName,
+      detectorId: detectorId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListFindings = {
   type t
   type request = {
@@ -2456,9 +2583,16 @@ module ListFindings = {
   }
   @module("@aws-sdk/client-guardduty") @new external new: request => t = "ListFindingsCommand"
   let make = (~detectorId, ~nextToken=?, ~maxResults=?, ~sortCriteria=?, ~findingCriteria=?, ()) =>
-    new({nextToken, maxResults, sortCriteria, findingCriteria, detectorId})
+    new({
+      nextToken: nextToken,
+      maxResults: maxResults,
+      sortCriteria: sortCriteria,
+      findingCriteria: findingCriteria,
+      detectorId: detectorId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetUsageStatistics = {
   type t
   type request = {
@@ -2502,9 +2636,18 @@ module GetUsageStatistics = {
     ~maxResults=?,
     ~unit_=?,
     (),
-  ) => new({nextToken, maxResults, unit_, usageCriteria, usageStatisticType, detectorId})
+  ) =>
+    new({
+      nextToken: nextToken,
+      maxResults: maxResults,
+      unit_: unit_,
+      usageCriteria: usageCriteria,
+      usageStatisticType: usageStatisticType,
+      detectorId: detectorId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetFindingsStatistics = {
   type t
   type request = {
@@ -2525,9 +2668,14 @@ module GetFindingsStatistics = {
   @module("@aws-sdk/client-guardduty") @new
   external new: request => t = "GetFindingsStatisticsCommand"
   let make = (~findingStatisticTypes, ~detectorId, ~findingCriteria=?, ()) =>
-    new({findingCriteria, findingStatisticTypes, detectorId})
+    new({
+      findingCriteria: findingCriteria,
+      findingStatisticTypes: findingStatisticTypes,
+      detectorId: detectorId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetFilter = {
   type t
   type request = {
@@ -2556,9 +2704,10 @@ module GetFilter = {
     @ocaml.doc("<p>The name of the filter.</p>") @as("Name") name: filterName,
   }
   @module("@aws-sdk/client-guardduty") @new external new: request => t = "GetFilterCommand"
-  let make = (~filterName, ~detectorId, ()) => new({filterName, detectorId})
+  let make = (~filterName, ~detectorId, ()) => new({filterName: filterName, detectorId: detectorId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateFilter = {
   type t
   type request = {
@@ -2780,9 +2929,20 @@ module CreateFilter = {
     ~action=?,
     ~description=?,
     (),
-  ) => new({tags, clientToken, findingCriteria, rank, action, description, name, detectorId})
+  ) =>
+    new({
+      tags: tags,
+      clientToken: clientToken,
+      findingCriteria: findingCriteria,
+      rank: rank,
+      action: action,
+      description: description,
+      name: name,
+      detectorId: detectorId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetMemberDetectors = {
   type t
   type request = {
@@ -2803,9 +2963,10 @@ module GetMemberDetectors = {
     memberDataSourceConfigurations: memberDataSourceConfigurations,
   }
   @module("@aws-sdk/client-guardduty") @new external new: request => t = "GetMemberDetectorsCommand"
-  let make = (~accountIds, ~detectorId, ()) => new({accountIds, detectorId})
+  let make = (~accountIds, ~detectorId, ()) => new({accountIds: accountIds, detectorId: detectorId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetFindings = {
   type t
   type request = {
@@ -2821,6 +2982,6 @@ module GetFindings = {
   type response = {@ocaml.doc("<p>A list of findings.</p>") @as("Findings") findings: findings}
   @module("@aws-sdk/client-guardduty") @new external new: request => t = "GetFindingsCommand"
   let make = (~findingIds, ~detectorId, ~sortCriteria=?, ()) =>
-    new({sortCriteria, findingIds, detectorId})
+    new({sortCriteria: sortCriteria, findingIds: findingIds, detectorId: detectorId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

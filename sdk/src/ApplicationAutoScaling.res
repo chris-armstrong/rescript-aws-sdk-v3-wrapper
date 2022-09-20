@@ -1524,9 +1524,14 @@ module DeregisterScalableTarget = {
   @module("@aws-sdk/client-application-autoscaling") @new
   external new: request => t = "DeregisterScalableTargetCommand"
   let make = (~scalableDimension, ~resourceId, ~serviceNamespace, ()) =>
-    new({scalableDimension, resourceId, serviceNamespace})
+    new({
+      scalableDimension: scalableDimension,
+      resourceId: resourceId,
+      serviceNamespace: serviceNamespace,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteScheduledAction = {
   type t
   type request = {
@@ -1694,9 +1699,15 @@ module DeleteScheduledAction = {
   @module("@aws-sdk/client-application-autoscaling") @new
   external new: request => t = "DeleteScheduledActionCommand"
   let make = (~scalableDimension, ~resourceId, ~scheduledActionName, ~serviceNamespace, ()) =>
-    new({scalableDimension, resourceId, scheduledActionName, serviceNamespace})
+    new({
+      scalableDimension: scalableDimension,
+      resourceId: resourceId,
+      scheduledActionName: scheduledActionName,
+      serviceNamespace: serviceNamespace,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteScalingPolicy = {
   type t
   type request = {
@@ -1864,9 +1875,15 @@ module DeleteScalingPolicy = {
   @module("@aws-sdk/client-application-autoscaling") @new
   external new: request => t = "DeleteScalingPolicyCommand"
   let make = (~scalableDimension, ~resourceId, ~serviceNamespace, ~policyName, ()) =>
-    new({scalableDimension, resourceId, serviceNamespace, policyName})
+    new({
+      scalableDimension: scalableDimension,
+      resourceId: resourceId,
+      serviceNamespace: serviceNamespace,
+      policyName: policyName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module RegisterScalableTarget = {
   type t
   type request = {
@@ -2094,16 +2111,17 @@ module RegisterScalableTarget = {
     (),
   ) =>
     new({
-      suspendedState,
-      roleARN,
-      maxCapacity,
-      minCapacity,
-      scalableDimension,
-      resourceId,
-      serviceNamespace,
+      suspendedState: suspendedState,
+      roleARN: roleARN,
+      maxCapacity: maxCapacity,
+      minCapacity: minCapacity,
+      scalableDimension: scalableDimension,
+      resourceId: resourceId,
+      serviceNamespace: serviceNamespace,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module PutScheduledAction = {
   type t
   type request = {
@@ -2326,18 +2344,19 @@ module PutScheduledAction = {
     (),
   ) =>
     new({
-      scalableTargetAction,
-      endTime,
-      startTime,
-      scalableDimension,
-      resourceId,
-      scheduledActionName,
-      timezone,
-      schedule,
-      serviceNamespace,
+      scalableTargetAction: scalableTargetAction,
+      endTime: endTime,
+      startTime: startTime,
+      scalableDimension: scalableDimension,
+      resourceId: resourceId,
+      scheduledActionName: scheduledActionName,
+      timezone: timezone,
+      schedule: schedule,
+      serviceNamespace: serviceNamespace,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DescribeScalingActivities = {
   type t
   type request = {
@@ -2528,9 +2547,17 @@ module DescribeScalingActivities = {
     ~scalableDimension=?,
     ~resourceId=?,
     (),
-  ) => new({nextToken, maxResults, scalableDimension, resourceId, serviceNamespace})
+  ) =>
+    new({
+      nextToken: nextToken,
+      maxResults: maxResults,
+      scalableDimension: scalableDimension,
+      resourceId: resourceId,
+      serviceNamespace: serviceNamespace,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeScheduledActions = {
   type t
   type request = {
@@ -2726,15 +2753,16 @@ module DescribeScheduledActions = {
     (),
   ) =>
     new({
-      nextToken,
-      maxResults,
-      scalableDimension,
-      resourceId,
-      serviceNamespace,
-      scheduledActionNames,
+      nextToken: nextToken,
+      maxResults: maxResults,
+      scalableDimension: scalableDimension,
+      resourceId: resourceId,
+      serviceNamespace: serviceNamespace,
+      scheduledActionNames: scheduledActionNames,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeScalableTargets = {
   type t
   type request = {
@@ -2926,9 +2954,17 @@ module DescribeScalableTargets = {
     ~scalableDimension=?,
     ~resourceIds=?,
     (),
-  ) => new({nextToken, maxResults, scalableDimension, resourceIds, serviceNamespace})
+  ) =>
+    new({
+      nextToken: nextToken,
+      maxResults: maxResults,
+      scalableDimension: scalableDimension,
+      resourceIds: resourceIds,
+      serviceNamespace: serviceNamespace,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module PutScalingPolicy = {
   type t
   type request = {
@@ -3134,16 +3170,17 @@ module PutScalingPolicy = {
     (),
   ) =>
     new({
-      targetTrackingScalingPolicyConfiguration,
-      stepScalingPolicyConfiguration,
-      policyType,
-      scalableDimension,
-      resourceId,
-      serviceNamespace,
-      policyName,
+      targetTrackingScalingPolicyConfiguration: targetTrackingScalingPolicyConfiguration,
+      stepScalingPolicyConfiguration: stepScalingPolicyConfiguration,
+      policyType: policyType,
+      scalableDimension: scalableDimension,
+      resourceId: resourceId,
+      serviceNamespace: serviceNamespace,
+      policyName: policyName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeScalingPolicies = {
   type t
   type request = {
@@ -3337,6 +3374,14 @@ module DescribeScalingPolicies = {
     ~resourceId=?,
     ~policyNames=?,
     (),
-  ) => new({nextToken, maxResults, scalableDimension, resourceId, serviceNamespace, policyNames})
+  ) =>
+    new({
+      nextToken: nextToken,
+      maxResults: maxResults,
+      scalableDimension: scalableDimension,
+      resourceId: resourceId,
+      serviceNamespace: serviceNamespace,
+      policyNames: policyNames,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

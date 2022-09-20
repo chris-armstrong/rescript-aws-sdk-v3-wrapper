@@ -94,9 +94,11 @@ module StartDeviceAuthorization = {
   }
   @module("@aws-sdk/client-awsssooidc") @new
   external new: request => t = "StartDeviceAuthorizationCommand"
-  let make = (~startUrl, ~clientSecret, ~clientId, ()) => new({startUrl, clientSecret, clientId})
+  let make = (~startUrl, ~clientSecret, ~clientId, ()) =>
+    new({startUrl: startUrl, clientSecret: clientSecret, clientId: clientId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module RegisterClient = {
   type t
   type request = {
@@ -130,9 +132,11 @@ module RegisterClient = {
     clientId: option<clientId>,
   }
   @module("@aws-sdk/client-awsssooidc") @new external new: request => t = "RegisterClientCommand"
-  let make = (~clientType, ~clientName, ~scopes=?, ()) => new({scopes, clientType, clientName})
+  let make = (~clientType, ~clientName, ~scopes=?, ()) =>
+    new({scopes: scopes, clientType: clientType, clientName: clientName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateToken = {
   type t
   type request = {
@@ -194,6 +198,16 @@ module CreateToken = {
     ~refreshToken=?,
     ~code=?,
     (),
-  ) => new({redirectUri, scope, refreshToken, code, deviceCode, grantType, clientSecret, clientId})
+  ) =>
+    new({
+      redirectUri: redirectUri,
+      scope: scope,
+      refreshToken: refreshToken,
+      code: code,
+      deviceCode: deviceCode,
+      grantType: grantType,
+      clientSecret: clientSecret,
+      clientId: clientId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

@@ -13822,6 +13822,7 @@ module EnableSagemakerServicecatalogPortfolio = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DisableSagemakerServicecatalogPortfolio = {
   type t
   type request = {.}
@@ -13831,6 +13832,7 @@ module DisableSagemakerServicecatalogPortfolio = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateTrial = {
   type t
   type request = {
@@ -13846,9 +13848,11 @@ module UpdateTrial = {
     trialArn: option<trialArn>,
   }
   @module("@aws-sdk/client-sagemaker") @new external new: request => t = "UpdateTrialCommand"
-  let make = (~trialName, ~displayName=?, ()) => new({displayName, trialName})
+  let make = (~trialName, ~displayName=?, ()) =>
+    new({displayName: displayName, trialName: trialName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateExperiment = {
   type t
   type request = {
@@ -13867,9 +13871,10 @@ module UpdateExperiment = {
   }
   @module("@aws-sdk/client-sagemaker") @new external new: request => t = "UpdateExperimentCommand"
   let make = (~experimentName, ~description=?, ~displayName=?, ()) =>
-    new({description, displayName, experimentName})
+    new({description: description, displayName: displayName, experimentName: experimentName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module StopTransformJob = {
   type t
   type request = {
@@ -13881,6 +13886,7 @@ module StopTransformJob = {
   let make = (~transformJobName, ()) => new({transformJobName: transformJobName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module StopTrainingJob = {
   type t
   type request = {
@@ -13892,6 +13898,7 @@ module StopTrainingJob = {
   let make = (~trainingJobName, ()) => new({trainingJobName: trainingJobName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module StopProcessingJob = {
   type t
   type request = {
@@ -13903,6 +13910,7 @@ module StopProcessingJob = {
   let make = (~processingJobName, ()) => new({processingJobName: processingJobName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module StopPipelineExecution = {
   type t
   type request = {
@@ -13922,9 +13930,10 @@ module StopPipelineExecution = {
   @module("@aws-sdk/client-sagemaker") @new
   external new: request => t = "StopPipelineExecutionCommand"
   let make = (~clientRequestToken, ~pipelineExecutionArn, ()) =>
-    new({clientRequestToken, pipelineExecutionArn})
+    new({clientRequestToken: clientRequestToken, pipelineExecutionArn: pipelineExecutionArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module StopNotebookInstance = {
   type t
   type request = {
@@ -13937,6 +13946,7 @@ module StopNotebookInstance = {
   let make = (~notebookInstanceName, ()) => new({notebookInstanceName: notebookInstanceName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module StopMonitoringSchedule = {
   type t
   type request = {
@@ -13949,6 +13959,7 @@ module StopMonitoringSchedule = {
   let make = (~monitoringScheduleName, ()) => new({monitoringScheduleName: monitoringScheduleName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module StopLabelingJob = {
   type t
   type request = {
@@ -13960,6 +13971,7 @@ module StopLabelingJob = {
   let make = (~labelingJobName, ()) => new({labelingJobName: labelingJobName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module StopInferenceRecommendationsJob = {
   type t
   type request = {
@@ -13972,6 +13984,7 @@ module StopInferenceRecommendationsJob = {
   let make = (~jobName, ()) => new({jobName: jobName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module StopHyperParameterTuningJob = {
   type t
   type request = {
@@ -13985,6 +13998,7 @@ module StopHyperParameterTuningJob = {
     new({hyperParameterTuningJobName: hyperParameterTuningJobName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module StopEdgePackagingJob = {
   type t
   type request = {
@@ -13997,6 +14011,7 @@ module StopEdgePackagingJob = {
   let make = (~edgePackagingJobName, ()) => new({edgePackagingJobName: edgePackagingJobName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module StopCompilationJob = {
   type t
   type request = {
@@ -14008,6 +14023,7 @@ module StopCompilationJob = {
   let make = (~compilationJobName, ()) => new({compilationJobName: compilationJobName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module StopAutoMLJob = {
   type t
   type request = {
@@ -14019,6 +14035,7 @@ module StopAutoMLJob = {
   let make = (~autoMLJobName, ()) => new({autoMLJobName: autoMLJobName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module StartNotebookInstance = {
   type t
   type request = {
@@ -14031,6 +14048,7 @@ module StartNotebookInstance = {
   let make = (~notebookInstanceName, ()) => new({notebookInstanceName: notebookInstanceName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module StartMonitoringSchedule = {
   type t
   type request = {
@@ -14043,6 +14061,7 @@ module StartMonitoringSchedule = {
   let make = (~monitoringScheduleName, ()) => new({monitoringScheduleName: monitoringScheduleName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module SendPipelineExecutionStepFailure = {
   type t
   type request = {
@@ -14064,9 +14083,14 @@ module SendPipelineExecutionStepFailure = {
   @module("@aws-sdk/client-sagemaker") @new
   external new: request => t = "SendPipelineExecutionStepFailureCommand"
   let make = (~callbackToken, ~clientRequestToken=?, ~failureReason=?, ()) =>
-    new({clientRequestToken, failureReason, callbackToken})
+    new({
+      clientRequestToken: clientRequestToken,
+      failureReason: failureReason,
+      callbackToken: callbackToken,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module PutModelPackageGroupPolicy = {
   type t
   type request = {
@@ -14084,9 +14108,10 @@ module PutModelPackageGroupPolicy = {
   @module("@aws-sdk/client-sagemaker") @new
   external new: request => t = "PutModelPackageGroupPolicyCommand"
   let make = (~resourcePolicy, ~modelPackageGroupName, ()) =>
-    new({resourcePolicy, modelPackageGroupName})
+    new({resourcePolicy: resourcePolicy, modelPackageGroupName: modelPackageGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetSagemakerServicecatalogPortfolioStatus = {
   type t
   type request = {.}
@@ -14099,6 +14124,7 @@ module GetSagemakerServicecatalogPortfolioStatus = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetModelPackageGroupPolicy = {
   type t
   type request = {
@@ -14115,6 +14141,7 @@ module GetModelPackageGroupPolicy = {
   let make = (~modelPackageGroupName, ()) => new({modelPackageGroupName: modelPackageGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetLineageGroupPolicy = {
   type t
   type request = {
@@ -14136,6 +14163,7 @@ module GetLineageGroupPolicy = {
   let make = (~lineageGroupName, ()) => new({lineageGroupName: lineageGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DisassociateTrialComponent = {
   type t
   type request = {
@@ -14153,9 +14181,11 @@ module DisassociateTrialComponent = {
   }
   @module("@aws-sdk/client-sagemaker") @new
   external new: request => t = "DisassociateTrialComponentCommand"
-  let make = (~trialName, ~trialComponentName, ()) => new({trialName, trialComponentName})
+  let make = (~trialName, ~trialComponentName, ()) =>
+    new({trialName: trialName, trialComponentName: trialComponentName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeStudioLifecycleConfig = {
   type t
   type request = {
@@ -14191,6 +14221,7 @@ module DescribeStudioLifecycleConfig = {
     new({studioLifecycleConfigName: studioLifecycleConfigName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribePipelineDefinitionForExecution = {
   type t
   type request = {
@@ -14209,6 +14240,7 @@ module DescribePipelineDefinitionForExecution = {
   let make = (~pipelineExecutionArn, ()) => new({pipelineExecutionArn: pipelineExecutionArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeImageVersion = {
   type t
   type request = {
@@ -14246,9 +14278,10 @@ module DescribeImageVersion = {
   }
   @module("@aws-sdk/client-sagemaker") @new
   external new: request => t = "DescribeImageVersionCommand"
-  let make = (~imageName, ~version=?, ()) => new({version, imageName})
+  let make = (~imageName, ~version=?, ()) => new({version: version, imageName: imageName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeImage = {
   type t
   type request = {
@@ -14283,6 +14316,7 @@ module DescribeImage = {
   let make = (~imageName, ()) => new({imageName: imageName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteWorkteam = {
   type t
   type request = {
@@ -14299,6 +14333,7 @@ module DeleteWorkteam = {
   let make = (~workteamName, ()) => new({workteamName: workteamName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteWorkforce = {
   type t
   type request = {
@@ -14310,6 +14345,7 @@ module DeleteWorkforce = {
   let make = (~workforceName, ()) => new({workforceName: workforceName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteUserProfile = {
   type t
   type request = {
@@ -14319,9 +14355,11 @@ module DeleteUserProfile = {
   }
   type response = {.}
   @module("@aws-sdk/client-sagemaker") @new external new: request => t = "DeleteUserProfileCommand"
-  let make = (~userProfileName, ~domainId, ()) => new({userProfileName, domainId})
+  let make = (~userProfileName, ~domainId, ()) =>
+    new({userProfileName: userProfileName, domainId: domainId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteTrialComponent = {
   type t
   type request = {
@@ -14338,6 +14376,7 @@ module DeleteTrialComponent = {
   let make = (~trialComponentName, ()) => new({trialComponentName: trialComponentName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteTrial = {
   type t
   type request = {
@@ -14353,6 +14392,7 @@ module DeleteTrial = {
   let make = (~trialName, ()) => new({trialName: trialName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteStudioLifecycleConfig = {
   type t
   type request = {
@@ -14367,6 +14407,7 @@ module DeleteStudioLifecycleConfig = {
     new({studioLifecycleConfigName: studioLifecycleConfigName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteProject = {
   type t
   type request = {
@@ -14378,6 +14419,7 @@ module DeleteProject = {
   let make = (~projectName, ()) => new({projectName: projectName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeletePipeline = {
   type t
   type request = {
@@ -14394,9 +14436,11 @@ module DeletePipeline = {
     pipelineArn: option<pipelineArn>,
   }
   @module("@aws-sdk/client-sagemaker") @new external new: request => t = "DeletePipelineCommand"
-  let make = (~clientRequestToken, ~pipelineName, ()) => new({clientRequestToken, pipelineName})
+  let make = (~clientRequestToken, ~pipelineName, ()) =>
+    new({clientRequestToken: clientRequestToken, pipelineName: pipelineName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteNotebookInstanceLifecycleConfig = {
   type t
   type request = {
@@ -14411,6 +14455,7 @@ module DeleteNotebookInstanceLifecycleConfig = {
     new({notebookInstanceLifecycleConfigName: notebookInstanceLifecycleConfigName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteNotebookInstance = {
   type t
   type request = {
@@ -14424,6 +14469,7 @@ module DeleteNotebookInstance = {
   let make = (~notebookInstanceName, ()) => new({notebookInstanceName: notebookInstanceName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteMonitoringSchedule = {
   type t
   type request = {
@@ -14437,6 +14483,7 @@ module DeleteMonitoringSchedule = {
   let make = (~monitoringScheduleName, ()) => new({monitoringScheduleName: monitoringScheduleName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteModelQualityJobDefinition = {
   type t
   type request = {
@@ -14450,6 +14497,7 @@ module DeleteModelQualityJobDefinition = {
   let make = (~jobDefinitionName, ()) => new({jobDefinitionName: jobDefinitionName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteModelPackageGroupPolicy = {
   type t
   type request = {
@@ -14463,6 +14511,7 @@ module DeleteModelPackageGroupPolicy = {
   let make = (~modelPackageGroupName, ()) => new({modelPackageGroupName: modelPackageGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteModelPackageGroup = {
   type t
   type request = {
@@ -14475,6 +14524,7 @@ module DeleteModelPackageGroup = {
   let make = (~modelPackageGroupName, ()) => new({modelPackageGroupName: modelPackageGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteModelPackage = {
   type t
   type request = {
@@ -14489,6 +14539,7 @@ module DeleteModelPackage = {
   let make = (~modelPackageName, ()) => new({modelPackageName: modelPackageName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteModelExplainabilityJobDefinition = {
   type t
   type request = {
@@ -14502,6 +14553,7 @@ module DeleteModelExplainabilityJobDefinition = {
   let make = (~jobDefinitionName, ()) => new({jobDefinitionName: jobDefinitionName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteModelBiasJobDefinition = {
   type t
   type request = {
@@ -14515,6 +14567,7 @@ module DeleteModelBiasJobDefinition = {
   let make = (~jobDefinitionName, ()) => new({jobDefinitionName: jobDefinitionName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteModel = {
   type t
   type request = {
@@ -14525,6 +14578,7 @@ module DeleteModel = {
   let make = (~modelName, ()) => new({modelName: modelName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteImageVersion = {
   type t
   type request = {
@@ -14533,9 +14587,10 @@ module DeleteImageVersion = {
   }
   type response = {.}
   @module("@aws-sdk/client-sagemaker") @new external new: request => t = "DeleteImageVersionCommand"
-  let make = (~version, ~imageName, ()) => new({version, imageName})
+  let make = (~version, ~imageName, ()) => new({version: version, imageName: imageName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteImage = {
   type t
   type request = {
@@ -14546,6 +14601,7 @@ module DeleteImage = {
   let make = (~imageName, ()) => new({imageName: imageName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteHumanTaskUi = {
   type t
   type request = {
@@ -14560,6 +14616,7 @@ module DeleteHumanTaskUi = {
   let make = (~humanTaskUiName, ()) => new({humanTaskUiName: humanTaskUiName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteFlowDefinition = {
   type t
   type request = {
@@ -14572,6 +14629,7 @@ module DeleteFlowDefinition = {
   let make = (~flowDefinitionName, ()) => new({flowDefinitionName: flowDefinitionName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteFeatureGroup = {
   type t
   type request = {
@@ -14585,6 +14643,7 @@ module DeleteFeatureGroup = {
   let make = (~featureGroupName, ()) => new({featureGroupName: featureGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteExperiment = {
   type t
   type request = {
@@ -14600,6 +14659,7 @@ module DeleteExperiment = {
   let make = (~experimentName, ()) => new({experimentName: experimentName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteEndpointConfig = {
   type t
   type request = {
@@ -14613,6 +14673,7 @@ module DeleteEndpointConfig = {
   let make = (~endpointConfigName, ()) => new({endpointConfigName: endpointConfigName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteEndpoint = {
   type t
   type request = {
@@ -14624,6 +14685,7 @@ module DeleteEndpoint = {
   let make = (~endpointName, ()) => new({endpointName: endpointName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteDeviceFleet = {
   type t
   type request = {
@@ -14635,6 +14697,7 @@ module DeleteDeviceFleet = {
   let make = (~deviceFleetName, ()) => new({deviceFleetName: deviceFleetName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteDataQualityJobDefinition = {
   type t
   type request = {
@@ -14648,6 +14711,7 @@ module DeleteDataQualityJobDefinition = {
   let make = (~jobDefinitionName, ()) => new({jobDefinitionName: jobDefinitionName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteContext = {
   type t
   type request = {
@@ -14662,6 +14726,7 @@ module DeleteContext = {
   let make = (~contextName, ()) => new({contextName: contextName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteCodeRepository = {
   type t
   type request = {
@@ -14674,6 +14739,7 @@ module DeleteCodeRepository = {
   let make = (~codeRepositoryName, ()) => new({codeRepositoryName: codeRepositoryName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteAssociation = {
   type t
   type request = {
@@ -14688,9 +14754,11 @@ module DeleteAssociation = {
     sourceArn: option<associationEntityArn>,
   }
   @module("@aws-sdk/client-sagemaker") @new external new: request => t = "DeleteAssociationCommand"
-  let make = (~destinationArn, ~sourceArn, ()) => new({destinationArn, sourceArn})
+  let make = (~destinationArn, ~sourceArn, ()) =>
+    new({destinationArn: destinationArn, sourceArn: sourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteAppImageConfig = {
   type t
   type request = {
@@ -14703,6 +14771,7 @@ module DeleteAppImageConfig = {
   let make = (~appImageConfigName, ()) => new({appImageConfigName: appImageConfigName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteApp = {
   type t
   type request = {
@@ -14715,9 +14784,10 @@ module DeleteApp = {
   type response = {.}
   @module("@aws-sdk/client-sagemaker") @new external new: request => t = "DeleteAppCommand"
   let make = (~appName, ~appType, ~userProfileName, ~domainId, ()) =>
-    new({appName, appType, userProfileName, domainId})
+    new({appName: appName, appType: appType, userProfileName: userProfileName, domainId: domainId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteAlgorithm = {
   type t
   type request = {
@@ -14729,6 +14799,7 @@ module DeleteAlgorithm = {
   let make = (~algorithmName, ()) => new({algorithmName: algorithmName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteAction = {
   type t
   type request = {
@@ -14743,6 +14814,7 @@ module DeleteAction = {
   let make = (~actionName, ()) => new({actionName: actionName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreatePresignedNotebookInstanceUrl = {
   type t
   type request = {
@@ -14759,9 +14831,13 @@ module CreatePresignedNotebookInstanceUrl = {
   @module("@aws-sdk/client-sagemaker") @new
   external new: request => t = "CreatePresignedNotebookInstanceUrlCommand"
   let make = (~notebookInstanceName, ~sessionExpirationDurationInSeconds=?, ()) =>
-    new({sessionExpirationDurationInSeconds, notebookInstanceName})
+    new({
+      sessionExpirationDurationInSeconds: sessionExpirationDurationInSeconds,
+      notebookInstanceName: notebookInstanceName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreatePresignedDomainUrl = {
   type t
   type request = {
@@ -14788,9 +14864,16 @@ module CreatePresignedDomainUrl = {
     ~expiresInSeconds=?,
     ~sessionExpirationDurationInSeconds=?,
     (),
-  ) => new({expiresInSeconds, sessionExpirationDurationInSeconds, userProfileName, domainId})
+  ) =>
+    new({
+      expiresInSeconds: expiresInSeconds,
+      sessionExpirationDurationInSeconds: sessionExpirationDurationInSeconds,
+      userProfileName: userProfileName,
+      domainId: domainId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateImageVersion = {
   type t
   type request = {
@@ -14816,9 +14899,11 @@ module CreateImageVersion = {
     imageVersionArn: option<imageVersionArn>,
   }
   @module("@aws-sdk/client-sagemaker") @new external new: request => t = "CreateImageVersionCommand"
-  let make = (~imageName, ~clientToken, ~baseImage, ()) => new({imageName, clientToken, baseImage})
+  let make = (~imageName, ~clientToken, ~baseImage, ()) =>
+    new({imageName: imageName, clientToken: clientToken, baseImage: baseImage})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module AssociateTrialComponent = {
   type t
   type request = {
@@ -14836,9 +14921,11 @@ module AssociateTrialComponent = {
   }
   @module("@aws-sdk/client-sagemaker") @new
   external new: request => t = "AssociateTrialComponentCommand"
-  let make = (~trialName, ~trialComponentName, ()) => new({trialName, trialComponentName})
+  let make = (~trialName, ~trialComponentName, ()) =>
+    new({trialName: trialName, trialComponentName: trialComponentName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module AddAssociation = {
   type t
   type request = {
@@ -14877,9 +14964,10 @@ module AddAssociation = {
   }
   @module("@aws-sdk/client-sagemaker") @new external new: request => t = "AddAssociationCommand"
   let make = (~destinationArn, ~sourceArn, ~associationType=?, ()) =>
-    new({associationType, destinationArn, sourceArn})
+    new({associationType: associationType, destinationArn: destinationArn, sourceArn: sourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdatePipelineExecution = {
   type t
   type request = {
@@ -14912,13 +15000,14 @@ module UpdatePipelineExecution = {
     (),
   ) =>
     new({
-      parallelismConfiguration,
-      pipelineExecutionDisplayName,
-      pipelineExecutionDescription,
-      pipelineExecutionArn,
+      parallelismConfiguration: parallelismConfiguration,
+      pipelineExecutionDisplayName: pipelineExecutionDisplayName,
+      pipelineExecutionDescription: pipelineExecutionDescription,
+      pipelineExecutionArn: pipelineExecutionArn,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdatePipeline = {
   type t
   type request = {
@@ -14957,16 +15046,17 @@ module UpdatePipeline = {
     (),
   ) =>
     new({
-      parallelismConfiguration,
-      roleArn,
-      pipelineDescription,
-      pipelineDefinitionS3Location,
-      pipelineDefinition,
-      pipelineDisplayName,
-      pipelineName,
+      parallelismConfiguration: parallelismConfiguration,
+      roleArn: roleArn,
+      pipelineDescription: pipelineDescription,
+      pipelineDefinitionS3Location: pipelineDefinitionS3Location,
+      pipelineDefinition: pipelineDefinition,
+      pipelineDisplayName: pipelineDisplayName,
+      pipelineName: pipelineName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateNotebookInstance = {
   type t
   type request = {
@@ -15070,22 +15160,23 @@ module UpdateNotebookInstance = {
     (),
   ) =>
     new({
-      rootAccess,
-      disassociateAdditionalCodeRepositories,
-      disassociateDefaultCodeRepository,
-      disassociateAcceleratorTypes,
-      acceleratorTypes,
-      additionalCodeRepositories,
-      defaultCodeRepository,
-      volumeSizeInGB,
-      disassociateLifecycleConfig,
-      lifecycleConfigName,
-      roleArn,
-      instanceType,
-      notebookInstanceName,
+      rootAccess: rootAccess,
+      disassociateAdditionalCodeRepositories: disassociateAdditionalCodeRepositories,
+      disassociateDefaultCodeRepository: disassociateDefaultCodeRepository,
+      disassociateAcceleratorTypes: disassociateAcceleratorTypes,
+      acceleratorTypes: acceleratorTypes,
+      additionalCodeRepositories: additionalCodeRepositories,
+      defaultCodeRepository: defaultCodeRepository,
+      volumeSizeInGB: volumeSizeInGB,
+      disassociateLifecycleConfig: disassociateLifecycleConfig,
+      lifecycleConfigName: lifecycleConfigName,
+      roleArn: roleArn,
+      instanceType: instanceType,
+      notebookInstanceName: notebookInstanceName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateImage = {
   type t
   type request = {
@@ -15110,9 +15201,16 @@ module UpdateImage = {
   }
   @module("@aws-sdk/client-sagemaker") @new external new: request => t = "UpdateImageCommand"
   let make = (~imageName, ~roleArn=?, ~displayName=?, ~description=?, ~deleteProperties=?, ()) =>
-    new({roleArn, imageName, displayName, description, deleteProperties})
+    new({
+      roleArn: roleArn,
+      imageName: imageName,
+      displayName: displayName,
+      description: description,
+      deleteProperties: deleteProperties,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateDeviceFleet = {
   type t
   type request = {
@@ -15141,9 +15239,17 @@ module UpdateDeviceFleet = {
     ~description=?,
     ~roleArn=?,
     (),
-  ) => new({enableIotRoleAlias, outputConfig, description, roleArn, deviceFleetName})
+  ) =>
+    new({
+      enableIotRoleAlias: enableIotRoleAlias,
+      outputConfig: outputConfig,
+      description: description,
+      roleArn: roleArn,
+      deviceFleetName: deviceFleetName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateContext = {
   type t
   type request = {
@@ -15163,9 +15269,15 @@ module UpdateContext = {
   }
   @module("@aws-sdk/client-sagemaker") @new external new: request => t = "UpdateContextCommand"
   let make = (~contextName, ~propertiesToRemove=?, ~properties=?, ~description=?, ()) =>
-    new({propertiesToRemove, properties, description, contextName})
+    new({
+      propertiesToRemove: propertiesToRemove,
+      properties: properties,
+      description: description,
+      contextName: contextName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateCodeRepository = {
   type t
   type request = {
@@ -15188,9 +15300,11 @@ module UpdateCodeRepository = {
   }
   @module("@aws-sdk/client-sagemaker") @new
   external new: request => t = "UpdateCodeRepositoryCommand"
-  let make = (~codeRepositoryName, ~gitConfig=?, ()) => new({gitConfig, codeRepositoryName})
+  let make = (~codeRepositoryName, ~gitConfig=?, ()) =>
+    new({gitConfig: gitConfig, codeRepositoryName: codeRepositoryName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateArtifact = {
   type t
   type request = {
@@ -15211,9 +15325,15 @@ module UpdateArtifact = {
   }
   @module("@aws-sdk/client-sagemaker") @new external new: request => t = "UpdateArtifactCommand"
   let make = (~artifactArn, ~propertiesToRemove=?, ~properties=?, ~artifactName=?, ()) =>
-    new({propertiesToRemove, properties, artifactName, artifactArn})
+    new({
+      propertiesToRemove: propertiesToRemove,
+      properties: properties,
+      artifactName: artifactName,
+      artifactArn: artifactArn,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateAction = {
   type t
   type request = {
@@ -15234,9 +15354,16 @@ module UpdateAction = {
   }
   @module("@aws-sdk/client-sagemaker") @new external new: request => t = "UpdateActionCommand"
   let make = (~actionName, ~propertiesToRemove=?, ~properties=?, ~status=?, ~description=?, ()) =>
-    new({propertiesToRemove, properties, status, description, actionName})
+    new({
+      propertiesToRemove: propertiesToRemove,
+      properties: properties,
+      status: status,
+      description: description,
+      actionName: actionName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module RetryPipelineExecution = {
   type t
   type request = {
@@ -15260,9 +15387,14 @@ module RetryPipelineExecution = {
   @module("@aws-sdk/client-sagemaker") @new
   external new: request => t = "RetryPipelineExecutionCommand"
   let make = (~clientRequestToken, ~pipelineExecutionArn, ~parallelismConfiguration=?, ()) =>
-    new({parallelismConfiguration, clientRequestToken, pipelineExecutionArn})
+    new({
+      parallelismConfiguration: parallelismConfiguration,
+      clientRequestToken: clientRequestToken,
+      pipelineExecutionArn: pipelineExecutionArn,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeTrial = {
   type t
   type request = {
@@ -15296,6 +15428,7 @@ module DescribeTrial = {
   let make = (~trialName, ()) => new({trialName: trialName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeSubscribedWorkteam = {
   type t
   type request = {
@@ -15315,6 +15448,7 @@ module DescribeSubscribedWorkteam = {
   let make = (~workteamArn, ()) => new({workteamArn: workteamArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribePipelineExecution = {
   type t
   type request = {
@@ -15355,6 +15489,7 @@ module DescribePipelineExecution = {
   let make = (~pipelineExecutionArn, ()) => new({pipelineExecutionArn: pipelineExecutionArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribePipeline = {
   type t
   type request = {
@@ -15393,6 +15528,7 @@ module DescribePipeline = {
   let make = (~pipelineName, ()) => new({pipelineName: pipelineName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeNotebookInstance = {
   type t
   type request = {
@@ -15499,6 +15635,7 @@ module DescribeNotebookInstance = {
   let make = (~notebookInstanceName, ()) => new({notebookInstanceName: notebookInstanceName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeModelPackageGroup = {
   type t
   type request = {
@@ -15524,6 +15661,7 @@ module DescribeModelPackageGroup = {
   let make = (~modelPackageGroupName, ()) => new({modelPackageGroupName: modelPackageGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeLineageGroup = {
   type t
   type request = {
@@ -15551,6 +15689,7 @@ module DescribeLineageGroup = {
   let make = (~lineageGroupName, ()) => new({lineageGroupName: lineageGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeHumanTaskUi = {
   type t
   type request = {
@@ -15583,6 +15722,7 @@ module DescribeHumanTaskUi = {
   let make = (~humanTaskUiName, ()) => new({humanTaskUiName: humanTaskUiName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeExperiment = {
   type t
   type request = {
@@ -15615,6 +15755,7 @@ module DescribeExperiment = {
   let make = (~experimentName, ()) => new({experimentName: experimentName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeEdgePackagingJob = {
   type t
   type request = {
@@ -15671,6 +15812,7 @@ module DescribeEdgePackagingJob = {
   let make = (~edgePackagingJobName, ()) => new({edgePackagingJobName: edgePackagingJobName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeDeviceFleet = {
   type t
   type request = {
@@ -15705,6 +15847,7 @@ module DescribeDeviceFleet = {
   let make = (~deviceFleetName, ()) => new({deviceFleetName: deviceFleetName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeContext = {
   type t
   type request = {
@@ -15735,6 +15878,7 @@ module DescribeContext = {
   let make = (~contextName, ()) => new({contextName: contextName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeCodeRepository = {
   type t
   type request = {
@@ -15763,6 +15907,7 @@ module DescribeCodeRepository = {
   let make = (~codeRepositoryName, ()) => new({codeRepositoryName: codeRepositoryName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeApp = {
   type t
   type request = {
@@ -15799,9 +15944,10 @@ module DescribeApp = {
   }
   @module("@aws-sdk/client-sagemaker") @new external new: request => t = "DescribeAppCommand"
   let make = (~appName, ~appType, ~userProfileName, ~domainId, ()) =>
-    new({appName, appType, userProfileName, domainId})
+    new({appName: appName, appType: appType, userProfileName: userProfileName, domainId: domainId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeAction = {
   type t
   type request = {
@@ -15834,6 +15980,7 @@ module DescribeAction = {
   let make = (~actionName, ()) => new({actionName: actionName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeregisterDevices = {
   type t
   type request = {
@@ -15843,9 +15990,11 @@ module DeregisterDevices = {
   }
   type response = {.}
   @module("@aws-sdk/client-sagemaker") @new external new: request => t = "DeregisterDevicesCommand"
-  let make = (~deviceNames, ~deviceFleetName, ()) => new({deviceNames, deviceFleetName})
+  let make = (~deviceNames, ~deviceFleetName, ()) =>
+    new({deviceNames: deviceNames, deviceFleetName: deviceFleetName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteTags = {
   type t
   type request = {
@@ -15858,9 +16007,10 @@ module DeleteTags = {
   }
   type response = {.}
   @module("@aws-sdk/client-sagemaker") @new external new: request => t = "DeleteTagsCommand"
-  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys, resourceArn})
+  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteDomain = {
   type t
   type request = {
@@ -15873,9 +16023,11 @@ module DeleteDomain = {
   }
   type response = {.}
   @module("@aws-sdk/client-sagemaker") @new external new: request => t = "DeleteDomainCommand"
-  let make = (~domainId, ~retentionPolicy=?, ()) => new({retentionPolicy, domainId})
+  let make = (~domainId, ~retentionPolicy=?, ()) =>
+    new({retentionPolicy: retentionPolicy, domainId: domainId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateTrialComponent = {
   type t
   type request = {
@@ -15936,20 +16088,21 @@ module UpdateTrialComponent = {
     (),
   ) =>
     new({
-      outputArtifactsToRemove,
-      outputArtifacts,
-      inputArtifactsToRemove,
-      inputArtifacts,
-      parametersToRemove,
-      parameters,
-      endTime,
-      startTime,
-      status,
-      displayName,
-      trialComponentName,
+      outputArtifactsToRemove: outputArtifactsToRemove,
+      outputArtifacts: outputArtifacts,
+      inputArtifactsToRemove: inputArtifactsToRemove,
+      inputArtifacts: inputArtifacts,
+      parametersToRemove: parametersToRemove,
+      parameters: parameters,
+      endTime: endTime,
+      startTime: startTime,
+      status: status,
+      displayName: displayName,
+      trialComponentName: trialComponentName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateNotebookInstanceLifecycleConfig = {
   type t
   type request = {
@@ -15970,9 +16123,14 @@ module UpdateNotebookInstanceLifecycleConfig = {
   @module("@aws-sdk/client-sagemaker") @new
   external new: request => t = "UpdateNotebookInstanceLifecycleConfigCommand"
   let make = (~notebookInstanceLifecycleConfigName, ~onStart=?, ~onCreate=?, ()) =>
-    new({onStart, onCreate, notebookInstanceLifecycleConfigName})
+    new({
+      onStart: onStart,
+      onCreate: onCreate,
+      notebookInstanceLifecycleConfigName: notebookInstanceLifecycleConfigName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateEndpointWeightsAndCapacities = {
   type t
   type request = {
@@ -15989,9 +16147,10 @@ module UpdateEndpointWeightsAndCapacities = {
   @module("@aws-sdk/client-sagemaker") @new
   external new: request => t = "UpdateEndpointWeightsAndCapacitiesCommand"
   let make = (~desiredWeightsAndCapacities, ~endpointName, ()) =>
-    new({desiredWeightsAndCapacities, endpointName})
+    new({desiredWeightsAndCapacities: desiredWeightsAndCapacities, endpointName: endpointName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateDevices = {
   type t
   type request = {
@@ -16002,9 +16161,11 @@ module UpdateDevices = {
   }
   type response = {.}
   @module("@aws-sdk/client-sagemaker") @new external new: request => t = "UpdateDevicesCommand"
-  let make = (~devices, ~deviceFleetName, ()) => new({devices, deviceFleetName})
+  let make = (~devices, ~deviceFleetName, ()) =>
+    new({devices: devices, deviceFleetName: deviceFleetName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module StartPipelineExecution = {
   type t
   type request = {
@@ -16044,15 +16205,16 @@ module StartPipelineExecution = {
     (),
   ) =>
     new({
-      parallelismConfiguration,
-      clientRequestToken,
-      pipelineExecutionDescription,
-      pipelineParameters,
-      pipelineExecutionDisplayName,
-      pipelineName,
+      parallelismConfiguration: parallelismConfiguration,
+      clientRequestToken: clientRequestToken,
+      pipelineExecutionDescription: pipelineExecutionDescription,
+      pipelineParameters: pipelineParameters,
+      pipelineExecutionDisplayName: pipelineExecutionDisplayName,
+      pipelineName: pipelineName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module SendPipelineExecutionStepSuccess = {
   type t
   type request = {
@@ -16075,9 +16237,14 @@ module SendPipelineExecutionStepSuccess = {
   @module("@aws-sdk/client-sagemaker") @new
   external new: request => t = "SendPipelineExecutionStepSuccessCommand"
   let make = (~callbackToken, ~clientRequestToken=?, ~outputParameters=?, ()) =>
-    new({clientRequestToken, outputParameters, callbackToken})
+    new({
+      clientRequestToken: clientRequestToken,
+      outputParameters: outputParameters,
+      callbackToken: callbackToken,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module RenderUiTemplate = {
   type t
   type request = {
@@ -16110,9 +16277,10 @@ module RenderUiTemplate = {
   }
   @module("@aws-sdk/client-sagemaker") @new external new: request => t = "RenderUiTemplateCommand"
   let make = (~roleArn, ~task, ~humanTaskUiArn=?, ~uiTemplate=?, ()) =>
-    new({humanTaskUiArn, roleArn, task, uiTemplate})
+    new({humanTaskUiArn: humanTaskUiArn, roleArn: roleArn, task: task, uiTemplate: uiTemplate})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module RegisterDevices = {
   type t
   type request = {
@@ -16123,9 +16291,11 @@ module RegisterDevices = {
   }
   type response = {.}
   @module("@aws-sdk/client-sagemaker") @new external new: request => t = "RegisterDevicesCommand"
-  let make = (~devices, ~deviceFleetName, ~tags=?, ()) => new({tags, devices, deviceFleetName})
+  let make = (~devices, ~deviceFleetName, ~tags=?, ()) =>
+    new({tags: tags, devices: devices, deviceFleetName: deviceFleetName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module QueryLineage = {
   type t
   type request = {
@@ -16201,9 +16371,19 @@ module QueryLineage = {
     ~includeEdges=?,
     ~direction=?,
     (),
-  ) => new({nextToken, maxResults, maxDepth, filters, includeEdges, direction, startArns})
+  ) =>
+    new({
+      nextToken: nextToken,
+      maxResults: maxResults,
+      maxDepth: maxDepth,
+      filters: filters,
+      includeEdges: includeEdges,
+      direction: direction,
+      startArns: startArns,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListUserProfiles = {
   type t
   type request = {
@@ -16240,9 +16420,18 @@ module ListUserProfiles = {
     ~maxResults=?,
     ~nextToken=?,
     (),
-  ) => new({userProfileNameContains, domainIdEquals, sortBy, sortOrder, maxResults, nextToken})
+  ) =>
+    new({
+      userProfileNameContains: userProfileNameContains,
+      domainIdEquals: domainIdEquals,
+      sortBy: sortBy,
+      sortOrder: sortOrder,
+      maxResults: maxResults,
+      nextToken: nextToken,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListTransformJobs = {
   type t
   type request = {
@@ -16314,19 +16503,20 @@ module ListTransformJobs = {
     (),
   ) =>
     new({
-      maxResults,
-      nextToken,
-      sortOrder,
-      sortBy,
-      statusEquals,
-      nameContains,
-      lastModifiedTimeBefore,
-      lastModifiedTimeAfter,
-      creationTimeBefore,
-      creationTimeAfter,
+      maxResults: maxResults,
+      nextToken: nextToken,
+      sortOrder: sortOrder,
+      sortBy: sortBy,
+      statusEquals: statusEquals,
+      nameContains: nameContains,
+      lastModifiedTimeBefore: lastModifiedTimeBefore,
+      lastModifiedTimeAfter: lastModifiedTimeAfter,
+      creationTimeBefore: creationTimeBefore,
+      creationTimeAfter: creationTimeAfter,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListTrainingJobs = {
   type t
   type request = {
@@ -16393,19 +16583,20 @@ module ListTrainingJobs = {
     (),
   ) =>
     new({
-      sortOrder,
-      sortBy,
-      statusEquals,
-      nameContains,
-      lastModifiedTimeBefore,
-      lastModifiedTimeAfter,
-      creationTimeBefore,
-      creationTimeAfter,
-      maxResults,
-      nextToken,
+      sortOrder: sortOrder,
+      sortBy: sortBy,
+      statusEquals: statusEquals,
+      nameContains: nameContains,
+      lastModifiedTimeBefore: lastModifiedTimeBefore,
+      lastModifiedTimeAfter: lastModifiedTimeAfter,
+      creationTimeBefore: creationTimeBefore,
+      creationTimeAfter: creationTimeAfter,
+      maxResults: maxResults,
+      nextToken: nextToken,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListTags = {
   type t
   type request = {
@@ -16432,9 +16623,10 @@ module ListTags = {
   }
   @module("@aws-sdk/client-sagemaker") @new external new: request => t = "ListTagsCommand"
   let make = (~resourceArn, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults, nextToken, resourceArn})
+    new({maxResults: maxResults, nextToken: nextToken, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListSubscribedWorkteams = {
   type t
   type request = {
@@ -16463,9 +16655,10 @@ module ListSubscribedWorkteams = {
   @module("@aws-sdk/client-sagemaker") @new
   external new: request => t = "ListSubscribedWorkteamsCommand"
   let make = (~maxResults=?, ~nextToken=?, ~nameContains=?, ()) =>
-    new({maxResults, nextToken, nameContains})
+    new({maxResults: maxResults, nextToken: nextToken, nameContains: nameContains})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListStudioLifecycleConfigs = {
   type t
   type request = {
@@ -16539,19 +16732,20 @@ module ListStudioLifecycleConfigs = {
     (),
   ) =>
     new({
-      sortOrder,
-      sortBy,
-      modifiedTimeAfter,
-      modifiedTimeBefore,
-      creationTimeAfter,
-      creationTimeBefore,
-      appTypeEquals,
-      nameContains,
-      nextToken,
-      maxResults,
+      sortOrder: sortOrder,
+      sortBy: sortBy,
+      modifiedTimeAfter: modifiedTimeAfter,
+      modifiedTimeBefore: modifiedTimeBefore,
+      creationTimeAfter: creationTimeAfter,
+      creationTimeBefore: creationTimeBefore,
+      appTypeEquals: appTypeEquals,
+      nameContains: nameContains,
+      nextToken: nextToken,
+      maxResults: maxResults,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListProjects = {
   type t
   type request = {
@@ -16603,16 +16797,17 @@ module ListProjects = {
     (),
   ) =>
     new({
-      sortOrder,
-      sortBy,
-      nextToken,
-      nameContains,
-      maxResults,
-      creationTimeBefore,
-      creationTimeAfter,
+      sortOrder: sortOrder,
+      sortBy: sortBy,
+      nextToken: nextToken,
+      nameContains: nameContains,
+      maxResults: maxResults,
+      creationTimeBefore: creationTimeBefore,
+      creationTimeAfter: creationTimeAfter,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListProcessingJobs = {
   type t
   type request = {
@@ -16683,19 +16878,20 @@ module ListProcessingJobs = {
     (),
   ) =>
     new({
-      maxResults,
-      nextToken,
-      sortOrder,
-      sortBy,
-      statusEquals,
-      nameContains,
-      lastModifiedTimeBefore,
-      lastModifiedTimeAfter,
-      creationTimeBefore,
-      creationTimeAfter,
+      maxResults: maxResults,
+      nextToken: nextToken,
+      sortOrder: sortOrder,
+      sortBy: sortBy,
+      statusEquals: statusEquals,
+      nameContains: nameContains,
+      lastModifiedTimeBefore: lastModifiedTimeBefore,
+      lastModifiedTimeAfter: lastModifiedTimeAfter,
+      creationTimeBefore: creationTimeBefore,
+      creationTimeAfter: creationTimeAfter,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListPipelines = {
   type t
   type request = {
@@ -16746,9 +16942,18 @@ module ListPipelines = {
     ~pipelineNamePrefix=?,
     (),
   ) =>
-    new({maxResults, nextToken, sortOrder, sortBy, createdBefore, createdAfter, pipelineNamePrefix})
+    new({
+      maxResults: maxResults,
+      nextToken: nextToken,
+      sortOrder: sortOrder,
+      sortBy: sortBy,
+      createdBefore: createdBefore,
+      createdAfter: createdAfter,
+      pipelineNamePrefix: pipelineNamePrefix,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListPipelineParametersForExecution = {
   type t
   type request = {
@@ -16775,9 +16980,10 @@ module ListPipelineParametersForExecution = {
   @module("@aws-sdk/client-sagemaker") @new
   external new: request => t = "ListPipelineParametersForExecutionCommand"
   let make = (~pipelineExecutionArn, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults, nextToken, pipelineExecutionArn})
+    new({maxResults: maxResults, nextToken: nextToken, pipelineExecutionArn: pipelineExecutionArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListPipelineExecutions = {
   type t
   type request = {
@@ -16826,9 +17032,19 @@ module ListPipelineExecutions = {
     ~createdBefore=?,
     ~createdAfter=?,
     (),
-  ) => new({maxResults, nextToken, sortOrder, sortBy, createdBefore, createdAfter, pipelineName})
+  ) =>
+    new({
+      maxResults: maxResults,
+      nextToken: nextToken,
+      sortOrder: sortOrder,
+      sortBy: sortBy,
+      createdBefore: createdBefore,
+      createdAfter: createdAfter,
+      pipelineName: pipelineName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListNotebookInstanceLifecycleConfigs = {
   type t
   type request = {
@@ -16891,18 +17107,19 @@ module ListNotebookInstanceLifecycleConfigs = {
     (),
   ) =>
     new({
-      lastModifiedTimeAfter,
-      lastModifiedTimeBefore,
-      creationTimeAfter,
-      creationTimeBefore,
-      nameContains,
-      sortOrder,
-      sortBy,
-      maxResults,
-      nextToken,
+      lastModifiedTimeAfter: lastModifiedTimeAfter,
+      lastModifiedTimeBefore: lastModifiedTimeBefore,
+      creationTimeAfter: creationTimeAfter,
+      creationTimeBefore: creationTimeBefore,
+      nameContains: nameContains,
+      sortOrder: sortOrder,
+      sortBy: sortBy,
+      maxResults: maxResults,
+      nextToken: nextToken,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListMonitoringSchedules = {
   type t
   type request = {
@@ -16990,22 +17207,23 @@ module ListMonitoringSchedules = {
     (),
   ) =>
     new({
-      monitoringTypeEquals,
-      monitoringJobDefinitionName,
-      statusEquals,
-      lastModifiedTimeAfter,
-      lastModifiedTimeBefore,
-      creationTimeAfter,
-      creationTimeBefore,
-      nameContains,
-      maxResults,
-      nextToken,
-      sortOrder,
-      sortBy,
-      endpointName,
+      monitoringTypeEquals: monitoringTypeEquals,
+      monitoringJobDefinitionName: monitoringJobDefinitionName,
+      statusEquals: statusEquals,
+      lastModifiedTimeAfter: lastModifiedTimeAfter,
+      lastModifiedTimeBefore: lastModifiedTimeBefore,
+      creationTimeAfter: creationTimeAfter,
+      creationTimeBefore: creationTimeBefore,
+      nameContains: nameContains,
+      maxResults: maxResults,
+      nextToken: nextToken,
+      sortOrder: sortOrder,
+      sortBy: sortBy,
+      endpointName: endpointName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListMonitoringExecutions = {
   type t
   type request = {
@@ -17090,24 +17308,25 @@ module ListMonitoringExecutions = {
     (),
   ) =>
     new({
-      monitoringTypeEquals,
-      monitoringJobDefinitionName,
-      statusEquals,
-      lastModifiedTimeAfter,
-      lastModifiedTimeBefore,
-      creationTimeAfter,
-      creationTimeBefore,
-      scheduledTimeAfter,
-      scheduledTimeBefore,
-      maxResults,
-      nextToken,
-      sortOrder,
-      sortBy,
-      endpointName,
-      monitoringScheduleName,
+      monitoringTypeEquals: monitoringTypeEquals,
+      monitoringJobDefinitionName: monitoringJobDefinitionName,
+      statusEquals: statusEquals,
+      lastModifiedTimeAfter: lastModifiedTimeAfter,
+      lastModifiedTimeBefore: lastModifiedTimeBefore,
+      creationTimeAfter: creationTimeAfter,
+      creationTimeBefore: creationTimeBefore,
+      scheduledTimeAfter: scheduledTimeAfter,
+      scheduledTimeBefore: scheduledTimeBefore,
+      maxResults: maxResults,
+      nextToken: nextToken,
+      sortOrder: sortOrder,
+      sortBy: sortBy,
+      endpointName: endpointName,
+      monitoringScheduleName: monitoringScheduleName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListModels = {
   type t
   type request = {
@@ -17159,16 +17378,17 @@ module ListModels = {
     (),
   ) =>
     new({
-      creationTimeAfter,
-      creationTimeBefore,
-      nameContains,
-      maxResults,
-      nextToken,
-      sortOrder,
-      sortBy,
+      creationTimeAfter: creationTimeAfter,
+      creationTimeBefore: creationTimeBefore,
+      nameContains: nameContains,
+      maxResults: maxResults,
+      nextToken: nextToken,
+      sortOrder: sortOrder,
+      sortBy: sortBy,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListModelQualityJobDefinitions = {
   type t
   type request = {
@@ -17227,17 +17447,18 @@ module ListModelQualityJobDefinitions = {
     (),
   ) =>
     new({
-      creationTimeAfter,
-      creationTimeBefore,
-      nameContains,
-      maxResults,
-      nextToken,
-      sortOrder,
-      sortBy,
-      endpointName,
+      creationTimeAfter: creationTimeAfter,
+      creationTimeBefore: creationTimeBefore,
+      nameContains: nameContains,
+      maxResults: maxResults,
+      nextToken: nextToken,
+      sortOrder: sortOrder,
+      sortBy: sortBy,
+      endpointName: endpointName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListModelPackages = {
   type t
   type request = {
@@ -17322,19 +17543,20 @@ module ListModelPackages = {
     (),
   ) =>
     new({
-      sortOrder,
-      sortBy,
-      nextToken,
-      modelPackageType,
-      modelPackageGroupName,
-      modelApprovalStatus,
-      nameContains,
-      maxResults,
-      creationTimeBefore,
-      creationTimeAfter,
+      sortOrder: sortOrder,
+      sortBy: sortBy,
+      nextToken: nextToken,
+      modelPackageType: modelPackageType,
+      modelPackageGroupName: modelPackageGroupName,
+      modelApprovalStatus: modelApprovalStatus,
+      nameContains: nameContains,
+      maxResults: maxResults,
+      creationTimeBefore: creationTimeBefore,
+      creationTimeAfter: creationTimeAfter,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListModelPackageGroups = {
   type t
   type request = {
@@ -17386,16 +17608,17 @@ module ListModelPackageGroups = {
     (),
   ) =>
     new({
-      sortOrder,
-      sortBy,
-      nextToken,
-      nameContains,
-      maxResults,
-      creationTimeBefore,
-      creationTimeAfter,
+      sortOrder: sortOrder,
+      sortBy: sortBy,
+      nextToken: nextToken,
+      nameContains: nameContains,
+      maxResults: maxResults,
+      creationTimeBefore: creationTimeBefore,
+      creationTimeAfter: creationTimeAfter,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListModelExplainabilityJobDefinitions = {
   type t
   type request = {
@@ -17458,17 +17681,18 @@ module ListModelExplainabilityJobDefinitions = {
     (),
   ) =>
     new({
-      creationTimeAfter,
-      creationTimeBefore,
-      nameContains,
-      maxResults,
-      nextToken,
-      sortOrder,
-      sortBy,
-      endpointName,
+      creationTimeAfter: creationTimeAfter,
+      creationTimeBefore: creationTimeBefore,
+      nameContains: nameContains,
+      maxResults: maxResults,
+      nextToken: nextToken,
+      sortOrder: sortOrder,
+      sortBy: sortBy,
+      endpointName: endpointName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListModelBiasJobDefinitions = {
   type t
   type request = {
@@ -17523,17 +17747,18 @@ module ListModelBiasJobDefinitions = {
     (),
   ) =>
     new({
-      creationTimeAfter,
-      creationTimeBefore,
-      nameContains,
-      maxResults,
-      nextToken,
-      sortOrder,
-      sortBy,
-      endpointName,
+      creationTimeAfter: creationTimeAfter,
+      creationTimeBefore: creationTimeBefore,
+      nameContains: nameContains,
+      maxResults: maxResults,
+      nextToken: nextToken,
+      sortOrder: sortOrder,
+      sortBy: sortBy,
+      endpointName: endpointName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListLineageGroups = {
   type t
   type request = {
@@ -17580,9 +17805,18 @@ module ListLineageGroups = {
     ~createdBefore=?,
     ~createdAfter=?,
     (),
-  ) => new({maxResults, nextToken, sortOrder, sortBy, createdBefore, createdAfter})
+  ) =>
+    new({
+      maxResults: maxResults,
+      nextToken: nextToken,
+      sortOrder: sortOrder,
+      sortBy: sortBy,
+      createdBefore: createdBefore,
+      createdAfter: createdAfter,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListInferenceRecommendationsJobs = {
   type t
   type request = {
@@ -17655,19 +17889,20 @@ module ListInferenceRecommendationsJobs = {
     (),
   ) =>
     new({
-      maxResults,
-      nextToken,
-      sortOrder,
-      sortBy,
-      statusEquals,
-      nameContains,
-      lastModifiedTimeBefore,
-      lastModifiedTimeAfter,
-      creationTimeBefore,
-      creationTimeAfter,
+      maxResults: maxResults,
+      nextToken: nextToken,
+      sortOrder: sortOrder,
+      sortBy: sortBy,
+      statusEquals: statusEquals,
+      nameContains: nameContains,
+      lastModifiedTimeBefore: lastModifiedTimeBefore,
+      lastModifiedTimeAfter: lastModifiedTimeAfter,
+      creationTimeBefore: creationTimeBefore,
+      creationTimeAfter: creationTimeAfter,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListImages = {
   type t
   type request = {
@@ -17725,18 +17960,19 @@ module ListImages = {
     (),
   ) =>
     new({
-      sortOrder,
-      sortBy,
-      nextToken,
-      nameContains,
-      maxResults,
-      lastModifiedTimeBefore,
-      lastModifiedTimeAfter,
-      creationTimeBefore,
-      creationTimeAfter,
+      sortOrder: sortOrder,
+      sortBy: sortBy,
+      nextToken: nextToken,
+      nameContains: nameContains,
+      maxResults: maxResults,
+      lastModifiedTimeBefore: lastModifiedTimeBefore,
+      lastModifiedTimeAfter: lastModifiedTimeAfter,
+      creationTimeBefore: creationTimeBefore,
+      creationTimeAfter: creationTimeAfter,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListImageVersions = {
   type t
   type request = {
@@ -17799,18 +18035,19 @@ module ListImageVersions = {
     (),
   ) =>
     new({
-      sortOrder,
-      sortBy,
-      nextToken,
-      maxResults,
-      lastModifiedTimeBefore,
-      lastModifiedTimeAfter,
-      imageName,
-      creationTimeBefore,
-      creationTimeAfter,
+      sortOrder: sortOrder,
+      sortBy: sortBy,
+      nextToken: nextToken,
+      maxResults: maxResults,
+      lastModifiedTimeBefore: lastModifiedTimeBefore,
+      lastModifiedTimeAfter: lastModifiedTimeAfter,
+      imageName: imageName,
+      creationTimeBefore: creationTimeBefore,
+      creationTimeAfter: creationTimeAfter,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListHumanTaskUis = {
   type t
   type request = {
@@ -17852,9 +18089,17 @@ module ListHumanTaskUis = {
     ~creationTimeBefore=?,
     ~creationTimeAfter=?,
     (),
-  ) => new({maxResults, nextToken, sortOrder, creationTimeBefore, creationTimeAfter})
+  ) =>
+    new({
+      maxResults: maxResults,
+      nextToken: nextToken,
+      sortOrder: sortOrder,
+      creationTimeBefore: creationTimeBefore,
+      creationTimeAfter: creationTimeAfter,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListFlowDefinitions = {
   type t
   type request = {
@@ -17897,9 +18142,17 @@ module ListFlowDefinitions = {
     ~creationTimeBefore=?,
     ~creationTimeAfter=?,
     (),
-  ) => new({maxResults, nextToken, sortOrder, creationTimeBefore, creationTimeAfter})
+  ) =>
+    new({
+      maxResults: maxResults,
+      nextToken: nextToken,
+      sortOrder: sortOrder,
+      creationTimeBefore: creationTimeBefore,
+      creationTimeAfter: creationTimeAfter,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListEndpoints = {
   type t
   type request = {
@@ -17965,19 +18218,20 @@ module ListEndpoints = {
     (),
   ) =>
     new({
-      statusEquals,
-      lastModifiedTimeAfter,
-      lastModifiedTimeBefore,
-      creationTimeAfter,
-      creationTimeBefore,
-      nameContains,
-      maxResults,
-      nextToken,
-      sortOrder,
-      sortBy,
+      statusEquals: statusEquals,
+      lastModifiedTimeAfter: lastModifiedTimeAfter,
+      lastModifiedTimeBefore: lastModifiedTimeBefore,
+      creationTimeAfter: creationTimeAfter,
+      creationTimeBefore: creationTimeBefore,
+      nameContains: nameContains,
+      maxResults: maxResults,
+      nextToken: nextToken,
+      sortOrder: sortOrder,
+      sortBy: sortBy,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListEndpointConfigs = {
   type t
   type request = {
@@ -18029,16 +18283,17 @@ module ListEndpointConfigs = {
     (),
   ) =>
     new({
-      creationTimeAfter,
-      creationTimeBefore,
-      nameContains,
-      maxResults,
-      nextToken,
-      sortOrder,
-      sortBy,
+      creationTimeAfter: creationTimeAfter,
+      creationTimeBefore: creationTimeBefore,
+      nameContains: nameContains,
+      maxResults: maxResults,
+      nextToken: nextToken,
+      sortOrder: sortOrder,
+      sortBy: sortBy,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListEdgePackagingJobs = {
   type t
   type request = {
@@ -18096,20 +18351,21 @@ module ListEdgePackagingJobs = {
     (),
   ) =>
     new({
-      sortOrder,
-      sortBy,
-      statusEquals,
-      modelNameContains,
-      nameContains,
-      lastModifiedTimeBefore,
-      lastModifiedTimeAfter,
-      creationTimeBefore,
-      creationTimeAfter,
-      maxResults,
-      nextToken,
+      sortOrder: sortOrder,
+      sortBy: sortBy,
+      statusEquals: statusEquals,
+      modelNameContains: modelNameContains,
+      nameContains: nameContains,
+      lastModifiedTimeBefore: lastModifiedTimeBefore,
+      lastModifiedTimeAfter: lastModifiedTimeAfter,
+      creationTimeBefore: creationTimeBefore,
+      creationTimeAfter: creationTimeAfter,
+      maxResults: maxResults,
+      nextToken: nextToken,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListDomains = {
   type t
   type request = {
@@ -18128,9 +18384,11 @@ module ListDomains = {
     @ocaml.doc("<p>The list of domains.</p>") @as("Domains") domains: option<domainList>,
   }
   @module("@aws-sdk/client-sagemaker") @new external new: request => t = "ListDomainsCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListDeviceFleets = {
   type t
   type request = {
@@ -18185,18 +18443,19 @@ module ListDeviceFleets = {
     (),
   ) =>
     new({
-      sortOrder,
-      sortBy,
-      nameContains,
-      lastModifiedTimeBefore,
-      lastModifiedTimeAfter,
-      creationTimeBefore,
-      creationTimeAfter,
-      maxResults,
-      nextToken,
+      sortOrder: sortOrder,
+      sortBy: sortBy,
+      nameContains: nameContains,
+      lastModifiedTimeBefore: lastModifiedTimeBefore,
+      lastModifiedTimeAfter: lastModifiedTimeAfter,
+      creationTimeBefore: creationTimeBefore,
+      creationTimeAfter: creationTimeAfter,
+      maxResults: maxResults,
+      nextToken: nextToken,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListDataQualityJobDefinitions = {
   type t
   type request = {
@@ -18256,17 +18515,18 @@ module ListDataQualityJobDefinitions = {
     (),
   ) =>
     new({
-      creationTimeAfter,
-      creationTimeBefore,
-      nameContains,
-      maxResults,
-      nextToken,
-      sortOrder,
-      sortBy,
-      endpointName,
+      creationTimeAfter: creationTimeAfter,
+      creationTimeBefore: creationTimeBefore,
+      nameContains: nameContains,
+      maxResults: maxResults,
+      nextToken: nextToken,
+      sortOrder: sortOrder,
+      sortBy: sortBy,
+      endpointName: endpointName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListCompilationJobs = {
   type t
   type request = {
@@ -18338,19 +18598,20 @@ module ListCompilationJobs = {
     (),
   ) =>
     new({
-      sortOrder,
-      sortBy,
-      statusEquals,
-      nameContains,
-      lastModifiedTimeBefore,
-      lastModifiedTimeAfter,
-      creationTimeBefore,
-      creationTimeAfter,
-      maxResults,
-      nextToken,
+      sortOrder: sortOrder,
+      sortBy: sortBy,
+      statusEquals: statusEquals,
+      nameContains: nameContains,
+      lastModifiedTimeBefore: lastModifiedTimeBefore,
+      lastModifiedTimeAfter: lastModifiedTimeAfter,
+      creationTimeBefore: creationTimeBefore,
+      creationTimeAfter: creationTimeAfter,
+      maxResults: maxResults,
+      nextToken: nextToken,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListApps = {
   type t
   type request = {
@@ -18386,9 +18647,18 @@ module ListApps = {
     ~maxResults=?,
     ~nextToken=?,
     (),
-  ) => new({userProfileNameEquals, domainIdEquals, sortBy, sortOrder, maxResults, nextToken})
+  ) =>
+    new({
+      userProfileNameEquals: userProfileNameEquals,
+      domainIdEquals: domainIdEquals,
+      sortBy: sortBy,
+      sortOrder: sortOrder,
+      maxResults: maxResults,
+      nextToken: nextToken,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListAlgorithms = {
   type t
   type request = {
@@ -18442,16 +18712,17 @@ module ListAlgorithms = {
     (),
   ) =>
     new({
-      sortOrder,
-      sortBy,
-      nextToken,
-      nameContains,
-      maxResults,
-      creationTimeBefore,
-      creationTimeAfter,
+      sortOrder: sortOrder,
+      sortBy: sortBy,
+      nextToken: nextToken,
+      nameContains: nameContains,
+      maxResults: maxResults,
+      creationTimeBefore: creationTimeBefore,
+      creationTimeAfter: creationTimeAfter,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetSearchSuggestions = {
   type t
   type request = {
@@ -18469,9 +18740,11 @@ module GetSearchSuggestions = {
   }
   @module("@aws-sdk/client-sagemaker") @new
   external new: request => t = "GetSearchSuggestionsCommand"
-  let make = (~resource, ~suggestionQuery=?, ()) => new({suggestionQuery, resource})
+  let make = (~resource, ~suggestionQuery=?, ()) =>
+    new({suggestionQuery: suggestionQuery, resource: resource})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetDeviceFleetReport = {
   type t
   type request = {
@@ -18500,6 +18773,7 @@ module GetDeviceFleetReport = {
   let make = (~deviceFleetName, ()) => new({deviceFleetName: deviceFleetName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeTrialComponent = {
   type t
   type request = {
@@ -18560,6 +18834,7 @@ module DescribeTrialComponent = {
   let make = (~trialComponentName, ()) => new({trialComponentName: trialComponentName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeNotebookInstanceLifecycleConfig = {
   type t
   type request = {
@@ -18594,6 +18869,7 @@ module DescribeNotebookInstanceLifecycleConfig = {
     new({notebookInstanceLifecycleConfigName: notebookInstanceLifecycleConfigName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeFeatureGroup = {
   type t
   type request = {
@@ -18676,9 +18952,11 @@ module DescribeFeatureGroup = {
   }
   @module("@aws-sdk/client-sagemaker") @new
   external new: request => t = "DescribeFeatureGroupCommand"
-  let make = (~featureGroupName, ~nextToken=?, ()) => new({nextToken, featureGroupName})
+  let make = (~featureGroupName, ~nextToken=?, ()) =>
+    new({nextToken: nextToken, featureGroupName: featureGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeDevice = {
   type t
   type request = {
@@ -18719,9 +18997,10 @@ module DescribeDevice = {
   }
   @module("@aws-sdk/client-sagemaker") @new external new: request => t = "DescribeDeviceCommand"
   let make = (~deviceFleetName, ~deviceName, ~nextToken=?, ()) =>
-    new({deviceFleetName, deviceName, nextToken})
+    new({deviceFleetName: deviceFleetName, deviceName: deviceName, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeCompilationJob = {
   type t
   type request = {
@@ -18806,6 +19085,7 @@ module DescribeCompilationJob = {
   let make = (~compilationJobName, ()) => new({compilationJobName: compilationJobName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateWorkforce = {
   type t
   type request = {
@@ -18838,9 +19118,16 @@ module CreateWorkforce = {
   }
   @module("@aws-sdk/client-sagemaker") @new external new: request => t = "CreateWorkforceCommand"
   let make = (~workforceName, ~tags=?, ~sourceIpConfig=?, ~oidcConfig=?, ~cognitoConfig=?, ()) =>
-    new({tags, workforceName, sourceIpConfig, oidcConfig, cognitoConfig})
+    new({
+      tags: tags,
+      workforceName: workforceName,
+      sourceIpConfig: sourceIpConfig,
+      oidcConfig: oidcConfig,
+      cognitoConfig: cognitoConfig,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateTrialComponent = {
   type t
   type request = {
@@ -18906,19 +19193,20 @@ module CreateTrialComponent = {
     (),
   ) =>
     new({
-      tags,
-      metadataProperties,
-      outputArtifacts,
-      inputArtifacts,
-      parameters,
-      endTime,
-      startTime,
-      status,
-      displayName,
-      trialComponentName,
+      tags: tags,
+      metadataProperties: metadataProperties,
+      outputArtifacts: outputArtifacts,
+      inputArtifacts: inputArtifacts,
+      parameters: parameters,
+      endTime: endTime,
+      startTime: startTime,
+      status: status,
+      displayName: displayName,
+      trialComponentName: trialComponentName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateTrial = {
   type t
   type request = {
@@ -18945,9 +19233,16 @@ module CreateTrial = {
   }
   @module("@aws-sdk/client-sagemaker") @new external new: request => t = "CreateTrialCommand"
   let make = (~experimentName, ~trialName, ~tags=?, ~metadataProperties=?, ~displayName=?, ()) =>
-    new({tags, metadataProperties, experimentName, displayName, trialName})
+    new({
+      tags: tags,
+      metadataProperties: metadataProperties,
+      experimentName: experimentName,
+      displayName: displayName,
+      trialName: trialName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateStudioLifecycleConfig = {
   type t
   type request = {
@@ -18983,13 +19278,14 @@ module CreateStudioLifecycleConfig = {
     (),
   ) =>
     new({
-      tags,
-      studioLifecycleConfigAppType,
-      studioLifecycleConfigContent,
-      studioLifecycleConfigName,
+      tags: tags,
+      studioLifecycleConfigAppType: studioLifecycleConfigAppType,
+      studioLifecycleConfigContent: studioLifecycleConfigContent,
+      studioLifecycleConfigName: studioLifecycleConfigName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreatePipeline = {
   type t
   type request = {
@@ -19038,18 +19334,19 @@ module CreatePipeline = {
     (),
   ) =>
     new({
-      parallelismConfiguration,
-      tags,
-      roleArn,
-      clientRequestToken,
-      pipelineDescription,
-      pipelineDefinitionS3Location,
-      pipelineDefinition,
-      pipelineDisplayName,
-      pipelineName,
+      parallelismConfiguration: parallelismConfiguration,
+      tags: tags,
+      roleArn: roleArn,
+      clientRequestToken: clientRequestToken,
+      pipelineDescription: pipelineDescription,
+      pipelineDefinitionS3Location: pipelineDefinitionS3Location,
+      pipelineDefinition: pipelineDefinition,
+      pipelineDisplayName: pipelineDisplayName,
+      pipelineName: pipelineName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateNotebookInstanceLifecycleConfig = {
   type t
   type request = {
@@ -19073,9 +19370,14 @@ module CreateNotebookInstanceLifecycleConfig = {
   @module("@aws-sdk/client-sagemaker") @new
   external new: request => t = "CreateNotebookInstanceLifecycleConfigCommand"
   let make = (~notebookInstanceLifecycleConfigName, ~onStart=?, ~onCreate=?, ()) =>
-    new({onStart, onCreate, notebookInstanceLifecycleConfigName})
+    new({
+      onStart: onStart,
+      onCreate: onCreate,
+      notebookInstanceLifecycleConfigName: notebookInstanceLifecycleConfigName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateNotebookInstance = {
   type t
   type request = {
@@ -19194,24 +19496,25 @@ module CreateNotebookInstance = {
     (),
   ) =>
     new({
-      platformIdentifier,
-      rootAccess,
-      additionalCodeRepositories,
-      defaultCodeRepository,
-      acceleratorTypes,
-      volumeSizeInGB,
-      directInternetAccess,
-      lifecycleConfigName,
-      tags,
-      kmsKeyId,
-      roleArn,
-      securityGroupIds,
-      subnetId,
-      instanceType,
-      notebookInstanceName,
+      platformIdentifier: platformIdentifier,
+      rootAccess: rootAccess,
+      additionalCodeRepositories: additionalCodeRepositories,
+      defaultCodeRepository: defaultCodeRepository,
+      acceleratorTypes: acceleratorTypes,
+      volumeSizeInGB: volumeSizeInGB,
+      directInternetAccess: directInternetAccess,
+      lifecycleConfigName: lifecycleConfigName,
+      tags: tags,
+      kmsKeyId: kmsKeyId,
+      roleArn: roleArn,
+      securityGroupIds: securityGroupIds,
+      subnetId: subnetId,
+      instanceType: instanceType,
+      notebookInstanceName: notebookInstanceName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateModelPackageGroup = {
   type t
   type request = {
@@ -19233,9 +19536,14 @@ module CreateModelPackageGroup = {
   @module("@aws-sdk/client-sagemaker") @new
   external new: request => t = "CreateModelPackageGroupCommand"
   let make = (~modelPackageGroupName, ~tags=?, ~modelPackageGroupDescription=?, ()) =>
-    new({tags, modelPackageGroupDescription, modelPackageGroupName})
+    new({
+      tags: tags,
+      modelPackageGroupDescription: modelPackageGroupDescription,
+      modelPackageGroupName: modelPackageGroupName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateImage = {
   type t
   type request = {
@@ -19261,9 +19569,16 @@ module CreateImage = {
   }
   @module("@aws-sdk/client-sagemaker") @new external new: request => t = "CreateImageCommand"
   let make = (~roleArn, ~imageName, ~tags=?, ~displayName=?, ~description=?, ()) =>
-    new({tags, roleArn, imageName, displayName, description})
+    new({
+      tags: tags,
+      roleArn: roleArn,
+      imageName: imageName,
+      displayName: displayName,
+      description: description,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateHumanTaskUi = {
   type t
   type request = {
@@ -19285,9 +19600,10 @@ module CreateHumanTaskUi = {
   }
   @module("@aws-sdk/client-sagemaker") @new external new: request => t = "CreateHumanTaskUiCommand"
   let make = (~uiTemplate, ~humanTaskUiName, ~tags=?, ()) =>
-    new({tags, uiTemplate, humanTaskUiName})
+    new({tags: tags, uiTemplate: uiTemplate, humanTaskUiName: humanTaskUiName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateFeatureGroup = {
   type t
   type request = {
@@ -19420,18 +19736,19 @@ module CreateFeatureGroup = {
     (),
   ) =>
     new({
-      tags,
-      description,
-      roleArn,
-      offlineStoreConfig,
-      onlineStoreConfig,
-      featureDefinitions,
-      eventTimeFeatureName,
-      recordIdentifierFeatureName,
-      featureGroupName,
+      tags: tags,
+      description: description,
+      roleArn: roleArn,
+      offlineStoreConfig: offlineStoreConfig,
+      onlineStoreConfig: onlineStoreConfig,
+      featureDefinitions: featureDefinitions,
+      eventTimeFeatureName: eventTimeFeatureName,
+      recordIdentifierFeatureName: recordIdentifierFeatureName,
+      featureGroupName: featureGroupName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateExperiment = {
   type t
   type request = {
@@ -19457,9 +19774,15 @@ module CreateExperiment = {
   }
   @module("@aws-sdk/client-sagemaker") @new external new: request => t = "CreateExperimentCommand"
   let make = (~experimentName, ~tags=?, ~description=?, ~displayName=?, ()) =>
-    new({tags, description, displayName, experimentName})
+    new({
+      tags: tags,
+      description: description,
+      displayName: displayName,
+      experimentName: experimentName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateEdgePackagingJob = {
   type t
   type request = {
@@ -19502,17 +19825,18 @@ module CreateEdgePackagingJob = {
     (),
   ) =>
     new({
-      tags,
-      resourceKey,
-      outputConfig,
-      roleArn,
-      modelVersion,
-      modelName,
-      compilationJobName,
-      edgePackagingJobName,
+      tags: tags,
+      resourceKey: resourceKey,
+      outputConfig: outputConfig,
+      roleArn: roleArn,
+      modelVersion: modelVersion,
+      modelName: modelName,
+      compilationJobName: compilationJobName,
+      edgePackagingJobName: edgePackagingJobName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module CreateDeviceFleet = {
   type t
   type request = {
@@ -19547,9 +19871,18 @@ module CreateDeviceFleet = {
     ~description=?,
     ~roleArn=?,
     (),
-  ) => new({enableIotRoleAlias, tags, outputConfig, description, roleArn, deviceFleetName})
+  ) =>
+    new({
+      enableIotRoleAlias: enableIotRoleAlias,
+      tags: tags,
+      outputConfig: outputConfig,
+      description: description,
+      roleArn: roleArn,
+      deviceFleetName: deviceFleetName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module CreateContext = {
   type t
   type request = {
@@ -19572,9 +19905,17 @@ module CreateContext = {
   }
   @module("@aws-sdk/client-sagemaker") @new external new: request => t = "CreateContextCommand"
   let make = (~contextType, ~source, ~contextName, ~tags=?, ~properties=?, ~description=?, ()) =>
-    new({tags, properties, description, contextType, source, contextName})
+    new({
+      tags: tags,
+      properties: properties,
+      description: description,
+      contextType: contextType,
+      source: source,
+      contextName: contextName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateCompilationJob = {
   type t
   type request = {
@@ -19665,17 +20006,18 @@ module CreateCompilationJob = {
     (),
   ) =>
     new({
-      tags,
-      stoppingCondition,
-      vpcConfig,
-      outputConfig,
-      inputConfig,
-      modelPackageVersionArn,
-      roleArn,
-      compilationJobName,
+      tags: tags,
+      stoppingCondition: stoppingCondition,
+      vpcConfig: vpcConfig,
+      outputConfig: outputConfig,
+      inputConfig: inputConfig,
+      modelPackageVersionArn: modelPackageVersionArn,
+      roleArn: roleArn,
+      compilationJobName: compilationJobName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateCodeRepository = {
   type t
   type request = {
@@ -19702,9 +20044,10 @@ module CreateCodeRepository = {
   @module("@aws-sdk/client-sagemaker") @new
   external new: request => t = "CreateCodeRepositoryCommand"
   let make = (~gitConfig, ~codeRepositoryName, ~tags=?, ()) =>
-    new({tags, gitConfig, codeRepositoryName})
+    new({tags: tags, gitConfig: gitConfig, codeRepositoryName: codeRepositoryName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateApp = {
   type t
   type request = {
@@ -19732,9 +20075,17 @@ module CreateApp = {
   }
   @module("@aws-sdk/client-sagemaker") @new external new: request => t = "CreateAppCommand"
   let make = (~appName, ~appType, ~userProfileName, ~domainId, ~resourceSpec=?, ~tags=?, ()) =>
-    new({resourceSpec, tags, appName, appType, userProfileName, domainId})
+    new({
+      resourceSpec: resourceSpec,
+      tags: tags,
+      appName: appName,
+      appType: appType,
+      userProfileName: userProfileName,
+      domainId: domainId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateAction = {
   type t
   type request = {
@@ -19769,9 +20120,19 @@ module CreateAction = {
     ~description=?,
     (),
   ) =>
-    new({tags, metadataProperties, properties, status, description, actionType, source, actionName})
+    new({
+      tags: tags,
+      metadataProperties: metadataProperties,
+      properties: properties,
+      status: status,
+      description: description,
+      actionType: actionType,
+      source: source,
+      actionName: actionName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module AddTags = {
   type t
   type request = {
@@ -19790,9 +20151,10 @@ module AddTags = {
     tags: option<tagList_>,
   }
   @module("@aws-sdk/client-sagemaker") @new external new: request => t = "AddTagsCommand"
-  let make = (~tags, ~resourceArn, ()) => new({tags, resourceArn})
+  let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateWorkforce = {
   type t
   type request = {
@@ -19819,9 +20181,10 @@ module UpdateWorkforce = {
   }
   @module("@aws-sdk/client-sagemaker") @new external new: request => t = "UpdateWorkforceCommand"
   let make = (~workforceName, ~oidcConfig=?, ~sourceIpConfig=?, ()) =>
-    new({oidcConfig, sourceIpConfig, workforceName})
+    new({oidcConfig: oidcConfig, sourceIpConfig: sourceIpConfig, workforceName: workforceName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateTrainingJob = {
   type t
   type request = {
@@ -19843,9 +20206,14 @@ module UpdateTrainingJob = {
   }
   @module("@aws-sdk/client-sagemaker") @new external new: request => t = "UpdateTrainingJobCommand"
   let make = (~trainingJobName, ~profilerRuleConfigurations=?, ~profilerConfig=?, ()) =>
-    new({profilerRuleConfigurations, profilerConfig, trainingJobName})
+    new({
+      profilerRuleConfigurations: profilerRuleConfigurations,
+      profilerConfig: profilerConfig,
+      trainingJobName: trainingJobName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateProject = {
   type t
   type request = {
@@ -19876,9 +20244,16 @@ module UpdateProject = {
     ~serviceCatalogProvisioningUpdateDetails=?,
     ~projectDescription=?,
     (),
-  ) => new({tags, serviceCatalogProvisioningUpdateDetails, projectDescription, projectName})
+  ) =>
+    new({
+      tags: tags,
+      serviceCatalogProvisioningUpdateDetails: serviceCatalogProvisioningUpdateDetails,
+      projectDescription: projectDescription,
+      projectName: projectName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateAppImageConfig = {
   type t
   type request = {
@@ -19896,9 +20271,13 @@ module UpdateAppImageConfig = {
   @module("@aws-sdk/client-sagemaker") @new
   external new: request => t = "UpdateAppImageConfigCommand"
   let make = (~appImageConfigName, ~kernelGatewayImageConfig=?, ()) =>
-    new({kernelGatewayImageConfig, appImageConfigName})
+    new({
+      kernelGatewayImageConfig: kernelGatewayImageConfig,
+      appImageConfigName: appImageConfigName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListTrials = {
   type t
   type request = {
@@ -19955,17 +20334,18 @@ module ListTrials = {
     (),
   ) =>
     new({
-      nextToken,
-      maxResults,
-      sortOrder,
-      sortBy,
-      createdBefore,
-      createdAfter,
-      trialComponentName,
-      experimentName,
+      nextToken: nextToken,
+      maxResults: maxResults,
+      sortOrder: sortOrder,
+      sortBy: sortBy,
+      createdBefore: createdBefore,
+      createdAfter: createdAfter,
+      trialComponentName: trialComponentName,
+      experimentName: experimentName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListTrialComponents = {
   type t
   type request = {
@@ -20030,18 +20410,19 @@ module ListTrialComponents = {
     (),
   ) =>
     new({
-      nextToken,
-      maxResults,
-      sortOrder,
-      sortBy,
-      createdBefore,
-      createdAfter,
-      sourceArn,
-      trialName,
-      experimentName,
+      nextToken: nextToken,
+      maxResults: maxResults,
+      sortOrder: sortOrder,
+      sortBy: sortBy,
+      createdBefore: createdBefore,
+      createdAfter: createdAfter,
+      sourceArn: sourceArn,
+      trialName: trialName,
+      experimentName: experimentName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListTrainingJobsForHyperParameterTuningJob = {
   type t
   type request = {
@@ -20097,9 +20478,18 @@ module ListTrainingJobsForHyperParameterTuningJob = {
     ~maxResults=?,
     ~nextToken=?,
     (),
-  ) => new({sortOrder, sortBy, statusEquals, maxResults, nextToken, hyperParameterTuningJobName})
+  ) =>
+    new({
+      sortOrder: sortOrder,
+      sortBy: sortBy,
+      statusEquals: statusEquals,
+      maxResults: maxResults,
+      nextToken: nextToken,
+      hyperParameterTuningJobName: hyperParameterTuningJobName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListNotebookInstances = {
   type t
   type request = {
@@ -20189,22 +20579,23 @@ module ListNotebookInstances = {
     (),
   ) =>
     new({
-      additionalCodeRepositoryEquals,
-      defaultCodeRepositoryContains,
-      notebookInstanceLifecycleConfigNameContains,
-      statusEquals,
-      lastModifiedTimeAfter,
-      lastModifiedTimeBefore,
-      creationTimeAfter,
-      creationTimeBefore,
-      nameContains,
-      sortOrder,
-      sortBy,
-      maxResults,
-      nextToken,
+      additionalCodeRepositoryEquals: additionalCodeRepositoryEquals,
+      defaultCodeRepositoryContains: defaultCodeRepositoryContains,
+      notebookInstanceLifecycleConfigNameContains: notebookInstanceLifecycleConfigNameContains,
+      statusEquals: statusEquals,
+      lastModifiedTimeAfter: lastModifiedTimeAfter,
+      lastModifiedTimeBefore: lastModifiedTimeBefore,
+      creationTimeAfter: creationTimeAfter,
+      creationTimeBefore: creationTimeBefore,
+      nameContains: nameContains,
+      sortOrder: sortOrder,
+      sortBy: sortBy,
+      maxResults: maxResults,
+      nextToken: nextToken,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListModelMetadata = {
   type t
   type request = {
@@ -20231,9 +20622,10 @@ module ListModelMetadata = {
   }
   @module("@aws-sdk/client-sagemaker") @new external new: request => t = "ListModelMetadataCommand"
   let make = (~maxResults=?, ~nextToken=?, ~searchExpression=?, ()) =>
-    new({maxResults, nextToken, searchExpression})
+    new({maxResults: maxResults, nextToken: nextToken, searchExpression: searchExpression})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListLabelingJobsForWorkteam = {
   type t
   type request = {
@@ -20292,17 +20684,18 @@ module ListLabelingJobsForWorkteam = {
     (),
   ) =>
     new({
-      sortOrder,
-      sortBy,
-      jobReferenceCodeContains,
-      creationTimeBefore,
-      creationTimeAfter,
-      nextToken,
-      maxResults,
-      workteamArn,
+      sortOrder: sortOrder,
+      sortBy: sortBy,
+      jobReferenceCodeContains: jobReferenceCodeContains,
+      creationTimeBefore: creationTimeBefore,
+      creationTimeAfter: creationTimeAfter,
+      nextToken: nextToken,
+      maxResults: maxResults,
+      workteamArn: workteamArn,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListHyperParameterTuningJobs = {
   type t
   type request = {
@@ -20383,19 +20776,20 @@ module ListHyperParameterTuningJobs = {
     (),
   ) =>
     new({
-      statusEquals,
-      lastModifiedTimeBefore,
-      lastModifiedTimeAfter,
-      creationTimeBefore,
-      creationTimeAfter,
-      nameContains,
-      sortOrder,
-      sortBy,
-      maxResults,
-      nextToken,
+      statusEquals: statusEquals,
+      lastModifiedTimeBefore: lastModifiedTimeBefore,
+      lastModifiedTimeAfter: lastModifiedTimeAfter,
+      creationTimeBefore: creationTimeBefore,
+      creationTimeAfter: creationTimeAfter,
+      nameContains: nameContains,
+      sortOrder: sortOrder,
+      sortBy: sortBy,
+      maxResults: maxResults,
+      nextToken: nextToken,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListFeatureGroups = {
   type t
   type request = {
@@ -20453,18 +20847,19 @@ module ListFeatureGroups = {
     (),
   ) =>
     new({
-      nextToken,
-      maxResults,
-      sortBy,
-      sortOrder,
-      creationTimeBefore,
-      creationTimeAfter,
-      offlineStoreStatusEquals,
-      featureGroupStatusEquals,
-      nameContains,
+      nextToken: nextToken,
+      maxResults: maxResults,
+      sortBy: sortBy,
+      sortOrder: sortOrder,
+      creationTimeBefore: creationTimeBefore,
+      creationTimeAfter: creationTimeAfter,
+      offlineStoreStatusEquals: offlineStoreStatusEquals,
+      featureGroupStatusEquals: featureGroupStatusEquals,
+      nameContains: nameContains,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListExperiments = {
   type t
   type request = {
@@ -20507,9 +20902,18 @@ module ListExperiments = {
     ~createdBefore=?,
     ~createdAfter=?,
     (),
-  ) => new({maxResults, nextToken, sortOrder, sortBy, createdBefore, createdAfter})
+  ) =>
+    new({
+      maxResults: maxResults,
+      nextToken: nextToken,
+      sortOrder: sortOrder,
+      sortBy: sortBy,
+      createdBefore: createdBefore,
+      createdAfter: createdAfter,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListContexts = {
   type t
   type request = {
@@ -20565,17 +20969,18 @@ module ListContexts = {
     (),
   ) =>
     new({
-      maxResults,
-      nextToken,
-      sortOrder,
-      sortBy,
-      createdBefore,
-      createdAfter,
-      contextType,
-      sourceUri,
+      maxResults: maxResults,
+      nextToken: nextToken,
+      sortOrder: sortOrder,
+      sortBy: sortBy,
+      createdBefore: createdBefore,
+      createdAfter: createdAfter,
+      contextType: contextType,
+      sourceUri: sourceUri,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListCodeRepositories = {
   type t
   type request = {
@@ -20659,18 +21064,19 @@ module ListCodeRepositories = {
     (),
   ) =>
     new({
-      sortOrder,
-      sortBy,
-      nextToken,
-      nameContains,
-      maxResults,
-      lastModifiedTimeBefore,
-      lastModifiedTimeAfter,
-      creationTimeBefore,
-      creationTimeAfter,
+      sortOrder: sortOrder,
+      sortBy: sortBy,
+      nextToken: nextToken,
+      nameContains: nameContains,
+      maxResults: maxResults,
+      lastModifiedTimeBefore: lastModifiedTimeBefore,
+      lastModifiedTimeAfter: lastModifiedTimeAfter,
+      creationTimeBefore: creationTimeBefore,
+      creationTimeAfter: creationTimeAfter,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListAssociations = {
   type t
   type request = {
@@ -20744,20 +21150,21 @@ module ListAssociations = {
     (),
   ) =>
     new({
-      maxResults,
-      nextToken,
-      sortOrder,
-      sortBy,
-      createdBefore,
-      createdAfter,
-      associationType,
-      destinationType,
-      sourceType,
-      destinationArn,
-      sourceArn,
+      maxResults: maxResults,
+      nextToken: nextToken,
+      sortOrder: sortOrder,
+      sortBy: sortBy,
+      createdBefore: createdBefore,
+      createdAfter: createdAfter,
+      associationType: associationType,
+      destinationType: destinationType,
+      sourceType: sourceType,
+      destinationArn: destinationArn,
+      sourceArn: sourceArn,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListActions = {
   type t
   type request = {
@@ -20810,17 +21217,18 @@ module ListActions = {
     (),
   ) =>
     new({
-      maxResults,
-      nextToken,
-      sortOrder,
-      sortBy,
-      createdBefore,
-      createdAfter,
-      actionType,
-      sourceUri,
+      maxResults: maxResults,
+      nextToken: nextToken,
+      sortOrder: sortOrder,
+      sortBy: sortBy,
+      createdBefore: createdBefore,
+      createdAfter: createdAfter,
+      actionType: actionType,
+      sourceUri: sourceUri,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeWorkforce = {
   type t
   type request = {
@@ -20842,6 +21250,7 @@ module DescribeWorkforce = {
   let make = (~workforceName, ()) => new({workforceName: workforceName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeTransformJob = {
   type t
   type request = {
@@ -20946,6 +21355,7 @@ module DescribeTransformJob = {
   let make = (~transformJobName, ()) => new({transformJobName: transformJobName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeProject = {
   type t
   type request = {
@@ -20979,6 +21389,7 @@ module DescribeProject = {
   let make = (~projectName, ()) => new({projectName: projectName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeLabelingJob = {
   type t
   type request = {
@@ -21109,6 +21520,7 @@ module DescribeLabelingJob = {
   let make = (~labelingJobName, ()) => new({labelingJobName: labelingJobName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeFlowDefinition = {
   type t
   type request = {
@@ -21156,6 +21568,7 @@ module DescribeFlowDefinition = {
   let make = (~flowDefinitionName, ()) => new({flowDefinitionName: flowDefinitionName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeEndpointConfig = {
   type t
   type request = {
@@ -21193,6 +21606,7 @@ module DescribeEndpointConfig = {
   let make = (~endpointConfigName, ()) => new({endpointConfigName: endpointConfigName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeArtifact = {
   type t
   type request = {
@@ -21224,6 +21638,7 @@ module DescribeArtifact = {
   let make = (~artifactArn, ()) => new({artifactArn: artifactArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeAppImageConfig = {
   type t
   type request = {
@@ -21248,6 +21663,7 @@ module DescribeAppImageConfig = {
   let make = (~appImageConfigName, ()) => new({appImageConfigName: appImageConfigName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteArtifact = {
   type t
   type request = {
@@ -21261,9 +21677,10 @@ module DeleteArtifact = {
     artifactArn: option<artifactArn>,
   }
   @module("@aws-sdk/client-sagemaker") @new external new: request => t = "DeleteArtifactCommand"
-  let make = (~source=?, ~artifactArn=?, ()) => new({source, artifactArn})
+  let make = (~source=?, ~artifactArn=?, ()) => new({source: source, artifactArn: artifactArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateTransformJob = {
   type t
   type request = {
@@ -21373,22 +21790,23 @@ module CreateTransformJob = {
     (),
   ) =>
     new({
-      experimentConfig,
-      tags,
-      dataProcessing,
-      transformResources,
-      transformOutput,
-      transformInput,
-      environment,
-      batchStrategy,
-      maxPayloadInMB,
-      modelClientConfig,
-      maxConcurrentTransforms,
-      modelName,
-      transformJobName,
+      experimentConfig: experimentConfig,
+      tags: tags,
+      dataProcessing: dataProcessing,
+      transformResources: transformResources,
+      transformOutput: transformOutput,
+      transformInput: transformInput,
+      environment: environment,
+      batchStrategy: batchStrategy,
+      maxPayloadInMB: maxPayloadInMB,
+      modelClientConfig: modelClientConfig,
+      maxConcurrentTransforms: maxConcurrentTransforms,
+      modelName: modelName,
+      transformJobName: transformJobName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateProject = {
   type t
   type request = {
@@ -21418,9 +21836,16 @@ module CreateProject = {
     ~tags=?,
     ~projectDescription=?,
     (),
-  ) => new({tags, serviceCatalogProvisioningDetails, projectDescription, projectName})
+  ) =>
+    new({
+      tags: tags,
+      serviceCatalogProvisioningDetails: serviceCatalogProvisioningDetails,
+      projectDescription: projectDescription,
+      projectName: projectName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateLabelingJob = {
   type t
   type request = {
@@ -21611,19 +22036,20 @@ module CreateLabelingJob = {
     (),
   ) =>
     new({
-      tags,
-      humanTaskConfig,
-      labelingJobAlgorithmsConfig,
-      stoppingConditions,
-      labelCategoryConfigS3Uri,
-      roleArn,
-      outputConfig,
-      inputConfig,
-      labelAttributeName,
-      labelingJobName,
+      tags: tags,
+      humanTaskConfig: humanTaskConfig,
+      labelingJobAlgorithmsConfig: labelingJobAlgorithmsConfig,
+      stoppingConditions: stoppingConditions,
+      labelCategoryConfigS3Uri: labelCategoryConfigS3Uri,
+      roleArn: roleArn,
+      outputConfig: outputConfig,
+      inputConfig: inputConfig,
+      labelAttributeName: labelAttributeName,
+      labelingJobName: labelingJobName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateFlowDefinition = {
   type t
   type request = {
@@ -21677,16 +22103,17 @@ module CreateFlowDefinition = {
     (),
   ) =>
     new({
-      tags,
-      roleArn,
-      outputConfig,
-      humanLoopConfig,
-      humanLoopActivationConfig,
-      humanLoopRequestSource,
-      flowDefinitionName,
+      tags: tags,
+      roleArn: roleArn,
+      outputConfig: outputConfig,
+      humanLoopConfig: humanLoopConfig,
+      humanLoopActivationConfig: humanLoopActivationConfig,
+      humanLoopRequestSource: humanLoopRequestSource,
+      flowDefinitionName: flowDefinitionName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateEndpointConfig = {
   type t
   type request = {
@@ -21772,15 +22199,16 @@ module CreateEndpointConfig = {
     (),
   ) =>
     new({
-      asyncInferenceConfig,
-      kmsKeyId,
-      tags,
-      dataCaptureConfig,
-      productionVariants,
-      endpointConfigName,
+      asyncInferenceConfig: asyncInferenceConfig,
+      kmsKeyId: kmsKeyId,
+      tags: tags,
+      dataCaptureConfig: dataCaptureConfig,
+      productionVariants: productionVariants,
+      endpointConfigName: endpointConfigName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateArtifact = {
   type t
   type request = {
@@ -21811,9 +22239,18 @@ module CreateArtifact = {
     ~properties=?,
     ~artifactName=?,
     (),
-  ) => new({tags, metadataProperties, properties, artifactType, source, artifactName})
+  ) =>
+    new({
+      tags: tags,
+      metadataProperties: metadataProperties,
+      properties: properties,
+      artifactType: artifactType,
+      source: source,
+      artifactName: artifactName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateAppImageConfig = {
   type t
   type request = {
@@ -21833,9 +22270,14 @@ module CreateAppImageConfig = {
   @module("@aws-sdk/client-sagemaker") @new
   external new: request => t = "CreateAppImageConfigCommand"
   let make = (~appImageConfigName, ~kernelGatewayImageConfig=?, ~tags=?, ()) =>
-    new({kernelGatewayImageConfig, tags, appImageConfigName})
+    new({
+      kernelGatewayImageConfig: kernelGatewayImageConfig,
+      tags: tags,
+      appImageConfigName: appImageConfigName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateUserProfile = {
   type t
   type request = {
@@ -21851,9 +22293,10 @@ module UpdateUserProfile = {
   }
   @module("@aws-sdk/client-sagemaker") @new external new: request => t = "UpdateUserProfileCommand"
   let make = (~userProfileName, ~domainId, ~userSettings=?, ()) =>
-    new({userSettings, userProfileName, domainId})
+    new({userSettings: userSettings, userProfileName: userProfileName, domainId: domainId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateEndpoint = {
   type t
   type request = {
@@ -21903,15 +22346,16 @@ module UpdateEndpoint = {
     (),
   ) =>
     new({
-      retainDeploymentConfig,
-      deploymentConfig,
-      excludeRetainedVariantProperties,
-      retainAllVariantProperties,
-      endpointConfigName,
-      endpointName,
+      retainDeploymentConfig: retainDeploymentConfig,
+      deploymentConfig: deploymentConfig,
+      excludeRetainedVariantProperties: excludeRetainedVariantProperties,
+      retainAllVariantProperties: retainAllVariantProperties,
+      endpointConfigName: endpointConfigName,
+      endpointName: endpointName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateDomain = {
   type t
   type request = {
@@ -21928,9 +22372,14 @@ module UpdateDomain = {
   }
   @module("@aws-sdk/client-sagemaker") @new external new: request => t = "UpdateDomainCommand"
   let make = (~domainId, ~domainSettingsForUpdate=?, ~defaultUserSettings=?, ()) =>
-    new({domainSettingsForUpdate, defaultUserSettings, domainId})
+    new({
+      domainSettingsForUpdate: domainSettingsForUpdate,
+      defaultUserSettings: defaultUserSettings,
+      domainId: domainId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListWorkforces = {
   type t
   type request = {
@@ -21957,9 +22406,16 @@ module ListWorkforces = {
   }
   @module("@aws-sdk/client-sagemaker") @new external new: request => t = "ListWorkforcesCommand"
   let make = (~maxResults=?, ~nextToken=?, ~nameContains=?, ~sortOrder=?, ~sortBy=?, ()) =>
-    new({maxResults, nextToken, nameContains, sortOrder, sortBy})
+    new({
+      maxResults: maxResults,
+      nextToken: nextToken,
+      nameContains: nameContains,
+      sortOrder: sortOrder,
+      sortBy: sortBy,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListDevices = {
   type t
   type request = {
@@ -21998,9 +22454,17 @@ module ListDevices = {
     ~maxResults=?,
     ~nextToken=?,
     (),
-  ) => new({deviceFleetName, modelName, latestHeartbeatAfter, maxResults, nextToken})
+  ) =>
+    new({
+      deviceFleetName: deviceFleetName,
+      modelName: modelName,
+      latestHeartbeatAfter: latestHeartbeatAfter,
+      maxResults: maxResults,
+      nextToken: nextToken,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListAutoMLJobs = {
   type t
   type request = {
@@ -22056,19 +22520,20 @@ module ListAutoMLJobs = {
     (),
   ) =>
     new({
-      nextToken,
-      maxResults,
-      sortBy,
-      sortOrder,
-      statusEquals,
-      nameContains,
-      lastModifiedTimeBefore,
-      lastModifiedTimeAfter,
-      creationTimeBefore,
-      creationTimeAfter,
+      nextToken: nextToken,
+      maxResults: maxResults,
+      sortBy: sortBy,
+      sortOrder: sortOrder,
+      statusEquals: statusEquals,
+      nameContains: nameContains,
+      lastModifiedTimeBefore: lastModifiedTimeBefore,
+      lastModifiedTimeAfter: lastModifiedTimeAfter,
+      creationTimeBefore: creationTimeBefore,
+      creationTimeAfter: creationTimeAfter,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeUserProfile = {
   type t
   type request = {
@@ -22104,9 +22569,11 @@ module DescribeUserProfile = {
   }
   @module("@aws-sdk/client-sagemaker") @new
   external new: request => t = "DescribeUserProfileCommand"
-  let make = (~userProfileName, ~domainId, ()) => new({userProfileName, domainId})
+  let make = (~userProfileName, ~domainId, ()) =>
+    new({userProfileName: userProfileName, domainId: domainId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeProcessingJob = {
   type t
   type request = {
@@ -22183,6 +22650,7 @@ module DescribeProcessingJob = {
   let make = (~processingJobName, ()) => new({processingJobName: processingJobName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeModelQualityJobDefinition = {
   type t
   type request = {
@@ -22224,6 +22692,7 @@ module DescribeModelQualityJobDefinition = {
   let make = (~jobDefinitionName, ()) => new({jobDefinitionName: jobDefinitionName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeModelExplainabilityJobDefinition = {
   type t
   type request = {
@@ -22269,6 +22738,7 @@ module DescribeModelExplainabilityJobDefinition = {
   let make = (~jobDefinitionName, ()) => new({jobDefinitionName: jobDefinitionName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeModelBiasJobDefinition = {
   type t
   type request = {
@@ -22311,6 +22781,7 @@ module DescribeModelBiasJobDefinition = {
   let make = (~jobDefinitionName, ()) => new({jobDefinitionName: jobDefinitionName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeModel = {
   type t
   type request = {@ocaml.doc("<p>The name of the model.</p>") @as("ModelName") modelName: modelName}
@@ -22351,6 +22822,7 @@ module DescribeModel = {
   let make = (~modelName, ()) => new({modelName: modelName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeDomain = {
   type t
   type request = {@ocaml.doc("<p>The domain ID.</p>") @as("DomainId") domainId: domainId}
@@ -22423,6 +22895,7 @@ module DescribeDomain = {
   let make = (~domainId, ()) => new({domainId: domainId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeDataQualityJobDefinition = {
   type t
   type request = {
@@ -22470,6 +22943,7 @@ module DescribeDataQualityJobDefinition = {
   let make = (~jobDefinitionName, ()) => new({jobDefinitionName: jobDefinitionName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeAutoMLJob = {
   type t
   type request = {
@@ -22542,6 +23016,7 @@ module DescribeAutoMLJob = {
   let make = (~autoMLJobName, ()) => new({autoMLJobName: autoMLJobName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateWorkteam = {
   type t
   type request = {
@@ -22600,15 +23075,16 @@ module CreateWorkteam = {
     (),
   ) =>
     new({
-      tags,
-      notificationConfiguration,
-      description,
-      memberDefinitions,
-      workforceName,
-      workteamName,
+      tags: tags,
+      notificationConfiguration: notificationConfiguration,
+      description: description,
+      memberDefinitions: memberDefinitions,
+      workforceName: workforceName,
+      workteamName: workteamName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateUserProfile = {
   type t
   type request = {
@@ -22650,15 +23126,16 @@ module CreateUserProfile = {
     (),
   ) =>
     new({
-      userSettings,
-      tags,
-      singleSignOnUserValue,
-      singleSignOnUserIdentifier,
-      userProfileName,
-      domainId,
+      userSettings: userSettings,
+      tags: tags,
+      singleSignOnUserValue: singleSignOnUserValue,
+      singleSignOnUserIdentifier: singleSignOnUserIdentifier,
+      userProfileName: userProfileName,
+      domainId: domainId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateProcessingJob = {
   type t
   type request = {
@@ -22723,20 +23200,21 @@ module CreateProcessingJob = {
     (),
   ) =>
     new({
-      experimentConfig,
-      tags,
-      roleArn,
-      networkConfig,
-      environment,
-      appSpecification,
-      stoppingCondition,
-      processingResources,
-      processingJobName,
-      processingOutputConfig,
-      processingInputs,
+      experimentConfig: experimentConfig,
+      tags: tags,
+      roleArn: roleArn,
+      networkConfig: networkConfig,
+      environment: environment,
+      appSpecification: appSpecification,
+      stoppingCondition: stoppingCondition,
+      processingResources: processingResources,
+      processingJobName: processingJobName,
+      processingOutputConfig: processingOutputConfig,
+      processingInputs: processingInputs,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateModelQualityJobDefinition = {
   type t
   type request = {
@@ -22787,19 +23265,20 @@ module CreateModelQualityJobDefinition = {
     (),
   ) =>
     new({
-      tags,
-      stoppingCondition,
-      roleArn,
-      networkConfig,
-      jobResources,
-      modelQualityJobOutputConfig,
-      modelQualityJobInput,
-      modelQualityAppSpecification,
-      modelQualityBaselineConfig,
-      jobDefinitionName,
+      tags: tags,
+      stoppingCondition: stoppingCondition,
+      roleArn: roleArn,
+      networkConfig: networkConfig,
+      jobResources: jobResources,
+      modelQualityJobOutputConfig: modelQualityJobOutputConfig,
+      modelQualityJobInput: modelQualityJobInput,
+      modelQualityAppSpecification: modelQualityAppSpecification,
+      modelQualityBaselineConfig: modelQualityBaselineConfig,
+      jobDefinitionName: jobDefinitionName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateModelExplainabilityJobDefinition = {
   type t
   type request = {
@@ -22852,19 +23331,20 @@ module CreateModelExplainabilityJobDefinition = {
     (),
   ) =>
     new({
-      tags,
-      stoppingCondition,
-      roleArn,
-      networkConfig,
-      jobResources,
-      modelExplainabilityJobOutputConfig,
-      modelExplainabilityJobInput,
-      modelExplainabilityAppSpecification,
-      modelExplainabilityBaselineConfig,
-      jobDefinitionName,
+      tags: tags,
+      stoppingCondition: stoppingCondition,
+      roleArn: roleArn,
+      networkConfig: networkConfig,
+      jobResources: jobResources,
+      modelExplainabilityJobOutputConfig: modelExplainabilityJobOutputConfig,
+      modelExplainabilityJobInput: modelExplainabilityJobInput,
+      modelExplainabilityAppSpecification: modelExplainabilityAppSpecification,
+      modelExplainabilityBaselineConfig: modelExplainabilityBaselineConfig,
+      jobDefinitionName: jobDefinitionName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateModelBiasJobDefinition = {
   type t
   type request = {
@@ -22915,19 +23395,20 @@ module CreateModelBiasJobDefinition = {
     (),
   ) =>
     new({
-      tags,
-      stoppingCondition,
-      roleArn,
-      networkConfig,
-      jobResources,
-      modelBiasJobOutputConfig,
-      modelBiasJobInput,
-      modelBiasAppSpecification,
-      modelBiasBaselineConfig,
-      jobDefinitionName,
+      tags: tags,
+      stoppingCondition: stoppingCondition,
+      roleArn: roleArn,
+      networkConfig: networkConfig,
+      jobResources: jobResources,
+      modelBiasJobOutputConfig: modelBiasJobOutputConfig,
+      modelBiasJobInput: modelBiasJobInput,
+      modelBiasAppSpecification: modelBiasAppSpecification,
+      modelBiasBaselineConfig: modelBiasBaselineConfig,
+      jobDefinitionName: jobDefinitionName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateModel = {
   type t
   type request = {
@@ -22990,17 +23471,18 @@ module CreateModel = {
     (),
   ) =>
     new({
-      enableNetworkIsolation,
-      vpcConfig,
-      tags,
-      executionRoleArn,
-      inferenceExecutionConfig,
-      containers,
-      primaryContainer,
-      modelName,
+      enableNetworkIsolation: enableNetworkIsolation,
+      vpcConfig: vpcConfig,
+      tags: tags,
+      executionRoleArn: executionRoleArn,
+      inferenceExecutionConfig: inferenceExecutionConfig,
+      containers: containers,
+      primaryContainer: primaryContainer,
+      modelName: modelName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateEndpoint = {
   type t
   type request = {
@@ -23028,9 +23510,15 @@ module CreateEndpoint = {
   }
   @module("@aws-sdk/client-sagemaker") @new external new: request => t = "CreateEndpointCommand"
   let make = (~endpointConfigName, ~endpointName, ~tags=?, ~deploymentConfig=?, ()) =>
-    new({tags, deploymentConfig, endpointConfigName, endpointName})
+    new({
+      tags: tags,
+      deploymentConfig: deploymentConfig,
+      endpointConfigName: endpointConfigName,
+      endpointName: endpointName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateDomain = {
   type t
   type request = {
@@ -23112,20 +23600,21 @@ module CreateDomain = {
     (),
   ) =>
     new({
-      domainSettings,
-      appSecurityGroupManagement,
-      kmsKeyId,
-      homeEfsFileSystemKmsKeyId,
-      appNetworkAccessType,
-      tags,
-      vpcId,
-      subnetIds,
-      defaultUserSettings,
-      authMode,
-      domainName,
+      domainSettings: domainSettings,
+      appSecurityGroupManagement: appSecurityGroupManagement,
+      kmsKeyId: kmsKeyId,
+      homeEfsFileSystemKmsKeyId: homeEfsFileSystemKmsKeyId,
+      appNetworkAccessType: appNetworkAccessType,
+      tags: tags,
+      vpcId: vpcId,
+      subnetIds: subnetIds,
+      defaultUserSettings: defaultUserSettings,
+      authMode: authMode,
+      domainName: domainName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateDataQualityJobDefinition = {
   type t
   type request = {
@@ -23177,19 +23666,20 @@ module CreateDataQualityJobDefinition = {
     (),
   ) =>
     new({
-      tags,
-      stoppingCondition,
-      roleArn,
-      networkConfig,
-      jobResources,
-      dataQualityJobOutputConfig,
-      dataQualityJobInput,
-      dataQualityAppSpecification,
-      dataQualityBaselineConfig,
-      jobDefinitionName,
+      tags: tags,
+      stoppingCondition: stoppingCondition,
+      roleArn: roleArn,
+      networkConfig: networkConfig,
+      jobResources: jobResources,
+      dataQualityJobOutputConfig: dataQualityJobOutputConfig,
+      dataQualityJobInput: dataQualityJobInput,
+      dataQualityAppSpecification: dataQualityAppSpecification,
+      dataQualityBaselineConfig: dataQualityBaselineConfig,
+      jobDefinitionName: jobDefinitionName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateAutoMLJob = {
   type t
   type request = {
@@ -23256,19 +23746,20 @@ module CreateAutoMLJob = {
     (),
   ) =>
     new({
-      modelDeployConfig,
-      tags,
-      generateCandidateDefinitionsOnly,
-      roleArn,
-      autoMLJobConfig,
-      autoMLJobObjective,
-      problemType,
-      outputDataConfig,
-      inputDataConfig,
-      autoMLJobName,
+      modelDeployConfig: modelDeployConfig,
+      tags: tags,
+      generateCandidateDefinitionsOnly: generateCandidateDefinitionsOnly,
+      roleArn: roleArn,
+      autoMLJobConfig: autoMLJobConfig,
+      autoMLJobObjective: autoMLJobObjective,
+      problemType: problemType,
+      outputDataConfig: outputDataConfig,
+      inputDataConfig: inputDataConfig,
+      autoMLJobName: autoMLJobName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateWorkteam = {
   type t
   type request = {
@@ -23314,9 +23805,16 @@ module UpdateWorkteam = {
     ~description=?,
     ~memberDefinitions=?,
     (),
-  ) => new({notificationConfiguration, description, memberDefinitions, workteamName})
+  ) =>
+    new({
+      notificationConfiguration: notificationConfiguration,
+      description: description,
+      memberDefinitions: memberDefinitions,
+      workteamName: workteamName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateModelPackage = {
   type t
   type request = {
@@ -23358,15 +23856,16 @@ module UpdateModelPackage = {
     (),
   ) =>
     new({
-      additionalInferenceSpecificationsToAdd,
-      customerMetadataPropertiesToRemove,
-      customerMetadataProperties,
-      approvalDescription,
-      modelApprovalStatus,
-      modelPackageArn,
+      additionalInferenceSpecificationsToAdd: additionalInferenceSpecificationsToAdd,
+      customerMetadataPropertiesToRemove: customerMetadataPropertiesToRemove,
+      customerMetadataProperties: customerMetadataProperties,
+      approvalDescription: approvalDescription,
+      modelApprovalStatus: modelApprovalStatus,
+      modelPackageArn: modelPackageArn,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListLabelingJobs = {
   type t
   type request = {
@@ -23433,19 +23932,20 @@ module ListLabelingJobs = {
     (),
   ) =>
     new({
-      statusEquals,
-      sortOrder,
-      sortBy,
-      nameContains,
-      nextToken,
-      maxResults,
-      lastModifiedTimeBefore,
-      lastModifiedTimeAfter,
-      creationTimeBefore,
-      creationTimeAfter,
+      statusEquals: statusEquals,
+      sortOrder: sortOrder,
+      sortBy: sortBy,
+      nameContains: nameContains,
+      nextToken: nextToken,
+      maxResults: maxResults,
+      lastModifiedTimeBefore: lastModifiedTimeBefore,
+      lastModifiedTimeAfter: lastModifiedTimeAfter,
+      creationTimeBefore: creationTimeBefore,
+      creationTimeAfter: creationTimeAfter,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListCandidatesForAutoMLJob = {
   type t
   type request = {
@@ -23492,16 +23992,17 @@ module ListCandidatesForAutoMLJob = {
     (),
   ) =>
     new({
-      nextToken,
-      maxResults,
-      sortBy,
-      sortOrder,
-      candidateNameEquals,
-      statusEquals,
-      autoMLJobName,
+      nextToken: nextToken,
+      maxResults: maxResults,
+      sortBy: sortBy,
+      sortOrder: sortOrder,
+      candidateNameEquals: candidateNameEquals,
+      statusEquals: statusEquals,
+      autoMLJobName: autoMLJobName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListArtifacts = {
   type t
   type request = {
@@ -23559,17 +24060,18 @@ module ListArtifacts = {
     (),
   ) =>
     new({
-      maxResults,
-      nextToken,
-      sortOrder,
-      sortBy,
-      createdBefore,
-      createdAfter,
-      artifactType,
-      sourceUri,
+      maxResults: maxResults,
+      nextToken: nextToken,
+      sortOrder: sortOrder,
+      sortBy: sortBy,
+      createdBefore: createdBefore,
+      createdAfter: createdAfter,
+      artifactType: artifactType,
+      sourceUri: sourceUri,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListAppImageConfigs = {
   type t
   type request = {
@@ -23637,18 +24139,19 @@ module ListAppImageConfigs = {
     (),
   ) =>
     new({
-      sortOrder,
-      sortBy,
-      modifiedTimeAfter,
-      modifiedTimeBefore,
-      creationTimeAfter,
-      creationTimeBefore,
-      nameContains,
-      nextToken,
-      maxResults,
+      sortOrder: sortOrder,
+      sortBy: sortBy,
+      modifiedTimeAfter: modifiedTimeAfter,
+      modifiedTimeBefore: modifiedTimeBefore,
+      creationTimeAfter: creationTimeAfter,
+      creationTimeBefore: creationTimeBefore,
+      nameContains: nameContains,
+      nextToken: nextToken,
+      maxResults: maxResults,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeWorkteam = {
   type t
   type request = {
@@ -23665,6 +24168,7 @@ module DescribeWorkteam = {
   let make = (~workteamName, ()) => new({workteamName: workteamName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeTrainingJob = {
   type t
   type request = {
@@ -23962,6 +24466,7 @@ module DescribeTrainingJob = {
   let make = (~trainingJobName, ()) => new({trainingJobName: trainingJobName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeEndpoint = {
   type t
   type request = {
@@ -24057,6 +24562,7 @@ module DescribeEndpoint = {
   let make = (~endpointName, ()) => new({endpointName: endpointName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateTrainingJob = {
   type t
   type request = {
@@ -24220,31 +24726,32 @@ module CreateTrainingJob = {
     (),
   ) =>
     new({
-      retryStrategy,
-      environment,
-      profilerRuleConfigurations,
-      profilerConfig,
-      experimentConfig,
-      tensorBoardOutputConfig,
-      debugRuleConfigurations,
-      debugHookConfig,
-      checkpointConfig,
-      enableManagedSpotTraining,
-      enableInterContainerTrafficEncryption,
-      enableNetworkIsolation,
-      tags,
-      stoppingCondition,
-      vpcConfig,
-      resourceConfig,
-      outputDataConfig,
-      inputDataConfig,
-      roleArn,
-      algorithmSpecification,
-      hyperParameters,
-      trainingJobName,
+      retryStrategy: retryStrategy,
+      environment: environment,
+      profilerRuleConfigurations: profilerRuleConfigurations,
+      profilerConfig: profilerConfig,
+      experimentConfig: experimentConfig,
+      tensorBoardOutputConfig: tensorBoardOutputConfig,
+      debugRuleConfigurations: debugRuleConfigurations,
+      debugHookConfig: debugHookConfig,
+      checkpointConfig: checkpointConfig,
+      enableManagedSpotTraining: enableManagedSpotTraining,
+      enableInterContainerTrafficEncryption: enableInterContainerTrafficEncryption,
+      enableNetworkIsolation: enableNetworkIsolation,
+      tags: tags,
+      stoppingCondition: stoppingCondition,
+      vpcConfig: vpcConfig,
+      resourceConfig: resourceConfig,
+      outputDataConfig: outputDataConfig,
+      inputDataConfig: inputDataConfig,
+      roleArn: roleArn,
+      algorithmSpecification: algorithmSpecification,
+      hyperParameters: hyperParameters,
+      trainingJobName: trainingJobName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateMonitoringSchedule = {
   type t
   type request = {
@@ -24265,9 +24772,13 @@ module UpdateMonitoringSchedule = {
   @module("@aws-sdk/client-sagemaker") @new
   external new: request => t = "UpdateMonitoringScheduleCommand"
   let make = (~monitoringScheduleConfig, ~monitoringScheduleName, ()) =>
-    new({monitoringScheduleConfig, monitoringScheduleName})
+    new({
+      monitoringScheduleConfig: monitoringScheduleConfig,
+      monitoringScheduleName: monitoringScheduleName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListWorkteams = {
   type t
   type request = {
@@ -24301,9 +24812,16 @@ module ListWorkteams = {
   }
   @module("@aws-sdk/client-sagemaker") @new external new: request => t = "ListWorkteamsCommand"
   let make = (~maxResults=?, ~nextToken=?, ~nameContains=?, ~sortOrder=?, ~sortBy=?, ()) =>
-    new({maxResults, nextToken, nameContains, sortOrder, sortBy})
+    new({
+      maxResults: maxResults,
+      nextToken: nextToken,
+      nameContains: nameContains,
+      sortOrder: sortOrder,
+      sortBy: sortBy,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListPipelineExecutionSteps = {
   type t
   type request = {
@@ -24338,9 +24856,15 @@ module ListPipelineExecutionSteps = {
   @module("@aws-sdk/client-sagemaker") @new
   external new: request => t = "ListPipelineExecutionStepsCommand"
   let make = (~sortOrder=?, ~maxResults=?, ~nextToken=?, ~pipelineExecutionArn=?, ()) =>
-    new({sortOrder, maxResults, nextToken, pipelineExecutionArn})
+    new({
+      sortOrder: sortOrder,
+      maxResults: maxResults,
+      nextToken: nextToken,
+      pipelineExecutionArn: pipelineExecutionArn,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeMonitoringSchedule = {
   type t
   type request = {
@@ -24405,6 +24929,7 @@ module DescribeMonitoringSchedule = {
   let make = (~monitoringScheduleName, ()) => new({monitoringScheduleName: monitoringScheduleName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateMonitoringSchedule = {
   type t
   type request = {
@@ -24429,9 +24954,14 @@ module CreateMonitoringSchedule = {
   @module("@aws-sdk/client-sagemaker") @new
   external new: request => t = "CreateMonitoringScheduleCommand"
   let make = (~monitoringScheduleConfig, ~monitoringScheduleName, ~tags=?, ()) =>
-    new({tags, monitoringScheduleConfig, monitoringScheduleName})
+    new({
+      tags: tags,
+      monitoringScheduleConfig: monitoringScheduleConfig,
+      monitoringScheduleName: monitoringScheduleName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module BatchDescribeModelPackage = {
   type t
   type request = {
@@ -24452,6 +24982,7 @@ module BatchDescribeModelPackage = {
   let make = (~modelPackageArnList, ()) => new({modelPackageArnList: modelPackageArnList})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeModelPackage = {
   type t
   type request = {
@@ -24540,6 +25071,7 @@ module DescribeModelPackage = {
   let make = (~modelPackageName, ()) => new({modelPackageName: modelPackageName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeInferenceRecommendationsJob = {
   type t
   type request = {
@@ -24591,6 +25123,7 @@ module DescribeInferenceRecommendationsJob = {
   let make = (~jobName, ()) => new({jobName: jobName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeHyperParameterTuningJob = {
   type t
   type request = {
@@ -24663,6 +25196,7 @@ module DescribeHyperParameterTuningJob = {
     new({hyperParameterTuningJobName: hyperParameterTuningJobName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateModelPackage = {
   type t
   type request = {
@@ -24781,27 +25315,28 @@ module CreateModelPackage = {
     (),
   ) =>
     new({
-      additionalInferenceSpecifications,
-      samplePayloadUrl,
-      task,
-      domain,
-      driftCheckBaselines,
-      customerMetadataProperties,
-      clientToken,
-      modelMetrics,
-      metadataProperties,
-      modelApprovalStatus,
-      tags,
-      certifyForMarketplace,
-      sourceAlgorithmSpecification,
-      validationSpecification,
-      inferenceSpecification,
-      modelPackageDescription,
-      modelPackageGroupName,
-      modelPackageName,
+      additionalInferenceSpecifications: additionalInferenceSpecifications,
+      samplePayloadUrl: samplePayloadUrl,
+      task: task,
+      domain: domain,
+      driftCheckBaselines: driftCheckBaselines,
+      customerMetadataProperties: customerMetadataProperties,
+      clientToken: clientToken,
+      modelMetrics: modelMetrics,
+      metadataProperties: metadataProperties,
+      modelApprovalStatus: modelApprovalStatus,
+      tags: tags,
+      certifyForMarketplace: certifyForMarketplace,
+      sourceAlgorithmSpecification: sourceAlgorithmSpecification,
+      validationSpecification: validationSpecification,
+      inferenceSpecification: inferenceSpecification,
+      modelPackageDescription: modelPackageDescription,
+      modelPackageGroupName: modelPackageGroupName,
+      modelPackageName: modelPackageName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateInferenceRecommendationsJob = {
   type t
   type request = {
@@ -24851,9 +25386,19 @@ module CreateInferenceRecommendationsJob = {
     ~stoppingConditions=?,
     ~jobDescription=?,
     (),
-  ) => new({tags, stoppingConditions, jobDescription, inputConfig, roleArn, jobType, jobName})
+  ) =>
+    new({
+      tags: tags,
+      stoppingConditions: stoppingConditions,
+      jobDescription: jobDescription,
+      inputConfig: inputConfig,
+      roleArn: roleArn,
+      jobType: jobType,
+      jobName: jobName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateHyperParameterTuningJob = {
   type t
   type request = {
@@ -24925,15 +25470,16 @@ module CreateHyperParameterTuningJob = {
     (),
   ) =>
     new({
-      tags,
-      warmStartConfig,
-      trainingJobDefinitions,
-      trainingJobDefinition,
-      hyperParameterTuningJobConfig,
-      hyperParameterTuningJobName,
+      tags: tags,
+      warmStartConfig: warmStartConfig,
+      trainingJobDefinitions: trainingJobDefinitions,
+      trainingJobDefinition: trainingJobDefinition,
+      hyperParameterTuningJobConfig: hyperParameterTuningJobConfig,
+      hyperParameterTuningJobName: hyperParameterTuningJobName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeAlgorithm = {
   type t
   type request = {
@@ -24976,6 +25522,7 @@ module DescribeAlgorithm = {
   let make = (~algorithmName, ()) => new({algorithmName: algorithmName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateAlgorithm = {
   type t
   type request = {
@@ -25064,16 +25611,17 @@ module CreateAlgorithm = {
     (),
   ) =>
     new({
-      tags,
-      certifyForMarketplace,
-      validationSpecification,
-      inferenceSpecification,
-      trainingSpecification,
-      algorithmDescription,
-      algorithmName,
+      tags: tags,
+      certifyForMarketplace: certifyForMarketplace,
+      validationSpecification: validationSpecification,
+      inferenceSpecification: inferenceSpecification,
+      trainingSpecification: trainingSpecification,
+      algorithmDescription: algorithmDescription,
+      algorithmName: algorithmName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module Search = {
   type t
   type request = {
@@ -25121,6 +25669,14 @@ module Search = {
     ~sortBy=?,
     ~searchExpression=?,
     (),
-  ) => new({maxResults, nextToken, sortOrder, sortBy, searchExpression, resource})
+  ) =>
+    new({
+      maxResults: maxResults,
+      nextToken: nextToken,
+      sortOrder: sortOrder,
+      sortBy: sortBy,
+      searchExpression: searchExpression,
+      resource: resource,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

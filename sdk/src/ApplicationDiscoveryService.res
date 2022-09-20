@@ -610,9 +610,10 @@ module UpdateApplication = {
   type response = {.}
   @module("@aws-sdk/client-discovery") @new external new: request => t = "UpdateApplicationCommand"
   let make = (~configurationId, ~description=?, ~name=?, ()) =>
-    new({description, name, configurationId})
+    new({description: description, name: name, configurationId: configurationId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module StopContinuousExport = {
   type t
   type request = {
@@ -630,6 +631,7 @@ module StopContinuousExport = {
   let make = (~exportId, ()) => new({exportId: exportId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ExportConfigurations = {
   type t
   type request = {.}
@@ -642,6 +644,7 @@ module ExportConfigurations = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateApplication = {
   type t
   type request = {
@@ -653,9 +656,10 @@ module CreateApplication = {
     configurationId: option<string_>,
   }
   @module("@aws-sdk/client-discovery") @new external new: request => t = "CreateApplicationCommand"
-  let make = (~name, ~description=?, ()) => new({description, name})
+  let make = (~name, ~description=?, ()) => new({description: description, name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module StartImportTask = {
   type t
   type request = {
@@ -687,9 +691,10 @@ module StartImportTask = {
   }
   @module("@aws-sdk/client-discovery") @new external new: request => t = "StartImportTaskCommand"
   let make = (~importUrl, ~name, ~clientRequestToken=?, ()) =>
-    new({importUrl, name, clientRequestToken})
+    new({importUrl: importUrl, name: name, clientRequestToken: clientRequestToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module StartContinuousExport = {
   type t
   type request = {.}
@@ -718,6 +723,7 @@ module StartContinuousExport = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetDiscoverySummary = {
   type t
   type request = {.}
@@ -737,6 +743,7 @@ module GetDiscoverySummary = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DisassociateConfigurationItemsFromApplication = {
   type t
   type request = {
@@ -749,9 +756,13 @@ module DisassociateConfigurationItemsFromApplication = {
   @module("@aws-sdk/client-discovery") @new
   external new: request => t = "DisassociateConfigurationItemsFromApplicationCommand"
   let make = (~configurationIds, ~applicationConfigurationId, ()) =>
-    new({configurationIds, applicationConfigurationId})
+    new({
+      configurationIds: configurationIds,
+      applicationConfigurationId: applicationConfigurationId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteApplications = {
   type t
   type request = {
@@ -763,6 +774,7 @@ module DeleteApplications = {
   let make = (~configurationIds, ()) => new({configurationIds: configurationIds})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module AssociateConfigurationItemsToApplication = {
   type t
   type request = {
@@ -777,9 +789,13 @@ module AssociateConfigurationItemsToApplication = {
   @module("@aws-sdk/client-discovery") @new
   external new: request => t = "AssociateConfigurationItemsToApplicationCommand"
   let make = (~configurationIds, ~applicationConfigurationId, ()) =>
-    new({configurationIds, applicationConfigurationId})
+    new({
+      configurationIds: configurationIds,
+      applicationConfigurationId: applicationConfigurationId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module StopDataCollectionByAgentIds = {
   type t
   type request = {
@@ -797,6 +813,7 @@ module StopDataCollectionByAgentIds = {
   let make = (~agentIds, ()) => new({agentIds: agentIds})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module StartDataCollectionByAgentIds = {
   type t
   type request = {
@@ -820,6 +837,7 @@ module StartDataCollectionByAgentIds = {
   let make = (~agentIds, ()) => new({agentIds: agentIds})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListServerNeighbors = {
   type t
   type request = {
@@ -860,9 +878,16 @@ module ListServerNeighbors = {
     ~portInformationNeeded=?,
     (),
   ) =>
-    new({nextToken, maxResults, neighborConfigurationIds, portInformationNeeded, configurationId})
+    new({
+      nextToken: nextToken,
+      maxResults: maxResults,
+      neighborConfigurationIds: neighborConfigurationIds,
+      portInformationNeeded: portInformationNeeded,
+      configurationId: configurationId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeExportConfigurations = {
   type t
   type request = {
@@ -882,9 +907,10 @@ module DescribeExportConfigurations = {
   @module("@aws-sdk/client-discovery") @new
   external new: request => t = "DescribeExportConfigurationsCommand"
   let make = (~nextToken=?, ~maxResults=?, ~exportIds=?, ()) =>
-    new({nextToken, maxResults, exportIds})
+    new({nextToken: nextToken, maxResults: maxResults, exportIds: exportIds})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeConfigurations = {
   type t
   type request = {
@@ -899,6 +925,7 @@ module DescribeConfigurations = {
   let make = (~configurationIds, ()) => new({configurationIds: configurationIds})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteTags = {
   type t
   type request = {
@@ -914,9 +941,11 @@ module DeleteTags = {
   }
   type response = {.}
   @module("@aws-sdk/client-discovery") @new external new: request => t = "DeleteTagsCommand"
-  let make = (~configurationIds, ~tags=?, ()) => new({tags, configurationIds})
+  let make = (~configurationIds, ~tags=?, ()) =>
+    new({tags: tags, configurationIds: configurationIds})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module CreateTags = {
   type t
   type request = {
@@ -932,9 +961,10 @@ module CreateTags = {
   }
   type response = {.}
   @module("@aws-sdk/client-discovery") @new external new: request => t = "CreateTagsCommand"
-  let make = (~tags, ~configurationIds, ()) => new({tags, configurationIds})
+  let make = (~tags, ~configurationIds, ()) => new({tags: tags, configurationIds: configurationIds})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module BatchDeleteImportData = {
   type t
   type request = {
@@ -951,6 +981,7 @@ module BatchDeleteImportData = {
   let make = (~importTaskIds, ()) => new({importTaskIds: importTaskIds})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module StartExportTask = {
   type t
   type request = {
@@ -983,9 +1014,15 @@ module StartExportTask = {
   }
   @module("@aws-sdk/client-discovery") @new external new: request => t = "StartExportTaskCommand"
   let make = (~endTime=?, ~startTime=?, ~filters=?, ~exportDataFormat=?, ()) =>
-    new({endTime, startTime, filters, exportDataFormat})
+    new({
+      endTime: endTime,
+      startTime: startTime,
+      filters: filters,
+      exportDataFormat: exportDataFormat,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListConfigurations = {
   type t
   type request = {
@@ -1025,9 +1062,16 @@ module ListConfigurations = {
   }
   @module("@aws-sdk/client-discovery") @new external new: request => t = "ListConfigurationsCommand"
   let make = (~configurationType, ~orderBy=?, ~nextToken=?, ~maxResults=?, ~filters=?, ()) =>
-    new({orderBy, nextToken, maxResults, filters, configurationType})
+    new({
+      orderBy: orderBy,
+      nextToken: nextToken,
+      maxResults: maxResults,
+      filters: filters,
+      configurationType: configurationType,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeTags = {
   type t
   type request = {
@@ -1049,9 +1093,11 @@ module DescribeTags = {
     tags: option<configurationTagSet>,
   }
   @module("@aws-sdk/client-discovery") @new external new: request => t = "DescribeTagsCommand"
-  let make = (~nextToken=?, ~maxResults=?, ~filters=?, ()) => new({nextToken, maxResults, filters})
+  let make = (~nextToken=?, ~maxResults=?, ~filters=?, ()) =>
+    new({nextToken: nextToken, maxResults: maxResults, filters: filters})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeImportTasks = {
   type t
   type request = {
@@ -1075,9 +1121,11 @@ module DescribeImportTasks = {
   }
   @module("@aws-sdk/client-discovery") @new
   external new: request => t = "DescribeImportTasksCommand"
-  let make = (~nextToken=?, ~maxResults=?, ~filters=?, ()) => new({nextToken, maxResults, filters})
+  let make = (~nextToken=?, ~maxResults=?, ~filters=?, ()) =>
+    new({nextToken: nextToken, maxResults: maxResults, filters: filters})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeExportTasks = {
   type t
   type request = {
@@ -1121,9 +1169,10 @@ module DescribeExportTasks = {
   @module("@aws-sdk/client-discovery") @new
   external new: request => t = "DescribeExportTasksCommand"
   let make = (~nextToken=?, ~maxResults=?, ~filters=?, ~exportIds=?, ()) =>
-    new({nextToken, maxResults, filters, exportIds})
+    new({nextToken: nextToken, maxResults: maxResults, filters: filters, exportIds: exportIds})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeContinuousExports = {
   type t
   type request = {
@@ -1144,9 +1193,10 @@ module DescribeContinuousExports = {
   @module("@aws-sdk/client-discovery") @new
   external new: request => t = "DescribeContinuousExportsCommand"
   let make = (~nextToken=?, ~maxResults=?, ~exportIds=?, ()) =>
-    new({nextToken, maxResults, exportIds})
+    new({nextToken: nextToken, maxResults: maxResults, exportIds: exportIds})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeAgents = {
   type t
   type request = {
@@ -1183,6 +1233,6 @@ module DescribeAgents = {
   }
   @module("@aws-sdk/client-discovery") @new external new: request => t = "DescribeAgentsCommand"
   let make = (~nextToken=?, ~maxResults=?, ~filters=?, ~agentIds=?, ()) =>
-    new({nextToken, maxResults, filters, agentIds})
+    new({nextToken: nextToken, maxResults: maxResults, filters: filters, agentIds: agentIds})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

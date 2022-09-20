@@ -573,15 +573,16 @@ module UpdateComponentConfiguration = {
     (),
   ) =>
     new({
-      autoConfigEnabled,
-      componentConfiguration,
-      tier,
-      monitor,
-      componentName,
-      resourceGroupName,
+      autoConfigEnabled: autoConfigEnabled,
+      componentConfiguration: componentConfiguration,
+      tier: tier,
+      monitor: monitor,
+      componentName: componentName,
+      resourceGroupName: resourceGroupName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DescribeComponentConfigurationRecommendation = {
   type t
   type request = {
@@ -605,9 +606,10 @@ module DescribeComponentConfigurationRecommendation = {
   @module("@aws-sdk/client-applicationinsights") @new
   external new: request => t = "DescribeComponentConfigurationRecommendationCommand"
   let make = (~tier, ~componentName, ~resourceGroupName, ()) =>
-    new({tier, componentName, resourceGroupName})
+    new({tier: tier, componentName: componentName, resourceGroupName: resourceGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeComponentConfiguration = {
   type t
   type request = {
@@ -633,9 +635,11 @@ module DescribeComponentConfiguration = {
   }
   @module("@aws-sdk/client-applicationinsights") @new
   external new: request => t = "DescribeComponentConfigurationCommand"
-  let make = (~componentName, ~resourceGroupName, ()) => new({componentName, resourceGroupName})
+  let make = (~componentName, ~resourceGroupName, ()) =>
+    new({componentName: componentName, resourceGroupName: resourceGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteLogPattern = {
   type t
   type request = {
@@ -650,9 +654,14 @@ module DeleteLogPattern = {
   @module("@aws-sdk/client-applicationinsights") @new
   external new: request => t = "DeleteLogPatternCommand"
   let make = (~patternName, ~patternSetName, ~resourceGroupName, ()) =>
-    new({patternName, patternSetName, resourceGroupName})
+    new({
+      patternName: patternName,
+      patternSetName: patternSetName,
+      resourceGroupName: resourceGroupName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteComponent = {
   type t
   type request = {
@@ -664,9 +673,11 @@ module DeleteComponent = {
   type response = {.}
   @module("@aws-sdk/client-applicationinsights") @new
   external new: request => t = "DeleteComponentCommand"
-  let make = (~componentName, ~resourceGroupName, ()) => new({componentName, resourceGroupName})
+  let make = (~componentName, ~resourceGroupName, ()) =>
+    new({componentName: componentName, resourceGroupName: resourceGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteApplication = {
   type t
   type request = {
@@ -679,6 +690,7 @@ module DeleteApplication = {
   let make = (~resourceGroupName, ()) => new({resourceGroupName: resourceGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateLogPattern = {
   type t
   type request = {
@@ -708,9 +720,16 @@ module UpdateLogPattern = {
   @module("@aws-sdk/client-applicationinsights") @new
   external new: request => t = "UpdateLogPatternCommand"
   let make = (~patternName, ~patternSetName, ~resourceGroupName, ~rank=?, ~pattern=?, ()) =>
-    new({rank, pattern, patternName, patternSetName, resourceGroupName})
+    new({
+      rank: rank,
+      pattern: pattern,
+      patternName: patternName,
+      patternSetName: patternSetName,
+      resourceGroupName: resourceGroupName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateComponent = {
   type t
   type request = {
@@ -727,9 +746,15 @@ module UpdateComponent = {
   @module("@aws-sdk/client-applicationinsights") @new
   external new: request => t = "UpdateComponentCommand"
   let make = (~componentName, ~resourceGroupName, ~resourceList=?, ~newComponentName=?, ()) =>
-    new({resourceList, newComponentName, componentName, resourceGroupName})
+    new({
+      resourceList: resourceList,
+      newComponentName: newComponentName,
+      componentName: componentName,
+      resourceGroupName: resourceGroupName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateApplication = {
   type t
   type request = {
@@ -772,15 +797,16 @@ module UpdateApplication = {
     (),
   ) =>
     new({
-      autoConfigEnabled,
-      removeSNSTopic,
-      opsItemSNSTopicArn,
-      cwemonitorEnabled,
-      opsCenterEnabled,
-      resourceGroupName,
+      autoConfigEnabled: autoConfigEnabled,
+      removeSNSTopic: removeSNSTopic,
+      opsItemSNSTopicArn: opsItemSNSTopicArn,
+      cwemonitorEnabled: cwemonitorEnabled,
+      opsCenterEnabled: opsCenterEnabled,
+      resourceGroupName: resourceGroupName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UntagResource = {
   type t
   type request = {
@@ -800,9 +826,10 @@ module UntagResource = {
   type response = {.}
   @module("@aws-sdk/client-applicationinsights") @new
   external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceARN, ()) => new({tagKeys, resourceARN})
+  let make = (~tagKeys, ~resourceARN, ()) => new({tagKeys: tagKeys, resourceARN: resourceARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ListLogPatternSets = {
   type t
   type request = {
@@ -828,9 +855,10 @@ module ListLogPatternSets = {
   @module("@aws-sdk/client-applicationinsights") @new
   external new: request => t = "ListLogPatternSetsCommand"
   let make = (~resourceGroupName, ~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken, maxResults, resourceGroupName})
+    new({nextToken: nextToken, maxResults: maxResults, resourceGroupName: resourceGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeObservation = {
   type t
   type request = {
@@ -846,6 +874,7 @@ module DescribeObservation = {
   let make = (~observationId, ()) => new({observationId: observationId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeLogPattern = {
   type t
   type request = {
@@ -865,9 +894,14 @@ module DescribeLogPattern = {
   @module("@aws-sdk/client-applicationinsights") @new
   external new: request => t = "DescribeLogPatternCommand"
   let make = (~patternName, ~patternSetName, ~resourceGroupName, ()) =>
-    new({patternName, patternSetName, resourceGroupName})
+    new({
+      patternName: patternName,
+      patternSetName: patternSetName,
+      resourceGroupName: resourceGroupName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeApplication = {
   type t
   type request = {
@@ -883,6 +917,7 @@ module DescribeApplication = {
   let make = (~resourceGroupName, ()) => new({resourceGroupName: resourceGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateLogPattern = {
   type t
   type request = {
@@ -912,9 +947,16 @@ module CreateLogPattern = {
   @module("@aws-sdk/client-applicationinsights") @new
   external new: request => t = "CreateLogPatternCommand"
   let make = (~rank, ~pattern, ~patternName, ~patternSetName, ~resourceGroupName, ()) =>
-    new({rank, pattern, patternName, patternSetName, resourceGroupName})
+    new({
+      rank: rank,
+      pattern: pattern,
+      patternName: patternName,
+      patternSetName: patternSetName,
+      resourceGroupName: resourceGroupName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateComponent = {
   type t
   type request = {
@@ -929,9 +971,14 @@ module CreateComponent = {
   @module("@aws-sdk/client-applicationinsights") @new
   external new: request => t = "CreateComponentCommand"
   let make = (~resourceList, ~componentName, ~resourceGroupName, ()) =>
-    new({resourceList, componentName, resourceGroupName})
+    new({
+      resourceList: resourceList,
+      componentName: componentName,
+      resourceGroupName: resourceGroupName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module TagResource = {
   type t
   type request = {
@@ -950,9 +997,10 @@ module TagResource = {
   type response = {.}
   @module("@aws-sdk/client-applicationinsights") @new
   external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceARN, ()) => new({tags, resourceARN})
+  let make = (~tags, ~resourceARN, ()) => new({tags: tags, resourceARN: resourceARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ListTagsForResource = {
   type t
   type request = {
@@ -973,6 +1021,7 @@ module ListTagsForResource = {
   let make = (~resourceARN, ()) => new({resourceARN: resourceARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListLogPatterns = {
   type t
   type request = {
@@ -1000,9 +1049,15 @@ module ListLogPatterns = {
   @module("@aws-sdk/client-applicationinsights") @new
   external new: request => t = "ListLogPatternsCommand"
   let make = (~resourceGroupName, ~nextToken=?, ~maxResults=?, ~patternSetName=?, ()) =>
-    new({nextToken, maxResults, patternSetName, resourceGroupName})
+    new({
+      nextToken: nextToken,
+      maxResults: maxResults,
+      patternSetName: patternSetName,
+      resourceGroupName: resourceGroupName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListConfigurationHistory = {
   type t
   type request = {
@@ -1054,9 +1109,18 @@ module ListConfigurationHistory = {
     ~startTime=?,
     ~resourceGroupName=?,
     (),
-  ) => new({nextToken, maxResults, eventStatus, endTime, startTime, resourceGroupName})
+  ) =>
+    new({
+      nextToken: nextToken,
+      maxResults: maxResults,
+      eventStatus: eventStatus,
+      endTime: endTime,
+      startTime: startTime,
+      resourceGroupName: resourceGroupName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListApplications = {
   type t
   type request = {
@@ -1077,9 +1141,11 @@ module ListApplications = {
   }
   @module("@aws-sdk/client-applicationinsights") @new
   external new: request => t = "ListApplicationsCommand"
-  let make = (~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults})
+  let make = (~nextToken=?, ~maxResults=?, ()) =>
+    new({nextToken: nextToken, maxResults: maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeProblem = {
   type t
   type request = {@ocaml.doc("<p>The ID of the problem.</p>") @as("ProblemId") problemId: problemId}
@@ -1091,6 +1157,7 @@ module DescribeProblem = {
   let make = (~problemId, ()) => new({problemId: problemId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateApplication = {
   type t
   type request = {
@@ -1138,16 +1205,17 @@ module CreateApplication = {
     (),
   ) =>
     new({
-      autoCreate,
-      autoConfigEnabled,
-      tags,
-      opsItemSNSTopicArn,
-      cwemonitorEnabled,
-      opsCenterEnabled,
-      resourceGroupName,
+      autoCreate: autoCreate,
+      autoConfigEnabled: autoConfigEnabled,
+      tags: tags,
+      opsItemSNSTopicArn: opsItemSNSTopicArn,
+      cwemonitorEnabled: cwemonitorEnabled,
+      opsCenterEnabled: opsCenterEnabled,
+      resourceGroupName: resourceGroupName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListProblems = {
   type t
   type request = {
@@ -1187,9 +1255,18 @@ module ListProblems = {
     ~startTime=?,
     ~resourceGroupName=?,
     (),
-  ) => new({componentName, nextToken, maxResults, endTime, startTime, resourceGroupName})
+  ) =>
+    new({
+      componentName: componentName,
+      nextToken: nextToken,
+      maxResults: maxResults,
+      endTime: endTime,
+      startTime: startTime,
+      resourceGroupName: resourceGroupName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeProblemObservations = {
   type t
   type request = {@ocaml.doc("<p>The ID of the problem.</p>") @as("ProblemId") problemId: problemId}
@@ -1202,6 +1279,7 @@ module DescribeProblemObservations = {
   let make = (~problemId, ()) => new({problemId: problemId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeComponent = {
   type t
   type request = {
@@ -1217,9 +1295,11 @@ module DescribeComponent = {
   }
   @module("@aws-sdk/client-applicationinsights") @new
   external new: request => t = "DescribeComponentCommand"
-  let make = (~componentName, ~resourceGroupName, ()) => new({componentName, resourceGroupName})
+  let make = (~componentName, ~resourceGroupName, ()) =>
+    new({componentName: componentName, resourceGroupName: resourceGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListComponents = {
   type t
   type request = {
@@ -1241,6 +1321,6 @@ module ListComponents = {
   @module("@aws-sdk/client-applicationinsights") @new
   external new: request => t = "ListComponentsCommand"
   let make = (~resourceGroupName, ~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken, maxResults, resourceGroupName})
+    new({nextToken: nextToken, maxResults: maxResults, resourceGroupName: resourceGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

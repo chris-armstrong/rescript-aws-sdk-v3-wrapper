@@ -1553,9 +1553,15 @@ module UpdateDomainContactPrivacy = {
   @module("@aws-sdk/client-route53domains") @new
   external new: request => t = "UpdateDomainContactPrivacyCommand"
   let make = (~domainName, ~techPrivacy=?, ~registrantPrivacy=?, ~adminPrivacy=?, ()) =>
-    new({techPrivacy, registrantPrivacy, adminPrivacy, domainName})
+    new({
+      techPrivacy: techPrivacy,
+      registrantPrivacy: registrantPrivacy,
+      adminPrivacy: adminPrivacy,
+      domainName: domainName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module TransferDomainToAnotherAwsAccount = {
   type t
   @ocaml.doc(
@@ -1590,9 +1596,10 @@ module TransferDomainToAnotherAwsAccount = {
   }
   @module("@aws-sdk/client-route53domains") @new
   external new: request => t = "TransferDomainToAnotherAwsAccountCommand"
-  let make = (~accountId, ~domainName, ()) => new({accountId, domainName})
+  let make = (~accountId, ~domainName, ()) => new({accountId: accountId, domainName: domainName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module RetrieveDomainAuthCode = {
   type t
   @ocaml.doc("<p>A request for the authorization code for the specified domain. To transfer a domain to another registrar, you provide 
@@ -1612,6 +1619,7 @@ module RetrieveDomainAuthCode = {
   let make = (~domainName, ()) => new({domainName: domainName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ResendContactReachabilityEmail = {
   type t
   type request = {
@@ -1637,6 +1645,7 @@ module ResendContactReachabilityEmail = {
   let make = (~domainName=?, ()) => new({domainName: domainName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module RenewDomain = {
   type t
   @ocaml.doc(
@@ -1666,9 +1675,14 @@ module RenewDomain = {
   }
   @module("@aws-sdk/client-route53domains") @new external new: request => t = "RenewDomainCommand"
   let make = (~currentExpiryYear, ~domainName, ~durationInYears=?, ()) =>
-    new({currentExpiryYear, durationInYears, domainName})
+    new({
+      currentExpiryYear: currentExpiryYear,
+      durationInYears: durationInYears,
+      domainName: domainName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module RejectDomainTransferFromAnotherAwsAccount = {
   type t
   @ocaml.doc(
@@ -1697,6 +1711,7 @@ module RejectDomainTransferFromAnotherAwsAccount = {
   let make = (~domainName, ()) => new({domainName: domainName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetOperationDetail = {
   type t
   @ocaml.doc("<p>The 
@@ -1728,6 +1743,7 @@ module GetOperationDetail = {
   let make = (~operationId, ()) => new({operationId: operationId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetContactReachabilityStatus = {
   type t
   type request = {
@@ -1761,6 +1777,7 @@ module GetContactReachabilityStatus = {
   let make = (~domainName=?, ()) => new({domainName: domainName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module EnableDomainTransferLock = {
   type t
   @ocaml.doc("<p>A request to set the transfer lock for the specified domain.</p>")
@@ -1782,6 +1799,7 @@ module EnableDomainTransferLock = {
   let make = (~domainName, ()) => new({domainName: domainName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module EnableDomainAutoRenew = {
   type t
   type request = {
@@ -1795,6 +1813,7 @@ module EnableDomainAutoRenew = {
   let make = (~domainName, ()) => new({domainName: domainName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DisableDomainTransferLock = {
   type t
   @ocaml.doc("<p>The DisableDomainTransferLock request includes the following element.</p>")
@@ -1815,6 +1834,7 @@ module DisableDomainTransferLock = {
   let make = (~domainName, ()) => new({domainName: domainName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DisableDomainAutoRenew = {
   type t
   type request = {
@@ -1828,6 +1848,7 @@ module DisableDomainAutoRenew = {
   let make = (~domainName, ()) => new({domainName: domainName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteDomain = {
   type t
   type request = {
@@ -1843,6 +1864,7 @@ module DeleteDomain = {
   let make = (~domainName, ()) => new({domainName: domainName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CheckDomainAvailability = {
   type t
   @ocaml.doc("<p>The CheckDomainAvailability request contains the following elements.</p>")
@@ -1929,9 +1951,11 @@ module CheckDomainAvailability = {
   }
   @module("@aws-sdk/client-route53domains") @new
   external new: request => t = "CheckDomainAvailabilityCommand"
-  let make = (~domainName, ~idnLangCode=?, ()) => new({idnLangCode, domainName})
+  let make = (~domainName, ~idnLangCode=?, ()) =>
+    new({idnLangCode: idnLangCode, domainName: domainName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CancelDomainTransferToAnotherAwsAccount = {
   type t
   @ocaml.doc(
@@ -1959,6 +1983,7 @@ module CancelDomainTransferToAnotherAwsAccount = {
   let make = (~domainName, ()) => new({domainName: domainName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module AcceptDomainTransferFromAnotherAwsAccount = {
   type t
   @ocaml.doc(
@@ -1989,9 +2014,10 @@ module AcceptDomainTransferFromAnotherAwsAccount = {
   }
   @module("@aws-sdk/client-route53domains") @new
   external new: request => t = "AcceptDomainTransferFromAnotherAwsAccountCommand"
-  let make = (~password, ~domainName, ()) => new({password, domainName})
+  let make = (~password, ~domainName, ()) => new({password: password, domainName: domainName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteTagsForDomain = {
   type t
   @ocaml.doc("<p>The DeleteTagsForDomainRequest includes the following elements.</p>")
@@ -2003,9 +2029,11 @@ module DeleteTagsForDomain = {
   type response = {.}
   @module("@aws-sdk/client-route53domains") @new
   external new: request => t = "DeleteTagsForDomainCommand"
-  let make = (~tagsToDelete, ~domainName, ()) => new({tagsToDelete, domainName})
+  let make = (~tagsToDelete, ~domainName, ()) =>
+    new({tagsToDelete: tagsToDelete, domainName: domainName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module CheckDomainTransferability = {
   type t
   @ocaml.doc("<p>The CheckDomainTransferability request contains the following elements.</p>")
@@ -2046,9 +2074,10 @@ module CheckDomainTransferability = {
   }
   @module("@aws-sdk/client-route53domains") @new
   external new: request => t = "CheckDomainTransferabilityCommand"
-  let make = (~domainName, ~authCode=?, ()) => new({authCode, domainName})
+  let make = (~domainName, ~authCode=?, ()) => new({authCode: authCode, domainName: domainName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ViewBilling = {
   type t
   @ocaml.doc("<p>The ViewBilling request includes the following elements.</p>")
@@ -2085,9 +2114,11 @@ module ViewBilling = {
     nextPageMarker: option<pageMarker>,
   }
   @module("@aws-sdk/client-route53domains") @new external new: request => t = "ViewBillingCommand"
-  let make = (~maxItems=?, ~marker=?, ~end=?, ~start=?, ()) => new({maxItems, marker, end, start})
+  let make = (~maxItems=?, ~marker=?, ~end=?, ~start=?, ()) =>
+    new({maxItems: maxItems, marker: marker, end: end, start: start})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateTagsForDomain = {
   type t
   @ocaml.doc("<p>The UpdateTagsForDomainRequest includes the following elements.</p>")
@@ -2102,9 +2133,11 @@ module UpdateTagsForDomain = {
   type response = {.}
   @module("@aws-sdk/client-route53domains") @new
   external new: request => t = "UpdateTagsForDomainCommand"
-  let make = (~domainName, ~tagsToUpdate=?, ()) => new({tagsToUpdate, domainName})
+  let make = (~domainName, ~tagsToUpdate=?, ()) =>
+    new({tagsToUpdate: tagsToUpdate, domainName: domainName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ListTagsForDomain = {
   type t
   @ocaml.doc("<p>The ListTagsForDomainRequest includes the following elements.</p>")
@@ -2123,6 +2156,7 @@ module ListTagsForDomain = {
   let make = (~domainName, ()) => new({domainName: domainName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListOperations = {
   type t
   @ocaml.doc("<p>The ListOperations request includes the following elements.</p>")
@@ -2154,9 +2188,10 @@ module ListOperations = {
   @module("@aws-sdk/client-route53domains") @new
   external new: request => t = "ListOperationsCommand"
   let make = (~maxItems=?, ~marker=?, ~submittedSince=?, ()) =>
-    new({maxItems, marker, submittedSince})
+    new({maxItems: maxItems, marker: marker, submittedSince: submittedSince})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetDomainSuggestions = {
   type t
   type request = {
@@ -2206,9 +2241,10 @@ module GetDomainSuggestions = {
   @module("@aws-sdk/client-route53domains") @new
   external new: request => t = "GetDomainSuggestionsCommand"
   let make = (~onlyAvailable, ~suggestionCount, ~domainName, ()) =>
-    new({onlyAvailable, suggestionCount, domainName})
+    new({onlyAvailable: onlyAvailable, suggestionCount: suggestionCount, domainName: domainName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateDomainNameservers = {
   type t
   @ocaml.doc("<p>Replaces the current set of name servers for the domain with the specified set of name servers. 
@@ -2234,9 +2270,10 @@ module UpdateDomainNameservers = {
   @module("@aws-sdk/client-route53domains") @new
   external new: request => t = "UpdateDomainNameserversCommand"
   let make = (~nameservers, ~domainName, ~fiauthKey=?, ()) =>
-    new({nameservers, fiauthKey, domainName})
+    new({nameservers: nameservers, fiauthKey: fiauthKey, domainName: domainName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateDomainContact = {
   type t
   @ocaml.doc("<p>The UpdateDomainContact request includes the following elements.</p>")
@@ -2261,9 +2298,15 @@ module UpdateDomainContact = {
   @module("@aws-sdk/client-route53domains") @new
   external new: request => t = "UpdateDomainContactCommand"
   let make = (~domainName, ~techContact=?, ~registrantContact=?, ~adminContact=?, ()) =>
-    new({techContact, registrantContact, adminContact, domainName})
+    new({
+      techContact: techContact,
+      registrantContact: registrantContact,
+      adminContact: adminContact,
+      domainName: domainName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module TransferDomain = {
   type t
   @ocaml.doc("<p>The TransferDomain request includes the following elements.</p>")
@@ -2372,21 +2415,22 @@ module TransferDomain = {
     (),
   ) =>
     new({
-      privacyProtectTechContact,
-      privacyProtectRegistrantContact,
-      privacyProtectAdminContact,
-      techContact,
-      registrantContact,
-      adminContact,
-      autoRenew,
-      authCode,
-      nameservers,
-      durationInYears,
-      idnLangCode,
-      domainName,
+      privacyProtectTechContact: privacyProtectTechContact,
+      privacyProtectRegistrantContact: privacyProtectRegistrantContact,
+      privacyProtectAdminContact: privacyProtectAdminContact,
+      techContact: techContact,
+      registrantContact: registrantContact,
+      adminContact: adminContact,
+      autoRenew: autoRenew,
+      authCode: authCode,
+      nameservers: nameservers,
+      durationInYears: durationInYears,
+      idnLangCode: idnLangCode,
+      domainName: domainName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module RegisterDomain = {
   type t
   @ocaml.doc("<p>The RegisterDomain request includes the following elements.</p>")
@@ -2501,19 +2545,20 @@ module RegisterDomain = {
     (),
   ) =>
     new({
-      privacyProtectTechContact,
-      privacyProtectRegistrantContact,
-      privacyProtectAdminContact,
-      techContact,
-      registrantContact,
-      adminContact,
-      autoRenew,
-      durationInYears,
-      idnLangCode,
-      domainName,
+      privacyProtectTechContact: privacyProtectTechContact,
+      privacyProtectRegistrantContact: privacyProtectRegistrantContact,
+      privacyProtectAdminContact: privacyProtectAdminContact,
+      techContact: techContact,
+      registrantContact: registrantContact,
+      adminContact: adminContact,
+      autoRenew: autoRenew,
+      durationInYears: durationInYears,
+      idnLangCode: idnLangCode,
+      domainName: domainName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListPrices = {
   type t
   type request = {
@@ -2548,9 +2593,11 @@ module ListPrices = {
     prices: domainPriceList,
   }
   @module("@aws-sdk/client-route53domains") @new external new: request => t = "ListPricesCommand"
-  let make = (~maxItems=?, ~marker=?, ~tld=?, ()) => new({maxItems, marker, tld})
+  let make = (~maxItems=?, ~marker=?, ~tld=?, ()) =>
+    new({maxItems: maxItems, marker: marker, tld: tld})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListDomains = {
   type t
   @ocaml.doc("<p>The ListDomains request includes the following elements.</p>")
@@ -2587,9 +2634,15 @@ module ListDomains = {
   }
   @module("@aws-sdk/client-route53domains") @new external new: request => t = "ListDomainsCommand"
   let make = (~maxItems=?, ~marker=?, ~sortCondition=?, ~filterConditions=?, ()) =>
-    new({maxItems, marker, sortCondition, filterConditions})
+    new({
+      maxItems: maxItems,
+      marker: marker,
+      sortCondition: sortCondition,
+      filterConditions: filterConditions,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetDomainDetail = {
   type t
   @ocaml.doc("<p>The GetDomainDetail request includes the following element.</p>")

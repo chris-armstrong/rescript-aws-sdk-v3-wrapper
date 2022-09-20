@@ -2527,6 +2527,7 @@ module DeleteVPCEConfiguration = {
   let make = (~arn, ()) => new({arn: arn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteUpload = {
   type t
   @ocaml.doc("<p>Represents a request to the delete upload operation.</p>")
@@ -2541,6 +2542,7 @@ module DeleteUpload = {
   let make = (~arn, ()) => new({arn: arn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteTestGridProject = {
   type t
   type request = {
@@ -2555,6 +2557,7 @@ module DeleteTestGridProject = {
   let make = (~projectArn, ()) => new({projectArn: projectArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteRun = {
   type t
   @ocaml.doc("<p>Represents a request to the delete run operation.</p>")
@@ -2567,6 +2570,7 @@ module DeleteRun = {
   let make = (~arn, ()) => new({arn: arn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteRemoteAccessSession = {
   type t
   @ocaml.doc("<p>Represents the request to delete the specified remote access session.</p>")
@@ -2581,6 +2585,7 @@ module DeleteRemoteAccessSession = {
   let make = (~arn, ()) => new({arn: arn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteProject = {
   type t
   @ocaml.doc("<p>Represents a request to the delete project operation.</p>")
@@ -2595,6 +2600,7 @@ module DeleteProject = {
   let make = (~arn, ()) => new({arn: arn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteNetworkProfile = {
   type t
   type request = {
@@ -2606,6 +2612,7 @@ module DeleteNetworkProfile = {
   let make = (~arn, ()) => new({arn: arn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteInstanceProfile = {
   type t
   type request = {
@@ -2619,6 +2626,7 @@ module DeleteInstanceProfile = {
   let make = (~arn, ()) => new({arn: arn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteDevicePool = {
   type t
   @ocaml.doc("<p>Represents a request to the delete device pool operation.</p>")
@@ -2633,6 +2641,7 @@ module DeleteDevicePool = {
   let make = (~arn, ()) => new({arn: arn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module CreateTestGridUrl = {
   type t
   type request = {
@@ -2652,9 +2661,11 @@ module CreateTestGridUrl = {
     url: option<sensitiveString>,
   }
   @module("@aws-sdk/client-devicefarm") @new external new: request => t = "CreateTestGridUrlCommand"
-  let make = (~expiresInSeconds, ~projectArn, ()) => new({expiresInSeconds, projectArn})
+  let make = (~expiresInSeconds, ~projectArn, ()) =>
+    new({expiresInSeconds: expiresInSeconds, projectArn: projectArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateVPCEConfiguration = {
   type t
   type request = {
@@ -2690,9 +2701,16 @@ module UpdateVPCEConfiguration = {
     ~vpceConfigurationName=?,
     (),
   ) =>
-    new({vpceConfigurationDescription, serviceDnsName, vpceServiceName, vpceConfigurationName, arn})
+    new({
+      vpceConfigurationDescription: vpceConfigurationDescription,
+      serviceDnsName: serviceDnsName,
+      vpceServiceName: vpceServiceName,
+      vpceConfigurationName: vpceConfigurationName,
+      arn: arn,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateUpload = {
   type t
   type request = {
@@ -2711,9 +2729,10 @@ module UpdateUpload = {
   type response = {@ocaml.doc("<p>A test spec uploaded to Device Farm.</p>") upload: option<upload>}
   @module("@aws-sdk/client-devicefarm") @new external new: request => t = "UpdateUploadCommand"
   let make = (~arn, ~editContent=?, ~contentType=?, ~name=?, ()) =>
-    new({editContent, contentType, name, arn})
+    new({editContent: editContent, contentType: contentType, name: name, arn: arn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateProject = {
   type t
   @ocaml.doc("<p>Represents a request to the update project operation.</p>")
@@ -2731,9 +2750,10 @@ module UpdateProject = {
   type response = {@ocaml.doc("<p>The project to update.</p>") project: option<project>}
   @module("@aws-sdk/client-devicefarm") @new external new: request => t = "UpdateProjectCommand"
   let make = (~arn, ~defaultJobTimeoutMinutes=?, ~name=?, ()) =>
-    new({defaultJobTimeoutMinutes, name, arn})
+    new({defaultJobTimeoutMinutes: defaultJobTimeoutMinutes, name: name, arn: arn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateNetworkProfile = {
   type t
   type request = {
@@ -2797,21 +2817,22 @@ module UpdateNetworkProfile = {
     (),
   ) =>
     new({
-      downlinkLossPercent,
-      uplinkLossPercent,
-      downlinkJitterMs,
-      uplinkJitterMs,
-      downlinkDelayMs,
-      uplinkDelayMs,
-      downlinkBandwidthBits,
-      uplinkBandwidthBits,
-      type_,
-      description,
-      name,
-      arn,
+      downlinkLossPercent: downlinkLossPercent,
+      uplinkLossPercent: uplinkLossPercent,
+      downlinkJitterMs: downlinkJitterMs,
+      uplinkJitterMs: uplinkJitterMs,
+      downlinkDelayMs: downlinkDelayMs,
+      uplinkDelayMs: uplinkDelayMs,
+      downlinkBandwidthBits: downlinkBandwidthBits,
+      uplinkBandwidthBits: uplinkBandwidthBits,
+      type_: type_,
+      description: description,
+      name: name,
+      arn: arn,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UntagResource = {
   type t
   type request = {
@@ -2826,9 +2847,10 @@ module UntagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-devicefarm") @new external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceARN, ()) => new({tagKeys, resourceARN})
+  let make = (~tagKeys, ~resourceARN, ()) => new({tagKeys: tagKeys, resourceARN: resourceARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module InstallToRemoteAccessSession = {
   type t
   @ocaml.doc("<p>Represents the request to install an Android application (in .apk format) or an iOS
@@ -2847,9 +2869,11 @@ module InstallToRemoteAccessSession = {
   }
   @module("@aws-sdk/client-devicefarm") @new
   external new: request => t = "InstallToRemoteAccessSessionCommand"
-  let make = (~appArn, ~remoteAccessSessionArn, ()) => new({appArn, remoteAccessSessionArn})
+  let make = (~appArn, ~remoteAccessSessionArn, ()) =>
+    new({appArn: appArn, remoteAccessSessionArn: remoteAccessSessionArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetVPCEConfiguration = {
   type t
   type request = {
@@ -2866,6 +2890,7 @@ module GetVPCEConfiguration = {
   let make = (~arn, ()) => new({arn: arn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetUpload = {
   type t
   @ocaml.doc("<p>Represents a request to the get upload operation.</p>")
@@ -2880,6 +2905,7 @@ module GetUpload = {
   let make = (~arn, ()) => new({arn: arn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetTestGridSession = {
   type t
   type request = {
@@ -2898,9 +2924,10 @@ module GetTestGridSession = {
   @module("@aws-sdk/client-devicefarm") @new
   external new: request => t = "GetTestGridSessionCommand"
   let make = (~sessionArn=?, ~sessionId=?, ~projectArn=?, ()) =>
-    new({sessionArn, sessionId, projectArn})
+    new({sessionArn: sessionArn, sessionId: sessionId, projectArn: projectArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetProject = {
   type t
   @ocaml.doc("<p>Represents a request to the get project operation.</p>")
@@ -2913,6 +2940,7 @@ module GetProject = {
   let make = (~arn, ()) => new({arn: arn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetNetworkProfile = {
   type t
   type request = {
@@ -2924,6 +2952,7 @@ module GetNetworkProfile = {
   let make = (~arn, ()) => new({arn: arn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateVPCEConfiguration = {
   type t
   type request = {
@@ -2954,9 +2983,16 @@ module CreateVPCEConfiguration = {
     ~vpceConfigurationName,
     ~vpceConfigurationDescription=?,
     (),
-  ) => new({vpceConfigurationDescription, serviceDnsName, vpceServiceName, vpceConfigurationName})
+  ) =>
+    new({
+      vpceConfigurationDescription: vpceConfigurationDescription,
+      serviceDnsName: serviceDnsName,
+      vpceServiceName: vpceServiceName,
+      vpceConfigurationName: vpceConfigurationName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateUpload = {
   type t
   @ocaml.doc("<p>Represents a request to the create upload operation.</p>")
@@ -3080,9 +3116,10 @@ module CreateUpload = {
   type response = {@ocaml.doc("<p>The newly created upload.</p>") upload: option<upload>}
   @module("@aws-sdk/client-devicefarm") @new external new: request => t = "CreateUploadCommand"
   let make = (~type_, ~name, ~projectArn, ~contentType=?, ()) =>
-    new({contentType, type_, name, projectArn})
+    new({contentType: contentType, type_: type_, name: name, projectArn: projectArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateProject = {
   type t
   @ocaml.doc("<p>Represents a request to the create project operation.</p>")
@@ -3095,9 +3132,11 @@ module CreateProject = {
   @ocaml.doc("<p>Represents the result of a create project request.</p>")
   type response = {@ocaml.doc("<p>The newly created project.</p>") project: option<project>}
   @module("@aws-sdk/client-devicefarm") @new external new: request => t = "CreateProjectCommand"
-  let make = (~name, ~defaultJobTimeoutMinutes=?, ()) => new({defaultJobTimeoutMinutes, name})
+  let make = (~name, ~defaultJobTimeoutMinutes=?, ()) =>
+    new({defaultJobTimeoutMinutes: defaultJobTimeoutMinutes, name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateNetworkProfile = {
   type t
   type request = {
@@ -3156,21 +3195,22 @@ module CreateNetworkProfile = {
     (),
   ) =>
     new({
-      downlinkLossPercent,
-      uplinkLossPercent,
-      downlinkJitterMs,
-      uplinkJitterMs,
-      downlinkDelayMs,
-      uplinkDelayMs,
-      downlinkBandwidthBits,
-      uplinkBandwidthBits,
-      type_,
-      description,
-      name,
-      projectArn,
+      downlinkLossPercent: downlinkLossPercent,
+      uplinkLossPercent: uplinkLossPercent,
+      downlinkJitterMs: downlinkJitterMs,
+      uplinkJitterMs: uplinkJitterMs,
+      downlinkDelayMs: downlinkDelayMs,
+      uplinkDelayMs: uplinkDelayMs,
+      downlinkBandwidthBits: downlinkBandwidthBits,
+      uplinkBandwidthBits: uplinkBandwidthBits,
+      type_: type_,
+      description: description,
+      name: name,
+      projectArn: projectArn,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateInstanceProfile = {
   type t
   type request = {
@@ -3205,9 +3245,18 @@ module UpdateInstanceProfile = {
     ~description=?,
     ~name=?,
     (),
-  ) => new({rebootAfterUse, excludeAppPackagesFromCleanup, packageCleanup, description, name, arn})
+  ) =>
+    new({
+      rebootAfterUse: rebootAfterUse,
+      excludeAppPackagesFromCleanup: excludeAppPackagesFromCleanup,
+      packageCleanup: packageCleanup,
+      description: description,
+      name: name,
+      arn: arn,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module TagResource = {
   type t
   type request = {
@@ -3225,9 +3274,10 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-devicefarm") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceARN, ()) => new({tags, resourceARN})
+  let make = (~tags, ~resourceARN, ()) => new({tags: tags, resourceARN: resourceARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ListVPCEConfigurations = {
   type t
   type request = {
@@ -3249,9 +3299,11 @@ module ListVPCEConfigurations = {
   }
   @module("@aws-sdk/client-devicefarm") @new
   external new: request => t = "ListVPCEConfigurationsCommand"
-  let make = (~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults})
+  let make = (~nextToken=?, ~maxResults=?, ()) =>
+    new({nextToken: nextToken, maxResults: maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListUploads = {
   type t
   @ocaml.doc("<p>Represents a request to the list uploads operation.</p>")
@@ -3374,9 +3426,11 @@ module ListUploads = {
     @ocaml.doc("<p>Information about the uploads.</p>") uploads: option<uploads>,
   }
   @module("@aws-sdk/client-devicefarm") @new external new: request => t = "ListUploadsCommand"
-  let make = (~arn, ~nextToken=?, ~type_=?, ()) => new({nextToken, type_, arn})
+  let make = (~arn, ~nextToken=?, ~type_=?, ()) =>
+    new({nextToken: nextToken, type_: type_, arn: arn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListTestGridSessions = {
   type t
   type request = {
@@ -3414,17 +3468,18 @@ module ListTestGridSessions = {
     (),
   ) =>
     new({
-      nextToken,
-      maxResult,
-      endTimeBefore,
-      endTimeAfter,
-      creationTimeBefore,
-      creationTimeAfter,
-      status,
-      projectArn,
+      nextToken: nextToken,
+      maxResult: maxResult,
+      endTimeBefore: endTimeBefore,
+      endTimeAfter: endTimeAfter,
+      creationTimeBefore: creationTimeBefore,
+      creationTimeAfter: creationTimeAfter,
+      status: status,
+      projectArn: projectArn,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListTestGridSessionArtifacts = {
   type t
   type request = {
@@ -3443,9 +3498,10 @@ module ListTestGridSessionArtifacts = {
   @module("@aws-sdk/client-devicefarm") @new
   external new: request => t = "ListTestGridSessionArtifactsCommand"
   let make = (~sessionArn, ~nextToken=?, ~maxResult=?, ~type_=?, ()) =>
-    new({nextToken, maxResult, type_, sessionArn})
+    new({nextToken: nextToken, maxResult: maxResult, type_: type_, sessionArn: sessionArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListTestGridSessionActions = {
   type t
   type request = {
@@ -3461,9 +3517,10 @@ module ListTestGridSessionActions = {
   @module("@aws-sdk/client-devicefarm") @new
   external new: request => t = "ListTestGridSessionActionsCommand"
   let make = (~sessionArn, ~nextToken=?, ~maxResult=?, ()) =>
-    new({nextToken, maxResult, sessionArn})
+    new({nextToken: nextToken, maxResult: maxResult, sessionArn: sessionArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListTagsForResource = {
   type t
   type request = {
@@ -3486,6 +3543,7 @@ module ListTagsForResource = {
   let make = (~resourceARN, ()) => new({resourceARN: resourceARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListSamples = {
   type t
   @ocaml.doc("<p>Represents a request to the list samples operation.</p>")
@@ -3505,9 +3563,10 @@ module ListSamples = {
     @ocaml.doc("<p>Information about the samples.</p>") samples: option<samples>,
   }
   @module("@aws-sdk/client-devicefarm") @new external new: request => t = "ListSamplesCommand"
-  let make = (~arn, ~nextToken=?, ()) => new({nextToken, arn})
+  let make = (~arn, ~nextToken=?, ()) => new({nextToken: nextToken, arn: arn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListProjects = {
   type t
   @ocaml.doc("<p>Represents a request to the list projects operation.</p>")
@@ -3529,9 +3588,10 @@ module ListProjects = {
     @ocaml.doc("<p>Information about the projects.</p>") projects: option<projects>,
   }
   @module("@aws-sdk/client-devicefarm") @new external new: request => t = "ListProjectsCommand"
-  let make = (~nextToken=?, ~arn=?, ()) => new({nextToken, arn})
+  let make = (~nextToken=?, ~arn=?, ()) => new({nextToken: nextToken, arn: arn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListOfferingPromotions = {
   type t
   type request = {
@@ -3551,6 +3611,7 @@ module ListOfferingPromotions = {
   let make = (~nextToken=?, ()) => new({nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListNetworkProfiles = {
   type t
   type request = {
@@ -3575,9 +3636,11 @@ module ListNetworkProfiles = {
   }
   @module("@aws-sdk/client-devicefarm") @new
   external new: request => t = "ListNetworkProfilesCommand"
-  let make = (~arn, ~nextToken=?, ~type_=?, ()) => new({nextToken, type_, arn})
+  let make = (~arn, ~nextToken=?, ~type_=?, ()) =>
+    new({nextToken: nextToken, type_: type_, arn: arn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListArtifacts = {
   type t
   @ocaml.doc("<p>Represents a request to the list artifacts operation.</p>")
@@ -3611,9 +3674,10 @@ module ListArtifacts = {
     @ocaml.doc("<p>Information about the artifacts.</p>") artifacts: option<artifacts>,
   }
   @module("@aws-sdk/client-devicefarm") @new external new: request => t = "ListArtifactsCommand"
-  let make = (~type_, ~arn, ~nextToken=?, ()) => new({nextToken, type_, arn})
+  let make = (~type_, ~arn, ~nextToken=?, ()) => new({nextToken: nextToken, type_: type_, arn: arn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetTest = {
   type t
   @ocaml.doc("<p>Represents a request to the get test operation.</p>")
@@ -3624,6 +3688,7 @@ module GetTest = {
   let make = (~arn, ()) => new({arn: arn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetSuite = {
   type t
   @ocaml.doc("<p>Represents a request to the get suite operation.</p>")
@@ -3634,6 +3699,7 @@ module GetSuite = {
   let make = (~arn, ()) => new({arn: arn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetInstanceProfile = {
   type t
   type request = {
@@ -3649,6 +3715,7 @@ module GetInstanceProfile = {
   let make = (~arn, ()) => new({arn: arn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetAccountSettings = {
   type t
   type request = {.}
@@ -3662,6 +3729,7 @@ module GetAccountSettings = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateInstanceProfile = {
   type t
   type request = {
@@ -3692,9 +3760,17 @@ module CreateInstanceProfile = {
     ~packageCleanup=?,
     ~description=?,
     (),
-  ) => new({rebootAfterUse, excludeAppPackagesFromCleanup, packageCleanup, description, name})
+  ) =>
+    new({
+      rebootAfterUse: rebootAfterUse,
+      excludeAppPackagesFromCleanup: excludeAppPackagesFromCleanup,
+      packageCleanup: packageCleanup,
+      description: description,
+      name: name,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateTestGridProject = {
   type t
   type request = {
@@ -3712,9 +3788,10 @@ module UpdateTestGridProject = {
   @module("@aws-sdk/client-devicefarm") @new
   external new: request => t = "UpdateTestGridProjectCommand"
   let make = (~projectArn, ~vpcConfig=?, ~description=?, ~name=?, ()) =>
-    new({vpcConfig, description, name, projectArn})
+    new({vpcConfig: vpcConfig, description: description, name: name, projectArn: projectArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateDevicePool = {
   type t
   @ocaml.doc("<p>Represents a request to the update device pool operation.</p>")
@@ -3750,9 +3827,17 @@ module UpdateDevicePool = {
   }
   @module("@aws-sdk/client-devicefarm") @new external new: request => t = "UpdateDevicePoolCommand"
   let make = (~arn, ~clearMaxDevices=?, ~maxDevices=?, ~rules=?, ~description=?, ~name=?, ()) =>
-    new({clearMaxDevices, maxDevices, rules, description, name, arn})
+    new({
+      clearMaxDevices: clearMaxDevices,
+      maxDevices: maxDevices,
+      rules: rules,
+      description: description,
+      name: name,
+      arn: arn,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateDeviceInstance = {
   type t
   type request = {
@@ -3769,9 +3854,11 @@ module UpdateDeviceInstance = {
   }
   @module("@aws-sdk/client-devicefarm") @new
   external new: request => t = "UpdateDeviceInstanceCommand"
-  let make = (~arn, ~labels=?, ~profileArn=?, ()) => new({labels, profileArn, arn})
+  let make = (~arn, ~labels=?, ~profileArn=?, ()) =>
+    new({labels: labels, profileArn: profileArn, arn: arn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListTests = {
   type t
   @ocaml.doc("<p>Represents a request to the list tests operation.</p>")
@@ -3790,9 +3877,10 @@ module ListTests = {
     @ocaml.doc("<p>Information about the tests.</p>") tests: option<tests>,
   }
   @module("@aws-sdk/client-devicefarm") @new external new: request => t = "ListTestsCommand"
-  let make = (~arn, ~nextToken=?, ()) => new({nextToken, arn})
+  let make = (~arn, ~nextToken=?, ()) => new({nextToken: nextToken, arn: arn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListSuites = {
   type t
   @ocaml.doc("<p>Represents a request to the list suites operation.</p>")
@@ -3811,9 +3899,10 @@ module ListSuites = {
     @ocaml.doc("<p>Information about the suites.</p>") suites: option<suites>,
   }
   @module("@aws-sdk/client-devicefarm") @new external new: request => t = "ListSuitesCommand"
-  let make = (~arn, ~nextToken=?, ()) => new({nextToken, arn})
+  let make = (~arn, ~nextToken=?, ()) => new({nextToken: nextToken, arn: arn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListInstanceProfiles = {
   type t
   type request = {
@@ -3834,9 +3923,11 @@ module ListInstanceProfiles = {
   }
   @module("@aws-sdk/client-devicefarm") @new
   external new: request => t = "ListInstanceProfilesCommand"
-  let make = (~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults})
+  let make = (~nextToken=?, ~maxResults=?, ()) =>
+    new({nextToken: nextToken, maxResults: maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetTestGridProject = {
   type t
   type request = {
@@ -3853,6 +3944,7 @@ module GetTestGridProject = {
   let make = (~projectArn, ()) => new({projectArn: projectArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetDevicePool = {
   type t
   @ocaml.doc("<p>Represents a request to the get device pool operation.</p>")
@@ -3866,6 +3958,7 @@ module GetDevicePool = {
   let make = (~arn, ()) => new({arn: arn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetDeviceInstance = {
   type t
   type request = {
@@ -3881,6 +3974,7 @@ module GetDeviceInstance = {
   let make = (~arn, ()) => new({arn: arn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateTestGridProject = {
   type t
   type request = {
@@ -3896,9 +3990,11 @@ module CreateTestGridProject = {
   }
   @module("@aws-sdk/client-devicefarm") @new
   external new: request => t = "CreateTestGridProjectCommand"
-  let make = (~name, ~vpcConfig=?, ~description=?, ()) => new({vpcConfig, description, name})
+  let make = (~name, ~vpcConfig=?, ~description=?, ()) =>
+    new({vpcConfig: vpcConfig, description: description, name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateDevicePool = {
   type t
   @ocaml.doc("<p>Represents a request to the create device pool operation.</p>")
@@ -3921,9 +4017,16 @@ module CreateDevicePool = {
   }
   @module("@aws-sdk/client-devicefarm") @new external new: request => t = "CreateDevicePoolCommand"
   let make = (~rules, ~name, ~projectArn, ~maxDevices=?, ~description=?, ()) =>
-    new({maxDevices, rules, description, name, projectArn})
+    new({
+      maxDevices: maxDevices,
+      rules: rules,
+      description: description,
+      name: name,
+      projectArn: projectArn,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListTestGridProjects = {
   type t
   type request = {
@@ -3942,9 +4045,10 @@ module ListTestGridProjects = {
   }
   @module("@aws-sdk/client-devicefarm") @new
   external new: request => t = "ListTestGridProjectsCommand"
-  let make = (~nextToken=?, ~maxResult=?, ()) => new({nextToken, maxResult})
+  let make = (~nextToken=?, ~maxResult=?, ()) => new({nextToken: nextToken, maxResult: maxResult})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListDevicePools = {
   type t
   @ocaml.doc("<p>Represents the result of a list device pools request.</p>")
@@ -3977,9 +4081,11 @@ module ListDevicePools = {
     @ocaml.doc("<p>Information about the device pools.</p>") devicePools: option<devicePools>,
   }
   @module("@aws-sdk/client-devicefarm") @new external new: request => t = "ListDevicePoolsCommand"
-  let make = (~arn, ~nextToken=?, ~type_=?, ()) => new({nextToken, type_, arn})
+  let make = (~arn, ~nextToken=?, ~type_=?, ()) =>
+    new({nextToken: nextToken, type_: type_, arn: arn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListDeviceInstances = {
   type t
   type request = {
@@ -4000,9 +4106,11 @@ module ListDeviceInstances = {
   }
   @module("@aws-sdk/client-devicefarm") @new
   external new: request => t = "ListDeviceInstancesCommand"
-  let make = (~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults})
+  let make = (~nextToken=?, ~maxResults=?, ()) =>
+    new({nextToken: nextToken, maxResults: maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module StopRun = {
   type t
   @ocaml.doc("<p>Represents the request to stop a specific run.</p>")
@@ -4016,6 +4124,7 @@ module StopRun = {
   let make = (~arn, ()) => new({arn: arn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ScheduleRun = {
   type t
   @ocaml.doc("<p>Represents a request to the schedule run operation.</p>")
@@ -4060,17 +4169,18 @@ module ScheduleRun = {
     (),
   ) =>
     new({
-      executionConfiguration,
-      configuration,
-      test,
-      name,
-      deviceSelectionConfiguration,
-      devicePoolArn,
-      appArn,
-      projectArn,
+      executionConfiguration: executionConfiguration,
+      configuration: configuration,
+      test: test,
+      name: name,
+      deviceSelectionConfiguration: deviceSelectionConfiguration,
+      devicePoolArn: devicePoolArn,
+      appArn: appArn,
+      projectArn: projectArn,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListOfferings = {
   type t
   @ocaml.doc("<p>Represents the request to list all offerings.</p>")
@@ -4091,6 +4201,7 @@ module ListOfferings = {
   let make = (~nextToken=?, ()) => new({nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetRun = {
   type t
   @ocaml.doc("<p>Represents a request to the get run operation.</p>")
@@ -4101,6 +4212,7 @@ module GetRun = {
   let make = (~arn, ()) => new({arn: arn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetDevice = {
   type t
   @ocaml.doc("<p>Represents a request to the get device request.</p>")
@@ -4114,6 +4226,7 @@ module GetDevice = {
   let make = (~arn, ()) => new({arn: arn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module StopRemoteAccessSession = {
   type t
   @ocaml.doc("<p>Represents the request to stop the remote access session.</p>")
@@ -4133,6 +4246,7 @@ module StopRemoteAccessSession = {
   let make = (~arn, ()) => new({arn: arn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module StopJob = {
   type t
   type request = {
@@ -4144,6 +4258,7 @@ module StopJob = {
   let make = (~arn, ()) => new({arn: arn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module RenewOffering = {
   type t
   @ocaml.doc("<p>A request that represents an offering renewal.</p>")
@@ -4157,9 +4272,10 @@ module RenewOffering = {
     offeringTransaction: option<offeringTransaction>,
   }
   @module("@aws-sdk/client-devicefarm") @new external new: request => t = "RenewOfferingCommand"
-  let make = (~quantity, ~offeringId, ()) => new({quantity, offeringId})
+  let make = (~quantity, ~offeringId, ()) => new({quantity: quantity, offeringId: offeringId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module PurchaseOffering = {
   type t
   @ocaml.doc("<p>Represents a request for a purchase offering.</p>")
@@ -4177,9 +4293,10 @@ module PurchaseOffering = {
   }
   @module("@aws-sdk/client-devicefarm") @new external new: request => t = "PurchaseOfferingCommand"
   let make = (~quantity, ~offeringId, ~offeringPromotionId=?, ()) =>
-    new({offeringPromotionId, quantity, offeringId})
+    new({offeringPromotionId: offeringPromotionId, quantity: quantity, offeringId: offeringId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListRuns = {
   type t
   @ocaml.doc("<p>Represents a request to the list runs operation.</p>")
@@ -4200,9 +4317,10 @@ module ListRuns = {
     @ocaml.doc("<p>Information about the runs.</p>") runs: option<runs>,
   }
   @module("@aws-sdk/client-devicefarm") @new external new: request => t = "ListRunsCommand"
-  let make = (~arn, ~nextToken=?, ()) => new({nextToken, arn})
+  let make = (~arn, ~nextToken=?, ()) => new({nextToken: nextToken, arn: arn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListDevices = {
   type t
   @ocaml.doc("<p>Represents the result of a list devices request.</p>")
@@ -4314,9 +4432,11 @@ module ListDevices = {
     @ocaml.doc("<p>Information about the devices.</p>") devices: option<devices>,
   }
   @module("@aws-sdk/client-devicefarm") @new external new: request => t = "ListDevicesCommand"
-  let make = (~filters=?, ~nextToken=?, ~arn=?, ()) => new({filters, nextToken, arn})
+  let make = (~filters=?, ~nextToken=?, ~arn=?, ()) =>
+    new({filters: filters, nextToken: nextToken, arn: arn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetRemoteAccessSession = {
   type t
   @ocaml.doc("<p>Represents the request to get information about the specified remote access
@@ -4338,6 +4458,7 @@ module GetRemoteAccessSession = {
   let make = (~arn, ()) => new({arn: arn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetOfferingStatus = {
   type t
   @ocaml.doc("<p>Represents the request to retrieve the offering status for the specified customer
@@ -4361,6 +4482,7 @@ module GetOfferingStatus = {
   let make = (~nextToken=?, ()) => new({nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetJob = {
   type t
   @ocaml.doc("<p>Represents a request to the get job operation.</p>")
@@ -4374,6 +4496,7 @@ module GetJob = {
   let make = (~arn, ()) => new({arn: arn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateRemoteAccessSession = {
   type t
   @ocaml.doc("<p>Creates and submits a request to start a remote access session.</p>")
@@ -4461,21 +4584,22 @@ module CreateRemoteAccessSession = {
     (),
   ) =>
     new({
-      skipAppResign,
-      interactionMode,
-      configuration,
-      clientId,
-      name,
-      remoteRecordAppArn,
-      remoteRecordEnabled,
-      remoteDebugEnabled,
-      sshPublicKey,
-      instanceArn,
-      deviceArn,
-      projectArn,
+      skipAppResign: skipAppResign,
+      interactionMode: interactionMode,
+      configuration: configuration,
+      clientId: clientId,
+      name: name,
+      remoteRecordAppArn: remoteRecordAppArn,
+      remoteRecordEnabled: remoteRecordEnabled,
+      remoteDebugEnabled: remoteDebugEnabled,
+      sshPublicKey: sshPublicKey,
+      instanceArn: instanceArn,
+      deviceArn: deviceArn,
+      projectArn: projectArn,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListRemoteAccessSessions = {
   type t
   @ocaml.doc("<p>Represents the request to return information about the remote access
@@ -4500,9 +4624,10 @@ module ListRemoteAccessSessions = {
   }
   @module("@aws-sdk/client-devicefarm") @new
   external new: request => t = "ListRemoteAccessSessionsCommand"
-  let make = (~arn, ~nextToken=?, ()) => new({nextToken, arn})
+  let make = (~arn, ~nextToken=?, ()) => new({nextToken: nextToken, arn: arn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListOfferingTransactions = {
   type t
   @ocaml.doc("<p>Represents the request to list the offering transaction history.</p>")
@@ -4525,6 +4650,7 @@ module ListOfferingTransactions = {
   let make = (~nextToken=?, ()) => new({nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListJobs = {
   type t
   @ocaml.doc("<p>Represents a request to the list jobs operation.</p>")
@@ -4543,9 +4669,10 @@ module ListJobs = {
     @ocaml.doc("<p>Information about the jobs.</p>") jobs: option<jobs>,
   }
   @module("@aws-sdk/client-devicefarm") @new external new: request => t = "ListJobsCommand"
-  let make = (~arn, ~nextToken=?, ()) => new({nextToken, arn})
+  let make = (~arn, ~nextToken=?, ()) => new({nextToken: nextToken, arn: arn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetDevicePoolCompatibility = {
   type t
   @ocaml.doc("<p>Represents a request to the get device pool compatibility operation.</p>")
@@ -4628,9 +4755,16 @@ module GetDevicePoolCompatibility = {
   @module("@aws-sdk/client-devicefarm") @new
   external new: request => t = "GetDevicePoolCompatibilityCommand"
   let make = (~devicePoolArn, ~configuration=?, ~test=?, ~testType=?, ~appArn=?, ()) =>
-    new({configuration, test, testType, appArn, devicePoolArn})
+    new({
+      configuration: configuration,
+      test: test,
+      testType: testType,
+      appArn: appArn,
+      devicePoolArn: devicePoolArn,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListUniqueProblems = {
   type t
   @ocaml.doc("<p>Represents a request to the list unique problems operation.</p>")
@@ -4675,6 +4809,6 @@ module ListUniqueProblems = {
   }
   @module("@aws-sdk/client-devicefarm") @new
   external new: request => t = "ListUniqueProblemsCommand"
-  let make = (~arn, ~nextToken=?, ()) => new({nextToken, arn})
+  let make = (~arn, ~nextToken=?, ()) => new({nextToken: nextToken, arn: arn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

@@ -821,9 +821,17 @@ module UpdateModel = {
   }
   @module("@aws-sdk/client-apigateway") @new external new: request => t = "UpdateModelCommand"
   let make = (~modelId, ~apiId, ~schema=?, ~name=?, ~description=?, ~contentType=?, ()) =>
-    new({schema, name, modelId, description, contentType, apiId})
+    new({
+      schema: schema,
+      name: name,
+      modelId: modelId,
+      description: description,
+      contentType: contentType,
+      apiId: apiId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateDeployment = {
   type t
   @ocaml.doc("<p>Updates a Deployment.</p>")
@@ -852,9 +860,11 @@ module UpdateDeployment = {
     autoDeployed: option<__boolean>,
   }
   @module("@aws-sdk/client-apigateway") @new external new: request => t = "UpdateDeploymentCommand"
-  let make = (~deploymentId, ~apiId, ~description=?, ()) => new({description, deploymentId, apiId})
+  let make = (~deploymentId, ~apiId, ~description=?, ()) =>
+    new({description: description, deploymentId: deploymentId, apiId: apiId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateApiMapping = {
   type t
   @ocaml.doc("<p>Updates an ApiMapping.</p>")
@@ -875,9 +885,16 @@ module UpdateApiMapping = {
   }
   @module("@aws-sdk/client-apigateway") @new external new: request => t = "UpdateApiMappingCommand"
   let make = (~domainName, ~apiMappingId, ~apiId, ~stage=?, ~apiMappingKey=?, ()) =>
-    new({stage, domainName, apiMappingKey, apiMappingId, apiId})
+    new({
+      stage: stage,
+      domainName: domainName,
+      apiMappingKey: apiMappingKey,
+      apiMappingId: apiMappingId,
+      apiId: apiId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ResetAuthorizersCache = {
   type t
   type request = {
@@ -891,9 +908,10 @@ module ResetAuthorizersCache = {
   type response = {.}
   @module("@aws-sdk/client-apigateway") @new
   external new: request => t = "ResetAuthorizersCacheCommand"
-  let make = (~stageName, ~apiId, ()) => new({stageName, apiId})
+  let make = (~stageName, ~apiId, ()) => new({stageName: stageName, apiId: apiId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module GetModelTemplate = {
   type t
   type request = {
@@ -902,9 +920,10 @@ module GetModelTemplate = {
   }
   type response = {@ocaml.doc("<p>The template value.</p>") @as("Value") value: option<__string>}
   @module("@aws-sdk/client-apigateway") @new external new: request => t = "GetModelTemplateCommand"
-  let make = (~modelId, ~apiId, ()) => new({modelId, apiId})
+  let make = (~modelId, ~apiId, ()) => new({modelId: modelId, apiId: apiId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetModel = {
   type t
   type request = {
@@ -927,9 +946,10 @@ module GetModel = {
     contentType: option<stringWithLengthBetween1And256>,
   }
   @module("@aws-sdk/client-apigateway") @new external new: request => t = "GetModelCommand"
-  let make = (~modelId, ~apiId, ()) => new({modelId, apiId})
+  let make = (~modelId, ~apiId, ()) => new({modelId: modelId, apiId: apiId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetDeployment = {
   type t
   type request = {
@@ -955,9 +975,10 @@ module GetDeployment = {
     autoDeployed: option<__boolean>,
   }
   @module("@aws-sdk/client-apigateway") @new external new: request => t = "GetDeploymentCommand"
-  let make = (~deploymentId, ~apiId, ()) => new({deploymentId, apiId})
+  let make = (~deploymentId, ~apiId, ()) => new({deploymentId: deploymentId, apiId: apiId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetApiMapping = {
   type t
   type request = {
@@ -972,9 +993,11 @@ module GetApiMapping = {
     @ocaml.doc("<p>The API identifier.</p>") @as("ApiId") apiId: option<id>,
   }
   @module("@aws-sdk/client-apigateway") @new external new: request => t = "GetApiMappingCommand"
-  let make = (~domainName, ~apiMappingId, ()) => new({domainName, apiMappingId})
+  let make = (~domainName, ~apiMappingId, ()) =>
+    new({domainName: domainName, apiMappingId: apiMappingId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ExportApi = {
   type t
   type request = {
@@ -1015,9 +1038,18 @@ module ExportApi = {
     ~includeExtensions=?,
     ~exportVersion=?,
     (),
-  ) => new({stageName, specification, outputType, includeExtensions, exportVersion, apiId})
+  ) =>
+    new({
+      stageName: stageName,
+      specification: specification,
+      outputType: outputType,
+      includeExtensions: includeExtensions,
+      exportVersion: exportVersion,
+      apiId: apiId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteVpcLink = {
   type t
   type request = {@ocaml.doc("<p>The ID of the VPC link.</p>") @as("VpcLinkId") vpcLinkId: __string}
@@ -1026,6 +1058,7 @@ module DeleteVpcLink = {
   let make = (~vpcLinkId, ()) => new({vpcLinkId: vpcLinkId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteStage = {
   type t
   type request = {
@@ -1038,9 +1071,10 @@ module DeleteStage = {
   }
   type response = {.}
   @module("@aws-sdk/client-apigateway") @new external new: request => t = "DeleteStageCommand"
-  let make = (~stageName, ~apiId, ()) => new({stageName, apiId})
+  let make = (~stageName, ~apiId, ()) => new({stageName: stageName, apiId: apiId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteRouteSettings = {
   type t
   type request = {
@@ -1055,9 +1089,11 @@ module DeleteRouteSettings = {
   type response = {.}
   @module("@aws-sdk/client-apigateway") @new
   external new: request => t = "DeleteRouteSettingsCommand"
-  let make = (~stageName, ~routeKey, ~apiId, ()) => new({stageName, routeKey, apiId})
+  let make = (~stageName, ~routeKey, ~apiId, ()) =>
+    new({stageName: stageName, routeKey: routeKey, apiId: apiId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteRouteResponse = {
   type t
   type request = {
@@ -1068,9 +1104,11 @@ module DeleteRouteResponse = {
   type response = {.}
   @module("@aws-sdk/client-apigateway") @new
   external new: request => t = "DeleteRouteResponseCommand"
-  let make = (~routeResponseId, ~routeId, ~apiId, ()) => new({routeResponseId, routeId, apiId})
+  let make = (~routeResponseId, ~routeId, ~apiId, ()) =>
+    new({routeResponseId: routeResponseId, routeId: routeId, apiId: apiId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteRouteRequestParameter = {
   type t
   type request = {
@@ -1083,9 +1121,10 @@ module DeleteRouteRequestParameter = {
   @module("@aws-sdk/client-apigateway") @new
   external new: request => t = "DeleteRouteRequestParameterCommand"
   let make = (~routeId, ~requestParameterKey, ~apiId, ()) =>
-    new({routeId, requestParameterKey, apiId})
+    new({routeId: routeId, requestParameterKey: requestParameterKey, apiId: apiId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteRoute = {
   type t
   type request = {
@@ -1094,9 +1133,10 @@ module DeleteRoute = {
   }
   type response = {.}
   @module("@aws-sdk/client-apigateway") @new external new: request => t = "DeleteRouteCommand"
-  let make = (~routeId, ~apiId, ()) => new({routeId, apiId})
+  let make = (~routeId, ~apiId, ()) => new({routeId: routeId, apiId: apiId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteModel = {
   type t
   type request = {
@@ -1105,9 +1145,10 @@ module DeleteModel = {
   }
   type response = {.}
   @module("@aws-sdk/client-apigateway") @new external new: request => t = "DeleteModelCommand"
-  let make = (~modelId, ~apiId, ()) => new({modelId, apiId})
+  let make = (~modelId, ~apiId, ()) => new({modelId: modelId, apiId: apiId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteIntegrationResponse = {
   type t
   type request = {
@@ -1120,9 +1161,10 @@ module DeleteIntegrationResponse = {
   @module("@aws-sdk/client-apigateway") @new
   external new: request => t = "DeleteIntegrationResponseCommand"
   let make = (~integrationResponseId, ~integrationId, ~apiId, ()) =>
-    new({integrationResponseId, integrationId, apiId})
+    new({integrationResponseId: integrationResponseId, integrationId: integrationId, apiId: apiId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteIntegration = {
   type t
   type request = {
@@ -1131,9 +1173,10 @@ module DeleteIntegration = {
   }
   type response = {.}
   @module("@aws-sdk/client-apigateway") @new external new: request => t = "DeleteIntegrationCommand"
-  let make = (~integrationId, ~apiId, ()) => new({integrationId, apiId})
+  let make = (~integrationId, ~apiId, ()) => new({integrationId: integrationId, apiId: apiId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteDomainName = {
   type t
   type request = {@ocaml.doc("<p>The domain name.</p>") @as("DomainName") domainName: __string}
@@ -1142,6 +1185,7 @@ module DeleteDomainName = {
   let make = (~domainName, ()) => new({domainName: domainName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteDeployment = {
   type t
   type request = {
@@ -1150,9 +1194,10 @@ module DeleteDeployment = {
   }
   type response = {.}
   @module("@aws-sdk/client-apigateway") @new external new: request => t = "DeleteDeploymentCommand"
-  let make = (~deploymentId, ~apiId, ()) => new({deploymentId, apiId})
+  let make = (~deploymentId, ~apiId, ()) => new({deploymentId: deploymentId, apiId: apiId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteCorsConfiguration = {
   type t
   type request = {@ocaml.doc("<p>The API identifier.</p>") @as("ApiId") apiId: __string}
@@ -1162,6 +1207,7 @@ module DeleteCorsConfiguration = {
   let make = (~apiId, ()) => new({apiId: apiId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteAuthorizer = {
   type t
   type request = {
@@ -1170,9 +1216,10 @@ module DeleteAuthorizer = {
   }
   type response = {.}
   @module("@aws-sdk/client-apigateway") @new external new: request => t = "DeleteAuthorizerCommand"
-  let make = (~authorizerId, ~apiId, ()) => new({authorizerId, apiId})
+  let make = (~authorizerId, ~apiId, ()) => new({authorizerId: authorizerId, apiId: apiId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteApiMapping = {
   type t
   type request = {
@@ -1181,9 +1228,11 @@ module DeleteApiMapping = {
   }
   type response = {.}
   @module("@aws-sdk/client-apigateway") @new external new: request => t = "DeleteApiMappingCommand"
-  let make = (~domainName, ~apiMappingId, ()) => new({domainName, apiMappingId})
+  let make = (~domainName, ~apiMappingId, ()) =>
+    new({domainName: domainName, apiMappingId: apiMappingId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteApi = {
   type t
   type request = {@ocaml.doc("<p>The API identifier.</p>") @as("ApiId") apiId: __string}
@@ -1192,6 +1241,7 @@ module DeleteApi = {
   let make = (~apiId, ()) => new({apiId: apiId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteAccessLogSettings = {
   type t
   type request = {
@@ -1205,9 +1255,10 @@ module DeleteAccessLogSettings = {
   type response = {.}
   @module("@aws-sdk/client-apigateway") @new
   external new: request => t = "DeleteAccessLogSettingsCommand"
-  let make = (~stageName, ~apiId, ()) => new({stageName, apiId})
+  let make = (~stageName, ~apiId, ()) => new({stageName: stageName, apiId: apiId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module CreateModel = {
   type t
   @ocaml.doc("<p>Creates a new Model.</p>")
@@ -1243,9 +1294,16 @@ module CreateModel = {
   }
   @module("@aws-sdk/client-apigateway") @new external new: request => t = "CreateModelCommand"
   let make = (~schema, ~name, ~apiId, ~description=?, ~contentType=?, ()) =>
-    new({schema, name, description, contentType, apiId})
+    new({
+      schema: schema,
+      name: name,
+      description: description,
+      contentType: contentType,
+      apiId: apiId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateDeployment = {
   type t
   @ocaml.doc("<p>Creates a new Deployment resource to represent a deployment.</p>")
@@ -1276,9 +1334,11 @@ module CreateDeployment = {
     autoDeployed: option<__boolean>,
   }
   @module("@aws-sdk/client-apigateway") @new external new: request => t = "CreateDeploymentCommand"
-  let make = (~apiId, ~stageName=?, ~description=?, ()) => new({stageName, description, apiId})
+  let make = (~apiId, ~stageName=?, ~description=?, ()) =>
+    new({stageName: stageName, description: description, apiId: apiId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateApiMapping = {
   type t
   @ocaml.doc("<p>Creates a new ApiMapping resource to represent an API mapping.</p>")
@@ -1297,9 +1357,10 @@ module CreateApiMapping = {
   }
   @module("@aws-sdk/client-apigateway") @new external new: request => t = "CreateApiMappingCommand"
   let make = (~stage, ~domainName, ~apiId, ~apiMappingKey=?, ()) =>
-    new({stage, domainName, apiMappingKey, apiId})
+    new({stage: stage, domainName: domainName, apiMappingKey: apiMappingKey, apiId: apiId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateVpcLink = {
   type t
   @ocaml.doc("<p>Updates a VPC link.</p>")
@@ -1328,9 +1389,10 @@ module UpdateVpcLink = {
     createdDate: option<__timestampIso8601>,
   }
   @module("@aws-sdk/client-apigateway") @new external new: request => t = "UpdateVpcLinkCommand"
-  let make = (~vpcLinkId, ~name=?, ()) => new({vpcLinkId, name})
+  let make = (~vpcLinkId, ~name=?, ()) => new({vpcLinkId: vpcLinkId, name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateIntegrationResponse = {
   type t
   @ocaml.doc("<p>Updates an IntegrationResponses.</p>")
@@ -1405,17 +1467,18 @@ module UpdateIntegrationResponse = {
     (),
   ) =>
     new({
-      templateSelectionExpression,
-      responseTemplates,
-      responseParameters,
-      integrationResponseKey,
-      integrationResponseId,
-      integrationId,
-      contentHandlingStrategy,
-      apiId,
+      templateSelectionExpression: templateSelectionExpression,
+      responseTemplates: responseTemplates,
+      responseParameters: responseParameters,
+      integrationResponseKey: integrationResponseKey,
+      integrationResponseId: integrationResponseId,
+      integrationId: integrationId,
+      contentHandlingStrategy: contentHandlingStrategy,
+      apiId: apiId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UntagResource = {
   type t
   type request = {
@@ -1424,9 +1487,10 @@ module UntagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-apigateway") @new external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys, resourceArn})
+  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module TagResource = {
   type t
   @ocaml.doc("<p>Creates a new Tag resource to represent a tag.</p>")
@@ -1440,9 +1504,10 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-apigateway") @new external new: request => t = "TagResourceCommand"
-  let make = (~resourceArn, ~tags=?, ()) => new({tags, resourceArn})
+  let make = (~resourceArn, ~tags=?, ()) => new({tags: tags, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module GetVpcLink = {
   type t
   type request = {@ocaml.doc("<p>The ID of the VPC link.</p>") @as("VpcLinkId") vpcLinkId: __string}
@@ -1469,6 +1534,7 @@ module GetVpcLink = {
   let make = (~vpcLinkId, ()) => new({vpcLinkId: vpcLinkId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetTags = {
   type t
   type request = {
@@ -1479,6 +1545,7 @@ module GetTags = {
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetIntegrationResponse = {
   type t
   type request = {
@@ -1514,9 +1581,10 @@ module GetIntegrationResponse = {
   @module("@aws-sdk/client-apigateway") @new
   external new: request => t = "GetIntegrationResponseCommand"
   let make = (~integrationResponseId, ~integrationId, ~apiId, ()) =>
-    new({integrationResponseId, integrationId, apiId})
+    new({integrationResponseId: integrationResponseId, integrationId: integrationId, apiId: apiId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateVpcLink = {
   type t
   @ocaml.doc("<p>Creates a VPC link</p>")
@@ -1549,9 +1617,10 @@ module CreateVpcLink = {
   }
   @module("@aws-sdk/client-apigateway") @new external new: request => t = "CreateVpcLinkCommand"
   let make = (~subnetIds, ~name, ~tags=?, ~securityGroupIds=?, ()) =>
-    new({tags, subnetIds, securityGroupIds, name})
+    new({tags: tags, subnetIds: subnetIds, securityGroupIds: securityGroupIds, name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateIntegrationResponse = {
   type t
   @ocaml.doc(
@@ -1620,16 +1689,17 @@ module CreateIntegrationResponse = {
     (),
   ) =>
     new({
-      templateSelectionExpression,
-      responseTemplates,
-      responseParameters,
-      integrationResponseKey,
-      integrationId,
-      contentHandlingStrategy,
-      apiId,
+      templateSelectionExpression: templateSelectionExpression,
+      responseTemplates: responseTemplates,
+      responseParameters: responseParameters,
+      integrationResponseKey: integrationResponseKey,
+      integrationId: integrationId,
+      contentHandlingStrategy: contentHandlingStrategy,
+      apiId: apiId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateStage = {
   type t
   @ocaml.doc("<p>Updates a Stage.</p>")
@@ -1733,19 +1803,20 @@ module UpdateStage = {
     (),
   ) =>
     new({
-      stageVariables,
-      stageName,
-      routeSettings,
-      description,
-      deploymentId,
-      defaultRouteSettings,
-      clientCertificateId,
-      autoDeploy,
-      apiId,
-      accessLogSettings,
+      stageVariables: stageVariables,
+      stageName: stageName,
+      routeSettings: routeSettings,
+      description: description,
+      deploymentId: deploymentId,
+      defaultRouteSettings: defaultRouteSettings,
+      clientCertificateId: clientCertificateId,
+      autoDeploy: autoDeploy,
+      apiId: apiId,
+      accessLogSettings: accessLogSettings,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateRouteResponse = {
   type t
   @ocaml.doc("<p>Updates a RouteResponse.</p>")
@@ -1795,16 +1866,17 @@ module UpdateRouteResponse = {
     (),
   ) =>
     new({
-      routeResponseKey,
-      routeResponseId,
-      routeId,
-      responseParameters,
-      responseModels,
-      modelSelectionExpression,
-      apiId,
+      routeResponseKey: routeResponseKey,
+      routeResponseId: routeResponseId,
+      routeId: routeId,
+      responseParameters: responseParameters,
+      responseModels: responseModels,
+      modelSelectionExpression: modelSelectionExpression,
+      apiId: apiId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateRoute = {
   type t
   @ocaml.doc("<p>Updates a Route.</p>")
@@ -1920,22 +1992,23 @@ module UpdateRoute = {
     (),
   ) =>
     new({
-      target,
-      routeResponseSelectionExpression,
-      routeKey,
-      routeId,
-      requestParameters,
-      requestModels,
-      operationName,
-      modelSelectionExpression,
-      authorizerId,
-      authorizationType,
-      authorizationScopes,
-      apiKeyRequired,
-      apiId,
+      target: target,
+      routeResponseSelectionExpression: routeResponseSelectionExpression,
+      routeKey: routeKey,
+      routeId: routeId,
+      requestParameters: requestParameters,
+      requestModels: requestModels,
+      operationName: operationName,
+      modelSelectionExpression: modelSelectionExpression,
+      authorizerId: authorizerId,
+      authorizationType: authorizationType,
+      authorizationScopes: authorizationScopes,
+      apiKeyRequired: apiKeyRequired,
+      apiId: apiId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateIntegration = {
   type t
   @ocaml.doc("<p>Updates an Integration.</p>")
@@ -2143,28 +2216,29 @@ module UpdateIntegration = {
     (),
   ) =>
     new({
-      tlsConfig,
-      timeoutInMillis,
-      templateSelectionExpression,
-      responseParameters,
-      requestTemplates,
-      requestParameters,
-      payloadFormatVersion,
-      passthroughBehavior,
-      integrationUri,
-      integrationType,
-      integrationSubtype,
-      integrationMethod,
-      integrationId,
-      description,
-      credentialsArn,
-      contentHandlingStrategy,
-      connectionType,
-      connectionId,
-      apiId,
+      tlsConfig: tlsConfig,
+      timeoutInMillis: timeoutInMillis,
+      templateSelectionExpression: templateSelectionExpression,
+      responseParameters: responseParameters,
+      requestTemplates: requestTemplates,
+      requestParameters: requestParameters,
+      payloadFormatVersion: payloadFormatVersion,
+      passthroughBehavior: passthroughBehavior,
+      integrationUri: integrationUri,
+      integrationType: integrationType,
+      integrationSubtype: integrationSubtype,
+      integrationMethod: integrationMethod,
+      integrationId: integrationId,
+      description: description,
+      credentialsArn: credentialsArn,
+      contentHandlingStrategy: contentHandlingStrategy,
+      connectionType: connectionType,
+      connectionId: connectionId,
+      apiId: apiId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateDomainName = {
   type t
   @ocaml.doc("<p>Updates a DomainName.</p>")
@@ -2191,9 +2265,14 @@ module UpdateDomainName = {
   }
   @module("@aws-sdk/client-apigateway") @new external new: request => t = "UpdateDomainNameCommand"
   let make = (~domainName, ~mutualTlsAuthentication=?, ~domainNameConfigurations=?, ()) =>
-    new({mutualTlsAuthentication, domainNameConfigurations, domainName})
+    new({
+      mutualTlsAuthentication: mutualTlsAuthentication,
+      domainNameConfigurations: domainNameConfigurations,
+      domainName: domainName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateAuthorizer = {
   type t
   @ocaml.doc("<p>Updates an Authorizer.</p>")
@@ -2308,21 +2387,22 @@ module UpdateAuthorizer = {
     (),
   ) =>
     new({
-      name,
-      jwtConfiguration,
-      identityValidationExpression,
-      identitySource,
-      enableSimpleResponses,
-      authorizerUri,
-      authorizerType,
-      authorizerResultTtlInSeconds,
-      authorizerPayloadFormatVersion,
-      authorizerId,
-      authorizerCredentialsArn,
-      apiId,
+      name: name,
+      jwtConfiguration: jwtConfiguration,
+      identityValidationExpression: identityValidationExpression,
+      identitySource: identitySource,
+      enableSimpleResponses: enableSimpleResponses,
+      authorizerUri: authorizerUri,
+      authorizerType: authorizerType,
+      authorizerResultTtlInSeconds: authorizerResultTtlInSeconds,
+      authorizerPayloadFormatVersion: authorizerPayloadFormatVersion,
+      authorizerId: authorizerId,
+      authorizerCredentialsArn: authorizerCredentialsArn,
+      apiId: apiId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateApi = {
   type t
   @ocaml.doc("<p>Updates an Api.</p>")
@@ -2447,21 +2527,22 @@ module UpdateApi = {
     (),
   ) =>
     new({
-      version,
-      target,
-      routeSelectionExpression,
-      routeKey,
-      name,
-      disableExecuteApiEndpoint,
-      disableSchemaValidation,
-      description,
-      credentialsArn,
-      corsConfiguration,
-      apiKeySelectionExpression,
-      apiId,
+      version: version,
+      target: target,
+      routeSelectionExpression: routeSelectionExpression,
+      routeKey: routeKey,
+      name: name,
+      disableExecuteApiEndpoint: disableExecuteApiEndpoint,
+      disableSchemaValidation: disableSchemaValidation,
+      description: description,
+      credentialsArn: credentialsArn,
+      corsConfiguration: corsConfiguration,
+      apiKeySelectionExpression: apiKeySelectionExpression,
+      apiId: apiId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ReimportApi = {
   type t
   @ocaml.doc("<p></p>")
@@ -2539,9 +2620,10 @@ module ReimportApi = {
   }
   @module("@aws-sdk/client-apigateway") @new external new: request => t = "ReimportApiCommand"
   let make = (~body, ~apiId, ~failOnWarnings=?, ~basepath=?, ()) =>
-    new({failOnWarnings, body, basepath, apiId})
+    new({failOnWarnings: failOnWarnings, body: body, basepath: basepath, apiId: apiId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ImportApi = {
   type t
   @ocaml.doc("<p></p>")
@@ -2617,9 +2699,11 @@ module ImportApi = {
     apiEndpoint: option<__string>,
   }
   @module("@aws-sdk/client-apigateway") @new external new: request => t = "ImportApiCommand"
-  let make = (~body, ~failOnWarnings=?, ~basepath=?, ()) => new({failOnWarnings, body, basepath})
+  let make = (~body, ~failOnWarnings=?, ~basepath=?, ()) =>
+    new({failOnWarnings: failOnWarnings, body: body, basepath: basepath})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetStage = {
   type t
   type request = {
@@ -2682,9 +2766,10 @@ module GetStage = {
     accessLogSettings: option<accessLogSettings>,
   }
   @module("@aws-sdk/client-apigateway") @new external new: request => t = "GetStageCommand"
-  let make = (~stageName, ~apiId, ()) => new({stageName, apiId})
+  let make = (~stageName, ~apiId, ()) => new({stageName: stageName, apiId: apiId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetRouteResponse = {
   type t
   type request = {
@@ -2710,9 +2795,11 @@ module GetRouteResponse = {
     modelSelectionExpression: option<selectionExpression>,
   }
   @module("@aws-sdk/client-apigateway") @new external new: request => t = "GetRouteResponseCommand"
-  let make = (~routeResponseId, ~routeId, ~apiId, ()) => new({routeResponseId, routeId, apiId})
+  let make = (~routeResponseId, ~routeId, ~apiId, ()) =>
+    new({routeResponseId: routeResponseId, routeId: routeId, apiId: apiId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetRoute = {
   type t
   type request = {
@@ -2770,9 +2857,10 @@ module GetRoute = {
     apiGatewayManaged: option<__boolean>,
   }
   @module("@aws-sdk/client-apigateway") @new external new: request => t = "GetRouteCommand"
-  let make = (~routeId, ~apiId, ()) => new({routeId, apiId})
+  let make = (~routeId, ~apiId, ()) => new({routeId: routeId, apiId: apiId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetModels = {
   type t
   type request = {
@@ -2796,9 +2884,11 @@ module GetModels = {
     items: option<__listOfModel>,
   }
   @module("@aws-sdk/client-apigateway") @new external new: request => t = "GetModelsCommand"
-  let make = (~apiId, ~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults, apiId})
+  let make = (~apiId, ~nextToken=?, ~maxResults=?, ()) =>
+    new({nextToken: nextToken, maxResults: maxResults, apiId: apiId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetIntegration = {
   type t
   type request = {
@@ -2902,9 +2992,10 @@ module GetIntegration = {
     apiGatewayManaged: option<__boolean>,
   }
   @module("@aws-sdk/client-apigateway") @new external new: request => t = "GetIntegrationCommand"
-  let make = (~integrationId, ~apiId, ()) => new({integrationId, apiId})
+  let make = (~integrationId, ~apiId, ()) => new({integrationId: integrationId, apiId: apiId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetDomainName = {
   type t
   type request = {@ocaml.doc("<p>The domain name.</p>") @as("DomainName") domainName: __string}
@@ -2925,6 +3016,7 @@ module GetDomainName = {
   let make = (~domainName, ()) => new({domainName: domainName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetDeployments = {
   type t
   type request = {
@@ -2948,9 +3040,11 @@ module GetDeployments = {
     items: option<__listOfDeployment>,
   }
   @module("@aws-sdk/client-apigateway") @new external new: request => t = "GetDeploymentsCommand"
-  let make = (~apiId, ~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults, apiId})
+  let make = (~apiId, ~nextToken=?, ~maxResults=?, ()) =>
+    new({nextToken: nextToken, maxResults: maxResults, apiId: apiId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetAuthorizer = {
   type t
   type request = {
@@ -3005,9 +3099,10 @@ module GetAuthorizer = {
     authorizerCredentialsArn: option<arn>,
   }
   @module("@aws-sdk/client-apigateway") @new external new: request => t = "GetAuthorizerCommand"
-  let make = (~authorizerId, ~apiId, ()) => new({authorizerId, apiId})
+  let make = (~authorizerId, ~apiId, ()) => new({authorizerId: authorizerId, apiId: apiId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetApiMappings = {
   type t
   type request = {
@@ -3032,9 +3127,10 @@ module GetApiMappings = {
   }
   @module("@aws-sdk/client-apigateway") @new external new: request => t = "GetApiMappingsCommand"
   let make = (~domainName, ~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken, maxResults, domainName})
+    new({nextToken: nextToken, maxResults: maxResults, domainName: domainName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetApi = {
   type t
   type request = {@ocaml.doc("<p>The API identifier.</p>") @as("ApiId") apiId: __string}
@@ -3099,6 +3195,7 @@ module GetApi = {
   let make = (~apiId, ()) => new({apiId: apiId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateStage = {
   type t
   @ocaml.doc("<p>Creates a new Stage resource to represent a stage.</p>")
@@ -3204,20 +3301,21 @@ module CreateStage = {
     (),
   ) =>
     new({
-      tags,
-      stageVariables,
-      stageName,
-      routeSettings,
-      description,
-      deploymentId,
-      defaultRouteSettings,
-      clientCertificateId,
-      autoDeploy,
-      apiId,
-      accessLogSettings,
+      tags: tags,
+      stageVariables: stageVariables,
+      stageName: stageName,
+      routeSettings: routeSettings,
+      description: description,
+      deploymentId: deploymentId,
+      defaultRouteSettings: defaultRouteSettings,
+      clientCertificateId: clientCertificateId,
+      autoDeploy: autoDeploy,
+      apiId: apiId,
+      accessLogSettings: accessLogSettings,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateRouteResponse = {
   type t
   @ocaml.doc("<p>Creates a new RouteResponse resource to represent a route response.</p>")
@@ -3265,15 +3363,16 @@ module CreateRouteResponse = {
     (),
   ) =>
     new({
-      routeResponseKey,
-      routeId,
-      responseParameters,
-      responseModels,
-      modelSelectionExpression,
-      apiId,
+      routeResponseKey: routeResponseKey,
+      routeId: routeId,
+      responseParameters: responseParameters,
+      responseModels: responseModels,
+      modelSelectionExpression: modelSelectionExpression,
+      apiId: apiId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateRoute = {
   type t
   @ocaml.doc("<p>Creates a new Route resource to represent a route.</p>")
@@ -3386,21 +3485,22 @@ module CreateRoute = {
     (),
   ) =>
     new({
-      target,
-      routeResponseSelectionExpression,
-      routeKey,
-      requestParameters,
-      requestModels,
-      operationName,
-      modelSelectionExpression,
-      authorizerId,
-      authorizationType,
-      authorizationScopes,
-      apiKeyRequired,
-      apiId,
+      target: target,
+      routeResponseSelectionExpression: routeResponseSelectionExpression,
+      routeKey: routeKey,
+      requestParameters: requestParameters,
+      requestModels: requestModels,
+      operationName: operationName,
+      modelSelectionExpression: modelSelectionExpression,
+      authorizerId: authorizerId,
+      authorizationType: authorizationType,
+      authorizationScopes: authorizationScopes,
+      apiKeyRequired: apiKeyRequired,
+      apiId: apiId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateIntegration = {
   type t
   @ocaml.doc("<p>Creates a new Integration resource to represent an integration.</p>")
@@ -3606,27 +3706,28 @@ module CreateIntegration = {
     (),
   ) =>
     new({
-      tlsConfig,
-      timeoutInMillis,
-      templateSelectionExpression,
-      responseParameters,
-      requestTemplates,
-      requestParameters,
-      payloadFormatVersion,
-      passthroughBehavior,
-      integrationUri,
-      integrationType,
-      integrationSubtype,
-      integrationMethod,
-      description,
-      credentialsArn,
-      contentHandlingStrategy,
-      connectionType,
-      connectionId,
-      apiId,
+      tlsConfig: tlsConfig,
+      timeoutInMillis: timeoutInMillis,
+      templateSelectionExpression: templateSelectionExpression,
+      responseParameters: responseParameters,
+      requestTemplates: requestTemplates,
+      requestParameters: requestParameters,
+      payloadFormatVersion: payloadFormatVersion,
+      passthroughBehavior: passthroughBehavior,
+      integrationUri: integrationUri,
+      integrationType: integrationType,
+      integrationSubtype: integrationSubtype,
+      integrationMethod: integrationMethod,
+      description: description,
+      credentialsArn: credentialsArn,
+      contentHandlingStrategy: contentHandlingStrategy,
+      connectionType: connectionType,
+      connectionId: connectionId,
+      apiId: apiId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateDomainName = {
   type t
   @ocaml.doc("<p>Creates a new DomainName resource to represent a domain name.</p>")
@@ -3656,9 +3757,15 @@ module CreateDomainName = {
   }
   @module("@aws-sdk/client-apigateway") @new external new: request => t = "CreateDomainNameCommand"
   let make = (~domainName, ~tags=?, ~mutualTlsAuthentication=?, ~domainNameConfigurations=?, ()) =>
-    new({tags, mutualTlsAuthentication, domainNameConfigurations, domainName})
+    new({
+      tags: tags,
+      mutualTlsAuthentication: mutualTlsAuthentication,
+      domainNameConfigurations: domainNameConfigurations,
+      domainName: domainName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateAuthorizer = {
   type t
   @ocaml.doc("<p>Creates a new Authorizer resource to represent an authorizer.</p>")
@@ -3771,20 +3878,21 @@ module CreateAuthorizer = {
     (),
   ) =>
     new({
-      name,
-      jwtConfiguration,
-      identityValidationExpression,
-      identitySource,
-      enableSimpleResponses,
-      authorizerUri,
-      authorizerType,
-      authorizerResultTtlInSeconds,
-      authorizerPayloadFormatVersion,
-      authorizerCredentialsArn,
-      apiId,
+      name: name,
+      jwtConfiguration: jwtConfiguration,
+      identityValidationExpression: identityValidationExpression,
+      identitySource: identitySource,
+      enableSimpleResponses: enableSimpleResponses,
+      authorizerUri: authorizerUri,
+      authorizerType: authorizerType,
+      authorizerResultTtlInSeconds: authorizerResultTtlInSeconds,
+      authorizerPayloadFormatVersion: authorizerPayloadFormatVersion,
+      authorizerCredentialsArn: authorizerCredentialsArn,
+      apiId: apiId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateApi = {
   type t
   @ocaml.doc("<p>Creates a new Api resource to represent an API.</p>")
@@ -3916,22 +4024,23 @@ module CreateApi = {
     (),
   ) =>
     new({
-      version,
-      target,
-      tags,
-      routeSelectionExpression,
-      routeKey,
-      protocolType,
-      name,
-      disableExecuteApiEndpoint,
-      disableSchemaValidation,
-      description,
-      credentialsArn,
-      corsConfiguration,
-      apiKeySelectionExpression,
+      version: version,
+      target: target,
+      tags: tags,
+      routeSelectionExpression: routeSelectionExpression,
+      routeKey: routeKey,
+      protocolType: protocolType,
+      name: name,
+      disableExecuteApiEndpoint: disableExecuteApiEndpoint,
+      disableSchemaValidation: disableSchemaValidation,
+      description: description,
+      credentialsArn: credentialsArn,
+      corsConfiguration: corsConfiguration,
+      apiKeySelectionExpression: apiKeySelectionExpression,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetVpcLinks = {
   type t
   type request = {
@@ -3953,9 +4062,11 @@ module GetVpcLinks = {
     @ocaml.doc("<p>A collection of VPC links.</p>") @as("Items") items: option<__listOfVpcLink>,
   }
   @module("@aws-sdk/client-apigateway") @new external new: request => t = "GetVpcLinksCommand"
-  let make = (~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults})
+  let make = (~nextToken=?, ~maxResults=?, ()) =>
+    new({nextToken: nextToken, maxResults: maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetIntegrationResponses = {
   type t
   type request = {
@@ -3982,9 +4093,10 @@ module GetIntegrationResponses = {
   @module("@aws-sdk/client-apigateway") @new
   external new: request => t = "GetIntegrationResponsesCommand"
   let make = (~integrationId, ~apiId, ~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken, maxResults, integrationId, apiId})
+    new({nextToken: nextToken, maxResults: maxResults, integrationId: integrationId, apiId: apiId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetStages = {
   type t
   type request = {
@@ -4008,9 +4120,11 @@ module GetStages = {
     items: option<__listOfStage>,
   }
   @module("@aws-sdk/client-apigateway") @new external new: request => t = "GetStagesCommand"
-  let make = (~apiId, ~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults, apiId})
+  let make = (~apiId, ~nextToken=?, ~maxResults=?, ()) =>
+    new({nextToken: nextToken, maxResults: maxResults, apiId: apiId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetRoutes = {
   type t
   type request = {
@@ -4034,9 +4148,11 @@ module GetRoutes = {
     items: option<__listOfRoute>,
   }
   @module("@aws-sdk/client-apigateway") @new external new: request => t = "GetRoutesCommand"
-  let make = (~apiId, ~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults, apiId})
+  let make = (~apiId, ~nextToken=?, ~maxResults=?, ()) =>
+    new({nextToken: nextToken, maxResults: maxResults, apiId: apiId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetRouteResponses = {
   type t
   type request = {
@@ -4062,9 +4178,10 @@ module GetRouteResponses = {
   }
   @module("@aws-sdk/client-apigateway") @new external new: request => t = "GetRouteResponsesCommand"
   let make = (~routeId, ~apiId, ~nextToken=?, ~maxResults=?, ()) =>
-    new({routeId, nextToken, maxResults, apiId})
+    new({routeId: routeId, nextToken: nextToken, maxResults: maxResults, apiId: apiId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetIntegrations = {
   type t
   type request = {
@@ -4088,9 +4205,11 @@ module GetIntegrations = {
     items: option<__listOfIntegration>,
   }
   @module("@aws-sdk/client-apigateway") @new external new: request => t = "GetIntegrationsCommand"
-  let make = (~apiId, ~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults, apiId})
+  let make = (~apiId, ~nextToken=?, ~maxResults=?, ()) =>
+    new({nextToken: nextToken, maxResults: maxResults, apiId: apiId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetDomainNames = {
   type t
   type request = {
@@ -4113,9 +4232,11 @@ module GetDomainNames = {
     items: option<__listOfDomainName>,
   }
   @module("@aws-sdk/client-apigateway") @new external new: request => t = "GetDomainNamesCommand"
-  let make = (~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults})
+  let make = (~nextToken=?, ~maxResults=?, ()) =>
+    new({nextToken: nextToken, maxResults: maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetAuthorizers = {
   type t
   type request = {
@@ -4139,9 +4260,11 @@ module GetAuthorizers = {
     items: option<__listOfAuthorizer>,
   }
   @module("@aws-sdk/client-apigateway") @new external new: request => t = "GetAuthorizersCommand"
-  let make = (~apiId, ~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults, apiId})
+  let make = (~apiId, ~nextToken=?, ~maxResults=?, ()) =>
+    new({nextToken: nextToken, maxResults: maxResults, apiId: apiId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetApis = {
   type t
   type request = {
@@ -4163,6 +4286,7 @@ module GetApis = {
     @ocaml.doc("<p>The elements from this collection.</p>") @as("Items") items: option<__listOfApi>,
   }
   @module("@aws-sdk/client-apigateway") @new external new: request => t = "GetApisCommand"
-  let make = (~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults})
+  let make = (~nextToken=?, ~maxResults=?, ()) =>
+    new({nextToken: nextToken, maxResults: maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

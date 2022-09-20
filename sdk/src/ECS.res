@@ -3726,9 +3726,11 @@ module DiscoverPollEndpoint = {
     @ocaml.doc("<p>The endpoint for the Amazon ECS agent to poll.</p>") endpoint: option<string_>,
   }
   @module("@aws-sdk/client-ecs") @new external new: request => t = "DiscoverPollEndpointCommand"
-  let make = (~cluster=?, ~containerInstance=?, ()) => new({cluster, containerInstance})
+  let make = (~cluster=?, ~containerInstance=?, ()) =>
+    new({cluster: cluster, containerInstance: containerInstance})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UntagResource = {
   type t
   type request = {
@@ -3740,9 +3742,10 @@ module UntagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-ecs") @new external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys, resourceArn})
+  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module PutAccountSettingDefault = {
   type t
   type request = {
@@ -3763,9 +3766,10 @@ module PutAccountSettingDefault = {
     @ocaml.doc("<p>The current setting for a resource.</p>") setting: option<setting>,
   }
   @module("@aws-sdk/client-ecs") @new external new: request => t = "PutAccountSettingDefaultCommand"
-  let make = (~value, ~name, ()) => new({value, name})
+  let make = (~value, ~name, ()) => new({value: value, name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module PutAccountSetting = {
   type t
   type request = {
@@ -3797,9 +3801,11 @@ module PutAccountSetting = {
     @ocaml.doc("<p>The current account setting for a resource.</p>") setting: option<setting>,
   }
   @module("@aws-sdk/client-ecs") @new external new: request => t = "PutAccountSettingCommand"
-  let make = (~value, ~name, ~principalArn=?, ()) => new({principalArn, value, name})
+  let make = (~value, ~name, ~principalArn=?, ()) =>
+    new({principalArn: principalArn, value: value, name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListTasks = {
   type t
   type request = {
@@ -3881,18 +3887,19 @@ module ListTasks = {
     (),
   ) =>
     new({
-      launchType,
-      desiredStatus,
-      serviceName,
-      startedBy,
-      maxResults,
-      nextToken,
-      family,
-      containerInstance,
-      cluster,
+      launchType: launchType,
+      desiredStatus: desiredStatus,
+      serviceName: serviceName,
+      startedBy: startedBy,
+      maxResults: maxResults,
+      nextToken: nextToken,
+      family: family,
+      containerInstance: containerInstance,
+      cluster: cluster,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListTaskDefinitions = {
   type t
   type request = {
@@ -3947,9 +3954,16 @@ module ListTaskDefinitions = {
   }
   @module("@aws-sdk/client-ecs") @new external new: request => t = "ListTaskDefinitionsCommand"
   let make = (~maxResults=?, ~nextToken=?, ~sort=?, ~status=?, ~familyPrefix=?, ()) =>
-    new({maxResults, nextToken, sort, status, familyPrefix})
+    new({
+      maxResults: maxResults,
+      nextToken: nextToken,
+      sort: sort,
+      status: status,
+      familyPrefix: familyPrefix,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListTaskDefinitionFamilies = {
   type t
   type request = {
@@ -4004,9 +4018,10 @@ module ListTaskDefinitionFamilies = {
   @module("@aws-sdk/client-ecs") @new
   external new: request => t = "ListTaskDefinitionFamiliesCommand"
   let make = (~maxResults=?, ~nextToken=?, ~status=?, ~familyPrefix=?, ()) =>
-    new({maxResults, nextToken, status, familyPrefix})
+    new({maxResults: maxResults, nextToken: nextToken, status: status, familyPrefix: familyPrefix})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListServices = {
   type t
   type request = {
@@ -4053,9 +4068,16 @@ module ListServices = {
   }
   @module("@aws-sdk/client-ecs") @new external new: request => t = "ListServicesCommand"
   let make = (~schedulingStrategy=?, ~launchType=?, ~maxResults=?, ~nextToken=?, ~cluster=?, ()) =>
-    new({schedulingStrategy, launchType, maxResults, nextToken, cluster})
+    new({
+      schedulingStrategy: schedulingStrategy,
+      launchType: launchType,
+      maxResults: maxResults,
+      nextToken: nextToken,
+      cluster: cluster,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListContainerInstances = {
   type t
   type request = {
@@ -4106,9 +4128,16 @@ module ListContainerInstances = {
   }
   @module("@aws-sdk/client-ecs") @new external new: request => t = "ListContainerInstancesCommand"
   let make = (~status=?, ~maxResults=?, ~nextToken=?, ~filter=?, ~cluster=?, ()) =>
-    new({status, maxResults, nextToken, filter, cluster})
+    new({
+      status: status,
+      maxResults: maxResults,
+      nextToken: nextToken,
+      filter: filter,
+      cluster: cluster,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListClusters = {
   type t
   type request = {
@@ -4143,9 +4172,11 @@ module ListClusters = {
     clusterArns: option<stringList>,
   }
   @module("@aws-sdk/client-ecs") @new external new: request => t = "ListClustersCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ExecuteCommand = {
   type t
   type request = {
@@ -4177,9 +4208,16 @@ module ExecuteCommand = {
   }
   @module("@aws-sdk/client-ecs") @new external new: request => t = "ExecuteCommandCommand"
   let make = (~task, ~interactive, ~command, ~container=?, ~cluster=?, ()) =>
-    new({task, interactive, command, container, cluster})
+    new({
+      task: task,
+      interactive: interactive,
+      command: command,
+      container: container,
+      cluster: cluster,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteAccountSetting = {
   type t
   type request = {
@@ -4203,9 +4241,10 @@ module DeleteAccountSetting = {
     setting: option<setting>,
   }
   @module("@aws-sdk/client-ecs") @new external new: request => t = "DeleteAccountSettingCommand"
-  let make = (~name, ~principalArn=?, ()) => new({principalArn, name})
+  let make = (~name, ~principalArn=?, ()) => new({principalArn: principalArn, name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module TagResource = {
   type t
   type request = {
@@ -4249,9 +4288,10 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-ecs") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceArn, ()) => new({tags, resourceArn})
+  let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module SubmitContainerStateChange = {
   type t
   type request = {
@@ -4285,9 +4325,20 @@ module SubmitContainerStateChange = {
     ~task=?,
     ~cluster=?,
     (),
-  ) => new({networkBindings, reason, exitCode, status, runtimeId, containerName, task, cluster})
+  ) =>
+    new({
+      networkBindings: networkBindings,
+      reason: reason,
+      exitCode: exitCode,
+      status: status,
+      runtimeId: runtimeId,
+      containerName: containerName,
+      task: task,
+      cluster: cluster,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module SubmitAttachmentStateChanges = {
   type t
   type request = {
@@ -4302,9 +4353,10 @@ module SubmitAttachmentStateChanges = {
   }
   @module("@aws-sdk/client-ecs") @new
   external new: request => t = "SubmitAttachmentStateChangesCommand"
-  let make = (~attachments, ~cluster=?, ()) => new({attachments, cluster})
+  let make = (~attachments, ~cluster=?, ()) => new({attachments: attachments, cluster: cluster})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module PutAttributes = {
   type t
   type request = {
@@ -4319,9 +4371,10 @@ module PutAttributes = {
     @ocaml.doc("<p>The attributes applied to your resource.</p>") attributes: option<attributes>,
   }
   @module("@aws-sdk/client-ecs") @new external new: request => t = "PutAttributesCommand"
-  let make = (~attributes, ~cluster=?, ()) => new({attributes, cluster})
+  let make = (~attributes, ~cluster=?, ()) => new({attributes: attributes, cluster: cluster})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListTagsForResource = {
   type t
   type request = {
@@ -4335,6 +4388,7 @@ module ListTagsForResource = {
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListAttributes = {
   type t
   type request = {
@@ -4385,9 +4439,18 @@ module ListAttributes = {
     ~attributeName=?,
     ~cluster=?,
     (),
-  ) => new({maxResults, nextToken, attributeValue, attributeName, targetType, cluster})
+  ) =>
+    new({
+      maxResults: maxResults,
+      nextToken: nextToken,
+      attributeValue: attributeValue,
+      attributeName: attributeName,
+      targetType: targetType,
+      cluster: cluster,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListAccountSettings = {
   type t
   type request = {
@@ -4448,9 +4511,18 @@ module ListAccountSettings = {
     ~value=?,
     ~name=?,
     (),
-  ) => new({maxResults, nextToken, effectiveSettings, principalArn, value, name})
+  ) =>
+    new({
+      maxResults: maxResults,
+      nextToken: nextToken,
+      effectiveSettings: effectiveSettings,
+      principalArn: principalArn,
+      value: value,
+      name: name,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteAttributes = {
   type t
   type request = {
@@ -4470,9 +4542,10 @@ module DeleteAttributes = {
     attributes: option<attributes>,
   }
   @module("@aws-sdk/client-ecs") @new external new: request => t = "DeleteAttributesCommand"
-  let make = (~attributes, ~cluster=?, ()) => new({attributes, cluster})
+  let make = (~attributes, ~cluster=?, ()) => new({attributes: attributes, cluster: cluster})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateCapacityProvider = {
   type t
   type request = {
@@ -4486,9 +4559,11 @@ module UpdateCapacityProvider = {
     capacityProvider: option<capacityProvider>,
   }
   @module("@aws-sdk/client-ecs") @new external new: request => t = "UpdateCapacityProviderCommand"
-  let make = (~autoScalingGroupProvider, ~name, ()) => new({autoScalingGroupProvider, name})
+  let make = (~autoScalingGroupProvider, ~name, ()) =>
+    new({autoScalingGroupProvider: autoScalingGroupProvider, name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteCapacityProvider = {
   type t
   type request = {
@@ -4505,6 +4580,7 @@ module DeleteCapacityProvider = {
   let make = (~capacityProvider, ()) => new({capacityProvider: capacityProvider})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateCapacityProvider = {
   type t
   type request = {
@@ -4557,9 +4633,10 @@ module CreateCapacityProvider = {
   }
   @module("@aws-sdk/client-ecs") @new external new: request => t = "CreateCapacityProviderCommand"
   let make = (~autoScalingGroupProvider, ~name, ~tags=?, ()) =>
-    new({tags, autoScalingGroupProvider, name})
+    new({tags: tags, autoScalingGroupProvider: autoScalingGroupProvider, name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateTaskSet = {
   type t
   type request = {
@@ -4580,9 +4657,11 @@ module UpdateTaskSet = {
   }
   type response = {@ocaml.doc("<p>Details about the task set.</p>") taskSet: option<taskSet>}
   @module("@aws-sdk/client-ecs") @new external new: request => t = "UpdateTaskSetCommand"
-  let make = (~scale, ~taskSet, ~service, ~cluster, ()) => new({scale, taskSet, service, cluster})
+  let make = (~scale, ~taskSet, ~service, ~cluster, ()) =>
+    new({scale: scale, taskSet: taskSet, service: service, cluster: cluster})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateServicePrimaryTaskSet = {
   type t
   type request = {
@@ -4600,9 +4679,11 @@ module UpdateServicePrimaryTaskSet = {
   type response = {@ocaml.doc("<p>etails about the task set.</p>") taskSet: option<taskSet>}
   @module("@aws-sdk/client-ecs") @new
   external new: request => t = "UpdateServicePrimaryTaskSetCommand"
-  let make = (~primaryTaskSet, ~service, ~cluster, ()) => new({primaryTaskSet, service, cluster})
+  let make = (~primaryTaskSet, ~service, ~cluster, ()) =>
+    new({primaryTaskSet: primaryTaskSet, service: service, cluster: cluster})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module SubmitTaskStateChange = {
   type t
   type request = {
@@ -4645,19 +4726,20 @@ module SubmitTaskStateChange = {
     (),
   ) =>
     new({
-      executionStoppedAt,
-      pullStoppedAt,
-      pullStartedAt,
-      managedAgents,
-      attachments,
-      containers,
-      reason,
-      status,
-      task,
-      cluster,
+      executionStoppedAt: executionStoppedAt,
+      pullStoppedAt: pullStoppedAt,
+      pullStartedAt: pullStartedAt,
+      managedAgents: managedAgents,
+      attachments: attachments,
+      containers: containers,
+      reason: reason,
+      status: status,
+      task: task,
+      cluster: cluster,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeCapacityProviders = {
   type t
   type request = {
@@ -4705,9 +4787,15 @@ module DescribeCapacityProviders = {
   @module("@aws-sdk/client-ecs") @new
   external new: request => t = "DescribeCapacityProvidersCommand"
   let make = (~nextToken=?, ~maxResults=?, ~include_=?, ~capacityProviders=?, ()) =>
-    new({nextToken, maxResults, include_, capacityProviders})
+    new({
+      nextToken: nextToken,
+      maxResults: maxResults,
+      include_: include_,
+      capacityProviders: capacityProviders,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteTaskSet = {
   type t
   type request = {
@@ -4727,9 +4815,11 @@ module DeleteTaskSet = {
   }
   type response = {@ocaml.doc("<p>Details about the task set.</p>") taskSet: option<taskSet>}
   @module("@aws-sdk/client-ecs") @new external new: request => t = "DeleteTaskSetCommand"
-  let make = (~taskSet, ~service, ~cluster, ~force=?, ()) => new({force, taskSet, service, cluster})
+  let make = (~taskSet, ~service, ~cluster, ~force=?, ()) =>
+    new({force: force, taskSet: taskSet, service: service, cluster: cluster})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateTaskSet = {
   type t
   type request = {
@@ -4852,22 +4942,23 @@ module CreateTaskSet = {
     (),
   ) =>
     new({
-      tags,
-      clientToken,
-      scale,
-      platformVersion,
-      capacityProviderStrategy,
-      launchType,
-      serviceRegistries,
-      loadBalancers,
-      networkConfiguration,
-      taskDefinition,
-      externalId,
-      cluster,
-      service,
+      tags: tags,
+      clientToken: clientToken,
+      scale: scale,
+      platformVersion: platformVersion,
+      capacityProviderStrategy: capacityProviderStrategy,
+      launchType: launchType,
+      serviceRegistries: serviceRegistries,
+      loadBalancers: loadBalancers,
+      networkConfiguration: networkConfiguration,
+      taskDefinition: taskDefinition,
+      externalId: externalId,
+      cluster: cluster,
+      service: service,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateContainerAgent = {
   type t
   type request = {
@@ -4883,9 +4974,11 @@ module UpdateContainerAgent = {
     containerInstance: option<containerInstance>,
   }
   @module("@aws-sdk/client-ecs") @new external new: request => t = "UpdateContainerAgentCommand"
-  let make = (~containerInstance, ~cluster=?, ()) => new({containerInstance, cluster})
+  let make = (~containerInstance, ~cluster=?, ()) =>
+    new({containerInstance: containerInstance, cluster: cluster})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateClusterSettings = {
   type t
   type request = {
@@ -4898,9 +4991,10 @@ module UpdateClusterSettings = {
   }
   type response = {@ocaml.doc("<p>Details about the cluster</p>") cluster: option<cluster>}
   @module("@aws-sdk/client-ecs") @new external new: request => t = "UpdateClusterSettingsCommand"
-  let make = (~settings, ~cluster, ()) => new({settings, cluster})
+  let make = (~settings, ~cluster, ()) => new({settings: settings, cluster: cluster})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateCluster = {
   type t
   type request = {
@@ -4912,9 +5006,10 @@ module UpdateCluster = {
   type response = {@ocaml.doc("<p>Details about the cluster.</p>") cluster: option<cluster>}
   @module("@aws-sdk/client-ecs") @new external new: request => t = "UpdateClusterCommand"
   let make = (~cluster, ~configuration=?, ~settings=?, ()) =>
-    new({configuration, settings, cluster})
+    new({configuration: configuration, settings: settings, cluster: cluster})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module RegisterContainerInstance = {
   type t
   type request = {
@@ -4996,18 +5091,19 @@ module RegisterContainerInstance = {
     (),
   ) =>
     new({
-      tags,
-      platformDevices,
-      attributes,
-      containerInstanceArn,
-      versionInfo,
-      totalResources,
-      instanceIdentityDocumentSignature,
-      instanceIdentityDocument,
-      cluster,
+      tags: tags,
+      platformDevices: platformDevices,
+      attributes: attributes,
+      containerInstanceArn: containerInstanceArn,
+      versionInfo: versionInfo,
+      totalResources: totalResources,
+      instanceIdentityDocumentSignature: instanceIdentityDocumentSignature,
+      instanceIdentityDocument: instanceIdentityDocument,
+      cluster: cluster,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module PutClusterCapacityProviders = {
   type t
   type request = {
@@ -5044,9 +5140,14 @@ module PutClusterCapacityProviders = {
   @module("@aws-sdk/client-ecs") @new
   external new: request => t = "PutClusterCapacityProvidersCommand"
   let make = (~defaultCapacityProviderStrategy, ~capacityProviders, ~cluster, ()) =>
-    new({defaultCapacityProviderStrategy, capacityProviders, cluster})
+    new({
+      defaultCapacityProviderStrategy: defaultCapacityProviderStrategy,
+      capacityProviders: capacityProviders,
+      cluster: cluster,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeTaskSets = {
   type t
   type request = {
@@ -5072,9 +5173,10 @@ module DescribeTaskSets = {
   }
   @module("@aws-sdk/client-ecs") @new external new: request => t = "DescribeTaskSetsCommand"
   let make = (~service, ~cluster, ~include_=?, ~taskSets=?, ()) =>
-    new({include_, taskSets, service, cluster})
+    new({include_: include_, taskSets: taskSets, service: service, cluster: cluster})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeregisterContainerInstance = {
   type t
   type request = {
@@ -5103,9 +5205,10 @@ module DeregisterContainerInstance = {
   @module("@aws-sdk/client-ecs") @new
   external new: request => t = "DeregisterContainerInstanceCommand"
   let make = (~containerInstance, ~force=?, ~cluster=?, ()) =>
-    new({force, containerInstance, cluster})
+    new({force: force, containerInstance: containerInstance, cluster: cluster})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteCluster = {
   type t
   type request = {
@@ -5119,6 +5222,7 @@ module DeleteCluster = {
   let make = (~cluster, ()) => new({cluster: cluster})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateCluster = {
   type t
   type request = {
@@ -5205,15 +5309,16 @@ module CreateCluster = {
     (),
   ) =>
     new({
-      defaultCapacityProviderStrategy,
-      capacityProviders,
-      configuration,
-      settings,
-      tags,
-      clusterName,
+      defaultCapacityProviderStrategy: defaultCapacityProviderStrategy,
+      capacityProviders: capacityProviders,
+      configuration: configuration,
+      settings: settings,
+      tags: tags,
+      clusterName: clusterName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateService = {
   type t
   type request = {
@@ -5370,26 +5475,27 @@ module UpdateService = {
     (),
   ) =>
     new({
-      serviceRegistries,
-      propagateTags,
-      loadBalancers,
-      enableECSManagedTags,
-      enableExecuteCommand,
-      healthCheckGracePeriodSeconds,
-      forceNewDeployment,
-      platformVersion,
-      placementStrategy,
-      placementConstraints,
-      networkConfiguration,
-      deploymentConfiguration,
-      capacityProviderStrategy,
-      taskDefinition,
-      desiredCount,
-      service,
-      cluster,
+      serviceRegistries: serviceRegistries,
+      propagateTags: propagateTags,
+      loadBalancers: loadBalancers,
+      enableECSManagedTags: enableECSManagedTags,
+      enableExecuteCommand: enableExecuteCommand,
+      healthCheckGracePeriodSeconds: healthCheckGracePeriodSeconds,
+      forceNewDeployment: forceNewDeployment,
+      platformVersion: platformVersion,
+      placementStrategy: placementStrategy,
+      placementConstraints: placementConstraints,
+      networkConfiguration: networkConfiguration,
+      deploymentConfiguration: deploymentConfiguration,
+      capacityProviderStrategy: capacityProviderStrategy,
+      taskDefinition: taskDefinition,
+      desiredCount: desiredCount,
+      service: service,
+      cluster: cluster,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateContainerInstancesState = {
   type t
   type request = {
@@ -5414,9 +5520,10 @@ module UpdateContainerInstancesState = {
   @module("@aws-sdk/client-ecs") @new
   external new: request => t = "UpdateContainerInstancesStateCommand"
   let make = (~status, ~containerInstances, ~cluster=?, ()) =>
-    new({status, containerInstances, cluster})
+    new({status: status, containerInstances: containerInstances, cluster: cluster})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module StopTask = {
   type t
   type request = {
@@ -5433,9 +5540,11 @@ module StopTask = {
   }
   type response = {@ocaml.doc("<p>The task that was stopped.</p>") task: option<task>}
   @module("@aws-sdk/client-ecs") @new external new: request => t = "StopTaskCommand"
-  let make = (~task, ~reason=?, ~cluster=?, ()) => new({reason, task, cluster})
+  let make = (~task, ~reason=?, ~cluster=?, ()) =>
+    new({reason: reason, task: task, cluster: cluster})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeContainerInstances = {
   type t
   type request = {
@@ -5464,9 +5573,10 @@ module DescribeContainerInstances = {
   @module("@aws-sdk/client-ecs") @new
   external new: request => t = "DescribeContainerInstancesCommand"
   let make = (~containerInstances, ~include_=?, ~cluster=?, ()) =>
-    new({include_, containerInstances, cluster})
+    new({include_: include_, containerInstances: containerInstances, cluster: cluster})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeClusters = {
   type t
   type request = {
@@ -5493,9 +5603,10 @@ module DescribeClusters = {
     @ocaml.doc("<p>The list of clusters.</p>") clusters: option<clusters>,
   }
   @module("@aws-sdk/client-ecs") @new external new: request => t = "DescribeClustersCommand"
-  let make = (~include_=?, ~clusters=?, ()) => new({include_, clusters})
+  let make = (~include_=?, ~clusters=?, ()) => new({include_: include_, clusters: clusters})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteService = {
   type t
   type request = {
@@ -5512,9 +5623,11 @@ module DeleteService = {
     @ocaml.doc("<p>The full description of the deleted service.</p>") service: option<service>,
   }
   @module("@aws-sdk/client-ecs") @new external new: request => t = "DeleteServiceCommand"
-  let make = (~service, ~force=?, ~cluster=?, ()) => new({force, service, cluster})
+  let make = (~service, ~force=?, ~cluster=?, ()) =>
+    new({force: force, service: service, cluster: cluster})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateService = {
   type t
   type request = {
@@ -5787,31 +5900,32 @@ module CreateService = {
     (),
   ) =>
     new({
-      enableExecuteCommand,
-      propagateTags,
-      enableECSManagedTags,
-      tags,
-      deploymentController,
-      schedulingStrategy,
-      healthCheckGracePeriodSeconds,
-      networkConfiguration,
-      placementStrategy,
-      placementConstraints,
-      deploymentConfiguration,
-      role,
-      platformVersion,
-      capacityProviderStrategy,
-      launchType,
-      clientToken,
-      desiredCount,
-      serviceRegistries,
-      loadBalancers,
-      taskDefinition,
-      serviceName,
-      cluster,
+      enableExecuteCommand: enableExecuteCommand,
+      propagateTags: propagateTags,
+      enableECSManagedTags: enableECSManagedTags,
+      tags: tags,
+      deploymentController: deploymentController,
+      schedulingStrategy: schedulingStrategy,
+      healthCheckGracePeriodSeconds: healthCheckGracePeriodSeconds,
+      networkConfiguration: networkConfiguration,
+      placementStrategy: placementStrategy,
+      placementConstraints: placementConstraints,
+      deploymentConfiguration: deploymentConfiguration,
+      role: role,
+      platformVersion: platformVersion,
+      capacityProviderStrategy: capacityProviderStrategy,
+      launchType: launchType,
+      clientToken: clientToken,
+      desiredCount: desiredCount,
+      serviceRegistries: serviceRegistries,
+      loadBalancers: loadBalancers,
+      taskDefinition: taskDefinition,
+      serviceName: serviceName,
+      cluster: cluster,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module StartTask = {
   type t
   type request = {
@@ -5921,21 +6035,22 @@ module StartTask = {
     (),
   ) =>
     new({
-      taskDefinition,
-      tags,
-      startedBy,
-      referenceId,
-      propagateTags,
-      overrides,
-      networkConfiguration,
-      group,
-      enableExecuteCommand,
-      enableECSManagedTags,
-      containerInstances,
-      cluster,
+      taskDefinition: taskDefinition,
+      tags: tags,
+      startedBy: startedBy,
+      referenceId: referenceId,
+      propagateTags: propagateTags,
+      overrides: overrides,
+      networkConfiguration: networkConfiguration,
+      group: group,
+      enableExecuteCommand: enableExecuteCommand,
+      enableECSManagedTags: enableECSManagedTags,
+      containerInstances: containerInstances,
+      cluster: cluster,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module RunTask = {
   type t
   type request = {
@@ -6116,26 +6231,27 @@ module RunTask = {
     (),
   ) =>
     new({
-      taskDefinition,
-      tags,
-      startedBy,
-      referenceId,
-      propagateTags,
-      platformVersion,
-      placementStrategy,
-      placementConstraints,
-      overrides,
-      networkConfiguration,
-      launchType,
-      group,
-      enableExecuteCommand,
-      enableECSManagedTags,
-      count,
-      cluster,
-      capacityProviderStrategy,
+      taskDefinition: taskDefinition,
+      tags: tags,
+      startedBy: startedBy,
+      referenceId: referenceId,
+      propagateTags: propagateTags,
+      platformVersion: platformVersion,
+      placementStrategy: placementStrategy,
+      placementConstraints: placementConstraints,
+      overrides: overrides,
+      networkConfiguration: networkConfiguration,
+      launchType: launchType,
+      group: group,
+      enableExecuteCommand: enableExecuteCommand,
+      enableECSManagedTags: enableECSManagedTags,
+      count: count,
+      cluster: cluster,
+      capacityProviderStrategy: capacityProviderStrategy,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module RegisterTaskDefinition = {
   type t
   type request = {
@@ -6410,26 +6526,27 @@ module RegisterTaskDefinition = {
     (),
   ) =>
     new({
-      runtimePlatform,
-      ephemeralStorage,
-      inferenceAccelerators,
-      proxyConfiguration,
-      ipcMode,
-      pidMode,
-      tags,
-      memory,
-      cpu,
-      requiresCompatibilities,
-      placementConstraints,
-      volumes,
-      containerDefinitions,
-      networkMode,
-      executionRoleArn,
-      taskRoleArn,
-      family,
+      runtimePlatform: runtimePlatform,
+      ephemeralStorage: ephemeralStorage,
+      inferenceAccelerators: inferenceAccelerators,
+      proxyConfiguration: proxyConfiguration,
+      ipcMode: ipcMode,
+      pidMode: pidMode,
+      tags: tags,
+      memory: memory,
+      cpu: cpu,
+      requiresCompatibilities: requiresCompatibilities,
+      placementConstraints: placementConstraints,
+      volumes: volumes,
+      containerDefinitions: containerDefinitions,
+      networkMode: networkMode,
+      executionRoleArn: executionRoleArn,
+      taskRoleArn: taskRoleArn,
+      family: family,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeTasks = {
   type t
   type request = {
@@ -6449,9 +6566,11 @@ module DescribeTasks = {
     @ocaml.doc("<p>The list of tasks.</p>") tasks: option<tasks>,
   }
   @module("@aws-sdk/client-ecs") @new external new: request => t = "DescribeTasksCommand"
-  let make = (~tasks, ~include_=?, ~cluster=?, ()) => new({include_, tasks, cluster})
+  let make = (~tasks, ~include_=?, ~cluster=?, ()) =>
+    new({include_: include_, tasks: tasks, cluster: cluster})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeTaskDefinition = {
   type t
   type request = {
@@ -6505,9 +6624,11 @@ module DescribeTaskDefinition = {
     taskDefinition: option<taskDefinition>,
   }
   @module("@aws-sdk/client-ecs") @new external new: request => t = "DescribeTaskDefinitionCommand"
-  let make = (~taskDefinition, ~include_=?, ()) => new({include_, taskDefinition})
+  let make = (~taskDefinition, ~include_=?, ()) =>
+    new({include_: include_, taskDefinition: taskDefinition})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeServices = {
   type t
   type request = {
@@ -6529,9 +6650,11 @@ module DescribeServices = {
     @ocaml.doc("<p>The list of services described.</p>") services: option<services>,
   }
   @module("@aws-sdk/client-ecs") @new external new: request => t = "DescribeServicesCommand"
-  let make = (~services, ~include_=?, ~cluster=?, ()) => new({include_, services, cluster})
+  let make = (~services, ~include_=?, ~cluster=?, ()) =>
+    new({include_: include_, services: services, cluster: cluster})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeregisterTaskDefinition = {
   type t
   type request = {

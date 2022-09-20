@@ -2983,6 +2983,7 @@ module UndeprecateDomain = {
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module TerminateWorkflowExecution = {
   type t
   type request = {
@@ -3027,9 +3028,17 @@ module TerminateWorkflowExecution = {
   @module("@aws-sdk/client-swf") @new
   external new: request => t = "TerminateWorkflowExecutionCommand"
   let make = (~workflowId, ~domain, ~childPolicy=?, ~details=?, ~reason=?, ~runId=?, ()) =>
-    new({childPolicy, details, reason, runId, workflowId, domain})
+    new({
+      childPolicy: childPolicy,
+      details: details,
+      reason: reason,
+      runId: runId,
+      workflowId: workflowId,
+      domain: domain,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module SignalWorkflowExecution = {
   type t
   type request = {
@@ -3049,9 +3058,16 @@ module SignalWorkflowExecution = {
   type response = {.}
   @module("@aws-sdk/client-swf") @new external new: request => t = "SignalWorkflowExecutionCommand"
   let make = (~signalName, ~workflowId, ~domain, ~input=?, ~runId=?, ()) =>
-    new({input, signalName, runId, workflowId, domain})
+    new({
+      input: input,
+      signalName: signalName,
+      runId: runId,
+      workflowId: workflowId,
+      domain: domain,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module RespondActivityTaskFailed = {
   type t
   type request = {
@@ -3071,9 +3087,11 @@ module RespondActivityTaskFailed = {
   type response = {.}
   @module("@aws-sdk/client-swf") @new
   external new: request => t = "RespondActivityTaskFailedCommand"
-  let make = (~taskToken, ~details=?, ~reason=?, ()) => new({details, reason, taskToken})
+  let make = (~taskToken, ~details=?, ~reason=?, ()) =>
+    new({details: details, reason: reason, taskToken: taskToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module RespondActivityTaskCompleted = {
   type t
   type request = {
@@ -3092,9 +3110,10 @@ module RespondActivityTaskCompleted = {
   type response = {.}
   @module("@aws-sdk/client-swf") @new
   external new: request => t = "RespondActivityTaskCompletedCommand"
-  let make = (~taskToken, ~result=?, ()) => new({result, taskToken})
+  let make = (~taskToken, ~result=?, ()) => new({result: result, taskToken: taskToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module RespondActivityTaskCanceled = {
   type t
   type request = {
@@ -3111,9 +3130,10 @@ module RespondActivityTaskCanceled = {
   type response = {.}
   @module("@aws-sdk/client-swf") @new
   external new: request => t = "RespondActivityTaskCanceledCommand"
-  let make = (~taskToken, ~details=?, ()) => new({details, taskToken})
+  let make = (~taskToken, ~details=?, ()) => new({details: details, taskToken: taskToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module RequestCancelWorkflowExecution = {
   type t
   type request = {
@@ -3126,9 +3146,11 @@ module RequestCancelWorkflowExecution = {
   type response = {.}
   @module("@aws-sdk/client-swf") @new
   external new: request => t = "RequestCancelWorkflowExecutionCommand"
-  let make = (~workflowId, ~domain, ~runId=?, ()) => new({runId, workflowId, domain})
+  let make = (~workflowId, ~domain, ~runId=?, ()) =>
+    new({runId: runId, workflowId: workflowId, domain: domain})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module RecordActivityTaskHeartbeat = {
   type t
   type request = {
@@ -3150,9 +3172,10 @@ module RecordActivityTaskHeartbeat = {
   }
   @module("@aws-sdk/client-swf") @new
   external new: request => t = "RecordActivityTaskHeartbeatCommand"
-  let make = (~taskToken, ~details=?, ()) => new({details, taskToken})
+  let make = (~taskToken, ~details=?, ()) => new({details: details, taskToken: taskToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeprecateDomain = {
   type t
   type request = {@ocaml.doc("<p>The name of the domain to deprecate.</p>") name: domainName}
@@ -3161,6 +3184,7 @@ module DeprecateDomain = {
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UntagResource = {
   type t
   type request = {
@@ -3170,9 +3194,10 @@ module UntagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-swf") @new external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys, resourceArn})
+  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UndeprecateWorkflowType = {
   type t
   type request = {
@@ -3182,9 +3207,10 @@ module UndeprecateWorkflowType = {
   }
   type response = {.}
   @module("@aws-sdk/client-swf") @new external new: request => t = "UndeprecateWorkflowTypeCommand"
-  let make = (~workflowType, ~domain, ()) => new({workflowType, domain})
+  let make = (~workflowType, ~domain, ()) => new({workflowType: workflowType, domain: domain})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UndeprecateActivityType = {
   type t
   type request = {
@@ -3193,9 +3219,10 @@ module UndeprecateActivityType = {
   }
   type response = {.}
   @module("@aws-sdk/client-swf") @new external new: request => t = "UndeprecateActivityTypeCommand"
-  let make = (~activityType, ~domain, ()) => new({activityType, domain})
+  let make = (~activityType, ~domain, ()) => new({activityType: activityType, domain: domain})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module StartWorkflowExecution = {
   type t
   type request = {
@@ -3331,20 +3358,21 @@ module StartWorkflowExecution = {
     (),
   ) =>
     new({
-      lambdaRole,
-      childPolicy,
-      taskStartToCloseTimeout,
-      tagList_,
-      executionStartToCloseTimeout,
-      input,
-      taskPriority,
-      taskList,
-      workflowType,
-      workflowId,
-      domain,
+      lambdaRole: lambdaRole,
+      childPolicy: childPolicy,
+      taskStartToCloseTimeout: taskStartToCloseTimeout,
+      tagList_: tagList_,
+      executionStartToCloseTimeout: executionStartToCloseTimeout,
+      input: input,
+      taskPriority: taskPriority,
+      taskList: taskList,
+      workflowType: workflowType,
+      workflowId: workflowId,
+      domain: domain,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module RegisterWorkflowType = {
   type t
   type request = {
@@ -3448,19 +3476,20 @@ module RegisterWorkflowType = {
     (),
   ) =>
     new({
-      defaultLambdaRole,
-      defaultChildPolicy,
-      defaultTaskPriority,
-      defaultTaskList,
-      defaultExecutionStartToCloseTimeout,
-      defaultTaskStartToCloseTimeout,
-      description,
-      version,
-      name,
-      domain,
+      defaultLambdaRole: defaultLambdaRole,
+      defaultChildPolicy: defaultChildPolicy,
+      defaultTaskPriority: defaultTaskPriority,
+      defaultTaskList: defaultTaskList,
+      defaultExecutionStartToCloseTimeout: defaultExecutionStartToCloseTimeout,
+      defaultTaskStartToCloseTimeout: defaultTaskStartToCloseTimeout,
+      description: description,
+      version: version,
+      name: name,
+      domain: domain,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module RegisterActivityType = {
   type t
   type request = {
@@ -3548,19 +3577,20 @@ module RegisterActivityType = {
     (),
   ) =>
     new({
-      defaultTaskScheduleToCloseTimeout,
-      defaultTaskScheduleToStartTimeout,
-      defaultTaskPriority,
-      defaultTaskList,
-      defaultTaskHeartbeatTimeout,
-      defaultTaskStartToCloseTimeout,
-      description,
-      version,
-      name,
-      domain,
+      defaultTaskScheduleToCloseTimeout: defaultTaskScheduleToCloseTimeout,
+      defaultTaskScheduleToStartTimeout: defaultTaskScheduleToStartTimeout,
+      defaultTaskPriority: defaultTaskPriority,
+      defaultTaskList: defaultTaskList,
+      defaultTaskHeartbeatTimeout: defaultTaskHeartbeatTimeout,
+      defaultTaskStartToCloseTimeout: defaultTaskStartToCloseTimeout,
+      description: description,
+      version: version,
+      name: name,
+      domain: domain,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module PollForActivityTask = {
   type t
   type request = {
@@ -3598,9 +3628,11 @@ module PollForActivityTask = {
     taskToken: taskToken,
   }
   @module("@aws-sdk/client-swf") @new external new: request => t = "PollForActivityTaskCommand"
-  let make = (~taskList, ~domain, ~identity=?, ()) => new({identity, taskList, domain})
+  let make = (~taskList, ~domain, ~identity=?, ()) =>
+    new({identity: identity, taskList: taskList, domain: domain})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeDomain = {
   type t
   type request = {@ocaml.doc("<p>The name of the domain to describe.</p>") name: domainName}
@@ -3617,6 +3649,7 @@ module DescribeDomain = {
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeprecateWorkflowType = {
   type t
   type request = {
@@ -3626,9 +3659,10 @@ module DeprecateWorkflowType = {
   }
   type response = {.}
   @module("@aws-sdk/client-swf") @new external new: request => t = "DeprecateWorkflowTypeCommand"
-  let make = (~workflowType, ~domain, ()) => new({workflowType, domain})
+  let make = (~workflowType, ~domain, ()) => new({workflowType: workflowType, domain: domain})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeprecateActivityType = {
   type t
   type request = {
@@ -3638,9 +3672,10 @@ module DeprecateActivityType = {
   }
   type response = {.}
   @module("@aws-sdk/client-swf") @new external new: request => t = "DeprecateActivityTypeCommand"
-  let make = (~activityType, ~domain, ()) => new({activityType, domain})
+  let make = (~activityType, ~domain, ()) => new({activityType: activityType, domain: domain})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module CountPendingDecisionTasks = {
   type t
   type request = {
@@ -3657,9 +3692,10 @@ module CountPendingDecisionTasks = {
   }
   @module("@aws-sdk/client-swf") @new
   external new: request => t = "CountPendingDecisionTasksCommand"
-  let make = (~taskList, ~domain, ()) => new({taskList, domain})
+  let make = (~taskList, ~domain, ()) => new({taskList: taskList, domain: domain})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CountPendingActivityTasks = {
   type t
   type request = {
@@ -3676,9 +3712,10 @@ module CountPendingActivityTasks = {
   }
   @module("@aws-sdk/client-swf") @new
   external new: request => t = "CountPendingActivityTasksCommand"
-  let make = (~taskList, ~domain, ()) => new({taskList, domain})
+  let make = (~taskList, ~domain, ()) => new({taskList: taskList, domain: domain})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CountOpenWorkflowExecutions = {
   type t
   type request = {
@@ -3724,9 +3761,16 @@ module CountOpenWorkflowExecutions = {
   @module("@aws-sdk/client-swf") @new
   external new: request => t = "CountOpenWorkflowExecutionsCommand"
   let make = (~startTimeFilter, ~domain, ~executionFilter=?, ~tagFilter=?, ~typeFilter=?, ()) =>
-    new({executionFilter, tagFilter, typeFilter, startTimeFilter, domain})
+    new({
+      executionFilter: executionFilter,
+      tagFilter: tagFilter,
+      typeFilter: typeFilter,
+      startTimeFilter: startTimeFilter,
+      domain: domain,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CountClosedWorkflowExecutions = {
   type t
   type request = {
@@ -3808,16 +3852,17 @@ module CountClosedWorkflowExecutions = {
     (),
   ) =>
     new({
-      closeStatusFilter,
-      tagFilter,
-      typeFilter,
-      executionFilter,
-      closeTimeFilter,
-      startTimeFilter,
-      domain,
+      closeStatusFilter: closeStatusFilter,
+      tagFilter: tagFilter,
+      typeFilter: typeFilter,
+      executionFilter: executionFilter,
+      closeTimeFilter: closeTimeFilter,
+      startTimeFilter: startTimeFilter,
+      domain: domain,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module TagResource = {
   type t
   type request = {
@@ -3828,9 +3873,10 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-swf") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceArn, ()) => new({tags, resourceArn})
+  let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module RegisterDomain = {
   type t
   type request = {
@@ -3860,9 +3906,15 @@ module RegisterDomain = {
   type response = {.}
   @module("@aws-sdk/client-swf") @new external new: request => t = "RegisterDomainCommand"
   let make = (~workflowExecutionRetentionPeriodInDays, ~name, ~tags=?, ~description=?, ()) =>
-    new({tags, workflowExecutionRetentionPeriodInDays, description, name})
+    new({
+      tags: tags,
+      workflowExecutionRetentionPeriodInDays: workflowExecutionRetentionPeriodInDays,
+      description: description,
+      name: name,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ListTagsForResource = {
   type t
   type request = {
@@ -3875,6 +3927,7 @@ module ListTagsForResource = {
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListDomains = {
   type t
   type request = {
@@ -3908,9 +3961,15 @@ module ListDomains = {
   }
   @module("@aws-sdk/client-swf") @new external new: request => t = "ListDomainsCommand"
   let make = (~registrationStatus, ~reverseOrder=?, ~maximumPageSize=?, ~nextPageToken=?, ()) =>
-    new({reverseOrder, maximumPageSize, registrationStatus, nextPageToken})
+    new({
+      reverseOrder: reverseOrder,
+      maximumPageSize: maximumPageSize,
+      registrationStatus: registrationStatus,
+      nextPageToken: nextPageToken,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeWorkflowType = {
   type t
   type request = {
@@ -3939,9 +3998,10 @@ module DescribeWorkflowType = {
     typeInfo: workflowTypeInfo,
   }
   @module("@aws-sdk/client-swf") @new external new: request => t = "DescribeWorkflowTypeCommand"
-  let make = (~workflowType, ~domain, ()) => new({workflowType, domain})
+  let make = (~workflowType, ~domain, ()) => new({workflowType: workflowType, domain: domain})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeWorkflowExecution = {
   type t
   type request = {
@@ -3971,9 +4031,10 @@ module DescribeWorkflowExecution = {
   }
   @module("@aws-sdk/client-swf") @new
   external new: request => t = "DescribeWorkflowExecutionCommand"
-  let make = (~execution, ~domain, ()) => new({execution, domain})
+  let make = (~execution, ~domain, ()) => new({execution: execution, domain: domain})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeActivityType = {
   type t
   type request = {
@@ -4008,9 +4069,10 @@ module DescribeActivityType = {
     typeInfo: activityTypeInfo,
   }
   @module("@aws-sdk/client-swf") @new external new: request => t = "DescribeActivityTypeCommand"
-  let make = (~activityType, ~domain, ()) => new({activityType, domain})
+  let make = (~activityType, ~domain, ()) => new({activityType: activityType, domain: domain})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListWorkflowTypes = {
   type t
   type request = {
@@ -4054,9 +4116,18 @@ module ListWorkflowTypes = {
     ~nextPageToken=?,
     ~name=?,
     (),
-  ) => new({reverseOrder, maximumPageSize, nextPageToken, registrationStatus, name, domain})
+  ) =>
+    new({
+      reverseOrder: reverseOrder,
+      maximumPageSize: maximumPageSize,
+      nextPageToken: nextPageToken,
+      registrationStatus: registrationStatus,
+      name: name,
+      domain: domain,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListOpenWorkflowExecutions = {
   type t
   type request = {
@@ -4128,17 +4199,18 @@ module ListOpenWorkflowExecutions = {
     (),
   ) =>
     new({
-      executionFilter,
-      reverseOrder,
-      maximumPageSize,
-      nextPageToken,
-      tagFilter,
-      typeFilter,
-      startTimeFilter,
-      domain,
+      executionFilter: executionFilter,
+      reverseOrder: reverseOrder,
+      maximumPageSize: maximumPageSize,
+      nextPageToken: nextPageToken,
+      tagFilter: tagFilter,
+      typeFilter: typeFilter,
+      startTimeFilter: startTimeFilter,
+      domain: domain,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListClosedWorkflowExecutions = {
   type t
   type request = {
@@ -4241,19 +4313,20 @@ module ListClosedWorkflowExecutions = {
     (),
   ) =>
     new({
-      reverseOrder,
-      maximumPageSize,
-      nextPageToken,
-      tagFilter,
-      typeFilter,
-      closeStatusFilter,
-      executionFilter,
-      closeTimeFilter,
-      startTimeFilter,
-      domain,
+      reverseOrder: reverseOrder,
+      maximumPageSize: maximumPageSize,
+      nextPageToken: nextPageToken,
+      tagFilter: tagFilter,
+      typeFilter: typeFilter,
+      closeStatusFilter: closeStatusFilter,
+      executionFilter: executionFilter,
+      closeTimeFilter: closeTimeFilter,
+      startTimeFilter: startTimeFilter,
+      domain: domain,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListActivityTypes = {
   type t
   type request = {
@@ -4298,9 +4371,18 @@ module ListActivityTypes = {
     ~nextPageToken=?,
     ~name=?,
     (),
-  ) => new({reverseOrder, maximumPageSize, nextPageToken, registrationStatus, name, domain})
+  ) =>
+    new({
+      reverseOrder: reverseOrder,
+      maximumPageSize: maximumPageSize,
+      nextPageToken: nextPageToken,
+      registrationStatus: registrationStatus,
+      name: name,
+      domain: domain,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module RespondDecisionTaskCompleted = {
   type t
   @ocaml.doc("<p>Input data for a TaskCompleted response to a decision task.</p>")
@@ -4324,9 +4406,10 @@ module RespondDecisionTaskCompleted = {
   @module("@aws-sdk/client-swf") @new
   external new: request => t = "RespondDecisionTaskCompletedCommand"
   let make = (~taskToken, ~executionContext=?, ~decisions=?, ()) =>
-    new({executionContext, decisions, taskToken})
+    new({executionContext: executionContext, decisions: decisions, taskToken: taskToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module PollForDecisionTask = {
   type t
   type request = {
@@ -4409,9 +4492,18 @@ module PollForDecisionTask = {
     ~nextPageToken=?,
     ~identity=?,
     (),
-  ) => new({reverseOrder, maximumPageSize, nextPageToken, identity, taskList, domain})
+  ) =>
+    new({
+      reverseOrder: reverseOrder,
+      maximumPageSize: maximumPageSize,
+      nextPageToken: nextPageToken,
+      identity: identity,
+      taskList: taskList,
+      domain: domain,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetWorkflowExecutionHistory = {
   type t
   type request = {
@@ -4450,6 +4542,12 @@ module GetWorkflowExecutionHistory = {
   @module("@aws-sdk/client-swf") @new
   external new: request => t = "GetWorkflowExecutionHistoryCommand"
   let make = (~execution, ~domain, ~reverseOrder=?, ~maximumPageSize=?, ~nextPageToken=?, ()) =>
-    new({reverseOrder, maximumPageSize, nextPageToken, execution, domain})
+    new({
+      reverseOrder: reverseOrder,
+      maximumPageSize: maximumPageSize,
+      nextPageToken: nextPageToken,
+      execution: execution,
+      domain: domain,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

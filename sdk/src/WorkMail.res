@@ -472,9 +472,11 @@ module UpdatePrimaryEmailAddress = {
   type response = {.}
   @module("@aws-sdk/client-workmail") @new
   external new: request => t = "UpdatePrimaryEmailAddressCommand"
-  let make = (~email, ~entityId, ~organizationId, ()) => new({email, entityId, organizationId})
+  let make = (~email, ~entityId, ~organizationId, ()) =>
+    new({email: email, entityId: entityId, organizationId: organizationId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateMailboxQuota = {
   type t
   type request = {
@@ -492,9 +494,10 @@ module UpdateMailboxQuota = {
   type response = {.}
   @module("@aws-sdk/client-workmail") @new external new: request => t = "UpdateMailboxQuotaCommand"
   let make = (~mailboxQuota, ~userId, ~organizationId, ()) =>
-    new({mailboxQuota, userId, organizationId})
+    new({mailboxQuota: mailboxQuota, userId: userId, organizationId: organizationId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateDefaultMailDomain = {
   type t
   type request = {
@@ -507,9 +510,11 @@ module UpdateDefaultMailDomain = {
   type response = {.}
   @module("@aws-sdk/client-workmail") @new
   external new: request => t = "UpdateDefaultMailDomainCommand"
-  let make = (~domainName, ~organizationId, ()) => new({domainName, organizationId})
+  let make = (~domainName, ~organizationId, ()) =>
+    new({domainName: domainName, organizationId: organizationId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module StartMailboxExportJob = {
   type t
   type request = {
@@ -548,17 +553,18 @@ module StartMailboxExportJob = {
     (),
   ) =>
     new({
-      s3Prefix,
-      s3BucketName,
-      kmsKeyArn,
-      roleArn,
-      description,
-      entityId,
-      organizationId,
-      clientToken,
+      s3Prefix: s3Prefix,
+      s3BucketName: s3BucketName,
+      kmsKeyArn: kmsKeyArn,
+      roleArn: roleArn,
+      description: description,
+      entityId: entityId,
+      organizationId: organizationId,
+      clientToken: clientToken,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ResetPassword = {
   type t
   type request = {
@@ -572,9 +578,11 @@ module ResetPassword = {
   }
   type response = {.}
   @module("@aws-sdk/client-workmail") @new external new: request => t = "ResetPasswordCommand"
-  let make = (~password, ~userId, ~organizationId, ()) => new({password, userId, organizationId})
+  let make = (~password, ~userId, ~organizationId, ()) =>
+    new({password: password, userId: userId, organizationId: organizationId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module RegisterToWorkMail = {
   type t
   type request = {
@@ -590,9 +598,11 @@ module RegisterToWorkMail = {
   }
   type response = {.}
   @module("@aws-sdk/client-workmail") @new external new: request => t = "RegisterToWorkMailCommand"
-  let make = (~email, ~entityId, ~organizationId, ()) => new({email, entityId, organizationId})
+  let make = (~email, ~entityId, ~organizationId, ()) =>
+    new({email: email, entityId: entityId, organizationId: organizationId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module RegisterMailDomain = {
   type t
   type request = {
@@ -608,9 +618,10 @@ module RegisterMailDomain = {
   type response = {.}
   @module("@aws-sdk/client-workmail") @new external new: request => t = "RegisterMailDomainCommand"
   let make = (~domainName, ~organizationId, ~clientToken=?, ()) =>
-    new({domainName, organizationId, clientToken})
+    new({domainName: domainName, organizationId: organizationId, clientToken: clientToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module PutMobileDeviceAccessOverride = {
   type t
   type request = {
@@ -651,9 +662,16 @@ module PutMobileDeviceAccessOverride = {
   @module("@aws-sdk/client-workmail") @new
   external new: request => t = "PutMobileDeviceAccessOverrideCommand"
   let make = (~effect, ~deviceId, ~userId, ~organizationId, ~description=?, ()) =>
-    new({description, effect, deviceId, userId, organizationId})
+    new({
+      description: description,
+      effect: effect,
+      deviceId: deviceId,
+      userId: userId,
+      organizationId: organizationId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module PutInboundDmarcSettings = {
   type t
   type request = {
@@ -666,9 +684,11 @@ module PutInboundDmarcSettings = {
   type response = {.}
   @module("@aws-sdk/client-workmail") @new
   external new: request => t = "PutInboundDmarcSettingsCommand"
-  let make = (~enforced, ~organizationId, ()) => new({enforced, organizationId})
+  let make = (~enforced, ~organizationId, ()) =>
+    new({enforced: enforced, organizationId: organizationId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module PutEmailMonitoringConfiguration = {
   type t
   type request = {
@@ -692,9 +712,10 @@ module PutEmailMonitoringConfiguration = {
   @module("@aws-sdk/client-workmail") @new
   external new: request => t = "PutEmailMonitoringConfigurationCommand"
   let make = (~logGroupArn, ~roleArn, ~organizationId, ()) =>
-    new({logGroupArn, roleArn, organizationId})
+    new({logGroupArn: logGroupArn, roleArn: roleArn, organizationId: organizationId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module GetMobileDeviceAccessOverride = {
   type t
   type request = {
@@ -741,9 +762,11 @@ module GetMobileDeviceAccessOverride = {
   }
   @module("@aws-sdk/client-workmail") @new
   external new: request => t = "GetMobileDeviceAccessOverrideCommand"
-  let make = (~deviceId, ~userId, ~organizationId, ()) => new({deviceId, userId, organizationId})
+  let make = (~deviceId, ~userId, ~organizationId, ()) =>
+    new({deviceId: deviceId, userId: userId, organizationId: organizationId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetMailboxDetails = {
   type t
   type request = {
@@ -763,9 +786,10 @@ module GetMailboxDetails = {
     mailboxQuota: option<mailboxQuota>,
   }
   @module("@aws-sdk/client-workmail") @new external new: request => t = "GetMailboxDetailsCommand"
-  let make = (~userId, ~organizationId, ()) => new({userId, organizationId})
+  let make = (~userId, ~organizationId, ()) => new({userId: userId, organizationId: organizationId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DisassociateMemberFromGroup = {
   type t
   type request = {
@@ -780,9 +804,11 @@ module DisassociateMemberFromGroup = {
   type response = {.}
   @module("@aws-sdk/client-workmail") @new
   external new: request => t = "DisassociateMemberFromGroupCommand"
-  let make = (~memberId, ~groupId, ~organizationId, ()) => new({memberId, groupId, organizationId})
+  let make = (~memberId, ~groupId, ~organizationId, ()) =>
+    new({memberId: memberId, groupId: groupId, organizationId: organizationId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DisassociateDelegateFromResource = {
   type t
   type request = {
@@ -802,9 +828,10 @@ module DisassociateDelegateFromResource = {
   @module("@aws-sdk/client-workmail") @new
   external new: request => t = "DisassociateDelegateFromResourceCommand"
   let make = (~entityId, ~resourceId, ~organizationId, ()) =>
-    new({entityId, resourceId, organizationId})
+    new({entityId: entityId, resourceId: resourceId, organizationId: organizationId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DescribeUser = {
   type t
   type request = {
@@ -842,9 +869,10 @@ module DescribeUser = {
     userId: option<workMailIdentifier>,
   }
   @module("@aws-sdk/client-workmail") @new external new: request => t = "DescribeUserCommand"
-  let make = (~userId, ~organizationId, ()) => new({userId, organizationId})
+  let make = (~userId, ~organizationId, ()) => new({userId: userId, organizationId: organizationId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeOrganization = {
   type t
   type request = {
@@ -884,6 +912,7 @@ module DescribeOrganization = {
   let make = (~organizationId, ()) => new({organizationId: organizationId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeMailboxExportJob = {
   type t
   type request = {
@@ -925,9 +954,10 @@ module DescribeMailboxExportJob = {
   }
   @module("@aws-sdk/client-workmail") @new
   external new: request => t = "DescribeMailboxExportJobCommand"
-  let make = (~organizationId, ~jobId, ()) => new({organizationId, jobId})
+  let make = (~organizationId, ~jobId, ()) => new({organizationId: organizationId, jobId: jobId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeInboundDmarcSettings = {
   type t
   type request = {
@@ -943,6 +973,7 @@ module DescribeInboundDmarcSettings = {
   let make = (~organizationId, ()) => new({organizationId: organizationId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeGroup = {
   type t
   type request = {
@@ -971,9 +1002,11 @@ module DescribeGroup = {
     groupId: option<workMailIdentifier>,
   }
   @module("@aws-sdk/client-workmail") @new external new: request => t = "DescribeGroupCommand"
-  let make = (~groupId, ~organizationId, ()) => new({groupId, organizationId})
+  let make = (~groupId, ~organizationId, ()) =>
+    new({groupId: groupId, organizationId: organizationId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeEmailMonitoringConfiguration = {
   type t
   type request = {
@@ -1000,6 +1033,7 @@ module DescribeEmailMonitoringConfiguration = {
   let make = (~organizationId, ()) => new({organizationId: organizationId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeregisterMailDomain = {
   type t
   type request = {
@@ -1012,9 +1046,11 @@ module DeregisterMailDomain = {
   type response = {.}
   @module("@aws-sdk/client-workmail") @new
   external new: request => t = "DeregisterMailDomainCommand"
-  let make = (~domainName, ~organizationId, ()) => new({domainName, organizationId})
+  let make = (~domainName, ~organizationId, ()) =>
+    new({domainName: domainName, organizationId: organizationId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeregisterFromWorkMail = {
   type t
   type request = {
@@ -1030,9 +1066,11 @@ module DeregisterFromWorkMail = {
   type response = {.}
   @module("@aws-sdk/client-workmail") @new
   external new: request => t = "DeregisterFromWorkMailCommand"
-  let make = (~entityId, ~organizationId, ()) => new({entityId, organizationId})
+  let make = (~entityId, ~organizationId, ()) =>
+    new({entityId: entityId, organizationId: organizationId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteUser = {
   type t
   type request = {
@@ -1044,9 +1082,10 @@ module DeleteUser = {
   }
   type response = {.}
   @module("@aws-sdk/client-workmail") @new external new: request => t = "DeleteUserCommand"
-  let make = (~userId, ~organizationId, ()) => new({userId, organizationId})
+  let make = (~userId, ~organizationId, ()) => new({userId: userId, organizationId: organizationId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteRetentionPolicy = {
   type t
   type request = {
@@ -1056,9 +1095,10 @@ module DeleteRetentionPolicy = {
   type response = {.}
   @module("@aws-sdk/client-workmail") @new
   external new: request => t = "DeleteRetentionPolicyCommand"
-  let make = (~id, ~organizationId, ()) => new({id, organizationId})
+  let make = (~id, ~organizationId, ()) => new({id: id, organizationId: organizationId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteResource = {
   type t
   type request = {
@@ -1071,9 +1111,11 @@ module DeleteResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-workmail") @new external new: request => t = "DeleteResourceCommand"
-  let make = (~resourceId, ~organizationId, ()) => new({resourceId, organizationId})
+  let make = (~resourceId, ~organizationId, ()) =>
+    new({resourceId: resourceId, organizationId: organizationId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteOrganization = {
   type t
   type request = {
@@ -1093,9 +1135,14 @@ module DeleteOrganization = {
   }
   @module("@aws-sdk/client-workmail") @new external new: request => t = "DeleteOrganizationCommand"
   let make = (~deleteDirectory, ~organizationId, ~clientToken=?, ()) =>
-    new({deleteDirectory, organizationId, clientToken})
+    new({
+      deleteDirectory: deleteDirectory,
+      organizationId: organizationId,
+      clientToken: clientToken,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteMobileDeviceAccessRule = {
   type t
   type request = {
@@ -1109,9 +1156,10 @@ module DeleteMobileDeviceAccessRule = {
   @module("@aws-sdk/client-workmail") @new
   external new: request => t = "DeleteMobileDeviceAccessRuleCommand"
   let make = (~mobileDeviceAccessRuleId, ~organizationId, ()) =>
-    new({mobileDeviceAccessRuleId, organizationId})
+    new({mobileDeviceAccessRuleId: mobileDeviceAccessRuleId, organizationId: organizationId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteMobileDeviceAccessOverride = {
   type t
   type request = {
@@ -1146,9 +1194,11 @@ module DeleteMobileDeviceAccessOverride = {
   type response = {.}
   @module("@aws-sdk/client-workmail") @new
   external new: request => t = "DeleteMobileDeviceAccessOverrideCommand"
-  let make = (~deviceId, ~userId, ~organizationId, ()) => new({deviceId, userId, organizationId})
+  let make = (~deviceId, ~userId, ~organizationId, ()) =>
+    new({deviceId: deviceId, userId: userId, organizationId: organizationId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteMailboxPermissions = {
   type t
   type request = {
@@ -1168,9 +1218,10 @@ module DeleteMailboxPermissions = {
   @module("@aws-sdk/client-workmail") @new
   external new: request => t = "DeleteMailboxPermissionsCommand"
   let make = (~granteeId, ~entityId, ~organizationId, ()) =>
-    new({granteeId, entityId, organizationId})
+    new({granteeId: granteeId, entityId: entityId, organizationId: organizationId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteGroup = {
   type t
   type request = {
@@ -1181,9 +1232,11 @@ module DeleteGroup = {
   }
   type response = {.}
   @module("@aws-sdk/client-workmail") @new external new: request => t = "DeleteGroupCommand"
-  let make = (~groupId, ~organizationId, ()) => new({groupId, organizationId})
+  let make = (~groupId, ~organizationId, ()) =>
+    new({groupId: groupId, organizationId: organizationId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteEmailMonitoringConfiguration = {
   type t
   type request = {
@@ -1199,6 +1252,7 @@ module DeleteEmailMonitoringConfiguration = {
   let make = (~organizationId, ()) => new({organizationId: organizationId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteAlias = {
   type t
   type request = {
@@ -1216,9 +1270,11 @@ module DeleteAlias = {
   }
   type response = {.}
   @module("@aws-sdk/client-workmail") @new external new: request => t = "DeleteAliasCommand"
-  let make = (~alias, ~entityId, ~organizationId, ()) => new({alias, entityId, organizationId})
+  let make = (~alias, ~entityId, ~organizationId, ()) =>
+    new({alias: alias, entityId: entityId, organizationId: organizationId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteAccessControlRule = {
   type t
   type request = {
@@ -1230,9 +1286,10 @@ module DeleteAccessControlRule = {
   type response = {.}
   @module("@aws-sdk/client-workmail") @new
   external new: request => t = "DeleteAccessControlRuleCommand"
-  let make = (~name, ~organizationId, ()) => new({name, organizationId})
+  let make = (~name, ~organizationId, ()) => new({name: name, organizationId: organizationId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module CreateUser = {
   type t
   type request = {
@@ -1253,9 +1310,10 @@ module CreateUser = {
   }
   @module("@aws-sdk/client-workmail") @new external new: request => t = "CreateUserCommand"
   let make = (~password, ~displayName, ~name, ~organizationId, ()) =>
-    new({password, displayName, name, organizationId})
+    new({password: password, displayName: displayName, name: name, organizationId: organizationId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateResource = {
   type t
   type request = {
@@ -1274,9 +1332,11 @@ module CreateResource = {
     resourceId: option<resourceId>,
   }
   @module("@aws-sdk/client-workmail") @new external new: request => t = "CreateResourceCommand"
-  let make = (~type_, ~name, ~organizationId, ()) => new({type_, name, organizationId})
+  let make = (~type_, ~name, ~organizationId, ()) =>
+    new({type_: type_, name: name, organizationId: organizationId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateGroup = {
   type t
   type request = {
@@ -1290,9 +1350,10 @@ module CreateGroup = {
     groupId: option<workMailIdentifier>,
   }
   @module("@aws-sdk/client-workmail") @new external new: request => t = "CreateGroupCommand"
-  let make = (~name, ~organizationId, ()) => new({name, organizationId})
+  let make = (~name, ~organizationId, ()) => new({name: name, organizationId: organizationId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateAlias = {
   type t
   type request = {
@@ -1305,9 +1366,11 @@ module CreateAlias = {
   }
   type response = {.}
   @module("@aws-sdk/client-workmail") @new external new: request => t = "CreateAliasCommand"
-  let make = (~alias, ~entityId, ~organizationId, ()) => new({alias, entityId, organizationId})
+  let make = (~alias, ~entityId, ~organizationId, ()) =>
+    new({alias: alias, entityId: entityId, organizationId: organizationId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module CancelMailboxExportJob = {
   type t
   type request = {
@@ -1320,9 +1383,10 @@ module CancelMailboxExportJob = {
   @module("@aws-sdk/client-workmail") @new
   external new: request => t = "CancelMailboxExportJobCommand"
   let make = (~organizationId, ~jobId, ~clientToken, ()) =>
-    new({organizationId, jobId, clientToken})
+    new({organizationId: organizationId, jobId: jobId, clientToken: clientToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module AssociateMemberToGroup = {
   type t
   type request = {
@@ -1336,9 +1400,11 @@ module AssociateMemberToGroup = {
   type response = {.}
   @module("@aws-sdk/client-workmail") @new
   external new: request => t = "AssociateMemberToGroupCommand"
-  let make = (~memberId, ~groupId, ~organizationId, ()) => new({memberId, groupId, organizationId})
+  let make = (~memberId, ~groupId, ~organizationId, ()) =>
+    new({memberId: memberId, groupId: groupId, organizationId: organizationId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module AssociateDelegateToResource = {
   type t
   type request = {
@@ -1354,9 +1420,10 @@ module AssociateDelegateToResource = {
   @module("@aws-sdk/client-workmail") @new
   external new: request => t = "AssociateDelegateToResourceCommand"
   let make = (~entityId, ~resourceId, ~organizationId, ()) =>
-    new({entityId, resourceId, organizationId})
+    new({entityId: entityId, resourceId: resourceId, organizationId: organizationId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateResource = {
   type t
   type request = {
@@ -1374,9 +1441,15 @@ module UpdateResource = {
   type response = {.}
   @module("@aws-sdk/client-workmail") @new external new: request => t = "UpdateResourceCommand"
   let make = (~resourceId, ~organizationId, ~bookingOptions=?, ~name=?, ()) =>
-    new({bookingOptions, name, resourceId, organizationId})
+    new({
+      bookingOptions: bookingOptions,
+      name: name,
+      resourceId: resourceId,
+      organizationId: organizationId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateMobileDeviceAccessRule = {
   type t
   type request = {
@@ -1443,22 +1516,23 @@ module UpdateMobileDeviceAccessRule = {
     (),
   ) =>
     new({
-      notDeviceUserAgents,
-      deviceUserAgents,
-      notDeviceOperatingSystems,
-      deviceOperatingSystems,
-      notDeviceModels,
-      deviceModels,
-      notDeviceTypes,
-      deviceTypes,
-      effect,
-      description,
-      name,
-      mobileDeviceAccessRuleId,
-      organizationId,
+      notDeviceUserAgents: notDeviceUserAgents,
+      deviceUserAgents: deviceUserAgents,
+      notDeviceOperatingSystems: notDeviceOperatingSystems,
+      deviceOperatingSystems: deviceOperatingSystems,
+      notDeviceModels: notDeviceModels,
+      deviceModels: deviceModels,
+      notDeviceTypes: notDeviceTypes,
+      deviceTypes: deviceTypes,
+      effect: effect,
+      description: description,
+      name: name,
+      mobileDeviceAccessRuleId: mobileDeviceAccessRuleId,
+      organizationId: organizationId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UntagResource = {
   type t
   type request = {
@@ -1467,9 +1541,10 @@ module UntagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-workmail") @new external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceARN, ()) => new({tagKeys, resourceARN})
+  let make = (~tagKeys, ~resourceARN, ()) => new({tagKeys: tagKeys, resourceARN: resourceARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module PutMailboxPermissions = {
   type t
   type request = {
@@ -1498,9 +1573,15 @@ module PutMailboxPermissions = {
   @module("@aws-sdk/client-workmail") @new
   external new: request => t = "PutMailboxPermissionsCommand"
   let make = (~permissionValues, ~granteeId, ~entityId, ~organizationId, ()) =>
-    new({permissionValues, granteeId, entityId, organizationId})
+    new({
+      permissionValues: permissionValues,
+      granteeId: granteeId,
+      entityId: entityId,
+      organizationId: organizationId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module PutAccessControlRule = {
   type t
   type request = {
@@ -1546,19 +1627,20 @@ module PutAccessControlRule = {
     (),
   ) =>
     new({
-      organizationId,
-      notUserIds,
-      userIds,
-      notActions,
-      actions,
-      notIpRanges,
-      ipRanges,
-      description,
-      effect,
-      name,
+      organizationId: organizationId,
+      notUserIds: notUserIds,
+      userIds: userIds,
+      notActions: notActions,
+      actions: actions,
+      notIpRanges: notIpRanges,
+      ipRanges: ipRanges,
+      description: description,
+      effect: effect,
+      name: name,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ListAliases = {
   type t
   type request = {
@@ -1584,9 +1666,15 @@ module ListAliases = {
   }
   @module("@aws-sdk/client-workmail") @new external new: request => t = "ListAliasesCommand"
   let make = (~entityId, ~organizationId, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults, nextToken, entityId, organizationId})
+    new({
+      maxResults: maxResults,
+      nextToken: nextToken,
+      entityId: entityId,
+      organizationId: organizationId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetAccessControlEffect = {
   type t
   type request = {
@@ -1609,9 +1697,10 @@ module GetAccessControlEffect = {
   @module("@aws-sdk/client-workmail") @new
   external new: request => t = "GetAccessControlEffectCommand"
   let make = (~userId, ~action, ~ipAddress, ~organizationId, ()) =>
-    new({userId, action, ipAddress, organizationId})
+    new({userId: userId, action: action, ipAddress: ipAddress, organizationId: organizationId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeResource = {
   type t
   type request = {
@@ -1646,9 +1735,11 @@ module DescribeResource = {
     resourceId: option<resourceId>,
   }
   @module("@aws-sdk/client-workmail") @new external new: request => t = "DescribeResourceCommand"
-  let make = (~resourceId, ~organizationId, ()) => new({resourceId, organizationId})
+  let make = (~resourceId, ~organizationId, ()) =>
+    new({resourceId: resourceId, organizationId: organizationId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateMobileDeviceAccessRule = {
   type t
   type request = {
@@ -1719,22 +1810,23 @@ module CreateMobileDeviceAccessRule = {
     (),
   ) =>
     new({
-      notDeviceUserAgents,
-      deviceUserAgents,
-      notDeviceOperatingSystems,
-      deviceOperatingSystems,
-      notDeviceModels,
-      deviceModels,
-      notDeviceTypes,
-      deviceTypes,
-      effect,
-      description,
-      name,
-      clientToken,
-      organizationId,
+      notDeviceUserAgents: notDeviceUserAgents,
+      deviceUserAgents: deviceUserAgents,
+      notDeviceOperatingSystems: notDeviceOperatingSystems,
+      deviceOperatingSystems: deviceOperatingSystems,
+      notDeviceModels: notDeviceModels,
+      deviceModels: deviceModels,
+      notDeviceTypes: notDeviceTypes,
+      deviceTypes: deviceTypes,
+      effect: effect,
+      description: description,
+      name: name,
+      clientToken: clientToken,
+      organizationId: organizationId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module TagResource = {
   type t
   type request = {
@@ -1743,9 +1835,10 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-workmail") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceARN, ()) => new({tags, resourceARN})
+  let make = (~tags, ~resourceARN, ()) => new({tags: tags, resourceARN: resourceARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module PutRetentionPolicy = {
   type t
   type request = {
@@ -1760,9 +1853,16 @@ module PutRetentionPolicy = {
   type response = {.}
   @module("@aws-sdk/client-workmail") @new external new: request => t = "PutRetentionPolicyCommand"
   let make = (~folderConfigurations, ~name, ~organizationId, ~description=?, ~id=?, ()) =>
-    new({folderConfigurations, description, name, id, organizationId})
+    new({
+      folderConfigurations: folderConfigurations,
+      description: description,
+      name: name,
+      id: id,
+      organizationId: organizationId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ListUsers = {
   type t
   type request = {
@@ -1786,9 +1886,10 @@ module ListUsers = {
   }
   @module("@aws-sdk/client-workmail") @new external new: request => t = "ListUsersCommand"
   let make = (~organizationId, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults, nextToken, organizationId})
+    new({maxResults: maxResults, nextToken: nextToken, organizationId: organizationId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListTagsForResource = {
   type t
   type request = {
@@ -1801,6 +1902,7 @@ module ListTagsForResource = {
   let make = (~resourceARN, ()) => new({resourceARN: resourceARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListResources = {
   type t
   type request = {
@@ -1825,9 +1927,10 @@ module ListResources = {
   }
   @module("@aws-sdk/client-workmail") @new external new: request => t = "ListResourcesCommand"
   let make = (~organizationId, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults, nextToken, organizationId})
+    new({maxResults: maxResults, nextToken: nextToken, organizationId: organizationId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListResourceDelegates = {
   type t
   type request = {
@@ -1857,9 +1960,15 @@ module ListResourceDelegates = {
   @module("@aws-sdk/client-workmail") @new
   external new: request => t = "ListResourceDelegatesCommand"
   let make = (~resourceId, ~organizationId, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults, nextToken, resourceId, organizationId})
+    new({
+      maxResults: maxResults,
+      nextToken: nextToken,
+      resourceId: resourceId,
+      organizationId: organizationId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListOrganizations = {
   type t
   type request = {
@@ -1881,9 +1990,11 @@ module ListOrganizations = {
     organizationSummaries: option<organizationSummaries>,
   }
   @module("@aws-sdk/client-workmail") @new external new: request => t = "ListOrganizationsCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListMobileDeviceAccessOverrides = {
   type t
   type request = {
@@ -1934,9 +2045,16 @@ module ListMobileDeviceAccessOverrides = {
   @module("@aws-sdk/client-workmail") @new
   external new: request => t = "ListMobileDeviceAccessOverridesCommand"
   let make = (~organizationId, ~maxResults=?, ~nextToken=?, ~deviceId=?, ~userId=?, ()) =>
-    new({maxResults, nextToken, deviceId, userId, organizationId})
+    new({
+      maxResults: maxResults,
+      nextToken: nextToken,
+      deviceId: deviceId,
+      userId: userId,
+      organizationId: organizationId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListMailboxExportJobs = {
   type t
   type request = {
@@ -1954,9 +2072,10 @@ module ListMailboxExportJobs = {
   @module("@aws-sdk/client-workmail") @new
   external new: request => t = "ListMailboxExportJobsCommand"
   let make = (~organizationId, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults, nextToken, organizationId})
+    new({maxResults: maxResults, nextToken: nextToken, organizationId: organizationId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListMailDomains = {
   type t
   type request = {
@@ -1985,9 +2104,10 @@ module ListMailDomains = {
   }
   @module("@aws-sdk/client-workmail") @new external new: request => t = "ListMailDomainsCommand"
   let make = (~organizationId, ~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken, maxResults, organizationId})
+    new({nextToken: nextToken, maxResults: maxResults, organizationId: organizationId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListGroups = {
   type t
   type request = {
@@ -2011,9 +2131,10 @@ module ListGroups = {
   }
   @module("@aws-sdk/client-workmail") @new external new: request => t = "ListGroupsCommand"
   let make = (~organizationId, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults, nextToken, organizationId})
+    new({maxResults: maxResults, nextToken: nextToken, organizationId: organizationId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListGroupMembers = {
   type t
   type request = {
@@ -2041,9 +2162,15 @@ module ListGroupMembers = {
   }
   @module("@aws-sdk/client-workmail") @new external new: request => t = "ListGroupMembersCommand"
   let make = (~groupId, ~organizationId, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults, nextToken, groupId, organizationId})
+    new({
+      maxResults: maxResults,
+      nextToken: nextToken,
+      groupId: groupId,
+      organizationId: organizationId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetMobileDeviceAccessEffect = {
   type t
   type request = {
@@ -2080,9 +2207,17 @@ module GetMobileDeviceAccessEffect = {
     ~deviceModel=?,
     ~deviceType=?,
     (),
-  ) => new({deviceUserAgent, deviceOperatingSystem, deviceModel, deviceType, organizationId})
+  ) =>
+    new({
+      deviceUserAgent: deviceUserAgent,
+      deviceOperatingSystem: deviceOperatingSystem,
+      deviceModel: deviceModel,
+      deviceType: deviceType,
+      organizationId: organizationId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetMailDomain = {
   type t
   type request = {
@@ -2112,9 +2247,11 @@ module GetMailDomain = {
     records: option<dnsRecords>,
   }
   @module("@aws-sdk/client-workmail") @new external new: request => t = "GetMailDomainCommand"
-  let make = (~domainName, ~organizationId, ()) => new({domainName, organizationId})
+  let make = (~domainName, ~organizationId, ()) =>
+    new({domainName: domainName, organizationId: organizationId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetDefaultRetentionPolicy = {
   type t
   type request = {
@@ -2133,6 +2270,7 @@ module GetDefaultRetentionPolicy = {
   let make = (~organizationId, ()) => new({organizationId: organizationId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateOrganization = {
   type t
   type request = {
@@ -2166,9 +2304,18 @@ module CreateOrganization = {
     ~clientToken=?,
     ~directoryId=?,
     (),
-  ) => new({enableInteroperability, kmsKeyArn, domains, clientToken, alias, directoryId})
+  ) =>
+    new({
+      enableInteroperability: enableInteroperability,
+      kmsKeyArn: kmsKeyArn,
+      domains: domains,
+      clientToken: clientToken,
+      alias: alias,
+      directoryId: directoryId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListMobileDeviceAccessRules = {
   type t
   type request = {
@@ -2188,6 +2335,7 @@ module ListMobileDeviceAccessRules = {
   let make = (~organizationId, ()) => new({organizationId: organizationId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListMailboxPermissions = {
   type t
   type request = {
@@ -2218,9 +2366,15 @@ module ListMailboxPermissions = {
   @module("@aws-sdk/client-workmail") @new
   external new: request => t = "ListMailboxPermissionsCommand"
   let make = (~entityId, ~organizationId, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults, nextToken, entityId, organizationId})
+    new({
+      maxResults: maxResults,
+      nextToken: nextToken,
+      entityId: entityId,
+      organizationId: organizationId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListAccessControlRules = {
   type t
   type request = {

@@ -245,6 +245,7 @@ module ExportProject = {
   let make = (~projectId, ()) => new({projectId: projectId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ExportBundle = {
   type t
   @ocaml.doc("<p>
@@ -280,9 +281,11 @@ module ExportBundle = {
   }
   @module("@aws-sdk/client-awsmobilehubservice") @new
   external new: request => t = "ExportBundleCommand"
-  let make = (~bundleId, ~platform=?, ~projectId=?, ()) => new({platform, projectId, bundleId})
+  let make = (~bundleId, ~platform=?, ~projectId=?, ()) =>
+    new({platform: platform, projectId: projectId, bundleId: bundleId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListProjects = {
   type t
   @ocaml.doc("<p>
@@ -309,9 +312,11 @@ module ListProjects = {
   }
   @module("@aws-sdk/client-awsmobilehubservice") @new
   external new: request => t = "ListProjectsCommand"
-  let make = (~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults})
+  let make = (~nextToken=?, ~maxResults=?, ()) =>
+    new({nextToken: nextToken, maxResults: maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeBundle = {
   type t
   @ocaml.doc("<p>
@@ -337,6 +342,7 @@ module DescribeBundle = {
   let make = (~bundleId, ()) => new({bundleId: bundleId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListBundles = {
   type t
   @ocaml.doc("<p>
@@ -370,9 +376,11 @@ module ListBundles = {
   }
   @module("@aws-sdk/client-awsmobilehubservice") @new
   external new: request => t = "ListBundlesCommand"
-  let make = (~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults})
+  let make = (~nextToken=?, ~maxResults=?, ()) =>
+    new({nextToken: nextToken, maxResults: maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteProject = {
   type t
   @ocaml.doc("<p>
@@ -403,6 +411,7 @@ module DeleteProject = {
   let make = (~projectId, ()) => new({projectId: projectId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateProject = {
   type t
   @ocaml.doc("<p>
@@ -431,9 +440,10 @@ module UpdateProject = {
   }
   @module("@aws-sdk/client-awsmobilehubservice") @new
   external new: request => t = "UpdateProjectCommand"
-  let make = (~projectId, ~contents=?, ()) => new({projectId, contents})
+  let make = (~projectId, ~contents=?, ()) => new({projectId: projectId, contents: contents})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeProject = {
   type t
   @ocaml.doc("<p>
@@ -455,9 +465,11 @@ module DescribeProject = {
   type response = {details: option<projectDetails>}
   @module("@aws-sdk/client-awsmobilehubservice") @new
   external new: request => t = "DescribeProjectCommand"
-  let make = (~projectId, ~syncFromResources=?, ()) => new({syncFromResources, projectId})
+  let make = (~projectId, ~syncFromResources=?, ()) =>
+    new({syncFromResources: syncFromResources, projectId: projectId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateProject = {
   type t
   @ocaml.doc("<p>
@@ -496,6 +508,6 @@ module CreateProject = {
   @module("@aws-sdk/client-awsmobilehubservice") @new
   external new: request => t = "CreateProjectCommand"
   let make = (~snapshotId=?, ~contents=?, ~region=?, ~name=?, ()) =>
-    new({snapshotId, contents, region, name})
+    new({snapshotId: snapshotId, contents: contents, region: region, name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

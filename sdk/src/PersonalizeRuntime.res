@@ -96,9 +96,19 @@ module GetRecommendations = {
     ~campaignArn=?,
     (),
   ) =>
-    new({recommenderArn, filterValues, filterArn, context, numResults, userId, itemId, campaignArn})
+    new({
+      recommenderArn: recommenderArn,
+      filterValues: filterValues,
+      filterArn: filterArn,
+      context: context,
+      numResults: numResults,
+      userId: userId,
+      itemId: itemId,
+      campaignArn: campaignArn,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetPersonalizedRanking = {
   type t
   type request = {
@@ -140,6 +150,13 @@ module GetPersonalizedRanking = {
   @module("@aws-sdk/client-personalize") @new
   external new: request => t = "GetPersonalizedRankingCommand"
   let make = (~userId, ~inputList, ~campaignArn, ~filterValues=?, ~filterArn=?, ~context=?, ()) =>
-    new({filterValues, filterArn, context, userId, inputList, campaignArn})
+    new({
+      filterValues: filterValues,
+      filterArn: filterArn,
+      context: context,
+      userId: userId,
+      inputList: inputList,
+      campaignArn: campaignArn,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

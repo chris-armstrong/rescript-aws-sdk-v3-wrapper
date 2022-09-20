@@ -1013,6 +1013,7 @@ module DeletePipeline = {
   let make = (~pipelineName, ()) => new({pipelineName: pipelineName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteDatastore = {
   type t
   type request = {
@@ -1023,6 +1024,7 @@ module DeleteDatastore = {
   let make = (~datastoreName, ()) => new({datastoreName: datastoreName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteDatasetContent = {
   type t
   type request = {
@@ -1035,9 +1037,11 @@ module DeleteDatasetContent = {
   type response = {.}
   @module("@aws-sdk/client-iotanalytics") @new
   external new: request => t = "DeleteDatasetContentCommand"
-  let make = (~datasetName, ~versionId=?, ()) => new({versionId, datasetName})
+  let make = (~datasetName, ~versionId=?, ()) =>
+    new({versionId: versionId, datasetName: datasetName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteDataset = {
   type t
   type request = {@ocaml.doc("<p>The name of the dataset to delete.</p>") datasetName: datasetName}
@@ -1046,6 +1050,7 @@ module DeleteDataset = {
   let make = (~datasetName, ()) => new({datasetName: datasetName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteChannel = {
   type t
   type request = {@ocaml.doc("<p>The name of the channel to delete.</p>") channelName: channelName}
@@ -1054,6 +1059,7 @@ module DeleteChannel = {
   let make = (~channelName, ()) => new({channelName: channelName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module CreateDatasetContent = {
   type t
   type request = {
@@ -1068,9 +1074,11 @@ module CreateDatasetContent = {
   }
   @module("@aws-sdk/client-iotanalytics") @new
   external new: request => t = "CreateDatasetContentCommand"
-  let make = (~datasetName, ~versionId=?, ()) => new({versionId, datasetName})
+  let make = (~datasetName, ~versionId=?, ()) =>
+    new({versionId: versionId, datasetName: datasetName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CancelPipelineReprocessing = {
   type t
   type request = {
@@ -1083,9 +1091,11 @@ module CancelPipelineReprocessing = {
   type response = {.}
   @module("@aws-sdk/client-iotanalytics") @new
   external new: request => t = "CancelPipelineReprocessingCommand"
-  let make = (~reprocessingId, ~pipelineName, ()) => new({reprocessingId, pipelineName})
+  let make = (~reprocessingId, ~pipelineName, ()) =>
+    new({reprocessingId: reprocessingId, pipelineName: pipelineName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UntagResource = {
   type t
   type request = {
@@ -1095,9 +1105,10 @@ module UntagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-iotanalytics") @new external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys, resourceArn})
+  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module SampleChannelData = {
   type t
   type request = {
@@ -1119,9 +1130,15 @@ module SampleChannelData = {
   @module("@aws-sdk/client-iotanalytics") @new
   external new: request => t = "SampleChannelDataCommand"
   let make = (~channelName, ~endTime=?, ~startTime=?, ~maxMessages=?, ()) =>
-    new({endTime, startTime, maxMessages, channelName})
+    new({
+      endTime: endTime,
+      startTime: startTime,
+      maxMessages: maxMessages,
+      channelName: channelName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module PutLoggingOptions = {
   type t
   type request = {
@@ -1134,6 +1151,7 @@ module PutLoggingOptions = {
   let make = (~loggingOptions, ()) => new({loggingOptions: loggingOptions})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DescribeLoggingOptions = {
   type t
   type request = {.}
@@ -1146,6 +1164,7 @@ module DescribeLoggingOptions = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateChannel = {
   type t
   type request = {
@@ -1162,9 +1181,14 @@ module UpdateChannel = {
   type response = {.}
   @module("@aws-sdk/client-iotanalytics") @new external new: request => t = "UpdateChannelCommand"
   let make = (~channelName, ~retentionPeriod=?, ~channelStorage=?, ()) =>
-    new({retentionPeriod, channelStorage, channelName})
+    new({
+      retentionPeriod: retentionPeriod,
+      channelStorage: channelStorage,
+      channelName: channelName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module TagResource = {
   type t
   type request = {
@@ -1174,9 +1198,10 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-iotanalytics") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceArn, ()) => new({tags, resourceArn})
+  let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module StartPipelineReprocessing = {
   type t
   type request = {
@@ -1202,9 +1227,15 @@ module StartPipelineReprocessing = {
   @module("@aws-sdk/client-iotanalytics") @new
   external new: request => t = "StartPipelineReprocessingCommand"
   let make = (~pipelineName, ~channelMessages=?, ~endTime=?, ~startTime=?, ()) =>
-    new({channelMessages, endTime, startTime, pipelineName})
+    new({
+      channelMessages: channelMessages,
+      endTime: endTime,
+      startTime: startTime,
+      pipelineName: pipelineName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListTagsForResource = {
   type t
   type request = {
@@ -1220,6 +1251,7 @@ module ListTagsForResource = {
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetDatasetContent = {
   type t
   type request = {
@@ -1239,9 +1271,11 @@ module GetDatasetContent = {
   }
   @module("@aws-sdk/client-iotanalytics") @new
   external new: request => t = "GetDatasetContentCommand"
-  let make = (~datasetName, ~versionId=?, ()) => new({versionId, datasetName})
+  let make = (~datasetName, ~versionId=?, ()) =>
+    new({versionId: versionId, datasetName: datasetName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateChannel = {
   type t
   type request = {
@@ -1264,9 +1298,15 @@ module CreateChannel = {
   }
   @module("@aws-sdk/client-iotanalytics") @new external new: request => t = "CreateChannelCommand"
   let make = (~channelName, ~tags=?, ~retentionPeriod=?, ~channelStorage=?, ()) =>
-    new({tags, retentionPeriod, channelStorage, channelName})
+    new({
+      tags: tags,
+      retentionPeriod: retentionPeriod,
+      channelStorage: channelStorage,
+      channelName: channelName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module BatchPutMessage = {
   type t
   type request = {
@@ -1307,9 +1347,10 @@ module BatchPutMessage = {
     batchPutMessageErrorEntries: option<batchPutMessageErrorEntries>,
   }
   @module("@aws-sdk/client-iotanalytics") @new external new: request => t = "BatchPutMessageCommand"
-  let make = (~messages, ~channelName, ()) => new({messages, channelName})
+  let make = (~messages, ~channelName, ()) => new({messages: messages, channelName: channelName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module RunPipelineActivity = {
   type t
   type request = {
@@ -1332,9 +1373,11 @@ module RunPipelineActivity = {
   }
   @module("@aws-sdk/client-iotanalytics") @new
   external new: request => t = "RunPipelineActivityCommand"
-  let make = (~payloads, ~pipelineActivity, ()) => new({payloads, pipelineActivity})
+  let make = (~payloads, ~pipelineActivity, ()) =>
+    new({payloads: payloads, pipelineActivity: pipelineActivity})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListDatasetContents = {
   type t
   type request = {
@@ -1368,9 +1411,17 @@ module ListDatasetContents = {
     ~maxResults=?,
     ~nextToken=?,
     (),
-  ) => new({scheduledBefore, scheduledOnOrAfter, maxResults, nextToken, datasetName})
+  ) =>
+    new({
+      scheduledBefore: scheduledBefore,
+      scheduledOnOrAfter: scheduledOnOrAfter,
+      maxResults: maxResults,
+      nextToken: nextToken,
+      datasetName: datasetName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeChannel = {
   type t
   type request = {
@@ -1388,9 +1439,11 @@ module DescribeChannel = {
     channel: option<channel>,
   }
   @module("@aws-sdk/client-iotanalytics") @new external new: request => t = "DescribeChannelCommand"
-  let make = (~channelName, ~includeStatistics=?, ()) => new({includeStatistics, channelName})
+  let make = (~channelName, ~includeStatistics=?, ()) =>
+    new({includeStatistics: includeStatistics, channelName: channelName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdatePipeline = {
   type t
   type request = {
@@ -1410,9 +1463,11 @@ module UpdatePipeline = {
   }
   type response = {.}
   @module("@aws-sdk/client-iotanalytics") @new external new: request => t = "UpdatePipelineCommand"
-  let make = (~pipelineActivities, ~pipelineName, ()) => new({pipelineActivities, pipelineName})
+  let make = (~pipelineActivities, ~pipelineName, ()) =>
+    new({pipelineActivities: pipelineActivities, pipelineName: pipelineName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ListPipelines = {
   type t
   type request = {
@@ -1429,9 +1484,11 @@ module ListPipelines = {
     pipelineSummaries: option<pipelineSummaries>,
   }
   @module("@aws-sdk/client-iotanalytics") @new external new: request => t = "ListPipelinesCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListChannels = {
   type t
   type request = {
@@ -1448,9 +1505,11 @@ module ListChannels = {
     channelSummaries: option<channelSummaries>,
   }
   @module("@aws-sdk/client-iotanalytics") @new external new: request => t = "ListChannelsCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreatePipeline = {
   type t
   type request = {
@@ -1475,9 +1534,10 @@ module CreatePipeline = {
   }
   @module("@aws-sdk/client-iotanalytics") @new external new: request => t = "CreatePipelineCommand"
   let make = (~pipelineActivities, ~pipelineName, ~tags=?, ()) =>
-    new({tags, pipelineActivities, pipelineName})
+    new({tags: tags, pipelineActivities: pipelineActivities, pipelineName: pipelineName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateDatastore = {
   type t
   type request = {
@@ -1502,9 +1562,16 @@ module UpdateDatastore = {
     ~datastoreStorage=?,
     ~retentionPeriod=?,
     (),
-  ) => new({fileFormatConfiguration, datastoreStorage, retentionPeriod, datastoreName})
+  ) =>
+    new({
+      fileFormatConfiguration: fileFormatConfiguration,
+      datastoreStorage: datastoreStorage,
+      retentionPeriod: retentionPeriod,
+      datastoreName: datastoreName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ListDatasets = {
   type t
   type request = {
@@ -1521,9 +1588,11 @@ module ListDatasets = {
     datasetSummaries: option<datasetSummaries>,
   }
   @module("@aws-sdk/client-iotanalytics") @new external new: request => t = "ListDatasetsCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribePipeline = {
   type t
   type request = {
@@ -1541,6 +1610,7 @@ module DescribePipeline = {
   let make = (~pipelineName, ()) => new({pipelineName: pipelineName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateDatastore = {
   type t
   type request = {
@@ -1578,15 +1648,16 @@ module CreateDatastore = {
     (),
   ) =>
     new({
-      datastorePartitions,
-      fileFormatConfiguration,
-      tags,
-      retentionPeriod,
-      datastoreStorage,
-      datastoreName,
+      datastorePartitions: datastorePartitions,
+      fileFormatConfiguration: fileFormatConfiguration,
+      tags: tags,
+      retentionPeriod: retentionPeriod,
+      datastoreStorage: datastoreStorage,
+      datastoreName: datastoreName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateDataset = {
   type t
   type request = {
@@ -1624,16 +1695,17 @@ module UpdateDataset = {
     (),
   ) =>
     new({
-      lateDataRules,
-      versioningConfiguration,
-      retentionPeriod,
-      contentDeliveryRules,
-      triggers,
-      actions,
-      datasetName,
+      lateDataRules: lateDataRules,
+      versioningConfiguration: versioningConfiguration,
+      retentionPeriod: retentionPeriod,
+      contentDeliveryRules: contentDeliveryRules,
+      triggers: triggers,
+      actions: actions,
+      datasetName: datasetName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ListDatastores = {
   type t
   type request = {
@@ -1650,9 +1722,11 @@ module ListDatastores = {
     datastoreSummaries: option<datastoreSummaries>,
   }
   @module("@aws-sdk/client-iotanalytics") @new external new: request => t = "ListDatastoresCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeDatastore = {
   type t
   type request = {
@@ -1670,9 +1744,11 @@ module DescribeDatastore = {
   }
   @module("@aws-sdk/client-iotanalytics") @new
   external new: request => t = "DescribeDatastoreCommand"
-  let make = (~datastoreName, ~includeStatistics=?, ()) => new({includeStatistics, datastoreName})
+  let make = (~datastoreName, ~includeStatistics=?, ()) =>
+    new({includeStatistics: includeStatistics, datastoreName: datastoreName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateDataset = {
   type t
   type request = {
@@ -1724,17 +1800,18 @@ module CreateDataset = {
     (),
   ) =>
     new({
-      lateDataRules,
-      tags,
-      versioningConfiguration,
-      retentionPeriod,
-      contentDeliveryRules,
-      triggers,
-      actions,
-      datasetName,
+      lateDataRules: lateDataRules,
+      tags: tags,
+      versioningConfiguration: versioningConfiguration,
+      retentionPeriod: retentionPeriod,
+      contentDeliveryRules: contentDeliveryRules,
+      triggers: triggers,
+      actions: actions,
+      datasetName: datasetName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeDataset = {
   type t
   type request = {

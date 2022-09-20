@@ -1121,9 +1121,10 @@ module PutProfileObject = {
   }
   @module("@aws-sdk/client-profile") @new external new: request => t = "PutProfileObjectCommand"
   let make = (~domainName, ~object_, ~objectTypeName, ()) =>
-    new({domainName, object_, objectTypeName})
+    new({domainName: domainName, object_: object_, objectTypeName: objectTypeName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteWorkflow = {
   type t
   type request = {
@@ -1133,9 +1134,10 @@ module DeleteWorkflow = {
   }
   type response = {.}
   @module("@aws-sdk/client-profile") @new external new: request => t = "DeleteWorkflowCommand"
-  let make = (~workflowId, ~domainName, ()) => new({workflowId, domainName})
+  let make = (~workflowId, ~domainName, ()) => new({workflowId: workflowId, domainName: domainName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteProfileObjectType = {
   type t
   type request = {
@@ -1149,9 +1151,11 @@ module DeleteProfileObjectType = {
   }
   @module("@aws-sdk/client-profile") @new
   external new: request => t = "DeleteProfileObjectTypeCommand"
-  let make = (~objectTypeName, ~domainName, ()) => new({objectTypeName, domainName})
+  let make = (~objectTypeName, ~domainName, ()) =>
+    new({objectTypeName: objectTypeName, domainName: domainName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteProfileObject = {
   type t
   type request = {
@@ -1170,9 +1174,15 @@ module DeleteProfileObject = {
   }
   @module("@aws-sdk/client-profile") @new external new: request => t = "DeleteProfileObjectCommand"
   let make = (~domainName, ~objectTypeName, ~profileObjectUniqueKey, ~profileId, ()) =>
-    new({domainName, objectTypeName, profileObjectUniqueKey, profileId})
+    new({
+      domainName: domainName,
+      objectTypeName: objectTypeName,
+      profileObjectUniqueKey: profileObjectUniqueKey,
+      profileId: profileId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteProfile = {
   type t
   type request = {
@@ -1185,9 +1195,10 @@ module DeleteProfile = {
     message: option<message>,
   }
   @module("@aws-sdk/client-profile") @new external new: request => t = "DeleteProfileCommand"
-  let make = (~domainName, ~profileId, ()) => new({domainName, profileId})
+  let make = (~domainName, ~profileId, ()) => new({domainName: domainName, profileId: profileId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteIntegration = {
   type t
   type request = {
@@ -1200,9 +1211,10 @@ module DeleteIntegration = {
     message: message,
   }
   @module("@aws-sdk/client-profile") @new external new: request => t = "DeleteIntegrationCommand"
-  let make = (~uri, ~domainName, ()) => new({uri, domainName})
+  let make = (~uri, ~domainName, ()) => new({uri: uri, domainName: domainName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteDomain = {
   type t
   type request = {
@@ -1216,6 +1228,7 @@ module DeleteDomain = {
   let make = (~domainName, ()) => new({domainName: domainName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateProfile = {
   type t
   type request = {
@@ -1304,32 +1317,33 @@ module UpdateProfile = {
     (),
   ) =>
     new({
-      attributes,
-      billingAddress,
-      mailingAddress,
-      shippingAddress,
-      address,
-      businessEmailAddress,
-      personalEmailAddress,
-      emailAddress,
-      businessPhoneNumber,
-      homePhoneNumber,
-      mobilePhoneNumber,
-      phoneNumber,
-      gender,
-      birthDate,
-      lastName,
-      middleName,
-      firstName,
-      businessName,
-      partyType,
-      accountNumber,
-      additionalInformation,
-      profileId,
-      domainName,
+      attributes: attributes,
+      billingAddress: billingAddress,
+      mailingAddress: mailingAddress,
+      shippingAddress: shippingAddress,
+      address: address,
+      businessEmailAddress: businessEmailAddress,
+      personalEmailAddress: personalEmailAddress,
+      emailAddress: emailAddress,
+      businessPhoneNumber: businessPhoneNumber,
+      homePhoneNumber: homePhoneNumber,
+      mobilePhoneNumber: mobilePhoneNumber,
+      phoneNumber: phoneNumber,
+      gender: gender,
+      birthDate: birthDate,
+      lastName: lastName,
+      middleName: middleName,
+      firstName: firstName,
+      businessName: businessName,
+      partyType: partyType,
+      accountNumber: accountNumber,
+      additionalInformation: additionalInformation,
+      profileId: profileId,
+      domainName: domainName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UntagResource = {
   type t
   type request = {
@@ -1339,9 +1353,10 @@ module UntagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-profile") @new external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys, resourceArn})
+  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module TagResource = {
   type t
   type request = {
@@ -1351,9 +1366,10 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-profile") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceArn, ()) => new({tags, resourceArn})
+  let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ListTagsForResource = {
   type t
   type request = {
@@ -1368,6 +1384,7 @@ module ListTagsForResource = {
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetIntegration = {
   type t
   type request = {
@@ -1398,9 +1415,10 @@ It supports the following event types: <code>SegmentIdentify</code>, <code>Shopi
     @ocaml.doc("<p>The unique name of the domain.</p>") @as("DomainName") domainName: name,
   }
   @module("@aws-sdk/client-profile") @new external new: request => t = "GetIntegrationCommand"
-  let make = (~uri, ~domainName, ()) => new({uri, domainName})
+  let make = (~uri, ~domainName, ()) => new({uri: uri, domainName: domainName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteProfileKey = {
   type t
   type request = {
@@ -1417,9 +1435,10 @@ module DeleteProfileKey = {
   }
   @module("@aws-sdk/client-profile") @new external new: request => t = "DeleteProfileKeyCommand"
   let make = (~domainName, ~values, ~keyName, ~profileId, ()) =>
-    new({domainName, values, keyName, profileId})
+    new({domainName: domainName, values: values, keyName: keyName, profileId: profileId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateProfile = {
   type t
   type request = {
@@ -1505,31 +1524,32 @@ module CreateProfile = {
     (),
   ) =>
     new({
-      attributes,
-      billingAddress,
-      mailingAddress,
-      shippingAddress,
-      address,
-      businessEmailAddress,
-      personalEmailAddress,
-      emailAddress,
-      businessPhoneNumber,
-      homePhoneNumber,
-      mobilePhoneNumber,
-      phoneNumber,
-      gender,
-      birthDate,
-      lastName,
-      middleName,
-      firstName,
-      businessName,
-      partyType,
-      additionalInformation,
-      accountNumber,
-      domainName,
+      attributes: attributes,
+      billingAddress: billingAddress,
+      mailingAddress: mailingAddress,
+      shippingAddress: shippingAddress,
+      address: address,
+      businessEmailAddress: businessEmailAddress,
+      personalEmailAddress: personalEmailAddress,
+      emailAddress: emailAddress,
+      businessPhoneNumber: businessPhoneNumber,
+      homePhoneNumber: homePhoneNumber,
+      mobilePhoneNumber: mobilePhoneNumber,
+      phoneNumber: phoneNumber,
+      gender: gender,
+      birthDate: birthDate,
+      lastName: lastName,
+      middleName: middleName,
+      firstName: firstName,
+      businessName: businessName,
+      partyType: partyType,
+      additionalInformation: additionalInformation,
+      accountNumber: accountNumber,
+      domainName: domainName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module AddProfileKey = {
   type t
   type request = {
@@ -1547,9 +1567,10 @@ module AddProfileKey = {
   }
   @module("@aws-sdk/client-profile") @new external new: request => t = "AddProfileKeyCommand"
   let make = (~domainName, ~values, ~keyName, ~profileId, ()) =>
-    new({domainName, values, keyName, profileId})
+    new({domainName: domainName, values: values, keyName: keyName, profileId: profileId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module MergeProfiles = {
   type t
   type request = {
@@ -1571,9 +1592,15 @@ module MergeProfiles = {
   }
   @module("@aws-sdk/client-profile") @new external new: request => t = "MergeProfilesCommand"
   let make = (~profileIdsToBeMerged, ~mainProfileId, ~domainName, ~fieldSourceProfileIds=?, ()) =>
-    new({fieldSourceProfileIds, profileIdsToBeMerged, mainProfileId, domainName})
+    new({
+      fieldSourceProfileIds: fieldSourceProfileIds,
+      profileIdsToBeMerged: profileIdsToBeMerged,
+      mainProfileId: mainProfileId,
+      domainName: domainName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListWorkflows = {
   type t
   type request = {
@@ -1611,9 +1638,19 @@ response in the next request to retrieve the next set of results.</p>")
     ~status=?,
     ~workflowType=?,
     (),
-  ) => new({maxResults, nextToken, queryEndDate, queryStartDate, status, workflowType, domainName})
+  ) =>
+    new({
+      maxResults: maxResults,
+      nextToken: nextToken,
+      queryEndDate: queryEndDate,
+      queryStartDate: queryStartDate,
+      status: status,
+      workflowType: workflowType,
+      domainName: domainName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListProfileObjects = {
   type t
   type request = {
@@ -1648,9 +1685,18 @@ module ListProfileObjects = {
     ~maxResults=?,
     ~nextToken=?,
     (),
-  ) => new({objectFilter, profileId, objectTypeName, domainName, maxResults, nextToken})
+  ) =>
+    new({
+      objectFilter: objectFilter,
+      profileId: profileId,
+      objectTypeName: objectTypeName,
+      domainName: domainName,
+      maxResults: maxResults,
+      nextToken: nextToken,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListProfileObjectTypeTemplates = {
   type t
   type request = {
@@ -1669,9 +1715,11 @@ module ListProfileObjectTypeTemplates = {
   }
   @module("@aws-sdk/client-profile") @new
   external new: request => t = "ListProfileObjectTypeTemplatesCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetWorkflow = {
   type t
   type request = {
@@ -1699,9 +1747,10 @@ module GetWorkflow = {
     workflowId: option<uuid>,
   }
   @module("@aws-sdk/client-profile") @new external new: request => t = "GetWorkflowCommand"
-  let make = (~workflowId, ~domainName, ()) => new({workflowId, domainName})
+  let make = (~workflowId, ~domainName, ()) => new({workflowId: workflowId, domainName: domainName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module SearchProfiles = {
   type t
   type request = {
@@ -1730,9 +1779,16 @@ module SearchProfiles = {
   }
   @module("@aws-sdk/client-profile") @new external new: request => t = "SearchProfilesCommand"
   let make = (~values, ~keyName, ~domainName, ~maxResults=?, ~nextToken=?, ()) =>
-    new({values, keyName, domainName, maxResults, nextToken})
+    new({
+      values: values,
+      keyName: keyName,
+      domainName: domainName,
+      maxResults: maxResults,
+      nextToken: nextToken,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListProfileObjectTypes = {
   type t
   type request = {
@@ -1751,9 +1807,10 @@ module ListProfileObjectTypes = {
   @module("@aws-sdk/client-profile") @new
   external new: request => t = "ListProfileObjectTypesCommand"
   let make = (~domainName, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults, nextToken, domainName})
+    new({maxResults: maxResults, nextToken: nextToken, domainName: domainName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListIntegrations = {
   type t
   type request = {
@@ -1778,9 +1835,15 @@ module ListIntegrations = {
   }
   @module("@aws-sdk/client-profile") @new external new: request => t = "ListIntegrationsCommand"
   let make = (~domainName, ~includeHidden=?, ~maxResults=?, ~nextToken=?, ()) =>
-    new({includeHidden, maxResults, nextToken, domainName})
+    new({
+      includeHidden: includeHidden,
+      maxResults: maxResults,
+      nextToken: nextToken,
+      domainName: domainName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListDomains = {
   type t
   type request = {
@@ -1797,9 +1860,11 @@ module ListDomains = {
     @ocaml.doc("<p>The list of ListDomains instances.</p>") @as("Items") items: option<domainList>,
   }
   @module("@aws-sdk/client-profile") @new external new: request => t = "ListDomainsCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListAccountIntegrations = {
   type t
   type request = {
@@ -1826,9 +1891,10 @@ module ListAccountIntegrations = {
   @module("@aws-sdk/client-profile") @new
   external new: request => t = "ListAccountIntegrationsCommand"
   let make = (~uri, ~includeHidden=?, ~maxResults=?, ~nextToken=?, ()) =>
-    new({includeHidden, maxResults, nextToken, uri})
+    new({includeHidden: includeHidden, maxResults: maxResults, nextToken: nextToken, uri: uri})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetWorkflowSteps = {
   type t
   type request = {
@@ -1857,9 +1923,15 @@ response in the next request to retrieve the next set of results.</p>")
   }
   @module("@aws-sdk/client-profile") @new external new: request => t = "GetWorkflowStepsCommand"
   let make = (~workflowId, ~domainName, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults, nextToken, workflowId, domainName})
+    new({
+      maxResults: maxResults,
+      nextToken: nextToken,
+      workflowId: workflowId,
+      domainName: domainName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetMatches = {
   type t
   type request = {
@@ -1887,9 +1959,10 @@ response in the next request to retrieve the next set of results.</p>")
   }
   @module("@aws-sdk/client-profile") @new external new: request => t = "GetMatchesCommand"
   let make = (~domainName, ~maxResults=?, ~nextToken=?, ()) =>
-    new({domainName, maxResults, nextToken})
+    new({domainName: domainName, maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetAutoMergingPreview = {
   type t
   type request = {
@@ -1921,9 +1994,14 @@ module GetAutoMergingPreview = {
   @module("@aws-sdk/client-profile") @new
   external new: request => t = "GetAutoMergingPreviewCommand"
   let make = (~conflictResolution, ~consolidation, ~domainName, ()) =>
-    new({conflictResolution, consolidation, domainName})
+    new({
+      conflictResolution: conflictResolution,
+      consolidation: consolidation,
+      domainName: domainName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module PutProfileObjectType = {
   type t
   type request = {
@@ -2017,20 +2095,21 @@ module PutProfileObjectType = {
     (),
   ) =>
     new({
-      tags,
-      keys,
-      fields,
-      sourceLastUpdatedTimestampFormat,
-      allowProfileCreation,
-      encryptionKey,
-      expirationDays,
-      templateId,
-      description,
-      objectTypeName,
-      domainName,
+      tags: tags,
+      keys: keys,
+      fields: fields,
+      sourceLastUpdatedTimestampFormat: sourceLastUpdatedTimestampFormat,
+      allowProfileCreation: allowProfileCreation,
+      encryptionKey: encryptionKey,
+      expirationDays: expirationDays,
+      templateId: templateId,
+      description: description,
+      objectTypeName: objectTypeName,
+      domainName: domainName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module PutIntegration = {
   type t
   type request = {
@@ -2083,9 +2162,18 @@ It supports the following event types: <code>SegmentIdentify</code>, <code>Shopi
     ~objectTypeName=?,
     ~uri=?,
     (),
-  ) => new({objectTypeNames, flowDefinition, tags, objectTypeName, uri, domainName})
+  ) =>
+    new({
+      objectTypeNames: objectTypeNames,
+      flowDefinition: flowDefinition,
+      tags: tags,
+      objectTypeName: objectTypeName,
+      uri: uri,
+      domainName: domainName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListIdentityResolutionJobs = {
   type t
   type request = {
@@ -2109,9 +2197,10 @@ response in the next request to retrieve the next set of results.</p>")
   @module("@aws-sdk/client-profile") @new
   external new: request => t = "ListIdentityResolutionJobsCommand"
   let make = (~domainName, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults, nextToken, domainName})
+    new({maxResults: maxResults, nextToken: nextToken, domainName: domainName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetProfileObjectTypeTemplate = {
   type t
   type request = {
@@ -2147,6 +2236,7 @@ module GetProfileObjectTypeTemplate = {
   let make = (~templateId, ()) => new({templateId: templateId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetProfileObjectType = {
   type t
   type request = {
@@ -2194,9 +2284,11 @@ module GetProfileObjectType = {
     objectTypeName: typeName,
   }
   @module("@aws-sdk/client-profile") @new external new: request => t = "GetProfileObjectTypeCommand"
-  let make = (~objectTypeName, ~domainName, ()) => new({objectTypeName, domainName})
+  let make = (~objectTypeName, ~domainName, ()) =>
+    new({objectTypeName: objectTypeName, domainName: domainName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetIdentityResolutionJob = {
   type t
   type request = {
@@ -2276,9 +2368,10 @@ module GetIdentityResolutionJob = {
   }
   @module("@aws-sdk/client-profile") @new
   external new: request => t = "GetIdentityResolutionJobCommand"
-  let make = (~jobId, ~domainName, ()) => new({jobId, domainName})
+  let make = (~jobId, ~domainName, ()) => new({jobId: jobId, domainName: domainName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateDomain = {
   type t
   type request = {
@@ -2355,15 +2448,16 @@ S3.</p>")
     (),
   ) =>
     new({
-      tags,
-      matching,
-      deadLetterQueueUrl,
-      defaultEncryptionKey,
-      defaultExpirationDays,
-      domainName,
+      tags: tags,
+      matching: matching,
+      deadLetterQueueUrl: deadLetterQueueUrl,
+      defaultEncryptionKey: defaultEncryptionKey,
+      defaultExpirationDays: defaultExpirationDays,
+      domainName: domainName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetDomain = {
   type t
   type request = {
@@ -2407,6 +2501,7 @@ S3.</p>")
   let make = (~domainName, ()) => new({domainName: domainName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateDomain = {
   type t
   type request = {
@@ -2481,15 +2576,16 @@ S3.</p>")
     (),
   ) =>
     new({
-      tags,
-      matching,
-      deadLetterQueueUrl,
-      defaultEncryptionKey,
-      defaultExpirationDays,
-      domainName,
+      tags: tags,
+      matching: matching,
+      deadLetterQueueUrl: deadLetterQueueUrl,
+      defaultEncryptionKey: defaultEncryptionKey,
+      defaultExpirationDays: defaultExpirationDays,
+      domainName: domainName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateIntegrationWorkflow = {
   type t
   type request = {
@@ -2525,6 +2621,14 @@ module CreateIntegrationWorkflow = {
     ~domainName,
     ~tags=?,
     (),
-  ) => new({tags, roleArn, objectTypeName, integrationConfig, workflowType, domainName})
+  ) =>
+    new({
+      tags: tags,
+      roleArn: roleArn,
+      objectTypeName: objectTypeName,
+      integrationConfig: integrationConfig,
+      workflowType: workflowType,
+      domainName: domainName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

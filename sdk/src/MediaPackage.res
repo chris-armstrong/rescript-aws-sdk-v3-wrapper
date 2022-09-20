@@ -546,6 +546,7 @@ module DeleteOriginEndpoint = {
   let make = (~id, ()) => new({id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteChannel = {
   type t
   type request = {@ocaml.doc("The ID of the Channel to delete.") @as("Id") id: __string}
@@ -554,6 +555,7 @@ module DeleteChannel = {
   let make = (~id, ()) => new({id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UntagResource = {
   type t
   type request = {
@@ -562,9 +564,10 @@ module UntagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-mediapackage") @new external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys, resourceArn})
+  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module TagResource = {
   type t
   type request = {
@@ -573,9 +576,10 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-mediapackage") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceArn, ()) => new({tags, resourceArn})
+  let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ListTagsForResource = {
   type t
   type request = {@as("ResourceArn") resourceArn: __string}
@@ -585,6 +589,7 @@ module ListTagsForResource = {
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeHarvestJob = {
   type t
   type request = {@ocaml.doc("The ID of the HarvestJob.") @as("Id") id: __string}
@@ -619,6 +624,7 @@ and it cannot be changed after the HarvestJob is submitted.")
   let make = (~id, ()) => new({id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateHarvestJob = {
   type t
   @ocaml.doc("Configuration parameters used to create a new HarvestJob.")
@@ -666,9 +672,16 @@ and it cannot be changed after the HarvestJob is submitted.")
   @module("@aws-sdk/client-mediapackage") @new
   external new: request => t = "CreateHarvestJobCommand"
   let make = (~startTime, ~s3Destination, ~originEndpointId, ~id, ~endTime, ()) =>
-    new({startTime, s3Destination, originEndpointId, id, endTime})
+    new({
+      startTime: startTime,
+      s3Destination: s3Destination,
+      originEndpointId: originEndpointId,
+      id: id,
+      endTime: endTime,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateChannel = {
   type t
   @ocaml.doc("Configuration parameters used to update the Channel.")
@@ -689,9 +702,10 @@ module UpdateChannel = {
     arn: option<__string>,
   }
   @module("@aws-sdk/client-mediapackage") @new external new: request => t = "UpdateChannelCommand"
-  let make = (~id, ~description=?, ()) => new({id, description})
+  let make = (~id, ~description=?, ()) => new({id: id, description: description})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module RotateIngestEndpointCredentials = {
   type t
   type request = {
@@ -713,9 +727,10 @@ module RotateIngestEndpointCredentials = {
   }
   @module("@aws-sdk/client-mediapackage") @new
   external new: request => t = "RotateIngestEndpointCredentialsCommand"
-  let make = (~ingestEndpointId, ~id, ()) => new({ingestEndpointId, id})
+  let make = (~ingestEndpointId, ~id, ()) => new({ingestEndpointId: ingestEndpointId, id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module RotateChannelCredentials = {
   type t
   type request = {@ocaml.doc("The ID of the channel to update.") @as("Id") id: __string}
@@ -735,6 +750,7 @@ module RotateChannelCredentials = {
   let make = (~id, ()) => new({id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListHarvestJobs = {
   type t
   type request = {
@@ -761,9 +777,15 @@ module ListHarvestJobs = {
   }
   @module("@aws-sdk/client-mediapackage") @new external new: request => t = "ListHarvestJobsCommand"
   let make = (~nextToken=?, ~maxResults=?, ~includeStatus=?, ~includeChannelId=?, ()) =>
-    new({nextToken, maxResults, includeStatus, includeChannelId})
+    new({
+      nextToken: nextToken,
+      maxResults: maxResults,
+      includeStatus: includeStatus,
+      includeChannelId: includeChannelId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeChannel = {
   type t
   type request = {@ocaml.doc("The ID of a Channel.") @as("Id") id: __string}
@@ -782,6 +804,7 @@ module DescribeChannel = {
   let make = (~id, ()) => new({id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateChannel = {
   type t
   @ocaml.doc("A new Channel configuration.")
@@ -806,9 +829,11 @@ cannot be changed after a Channel is created.")
     arn: option<__string>,
   }
   @module("@aws-sdk/client-mediapackage") @new external new: request => t = "CreateChannelCommand"
-  let make = (~id, ~tags=?, ~description=?, ()) => new({tags, id, description})
+  let make = (~id, ~tags=?, ~description=?, ()) =>
+    new({tags: tags, id: id, description: description})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ConfigureLogs = {
   type t
   @ocaml.doc("the option to configure log subscription.")
@@ -830,9 +855,10 @@ module ConfigureLogs = {
   }
   @module("@aws-sdk/client-mediapackage") @new external new: request => t = "ConfigureLogsCommand"
   let make = (~id, ~ingressAccessLogs=?, ~egressAccessLogs=?, ()) =>
-    new({ingressAccessLogs, id, egressAccessLogs})
+    new({ingressAccessLogs: ingressAccessLogs, id: id, egressAccessLogs: egressAccessLogs})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateOriginEndpoint = {
   type t
   @ocaml.doc("Configuration parameters used to update an existing OriginEndpoint.")
@@ -918,21 +944,22 @@ requested. This can be helpful for Live to VOD harvesting, or for temporarily di
     (),
   ) =>
     new({
-      whitelist,
-      timeDelaySeconds,
-      startoverWindowSeconds,
-      origination,
-      mssPackage,
-      manifestName,
-      id,
-      hlsPackage,
-      description,
-      dashPackage,
-      cmafPackage,
-      authorization,
+      whitelist: whitelist,
+      timeDelaySeconds: timeDelaySeconds,
+      startoverWindowSeconds: startoverWindowSeconds,
+      origination: origination,
+      mssPackage: mssPackage,
+      manifestName: manifestName,
+      id: id,
+      hlsPackage: hlsPackage,
+      description: description,
+      dashPackage: dashPackage,
+      cmafPackage: cmafPackage,
+      authorization: authorization,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeOriginEndpoint = {
   type t
   type request = {@ocaml.doc("The ID of the OriginEndpoint.") @as("Id") id: __string}
@@ -976,6 +1003,7 @@ requested. This can be helpful for Live to VOD harvesting, or for temporarily di
   let make = (~id, ()) => new({id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateOriginEndpoint = {
   type t
   @ocaml.doc("Configuration parameters used to create a new OriginEndpoint.")
@@ -1073,23 +1101,24 @@ requested. This can be helpful for Live to VOD harvesting, or for temporarily di
     (),
   ) =>
     new({
-      whitelist,
-      timeDelaySeconds,
-      tags,
-      startoverWindowSeconds,
-      origination,
-      mssPackage,
-      manifestName,
-      id,
-      hlsPackage,
-      description,
-      dashPackage,
-      cmafPackage,
-      channelId,
-      authorization,
+      whitelist: whitelist,
+      timeDelaySeconds: timeDelaySeconds,
+      tags: tags,
+      startoverWindowSeconds: startoverWindowSeconds,
+      origination: origination,
+      mssPackage: mssPackage,
+      manifestName: manifestName,
+      id: id,
+      hlsPackage: hlsPackage,
+      description: description,
+      dashPackage: dashPackage,
+      cmafPackage: cmafPackage,
+      channelId: channelId,
+      authorization: authorization,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListChannels = {
   type t
   type request = {
@@ -1106,9 +1135,11 @@ module ListChannels = {
     @ocaml.doc("A list of Channel records.") @as("Channels") channels: option<__listOfChannel>,
   }
   @module("@aws-sdk/client-mediapackage") @new external new: request => t = "ListChannelsCommand"
-  let make = (~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults})
+  let make = (~nextToken=?, ~maxResults=?, ()) =>
+    new({nextToken: nextToken, maxResults: maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListOriginEndpoints = {
   type t
   type request = {
@@ -1133,6 +1164,6 @@ module ListOriginEndpoints = {
   @module("@aws-sdk/client-mediapackage") @new
   external new: request => t = "ListOriginEndpointsCommand"
   let make = (~nextToken=?, ~maxResults=?, ~channelId=?, ()) =>
-    new({nextToken, maxResults, channelId})
+    new({nextToken: nextToken, maxResults: maxResults, channelId: channelId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

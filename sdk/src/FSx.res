@@ -3479,9 +3479,10 @@ module DeleteStorageVirtualMachine = {
   @module("@aws-sdk/client-fsx") @new
   external new: request => t = "DeleteStorageVirtualMachineCommand"
   let make = (~storageVirtualMachineId, ~clientRequestToken=?, ()) =>
-    new({storageVirtualMachineId, clientRequestToken})
+    new({storageVirtualMachineId: storageVirtualMachineId, clientRequestToken: clientRequestToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteSnapshot = {
   type t
   type request = {
@@ -3498,9 +3499,11 @@ module DeleteSnapshot = {
     snapshotId: option<snapshotId>,
   }
   @module("@aws-sdk/client-fsx") @new external new: request => t = "DeleteSnapshotCommand"
-  let make = (~snapshotId, ~clientRequestToken=?, ()) => new({snapshotId, clientRequestToken})
+  let make = (~snapshotId, ~clientRequestToken=?, ()) =>
+    new({snapshotId: snapshotId, clientRequestToken: clientRequestToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteDataRepositoryAssociation = {
   type t
   type request = {
@@ -3530,9 +3533,14 @@ module DeleteDataRepositoryAssociation = {
   @module("@aws-sdk/client-fsx") @new
   external new: request => t = "DeleteDataRepositoryAssociationCommand"
   let make = (~deleteDataInFileSystem, ~associationId, ~clientRequestToken=?, ()) =>
-    new({deleteDataInFileSystem, clientRequestToken, associationId})
+    new({
+      deleteDataInFileSystem: deleteDataInFileSystem,
+      clientRequestToken: clientRequestToken,
+      associationId: associationId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteBackup = {
   type t
   @ocaml.doc("<p>The request object for the <code>DeleteBackup</code> operation.</p>")
@@ -3555,9 +3563,11 @@ module DeleteBackup = {
     backupId: option<backupId>,
   }
   @module("@aws-sdk/client-fsx") @new external new: request => t = "DeleteBackupCommand"
-  let make = (~backupId, ~clientRequestToken=?, ()) => new({clientRequestToken, backupId})
+  let make = (~backupId, ~clientRequestToken=?, ()) =>
+    new({clientRequestToken: clientRequestToken, backupId: backupId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CancelDataRepositoryTask = {
   type t
   @ocaml.doc("<p>Cancels a data repository task.</p>")
@@ -3601,6 +3611,7 @@ module CancelDataRepositoryTask = {
   let make = (~taskId, ()) => new({taskId: taskId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UntagResource = {
   type t
   @ocaml.doc("<p>The request object for <code>UntagResource</code> action.</p>")
@@ -3614,9 +3625,10 @@ module UntagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-fsx") @new external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceARN, ()) => new({tagKeys, resourceARN})
+  let make = (~tagKeys, ~resourceARN, ()) => new({tagKeys: tagKeys, resourceARN: resourceARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module RestoreVolumeFromSnapshot = {
   type t
   type request = {
@@ -3654,9 +3666,15 @@ module RestoreVolumeFromSnapshot = {
   @module("@aws-sdk/client-fsx") @new
   external new: request => t = "RestoreVolumeFromSnapshotCommand"
   let make = (~snapshotId, ~volumeId, ~options=?, ~clientRequestToken=?, ()) =>
-    new({options, snapshotId, volumeId, clientRequestToken})
+    new({
+      options: options,
+      snapshotId: snapshotId,
+      volumeId: volumeId,
+      clientRequestToken: clientRequestToken,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module TagResource = {
   type t
   @ocaml.doc("<p>The request object for the <code>TagResource</code> operation.</p>")
@@ -3672,9 +3690,10 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-fsx") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceARN, ()) => new({tags, resourceARN})
+  let make = (~tags, ~resourceARN, ()) => new({tags: tags, resourceARN: resourceARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ListTagsForResource = {
   type t
   @ocaml.doc("<p>The request object for <code>ListTagsForResource</code> operation.</p>")
@@ -3705,9 +3724,10 @@ module ListTagsForResource = {
   }
   @module("@aws-sdk/client-fsx") @new external new: request => t = "ListTagsForResourceCommand"
   let make = (~resourceARN, ~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken, maxResults, resourceARN})
+    new({nextToken: nextToken, maxResults: maxResults, resourceARN: resourceARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DisassociateFileSystemAliases = {
   type t
   @ocaml.doc(
@@ -3736,9 +3756,10 @@ module DisassociateFileSystemAliases = {
   @module("@aws-sdk/client-fsx") @new
   external new: request => t = "DisassociateFileSystemAliasesCommand"
   let make = (~aliases, ~fileSystemId, ~clientRequestToken=?, ()) =>
-    new({aliases, fileSystemId, clientRequestToken})
+    new({aliases: aliases, fileSystemId: fileSystemId, clientRequestToken: clientRequestToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeFileSystemAliases = {
   type t
   @ocaml.doc("<p>The request object for <code>DescribeFileSystemAliases</code> operation.</p>")
@@ -3776,9 +3797,15 @@ module DescribeFileSystemAliases = {
   @module("@aws-sdk/client-fsx") @new
   external new: request => t = "DescribeFileSystemAliasesCommand"
   let make = (~fileSystemId, ~nextToken=?, ~maxResults=?, ~clientRequestToken=?, ()) =>
-    new({nextToken, maxResults, fileSystemId, clientRequestToken})
+    new({
+      nextToken: nextToken,
+      maxResults: maxResults,
+      fileSystemId: fileSystemId,
+      clientRequestToken: clientRequestToken,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module AssociateFileSystemAliases = {
   type t
   @ocaml.doc(
@@ -3831,9 +3858,10 @@ module AssociateFileSystemAliases = {
   @module("@aws-sdk/client-fsx") @new
   external new: request => t = "AssociateFileSystemAliasesCommand"
   let make = (~aliases, ~fileSystemId, ~clientRequestToken=?, ()) =>
-    new({aliases, fileSystemId, clientRequestToken})
+    new({aliases: aliases, fileSystemId: fileSystemId, clientRequestToken: clientRequestToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteVolume = {
   type t
   type request = {
@@ -3869,9 +3897,16 @@ module DeleteVolume = {
     ~ontapConfiguration=?,
     ~clientRequestToken=?,
     (),
-  ) => new({openZFSConfiguration, ontapConfiguration, volumeId, clientRequestToken})
+  ) =>
+    new({
+      openZFSConfiguration: openZFSConfiguration,
+      ontapConfiguration: ontapConfiguration,
+      volumeId: volumeId,
+      clientRequestToken: clientRequestToken,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteFileSystem = {
   type t
   @ocaml.doc("<p>The request object for <code>DeleteFileSystem</code> operation.</p>")
@@ -3916,14 +3951,15 @@ module DeleteFileSystem = {
     (),
   ) =>
     new({
-      openZFSConfiguration,
-      lustreConfiguration,
-      windowsConfiguration,
-      clientRequestToken,
-      fileSystemId,
+      openZFSConfiguration: openZFSConfiguration,
+      lustreConfiguration: lustreConfiguration,
+      windowsConfiguration: windowsConfiguration,
+      clientRequestToken: clientRequestToken,
+      fileSystemId: fileSystemId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateDataRepositoryTask = {
   type t
   type request = {
@@ -3953,9 +3989,17 @@ module CreateDataRepositoryTask = {
   }
   @module("@aws-sdk/client-fsx") @new external new: request => t = "CreateDataRepositoryTaskCommand"
   let make = (~report, ~fileSystemId, ~type_, ~tags=?, ~clientRequestToken=?, ~paths=?, ()) =>
-    new({tags, clientRequestToken, report, fileSystemId, paths, type_})
+    new({
+      tags: tags,
+      clientRequestToken: clientRequestToken,
+      report: report,
+      fileSystemId: fileSystemId,
+      paths: paths,
+      type_: type_,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateStorageVirtualMachine = {
   type t
   type request = {
@@ -3987,13 +4031,14 @@ module UpdateStorageVirtualMachine = {
     (),
   ) =>
     new({
-      svmAdminPassword,
-      storageVirtualMachineId,
-      clientRequestToken,
-      activeDirectoryConfiguration,
+      svmAdminPassword: svmAdminPassword,
+      storageVirtualMachineId: storageVirtualMachineId,
+      clientRequestToken: clientRequestToken,
+      activeDirectoryConfiguration: activeDirectoryConfiguration,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateDataRepositoryAssociation = {
   type t
   type request = {
@@ -4029,9 +4074,15 @@ module UpdateDataRepositoryAssociation = {
   @module("@aws-sdk/client-fsx") @new
   external new: request => t = "UpdateDataRepositoryAssociationCommand"
   let make = (~associationId, ~s3=?, ~importedFileChunkSize=?, ~clientRequestToken=?, ()) =>
-    new({s3, importedFileChunkSize, clientRequestToken, associationId})
+    new({
+      s3: s3,
+      importedFileChunkSize: importedFileChunkSize,
+      clientRequestToken: clientRequestToken,
+      associationId: associationId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeDataRepositoryTasks = {
   type t
   type request = {
@@ -4055,9 +4106,10 @@ module DescribeDataRepositoryTasks = {
   @module("@aws-sdk/client-fsx") @new
   external new: request => t = "DescribeDataRepositoryTasksCommand"
   let make = (~nextToken=?, ~maxResults=?, ~filters=?, ~taskIds=?, ()) =>
-    new({nextToken, maxResults, filters, taskIds})
+    new({nextToken: nextToken, maxResults: maxResults, filters: filters, taskIds: taskIds})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateStorageVirtualMachine = {
   type t
   type request = {
@@ -4118,16 +4170,17 @@ module CreateStorageVirtualMachine = {
     (),
   ) =>
     new({
-      rootVolumeSecurityStyle,
-      tags,
-      svmAdminPassword,
-      name,
-      fileSystemId,
-      clientRequestToken,
-      activeDirectoryConfiguration,
+      rootVolumeSecurityStyle: rootVolumeSecurityStyle,
+      tags: tags,
+      svmAdminPassword: svmAdminPassword,
+      name: name,
+      fileSystemId: fileSystemId,
+      clientRequestToken: clientRequestToken,
+      activeDirectoryConfiguration: activeDirectoryConfiguration,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateDataRepositoryAssociation = {
   type t
   type request = {
@@ -4202,17 +4255,18 @@ module CreateDataRepositoryAssociation = {
     (),
   ) =>
     new({
-      tags,
-      clientRequestToken,
-      s3,
-      importedFileChunkSize,
-      batchImportMetaDataOnCreate,
-      dataRepositoryPath,
-      fileSystemPath,
-      fileSystemId,
+      tags: tags,
+      clientRequestToken: clientRequestToken,
+      s3: s3,
+      importedFileChunkSize: importedFileChunkSize,
+      batchImportMetaDataOnCreate: batchImportMetaDataOnCreate,
+      dataRepositoryPath: dataRepositoryPath,
+      fileSystemPath: fileSystemPath,
+      fileSystemId: fileSystemId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeStorageVirtualMachines = {
   type t
   type request = {
@@ -4235,9 +4289,15 @@ module DescribeStorageVirtualMachines = {
   @module("@aws-sdk/client-fsx") @new
   external new: request => t = "DescribeStorageVirtualMachinesCommand"
   let make = (~nextToken=?, ~maxResults=?, ~filters=?, ~storageVirtualMachineIds=?, ()) =>
-    new({nextToken, maxResults, filters, storageVirtualMachineIds})
+    new({
+      nextToken: nextToken,
+      maxResults: maxResults,
+      filters: filters,
+      storageVirtualMachineIds: storageVirtualMachineIds,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeDataRepositoryAssociations = {
   type t
   type request = {
@@ -4261,9 +4321,15 @@ module DescribeDataRepositoryAssociations = {
   @module("@aws-sdk/client-fsx") @new
   external new: request => t = "DescribeDataRepositoryAssociationsCommand"
   let make = (~nextToken=?, ~maxResults=?, ~filters=?, ~associationIds=?, ()) =>
-    new({nextToken, maxResults, filters, associationIds})
+    new({
+      nextToken: nextToken,
+      maxResults: maxResults,
+      filters: filters,
+      associationIds: associationIds,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateVolume = {
   type t
   type request = {
@@ -4298,9 +4364,17 @@ module UpdateVolume = {
     ~ontapConfiguration=?,
     ~clientRequestToken=?,
     (),
-  ) => new({openZFSConfiguration, name, ontapConfiguration, volumeId, clientRequestToken})
+  ) =>
+    new({
+      openZFSConfiguration: openZFSConfiguration,
+      name: name,
+      ontapConfiguration: ontapConfiguration,
+      volumeId: volumeId,
+      clientRequestToken: clientRequestToken,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateSnapshot = {
   type t
   type request = {
@@ -4319,9 +4393,10 @@ module UpdateSnapshot = {
   }
   @module("@aws-sdk/client-fsx") @new external new: request => t = "UpdateSnapshotCommand"
   let make = (~snapshotId, ~name, ~clientRequestToken=?, ()) =>
-    new({snapshotId, name, clientRequestToken})
+    new({snapshotId: snapshotId, name: name, clientRequestToken: clientRequestToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateFileSystem = {
   type t
   @ocaml.doc("<p>The request object for the <code>UpdateFileSystem</code> operation.</p>")
@@ -4396,16 +4471,17 @@ module UpdateFileSystem = {
     (),
   ) =>
     new({
-      openZFSConfiguration,
-      ontapConfiguration,
-      lustreConfiguration,
-      windowsConfiguration,
-      storageCapacity,
-      clientRequestToken,
-      fileSystemId,
+      openZFSConfiguration: openZFSConfiguration,
+      ontapConfiguration: ontapConfiguration,
+      lustreConfiguration: lustreConfiguration,
+      windowsConfiguration: windowsConfiguration,
+      storageCapacity: storageCapacity,
+      clientRequestToken: clientRequestToken,
+      fileSystemId: fileSystemId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ReleaseFileSystemNfsV3Locks = {
   type t
   type request = {
@@ -4415,9 +4491,11 @@ module ReleaseFileSystemNfsV3Locks = {
   type response = {@as("FileSystem") fileSystem: option<fileSystem>}
   @module("@aws-sdk/client-fsx") @new
   external new: request => t = "ReleaseFileSystemNfsV3LocksCommand"
-  let make = (~fileSystemId, ~clientRequestToken=?, ()) => new({clientRequestToken, fileSystemId})
+  let make = (~fileSystemId, ~clientRequestToken=?, ()) =>
+    new({clientRequestToken: clientRequestToken, fileSystemId: fileSystemId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateVolumeFromBackup = {
   type t
   type request = {
@@ -4437,9 +4515,16 @@ module CreateVolumeFromBackup = {
   }
   @module("@aws-sdk/client-fsx") @new external new: request => t = "CreateVolumeFromBackupCommand"
   let make = (~name, ~backupId, ~tags=?, ~ontapConfiguration=?, ~clientRequestToken=?, ()) =>
-    new({tags, ontapConfiguration, name, clientRequestToken, backupId})
+    new({
+      tags: tags,
+      ontapConfiguration: ontapConfiguration,
+      name: name,
+      clientRequestToken: clientRequestToken,
+      backupId: backupId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateVolume = {
   type t
   type request = {
@@ -4474,9 +4559,18 @@ module CreateVolume = {
     ~ontapConfiguration=?,
     ~clientRequestToken=?,
     (),
-  ) => new({openZFSConfiguration, tags, ontapConfiguration, name, volumeType, clientRequestToken})
+  ) =>
+    new({
+      openZFSConfiguration: openZFSConfiguration,
+      tags: tags,
+      ontapConfiguration: ontapConfiguration,
+      name: name,
+      volumeType: volumeType,
+      clientRequestToken: clientRequestToken,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateSnapshot = {
   type t
   type request = {
@@ -4491,9 +4585,10 @@ module CreateSnapshot = {
   }
   @module("@aws-sdk/client-fsx") @new external new: request => t = "CreateSnapshotCommand"
   let make = (~volumeId, ~name, ~tags=?, ~clientRequestToken=?, ()) =>
-    new({tags, volumeId, name, clientRequestToken})
+    new({tags: tags, volumeId: volumeId, name: name, clientRequestToken: clientRequestToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateFileSystemFromBackup = {
   type t
   @ocaml.doc("<p>The request object for the <code>CreateFileSystemFromBackup</code>
@@ -4585,20 +4680,21 @@ module CreateFileSystemFromBackup = {
     (),
   ) =>
     new({
-      openZFSConfiguration,
-      fileSystemTypeVersion,
-      kmsKeyId,
-      storageType,
-      lustreConfiguration,
-      windowsConfiguration,
-      tags,
-      securityGroupIds,
-      subnetIds,
-      clientRequestToken,
-      backupId,
+      openZFSConfiguration: openZFSConfiguration,
+      fileSystemTypeVersion: fileSystemTypeVersion,
+      kmsKeyId: kmsKeyId,
+      storageType: storageType,
+      lustreConfiguration: lustreConfiguration,
+      windowsConfiguration: windowsConfiguration,
+      tags: tags,
+      securityGroupIds: securityGroupIds,
+      subnetIds: subnetIds,
+      clientRequestToken: clientRequestToken,
+      backupId: backupId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateFileSystem = {
   type t
   @ocaml.doc("<p>The request object used to create a new Amazon FSx file system.</p>")
@@ -4756,22 +4852,23 @@ module CreateFileSystem = {
     (),
   ) =>
     new({
-      openZFSConfiguration,
-      fileSystemTypeVersion,
-      ontapConfiguration,
-      lustreConfiguration,
-      windowsConfiguration,
-      kmsKeyId,
-      tags,
-      securityGroupIds,
-      subnetIds,
-      storageType,
-      storageCapacity,
-      fileSystemType,
-      clientRequestToken,
+      openZFSConfiguration: openZFSConfiguration,
+      fileSystemTypeVersion: fileSystemTypeVersion,
+      ontapConfiguration: ontapConfiguration,
+      lustreConfiguration: lustreConfiguration,
+      windowsConfiguration: windowsConfiguration,
+      kmsKeyId: kmsKeyId,
+      tags: tags,
+      securityGroupIds: securityGroupIds,
+      subnetIds: subnetIds,
+      storageType: storageType,
+      storageCapacity: storageCapacity,
+      fileSystemType: fileSystemType,
+      clientRequestToken: clientRequestToken,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeVolumes = {
   type t
   type request = {
@@ -4795,9 +4892,10 @@ module DescribeVolumes = {
   }
   @module("@aws-sdk/client-fsx") @new external new: request => t = "DescribeVolumesCommand"
   let make = (~nextToken=?, ~maxResults=?, ~filters=?, ~volumeIds=?, ()) =>
-    new({nextToken, maxResults, filters, volumeIds})
+    new({nextToken: nextToken, maxResults: maxResults, filters: filters, volumeIds: volumeIds})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeSnapshots = {
   type t
   type request = {
@@ -4818,9 +4916,10 @@ module DescribeSnapshots = {
   }
   @module("@aws-sdk/client-fsx") @new external new: request => t = "DescribeSnapshotsCommand"
   let make = (~nextToken=?, ~maxResults=?, ~filters=?, ~snapshotIds=?, ()) =>
-    new({nextToken, maxResults, filters, snapshotIds})
+    new({nextToken: nextToken, maxResults: maxResults, filters: filters, snapshotIds: snapshotIds})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeFileSystems = {
   type t
   @ocaml.doc("<p>The request object for <code>DescribeFileSystems</code> operation.</p>")
@@ -4853,9 +4952,10 @@ module DescribeFileSystems = {
   }
   @module("@aws-sdk/client-fsx") @new external new: request => t = "DescribeFileSystemsCommand"
   let make = (~nextToken=?, ~maxResults=?, ~fileSystemIds=?, ()) =>
-    new({nextToken, maxResults, fileSystemIds})
+    new({nextToken: nextToken, maxResults: maxResults, fileSystemIds: fileSystemIds})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateBackup = {
   type t
   @ocaml.doc("<p>The request object for the <code>CreateBackup</code> operation.</p>")
@@ -4883,9 +4983,15 @@ module CreateBackup = {
   }
   @module("@aws-sdk/client-fsx") @new external new: request => t = "CreateBackupCommand"
   let make = (~volumeId=?, ~tags=?, ~clientRequestToken=?, ~fileSystemId=?, ()) =>
-    new({volumeId, tags, clientRequestToken, fileSystemId})
+    new({
+      volumeId: volumeId,
+      tags: tags,
+      clientRequestToken: clientRequestToken,
+      fileSystemId: fileSystemId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CopyBackup = {
   type t
   type request = {
@@ -4923,9 +5029,18 @@ module CopyBackup = {
     ~sourceRegion=?,
     ~clientRequestToken=?,
     (),
-  ) => new({tags, copyTags, kmsKeyId, sourceRegion, sourceBackupId, clientRequestToken})
+  ) =>
+    new({
+      tags: tags,
+      copyTags: copyTags,
+      kmsKeyId: kmsKeyId,
+      sourceRegion: sourceRegion,
+      sourceBackupId: sourceBackupId,
+      clientRequestToken: clientRequestToken,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeBackups = {
   type t
   @ocaml.doc("<p>The request object for the <code>DescribeBackups</code> operation.</p>")
@@ -4962,6 +5077,6 @@ module DescribeBackups = {
   }
   @module("@aws-sdk/client-fsx") @new external new: request => t = "DescribeBackupsCommand"
   let make = (~nextToken=?, ~maxResults=?, ~filters=?, ~backupIds=?, ()) =>
-    new({nextToken, maxResults, filters, backupIds})
+    new({nextToken: nextToken, maxResults: maxResults, filters: filters, backupIds: backupIds})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

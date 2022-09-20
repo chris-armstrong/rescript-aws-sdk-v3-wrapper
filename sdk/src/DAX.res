@@ -363,6 +363,7 @@ module DeleteSubnetGroup = {
   let make = (~subnetGroupName, ()) => new({subnetGroupName: subnetGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteParameterGroup = {
   type t
   type request = {
@@ -379,6 +380,7 @@ module DeleteParameterGroup = {
   let make = (~parameterGroupName, ()) => new({parameterGroupName: parameterGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateParameterGroup = {
   type t
   type request = {
@@ -396,9 +398,11 @@ module CreateParameterGroup = {
     parameterGroup: option<parameterGroup>,
   }
   @module("@aws-sdk/client-dax") @new external new: request => t = "CreateParameterGroupCommand"
-  let make = (~parameterGroupName, ~description=?, ()) => new({description, parameterGroupName})
+  let make = (~parameterGroupName, ~description=?, ()) =>
+    new({description: description, parameterGroupName: parameterGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateParameterGroup = {
   type t
   type request = {
@@ -419,9 +423,10 @@ module UpdateParameterGroup = {
   }
   @module("@aws-sdk/client-dax") @new external new: request => t = "UpdateParameterGroupCommand"
   let make = (~parameterNameValues, ~parameterGroupName, ()) =>
-    new({parameterNameValues, parameterGroupName})
+    new({parameterNameValues: parameterNameValues, parameterGroupName: parameterGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UntagResource = {
   type t
   type request = {
@@ -439,9 +444,10 @@ module UntagResource = {
     tags: option<tagList_>,
   }
   @module("@aws-sdk/client-dax") @new external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceName, ()) => new({tagKeys, resourceName})
+  let make = (~tagKeys, ~resourceName, ()) => new({tagKeys: tagKeys, resourceName: resourceName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module TagResource = {
   type t
   type request = {
@@ -455,9 +461,10 @@ module TagResource = {
     tags: option<tagList_>,
   }
   @module("@aws-sdk/client-dax") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceName, ()) => new({tags, resourceName})
+  let make = (~tags, ~resourceName, ()) => new({tags: tags, resourceName: resourceName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListTags = {
   type t
   type request = {
@@ -478,9 +485,11 @@ module ListTags = {
     tags: option<tagList_>,
   }
   @module("@aws-sdk/client-dax") @new external new: request => t = "ListTagsCommand"
-  let make = (~resourceName, ~nextToken=?, ()) => new({nextToken, resourceName})
+  let make = (~resourceName, ~nextToken=?, ()) =>
+    new({nextToken: nextToken, resourceName: resourceName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeParameterGroups = {
   type t
   type request = {
@@ -511,9 +520,10 @@ module DescribeParameterGroups = {
   }
   @module("@aws-sdk/client-dax") @new external new: request => t = "DescribeParameterGroupsCommand"
   let make = (~nextToken=?, ~maxResults=?, ~parameterGroupNames=?, ()) =>
-    new({nextToken, maxResults, parameterGroupNames})
+    new({nextToken: nextToken, maxResults: maxResults, parameterGroupNames: parameterGroupNames})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeEvents = {
   type t
   type request = {
@@ -566,9 +576,19 @@ module DescribeEvents = {
     ~sourceType=?,
     ~sourceName=?,
     (),
-  ) => new({nextToken, maxResults, duration, endTime, startTime, sourceType, sourceName})
+  ) =>
+    new({
+      nextToken: nextToken,
+      maxResults: maxResults,
+      duration: duration,
+      endTime: endTime,
+      startTime: startTime,
+      sourceType: sourceType,
+      sourceName: sourceName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateSubnetGroup = {
   type t
   type request = {
@@ -585,9 +605,10 @@ module UpdateSubnetGroup = {
   }
   @module("@aws-sdk/client-dax") @new external new: request => t = "UpdateSubnetGroupCommand"
   let make = (~subnetGroupName, ~subnetIds=?, ~description=?, ()) =>
-    new({subnetIds, description, subnetGroupName})
+    new({subnetIds: subnetIds, description: description, subnetGroupName: subnetGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateSubnetGroup = {
   type t
   type request = {
@@ -607,9 +628,10 @@ module CreateSubnetGroup = {
   }
   @module("@aws-sdk/client-dax") @new external new: request => t = "CreateSubnetGroupCommand"
   let make = (~subnetIds, ~subnetGroupName, ~description=?, ()) =>
-    new({subnetIds, description, subnetGroupName})
+    new({subnetIds: subnetIds, description: description, subnetGroupName: subnetGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateCluster = {
   type t
   type request = {
@@ -654,16 +676,17 @@ module UpdateCluster = {
     (),
   ) =>
     new({
-      securityGroupIds,
-      parameterGroupName,
-      notificationTopicStatus,
-      notificationTopicArn,
-      preferredMaintenanceWindow,
-      description,
-      clusterName,
+      securityGroupIds: securityGroupIds,
+      parameterGroupName: parameterGroupName,
+      notificationTopicStatus: notificationTopicStatus,
+      notificationTopicArn: notificationTopicArn,
+      preferredMaintenanceWindow: preferredMaintenanceWindow,
+      description: description,
+      clusterName: clusterName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module RebootNode = {
   type t
   type request = {
@@ -679,9 +702,10 @@ module RebootNode = {
     cluster: option<cluster>,
   }
   @module("@aws-sdk/client-dax") @new external new: request => t = "RebootNodeCommand"
-  let make = (~nodeId, ~clusterName, ()) => new({nodeId, clusterName})
+  let make = (~nodeId, ~clusterName, ()) => new({nodeId: nodeId, clusterName: clusterName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module IncreaseReplicationFactor = {
   type t
   type request = {
@@ -704,9 +728,14 @@ module IncreaseReplicationFactor = {
   @module("@aws-sdk/client-dax") @new
   external new: request => t = "IncreaseReplicationFactorCommand"
   let make = (~newReplicationFactor, ~clusterName, ~availabilityZones=?, ()) =>
-    new({availabilityZones, newReplicationFactor, clusterName})
+    new({
+      availabilityZones: availabilityZones,
+      newReplicationFactor: newReplicationFactor,
+      clusterName: clusterName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeSubnetGroups = {
   type t
   type request = {
@@ -737,9 +766,10 @@ module DescribeSubnetGroups = {
   }
   @module("@aws-sdk/client-dax") @new external new: request => t = "DescribeSubnetGroupsCommand"
   let make = (~nextToken=?, ~maxResults=?, ~subnetGroupNames=?, ()) =>
-    new({nextToken, maxResults, subnetGroupNames})
+    new({nextToken: nextToken, maxResults: maxResults, subnetGroupNames: subnetGroupNames})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeParameters = {
   type t
   type request = {
@@ -774,9 +804,15 @@ module DescribeParameters = {
   }
   @module("@aws-sdk/client-dax") @new external new: request => t = "DescribeParametersCommand"
   let make = (~parameterGroupName, ~nextToken=?, ~maxResults=?, ~source=?, ()) =>
-    new({nextToken, maxResults, source, parameterGroupName})
+    new({
+      nextToken: nextToken,
+      maxResults: maxResults,
+      source: source,
+      parameterGroupName: parameterGroupName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeDefaultParameters = {
   type t
   type request = {
@@ -803,9 +839,11 @@ module DescribeDefaultParameters = {
   }
   @module("@aws-sdk/client-dax") @new
   external new: request => t = "DescribeDefaultParametersCommand"
-  let make = (~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults})
+  let make = (~nextToken=?, ~maxResults=?, ()) =>
+    new({nextToken: nextToken, maxResults: maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteCluster = {
   type t
   type request = {
@@ -820,6 +858,7 @@ module DeleteCluster = {
   let make = (~clusterName, ()) => new({clusterName: clusterName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DecreaseReplicationFactor = {
   type t
   type request = {
@@ -844,9 +883,15 @@ module DecreaseReplicationFactor = {
   @module("@aws-sdk/client-dax") @new
   external new: request => t = "DecreaseReplicationFactorCommand"
   let make = (~newReplicationFactor, ~clusterName, ~nodeIdsToRemove=?, ~availabilityZones=?, ()) =>
-    new({nodeIdsToRemove, availabilityZones, newReplicationFactor, clusterName})
+    new({
+      nodeIdsToRemove: nodeIdsToRemove,
+      availabilityZones: availabilityZones,
+      newReplicationFactor: newReplicationFactor,
+      clusterName: clusterName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateCluster = {
   type t
   type request = {
@@ -1012,23 +1057,24 @@ module CreateCluster = {
     (),
   ) =>
     new({
-      clusterEndpointEncryptionType,
-      ssespecification,
-      tags,
-      parameterGroupName,
-      iamRoleArn,
-      notificationTopicArn,
-      preferredMaintenanceWindow,
-      securityGroupIds,
-      subnetGroupName,
-      availabilityZones,
-      replicationFactor,
-      description,
-      nodeType,
-      clusterName,
+      clusterEndpointEncryptionType: clusterEndpointEncryptionType,
+      ssespecification: ssespecification,
+      tags: tags,
+      parameterGroupName: parameterGroupName,
+      iamRoleArn: iamRoleArn,
+      notificationTopicArn: notificationTopicArn,
+      preferredMaintenanceWindow: preferredMaintenanceWindow,
+      securityGroupIds: securityGroupIds,
+      subnetGroupName: subnetGroupName,
+      availabilityZones: availabilityZones,
+      replicationFactor: replicationFactor,
+      description: description,
+      nodeType: nodeType,
+      clusterName: clusterName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeClusters = {
   type t
   type request = {
@@ -1058,6 +1104,6 @@ module DescribeClusters = {
   }
   @module("@aws-sdk/client-dax") @new external new: request => t = "DescribeClustersCommand"
   let make = (~nextToken=?, ~maxResults=?, ~clusterNames=?, ()) =>
-    new({nextToken, maxResults, clusterNames})
+    new({nextToken: nextToken, maxResults: maxResults, clusterNames: clusterNames})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

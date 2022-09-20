@@ -2178,6 +2178,7 @@ module UpdateOrganizationConfiguration = {
   let make = (~autoEnable, ()) => new({autoEnable: autoEnable})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateMemberSession = {
   type t
   type request = {
@@ -2192,9 +2193,10 @@ module UpdateMemberSession = {
   }
   type response = {.}
   @module("@aws-sdk/client-macie2") @new external new: request => t = "UpdateMemberSessionCommand"
-  let make = (~status, ~id, ()) => new({status, id})
+  let make = (~status, ~id, ()) => new({status: status, id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateMacieSession = {
   type t
   type request = {
@@ -2210,9 +2212,10 @@ module UpdateMacieSession = {
   type response = {.}
   @module("@aws-sdk/client-macie2") @new external new: request => t = "UpdateMacieSessionCommand"
   let make = (~status=?, ~findingPublishingFrequency=?, ()) =>
-    new({status, findingPublishingFrequency})
+    new({status: status, findingPublishingFrequency: findingPublishingFrequency})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateClassificationJob = {
   type t
   type request = {
@@ -2225,9 +2228,10 @@ module UpdateClassificationJob = {
   type response = {.}
   @module("@aws-sdk/client-macie2") @new
   external new: request => t = "UpdateClassificationJobCommand"
-  let make = (~jobStatus, ~jobId, ()) => new({jobStatus, jobId})
+  let make = (~jobStatus, ~jobId, ()) => new({jobStatus: jobStatus, jobId: jobId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module GetMacieSession = {
   type t
   type request = {.}
@@ -2257,6 +2261,7 @@ module GetMacieSession = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetInvitationsCount = {
   type t
   type request = {.}
@@ -2270,6 +2275,7 @@ module GetInvitationsCount = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module EnableOrganizationAdminAccount = {
   type t
   type request = {
@@ -2285,9 +2291,11 @@ module EnableOrganizationAdminAccount = {
   type response = {.}
   @module("@aws-sdk/client-macie2") @new
   external new: request => t = "EnableOrganizationAdminAccountCommand"
-  let make = (~adminAccountId, ~clientToken=?, ()) => new({clientToken, adminAccountId})
+  let make = (~adminAccountId, ~clientToken=?, ()) =>
+    new({clientToken: clientToken, adminAccountId: adminAccountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module EnableMacie = {
   type t
   type request = {
@@ -2307,9 +2315,14 @@ module EnableMacie = {
   type response = {.}
   @module("@aws-sdk/client-macie2") @new external new: request => t = "EnableMacieCommand"
   let make = (~status=?, ~findingPublishingFrequency=?, ~clientToken=?, ()) =>
-    new({status, findingPublishingFrequency, clientToken})
+    new({
+      status: status,
+      findingPublishingFrequency: findingPublishingFrequency,
+      clientToken: clientToken,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DisassociateMember = {
   type t
   type request = {
@@ -2323,6 +2336,7 @@ module DisassociateMember = {
   let make = (~id, ()) => new({id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DisassociateFromMasterAccount = {
   type t
   type request = {.}
@@ -2332,6 +2346,7 @@ module DisassociateFromMasterAccount = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DisassociateFromAdministratorAccount = {
   type t
   type request = {.}
@@ -2341,6 +2356,7 @@ module DisassociateFromAdministratorAccount = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DisableOrganizationAdminAccount = {
   type t
   type request = {
@@ -2355,6 +2371,7 @@ module DisableOrganizationAdminAccount = {
   let make = (~adminAccountId, ()) => new({adminAccountId: adminAccountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DisableMacie = {
   type t
   type request = {.}
@@ -2363,6 +2380,7 @@ module DisableMacie = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DescribeOrganizationConfiguration = {
   type t
   type request = {.}
@@ -2381,6 +2399,7 @@ module DescribeOrganizationConfiguration = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteMember = {
   type t
   type request = {
@@ -2394,6 +2413,7 @@ module DeleteMember = {
   let make = (~id, ()) => new({id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteFindingsFilter = {
   type t
   type request = {
@@ -2407,6 +2427,7 @@ module DeleteFindingsFilter = {
   let make = (~id, ()) => new({id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteCustomDataIdentifier = {
   type t
   type request = {
@@ -2421,6 +2442,7 @@ module DeleteCustomDataIdentifier = {
   let make = (~id, ()) => new({id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module AcceptInvitation = {
   type t
   type request = {
@@ -2437,9 +2459,14 @@ module AcceptInvitation = {
   type response = {.}
   @module("@aws-sdk/client-macie2") @new external new: request => t = "AcceptInvitationCommand"
   let make = (~invitationId, ~masterAccount=?, ~administratorAccountId=?, ()) =>
-    new({masterAccount, invitationId, administratorAccountId})
+    new({
+      masterAccount: masterAccount,
+      invitationId: invitationId,
+      administratorAccountId: administratorAccountId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UntagResource = {
   type t
   type request = {
@@ -2454,9 +2481,10 @@ module UntagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-macie2") @new external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys, resourceArn})
+  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module TestCustomDataIdentifier = {
   type t
   type request = {
@@ -2490,9 +2518,16 @@ module TestCustomDataIdentifier = {
   @module("@aws-sdk/client-macie2") @new
   external new: request => t = "TestCustomDataIdentifierCommand"
   let make = (~sampleText, ~regex, ~maximumMatchDistance=?, ~keywords=?, ~ignoreWords=?, ()) =>
-    new({sampleText, regex, maximumMatchDistance, keywords, ignoreWords})
+    new({
+      sampleText: sampleText,
+      regex: regex,
+      maximumMatchDistance: maximumMatchDistance,
+      keywords: keywords,
+      ignoreWords: ignoreWords,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module TagResource = {
   type t
   type request = {
@@ -2507,9 +2542,10 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-macie2") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceArn, ()) => new({tags, resourceArn})
+  let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module PutFindingsPublicationConfiguration = {
   type t
   type request = {
@@ -2526,9 +2562,10 @@ module PutFindingsPublicationConfiguration = {
   @module("@aws-sdk/client-macie2") @new
   external new: request => t = "PutFindingsPublicationConfigurationCommand"
   let make = (~securityHubConfiguration=?, ~clientToken=?, ()) =>
-    new({securityHubConfiguration, clientToken})
+    new({securityHubConfiguration: securityHubConfiguration, clientToken: clientToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ListTagsForResource = {
   type t
   type request = {
@@ -2547,6 +2584,7 @@ module ListTagsForResource = {
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetMember = {
   type t
   type request = {
@@ -2587,6 +2625,7 @@ module GetMember = {
   let make = (~id, ()) => new({id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetMasterAccount = {
   type t
   type request = {.}
@@ -2600,6 +2639,7 @@ module GetMasterAccount = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetFindingsPublicationConfiguration = {
   type t
   type request = {.}
@@ -2614,6 +2654,7 @@ module GetFindingsPublicationConfiguration = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetBucketStatistics = {
   type t
   type request = {
@@ -2674,6 +2715,7 @@ module GetBucketStatistics = {
   let make = (~accountId=?, ()) => new({accountId: accountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetAdministratorAccount = {
   type t
   type request = {.}
@@ -2688,6 +2730,7 @@ module GetAdministratorAccount = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateSampleFindings = {
   type t
   type request = {
@@ -2701,6 +2744,7 @@ module CreateSampleFindings = {
   let make = (~findingTypes=?, ()) => new({findingTypes: findingTypes})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module CreateMember = {
   type t
   type request = {
@@ -2718,9 +2762,10 @@ module CreateMember = {
     arn: option<__string>,
   }
   @module("@aws-sdk/client-macie2") @new external new: request => t = "CreateMemberCommand"
-  let make = (~account, ~tags=?, ()) => new({tags, account})
+  let make = (~account, ~tags=?, ()) => new({tags: tags, account: account})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module PutClassificationExportConfiguration = {
   type t
   type request = {
@@ -2740,6 +2785,7 @@ module PutClassificationExportConfiguration = {
   let make = (~configuration, ()) => new({configuration: configuration})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListOrganizationAdminAccounts = {
   type t
   type request = {
@@ -2764,9 +2810,11 @@ module ListOrganizationAdminAccounts = {
   }
   @module("@aws-sdk/client-macie2") @new
   external new: request => t = "ListOrganizationAdminAccountsCommand"
-  let make = (~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults})
+  let make = (~nextToken=?, ~maxResults=?, ()) =>
+    new({nextToken: nextToken, maxResults: maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListManagedDataIdentifiers = {
   type t
   type request = {
@@ -2788,6 +2836,7 @@ module ListManagedDataIdentifiers = {
   let make = (~nextToken=?, ()) => new({nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListInvitations = {
   type t
   type request = {
@@ -2811,9 +2860,11 @@ module ListInvitations = {
     invitations: option<__listOfInvitation>,
   }
   @module("@aws-sdk/client-macie2") @new external new: request => t = "ListInvitationsCommand"
-  let make = (~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults})
+  let make = (~nextToken=?, ~maxResults=?, ()) =>
+    new({nextToken: nextToken, maxResults: maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListCustomDataIdentifiers = {
   type t
   type request = {
@@ -2834,9 +2885,11 @@ module ListCustomDataIdentifiers = {
   }
   @module("@aws-sdk/client-macie2") @new
   external new: request => t = "ListCustomDataIdentifiersCommand"
-  let make = (~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults})
+  let make = (~nextToken=?, ~maxResults=?, ()) =>
+    new({nextToken: nextToken, maxResults: maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetUsageTotals = {
   type t
   type request = {
@@ -2859,6 +2912,7 @@ module GetUsageTotals = {
   let make = (~timeRange=?, ()) => new({timeRange: timeRange})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetCustomDataIdentifier = {
   type t
   type request = {
@@ -2910,6 +2964,7 @@ module GetCustomDataIdentifier = {
   let make = (~id, ()) => new({id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetClassificationExportConfiguration = {
   type t
   type request = {.}
@@ -2924,6 +2979,7 @@ module GetClassificationExportConfiguration = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteInvitations = {
   type t
   type request = {
@@ -2942,6 +2998,7 @@ module DeleteInvitations = {
   let make = (~accountIds, ()) => new({accountIds: accountIds})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeclineInvitations = {
   type t
   type request = {
@@ -2960,6 +3017,7 @@ module DeclineInvitations = {
   let make = (~accountIds, ()) => new({accountIds: accountIds})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateInvitations = {
   type t
   type request = {
@@ -2984,9 +3042,14 @@ module CreateInvitations = {
   }
   @module("@aws-sdk/client-macie2") @new external new: request => t = "CreateInvitationsCommand"
   let make = (~accountIds, ~message=?, ~disableEmailNotification=?, ()) =>
-    new({message, disableEmailNotification, accountIds})
+    new({
+      message: message,
+      disableEmailNotification: disableEmailNotification,
+      accountIds: accountIds,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateCustomDataIdentifier = {
   type t
   type request = {
@@ -3046,18 +3109,19 @@ module CreateCustomDataIdentifier = {
     (),
   ) =>
     new({
-      tags,
-      severityLevels,
-      regex,
-      name,
-      maximumMatchDistance,
-      keywords,
-      ignoreWords,
-      description,
-      clientToken,
+      tags: tags,
+      severityLevels: severityLevels,
+      regex: regex,
+      name: name,
+      maximumMatchDistance: maximumMatchDistance,
+      keywords: keywords,
+      ignoreWords: ignoreWords,
+      description: description,
+      clientToken: clientToken,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module BatchGetCustomDataIdentifiers = {
   type t
   type request = {
@@ -3081,6 +3145,7 @@ module BatchGetCustomDataIdentifiers = {
   let make = (~ids=?, ()) => new({ids: ids})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListMembers = {
   type t
   type request = {
@@ -3109,9 +3174,10 @@ module ListMembers = {
   }
   @module("@aws-sdk/client-macie2") @new external new: request => t = "ListMembersCommand"
   let make = (~onlyAssociated=?, ~nextToken=?, ~maxResults=?, ()) =>
-    new({onlyAssociated, nextToken, maxResults})
+    new({onlyAssociated: onlyAssociated, nextToken: nextToken, maxResults: maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListFindingsFilters = {
   type t
   type request = {
@@ -3135,9 +3201,11 @@ module ListFindingsFilters = {
     findingsFilterListItems: option<__listOfFindingsFilterListItem>,
   }
   @module("@aws-sdk/client-macie2") @new external new: request => t = "ListFindingsFiltersCommand"
-  let make = (~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults})
+  let make = (~nextToken=?, ~maxResults=?, ()) =>
+    new({nextToken: nextToken, maxResults: maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateFindingsFilter = {
   type t
   type request = {
@@ -3184,9 +3252,19 @@ module UpdateFindingsFilter = {
     ~description=?,
     ~action=?,
     (),
-  ) => new({clientToken, position, name, id, findingCriteria, description, action})
+  ) =>
+    new({
+      clientToken: clientToken,
+      position: position,
+      name: name,
+      id: id,
+      findingCriteria: findingCriteria,
+      description: description,
+      action: action,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListFindings = {
   type t
   type request = {
@@ -3213,9 +3291,15 @@ module ListFindings = {
   }
   @module("@aws-sdk/client-macie2") @new external new: request => t = "ListFindingsCommand"
   let make = (~sortCriteria=?, ~nextToken=?, ~maxResults=?, ~findingCriteria=?, ()) =>
-    new({sortCriteria, nextToken, maxResults, findingCriteria})
+    new({
+      sortCriteria: sortCriteria,
+      nextToken: nextToken,
+      maxResults: maxResults,
+      findingCriteria: findingCriteria,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetFindingsFilter = {
   type t
   type request = {
@@ -3248,6 +3332,7 @@ module GetFindingsFilter = {
   let make = (~id, ()) => new({id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetFindingStatistics = {
   type t
   type request = {
@@ -3270,9 +3355,15 @@ module GetFindingStatistics = {
   }
   @module("@aws-sdk/client-macie2") @new external new: request => t = "GetFindingStatisticsCommand"
   let make = (~groupBy, ~sortCriteria=?, ~size=?, ~findingCriteria=?, ()) =>
-    new({sortCriteria, size, groupBy, findingCriteria})
+    new({
+      sortCriteria: sortCriteria,
+      size: size,
+      groupBy: groupBy,
+      findingCriteria: findingCriteria,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateFindingsFilter = {
   type t
   type request = {
@@ -3318,9 +3409,19 @@ module CreateFindingsFilter = {
     ~description=?,
     ~clientToken=?,
     (),
-  ) => new({tags, position, name, findingCriteria, description, clientToken, action})
+  ) =>
+    new({
+      tags: tags,
+      position: position,
+      name: name,
+      findingCriteria: findingCriteria,
+      description: description,
+      clientToken: clientToken,
+      action: action,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetUsageStatistics = {
   type t
   type request = {
@@ -3357,9 +3458,16 @@ module GetUsageStatistics = {
   }
   @module("@aws-sdk/client-macie2") @new external new: request => t = "GetUsageStatisticsCommand"
   let make = (~timeRange=?, ~sortBy=?, ~nextToken=?, ~maxResults=?, ~filterBy=?, ()) =>
-    new({timeRange, sortBy, nextToken, maxResults, filterBy})
+    new({
+      timeRange: timeRange,
+      sortBy: sortBy,
+      nextToken: nextToken,
+      maxResults: maxResults,
+      filterBy: filterBy,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeBuckets = {
   type t
   type request = {
@@ -3388,9 +3496,15 @@ module DescribeBuckets = {
   }
   @module("@aws-sdk/client-macie2") @new external new: request => t = "DescribeBucketsCommand"
   let make = (~sortCriteria=?, ~nextToken=?, ~maxResults=?, ~criteria=?, ()) =>
-    new({sortCriteria, nextToken, maxResults, criteria})
+    new({
+      sortCriteria: sortCriteria,
+      nextToken: nextToken,
+      maxResults: maxResults,
+      criteria: criteria,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module SearchResources = {
   type t
   type request = {
@@ -3421,9 +3535,15 @@ module SearchResources = {
   }
   @module("@aws-sdk/client-macie2") @new external new: request => t = "SearchResourcesCommand"
   let make = (~sortCriteria=?, ~nextToken=?, ~maxResults=?, ~bucketCriteria=?, ()) =>
-    new({sortCriteria, nextToken, maxResults, bucketCriteria})
+    new({
+      sortCriteria: sortCriteria,
+      nextToken: nextToken,
+      maxResults: maxResults,
+      bucketCriteria: bucketCriteria,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeClassificationJob = {
   type t
   type request = {
@@ -3504,6 +3624,7 @@ module DescribeClassificationJob = {
   let make = (~jobId, ()) => new({jobId: jobId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateClassificationJob = {
   type t
   type request = {
@@ -3576,21 +3697,22 @@ module CreateClassificationJob = {
     (),
   ) =>
     new({
-      tags,
-      scheduleFrequency,
-      samplingPercentage,
-      s3JobDefinition,
-      name,
-      managedDataIdentifierSelector,
-      managedDataIdentifierIds,
-      jobType,
-      initialRun,
-      description,
-      customDataIdentifierIds,
-      clientToken,
+      tags: tags,
+      scheduleFrequency: scheduleFrequency,
+      samplingPercentage: samplingPercentage,
+      s3JobDefinition: s3JobDefinition,
+      name: name,
+      managedDataIdentifierSelector: managedDataIdentifierSelector,
+      managedDataIdentifierIds: managedDataIdentifierIds,
+      jobType: jobType,
+      initialRun: initialRun,
+      description: description,
+      customDataIdentifierIds: customDataIdentifierIds,
+      clientToken: clientToken,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListClassificationJobs = {
   type t
   type request = {
@@ -3618,9 +3740,15 @@ module ListClassificationJobs = {
   @module("@aws-sdk/client-macie2") @new
   external new: request => t = "ListClassificationJobsCommand"
   let make = (~sortCriteria=?, ~nextToken=?, ~maxResults=?, ~filterCriteria=?, ()) =>
-    new({sortCriteria, nextToken, maxResults, filterCriteria})
+    new({
+      sortCriteria: sortCriteria,
+      nextToken: nextToken,
+      maxResults: maxResults,
+      filterCriteria: filterCriteria,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetFindings = {
   type t
   type request = {
@@ -3638,6 +3766,7 @@ module GetFindings = {
     findings: option<__listOfFinding>,
   }
   @module("@aws-sdk/client-macie2") @new external new: request => t = "GetFindingsCommand"
-  let make = (~findingIds, ~sortCriteria=?, ()) => new({sortCriteria, findingIds})
+  let make = (~findingIds, ~sortCriteria=?, ()) =>
+    new({sortCriteria: sortCriteria, findingIds: findingIds})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

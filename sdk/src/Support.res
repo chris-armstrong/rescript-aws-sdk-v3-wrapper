@@ -571,6 +571,7 @@ module ResolveCase = {
   let make = (~caseId=?, ()) => new({caseId: caseId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module RefreshTrustedAdvisorCheck = {
   type t
   @ocaml.doc("<p></p>")
@@ -593,6 +594,7 @@ module RefreshTrustedAdvisorCheck = {
   let make = (~checkId, ()) => new({checkId: checkId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeAttachment = {
   type t
   type request = {
@@ -616,6 +618,7 @@ module DescribeAttachment = {
   let make = (~attachmentId, ()) => new({attachmentId: attachmentId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateCase = {
   type t
   type request = {
@@ -683,18 +686,19 @@ module CreateCase = {
     (),
   ) =>
     new({
-      attachmentSetId,
-      issueType,
-      language,
-      ccEmailAddresses,
-      communicationBody,
-      categoryCode,
-      severityCode,
-      serviceCode,
-      subject,
+      attachmentSetId: attachmentSetId,
+      issueType: issueType,
+      language: language,
+      ccEmailAddresses: ccEmailAddresses,
+      communicationBody: communicationBody,
+      categoryCode: categoryCode,
+      severityCode: severityCode,
+      serviceCode: serviceCode,
+      subject: subject,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module AddCommunicationToCase = {
   type t
   type request = {
@@ -723,9 +727,15 @@ module AddCommunicationToCase = {
   @module("@aws-sdk/client-support") @new
   external new: request => t = "AddCommunicationToCaseCommand"
   let make = (~communicationBody, ~attachmentSetId=?, ~ccEmailAddresses=?, ~caseId=?, ()) =>
-    new({attachmentSetId, ccEmailAddresses, communicationBody, caseId})
+    new({
+      attachmentSetId: attachmentSetId,
+      ccEmailAddresses: ccEmailAddresses,
+      communicationBody: communicationBody,
+      caseId: caseId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeTrustedAdvisorCheckRefreshStatuses = {
   type t
   type request = {
@@ -748,6 +758,7 @@ module DescribeTrustedAdvisorCheckRefreshStatuses = {
   let make = (~checkIds, ()) => new({checkIds: checkIds})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeSeverityLevels = {
   type t
   type request = {
@@ -768,6 +779,7 @@ module DescribeSeverityLevels = {
   let make = (~language=?, ()) => new({language: language})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module AddAttachmentsToSet = {
   type t
   type request = {
@@ -798,9 +810,11 @@ module AddAttachmentsToSet = {
     attachmentSetId: option<attachmentSetId>,
   }
   @module("@aws-sdk/client-support") @new external new: request => t = "AddAttachmentsToSetCommand"
-  let make = (~attachments, ~attachmentSetId=?, ()) => new({attachments, attachmentSetId})
+  let make = (~attachments, ~attachmentSetId=?, ()) =>
+    new({attachments: attachments, attachmentSetId: attachmentSetId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeTrustedAdvisorChecks = {
   type t
   type request = {
@@ -821,6 +835,7 @@ module DescribeTrustedAdvisorChecks = {
   let make = (~language, ()) => new({language: language})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeTrustedAdvisorCheckSummaries = {
   type t
   type request = {@ocaml.doc("<p>The IDs of the Trusted Advisor checks.</p>") checkIds: stringList}
@@ -836,6 +851,7 @@ module DescribeTrustedAdvisorCheckSummaries = {
   let make = (~checkIds, ()) => new({checkIds: checkIds})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeTrustedAdvisorCheckResult = {
   type t
   @ocaml.doc("<p></p>")
@@ -855,9 +871,10 @@ module DescribeTrustedAdvisorCheckResult = {
   }
   @module("@aws-sdk/client-support") @new
   external new: request => t = "DescribeTrustedAdvisorCheckResultCommand"
-  let make = (~checkId, ~language=?, ()) => new({language, checkId})
+  let make = (~checkId, ~language=?, ()) => new({language: language, checkId: checkId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeServices = {
   type t
   type request = {
@@ -877,9 +894,11 @@ module DescribeServices = {
     services: option<serviceList>,
   }
   @module("@aws-sdk/client-support") @new external new: request => t = "DescribeServicesCommand"
-  let make = (~language=?, ~serviceCodeList=?, ()) => new({language, serviceCodeList})
+  let make = (~language=?, ~serviceCodeList=?, ()) =>
+    new({language: language, serviceCodeList: serviceCodeList})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeCommunications = {
   type t
   type request = {
@@ -907,9 +926,16 @@ module DescribeCommunications = {
   @module("@aws-sdk/client-support") @new
   external new: request => t = "DescribeCommunicationsCommand"
   let make = (~caseId, ~maxResults=?, ~nextToken=?, ~afterTime=?, ~beforeTime=?, ()) =>
-    new({maxResults, nextToken, afterTime, beforeTime, caseId})
+    new({
+      maxResults: maxResults,
+      nextToken: nextToken,
+      afterTime: afterTime,
+      beforeTime: beforeTime,
+      caseId: caseId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeCases = {
   type t
   type request = {
@@ -961,15 +987,15 @@ module DescribeCases = {
     (),
   ) =>
     new({
-      includeCommunications,
-      language,
-      maxResults,
-      nextToken,
-      includeResolvedCases,
-      beforeTime,
-      afterTime,
-      displayId,
-      caseIdList,
+      includeCommunications: includeCommunications,
+      language: language,
+      maxResults: maxResults,
+      nextToken: nextToken,
+      includeResolvedCases: includeResolvedCases,
+      beforeTime: beforeTime,
+      afterTime: afterTime,
+      displayId: displayId,
+      caseIdList: caseIdList,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

@@ -1348,9 +1348,10 @@ module UpdateMLModel = {
   @module("@aws-sdk/client-machinelearning") @new
   external new: request => t = "UpdateMLModelCommand"
   let make = (~mlmodelId, ~scoreThreshold=?, ~mlmodelName=?, ()) =>
-    new({scoreThreshold, mlmodelName, mlmodelId})
+    new({scoreThreshold: scoreThreshold, mlmodelName: mlmodelName, mlmodelId: mlmodelId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateEvaluation = {
   type t
   type request = {
@@ -1373,9 +1374,11 @@ module UpdateEvaluation = {
   }
   @module("@aws-sdk/client-machinelearning") @new
   external new: request => t = "UpdateEvaluationCommand"
-  let make = (~evaluationName, ~evaluationId, ()) => new({evaluationName, evaluationId})
+  let make = (~evaluationName, ~evaluationId, ()) =>
+    new({evaluationName: evaluationName, evaluationId: evaluationId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateDataSource = {
   type t
   type request = {
@@ -1398,9 +1401,11 @@ module UpdateDataSource = {
   }
   @module("@aws-sdk/client-machinelearning") @new
   external new: request => t = "UpdateDataSourceCommand"
-  let make = (~dataSourceName, ~dataSourceId, ()) => new({dataSourceName, dataSourceId})
+  let make = (~dataSourceName, ~dataSourceId, ()) =>
+    new({dataSourceName: dataSourceName, dataSourceId: dataSourceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateBatchPrediction = {
   type t
   type request = {
@@ -1424,9 +1429,10 @@ module UpdateBatchPrediction = {
   @module("@aws-sdk/client-machinelearning") @new
   external new: request => t = "UpdateBatchPredictionCommand"
   let make = (~batchPredictionName, ~batchPredictionId, ()) =>
-    new({batchPredictionName, batchPredictionId})
+    new({batchPredictionName: batchPredictionName, batchPredictionId: batchPredictionId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetBatchPrediction = {
   type t
   type request = {
@@ -1545,6 +1551,7 @@ module GetBatchPrediction = {
   let make = (~batchPredictionId, ()) => new({batchPredictionId: batchPredictionId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteMLModel = {
   type t
   type request = {
@@ -1567,6 +1574,7 @@ module DeleteMLModel = {
   let make = (~mlmodelId, ()) => new({mlmodelId: mlmodelId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteEvaluation = {
   type t
   type request = {
@@ -1591,6 +1599,7 @@ module DeleteEvaluation = {
   let make = (~evaluationId, ()) => new({evaluationId: evaluationId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteDataSource = {
   type t
   type request = {
@@ -1611,6 +1620,7 @@ module DeleteDataSource = {
   let make = (~dataSourceId, ()) => new({dataSourceId: dataSourceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteBatchPrediction = {
   type t
   type request = {
@@ -1635,6 +1645,7 @@ module DeleteBatchPrediction = {
   let make = (~batchPredictionId, ()) => new({batchPredictionId: batchPredictionId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateEvaluation = {
   type t
   type request = {
@@ -1668,9 +1679,15 @@ module CreateEvaluation = {
   @module("@aws-sdk/client-machinelearning") @new
   external new: request => t = "CreateEvaluationCommand"
   let make = (~evaluationDataSourceId, ~mlmodelId, ~evaluationId, ~evaluationName=?, ()) =>
-    new({evaluationDataSourceId, mlmodelId, evaluationName, evaluationId})
+    new({
+      evaluationDataSourceId: evaluationDataSourceId,
+      mlmodelId: mlmodelId,
+      evaluationName: evaluationName,
+      evaluationId: evaluationId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateBatchPrediction = {
   type t
   type request = {
@@ -1718,9 +1735,16 @@ module CreateBatchPrediction = {
     ~batchPredictionName=?,
     (),
   ) =>
-    new({outputUri, batchPredictionDataSourceId, mlmodelId, batchPredictionName, batchPredictionId})
+    new({
+      outputUri: outputUri,
+      batchPredictionDataSourceId: batchPredictionDataSourceId,
+      mlmodelId: mlmodelId,
+      batchPredictionName: batchPredictionName,
+      batchPredictionId: batchPredictionId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetMLModel = {
   type t
   type request = {
@@ -1910,9 +1934,10 @@ module GetMLModel = {
     mlmodelId: option<entityId>,
   }
   @module("@aws-sdk/client-machinelearning") @new external new: request => t = "GetMLModelCommand"
-  let make = (~mlmodelId, ~verbose=?, ()) => new({verbose, mlmodelId})
+  let make = (~mlmodelId, ~verbose=?, ()) => new({verbose: verbose, mlmodelId: mlmodelId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteTags = {
   type t
   type request = {
@@ -1931,9 +1956,11 @@ module DeleteTags = {
     resourceId: option<entityId>,
   }
   @module("@aws-sdk/client-machinelearning") @new external new: request => t = "DeleteTagsCommand"
-  let make = (~resourceType, ~resourceId, ~tagKeys, ()) => new({resourceType, resourceId, tagKeys})
+  let make = (~resourceType, ~resourceId, ~tagKeys, ()) =>
+    new({resourceType: resourceType, resourceId: resourceId, tagKeys: tagKeys})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteRealtimeEndpoint = {
   type t
   type request = {
@@ -1958,6 +1985,7 @@ module DeleteRealtimeEndpoint = {
   let make = (~mlmodelId, ()) => new({mlmodelId: mlmodelId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateRealtimeEndpoint = {
   type t
   type request = {
@@ -1984,6 +2012,7 @@ module CreateRealtimeEndpoint = {
   let make = (~mlmodelId, ()) => new({mlmodelId: mlmodelId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateMLModel = {
   type t
   type request = {
@@ -2091,9 +2120,18 @@ module CreateMLModel = {
     ~mlmodelName=?,
     (),
   ) =>
-    new({recipeUri, recipe, trainingDataSourceId, parameters, mlmodelType, mlmodelName, mlmodelId})
+    new({
+      recipeUri: recipeUri,
+      recipe: recipe,
+      trainingDataSourceId: trainingDataSourceId,
+      parameters: parameters,
+      mlmodelType: mlmodelType,
+      mlmodelName: mlmodelName,
+      mlmodelId: mlmodelId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateDataSourceFromS3 = {
   type t
   type request = {
@@ -2144,9 +2182,15 @@ module CreateDataSourceFromS3 = {
   @module("@aws-sdk/client-machinelearning") @new
   external new: request => t = "CreateDataSourceFromS3Command"
   let make = (~dataSpec, ~dataSourceId, ~computeStatistics=?, ~dataSourceName=?, ()) =>
-    new({computeStatistics, dataSpec, dataSourceName, dataSourceId})
+    new({
+      computeStatistics: computeStatistics,
+      dataSpec: dataSpec,
+      dataSourceName: dataSourceName,
+      dataSourceId: dataSourceId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module Predict = {
   type t
   type request = {
@@ -2158,9 +2202,10 @@ module Predict = {
   type response = {@as("Prediction") prediction: option<prediction>}
   @module("@aws-sdk/client-machinelearning") @new external new: request => t = "PredictCommand"
   let make = (~predictEndpoint, ~record, ~mlmodelId, ()) =>
-    new({predictEndpoint, record, mlmodelId})
+    new({predictEndpoint: predictEndpoint, record: record, mlmodelId: mlmodelId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetEvaluation = {
   type t
   type request = {
@@ -2282,6 +2327,7 @@ module GetEvaluation = {
   let make = (~evaluationId, ()) => new({evaluationId: evaluationId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetDataSource = {
   type t
   type request = {
@@ -2401,9 +2447,10 @@ module GetDataSource = {
   }
   @module("@aws-sdk/client-machinelearning") @new
   external new: request => t = "GetDataSourceCommand"
-  let make = (~dataSourceId, ~verbose=?, ()) => new({verbose, dataSourceId})
+  let make = (~dataSourceId, ~verbose=?, ()) => new({verbose: verbose, dataSourceId: dataSourceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeTags = {
   type t
   type request = {
@@ -2423,9 +2470,11 @@ module DescribeTags = {
     resourceId: option<entityId>,
   }
   @module("@aws-sdk/client-machinelearning") @new external new: request => t = "DescribeTagsCommand"
-  let make = (~resourceType, ~resourceId, ()) => new({resourceType, resourceId})
+  let make = (~resourceType, ~resourceId, ()) =>
+    new({resourceType: resourceType, resourceId: resourceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeBatchPredictions = {
   type t
   type request = {
@@ -2561,9 +2610,23 @@ module DescribeBatchPredictions = {
     ~eq=?,
     ~filterVariable=?,
     (),
-  ) => new({limit, nextToken, sortOrder, prefix, ne, le, ge, lt, gt, eq, filterVariable})
+  ) =>
+    new({
+      limit: limit,
+      nextToken: nextToken,
+      sortOrder: sortOrder,
+      prefix: prefix,
+      ne: ne,
+      le: le,
+      ge: ge,
+      lt: lt,
+      gt: gt,
+      eq: eq,
+      filterVariable: filterVariable,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateDataSourceFromRedshift = {
   type t
   type request = {
@@ -2648,9 +2711,16 @@ module CreateDataSourceFromRedshift = {
   @module("@aws-sdk/client-machinelearning") @new
   external new: request => t = "CreateDataSourceFromRedshiftCommand"
   let make = (~roleARN, ~dataSpec, ~dataSourceId, ~computeStatistics=?, ~dataSourceName=?, ()) =>
-    new({computeStatistics, roleARN, dataSpec, dataSourceName, dataSourceId})
+    new({
+      computeStatistics: computeStatistics,
+      roleARN: roleARN,
+      dataSpec: dataSpec,
+      dataSourceName: dataSourceName,
+      dataSourceId: dataSourceId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateDataSourceFromRDS = {
   type t
   type request = {
@@ -2739,9 +2809,16 @@ module CreateDataSourceFromRDS = {
   @module("@aws-sdk/client-machinelearning") @new
   external new: request => t = "CreateDataSourceFromRDSCommand"
   let make = (~roleARN, ~rdsdata, ~dataSourceId, ~computeStatistics=?, ~dataSourceName=?, ()) =>
-    new({computeStatistics, roleARN, rdsdata, dataSourceName, dataSourceId})
+    new({
+      computeStatistics: computeStatistics,
+      roleARN: roleARN,
+      rdsdata: rdsdata,
+      dataSourceName: dataSourceName,
+      dataSourceId: dataSourceId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module AddTags = {
   type t
   type request = {
@@ -2764,9 +2841,11 @@ module AddTags = {
     resourceId: option<entityId>,
   }
   @module("@aws-sdk/client-machinelearning") @new external new: request => t = "AddTagsCommand"
-  let make = (~resourceType, ~resourceId, ~tags, ()) => new({resourceType, resourceId, tags})
+  let make = (~resourceType, ~resourceId, ~tags, ()) =>
+    new({resourceType: resourceType, resourceId: resourceId, tags: tags})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeMLModels = {
   type t
   type request = {
@@ -2909,9 +2988,23 @@ module DescribeMLModels = {
     ~eq=?,
     ~filterVariable=?,
     (),
-  ) => new({limit, nextToken, sortOrder, prefix, ne, le, ge, lt, gt, eq, filterVariable})
+  ) =>
+    new({
+      limit: limit,
+      nextToken: nextToken,
+      sortOrder: sortOrder,
+      prefix: prefix,
+      ne: ne,
+      le: le,
+      ge: ge,
+      lt: lt,
+      gt: gt,
+      eq: eq,
+      filterVariable: filterVariable,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeEvaluations = {
   type t
   type request = {
@@ -3045,9 +3138,23 @@ module DescribeEvaluations = {
     ~eq=?,
     ~filterVariable=?,
     (),
-  ) => new({limit, nextToken, sortOrder, prefix, ne, le, ge, lt, gt, eq, filterVariable})
+  ) =>
+    new({
+      limit: limit,
+      nextToken: nextToken,
+      sortOrder: sortOrder,
+      prefix: prefix,
+      ne: ne,
+      le: le,
+      ge: ge,
+      lt: lt,
+      gt: gt,
+      eq: eq,
+      filterVariable: filterVariable,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeDataSources = {
   type t
   type request = {
@@ -3172,6 +3279,19 @@ module DescribeDataSources = {
     ~eq=?,
     ~filterVariable=?,
     (),
-  ) => new({limit, nextToken, sortOrder, prefix, ne, le, ge, lt, gt, eq, filterVariable})
+  ) =>
+    new({
+      limit: limit,
+      nextToken: nextToken,
+      sortOrder: sortOrder,
+      prefix: prefix,
+      ne: ne,
+      le: le,
+      ge: ge,
+      lt: lt,
+      gt: gt,
+      eq: eq,
+      filterVariable: filterVariable,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

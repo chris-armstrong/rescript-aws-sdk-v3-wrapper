@@ -3461,9 +3461,14 @@ module UpdateContributorInsights = {
   @module("@aws-sdk/client-dynamodb") @new
   external new: request => t = "UpdateContributorInsightsCommand"
   let make = (~contributorInsightsAction, ~tableName, ~indexName=?, ()) =>
-    new({contributorInsightsAction, indexName, tableName})
+    new({
+      contributorInsightsAction: contributorInsightsAction,
+      indexName: indexName,
+      tableName: tableName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module EnableKinesisStreamingDestination = {
   type t
   type request = {
@@ -3480,9 +3485,10 @@ module EnableKinesisStreamingDestination = {
   }
   @module("@aws-sdk/client-dynamodb") @new
   external new: request => t = "EnableKinesisStreamingDestinationCommand"
-  let make = (~streamArn, ~tableName, ()) => new({streamArn, tableName})
+  let make = (~streamArn, ~tableName, ()) => new({streamArn: streamArn, tableName: tableName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DisableKinesisStreamingDestination = {
   type t
   type request = {
@@ -3499,9 +3505,10 @@ module DisableKinesisStreamingDestination = {
   }
   @module("@aws-sdk/client-dynamodb") @new
   external new: request => t = "DisableKinesisStreamingDestinationCommand"
-  let make = (~streamArn, ~tableName, ()) => new({streamArn, tableName})
+  let make = (~streamArn, ~tableName, ()) => new({streamArn: streamArn, tableName: tableName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeLimits = {
   type t
   type request = {.}
@@ -3530,6 +3537,7 @@ module DescribeLimits = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateTimeToLive = {
   type t
   @ocaml.doc("<p>Represents the input of an <code>UpdateTimeToLive</code> operation.</p>")
@@ -3547,9 +3555,11 @@ module UpdateTimeToLive = {
     timeToLiveSpecification: option<timeToLiveSpecification>,
   }
   @module("@aws-sdk/client-dynamodb") @new external new: request => t = "UpdateTimeToLiveCommand"
-  let make = (~timeToLiveSpecification, ~tableName, ()) => new({timeToLiveSpecification, tableName})
+  let make = (~timeToLiveSpecification, ~tableName, ()) =>
+    new({timeToLiveSpecification: timeToLiveSpecification, tableName: tableName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UntagResource = {
   type t
   type request = {
@@ -3564,9 +3574,10 @@ module UntagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-dynamodb") @new external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys, resourceArn})
+  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ListTables = {
   type t
   @ocaml.doc("<p>Represents the input of a <code>ListTables</code> operation.</p>")
@@ -3599,9 +3610,11 @@ module ListTables = {
     tableNames: option<tableNameList>,
   }
   @module("@aws-sdk/client-dynamodb") @new external new: request => t = "ListTablesCommand"
-  let make = (~limit=?, ~exclusiveStartTableName=?, ()) => new({limit, exclusiveStartTableName})
+  let make = (~limit=?, ~exclusiveStartTableName=?, ()) =>
+    new({limit: limit, exclusiveStartTableName: exclusiveStartTableName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ExportTableToPointInTime = {
   type t
   type request = {
@@ -3678,18 +3691,19 @@ module ExportTableToPointInTime = {
     (),
   ) =>
     new({
-      exportFormat,
-      s3SseKmsKeyId,
-      s3SseAlgorithm,
-      s3Prefix,
-      s3BucketOwner,
-      s3Bucket,
-      clientToken,
-      exportTime,
-      tableArn,
+      exportFormat: exportFormat,
+      s3SseKmsKeyId: s3SseKmsKeyId,
+      s3SseAlgorithm: s3SseAlgorithm,
+      s3Prefix: s3Prefix,
+      s3BucketOwner: s3BucketOwner,
+      s3Bucket: s3Bucket,
+      clientToken: clientToken,
+      exportTime: exportTime,
+      tableArn: tableArn,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeTimeToLive = {
   type t
   type request = {
@@ -3704,6 +3718,7 @@ module DescribeTimeToLive = {
   let make = (~tableName, ()) => new({tableName: tableName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeExport = {
   type t
   type request = {
@@ -3718,6 +3733,7 @@ module DescribeExport = {
   let make = (~exportArn, ()) => new({exportArn: exportArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeContributorInsights = {
   type t
   type request = {
@@ -3765,9 +3781,10 @@ module DescribeContributorInsights = {
   }
   @module("@aws-sdk/client-dynamodb") @new
   external new: request => t = "DescribeContributorInsightsCommand"
-  let make = (~tableName, ~indexName=?, ()) => new({indexName, tableName})
+  let make = (~tableName, ~indexName=?, ()) => new({indexName: indexName, tableName: tableName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateBackup = {
   type t
   type request = {
@@ -3780,9 +3797,10 @@ module CreateBackup = {
     backupDetails: option<backupDetails>,
   }
   @module("@aws-sdk/client-dynamodb") @new external new: request => t = "CreateBackupCommand"
-  let make = (~backupName, ~tableName, ()) => new({backupName, tableName})
+  let make = (~backupName, ~tableName, ()) => new({backupName: backupName, tableName: tableName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateContinuousBackups = {
   type t
   type request = {
@@ -3800,9 +3818,10 @@ module UpdateContinuousBackups = {
   @module("@aws-sdk/client-dynamodb") @new
   external new: request => t = "UpdateContinuousBackupsCommand"
   let make = (~pointInTimeRecoverySpecification, ~tableName, ()) =>
-    new({pointInTimeRecoverySpecification, tableName})
+    new({pointInTimeRecoverySpecification: pointInTimeRecoverySpecification, tableName: tableName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module TagResource = {
   type t
   type request = {
@@ -3815,9 +3834,10 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-dynamodb") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceArn, ()) => new({tags, resourceArn})
+  let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ListTagsOfResource = {
   type t
   type request = {
@@ -3841,9 +3861,11 @@ module ListTagsOfResource = {
     tags: option<tagList_>,
   }
   @module("@aws-sdk/client-dynamodb") @new external new: request => t = "ListTagsOfResourceCommand"
-  let make = (~resourceArn, ~nextToken=?, ()) => new({nextToken, resourceArn})
+  let make = (~resourceArn, ~nextToken=?, ()) =>
+    new({nextToken: nextToken, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListExports = {
   type t
   type request = {
@@ -3869,9 +3891,10 @@ module ListExports = {
   }
   @module("@aws-sdk/client-dynamodb") @new external new: request => t = "ListExportsCommand"
   let make = (~nextToken=?, ~maxResults=?, ~tableArn=?, ()) =>
-    new({nextToken, maxResults, tableArn})
+    new({nextToken: nextToken, maxResults: maxResults, tableArn: tableArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListContributorInsights = {
   type t
   type request = {
@@ -3890,9 +3913,10 @@ module ListContributorInsights = {
   @module("@aws-sdk/client-dynamodb") @new
   external new: request => t = "ListContributorInsightsCommand"
   let make = (~maxResults=?, ~nextToken=?, ~tableName=?, ()) =>
-    new({maxResults, nextToken, tableName})
+    new({maxResults: maxResults, nextToken: nextToken, tableName: tableName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListBackups = {
   type t
   type request = {
@@ -3962,15 +3986,16 @@ module ListBackups = {
     (),
   ) =>
     new({
-      backupType,
-      exclusiveStartBackupArn,
-      timeRangeUpperBound,
-      timeRangeLowerBound,
-      limit,
-      tableName,
+      backupType: backupType,
+      exclusiveStartBackupArn: exclusiveStartBackupArn,
+      timeRangeUpperBound: timeRangeUpperBound,
+      timeRangeLowerBound: timeRangeLowerBound,
+      limit: limit,
+      tableName: tableName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeKinesisStreamingDestination = {
   type t
   type request = {
@@ -3989,6 +4014,7 @@ module DescribeKinesisStreamingDestination = {
   let make = (~tableName, ()) => new({tableName: tableName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeEndpoints = {
   type t
   type request = {.}
@@ -3997,6 +4023,7 @@ module DescribeEndpoints = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeContinuousBackups = {
   type t
   type request = {
@@ -4016,6 +4043,7 @@ module DescribeContinuousBackups = {
   let make = (~tableName, ()) => new({tableName: tableName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListGlobalTables = {
   type t
   type request = {
@@ -4041,9 +4069,14 @@ module ListGlobalTables = {
   }
   @module("@aws-sdk/client-dynamodb") @new external new: request => t = "ListGlobalTablesCommand"
   let make = (~regionName=?, ~limit=?, ~exclusiveStartGlobalTableName=?, ()) =>
-    new({regionName, limit, exclusiveStartGlobalTableName})
+    new({
+      regionName: regionName,
+      limit: limit,
+      exclusiveStartGlobalTableName: exclusiveStartGlobalTableName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateTable = {
   type t
   @ocaml.doc("<p>Represents the input of an <code>UpdateTable</code> operation.</p>")
@@ -4143,18 +4176,19 @@ module UpdateTable = {
     (),
   ) =>
     new({
-      tableClass,
-      replicaUpdates,
-      ssespecification,
-      streamSpecification,
-      globalSecondaryIndexUpdates,
-      provisionedThroughput,
-      billingMode,
-      tableName,
-      attributeDefinitions,
+      tableClass: tableClass,
+      replicaUpdates: replicaUpdates,
+      ssespecification: ssespecification,
+      streamSpecification: streamSpecification,
+      globalSecondaryIndexUpdates: globalSecondaryIndexUpdates,
+      provisionedThroughput: provisionedThroughput,
+      billingMode: billingMode,
+      tableName: tableName,
+      attributeDefinitions: attributeDefinitions,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateGlobalTable = {
   type t
   type request = {
@@ -4168,9 +4202,11 @@ module UpdateGlobalTable = {
     globalTableDescription: option<globalTableDescription>,
   }
   @module("@aws-sdk/client-dynamodb") @new external new: request => t = "UpdateGlobalTableCommand"
-  let make = (~replicaUpdates, ~globalTableName, ()) => new({replicaUpdates, globalTableName})
+  let make = (~replicaUpdates, ~globalTableName, ()) =>
+    new({replicaUpdates: replicaUpdates, globalTableName: globalTableName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module RestoreTableToPointInTime = {
   type t
   type request = {
@@ -4228,19 +4264,20 @@ module RestoreTableToPointInTime = {
     (),
   ) =>
     new({
-      ssespecificationOverride,
-      provisionedThroughputOverride,
-      localSecondaryIndexOverride,
-      globalSecondaryIndexOverride,
-      billingModeOverride,
-      restoreDateTime,
-      useLatestRestorableTime,
-      targetTableName,
-      sourceTableName,
-      sourceTableArn,
+      ssespecificationOverride: ssespecificationOverride,
+      provisionedThroughputOverride: provisionedThroughputOverride,
+      localSecondaryIndexOverride: localSecondaryIndexOverride,
+      globalSecondaryIndexOverride: globalSecondaryIndexOverride,
+      billingModeOverride: billingModeOverride,
+      restoreDateTime: restoreDateTime,
+      useLatestRestorableTime: useLatestRestorableTime,
+      targetTableName: targetTableName,
+      sourceTableName: sourceTableName,
+      sourceTableArn: sourceTableArn,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module RestoreTableFromBackup = {
   type t
   type request = {
@@ -4286,16 +4323,17 @@ module RestoreTableFromBackup = {
     (),
   ) =>
     new({
-      ssespecificationOverride,
-      provisionedThroughputOverride,
-      localSecondaryIndexOverride,
-      globalSecondaryIndexOverride,
-      billingModeOverride,
-      backupArn,
-      targetTableName,
+      ssespecificationOverride: ssespecificationOverride,
+      provisionedThroughputOverride: provisionedThroughputOverride,
+      localSecondaryIndexOverride: localSecondaryIndexOverride,
+      globalSecondaryIndexOverride: globalSecondaryIndexOverride,
+      billingModeOverride: billingModeOverride,
+      backupArn: backupArn,
+      targetTableName: targetTableName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeTable = {
   type t
   @ocaml.doc("<p>Represents the input of a <code>DescribeTable</code> operation.</p>")
@@ -4310,6 +4348,7 @@ module DescribeTable = {
   let make = (~tableName, ()) => new({tableName: tableName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeGlobalTable = {
   type t
   type request = {
@@ -4324,6 +4363,7 @@ module DescribeGlobalTable = {
   let make = (~globalTableName, ()) => new({globalTableName: globalTableName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeBackup = {
   type t
   type request = {
@@ -4339,6 +4379,7 @@ module DescribeBackup = {
   let make = (~backupArn, ()) => new({backupArn: backupArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteTable = {
   type t
   @ocaml.doc("<p>Represents the input of a <code>DeleteTable</code> operation.</p>")
@@ -4354,6 +4395,7 @@ module DeleteTable = {
   let make = (~tableName, ()) => new({tableName: tableName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteBackup = {
   type t
   type request = {
@@ -4368,6 +4410,7 @@ module DeleteBackup = {
   let make = (~backupArn, ()) => new({backupArn: backupArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateTable = {
   type t
   @ocaml.doc("<p>Represents the input of a <code>CreateTable</code> operation.</p>")
@@ -4644,20 +4687,21 @@ module CreateTable = {
     (),
   ) =>
     new({
-      tableClass,
-      tags,
-      ssespecification,
-      streamSpecification,
-      provisionedThroughput,
-      billingMode,
-      globalSecondaryIndexes,
-      localSecondaryIndexes,
-      keySchema,
-      tableName,
-      attributeDefinitions,
+      tableClass: tableClass,
+      tags: tags,
+      ssespecification: ssespecification,
+      streamSpecification: streamSpecification,
+      provisionedThroughput: provisionedThroughput,
+      billingMode: billingMode,
+      globalSecondaryIndexes: globalSecondaryIndexes,
+      localSecondaryIndexes: localSecondaryIndexes,
+      keySchema: keySchema,
+      tableName: tableName,
+      attributeDefinitions: attributeDefinitions,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateGlobalTable = {
   type t
   type request = {
@@ -4671,9 +4715,11 @@ module CreateGlobalTable = {
     globalTableDescription: option<globalTableDescription>,
   }
   @module("@aws-sdk/client-dynamodb") @new external new: request => t = "CreateGlobalTableCommand"
-  let make = (~replicationGroup, ~globalTableName, ()) => new({replicationGroup, globalTableName})
+  let make = (~replicationGroup, ~globalTableName, ()) =>
+    new({replicationGroup: replicationGroup, globalTableName: globalTableName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateGlobalTableSettings = {
   type t
   type request = {
@@ -4736,15 +4782,16 @@ module UpdateGlobalTableSettings = {
     (),
   ) =>
     new({
-      replicaSettingsUpdate,
-      globalTableGlobalSecondaryIndexSettingsUpdate,
-      globalTableProvisionedWriteCapacityAutoScalingSettingsUpdate,
-      globalTableProvisionedWriteCapacityUnits,
-      globalTableBillingMode,
-      globalTableName,
+      replicaSettingsUpdate: replicaSettingsUpdate,
+      globalTableGlobalSecondaryIndexSettingsUpdate: globalTableGlobalSecondaryIndexSettingsUpdate,
+      globalTableProvisionedWriteCapacityAutoScalingSettingsUpdate: globalTableProvisionedWriteCapacityAutoScalingSettingsUpdate,
+      globalTableProvisionedWriteCapacityUnits: globalTableProvisionedWriteCapacityUnits,
+      globalTableBillingMode: globalTableBillingMode,
+      globalTableName: globalTableName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeGlobalTableSettings = {
   type t
   type request = {
@@ -4762,6 +4809,7 @@ module DescribeGlobalTableSettings = {
   let make = (~globalTableName, ()) => new({globalTableName: globalTableName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateTableReplicaAutoScaling = {
   type t
   type request = {
@@ -4795,13 +4843,14 @@ module UpdateTableReplicaAutoScaling = {
     (),
   ) =>
     new({
-      replicaUpdates,
-      provisionedWriteCapacityAutoScalingUpdate,
-      tableName,
-      globalSecondaryIndexUpdates,
+      replicaUpdates: replicaUpdates,
+      provisionedWriteCapacityAutoScalingUpdate: provisionedWriteCapacityAutoScalingUpdate,
+      tableName: tableName,
+      globalSecondaryIndexUpdates: globalSecondaryIndexUpdates,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeTableReplicaAutoScaling = {
   type t
   type request = {@ocaml.doc("<p>The name of the table.</p>") @as("TableName") tableName: tableName}
@@ -4815,6 +4864,7 @@ module DescribeTableReplicaAutoScaling = {
   let make = (~tableName, ()) => new({tableName: tableName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetItem = {
   type t
   @ocaml.doc("<p>Represents the input of a <code>GetItem</code> operation.</p>")
@@ -4930,16 +4980,17 @@ module GetItem = {
     (),
   ) =>
     new({
-      expressionAttributeNames,
-      projectionExpression,
-      returnConsumedCapacity,
-      consistentRead,
-      attributesToGet,
-      key,
-      tableName,
+      expressionAttributeNames: expressionAttributeNames,
+      projectionExpression: projectionExpression,
+      returnConsumedCapacity: returnConsumedCapacity,
+      consistentRead: consistentRead,
+      attributesToGet: attributesToGet,
+      key: key,
+      tableName: tableName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ExecuteStatement = {
   type t
   type request = {
@@ -4998,9 +5049,18 @@ module ExecuteStatement = {
     ~consistentRead=?,
     ~parameters=?,
     (),
-  ) => new({limit, returnConsumedCapacity, nextToken, consistentRead, parameters, statement})
+  ) =>
+    new({
+      limit: limit,
+      returnConsumedCapacity: returnConsumedCapacity,
+      nextToken: nextToken,
+      consistentRead: consistentRead,
+      parameters: parameters,
+      statement: statement,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateItem = {
   type t
   @ocaml.doc("<p>Represents the input of an <code>UpdateItem</code> operation.</p>")
@@ -5340,21 +5400,22 @@ module UpdateItem = {
     (),
   ) =>
     new({
-      expressionAttributeValues,
-      expressionAttributeNames,
-      conditionExpression,
-      updateExpression,
-      returnItemCollectionMetrics,
-      returnConsumedCapacity,
-      returnValues,
-      conditionalOperator,
-      expected,
-      attributeUpdates,
-      key,
-      tableName,
+      expressionAttributeValues: expressionAttributeValues,
+      expressionAttributeNames: expressionAttributeNames,
+      conditionExpression: conditionExpression,
+      updateExpression: updateExpression,
+      returnItemCollectionMetrics: returnItemCollectionMetrics,
+      returnConsumedCapacity: returnConsumedCapacity,
+      returnValues: returnValues,
+      conditionalOperator: conditionalOperator,
+      expected: expected,
+      attributeUpdates: attributeUpdates,
+      key: key,
+      tableName: tableName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module Scan = {
   type t
   @ocaml.doc("<p>Represents the input of a <code>Scan</code> operation.</p>")
@@ -5667,25 +5728,26 @@ module Scan = {
     (),
   ) =>
     new({
-      consistentRead,
-      expressionAttributeValues,
-      expressionAttributeNames,
-      filterExpression,
-      projectionExpression,
-      segment,
-      totalSegments,
-      returnConsumedCapacity,
-      exclusiveStartKey,
-      conditionalOperator,
-      scanFilter,
-      select,
-      limit,
-      attributesToGet,
-      indexName,
-      tableName,
+      consistentRead: consistentRead,
+      expressionAttributeValues: expressionAttributeValues,
+      expressionAttributeNames: expressionAttributeNames,
+      filterExpression: filterExpression,
+      projectionExpression: projectionExpression,
+      segment: segment,
+      totalSegments: totalSegments,
+      returnConsumedCapacity: returnConsumedCapacity,
+      exclusiveStartKey: exclusiveStartKey,
+      conditionalOperator: conditionalOperator,
+      scanFilter: scanFilter,
+      select: select,
+      limit: limit,
+      attributesToGet: attributesToGet,
+      indexName: indexName,
+      tableName: tableName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module Query = {
   type t
   @ocaml.doc("<p>Represents the input of a <code>Query</code> operation.</p>")
@@ -6098,26 +6160,27 @@ module Query = {
     (),
   ) =>
     new({
-      expressionAttributeValues,
-      expressionAttributeNames,
-      keyConditionExpression,
-      filterExpression,
-      projectionExpression,
-      returnConsumedCapacity,
-      exclusiveStartKey,
-      scanIndexForward,
-      conditionalOperator,
-      queryFilter,
-      keyConditions,
-      consistentRead,
-      limit,
-      attributesToGet,
-      select,
-      indexName,
-      tableName,
+      expressionAttributeValues: expressionAttributeValues,
+      expressionAttributeNames: expressionAttributeNames,
+      keyConditionExpression: keyConditionExpression,
+      filterExpression: filterExpression,
+      projectionExpression: projectionExpression,
+      returnConsumedCapacity: returnConsumedCapacity,
+      exclusiveStartKey: exclusiveStartKey,
+      scanIndexForward: scanIndexForward,
+      conditionalOperator: conditionalOperator,
+      queryFilter: queryFilter,
+      keyConditions: keyConditions,
+      consistentRead: consistentRead,
+      limit: limit,
+      attributesToGet: attributesToGet,
+      select: select,
+      indexName: indexName,
+      tableName: tableName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module PutItem = {
   type t
   @ocaml.doc("<p>Represents the input of a <code>PutItem</code> operation.</p>")
@@ -6342,19 +6405,20 @@ module PutItem = {
     (),
   ) =>
     new({
-      expressionAttributeValues,
-      expressionAttributeNames,
-      conditionExpression,
-      conditionalOperator,
-      returnItemCollectionMetrics,
-      returnConsumedCapacity,
-      returnValues,
-      expected,
-      item,
-      tableName,
+      expressionAttributeValues: expressionAttributeValues,
+      expressionAttributeNames: expressionAttributeNames,
+      conditionExpression: conditionExpression,
+      conditionalOperator: conditionalOperator,
+      returnItemCollectionMetrics: returnItemCollectionMetrics,
+      returnConsumedCapacity: returnConsumedCapacity,
+      returnValues: returnValues,
+      expected: expected,
+      item: item,
+      tableName: tableName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ExecuteTransaction = {
   type t
   type request = {
@@ -6380,9 +6444,14 @@ module ExecuteTransaction = {
   }
   @module("@aws-sdk/client-dynamodb") @new external new: request => t = "ExecuteTransactionCommand"
   let make = (~transactStatements, ~returnConsumedCapacity=?, ~clientRequestToken=?, ()) =>
-    new({returnConsumedCapacity, clientRequestToken, transactStatements})
+    new({
+      returnConsumedCapacity: returnConsumedCapacity,
+      clientRequestToken: clientRequestToken,
+      transactStatements: transactStatements,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteItem = {
   type t
   @ocaml.doc("<p>Represents the input of a <code>DeleteItem</code> operation.</p>")
@@ -6593,19 +6662,20 @@ module DeleteItem = {
     (),
   ) =>
     new({
-      expressionAttributeValues,
-      expressionAttributeNames,
-      conditionExpression,
-      returnItemCollectionMetrics,
-      returnConsumedCapacity,
-      returnValues,
-      conditionalOperator,
-      expected,
-      key,
-      tableName,
+      expressionAttributeValues: expressionAttributeValues,
+      expressionAttributeNames: expressionAttributeNames,
+      conditionExpression: conditionExpression,
+      returnItemCollectionMetrics: returnItemCollectionMetrics,
+      returnConsumedCapacity: returnConsumedCapacity,
+      returnValues: returnValues,
+      conditionalOperator: conditionalOperator,
+      expected: expected,
+      key: key,
+      tableName: tableName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module BatchExecuteStatement = {
   type t
   type request = {
@@ -6625,9 +6695,10 @@ module BatchExecuteStatement = {
   @module("@aws-sdk/client-dynamodb") @new
   external new: request => t = "BatchExecuteStatementCommand"
   let make = (~statements, ~returnConsumedCapacity=?, ()) =>
-    new({returnConsumedCapacity, statements})
+    new({returnConsumedCapacity: returnConsumedCapacity, statements: statements})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module TransactWriteItems = {
   type t
   type request = {
@@ -6685,9 +6756,16 @@ module TransactWriteItems = {
     ~returnItemCollectionMetrics=?,
     ~returnConsumedCapacity=?,
     (),
-  ) => new({clientRequestToken, returnItemCollectionMetrics, returnConsumedCapacity, transactItems})
+  ) =>
+    new({
+      clientRequestToken: clientRequestToken,
+      returnItemCollectionMetrics: returnItemCollectionMetrics,
+      returnConsumedCapacity: returnConsumedCapacity,
+      transactItems: transactItems,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module TransactGetItems = {
   type t
   type request = {
@@ -6722,9 +6800,10 @@ module TransactGetItems = {
   }
   @module("@aws-sdk/client-dynamodb") @new external new: request => t = "TransactGetItemsCommand"
   let make = (~transactItems, ~returnConsumedCapacity=?, ()) =>
-    new({returnConsumedCapacity, transactItems})
+    new({returnConsumedCapacity: returnConsumedCapacity, transactItems: transactItems})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module BatchGetItem = {
   type t
   @ocaml.doc("<p>Represents the input of a <code>BatchGetItem</code> operation.</p>")
@@ -6888,9 +6967,10 @@ module BatchGetItem = {
   }
   @module("@aws-sdk/client-dynamodb") @new external new: request => t = "BatchGetItemCommand"
   let make = (~requestItems, ~returnConsumedCapacity=?, ()) =>
-    new({returnConsumedCapacity, requestItems})
+    new({returnConsumedCapacity: returnConsumedCapacity, requestItems: requestItems})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module BatchWriteItem = {
   type t
   @ocaml.doc("<p>Represents the input of a <code>BatchWriteItem</code> operation.</p>")
@@ -7041,6 +7121,10 @@ module BatchWriteItem = {
   }
   @module("@aws-sdk/client-dynamodb") @new external new: request => t = "BatchWriteItemCommand"
   let make = (~requestItems, ~returnItemCollectionMetrics=?, ~returnConsumedCapacity=?, ()) =>
-    new({returnItemCollectionMetrics, returnConsumedCapacity, requestItems})
+    new({
+      returnItemCollectionMetrics: returnItemCollectionMetrics,
+      returnConsumedCapacity: returnConsumedCapacity,
+      requestItems: requestItems,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

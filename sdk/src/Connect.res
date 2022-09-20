@@ -1629,9 +1629,10 @@ module UpdateUserRoutingProfile = {
   @module("@aws-sdk/client-connect") @new
   external new: request => t = "UpdateUserRoutingProfileCommand"
   let make = (~instanceId, ~userId, ~routingProfileId, ()) =>
-    new({instanceId, userId, routingProfileId})
+    new({instanceId: instanceId, userId: userId, routingProfileId: routingProfileId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateUserHierarchyGroupName = {
   type t
   type request = {
@@ -1650,9 +1651,10 @@ module UpdateUserHierarchyGroupName = {
   @module("@aws-sdk/client-connect") @new
   external new: request => t = "UpdateUserHierarchyGroupNameCommand"
   let make = (~instanceId, ~hierarchyGroupId, ~name, ()) =>
-    new({instanceId, hierarchyGroupId, name})
+    new({instanceId: instanceId, hierarchyGroupId: hierarchyGroupId, name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateUserHierarchy = {
   type t
   type request = {
@@ -1668,9 +1670,10 @@ module UpdateUserHierarchy = {
   type response = {.}
   @module("@aws-sdk/client-connect") @new external new: request => t = "UpdateUserHierarchyCommand"
   let make = (~instanceId, ~userId, ~hierarchyGroupId=?, ()) =>
-    new({instanceId, userId, hierarchyGroupId})
+    new({instanceId: instanceId, userId: userId, hierarchyGroupId: hierarchyGroupId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateRoutingProfileName = {
   type t
   type request = {
@@ -1694,9 +1697,15 @@ module UpdateRoutingProfileName = {
   @module("@aws-sdk/client-connect") @new
   external new: request => t = "UpdateRoutingProfileNameCommand"
   let make = (~routingProfileId, ~instanceId, ~description=?, ~name=?, ()) =>
-    new({description, name, routingProfileId, instanceId})
+    new({
+      description: description,
+      name: name,
+      routingProfileId: routingProfileId,
+      instanceId: instanceId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateRoutingProfileDefaultOutboundQueue = {
   type t
   type request = {
@@ -1715,9 +1724,14 @@ module UpdateRoutingProfileDefaultOutboundQueue = {
   @module("@aws-sdk/client-connect") @new
   external new: request => t = "UpdateRoutingProfileDefaultOutboundQueueCommand"
   let make = (~defaultOutboundQueueId, ~routingProfileId, ~instanceId, ()) =>
-    new({defaultOutboundQueueId, routingProfileId, instanceId})
+    new({
+      defaultOutboundQueueId: defaultOutboundQueueId,
+      routingProfileId: routingProfileId,
+      instanceId: instanceId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateQuickConnectName = {
   type t
   type request = {
@@ -1736,9 +1750,15 @@ module UpdateQuickConnectName = {
   @module("@aws-sdk/client-connect") @new
   external new: request => t = "UpdateQuickConnectNameCommand"
   let make = (~quickConnectId, ~instanceId, ~description=?, ~name=?, ()) =>
-    new({description, name, quickConnectId, instanceId})
+    new({
+      description: description,
+      name: name,
+      quickConnectId: quickConnectId,
+      instanceId: instanceId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateQueueStatus = {
   type t
   type request = {
@@ -1752,9 +1772,11 @@ module UpdateQueueStatus = {
   }
   type response = {.}
   @module("@aws-sdk/client-connect") @new external new: request => t = "UpdateQueueStatusCommand"
-  let make = (~status, ~queueId, ~instanceId, ()) => new({status, queueId, instanceId})
+  let make = (~status, ~queueId, ~instanceId, ()) =>
+    new({status: status, queueId: queueId, instanceId: instanceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateQueueName = {
   type t
   type request = {
@@ -1771,9 +1793,10 @@ module UpdateQueueName = {
   type response = {.}
   @module("@aws-sdk/client-connect") @new external new: request => t = "UpdateQueueNameCommand"
   let make = (~queueId, ~instanceId, ~description=?, ~name=?, ()) =>
-    new({description, name, queueId, instanceId})
+    new({description: description, name: name, queueId: queueId, instanceId: instanceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateQueueMaxContacts = {
   type t
   type request = {
@@ -1792,9 +1815,11 @@ module UpdateQueueMaxContacts = {
   type response = {.}
   @module("@aws-sdk/client-connect") @new
   external new: request => t = "UpdateQueueMaxContactsCommand"
-  let make = (~queueId, ~instanceId, ~maxContacts=?, ()) => new({maxContacts, queueId, instanceId})
+  let make = (~queueId, ~instanceId, ~maxContacts=?, ()) =>
+    new({maxContacts: maxContacts, queueId: queueId, instanceId: instanceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateQueueHoursOfOperation = {
   type t
   type request = {
@@ -1811,9 +1836,10 @@ module UpdateQueueHoursOfOperation = {
   @module("@aws-sdk/client-connect") @new
   external new: request => t = "UpdateQueueHoursOfOperationCommand"
   let make = (~hoursOfOperationId, ~queueId, ~instanceId, ()) =>
-    new({hoursOfOperationId, queueId, instanceId})
+    new({hoursOfOperationId: hoursOfOperationId, queueId: queueId, instanceId: instanceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateInstanceAttribute = {
   type t
   type request = {
@@ -1835,9 +1861,11 @@ module UpdateInstanceAttribute = {
   type response = {.}
   @module("@aws-sdk/client-connect") @new
   external new: request => t = "UpdateInstanceAttributeCommand"
-  let make = (~value, ~attributeType, ~instanceId, ()) => new({value, attributeType, instanceId})
+  let make = (~value, ~attributeType, ~instanceId, ()) =>
+    new({value: value, attributeType: attributeType, instanceId: instanceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateContactSchedule = {
   type t
   type request = {
@@ -1857,9 +1885,10 @@ module UpdateContactSchedule = {
   @module("@aws-sdk/client-connect") @new
   external new: request => t = "UpdateContactScheduleCommand"
   let make = (~scheduledTime, ~contactId, ~instanceId, ()) =>
-    new({scheduledTime, contactId, instanceId})
+    new({scheduledTime: scheduledTime, contactId: contactId, instanceId: instanceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateContactFlowName = {
   type t
   type request = {
@@ -1875,9 +1904,15 @@ module UpdateContactFlowName = {
   @module("@aws-sdk/client-connect") @new
   external new: request => t = "UpdateContactFlowNameCommand"
   let make = (~contactFlowId, ~instanceId, ~description=?, ~name=?, ()) =>
-    new({description, name, contactFlowId, instanceId})
+    new({
+      description: description,
+      name: name,
+      contactFlowId: contactFlowId,
+      instanceId: instanceId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateContactFlowModuleMetadata = {
   type t
   type request = {
@@ -1899,9 +1934,16 @@ module UpdateContactFlowModuleMetadata = {
   @module("@aws-sdk/client-connect") @new
   external new: request => t = "UpdateContactFlowModuleMetadataCommand"
   let make = (~contactFlowModuleId, ~instanceId, ~state=?, ~description=?, ~name=?, ()) =>
-    new({state, description, name, contactFlowModuleId, instanceId})
+    new({
+      state: state,
+      description: description,
+      name: name,
+      contactFlowModuleId: contactFlowModuleId,
+      instanceId: instanceId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateContactFlowMetadata = {
   type t
   type request = {
@@ -1922,9 +1964,16 @@ module UpdateContactFlowMetadata = {
   @module("@aws-sdk/client-connect") @new
   external new: request => t = "UpdateContactFlowMetadataCommand"
   let make = (~contactFlowId, ~instanceId, ~contactFlowState=?, ~description=?, ~name=?, ()) =>
-    new({contactFlowState, description, name, contactFlowId, instanceId})
+    new({
+      contactFlowState: contactFlowState,
+      description: description,
+      name: name,
+      contactFlowId: contactFlowId,
+      instanceId: instanceId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateAgentStatus = {
   type t
   type request = {
@@ -1957,9 +2006,19 @@ module UpdateAgentStatus = {
     ~description=?,
     ~name=?,
     (),
-  ) => new({resetOrderNumber, displayOrder, state, description, name, agentStatusId, instanceId})
+  ) =>
+    new({
+      resetOrderNumber: resetOrderNumber,
+      displayOrder: displayOrder,
+      state: state,
+      description: description,
+      name: name,
+      agentStatusId: agentStatusId,
+      instanceId: instanceId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module SuspendContactRecording = {
   type t
   type request = {
@@ -1978,9 +2037,10 @@ module SuspendContactRecording = {
   @module("@aws-sdk/client-connect") @new
   external new: request => t = "SuspendContactRecordingCommand"
   let make = (~initialContactId, ~contactId, ~instanceId, ()) =>
-    new({initialContactId, contactId, instanceId})
+    new({initialContactId: initialContactId, contactId: contactId, instanceId: instanceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module StopContactStreaming = {
   type t
   type request = {
@@ -1999,9 +2059,10 @@ module StopContactStreaming = {
   type response = {.}
   @module("@aws-sdk/client-connect") @new external new: request => t = "StopContactStreamingCommand"
   let make = (~streamingId, ~contactId, ~instanceId, ()) =>
-    new({streamingId, contactId, instanceId})
+    new({streamingId: streamingId, contactId: contactId, instanceId: instanceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module StopContactRecording = {
   type t
   type request = {
@@ -2019,9 +2080,10 @@ module StopContactRecording = {
   type response = {.}
   @module("@aws-sdk/client-connect") @new external new: request => t = "StopContactRecordingCommand"
   let make = (~initialContactId, ~contactId, ~instanceId, ()) =>
-    new({initialContactId, contactId, instanceId})
+    new({initialContactId: initialContactId, contactId: contactId, instanceId: instanceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module StopContact = {
   type t
   type request = {
@@ -2034,9 +2096,10 @@ module StopContact = {
   }
   type response = {.}
   @module("@aws-sdk/client-connect") @new external new: request => t = "StopContactCommand"
-  let make = (~instanceId, ~contactId, ()) => new({instanceId, contactId})
+  let make = (~instanceId, ~contactId, ()) => new({instanceId: instanceId, contactId: contactId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ResumeContactRecording = {
   type t
   type request = {
@@ -2055,9 +2118,10 @@ module ResumeContactRecording = {
   @module("@aws-sdk/client-connect") @new
   external new: request => t = "ResumeContactRecordingCommand"
   let make = (~initialContactId, ~contactId, ~instanceId, ()) =>
-    new({initialContactId, contactId, instanceId})
+    new({initialContactId: initialContactId, contactId: contactId, instanceId: instanceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DisassociateSecurityKey = {
   type t
   type request = {
@@ -2075,9 +2139,11 @@ module DisassociateSecurityKey = {
   type response = {.}
   @module("@aws-sdk/client-connect") @new
   external new: request => t = "DisassociateSecurityKeyCommand"
-  let make = (~associationId, ~instanceId, ()) => new({associationId, instanceId})
+  let make = (~associationId, ~instanceId, ()) =>
+    new({associationId: associationId, instanceId: instanceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DisassociateLexBot = {
   type t
   type request = {
@@ -2094,9 +2160,11 @@ module DisassociateLexBot = {
   }
   type response = {.}
   @module("@aws-sdk/client-connect") @new external new: request => t = "DisassociateLexBotCommand"
-  let make = (~lexRegion, ~botName, ~instanceId, ()) => new({lexRegion, botName, instanceId})
+  let make = (~lexRegion, ~botName, ~instanceId, ()) =>
+    new({lexRegion: lexRegion, botName: botName, instanceId: instanceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DisassociateLambdaFunction = {
   type t
   type request = {
@@ -2112,9 +2180,11 @@ module DisassociateLambdaFunction = {
   type response = {.}
   @module("@aws-sdk/client-connect") @new
   external new: request => t = "DisassociateLambdaFunctionCommand"
-  let make = (~functionArn, ~instanceId, ()) => new({functionArn, instanceId})
+  let make = (~functionArn, ~instanceId, ()) =>
+    new({functionArn: functionArn, instanceId: instanceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DisassociateInstanceStorageConfig = {
   type t
   type request = {
@@ -2135,9 +2205,10 @@ module DisassociateInstanceStorageConfig = {
   @module("@aws-sdk/client-connect") @new
   external new: request => t = "DisassociateInstanceStorageConfigCommand"
   let make = (~resourceType, ~associationId, ~instanceId, ()) =>
-    new({resourceType, associationId, instanceId})
+    new({resourceType: resourceType, associationId: associationId, instanceId: instanceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DisassociateApprovedOrigin = {
   type t
   type request = {
@@ -2151,9 +2222,10 @@ module DisassociateApprovedOrigin = {
   type response = {.}
   @module("@aws-sdk/client-connect") @new
   external new: request => t = "DisassociateApprovedOriginCommand"
-  let make = (~origin, ~instanceId, ()) => new({origin, instanceId})
+  let make = (~origin, ~instanceId, ()) => new({origin: origin, instanceId: instanceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteVocabulary = {
   type t
   type request = {
@@ -2175,9 +2247,11 @@ module DeleteVocabulary = {
     vocabularyArn: arn,
   }
   @module("@aws-sdk/client-connect") @new external new: request => t = "DeleteVocabularyCommand"
-  let make = (~vocabularyId, ~instanceId, ()) => new({vocabularyId, instanceId})
+  let make = (~vocabularyId, ~instanceId, ()) =>
+    new({vocabularyId: vocabularyId, instanceId: instanceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteUserHierarchyGroup = {
   type t
   type request = {
@@ -2192,9 +2266,11 @@ module DeleteUserHierarchyGroup = {
   type response = {.}
   @module("@aws-sdk/client-connect") @new
   external new: request => t = "DeleteUserHierarchyGroupCommand"
-  let make = (~instanceId, ~hierarchyGroupId, ()) => new({instanceId, hierarchyGroupId})
+  let make = (~instanceId, ~hierarchyGroupId, ()) =>
+    new({instanceId: instanceId, hierarchyGroupId: hierarchyGroupId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteUser = {
   type t
   type request = {
@@ -2207,9 +2283,10 @@ module DeleteUser = {
   }
   type response = {.}
   @module("@aws-sdk/client-connect") @new external new: request => t = "DeleteUserCommand"
-  let make = (~userId, ~instanceId, ()) => new({userId, instanceId})
+  let make = (~userId, ~instanceId, ()) => new({userId: userId, instanceId: instanceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteUseCase = {
   type t
   type request = {
@@ -2226,9 +2303,14 @@ module DeleteUseCase = {
   type response = {.}
   @module("@aws-sdk/client-connect") @new external new: request => t = "DeleteUseCaseCommand"
   let make = (~useCaseId, ~integrationAssociationId, ~instanceId, ()) =>
-    new({useCaseId, integrationAssociationId, instanceId})
+    new({
+      useCaseId: useCaseId,
+      integrationAssociationId: integrationAssociationId,
+      instanceId: instanceId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteSecurityProfile = {
   type t
   type request = {
@@ -2243,9 +2325,11 @@ module DeleteSecurityProfile = {
   type response = {.}
   @module("@aws-sdk/client-connect") @new
   external new: request => t = "DeleteSecurityProfileCommand"
-  let make = (~securityProfileId, ~instanceId, ()) => new({securityProfileId, instanceId})
+  let make = (~securityProfileId, ~instanceId, ()) =>
+    new({securityProfileId: securityProfileId, instanceId: instanceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteQuickConnect = {
   type t
   type request = {
@@ -2259,9 +2343,11 @@ module DeleteQuickConnect = {
   }
   type response = {.}
   @module("@aws-sdk/client-connect") @new external new: request => t = "DeleteQuickConnectCommand"
-  let make = (~quickConnectId, ~instanceId, ()) => new({quickConnectId, instanceId})
+  let make = (~quickConnectId, ~instanceId, ()) =>
+    new({quickConnectId: quickConnectId, instanceId: instanceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteIntegrationAssociation = {
   type t
   type request = {
@@ -2278,9 +2364,10 @@ module DeleteIntegrationAssociation = {
   @module("@aws-sdk/client-connect") @new
   external new: request => t = "DeleteIntegrationAssociationCommand"
   let make = (~integrationAssociationId, ~instanceId, ()) =>
-    new({integrationAssociationId, instanceId})
+    new({integrationAssociationId: integrationAssociationId, instanceId: instanceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteInstance = {
   type t
   type request = {
@@ -2295,6 +2382,7 @@ module DeleteInstance = {
   let make = (~instanceId, ()) => new({instanceId: instanceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteHoursOfOperation = {
   type t
   type request = {
@@ -2309,9 +2397,11 @@ module DeleteHoursOfOperation = {
   type response = {.}
   @module("@aws-sdk/client-connect") @new
   external new: request => t = "DeleteHoursOfOperationCommand"
-  let make = (~hoursOfOperationId, ~instanceId, ()) => new({hoursOfOperationId, instanceId})
+  let make = (~hoursOfOperationId, ~instanceId, ()) =>
+    new({hoursOfOperationId: hoursOfOperationId, instanceId: instanceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteContactFlowModule = {
   type t
   type request = {
@@ -2326,9 +2416,11 @@ module DeleteContactFlowModule = {
   type response = {.}
   @module("@aws-sdk/client-connect") @new
   external new: request => t = "DeleteContactFlowModuleCommand"
-  let make = (~contactFlowModuleId, ~instanceId, ()) => new({contactFlowModuleId, instanceId})
+  let make = (~contactFlowModuleId, ~instanceId, ()) =>
+    new({contactFlowModuleId: contactFlowModuleId, instanceId: instanceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteContactFlow = {
   type t
   type request = {
@@ -2342,9 +2434,11 @@ module DeleteContactFlow = {
   }
   type response = {.}
   @module("@aws-sdk/client-connect") @new external new: request => t = "DeleteContactFlowCommand"
-  let make = (~contactFlowId, ~instanceId, ()) => new({contactFlowId, instanceId})
+  let make = (~contactFlowId, ~instanceId, ()) =>
+    new({contactFlowId: contactFlowId, instanceId: instanceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module CreateInstance = {
   type t
   type request = {
@@ -2377,15 +2471,16 @@ module CreateInstance = {
     (),
   ) =>
     new({
-      outboundCallsEnabled,
-      inboundCallsEnabled,
-      directoryId,
-      instanceAlias,
-      identityManagementType,
-      clientToken,
+      outboundCallsEnabled: outboundCallsEnabled,
+      inboundCallsEnabled: inboundCallsEnabled,
+      directoryId: directoryId,
+      instanceAlias: instanceAlias,
+      identityManagementType: identityManagementType,
+      clientToken: clientToken,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module AssociateSecurityKey = {
   type t
   type request = {
@@ -2404,9 +2499,10 @@ module AssociateSecurityKey = {
     associationId: option<associationId>,
   }
   @module("@aws-sdk/client-connect") @new external new: request => t = "AssociateSecurityKeyCommand"
-  let make = (~key, ~instanceId, ()) => new({key, instanceId})
+  let make = (~key, ~instanceId, ()) => new({key: key, instanceId: instanceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module AssociateLambdaFunction = {
   type t
   type request = {
@@ -2423,9 +2519,11 @@ module AssociateLambdaFunction = {
   type response = {.}
   @module("@aws-sdk/client-connect") @new
   external new: request => t = "AssociateLambdaFunctionCommand"
-  let make = (~functionArn, ~instanceId, ()) => new({functionArn, instanceId})
+  let make = (~functionArn, ~instanceId, ()) =>
+    new({functionArn: functionArn, instanceId: instanceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module AssociateDefaultVocabulary = {
   type t
   type request = {
@@ -2449,9 +2547,10 @@ module AssociateDefaultVocabulary = {
   @module("@aws-sdk/client-connect") @new
   external new: request => t = "AssociateDefaultVocabularyCommand"
   let make = (~languageCode, ~instanceId, ~vocabularyId=?, ()) =>
-    new({vocabularyId, languageCode, instanceId})
+    new({vocabularyId: vocabularyId, languageCode: languageCode, instanceId: instanceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module AssociateApprovedOrigin = {
   type t
   type request = {
@@ -2465,9 +2564,10 @@ module AssociateApprovedOrigin = {
   type response = {.}
   @module("@aws-sdk/client-connect") @new
   external new: request => t = "AssociateApprovedOriginCommand"
-  let make = (~origin, ~instanceId, ()) => new({origin, instanceId})
+  let make = (~origin, ~instanceId, ()) => new({origin: origin, instanceId: instanceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateUserSecurityProfiles = {
   type t
   type request = {
@@ -2485,9 +2585,10 @@ module UpdateUserSecurityProfiles = {
   @module("@aws-sdk/client-connect") @new
   external new: request => t = "UpdateUserSecurityProfilesCommand"
   let make = (~instanceId, ~userId, ~securityProfileIds, ()) =>
-    new({instanceId, userId, securityProfileIds})
+    new({instanceId: instanceId, userId: userId, securityProfileIds: securityProfileIds})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateUserPhoneConfig = {
   type t
   type request = {
@@ -2504,9 +2605,11 @@ module UpdateUserPhoneConfig = {
   type response = {.}
   @module("@aws-sdk/client-connect") @new
   external new: request => t = "UpdateUserPhoneConfigCommand"
-  let make = (~instanceId, ~userId, ~phoneConfig, ()) => new({instanceId, userId, phoneConfig})
+  let make = (~instanceId, ~userId, ~phoneConfig, ()) =>
+    new({instanceId: instanceId, userId: userId, phoneConfig: phoneConfig})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateUserIdentityInfo = {
   type t
   type request = {
@@ -2522,9 +2625,11 @@ module UpdateUserIdentityInfo = {
   type response = {.}
   @module("@aws-sdk/client-connect") @new
   external new: request => t = "UpdateUserIdentityInfoCommand"
-  let make = (~instanceId, ~userId, ~identityInfo, ()) => new({instanceId, userId, identityInfo})
+  let make = (~instanceId, ~userId, ~identityInfo, ()) =>
+    new({instanceId: instanceId, userId: userId, identityInfo: identityInfo})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateSecurityProfile = {
   type t
   type request = {
@@ -2544,9 +2649,15 @@ module UpdateSecurityProfile = {
   @module("@aws-sdk/client-connect") @new
   external new: request => t = "UpdateSecurityProfileCommand"
   let make = (~instanceId, ~securityProfileId, ~permissions=?, ~description=?, ()) =>
-    new({instanceId, securityProfileId, permissions, description})
+    new({
+      instanceId: instanceId,
+      securityProfileId: securityProfileId,
+      permissions: permissions,
+      description: description,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateQueueOutboundCallerConfig = {
   type t
   type request = {
@@ -2564,9 +2675,10 @@ module UpdateQueueOutboundCallerConfig = {
   @module("@aws-sdk/client-connect") @new
   external new: request => t = "UpdateQueueOutboundCallerConfigCommand"
   let make = (~outboundCallerConfig, ~queueId, ~instanceId, ()) =>
-    new({outboundCallerConfig, queueId, instanceId})
+    new({outboundCallerConfig: outboundCallerConfig, queueId: queueId, instanceId: instanceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateContactAttributes = {
   type t
   type request = {
@@ -2590,9 +2702,10 @@ module UpdateContactAttributes = {
   @module("@aws-sdk/client-connect") @new
   external new: request => t = "UpdateContactAttributesCommand"
   let make = (~attributes, ~instanceId, ~initialContactId, ()) =>
-    new({attributes, instanceId, initialContactId})
+    new({attributes: attributes, instanceId: instanceId, initialContactId: initialContactId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UntagResource = {
   type t
   type request = {
@@ -2601,9 +2714,10 @@ module UntagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-connect") @new external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys, resourceArn})
+  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module TagResource = {
   type t
   type request = {
@@ -2615,9 +2729,10 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-connect") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceArn, ()) => new({tags, resourceArn})
+  let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module StartOutboundVoiceContact = {
   type t
   type request = {
@@ -2694,19 +2809,20 @@ module StartOutboundVoiceContact = {
     (),
   ) =>
     new({
-      trafficType,
-      campaignId,
-      answerMachineDetectionConfig,
-      attributes,
-      queueId,
-      sourcePhoneNumber,
-      clientToken,
-      instanceId,
-      contactFlowId,
-      destinationPhoneNumber,
+      trafficType: trafficType,
+      campaignId: campaignId,
+      answerMachineDetectionConfig: answerMachineDetectionConfig,
+      attributes: attributes,
+      queueId: queueId,
+      sourcePhoneNumber: sourcePhoneNumber,
+      clientToken: clientToken,
+      instanceId: instanceId,
+      contactFlowId: contactFlowId,
+      destinationPhoneNumber: destinationPhoneNumber,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module StartContactStreaming = {
   type t
   type request = {
@@ -2734,9 +2850,15 @@ module StartContactStreaming = {
   @module("@aws-sdk/client-connect") @new
   external new: request => t = "StartContactStreamingCommand"
   let make = (~clientToken, ~chatStreamingConfiguration, ~contactId, ~instanceId, ()) =>
-    new({clientToken, chatStreamingConfiguration, contactId, instanceId})
+    new({
+      clientToken: clientToken,
+      chatStreamingConfiguration: chatStreamingConfiguration,
+      contactId: contactId,
+      instanceId: instanceId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module StartContactRecording = {
   type t
   type request = {
@@ -2757,9 +2879,15 @@ module StartContactRecording = {
   @module("@aws-sdk/client-connect") @new
   external new: request => t = "StartContactRecordingCommand"
   let make = (~voiceRecordingConfiguration, ~initialContactId, ~contactId, ~instanceId, ()) =>
-    new({voiceRecordingConfiguration, initialContactId, contactId, instanceId})
+    new({
+      voiceRecordingConfiguration: voiceRecordingConfiguration,
+      initialContactId: initialContactId,
+      contactId: contactId,
+      instanceId: instanceId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module StartChatContact = {
   type t
   type request = {
@@ -2828,17 +2956,18 @@ module StartChatContact = {
     (),
   ) =>
     new({
-      supportedMessagingContentTypes,
-      chatDurationInMinutes,
-      clientToken,
-      initialMessage,
-      participantDetails,
-      attributes,
-      contactFlowId,
-      instanceId,
+      supportedMessagingContentTypes: supportedMessagingContentTypes,
+      chatDurationInMinutes: chatDurationInMinutes,
+      clientToken: clientToken,
+      initialMessage: initialMessage,
+      participantDetails: participantDetails,
+      attributes: attributes,
+      contactFlowId: contactFlowId,
+      instanceId: instanceId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListTagsForResource = {
   type t
   type request = {
@@ -2849,6 +2978,7 @@ module ListTagsForResource = {
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListSecurityProfilePermissions = {
   type t
   type request = {
@@ -2878,9 +3008,15 @@ response in the next request to retrieve the next set of results.</p>")
   @module("@aws-sdk/client-connect") @new
   external new: request => t = "ListSecurityProfilePermissionsCommand"
   let make = (~instanceId, ~securityProfileId, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults, nextToken, instanceId, securityProfileId})
+    new({
+      maxResults: maxResults,
+      nextToken: nextToken,
+      instanceId: instanceId,
+      securityProfileId: securityProfileId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListLambdaFunctions = {
   type t
   type request = {
@@ -2908,9 +3044,10 @@ response in the next request to retrieve the next set of results.</p>")
   }
   @module("@aws-sdk/client-connect") @new external new: request => t = "ListLambdaFunctionsCommand"
   let make = (~instanceId, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults, nextToken, instanceId})
+    new({maxResults: maxResults, nextToken: nextToken, instanceId: instanceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListApprovedOrigins = {
   type t
   type request = {
@@ -2936,9 +3073,10 @@ response in the next request to retrieve the next set of results.</p>")
   }
   @module("@aws-sdk/client-connect") @new external new: request => t = "ListApprovedOriginsCommand"
   let make = (~instanceId, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults, nextToken, instanceId})
+    new({maxResults: maxResults, nextToken: nextToken, instanceId: instanceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetFederationToken = {
   type t
   type request = {
@@ -2956,6 +3094,7 @@ module GetFederationToken = {
   let make = (~instanceId, ()) => new({instanceId: instanceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetContactAttributes = {
   type t
   type request = {
@@ -2969,9 +3108,11 @@ module GetContactAttributes = {
     attributes: option<attributes>,
   }
   @module("@aws-sdk/client-connect") @new external new: request => t = "GetContactAttributesCommand"
-  let make = (~initialContactId, ~instanceId, ()) => new({initialContactId, instanceId})
+  let make = (~initialContactId, ~instanceId, ()) =>
+    new({initialContactId: initialContactId, instanceId: instanceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DisassociateQueueQuickConnects = {
   type t
   type request = {
@@ -2988,9 +3129,10 @@ module DisassociateQueueQuickConnects = {
   @module("@aws-sdk/client-connect") @new
   external new: request => t = "DisassociateQueueQuickConnectsCommand"
   let make = (~quickConnectIds, ~queueId, ~instanceId, ()) =>
-    new({quickConnectIds, queueId, instanceId})
+    new({quickConnectIds: quickConnectIds, queueId: queueId, instanceId: instanceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DisassociateBot = {
   type t
   type request = {
@@ -3005,9 +3147,11 @@ module DisassociateBot = {
   }
   type response = {.}
   @module("@aws-sdk/client-connect") @new external new: request => t = "DisassociateBotCommand"
-  let make = (~instanceId, ~lexV2Bot=?, ~lexBot=?, ()) => new({lexV2Bot, lexBot, instanceId})
+  let make = (~instanceId, ~lexV2Bot=?, ~lexBot=?, ()) =>
+    new({lexV2Bot: lexV2Bot, lexBot: lexBot, instanceId: instanceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DescribeInstanceAttribute = {
   type t
   type request = {
@@ -3028,9 +3172,11 @@ module DescribeInstanceAttribute = {
   }
   @module("@aws-sdk/client-connect") @new
   external new: request => t = "DescribeInstanceAttributeCommand"
-  let make = (~attributeType, ~instanceId, ()) => new({attributeType, instanceId})
+  let make = (~attributeType, ~instanceId, ()) =>
+    new({attributeType: attributeType, instanceId: instanceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateVocabulary = {
   type t
   type request = {
@@ -3073,9 +3219,17 @@ module CreateVocabulary = {
   }
   @module("@aws-sdk/client-connect") @new external new: request => t = "CreateVocabularyCommand"
   let make = (~content, ~languageCode, ~vocabularyName, ~instanceId, ~tags=?, ~clientToken=?, ()) =>
-    new({tags, content, languageCode, vocabularyName, instanceId, clientToken})
+    new({
+      tags: tags,
+      content: content,
+      languageCode: languageCode,
+      vocabularyName: vocabularyName,
+      instanceId: instanceId,
+      clientToken: clientToken,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateUserHierarchyGroup = {
   type t
   type request = {
@@ -3105,9 +3259,10 @@ module CreateUserHierarchyGroup = {
   @module("@aws-sdk/client-connect") @new
   external new: request => t = "CreateUserHierarchyGroupCommand"
   let make = (~instanceId, ~name, ~tags=?, ~parentGroupId=?, ()) =>
-    new({tags, instanceId, parentGroupId, name})
+    new({tags: tags, instanceId: instanceId, parentGroupId: parentGroupId, name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateUser = {
   type t
   type request = {
@@ -3167,19 +3322,20 @@ module CreateUser = {
     (),
   ) =>
     new({
-      tags,
-      instanceId,
-      hierarchyGroupId,
-      routingProfileId,
-      securityProfileIds,
-      directoryUserId,
-      phoneConfig,
-      identityInfo,
-      password,
-      username,
+      tags: tags,
+      instanceId: instanceId,
+      hierarchyGroupId: hierarchyGroupId,
+      routingProfileId: routingProfileId,
+      securityProfileIds: securityProfileIds,
+      directoryUserId: directoryUserId,
+      phoneConfig: phoneConfig,
+      identityInfo: identityInfo,
+      password: password,
+      username: username,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateUseCase = {
   type t
   type request = {
@@ -3207,9 +3363,15 @@ module CreateUseCase = {
   }
   @module("@aws-sdk/client-connect") @new external new: request => t = "CreateUseCaseCommand"
   let make = (~useCaseType, ~integrationAssociationId, ~instanceId, ~tags=?, ()) =>
-    new({tags, useCaseType, integrationAssociationId, instanceId})
+    new({
+      tags: tags,
+      useCaseType: useCaseType,
+      integrationAssociationId: integrationAssociationId,
+      instanceId: instanceId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateSecurityProfile = {
   type t
   type request = {
@@ -3238,9 +3400,16 @@ module CreateSecurityProfile = {
   @module("@aws-sdk/client-connect") @new
   external new: request => t = "CreateSecurityProfileCommand"
   let make = (~instanceId, ~securityProfileName, ~tags=?, ~permissions=?, ~description=?, ()) =>
-    new({tags, instanceId, permissions, description, securityProfileName})
+    new({
+      tags: tags,
+      instanceId: instanceId,
+      permissions: permissions,
+      description: description,
+      securityProfileName: securityProfileName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateQueue = {
   type t
   type request = {
@@ -3287,17 +3456,18 @@ module CreateQueue = {
     (),
   ) =>
     new({
-      tags,
-      quickConnectIds,
-      maxContacts,
-      hoursOfOperationId,
-      outboundCallerConfig,
-      description,
-      name,
-      instanceId,
+      tags: tags,
+      quickConnectIds: quickConnectIds,
+      maxContacts: maxContacts,
+      hoursOfOperationId: hoursOfOperationId,
+      outboundCallerConfig: outboundCallerConfig,
+      description: description,
+      name: name,
+      instanceId: instanceId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateIntegrationAssociation = {
   type t
   type request = {
@@ -3350,16 +3520,17 @@ module CreateIntegrationAssociation = {
     (),
   ) =>
     new({
-      tags,
-      sourceType,
-      sourceApplicationName,
-      sourceApplicationUrl,
-      integrationArn,
-      integrationType,
-      instanceId,
+      tags: tags,
+      sourceType: sourceType,
+      sourceApplicationName: sourceApplicationName,
+      sourceApplicationUrl: sourceApplicationUrl,
+      integrationArn: integrationArn,
+      integrationType: integrationType,
+      instanceId: instanceId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateAgentStatus = {
   type t
   type request = {
@@ -3386,9 +3557,17 @@ module CreateAgentStatus = {
   }
   @module("@aws-sdk/client-connect") @new external new: request => t = "CreateAgentStatusCommand"
   let make = (~state, ~name, ~instanceId, ~tags=?, ~displayOrder=?, ~description=?, ()) =>
-    new({tags, displayOrder, state, description, name, instanceId})
+    new({
+      tags: tags,
+      displayOrder: displayOrder,
+      state: state,
+      description: description,
+      name: name,
+      instanceId: instanceId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module AssociateQueueQuickConnects = {
   type t
   type request = {
@@ -3405,9 +3584,10 @@ module AssociateQueueQuickConnects = {
   @module("@aws-sdk/client-connect") @new
   external new: request => t = "AssociateQueueQuickConnectsCommand"
   let make = (~quickConnectIds, ~queueId, ~instanceId, ()) =>
-    new({quickConnectIds, queueId, instanceId})
+    new({quickConnectIds: quickConnectIds, queueId: queueId, instanceId: instanceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module AssociateLexBot = {
   type t
   type request = {
@@ -3421,9 +3601,10 @@ module AssociateLexBot = {
   }
   type response = {.}
   @module("@aws-sdk/client-connect") @new external new: request => t = "AssociateLexBotCommand"
-  let make = (~lexBot, ~instanceId, ()) => new({lexBot, instanceId})
+  let make = (~lexBot, ~instanceId, ()) => new({lexBot: lexBot, instanceId: instanceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module AssociateBot = {
   type t
   type request = {
@@ -3438,9 +3619,11 @@ module AssociateBot = {
   }
   type response = {.}
   @module("@aws-sdk/client-connect") @new external new: request => t = "AssociateBotCommand"
-  let make = (~instanceId, ~lexV2Bot=?, ~lexBot=?, ()) => new({lexV2Bot, lexBot, instanceId})
+  let make = (~instanceId, ~lexV2Bot=?, ~lexBot=?, ()) =>
+    new({lexV2Bot: lexV2Bot, lexBot: lexBot, instanceId: instanceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateUserHierarchyStructure = {
   type t
   type request = {
@@ -3455,9 +3638,11 @@ module UpdateUserHierarchyStructure = {
   type response = {.}
   @module("@aws-sdk/client-connect") @new
   external new: request => t = "UpdateUserHierarchyStructureCommand"
-  let make = (~instanceId, ~hierarchyStructure, ()) => new({instanceId, hierarchyStructure})
+  let make = (~instanceId, ~hierarchyStructure, ()) =>
+    new({instanceId: instanceId, hierarchyStructure: hierarchyStructure})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateRoutingProfileConcurrency = {
   type t
   type request = {
@@ -3476,9 +3661,14 @@ module UpdateRoutingProfileConcurrency = {
   @module("@aws-sdk/client-connect") @new
   external new: request => t = "UpdateRoutingProfileConcurrencyCommand"
   let make = (~mediaConcurrencies, ~routingProfileId, ~instanceId, ()) =>
-    new({mediaConcurrencies, routingProfileId, instanceId})
+    new({
+      mediaConcurrencies: mediaConcurrencies,
+      routingProfileId: routingProfileId,
+      instanceId: instanceId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateQuickConnectConfig = {
   type t
   type request = {
@@ -3497,9 +3687,14 @@ module UpdateQuickConnectConfig = {
   @module("@aws-sdk/client-connect") @new
   external new: request => t = "UpdateQuickConnectConfigCommand"
   let make = (~quickConnectConfig, ~quickConnectId, ~instanceId, ()) =>
-    new({quickConnectConfig, quickConnectId, instanceId})
+    new({
+      quickConnectConfig: quickConnectConfig,
+      quickConnectId: quickConnectId,
+      instanceId: instanceId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateContactFlowModuleContent = {
   type t
   type request = {
@@ -3517,9 +3712,10 @@ module UpdateContactFlowModuleContent = {
   @module("@aws-sdk/client-connect") @new
   external new: request => t = "UpdateContactFlowModuleContentCommand"
   let make = (~content, ~contactFlowModuleId, ~instanceId, ()) =>
-    new({content, contactFlowModuleId, instanceId})
+    new({content: content, contactFlowModuleId: contactFlowModuleId, instanceId: instanceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateContactFlowContent = {
   type t
   type request = {
@@ -3537,9 +3733,10 @@ module UpdateContactFlowContent = {
   @module("@aws-sdk/client-connect") @new
   external new: request => t = "UpdateContactFlowContentCommand"
   let make = (~content, ~contactFlowId, ~instanceId, ()) =>
-    new({content, contactFlowId, instanceId})
+    new({content: content, contactFlowId: contactFlowId, instanceId: instanceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateContact = {
   type t
   type request = {
@@ -3564,9 +3761,16 @@ module UpdateContact = {
   type response = {.}
   @module("@aws-sdk/client-connect") @new external new: request => t = "UpdateContactCommand"
   let make = (~contactId, ~instanceId, ~references=?, ~description=?, ~name=?, ()) =>
-    new({references, description, name, contactId, instanceId})
+    new({
+      references: references,
+      description: description,
+      name: name,
+      contactId: contactId,
+      instanceId: instanceId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module StartTaskContact = {
   type t
   type request = {
@@ -3636,18 +3840,19 @@ module StartTaskContact = {
     (),
   ) =>
     new({
-      scheduledTime,
-      clientToken,
-      description,
-      references,
-      name,
-      attributes,
-      contactFlowId,
-      previousContactId,
-      instanceId,
+      scheduledTime: scheduledTime,
+      clientToken: clientToken,
+      description: description,
+      references: references,
+      name: name,
+      attributes: attributes,
+      contactFlowId: contactFlowId,
+      previousContactId: previousContactId,
+      instanceId: instanceId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module SearchVocabularies = {
   type t
   type request = {
@@ -3690,9 +3895,18 @@ response in the next request to retrieve the next set of results.</p>")
     ~nextToken=?,
     ~maxResults=?,
     (),
-  ) => new({languageCode, nameStartsWith, state, nextToken, maxResults, instanceId})
+  ) =>
+    new({
+      languageCode: languageCode,
+      nameStartsWith: nameStartsWith,
+      state: state,
+      nextToken: nextToken,
+      maxResults: maxResults,
+      instanceId: instanceId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListUsers = {
   type t
   type request = {
@@ -3719,9 +3933,10 @@ response in the next request to retrieve the next set of results.</p>")
   }
   @module("@aws-sdk/client-connect") @new external new: request => t = "ListUsersCommand"
   let make = (~instanceId, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults, nextToken, instanceId})
+    new({maxResults: maxResults, nextToken: nextToken, instanceId: instanceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListUserHierarchyGroups = {
   type t
   type request = {
@@ -3750,9 +3965,10 @@ response in the next request to retrieve the next set of results.</p>")
   @module("@aws-sdk/client-connect") @new
   external new: request => t = "ListUserHierarchyGroupsCommand"
   let make = (~instanceId, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults, nextToken, instanceId})
+    new({maxResults: maxResults, nextToken: nextToken, instanceId: instanceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListUseCases = {
   type t
   @ocaml.doc("<p>Provides summary information about the use cases for the specified integration
@@ -3784,9 +4000,15 @@ response in the next request to retrieve the next set of results.</p>")
   }
   @module("@aws-sdk/client-connect") @new external new: request => t = "ListUseCasesCommand"
   let make = (~integrationAssociationId, ~instanceId, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults, nextToken, integrationAssociationId, instanceId})
+    new({
+      maxResults: maxResults,
+      nextToken: nextToken,
+      integrationAssociationId: integrationAssociationId,
+      instanceId: instanceId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListSecurityProfiles = {
   type t
   type request = {
@@ -3813,9 +4035,10 @@ response in the next request to retrieve the next set of results.</p>")
   }
   @module("@aws-sdk/client-connect") @new external new: request => t = "ListSecurityProfilesCommand"
   let make = (~instanceId, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults, nextToken, instanceId})
+    new({maxResults: maxResults, nextToken: nextToken, instanceId: instanceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListSecurityKeys = {
   type t
   type request = {
@@ -3842,9 +4065,10 @@ response in the next request to retrieve the next set of results.</p>")
   }
   @module("@aws-sdk/client-connect") @new external new: request => t = "ListSecurityKeysCommand"
   let make = (~instanceId, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults, nextToken, instanceId})
+    new({maxResults: maxResults, nextToken: nextToken, instanceId: instanceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListRoutingProfiles = {
   type t
   type request = {
@@ -3871,9 +4095,10 @@ response in the next request to retrieve the next set of results.</p>")
   }
   @module("@aws-sdk/client-connect") @new external new: request => t = "ListRoutingProfilesCommand"
   let make = (~instanceId, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults, nextToken, instanceId})
+    new({maxResults: maxResults, nextToken: nextToken, instanceId: instanceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListRoutingProfileQueues = {
   type t
   type request = {
@@ -3904,9 +4129,15 @@ response in the next request to retrieve the next set of results.</p>")
   @module("@aws-sdk/client-connect") @new
   external new: request => t = "ListRoutingProfileQueuesCommand"
   let make = (~routingProfileId, ~instanceId, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults, nextToken, routingProfileId, instanceId})
+    new({
+      maxResults: maxResults,
+      nextToken: nextToken,
+      routingProfileId: routingProfileId,
+      instanceId: instanceId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListQuickConnects = {
   type t
   type request = {
@@ -3937,9 +4168,15 @@ response in the next request to retrieve the next set of results.</p>")
   }
   @module("@aws-sdk/client-connect") @new external new: request => t = "ListQuickConnectsCommand"
   let make = (~instanceId, ~quickConnectTypes=?, ~maxResults=?, ~nextToken=?, ()) =>
-    new({quickConnectTypes, maxResults, nextToken, instanceId})
+    new({
+      quickConnectTypes: quickConnectTypes,
+      maxResults: maxResults,
+      nextToken: nextToken,
+      instanceId: instanceId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListQueues = {
   type t
   type request = {
@@ -3967,9 +4204,15 @@ response in the next request to retrieve the next set of results.</p>")
   }
   @module("@aws-sdk/client-connect") @new external new: request => t = "ListQueuesCommand"
   let make = (~instanceId, ~maxResults=?, ~nextToken=?, ~queueTypes=?, ()) =>
-    new({maxResults, nextToken, queueTypes, instanceId})
+    new({
+      maxResults: maxResults,
+      nextToken: nextToken,
+      queueTypes: queueTypes,
+      instanceId: instanceId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListQueueQuickConnects = {
   type t
   type request = {
@@ -3998,9 +4241,10 @@ response in the next request to retrieve the next set of results.</p>")
   @module("@aws-sdk/client-connect") @new
   external new: request => t = "ListQueueQuickConnectsCommand"
   let make = (~queueId, ~instanceId, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults, nextToken, queueId, instanceId})
+    new({maxResults: maxResults, nextToken: nextToken, queueId: queueId, instanceId: instanceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListPrompts = {
   type t
   type request = {
@@ -4024,9 +4268,10 @@ module ListPrompts = {
   }
   @module("@aws-sdk/client-connect") @new external new: request => t = "ListPromptsCommand"
   let make = (~instanceId, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults, nextToken, instanceId})
+    new({maxResults: maxResults, nextToken: nextToken, instanceId: instanceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListPhoneNumbers = {
   type t
   type request = {
@@ -4063,9 +4308,17 @@ response in the next request to retrieve the next set of results.</p>")
     ~phoneNumberCountryCodes=?,
     ~phoneNumberTypes=?,
     (),
-  ) => new({maxResults, nextToken, phoneNumberCountryCodes, phoneNumberTypes, instanceId})
+  ) =>
+    new({
+      maxResults: maxResults,
+      nextToken: nextToken,
+      phoneNumberCountryCodes: phoneNumberCountryCodes,
+      phoneNumberTypes: phoneNumberTypes,
+      instanceId: instanceId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListLexBots = {
   type t
   type request = {
@@ -4097,9 +4350,10 @@ response in the next request to retrieve the next set of results.</p>")
   }
   @module("@aws-sdk/client-connect") @new external new: request => t = "ListLexBotsCommand"
   let make = (~instanceId, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults, nextToken, instanceId})
+    new({maxResults: maxResults, nextToken: nextToken, instanceId: instanceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListIntegrationAssociations = {
   type t
   type request = {
@@ -4129,9 +4383,15 @@ response in the next request to retrieve the next set of results.</p>")
   @module("@aws-sdk/client-connect") @new
   external new: request => t = "ListIntegrationAssociationsCommand"
   let make = (~instanceId, ~maxResults=?, ~nextToken=?, ~integrationType=?, ()) =>
-    new({maxResults, nextToken, integrationType, instanceId})
+    new({
+      maxResults: maxResults,
+      nextToken: nextToken,
+      integrationType: integrationType,
+      instanceId: instanceId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListInstances = {
   type t
   type request = {
@@ -4152,9 +4412,11 @@ response in the next request to retrieve the next set of results.</p>")
     instanceSummaryList: option<instanceSummaryList>,
   }
   @module("@aws-sdk/client-connect") @new external new: request => t = "ListInstancesCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListInstanceAttributes = {
   type t
   type request = {
@@ -4181,9 +4443,10 @@ response in the next request to retrieve the next set of results.</p>")
   @module("@aws-sdk/client-connect") @new
   external new: request => t = "ListInstanceAttributesCommand"
   let make = (~instanceId, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults, nextToken, instanceId})
+    new({maxResults: maxResults, nextToken: nextToken, instanceId: instanceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListHoursOfOperations = {
   type t
   type request = {
@@ -4212,9 +4475,10 @@ response in the next request to retrieve the next set of results.</p>")
   @module("@aws-sdk/client-connect") @new
   external new: request => t = "ListHoursOfOperationsCommand"
   let make = (~instanceId, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults, nextToken, instanceId})
+    new({maxResults: maxResults, nextToken: nextToken, instanceId: instanceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListDefaultVocabularies = {
   type t
   type request = {
@@ -4247,9 +4511,15 @@ response in the next request to retrieve the next set of results.</p>")
   @module("@aws-sdk/client-connect") @new
   external new: request => t = "ListDefaultVocabulariesCommand"
   let make = (~instanceId, ~nextToken=?, ~maxResults=?, ~languageCode=?, ()) =>
-    new({nextToken, maxResults, languageCode, instanceId})
+    new({
+      nextToken: nextToken,
+      maxResults: maxResults,
+      languageCode: languageCode,
+      instanceId: instanceId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListContactFlows = {
   type t
   type request = {
@@ -4278,9 +4548,15 @@ response in the next request to retrieve the next set of results.</p>")
   }
   @module("@aws-sdk/client-connect") @new external new: request => t = "ListContactFlowsCommand"
   let make = (~instanceId, ~maxResults=?, ~nextToken=?, ~contactFlowTypes=?, ()) =>
-    new({maxResults, nextToken, contactFlowTypes, instanceId})
+    new({
+      maxResults: maxResults,
+      nextToken: nextToken,
+      contactFlowTypes: contactFlowTypes,
+      instanceId: instanceId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListContactFlowModules = {
   type t
   type request = {
@@ -4311,9 +4587,15 @@ response in the next request to retrieve the next set of results.</p>")
   @module("@aws-sdk/client-connect") @new
   external new: request => t = "ListContactFlowModulesCommand"
   let make = (~instanceId, ~contactFlowModuleState=?, ~maxResults=?, ~nextToken=?, ()) =>
-    new({contactFlowModuleState, maxResults, nextToken, instanceId})
+    new({
+      contactFlowModuleState: contactFlowModuleState,
+      maxResults: maxResults,
+      nextToken: nextToken,
+      instanceId: instanceId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListAgentStatuses = {
   type t
   type request = {
@@ -4342,9 +4624,15 @@ response in the next request to retrieve the next set of results.</p>")
   }
   @module("@aws-sdk/client-connect") @new external new: request => t = "ListAgentStatusesCommand"
   let make = (~instanceId, ~agentStatusTypes=?, ~maxResults=?, ~nextToken=?, ()) =>
-    new({agentStatusTypes, maxResults, nextToken, instanceId})
+    new({
+      agentStatusTypes: agentStatusTypes,
+      maxResults: maxResults,
+      nextToken: nextToken,
+      instanceId: instanceId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DisassociateRoutingProfileQueues = {
   type t
   type request = {
@@ -4363,9 +4651,14 @@ module DisassociateRoutingProfileQueues = {
   @module("@aws-sdk/client-connect") @new
   external new: request => t = "DisassociateRoutingProfileQueuesCommand"
   let make = (~queueReferences, ~routingProfileId, ~instanceId, ()) =>
-    new({queueReferences, routingProfileId, instanceId})
+    new({
+      queueReferences: queueReferences,
+      routingProfileId: routingProfileId,
+      instanceId: instanceId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DescribeVocabulary = {
   type t
   type request = {
@@ -4385,9 +4678,11 @@ module DescribeVocabulary = {
     vocabulary: vocabulary,
   }
   @module("@aws-sdk/client-connect") @new external new: request => t = "DescribeVocabularyCommand"
-  let make = (~vocabularyId, ~instanceId, ()) => new({vocabularyId, instanceId})
+  let make = (~vocabularyId, ~instanceId, ()) =>
+    new({vocabularyId: vocabularyId, instanceId: instanceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeUserHierarchyStructure = {
   type t
   type request = {
@@ -4406,6 +4701,7 @@ module DescribeUserHierarchyStructure = {
   let make = (~instanceId, ()) => new({instanceId: instanceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeUser = {
   type t
   type request = {
@@ -4421,9 +4717,10 @@ module DescribeUser = {
     user: option<user>,
   }
   @module("@aws-sdk/client-connect") @new external new: request => t = "DescribeUserCommand"
-  let make = (~instanceId, ~userId, ()) => new({instanceId, userId})
+  let make = (~instanceId, ~userId, ()) => new({instanceId: instanceId, userId: userId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeSecurityProfile = {
   type t
   type request = {
@@ -4441,9 +4738,11 @@ module DescribeSecurityProfile = {
   }
   @module("@aws-sdk/client-connect") @new
   external new: request => t = "DescribeSecurityProfileCommand"
-  let make = (~instanceId, ~securityProfileId, ()) => new({instanceId, securityProfileId})
+  let make = (~instanceId, ~securityProfileId, ()) =>
+    new({instanceId: instanceId, securityProfileId: securityProfileId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeQueue = {
   type t
   type request = {
@@ -4456,9 +4755,10 @@ module DescribeQueue = {
   }
   type response = {@ocaml.doc("<p>The name of the queue.</p>") @as("Queue") queue: option<queue>}
   @module("@aws-sdk/client-connect") @new external new: request => t = "DescribeQueueCommand"
-  let make = (~queueId, ~instanceId, ()) => new({queueId, instanceId})
+  let make = (~queueId, ~instanceId, ()) => new({queueId: queueId, instanceId: instanceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeInstance = {
   type t
   type request = {
@@ -4475,6 +4775,7 @@ module DescribeInstance = {
   let make = (~instanceId, ()) => new({instanceId: instanceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeContactFlowModule = {
   type t
   type request = {
@@ -4492,9 +4793,11 @@ module DescribeContactFlowModule = {
   }
   @module("@aws-sdk/client-connect") @new
   external new: request => t = "DescribeContactFlowModuleCommand"
-  let make = (~contactFlowModuleId, ~instanceId, ()) => new({contactFlowModuleId, instanceId})
+  let make = (~contactFlowModuleId, ~instanceId, ()) =>
+    new({contactFlowModuleId: contactFlowModuleId, instanceId: instanceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeContactFlow = {
   type t
   type request = {
@@ -4508,9 +4811,11 @@ module DescribeContactFlow = {
     contactFlow: option<contactFlow>,
   }
   @module("@aws-sdk/client-connect") @new external new: request => t = "DescribeContactFlowCommand"
-  let make = (~contactFlowId, ~instanceId, ()) => new({contactFlowId, instanceId})
+  let make = (~contactFlowId, ~instanceId, ()) =>
+    new({contactFlowId: contactFlowId, instanceId: instanceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeContact = {
   type t
   type request = {
@@ -4525,9 +4830,10 @@ module DescribeContact = {
     @ocaml.doc("<p>Information about the contact.</p>") @as("Contact") contact: option<contact>,
   }
   @module("@aws-sdk/client-connect") @new external new: request => t = "DescribeContactCommand"
-  let make = (~contactId, ~instanceId, ()) => new({contactId, instanceId})
+  let make = (~contactId, ~instanceId, ()) => new({contactId: contactId, instanceId: instanceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeAgentStatus = {
   type t
   type request = {
@@ -4543,9 +4849,11 @@ module DescribeAgentStatus = {
     @ocaml.doc("<p>The agent status.</p>") @as("AgentStatus") agentStatus: option<agentStatus>,
   }
   @module("@aws-sdk/client-connect") @new external new: request => t = "DescribeAgentStatusCommand"
-  let make = (~agentStatusId, ~instanceId, ()) => new({agentStatusId, instanceId})
+  let make = (~agentStatusId, ~instanceId, ()) =>
+    new({agentStatusId: agentStatusId, instanceId: instanceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateQuickConnect = {
   type t
   type request = {
@@ -4572,9 +4880,16 @@ module CreateQuickConnect = {
   }
   @module("@aws-sdk/client-connect") @new external new: request => t = "CreateQuickConnectCommand"
   let make = (~quickConnectConfig, ~name, ~instanceId, ~tags=?, ~description=?, ()) =>
-    new({tags, quickConnectConfig, description, name, instanceId})
+    new({
+      tags: tags,
+      quickConnectConfig: quickConnectConfig,
+      description: description,
+      name: name,
+      instanceId: instanceId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateContactFlowModule = {
   type t
   type request = {
@@ -4606,9 +4921,17 @@ module CreateContactFlowModule = {
   @module("@aws-sdk/client-connect") @new
   external new: request => t = "CreateContactFlowModuleCommand"
   let make = (~content, ~name, ~instanceId, ~clientToken=?, ~tags=?, ~description=?, ()) =>
-    new({clientToken, tags, content, description, name, instanceId})
+    new({
+      clientToken: clientToken,
+      tags: tags,
+      content: content,
+      description: description,
+      name: name,
+      instanceId: instanceId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateContactFlow = {
   type t
   type request = {
@@ -4633,9 +4956,17 @@ module CreateContactFlow = {
   }
   @module("@aws-sdk/client-connect") @new external new: request => t = "CreateContactFlowCommand"
   let make = (~content, ~type_, ~name, ~instanceId, ~tags=?, ~description=?, ()) =>
-    new({tags, content, description, type_, name, instanceId})
+    new({
+      tags: tags,
+      content: content,
+      description: description,
+      type_: type_,
+      name: name,
+      instanceId: instanceId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateRoutingProfileQueues = {
   type t
   type request = {
@@ -4656,9 +4987,10 @@ module UpdateRoutingProfileQueues = {
   @module("@aws-sdk/client-connect") @new
   external new: request => t = "UpdateRoutingProfileQueuesCommand"
   let make = (~queueConfigs, ~routingProfileId, ~instanceId, ()) =>
-    new({queueConfigs, routingProfileId, instanceId})
+    new({queueConfigs: queueConfigs, routingProfileId: routingProfileId, instanceId: instanceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateInstanceStorageConfig = {
   type t
   type request = {
@@ -4680,9 +5012,15 @@ module UpdateInstanceStorageConfig = {
   @module("@aws-sdk/client-connect") @new
   external new: request => t = "UpdateInstanceStorageConfigCommand"
   let make = (~storageConfig, ~resourceType, ~associationId, ~instanceId, ()) =>
-    new({storageConfig, resourceType, associationId, instanceId})
+    new({
+      storageConfig: storageConfig,
+      resourceType: resourceType,
+      associationId: associationId,
+      instanceId: instanceId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateHoursOfOperation = {
   type t
   type request = {
@@ -4713,9 +5051,18 @@ module UpdateHoursOfOperation = {
     ~description=?,
     ~name=?,
     (),
-  ) => new({config, timeZone, description, name, hoursOfOperationId, instanceId})
+  ) =>
+    new({
+      config: config,
+      timeZone: timeZone,
+      description: description,
+      name: name,
+      hoursOfOperationId: hoursOfOperationId,
+      instanceId: instanceId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ListContactReferences = {
   type t
   type request = {
@@ -4750,9 +5097,15 @@ response in the next request to retrieve the next set of results.</p>
   @module("@aws-sdk/client-connect") @new
   external new: request => t = "ListContactReferencesCommand"
   let make = (~referenceTypes, ~contactId, ~instanceId, ~nextToken=?, ()) =>
-    new({nextToken, referenceTypes, contactId, instanceId})
+    new({
+      nextToken: nextToken,
+      referenceTypes: referenceTypes,
+      contactId: contactId,
+      instanceId: instanceId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListBots = {
   type t
   type request = {
@@ -4783,9 +5136,15 @@ response in the next request to retrieve the next set of results.</p>")
   }
   @module("@aws-sdk/client-connect") @new external new: request => t = "ListBotsCommand"
   let make = (~lexVersion, ~instanceId, ~maxResults=?, ~nextToken=?, ()) =>
-    new({lexVersion, maxResults, nextToken, instanceId})
+    new({
+      lexVersion: lexVersion,
+      maxResults: maxResults,
+      nextToken: nextToken,
+      instanceId: instanceId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeUserHierarchyGroup = {
   type t
   type request = {
@@ -4803,9 +5162,11 @@ module DescribeUserHierarchyGroup = {
   }
   @module("@aws-sdk/client-connect") @new
   external new: request => t = "DescribeUserHierarchyGroupCommand"
-  let make = (~instanceId, ~hierarchyGroupId, ()) => new({instanceId, hierarchyGroupId})
+  let make = (~instanceId, ~hierarchyGroupId, ()) =>
+    new({instanceId: instanceId, hierarchyGroupId: hierarchyGroupId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeRoutingProfile = {
   type t
   type request = {
@@ -4823,9 +5184,11 @@ module DescribeRoutingProfile = {
   }
   @module("@aws-sdk/client-connect") @new
   external new: request => t = "DescribeRoutingProfileCommand"
-  let make = (~routingProfileId, ~instanceId, ()) => new({routingProfileId, instanceId})
+  let make = (~routingProfileId, ~instanceId, ()) =>
+    new({routingProfileId: routingProfileId, instanceId: instanceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeQuickConnect = {
   type t
   type request = {
@@ -4842,9 +5205,11 @@ module DescribeQuickConnect = {
     quickConnect: option<quickConnect>,
   }
   @module("@aws-sdk/client-connect") @new external new: request => t = "DescribeQuickConnectCommand"
-  let make = (~quickConnectId, ~instanceId, ()) => new({quickConnectId, instanceId})
+  let make = (~quickConnectId, ~instanceId, ()) =>
+    new({quickConnectId: quickConnectId, instanceId: instanceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeInstanceStorageConfig = {
   type t
   type request = {
@@ -4868,9 +5233,10 @@ module DescribeInstanceStorageConfig = {
   @module("@aws-sdk/client-connect") @new
   external new: request => t = "DescribeInstanceStorageConfigCommand"
   let make = (~resourceType, ~associationId, ~instanceId, ()) =>
-    new({resourceType, associationId, instanceId})
+    new({resourceType: resourceType, associationId: associationId, instanceId: instanceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateRoutingProfile = {
   type t
   type request = {
@@ -4917,16 +5283,17 @@ module CreateRoutingProfile = {
     (),
   ) =>
     new({
-      tags,
-      mediaConcurrencies,
-      queueConfigs,
-      defaultOutboundQueueId,
-      description,
-      name,
-      instanceId,
+      tags: tags,
+      mediaConcurrencies: mediaConcurrencies,
+      queueConfigs: queueConfigs,
+      defaultOutboundQueueId: defaultOutboundQueueId,
+      description: description,
+      name: name,
+      instanceId: instanceId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateHoursOfOperation = {
   type t
   type request = {
@@ -4959,9 +5326,17 @@ module CreateHoursOfOperation = {
   @module("@aws-sdk/client-connect") @new
   external new: request => t = "CreateHoursOfOperationCommand"
   let make = (~config, ~timeZone, ~name, ~instanceId, ~tags=?, ~description=?, ()) =>
-    new({tags, config, timeZone, description, name, instanceId})
+    new({
+      tags: tags,
+      config: config,
+      timeZone: timeZone,
+      description: description,
+      name: name,
+      instanceId: instanceId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module AssociateRoutingProfileQueues = {
   type t
   type request = {
@@ -4979,9 +5354,10 @@ module AssociateRoutingProfileQueues = {
   @module("@aws-sdk/client-connect") @new
   external new: request => t = "AssociateRoutingProfileQueuesCommand"
   let make = (~queueConfigs, ~routingProfileId, ~instanceId, ()) =>
-    new({queueConfigs, routingProfileId, instanceId})
+    new({queueConfigs: queueConfigs, routingProfileId: routingProfileId, instanceId: instanceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module AssociateInstanceStorageConfig = {
   type t
   type request = {
@@ -5005,9 +5381,10 @@ module AssociateInstanceStorageConfig = {
   @module("@aws-sdk/client-connect") @new
   external new: request => t = "AssociateInstanceStorageConfigCommand"
   let make = (~storageConfig, ~resourceType, ~instanceId, ()) =>
-    new({storageConfig, resourceType, instanceId})
+    new({storageConfig: storageConfig, resourceType: resourceType, instanceId: instanceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListInstanceStorageConfigs = {
   type t
   type request = {
@@ -5037,9 +5414,15 @@ response in the next request to retrieve the next set of results.</p>")
   @module("@aws-sdk/client-connect") @new
   external new: request => t = "ListInstanceStorageConfigsCommand"
   let make = (~resourceType, ~instanceId, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults, nextToken, resourceType, instanceId})
+    new({
+      maxResults: maxResults,
+      nextToken: nextToken,
+      resourceType: resourceType,
+      instanceId: instanceId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeHoursOfOperation = {
   type t
   type request = {
@@ -5057,9 +5440,11 @@ module DescribeHoursOfOperation = {
   }
   @module("@aws-sdk/client-connect") @new
   external new: request => t = "DescribeHoursOfOperationCommand"
-  let make = (~hoursOfOperationId, ~instanceId, ()) => new({hoursOfOperationId, instanceId})
+  let make = (~hoursOfOperationId, ~instanceId, ()) =>
+    new({hoursOfOperationId: hoursOfOperationId, instanceId: instanceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetCurrentMetricData = {
   type t
   type request = {
@@ -5208,9 +5593,18 @@ response in the next request to retrieve the next set of results.</p>
     ~nextToken=?,
     ~groupings=?,
     (),
-  ) => new({maxResults, nextToken, currentMetrics, groupings, filters, instanceId})
+  ) =>
+    new({
+      maxResults: maxResults,
+      nextToken: nextToken,
+      currentMetrics: currentMetrics,
+      groupings: groupings,
+      filters: filters,
+      instanceId: instanceId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetMetricData = {
   type t
   type request = {
@@ -5420,14 +5814,14 @@ response in the next request to retrieve the next set of results.</p>")
     (),
   ) =>
     new({
-      maxResults,
-      nextToken,
-      historicalMetrics,
-      groupings,
-      filters,
-      endTime,
-      startTime,
-      instanceId,
+      maxResults: maxResults,
+      nextToken: nextToken,
+      historicalMetrics: historicalMetrics,
+      groupings: groupings,
+      filters: filters,
+      endTime: endTime,
+      startTime: startTime,
+      instanceId: instanceId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

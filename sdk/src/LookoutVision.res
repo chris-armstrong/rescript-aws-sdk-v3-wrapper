@@ -585,9 +585,15 @@ module UpdateDatasetEntries = {
   @module("@aws-sdk/client-lookoutvision") @new
   external new: request => t = "UpdateDatasetEntriesCommand"
   let make = (~changes, ~datasetType, ~projectName, ~clientToken=?, ()) =>
-    new({clientToken, changes, datasetType, projectName})
+    new({
+      clientToken: clientToken,
+      changes: changes,
+      datasetType: datasetType,
+      projectName: projectName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module StopModel = {
   type t
   type request = {
@@ -618,9 +624,10 @@ module StopModel = {
   }
   @module("@aws-sdk/client-lookoutvision") @new external new: request => t = "StopModelCommand"
   let make = (~modelVersion, ~projectName, ~clientToken=?, ()) =>
-    new({clientToken, modelVersion, projectName})
+    new({clientToken: clientToken, modelVersion: modelVersion, projectName: projectName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module StartModel = {
   type t
   type request = {
@@ -658,9 +665,15 @@ module StartModel = {
   }
   @module("@aws-sdk/client-lookoutvision") @new external new: request => t = "StartModelCommand"
   let make = (~minInferenceUnits, ~modelVersion, ~projectName, ~clientToken=?, ()) =>
-    new({clientToken, minInferenceUnits, modelVersion, projectName})
+    new({
+      clientToken: clientToken,
+      minInferenceUnits: minInferenceUnits,
+      modelVersion: modelVersion,
+      projectName: projectName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteProject = {
   type t
   type request = {
@@ -686,9 +699,11 @@ module DeleteProject = {
     projectArn: option<projectArn>,
   }
   @module("@aws-sdk/client-lookoutvision") @new external new: request => t = "DeleteProjectCommand"
-  let make = (~projectName, ~clientToken=?, ()) => new({clientToken, projectName})
+  let make = (~projectName, ~clientToken=?, ()) =>
+    new({clientToken: clientToken, projectName: projectName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteModel = {
   type t
   type request = {
@@ -719,9 +734,10 @@ module DeleteModel = {
   }
   @module("@aws-sdk/client-lookoutvision") @new external new: request => t = "DeleteModelCommand"
   let make = (~modelVersion, ~projectName, ~clientToken=?, ()) =>
-    new({clientToken, modelVersion, projectName})
+    new({clientToken: clientToken, modelVersion: modelVersion, projectName: projectName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteDataset = {
   type t
   type request = {
@@ -749,9 +765,10 @@ module DeleteDataset = {
   type response = {.}
   @module("@aws-sdk/client-lookoutvision") @new external new: request => t = "DeleteDatasetCommand"
   let make = (~datasetType, ~projectName, ~clientToken=?, ()) =>
-    new({clientToken, datasetType, projectName})
+    new({clientToken: clientToken, datasetType: datasetType, projectName: projectName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UntagResource = {
   type t
   type request = {
@@ -765,9 +782,10 @@ module UntagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-lookoutvision") @new external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys, resourceArn})
+  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ListDatasetEntries = {
   type t
   type request = {
@@ -836,18 +854,19 @@ module ListDatasetEntries = {
     (),
   ) =>
     new({
-      sourceRefContains,
-      maxResults,
-      nextToken,
-      afterCreationDate,
-      beforeCreationDate,
-      anomalyClass,
-      labeled,
-      datasetType,
-      projectName,
+      sourceRefContains: sourceRefContains,
+      maxResults: maxResults,
+      nextToken: nextToken,
+      afterCreationDate: afterCreationDate,
+      beforeCreationDate: beforeCreationDate,
+      anomalyClass: anomalyClass,
+      labeled: labeled,
+      datasetType: datasetType,
+      projectName: projectName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateProject = {
   type t
   type request = {
@@ -872,9 +891,11 @@ module CreateProject = {
     projectMetadata: option<projectMetadata>,
   }
   @module("@aws-sdk/client-lookoutvision") @new external new: request => t = "CreateProjectCommand"
-  let make = (~projectName, ~clientToken=?, ()) => new({clientToken, projectName})
+  let make = (~projectName, ~clientToken=?, ()) =>
+    new({clientToken: clientToken, projectName: projectName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module TagResource = {
   type t
   type request = {
@@ -885,9 +906,10 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-lookoutvision") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceArn, ()) => new({tags, resourceArn})
+  let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ListTagsForResource = {
   type t
   type request = {
@@ -906,6 +928,7 @@ module ListTagsForResource = {
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListProjects = {
   type t
   type request = {
@@ -929,9 +952,11 @@ module ListProjects = {
     projects: option<projectMetadataList>,
   }
   @module("@aws-sdk/client-lookoutvision") @new external new: request => t = "ListProjectsCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListModelPackagingJobs = {
   type t
   type request = {
@@ -967,9 +992,10 @@ A list of the model packaging jobs created for the specified Amazon Lookout for 
   @module("@aws-sdk/client-lookoutvision") @new
   external new: request => t = "ListModelPackagingJobsCommand"
   let make = (~projectName, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults, nextToken, projectName})
+    new({maxResults: maxResults, nextToken: nextToken, projectName: projectName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DetectAnomalies = {
   type t
   type request = {
@@ -995,9 +1021,15 @@ module DetectAnomalies = {
   @module("@aws-sdk/client-lookoutvision") @new
   external new: request => t = "DetectAnomaliesCommand"
   let make = (~contentType, ~body, ~modelVersion, ~projectName, ()) =>
-    new({contentType, body, modelVersion, projectName})
+    new({
+      contentType: contentType,
+      body: body,
+      modelVersion: modelVersion,
+      projectName: projectName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeDataset = {
   type t
   type request = {
@@ -1019,9 +1051,11 @@ module DescribeDataset = {
   }
   @module("@aws-sdk/client-lookoutvision") @new
   external new: request => t = "DescribeDatasetCommand"
-  let make = (~datasetType, ~projectName, ()) => new({datasetType, projectName})
+  let make = (~datasetType, ~projectName, ()) =>
+    new({datasetType: datasetType, projectName: projectName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateModel = {
   type t
   type request = {
@@ -1069,9 +1103,18 @@ module CreateModel = {
     ~clientToken=?,
     ~description=?,
     (),
-  ) => new({tags, kmsKeyId, outputConfig, clientToken, description, projectName})
+  ) =>
+    new({
+      tags: tags,
+      kmsKeyId: kmsKeyId,
+      outputConfig: outputConfig,
+      clientToken: clientToken,
+      description: description,
+      projectName: projectName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListModels = {
   type t
   type request = {
@@ -1101,9 +1144,10 @@ module ListModels = {
   }
   @module("@aws-sdk/client-lookoutvision") @new external new: request => t = "ListModelsCommand"
   let make = (~projectName, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults, nextToken, projectName})
+    new({maxResults: maxResults, nextToken: nextToken, projectName: projectName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeProject = {
   type t
   type request = {
@@ -1119,6 +1163,7 @@ module DescribeProject = {
   let make = (~projectName, ()) => new({projectName: projectName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeModel = {
   type t
   type request = {
@@ -1133,9 +1178,11 @@ module DescribeModel = {
     modelDescription: option<modelDescription>,
   }
   @module("@aws-sdk/client-lookoutvision") @new external new: request => t = "DescribeModelCommand"
-  let make = (~modelVersion, ~projectName, ()) => new({modelVersion, projectName})
+  let make = (~modelVersion, ~projectName, ()) =>
+    new({modelVersion: modelVersion, projectName: projectName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateDataset = {
   type t
   type request = {
@@ -1177,9 +1224,15 @@ module CreateDataset = {
   }
   @module("@aws-sdk/client-lookoutvision") @new external new: request => t = "CreateDatasetCommand"
   let make = (~datasetType, ~projectName, ~clientToken=?, ~datasetSource=?, ()) =>
-    new({clientToken, datasetSource, datasetType, projectName})
+    new({
+      clientToken: clientToken,
+      datasetSource: datasetSource,
+      datasetType: datasetType,
+      projectName: projectName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module StartModelPackagingJob = {
   type t
   type request = {
@@ -1239,9 +1292,18 @@ The name of the project which contains the version of the model that you want to
     ~description=?,
     ~jobName=?,
     (),
-  ) => new({clientToken, description, configuration, jobName, modelVersion, projectName})
+  ) =>
+    new({
+      clientToken: clientToken,
+      description: description,
+      configuration: configuration,
+      jobName: jobName,
+      modelVersion: modelVersion,
+      projectName: projectName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeModelPackagingJob = {
   type t
   type request = {
@@ -1263,6 +1325,6 @@ module DescribeModelPackagingJob = {
   }
   @module("@aws-sdk/client-lookoutvision") @new
   external new: request => t = "DescribeModelPackagingJobCommand"
-  let make = (~jobName, ~projectName, ()) => new({jobName, projectName})
+  let make = (~jobName, ~projectName, ()) => new({jobName: jobName, projectName: projectName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

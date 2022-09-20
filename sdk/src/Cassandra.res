@@ -252,6 +252,7 @@ module GetKeyspace = {
   let make = (~keyspaceName, ()) => new({keyspaceName: keyspaceName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteTable = {
   type t
   type request = {
@@ -261,9 +262,11 @@ module DeleteTable = {
   }
   type response = {.}
   @module("@aws-sdk/client-cassandra") @new external new: request => t = "DeleteTableCommand"
-  let make = (~tableName, ~keyspaceName, ()) => new({tableName, keyspaceName})
+  let make = (~tableName, ~keyspaceName, ()) =>
+    new({tableName: tableName, keyspaceName: keyspaceName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteKeyspace = {
   type t
   type request = {
@@ -274,6 +277,7 @@ module DeleteKeyspace = {
   let make = (~keyspaceName, ()) => new({keyspaceName: keyspaceName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateTable = {
   type t
   type request = {
@@ -345,17 +349,18 @@ module UpdateTable = {
     (),
   ) =>
     new({
-      defaultTimeToLive,
-      ttl,
-      pointInTimeRecovery,
-      encryptionSpecification,
-      capacitySpecification,
-      addColumns,
-      tableName,
-      keyspaceName,
+      defaultTimeToLive: defaultTimeToLive,
+      ttl: ttl,
+      pointInTimeRecovery: pointInTimeRecovery,
+      encryptionSpecification: encryptionSpecification,
+      capacitySpecification: capacitySpecification,
+      addColumns: addColumns,
+      tableName: tableName,
+      keyspaceName: keyspaceName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UntagResource = {
   type t
   type request = {
@@ -368,9 +373,10 @@ module UntagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-cassandra") @new external new: request => t = "UntagResourceCommand"
-  let make = (~tags, ~resourceArn, ()) => new({tags, resourceArn})
+  let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module TagResource = {
   type t
   type request = {
@@ -382,9 +388,10 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-cassandra") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceArn, ()) => new({tags, resourceArn})
+  let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module RestoreTable = {
   type t
   type request = {
@@ -446,18 +453,19 @@ module RestoreTable = {
     (),
   ) =>
     new({
-      tagsOverride,
-      pointInTimeRecoveryOverride,
-      encryptionSpecificationOverride,
-      capacitySpecificationOverride,
-      restoreTimestamp,
-      targetTableName,
-      targetKeyspaceName,
-      sourceTableName,
-      sourceKeyspaceName,
+      tagsOverride: tagsOverride,
+      pointInTimeRecoveryOverride: pointInTimeRecoveryOverride,
+      encryptionSpecificationOverride: encryptionSpecificationOverride,
+      capacitySpecificationOverride: capacitySpecificationOverride,
+      restoreTimestamp: restoreTimestamp,
+      targetTableName: targetTableName,
+      targetKeyspaceName: targetKeyspaceName,
+      sourceTableName: sourceTableName,
+      sourceKeyspaceName: sourceKeyspaceName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListTagsForResource = {
   type t
   type request = {
@@ -482,9 +490,10 @@ module ListTagsForResource = {
   @module("@aws-sdk/client-cassandra") @new
   external new: request => t = "ListTagsForResourceCommand"
   let make = (~resourceArn, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults, nextToken, resourceArn})
+    new({maxResults: maxResults, nextToken: nextToken, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListTables = {
   type t
   type request = {
@@ -507,9 +516,10 @@ module ListTables = {
   }
   @module("@aws-sdk/client-cassandra") @new external new: request => t = "ListTablesCommand"
   let make = (~keyspaceName, ~maxResults=?, ~nextToken=?, ()) =>
-    new({keyspaceName, maxResults, nextToken})
+    new({keyspaceName: keyspaceName, maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListKeyspaces = {
   type t
   type request = {
@@ -530,9 +540,11 @@ module ListKeyspaces = {
     nextToken: option<nextToken>,
   }
   @module("@aws-sdk/client-cassandra") @new external new: request => t = "ListKeyspacesCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateKeyspace = {
   type t
   type request = {
@@ -549,9 +561,10 @@ module CreateKeyspace = {
     resourceArn: arn,
   }
   @module("@aws-sdk/client-cassandra") @new external new: request => t = "CreateKeyspaceCommand"
-  let make = (~keyspaceName, ~tags=?, ()) => new({tags, keyspaceName})
+  let make = (~keyspaceName, ~tags=?, ()) => new({tags: tags, keyspaceName: keyspaceName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetTable = {
   type t
   type request = {
@@ -586,9 +599,11 @@ module GetTable = {
     keyspaceName: keyspaceName,
   }
   @module("@aws-sdk/client-cassandra") @new external new: request => t = "GetTableCommand"
-  let make = (~tableName, ~keyspaceName, ()) => new({tableName, keyspaceName})
+  let make = (~tableName, ~keyspaceName, ()) =>
+    new({tableName: tableName, keyspaceName: keyspaceName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateTable = {
   type t
   type request = {
@@ -699,16 +714,16 @@ module CreateTable = {
     (),
   ) =>
     new({
-      tags,
-      defaultTimeToLive,
-      ttl,
-      pointInTimeRecovery,
-      encryptionSpecification,
-      capacitySpecification,
-      comment,
-      schemaDefinition,
-      tableName,
-      keyspaceName,
+      tags: tags,
+      defaultTimeToLive: defaultTimeToLive,
+      ttl: ttl,
+      pointInTimeRecovery: pointInTimeRecovery,
+      encryptionSpecification: encryptionSpecification,
+      capacitySpecification: capacitySpecification,
+      comment: comment,
+      schemaDefinition: schemaDefinition,
+      tableName: tableName,
+      keyspaceName: keyspaceName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

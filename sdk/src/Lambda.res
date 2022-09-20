@@ -1027,9 +1027,15 @@ module RemovePermission = {
   type response = {.}
   @module("@aws-sdk/client-lambda") @new external new: request => t = "RemovePermissionCommand"
   let make = (~statementId, ~functionName, ~revisionId=?, ~qualifier=?, ()) =>
-    new({revisionId, qualifier, statementId, functionName})
+    new({
+      revisionId: revisionId,
+      qualifier: qualifier,
+      statementId: statementId,
+      functionName: functionName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module RemoveLayerVersionPermission = {
   type t
   type request = {
@@ -1048,9 +1054,15 @@ module RemoveLayerVersionPermission = {
   @module("@aws-sdk/client-lambda") @new
   external new: request => t = "RemoveLayerVersionPermissionCommand"
   let make = (~statementId, ~versionNumber, ~layerName, ~revisionId=?, ()) =>
-    new({revisionId, statementId, versionNumber, layerName})
+    new({
+      revisionId: revisionId,
+      statementId: statementId,
+      versionNumber: versionNumber,
+      layerName: layerName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module PutProvisionedConcurrencyConfig = {
   type t
   type request = {
@@ -1107,9 +1119,14 @@ module PutProvisionedConcurrencyConfig = {
   @module("@aws-sdk/client-lambda") @new
   external new: request => t = "PutProvisionedConcurrencyConfigCommand"
   let make = (~provisionedConcurrentExecutions, ~qualifier, ~functionName, ()) =>
-    new({provisionedConcurrentExecutions, qualifier, functionName})
+    new({
+      provisionedConcurrentExecutions: provisionedConcurrentExecutions,
+      qualifier: qualifier,
+      functionName: functionName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module PutFunctionConcurrency = {
   type t
   type request = {
@@ -1143,9 +1160,10 @@ module PutFunctionConcurrency = {
   @module("@aws-sdk/client-lambda") @new
   external new: request => t = "PutFunctionConcurrencyCommand"
   let make = (~reservedConcurrentExecutions, ~functionName, ()) =>
-    new({reservedConcurrentExecutions, functionName})
+    new({reservedConcurrentExecutions: reservedConcurrentExecutions, functionName: functionName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module PutFunctionCodeSigningConfig = {
   type t
   type request = {
@@ -1204,9 +1222,11 @@ module PutFunctionCodeSigningConfig = {
   }
   @module("@aws-sdk/client-lambda") @new
   external new: request => t = "PutFunctionCodeSigningConfigCommand"
-  let make = (~functionName, ~codeSigningConfigArn, ()) => new({functionName, codeSigningConfigArn})
+  let make = (~functionName, ~codeSigningConfigArn, ()) =>
+    new({functionName: functionName, codeSigningConfigArn: codeSigningConfigArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module InvokeAsync = {
   type t
   type request = {
@@ -1241,9 +1261,11 @@ module InvokeAsync = {
   )
   type response = {@ocaml.doc("<p>The status code.</p>") @as("Status") status: option<httpStatus>}
   @module("@aws-sdk/client-lambda") @new external new: request => t = "InvokeAsyncCommand"
-  let make = (~invokeArgs, ~functionName, ()) => new({invokeArgs, functionName})
+  let make = (~invokeArgs, ~functionName, ()) =>
+    new({invokeArgs: invokeArgs, functionName: functionName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module Invoke = {
   type t
   type request = {
@@ -1338,9 +1360,18 @@ module Invoke = {
     ~logType=?,
     ~invocationType=?,
     (),
-  ) => new({qualifier, payload, clientContext, logType, invocationType, functionName})
+  ) =>
+    new({
+      qualifier: qualifier,
+      payload: payload,
+      clientContext: clientContext,
+      logType: logType,
+      invocationType: invocationType,
+      functionName: functionName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetProvisionedConcurrencyConfig = {
   type t
   type request = {
@@ -1393,9 +1424,11 @@ module GetProvisionedConcurrencyConfig = {
   }
   @module("@aws-sdk/client-lambda") @new
   external new: request => t = "GetProvisionedConcurrencyConfigCommand"
-  let make = (~qualifier, ~functionName, ()) => new({qualifier, functionName})
+  let make = (~qualifier, ~functionName, ()) =>
+    new({qualifier: qualifier, functionName: functionName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetPolicy = {
   type t
   type request = {
@@ -1432,9 +1465,11 @@ module GetPolicy = {
     @ocaml.doc("<p>The resource-based policy.</p>") @as("Policy") policy: option<string_>,
   }
   @module("@aws-sdk/client-lambda") @new external new: request => t = "GetPolicyCommand"
-  let make = (~functionName, ~qualifier=?, ()) => new({qualifier, functionName})
+  let make = (~functionName, ~qualifier=?, ()) =>
+    new({qualifier: qualifier, functionName: functionName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetLayerVersionPolicy = {
   type t
   type request = {
@@ -1449,9 +1484,11 @@ module GetLayerVersionPolicy = {
     @ocaml.doc("<p>The policy document.</p>") @as("Policy") policy: option<string_>,
   }
   @module("@aws-sdk/client-lambda") @new external new: request => t = "GetLayerVersionPolicyCommand"
-  let make = (~versionNumber, ~layerName, ()) => new({versionNumber, layerName})
+  let make = (~versionNumber, ~layerName, ()) =>
+    new({versionNumber: versionNumber, layerName: layerName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetFunctionConcurrency = {
   type t
   type request = {
@@ -1488,6 +1525,7 @@ module GetFunctionConcurrency = {
   let make = (~functionName, ()) => new({functionName: functionName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetFunctionCodeSigningConfig = {
   type t
   type request = {
@@ -1546,6 +1584,7 @@ module GetFunctionCodeSigningConfig = {
   let make = (~functionName, ()) => new({functionName: functionName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteProvisionedConcurrencyConfig = {
   type t
   type request = {
@@ -1576,9 +1615,11 @@ module DeleteProvisionedConcurrencyConfig = {
   type response = {.}
   @module("@aws-sdk/client-lambda") @new
   external new: request => t = "DeleteProvisionedConcurrencyConfigCommand"
-  let make = (~qualifier, ~functionName, ()) => new({qualifier, functionName})
+  let make = (~qualifier, ~functionName, ()) =>
+    new({qualifier: qualifier, functionName: functionName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteLayerVersion = {
   type t
   type request = {
@@ -1588,9 +1629,11 @@ module DeleteLayerVersion = {
   }
   type response = {.}
   @module("@aws-sdk/client-lambda") @new external new: request => t = "DeleteLayerVersionCommand"
-  let make = (~versionNumber, ~layerName, ()) => new({versionNumber, layerName})
+  let make = (~versionNumber, ~layerName, ()) =>
+    new({versionNumber: versionNumber, layerName: layerName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteFunctionEventInvokeConfig = {
   type t
   type request = {
@@ -1622,9 +1665,11 @@ module DeleteFunctionEventInvokeConfig = {
   type response = {.}
   @module("@aws-sdk/client-lambda") @new
   external new: request => t = "DeleteFunctionEventInvokeConfigCommand"
-  let make = (~functionName, ~qualifier=?, ()) => new({qualifier, functionName})
+  let make = (~functionName, ~qualifier=?, ()) =>
+    new({qualifier: qualifier, functionName: functionName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteFunctionConcurrency = {
   type t
   type request = {
@@ -1657,6 +1702,7 @@ module DeleteFunctionConcurrency = {
   let make = (~functionName, ()) => new({functionName: functionName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteFunctionCodeSigningConfig = {
   type t
   type request = {
@@ -1689,6 +1735,7 @@ module DeleteFunctionCodeSigningConfig = {
   let make = (~functionName, ()) => new({functionName: functionName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteFunction = {
   type t
   type request = {
@@ -1722,9 +1769,11 @@ module DeleteFunction = {
   }
   type response = {.}
   @module("@aws-sdk/client-lambda") @new external new: request => t = "DeleteFunctionCommand"
-  let make = (~functionName, ~qualifier=?, ()) => new({qualifier, functionName})
+  let make = (~functionName, ~qualifier=?, ()) =>
+    new({qualifier: qualifier, functionName: functionName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteCodeSigningConfig = {
   type t
   type request = {
@@ -1738,6 +1787,7 @@ module DeleteCodeSigningConfig = {
   let make = (~codeSigningConfigArn, ()) => new({codeSigningConfigArn: codeSigningConfigArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteAlias = {
   type t
   type request = {
@@ -1767,9 +1817,10 @@ module DeleteAlias = {
   }
   type response = {.}
   @module("@aws-sdk/client-lambda") @new external new: request => t = "DeleteAliasCommand"
-  let make = (~name, ~functionName, ()) => new({name, functionName})
+  let make = (~name, ~functionName, ()) => new({name: name, functionName: functionName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module AddPermission = {
   type t
   type request = {
@@ -1857,19 +1908,20 @@ module AddPermission = {
     (),
   ) =>
     new({
-      principalOrgID,
-      revisionId,
-      qualifier,
-      eventSourceToken,
-      sourceAccount,
-      sourceArn,
-      principal,
-      action,
-      statementId,
-      functionName,
+      principalOrgID: principalOrgID,
+      revisionId: revisionId,
+      qualifier: qualifier,
+      eventSourceToken: eventSourceToken,
+      sourceAccount: sourceAccount,
+      sourceArn: sourceArn,
+      principal: principal,
+      action: action,
+      statementId: statementId,
+      functionName: functionName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module AddLayerVersionPermission = {
   type t
   type request = {
@@ -1918,9 +1970,19 @@ module AddLayerVersionPermission = {
     ~revisionId=?,
     ~organizationId=?,
     (),
-  ) => new({revisionId, organizationId, principal, action, statementId, versionNumber, layerName})
+  ) =>
+    new({
+      revisionId: revisionId,
+      organizationId: organizationId,
+      principal: principal,
+      action: action,
+      statementId: statementId,
+      versionNumber: versionNumber,
+      layerName: layerName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UntagResource = {
   type t
   type request = {
@@ -1931,9 +1993,10 @@ module UntagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-lambda") @new external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resource, ()) => new({tagKeys, resource})
+  let make = (~tagKeys, ~resource, ()) => new({tagKeys: tagKeys, resource: resource})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module TagResource = {
   type t
   type request = {
@@ -1943,9 +2006,10 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-lambda") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resource, ()) => new({tags, resource})
+  let make = (~tags, ~resource, ()) => new({tags: tags, resource: resource})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module PublishLayerVersion = {
   type t
   type request = {
@@ -2013,9 +2077,17 @@ module PublishLayerVersion = {
     ~description=?,
     (),
   ) =>
-    new({compatibleArchitectures, licenseInfo, compatibleRuntimes, content, description, layerName})
+    new({
+      compatibleArchitectures: compatibleArchitectures,
+      licenseInfo: licenseInfo,
+      compatibleRuntimes: compatibleRuntimes,
+      content: content,
+      description: description,
+      layerName: layerName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListTags = {
   type t
   type request = {
@@ -2029,6 +2101,7 @@ module ListTags = {
   let make = (~resource, ()) => new({resource: resource})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListFunctionsByCodeSigningConfig = {
   type t
   type request = {
@@ -2053,9 +2126,10 @@ module ListFunctionsByCodeSigningConfig = {
   @module("@aws-sdk/client-lambda") @new
   external new: request => t = "ListFunctionsByCodeSigningConfigCommand"
   let make = (~codeSigningConfigArn, ~maxItems=?, ~marker=?, ()) =>
-    new({maxItems, marker, codeSigningConfigArn})
+    new({maxItems: maxItems, marker: marker, codeSigningConfigArn: codeSigningConfigArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetLayerVersionByArn = {
   type t
   type request = {
@@ -2088,6 +2162,7 @@ module GetLayerVersionByArn = {
   let make = (~arn, ()) => new({arn: arn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetLayerVersion = {
   type t
   type request = {
@@ -2119,9 +2194,11 @@ module GetLayerVersion = {
     content: option<layerVersionContentOutput>,
   }
   @module("@aws-sdk/client-lambda") @new external new: request => t = "GetLayerVersionCommand"
-  let make = (~versionNumber, ~layerName, ()) => new({versionNumber, layerName})
+  let make = (~versionNumber, ~layerName, ()) =>
+    new({versionNumber: versionNumber, layerName: layerName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetAccountSettings = {
   type t
   type request = {.}
@@ -2136,6 +2213,7 @@ module GetAccountSettings = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateFunctionEventInvokeConfig = {
   type t
   type request = {
@@ -2208,14 +2286,15 @@ module UpdateFunctionEventInvokeConfig = {
     (),
   ) =>
     new({
-      destinationConfig,
-      maximumEventAgeInSeconds,
-      maximumRetryAttempts,
-      qualifier,
-      functionName,
+      destinationConfig: destinationConfig,
+      maximumEventAgeInSeconds: maximumEventAgeInSeconds,
+      maximumRetryAttempts: maximumRetryAttempts,
+      qualifier: qualifier,
+      functionName: functionName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateAlias = {
   type t
   type request = {
@@ -2265,9 +2344,18 @@ module UpdateAlias = {
     ~description=?,
     ~functionVersion=?,
     (),
-  ) => new({revisionId, routingConfig, description, functionVersion, name, functionName})
+  ) =>
+    new({
+      revisionId: revisionId,
+      routingConfig: routingConfig,
+      description: description,
+      functionVersion: functionVersion,
+      name: name,
+      functionName: functionName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module PutFunctionEventInvokeConfig = {
   type t
   type request = {
@@ -2340,14 +2428,15 @@ module PutFunctionEventInvokeConfig = {
     (),
   ) =>
     new({
-      destinationConfig,
-      maximumEventAgeInSeconds,
-      maximumRetryAttempts,
-      qualifier,
-      functionName,
+      destinationConfig: destinationConfig,
+      maximumEventAgeInSeconds: maximumEventAgeInSeconds,
+      maximumRetryAttempts: maximumRetryAttempts,
+      qualifier: qualifier,
+      functionName: functionName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListProvisionedConcurrencyConfigs = {
   type t
   type request = {
@@ -2392,9 +2481,11 @@ module ListProvisionedConcurrencyConfigs = {
   }
   @module("@aws-sdk/client-lambda") @new
   external new: request => t = "ListProvisionedConcurrencyConfigsCommand"
-  let make = (~functionName, ~maxItems=?, ~marker=?, ()) => new({maxItems, marker, functionName})
+  let make = (~functionName, ~maxItems=?, ~marker=?, ()) =>
+    new({maxItems: maxItems, marker: marker, functionName: functionName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetFunctionEventInvokeConfig = {
   type t
   type request = {
@@ -2426,9 +2517,11 @@ module GetFunctionEventInvokeConfig = {
   type response = functionEventInvokeConfig
   @module("@aws-sdk/client-lambda") @new
   external new: request => t = "GetFunctionEventInvokeConfigCommand"
-  let make = (~functionName, ~qualifier=?, ()) => new({qualifier, functionName})
+  let make = (~functionName, ~qualifier=?, ()) =>
+    new({qualifier: qualifier, functionName: functionName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetAlias = {
   type t
   type request = {
@@ -2458,9 +2551,10 @@ module GetAlias = {
   }
   type response = aliasConfiguration
   @module("@aws-sdk/client-lambda") @new external new: request => t = "GetAliasCommand"
-  let make = (~name, ~functionName, ()) => new({name, functionName})
+  let make = (~name, ~functionName, ()) => new({name: name, functionName: functionName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateAlias = {
   type t
   type request = {
@@ -2499,9 +2593,16 @@ module CreateAlias = {
   type response = aliasConfiguration
   @module("@aws-sdk/client-lambda") @new external new: request => t = "CreateAliasCommand"
   let make = (~functionVersion, ~name, ~functionName, ~routingConfig=?, ~description=?, ()) =>
-    new({routingConfig, description, functionVersion, name, functionName})
+    new({
+      routingConfig: routingConfig,
+      description: description,
+      functionVersion: functionVersion,
+      name: name,
+      functionName: functionName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateFunctionConfiguration = {
   type t
   type request = {
@@ -2617,26 +2718,27 @@ Handler is required if the deployment package is a .zip file archive. The format
     (),
   ) =>
     new({
-      ephemeralStorage,
-      imageConfig,
-      fileSystemConfigs,
-      layers,
-      revisionId,
-      tracingConfig,
-      kmskeyArn,
-      deadLetterConfig,
-      runtime,
-      environment,
-      vpcConfig,
-      memorySize,
-      timeout,
-      description,
-      handler,
-      role,
-      functionName,
+      ephemeralStorage: ephemeralStorage,
+      imageConfig: imageConfig,
+      fileSystemConfigs: fileSystemConfigs,
+      layers: layers,
+      revisionId: revisionId,
+      tracingConfig: tracingConfig,
+      kmskeyArn: kmskeyArn,
+      deadLetterConfig: deadLetterConfig,
+      runtime: runtime,
+      environment: environment,
+      vpcConfig: vpcConfig,
+      memorySize: memorySize,
+      timeout: timeout,
+      description: description,
+      handler: handler,
+      role: role,
+      functionName: functionName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateFunctionCode = {
   type t
   type request = {
@@ -2715,19 +2817,20 @@ handle the encoding for you. Use only with a function defined with a .zip file a
     (),
   ) =>
     new({
-      architectures,
-      revisionId,
-      dryRun,
-      publish,
-      imageUri,
-      s3ObjectVersion,
-      s3Key,
-      s3Bucket,
-      zipFile,
-      functionName,
+      architectures: architectures,
+      revisionId: revisionId,
+      dryRun: dryRun,
+      publish: publish,
+      imageUri: imageUri,
+      s3ObjectVersion: s3ObjectVersion,
+      s3Key: s3Key,
+      s3Bucket: s3Bucket,
+      zipFile: zipFile,
+      functionName: functionName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateEventSourceMapping = {
   type t
   type request = {
@@ -2863,23 +2966,24 @@ module UpdateEventSourceMapping = {
     (),
   ) =>
     new({
-      functionResponseTypes,
-      tumblingWindowInSeconds,
-      sourceAccessConfigurations,
-      parallelizationFactor,
-      maximumRetryAttempts,
-      bisectBatchOnFunctionError,
-      maximumRecordAgeInSeconds,
-      destinationConfig,
-      maximumBatchingWindowInSeconds,
-      filterCriteria,
-      batchSize,
-      enabled,
-      functionName,
-      uuid,
+      functionResponseTypes: functionResponseTypes,
+      tumblingWindowInSeconds: tumblingWindowInSeconds,
+      sourceAccessConfigurations: sourceAccessConfigurations,
+      parallelizationFactor: parallelizationFactor,
+      maximumRetryAttempts: maximumRetryAttempts,
+      bisectBatchOnFunctionError: bisectBatchOnFunctionError,
+      maximumRecordAgeInSeconds: maximumRecordAgeInSeconds,
+      destinationConfig: destinationConfig,
+      maximumBatchingWindowInSeconds: maximumBatchingWindowInSeconds,
+      filterCriteria: filterCriteria,
+      batchSize: batchSize,
+      enabled: enabled,
+      functionName: functionName,
+      uuid: uuid,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateCodeSigningConfig = {
   type t
   type request = {
@@ -2906,9 +3010,16 @@ module UpdateCodeSigningConfig = {
     ~allowedPublishers=?,
     ~description=?,
     (),
-  ) => new({codeSigningPolicies, allowedPublishers, description, codeSigningConfigArn})
+  ) =>
+    new({
+      codeSigningPolicies: codeSigningPolicies,
+      allowedPublishers: allowedPublishers,
+      description: description,
+      codeSigningConfigArn: codeSigningConfigArn,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module PublishVersion = {
   type t
   type request = {
@@ -2952,9 +3063,15 @@ module PublishVersion = {
   type response = functionConfiguration
   @module("@aws-sdk/client-lambda") @new external new: request => t = "PublishVersionCommand"
   let make = (~functionName, ~revisionId=?, ~description=?, ~codeSha256=?, ()) =>
-    new({revisionId, description, codeSha256, functionName})
+    new({
+      revisionId: revisionId,
+      description: description,
+      codeSha256: codeSha256,
+      functionName: functionName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListLayerVersions = {
   type t
   type request = {
@@ -2987,9 +3104,17 @@ module ListLayerVersions = {
     ~marker=?,
     ~compatibleRuntime=?,
     (),
-  ) => new({compatibleArchitecture, maxItems, marker, layerName, compatibleRuntime})
+  ) =>
+    new({
+      compatibleArchitecture: compatibleArchitecture,
+      maxItems: maxItems,
+      marker: marker,
+      layerName: layerName,
+      compatibleRuntime: compatibleRuntime,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetFunctionConfiguration = {
   type t
   type request = {
@@ -3024,9 +3149,11 @@ module GetFunctionConfiguration = {
   type response = functionConfiguration
   @module("@aws-sdk/client-lambda") @new
   external new: request => t = "GetFunctionConfigurationCommand"
-  let make = (~functionName, ~qualifier=?, ()) => new({qualifier, functionName})
+  let make = (~functionName, ~qualifier=?, ()) =>
+    new({qualifier: qualifier, functionName: functionName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetEventSourceMapping = {
   type t
   type request = {
@@ -3037,6 +3164,7 @@ module GetEventSourceMapping = {
   let make = (~uuid, ()) => new({uuid: uuid})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetCodeSigningConfig = {
   type t
   type request = {
@@ -3052,6 +3180,7 @@ module GetCodeSigningConfig = {
   let make = (~codeSigningConfigArn, ()) => new({codeSigningConfigArn: codeSigningConfigArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteEventSourceMapping = {
   type t
   type request = {
@@ -3063,6 +3192,7 @@ module DeleteEventSourceMapping = {
   let make = (~uuid, ()) => new({uuid: uuid})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateFunction = {
   type t
   type request = {
@@ -3198,31 +3328,32 @@ Handler is required if the deployment package is a .zip file archive. The format
     (),
   ) =>
     new({
-      ephemeralStorage,
-      architectures,
-      codeSigningConfigArn,
-      imageConfig,
-      fileSystemConfigs,
-      layers,
-      tags,
-      tracingConfig,
-      kmskeyArn,
-      environment,
-      deadLetterConfig,
-      packageType,
-      vpcConfig,
-      publish,
-      memorySize,
-      timeout,
-      description,
-      code,
-      handler,
-      role,
-      runtime,
-      functionName,
+      ephemeralStorage: ephemeralStorage,
+      architectures: architectures,
+      codeSigningConfigArn: codeSigningConfigArn,
+      imageConfig: imageConfig,
+      fileSystemConfigs: fileSystemConfigs,
+      layers: layers,
+      tags: tags,
+      tracingConfig: tracingConfig,
+      kmskeyArn: kmskeyArn,
+      environment: environment,
+      deadLetterConfig: deadLetterConfig,
+      packageType: packageType,
+      vpcConfig: vpcConfig,
+      publish: publish,
+      memorySize: memorySize,
+      timeout: timeout,
+      description: description,
+      code: code,
+      handler: handler,
+      role: role,
+      runtime: runtime,
+      functionName: functionName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateEventSourceMapping = {
   type t
   type request = {
@@ -3398,28 +3529,29 @@ module CreateEventSourceMapping = {
     (),
   ) =>
     new({
-      functionResponseTypes,
-      selfManagedEventSource,
-      sourceAccessConfigurations,
-      queues,
-      topics,
-      tumblingWindowInSeconds,
-      maximumRetryAttempts,
-      bisectBatchOnFunctionError,
-      maximumRecordAgeInSeconds,
-      destinationConfig,
-      startingPositionTimestamp,
-      startingPosition,
-      parallelizationFactor,
-      maximumBatchingWindowInSeconds,
-      filterCriteria,
-      batchSize,
-      enabled,
-      functionName,
-      eventSourceArn,
+      functionResponseTypes: functionResponseTypes,
+      selfManagedEventSource: selfManagedEventSource,
+      sourceAccessConfigurations: sourceAccessConfigurations,
+      queues: queues,
+      topics: topics,
+      tumblingWindowInSeconds: tumblingWindowInSeconds,
+      maximumRetryAttempts: maximumRetryAttempts,
+      bisectBatchOnFunctionError: bisectBatchOnFunctionError,
+      maximumRecordAgeInSeconds: maximumRecordAgeInSeconds,
+      destinationConfig: destinationConfig,
+      startingPositionTimestamp: startingPositionTimestamp,
+      startingPosition: startingPosition,
+      parallelizationFactor: parallelizationFactor,
+      maximumBatchingWindowInSeconds: maximumBatchingWindowInSeconds,
+      filterCriteria: filterCriteria,
+      batchSize: batchSize,
+      enabled: enabled,
+      functionName: functionName,
+      eventSourceArn: eventSourceArn,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateCodeSigningConfig = {
   type t
   type request = {
@@ -3441,9 +3573,14 @@ module CreateCodeSigningConfig = {
   @module("@aws-sdk/client-lambda") @new
   external new: request => t = "CreateCodeSigningConfigCommand"
   let make = (~allowedPublishers, ~codeSigningPolicies=?, ~description=?, ()) =>
-    new({codeSigningPolicies, allowedPublishers, description})
+    new({
+      codeSigningPolicies: codeSigningPolicies,
+      allowedPublishers: allowedPublishers,
+      description: description,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListLayers = {
   type t
   type request = {
@@ -3467,9 +3604,15 @@ module ListLayers = {
   }
   @module("@aws-sdk/client-lambda") @new external new: request => t = "ListLayersCommand"
   let make = (~compatibleArchitecture=?, ~maxItems=?, ~marker=?, ~compatibleRuntime=?, ()) =>
-    new({compatibleArchitecture, maxItems, marker, compatibleRuntime})
+    new({
+      compatibleArchitecture: compatibleArchitecture,
+      maxItems: maxItems,
+      marker: marker,
+      compatibleRuntime: compatibleRuntime,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListFunctionEventInvokeConfigs = {
   type t
   type request = {
@@ -3512,9 +3655,11 @@ module ListFunctionEventInvokeConfigs = {
   }
   @module("@aws-sdk/client-lambda") @new
   external new: request => t = "ListFunctionEventInvokeConfigsCommand"
-  let make = (~functionName, ~maxItems=?, ~marker=?, ()) => new({maxItems, marker, functionName})
+  let make = (~functionName, ~maxItems=?, ~marker=?, ()) =>
+    new({maxItems: maxItems, marker: marker, functionName: functionName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListCodeSigningConfigs = {
   type t
   type request = {
@@ -3535,9 +3680,10 @@ module ListCodeSigningConfigs = {
   }
   @module("@aws-sdk/client-lambda") @new
   external new: request => t = "ListCodeSigningConfigsCommand"
-  let make = (~maxItems=?, ~marker=?, ()) => new({maxItems, marker})
+  let make = (~maxItems=?, ~marker=?, ()) => new({maxItems: maxItems, marker: marker})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListAliases = {
   type t
   type request = {
@@ -3582,9 +3728,15 @@ module ListAliases = {
   }
   @module("@aws-sdk/client-lambda") @new external new: request => t = "ListAliasesCommand"
   let make = (~functionName, ~maxItems=?, ~marker=?, ~functionVersion=?, ()) =>
-    new({maxItems, marker, functionVersion, functionName})
+    new({
+      maxItems: maxItems,
+      marker: marker,
+      functionVersion: functionVersion,
+      functionName: functionName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetFunction = {
   type t
   type request = {
@@ -3632,9 +3784,11 @@ module GetFunction = {
     configuration: option<functionConfiguration>,
   }
   @module("@aws-sdk/client-lambda") @new external new: request => t = "GetFunctionCommand"
-  let make = (~functionName, ~qualifier=?, ()) => new({qualifier, functionName})
+  let make = (~functionName, ~qualifier=?, ()) =>
+    new({qualifier: qualifier, functionName: functionName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListVersionsByFunction = {
   type t
   type request = {
@@ -3679,9 +3833,11 @@ module ListVersionsByFunction = {
   }
   @module("@aws-sdk/client-lambda") @new
   external new: request => t = "ListVersionsByFunctionCommand"
-  let make = (~functionName, ~maxItems=?, ~marker=?, ()) => new({maxItems, marker, functionName})
+  let make = (~functionName, ~maxItems=?, ~marker=?, ()) =>
+    new({maxItems: maxItems, marker: marker, functionName: functionName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListFunctions = {
   type t
   type request = {
@@ -3715,9 +3871,15 @@ module ListFunctions = {
   }
   @module("@aws-sdk/client-lambda") @new external new: request => t = "ListFunctionsCommand"
   let make = (~maxItems=?, ~marker=?, ~functionVersion=?, ~masterRegion=?, ()) =>
-    new({maxItems, marker, functionVersion, masterRegion})
+    new({
+      maxItems: maxItems,
+      marker: marker,
+      functionVersion: functionVersion,
+      masterRegion: masterRegion,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListEventSourceMappings = {
   type t
   type request = {
@@ -3787,6 +3949,11 @@ module ListEventSourceMappings = {
   @module("@aws-sdk/client-lambda") @new
   external new: request => t = "ListEventSourceMappingsCommand"
   let make = (~maxItems=?, ~marker=?, ~functionName=?, ~eventSourceArn=?, ()) =>
-    new({maxItems, marker, functionName, eventSourceArn})
+    new({
+      maxItems: maxItems,
+      marker: marker,
+      functionName: functionName,
+      eventSourceArn: eventSourceArn,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

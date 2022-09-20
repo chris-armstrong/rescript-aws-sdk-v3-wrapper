@@ -1966,6 +1966,7 @@ module StopResource = {
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteResourceTree = {
   type t
   type request = {
@@ -1979,6 +1980,7 @@ module DeleteResourceTree = {
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeletePredictorBacktestExportJob = {
   type t
   type request = {
@@ -1995,6 +1997,7 @@ module DeletePredictorBacktestExportJob = {
     new({predictorBacktestExportJobArn: predictorBacktestExportJobArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeletePredictor = {
   type t
   type request = {
@@ -2007,6 +2010,7 @@ module DeletePredictor = {
   let make = (~predictorArn, ()) => new({predictorArn: predictorArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteForecastExportJob = {
   type t
   type request = {
@@ -2020,6 +2024,7 @@ module DeleteForecastExportJob = {
   let make = (~forecastExportJobArn, ()) => new({forecastExportJobArn: forecastExportJobArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteForecast = {
   type t
   type request = {
@@ -2032,6 +2037,7 @@ module DeleteForecast = {
   let make = (~forecastArn, ()) => new({forecastArn: forecastArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteExplainabilityExport = {
   type t
   type request = {
@@ -2046,6 +2052,7 @@ module DeleteExplainabilityExport = {
     new({explainabilityExportArn: explainabilityExportArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteExplainability = {
   type t
   type request = {
@@ -2059,6 +2066,7 @@ module DeleteExplainability = {
   let make = (~explainabilityArn, ()) => new({explainabilityArn: explainabilityArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteDatasetImportJob = {
   type t
   type request = {
@@ -2072,6 +2080,7 @@ module DeleteDatasetImportJob = {
   let make = (~datasetImportJobArn, ()) => new({datasetImportJobArn: datasetImportJobArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteDatasetGroup = {
   type t
   type request = {
@@ -2084,6 +2093,7 @@ module DeleteDatasetGroup = {
   let make = (~datasetGroupArn, ()) => new({datasetGroupArn: datasetGroupArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteDataset = {
   type t
   type request = {
@@ -2095,6 +2105,7 @@ module DeleteDataset = {
   let make = (~datasetArn, ()) => new({datasetArn: datasetArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateDatasetGroup = {
   type t
   type request = {
@@ -2106,9 +2117,11 @@ module UpdateDatasetGroup = {
   }
   type response = {.}
   @module("@aws-sdk/client-forecast") @new external new: request => t = "UpdateDatasetGroupCommand"
-  let make = (~datasetArns, ~datasetGroupArn, ()) => new({datasetArns, datasetGroupArn})
+  let make = (~datasetArns, ~datasetGroupArn, ()) =>
+    new({datasetArns: datasetArns, datasetGroupArn: datasetGroupArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UntagResource = {
   type t
   type request = {
@@ -2120,9 +2133,10 @@ module UntagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-forecast") @new external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys, resourceArn})
+  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DescribeForecast = {
   type t
   type request = {
@@ -2213,6 +2227,7 @@ module DescribeForecast = {
   let make = (~forecastArn, ()) => new({forecastArn: forecastArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeDatasetGroup = {
   type t
   type request = {
@@ -2276,6 +2291,7 @@ module DescribeDatasetGroup = {
   let make = (~datasetGroupArn, ()) => new({datasetGroupArn: datasetGroupArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module TagResource = {
   type t
   type request = {
@@ -2322,9 +2338,10 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-forecast") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceArn, ()) => new({tags, resourceArn})
+  let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ListTagsForResource = {
   type t
   type request = {
@@ -2338,6 +2355,7 @@ module ListTagsForResource = {
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListForecasts = {
   type t
   type request = {
@@ -2390,9 +2408,11 @@ module ListForecasts = {
     forecasts: option<forecasts>,
   }
   @module("@aws-sdk/client-forecast") @new external new: request => t = "ListForecastsCommand"
-  let make = (~filters=?, ~maxResults=?, ~nextToken=?, ()) => new({filters, maxResults, nextToken})
+  let make = (~filters=?, ~maxResults=?, ~nextToken=?, ()) =>
+    new({filters: filters, maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListDatasets = {
   type t
   type request = {
@@ -2414,9 +2434,11 @@ module ListDatasets = {
     datasets: option<datasets>,
   }
   @module("@aws-sdk/client-forecast") @new external new: request => t = "ListDatasetsCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListDatasetGroups = {
   type t
   type request = {
@@ -2438,9 +2460,11 @@ module ListDatasetGroups = {
     datasetGroups: option<datasetGroups>,
   }
   @module("@aws-sdk/client-forecast") @new external new: request => t = "ListDatasetGroupsCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribePredictorBacktestExportJob = {
   type t
   type request = {
@@ -2526,6 +2550,7 @@ module DescribePredictorBacktestExportJob = {
     new({predictorBacktestExportJobArn: predictorBacktestExportJobArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeForecastExportJob = {
   type t
   type request = {
@@ -2613,6 +2638,7 @@ module DescribeForecastExportJob = {
   let make = (~forecastExportJobArn, ()) => new({forecastExportJobArn: forecastExportJobArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeExplainabilityExport = {
   type t
   type request = {
@@ -2696,6 +2722,7 @@ module DescribeExplainabilityExport = {
     new({explainabilityExportArn: explainabilityExportArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeDatasetImportJob = {
   type t
   type request = {
@@ -2821,6 +2848,7 @@ module DescribeDatasetImportJob = {
   let make = (~datasetImportJobArn, ()) => new({datasetImportJobArn: datasetImportJobArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreatePredictorBacktestExportJob = {
   type t
   type request = {
@@ -2874,9 +2902,15 @@ module CreatePredictorBacktestExportJob = {
   @module("@aws-sdk/client-forecast") @new
   external new: request => t = "CreatePredictorBacktestExportJobCommand"
   let make = (~destination, ~predictorArn, ~predictorBacktestExportJobName, ~tags=?, ()) =>
-    new({tags, destination, predictorArn, predictorBacktestExportJobName})
+    new({
+      tags: tags,
+      destination: destination,
+      predictorArn: predictorArn,
+      predictorBacktestExportJobName: predictorBacktestExportJobName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateForecastExportJob = {
   type t
   type request = {
@@ -2939,9 +2973,15 @@ module CreateForecastExportJob = {
   @module("@aws-sdk/client-forecast") @new
   external new: request => t = "CreateForecastExportJobCommand"
   let make = (~destination, ~forecastArn, ~forecastExportJobName, ~tags=?, ()) =>
-    new({tags, destination, forecastArn, forecastExportJobName})
+    new({
+      tags: tags,
+      destination: destination,
+      forecastArn: forecastArn,
+      forecastExportJobName: forecastExportJobName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateForecast = {
   type t
   type request = {
@@ -3002,9 +3042,15 @@ module CreateForecast = {
   }
   @module("@aws-sdk/client-forecast") @new external new: request => t = "CreateForecastCommand"
   let make = (~predictorArn, ~forecastName, ~tags=?, ~forecastTypes=?, ()) =>
-    new({tags, forecastTypes, predictorArn, forecastName})
+    new({
+      tags: tags,
+      forecastTypes: forecastTypes,
+      predictorArn: predictorArn,
+      forecastName: forecastName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateExplainabilityExport = {
   type t
   type request = {
@@ -3058,9 +3104,15 @@ module CreateExplainabilityExport = {
   @module("@aws-sdk/client-forecast") @new
   external new: request => t = "CreateExplainabilityExportCommand"
   let make = (~destination, ~explainabilityArn, ~explainabilityExportName, ~tags=?, ()) =>
-    new({tags, destination, explainabilityArn, explainabilityExportName})
+    new({
+      tags: tags,
+      destination: destination,
+      explainabilityArn: explainabilityArn,
+      explainabilityExportName: explainabilityExportName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateDatasetImportJob = {
   type t
   type request = {
@@ -3182,17 +3234,18 @@ module CreateDatasetImportJob = {
     (),
   ) =>
     new({
-      tags,
-      geolocationFormat,
-      useGeolocationForTimeZone,
-      timeZone,
-      timestampFormat,
-      dataSource,
-      datasetArn,
-      datasetImportJobName,
+      tags: tags,
+      geolocationFormat: geolocationFormat,
+      useGeolocationForTimeZone: useGeolocationForTimeZone,
+      timeZone: timeZone,
+      timestampFormat: timestampFormat,
+      dataSource: dataSource,
+      datasetArn: datasetArn,
+      datasetImportJobName: datasetImportJobName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateDatasetGroup = {
   type t
   type request = {
@@ -3257,9 +3310,10 @@ module CreateDatasetGroup = {
   }
   @module("@aws-sdk/client-forecast") @new external new: request => t = "CreateDatasetGroupCommand"
   let make = (~domain, ~datasetGroupName, ~tags=?, ~datasetArns=?, ()) =>
-    new({tags, datasetArns, domain, datasetGroupName})
+    new({tags: tags, datasetArns: datasetArns, domain: domain, datasetGroupName: datasetGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListPredictors = {
   type t
   type request = {
@@ -3312,9 +3366,11 @@ module ListPredictors = {
     predictors: option<predictors>,
   }
   @module("@aws-sdk/client-forecast") @new external new: request => t = "ListPredictorsCommand"
-  let make = (~filters=?, ~maxResults=?, ~nextToken=?, ()) => new({filters, maxResults, nextToken})
+  let make = (~filters=?, ~maxResults=?, ~nextToken=?, ()) =>
+    new({filters: filters, maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListExplainabilities = {
   type t
   type request = {
@@ -3363,9 +3419,11 @@ module ListExplainabilities = {
   }
   @module("@aws-sdk/client-forecast") @new
   external new: request => t = "ListExplainabilitiesCommand"
-  let make = (~filters=?, ~maxResults=?, ~nextToken=?, ()) => new({filters, maxResults, nextToken})
+  let make = (~filters=?, ~maxResults=?, ~nextToken=?, ()) =>
+    new({filters: filters, maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeExplainability = {
   type t
   type request = {
@@ -3468,6 +3526,7 @@ module DescribeExplainability = {
   let make = (~explainabilityArn, ()) => new({explainabilityArn: explainabilityArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeDataset = {
   type t
   type request = {
@@ -3545,6 +3604,7 @@ module DescribeDataset = {
   let make = (~datasetArn, ()) => new({datasetArn: datasetArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateExplainability = {
   type t
   type request = {
@@ -3630,18 +3690,19 @@ module CreateExplainability = {
     (),
   ) =>
     new({
-      tags,
-      endDateTime,
-      startDateTime,
-      enableVisualization,
-      schema,
-      dataSource,
-      explainabilityConfig,
-      resourceArn,
-      explainabilityName,
+      tags: tags,
+      endDateTime: endDateTime,
+      startDateTime: startDateTime,
+      enableVisualization: enableVisualization,
+      schema: schema,
+      dataSource: dataSource,
+      explainabilityConfig: explainabilityConfig,
+      resourceArn: resourceArn,
+      explainabilityName: explainabilityName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateDataset = {
   type t
   type request = {
@@ -3727,9 +3788,19 @@ module CreateDataset = {
     ~encryptionConfig=?,
     ~dataFrequency=?,
     (),
-  ) => new({tags, encryptionConfig, schema, dataFrequency, datasetType, domain, datasetName})
+  ) =>
+    new({
+      tags: tags,
+      encryptionConfig: encryptionConfig,
+      schema: schema,
+      dataFrequency: dataFrequency,
+      datasetType: datasetType,
+      domain: domain,
+      datasetName: datasetName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListPredictorBacktestExportJobs = {
   type t
   type request = {
@@ -3780,9 +3851,11 @@ module ListPredictorBacktestExportJobs = {
   }
   @module("@aws-sdk/client-forecast") @new
   external new: request => t = "ListPredictorBacktestExportJobsCommand"
-  let make = (~filters=?, ~maxResults=?, ~nextToken=?, ()) => new({filters, maxResults, nextToken})
+  let make = (~filters=?, ~maxResults=?, ~nextToken=?, ()) =>
+    new({filters: filters, maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListForecastExportJobs = {
   type t
   type request = {
@@ -3838,9 +3911,11 @@ module ListForecastExportJobs = {
   }
   @module("@aws-sdk/client-forecast") @new
   external new: request => t = "ListForecastExportJobsCommand"
-  let make = (~filters=?, ~maxResults=?, ~nextToken=?, ()) => new({filters, maxResults, nextToken})
+  let make = (~filters=?, ~maxResults=?, ~nextToken=?, ()) =>
+    new({filters: filters, maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListExplainabilityExports = {
   type t
   type request = {
@@ -3889,9 +3964,11 @@ module ListExplainabilityExports = {
   }
   @module("@aws-sdk/client-forecast") @new
   external new: request => t = "ListExplainabilityExportsCommand"
-  let make = (~filters=?, ~maxResults=?, ~nextToken=?, ()) => new({filters, maxResults, nextToken})
+  let make = (~filters=?, ~maxResults=?, ~nextToken=?, ()) =>
+    new({filters: filters, maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListDatasetImportJobs = {
   type t
   type request = {
@@ -3946,9 +4023,11 @@ module ListDatasetImportJobs = {
   }
   @module("@aws-sdk/client-forecast") @new
   external new: request => t = "ListDatasetImportJobsCommand"
-  let make = (~filters=?, ~maxResults=?, ~nextToken=?, ()) => new({filters, maxResults, nextToken})
+  let make = (~filters=?, ~maxResults=?, ~nextToken=?, ()) =>
+    new({filters: filters, maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeAutoPredictor = {
   type t
   type request = {
@@ -4066,6 +4145,7 @@ module DescribeAutoPredictor = {
   let make = (~predictorArn, ()) => new({predictorArn: predictorArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateAutoPredictor = {
   type t
   type request = {
@@ -4169,20 +4249,21 @@ module CreateAutoPredictor = {
     (),
   ) =>
     new({
-      tags,
-      explainPredictor,
-      optimizationMetric,
-      referencePredictorArn,
-      encryptionConfig,
-      dataConfig,
-      forecastFrequency,
-      forecastDimensions,
-      forecastTypes,
-      forecastHorizon,
-      predictorName,
+      tags: tags,
+      explainPredictor: explainPredictor,
+      optimizationMetric: optimizationMetric,
+      referencePredictorArn: referencePredictorArn,
+      encryptionConfig: encryptionConfig,
+      dataConfig: dataConfig,
+      forecastFrequency: forecastFrequency,
+      forecastDimensions: forecastDimensions,
+      forecastTypes: forecastTypes,
+      forecastHorizon: forecastHorizon,
+      predictorName: predictorName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribePredictor = {
   type t
   type request = {
@@ -4338,6 +4419,7 @@ module DescribePredictor = {
   let make = (~predictorArn, ()) => new({predictorArn: predictorArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreatePredictor = {
   type t
   type request = {
@@ -4530,24 +4612,25 @@ module CreatePredictor = {
     (),
   ) =>
     new({
-      optimizationMetric,
-      tags,
-      encryptionConfig,
-      featurizationConfig,
-      inputDataConfig,
-      hpoconfig,
-      evaluationParameters,
-      trainingParameters,
-      performHPO,
-      autoMLOverrideStrategy,
-      performAutoML,
-      forecastTypes,
-      forecastHorizon,
-      algorithmArn,
-      predictorName,
+      optimizationMetric: optimizationMetric,
+      tags: tags,
+      encryptionConfig: encryptionConfig,
+      featurizationConfig: featurizationConfig,
+      inputDataConfig: inputDataConfig,
+      hpoconfig: hpoconfig,
+      evaluationParameters: evaluationParameters,
+      trainingParameters: trainingParameters,
+      performHPO: performHPO,
+      autoMLOverrideStrategy: autoMLOverrideStrategy,
+      performAutoML: performAutoML,
+      forecastTypes: forecastTypes,
+      forecastHorizon: forecastHorizon,
+      algorithmArn: algorithmArn,
+      predictorName: predictorName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetAccuracyMetrics = {
   type t
   type request = {

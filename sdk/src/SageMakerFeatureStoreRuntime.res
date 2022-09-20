@@ -128,9 +128,14 @@ module DeleteRecord = {
   type response = {.}
   @module("@aws-sdk/client-sagemaker") @new external new: request => t = "DeleteRecordCommand"
   let make = (~eventTime, ~recordIdentifierValueAsString, ~featureGroupName, ()) =>
-    new({eventTime, recordIdentifierValueAsString, featureGroupName})
+    new({
+      eventTime: eventTime,
+      recordIdentifierValueAsString: recordIdentifierValueAsString,
+      featureGroupName: featureGroupName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module PutRecord = {
   type t
   type request = {
@@ -155,9 +160,11 @@ module PutRecord = {
   }
   type response = {.}
   @module("@aws-sdk/client-sagemaker") @new external new: request => t = "PutRecordCommand"
-  let make = (~record, ~featureGroupName, ()) => new({record, featureGroupName})
+  let make = (~record, ~featureGroupName, ()) =>
+    new({record: record, featureGroupName: featureGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module GetRecord = {
   type t
   type request = {
@@ -180,9 +187,14 @@ module GetRecord = {
   }
   @module("@aws-sdk/client-sagemaker") @new external new: request => t = "GetRecordCommand"
   let make = (~recordIdentifierValueAsString, ~featureGroupName, ~featureNames=?, ()) =>
-    new({featureNames, recordIdentifierValueAsString, featureGroupName})
+    new({
+      featureNames: featureNames,
+      recordIdentifierValueAsString: recordIdentifierValueAsString,
+      featureGroupName: featureGroupName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module BatchGetRecord = {
   type t
   type request = {

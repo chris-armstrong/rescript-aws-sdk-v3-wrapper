@@ -664,6 +664,7 @@ module ListDomainNames = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module IndexDocuments = {
   type t
   @ocaml.doc(
@@ -681,6 +682,7 @@ module IndexDocuments = {
   let make = (~domainName, ()) => new({domainName: domainName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module BuildSuggesters = {
   type t
   @ocaml.doc(
@@ -695,6 +697,7 @@ module BuildSuggesters = {
   let make = (~domainName, ()) => new({domainName: domainName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateServiceAccessPolicies = {
   type t
   @ocaml.doc(
@@ -717,9 +720,11 @@ module UpdateServiceAccessPolicies = {
   }
   @module("@aws-sdk/client-cloudsearch") @new
   external new: request => t = "UpdateServiceAccessPoliciesCommand"
-  let make = (~accessPolicies, ~domainName, ()) => new({accessPolicies, domainName})
+  let make = (~accessPolicies, ~domainName, ()) =>
+    new({accessPolicies: accessPolicies, domainName: domainName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateScalingParameters = {
   type t
   @ocaml.doc(
@@ -735,9 +740,11 @@ module UpdateScalingParameters = {
   type response = {@as("ScalingParameters") scalingParameters: scalingParametersStatus}
   @module("@aws-sdk/client-cloudsearch") @new
   external new: request => t = "UpdateScalingParametersCommand"
-  let make = (~scalingParameters, ~domainName, ()) => new({scalingParameters, domainName})
+  let make = (~scalingParameters, ~domainName, ()) =>
+    new({scalingParameters: scalingParameters, domainName: domainName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateDomainEndpointOptions = {
   type t
   @ocaml.doc(
@@ -761,9 +768,11 @@ module UpdateDomainEndpointOptions = {
   }
   @module("@aws-sdk/client-cloudsearch") @new
   external new: request => t = "UpdateDomainEndpointOptionsCommand"
-  let make = (~domainEndpointOptions, ~domainName, ()) => new({domainEndpointOptions, domainName})
+  let make = (~domainEndpointOptions, ~domainName, ()) =>
+    new({domainEndpointOptions: domainEndpointOptions, domainName: domainName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateAvailabilityOptions = {
   type t
   @ocaml.doc(
@@ -789,9 +798,10 @@ module UpdateAvailabilityOptions = {
   }
   @module("@aws-sdk/client-cloudsearch") @new
   external new: request => t = "UpdateAvailabilityOptionsCommand"
-  let make = (~multiAZ, ~domainName, ()) => new({multiAZ, domainName})
+  let make = (~multiAZ, ~domainName, ()) => new({multiAZ: multiAZ, domainName: domainName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeServiceAccessPolicies = {
   type t
   @ocaml.doc(
@@ -814,9 +824,10 @@ module DescribeServiceAccessPolicies = {
   }
   @module("@aws-sdk/client-cloudsearch") @new
   external new: request => t = "DescribeServiceAccessPoliciesCommand"
-  let make = (~domainName, ~deployed=?, ()) => new({deployed, domainName})
+  let make = (~domainName, ~deployed=?, ()) => new({deployed: deployed, domainName: domainName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeScalingParameters = {
   type t
   @ocaml.doc(
@@ -832,6 +843,7 @@ module DescribeScalingParameters = {
   let make = (~domainName, ()) => new({domainName: domainName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeDomainEndpointOptions = {
   type t
   @ocaml.doc(
@@ -856,9 +868,10 @@ module DescribeDomainEndpointOptions = {
   }
   @module("@aws-sdk/client-cloudsearch") @new
   external new: request => t = "DescribeDomainEndpointOptionsCommand"
-  let make = (~domainName, ~deployed=?, ()) => new({deployed, domainName})
+  let make = (~domainName, ~deployed=?, ()) => new({deployed: deployed, domainName: domainName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeAvailabilityOptions = {
   type t
   @ocaml.doc(
@@ -885,9 +898,10 @@ module DescribeAvailabilityOptions = {
   }
   @module("@aws-sdk/client-cloudsearch") @new
   external new: request => t = "DescribeAvailabilityOptionsCommand"
-  let make = (~domainName, ~deployed=?, ()) => new({deployed, domainName})
+  let make = (~domainName, ~deployed=?, ()) => new({deployed: deployed, domainName: domainName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteExpression = {
   type t
   @ocaml.doc(
@@ -907,9 +921,11 @@ module DeleteExpression = {
     expression: expressionStatus,
   }
   @module("@aws-sdk/client-cloudsearch") @new external new: request => t = "DeleteExpressionCommand"
-  let make = (~expressionName, ~domainName, ()) => new({expressionName, domainName})
+  let make = (~expressionName, ~domainName, ()) =>
+    new({expressionName: expressionName, domainName: domainName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteDomain = {
   type t
   @ocaml.doc(
@@ -927,6 +943,7 @@ module DeleteDomain = {
   let make = (~domainName, ()) => new({domainName: domainName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DefineExpression = {
   type t
   @ocaml.doc(
@@ -941,9 +958,10 @@ module DefineExpression = {
   )
   type response = {@as("Expression") expression: expressionStatus}
   @module("@aws-sdk/client-cloudsearch") @new external new: request => t = "DefineExpressionCommand"
-  let make = (~expression, ~domainName, ()) => new({expression, domainName})
+  let make = (~expression, ~domainName, ()) => new({expression: expression, domainName: domainName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateDomain = {
   type t
   @ocaml.doc(
@@ -964,6 +982,7 @@ module CreateDomain = {
   let make = (~domainName, ()) => new({domainName: domainName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeExpressions = {
   type t
   @ocaml.doc("<p>Container for the parameters to the <code><a>DescribeDomains</a></code> operation.
@@ -992,9 +1011,10 @@ module DescribeExpressions = {
   @module("@aws-sdk/client-cloudsearch") @new
   external new: request => t = "DescribeExpressionsCommand"
   let make = (~domainName, ~deployed=?, ~expressionNames=?, ()) =>
-    new({deployed, expressionNames, domainName})
+    new({deployed: deployed, expressionNames: expressionNames, domainName: domainName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeDomains = {
   type t
   @ocaml.doc(
@@ -1013,6 +1033,7 @@ module DescribeDomains = {
   let make = (~domainNames=?, ()) => new({domainNames: domainNames})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteSuggester = {
   type t
   @ocaml.doc(
@@ -1032,9 +1053,11 @@ module DeleteSuggester = {
     suggester: suggesterStatus,
   }
   @module("@aws-sdk/client-cloudsearch") @new external new: request => t = "DeleteSuggesterCommand"
-  let make = (~suggesterName, ~domainName, ()) => new({suggesterName, domainName})
+  let make = (~suggesterName, ~domainName, ()) =>
+    new({suggesterName: suggesterName, domainName: domainName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteIndexField = {
   type t
   @ocaml.doc(
@@ -1054,9 +1077,11 @@ module DeleteIndexField = {
     indexField: indexFieldStatus,
   }
   @module("@aws-sdk/client-cloudsearch") @new external new: request => t = "DeleteIndexFieldCommand"
-  let make = (~indexFieldName, ~domainName, ()) => new({indexFieldName, domainName})
+  let make = (~indexFieldName, ~domainName, ()) =>
+    new({indexFieldName: indexFieldName, domainName: domainName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteAnalysisScheme = {
   type t
   @ocaml.doc(
@@ -1077,9 +1102,11 @@ module DeleteAnalysisScheme = {
   }
   @module("@aws-sdk/client-cloudsearch") @new
   external new: request => t = "DeleteAnalysisSchemeCommand"
-  let make = (~analysisSchemeName, ~domainName, ()) => new({analysisSchemeName, domainName})
+  let make = (~analysisSchemeName, ~domainName, ()) =>
+    new({analysisSchemeName: analysisSchemeName, domainName: domainName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DefineSuggester = {
   type t
   @ocaml.doc(
@@ -1094,9 +1121,10 @@ module DefineSuggester = {
   )
   type response = {@as("Suggester") suggester: suggesterStatus}
   @module("@aws-sdk/client-cloudsearch") @new external new: request => t = "DefineSuggesterCommand"
-  let make = (~suggester, ~domainName, ()) => new({suggester, domainName})
+  let make = (~suggester, ~domainName, ()) => new({suggester: suggester, domainName: domainName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DefineIndexField = {
   type t
   @ocaml.doc(
@@ -1112,9 +1140,10 @@ module DefineIndexField = {
   )
   type response = {@as("IndexField") indexField: indexFieldStatus}
   @module("@aws-sdk/client-cloudsearch") @new external new: request => t = "DefineIndexFieldCommand"
-  let make = (~indexField, ~domainName, ()) => new({indexField, domainName})
+  let make = (~indexField, ~domainName, ()) => new({indexField: indexField, domainName: domainName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DefineAnalysisScheme = {
   type t
   @ocaml.doc(
@@ -1130,9 +1159,11 @@ module DefineAnalysisScheme = {
   type response = {@as("AnalysisScheme") analysisScheme: analysisSchemeStatus}
   @module("@aws-sdk/client-cloudsearch") @new
   external new: request => t = "DefineAnalysisSchemeCommand"
-  let make = (~analysisScheme, ~domainName, ()) => new({analysisScheme, domainName})
+  let make = (~analysisScheme, ~domainName, ()) =>
+    new({analysisScheme: analysisScheme, domainName: domainName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeSuggesters = {
   type t
   @ocaml.doc(
@@ -1158,9 +1189,10 @@ module DescribeSuggesters = {
   @module("@aws-sdk/client-cloudsearch") @new
   external new: request => t = "DescribeSuggestersCommand"
   let make = (~domainName, ~deployed=?, ~suggesterNames=?, ()) =>
-    new({deployed, suggesterNames, domainName})
+    new({deployed: deployed, suggesterNames: suggesterNames, domainName: domainName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeIndexFields = {
   type t
   @ocaml.doc(
@@ -1190,9 +1222,10 @@ module DescribeIndexFields = {
   @module("@aws-sdk/client-cloudsearch") @new
   external new: request => t = "DescribeIndexFieldsCommand"
   let make = (~domainName, ~deployed=?, ~fieldNames=?, ()) =>
-    new({deployed, fieldNames, domainName})
+    new({deployed: deployed, fieldNames: fieldNames, domainName: domainName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeAnalysisSchemes = {
   type t
   @ocaml.doc(
@@ -1219,6 +1252,6 @@ module DescribeAnalysisSchemes = {
   @module("@aws-sdk/client-cloudsearch") @new
   external new: request => t = "DescribeAnalysisSchemesCommand"
   let make = (~domainName, ~deployed=?, ~analysisSchemeNames=?, ()) =>
-    new({deployed, analysisSchemeNames, domainName})
+    new({deployed: deployed, analysisSchemeNames: analysisSchemeNames, domainName: domainName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

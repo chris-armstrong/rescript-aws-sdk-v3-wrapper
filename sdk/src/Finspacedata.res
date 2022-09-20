@@ -725,9 +725,19 @@ module UpdateUser = {
     ~firstName=?,
     ~type_=?,
     (),
-  ) => new({clientToken, apiAccessPrincipalArn, apiAccess, lastName, firstName, type_, userId})
+  ) =>
+    new({
+      clientToken: clientToken,
+      apiAccessPrincipalArn: apiAccessPrincipalArn,
+      apiAccess: apiAccess,
+      lastName: lastName,
+      firstName: firstName,
+      type_: type_,
+      userId: userId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ResetUserPassword = {
   type t
   type request = {
@@ -748,9 +758,10 @@ module ResetUserPassword = {
   }
   @module("@aws-sdk/client-finspace-api") @new
   external new: request => t = "ResetUserPasswordCommand"
-  let make = (~userId, ~clientToken=?, ()) => new({clientToken, userId})
+  let make = (~userId, ~clientToken=?, ()) => new({clientToken: clientToken, userId: userId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetWorkingLocation = {
   type t
   type request = {
@@ -782,6 +793,7 @@ module GetWorkingLocation = {
   let make = (~locationType=?, ()) => new({locationType: locationType})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetUser = {
   type t
   type request = {
@@ -866,6 +878,7 @@ module GetUser = {
   let make = (~userId, ()) => new({userId: userId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module EnableUser = {
   type t
   type request = {
@@ -878,9 +891,10 @@ module EnableUser = {
     @ocaml.doc("<p>The unique identifier for the enabled user account.</p>") userId: option<userId>,
   }
   @module("@aws-sdk/client-finspace-api") @new external new: request => t = "EnableUserCommand"
-  let make = (~userId, ~clientToken=?, ()) => new({clientToken, userId})
+  let make = (~userId, ~clientToken=?, ()) => new({clientToken: clientToken, userId: userId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DisableUser = {
   type t
   type request = {
@@ -894,9 +908,10 @@ module DisableUser = {
     userId: option<userId>,
   }
   @module("@aws-sdk/client-finspace-api") @new external new: request => t = "DisableUserCommand"
-  let make = (~userId, ~clientToken=?, ()) => new({clientToken, userId})
+  let make = (~userId, ~clientToken=?, ()) => new({clientToken: clientToken, userId: userId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeletePermissionGroup = {
   type t
   type request = {
@@ -911,9 +926,11 @@ module DeletePermissionGroup = {
   }
   @module("@aws-sdk/client-finspace-api") @new
   external new: request => t = "DeletePermissionGroupCommand"
-  let make = (~permissionGroupId, ~clientToken=?, ()) => new({clientToken, permissionGroupId})
+  let make = (~permissionGroupId, ~clientToken=?, ()) =>
+    new({clientToken: clientToken, permissionGroupId: permissionGroupId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteDataset = {
   type t
   @ocaml.doc("The request for a DeleteDataset operation.")
@@ -928,9 +945,11 @@ module DeleteDataset = {
     datasetId: option<datasetId>,
   }
   @module("@aws-sdk/client-finspace-api") @new external new: request => t = "DeleteDatasetCommand"
-  let make = (~datasetId, ~clientToken=?, ()) => new({datasetId, clientToken})
+  let make = (~datasetId, ~clientToken=?, ()) =>
+    new({datasetId: datasetId, clientToken: clientToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateUser = {
   type t
   type request = {
@@ -987,9 +1006,18 @@ module CreateUser = {
     ~firstName=?,
     (),
   ) =>
-    new({clientToken, apiAccessPrincipalArn, apiAccess, lastName, firstName, type_, emailAddress})
+    new({
+      clientToken: clientToken,
+      apiAccessPrincipalArn: apiAccessPrincipalArn,
+      apiAccess: apiAccess,
+      lastName: lastName,
+      firstName: firstName,
+      type_: type_,
+      emailAddress: emailAddress,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdatePermissionGroup = {
   type t
   type request = {
@@ -1046,9 +1074,17 @@ module UpdatePermissionGroup = {
     ~description=?,
     ~name=?,
     (),
-  ) => new({clientToken, applicationPermissions, description, name, permissionGroupId})
+  ) =>
+    new({
+      clientToken: clientToken,
+      applicationPermissions: applicationPermissions,
+      description: description,
+      name: name,
+      permissionGroupId: permissionGroupId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateChangeset = {
   type t
   @ocaml.doc("Request to update an existing changeset.")
@@ -1134,9 +1170,16 @@ module UpdateChangeset = {
   }
   @module("@aws-sdk/client-finspace-api") @new external new: request => t = "UpdateChangesetCommand"
   let make = (~formatParams, ~sourceParams, ~changesetId, ~datasetId, ~clientToken=?, ()) =>
-    new({formatParams, sourceParams, changesetId, datasetId, clientToken})
+    new({
+      formatParams: formatParams,
+      sourceParams: sourceParams,
+      changesetId: changesetId,
+      datasetId: datasetId,
+      clientToken: clientToken,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetProgrammaticAccessCredentials = {
   type t
   @ocaml.doc("Request for GetProgrammaticAccessCredentials operation")
@@ -1153,9 +1196,11 @@ module GetProgrammaticAccessCredentials = {
   }
   @module("@aws-sdk/client-finspace-api") @new
   external new: request => t = "GetProgrammaticAccessCredentialsCommand"
-  let make = (~environmentId, ~durationInMinutes=?, ()) => new({environmentId, durationInMinutes})
+  let make = (~environmentId, ~durationInMinutes=?, ()) =>
+    new({environmentId: environmentId, durationInMinutes: durationInMinutes})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetChangeset = {
   type t
   @ocaml.doc("Request to describe a changeset.")
@@ -1215,9 +1260,10 @@ module GetChangeset = {
     @ocaml.doc("<p>The unique identifier for a Changeset.</p>") changesetId: option<changesetId>,
   }
   @module("@aws-sdk/client-finspace-api") @new external new: request => t = "GetChangesetCommand"
-  let make = (~changesetId, ~datasetId, ()) => new({changesetId, datasetId})
+  let make = (~changesetId, ~datasetId, ()) => new({changesetId: changesetId, datasetId: datasetId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreatePermissionGroup = {
   type t
   type request = {
@@ -1266,9 +1312,15 @@ module CreatePermissionGroup = {
   @module("@aws-sdk/client-finspace-api") @new
   external new: request => t = "CreatePermissionGroupCommand"
   let make = (~applicationPermissions, ~name, ~clientToken=?, ~description=?, ()) =>
-    new({clientToken, applicationPermissions, description, name})
+    new({
+      clientToken: clientToken,
+      applicationPermissions: applicationPermissions,
+      description: description,
+      name: name,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateChangeset = {
   type t
   @ocaml.doc("The request for a CreateChangeset operation.")
@@ -1369,9 +1421,16 @@ module CreateChangeset = {
   }
   @module("@aws-sdk/client-finspace-api") @new external new: request => t = "CreateChangesetCommand"
   let make = (~formatParams, ~sourceParams, ~changeType, ~datasetId, ~clientToken=?, ()) =>
-    new({formatParams, sourceParams, changeType, datasetId, clientToken})
+    new({
+      formatParams: formatParams,
+      sourceParams: sourceParams,
+      changeType: changeType,
+      datasetId: datasetId,
+      clientToken: clientToken,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListUsers = {
   type t
   type request = {
@@ -1385,9 +1444,10 @@ module ListUsers = {
     @ocaml.doc("<p>A list of all the user accounts.</p>") users: option<userList>,
   }
   @module("@aws-sdk/client-finspace-api") @new external new: request => t = "ListUsersCommand"
-  let make = (~maxResults, ~nextToken=?, ()) => new({maxResults, nextToken})
+  let make = (~maxResults, ~nextToken=?, ()) => new({maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetDataView = {
   type t
   @ocaml.doc(
@@ -1466,9 +1526,10 @@ module GetDataView = {
     autoUpdate: option<boolean_>,
   }
   @module("@aws-sdk/client-finspace-api") @new external new: request => t = "GetDataViewCommand"
-  let make = (~datasetId, ~dataViewId, ()) => new({datasetId, dataViewId})
+  let make = (~datasetId, ~dataViewId, ()) => new({datasetId: datasetId, dataViewId: dataViewId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateDataView = {
   type t
   @ocaml.doc("Request for creating a data view.")
@@ -1509,16 +1570,17 @@ module CreateDataView = {
     (),
   ) =>
     new({
-      destinationTypeParams,
-      asOfTimestamp,
-      partitionColumns,
-      sortColumns,
-      autoUpdate,
-      datasetId,
-      clientToken,
+      destinationTypeParams: destinationTypeParams,
+      asOfTimestamp: asOfTimestamp,
+      partitionColumns: partitionColumns,
+      sortColumns: sortColumns,
+      autoUpdate: autoUpdate,
+      datasetId: datasetId,
+      clientToken: clientToken,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListPermissionGroups = {
   type t
   type request = {
@@ -1534,9 +1596,10 @@ module ListPermissionGroups = {
   }
   @module("@aws-sdk/client-finspace-api") @new
   external new: request => t = "ListPermissionGroupsCommand"
-  let make = (~maxResults, ~nextToken=?, ()) => new({maxResults, nextToken})
+  let make = (~maxResults, ~nextToken=?, ()) => new({maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListChangesets = {
   type t
   @ocaml.doc("Request to ListChangesetsRequest. It exposes minimal query filters.")
@@ -1559,9 +1622,10 @@ module ListChangesets = {
   }
   @module("@aws-sdk/client-finspace-api") @new external new: request => t = "ListChangesetsCommand"
   let make = (~datasetId, ~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken, maxResults, datasetId})
+    new({nextToken: nextToken, maxResults: maxResults, datasetId: datasetId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateDataset = {
   type t
   @ocaml.doc("The request for an UpdateDataset operation")
@@ -1603,9 +1667,18 @@ module UpdateDataset = {
     ~clientToken=?,
     (),
   ) =>
-    new({schemaDefinition, alias, datasetDescription, kind, datasetTitle, datasetId, clientToken})
+    new({
+      schemaDefinition: schemaDefinition,
+      alias: alias,
+      datasetDescription: datasetDescription,
+      kind: kind,
+      datasetTitle: datasetTitle,
+      datasetId: datasetId,
+      clientToken: clientToken,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListDataViews = {
   type t
   @ocaml.doc("Request for a list data views.")
@@ -1623,9 +1696,10 @@ module ListDataViews = {
   }
   @module("@aws-sdk/client-finspace-api") @new external new: request => t = "ListDataViewsCommand"
   let make = (~datasetId, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults, nextToken, datasetId})
+    new({maxResults: maxResults, nextToken: nextToken, datasetId: datasetId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetDataset = {
   type t
   @ocaml.doc("Request for the GetDataset operation.")
@@ -1687,6 +1761,7 @@ module GetDataset = {
   let make = (~datasetId, ()) => new({datasetId: datasetId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateDataset = {
   type t
   @ocaml.doc("The request for a CreateDataset operation")
@@ -1733,17 +1808,18 @@ module CreateDataset = {
     (),
   ) =>
     new({
-      schemaDefinition,
-      alias,
-      permissionGroupParams,
-      ownerInfo,
-      datasetDescription,
-      kind,
-      datasetTitle,
-      clientToken,
+      schemaDefinition: schemaDefinition,
+      alias: alias,
+      permissionGroupParams: permissionGroupParams,
+      ownerInfo: ownerInfo,
+      datasetDescription: datasetDescription,
+      kind: kind,
+      datasetTitle: datasetTitle,
+      clientToken: clientToken,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListDatasets = {
   type t
   @ocaml.doc("Request for the ListDatasets operation.")
@@ -1759,6 +1835,7 @@ module ListDatasets = {
     @ocaml.doc("<p>List of Datasets.</p>") datasets: option<datasetList>,
   }
   @module("@aws-sdk/client-finspace-api") @new external new: request => t = "ListDatasetsCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

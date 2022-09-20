@@ -128,9 +128,13 @@ module UpdateRoutingControlStates = {
   @module("@aws-sdk/client-route53-recovery-cluster") @new
   external new: request => t = "UpdateRoutingControlStatesCommand"
   let make = (~updateRoutingControlStateEntries, ~safetyRulesToOverride=?, ()) =>
-    new({safetyRulesToOverride, updateRoutingControlStateEntries})
+    new({
+      safetyRulesToOverride: safetyRulesToOverride,
+      updateRoutingControlStateEntries: updateRoutingControlStateEntries,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateRoutingControlState = {
   type t
   type request = {
@@ -154,9 +158,14 @@ module UpdateRoutingControlState = {
   @module("@aws-sdk/client-route53-recovery-cluster") @new
   external new: request => t = "UpdateRoutingControlStateCommand"
   let make = (~routingControlState, ~routingControlArn, ~safetyRulesToOverride=?, ()) =>
-    new({safetyRulesToOverride, routingControlState, routingControlArn})
+    new({
+      safetyRulesToOverride: safetyRulesToOverride,
+      routingControlState: routingControlState,
+      routingControlArn: routingControlArn,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ListRoutingControls = {
   type t
   type request = {
@@ -188,9 +197,10 @@ module ListRoutingControls = {
   @module("@aws-sdk/client-route53-recovery-cluster") @new
   external new: request => t = "ListRoutingControlsCommand"
   let make = (~maxResults=?, ~nextToken=?, ~controlPanelArn=?, ()) =>
-    new({maxResults, nextToken, controlPanelArn})
+    new({maxResults: maxResults, nextToken: nextToken, controlPanelArn: controlPanelArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetRoutingControlState = {
   type t
   type request = {

@@ -120,9 +120,10 @@ module UpdateEventIntegration = {
   type response = {.}
   @module("@aws-sdk/client-app-integrations") @new
   external new: request => t = "UpdateEventIntegrationCommand"
-  let make = (~name, ~description=?, ()) => new({description, name})
+  let make = (~name, ~description=?, ()) => new({description: description, name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateDataIntegration = {
   type t
   type request = {
@@ -135,9 +136,11 @@ module UpdateDataIntegration = {
   type response = {.}
   @module("@aws-sdk/client-app-integrations") @new
   external new: request => t = "UpdateDataIntegrationCommand"
-  let make = (~identifier, ~description=?, ~name=?, ()) => new({description, name, identifier})
+  let make = (~identifier, ~description=?, ~name=?, ()) =>
+    new({description: description, name: name, identifier: identifier})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteEventIntegration = {
   type t
   type request = {@ocaml.doc("<p>The name of the event integration.</p>") @as("Name") name: name}
@@ -147,6 +150,7 @@ module DeleteEventIntegration = {
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteDataIntegration = {
   type t
   type request = {
@@ -161,6 +165,7 @@ module DeleteDataIntegration = {
     new({dataIntegrationIdentifier: dataIntegrationIdentifier})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UntagResource = {
   type t
   type request = {
@@ -170,9 +175,10 @@ module UntagResource = {
   type response = {.}
   @module("@aws-sdk/client-app-integrations") @new
   external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys, resourceArn})
+  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module TagResource = {
   type t
   type request = {
@@ -181,9 +187,10 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-app-integrations") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceArn, ()) => new({tags, resourceArn})
+  let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ListTagsForResource = {
   type t
   type request = {
@@ -195,6 +202,7 @@ module ListTagsForResource = {
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetEventIntegration = {
   type t
   type request = {@ocaml.doc("<p>The name of the event integration. </p>") @as("Name") name: name}
@@ -215,6 +223,7 @@ module GetEventIntegration = {
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetDataIntegration = {
   type t
   type request = {
@@ -241,6 +250,7 @@ module GetDataIntegration = {
   let make = (~identifier, ()) => new({identifier: identifier})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateEventIntegration = {
   type t
   type request = {
@@ -263,9 +273,17 @@ module CreateEventIntegration = {
   @module("@aws-sdk/client-app-integrations") @new
   external new: request => t = "CreateEventIntegrationCommand"
   let make = (~eventBridgeBus, ~eventFilter, ~name, ~tags=?, ~clientToken=?, ~description=?, ()) =>
-    new({tags, clientToken, eventBridgeBus, eventFilter, description, name})
+    new({
+      tags: tags,
+      clientToken: clientToken,
+      eventBridgeBus: eventBridgeBus,
+      eventFilter: eventFilter,
+      description: description,
+      name: name,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateDataIntegration = {
   type t
   type request = {
@@ -315,9 +333,19 @@ module CreateDataIntegration = {
     ~kmsKey=?,
     ~description=?,
     (),
-  ) => new({clientToken, tags, scheduleConfig, sourceURI, kmsKey, description, name})
+  ) =>
+    new({
+      clientToken: clientToken,
+      tags: tags,
+      scheduleConfig: scheduleConfig,
+      sourceURI: sourceURI,
+      kmsKey: kmsKey,
+      description: description,
+      name: name,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListDataIntegrations = {
   type t
   type request = {
@@ -339,9 +367,11 @@ response in the next request to retrieve the next set of results.</p>")
   }
   @module("@aws-sdk/client-app-integrations") @new
   external new: request => t = "ListDataIntegrationsCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListDataIntegrationAssociations = {
   type t
   type request = {
@@ -370,9 +400,14 @@ response in the next request to retrieve the next set of results.</p>")
   @module("@aws-sdk/client-app-integrations") @new
   external new: request => t = "ListDataIntegrationAssociationsCommand"
   let make = (~dataIntegrationIdentifier, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults, nextToken, dataIntegrationIdentifier})
+    new({
+      maxResults: maxResults,
+      nextToken: nextToken,
+      dataIntegrationIdentifier: dataIntegrationIdentifier,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListEventIntegrations = {
   type t
   type request = {
@@ -394,9 +429,11 @@ response in the next request to retrieve the next set of results.</p>")
   }
   @module("@aws-sdk/client-app-integrations") @new
   external new: request => t = "ListEventIntegrationsCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListEventIntegrationAssociations = {
   type t
   type request = {
@@ -421,6 +458,6 @@ response in the next request to retrieve the next set of results.</p>")
   @module("@aws-sdk/client-app-integrations") @new
   external new: request => t = "ListEventIntegrationAssociationsCommand"
   let make = (~eventIntegrationName, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults, nextToken, eventIntegrationName})
+    new({maxResults: maxResults, nextToken: nextToken, eventIntegrationName: eventIntegrationName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

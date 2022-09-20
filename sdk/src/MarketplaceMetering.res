@@ -245,6 +245,7 @@ module ResolveCustomer = {
   let make = (~registrationToken, ()) => new({registrationToken: registrationToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module RegisterUsage = {
   type t
   type request = {
@@ -268,9 +269,10 @@ module RegisterUsage = {
   @module("@aws-sdk/client-aws-marketplace") @new
   external new: request => t = "RegisterUsageCommand"
   let make = (~publicKeyVersion, ~productCode, ~nonce=?, ()) =>
-    new({nonce, publicKeyVersion, productCode})
+    new({nonce: nonce, publicKeyVersion: publicKeyVersion, productCode: productCode})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module MeterUsage = {
   type t
   type request = {
@@ -319,9 +321,18 @@ module MeterUsage = {
     ~dryRun=?,
     ~usageQuantity=?,
     (),
-  ) => new({usageAllocations, dryRun, usageQuantity, usageDimension, timestamp_, productCode})
+  ) =>
+    new({
+      usageAllocations: usageAllocations,
+      dryRun: dryRun,
+      usageQuantity: usageQuantity,
+      usageDimension: usageDimension,
+      timestamp_: timestamp_,
+      productCode: productCode,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module BatchMeterUsage = {
   type t
   @ocaml.doc("<p>A <code>BatchMeterUsageRequest</code> contains <code>UsageRecords</code>, which
@@ -353,6 +364,7 @@ module BatchMeterUsage = {
   }
   @module("@aws-sdk/client-aws-marketplace") @new
   external new: request => t = "BatchMeterUsageCommand"
-  let make = (~productCode, ~usageRecords, ()) => new({productCode, usageRecords})
+  let make = (~productCode, ~usageRecords, ()) =>
+    new({productCode: productCode, usageRecords: usageRecords})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

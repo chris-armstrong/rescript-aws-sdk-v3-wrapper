@@ -3433,9 +3433,10 @@ module UpdateTopicRuleDestination = {
   type response = {.}
   @module("@aws-sdk/client-iot") @new
   external new: request => t = "UpdateTopicRuleDestinationCommand"
-  let make = (~status, ~arn, ()) => new({status, arn})
+  let make = (~status, ~arn, ()) => new({status: status, arn: arn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateRoleAlias = {
   type t
   type request = {
@@ -3452,9 +3453,14 @@ module UpdateRoleAlias = {
   }
   @module("@aws-sdk/client-iot") @new external new: request => t = "UpdateRoleAliasCommand"
   let make = (~roleAlias, ~credentialDurationSeconds=?, ~roleArn=?, ()) =>
-    new({credentialDurationSeconds, roleArn, roleAlias})
+    new({
+      credentialDurationSeconds: credentialDurationSeconds,
+      roleArn: roleArn,
+      roleAlias: roleAlias,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateCustomMetric = {
   type t
   type request = {
@@ -3499,9 +3505,11 @@ module UpdateCustomMetric = {
     metricName: option<metricName>,
   }
   @module("@aws-sdk/client-iot") @new external new: request => t = "UpdateCustomMetricCommand"
-  let make = (~displayName, ~metricName, ()) => new({displayName, metricName})
+  let make = (~displayName, ~metricName, ()) =>
+    new({displayName: displayName, metricName: metricName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateCertificate = {
   type t
   @ocaml.doc("<p>The input for the UpdateCertificate operation.</p>")
@@ -3521,9 +3529,11 @@ module UpdateCertificate = {
   }
   type response = {.}
   @module("@aws-sdk/client-iot") @new external new: request => t = "UpdateCertificateCommand"
-  let make = (~newStatus, ~certificateId, ()) => new({newStatus, certificateId})
+  let make = (~newStatus, ~certificateId, ()) =>
+    new({newStatus: newStatus, certificateId: certificateId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module TransferCertificate = {
   type t
   @ocaml.doc("<p>The input for the TransferCertificate operation.</p>")
@@ -3541,9 +3551,14 @@ module TransferCertificate = {
   }
   @module("@aws-sdk/client-iot") @new external new: request => t = "TransferCertificateCommand"
   let make = (~targetAwsAccount, ~certificateId, ~transferMessage=?, ()) =>
-    new({transferMessage, targetAwsAccount, certificateId})
+    new({
+      transferMessage: transferMessage,
+      targetAwsAccount: targetAwsAccount,
+      certificateId: certificateId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module StopThingRegistrationTask = {
   type t
   type request = {@ocaml.doc("<p>The bulk thing provisioning task ID.</p>") taskId: taskId}
@@ -3553,6 +3568,7 @@ module StopThingRegistrationTask = {
   let make = (~taskId, ()) => new({taskId: taskId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module StartThingRegistrationTask = {
   type t
   type request = {
@@ -3569,9 +3585,15 @@ module StartThingRegistrationTask = {
   @module("@aws-sdk/client-iot") @new
   external new: request => t = "StartThingRegistrationTaskCommand"
   let make = (~roleArn, ~inputFileKey, ~inputFileBucket, ~templateBody, ()) =>
-    new({roleArn, inputFileKey, inputFileBucket, templateBody})
+    new({
+      roleArn: roleArn,
+      inputFileKey: inputFileKey,
+      inputFileBucket: inputFileBucket,
+      templateBody: templateBody,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module SetV2LoggingOptions = {
   type t
   type request = {
@@ -3584,9 +3606,10 @@ module SetV2LoggingOptions = {
   type response = {.}
   @module("@aws-sdk/client-iot") @new external new: request => t = "SetV2LoggingOptionsCommand"
   let make = (~disableAllLogs=?, ~defaultLogLevel=?, ~roleArn=?, ()) =>
-    new({disableAllLogs, defaultLogLevel, roleArn})
+    new({disableAllLogs: disableAllLogs, defaultLogLevel: defaultLogLevel, roleArn: roleArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module SetDefaultPolicyVersion = {
   type t
   @ocaml.doc("<p>The input for the SetDefaultPolicyVersion operation.</p>")
@@ -3596,9 +3619,11 @@ module SetDefaultPolicyVersion = {
   }
   type response = {.}
   @module("@aws-sdk/client-iot") @new external new: request => t = "SetDefaultPolicyVersionCommand"
-  let make = (~policyVersionId, ~policyName, ()) => new({policyVersionId, policyName})
+  let make = (~policyVersionId, ~policyName, ()) =>
+    new({policyVersionId: policyVersionId, policyName: policyName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module SetDefaultAuthorizer = {
   type t
   type request = {@ocaml.doc("<p>The authorizer name.</p>") authorizerName: authorizerName}
@@ -3610,6 +3635,7 @@ module SetDefaultAuthorizer = {
   let make = (~authorizerName, ()) => new({authorizerName: authorizerName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module RemoveThingFromThingGroup = {
   type t
   type request = {
@@ -3623,9 +3649,15 @@ module RemoveThingFromThingGroup = {
   @module("@aws-sdk/client-iot") @new
   external new: request => t = "RemoveThingFromThingGroupCommand"
   let make = (~thingArn=?, ~thingName=?, ~thingGroupArn=?, ~thingGroupName=?, ()) =>
-    new({thingArn, thingName, thingGroupArn, thingGroupName})
+    new({
+      thingArn: thingArn,
+      thingName: thingName,
+      thingGroupArn: thingGroupArn,
+      thingGroupName: thingGroupName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module RemoveThingFromBillingGroup = {
   type t
   type request = {
@@ -3640,9 +3672,15 @@ module RemoveThingFromBillingGroup = {
   @module("@aws-sdk/client-iot") @new
   external new: request => t = "RemoveThingFromBillingGroupCommand"
   let make = (~thingArn=?, ~thingName=?, ~billingGroupArn=?, ~billingGroupName=?, ()) =>
-    new({thingArn, thingName, billingGroupArn, billingGroupName})
+    new({
+      thingArn: thingArn,
+      thingName: thingName,
+      billingGroupArn: billingGroupArn,
+      billingGroupName: billingGroupName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module RejectCertificateTransfer = {
   type t
   @ocaml.doc("<p>The input for the RejectCertificateTransfer operation.</p>")
@@ -3656,9 +3694,11 @@ module RejectCertificateTransfer = {
   type response = {.}
   @module("@aws-sdk/client-iot") @new
   external new: request => t = "RejectCertificateTransferCommand"
-  let make = (~certificateId, ~rejectReason=?, ()) => new({rejectReason, certificateId})
+  let make = (~certificateId, ~rejectReason=?, ()) =>
+    new({rejectReason: rejectReason, certificateId: certificateId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module RegisterCertificateWithoutCA = {
   type t
   type request = {
@@ -3675,9 +3715,11 @@ module RegisterCertificateWithoutCA = {
   }
   @module("@aws-sdk/client-iot") @new
   external new: request => t = "RegisterCertificateWithoutCACommand"
-  let make = (~certificatePem, ~status=?, ()) => new({status, certificatePem})
+  let make = (~certificatePem, ~status=?, ()) =>
+    new({status: status, certificatePem: certificatePem})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module RegisterCertificate = {
   type t
   @ocaml.doc("<p>The input to the RegisterCertificate operation.</p>")
@@ -3700,9 +3742,15 @@ module RegisterCertificate = {
   }
   @module("@aws-sdk/client-iot") @new external new: request => t = "RegisterCertificateCommand"
   let make = (~certificatePem, ~status=?, ~setAsActive=?, ~caCertificatePem=?, ()) =>
-    new({status, setAsActive, caCertificatePem, certificatePem})
+    new({
+      status: status,
+      setAsActive: setAsActive,
+      caCertificatePem: caCertificatePem,
+      certificatePem: certificatePem,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module PutVerificationStateOnViolation = {
   type t
   type request = {
@@ -3716,9 +3764,14 @@ module PutVerificationStateOnViolation = {
   @module("@aws-sdk/client-iot") @new
   external new: request => t = "PutVerificationStateOnViolationCommand"
   let make = (~verificationState, ~violationId, ~verificationStateDescription=?, ()) =>
-    new({verificationStateDescription, verificationState, violationId})
+    new({
+      verificationStateDescription: verificationStateDescription,
+      verificationState: verificationState,
+      violationId: violationId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module GetV2LoggingOptions = {
   type t
   type request = {.}
@@ -3732,6 +3785,7 @@ module GetV2LoggingOptions = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetRegistrationCode = {
   type t
   type request = {.}
@@ -3744,6 +3798,7 @@ module GetRegistrationCode = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetPolicyVersion = {
   type t
   @ocaml.doc("<p>The input for the GetPolicyVersion operation.</p>")
@@ -3766,9 +3821,11 @@ module GetPolicyVersion = {
     @ocaml.doc("<p>The policy ARN.</p>") policyArn: option<policyArn>,
   }
   @module("@aws-sdk/client-iot") @new external new: request => t = "GetPolicyVersionCommand"
-  let make = (~policyVersionId, ~policyName, ()) => new({policyVersionId, policyName})
+  let make = (~policyVersionId, ~policyName, ()) =>
+    new({policyVersionId: policyVersionId, policyName: policyName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetPolicy = {
   type t
   @ocaml.doc("<p>The input for the GetPolicy operation.</p>")
@@ -3788,6 +3845,7 @@ module GetPolicy = {
   let make = (~policyName, ()) => new({policyName: policyName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetLoggingOptions = {
   type t
   type request = {.}
@@ -3800,6 +3858,7 @@ module GetLoggingOptions = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetJobDocument = {
   type t
   type request = {
@@ -3811,6 +3870,7 @@ module GetJobDocument = {
   let make = (~jobId, ()) => new({jobId: jobId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetCardinality = {
   type t
   type request = {
@@ -3825,9 +3885,15 @@ module GetCardinality = {
   }
   @module("@aws-sdk/client-iot") @new external new: request => t = "GetCardinalityCommand"
   let make = (~queryString, ~queryVersion=?, ~aggregationField=?, ~indexName=?, ()) =>
-    new({queryVersion, aggregationField, queryString, indexName})
+    new({
+      queryVersion: queryVersion,
+      aggregationField: aggregationField,
+      queryString: queryString,
+      indexName: indexName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module EnableTopicRule = {
   type t
   @ocaml.doc("<p>The input for the EnableTopicRuleRequest operation.</p>")
@@ -3837,6 +3903,7 @@ module EnableTopicRule = {
   let make = (~ruleName, ()) => new({ruleName: ruleName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DisableTopicRule = {
   type t
   @ocaml.doc("<p>The input for the DisableTopicRuleRequest operation.</p>")
@@ -3846,6 +3913,7 @@ module DisableTopicRule = {
   let make = (~ruleName, ()) => new({ruleName: ruleName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DetachThingPrincipal = {
   type t
   @ocaml.doc("<p>The input for the DetachThingPrincipal operation.</p>")
@@ -3858,9 +3926,10 @@ module DetachThingPrincipal = {
   }
   type response = {.}
   @module("@aws-sdk/client-iot") @new external new: request => t = "DetachThingPrincipalCommand"
-  let make = (~principal, ~thingName, ()) => new({principal, thingName})
+  let make = (~principal, ~thingName, ()) => new({principal: principal, thingName: thingName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DetachSecurityProfile = {
   type t
   type request = {
@@ -3872,9 +3941,13 @@ module DetachSecurityProfile = {
   type response = {.}
   @module("@aws-sdk/client-iot") @new external new: request => t = "DetachSecurityProfileCommand"
   let make = (~securityProfileTargetArn, ~securityProfileName, ()) =>
-    new({securityProfileTargetArn, securityProfileName})
+    new({
+      securityProfileTargetArn: securityProfileTargetArn,
+      securityProfileName: securityProfileName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DetachPrincipalPolicy = {
   type t
   @ocaml.doc("<p>The input for the DetachPrincipalPolicy operation.</p>")
@@ -3886,9 +3959,10 @@ module DetachPrincipalPolicy = {
   }
   type response = {.}
   @module("@aws-sdk/client-iot") @new external new: request => t = "DetachPrincipalPolicyCommand"
-  let make = (~principal, ~policyName, ()) => new({principal, policyName})
+  let make = (~principal, ~policyName, ()) => new({principal: principal, policyName: policyName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DetachPolicy = {
   type t
   type request = {
@@ -3897,9 +3971,10 @@ module DetachPolicy = {
   }
   type response = {.}
   @module("@aws-sdk/client-iot") @new external new: request => t = "DetachPolicyCommand"
-  let make = (~target, ~policyName, ()) => new({target, policyName})
+  let make = (~target, ~policyName, ()) => new({target: target, policyName: policyName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DescribeThingRegistrationTask = {
   type t
   type request = {@ocaml.doc("<p>The task ID.</p>") taskId: taskId}
@@ -3927,6 +4002,7 @@ module DescribeThingRegistrationTask = {
   let make = (~taskId, ()) => new({taskId: taskId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeProvisioningTemplateVersion = {
   type t
   type request = {
@@ -3945,9 +4021,11 @@ module DescribeProvisioningTemplateVersion = {
   }
   @module("@aws-sdk/client-iot") @new
   external new: request => t = "DescribeProvisioningTemplateVersionCommand"
-  let make = (~versionId, ~templateName, ()) => new({versionId, templateName})
+  let make = (~versionId, ~templateName, ()) =>
+    new({versionId: versionId, templateName: templateName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeIndex = {
   type t
   type request = {@ocaml.doc("<p>The index name.</p>") indexName: indexName}
@@ -3982,6 +4060,7 @@ module DescribeIndex = {
   let make = (~indexName, ()) => new({indexName: indexName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeEndpoint = {
   type t
   @ocaml.doc("<p>The input for the DescribeEndpoint operation.</p>")
@@ -4027,6 +4106,7 @@ module DescribeEndpoint = {
   let make = (~endpointType=?, ()) => new({endpointType: endpointType})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeCustomMetric = {
   type t
   type request = {
@@ -4066,6 +4146,7 @@ module DescribeCustomMetric = {
   let make = (~metricName, ()) => new({metricName: metricName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeprecateThingType = {
   type t
   @ocaml.doc("<p>The input for the DeprecateThingType operation.</p>")
@@ -4077,9 +4158,11 @@ module DeprecateThingType = {
   }
   type response = {.}
   @module("@aws-sdk/client-iot") @new external new: request => t = "DeprecateThingTypeCommand"
-  let make = (~thingTypeName, ~undoDeprecate=?, ()) => new({undoDeprecate, thingTypeName})
+  let make = (~thingTypeName, ~undoDeprecate=?, ()) =>
+    new({undoDeprecate: undoDeprecate, thingTypeName: thingTypeName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteV2LoggingLevel = {
   type t
   type request = {
@@ -4091,9 +4174,10 @@ module DeleteV2LoggingLevel = {
   }
   type response = {.}
   @module("@aws-sdk/client-iot") @new external new: request => t = "DeleteV2LoggingLevelCommand"
-  let make = (~targetName, ~targetType, ()) => new({targetName, targetType})
+  let make = (~targetName, ~targetType, ()) => new({targetName: targetName, targetType: targetType})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteTopicRuleDestination = {
   type t
   type request = {@ocaml.doc("<p>The ARN of the topic rule destination to delete.</p>") arn: awsArn}
@@ -4103,6 +4187,7 @@ module DeleteTopicRuleDestination = {
   let make = (~arn, ()) => new({arn: arn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteTopicRule = {
   type t
   @ocaml.doc("<p>The input for the DeleteTopicRule operation.</p>")
@@ -4112,6 +4197,7 @@ module DeleteTopicRule = {
   let make = (~ruleName, ()) => new({ruleName: ruleName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteThingType = {
   type t
   @ocaml.doc("<p>The input for the DeleteThingType operation.</p>")
@@ -4121,6 +4207,7 @@ module DeleteThingType = {
   let make = (~thingTypeName, ()) => new({thingTypeName: thingTypeName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteThingGroup = {
   type t
   type request = {
@@ -4130,9 +4217,11 @@ module DeleteThingGroup = {
   }
   type response = {.}
   @module("@aws-sdk/client-iot") @new external new: request => t = "DeleteThingGroupCommand"
-  let make = (~thingGroupName, ~expectedVersion=?, ()) => new({expectedVersion, thingGroupName})
+  let make = (~thingGroupName, ~expectedVersion=?, ()) =>
+    new({expectedVersion: expectedVersion, thingGroupName: thingGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteThing = {
   type t
   @ocaml.doc("<p>The input for the DeleteThing operation.</p>")
@@ -4146,9 +4235,11 @@ module DeleteThing = {
   }
   type response = {.}
   @module("@aws-sdk/client-iot") @new external new: request => t = "DeleteThingCommand"
-  let make = (~thingName, ~expectedVersion=?, ()) => new({expectedVersion, thingName})
+  let make = (~thingName, ~expectedVersion=?, ()) =>
+    new({expectedVersion: expectedVersion, thingName: thingName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteStream = {
   type t
   type request = {@ocaml.doc("<p>The stream ID.</p>") streamId: streamId}
@@ -4157,6 +4248,7 @@ module DeleteStream = {
   let make = (~streamId, ()) => new({streamId: streamId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteSecurityProfile = {
   type t
   type request = {
@@ -4170,9 +4262,10 @@ module DeleteSecurityProfile = {
   type response = {.}
   @module("@aws-sdk/client-iot") @new external new: request => t = "DeleteSecurityProfileCommand"
   let make = (~securityProfileName, ~expectedVersion=?, ()) =>
-    new({expectedVersion, securityProfileName})
+    new({expectedVersion: expectedVersion, securityProfileName: securityProfileName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteScheduledAudit = {
   type t
   type request = {
@@ -4184,6 +4277,7 @@ module DeleteScheduledAudit = {
   let make = (~scheduledAuditName, ()) => new({scheduledAuditName: scheduledAuditName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteRoleAlias = {
   type t
   type request = {@ocaml.doc("<p>The role alias to delete.</p>") roleAlias: roleAlias}
@@ -4192,6 +4286,7 @@ module DeleteRoleAlias = {
   let make = (~roleAlias, ()) => new({roleAlias: roleAlias})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteRegistrationCode = {
   type t
   type request = {.}
@@ -4200,6 +4295,7 @@ module DeleteRegistrationCode = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteProvisioningTemplateVersion = {
   type t
   type request = {
@@ -4211,9 +4307,11 @@ module DeleteProvisioningTemplateVersion = {
   type response = {.}
   @module("@aws-sdk/client-iot") @new
   external new: request => t = "DeleteProvisioningTemplateVersionCommand"
-  let make = (~versionId, ~templateName, ()) => new({versionId, templateName})
+  let make = (~versionId, ~templateName, ()) =>
+    new({versionId: versionId, templateName: templateName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteProvisioningTemplate = {
   type t
   type request = {
@@ -4226,6 +4324,7 @@ module DeleteProvisioningTemplate = {
   let make = (~templateName, ()) => new({templateName: templateName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeletePolicyVersion = {
   type t
   @ocaml.doc("<p>The input for the DeletePolicyVersion operation.</p>")
@@ -4235,9 +4334,11 @@ module DeletePolicyVersion = {
   }
   type response = {.}
   @module("@aws-sdk/client-iot") @new external new: request => t = "DeletePolicyVersionCommand"
-  let make = (~policyVersionId, ~policyName, ()) => new({policyVersionId, policyName})
+  let make = (~policyVersionId, ~policyName, ()) =>
+    new({policyVersionId: policyVersionId, policyName: policyName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeletePolicy = {
   type t
   @ocaml.doc("<p>The input for the DeletePolicy operation.</p>")
@@ -4247,6 +4348,7 @@ module DeletePolicy = {
   let make = (~policyName, ()) => new({policyName: policyName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteOTAUpdate = {
   type t
   type request = {
@@ -4261,9 +4363,14 @@ module DeleteOTAUpdate = {
   type response = {.}
   @module("@aws-sdk/client-iot") @new external new: request => t = "DeleteOTAUpdateCommand"
   let make = (~otaUpdateId, ~forceDeleteAWSJob=?, ~deleteStream=?, ()) =>
-    new({forceDeleteAWSJob, deleteStream, otaUpdateId})
+    new({
+      forceDeleteAWSJob: forceDeleteAWSJob,
+      deleteStream: deleteStream,
+      otaUpdateId: otaUpdateId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteMitigationAction = {
   type t
   type request = {
@@ -4275,6 +4382,7 @@ module DeleteMitigationAction = {
   let make = (~actionName, ()) => new({actionName: actionName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteJobTemplate = {
   type t
   type request = {
@@ -4286,6 +4394,7 @@ module DeleteJobTemplate = {
   let make = (~jobTemplateId, ()) => new({jobTemplateId: jobTemplateId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteJobExecution = {
   type t
   type request = {
@@ -4321,9 +4430,16 @@ module DeleteJobExecution = {
   type response = {.}
   @module("@aws-sdk/client-iot") @new external new: request => t = "DeleteJobExecutionCommand"
   let make = (~executionNumber, ~thingName, ~jobId, ~namespaceId=?, ~force=?, ()) =>
-    new({namespaceId, force, executionNumber, thingName, jobId})
+    new({
+      namespaceId: namespaceId,
+      force: force,
+      executionNumber: executionNumber,
+      thingName: thingName,
+      jobId: jobId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteJob = {
   type t
   type request = {
@@ -4355,9 +4471,11 @@ module DeleteJob = {
   }
   type response = {.}
   @module("@aws-sdk/client-iot") @new external new: request => t = "DeleteJobCommand"
-  let make = (~jobId, ~namespaceId=?, ~force=?, ()) => new({namespaceId, force, jobId})
+  let make = (~jobId, ~namespaceId=?, ~force=?, ()) =>
+    new({namespaceId: namespaceId, force: force, jobId: jobId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteFleetMetric = {
   type t
   type request = {
@@ -4367,9 +4485,11 @@ module DeleteFleetMetric = {
   }
   type response = {.}
   @module("@aws-sdk/client-iot") @new external new: request => t = "DeleteFleetMetricCommand"
-  let make = (~metricName, ~expectedVersion=?, ()) => new({expectedVersion, metricName})
+  let make = (~metricName, ~expectedVersion=?, ()) =>
+    new({expectedVersion: expectedVersion, metricName: metricName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteDynamicThingGroup = {
   type t
   type request = {
@@ -4380,9 +4500,11 @@ module DeleteDynamicThingGroup = {
   }
   type response = {.}
   @module("@aws-sdk/client-iot") @new external new: request => t = "DeleteDynamicThingGroupCommand"
-  let make = (~thingGroupName, ~expectedVersion=?, ()) => new({expectedVersion, thingGroupName})
+  let make = (~thingGroupName, ~expectedVersion=?, ()) =>
+    new({expectedVersion: expectedVersion, thingGroupName: thingGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteDomainConfiguration = {
   type t
   type request = {
@@ -4396,6 +4518,7 @@ module DeleteDomainConfiguration = {
     new({domainConfigurationName: domainConfigurationName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteDimension = {
   type t
   type request = {
@@ -4407,6 +4530,7 @@ module DeleteDimension = {
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteCustomMetric = {
   type t
   type request = {
@@ -4420,6 +4544,7 @@ module DeleteCustomMetric = {
   let make = (~metricName, ()) => new({metricName: metricName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteCertificate = {
   type t
   @ocaml.doc("<p>The input for the DeleteCertificate operation.</p>")
@@ -4433,9 +4558,11 @@ module DeleteCertificate = {
   }
   type response = {.}
   @module("@aws-sdk/client-iot") @new external new: request => t = "DeleteCertificateCommand"
-  let make = (~certificateId, ~forceDelete=?, ()) => new({forceDelete, certificateId})
+  let make = (~certificateId, ~forceDelete=?, ()) =>
+    new({forceDelete: forceDelete, certificateId: certificateId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteCACertificate = {
   type t
   @ocaml.doc("<p>Input for the DeleteCACertificate operation.</p>")
@@ -4449,6 +4576,7 @@ module DeleteCACertificate = {
   let make = (~certificateId, ()) => new({certificateId: certificateId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteBillingGroup = {
   type t
   type request = {
@@ -4461,9 +4589,11 @@ module DeleteBillingGroup = {
   }
   type response = {.}
   @module("@aws-sdk/client-iot") @new external new: request => t = "DeleteBillingGroupCommand"
-  let make = (~billingGroupName, ~expectedVersion=?, ()) => new({expectedVersion, billingGroupName})
+  let make = (~billingGroupName, ~expectedVersion=?, ()) =>
+    new({expectedVersion: expectedVersion, billingGroupName: billingGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteAuthorizer = {
   type t
   type request = {
@@ -4474,6 +4604,7 @@ module DeleteAuthorizer = {
   let make = (~authorizerName, ()) => new({authorizerName: authorizerName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteAccountAuditConfiguration = {
   type t
   type request = {
@@ -4486,6 +4617,7 @@ module DeleteAccountAuditConfiguration = {
   let make = (~deleteScheduledAudits=?, ()) => new({deleteScheduledAudits: deleteScheduledAudits})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module CreateProvisioningTemplateVersion = {
   type t
   type request = {
@@ -4509,9 +4641,10 @@ module CreateProvisioningTemplateVersion = {
   @module("@aws-sdk/client-iot") @new
   external new: request => t = "CreateProvisioningTemplateVersionCommand"
   let make = (~templateBody, ~templateName, ~setAsDefault=?, ()) =>
-    new({setAsDefault, templateBody, templateName})
+    new({setAsDefault: setAsDefault, templateBody: templateBody, templateName: templateName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreatePolicyVersion = {
   type t
   @ocaml.doc("<p>The input for the CreatePolicyVersion operation.</p>")
@@ -4536,9 +4669,10 @@ module CreatePolicyVersion = {
   }
   @module("@aws-sdk/client-iot") @new external new: request => t = "CreatePolicyVersionCommand"
   let make = (~policyDocument, ~policyName, ~setAsDefault=?, ()) =>
-    new({setAsDefault, policyDocument, policyName})
+    new({setAsDefault: setAsDefault, policyDocument: policyDocument, policyName: policyName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateCertificateFromCsr = {
   type t
   @ocaml.doc("<p>The input for the CreateCertificateFromCsr operation.</p>")
@@ -4561,9 +4695,10 @@ module CreateCertificateFromCsr = {
   }
   @module("@aws-sdk/client-iot") @new external new: request => t = "CreateCertificateFromCsrCommand"
   let make = (~certificateSigningRequest, ~setAsActive=?, ()) =>
-    new({setAsActive, certificateSigningRequest})
+    new({setAsActive: setAsActive, certificateSigningRequest: certificateSigningRequest})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ConfirmTopicRuleDestination = {
   type t
   type request = {
@@ -4578,6 +4713,7 @@ module ConfirmTopicRuleDestination = {
   let make = (~confirmationToken, ()) => new({confirmationToken: confirmationToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ClearDefaultAuthorizer = {
   type t
   type request = {.}
@@ -4586,6 +4722,7 @@ module ClearDefaultAuthorizer = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module CancelJob = {
   type t
   type request = {
@@ -4611,9 +4748,10 @@ module CancelJob = {
   }
   @module("@aws-sdk/client-iot") @new external new: request => t = "CancelJobCommand"
   let make = (~jobId, ~force=?, ~comment=?, ~reasonCode=?, ()) =>
-    new({force, comment, reasonCode, jobId})
+    new({force: force, comment: comment, reasonCode: reasonCode, jobId: jobId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CancelDetectMitigationActionsTask = {
   type t
   type request = {
@@ -4628,6 +4766,7 @@ module CancelDetectMitigationActionsTask = {
   let make = (~taskId, ()) => new({taskId: taskId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module CancelCertificateTransfer = {
   type t
   @ocaml.doc("<p>The input for the CancelCertificateTransfer operation.</p>")
@@ -4642,6 +4781,7 @@ module CancelCertificateTransfer = {
   let make = (~certificateId, ()) => new({certificateId: certificateId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module CancelAuditTask = {
   type t
   type request = {
@@ -4654,6 +4794,7 @@ module CancelAuditTask = {
   let make = (~taskId, ()) => new({taskId: taskId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module CancelAuditMitigationActionsTask = {
   type t
   type request = {
@@ -4666,6 +4807,7 @@ module CancelAuditMitigationActionsTask = {
   let make = (~taskId, ()) => new({taskId: taskId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module AttachThingPrincipal = {
   type t
   @ocaml.doc("<p>The input for the AttachThingPrincipal operation.</p>")
@@ -4677,9 +4819,10 @@ module AttachThingPrincipal = {
   }
   type response = {.}
   @module("@aws-sdk/client-iot") @new external new: request => t = "AttachThingPrincipalCommand"
-  let make = (~principal, ~thingName, ()) => new({principal, thingName})
+  let make = (~principal, ~thingName, ()) => new({principal: principal, thingName: thingName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module AttachSecurityProfile = {
   type t
   type request = {
@@ -4693,9 +4836,13 @@ module AttachSecurityProfile = {
   type response = {.}
   @module("@aws-sdk/client-iot") @new external new: request => t = "AttachSecurityProfileCommand"
   let make = (~securityProfileTargetArn, ~securityProfileName, ()) =>
-    new({securityProfileTargetArn, securityProfileName})
+    new({
+      securityProfileTargetArn: securityProfileTargetArn,
+      securityProfileName: securityProfileName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module AttachPrincipalPolicy = {
   type t
   @ocaml.doc("<p>The input for the AttachPrincipalPolicy operation.</p>")
@@ -4707,9 +4854,10 @@ module AttachPrincipalPolicy = {
   }
   type response = {.}
   @module("@aws-sdk/client-iot") @new external new: request => t = "AttachPrincipalPolicyCommand"
-  let make = (~principal, ~policyName, ()) => new({principal, policyName})
+  let make = (~principal, ~policyName, ()) => new({principal: principal, policyName: policyName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module AttachPolicy = {
   type t
   type request = {
@@ -4721,9 +4869,10 @@ module AttachPolicy = {
   }
   type response = {.}
   @module("@aws-sdk/client-iot") @new external new: request => t = "AttachPolicyCommand"
-  let make = (~target, ~policyName, ()) => new({target, policyName})
+  let make = (~target, ~policyName, ()) => new({target: target, policyName: policyName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module AddThingToThingGroup = {
   type t
   type request = {
@@ -4748,9 +4897,17 @@ module AddThingToThingGroup = {
     ~thingGroupArn=?,
     ~thingGroupName=?,
     (),
-  ) => new({overrideDynamicGroups, thingArn, thingName, thingGroupArn, thingGroupName})
+  ) =>
+    new({
+      overrideDynamicGroups: overrideDynamicGroups,
+      thingArn: thingArn,
+      thingName: thingName,
+      thingGroupArn: thingGroupArn,
+      thingGroupName: thingGroupName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module AddThingToBillingGroup = {
   type t
   type request = {
@@ -4768,9 +4925,15 @@ module AddThingToBillingGroup = {
   type response = {.}
   @module("@aws-sdk/client-iot") @new external new: request => t = "AddThingToBillingGroupCommand"
   let make = (~thingArn=?, ~thingName=?, ~billingGroupArn=?, ~billingGroupName=?, ()) =>
-    new({thingArn, thingName, billingGroupArn, billingGroupName})
+    new({
+      thingArn: thingArn,
+      thingName: thingName,
+      billingGroupArn: billingGroupArn,
+      billingGroupName: billingGroupName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module AcceptCertificateTransfer = {
   type t
   @ocaml.doc("<p>The input for the AcceptCertificateTransfer operation.</p>")
@@ -4784,9 +4947,11 @@ module AcceptCertificateTransfer = {
   type response = {.}
   @module("@aws-sdk/client-iot") @new
   external new: request => t = "AcceptCertificateTransferCommand"
-  let make = (~certificateId, ~setAsActive=?, ()) => new({setAsActive, certificateId})
+  let make = (~certificateId, ~setAsActive=?, ()) =>
+    new({setAsActive: setAsActive, certificateId: certificateId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateThingGroupsForThing = {
   type t
   type request = {
@@ -4811,9 +4976,16 @@ module UpdateThingGroupsForThing = {
     ~thingGroupsToAdd=?,
     ~thingName=?,
     (),
-  ) => new({overrideDynamicGroups, thingGroupsToRemove, thingGroupsToAdd, thingName})
+  ) =>
+    new({
+      overrideDynamicGroups: overrideDynamicGroups,
+      thingGroupsToRemove: thingGroupsToRemove,
+      thingGroupsToAdd: thingGroupsToAdd,
+      thingName: thingName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateScheduledAudit = {
   type t
   type request = {
@@ -4856,9 +5028,17 @@ module UpdateScheduledAudit = {
     ~dayOfMonth=?,
     ~frequency=?,
     (),
-  ) => new({scheduledAuditName, targetCheckNames, dayOfWeek, dayOfMonth, frequency})
+  ) =>
+    new({
+      scheduledAuditName: scheduledAuditName,
+      targetCheckNames: targetCheckNames,
+      dayOfWeek: dayOfWeek,
+      dayOfMonth: dayOfMonth,
+      frequency: frequency,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateProvisioningTemplate = {
   type t
   type request = {
@@ -4891,16 +5071,17 @@ module UpdateProvisioningTemplate = {
     (),
   ) =>
     new({
-      removePreProvisioningHook,
-      preProvisioningHook,
-      provisioningRoleArn,
-      defaultVersionId,
-      enabled,
-      description,
-      templateName,
+      removePreProvisioningHook: removePreProvisioningHook,
+      preProvisioningHook: preProvisioningHook,
+      provisioningRoleArn: provisioningRoleArn,
+      defaultVersionId: defaultVersionId,
+      enabled: enabled,
+      description: description,
+      templateName: templateName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateDomainConfiguration = {
   type t
   type request = {
@@ -4929,13 +5110,14 @@ module UpdateDomainConfiguration = {
     (),
   ) =>
     new({
-      removeAuthorizerConfig,
-      domainConfigurationStatus,
-      authorizerConfig,
-      domainConfigurationName,
+      removeAuthorizerConfig: removeAuthorizerConfig,
+      domainConfigurationStatus: domainConfigurationStatus,
+      authorizerConfig: authorizerConfig,
+      domainConfigurationName: domainConfigurationName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateDimension = {
   type t
   type request = {
@@ -4969,9 +5151,10 @@ module UpdateDimension = {
     @ocaml.doc("<p>A unique identifier for the dimension.</p>") name: option<dimensionName>,
   }
   @module("@aws-sdk/client-iot") @new external new: request => t = "UpdateDimensionCommand"
-  let make = (~stringValues, ~name, ()) => new({stringValues, name})
+  let make = (~stringValues, ~name, ()) => new({stringValues: stringValues, name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateCACertificate = {
   type t
   @ocaml.doc("<p>The input to the UpdateCACertificate operation.</p>")
@@ -5001,14 +5184,15 @@ module UpdateCACertificate = {
     (),
   ) =>
     new({
-      removeAutoRegistration,
-      registrationConfig,
-      newAutoRegistrationStatus,
-      newStatus,
-      certificateId,
+      removeAutoRegistration: removeAutoRegistration,
+      registrationConfig: registrationConfig,
+      newAutoRegistrationStatus: newAutoRegistrationStatus,
+      newStatus: newStatus,
+      certificateId: certificateId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateBillingGroup = {
   type t
   type request = {
@@ -5026,9 +5210,14 @@ module UpdateBillingGroup = {
   }
   @module("@aws-sdk/client-iot") @new external new: request => t = "UpdateBillingGroupCommand"
   let make = (~billingGroupProperties, ~billingGroupName, ~expectedVersion=?, ()) =>
-    new({expectedVersion, billingGroupProperties, billingGroupName})
+    new({
+      expectedVersion: expectedVersion,
+      billingGroupProperties: billingGroupProperties,
+      billingGroupName: billingGroupName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateAuthorizer = {
   type t
   type request = {
@@ -5061,15 +5250,16 @@ module UpdateAuthorizer = {
     (),
   ) =>
     new({
-      enableCachingForHttp,
-      status,
-      tokenSigningPublicKeys,
-      tokenKeyName,
-      authorizerFunctionArn,
-      authorizerName,
+      enableCachingForHttp: enableCachingForHttp,
+      status: status,
+      tokenSigningPublicKeys: tokenSigningPublicKeys,
+      tokenKeyName: tokenKeyName,
+      authorizerFunctionArn: authorizerFunctionArn,
+      authorizerName: authorizerName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UntagResource = {
   type t
   type request = {
@@ -5079,9 +5269,10 @@ module UntagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-iot") @new external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys, resourceArn})
+  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module StartOnDemandAuditTask = {
   type t
   type request = {
@@ -5098,6 +5289,7 @@ module StartOnDemandAuditTask = {
   let make = (~targetCheckNames, ()) => new({targetCheckNames: targetCheckNames})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module SetV2LoggingLevel = {
   type t
   type request = {
@@ -5106,9 +5298,10 @@ module SetV2LoggingLevel = {
   }
   type response = {.}
   @module("@aws-sdk/client-iot") @new external new: request => t = "SetV2LoggingLevelCommand"
-  let make = (~logLevel, ~logTarget, ()) => new({logLevel, logTarget})
+  let make = (~logLevel, ~logTarget, ()) => new({logLevel: logLevel, logTarget: logTarget})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module SetLoggingOptions = {
   type t
   @ocaml.doc("<p>The input for the SetLoggingOptions operation.</p>")
@@ -5120,6 +5313,7 @@ module SetLoggingOptions = {
   let make = (~loggingOptionsPayload, ()) => new({loggingOptionsPayload: loggingOptionsPayload})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module RegisterThing = {
   type t
   type request = {
@@ -5138,9 +5332,11 @@ module RegisterThing = {
     certificatePem: option<certificatePem>,
   }
   @module("@aws-sdk/client-iot") @new external new: request => t = "RegisterThingCommand"
-  let make = (~templateBody, ~parameters=?, ()) => new({parameters, templateBody})
+  let make = (~templateBody, ~parameters=?, ()) =>
+    new({parameters: parameters, templateBody: templateBody})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListThingsInThingGroup = {
   type t
   type request = {
@@ -5164,9 +5360,15 @@ module ListThingsInThingGroup = {
   }
   @module("@aws-sdk/client-iot") @new external new: request => t = "ListThingsInThingGroupCommand"
   let make = (~thingGroupName, ~maxResults=?, ~nextToken=?, ~recursive=?, ()) =>
-    new({maxResults, nextToken, recursive, thingGroupName})
+    new({
+      maxResults: maxResults,
+      nextToken: nextToken,
+      recursive: recursive,
+      thingGroupName: thingGroupName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListThingsInBillingGroup = {
   type t
   type request = {
@@ -5187,9 +5389,10 @@ module ListThingsInBillingGroup = {
   }
   @module("@aws-sdk/client-iot") @new external new: request => t = "ListThingsInBillingGroupCommand"
   let make = (~billingGroupName, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults, nextToken, billingGroupName})
+    new({maxResults: maxResults, nextToken: nextToken, billingGroupName: billingGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListThingRegistrationTasks = {
   type t
   type request = {
@@ -5210,9 +5413,11 @@ module ListThingRegistrationTasks = {
   }
   @module("@aws-sdk/client-iot") @new
   external new: request => t = "ListThingRegistrationTasksCommand"
-  let make = (~status=?, ~maxResults=?, ~nextToken=?, ()) => new({status, maxResults, nextToken})
+  let make = (~status=?, ~maxResults=?, ~nextToken=?, ()) =>
+    new({status: status, maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListThingRegistrationTaskReports = {
   type t
   type request = {
@@ -5236,9 +5441,10 @@ module ListThingRegistrationTaskReports = {
   @module("@aws-sdk/client-iot") @new
   external new: request => t = "ListThingRegistrationTaskReportsCommand"
   let make = (~reportType, ~taskId, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults, nextToken, reportType, taskId})
+    new({maxResults: maxResults, nextToken: nextToken, reportType: reportType, taskId: taskId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListThingPrincipals = {
   type t
   @ocaml.doc("<p>The input for the ListThingPrincipal operation.</p>")
@@ -5261,9 +5467,10 @@ module ListThingPrincipals = {
   }
   @module("@aws-sdk/client-iot") @new external new: request => t = "ListThingPrincipalsCommand"
   let make = (~thingName, ~maxResults=?, ~nextToken=?, ()) =>
-    new({thingName, maxResults, nextToken})
+    new({thingName: thingName, maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListTargetsForPolicy = {
   type t
   type request = {
@@ -5277,9 +5484,11 @@ module ListTargetsForPolicy = {
     @ocaml.doc("<p>The policy targets.</p>") targets: option<policyTargets>,
   }
   @module("@aws-sdk/client-iot") @new external new: request => t = "ListTargetsForPolicyCommand"
-  let make = (~policyName, ~pageSize=?, ~marker=?, ()) => new({pageSize, marker, policyName})
+  let make = (~policyName, ~pageSize=?, ~marker=?, ()) =>
+    new({pageSize: pageSize, marker: marker, policyName: policyName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListRoleAliases = {
   type t
   type request = {
@@ -5295,9 +5504,10 @@ module ListRoleAliases = {
   }
   @module("@aws-sdk/client-iot") @new external new: request => t = "ListRoleAliasesCommand"
   let make = (~ascendingOrder=?, ~marker=?, ~pageSize=?, ()) =>
-    new({ascendingOrder, marker, pageSize})
+    new({ascendingOrder: ascendingOrder, marker: marker, pageSize: pageSize})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListPrincipalThings = {
   type t
   @ocaml.doc("<p>The input for the ListPrincipalThings operation.</p>")
@@ -5320,9 +5530,10 @@ module ListPrincipalThings = {
   }
   @module("@aws-sdk/client-iot") @new external new: request => t = "ListPrincipalThingsCommand"
   let make = (~principal, ~maxResults=?, ~nextToken=?, ()) =>
-    new({principal, maxResults, nextToken})
+    new({principal: principal, maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListPolicyPrincipals = {
   type t
   @ocaml.doc("<p>The input for the ListPolicyPrincipals operation.</p>")
@@ -5343,9 +5554,15 @@ module ListPolicyPrincipals = {
   }
   @module("@aws-sdk/client-iot") @new external new: request => t = "ListPolicyPrincipalsCommand"
   let make = (~policyName, ~ascendingOrder=?, ~pageSize=?, ~marker=?, ()) =>
-    new({ascendingOrder, pageSize, marker, policyName})
+    new({
+      ascendingOrder: ascendingOrder,
+      pageSize: pageSize,
+      marker: marker,
+      policyName: policyName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListIndices = {
   type t
   type request = {
@@ -5362,9 +5579,11 @@ module ListIndices = {
     @ocaml.doc("<p>The index names.</p>") indexNames: option<indexNamesList>,
   }
   @module("@aws-sdk/client-iot") @new external new: request => t = "ListIndicesCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListDimensions = {
   type t
   type request = {
@@ -5383,9 +5602,11 @@ module ListDimensions = {
     dimensionNames: option<dimensionNames>,
   }
   @module("@aws-sdk/client-iot") @new external new: request => t = "ListDimensionsCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListCustomMetrics = {
   type t
   type request = {
@@ -5410,9 +5631,11 @@ module ListCustomMetrics = {
     metricNames: option<metricNames>,
   }
   @module("@aws-sdk/client-iot") @new external new: request => t = "ListCustomMetricsCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetStatistics = {
   type t
   type request = {
@@ -5434,9 +5657,15 @@ module GetStatistics = {
   }
   @module("@aws-sdk/client-iot") @new external new: request => t = "GetStatisticsCommand"
   let make = (~queryString, ~queryVersion=?, ~aggregationField=?, ~indexName=?, ()) =>
-    new({queryVersion, aggregationField, queryString, indexName})
+    new({
+      queryVersion: queryVersion,
+      aggregationField: aggregationField,
+      queryString: queryString,
+      indexName: indexName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeThing = {
   type t
   @ocaml.doc("<p>The input for the DescribeThing operation.</p>")
@@ -5467,6 +5696,7 @@ module DescribeThing = {
   let make = (~thingName, ()) => new({thingName: thingName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeScheduledAudit = {
   type t
   type request = {
@@ -5507,6 +5737,7 @@ module DescribeScheduledAudit = {
   let make = (~scheduledAuditName, ()) => new({scheduledAuditName: scheduledAuditName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeRoleAlias = {
   type t
   type request = {@ocaml.doc("<p>The role alias to describe.</p>") roleAlias: roleAlias}
@@ -5518,6 +5749,7 @@ module DescribeRoleAlias = {
   let make = (~roleAlias, ()) => new({roleAlias: roleAlias})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeProvisioningTemplate = {
   type t
   type request = {
@@ -5551,6 +5783,7 @@ module DescribeProvisioningTemplate = {
   let make = (~templateName, ()) => new({templateName: templateName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeDimension = {
   type t
   type request = {@ocaml.doc("<p>The unique identifier for the dimension.</p>") name: dimensionName}
@@ -5574,6 +5807,7 @@ module DescribeDimension = {
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeBillingGroup = {
   type t
   type request = {
@@ -5593,6 +5827,7 @@ module DescribeBillingGroup = {
   let make = (~billingGroupName, ()) => new({billingGroupName: billingGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateProvisioningClaim = {
   type t
   type request = {
@@ -5608,6 +5843,7 @@ module CreateProvisioningClaim = {
   let make = (~templateName, ()) => new({templateName: templateName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateKeysAndCertificate = {
   type t
   @ocaml.doc("<p>The input for the CreateKeysAndCertificate operation.</p>
@@ -5630,6 +5866,7 @@ module CreateKeysAndCertificate = {
   let make = (~setAsActive=?, ()) => new({setAsActive: setAsActive})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CancelJobExecution = {
   type t
   type request = {
@@ -5659,9 +5896,16 @@ module CancelJobExecution = {
   type response = {.}
   @module("@aws-sdk/client-iot") @new external new: request => t = "CancelJobExecutionCommand"
   let make = (~thingName, ~jobId, ~statusDetails=?, ~expectedVersion=?, ~force=?, ()) =>
-    new({statusDetails, expectedVersion, force, thingName, jobId})
+    new({
+      statusDetails: statusDetails,
+      expectedVersion: expectedVersion,
+      force: force,
+      thingName: thingName,
+      jobId: jobId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module AssociateTargetsWithJob = {
   type t
   type request = {
@@ -5692,9 +5936,10 @@ module AssociateTargetsWithJob = {
   }
   @module("@aws-sdk/client-iot") @new external new: request => t = "AssociateTargetsWithJobCommand"
   let make = (~jobId, ~targets, ~namespaceId=?, ~comment=?, ()) =>
-    new({namespaceId, comment, jobId, targets})
+    new({namespaceId: namespaceId, comment: comment, jobId: jobId, targets: targets})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateThing = {
   type t
   @ocaml.doc("<p>The input for the UpdateThing operation.</p>")
@@ -5729,9 +5974,17 @@ module UpdateThing = {
     ~attributePayload=?,
     ~thingTypeName=?,
     (),
-  ) => new({removeThingType, expectedVersion, attributePayload, thingTypeName, thingName})
+  ) =>
+    new({
+      removeThingType: removeThingType,
+      expectedVersion: expectedVersion,
+      attributePayload: attributePayload,
+      thingTypeName: thingTypeName,
+      thingName: thingName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateFleetMetric = {
   type t
   type request = {
@@ -5771,19 +6024,20 @@ module UpdateFleetMetric = {
     (),
   ) =>
     new({
-      expectedVersion,
-      unit_,
-      indexName,
-      queryVersion,
-      description,
-      aggregationField,
-      period,
-      aggregationType,
-      queryString,
-      metricName,
+      expectedVersion: expectedVersion,
+      unit_: unit_,
+      indexName: indexName,
+      queryVersion: queryVersion,
+      description: description,
+      aggregationField: aggregationField,
+      period: period,
+      aggregationType: aggregationType,
+      queryString: queryString,
+      metricName: metricName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateEventConfigurations = {
   type t
   type request = {
@@ -5796,6 +6050,7 @@ module UpdateEventConfigurations = {
   let make = (~eventConfigurations=?, ()) => new({eventConfigurations: eventConfigurations})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateAuditSuppression = {
   type t
   type request = {
@@ -5823,9 +6078,17 @@ module UpdateAuditSuppression = {
     ~suppressIndefinitely=?,
     ~expirationDate=?,
     (),
-  ) => new({description, suppressIndefinitely, expirationDate, resourceIdentifier, checkName})
+  ) =>
+    new({
+      description: description,
+      suppressIndefinitely: suppressIndefinitely,
+      expirationDate: expirationDate,
+      resourceIdentifier: resourceIdentifier,
+      checkName: checkName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateAccountAuditConfiguration = {
   type t
   type request = {
@@ -5863,9 +6126,15 @@ module UpdateAccountAuditConfiguration = {
     ~auditNotificationTargetConfigurations=?,
     ~roleArn=?,
     (),
-  ) => new({auditCheckConfigurations, auditNotificationTargetConfigurations, roleArn})
+  ) =>
+    new({
+      auditCheckConfigurations: auditCheckConfigurations,
+      auditNotificationTargetConfigurations: auditNotificationTargetConfigurations,
+      roleArn: roleArn,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module TestInvokeAuthorizer = {
   type t
   type request = {
@@ -5900,9 +6169,18 @@ module TestInvokeAuthorizer = {
     ~tokenSignature=?,
     ~token=?,
     (),
-  ) => new({tlsContext, mqttContext, httpContext, tokenSignature, token, authorizerName})
+  ) =>
+    new({
+      tlsContext: tlsContext,
+      mqttContext: mqttContext,
+      httpContext: httpContext,
+      tokenSignature: tokenSignature,
+      token: token,
+      authorizerName: authorizerName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module TagResource = {
   type t
   type request = {
@@ -5911,9 +6189,10 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-iot") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceArn, ()) => new({tags, resourceArn})
+  let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module StartDetectMitigationActionsTask = {
   type t
   type request = {
@@ -5965,16 +6244,17 @@ module StartDetectMitigationActionsTask = {
     (),
   ) =>
     new({
-      clientRequestToken,
-      includeSuppressedAlerts,
-      includeOnlyActiveViolations,
-      violationEventOccurrenceRange,
-      actions,
-      target,
-      taskId,
+      clientRequestToken: clientRequestToken,
+      includeSuppressedAlerts: includeSuppressedAlerts,
+      includeOnlyActiveViolations: includeOnlyActiveViolations,
+      violationEventOccurrenceRange: violationEventOccurrenceRange,
+      actions: actions,
+      target: target,
+      taskId: taskId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module RegisterCACertificate = {
   type t
   @ocaml.doc("<p>The input to the RegisterCACertificate operation.</p>")
@@ -6017,15 +6297,16 @@ module RegisterCACertificate = {
     (),
   ) =>
     new({
-      tags,
-      registrationConfig,
-      allowAutoRegistration,
-      setAsActive,
-      verificationCertificate,
-      caCertificate,
+      tags: tags,
+      registrationConfig: registrationConfig,
+      allowAutoRegistration: allowAutoRegistration,
+      setAsActive: setAsActive,
+      verificationCertificate: verificationCertificate,
+      caCertificate: caCertificate,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListTopicRules = {
   type t
   @ocaml.doc("<p>The input for the ListTopicRules operation.</p>")
@@ -6049,9 +6330,10 @@ module ListTopicRules = {
   }
   @module("@aws-sdk/client-iot") @new external new: request => t = "ListTopicRulesCommand"
   let make = (~ruleDisabled=?, ~nextToken=?, ~maxResults=?, ~topic=?, ()) =>
-    new({ruleDisabled, nextToken, maxResults, topic})
+    new({ruleDisabled: ruleDisabled, nextToken: nextToken, maxResults: maxResults, topic: topic})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListThingGroupsForThing = {
   type t
   type request = {
@@ -6072,9 +6354,10 @@ module ListThingGroupsForThing = {
   }
   @module("@aws-sdk/client-iot") @new external new: request => t = "ListThingGroupsForThingCommand"
   let make = (~thingName, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults, nextToken, thingName})
+    new({maxResults: maxResults, nextToken: nextToken, thingName: thingName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListThingGroups = {
   type t
   type request = {
@@ -6100,9 +6383,16 @@ module ListThingGroups = {
   }
   @module("@aws-sdk/client-iot") @new external new: request => t = "ListThingGroupsCommand"
   let make = (~recursive=?, ~namePrefixFilter=?, ~parentGroup=?, ~maxResults=?, ~nextToken=?, ()) =>
-    new({recursive, namePrefixFilter, parentGroup, maxResults, nextToken})
+    new({
+      recursive: recursive,
+      namePrefixFilter: namePrefixFilter,
+      parentGroup: parentGroup,
+      maxResults: maxResults,
+      nextToken: nextToken,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListTargetsForSecurityProfile = {
   type t
   type request = {
@@ -6121,9 +6411,10 @@ module ListTargetsForSecurityProfile = {
   @module("@aws-sdk/client-iot") @new
   external new: request => t = "ListTargetsForSecurityProfileCommand"
   let make = (~securityProfileName, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults, nextToken, securityProfileName})
+    new({maxResults: maxResults, nextToken: nextToken, securityProfileName: securityProfileName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListTagsForResource = {
   type t
   type request = {
@@ -6141,9 +6432,11 @@ module ListTagsForResource = {
     @ocaml.doc("<p>The list of tags assigned to the resource.</p>") tags: option<tagList_>,
   }
   @module("@aws-sdk/client-iot") @new external new: request => t = "ListTagsForResourceCommand"
-  let make = (~resourceArn, ~nextToken=?, ()) => new({nextToken, resourceArn})
+  let make = (~resourceArn, ~nextToken=?, ()) =>
+    new({nextToken: nextToken, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListStreams = {
   type t
   type request = {
@@ -6159,9 +6452,10 @@ module ListStreams = {
   }
   @module("@aws-sdk/client-iot") @new external new: request => t = "ListStreamsCommand"
   let make = (~ascendingOrder=?, ~nextToken=?, ~maxResults=?, ()) =>
-    new({ascendingOrder, nextToken, maxResults})
+    new({ascendingOrder: ascendingOrder, nextToken: nextToken, maxResults: maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListSecurityProfiles = {
   type t
   type request = {
@@ -6185,9 +6479,15 @@ module ListSecurityProfiles = {
   }
   @module("@aws-sdk/client-iot") @new external new: request => t = "ListSecurityProfilesCommand"
   let make = (~metricName=?, ~dimensionName=?, ~maxResults=?, ~nextToken=?, ()) =>
-    new({metricName, dimensionName, maxResults, nextToken})
+    new({
+      metricName: metricName,
+      dimensionName: dimensionName,
+      maxResults: maxResults,
+      nextToken: nextToken,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListScheduledAudits = {
   type t
   type request = {
@@ -6203,9 +6503,11 @@ module ListScheduledAudits = {
     scheduledAudits: option<scheduledAuditMetadataList>,
   }
   @module("@aws-sdk/client-iot") @new external new: request => t = "ListScheduledAuditsCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListProvisioningTemplates = {
   type t
   type request = {
@@ -6220,9 +6522,11 @@ module ListProvisioningTemplates = {
   }
   @module("@aws-sdk/client-iot") @new
   external new: request => t = "ListProvisioningTemplatesCommand"
-  let make = (~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults})
+  let make = (~nextToken=?, ~maxResults=?, ()) =>
+    new({nextToken: nextToken, maxResults: maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListProvisioningTemplateVersions = {
   type t
   type request = {
@@ -6239,9 +6543,10 @@ module ListProvisioningTemplateVersions = {
   @module("@aws-sdk/client-iot") @new
   external new: request => t = "ListProvisioningTemplateVersionsCommand"
   let make = (~templateName, ~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken, maxResults, templateName})
+    new({nextToken: nextToken, maxResults: maxResults, templateName: templateName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListPrincipalPolicies = {
   type t
   @ocaml.doc("<p>The input for the ListPrincipalPolicies operation.</p>")
@@ -6265,9 +6570,10 @@ module ListPrincipalPolicies = {
   }
   @module("@aws-sdk/client-iot") @new external new: request => t = "ListPrincipalPoliciesCommand"
   let make = (~principal, ~ascendingOrder=?, ~pageSize=?, ~marker=?, ()) =>
-    new({ascendingOrder, pageSize, marker, principal})
+    new({ascendingOrder: ascendingOrder, pageSize: pageSize, marker: marker, principal: principal})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListPolicyVersions = {
   type t
   @ocaml.doc("<p>The input for the ListPolicyVersions operation.</p>")
@@ -6278,6 +6584,7 @@ module ListPolicyVersions = {
   let make = (~policyName, ()) => new({policyName: policyName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListPolicies = {
   type t
   @ocaml.doc("<p>The input for the ListPolicies operation.</p>")
@@ -6297,9 +6604,10 @@ module ListPolicies = {
   }
   @module("@aws-sdk/client-iot") @new external new: request => t = "ListPoliciesCommand"
   let make = (~ascendingOrder=?, ~pageSize=?, ~marker=?, ()) =>
-    new({ascendingOrder, pageSize, marker})
+    new({ascendingOrder: ascendingOrder, pageSize: pageSize, marker: marker})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListOutgoingCertificates = {
   type t
   @ocaml.doc("<p>The input to the ListOutgoingCertificates operation.</p>")
@@ -6318,9 +6626,10 @@ module ListOutgoingCertificates = {
   }
   @module("@aws-sdk/client-iot") @new external new: request => t = "ListOutgoingCertificatesCommand"
   let make = (~ascendingOrder=?, ~marker=?, ~pageSize=?, ()) =>
-    new({ascendingOrder, marker, pageSize})
+    new({ascendingOrder: ascendingOrder, marker: marker, pageSize: pageSize})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListOTAUpdates = {
   type t
   type request = {
@@ -6337,9 +6646,10 @@ module ListOTAUpdates = {
   }
   @module("@aws-sdk/client-iot") @new external new: request => t = "ListOTAUpdatesCommand"
   let make = (~otaUpdateStatus=?, ~nextToken=?, ~maxResults=?, ()) =>
-    new({otaUpdateStatus, nextToken, maxResults})
+    new({otaUpdateStatus: otaUpdateStatus, nextToken: nextToken, maxResults: maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListMitigationActions = {
   type t
   type request = {
@@ -6358,9 +6668,10 @@ module ListMitigationActions = {
   }
   @module("@aws-sdk/client-iot") @new external new: request => t = "ListMitigationActionsCommand"
   let make = (~nextToken=?, ~maxResults=?, ~actionType=?, ()) =>
-    new({nextToken, maxResults, actionType})
+    new({nextToken: nextToken, maxResults: maxResults, actionType: actionType})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListJobs = {
   type t
   type request = {
@@ -6409,9 +6720,18 @@ module ListJobs = {
     ~status=?,
     (),
   ) =>
-    new({namespaceId, thingGroupId, thingGroupName, nextToken, maxResults, targetSelection, status})
+    new({
+      namespaceId: namespaceId,
+      thingGroupId: thingGroupId,
+      thingGroupName: thingGroupName,
+      nextToken: nextToken,
+      maxResults: maxResults,
+      targetSelection: targetSelection,
+      status: status,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListJobTemplates = {
   type t
   type request = {
@@ -6428,9 +6748,11 @@ module ListJobTemplates = {
     jobTemplates: option<jobTemplateSummaryList>,
   }
   @module("@aws-sdk/client-iot") @new external new: request => t = "ListJobTemplatesCommand"
-  let make = (~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults})
+  let make = (~nextToken=?, ~maxResults=?, ()) =>
+    new({nextToken: nextToken, maxResults: maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListFleetMetrics = {
   type t
   type request = {
@@ -6448,9 +6770,11 @@ module ListFleetMetrics = {
     fleetMetrics: option<fleetMetricNameAndArnList>,
   }
   @module("@aws-sdk/client-iot") @new external new: request => t = "ListFleetMetricsCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListDomainConfigurations = {
   type t
   type request = {
@@ -6467,9 +6791,11 @@ module ListDomainConfigurations = {
     domainConfigurations: option<domainConfigurations>,
   }
   @module("@aws-sdk/client-iot") @new external new: request => t = "ListDomainConfigurationsCommand"
-  let make = (~serviceType=?, ~pageSize=?, ~marker=?, ()) => new({serviceType, pageSize, marker})
+  let make = (~serviceType=?, ~pageSize=?, ~marker=?, ()) =>
+    new({serviceType: serviceType, pageSize: pageSize, marker: marker})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListDetectMitigationActionsExecutions = {
   type t
   type request = {
@@ -6524,9 +6850,19 @@ module ListDetectMitigationActionsExecutions = {
     ~violationId=?,
     ~taskId=?,
     (),
-  ) => new({nextToken, maxResults, endTime, startTime, thingName, violationId, taskId})
+  ) =>
+    new({
+      nextToken: nextToken,
+      maxResults: maxResults,
+      endTime: endTime,
+      startTime: startTime,
+      thingName: thingName,
+      violationId: violationId,
+      taskId: taskId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListCertificatesByCA = {
   type t
   @ocaml.doc("<p>The input to the ListCertificatesByCA operation.</p>")
@@ -6550,9 +6886,15 @@ module ListCertificatesByCA = {
   }
   @module("@aws-sdk/client-iot") @new external new: request => t = "ListCertificatesByCACommand"
   let make = (~caCertificateId, ~ascendingOrder=?, ~marker=?, ~pageSize=?, ()) =>
-    new({ascendingOrder, marker, pageSize, caCertificateId})
+    new({
+      ascendingOrder: ascendingOrder,
+      marker: marker,
+      pageSize: pageSize,
+      caCertificateId: caCertificateId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListCertificates = {
   type t
   @ocaml.doc("<p>The input for the ListCertificates operation.</p>")
@@ -6572,9 +6914,10 @@ module ListCertificates = {
   }
   @module("@aws-sdk/client-iot") @new external new: request => t = "ListCertificatesCommand"
   let make = (~ascendingOrder=?, ~marker=?, ~pageSize=?, ()) =>
-    new({ascendingOrder, marker, pageSize})
+    new({ascendingOrder: ascendingOrder, marker: marker, pageSize: pageSize})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListCACertificates = {
   type t
   @ocaml.doc("<p>Input for the ListCACertificates operation.</p>")
@@ -6593,9 +6936,10 @@ module ListCACertificates = {
   }
   @module("@aws-sdk/client-iot") @new external new: request => t = "ListCACertificatesCommand"
   let make = (~ascendingOrder=?, ~marker=?, ~pageSize=?, ()) =>
-    new({ascendingOrder, marker, pageSize})
+    new({ascendingOrder: ascendingOrder, marker: marker, pageSize: pageSize})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListBillingGroups = {
   type t
   type request = {
@@ -6618,9 +6962,10 @@ module ListBillingGroups = {
   }
   @module("@aws-sdk/client-iot") @new external new: request => t = "ListBillingGroupsCommand"
   let make = (~namePrefixFilter=?, ~maxResults=?, ~nextToken=?, ()) =>
-    new({namePrefixFilter, maxResults, nextToken})
+    new({namePrefixFilter: namePrefixFilter, maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListAuthorizers = {
   type t
   type request = {
@@ -6638,9 +6983,10 @@ module ListAuthorizers = {
   }
   @module("@aws-sdk/client-iot") @new external new: request => t = "ListAuthorizersCommand"
   let make = (~status=?, ~ascendingOrder=?, ~marker=?, ~pageSize=?, ()) =>
-    new({status, ascendingOrder, marker, pageSize})
+    new({status: status, ascendingOrder: ascendingOrder, marker: marker, pageSize: pageSize})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListAuditTasks = {
   type t
   type request = {
@@ -6668,9 +7014,17 @@ module ListAuditTasks = {
   }
   @module("@aws-sdk/client-iot") @new external new: request => t = "ListAuditTasksCommand"
   let make = (~endTime, ~startTime, ~maxResults=?, ~nextToken=?, ~taskStatus=?, ~taskType=?, ()) =>
-    new({maxResults, nextToken, taskStatus, taskType, endTime, startTime})
+    new({
+      maxResults: maxResults,
+      nextToken: nextToken,
+      taskStatus: taskStatus,
+      taskType: taskType,
+      endTime: endTime,
+      startTime: startTime,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListAuditMitigationActionsTasks = {
   type t
   type request = {
@@ -6712,9 +7066,19 @@ module ListAuditMitigationActionsTasks = {
     ~findingId=?,
     ~auditTaskId=?,
     (),
-  ) => new({endTime, startTime, nextToken, maxResults, taskStatus, findingId, auditTaskId})
+  ) =>
+    new({
+      endTime: endTime,
+      startTime: startTime,
+      nextToken: nextToken,
+      maxResults: maxResults,
+      taskStatus: taskStatus,
+      findingId: findingId,
+      auditTaskId: auditTaskId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListAuditMitigationActionsExecutions = {
   type t
   type request = {
@@ -6742,9 +7106,16 @@ module ListAuditMitigationActionsExecutions = {
   @module("@aws-sdk/client-iot") @new
   external new: request => t = "ListAuditMitigationActionsExecutionsCommand"
   let make = (~findingId, ~taskId, ~nextToken=?, ~maxResults=?, ~actionStatus=?, ()) =>
-    new({nextToken, maxResults, findingId, actionStatus, taskId})
+    new({
+      nextToken: nextToken,
+      maxResults: maxResults,
+      findingId: findingId,
+      actionStatus: actionStatus,
+      taskId: taskId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListAttachedPolicies = {
   type t
   type request = {
@@ -6766,9 +7137,10 @@ module ListAttachedPolicies = {
   }
   @module("@aws-sdk/client-iot") @new external new: request => t = "ListAttachedPoliciesCommand"
   let make = (~target, ~pageSize=?, ~marker=?, ~recursive=?, ()) =>
-    new({pageSize, marker, recursive, target})
+    new({pageSize: pageSize, marker: marker, recursive: recursive, target: target})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetPercentiles = {
   type t
   type request = {
@@ -6784,9 +7156,16 @@ module GetPercentiles = {
   }
   @module("@aws-sdk/client-iot") @new external new: request => t = "GetPercentilesCommand"
   let make = (~queryString, ~percents=?, ~queryVersion=?, ~aggregationField=?, ~indexName=?, ()) =>
-    new({percents, queryVersion, aggregationField, queryString, indexName})
+    new({
+      percents: percents,
+      queryVersion: queryVersion,
+      aggregationField: aggregationField,
+      queryString: queryString,
+      indexName: indexName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetEffectivePolicies = {
   type t
   type request = {
@@ -6803,9 +7182,10 @@ module GetEffectivePolicies = {
   }
   @module("@aws-sdk/client-iot") @new external new: request => t = "GetEffectivePoliciesCommand"
   let make = (~thingName=?, ~cognitoIdentityPoolId=?, ~principal=?, ()) =>
-    new({thingName, cognitoIdentityPoolId, principal})
+    new({thingName: thingName, cognitoIdentityPoolId: cognitoIdentityPoolId, principal: principal})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetBucketsAggregation = {
   type t
   type request = {
@@ -6836,9 +7216,17 @@ module GetBucketsAggregation = {
     ~queryVersion=?,
     ~indexName=?,
     (),
-  ) => new({bucketsAggregationType, queryVersion, aggregationField, queryString, indexName})
+  ) =>
+    new({
+      bucketsAggregationType: bucketsAggregationType,
+      queryVersion: queryVersion,
+      aggregationField: aggregationField,
+      queryString: queryString,
+      indexName: indexName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetBehaviorModelTrainingSummaries = {
   type t
   type request = {
@@ -6868,9 +7256,10 @@ module GetBehaviorModelTrainingSummaries = {
   @module("@aws-sdk/client-iot") @new
   external new: request => t = "GetBehaviorModelTrainingSummariesCommand"
   let make = (~nextToken=?, ~maxResults=?, ~securityProfileName=?, ()) =>
-    new({nextToken, maxResults, securityProfileName})
+    new({nextToken: nextToken, maxResults: maxResults, securityProfileName: securityProfileName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeThingType = {
   type t
   @ocaml.doc("<p>The input for the DescribeThingType operation.</p>")
@@ -6892,6 +7281,7 @@ module DescribeThingType = {
   let make = (~thingTypeName, ()) => new({thingTypeName: thingTypeName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeManagedJobTemplate = {
   type t
   type request = {
@@ -6920,9 +7310,11 @@ module DescribeManagedJobTemplate = {
   }
   @module("@aws-sdk/client-iot") @new
   external new: request => t = "DescribeManagedJobTemplateCommand"
-  let make = (~templateName, ~templateVersion=?, ()) => new({templateVersion, templateName})
+  let make = (~templateName, ~templateVersion=?, ()) =>
+    new({templateVersion: templateVersion, templateName: templateName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeFleetMetric = {
   type t
   type request = {
@@ -6957,6 +7349,7 @@ module DescribeFleetMetric = {
   let make = (~metricName, ()) => new({metricName: metricName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeEventConfigurations = {
   type t
   type request = {.}
@@ -6972,6 +7365,7 @@ module DescribeEventConfigurations = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeDomainConfiguration = {
   type t
   type request = {
@@ -7006,6 +7400,7 @@ module DescribeDomainConfiguration = {
     new({domainConfigurationName: domainConfigurationName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeDefaultAuthorizer = {
   type t
   type request = {.}
@@ -7018,6 +7413,7 @@ module DescribeDefaultAuthorizer = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeCertificate = {
   type t
   @ocaml.doc("<p>The input for the DescribeCertificate operation.</p>")
@@ -7035,6 +7431,7 @@ module DescribeCertificate = {
   let make = (~certificateId, ()) => new({certificateId: certificateId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeCACertificate = {
   type t
   @ocaml.doc("<p>The input for the DescribeCACertificate operation.</p>")
@@ -7050,6 +7447,7 @@ module DescribeCACertificate = {
   let make = (~certificateId, ()) => new({certificateId: certificateId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeAuthorizer = {
   type t
   type request = {
@@ -7063,6 +7461,7 @@ module DescribeAuthorizer = {
   let make = (~authorizerName, ()) => new({authorizerName: authorizerName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeAuditTask = {
   type t
   type request = {
@@ -7086,6 +7485,7 @@ module DescribeAuditTask = {
   let make = (~taskId, ()) => new({taskId: taskId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeAuditSuppression = {
   type t
   type request = {
@@ -7109,9 +7509,11 @@ module DescribeAuditSuppression = {
     checkName: option<auditCheckName>,
   }
   @module("@aws-sdk/client-iot") @new external new: request => t = "DescribeAuditSuppressionCommand"
-  let make = (~resourceIdentifier, ~checkName, ()) => new({resourceIdentifier, checkName})
+  let make = (~resourceIdentifier, ~checkName, ()) =>
+    new({resourceIdentifier: resourceIdentifier, checkName: checkName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeAccountAuditConfiguration = {
   type t
   type request = {.}
@@ -7133,6 +7535,7 @@ module DescribeAccountAuditConfiguration = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteAuditSuppression = {
   type t
   type request = {
@@ -7141,9 +7544,11 @@ module DeleteAuditSuppression = {
   }
   type response = {.}
   @module("@aws-sdk/client-iot") @new external new: request => t = "DeleteAuditSuppressionCommand"
-  let make = (~resourceIdentifier, ~checkName, ()) => new({resourceIdentifier, checkName})
+  let make = (~resourceIdentifier, ~checkName, ()) =>
+    new({resourceIdentifier: resourceIdentifier, checkName: checkName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module CreateThingType = {
   type t
   @ocaml.doc("<p>The input for the CreateThingType operation.</p>")
@@ -7165,9 +7570,10 @@ module CreateThingType = {
   }
   @module("@aws-sdk/client-iot") @new external new: request => t = "CreateThingTypeCommand"
   let make = (~thingTypeName, ~tags=?, ~thingTypeProperties=?, ()) =>
-    new({tags, thingTypeProperties, thingTypeName})
+    new({tags: tags, thingTypeProperties: thingTypeProperties, thingTypeName: thingTypeName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateThing = {
   type t
   @ocaml.doc("<p>The input for the CreateThing operation.</p>")
@@ -7195,9 +7601,15 @@ module CreateThing = {
   }
   @module("@aws-sdk/client-iot") @new external new: request => t = "CreateThingCommand"
   let make = (~thingName, ~billingGroupName=?, ~attributePayload=?, ~thingTypeName=?, ()) =>
-    new({billingGroupName, attributePayload, thingTypeName, thingName})
+    new({
+      billingGroupName: billingGroupName,
+      attributePayload: attributePayload,
+      thingTypeName: thingTypeName,
+      thingName: thingName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateScheduledAudit = {
   type t
   type request = {
@@ -7246,9 +7658,18 @@ module CreateScheduledAudit = {
     ~dayOfWeek=?,
     ~dayOfMonth=?,
     (),
-  ) => new({tags, scheduledAuditName, targetCheckNames, dayOfWeek, dayOfMonth, frequency})
+  ) =>
+    new({
+      tags: tags,
+      scheduledAuditName: scheduledAuditName,
+      targetCheckNames: targetCheckNames,
+      dayOfWeek: dayOfWeek,
+      dayOfMonth: dayOfMonth,
+      frequency: frequency,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateRoleAlias = {
   type t
   type request = {
@@ -7276,9 +7697,15 @@ module CreateRoleAlias = {
   }
   @module("@aws-sdk/client-iot") @new external new: request => t = "CreateRoleAliasCommand"
   let make = (~roleArn, ~roleAlias, ~tags=?, ~credentialDurationSeconds=?, ()) =>
-    new({tags, credentialDurationSeconds, roleArn, roleAlias})
+    new({
+      tags: tags,
+      credentialDurationSeconds: credentialDurationSeconds,
+      roleArn: roleArn,
+      roleAlias: roleAlias,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateProvisioningTemplate = {
   type t
   type request = {
@@ -7325,16 +7752,17 @@ module CreateProvisioningTemplate = {
     (),
   ) =>
     new({
-      tags,
-      preProvisioningHook,
-      provisioningRoleArn,
-      enabled,
-      templateBody,
-      description,
-      templateName,
+      tags: tags,
+      preProvisioningHook: preProvisioningHook,
+      provisioningRoleArn: provisioningRoleArn,
+      enabled: enabled,
+      templateBody: templateBody,
+      description: description,
+      templateName: templateName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreatePolicy = {
   type t
   @ocaml.doc("<p>The input for the CreatePolicy operation.</p>")
@@ -7362,9 +7790,11 @@ module CreatePolicy = {
     @ocaml.doc("<p>The policy name.</p>") policyName: option<policyName>,
   }
   @module("@aws-sdk/client-iot") @new external new: request => t = "CreatePolicyCommand"
-  let make = (~policyDocument, ~policyName, ~tags=?, ()) => new({tags, policyDocument, policyName})
+  let make = (~policyDocument, ~policyName, ~tags=?, ()) =>
+    new({tags: tags, policyDocument: policyDocument, policyName: policyName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateFleetMetric = {
   type t
   type request = {
@@ -7407,19 +7837,20 @@ module CreateFleetMetric = {
     (),
   ) =>
     new({
-      tags,
-      unit_,
-      indexName,
-      queryVersion,
-      description,
-      aggregationField,
-      period,
-      aggregationType,
-      queryString,
-      metricName,
+      tags: tags,
+      unit_: unit_,
+      indexName: indexName,
+      queryVersion: queryVersion,
+      description: description,
+      aggregationField: aggregationField,
+      period: period,
+      aggregationType: aggregationType,
+      queryString: queryString,
+      metricName: metricName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateDomainConfiguration = {
   type t
   type request = {
@@ -7470,16 +7901,17 @@ module CreateDomainConfiguration = {
     (),
   ) =>
     new({
-      tags,
-      serviceType,
-      authorizerConfig,
-      validationCertificateArn,
-      serverCertificateArns,
-      domainName,
-      domainConfigurationName,
+      tags: tags,
+      serviceType: serviceType,
+      authorizerConfig: authorizerConfig,
+      validationCertificateArn: validationCertificateArn,
+      serverCertificateArns: serverCertificateArns,
+      domainName: domainName,
+      domainConfigurationName: domainConfigurationName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateDimension = {
   type t
   type request = {
@@ -7510,9 +7942,16 @@ module CreateDimension = {
   }
   @module("@aws-sdk/client-iot") @new external new: request => t = "CreateDimensionCommand"
   let make = (~clientRequestToken, ~stringValues, ~type_, ~name, ~tags=?, ()) =>
-    new({clientRequestToken, tags, stringValues, type_, name})
+    new({
+      clientRequestToken: clientRequestToken,
+      tags: tags,
+      stringValues: stringValues,
+      type_: type_,
+      name: name,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateCustomMetric = {
   type t
   type request = {
@@ -7555,9 +7994,16 @@ module CreateCustomMetric = {
   }
   @module("@aws-sdk/client-iot") @new external new: request => t = "CreateCustomMetricCommand"
   let make = (~clientRequestToken, ~metricType, ~metricName, ~tags=?, ~displayName=?, ()) =>
-    new({clientRequestToken, tags, metricType, displayName, metricName})
+    new({
+      clientRequestToken: clientRequestToken,
+      tags: tags,
+      metricType: metricType,
+      displayName: displayName,
+      metricName: metricName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateBillingGroup = {
   type t
   type request = {
@@ -7576,9 +8022,14 @@ module CreateBillingGroup = {
   }
   @module("@aws-sdk/client-iot") @new external new: request => t = "CreateBillingGroupCommand"
   let make = (~billingGroupName, ~tags=?, ~billingGroupProperties=?, ()) =>
-    new({tags, billingGroupProperties, billingGroupName})
+    new({
+      tags: tags,
+      billingGroupProperties: billingGroupProperties,
+      billingGroupName: billingGroupName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateAuthorizer = {
   type t
   type request = {
@@ -7629,17 +8080,18 @@ module CreateAuthorizer = {
     (),
   ) =>
     new({
-      enableCachingForHttp,
-      signingDisabled,
-      tags,
-      status,
-      tokenSigningPublicKeys,
-      tokenKeyName,
-      authorizerFunctionArn,
-      authorizerName,
+      enableCachingForHttp: enableCachingForHttp,
+      signingDisabled: signingDisabled,
+      tags: tags,
+      status: status,
+      tokenSigningPublicKeys: tokenSigningPublicKeys,
+      tokenKeyName: tokenKeyName,
+      authorizerFunctionArn: authorizerFunctionArn,
+      authorizerName: authorizerName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateAuditSuppression = {
   type t
   type request = {
@@ -7675,15 +8127,16 @@ module CreateAuditSuppression = {
     (),
   ) =>
     new({
-      clientRequestToken,
-      description,
-      suppressIndefinitely,
-      expirationDate,
-      resourceIdentifier,
-      checkName,
+      clientRequestToken: clientRequestToken,
+      description: description,
+      suppressIndefinitely: suppressIndefinitely,
+      expirationDate: expirationDate,
+      resourceIdentifier: resourceIdentifier,
+      checkName: checkName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateThingGroup = {
   type t
   type request = {
@@ -7698,9 +8151,14 @@ module UpdateThingGroup = {
   }
   @module("@aws-sdk/client-iot") @new external new: request => t = "UpdateThingGroupCommand"
   let make = (~thingGroupProperties, ~thingGroupName, ~expectedVersion=?, ()) =>
-    new({expectedVersion, thingGroupProperties, thingGroupName})
+    new({
+      expectedVersion: expectedVersion,
+      thingGroupProperties: thingGroupProperties,
+      thingGroupName: thingGroupName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateStream = {
   type t
   type request = {
@@ -7720,9 +8178,10 @@ module UpdateStream = {
   }
   @module("@aws-sdk/client-iot") @new external new: request => t = "UpdateStreamCommand"
   let make = (~streamId, ~roleArn=?, ~files=?, ~description=?, ()) =>
-    new({roleArn, files, description, streamId})
+    new({roleArn: roleArn, files: files, description: description, streamId: streamId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateMitigationAction = {
   type t
   type request = {
@@ -7744,9 +8203,10 @@ module UpdateMitigationAction = {
   }
   @module("@aws-sdk/client-iot") @new external new: request => t = "UpdateMitigationActionCommand"
   let make = (~actionName, ~actionParams=?, ~roleArn=?, ()) =>
-    new({actionParams, roleArn, actionName})
+    new({actionParams: actionParams, roleArn: roleArn, actionName: actionName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateJob = {
   type t
   type request = {
@@ -7788,17 +8248,18 @@ module UpdateJob = {
     (),
   ) =>
     new({
-      jobExecutionsRetryConfig,
-      namespaceId,
-      timeoutConfig,
-      abortConfig,
-      jobExecutionsRolloutConfig,
-      presignedUrlConfig,
-      description,
-      jobId,
+      jobExecutionsRetryConfig: jobExecutionsRetryConfig,
+      namespaceId: namespaceId,
+      timeoutConfig: timeoutConfig,
+      abortConfig: abortConfig,
+      jobExecutionsRolloutConfig: jobExecutionsRolloutConfig,
+      presignedUrlConfig: presignedUrlConfig,
+      description: description,
+      jobId: jobId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateIndexingConfiguration = {
   type t
   type request = {
@@ -7811,9 +8272,13 @@ module UpdateIndexingConfiguration = {
   @module("@aws-sdk/client-iot") @new
   external new: request => t = "UpdateIndexingConfigurationCommand"
   let make = (~thingGroupIndexingConfiguration=?, ~thingIndexingConfiguration=?, ()) =>
-    new({thingGroupIndexingConfiguration, thingIndexingConfiguration})
+    new({
+      thingGroupIndexingConfiguration: thingGroupIndexingConfiguration,
+      thingIndexingConfiguration: thingIndexingConfiguration,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateDynamicThingGroup = {
   type t
   type request = {
@@ -7849,15 +8314,16 @@ module UpdateDynamicThingGroup = {
     (),
   ) =>
     new({
-      queryVersion,
-      queryString,
-      indexName,
-      expectedVersion,
-      thingGroupProperties,
-      thingGroupName,
+      queryVersion: queryVersion,
+      queryString: queryString,
+      indexName: indexName,
+      expectedVersion: expectedVersion,
+      thingGroupProperties: thingGroupProperties,
+      thingGroupName: thingGroupName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module StartAuditMitigationActionsTask = {
   type t
   type request = {
@@ -7888,9 +8354,15 @@ module StartAuditMitigationActionsTask = {
   @module("@aws-sdk/client-iot") @new
   external new: request => t = "StartAuditMitigationActionsTaskCommand"
   let make = (~clientRequestToken, ~auditCheckToActionsMapping, ~target, ~taskId, ()) =>
-    new({clientRequestToken, auditCheckToActionsMapping, target, taskId})
+    new({
+      clientRequestToken: clientRequestToken,
+      auditCheckToActionsMapping: auditCheckToActionsMapping,
+      target: target,
+      taskId: taskId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module SearchIndex = {
   type t
   type request = {
@@ -7913,9 +8385,16 @@ module SearchIndex = {
   }
   @module("@aws-sdk/client-iot") @new external new: request => t = "SearchIndexCommand"
   let make = (~queryString, ~queryVersion=?, ~maxResults=?, ~nextToken=?, ~indexName=?, ()) =>
-    new({queryVersion, maxResults, nextToken, queryString, indexName})
+    new({
+      queryVersion: queryVersion,
+      maxResults: maxResults,
+      nextToken: nextToken,
+      queryString: queryString,
+      indexName: indexName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListV2LoggingLevels = {
   type t
   type request = {
@@ -7939,9 +8418,10 @@ module ListV2LoggingLevels = {
   }
   @module("@aws-sdk/client-iot") @new external new: request => t = "ListV2LoggingLevelsCommand"
   let make = (~maxResults=?, ~nextToken=?, ~targetType=?, ()) =>
-    new({maxResults, nextToken, targetType})
+    new({maxResults: maxResults, nextToken: nextToken, targetType: targetType})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListThings = {
   type t
   @ocaml.doc("<p>The input for the ListThings operation.</p>")
@@ -7984,15 +8464,16 @@ module ListThings = {
     (),
   ) =>
     new({
-      usePrefixAttributeValue,
-      thingTypeName,
-      attributeValue,
-      attributeName,
-      maxResults,
-      nextToken,
+      usePrefixAttributeValue: usePrefixAttributeValue,
+      thingTypeName: thingTypeName,
+      attributeValue: attributeValue,
+      attributeName: attributeName,
+      maxResults: maxResults,
+      nextToken: nextToken,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListSecurityProfilesForTarget = {
   type t
   type request = {
@@ -8015,9 +8496,15 @@ module ListSecurityProfilesForTarget = {
   @module("@aws-sdk/client-iot") @new
   external new: request => t = "ListSecurityProfilesForTargetCommand"
   let make = (~securityProfileTargetArn, ~recursive=?, ~maxResults=?, ~nextToken=?, ()) =>
-    new({securityProfileTargetArn, recursive, maxResults, nextToken})
+    new({
+      securityProfileTargetArn: securityProfileTargetArn,
+      recursive: recursive,
+      maxResults: maxResults,
+      nextToken: nextToken,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListManagedJobTemplates = {
   type t
   type request = {
@@ -8037,9 +8524,10 @@ module ListManagedJobTemplates = {
   }
   @module("@aws-sdk/client-iot") @new external new: request => t = "ListManagedJobTemplatesCommand"
   let make = (~nextToken=?, ~maxResults=?, ~templateName=?, ()) =>
-    new({nextToken, maxResults, templateName})
+    new({nextToken: nextToken, maxResults: maxResults, templateName: templateName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListJobExecutionsForThing = {
   type t
   type request = {
@@ -8075,9 +8563,17 @@ module ListJobExecutionsForThing = {
   @module("@aws-sdk/client-iot") @new
   external new: request => t = "ListJobExecutionsForThingCommand"
   let make = (~thingName, ~jobId=?, ~nextToken=?, ~maxResults=?, ~namespaceId=?, ~status=?, ()) =>
-    new({jobId, nextToken, maxResults, namespaceId, status, thingName})
+    new({
+      jobId: jobId,
+      nextToken: nextToken,
+      maxResults: maxResults,
+      namespaceId: namespaceId,
+      status: status,
+      thingName: thingName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListJobExecutionsForJob = {
   type t
   type request = {
@@ -8098,9 +8594,10 @@ module ListJobExecutionsForJob = {
   }
   @module("@aws-sdk/client-iot") @new external new: request => t = "ListJobExecutionsForJobCommand"
   let make = (~jobId, ~nextToken=?, ~maxResults=?, ~status=?, ()) =>
-    new({nextToken, maxResults, status, jobId})
+    new({nextToken: nextToken, maxResults: maxResults, status: status, jobId: jobId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetTopicRuleDestination = {
   type t
   type request = {@ocaml.doc("<p>The ARN of the topic rule destination.</p>") arn: awsArn}
@@ -8112,6 +8609,7 @@ module GetTopicRuleDestination = {
   let make = (~arn, ()) => new({arn: arn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetIndexingConfiguration = {
   type t
   type request = {.}
@@ -8125,6 +8623,7 @@ module GetIndexingConfiguration = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeThingGroup = {
   type t
   type request = {@ocaml.doc("<p>The name of the thing group.</p>") thingGroupName: thingGroupName}
@@ -8146,6 +8645,7 @@ module DescribeThingGroup = {
   let make = (~thingGroupName, ()) => new({thingGroupName: thingGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeMitigationAction = {
   type t
   type request = {
@@ -8176,6 +8676,7 @@ module DescribeMitigationAction = {
   let make = (~actionName, ()) => new({actionName: actionName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeJobTemplate = {
   type t
   type request = {
@@ -8202,6 +8703,7 @@ module DescribeJobTemplate = {
   let make = (~jobTemplateId, ()) => new({jobTemplateId: jobTemplateId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeJobExecution = {
   type t
   type request = {
@@ -8218,9 +8720,10 @@ module DescribeJobExecution = {
   }
   @module("@aws-sdk/client-iot") @new external new: request => t = "DescribeJobExecutionCommand"
   let make = (~thingName, ~jobId, ~executionNumber=?, ()) =>
-    new({executionNumber, thingName, jobId})
+    new({executionNumber: executionNumber, thingName: thingName, jobId: jobId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateTopicRuleDestination = {
   type t
   type request = {
@@ -8237,6 +8740,7 @@ module CreateTopicRuleDestination = {
     new({destinationConfiguration: destinationConfiguration})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateThingGroup = {
   type t
   type request = {
@@ -8255,9 +8759,15 @@ module CreateThingGroup = {
   }
   @module("@aws-sdk/client-iot") @new external new: request => t = "CreateThingGroupCommand"
   let make = (~thingGroupName, ~tags=?, ~thingGroupProperties=?, ~parentGroupName=?, ()) =>
-    new({tags, thingGroupProperties, parentGroupName, thingGroupName})
+    new({
+      tags: tags,
+      thingGroupProperties: thingGroupProperties,
+      parentGroupName: parentGroupName,
+      thingGroupName: thingGroupName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateStream = {
   type t
   type request = {
@@ -8276,9 +8786,10 @@ module CreateStream = {
   }
   @module("@aws-sdk/client-iot") @new external new: request => t = "CreateStreamCommand"
   let make = (~roleArn, ~files, ~streamId, ~tags=?, ~description=?, ()) =>
-    new({tags, roleArn, files, description, streamId})
+    new({tags: tags, roleArn: roleArn, files: files, description: description, streamId: streamId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateMitigationAction = {
   type t
   type request = {
@@ -8301,9 +8812,10 @@ module CreateMitigationAction = {
   }
   @module("@aws-sdk/client-iot") @new external new: request => t = "CreateMitigationActionCommand"
   let make = (~actionParams, ~roleArn, ~actionName, ~tags=?, ()) =>
-    new({tags, actionParams, roleArn, actionName})
+    new({tags: tags, actionParams: actionParams, roleArn: roleArn, actionName: actionName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateJobTemplate = {
   type t
   type request = {
@@ -8357,20 +8869,21 @@ module CreateJobTemplate = {
     (),
   ) =>
     new({
-      jobExecutionsRetryConfig,
-      tags,
-      timeoutConfig,
-      abortConfig,
-      jobExecutionsRolloutConfig,
-      presignedUrlConfig,
-      description,
-      document,
-      documentSource,
-      jobArn,
-      jobTemplateId,
+      jobExecutionsRetryConfig: jobExecutionsRetryConfig,
+      tags: tags,
+      timeoutConfig: timeoutConfig,
+      abortConfig: abortConfig,
+      jobExecutionsRolloutConfig: jobExecutionsRolloutConfig,
+      presignedUrlConfig: presignedUrlConfig,
+      description: description,
+      document: document,
+      documentSource: documentSource,
+      jobArn: jobArn,
+      jobTemplateId: jobTemplateId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateJob = {
   type t
   type request = {
@@ -8455,24 +8968,25 @@ module CreateJob = {
     (),
   ) =>
     new({
-      documentParameters,
-      jobExecutionsRetryConfig,
-      jobTemplateArn,
-      namespaceId,
-      tags,
-      timeoutConfig,
-      abortConfig,
-      jobExecutionsRolloutConfig,
-      targetSelection,
-      presignedUrlConfig,
-      description,
-      document,
-      documentSource,
-      targets,
-      jobId,
+      documentParameters: documentParameters,
+      jobExecutionsRetryConfig: jobExecutionsRetryConfig,
+      jobTemplateArn: jobTemplateArn,
+      namespaceId: namespaceId,
+      tags: tags,
+      timeoutConfig: timeoutConfig,
+      abortConfig: abortConfig,
+      jobExecutionsRolloutConfig: jobExecutionsRolloutConfig,
+      targetSelection: targetSelection,
+      presignedUrlConfig: presignedUrlConfig,
+      description: description,
+      document: document,
+      documentSource: documentSource,
+      targets: targets,
+      jobId: jobId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateDynamicThingGroup = {
   type t
   type request = {
@@ -8514,9 +9028,18 @@ module CreateDynamicThingGroup = {
     ~indexName=?,
     ~thingGroupProperties=?,
     (),
-  ) => new({tags, queryVersion, queryString, indexName, thingGroupProperties, thingGroupName})
+  ) =>
+    new({
+      tags: tags,
+      queryVersion: queryVersion,
+      queryString: queryString,
+      indexName: indexName,
+      thingGroupProperties: thingGroupProperties,
+      thingGroupName: thingGroupName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListTopicRuleDestinations = {
   type t
   type request = {
@@ -8537,9 +9060,11 @@ module ListTopicRuleDestinations = {
   }
   @module("@aws-sdk/client-iot") @new
   external new: request => t = "ListTopicRuleDestinationsCommand"
-  let make = (~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults})
+  let make = (~nextToken=?, ~maxResults=?, ()) =>
+    new({nextToken: nextToken, maxResults: maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListThingTypes = {
   type t
   @ocaml.doc("<p>The input for the ListThingTypes operation.</p>")
@@ -8562,9 +9087,10 @@ module ListThingTypes = {
   }
   @module("@aws-sdk/client-iot") @new external new: request => t = "ListThingTypesCommand"
   let make = (~thingTypeName=?, ~maxResults=?, ~nextToken=?, ()) =>
-    new({thingTypeName, maxResults, nextToken})
+    new({thingTypeName: thingTypeName, maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListAuditSuppressions = {
   type t
   type request = {
@@ -8601,9 +9127,17 @@ module ListAuditSuppressions = {
     ~resourceIdentifier=?,
     ~checkName=?,
     (),
-  ) => new({maxResults, nextToken, ascendingOrder, resourceIdentifier, checkName})
+  ) =>
+    new({
+      maxResults: maxResults,
+      nextToken: nextToken,
+      ascendingOrder: ascendingOrder,
+      resourceIdentifier: resourceIdentifier,
+      checkName: checkName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeStream = {
   type t
   type request = {@ocaml.doc("<p>The stream ID.</p>") streamId: streamId}
@@ -8614,6 +9148,7 @@ module DescribeStream = {
   let make = (~streamId, ()) => new({streamId: streamId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeJob = {
   type t
   type request = {
@@ -8628,6 +9163,7 @@ module DescribeJob = {
   let make = (~jobId, ()) => new({jobId: jobId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ValidateSecurityProfileBehaviors = {
   type t
   type request = {
@@ -8646,6 +9182,7 @@ module ValidateSecurityProfileBehaviors = {
   let make = (~behaviors, ()) => new({behaviors: behaviors})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateSecurityProfile = {
   type t
   type request = {
@@ -8738,19 +9275,20 @@ module UpdateSecurityProfile = {
     (),
   ) =>
     new({
-      expectedVersion,
-      deleteAdditionalMetricsToRetain,
-      deleteAlertTargets,
-      deleteBehaviors,
-      additionalMetricsToRetainV2,
-      additionalMetricsToRetain,
-      alertTargets,
-      behaviors,
-      securityProfileDescription,
-      securityProfileName,
+      expectedVersion: expectedVersion,
+      deleteAdditionalMetricsToRetain: deleteAdditionalMetricsToRetain,
+      deleteAlertTargets: deleteAlertTargets,
+      deleteBehaviors: deleteBehaviors,
+      additionalMetricsToRetainV2: additionalMetricsToRetainV2,
+      additionalMetricsToRetain: additionalMetricsToRetain,
+      alertTargets: alertTargets,
+      behaviors: behaviors,
+      securityProfileDescription: securityProfileDescription,
+      securityProfileName: securityProfileName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeSecurityProfile = {
   type t
   type request = {
@@ -8800,6 +9338,7 @@ module DescribeSecurityProfile = {
   let make = (~securityProfileName, ()) => new({securityProfileName: securityProfileName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeAuditMitigationActionsTask = {
   type t
   type request = {
@@ -8834,6 +9373,7 @@ module DescribeAuditMitigationActionsTask = {
   let make = (~taskId, ()) => new({taskId: taskId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeAuditFinding = {
   type t
   type request = {
@@ -8847,6 +9387,7 @@ module DescribeAuditFinding = {
   let make = (~findingId, ()) => new({findingId: findingId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateSecurityProfile = {
   type t
   type request = {
@@ -8893,16 +9434,17 @@ module CreateSecurityProfile = {
     (),
   ) =>
     new({
-      tags,
-      additionalMetricsToRetainV2,
-      additionalMetricsToRetain,
-      alertTargets,
-      behaviors,
-      securityProfileDescription,
-      securityProfileName,
+      tags: tags,
+      additionalMetricsToRetainV2: additionalMetricsToRetainV2,
+      additionalMetricsToRetain: additionalMetricsToRetain,
+      alertTargets: alertTargets,
+      behaviors: behaviors,
+      securityProfileDescription: securityProfileDescription,
+      securityProfileName: securityProfileName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module TestAuthorization = {
   type t
   type request = {
@@ -8937,15 +9479,16 @@ module TestAuthorization = {
     (),
   ) =>
     new({
-      policyNamesToSkip,
-      policyNamesToAdd,
-      clientId,
-      authInfos,
-      cognitoIdentityPoolId,
-      principal,
+      policyNamesToSkip: policyNamesToSkip,
+      policyNamesToAdd: policyNamesToAdd,
+      clientId: clientId,
+      authInfos: authInfos,
+      cognitoIdentityPoolId: cognitoIdentityPoolId,
+      principal: principal,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListViolationEvents = {
   type t
   type request = {
@@ -8993,18 +9536,19 @@ module ListViolationEvents = {
     (),
   ) =>
     new({
-      maxResults,
-      nextToken,
-      verificationState,
-      listSuppressedAlerts,
-      behaviorCriteriaType,
-      securityProfileName,
-      thingName,
-      endTime,
-      startTime,
+      maxResults: maxResults,
+      nextToken: nextToken,
+      verificationState: verificationState,
+      listSuppressedAlerts: listSuppressedAlerts,
+      behaviorCriteriaType: behaviorCriteriaType,
+      securityProfileName: securityProfileName,
+      thingName: thingName,
+      endTime: endTime,
+      startTime: startTime,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListAuditFindings = {
   type t
   type request = {
@@ -9048,17 +9592,18 @@ module ListAuditFindings = {
     (),
   ) =>
     new({
-      listSuppressedFindings,
-      endTime,
-      startTime,
-      nextToken,
-      maxResults,
-      resourceIdentifier,
-      checkName,
-      taskId,
+      listSuppressedFindings: listSuppressedFindings,
+      endTime: endTime,
+      startTime: startTime,
+      nextToken: nextToken,
+      maxResults: maxResults,
+      resourceIdentifier: resourceIdentifier,
+      checkName: checkName,
+      taskId: taskId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListActiveViolations = {
   type t
   type request = {
@@ -9100,16 +9645,17 @@ module ListActiveViolations = {
     (),
   ) =>
     new({
-      maxResults,
-      nextToken,
-      verificationState,
-      listSuppressedAlerts,
-      behaviorCriteriaType,
-      securityProfileName,
-      thingName,
+      maxResults: maxResults,
+      nextToken: nextToken,
+      verificationState: verificationState,
+      listSuppressedAlerts: listSuppressedAlerts,
+      behaviorCriteriaType: behaviorCriteriaType,
+      securityProfileName: securityProfileName,
+      thingName: thingName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeDetectMitigationActionsTask = {
   type t
   type request = {
@@ -9129,6 +9675,7 @@ module DescribeDetectMitigationActionsTask = {
   let make = (~taskId, ()) => new({taskId: taskId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateOTAUpdate = {
   type t
   type request = {
@@ -9191,22 +9738,23 @@ module CreateOTAUpdate = {
     (),
   ) =>
     new({
-      tags,
-      additionalParameters,
-      roleArn,
-      files,
-      awsJobTimeoutConfig,
-      awsJobAbortConfig,
-      awsJobPresignedUrlConfig,
-      awsJobExecutionsRolloutConfig,
-      targetSelection,
-      protocols,
-      targets,
-      description,
-      otaUpdateId,
+      tags: tags,
+      additionalParameters: additionalParameters,
+      roleArn: roleArn,
+      files: files,
+      awsJobTimeoutConfig: awsJobTimeoutConfig,
+      awsJobAbortConfig: awsJobAbortConfig,
+      awsJobPresignedUrlConfig: awsJobPresignedUrlConfig,
+      awsJobExecutionsRolloutConfig: awsJobExecutionsRolloutConfig,
+      targetSelection: targetSelection,
+      protocols: protocols,
+      targets: targets,
+      description: description,
+      otaUpdateId: otaUpdateId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListDetectMitigationActionsTasks = {
   type t
   type request = {
@@ -9239,9 +9787,10 @@ module ListDetectMitigationActionsTasks = {
   @module("@aws-sdk/client-iot") @new
   external new: request => t = "ListDetectMitigationActionsTasksCommand"
   let make = (~endTime, ~startTime, ~nextToken=?, ~maxResults=?, ()) =>
-    new({endTime, startTime, nextToken, maxResults})
+    new({endTime: endTime, startTime: startTime, nextToken: nextToken, maxResults: maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetOTAUpdate = {
   type t
   type request = {@ocaml.doc("<p>The OTA update ID.</p>") otaUpdateId: otaupdateId}
@@ -9250,6 +9799,7 @@ module GetOTAUpdate = {
   let make = (~otaUpdateId, ()) => new({otaUpdateId: otaUpdateId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ReplaceTopicRule = {
   type t
   @ocaml.doc("<p>The input for the ReplaceTopicRule operation.</p>")
@@ -9259,9 +9809,11 @@ module ReplaceTopicRule = {
   }
   type response = {.}
   @module("@aws-sdk/client-iot") @new external new: request => t = "ReplaceTopicRuleCommand"
-  let make = (~topicRulePayload, ~ruleName, ()) => new({topicRulePayload, ruleName})
+  let make = (~topicRulePayload, ~ruleName, ()) =>
+    new({topicRulePayload: topicRulePayload, ruleName: ruleName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module GetTopicRule = {
   type t
   @ocaml.doc("<p>The input for the GetTopicRule operation.</p>")
@@ -9275,6 +9827,7 @@ module GetTopicRule = {
   let make = (~ruleName, ()) => new({ruleName: ruleName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateTopicRule = {
   type t
   @ocaml.doc("<p>The input for the CreateTopicRule operation.</p>")
@@ -9293,6 +9846,7 @@ module CreateTopicRule = {
   }
   type response = {.}
   @module("@aws-sdk/client-iot") @new external new: request => t = "CreateTopicRuleCommand"
-  let make = (~topicRulePayload, ~ruleName, ~tags=?, ()) => new({tags, topicRulePayload, ruleName})
+  let make = (~topicRulePayload, ~ruleName, ~tags=?, ()) =>
+    new({tags: tags, topicRulePayload: topicRulePayload, ruleName: ruleName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }

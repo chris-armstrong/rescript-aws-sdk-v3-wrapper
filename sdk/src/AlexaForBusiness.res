@@ -1086,9 +1086,10 @@ module UpdateSkillGroup = {
   type response = {.}
   @module("@aws-sdk/client-a4b") @new external new: request => t = "UpdateSkillGroupCommand"
   let make = (~description=?, ~skillGroupName=?, ~skillGroupArn=?, ()) =>
-    new({description, skillGroupName, skillGroupArn})
+    new({description: description, skillGroupName: skillGroupName, skillGroupArn: skillGroupArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateRoom = {
   type t
   type request = {
@@ -1104,9 +1105,16 @@ module UpdateRoom = {
   type response = {.}
   @module("@aws-sdk/client-a4b") @new external new: request => t = "UpdateRoomCommand"
   let make = (~profileArn=?, ~providerCalendarId=?, ~description=?, ~roomName=?, ~roomArn=?, ()) =>
-    new({profileArn, providerCalendarId, description, roomName, roomArn})
+    new({
+      profileArn: profileArn,
+      providerCalendarId: providerCalendarId,
+      description: description,
+      roomName: roomName,
+      roomArn: roomArn,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateGatewayGroup = {
   type t
   type request = {
@@ -1120,9 +1128,10 @@ module UpdateGatewayGroup = {
   type response = {.}
   @module("@aws-sdk/client-a4b") @new external new: request => t = "UpdateGatewayGroupCommand"
   let make = (~gatewayGroupArn, ~description=?, ~name=?, ()) =>
-    new({description, name, gatewayGroupArn})
+    new({description: description, name: name, gatewayGroupArn: gatewayGroupArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateGateway = {
   type t
   type request = {
@@ -1138,9 +1147,15 @@ module UpdateGateway = {
   type response = {.}
   @module("@aws-sdk/client-a4b") @new external new: request => t = "UpdateGatewayCommand"
   let make = (~gatewayArn, ~softwareVersion=?, ~description=?, ~name=?, ()) =>
-    new({softwareVersion, description, name, gatewayArn})
+    new({
+      softwareVersion: softwareVersion,
+      description: description,
+      name: name,
+      gatewayArn: gatewayArn,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateDevice = {
   type t
   type request = {
@@ -1151,9 +1166,11 @@ module UpdateDevice = {
   }
   type response = {.}
   @module("@aws-sdk/client-a4b") @new external new: request => t = "UpdateDeviceCommand"
-  let make = (~deviceName=?, ~deviceArn=?, ()) => new({deviceName, deviceArn})
+  let make = (~deviceName=?, ~deviceArn=?, ()) =>
+    new({deviceName: deviceName, deviceArn: deviceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateAddressBook = {
   type t
   type request = {
@@ -1165,9 +1182,10 @@ module UpdateAddressBook = {
   type response = {.}
   @module("@aws-sdk/client-a4b") @new external new: request => t = "UpdateAddressBookCommand"
   let make = (~addressBookArn, ~description=?, ~name=?, ()) =>
-    new({description, name, addressBookArn})
+    new({description: description, name: name, addressBookArn: addressBookArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module StartSmartHomeApplianceDiscovery = {
   type t
   type request = {
@@ -1180,6 +1198,7 @@ module StartSmartHomeApplianceDiscovery = {
   let make = (~roomArn, ()) => new({roomArn: roomArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module SendInvitation = {
   type t
   type request = {
@@ -1191,6 +1210,7 @@ module SendInvitation = {
   let make = (~userArn=?, ()) => new({userArn: userArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module RevokeInvitation = {
   type t
   type request = {
@@ -1203,9 +1223,11 @@ module RevokeInvitation = {
   }
   type response = {.}
   @module("@aws-sdk/client-a4b") @new external new: request => t = "RevokeInvitationCommand"
-  let make = (~enrollmentId=?, ~userArn=?, ()) => new({enrollmentId, userArn})
+  let make = (~enrollmentId=?, ~userArn=?, ()) =>
+    new({enrollmentId: enrollmentId, userArn: userArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module RejectSkill = {
   type t
   type request = {
@@ -1216,6 +1238,7 @@ module RejectSkill = {
   let make = (~skillId, ()) => new({skillId: skillId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ForgetSmartHomeAppliances = {
   type t
   type request = {
@@ -1228,6 +1251,7 @@ module ForgetSmartHomeAppliances = {
   let make = (~roomArn, ()) => new({roomArn: roomArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DisassociateSkillGroupFromRoom = {
   type t
   type request = {
@@ -1242,9 +1266,11 @@ module DisassociateSkillGroupFromRoom = {
   type response = {.}
   @module("@aws-sdk/client-a4b") @new
   external new: request => t = "DisassociateSkillGroupFromRoomCommand"
-  let make = (~roomArn=?, ~skillGroupArn=?, ()) => new({roomArn, skillGroupArn})
+  let make = (~roomArn=?, ~skillGroupArn=?, ()) =>
+    new({roomArn: roomArn, skillGroupArn: skillGroupArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DisassociateSkillFromUsers = {
   type t
   type request = {
@@ -1258,6 +1284,7 @@ module DisassociateSkillFromUsers = {
   let make = (~skillId, ()) => new({skillId: skillId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DisassociateSkillFromSkillGroup = {
   type t
   type request = {
@@ -1269,9 +1296,11 @@ module DisassociateSkillFromSkillGroup = {
   type response = {.}
   @module("@aws-sdk/client-a4b") @new
   external new: request => t = "DisassociateSkillFromSkillGroupCommand"
-  let make = (~skillId, ~skillGroupArn=?, ()) => new({skillId, skillGroupArn})
+  let make = (~skillId, ~skillGroupArn=?, ()) =>
+    new({skillId: skillId, skillGroupArn: skillGroupArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DisassociateDeviceFromRoom = {
   type t
   type request = {
@@ -1285,6 +1314,7 @@ module DisassociateDeviceFromRoom = {
   let make = (~deviceArn=?, ()) => new({deviceArn: deviceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DisassociateContactFromAddressBook = {
   type t
   type request = {
@@ -1298,9 +1328,11 @@ module DisassociateContactFromAddressBook = {
   type response = {.}
   @module("@aws-sdk/client-a4b") @new
   external new: request => t = "DisassociateContactFromAddressBookCommand"
-  let make = (~addressBookArn, ~contactArn, ()) => new({addressBookArn, contactArn})
+  let make = (~addressBookArn, ~contactArn, ()) =>
+    new({addressBookArn: addressBookArn, contactArn: contactArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteUser = {
   type t
   type request = {
@@ -1312,9 +1344,10 @@ module DeleteUser = {
   }
   type response = {.}
   @module("@aws-sdk/client-a4b") @new external new: request => t = "DeleteUserCommand"
-  let make = (~enrollmentId, ~userArn=?, ()) => new({enrollmentId, userArn})
+  let make = (~enrollmentId, ~userArn=?, ()) => new({enrollmentId: enrollmentId, userArn: userArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteSkillGroup = {
   type t
   type request = {
@@ -1326,6 +1359,7 @@ module DeleteSkillGroup = {
   let make = (~skillGroupArn=?, ()) => new({skillGroupArn: skillGroupArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteSkillAuthorization = {
   type t
   type request = {
@@ -1335,9 +1369,10 @@ module DeleteSkillAuthorization = {
   }
   type response = {.}
   @module("@aws-sdk/client-a4b") @new external new: request => t = "DeleteSkillAuthorizationCommand"
-  let make = (~skillId, ~roomArn=?, ()) => new({roomArn, skillId})
+  let make = (~skillId, ~roomArn=?, ()) => new({roomArn: roomArn, skillId: skillId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteRoomSkillParameter = {
   type t
   type request = {
@@ -1353,9 +1388,11 @@ module DeleteRoomSkillParameter = {
   }
   type response = {.}
   @module("@aws-sdk/client-a4b") @new external new: request => t = "DeleteRoomSkillParameterCommand"
-  let make = (~parameterKey, ~skillId, ~roomArn=?, ()) => new({parameterKey, skillId, roomArn})
+  let make = (~parameterKey, ~skillId, ~roomArn=?, ()) =>
+    new({parameterKey: parameterKey, skillId: skillId, roomArn: roomArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteRoom = {
   type t
   type request = {
@@ -1367,6 +1404,7 @@ module DeleteRoom = {
   let make = (~roomArn=?, ()) => new({roomArn: roomArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteProfile = {
   type t
   type request = {
@@ -1378,6 +1416,7 @@ module DeleteProfile = {
   let make = (~profileArn=?, ()) => new({profileArn: profileArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteNetworkProfile = {
   type t
   type request = {
@@ -1390,6 +1429,7 @@ module DeleteNetworkProfile = {
   let make = (~networkProfileArn, ()) => new({networkProfileArn: networkProfileArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteGatewayGroup = {
   type t
   type request = {
@@ -1401,6 +1441,7 @@ module DeleteGatewayGroup = {
   let make = (~gatewayGroupArn, ()) => new({gatewayGroupArn: gatewayGroupArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteDeviceUsageData = {
   type t
   type request = {
@@ -1410,9 +1451,11 @@ module DeleteDeviceUsageData = {
   }
   type response = {.}
   @module("@aws-sdk/client-a4b") @new external new: request => t = "DeleteDeviceUsageDataCommand"
-  let make = (~deviceUsageType, ~deviceArn, ()) => new({deviceUsageType, deviceArn})
+  let make = (~deviceUsageType, ~deviceArn, ()) =>
+    new({deviceUsageType: deviceUsageType, deviceArn: deviceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteDevice = {
   type t
   type request = {
@@ -1424,6 +1467,7 @@ module DeleteDevice = {
   let make = (~deviceArn, ()) => new({deviceArn: deviceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteContact = {
   type t
   type request = {
@@ -1434,6 +1478,7 @@ module DeleteContact = {
   let make = (~contactArn, ()) => new({contactArn: contactArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteConferenceProvider = {
   type t
   type request = {
@@ -1445,6 +1490,7 @@ module DeleteConferenceProvider = {
   let make = (~conferenceProviderArn, ()) => new({conferenceProviderArn: conferenceProviderArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteBusinessReportSchedule = {
   type t
   type request = {
@@ -1457,6 +1503,7 @@ module DeleteBusinessReportSchedule = {
   let make = (~scheduleArn, ()) => new({scheduleArn: scheduleArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteAddressBook = {
   type t
   type request = {
@@ -1468,6 +1515,7 @@ module DeleteAddressBook = {
   let make = (~addressBookArn, ()) => new({addressBookArn: addressBookArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module AssociateSkillWithUsers = {
   type t
   type request = {
@@ -1480,6 +1528,7 @@ module AssociateSkillWithUsers = {
   let make = (~skillId, ()) => new({skillId: skillId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module AssociateSkillWithSkillGroup = {
   type t
   type request = {
@@ -1491,9 +1540,11 @@ module AssociateSkillWithSkillGroup = {
   type response = {.}
   @module("@aws-sdk/client-a4b") @new
   external new: request => t = "AssociateSkillWithSkillGroupCommand"
-  let make = (~skillId, ~skillGroupArn=?, ()) => new({skillId, skillGroupArn})
+  let make = (~skillId, ~skillGroupArn=?, ()) =>
+    new({skillId: skillId, skillGroupArn: skillGroupArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module AssociateSkillGroupWithRoom = {
   type t
   type request = {
@@ -1507,9 +1558,11 @@ module AssociateSkillGroupWithRoom = {
   type response = {.}
   @module("@aws-sdk/client-a4b") @new
   external new: request => t = "AssociateSkillGroupWithRoomCommand"
-  let make = (~roomArn=?, ~skillGroupArn=?, ()) => new({roomArn, skillGroupArn})
+  let make = (~roomArn=?, ~skillGroupArn=?, ()) =>
+    new({roomArn: roomArn, skillGroupArn: skillGroupArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module AssociateDeviceWithRoom = {
   type t
   type request = {
@@ -1521,9 +1574,10 @@ module AssociateDeviceWithRoom = {
   }
   type response = {.}
   @module("@aws-sdk/client-a4b") @new external new: request => t = "AssociateDeviceWithRoomCommand"
-  let make = (~roomArn=?, ~deviceArn=?, ()) => new({roomArn, deviceArn})
+  let make = (~roomArn=?, ~deviceArn=?, ()) => new({roomArn: roomArn, deviceArn: deviceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module AssociateDeviceWithNetworkProfile = {
   type t
   type request = {
@@ -1535,9 +1589,11 @@ module AssociateDeviceWithNetworkProfile = {
   type response = {.}
   @module("@aws-sdk/client-a4b") @new
   external new: request => t = "AssociateDeviceWithNetworkProfileCommand"
-  let make = (~networkProfileArn, ~deviceArn, ()) => new({networkProfileArn, deviceArn})
+  let make = (~networkProfileArn, ~deviceArn, ()) =>
+    new({networkProfileArn: networkProfileArn, deviceArn: deviceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module AssociateContactWithAddressBook = {
   type t
   type request = {
@@ -1550,9 +1606,11 @@ module AssociateContactWithAddressBook = {
   type response = {.}
   @module("@aws-sdk/client-a4b") @new
   external new: request => t = "AssociateContactWithAddressBookCommand"
-  let make = (~addressBookArn, ~contactArn, ()) => new({addressBookArn, contactArn})
+  let make = (~addressBookArn, ~contactArn, ()) =>
+    new({addressBookArn: addressBookArn, contactArn: contactArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ApproveSkill = {
   type t
   type request = {
@@ -1563,6 +1621,7 @@ module ApproveSkill = {
   let make = (~skillId, ()) => new({skillId: skillId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateNetworkProfile = {
   type t
   type request = {
@@ -1603,16 +1662,17 @@ module UpdateNetworkProfile = {
     (),
   ) =>
     new({
-      trustAnchors,
-      certificateAuthorityArn,
-      nextPassword,
-      currentPassword,
-      description,
-      networkProfileName,
-      networkProfileArn,
+      trustAnchors: trustAnchors,
+      certificateAuthorityArn: certificateAuthorityArn,
+      nextPassword: nextPassword,
+      currentPassword: currentPassword,
+      description: description,
+      networkProfileName: networkProfileName,
+      networkProfileArn: networkProfileArn,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateConferenceProvider = {
   type t
   type request = {
@@ -1636,9 +1696,17 @@ module UpdateConferenceProvider = {
     ~pstndialIn=?,
     ~ipdialIn=?,
     (),
-  ) => new({meetingSetting, pstndialIn, ipdialIn, conferenceProviderType, conferenceProviderArn})
+  ) =>
+    new({
+      meetingSetting: meetingSetting,
+      pstndialIn: pstndialIn,
+      ipdialIn: ipdialIn,
+      conferenceProviderType: conferenceProviderType,
+      conferenceProviderArn: conferenceProviderArn,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateBusinessReportSchedule = {
   type t
   type request = {
@@ -1668,9 +1736,18 @@ module UpdateBusinessReportSchedule = {
     ~s3KeyPrefix=?,
     ~s3BucketName=?,
     (),
-  ) => new({recurrence, scheduleName, format, s3KeyPrefix, s3BucketName, scheduleArn})
+  ) =>
+    new({
+      recurrence: recurrence,
+      scheduleName: scheduleName,
+      format: format,
+      s3KeyPrefix: s3KeyPrefix,
+      s3BucketName: s3BucketName,
+      scheduleArn: scheduleArn,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UntagResource = {
   type t
   type request = {
@@ -1684,9 +1761,10 @@ module UntagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-a4b") @new external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~arn, ()) => new({tagKeys, arn})
+  let make = (~tagKeys, ~arn, ()) => new({tagKeys: tagKeys, arn: arn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module StartDeviceSync = {
   type t
   type request = {
@@ -1700,9 +1778,11 @@ module StartDeviceSync = {
   }
   type response = {.}
   @module("@aws-sdk/client-a4b") @new external new: request => t = "StartDeviceSyncCommand"
-  let make = (~features, ~deviceArn=?, ~roomArn=?, ()) => new({features, deviceArn, roomArn})
+  let make = (~features, ~deviceArn=?, ~roomArn=?, ()) =>
+    new({features: features, deviceArn: deviceArn, roomArn: roomArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module PutSkillAuthorization = {
   type t
   type request = {
@@ -1717,9 +1797,10 @@ module PutSkillAuthorization = {
   type response = {.}
   @module("@aws-sdk/client-a4b") @new external new: request => t = "PutSkillAuthorizationCommand"
   let make = (~skillId, ~authorizationResult, ~roomArn=?, ()) =>
-    new({roomArn, skillId, authorizationResult})
+    new({roomArn: roomArn, skillId: skillId, authorizationResult: authorizationResult})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module PutRoomSkillParameter = {
   type t
   type request = {
@@ -1735,9 +1816,10 @@ module PutRoomSkillParameter = {
   type response = {.}
   @module("@aws-sdk/client-a4b") @new external new: request => t = "PutRoomSkillParameterCommand"
   let make = (~roomSkillParameter, ~skillId, ~roomArn=?, ()) =>
-    new({roomSkillParameter, skillId, roomArn})
+    new({roomSkillParameter: roomSkillParameter, skillId: skillId, roomArn: roomArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module PutInvitationConfiguration = {
   type t
   type request = {
@@ -1757,9 +1839,14 @@ module PutInvitationConfiguration = {
   @module("@aws-sdk/client-a4b") @new
   external new: request => t = "PutInvitationConfigurationCommand"
   let make = (~organizationName, ~privateSkillIds=?, ~contactEmail=?, ()) =>
-    new({privateSkillIds, contactEmail, organizationName})
+    new({
+      privateSkillIds: privateSkillIds,
+      contactEmail: contactEmail,
+      organizationName: organizationName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module PutConferencePreference = {
   type t
   type request = {
@@ -1772,6 +1859,7 @@ module PutConferencePreference = {
   let make = (~conferencePreference, ()) => new({conferencePreference: conferencePreference})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module GetSkillGroup = {
   type t
   type request = {
@@ -1787,6 +1875,7 @@ module GetSkillGroup = {
   let make = (~skillGroupArn=?, ()) => new({skillGroupArn: skillGroupArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetRoomSkillParameter = {
   type t
   type request = {
@@ -1807,9 +1896,11 @@ module GetRoomSkillParameter = {
     roomSkillParameter: option<roomSkillParameter>,
   }
   @module("@aws-sdk/client-a4b") @new external new: request => t = "GetRoomSkillParameterCommand"
-  let make = (~parameterKey, ~skillId, ~roomArn=?, ()) => new({parameterKey, skillId, roomArn})
+  let make = (~parameterKey, ~skillId, ~roomArn=?, ()) =>
+    new({parameterKey: parameterKey, skillId: skillId, roomArn: roomArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetRoom = {
   type t
   type request = {
@@ -1823,6 +1914,7 @@ module GetRoom = {
   let make = (~roomArn=?, ()) => new({roomArn: roomArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetInvitationConfiguration = {
   type t
   type request = {.}
@@ -1844,6 +1936,7 @@ module GetInvitationConfiguration = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetGatewayGroup = {
   type t
   type request = {
@@ -1855,6 +1948,7 @@ module GetGatewayGroup = {
   let make = (~gatewayGroupArn, ()) => new({gatewayGroupArn: gatewayGroupArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetGateway = {
   type t
   type request = {
@@ -1867,6 +1961,7 @@ module GetGateway = {
   let make = (~gatewayArn, ()) => new({gatewayArn: gatewayArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetConferencePreference = {
   type t
   type request = {.}
@@ -1878,6 +1973,7 @@ module GetConferencePreference = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetAddressBook = {
   type t
   type request = {
@@ -1893,6 +1989,7 @@ module GetAddressBook = {
   let make = (~addressBookArn, ()) => new({addressBookArn: addressBookArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateContact = {
   type t
   type request = {
@@ -1924,9 +2021,19 @@ module UpdateContact = {
     ~firstName=?,
     ~displayName=?,
     (),
-  ) => new({sipAddresses, phoneNumbers, phoneNumber, lastName, firstName, displayName, contactArn})
+  ) =>
+    new({
+      sipAddresses: sipAddresses,
+      phoneNumbers: phoneNumbers,
+      phoneNumber: phoneNumber,
+      lastName: lastName,
+      firstName: firstName,
+      displayName: displayName,
+      contactArn: contactArn,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module TagResource = {
   type t
   type request = {
@@ -1940,9 +2047,10 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-a4b") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~arn, ()) => new({tags, arn})
+  let make = (~tags, ~arn, ()) => new({tags: tags, arn: arn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ResolveRoom = {
   type t
   type request = {
@@ -1962,9 +2070,10 @@ module ResolveRoom = {
     roomArn: option<arn>,
   }
   @module("@aws-sdk/client-a4b") @new external new: request => t = "ResolveRoomCommand"
-  let make = (~skillId, ~userId, ()) => new({skillId, userId})
+  let make = (~skillId, ~userId, ()) => new({skillId: skillId, userId: userId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module RegisterAVSDevice = {
   type t
   type request = {
@@ -2010,9 +2119,19 @@ module RegisterAVSDevice = {
     ~roomArn=?,
     ~deviceSerialNumber=?,
     (),
-  ) => new({tags, roomArn, amazonId, deviceSerialNumber, productId, userCode, clientId})
+  ) =>
+    new({
+      tags: tags,
+      roomArn: roomArn,
+      amazonId: amazonId,
+      deviceSerialNumber: deviceSerialNumber,
+      productId: productId,
+      userCode: userCode,
+      clientId: clientId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListTags = {
   type t
   type request = {
@@ -2037,9 +2156,11 @@ module ListTags = {
     tags: option<tagList_>,
   }
   @module("@aws-sdk/client-a4b") @new external new: request => t = "ListTagsCommand"
-  let make = (~arn, ~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken, arn})
+  let make = (~arn, ~maxResults=?, ~nextToken=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken, arn: arn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListSmartHomeAppliances = {
   type t
   type request = {
@@ -2058,9 +2179,11 @@ module ListSmartHomeAppliances = {
     smartHomeAppliances: option<smartHomeApplianceList>,
   }
   @module("@aws-sdk/client-a4b") @new external new: request => t = "ListSmartHomeAppliancesCommand"
-  let make = (~roomArn, ~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults, roomArn})
+  let make = (~roomArn, ~nextToken=?, ~maxResults=?, ()) =>
+    new({nextToken: nextToken, maxResults: maxResults, roomArn: roomArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListSkillsStoreCategories = {
   type t
   type request = {
@@ -2078,9 +2201,11 @@ module ListSkillsStoreCategories = {
   }
   @module("@aws-sdk/client-a4b") @new
   external new: request => t = "ListSkillsStoreCategoriesCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListSkills = {
   type t
   type request = {
@@ -2113,9 +2238,16 @@ module ListSkills = {
   }
   @module("@aws-sdk/client-a4b") @new external new: request => t = "ListSkillsCommand"
   let make = (~maxResults=?, ~nextToken=?, ~skillType=?, ~enablementType=?, ~skillGroupArn=?, ()) =>
-    new({maxResults, nextToken, skillType, enablementType, skillGroupArn})
+    new({
+      maxResults: maxResults,
+      nextToken: nextToken,
+      skillType: skillType,
+      enablementType: enablementType,
+      skillGroupArn: skillGroupArn,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListGateways = {
   type t
   type request = {
@@ -2137,9 +2269,10 @@ module ListGateways = {
   }
   @module("@aws-sdk/client-a4b") @new external new: request => t = "ListGatewaysCommand"
   let make = (~maxResults=?, ~nextToken=?, ~gatewayGroupArn=?, ()) =>
-    new({maxResults, nextToken, gatewayGroupArn})
+    new({maxResults: maxResults, nextToken: nextToken, gatewayGroupArn: gatewayGroupArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListGatewayGroups = {
   type t
   type request = {
@@ -2162,9 +2295,11 @@ module ListGatewayGroups = {
     gatewayGroups: option<gatewayGroupSummaries>,
   }
   @module("@aws-sdk/client-a4b") @new external new: request => t = "ListGatewayGroupsCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListDeviceEvents = {
   type t
   type request = {
@@ -2196,9 +2331,10 @@ module ListDeviceEvents = {
   }
   @module("@aws-sdk/client-a4b") @new external new: request => t = "ListDeviceEventsCommand"
   let make = (~deviceArn, ~maxResults=?, ~nextToken=?, ~eventType=?, ()) =>
-    new({maxResults, nextToken, eventType, deviceArn})
+    new({maxResults: maxResults, nextToken: nextToken, eventType: eventType, deviceArn: deviceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetNetworkProfile = {
   type t
   type request = {
@@ -2214,6 +2350,7 @@ module GetNetworkProfile = {
   let make = (~networkProfileArn, ()) => new({networkProfileArn: networkProfileArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetConferenceProvider = {
   type t
   type request = {
@@ -2229,6 +2366,7 @@ module GetConferenceProvider = {
   let make = (~conferenceProviderArn, ()) => new({conferenceProviderArn: conferenceProviderArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateUser = {
   type t
   type request = {
@@ -2250,9 +2388,17 @@ module CreateUser = {
   }
   @module("@aws-sdk/client-a4b") @new external new: request => t = "CreateUserCommand"
   let make = (~userId, ~tags=?, ~clientRequestToken=?, ~email=?, ~lastName=?, ~firstName=?, ()) =>
-    new({tags, clientRequestToken, email, lastName, firstName, userId})
+    new({
+      tags: tags,
+      clientRequestToken: clientRequestToken,
+      email: email,
+      lastName: lastName,
+      firstName: firstName,
+      userId: userId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateSkillGroup = {
   type t
   type request = {
@@ -2273,9 +2419,15 @@ module CreateSkillGroup = {
   }
   @module("@aws-sdk/client-a4b") @new external new: request => t = "CreateSkillGroupCommand"
   let make = (~skillGroupName, ~tags=?, ~clientRequestToken=?, ~description=?, ()) =>
-    new({tags, clientRequestToken, description, skillGroupName})
+    new({
+      tags: tags,
+      clientRequestToken: clientRequestToken,
+      description: description,
+      skillGroupName: skillGroupName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateRoom = {
   type t
   type request = {
@@ -2305,9 +2457,18 @@ module CreateRoom = {
     ~profileArn=?,
     ~description=?,
     (),
-  ) => new({tags, clientRequestToken, providerCalendarId, profileArn, description, roomName})
+  ) =>
+    new({
+      tags: tags,
+      clientRequestToken: clientRequestToken,
+      providerCalendarId: providerCalendarId,
+      profileArn: profileArn,
+      description: description,
+      roomName: roomName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateNetworkProfile = {
   type t
   type request = {
@@ -2368,20 +2529,21 @@ module CreateNetworkProfile = {
     (),
   ) =>
     new({
-      tags,
-      clientRequestToken,
-      trustAnchors,
-      certificateAuthorityArn,
-      nextPassword,
-      currentPassword,
-      eapMethod,
-      securityType,
-      ssid,
-      description,
-      networkProfileName,
+      tags: tags,
+      clientRequestToken: clientRequestToken,
+      trustAnchors: trustAnchors,
+      certificateAuthorityArn: certificateAuthorityArn,
+      nextPassword: nextPassword,
+      currentPassword: currentPassword,
+      eapMethod: eapMethod,
+      securityType: securityType,
+      ssid: ssid,
+      description: description,
+      networkProfileName: networkProfileName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateGatewayGroup = {
   type t
   type request = {
@@ -2403,9 +2565,10 @@ module CreateGatewayGroup = {
   }
   @module("@aws-sdk/client-a4b") @new external new: request => t = "CreateGatewayGroupCommand"
   let make = (~clientRequestToken, ~name, ~tags=?, ~description=?, ()) =>
-    new({tags, clientRequestToken, description, name})
+    new({tags: tags, clientRequestToken: clientRequestToken, description: description, name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateContact = {
   type t
   type request = {
@@ -2453,17 +2616,18 @@ module CreateContact = {
     (),
   ) =>
     new({
-      tags,
-      clientRequestToken,
-      sipAddresses,
-      phoneNumbers,
-      phoneNumber,
-      lastName,
-      firstName,
-      displayName,
+      tags: tags,
+      clientRequestToken: clientRequestToken,
+      sipAddresses: sipAddresses,
+      phoneNumbers: phoneNumbers,
+      phoneNumber: phoneNumber,
+      lastName: lastName,
+      firstName: firstName,
+      displayName: displayName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateConferenceProvider = {
   type t
   type request = {
@@ -2501,16 +2665,17 @@ module CreateConferenceProvider = {
     (),
   ) =>
     new({
-      tags,
-      clientRequestToken,
-      meetingSetting,
-      pstndialIn,
-      ipdialIn,
-      conferenceProviderType,
-      conferenceProviderName,
+      tags: tags,
+      clientRequestToken: clientRequestToken,
+      meetingSetting: meetingSetting,
+      pstndialIn: pstndialIn,
+      ipdialIn: ipdialIn,
+      conferenceProviderType: conferenceProviderType,
+      conferenceProviderName: conferenceProviderName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateBusinessReportSchedule = {
   type t
   type request = {
@@ -2555,17 +2720,18 @@ module CreateBusinessReportSchedule = {
     (),
   ) =>
     new({
-      tags,
-      clientRequestToken,
-      recurrence,
-      contentRange,
-      format,
-      s3KeyPrefix,
-      s3BucketName,
-      scheduleName,
+      tags: tags,
+      clientRequestToken: clientRequestToken,
+      recurrence: recurrence,
+      contentRange: contentRange,
+      format: format,
+      s3KeyPrefix: s3KeyPrefix,
+      s3BucketName: s3BucketName,
+      scheduleName: scheduleName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateAddressBook = {
   type t
   type request = {
@@ -2586,9 +2752,10 @@ module CreateAddressBook = {
   }
   @module("@aws-sdk/client-a4b") @new external new: request => t = "CreateAddressBookCommand"
   let make = (~name, ~tags=?, ~clientRequestToken=?, ~description=?, ()) =>
-    new({tags, clientRequestToken, description, name})
+    new({tags: tags, clientRequestToken: clientRequestToken, description: description, name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateProfile = {
   type t
   type request = {
@@ -2648,23 +2815,24 @@ module UpdateProfile = {
     (),
   ) =>
     new({
-      meetingRoomConfiguration,
-      dataRetentionOptIn,
-      pstnenabled,
-      maxVolumeLimit,
-      setupModeDisabled,
-      locale,
-      wakeWord,
-      temperatureUnit,
-      distanceUnit,
-      address,
-      timezone,
-      isDefault,
-      profileName,
-      profileArn,
+      meetingRoomConfiguration: meetingRoomConfiguration,
+      dataRetentionOptIn: dataRetentionOptIn,
+      pstnenabled: pstnenabled,
+      maxVolumeLimit: maxVolumeLimit,
+      setupModeDisabled: setupModeDisabled,
+      locale: locale,
+      wakeWord: wakeWord,
+      temperatureUnit: temperatureUnit,
+      distanceUnit: distanceUnit,
+      address: address,
+      timezone: timezone,
+      isDefault: isDefault,
+      profileName: profileName,
+      profileArn: profileArn,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module SendAnnouncement = {
   type t
   type request = {
@@ -2694,9 +2862,15 @@ module SendAnnouncement = {
   }
   @module("@aws-sdk/client-a4b") @new external new: request => t = "SendAnnouncementCommand"
   let make = (~clientRequestToken, ~content, ~roomFilters, ~timeToLiveInSeconds=?, ()) =>
-    new({clientRequestToken, timeToLiveInSeconds, content, roomFilters})
+    new({
+      clientRequestToken: clientRequestToken,
+      timeToLiveInSeconds: timeToLiveInSeconds,
+      content: content,
+      roomFilters: roomFilters,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module SearchUsers = {
   type t
   type request = {
@@ -2732,9 +2906,15 @@ module SearchUsers = {
   }
   @module("@aws-sdk/client-a4b") @new external new: request => t = "SearchUsersCommand"
   let make = (~sortCriteria=?, ~filters=?, ~maxResults=?, ~nextToken=?, ()) =>
-    new({sortCriteria, filters, maxResults, nextToken})
+    new({
+      sortCriteria: sortCriteria,
+      filters: filters,
+      maxResults: maxResults,
+      nextToken: nextToken,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module SearchSkillGroups = {
   type t
   type request = {
@@ -2770,9 +2950,15 @@ module SearchSkillGroups = {
   }
   @module("@aws-sdk/client-a4b") @new external new: request => t = "SearchSkillGroupsCommand"
   let make = (~sortCriteria=?, ~filters=?, ~maxResults=?, ~nextToken=?, ()) =>
-    new({sortCriteria, filters, maxResults, nextToken})
+    new({
+      sortCriteria: sortCriteria,
+      filters: filters,
+      maxResults: maxResults,
+      nextToken: nextToken,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module SearchRooms = {
   type t
   type request = {
@@ -2807,9 +2993,15 @@ module SearchRooms = {
   }
   @module("@aws-sdk/client-a4b") @new external new: request => t = "SearchRoomsCommand"
   let make = (~sortCriteria=?, ~filters=?, ~maxResults=?, ~nextToken=?, ()) =>
-    new({sortCriteria, filters, maxResults, nextToken})
+    new({
+      sortCriteria: sortCriteria,
+      filters: filters,
+      maxResults: maxResults,
+      nextToken: nextToken,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module SearchProfiles = {
   type t
   type request = {
@@ -2844,9 +3036,15 @@ module SearchProfiles = {
   }
   @module("@aws-sdk/client-a4b") @new external new: request => t = "SearchProfilesCommand"
   let make = (~sortCriteria=?, ~filters=?, ~maxResults=?, ~nextToken=?, ()) =>
-    new({sortCriteria, filters, maxResults, nextToken})
+    new({
+      sortCriteria: sortCriteria,
+      filters: filters,
+      maxResults: maxResults,
+      nextToken: nextToken,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module SearchNetworkProfiles = {
   type t
   type request = {
@@ -2884,9 +3082,15 @@ module SearchNetworkProfiles = {
   }
   @module("@aws-sdk/client-a4b") @new external new: request => t = "SearchNetworkProfilesCommand"
   let make = (~sortCriteria=?, ~filters=?, ~maxResults=?, ~nextToken=?, ()) =>
-    new({sortCriteria, filters, maxResults, nextToken})
+    new({
+      sortCriteria: sortCriteria,
+      filters: filters,
+      maxResults: maxResults,
+      nextToken: nextToken,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module SearchAddressBooks = {
   type t
   type request = {
@@ -2922,9 +3126,15 @@ module SearchAddressBooks = {
   }
   @module("@aws-sdk/client-a4b") @new external new: request => t = "SearchAddressBooksCommand"
   let make = (~maxResults=?, ~nextToken=?, ~sortCriteria=?, ~filters=?, ()) =>
-    new({maxResults, nextToken, sortCriteria, filters})
+    new({
+      maxResults: maxResults,
+      nextToken: nextToken,
+      sortCriteria: sortCriteria,
+      filters: filters,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListConferenceProviders = {
   type t
   type request = {
@@ -2942,9 +3152,11 @@ module ListConferenceProviders = {
     conferenceProviders: option<conferenceProvidersList>,
   }
   @module("@aws-sdk/client-a4b") @new external new: request => t = "ListConferenceProvidersCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetContact = {
   type t
   type request = {
@@ -2959,6 +3171,7 @@ module GetContact = {
   let make = (~contactArn, ()) => new({contactArn: contactArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateProfile = {
   type t
   type request = {
@@ -3017,23 +3230,24 @@ module CreateProfile = {
     (),
   ) =>
     new({
-      tags,
-      meetingRoomConfiguration,
-      dataRetentionOptIn,
-      pstnenabled,
-      maxVolumeLimit,
-      setupModeDisabled,
-      clientRequestToken,
-      locale,
-      wakeWord,
-      temperatureUnit,
-      distanceUnit,
-      address,
-      timezone,
-      profileName,
+      tags: tags,
+      meetingRoomConfiguration: meetingRoomConfiguration,
+      dataRetentionOptIn: dataRetentionOptIn,
+      pstnenabled: pstnenabled,
+      maxVolumeLimit: maxVolumeLimit,
+      setupModeDisabled: setupModeDisabled,
+      clientRequestToken: clientRequestToken,
+      locale: locale,
+      wakeWord: wakeWord,
+      temperatureUnit: temperatureUnit,
+      distanceUnit: distanceUnit,
+      address: address,
+      timezone: timezone,
+      profileName: profileName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module SearchContacts = {
   type t
   type request = {
@@ -3068,9 +3282,15 @@ module SearchContacts = {
   }
   @module("@aws-sdk/client-a4b") @new external new: request => t = "SearchContactsCommand"
   let make = (~maxResults=?, ~nextToken=?, ~sortCriteria=?, ~filters=?, ()) =>
-    new({maxResults, nextToken, sortCriteria, filters})
+    new({
+      maxResults: maxResults,
+      nextToken: nextToken,
+      sortCriteria: sortCriteria,
+      filters: filters,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListSkillsStoreSkillsByCategory = {
   type t
   type request = {
@@ -3093,9 +3313,10 @@ module ListSkillsStoreSkillsByCategory = {
   @module("@aws-sdk/client-a4b") @new
   external new: request => t = "ListSkillsStoreSkillsByCategoryCommand"
   let make = (~categoryId, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults, nextToken, categoryId})
+    new({maxResults: maxResults, nextToken: nextToken, categoryId: categoryId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListBusinessReportSchedules = {
   type t
   type request = {
@@ -3114,9 +3335,11 @@ module ListBusinessReportSchedules = {
   }
   @module("@aws-sdk/client-a4b") @new
   external new: request => t = "ListBusinessReportSchedulesCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetProfile = {
   type t
   type request = {
@@ -3132,6 +3355,7 @@ module GetProfile = {
   let make = (~profileArn=?, ()) => new({profileArn: profileArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetDevice = {
   type t
   type request = {
@@ -3147,6 +3371,7 @@ module GetDevice = {
   let make = (~deviceArn=?, ()) => new({deviceArn: deviceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module SearchDevices = {
   type t
   type request = {
@@ -3184,6 +3409,11 @@ module SearchDevices = {
   }
   @module("@aws-sdk/client-a4b") @new external new: request => t = "SearchDevicesCommand"
   let make = (~sortCriteria=?, ~filters=?, ~maxResults=?, ~nextToken=?, ()) =>
-    new({sortCriteria, filters, maxResults, nextToken})
+    new({
+      sortCriteria: sortCriteria,
+      filters: filters,
+      maxResults: maxResults,
+      nextToken: nextToken,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

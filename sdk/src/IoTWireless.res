@@ -837,9 +837,16 @@ module UpdateDestination = {
   @module("@aws-sdk/client-iotwireless") @new
   external new: request => t = "UpdateDestinationCommand"
   let make = (~name, ~roleArn=?, ~description=?, ~expression=?, ~expressionType=?, ()) =>
-    new({roleArn, description, expression, expressionType, name})
+    new({
+      roleArn: roleArn,
+      description: description,
+      expression: expression,
+      expressionType: expressionType,
+      name: name,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module TestWirelessDevice = {
   type t
   type request = {
@@ -853,6 +860,7 @@ module TestWirelessDevice = {
   let make = (~id, ()) => new({id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ResetResourceLogLevel = {
   type t
   type request = {
@@ -866,9 +874,11 @@ module ResetResourceLogLevel = {
   type response = {.}
   @module("@aws-sdk/client-iotwireless") @new
   external new: request => t = "ResetResourceLogLevelCommand"
-  let make = (~resourceType, ~resourceIdentifier, ()) => new({resourceType, resourceIdentifier})
+  let make = (~resourceType, ~resourceIdentifier, ()) =>
+    new({resourceType: resourceType, resourceIdentifier: resourceIdentifier})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ResetAllResourceLogLevels = {
   type t
   type request = {.}
@@ -878,6 +888,7 @@ module ResetAllResourceLogLevels = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module PutResourceLogLevel = {
   type t
   type request = {
@@ -893,9 +904,10 @@ module PutResourceLogLevel = {
   @module("@aws-sdk/client-iotwireless") @new
   external new: request => t = "PutResourceLogLevelCommand"
   let make = (~logLevel, ~resourceType, ~resourceIdentifier, ()) =>
-    new({logLevel, resourceType, resourceIdentifier})
+    new({logLevel: logLevel, resourceType: resourceType, resourceIdentifier: resourceIdentifier})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module GetWirelessGatewayTask = {
   type t
   type request = {
@@ -919,6 +931,7 @@ module GetWirelessGatewayTask = {
   let make = (~id, ()) => new({id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetWirelessGatewayStatistics = {
   type t
   type request = {
@@ -940,6 +953,7 @@ module GetWirelessGatewayStatistics = {
   let make = (~wirelessGatewayId, ()) => new({wirelessGatewayId: wirelessGatewayId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetWirelessGatewayCertificate = {
   type t
   type request = {
@@ -960,6 +974,7 @@ module GetWirelessGatewayCertificate = {
   let make = (~id, ()) => new({id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetServiceEndpoint = {
   type t
   type request = {
@@ -982,6 +997,7 @@ module GetServiceEndpoint = {
   let make = (~serviceType=?, ()) => new({serviceType: serviceType})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetResourceLogLevel = {
   type t
   type request = {
@@ -995,9 +1011,11 @@ module GetResourceLogLevel = {
   type response = {@as("LogLevel") logLevel: option<logLevel>}
   @module("@aws-sdk/client-iotwireless") @new
   external new: request => t = "GetResourceLogLevelCommand"
-  let make = (~resourceType, ~resourceIdentifier, ()) => new({resourceType, resourceIdentifier})
+  let make = (~resourceType, ~resourceIdentifier, ()) =>
+    new({resourceType: resourceType, resourceIdentifier: resourceIdentifier})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetDestination = {
   type t
   type request = {
@@ -1020,6 +1038,7 @@ module GetDestination = {
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DisassociateWirelessGatewayFromThing = {
   type t
   type request = {
@@ -1031,6 +1050,7 @@ module DisassociateWirelessGatewayFromThing = {
   let make = (~id, ()) => new({id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DisassociateWirelessGatewayFromCertificate = {
   type t
   type request = {
@@ -1042,6 +1062,7 @@ module DisassociateWirelessGatewayFromCertificate = {
   let make = (~id, ()) => new({id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DisassociateWirelessDeviceFromThing = {
   type t
   type request = {
@@ -1053,6 +1074,7 @@ module DisassociateWirelessDeviceFromThing = {
   let make = (~id, ()) => new({id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DisassociateWirelessDeviceFromMulticastGroup = {
   type t
   type request = {
@@ -1062,9 +1084,10 @@ module DisassociateWirelessDeviceFromMulticastGroup = {
   type response = {.}
   @module("@aws-sdk/client-iotwireless") @new
   external new: request => t = "DisassociateWirelessDeviceFromMulticastGroupCommand"
-  let make = (~wirelessDeviceId, ~id, ()) => new({wirelessDeviceId, id})
+  let make = (~wirelessDeviceId, ~id, ()) => new({wirelessDeviceId: wirelessDeviceId, id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DisassociateWirelessDeviceFromFuotaTask = {
   type t
   type request = {
@@ -1074,9 +1097,10 @@ module DisassociateWirelessDeviceFromFuotaTask = {
   type response = {.}
   @module("@aws-sdk/client-iotwireless") @new
   external new: request => t = "DisassociateWirelessDeviceFromFuotaTaskCommand"
-  let make = (~wirelessDeviceId, ~id, ()) => new({wirelessDeviceId, id})
+  let make = (~wirelessDeviceId, ~id, ()) => new({wirelessDeviceId: wirelessDeviceId, id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DisassociateMulticastGroupFromFuotaTask = {
   type t
   type request = {
@@ -1086,9 +1110,10 @@ module DisassociateMulticastGroupFromFuotaTask = {
   type response = {.}
   @module("@aws-sdk/client-iotwireless") @new
   external new: request => t = "DisassociateMulticastGroupFromFuotaTaskCommand"
-  let make = (~multicastGroupId, ~id, ()) => new({multicastGroupId, id})
+  let make = (~multicastGroupId, ~id, ()) => new({multicastGroupId: multicastGroupId, id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DisassociateAwsAccountFromPartnerAccount = {
   type t
   type request = {
@@ -1100,9 +1125,11 @@ module DisassociateAwsAccountFromPartnerAccount = {
   type response = {.}
   @module("@aws-sdk/client-iotwireless") @new
   external new: request => t = "DisassociateAwsAccountFromPartnerAccountCommand"
-  let make = (~partnerType, ~partnerAccountId, ()) => new({partnerType, partnerAccountId})
+  let make = (~partnerType, ~partnerAccountId, ()) =>
+    new({partnerType: partnerType, partnerAccountId: partnerAccountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteWirelessGatewayTaskDefinition = {
   type t
   type request = {
@@ -1115,6 +1142,7 @@ module DeleteWirelessGatewayTaskDefinition = {
   let make = (~id, ()) => new({id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteWirelessGatewayTask = {
   type t
   type request = {
@@ -1126,6 +1154,7 @@ module DeleteWirelessGatewayTask = {
   let make = (~id, ()) => new({id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteWirelessGateway = {
   type t
   type request = {
@@ -1137,6 +1166,7 @@ module DeleteWirelessGateway = {
   let make = (~id, ()) => new({id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteWirelessDevice = {
   type t
   type request = {
@@ -1148,6 +1178,7 @@ module DeleteWirelessDevice = {
   let make = (~id, ()) => new({id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteServiceProfile = {
   type t
   type request = {
@@ -1159,6 +1190,7 @@ module DeleteServiceProfile = {
   let make = (~id, ()) => new({id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteQueuedMessages = {
   type t
   type request = {
@@ -1177,9 +1209,10 @@ module DeleteQueuedMessages = {
   @module("@aws-sdk/client-iotwireless") @new
   external new: request => t = "DeleteQueuedMessagesCommand"
   let make = (~messageId, ~id, ~wirelessDeviceType=?, ()) =>
-    new({wirelessDeviceType, messageId, id})
+    new({wirelessDeviceType: wirelessDeviceType, messageId: messageId, id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteMulticastGroup = {
   type t
   type request = {@as("Id") id: multicastGroupId}
@@ -1189,6 +1222,7 @@ module DeleteMulticastGroup = {
   let make = (~id, ()) => new({id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteFuotaTask = {
   type t
   type request = {@as("Id") id: fuotaTaskId}
@@ -1197,6 +1231,7 @@ module DeleteFuotaTask = {
   let make = (~id, ()) => new({id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteDeviceProfile = {
   type t
   type request = {
@@ -1208,6 +1243,7 @@ module DeleteDeviceProfile = {
   let make = (~id, ()) => new({id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteDestination = {
   type t
   type request = {
@@ -1219,6 +1255,7 @@ module DeleteDestination = {
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module CreateWirelessGatewayTask = {
   type t
   type request = {
@@ -1237,9 +1274,10 @@ module CreateWirelessGatewayTask = {
   @module("@aws-sdk/client-iotwireless") @new
   external new: request => t = "CreateWirelessGatewayTaskCommand"
   let make = (~wirelessGatewayTaskDefinitionId, ~id, ()) =>
-    new({wirelessGatewayTaskDefinitionId, id})
+    new({wirelessGatewayTaskDefinitionId: wirelessGatewayTaskDefinitionId, id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CancelMulticastGroupSession = {
   type t
   type request = {@as("Id") id: multicastGroupId}
@@ -1249,6 +1287,7 @@ module CancelMulticastGroupSession = {
   let make = (~id, ()) => new({id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module AssociateWirelessGatewayWithThing = {
   type t
   type request = {
@@ -1260,9 +1299,10 @@ module AssociateWirelessGatewayWithThing = {
   type response = {.}
   @module("@aws-sdk/client-iotwireless") @new
   external new: request => t = "AssociateWirelessGatewayWithThingCommand"
-  let make = (~thingArn, ~id, ()) => new({thingArn, id})
+  let make = (~thingArn, ~id, ()) => new({thingArn: thingArn, id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module AssociateWirelessGatewayWithCertificate = {
   type t
   type request = {
@@ -1278,9 +1318,10 @@ module AssociateWirelessGatewayWithCertificate = {
   }
   @module("@aws-sdk/client-iotwireless") @new
   external new: request => t = "AssociateWirelessGatewayWithCertificateCommand"
-  let make = (~iotCertificateId, ~id, ()) => new({iotCertificateId, id})
+  let make = (~iotCertificateId, ~id, ()) => new({iotCertificateId: iotCertificateId, id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module AssociateWirelessDeviceWithThing = {
   type t
   type request = {
@@ -1291,9 +1332,10 @@ module AssociateWirelessDeviceWithThing = {
   type response = {.}
   @module("@aws-sdk/client-iotwireless") @new
   external new: request => t = "AssociateWirelessDeviceWithThingCommand"
-  let make = (~thingArn, ~id, ()) => new({thingArn, id})
+  let make = (~thingArn, ~id, ()) => new({thingArn: thingArn, id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module AssociateWirelessDeviceWithMulticastGroup = {
   type t
   type request = {
@@ -1303,9 +1345,10 @@ module AssociateWirelessDeviceWithMulticastGroup = {
   type response = {.}
   @module("@aws-sdk/client-iotwireless") @new
   external new: request => t = "AssociateWirelessDeviceWithMulticastGroupCommand"
-  let make = (~wirelessDeviceId, ~id, ()) => new({wirelessDeviceId, id})
+  let make = (~wirelessDeviceId, ~id, ()) => new({wirelessDeviceId: wirelessDeviceId, id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module AssociateWirelessDeviceWithFuotaTask = {
   type t
   type request = {
@@ -1315,9 +1358,10 @@ module AssociateWirelessDeviceWithFuotaTask = {
   type response = {.}
   @module("@aws-sdk/client-iotwireless") @new
   external new: request => t = "AssociateWirelessDeviceWithFuotaTaskCommand"
-  let make = (~wirelessDeviceId, ~id, ()) => new({wirelessDeviceId, id})
+  let make = (~wirelessDeviceId, ~id, ()) => new({wirelessDeviceId: wirelessDeviceId, id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module AssociateMulticastGroupWithFuotaTask = {
   type t
   type request = {
@@ -1327,9 +1371,10 @@ module AssociateMulticastGroupWithFuotaTask = {
   type response = {.}
   @module("@aws-sdk/client-iotwireless") @new
   external new: request => t = "AssociateMulticastGroupWithFuotaTaskCommand"
-  let make = (~multicastGroupId, ~id, ()) => new({multicastGroupId, id})
+  let make = (~multicastGroupId, ~id, ()) => new({multicastGroupId: multicastGroupId, id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateWirelessDevice = {
   type t
   type request = {
@@ -1346,9 +1391,16 @@ module UpdateWirelessDevice = {
   @module("@aws-sdk/client-iotwireless") @new
   external new: request => t = "UpdateWirelessDeviceCommand"
   let make = (~id, ~loRaWAN=?, ~description=?, ~name=?, ~destinationName=?, ()) =>
-    new({loRaWAN, description, name, destinationName, id})
+    new({
+      loRaWAN: loRaWAN,
+      description: description,
+      name: name,
+      destinationName: destinationName,
+      id: id,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdatePartnerAccount = {
   type t
   type request = {
@@ -1362,9 +1414,10 @@ module UpdatePartnerAccount = {
   @module("@aws-sdk/client-iotwireless") @new
   external new: request => t = "UpdatePartnerAccountCommand"
   let make = (~partnerType, ~partnerAccountId, ~sidewalk, ()) =>
-    new({partnerType, partnerAccountId, sidewalk})
+    new({partnerType: partnerType, partnerAccountId: partnerAccountId, sidewalk: sidewalk})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateNetworkAnalyzerConfiguration = {
   type t
   type request = {
@@ -1396,15 +1449,16 @@ module UpdateNetworkAnalyzerConfiguration = {
     (),
   ) =>
     new({
-      wirelessGatewaysToRemove,
-      wirelessGatewaysToAdd,
-      wirelessDevicesToRemove,
-      wirelessDevicesToAdd,
-      traceContent,
-      configurationName,
+      wirelessGatewaysToRemove: wirelessGatewaysToRemove,
+      wirelessGatewaysToAdd: wirelessGatewaysToAdd,
+      wirelessDevicesToRemove: wirelessDevicesToRemove,
+      wirelessDevicesToAdd: wirelessDevicesToAdd,
+      traceContent: traceContent,
+      configurationName: configurationName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateMulticastGroup = {
   type t
   type request = {
@@ -1416,9 +1470,11 @@ module UpdateMulticastGroup = {
   type response = {.}
   @module("@aws-sdk/client-iotwireless") @new
   external new: request => t = "UpdateMulticastGroupCommand"
-  let make = (~id, ~loRaWAN=?, ~description=?, ~name=?, ()) => new({loRaWAN, description, name, id})
+  let make = (~id, ~loRaWAN=?, ~description=?, ~name=?, ()) =>
+    new({loRaWAN: loRaWAN, description: description, name: name, id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateFuotaTask = {
   type t
   type request = {
@@ -1439,9 +1495,18 @@ module UpdateFuotaTask = {
     ~description=?,
     ~name=?,
     (),
-  ) => new({firmwareUpdateRole, firmwareUpdateImage, loRaWAN, description, name, id})
+  ) =>
+    new({
+      firmwareUpdateRole: firmwareUpdateRole,
+      firmwareUpdateImage: firmwareUpdateImage,
+      loRaWAN: loRaWAN,
+      description: description,
+      name: name,
+      id: id,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UntagResource = {
   type t
   type request = {
@@ -1452,9 +1517,10 @@ module UntagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-iotwireless") @new external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys, resourceArn})
+  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module StartMulticastGroupSession = {
   type t
   type request = {
@@ -1464,9 +1530,10 @@ module StartMulticastGroupSession = {
   type response = {.}
   @module("@aws-sdk/client-iotwireless") @new
   external new: request => t = "StartMulticastGroupSessionCommand"
-  let make = (~loRaWAN, ~id, ()) => new({loRaWAN, id})
+  let make = (~loRaWAN, ~id, ()) => new({loRaWAN: loRaWAN, id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module StartFuotaTask = {
   type t
   type request = {
@@ -1475,9 +1542,10 @@ module StartFuotaTask = {
   }
   type response = {.}
   @module("@aws-sdk/client-iotwireless") @new external new: request => t = "StartFuotaTaskCommand"
-  let make = (~id, ~loRaWAN=?, ()) => new({loRaWAN, id})
+  let make = (~id, ~loRaWAN=?, ()) => new({loRaWAN: loRaWAN, id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module GetServiceProfile = {
   type t
   type request = {
@@ -1496,6 +1564,7 @@ module GetServiceProfile = {
   let make = (~id, ()) => new({id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetPartnerAccount = {
   type t
   type request = {
@@ -1513,9 +1582,11 @@ module GetPartnerAccount = {
   }
   @module("@aws-sdk/client-iotwireless") @new
   external new: request => t = "GetPartnerAccountCommand"
-  let make = (~partnerType, ~partnerAccountId, ()) => new({partnerType, partnerAccountId})
+  let make = (~partnerType, ~partnerAccountId, ()) =>
+    new({partnerType: partnerType, partnerAccountId: partnerAccountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetNetworkAnalyzerConfiguration = {
   type t
   type request = {@as("ConfigurationName") configurationName: networkAnalyzerConfigurationName}
@@ -1533,6 +1604,7 @@ module GetNetworkAnalyzerConfiguration = {
   let make = (~configurationName, ()) => new({configurationName: configurationName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetMulticastGroupSession = {
   type t
   type request = {@as("Id") id: multicastGroupId}
@@ -1542,6 +1614,7 @@ module GetMulticastGroupSession = {
   let make = (~id, ()) => new({id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetMulticastGroup = {
   type t
   type request = {@as("Id") id: multicastGroupId}
@@ -1559,6 +1632,7 @@ module GetMulticastGroup = {
   let make = (~id, ()) => new({id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetFuotaTask = {
   type t
   type request = {@as("Id") id: fuotaTaskId}
@@ -1577,6 +1651,7 @@ module GetFuotaTask = {
   let make = (~id, ()) => new({id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateWirelessGateway = {
   type t
   type request = {
@@ -1592,9 +1667,16 @@ module UpdateWirelessGateway = {
   @module("@aws-sdk/client-iotwireless") @new
   external new: request => t = "UpdateWirelessGatewayCommand"
   let make = (~id, ~netIdFilters=?, ~joinEuiFilters=?, ~description=?, ~name=?, ()) =>
-    new({netIdFilters, joinEuiFilters, description, name, id})
+    new({
+      netIdFilters: netIdFilters,
+      joinEuiFilters: joinEuiFilters,
+      description: description,
+      name: name,
+      id: id,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateResourceEventConfiguration = {
   type t
   type request = {
@@ -1624,9 +1706,17 @@ module UpdateResourceEventConfiguration = {
     ~deviceRegistrationState=?,
     ~partnerType=?,
     (),
-  ) => new({proximity, deviceRegistrationState, partnerType, identifierType, identifier})
+  ) =>
+    new({
+      proximity: proximity,
+      deviceRegistrationState: deviceRegistrationState,
+      partnerType: partnerType,
+      identifierType: identifierType,
+      identifier: identifier,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module TagResource = {
   type t
   type request = {
@@ -1640,9 +1730,10 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-iotwireless") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceArn, ()) => new({tags, resourceArn})
+  let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module StartBulkDisassociateWirelessDeviceFromMulticastGroup = {
   type t
   type request = {
@@ -1653,9 +1744,11 @@ module StartBulkDisassociateWirelessDeviceFromMulticastGroup = {
   type response = {.}
   @module("@aws-sdk/client-iotwireless") @new
   external new: request => t = "StartBulkDisassociateWirelessDeviceFromMulticastGroupCommand"
-  let make = (~id, ~tags=?, ~queryString=?, ()) => new({tags, queryString, id})
+  let make = (~id, ~tags=?, ~queryString=?, ()) =>
+    new({tags: tags, queryString: queryString, id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module StartBulkAssociateWirelessDeviceWithMulticastGroup = {
   type t
   type request = {
@@ -1666,9 +1759,11 @@ module StartBulkAssociateWirelessDeviceWithMulticastGroup = {
   type response = {.}
   @module("@aws-sdk/client-iotwireless") @new
   external new: request => t = "StartBulkAssociateWirelessDeviceWithMulticastGroupCommand"
-  let make = (~id, ~tags=?, ~queryString=?, ()) => new({tags, queryString, id})
+  let make = (~id, ~tags=?, ~queryString=?, ()) =>
+    new({tags: tags, queryString: queryString, id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module SendDataToWirelessDevice = {
   type t
   type request = {
@@ -1690,9 +1785,15 @@ module SendDataToWirelessDevice = {
   @module("@aws-sdk/client-iotwireless") @new
   external new: request => t = "SendDataToWirelessDeviceCommand"
   let make = (~payloadData, ~transmitMode, ~id, ~wirelessMetadata=?, ()) =>
-    new({wirelessMetadata, payloadData, transmitMode, id})
+    new({
+      wirelessMetadata: wirelessMetadata,
+      payloadData: payloadData,
+      transmitMode: transmitMode,
+      id: id,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module SendDataToMulticastGroup = {
   type t
   type request = {
@@ -1703,9 +1804,11 @@ module SendDataToMulticastGroup = {
   type response = {@as("MessageId") messageId: option<multicastGroupMessageId>}
   @module("@aws-sdk/client-iotwireless") @new
   external new: request => t = "SendDataToMulticastGroupCommand"
-  let make = (~wirelessMetadata, ~payloadData, ~id, ()) => new({wirelessMetadata, payloadData, id})
+  let make = (~wirelessMetadata, ~payloadData, ~id, ()) =>
+    new({wirelessMetadata: wirelessMetadata, payloadData: payloadData, id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListTagsForResource = {
   type t
   type request = {
@@ -1724,6 +1827,7 @@ module ListTagsForResource = {
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListServiceProfiles = {
   type t
   type request = {
@@ -1747,9 +1851,11 @@ module ListServiceProfiles = {
   }
   @module("@aws-sdk/client-iotwireless") @new
   external new: request => t = "ListServiceProfilesCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListPartnerAccounts = {
   type t
   type request = {
@@ -1773,9 +1879,11 @@ module ListPartnerAccounts = {
   }
   @module("@aws-sdk/client-iotwireless") @new
   external new: request => t = "ListPartnerAccountsCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListMulticastGroupsByFuotaTask = {
   type t
   type request = {
@@ -1797,9 +1905,11 @@ module ListMulticastGroupsByFuotaTask = {
   }
   @module("@aws-sdk/client-iotwireless") @new
   external new: request => t = "ListMulticastGroupsByFuotaTaskCommand"
-  let make = (~id, ~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken, id})
+  let make = (~id, ~maxResults=?, ~nextToken=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken, id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListMulticastGroups = {
   type t
   type request = {
@@ -1820,9 +1930,11 @@ module ListMulticastGroups = {
   }
   @module("@aws-sdk/client-iotwireless") @new
   external new: request => t = "ListMulticastGroupsCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListFuotaTasks = {
   type t
   type request = {
@@ -1842,9 +1954,11 @@ module ListFuotaTasks = {
     nextToken: option<nextToken>,
   }
   @module("@aws-sdk/client-iotwireless") @new external new: request => t = "ListFuotaTasksCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListDeviceProfiles = {
   type t
   type request = {
@@ -1868,9 +1982,11 @@ module ListDeviceProfiles = {
   }
   @module("@aws-sdk/client-iotwireless") @new
   external new: request => t = "ListDeviceProfilesCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListDestinations = {
   type t
   type request = {
@@ -1893,9 +2009,11 @@ module ListDestinations = {
     nextToken: option<nextToken>,
   }
   @module("@aws-sdk/client-iotwireless") @new external new: request => t = "ListDestinationsCommand"
-  let make = (~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults})
+  let make = (~nextToken=?, ~maxResults=?, ()) =>
+    new({nextToken: nextToken, maxResults: maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetWirelessGatewayFirmwareInformation = {
   type t
   type request = {
@@ -1910,6 +2028,7 @@ module GetWirelessGatewayFirmwareInformation = {
   let make = (~id, ()) => new({id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetResourceEventConfiguration = {
   type t
   type request = {
@@ -1934,9 +2053,10 @@ module GetResourceEventConfiguration = {
   @module("@aws-sdk/client-iotwireless") @new
   external new: request => t = "GetResourceEventConfigurationCommand"
   let make = (~identifierType, ~identifier, ~partnerType=?, ()) =>
-    new({partnerType, identifierType, identifier})
+    new({partnerType: partnerType, identifierType: identifierType, identifier: identifier})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetDeviceProfile = {
   type t
   type request = {@ocaml.doc("<p>The ID of the resource to get.</p>") @as("Id") id: deviceProfileId}
@@ -1952,6 +2072,7 @@ module GetDeviceProfile = {
   let make = (~id, ()) => new({id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateServiceProfile = {
   type t
   type request = {
@@ -1978,9 +2099,10 @@ module CreateServiceProfile = {
   @module("@aws-sdk/client-iotwireless") @new
   external new: request => t = "CreateServiceProfileCommand"
   let make = (~clientRequestToken=?, ~tags=?, ~loRaWAN=?, ~name=?, ()) =>
-    new({clientRequestToken, tags, loRaWAN, name})
+    new({clientRequestToken: clientRequestToken, tags: tags, loRaWAN: loRaWAN, name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateMulticastGroup = {
   type t
   type request = {
@@ -2002,9 +2124,16 @@ module CreateMulticastGroup = {
   @module("@aws-sdk/client-iotwireless") @new
   external new: request => t = "CreateMulticastGroupCommand"
   let make = (~loRaWAN, ~tags=?, ~clientRequestToken=?, ~description=?, ~name=?, ()) =>
-    new({tags, loRaWAN, clientRequestToken, description, name})
+    new({
+      tags: tags,
+      loRaWAN: loRaWAN,
+      clientRequestToken: clientRequestToken,
+      description: description,
+      name: name,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateFuotaTask = {
   type t
   type request = {
@@ -2032,16 +2161,17 @@ module CreateFuotaTask = {
     (),
   ) =>
     new({
-      tags,
-      firmwareUpdateRole,
-      firmwareUpdateImage,
-      loRaWAN,
-      clientRequestToken,
-      description,
-      name,
+      tags: tags,
+      firmwareUpdateRole: firmwareUpdateRole,
+      firmwareUpdateImage: firmwareUpdateImage,
+      loRaWAN: loRaWAN,
+      clientRequestToken: clientRequestToken,
+      description: description,
+      name: name,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateDeviceProfile = {
   type t
   type request = {
@@ -2068,9 +2198,10 @@ module CreateDeviceProfile = {
   @module("@aws-sdk/client-iotwireless") @new
   external new: request => t = "CreateDeviceProfileCommand"
   let make = (~clientRequestToken=?, ~tags=?, ~loRaWAN=?, ~name=?, ()) =>
-    new({clientRequestToken, tags, loRaWAN, name})
+    new({clientRequestToken: clientRequestToken, tags: tags, loRaWAN: loRaWAN, name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateDestination = {
   type t
   type request = {
@@ -2110,9 +2241,19 @@ module CreateDestination = {
     ~tags=?,
     ~description=?,
     (),
-  ) => new({clientRequestToken, tags, roleArn, description, expression, expressionType, name})
+  ) =>
+    new({
+      clientRequestToken: clientRequestToken,
+      tags: tags,
+      roleArn: roleArn,
+      description: description,
+      expression: expression,
+      expressionType: expressionType,
+      name: name,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module AssociateAwsAccountWithPartnerAccount = {
   type t
   type request = {
@@ -2138,9 +2279,10 @@ module AssociateAwsAccountWithPartnerAccount = {
   @module("@aws-sdk/client-iotwireless") @new
   external new: request => t = "AssociateAwsAccountWithPartnerAccountCommand"
   let make = (~sidewalk, ~tags=?, ~clientRequestToken=?, ()) =>
-    new({tags, clientRequestToken, sidewalk})
+    new({tags: tags, clientRequestToken: clientRequestToken, sidewalk: sidewalk})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListQueuedMessages = {
   type t
   type request = {
@@ -2171,9 +2313,15 @@ module ListQueuedMessages = {
   @module("@aws-sdk/client-iotwireless") @new
   external new: request => t = "ListQueuedMessagesCommand"
   let make = (~id, ~wirelessDeviceType=?, ~maxResults=?, ~nextToken=?, ()) =>
-    new({wirelessDeviceType, maxResults, nextToken, id})
+    new({
+      wirelessDeviceType: wirelessDeviceType,
+      maxResults: maxResults,
+      nextToken: nextToken,
+      id: id,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetWirelessGatewayTaskDefinition = {
   type t
   type request = {
@@ -2198,6 +2346,7 @@ module GetWirelessGatewayTaskDefinition = {
   let make = (~id, ()) => new({id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetWirelessGateway = {
   type t
   type request = {
@@ -2226,9 +2375,11 @@ module GetWirelessGateway = {
   }
   @module("@aws-sdk/client-iotwireless") @new
   external new: request => t = "GetWirelessGatewayCommand"
-  let make = (~identifierType, ~identifier, ()) => new({identifierType, identifier})
+  let make = (~identifierType, ~identifier, ()) =>
+    new({identifierType: identifierType, identifier: identifier})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetWirelessDeviceStatistics = {
   type t
   type request = {
@@ -2252,6 +2403,7 @@ module GetWirelessDeviceStatistics = {
   let make = (~wirelessDeviceId, ()) => new({wirelessDeviceId: wirelessDeviceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetWirelessDevice = {
   type t
   type request = {
@@ -2285,9 +2437,11 @@ module GetWirelessDevice = {
   }
   @module("@aws-sdk/client-iotwireless") @new
   external new: request => t = "GetWirelessDeviceCommand"
-  let make = (~identifierType, ~identifier, ()) => new({identifierType, identifier})
+  let make = (~identifierType, ~identifier, ()) =>
+    new({identifierType: identifierType, identifier: identifier})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateWirelessGatewayTaskDefinition = {
   type t
   type request = {
@@ -2320,9 +2474,16 @@ module CreateWirelessGatewayTaskDefinition = {
   @module("@aws-sdk/client-iotwireless") @new
   external new: request => t = "CreateWirelessGatewayTaskDefinitionCommand"
   let make = (~autoCreateTasks, ~tags=?, ~clientRequestToken=?, ~update=?, ~name=?, ()) =>
-    new({tags, clientRequestToken, update, name, autoCreateTasks})
+    new({
+      tags: tags,
+      clientRequestToken: clientRequestToken,
+      update: update,
+      name: name,
+      autoCreateTasks: autoCreateTasks,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateWirelessGateway = {
   type t
   type request = {
@@ -2354,9 +2515,16 @@ module CreateWirelessGateway = {
   @module("@aws-sdk/client-iotwireless") @new
   external new: request => t = "CreateWirelessGatewayCommand"
   let make = (~loRaWAN, ~clientRequestToken=?, ~tags=?, ~description=?, ~name=?, ()) =>
-    new({clientRequestToken, tags, loRaWAN, description, name})
+    new({
+      clientRequestToken: clientRequestToken,
+      tags: tags,
+      loRaWAN: loRaWAN,
+      description: description,
+      name: name,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateWirelessDevice = {
   type t
   type request = {
@@ -2397,9 +2565,19 @@ module CreateWirelessDevice = {
     ~description=?,
     ~name=?,
     (),
-  ) => new({tags, loRaWAN, clientRequestToken, destinationName, description, name, type_})
+  ) =>
+    new({
+      tags: tags,
+      loRaWAN: loRaWAN,
+      clientRequestToken: clientRequestToken,
+      destinationName: destinationName,
+      description: description,
+      name: name,
+      type_: type_,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateLogLevelsByResourceTypes = {
   type t
   type request = {
@@ -2412,9 +2590,14 @@ module UpdateLogLevelsByResourceTypes = {
   @module("@aws-sdk/client-iotwireless") @new
   external new: request => t = "UpdateLogLevelsByResourceTypesCommand"
   let make = (~wirelessGatewayLogOptions=?, ~wirelessDeviceLogOptions=?, ~defaultLogLevel=?, ()) =>
-    new({wirelessGatewayLogOptions, wirelessDeviceLogOptions, defaultLogLevel})
+    new({
+      wirelessGatewayLogOptions: wirelessGatewayLogOptions,
+      wirelessDeviceLogOptions: wirelessDeviceLogOptions,
+      defaultLogLevel: defaultLogLevel,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ListWirelessGatewayTaskDefinitions = {
   type t
   type request = {
@@ -2444,9 +2627,10 @@ module ListWirelessGatewayTaskDefinitions = {
   @module("@aws-sdk/client-iotwireless") @new
   external new: request => t = "ListWirelessGatewayTaskDefinitionsCommand"
   let make = (~taskDefinitionType=?, ~nextToken=?, ~maxResults=?, ()) =>
-    new({taskDefinitionType, nextToken, maxResults})
+    new({taskDefinitionType: taskDefinitionType, nextToken: nextToken, maxResults: maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetLogLevelsByResourceTypes = {
   type t
   type request = {.}
@@ -2461,6 +2645,7 @@ module GetLogLevelsByResourceTypes = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListWirelessGateways = {
   type t
   type request = {
@@ -2484,9 +2669,11 @@ module ListWirelessGateways = {
   }
   @module("@aws-sdk/client-iotwireless") @new
   external new: request => t = "ListWirelessGatewaysCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListWirelessDevices = {
   type t
   type request = {
@@ -2538,14 +2725,14 @@ module ListWirelessDevices = {
     (),
   ) =>
     new({
-      multicastGroupId,
-      fuotaTaskId,
-      wirelessDeviceType,
-      serviceProfileId,
-      deviceProfileId,
-      destinationName,
-      nextToken,
-      maxResults,
+      multicastGroupId: multicastGroupId,
+      fuotaTaskId: fuotaTaskId,
+      wirelessDeviceType: wirelessDeviceType,
+      serviceProfileId: serviceProfileId,
+      deviceProfileId: deviceProfileId,
+      destinationName: destinationName,
+      nextToken: nextToken,
+      maxResults: maxResults,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

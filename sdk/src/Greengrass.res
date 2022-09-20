@@ -632,9 +632,11 @@ module UpdateThingRuntimeConfiguration = {
   type response = {.}
   @module("@aws-sdk/client-greengrass") @new
   external new: request => t = "UpdateThingRuntimeConfigurationCommand"
-  let make = (~thingName, ~telemetryConfiguration=?, ()) => new({thingName, telemetryConfiguration})
+  let make = (~thingName, ~telemetryConfiguration=?, ()) =>
+    new({thingName: thingName, telemetryConfiguration: telemetryConfiguration})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateSubscriptionDefinition = {
   type t
   type request = {
@@ -645,9 +647,11 @@ module UpdateSubscriptionDefinition = {
   type response = {.}
   @module("@aws-sdk/client-greengrass") @new
   external new: request => t = "UpdateSubscriptionDefinitionCommand"
-  let make = (~subscriptionDefinitionId, ~name=?, ()) => new({subscriptionDefinitionId, name})
+  let make = (~subscriptionDefinitionId, ~name=?, ()) =>
+    new({subscriptionDefinitionId: subscriptionDefinitionId, name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateResourceDefinition = {
   type t
   type request = {
@@ -658,9 +662,11 @@ module UpdateResourceDefinition = {
   type response = {.}
   @module("@aws-sdk/client-greengrass") @new
   external new: request => t = "UpdateResourceDefinitionCommand"
-  let make = (~resourceDefinitionId, ~name=?, ()) => new({resourceDefinitionId, name})
+  let make = (~resourceDefinitionId, ~name=?, ()) =>
+    new({resourceDefinitionId: resourceDefinitionId, name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateLoggerDefinition = {
   type t
   type request = {
@@ -671,9 +677,11 @@ module UpdateLoggerDefinition = {
   type response = {.}
   @module("@aws-sdk/client-greengrass") @new
   external new: request => t = "UpdateLoggerDefinitionCommand"
-  let make = (~loggerDefinitionId, ~name=?, ()) => new({name, loggerDefinitionId})
+  let make = (~loggerDefinitionId, ~name=?, ()) =>
+    new({name: name, loggerDefinitionId: loggerDefinitionId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateGroupCertificateConfiguration = {
   type t
   type request = {
@@ -697,9 +705,10 @@ module UpdateGroupCertificateConfiguration = {
   @module("@aws-sdk/client-greengrass") @new
   external new: request => t = "UpdateGroupCertificateConfigurationCommand"
   let make = (~groupId, ~certificateExpiryInMilliseconds=?, ()) =>
-    new({groupId, certificateExpiryInMilliseconds})
+    new({groupId: groupId, certificateExpiryInMilliseconds: certificateExpiryInMilliseconds})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateGroup = {
   type t
   type request = {
@@ -708,9 +717,10 @@ module UpdateGroup = {
   }
   type response = {.}
   @module("@aws-sdk/client-greengrass") @new external new: request => t = "UpdateGroupCommand"
-  let make = (~groupId, ~name=?, ()) => new({name, groupId})
+  let make = (~groupId, ~name=?, ()) => new({name: name, groupId: groupId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateFunctionDefinition = {
   type t
   type request = {
@@ -721,9 +731,11 @@ module UpdateFunctionDefinition = {
   type response = {.}
   @module("@aws-sdk/client-greengrass") @new
   external new: request => t = "UpdateFunctionDefinitionCommand"
-  let make = (~functionDefinitionId, ~name=?, ()) => new({name, functionDefinitionId})
+  let make = (~functionDefinitionId, ~name=?, ()) =>
+    new({name: name, functionDefinitionId: functionDefinitionId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateDeviceDefinition = {
   type t
   type request = {
@@ -734,9 +746,11 @@ module UpdateDeviceDefinition = {
   type response = {.}
   @module("@aws-sdk/client-greengrass") @new
   external new: request => t = "UpdateDeviceDefinitionCommand"
-  let make = (~deviceDefinitionId, ~name=?, ()) => new({name, deviceDefinitionId})
+  let make = (~deviceDefinitionId, ~name=?, ()) =>
+    new({name: name, deviceDefinitionId: deviceDefinitionId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateCoreDefinition = {
   type t
   type request = {
@@ -746,9 +760,11 @@ module UpdateCoreDefinition = {
   type response = {.}
   @module("@aws-sdk/client-greengrass") @new
   external new: request => t = "UpdateCoreDefinitionCommand"
-  let make = (~coreDefinitionId, ~name=?, ()) => new({name, coreDefinitionId})
+  let make = (~coreDefinitionId, ~name=?, ()) =>
+    new({name: name, coreDefinitionId: coreDefinitionId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateConnectorDefinition = {
   type t
   type request = {
@@ -759,9 +775,11 @@ module UpdateConnectorDefinition = {
   type response = {.}
   @module("@aws-sdk/client-greengrass") @new
   external new: request => t = "UpdateConnectorDefinitionCommand"
-  let make = (~connectorDefinitionId, ~name=?, ()) => new({name, connectorDefinitionId})
+  let make = (~connectorDefinitionId, ~name=?, ()) =>
+    new({name: name, connectorDefinitionId: connectorDefinitionId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateConnectivityInfo = {
   type t
   @ocaml.doc("Connectivity information.")
@@ -778,9 +796,11 @@ module UpdateConnectivityInfo = {
   }
   @module("@aws-sdk/client-greengrass") @new
   external new: request => t = "UpdateConnectivityInfoCommand"
-  let make = (~thingName, ~connectivityInfo=?, ()) => new({thingName, connectivityInfo})
+  let make = (~thingName, ~connectivityInfo=?, ()) =>
+    new({thingName: thingName, connectivityInfo: connectivityInfo})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UntagResource = {
   type t
   type request = {
@@ -790,9 +810,10 @@ module UntagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-greengrass") @new external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys, resourceArn})
+  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module TagResource = {
   type t
   @ocaml.doc("A map of the key-value pairs for the resource tag.")
@@ -803,9 +824,10 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-greengrass") @new external new: request => t = "TagResourceCommand"
-  let make = (~resourceArn, ~tags=?, ()) => new({tags, resourceArn})
+  let make = (~resourceArn, ~tags=?, ()) => new({tags: tags, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module StopBulkDeployment = {
   type t
   type request = {
@@ -817,6 +839,7 @@ module StopBulkDeployment = {
   let make = (~bulkDeploymentId, ()) => new({bulkDeploymentId: bulkDeploymentId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module StartBulkDeployment = {
   type t
   type request = {
@@ -843,9 +866,15 @@ module StartBulkDeployment = {
   @module("@aws-sdk/client-greengrass") @new
   external new: request => t = "StartBulkDeploymentCommand"
   let make = (~inputFileUri, ~executionRoleArn, ~tags=?, ~amznClientToken=?, ()) =>
-    new({tags, inputFileUri, executionRoleArn, amznClientToken})
+    new({
+      tags: tags,
+      inputFileUri: inputFileUri,
+      executionRoleArn: executionRoleArn,
+      amznClientToken: amznClientToken,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ResetDeployments = {
   type t
   @ocaml.doc("Information needed to reset deployments.")
@@ -861,9 +890,11 @@ module ResetDeployments = {
     @ocaml.doc("The ARN of the deployment.") @as("DeploymentArn") deploymentArn: option<__string>,
   }
   @module("@aws-sdk/client-greengrass") @new external new: request => t = "ResetDeploymentsCommand"
-  let make = (~groupId, ~force=?, ~amznClientToken=?, ()) => new({groupId, force, amznClientToken})
+  let make = (~groupId, ~force=?, ~amznClientToken=?, ()) =>
+    new({groupId: groupId, force: force, amznClientToken: amznClientToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListTagsForResource = {
   type t
   type request = {
@@ -876,6 +907,7 @@ module ListTagsForResource = {
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListSubscriptionDefinitionVersions = {
   type t
   type request = {
@@ -901,9 +933,14 @@ module ListSubscriptionDefinitionVersions = {
   @module("@aws-sdk/client-greengrass") @new
   external new: request => t = "ListSubscriptionDefinitionVersionsCommand"
   let make = (~subscriptionDefinitionId, ~nextToken=?, ~maxResults=?, ()) =>
-    new({subscriptionDefinitionId, nextToken, maxResults})
+    new({
+      subscriptionDefinitionId: subscriptionDefinitionId,
+      nextToken: nextToken,
+      maxResults: maxResults,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListResourceDefinitionVersions = {
   type t
   type request = {
@@ -929,9 +966,10 @@ module ListResourceDefinitionVersions = {
   @module("@aws-sdk/client-greengrass") @new
   external new: request => t = "ListResourceDefinitionVersionsCommand"
   let make = (~resourceDefinitionId, ~nextToken=?, ~maxResults=?, ()) =>
-    new({resourceDefinitionId, nextToken, maxResults})
+    new({resourceDefinitionId: resourceDefinitionId, nextToken: nextToken, maxResults: maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListLoggerDefinitionVersions = {
   type t
   type request = {
@@ -957,9 +995,10 @@ module ListLoggerDefinitionVersions = {
   @module("@aws-sdk/client-greengrass") @new
   external new: request => t = "ListLoggerDefinitionVersionsCommand"
   let make = (~loggerDefinitionId, ~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken, maxResults, loggerDefinitionId})
+    new({nextToken: nextToken, maxResults: maxResults, loggerDefinitionId: loggerDefinitionId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListGroups = {
   type t
   type request = {
@@ -980,9 +1019,11 @@ module ListGroups = {
     @ocaml.doc("Information about a group.") @as("Groups") groups: option<__listOfGroupInformation>,
   }
   @module("@aws-sdk/client-greengrass") @new external new: request => t = "ListGroupsCommand"
-  let make = (~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults})
+  let make = (~nextToken=?, ~maxResults=?, ()) =>
+    new({nextToken: nextToken, maxResults: maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListGroupVersions = {
   type t
   type request = {
@@ -1005,9 +1046,11 @@ module ListGroupVersions = {
     nextToken: option<__string>,
   }
   @module("@aws-sdk/client-greengrass") @new external new: request => t = "ListGroupVersionsCommand"
-  let make = (~groupId, ~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults, groupId})
+  let make = (~groupId, ~nextToken=?, ~maxResults=?, ()) =>
+    new({nextToken: nextToken, maxResults: maxResults, groupId: groupId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListGroupCertificateAuthorities = {
   type t
   type request = {@ocaml.doc("The ID of the Greengrass group.") @as("GroupId") groupId: __string}
@@ -1021,6 +1064,7 @@ module ListGroupCertificateAuthorities = {
   let make = (~groupId, ()) => new({groupId: groupId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListFunctionDefinitionVersions = {
   type t
   type request = {
@@ -1046,9 +1090,10 @@ module ListFunctionDefinitionVersions = {
   @module("@aws-sdk/client-greengrass") @new
   external new: request => t = "ListFunctionDefinitionVersionsCommand"
   let make = (~functionDefinitionId, ~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken, maxResults, functionDefinitionId})
+    new({nextToken: nextToken, maxResults: maxResults, functionDefinitionId: functionDefinitionId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListDeviceDefinitionVersions = {
   type t
   type request = {
@@ -1074,9 +1119,10 @@ module ListDeviceDefinitionVersions = {
   @module("@aws-sdk/client-greengrass") @new
   external new: request => t = "ListDeviceDefinitionVersionsCommand"
   let make = (~deviceDefinitionId, ~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken, maxResults, deviceDefinitionId})
+    new({nextToken: nextToken, maxResults: maxResults, deviceDefinitionId: deviceDefinitionId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListDeployments = {
   type t
   type request = {
@@ -1099,9 +1145,11 @@ module ListDeployments = {
     deployments: option<deployments>,
   }
   @module("@aws-sdk/client-greengrass") @new external new: request => t = "ListDeploymentsCommand"
-  let make = (~groupId, ~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults, groupId})
+  let make = (~groupId, ~nextToken=?, ~maxResults=?, ()) =>
+    new({nextToken: nextToken, maxResults: maxResults, groupId: groupId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListCoreDefinitionVersions = {
   type t
   type request = {
@@ -1126,9 +1174,10 @@ module ListCoreDefinitionVersions = {
   @module("@aws-sdk/client-greengrass") @new
   external new: request => t = "ListCoreDefinitionVersionsCommand"
   let make = (~coreDefinitionId, ~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken, maxResults, coreDefinitionId})
+    new({nextToken: nextToken, maxResults: maxResults, coreDefinitionId: coreDefinitionId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListConnectorDefinitionVersions = {
   type t
   type request = {
@@ -1154,9 +1203,14 @@ module ListConnectorDefinitionVersions = {
   @module("@aws-sdk/client-greengrass") @new
   external new: request => t = "ListConnectorDefinitionVersionsCommand"
   let make = (~connectorDefinitionId, ~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken, maxResults, connectorDefinitionId})
+    new({
+      nextToken: nextToken,
+      maxResults: maxResults,
+      connectorDefinitionId: connectorDefinitionId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListBulkDeployments = {
   type t
   type request = {
@@ -1179,9 +1233,11 @@ module ListBulkDeployments = {
   }
   @module("@aws-sdk/client-greengrass") @new
   external new: request => t = "ListBulkDeploymentsCommand"
-  let make = (~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults})
+  let make = (~nextToken=?, ~maxResults=?, ()) =>
+    new({nextToken: nextToken, maxResults: maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetThingRuntimeConfiguration = {
   type t
   type request = {@ocaml.doc("The thing name.") @as("ThingName") thingName: __string}
@@ -1194,6 +1250,7 @@ module GetThingRuntimeConfiguration = {
   let make = (~thingName, ()) => new({thingName: thingName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetSubscriptionDefinition = {
   type t
   type request = {
@@ -1223,6 +1280,7 @@ module GetSubscriptionDefinition = {
     new({subscriptionDefinitionId: subscriptionDefinitionId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetServiceRoleForAccount = {
   type t
   type request = {.}
@@ -1238,6 +1296,7 @@ module GetServiceRoleForAccount = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetResourceDefinition = {
   type t
   type request = {
@@ -1266,6 +1325,7 @@ module GetResourceDefinition = {
   let make = (~resourceDefinitionId, ()) => new({resourceDefinitionId: resourceDefinitionId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetLoggerDefinition = {
   type t
   type request = {
@@ -1294,6 +1354,7 @@ module GetLoggerDefinition = {
   let make = (~loggerDefinitionId, ()) => new({loggerDefinitionId: loggerDefinitionId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetGroupVersion = {
   type t
   type request = {
@@ -1316,9 +1377,11 @@ module GetGroupVersion = {
     @ocaml.doc("The ARN of the group version.") @as("Arn") arn: option<__string>,
   }
   @module("@aws-sdk/client-greengrass") @new external new: request => t = "GetGroupVersionCommand"
-  let make = (~groupVersionId, ~groupId, ()) => new({groupVersionId, groupId})
+  let make = (~groupVersionId, ~groupId, ()) =>
+    new({groupVersionId: groupVersionId, groupId: groupId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetGroupCertificateConfiguration = {
   type t
   type request = {@ocaml.doc("The ID of the Greengrass group.") @as("GroupId") groupId: __string}
@@ -1339,6 +1402,7 @@ module GetGroupCertificateConfiguration = {
   let make = (~groupId, ()) => new({groupId: groupId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetGroupCertificateAuthority = {
   type t
   type request = {
@@ -1358,9 +1422,11 @@ module GetGroupCertificateAuthority = {
   }
   @module("@aws-sdk/client-greengrass") @new
   external new: request => t = "GetGroupCertificateAuthorityCommand"
-  let make = (~groupId, ~certificateAuthorityId, ()) => new({groupId, certificateAuthorityId})
+  let make = (~groupId, ~certificateAuthorityId, ()) =>
+    new({groupId: groupId, certificateAuthorityId: certificateAuthorityId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetGroup = {
   type t
   type request = {@ocaml.doc("The ID of the Greengrass group.") @as("GroupId") groupId: __string}
@@ -1385,6 +1451,7 @@ module GetGroup = {
   let make = (~groupId, ()) => new({groupId: groupId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetFunctionDefinition = {
   type t
   type request = {
@@ -1413,6 +1480,7 @@ module GetFunctionDefinition = {
   let make = (~functionDefinitionId, ()) => new({functionDefinitionId: functionDefinitionId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetDeviceDefinition = {
   type t
   type request = {
@@ -1441,6 +1509,7 @@ module GetDeviceDefinition = {
   let make = (~deviceDefinitionId, ()) => new({deviceDefinitionId: deviceDefinitionId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetDeploymentStatus = {
   type t
   type request = {
@@ -1463,9 +1532,10 @@ module GetDeploymentStatus = {
   }
   @module("@aws-sdk/client-greengrass") @new
   external new: request => t = "GetDeploymentStatusCommand"
-  let make = (~groupId, ~deploymentId, ()) => new({groupId, deploymentId})
+  let make = (~groupId, ~deploymentId, ()) => new({groupId: groupId, deploymentId: deploymentId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetCoreDefinition = {
   type t
   type request = {
@@ -1492,6 +1562,7 @@ module GetCoreDefinition = {
   let make = (~coreDefinitionId, ()) => new({coreDefinitionId: coreDefinitionId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetConnectorDefinition = {
   type t
   type request = {
@@ -1520,6 +1591,7 @@ module GetConnectorDefinition = {
   let make = (~connectorDefinitionId, ()) => new({connectorDefinitionId: connectorDefinitionId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetConnectivityInfo = {
   type t
   type request = {@ocaml.doc("The thing name.") @as("ThingName") thingName: __string}
@@ -1534,6 +1606,7 @@ module GetConnectivityInfo = {
   let make = (~thingName, ()) => new({thingName: thingName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetBulkDeploymentStatus = {
   type t
   type request = {
@@ -1556,6 +1629,7 @@ module GetBulkDeploymentStatus = {
   let make = (~bulkDeploymentId, ()) => new({bulkDeploymentId: bulkDeploymentId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetAssociatedRole = {
   type t
   type request = {@ocaml.doc("The ID of the Greengrass group.") @as("GroupId") groupId: __string}
@@ -1569,6 +1643,7 @@ module GetAssociatedRole = {
   let make = (~groupId, ()) => new({groupId: groupId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DisassociateServiceRoleFromAccount = {
   type t
   type request = {.}
@@ -1582,6 +1657,7 @@ module DisassociateServiceRoleFromAccount = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DisassociateRoleFromGroup = {
   type t
   type request = {@ocaml.doc("The ID of the Greengrass group.") @as("GroupId") groupId: __string}
@@ -1597,6 +1673,7 @@ module DisassociateRoleFromGroup = {
   let make = (~groupId, ()) => new({groupId: groupId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteSubscriptionDefinition = {
   type t
   type request = {
@@ -1610,6 +1687,7 @@ module DeleteSubscriptionDefinition = {
     new({subscriptionDefinitionId: subscriptionDefinitionId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteResourceDefinition = {
   type t
   type request = {
@@ -1622,6 +1700,7 @@ module DeleteResourceDefinition = {
   let make = (~resourceDefinitionId, ()) => new({resourceDefinitionId: resourceDefinitionId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteLoggerDefinition = {
   type t
   type request = {
@@ -1634,6 +1713,7 @@ module DeleteLoggerDefinition = {
   let make = (~loggerDefinitionId, ()) => new({loggerDefinitionId: loggerDefinitionId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteGroup = {
   type t
   type request = {@ocaml.doc("The ID of the Greengrass group.") @as("GroupId") groupId: __string}
@@ -1642,6 +1722,7 @@ module DeleteGroup = {
   let make = (~groupId, ()) => new({groupId: groupId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteFunctionDefinition = {
   type t
   type request = {
@@ -1654,6 +1735,7 @@ module DeleteFunctionDefinition = {
   let make = (~functionDefinitionId, ()) => new({functionDefinitionId: functionDefinitionId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteDeviceDefinition = {
   type t
   type request = {
@@ -1666,6 +1748,7 @@ module DeleteDeviceDefinition = {
   let make = (~deviceDefinitionId, ()) => new({deviceDefinitionId: deviceDefinitionId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteCoreDefinition = {
   type t
   type request = {
@@ -1677,6 +1760,7 @@ module DeleteCoreDefinition = {
   let make = (~coreDefinitionId, ()) => new({coreDefinitionId: coreDefinitionId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteConnectorDefinition = {
   type t
   type request = {
@@ -1689,6 +1773,7 @@ module DeleteConnectorDefinition = {
   let make = (~connectorDefinitionId, ()) => new({connectorDefinitionId: connectorDefinitionId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module CreateSubscriptionDefinitionVersion = {
   type t
   type request = {
@@ -1711,9 +1796,14 @@ module CreateSubscriptionDefinitionVersion = {
   @module("@aws-sdk/client-greengrass") @new
   external new: request => t = "CreateSubscriptionDefinitionVersionCommand"
   let make = (~subscriptionDefinitionId, ~subscriptions=?, ~amznClientToken=?, ()) =>
-    new({subscriptions, subscriptionDefinitionId, amznClientToken})
+    new({
+      subscriptions: subscriptions,
+      subscriptionDefinitionId: subscriptionDefinitionId,
+      amznClientToken: amznClientToken,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateSoftwareUpdateJob = {
   type t
   type request = {
@@ -1748,16 +1838,17 @@ module CreateSoftwareUpdateJob = {
     (),
   ) =>
     new({
-      updateTargetsOperatingSystem,
-      updateTargetsArchitecture,
-      updateTargets,
-      updateAgentLogLevel,
-      softwareToUpdate,
-      s3UrlSignerRole,
-      amznClientToken,
+      updateTargetsOperatingSystem: updateTargetsOperatingSystem,
+      updateTargetsArchitecture: updateTargetsArchitecture,
+      updateTargets: updateTargets,
+      updateAgentLogLevel: updateAgentLogLevel,
+      softwareToUpdate: softwareToUpdate,
+      s3UrlSignerRole: s3UrlSignerRole,
+      amznClientToken: amznClientToken,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateLoggerDefinitionVersion = {
   type t
   type request = {
@@ -1779,9 +1870,14 @@ module CreateLoggerDefinitionVersion = {
   @module("@aws-sdk/client-greengrass") @new
   external new: request => t = "CreateLoggerDefinitionVersionCommand"
   let make = (~loggerDefinitionId, ~loggers=?, ~amznClientToken=?, ()) =>
-    new({loggers, loggerDefinitionId, amznClientToken})
+    new({
+      loggers: loggers,
+      loggerDefinitionId: loggerDefinitionId,
+      amznClientToken: amznClientToken,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateGroupVersion = {
   type t
   type request = {
@@ -1834,18 +1930,19 @@ module CreateGroupVersion = {
     (),
   ) =>
     new({
-      subscriptionDefinitionVersionArn,
-      resourceDefinitionVersionArn,
-      loggerDefinitionVersionArn,
-      groupId,
-      functionDefinitionVersionArn,
-      deviceDefinitionVersionArn,
-      coreDefinitionVersionArn,
-      connectorDefinitionVersionArn,
-      amznClientToken,
+      subscriptionDefinitionVersionArn: subscriptionDefinitionVersionArn,
+      resourceDefinitionVersionArn: resourceDefinitionVersionArn,
+      loggerDefinitionVersionArn: loggerDefinitionVersionArn,
+      groupId: groupId,
+      functionDefinitionVersionArn: functionDefinitionVersionArn,
+      deviceDefinitionVersionArn: deviceDefinitionVersionArn,
+      coreDefinitionVersionArn: coreDefinitionVersionArn,
+      connectorDefinitionVersionArn: connectorDefinitionVersionArn,
+      amznClientToken: amznClientToken,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateGroupCertificateAuthority = {
   type t
   type request = {
@@ -1859,9 +1956,11 @@ module CreateGroupCertificateAuthority = {
   }
   @module("@aws-sdk/client-greengrass") @new
   external new: request => t = "CreateGroupCertificateAuthorityCommand"
-  let make = (~groupId, ~amznClientToken=?, ()) => new({groupId, amznClientToken})
+  let make = (~groupId, ~amznClientToken=?, ()) =>
+    new({groupId: groupId, amznClientToken: amznClientToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateGroup = {
   type t
   type request = {
@@ -1890,9 +1989,10 @@ module CreateGroup = {
   }
   @module("@aws-sdk/client-greengrass") @new external new: request => t = "CreateGroupCommand"
   let make = (~name, ~tags=?, ~initialVersion=?, ~amznClientToken=?, ()) =>
-    new({tags, name, initialVersion, amznClientToken})
+    new({tags: tags, name: name, initialVersion: initialVersion, amznClientToken: amznClientToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateDeviceDefinitionVersion = {
   type t
   type request = {
@@ -1915,9 +2015,14 @@ module CreateDeviceDefinitionVersion = {
   @module("@aws-sdk/client-greengrass") @new
   external new: request => t = "CreateDeviceDefinitionVersionCommand"
   let make = (~deviceDefinitionId, ~devices=?, ~amznClientToken=?, ()) =>
-    new({devices, deviceDefinitionId, amznClientToken})
+    new({
+      devices: devices,
+      deviceDefinitionId: deviceDefinitionId,
+      amznClientToken: amznClientToken,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateDeployment = {
   type t
   type request = {
@@ -1947,9 +2052,17 @@ module CreateDeployment = {
     ~deploymentId=?,
     ~amznClientToken=?,
     (),
-  ) => new({groupVersionId, groupId, deploymentType, deploymentId, amznClientToken})
+  ) =>
+    new({
+      groupVersionId: groupVersionId,
+      groupId: groupId,
+      deploymentType: deploymentType,
+      deploymentId: deploymentId,
+      amznClientToken: amznClientToken,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateCoreDefinitionVersion = {
   type t
   type request = {
@@ -1971,9 +2084,10 @@ module CreateCoreDefinitionVersion = {
   @module("@aws-sdk/client-greengrass") @new
   external new: request => t = "CreateCoreDefinitionVersionCommand"
   let make = (~coreDefinitionId, ~cores=?, ~amznClientToken=?, ()) =>
-    new({cores, coreDefinitionId, amznClientToken})
+    new({cores: cores, coreDefinitionId: coreDefinitionId, amznClientToken: amznClientToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module AssociateServiceRoleToAccount = {
   type t
   type request = {
@@ -1991,6 +2105,7 @@ module AssociateServiceRoleToAccount = {
   let make = (~roleArn, ()) => new({roleArn: roleArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module AssociateRoleToGroup = {
   type t
   type request = {
@@ -2010,9 +2125,10 @@ module AssociateRoleToGroup = {
   }
   @module("@aws-sdk/client-greengrass") @new
   external new: request => t = "AssociateRoleToGroupCommand"
-  let make = (~roleArn, ~groupId, ()) => new({roleArn, groupId})
+  let make = (~roleArn, ~groupId, ()) => new({roleArn: roleArn, groupId: groupId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListSubscriptionDefinitions = {
   type t
   type request = {
@@ -2035,9 +2151,11 @@ module ListSubscriptionDefinitions = {
   }
   @module("@aws-sdk/client-greengrass") @new
   external new: request => t = "ListSubscriptionDefinitionsCommand"
-  let make = (~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults})
+  let make = (~nextToken=?, ~maxResults=?, ()) =>
+    new({nextToken: nextToken, maxResults: maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListResourceDefinitions = {
   type t
   type request = {
@@ -2060,9 +2178,11 @@ module ListResourceDefinitions = {
   }
   @module("@aws-sdk/client-greengrass") @new
   external new: request => t = "ListResourceDefinitionsCommand"
-  let make = (~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults})
+  let make = (~nextToken=?, ~maxResults=?, ()) =>
+    new({nextToken: nextToken, maxResults: maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListLoggerDefinitions = {
   type t
   type request = {
@@ -2085,9 +2205,11 @@ module ListLoggerDefinitions = {
   }
   @module("@aws-sdk/client-greengrass") @new
   external new: request => t = "ListLoggerDefinitionsCommand"
-  let make = (~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults})
+  let make = (~nextToken=?, ~maxResults=?, ()) =>
+    new({nextToken: nextToken, maxResults: maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListFunctionDefinitions = {
   type t
   type request = {
@@ -2110,9 +2232,11 @@ module ListFunctionDefinitions = {
   }
   @module("@aws-sdk/client-greengrass") @new
   external new: request => t = "ListFunctionDefinitionsCommand"
-  let make = (~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults})
+  let make = (~nextToken=?, ~maxResults=?, ()) =>
+    new({nextToken: nextToken, maxResults: maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListDeviceDefinitions = {
   type t
   type request = {
@@ -2135,9 +2259,11 @@ module ListDeviceDefinitions = {
   }
   @module("@aws-sdk/client-greengrass") @new
   external new: request => t = "ListDeviceDefinitionsCommand"
-  let make = (~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults})
+  let make = (~nextToken=?, ~maxResults=?, ()) =>
+    new({nextToken: nextToken, maxResults: maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListCoreDefinitions = {
   type t
   type request = {
@@ -2160,9 +2286,11 @@ module ListCoreDefinitions = {
   }
   @module("@aws-sdk/client-greengrass") @new
   external new: request => t = "ListCoreDefinitionsCommand"
-  let make = (~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults})
+  let make = (~nextToken=?, ~maxResults=?, ()) =>
+    new({nextToken: nextToken, maxResults: maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListConnectorDefinitions = {
   type t
   type request = {
@@ -2185,9 +2313,11 @@ module ListConnectorDefinitions = {
   }
   @module("@aws-sdk/client-greengrass") @new
   external new: request => t = "ListConnectorDefinitionsCommand"
-  let make = (~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults})
+  let make = (~nextToken=?, ~maxResults=?, ()) =>
+    new({nextToken: nextToken, maxResults: maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetSubscriptionDefinitionVersion = {
   type t
   type request = {
@@ -2225,9 +2355,14 @@ module GetSubscriptionDefinitionVersion = {
   @module("@aws-sdk/client-greengrass") @new
   external new: request => t = "GetSubscriptionDefinitionVersionCommand"
   let make = (~subscriptionDefinitionVersionId, ~subscriptionDefinitionId, ~nextToken=?, ()) =>
-    new({subscriptionDefinitionVersionId, subscriptionDefinitionId, nextToken})
+    new({
+      subscriptionDefinitionVersionId: subscriptionDefinitionVersionId,
+      subscriptionDefinitionId: subscriptionDefinitionId,
+      nextToken: nextToken,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetLoggerDefinitionVersion = {
   type t
   type request = {
@@ -2260,9 +2395,14 @@ module GetLoggerDefinitionVersion = {
   @module("@aws-sdk/client-greengrass") @new
   external new: request => t = "GetLoggerDefinitionVersionCommand"
   let make = (~loggerDefinitionVersionId, ~loggerDefinitionId, ~nextToken=?, ()) =>
-    new({nextToken, loggerDefinitionVersionId, loggerDefinitionId})
+    new({
+      nextToken: nextToken,
+      loggerDefinitionVersionId: loggerDefinitionVersionId,
+      loggerDefinitionId: loggerDefinitionId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetDeviceDefinitionVersion = {
   type t
   type request = {
@@ -2300,9 +2440,14 @@ module GetDeviceDefinitionVersion = {
   @module("@aws-sdk/client-greengrass") @new
   external new: request => t = "GetDeviceDefinitionVersionCommand"
   let make = (~deviceDefinitionVersionId, ~deviceDefinitionId, ~nextToken=?, ()) =>
-    new({nextToken, deviceDefinitionVersionId, deviceDefinitionId})
+    new({
+      nextToken: nextToken,
+      deviceDefinitionVersionId: deviceDefinitionVersionId,
+      deviceDefinitionId: deviceDefinitionId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetCoreDefinitionVersion = {
   type t
   type request = {
@@ -2334,9 +2479,10 @@ module GetCoreDefinitionVersion = {
   @module("@aws-sdk/client-greengrass") @new
   external new: request => t = "GetCoreDefinitionVersionCommand"
   let make = (~coreDefinitionVersionId, ~coreDefinitionId, ()) =>
-    new({coreDefinitionVersionId, coreDefinitionId})
+    new({coreDefinitionVersionId: coreDefinitionVersionId, coreDefinitionId: coreDefinitionId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateSubscriptionDefinition = {
   type t
   type request = {
@@ -2367,9 +2513,10 @@ module CreateSubscriptionDefinition = {
   @module("@aws-sdk/client-greengrass") @new
   external new: request => t = "CreateSubscriptionDefinitionCommand"
   let make = (~tags=?, ~name=?, ~initialVersion=?, ~amznClientToken=?, ()) =>
-    new({tags, name, initialVersion, amznClientToken})
+    new({tags: tags, name: name, initialVersion: initialVersion, amznClientToken: amznClientToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateLoggerDefinition = {
   type t
   type request = {
@@ -2400,9 +2547,10 @@ module CreateLoggerDefinition = {
   @module("@aws-sdk/client-greengrass") @new
   external new: request => t = "CreateLoggerDefinitionCommand"
   let make = (~tags=?, ~name=?, ~initialVersion=?, ~amznClientToken=?, ()) =>
-    new({tags, name, initialVersion, amznClientToken})
+    new({tags: tags, name: name, initialVersion: initialVersion, amznClientToken: amznClientToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateDeviceDefinition = {
   type t
   type request = {
@@ -2433,9 +2581,10 @@ module CreateDeviceDefinition = {
   @module("@aws-sdk/client-greengrass") @new
   external new: request => t = "CreateDeviceDefinitionCommand"
   let make = (~tags=?, ~name=?, ~initialVersion=?, ~amznClientToken=?, ()) =>
-    new({tags, name, initialVersion, amznClientToken})
+    new({tags: tags, name: name, initialVersion: initialVersion, amznClientToken: amznClientToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateCoreDefinition = {
   type t
   @ocaml.doc("Information needed to create a core definition.")
@@ -2467,9 +2616,10 @@ module CreateCoreDefinition = {
   @module("@aws-sdk/client-greengrass") @new
   external new: request => t = "CreateCoreDefinitionCommand"
   let make = (~tags=?, ~name=?, ~initialVersion=?, ~amznClientToken=?, ()) =>
-    new({tags, name, initialVersion, amznClientToken})
+    new({tags: tags, name: name, initialVersion: initialVersion, amznClientToken: amznClientToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateConnectorDefinitionVersion = {
   type t
   type request = {
@@ -2495,9 +2645,14 @@ module CreateConnectorDefinitionVersion = {
   @module("@aws-sdk/client-greengrass") @new
   external new: request => t = "CreateConnectorDefinitionVersionCommand"
   let make = (~connectorDefinitionId, ~connectors=?, ~amznClientToken=?, ()) =>
-    new({connectors, connectorDefinitionId, amznClientToken})
+    new({
+      connectors: connectors,
+      connectorDefinitionId: connectorDefinitionId,
+      amznClientToken: amznClientToken,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListBulkDeploymentDetailedReports = {
   type t
   type request = {
@@ -2523,9 +2678,10 @@ module ListBulkDeploymentDetailedReports = {
   @module("@aws-sdk/client-greengrass") @new
   external new: request => t = "ListBulkDeploymentDetailedReportsCommand"
   let make = (~bulkDeploymentId, ~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken, maxResults, bulkDeploymentId})
+    new({nextToken: nextToken, maxResults: maxResults, bulkDeploymentId: bulkDeploymentId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetConnectorDefinitionVersion = {
   type t
   type request = {
@@ -2563,9 +2719,14 @@ module GetConnectorDefinitionVersion = {
   @module("@aws-sdk/client-greengrass") @new
   external new: request => t = "GetConnectorDefinitionVersionCommand"
   let make = (~connectorDefinitionVersionId, ~connectorDefinitionId, ~nextToken=?, ()) =>
-    new({nextToken, connectorDefinitionVersionId, connectorDefinitionId})
+    new({
+      nextToken: nextToken,
+      connectorDefinitionVersionId: connectorDefinitionVersionId,
+      connectorDefinitionId: connectorDefinitionId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateConnectorDefinition = {
   type t
   type request = {
@@ -2596,9 +2757,10 @@ module CreateConnectorDefinition = {
   @module("@aws-sdk/client-greengrass") @new
   external new: request => t = "CreateConnectorDefinitionCommand"
   let make = (~tags=?, ~name=?, ~initialVersion=?, ~amznClientToken=?, ()) =>
-    new({tags, name, initialVersion, amznClientToken})
+    new({tags: tags, name: name, initialVersion: initialVersion, amznClientToken: amznClientToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateResourceDefinitionVersion = {
   type t
   type request = {
@@ -2620,9 +2782,14 @@ module CreateResourceDefinitionVersion = {
   @module("@aws-sdk/client-greengrass") @new
   external new: request => t = "CreateResourceDefinitionVersionCommand"
   let make = (~resourceDefinitionId, ~resources=?, ~amznClientToken=?, ()) =>
-    new({resources, resourceDefinitionId, amznClientToken})
+    new({
+      resources: resources,
+      resourceDefinitionId: resourceDefinitionId,
+      amznClientToken: amznClientToken,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetResourceDefinitionVersion = {
   type t
   type request = {
@@ -2650,9 +2817,13 @@ module GetResourceDefinitionVersion = {
   @module("@aws-sdk/client-greengrass") @new
   external new: request => t = "GetResourceDefinitionVersionCommand"
   let make = (~resourceDefinitionVersionId, ~resourceDefinitionId, ()) =>
-    new({resourceDefinitionVersionId, resourceDefinitionId})
+    new({
+      resourceDefinitionVersionId: resourceDefinitionVersionId,
+      resourceDefinitionId: resourceDefinitionId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateResourceDefinition = {
   type t
   type request = {
@@ -2683,9 +2854,10 @@ module CreateResourceDefinition = {
   @module("@aws-sdk/client-greengrass") @new
   external new: request => t = "CreateResourceDefinitionCommand"
   let make = (~tags=?, ~name=?, ~initialVersion=?, ~amznClientToken=?, ()) =>
-    new({tags, name, initialVersion, amznClientToken})
+    new({tags: tags, name: name, initialVersion: initialVersion, amznClientToken: amznClientToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateFunctionDefinitionVersion = {
   type t
   @ocaml.doc("Information needed to create a function definition version.")
@@ -2714,9 +2886,15 @@ module CreateFunctionDefinitionVersion = {
   @module("@aws-sdk/client-greengrass") @new
   external new: request => t = "CreateFunctionDefinitionVersionCommand"
   let make = (~functionDefinitionId, ~functions=?, ~defaultConfig=?, ~amznClientToken=?, ()) =>
-    new({functions, functionDefinitionId, defaultConfig, amznClientToken})
+    new({
+      functions: functions,
+      functionDefinitionId: functionDefinitionId,
+      defaultConfig: defaultConfig,
+      amznClientToken: amznClientToken,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetFunctionDefinitionVersion = {
   type t
   type request = {
@@ -2754,9 +2932,14 @@ module GetFunctionDefinitionVersion = {
   @module("@aws-sdk/client-greengrass") @new
   external new: request => t = "GetFunctionDefinitionVersionCommand"
   let make = (~functionDefinitionVersionId, ~functionDefinitionId, ~nextToken=?, ()) =>
-    new({nextToken, functionDefinitionVersionId, functionDefinitionId})
+    new({
+      nextToken: nextToken,
+      functionDefinitionVersionId: functionDefinitionVersionId,
+      functionDefinitionId: functionDefinitionId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateFunctionDefinition = {
   type t
   type request = {
@@ -2787,6 +2970,6 @@ module CreateFunctionDefinition = {
   @module("@aws-sdk/client-greengrass") @new
   external new: request => t = "CreateFunctionDefinitionCommand"
   let make = (~tags=?, ~name=?, ~initialVersion=?, ~amznClientToken=?, ()) =>
-    new({tags, name, initialVersion, amznClientToken})
+    new({tags: tags, name: name, initialVersion: initialVersion, amznClientToken: amznClientToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

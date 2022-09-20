@@ -125,9 +125,16 @@ module GetProducts = {
   }
   @module("@aws-sdk/client-pricing") @new external new: request => t = "GetProductsCommand"
   let make = (~maxResults=?, ~nextToken=?, ~formatVersion=?, ~filters=?, ~serviceCode=?, ()) =>
-    new({maxResults, nextToken, formatVersion, filters, serviceCode})
+    new({
+      maxResults: maxResults,
+      nextToken: nextToken,
+      formatVersion: formatVersion,
+      filters: filters,
+      serviceCode: serviceCode,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetAttributeValues = {
   type t
   type request = {
@@ -160,9 +167,15 @@ module GetAttributeValues = {
   }
   @module("@aws-sdk/client-pricing") @new external new: request => t = "GetAttributeValuesCommand"
   let make = (~attributeName, ~serviceCode, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults, nextToken, attributeName, serviceCode})
+    new({
+      maxResults: maxResults,
+      nextToken: nextToken,
+      attributeName: attributeName,
+      serviceCode: serviceCode,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeServices = {
   type t
   type request = {
@@ -199,6 +212,11 @@ module DescribeServices = {
   }
   @module("@aws-sdk/client-pricing") @new external new: request => t = "DescribeServicesCommand"
   let make = (~maxResults=?, ~nextToken=?, ~formatVersion=?, ~serviceCode=?, ()) =>
-    new({maxResults, nextToken, formatVersion, serviceCode})
+    new({
+      maxResults: maxResults,
+      nextToken: nextToken,
+      formatVersion: formatVersion,
+      serviceCode: serviceCode,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

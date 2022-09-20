@@ -287,6 +287,7 @@ module CancelStatement = {
   let make = (~id, ()) => new({id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListSchemas = {
   type t
   type request = {
@@ -351,17 +352,18 @@ module ListSchemas = {
     (),
   ) =>
     new({
-      maxResults,
-      nextToken,
-      schemaPattern,
-      connectedDatabase,
-      database,
-      dbUser,
-      secretArn,
-      clusterIdentifier,
+      maxResults: maxResults,
+      nextToken: nextToken,
+      schemaPattern: schemaPattern,
+      connectedDatabase: connectedDatabase,
+      database: database,
+      dbUser: dbUser,
+      secretArn: secretArn,
+      clusterIdentifier: clusterIdentifier,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListDatabases = {
   type t
   type request = {
@@ -412,9 +414,18 @@ module ListDatabases = {
     ~secretArn=?,
     ~clusterIdentifier=?,
     (),
-  ) => new({maxResults, nextToken, dbUser, secretArn, database, clusterIdentifier})
+  ) =>
+    new({
+      maxResults: maxResults,
+      nextToken: nextToken,
+      dbUser: dbUser,
+      secretArn: secretArn,
+      database: database,
+      clusterIdentifier: clusterIdentifier,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module BatchExecuteStatement = {
   type t
   type request = {
@@ -479,9 +490,19 @@ module BatchExecuteStatement = {
     ~secretArn=?,
     ~clusterIdentifier=?,
     (),
-  ) => new({statementName, withEvent, database, dbUser, secretArn, clusterIdentifier, sqls})
+  ) =>
+    new({
+      statementName: statementName,
+      withEvent: withEvent,
+      database: database,
+      dbUser: dbUser,
+      secretArn: secretArn,
+      clusterIdentifier: clusterIdentifier,
+      sqls: sqls,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListTables = {
   type t
   type request = {
@@ -556,18 +577,19 @@ module ListTables = {
     (),
   ) =>
     new({
-      maxResults,
-      nextToken,
-      tablePattern,
-      schemaPattern,
-      connectedDatabase,
-      database,
-      dbUser,
-      secretArn,
-      clusterIdentifier,
+      maxResults: maxResults,
+      nextToken: nextToken,
+      tablePattern: tablePattern,
+      schemaPattern: schemaPattern,
+      connectedDatabase: connectedDatabase,
+      database: database,
+      dbUser: dbUser,
+      secretArn: secretArn,
+      clusterIdentifier: clusterIdentifier,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ExecuteStatement = {
   type t
   type request = {
@@ -637,9 +659,19 @@ module ExecuteStatement = {
     ~clusterIdentifier=?,
     (),
   ) =>
-    new({parameters, statementName, withEvent, database, dbUser, secretArn, clusterIdentifier, sql})
+    new({
+      parameters: parameters,
+      statementName: statementName,
+      withEvent: withEvent,
+      database: database,
+      dbUser: dbUser,
+      secretArn: secretArn,
+      clusterIdentifier: clusterIdentifier,
+      sql: sql,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeTable = {
   type t
   type request = {
@@ -710,18 +742,19 @@ module DescribeTable = {
     (),
   ) =>
     new({
-      maxResults,
-      nextToken,
-      table,
-      schema,
-      connectedDatabase,
-      database,
-      dbUser,
-      secretArn,
-      clusterIdentifier,
+      maxResults: maxResults,
+      nextToken: nextToken,
+      table: table,
+      schema: schema,
+      connectedDatabase: connectedDatabase,
+      database: database,
+      dbUser: dbUser,
+      secretArn: secretArn,
+      clusterIdentifier: clusterIdentifier,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeStatement = {
   type t
   type request = {
@@ -819,6 +852,7 @@ module DescribeStatement = {
   let make = (~id, ()) => new({id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetStatementResult = {
   type t
   type request = {
@@ -850,9 +884,10 @@ module GetStatementResult = {
   }
   @module("@aws-sdk/client-redshift-data") @new
   external new: request => t = "GetStatementResultCommand"
-  let make = (~id, ~nextToken=?, ()) => new({nextToken, id})
+  let make = (~id, ~nextToken=?, ()) => new({nextToken: nextToken, id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListStatements = {
   type t
   type request = {
@@ -912,6 +947,12 @@ module ListStatements = {
   }
   @module("@aws-sdk/client-redshift-data") @new external new: request => t = "ListStatementsCommand"
   let make = (~roleLevel=?, ~status=?, ~statementName=?, ~maxResults=?, ~nextToken=?, ()) =>
-    new({roleLevel, status, statementName, maxResults, nextToken})
+    new({
+      roleLevel: roleLevel,
+      status: status,
+      statementName: statementName,
+      maxResults: maxResults,
+      nextToken: nextToken,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

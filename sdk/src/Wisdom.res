@@ -422,6 +422,7 @@ module RemoveKnowledgeBaseTemplateUri = {
   let make = (~knowledgeBaseId, ()) => new({knowledgeBaseId: knowledgeBaseId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteKnowledgeBase = {
   type t
   type request = {
@@ -435,6 +436,7 @@ module DeleteKnowledgeBase = {
   let make = (~knowledgeBaseId, ()) => new({knowledgeBaseId: knowledgeBaseId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteContent = {
   type t
   type request = {
@@ -449,9 +451,11 @@ module DeleteContent = {
   }
   type response = {.}
   @module("@aws-sdk/client-wisdom") @new external new: request => t = "DeleteContentCommand"
-  let make = (~contentId, ~knowledgeBaseId, ()) => new({contentId, knowledgeBaseId})
+  let make = (~contentId, ~knowledgeBaseId, ()) =>
+    new({contentId: contentId, knowledgeBaseId: knowledgeBaseId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteAssistantAssociation = {
   type t
   type request = {
@@ -468,9 +472,10 @@ module DeleteAssistantAssociation = {
   @module("@aws-sdk/client-wisdom") @new
   external new: request => t = "DeleteAssistantAssociationCommand"
   let make = (~assistantId, ~assistantAssociationId, ()) =>
-    new({assistantId, assistantAssociationId})
+    new({assistantId: assistantId, assistantAssociationId: assistantAssociationId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteAssistant = {
   type t
   type request = {
@@ -484,6 +489,7 @@ module DeleteAssistant = {
   let make = (~assistantId, ()) => new({assistantId: assistantId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UntagResource = {
   type t
   type request = {
@@ -492,9 +498,10 @@ module UntagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-wisdom") @new external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys, resourceArn})
+  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module TagResource = {
   type t
   type request = {
@@ -504,9 +511,10 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-wisdom") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceArn, ()) => new({tags, resourceArn})
+  let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module StartContentUpload = {
   type t
   type request = {
@@ -524,9 +532,11 @@ module StartContentUpload = {
     @ocaml.doc("<p>The identifier of the upload.</p>") uploadId: nonEmptyString,
   }
   @module("@aws-sdk/client-wisdom") @new external new: request => t = "StartContentUploadCommand"
-  let make = (~contentType, ~knowledgeBaseId, ()) => new({contentType, knowledgeBaseId})
+  let make = (~contentType, ~knowledgeBaseId, ()) =>
+    new({contentType: contentType, knowledgeBaseId: knowledgeBaseId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListTagsForResource = {
   type t
   type request = {
@@ -540,6 +550,7 @@ module ListTagsForResource = {
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateContent = {
   type t
   type request = {
@@ -584,17 +595,18 @@ module UpdateContent = {
     (),
   ) =>
     new({
-      uploadId,
-      metadata,
-      removeOverrideLinkOutUri,
-      overrideLinkOutUri,
-      title,
-      revisionId,
-      contentId,
-      knowledgeBaseId,
+      uploadId: uploadId,
+      metadata: metadata,
+      removeOverrideLinkOutUri: removeOverrideLinkOutUri,
+      overrideLinkOutUri: overrideLinkOutUri,
+      title: title,
+      revisionId: revisionId,
+      contentId: contentId,
+      knowledgeBaseId: knowledgeBaseId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module NotifyRecommendationsReceived = {
   type t
   type request = {
@@ -618,9 +630,10 @@ module NotifyRecommendationsReceived = {
   @module("@aws-sdk/client-wisdom") @new
   external new: request => t = "NotifyRecommendationsReceivedCommand"
   let make = (~recommendationIds, ~sessionId, ~assistantId, ()) =>
-    new({recommendationIds, sessionId, assistantId})
+    new({recommendationIds: recommendationIds, sessionId: sessionId, assistantId: assistantId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetSession = {
   type t
   type request = {
@@ -635,9 +648,10 @@ module GetSession = {
   }
   type response = {@ocaml.doc("<p>The session.</p>") session: option<sessionData>}
   @module("@aws-sdk/client-wisdom") @new external new: request => t = "GetSessionCommand"
-  let make = (~sessionId, ~assistantId, ()) => new({sessionId, assistantId})
+  let make = (~sessionId, ~assistantId, ()) => new({sessionId: sessionId, assistantId: assistantId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetContentSummary = {
   type t
   type request = {
@@ -652,9 +666,11 @@ module GetContentSummary = {
   }
   type response = {@ocaml.doc("<p>The content summary.</p>") contentSummary: option<contentSummary>}
   @module("@aws-sdk/client-wisdom") @new external new: request => t = "GetContentSummaryCommand"
-  let make = (~knowledgeBaseId, ~contentId, ()) => new({knowledgeBaseId, contentId})
+  let make = (~knowledgeBaseId, ~contentId, ()) =>
+    new({knowledgeBaseId: knowledgeBaseId, contentId: contentId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetContent = {
   type t
   type request = {
@@ -669,9 +685,11 @@ module GetContent = {
   }
   type response = {@ocaml.doc("<p>The content.</p>") content: option<contentData>}
   @module("@aws-sdk/client-wisdom") @new external new: request => t = "GetContentCommand"
-  let make = (~knowledgeBaseId, ~contentId, ()) => new({knowledgeBaseId, contentId})
+  let make = (~knowledgeBaseId, ~contentId, ()) =>
+    new({knowledgeBaseId: knowledgeBaseId, contentId: contentId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetAssistant = {
   type t
   type request = {
@@ -687,6 +705,7 @@ module GetAssistant = {
   let make = (~assistantId, ()) => new({assistantId: assistantId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateSession = {
   type t
   type request = {
@@ -705,9 +724,16 @@ module CreateSession = {
   type response = {@ocaml.doc("<p>The session.</p>") session: option<sessionData>}
   @module("@aws-sdk/client-wisdom") @new external new: request => t = "CreateSessionCommand"
   let make = (~name, ~assistantId, ~tags=?, ~description=?, ~clientToken=?, ()) =>
-    new({tags, description, name, assistantId, clientToken})
+    new({
+      tags: tags,
+      description: description,
+      name: name,
+      assistantId: assistantId,
+      clientToken: clientToken,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateContent = {
   type t
   type request = {
@@ -750,9 +776,19 @@ For example, when synchronizing data between an external system and Wisdom, you 
     ~title=?,
     (),
   ) =>
-    new({tags, clientToken, uploadId, metadata, overrideLinkOutUri, title, name, knowledgeBaseId})
+    new({
+      tags: tags,
+      clientToken: clientToken,
+      uploadId: uploadId,
+      metadata: metadata,
+      overrideLinkOutUri: overrideLinkOutUri,
+      title: title,
+      name: name,
+      knowledgeBaseId: knowledgeBaseId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateAssistant = {
   type t
   type request = {
@@ -779,9 +815,18 @@ module CreateAssistant = {
     ~description=?,
     ~clientToken=?,
     (),
-  ) => new({serverSideEncryptionConfiguration, tags, description, type_, name, clientToken})
+  ) =>
+    new({
+      serverSideEncryptionConfiguration: serverSideEncryptionConfiguration,
+      tags: tags,
+      description: description,
+      type_: type_,
+      name: name,
+      clientToken: clientToken,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module SearchSessions = {
   type t
   type request = {
@@ -806,9 +851,15 @@ response in the next request to retrieve the next set of results.</p>")
   }
   @module("@aws-sdk/client-wisdom") @new external new: request => t = "SearchSessionsCommand"
   let make = (~searchExpression, ~assistantId, ~maxResults=?, ~nextToken=?, ()) =>
-    new({searchExpression, assistantId, maxResults, nextToken})
+    new({
+      searchExpression: searchExpression,
+      assistantId: assistantId,
+      maxResults: maxResults,
+      nextToken: nextToken,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module SearchContent = {
   type t
   type request = {
@@ -834,9 +885,15 @@ response in the next request to retrieve the next set of results.</p>")
   }
   @module("@aws-sdk/client-wisdom") @new external new: request => t = "SearchContentCommand"
   let make = (~searchExpression, ~knowledgeBaseId, ~maxResults=?, ~nextToken=?, ()) =>
-    new({searchExpression, knowledgeBaseId, maxResults, nextToken})
+    new({
+      searchExpression: searchExpression,
+      knowledgeBaseId: knowledgeBaseId,
+      maxResults: maxResults,
+      nextToken: nextToken,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListContents = {
   type t
   type request = {
@@ -859,9 +916,10 @@ response in the next request to retrieve the next set of results.</p>")
   }
   @module("@aws-sdk/client-wisdom") @new external new: request => t = "ListContentsCommand"
   let make = (~knowledgeBaseId, ~maxResults=?, ~nextToken=?, ()) =>
-    new({knowledgeBaseId, maxResults, nextToken})
+    new({knowledgeBaseId: knowledgeBaseId, maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListAssistants = {
   type t
   type request = {
@@ -879,9 +937,11 @@ response in the next request to retrieve the next set of results.</p>")
     @ocaml.doc("<p>Information about the assistants.</p>") assistantSummaries: assistantList,
   }
   @module("@aws-sdk/client-wisdom") @new external new: request => t = "ListAssistantsCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetAssistantAssociation = {
   type t
   type request = {
@@ -901,9 +961,10 @@ module GetAssistantAssociation = {
   @module("@aws-sdk/client-wisdom") @new
   external new: request => t = "GetAssistantAssociationCommand"
   let make = (~assistantId, ~assistantAssociationId, ()) =>
-    new({assistantId, assistantAssociationId})
+    new({assistantId: assistantId, assistantAssociationId: assistantAssociationId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateAssistantAssociation = {
   type t
   type request = {
@@ -927,9 +988,16 @@ module CreateAssistantAssociation = {
   @module("@aws-sdk/client-wisdom") @new
   external new: request => t = "CreateAssistantAssociationCommand"
   let make = (~association, ~associationType, ~assistantId, ~tags=?, ~clientToken=?, ()) =>
-    new({tags, clientToken, association, associationType, assistantId})
+    new({
+      tags: tags,
+      clientToken: clientToken,
+      association: association,
+      associationType: associationType,
+      assistantId: assistantId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateKnowledgeBaseTemplateUri = {
   type t
   type request = {
@@ -944,9 +1012,11 @@ module UpdateKnowledgeBaseTemplateUri = {
   }
   @module("@aws-sdk/client-wisdom") @new
   external new: request => t = "UpdateKnowledgeBaseTemplateUriCommand"
-  let make = (~templateUri, ~knowledgeBaseId, ()) => new({templateUri, knowledgeBaseId})
+  let make = (~templateUri, ~knowledgeBaseId, ()) =>
+    new({templateUri: templateUri, knowledgeBaseId: knowledgeBaseId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListAssistantAssociations = {
   type t
   type request = {
@@ -971,9 +1041,10 @@ response in the next request to retrieve the next set of results.</p>")
   @module("@aws-sdk/client-wisdom") @new
   external new: request => t = "ListAssistantAssociationsCommand"
   let make = (~assistantId, ~maxResults=?, ~nextToken=?, ()) =>
-    new({assistantId, maxResults, nextToken})
+    new({assistantId: assistantId, maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetKnowledgeBase = {
   type t
   type request = {
@@ -989,6 +1060,7 @@ module GetKnowledgeBase = {
   let make = (~knowledgeBaseId, ()) => new({knowledgeBaseId: knowledgeBaseId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateKnowledgeBase = {
   type t
   type request = {
@@ -1027,17 +1099,18 @@ module CreateKnowledgeBase = {
     (),
   ) =>
     new({
-      tags,
-      description,
-      serverSideEncryptionConfiguration,
-      renderingConfiguration,
-      sourceConfiguration,
-      knowledgeBaseType,
-      name,
-      clientToken,
+      tags: tags,
+      description: description,
+      serverSideEncryptionConfiguration: serverSideEncryptionConfiguration,
+      renderingConfiguration: renderingConfiguration,
+      sourceConfiguration: sourceConfiguration,
+      knowledgeBaseType: knowledgeBaseType,
+      name: name,
+      clientToken: clientToken,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListKnowledgeBases = {
   type t
   type request = {
@@ -1056,9 +1129,11 @@ response in the next request to retrieve the next set of results.</p>")
     knowledgeBaseSummaries: knowledgeBaseList,
   }
   @module("@aws-sdk/client-wisdom") @new external new: request => t = "ListKnowledgeBasesCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module QueryAssistant = {
   type t
   type request = {
@@ -1082,9 +1157,15 @@ response in the next request to retrieve the next set of results.</p>")
   }
   @module("@aws-sdk/client-wisdom") @new external new: request => t = "QueryAssistantCommand"
   let make = (~queryText, ~assistantId, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults, nextToken, queryText, assistantId})
+    new({
+      maxResults: maxResults,
+      nextToken: nextToken,
+      queryText: queryText,
+      assistantId: assistantId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetRecommendations = {
   type t
   type request = {
@@ -1107,6 +1188,11 @@ module GetRecommendations = {
   type response = {@ocaml.doc("<p>The recommendations.</p>") recommendations: recommendationList}
   @module("@aws-sdk/client-wisdom") @new external new: request => t = "GetRecommendationsCommand"
   let make = (~sessionId, ~assistantId, ~waitTimeSeconds=?, ~maxResults=?, ()) =>
-    new({waitTimeSeconds, maxResults, sessionId, assistantId})
+    new({
+      waitTimeSeconds: waitTimeSeconds,
+      maxResults: maxResults,
+      sessionId: sessionId,
+      assistantId: assistantId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

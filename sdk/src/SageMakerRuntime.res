@@ -93,16 +93,17 @@ module InvokeEndpointAsync = {
     (),
   ) =>
     new({
-      requestTTLSeconds,
-      inputLocation,
-      inferenceId,
-      customAttributes,
-      accept,
-      contentType,
-      endpointName,
+      requestTTLSeconds: requestTTLSeconds,
+      inputLocation: inputLocation,
+      inferenceId: inferenceId,
+      customAttributes: customAttributes,
+      accept: accept,
+      contentType: contentType,
+      endpointName: endpointName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module InvokeEndpoint = {
   type t
   type request = {
@@ -204,15 +205,15 @@ module InvokeEndpoint = {
     (),
   ) =>
     new({
-      inferenceId,
-      targetContainerHostname,
-      targetVariant,
-      targetModel,
-      customAttributes,
-      accept,
-      contentType,
-      body,
-      endpointName,
+      inferenceId: inferenceId,
+      targetContainerHostname: targetContainerHostname,
+      targetVariant: targetVariant,
+      targetModel: targetModel,
+      customAttributes: customAttributes,
+      accept: accept,
+      contentType: contentType,
+      body: body,
+      endpointName: endpointName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

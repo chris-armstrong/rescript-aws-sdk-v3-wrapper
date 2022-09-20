@@ -165,9 +165,10 @@ module DeleteConfigurationSetEventDestination = {
   @module("@aws-sdk/client-sms-voice") @new
   external new: request => t = "DeleteConfigurationSetEventDestinationCommand"
   let make = (~eventDestinationName, ~configurationSetName, ()) =>
-    new({eventDestinationName, configurationSetName})
+    new({eventDestinationName: eventDestinationName, configurationSetName: configurationSetName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteConfigurationSet = {
   type t
   type request = {
@@ -179,6 +180,7 @@ module DeleteConfigurationSet = {
   let make = (~configurationSetName, ()) => new({configurationSetName: configurationSetName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module CreateConfigurationSet = {
   type t
   @ocaml.doc("A request to create a new configuration set.")
@@ -192,6 +194,7 @@ module CreateConfigurationSet = {
   let make = (~configurationSetName=?, ()) => new({configurationSetName: configurationSetName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ListConfigurationSets = {
   type t
   type request = {
@@ -221,9 +224,10 @@ module ListConfigurationSets = {
   }
   @module("@aws-sdk/client-sms-voice") @new
   external new: request => t = "ListConfigurationSetsCommand"
-  let make = (~pageSize=?, ~nextToken=?, ()) => new({pageSize, nextToken})
+  let make = (~pageSize=?, ~nextToken=?, ()) => new({pageSize: pageSize, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateConfigurationSetEventDestination = {
   type t
   @ocaml.doc("UpdateConfigurationSetEventDestinationRequest")
@@ -236,9 +240,14 @@ module UpdateConfigurationSetEventDestination = {
   @module("@aws-sdk/client-sms-voice") @new
   external new: request => t = "UpdateConfigurationSetEventDestinationCommand"
   let make = (~eventDestinationName, ~configurationSetName, ~eventDestination=?, ()) =>
-    new({eventDestinationName, eventDestination, configurationSetName})
+    new({
+      eventDestinationName: eventDestinationName,
+      eventDestination: eventDestination,
+      configurationSetName: configurationSetName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module SendVoiceMessage = {
   type t
   @ocaml.doc("SendVoiceMessageRequest")
@@ -277,9 +286,16 @@ module SendVoiceMessage = {
     ~callerId=?,
     (),
   ) =>
-    new({originationPhoneNumber, destinationPhoneNumber, content, configurationSetName, callerId})
+    new({
+      originationPhoneNumber: originationPhoneNumber,
+      destinationPhoneNumber: destinationPhoneNumber,
+      content: content,
+      configurationSetName: configurationSetName,
+      callerId: callerId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateConfigurationSetEventDestination = {
   type t
   @ocaml.doc("Create a new event destination in a configuration set.")
@@ -293,9 +309,14 @@ module CreateConfigurationSetEventDestination = {
   @module("@aws-sdk/client-sms-voice") @new
   external new: request => t = "CreateConfigurationSetEventDestinationCommand"
   let make = (~configurationSetName, ~eventDestinationName=?, ~eventDestination=?, ()) =>
-    new({eventDestinationName, eventDestination, configurationSetName})
+    new({
+      eventDestinationName: eventDestinationName,
+      eventDestination: eventDestination,
+      configurationSetName: configurationSetName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module GetConfigurationSetEventDestinations = {
   type t
   type request = {

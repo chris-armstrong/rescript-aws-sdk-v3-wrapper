@@ -1237,6 +1237,7 @@ module StopBackupJob = {
   let make = (~backupJobId, ()) => new({backupJobId: backupJobId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module StartReportJob = {
   type t
   type request = {
@@ -1255,9 +1256,11 @@ module StartReportJob = {
     reportJobId: option<reportJobId>,
   }
   @module("@aws-sdk/client-backup") @new external new: request => t = "StartReportJobCommand"
-  let make = (~reportPlanName, ~idempotencyToken=?, ()) => new({idempotencyToken, reportPlanName})
+  let make = (~reportPlanName, ~idempotencyToken=?, ()) =>
+    new({idempotencyToken: idempotencyToken, reportPlanName: reportPlanName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module PutBackupVaultLockConfiguration = {
   type t
   type request = {
@@ -1322,9 +1325,16 @@ module PutBackupVaultLockConfiguration = {
     ~maxRetentionDays=?,
     ~minRetentionDays=?,
     (),
-  ) => new({changeableForDays, maxRetentionDays, minRetentionDays, backupVaultName})
+  ) =>
+    new({
+      changeableForDays: changeableForDays,
+      maxRetentionDays: maxRetentionDays,
+      minRetentionDays: minRetentionDays,
+      backupVaultName: backupVaultName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module PutBackupVaultAccessPolicy = {
   type t
   type request = {
@@ -1340,9 +1350,11 @@ module PutBackupVaultAccessPolicy = {
   type response = {.}
   @module("@aws-sdk/client-backup") @new
   external new: request => t = "PutBackupVaultAccessPolicyCommand"
-  let make = (~backupVaultName, ~policy=?, ()) => new({policy, backupVaultName})
+  let make = (~backupVaultName, ~policy=?, ()) =>
+    new({policy: policy, backupVaultName: backupVaultName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module GetBackupVaultAccessPolicy = {
   type t
   type request = {
@@ -1371,6 +1383,7 @@ module GetBackupVaultAccessPolicy = {
   let make = (~backupVaultName, ()) => new({backupVaultName: backupVaultName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ExportBackupPlanTemplate = {
   type t
   type request = {
@@ -1392,6 +1405,7 @@ module ExportBackupPlanTemplate = {
   let make = (~backupPlanId, ()) => new({backupPlanId: backupPlanId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DisassociateRecoveryPoint = {
   type t
   type request = {
@@ -1405,9 +1419,11 @@ module DisassociateRecoveryPoint = {
   type response = {.}
   @module("@aws-sdk/client-backup") @new
   external new: request => t = "DisassociateRecoveryPointCommand"
-  let make = (~recoveryPointArn, ~backupVaultName, ()) => new({recoveryPointArn, backupVaultName})
+  let make = (~recoveryPointArn, ~backupVaultName, ()) =>
+    new({recoveryPointArn: recoveryPointArn, backupVaultName: backupVaultName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DescribeRestoreJob = {
   type t
   type request = {
@@ -1471,6 +1487,7 @@ module DescribeRestoreJob = {
   let make = (~restoreJobId, ()) => new({restoreJobId: restoreJobId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeProtectedResource = {
   type t
   type request = {
@@ -1500,6 +1517,7 @@ module DescribeProtectedResource = {
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeBackupVault = {
   type t
   type request = {
@@ -1580,6 +1598,7 @@ module DescribeBackupVault = {
   let make = (~backupVaultName, ()) => new({backupVaultName: backupVaultName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteReportPlan = {
   type t
   type request = {
@@ -1591,6 +1610,7 @@ module DeleteReportPlan = {
   let make = (~reportPlanName, ()) => new({reportPlanName: reportPlanName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteRecoveryPoint = {
   type t
   type request = {
@@ -1607,9 +1627,11 @@ module DeleteRecoveryPoint = {
   }
   type response = {.}
   @module("@aws-sdk/client-backup") @new external new: request => t = "DeleteRecoveryPointCommand"
-  let make = (~recoveryPointArn, ~backupVaultName, ()) => new({recoveryPointArn, backupVaultName})
+  let make = (~recoveryPointArn, ~backupVaultName, ()) =>
+    new({recoveryPointArn: recoveryPointArn, backupVaultName: backupVaultName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteFramework = {
   type t
   type request = {
@@ -1621,6 +1643,7 @@ module DeleteFramework = {
   let make = (~frameworkName, ()) => new({frameworkName: frameworkName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteBackupVaultNotifications = {
   type t
   type request = {
@@ -1636,6 +1659,7 @@ module DeleteBackupVaultNotifications = {
   let make = (~backupVaultName, ()) => new({backupVaultName: backupVaultName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteBackupVaultLockConfiguration = {
   type t
   type request = {
@@ -1649,6 +1673,7 @@ module DeleteBackupVaultLockConfiguration = {
   let make = (~backupVaultName, ()) => new({backupVaultName: backupVaultName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteBackupVaultAccessPolicy = {
   type t
   type request = {
@@ -1665,6 +1690,7 @@ module DeleteBackupVaultAccessPolicy = {
   let make = (~backupVaultName, ()) => new({backupVaultName: backupVaultName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteBackupVault = {
   type t
   type request = {
@@ -1680,6 +1706,7 @@ module DeleteBackupVault = {
   let make = (~backupVaultName, ()) => new({backupVaultName: backupVaultName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteBackupSelection = {
   type t
   type request = {
@@ -1692,9 +1719,11 @@ module DeleteBackupSelection = {
   }
   type response = {.}
   @module("@aws-sdk/client-backup") @new external new: request => t = "DeleteBackupSelectionCommand"
-  let make = (~selectionId, ~backupPlanId, ()) => new({selectionId, backupPlanId})
+  let make = (~selectionId, ~backupPlanId, ()) =>
+    new({selectionId: selectionId, backupPlanId: backupPlanId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteBackupPlan = {
   type t
   type request = {
@@ -1723,6 +1752,7 @@ module DeleteBackupPlan = {
   let make = (~backupPlanId, ()) => new({backupPlanId: backupPlanId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateRegionSettings = {
   type t
   type request = {
@@ -1741,9 +1771,13 @@ module UpdateRegionSettings = {
   type response = {.}
   @module("@aws-sdk/client-backup") @new external new: request => t = "UpdateRegionSettingsCommand"
   let make = (~resourceTypeManagementPreference=?, ~resourceTypeOptInPreference=?, ()) =>
-    new({resourceTypeManagementPreference, resourceTypeOptInPreference})
+    new({
+      resourceTypeManagementPreference: resourceTypeManagementPreference,
+      resourceTypeOptInPreference: resourceTypeOptInPreference,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateRecoveryPointLifecycle = {
   type t
   type request = {
@@ -1798,9 +1832,14 @@ module UpdateRecoveryPointLifecycle = {
   @module("@aws-sdk/client-backup") @new
   external new: request => t = "UpdateRecoveryPointLifecycleCommand"
   let make = (~recoveryPointArn, ~backupVaultName, ~lifecycle=?, ()) =>
-    new({lifecycle, recoveryPointArn, backupVaultName})
+    new({
+      lifecycle: lifecycle,
+      recoveryPointArn: recoveryPointArn,
+      backupVaultName: backupVaultName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateGlobalSettings = {
   type t
   type request = {
@@ -1815,6 +1854,7 @@ module UpdateGlobalSettings = {
   let make = (~globalSettings=?, ()) => new({globalSettings: globalSettings})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UntagResource = {
   type t
   type request = {
@@ -1828,9 +1868,11 @@ module UntagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-backup") @new external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeyList, ~resourceArn, ()) => new({tagKeyList, resourceArn})
+  let make = (~tagKeyList, ~resourceArn, ()) =>
+    new({tagKeyList: tagKeyList, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module TagResource = {
   type t
   type request = {
@@ -1846,9 +1888,10 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-backup") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceArn, ()) => new({tags, resourceArn})
+  let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module StartRestoreJob = {
   type t
   type request = {
@@ -1984,9 +2027,17 @@ module StartRestoreJob = {
     ~resourceType=?,
     ~idempotencyToken=?,
     (),
-  ) => new({resourceType, idempotencyToken, iamRoleArn, metadata, recoveryPointArn})
+  ) =>
+    new({
+      resourceType: resourceType,
+      idempotencyToken: idempotencyToken,
+      iamRoleArn: iamRoleArn,
+      metadata: metadata,
+      recoveryPointArn: recoveryPointArn,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module StartCopyJob = {
   type t
   type request = {
@@ -2037,15 +2088,16 @@ module StartCopyJob = {
     (),
   ) =>
     new({
-      lifecycle,
-      idempotencyToken,
-      iamRoleArn,
-      destinationBackupVaultArn,
-      sourceBackupVaultName,
-      recoveryPointArn,
+      lifecycle: lifecycle,
+      idempotencyToken: idempotencyToken,
+      iamRoleArn: iamRoleArn,
+      destinationBackupVaultArn: destinationBackupVaultArn,
+      sourceBackupVaultName: sourceBackupVaultName,
+      recoveryPointArn: recoveryPointArn,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module StartBackupJob = {
   type t
   type request = {
@@ -2134,18 +2186,19 @@ module StartBackupJob = {
     (),
   ) =>
     new({
-      backupOptions,
-      recoveryPointTags,
-      lifecycle,
-      completeWindowMinutes,
-      startWindowMinutes,
-      idempotencyToken,
-      iamRoleArn,
-      resourceArn,
-      backupVaultName,
+      backupOptions: backupOptions,
+      recoveryPointTags: recoveryPointTags,
+      lifecycle: lifecycle,
+      completeWindowMinutes: completeWindowMinutes,
+      startWindowMinutes: startWindowMinutes,
+      idempotencyToken: idempotencyToken,
+      iamRoleArn: iamRoleArn,
+      resourceArn: resourceArn,
+      backupVaultName: backupVaultName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module PutBackupVaultNotifications = {
   type t
   type request = {
@@ -2199,9 +2252,14 @@ module PutBackupVaultNotifications = {
   @module("@aws-sdk/client-backup") @new
   external new: request => t = "PutBackupVaultNotificationsCommand"
   let make = (~backupVaultEvents, ~snstopicArn, ~backupVaultName, ()) =>
-    new({backupVaultEvents, snstopicArn, backupVaultName})
+    new({
+      backupVaultEvents: backupVaultEvents,
+      snstopicArn: snstopicArn,
+      backupVaultName: backupVaultName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ListTags = {
   type t
   type request = {
@@ -2233,9 +2291,10 @@ module ListTags = {
   }
   @module("@aws-sdk/client-backup") @new external new: request => t = "ListTagsCommand"
   let make = (~resourceArn, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults, nextToken, resourceArn})
+    new({maxResults: maxResults, nextToken: nextToken, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetSupportedResourceTypes = {
   type t
   type request = {.}
@@ -2291,6 +2350,7 @@ module GetSupportedResourceTypes = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetRecoveryPointRestoreMetadata = {
   type t
   type request = {
@@ -2322,9 +2382,11 @@ module GetRecoveryPointRestoreMetadata = {
   }
   @module("@aws-sdk/client-backup") @new
   external new: request => t = "GetRecoveryPointRestoreMetadataCommand"
-  let make = (~recoveryPointArn, ~backupVaultName, ()) => new({recoveryPointArn, backupVaultName})
+  let make = (~recoveryPointArn, ~backupVaultName, ()) =>
+    new({recoveryPointArn: recoveryPointArn, backupVaultName: backupVaultName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetBackupVaultNotifications = {
   type t
   type request = {
@@ -2359,6 +2421,7 @@ module GetBackupVaultNotifications = {
   let make = (~backupVaultName, ()) => new({backupVaultName: backupVaultName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeRegionSettings = {
   type t
   type request = {.}
@@ -2384,6 +2447,7 @@ module DescribeRegionSettings = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeRecoveryPoint = {
   type t
   type request = {
@@ -2507,9 +2571,11 @@ module DescribeRecoveryPoint = {
     recoveryPointArn: option<arn>,
   }
   @module("@aws-sdk/client-backup") @new external new: request => t = "DescribeRecoveryPointCommand"
-  let make = (~recoveryPointArn, ~backupVaultName, ()) => new({recoveryPointArn, backupVaultName})
+  let make = (~recoveryPointArn, ~backupVaultName, ()) =>
+    new({recoveryPointArn: recoveryPointArn, backupVaultName: backupVaultName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeGlobalSettings = {
   type t
   type request = {.}
@@ -2529,6 +2595,7 @@ module DescribeGlobalSettings = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeBackupJob = {
   type t
   type request = {
@@ -2631,6 +2698,7 @@ module DescribeBackupJob = {
   let make = (~backupJobId, ()) => new({backupJobId: backupJobId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateBackupVault = {
   type t
   type request = {
@@ -2672,9 +2740,15 @@ module CreateBackupVault = {
   }
   @module("@aws-sdk/client-backup") @new external new: request => t = "CreateBackupVaultCommand"
   let make = (~backupVaultName, ~creatorRequestId=?, ~encryptionKeyArn=?, ~backupVaultTags=?, ()) =>
-    new({creatorRequestId, encryptionKeyArn, backupVaultTags, backupVaultName})
+    new({
+      creatorRequestId: creatorRequestId,
+      encryptionKeyArn: encryptionKeyArn,
+      backupVaultTags: backupVaultTags,
+      backupVaultName: backupVaultName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateReportPlan = {
   type t
   type request = {
@@ -2731,14 +2805,15 @@ module UpdateReportPlan = {
     (),
   ) =>
     new({
-      idempotencyToken,
-      reportSetting,
-      reportDeliveryChannel,
-      reportPlanDescription,
-      reportPlanName,
+      idempotencyToken: idempotencyToken,
+      reportSetting: reportSetting,
+      reportDeliveryChannel: reportDeliveryChannel,
+      reportPlanDescription: reportPlanDescription,
+      reportPlanName: reportPlanName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListRestoreJobs = {
   type t
   type request = {
@@ -2785,9 +2860,18 @@ module ListRestoreJobs = {
     ~maxResults=?,
     ~nextToken=?,
     (),
-  ) => new({byStatus, byCreatedAfter, byCreatedBefore, byAccountId, maxResults, nextToken})
+  ) =>
+    new({
+      byStatus: byStatus,
+      byCreatedAfter: byCreatedAfter,
+      byCreatedBefore: byCreatedBefore,
+      byAccountId: byAccountId,
+      maxResults: maxResults,
+      nextToken: nextToken,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListRecoveryPointsByResource = {
   type t
   type request = {
@@ -2827,9 +2911,10 @@ module ListRecoveryPointsByResource = {
   @module("@aws-sdk/client-backup") @new
   external new: request => t = "ListRecoveryPointsByResourceCommand"
   let make = (~resourceArn, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults, nextToken, resourceArn})
+    new({maxResults: maxResults, nextToken: nextToken, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListProtectedResources = {
   type t
   type request = {
@@ -2857,9 +2942,11 @@ module ListProtectedResources = {
   }
   @module("@aws-sdk/client-backup") @new
   external new: request => t = "ListProtectedResourcesCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListFrameworks = {
   type t
   type request = {
@@ -2884,9 +2971,11 @@ module ListFrameworks = {
     frameworks: option<frameworkList>,
   }
   @module("@aws-sdk/client-backup") @new external new: request => t = "ListFrameworksCommand"
-  let make = (~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults})
+  let make = (~nextToken=?, ~maxResults=?, ()) =>
+    new({nextToken: nextToken, maxResults: maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListBackupVaults = {
   type t
   type request = {
@@ -2913,9 +3002,11 @@ module ListBackupVaults = {
     backupVaultList: option<backupVaultList>,
   }
   @module("@aws-sdk/client-backup") @new external new: request => t = "ListBackupVaultsCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListBackupSelections = {
   type t
   type request = {
@@ -2944,9 +3035,10 @@ module ListBackupSelections = {
   }
   @module("@aws-sdk/client-backup") @new external new: request => t = "ListBackupSelectionsCommand"
   let make = (~backupPlanId, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults, nextToken, backupPlanId})
+    new({maxResults: maxResults, nextToken: nextToken, backupPlanId: backupPlanId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListBackupPlanTemplates = {
   type t
   type request = {
@@ -2974,9 +3066,11 @@ module ListBackupPlanTemplates = {
   }
   @module("@aws-sdk/client-backup") @new
   external new: request => t = "ListBackupPlanTemplatesCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeCopyJob = {
   type t
   type request = {
@@ -2990,6 +3084,7 @@ module DescribeCopyJob = {
   let make = (~copyJobId, ()) => new({copyJobId: copyJobId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateReportPlan = {
   type t
   type request = {
@@ -3054,15 +3149,16 @@ module CreateReportPlan = {
     (),
   ) =>
     new({
-      idempotencyToken,
-      reportPlanTags,
-      reportSetting,
-      reportDeliveryChannel,
-      reportPlanDescription,
-      reportPlanName,
+      idempotencyToken: idempotencyToken,
+      reportPlanTags: reportPlanTags,
+      reportSetting: reportSetting,
+      reportDeliveryChannel: reportDeliveryChannel,
+      reportPlanDescription: reportPlanDescription,
+      reportPlanName: reportPlanName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListRecoveryPointsByBackupVault = {
   type t
   type request = {
@@ -3131,17 +3227,18 @@ module ListRecoveryPointsByBackupVault = {
     (),
   ) =>
     new({
-      byCreatedAfter,
-      byCreatedBefore,
-      byBackupPlanId,
-      byResourceType,
-      byResourceArn,
-      maxResults,
-      nextToken,
-      backupVaultName,
+      byCreatedAfter: byCreatedAfter,
+      byCreatedBefore: byCreatedBefore,
+      byBackupPlanId: byBackupPlanId,
+      byResourceType: byResourceType,
+      byResourceArn: byResourceArn,
+      maxResults: maxResults,
+      nextToken: nextToken,
+      backupVaultName: backupVaultName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListCopyJobs = {
   type t
   type request = {
@@ -3252,18 +3349,19 @@ module ListCopyJobs = {
     (),
   ) =>
     new({
-      byAccountId,
-      byDestinationVaultArn,
-      byResourceType,
-      byCreatedAfter,
-      byCreatedBefore,
-      byState,
-      byResourceArn,
-      maxResults,
-      nextToken,
+      byAccountId: byAccountId,
+      byDestinationVaultArn: byDestinationVaultArn,
+      byResourceType: byResourceType,
+      byCreatedAfter: byCreatedAfter,
+      byCreatedBefore: byCreatedBefore,
+      byState: byState,
+      byResourceArn: byResourceArn,
+      maxResults: maxResults,
+      nextToken: nextToken,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListBackupJobs = {
   type t
   type request = {
@@ -3379,18 +3477,19 @@ module ListBackupJobs = {
     (),
   ) =>
     new({
-      byAccountId,
-      byResourceType,
-      byCreatedAfter,
-      byCreatedBefore,
-      byBackupVaultName,
-      byState,
-      byResourceArn,
-      maxResults,
-      nextToken,
+      byAccountId: byAccountId,
+      byResourceType: byResourceType,
+      byCreatedAfter: byCreatedAfter,
+      byCreatedBefore: byCreatedBefore,
+      byBackupVaultName: byBackupVaultName,
+      byState: byState,
+      byResourceArn: byResourceArn,
+      maxResults: maxResults,
+      nextToken: nextToken,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeReportPlan = {
   type t
   type request = {
@@ -3409,6 +3508,7 @@ module DescribeReportPlan = {
   let make = (~reportPlanName, ()) => new({reportPlanName: reportPlanName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeReportJob = {
   type t
   type request = {
@@ -3428,6 +3528,7 @@ module DescribeReportJob = {
   let make = (~reportJobId, ()) => new({reportJobId: reportJobId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateFramework = {
   type t
   type request = {
@@ -3471,9 +3572,16 @@ module UpdateFramework = {
     ~frameworkControls=?,
     ~frameworkDescription=?,
     (),
-  ) => new({idempotencyToken, frameworkControls, frameworkDescription, frameworkName})
+  ) =>
+    new({
+      idempotencyToken: idempotencyToken,
+      frameworkControls: frameworkControls,
+      frameworkDescription: frameworkDescription,
+      frameworkName: frameworkName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListReportPlans = {
   type t
   type request = {
@@ -3499,9 +3607,11 @@ module ListReportPlans = {
     reportPlans: option<reportPlanList>,
   }
   @module("@aws-sdk/client-backup") @new external new: request => t = "ListReportPlansCommand"
-  let make = (~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults})
+  let make = (~nextToken=?, ~maxResults=?, ()) =>
+    new({nextToken: nextToken, maxResults: maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListReportJobs = {
   type t
   type request = {
@@ -3550,9 +3660,18 @@ module ListReportJobs = {
     ~byCreationBefore=?,
     ~byReportPlanName=?,
     (),
-  ) => new({nextToken, maxResults, byStatus, byCreationAfter, byCreationBefore, byReportPlanName})
+  ) =>
+    new({
+      nextToken: nextToken,
+      maxResults: maxResults,
+      byStatus: byStatus,
+      byCreationAfter: byCreationAfter,
+      byCreationBefore: byCreationBefore,
+      byReportPlanName: byReportPlanName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetBackupSelection = {
   type t
   type request = {
@@ -3587,9 +3706,11 @@ module GetBackupSelection = {
     backupSelection: option<backupSelection>,
   }
   @module("@aws-sdk/client-backup") @new external new: request => t = "GetBackupSelectionCommand"
-  let make = (~selectionId, ~backupPlanId, ()) => new({selectionId, backupPlanId})
+  let make = (~selectionId, ~backupPlanId, ()) =>
+    new({selectionId: selectionId, backupPlanId: backupPlanId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeFramework = {
   type t
   type request = {
@@ -3659,6 +3780,7 @@ module DescribeFramework = {
   let make = (~frameworkName, ()) => new({frameworkName: frameworkName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateFramework = {
   type t
   type request = {
@@ -3706,9 +3828,16 @@ module CreateFramework = {
     ~frameworkDescription=?,
     (),
   ) =>
-    new({frameworkTags, idempotencyToken, frameworkControls, frameworkDescription, frameworkName})
+    new({
+      frameworkTags: frameworkTags,
+      idempotencyToken: idempotencyToken,
+      frameworkControls: frameworkControls,
+      frameworkDescription: frameworkDescription,
+      frameworkName: frameworkName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateBackupSelection = {
   type t
   type request = {
@@ -3743,9 +3872,14 @@ module CreateBackupSelection = {
   }
   @module("@aws-sdk/client-backup") @new external new: request => t = "CreateBackupSelectionCommand"
   let make = (~backupSelection, ~backupPlanId, ~creatorRequestId=?, ()) =>
-    new({creatorRequestId, backupSelection, backupPlanId})
+    new({
+      creatorRequestId: creatorRequestId,
+      backupSelection: backupSelection,
+      backupPlanId: backupPlanId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListBackupPlans = {
   type t
   type request = {
@@ -3776,9 +3910,10 @@ module ListBackupPlans = {
   }
   @module("@aws-sdk/client-backup") @new external new: request => t = "ListBackupPlansCommand"
   let make = (~includeDeleted=?, ~maxResults=?, ~nextToken=?, ()) =>
-    new({includeDeleted, maxResults, nextToken})
+    new({includeDeleted: includeDeleted, maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListBackupPlanVersions = {
   type t
   type request = {
@@ -3807,9 +3942,10 @@ module ListBackupPlanVersions = {
   @module("@aws-sdk/client-backup") @new
   external new: request => t = "ListBackupPlanVersionsCommand"
   let make = (~backupPlanId, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults, nextToken, backupPlanId})
+    new({maxResults: maxResults, nextToken: nextToken, backupPlanId: backupPlanId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateBackupPlan = {
   type t
   type request = {
@@ -3842,9 +3978,11 @@ module UpdateBackupPlan = {
     backupPlanId: option<string_>,
   }
   @module("@aws-sdk/client-backup") @new external new: request => t = "UpdateBackupPlanCommand"
-  let make = (~backupPlan, ~backupPlanId, ()) => new({backupPlan, backupPlanId})
+  let make = (~backupPlan, ~backupPlanId, ()) =>
+    new({backupPlan: backupPlan, backupPlanId: backupPlanId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetBackupPlanFromTemplate = {
   type t
   type request = {
@@ -3863,6 +4001,7 @@ module GetBackupPlanFromTemplate = {
   let make = (~backupPlanTemplateId, ()) => new({backupPlanTemplateId: backupPlanTemplateId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetBackupPlanFromJSON = {
   type t
   type request = {
@@ -3880,6 +4019,7 @@ module GetBackupPlanFromJSON = {
   let make = (~backupPlanTemplateJson, ()) => new({backupPlanTemplateJson: backupPlanTemplateJson})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetBackupPlan = {
   type t
   type request = {
@@ -3933,9 +4073,11 @@ module GetBackupPlan = {
     backupPlan: option<backupPlan>,
   }
   @module("@aws-sdk/client-backup") @new external new: request => t = "GetBackupPlanCommand"
-  let make = (~backupPlanId, ~versionId=?, ()) => new({versionId, backupPlanId})
+  let make = (~backupPlanId, ~versionId=?, ()) =>
+    new({versionId: versionId, backupPlanId: backupPlanId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateBackupPlan = {
   type t
   type request = {
@@ -3979,6 +4121,10 @@ module CreateBackupPlan = {
   }
   @module("@aws-sdk/client-backup") @new external new: request => t = "CreateBackupPlanCommand"
   let make = (~backupPlan, ~creatorRequestId=?, ~backupPlanTags=?, ()) =>
-    new({creatorRequestId, backupPlanTags, backupPlan})
+    new({
+      creatorRequestId: creatorRequestId,
+      backupPlanTags: backupPlanTags,
+      backupPlan: backupPlan,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

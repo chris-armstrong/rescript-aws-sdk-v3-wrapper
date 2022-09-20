@@ -208,9 +208,16 @@ module UpdateStream = {
   type response = {.}
   @module("@aws-sdk/client-kinesisvideo") @new external new: request => t = "UpdateStreamCommand"
   let make = (~currentVersion, ~mediaType=?, ~deviceName=?, ~streamARN=?, ~streamName=?, ()) =>
-    new({mediaType, deviceName, currentVersion, streamARN, streamName})
+    new({
+      mediaType: mediaType,
+      deviceName: deviceName,
+      currentVersion: currentVersion,
+      streamARN: streamARN,
+      streamName: streamName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateDataRetention = {
   type t
   type request = {
@@ -244,9 +251,17 @@ module UpdateDataRetention = {
     ~streamARN=?,
     ~streamName=?,
     (),
-  ) => new({dataRetentionChangeInHours, operation, currentVersion, streamARN, streamName})
+  ) =>
+    new({
+      dataRetentionChangeInHours: dataRetentionChangeInHours,
+      operation: operation,
+      currentVersion: currentVersion,
+      streamARN: streamARN,
+      streamName: streamName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module GetDataEndpoint = {
   type t
   type request = {
@@ -269,9 +284,11 @@ module GetDataEndpoint = {
     dataEndpoint: option<dataEndpoint>,
   }
   @module("@aws-sdk/client-kinesisvideo") @new external new: request => t = "GetDataEndpointCommand"
-  let make = (~apiname, ~streamARN=?, ~streamName=?, ()) => new({apiname, streamARN, streamName})
+  let make = (~apiname, ~streamARN=?, ~streamName=?, ()) =>
+    new({apiname: apiname, streamARN: streamARN, streamName: streamName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteStream = {
   type t
   type request = {
@@ -288,9 +305,11 @@ module DeleteStream = {
   }
   type response = {.}
   @module("@aws-sdk/client-kinesisvideo") @new external new: request => t = "DeleteStreamCommand"
-  let make = (~streamARN, ~currentVersion=?, ()) => new({currentVersion, streamARN})
+  let make = (~streamARN, ~currentVersion=?, ()) =>
+    new({currentVersion: currentVersion, streamARN: streamARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteSignalingChannel = {
   type t
   type request = {
@@ -307,9 +326,11 @@ module DeleteSignalingChannel = {
   type response = {.}
   @module("@aws-sdk/client-kinesisvideo") @new
   external new: request => t = "DeleteSignalingChannelCommand"
-  let make = (~channelARN, ~currentVersion=?, ()) => new({currentVersion, channelARN})
+  let make = (~channelARN, ~currentVersion=?, ()) =>
+    new({currentVersion: currentVersion, channelARN: channelARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateSignalingChannel = {
   type t
   type request = {
@@ -329,9 +350,14 @@ module UpdateSignalingChannel = {
   @module("@aws-sdk/client-kinesisvideo") @new
   external new: request => t = "UpdateSignalingChannelCommand"
   let make = (~currentVersion, ~channelARN, ~singleMasterConfiguration=?, ()) =>
-    new({singleMasterConfiguration, currentVersion, channelARN})
+    new({
+      singleMasterConfiguration: singleMasterConfiguration,
+      currentVersion: currentVersion,
+      channelARN: channelARN,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UntagStream = {
   type t
   type request = {
@@ -347,9 +373,10 @@ module UntagStream = {
   type response = {.}
   @module("@aws-sdk/client-kinesisvideo") @new external new: request => t = "UntagStreamCommand"
   let make = (~tagKeyList, ~streamName=?, ~streamARN=?, ()) =>
-    new({tagKeyList, streamName, streamARN})
+    new({tagKeyList: tagKeyList, streamName: streamName, streamARN: streamARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UntagResource = {
   type t
   type request = {
@@ -362,9 +389,11 @@ module UntagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-kinesisvideo") @new external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeyList, ~resourceARN, ()) => new({tagKeyList, resourceARN})
+  let make = (~tagKeyList, ~resourceARN, ()) =>
+    new({tagKeyList: tagKeyList, resourceARN: resourceARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module TagStream = {
   type t
   type request = {
@@ -382,9 +411,11 @@ module TagStream = {
   }
   type response = {.}
   @module("@aws-sdk/client-kinesisvideo") @new external new: request => t = "TagStreamCommand"
-  let make = (~tags, ~streamName=?, ~streamARN=?, ()) => new({tags, streamName, streamARN})
+  let make = (~tags, ~streamName=?, ~streamARN=?, ()) =>
+    new({tags: tags, streamName: streamName, streamARN: streamARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ListTagsForStream = {
   type t
   type request = {
@@ -413,9 +444,10 @@ module ListTagsForStream = {
   @module("@aws-sdk/client-kinesisvideo") @new
   external new: request => t = "ListTagsForStreamCommand"
   let make = (~streamName=?, ~streamARN=?, ~nextToken=?, ()) =>
-    new({streamName, streamARN, nextToken})
+    new({streamName: streamName, streamARN: streamARN, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListTagsForResource = {
   type t
   type request = {
@@ -443,9 +475,11 @@ module ListTagsForResource = {
   }
   @module("@aws-sdk/client-kinesisvideo") @new
   external new: request => t = "ListTagsForResourceCommand"
-  let make = (~resourceARN, ~nextToken=?, ()) => new({resourceARN, nextToken})
+  let make = (~resourceARN, ~nextToken=?, ()) =>
+    new({resourceARN: resourceARN, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeStream = {
   type t
   type request = {
@@ -458,9 +492,11 @@ module DescribeStream = {
     streamInfo: option<streamInfo>,
   }
   @module("@aws-sdk/client-kinesisvideo") @new external new: request => t = "DescribeStreamCommand"
-  let make = (~streamARN=?, ~streamName=?, ()) => new({streamARN, streamName})
+  let make = (~streamARN=?, ~streamName=?, ()) =>
+    new({streamARN: streamARN, streamName: streamName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateStream = {
   type t
   type request = {
@@ -520,9 +556,18 @@ module CreateStream = {
     ~mediaType=?,
     ~deviceName=?,
     (),
-  ) => new({tags, dataRetentionInHours, kmsKeyId, mediaType, streamName, deviceName})
+  ) =>
+    new({
+      tags: tags,
+      dataRetentionInHours: dataRetentionInHours,
+      kmsKeyId: kmsKeyId,
+      mediaType: mediaType,
+      streamName: streamName,
+      deviceName: deviceName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module TagResource = {
   type t
   type request = {
@@ -537,9 +582,10 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-kinesisvideo") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceARN, ()) => new({tags, resourceARN})
+  let make = (~tags, ~resourceARN, ()) => new({tags: tags, resourceARN: resourceARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ListStreams = {
   type t
   type request = {
@@ -567,9 +613,10 @@ module ListStreams = {
   }
   @module("@aws-sdk/client-kinesisvideo") @new external new: request => t = "ListStreamsCommand"
   let make = (~streamNameCondition=?, ~nextToken=?, ~maxResults=?, ()) =>
-    new({streamNameCondition, nextToken, maxResults})
+    new({streamNameCondition: streamNameCondition, nextToken: nextToken, maxResults: maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetSignalingChannelEndpoint = {
   type t
   type request = {
@@ -590,9 +637,13 @@ module GetSignalingChannelEndpoint = {
   @module("@aws-sdk/client-kinesisvideo") @new
   external new: request => t = "GetSignalingChannelEndpointCommand"
   let make = (~channelARN, ~singleMasterChannelEndpointConfiguration=?, ()) =>
-    new({singleMasterChannelEndpointConfiguration, channelARN})
+    new({
+      singleMasterChannelEndpointConfiguration: singleMasterChannelEndpointConfiguration,
+      channelARN: channelARN,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeSignalingChannel = {
   type t
   type request = {
@@ -611,9 +662,11 @@ module DescribeSignalingChannel = {
   }
   @module("@aws-sdk/client-kinesisvideo") @new
   external new: request => t = "DescribeSignalingChannelCommand"
-  let make = (~channelARN=?, ~channelName=?, ()) => new({channelARN, channelName})
+  let make = (~channelARN=?, ~channelName=?, ()) =>
+    new({channelARN: channelARN, channelName: channelName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateSignalingChannel = {
   type t
   type request = {
@@ -642,9 +695,15 @@ module CreateSignalingChannel = {
   @module("@aws-sdk/client-kinesisvideo") @new
   external new: request => t = "CreateSignalingChannelCommand"
   let make = (~channelName, ~tags=?, ~singleMasterConfiguration=?, ~channelType=?, ()) =>
-    new({tags, singleMasterConfiguration, channelType, channelName})
+    new({
+      tags: tags,
+      singleMasterConfiguration: singleMasterConfiguration,
+      channelType: channelType,
+      channelName: channelName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListSignalingChannels = {
   type t
   type request = {
@@ -673,6 +732,6 @@ module ListSignalingChannels = {
   @module("@aws-sdk/client-kinesisvideo") @new
   external new: request => t = "ListSignalingChannelsCommand"
   let make = (~channelNameCondition=?, ~nextToken=?, ~maxResults=?, ()) =>
-    new({channelNameCondition, nextToken, maxResults})
+    new({channelNameCondition: channelNameCondition, nextToken: nextToken, maxResults: maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

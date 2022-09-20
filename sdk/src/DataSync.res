@@ -685,9 +685,10 @@ module UpdateAgent = {
   }
   type response = {.}
   @module("@aws-sdk/client-datasync") @new external new: request => t = "UpdateAgentCommand"
-  let make = (~agentArn, ~name=?, ()) => new({name, agentArn})
+  let make = (~agentArn, ~name=?, ()) => new({name: name, agentArn: agentArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteTask = {
   type t
   @ocaml.doc("<p>DeleteTask</p>")
@@ -700,6 +701,7 @@ module DeleteTask = {
   let make = (~taskArn, ()) => new({taskArn: taskArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteLocation = {
   type t
   @ocaml.doc("<p>DeleteLocation</p>")
@@ -713,6 +715,7 @@ module DeleteLocation = {
   let make = (~locationArn, ()) => new({locationArn: locationArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteAgent = {
   type t
   @ocaml.doc("<p>DeleteAgentRequest</p>")
@@ -727,6 +730,7 @@ module DeleteAgent = {
   let make = (~agentArn, ()) => new({agentArn: agentArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module CancelTaskExecution = {
   type t
   @ocaml.doc("<p>CancelTaskExecutionRequest</p>")
@@ -740,6 +744,7 @@ module CancelTaskExecution = {
   let make = (~taskExecutionArn, ()) => new({taskExecutionArn: taskExecutionArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateTaskExecution = {
   type t
   type request = {
@@ -752,9 +757,11 @@ module UpdateTaskExecution = {
   }
   type response = {.}
   @module("@aws-sdk/client-datasync") @new external new: request => t = "UpdateTaskExecutionCommand"
-  let make = (~options, ~taskExecutionArn, ()) => new({options, taskExecutionArn})
+  let make = (~options, ~taskExecutionArn, ()) =>
+    new({options: options, taskExecutionArn: taskExecutionArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateLocationSmb = {
   type t
   type request = {
@@ -816,9 +823,19 @@ module UpdateLocationSmb = {
     ~user=?,
     ~subdirectory=?,
     (),
-  ) => new({mountOptions, agentArns, password, domain, user, subdirectory, locationArn})
+  ) =>
+    new({
+      mountOptions: mountOptions,
+      agentArns: agentArns,
+      password: password,
+      domain: domain,
+      user: user,
+      subdirectory: subdirectory,
+      locationArn: locationArn,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateLocationObjectStorage = {
   type t
   type request = {
@@ -869,9 +886,19 @@ module UpdateLocationObjectStorage = {
     ~serverProtocol=?,
     ~serverPort=?,
     (),
-  ) => new({agentArns, secretKey, accessKey, subdirectory, serverProtocol, serverPort, locationArn})
+  ) =>
+    new({
+      agentArns: agentArns,
+      secretKey: secretKey,
+      accessKey: accessKey,
+      subdirectory: subdirectory,
+      serverProtocol: serverProtocol,
+      serverPort: serverPort,
+      locationArn: locationArn,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UntagResource = {
   type t
   @ocaml.doc("<p>UntagResourceRequest</p>")
@@ -884,9 +911,10 @@ module UntagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-datasync") @new external new: request => t = "UntagResourceCommand"
-  let make = (~keys, ~resourceArn, ()) => new({keys, resourceArn})
+  let make = (~keys, ~resourceArn, ()) => new({keys: keys, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DescribeLocationSmb = {
   type t
   @ocaml.doc("<p>DescribeLocationSmbRequest</p>")
@@ -925,6 +953,7 @@ module DescribeLocationSmb = {
   let make = (~locationArn, ()) => new({locationArn: locationArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeLocationS3 = {
   type t
   @ocaml.doc("<p>DescribeLocationS3Request</p>")
@@ -962,6 +991,7 @@ module DescribeLocationS3 = {
   let make = (~locationArn, ()) => new({locationArn: locationArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeLocationObjectStorage = {
   type t
   @ocaml.doc("<p>DescribeLocationObjectStorageRequest</p>")
@@ -1011,6 +1041,7 @@ module DescribeLocationObjectStorage = {
   let make = (~locationArn, ()) => new({locationArn: locationArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeLocationFsxWindows = {
   type t
   type request = {
@@ -1049,6 +1080,7 @@ module DescribeLocationFsxWindows = {
   let make = (~locationArn, ()) => new({locationArn: locationArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeLocationFsxLustre = {
   type t
   type request = {
@@ -1078,6 +1110,7 @@ module DescribeLocationFsxLustre = {
   let make = (~locationArn, ()) => new({locationArn: locationArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateTask = {
   type t
   @ocaml.doc("<p>UpdateTaskResponse</p>")
@@ -1121,9 +1154,19 @@ module UpdateTask = {
     ~excludes=?,
     ~options=?,
     (),
-  ) => new({includes, cloudWatchLogGroupArn, name, schedule, excludes, options, taskArn})
+  ) =>
+    new({
+      includes: includes,
+      cloudWatchLogGroupArn: cloudWatchLogGroupArn,
+      name: name,
+      schedule: schedule,
+      excludes: excludes,
+      options: options,
+      taskArn: taskArn,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateLocationNfs = {
   type t
   type request = {
@@ -1157,9 +1200,15 @@ module UpdateLocationNfs = {
   type response = {.}
   @module("@aws-sdk/client-datasync") @new external new: request => t = "UpdateLocationNfsCommand"
   let make = (~locationArn, ~mountOptions=?, ~onPremConfig=?, ~subdirectory=?, ()) =>
-    new({mountOptions, onPremConfig, subdirectory, locationArn})
+    new({
+      mountOptions: mountOptions,
+      onPremConfig: onPremConfig,
+      subdirectory: subdirectory,
+      locationArn: locationArn,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateLocationHdfs = {
   type t
   type request = {
@@ -1237,22 +1286,23 @@ module UpdateLocationHdfs = {
     (),
   ) =>
     new({
-      agentArns,
-      kerberosKrb5Conf,
-      kerberosKeytab,
-      kerberosPrincipal,
-      simpleUser,
-      authenticationType,
-      qopConfiguration,
-      kmsKeyProviderUri,
-      replicationFactor,
-      blockSize,
-      nameNodes,
-      subdirectory,
-      locationArn,
+      agentArns: agentArns,
+      kerberosKrb5Conf: kerberosKrb5Conf,
+      kerberosKeytab: kerberosKeytab,
+      kerberosPrincipal: kerberosPrincipal,
+      simpleUser: simpleUser,
+      authenticationType: authenticationType,
+      qopConfiguration: qopConfiguration,
+      kmsKeyProviderUri: kmsKeyProviderUri,
+      replicationFactor: replicationFactor,
+      blockSize: blockSize,
+      nameNodes: nameNodes,
+      subdirectory: subdirectory,
+      locationArn: locationArn,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module TagResource = {
   type t
   @ocaml.doc("<p>TagResourceRequest</p>")
@@ -1264,9 +1314,10 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-datasync") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceArn, ()) => new({tags, resourceArn})
+  let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module StartTaskExecution = {
   type t
   @ocaml.doc("<p>StartTaskExecutionRequest</p>")
@@ -1298,9 +1349,15 @@ module StartTaskExecution = {
   }
   @module("@aws-sdk/client-datasync") @new external new: request => t = "StartTaskExecutionCommand"
   let make = (~taskArn, ~excludes=?, ~includes=?, ~overrideOptions=?, ()) =>
-    new({excludes, includes, overrideOptions, taskArn})
+    new({
+      excludes: excludes,
+      includes: includes,
+      overrideOptions: overrideOptions,
+      taskArn: taskArn,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListTaskExecutions = {
   type t
   @ocaml.doc("<p>ListTaskExecutions</p>")
@@ -1325,9 +1382,11 @@ module ListTaskExecutions = {
     taskExecutions: option<taskExecutionList>,
   }
   @module("@aws-sdk/client-datasync") @new external new: request => t = "ListTaskExecutionsCommand"
-  let make = (~nextToken=?, ~maxResults=?, ~taskArn=?, ()) => new({nextToken, maxResults, taskArn})
+  let make = (~nextToken=?, ~maxResults=?, ~taskArn=?, ()) =>
+    new({nextToken: nextToken, maxResults: maxResults, taskArn: taskArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListTagsForResource = {
   type t
   @ocaml.doc("<p>ListTagsForResourceRequest</p>")
@@ -1352,9 +1411,10 @@ module ListTagsForResource = {
   }
   @module("@aws-sdk/client-datasync") @new external new: request => t = "ListTagsForResourceCommand"
   let make = (~resourceArn, ~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken, maxResults, resourceArn})
+    new({nextToken: nextToken, maxResults: maxResults, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListAgents = {
   type t
   @ocaml.doc("<p>ListAgentsRequest</p>")
@@ -1375,9 +1435,11 @@ module ListAgents = {
     @ocaml.doc("<p>A list of agents in your account.</p>") @as("Agents") agents: option<agentList>,
   }
   @module("@aws-sdk/client-datasync") @new external new: request => t = "ListAgentsCommand"
-  let make = (~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults})
+  let make = (~nextToken=?, ~maxResults=?, ()) =>
+    new({nextToken: nextToken, maxResults: maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeTaskExecution = {
   type t
   @ocaml.doc("<p>DescribeTaskExecutionRequest</p>")
@@ -1461,6 +1523,7 @@ module DescribeTaskExecution = {
   let make = (~taskExecutionArn, ()) => new({taskExecutionArn: taskExecutionArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeTask = {
   type t
   @ocaml.doc("<p>DescribeTaskRequest</p>")
@@ -1549,6 +1612,7 @@ module DescribeTask = {
   let make = (~taskArn, ()) => new({taskArn: taskArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeLocationNfs = {
   type t
   @ocaml.doc("<p>DescribeLocationNfsRequest</p>")
@@ -1575,6 +1639,7 @@ module DescribeLocationNfs = {
   let make = (~locationArn, ()) => new({locationArn: locationArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeLocationHdfs = {
   type t
   type request = {
@@ -1628,6 +1693,7 @@ module DescribeLocationHdfs = {
   let make = (~locationArn, ()) => new({locationArn: locationArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeLocationEfs = {
   type t
   @ocaml.doc("<p>DescribeLocationEfsRequest</p>")
@@ -1651,6 +1717,7 @@ module DescribeLocationEfs = {
   let make = (~locationArn, ()) => new({locationArn: locationArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeAgent = {
   type t
   @ocaml.doc("<p>DescribeAgent</p>")
@@ -1690,6 +1757,7 @@ module DescribeAgent = {
   let make = (~agentArn, ()) => new({agentArn: agentArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateTask = {
   type t
   @ocaml.doc("<p>CreateTaskRequest</p>")
@@ -1759,18 +1827,19 @@ module CreateTask = {
     (),
   ) =>
     new({
-      includes,
-      tags,
-      schedule,
-      excludes,
-      options,
-      name,
-      cloudWatchLogGroupArn,
-      destinationLocationArn,
-      sourceLocationArn,
+      includes: includes,
+      tags: tags,
+      schedule: schedule,
+      excludes: excludes,
+      options: options,
+      name: name,
+      cloudWatchLogGroupArn: cloudWatchLogGroupArn,
+      destinationLocationArn: destinationLocationArn,
+      sourceLocationArn: sourceLocationArn,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateLocationSmb = {
   type t
   @ocaml.doc("<p>CreateLocationSmbRequest</p>")
@@ -1846,9 +1915,20 @@ module CreateLocationSmb = {
     ~mountOptions=?,
     ~domain=?,
     (),
-  ) => new({tags, mountOptions, agentArns, password, domain, user, serverHostname, subdirectory})
+  ) =>
+    new({
+      tags: tags,
+      mountOptions: mountOptions,
+      agentArns: agentArns,
+      password: password,
+      domain: domain,
+      user: user,
+      serverHostname: serverHostname,
+      subdirectory: subdirectory,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateLocationS3 = {
   type t
   @ocaml.doc("<p>CreateLocationS3Request</p>")
@@ -1896,9 +1976,18 @@ module CreateLocationS3 = {
     ~s3StorageClass=?,
     ~subdirectory=?,
     (),
-  ) => new({tags, agentArns, s3Config, s3StorageClass, s3BucketArn, subdirectory})
+  ) =>
+    new({
+      tags: tags,
+      agentArns: agentArns,
+      s3Config: s3Config,
+      s3StorageClass: s3StorageClass,
+      s3BucketArn: s3BucketArn,
+      subdirectory: subdirectory,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateLocationObjectStorage = {
   type t
   @ocaml.doc("<p>CreateLocationObjectStorageRequest</p>")
@@ -1968,18 +2057,19 @@ module CreateLocationObjectStorage = {
     (),
   ) =>
     new({
-      tags,
-      agentArns,
-      secretKey,
-      accessKey,
-      bucketName,
-      subdirectory,
-      serverProtocol,
-      serverPort,
-      serverHostname,
+      tags: tags,
+      agentArns: agentArns,
+      secretKey: secretKey,
+      accessKey: accessKey,
+      bucketName: bucketName,
+      subdirectory: subdirectory,
+      serverProtocol: serverProtocol,
+      serverPort: serverPort,
+      serverHostname: serverHostname,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateLocationNfs = {
   type t
   @ocaml.doc("<p>CreateLocationNfsRequest</p>")
@@ -2036,9 +2126,16 @@ module CreateLocationNfs = {
   }
   @module("@aws-sdk/client-datasync") @new external new: request => t = "CreateLocationNfsCommand"
   let make = (~onPremConfig, ~serverHostname, ~subdirectory, ~tags=?, ~mountOptions=?, ()) =>
-    new({tags, mountOptions, onPremConfig, serverHostname, subdirectory})
+    new({
+      tags: tags,
+      mountOptions: mountOptions,
+      onPremConfig: onPremConfig,
+      serverHostname: serverHostname,
+      subdirectory: subdirectory,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateLocationHdfs = {
   type t
   type request = {
@@ -2140,22 +2237,23 @@ module CreateLocationHdfs = {
     (),
   ) =>
     new({
-      tags,
-      agentArns,
-      kerberosKrb5Conf,
-      kerberosKeytab,
-      kerberosPrincipal,
-      simpleUser,
-      authenticationType,
-      qopConfiguration,
-      kmsKeyProviderUri,
-      replicationFactor,
-      blockSize,
-      nameNodes,
-      subdirectory,
+      tags: tags,
+      agentArns: agentArns,
+      kerberosKrb5Conf: kerberosKrb5Conf,
+      kerberosKeytab: kerberosKeytab,
+      kerberosPrincipal: kerberosPrincipal,
+      simpleUser: simpleUser,
+      authenticationType: authenticationType,
+      qopConfiguration: qopConfiguration,
+      kmsKeyProviderUri: kmsKeyProviderUri,
+      replicationFactor: replicationFactor,
+      blockSize: blockSize,
+      nameNodes: nameNodes,
+      subdirectory: subdirectory,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateLocationFsxWindows = {
   type t
   type request = {
@@ -2211,9 +2309,19 @@ module CreateLocationFsxWindows = {
     ~tags=?,
     ~subdirectory=?,
     (),
-  ) => new({password, domain, user, tags, securityGroupArns, fsxFilesystemArn, subdirectory})
+  ) =>
+    new({
+      password: password,
+      domain: domain,
+      user: user,
+      tags: tags,
+      securityGroupArns: securityGroupArns,
+      fsxFilesystemArn: fsxFilesystemArn,
+      subdirectory: subdirectory,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateLocationFsxLustre = {
   type t
   type request = {
@@ -2245,9 +2353,15 @@ module CreateLocationFsxLustre = {
   @module("@aws-sdk/client-datasync") @new
   external new: request => t = "CreateLocationFsxLustreCommand"
   let make = (~securityGroupArns, ~fsxFilesystemArn, ~tags=?, ~subdirectory=?, ()) =>
-    new({tags, subdirectory, securityGroupArns, fsxFilesystemArn})
+    new({
+      tags: tags,
+      subdirectory: subdirectory,
+      securityGroupArns: securityGroupArns,
+      fsxFilesystemArn: fsxFilesystemArn,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateLocationEfs = {
   type t
   @ocaml.doc("<p>CreateLocationEfsRequest</p>")
@@ -2306,9 +2420,15 @@ module CreateLocationEfs = {
   }
   @module("@aws-sdk/client-datasync") @new external new: request => t = "CreateLocationEfsCommand"
   let make = (~ec2Config, ~efsFilesystemArn, ~tags=?, ~subdirectory=?, ()) =>
-    new({tags, ec2Config, efsFilesystemArn, subdirectory})
+    new({
+      tags: tags,
+      ec2Config: ec2Config,
+      efsFilesystemArn: efsFilesystemArn,
+      subdirectory: subdirectory,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateAgent = {
   type t
   @ocaml.doc("<p>CreateAgentRequest</p>")
@@ -2376,9 +2496,18 @@ module CreateAgent = {
     ~tags=?,
     ~agentName=?,
     (),
-  ) => new({securityGroupArns, subnetArns, vpcEndpointId, tags, agentName, activationKey})
+  ) =>
+    new({
+      securityGroupArns: securityGroupArns,
+      subnetArns: subnetArns,
+      vpcEndpointId: vpcEndpointId,
+      tags: tags,
+      agentName: agentName,
+      activationKey: activationKey,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListTasks = {
   type t
   @ocaml.doc("<p>ListTasksRequest</p>")
@@ -2406,9 +2535,11 @@ module ListTasks = {
     tasks: option<taskList>,
   }
   @module("@aws-sdk/client-datasync") @new external new: request => t = "ListTasksCommand"
-  let make = (~filters=?, ~nextToken=?, ~maxResults=?, ()) => new({filters, nextToken, maxResults})
+  let make = (~filters=?, ~nextToken=?, ~maxResults=?, ()) =>
+    new({filters: filters, nextToken: nextToken, maxResults: maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListLocations = {
   type t
   @ocaml.doc("<p>ListLocationsRequest</p>")
@@ -2435,6 +2566,7 @@ module ListLocations = {
     locations: option<locationList>,
   }
   @module("@aws-sdk/client-datasync") @new external new: request => t = "ListLocationsCommand"
-  let make = (~filters=?, ~nextToken=?, ~maxResults=?, ()) => new({filters, nextToken, maxResults})
+  let make = (~filters=?, ~nextToken=?, ~maxResults=?, ()) =>
+    new({filters: filters, nextToken: nextToken, maxResults: maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

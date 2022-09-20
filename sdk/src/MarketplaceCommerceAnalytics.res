@@ -119,16 +119,17 @@ module StartSupportDataExport = {
     (),
   ) =>
     new({
-      customerDefinedValues,
-      snsTopicArn,
-      destinationS3Prefix,
-      destinationS3BucketName,
-      roleNameArn,
-      fromDate,
-      dataSetType,
+      customerDefinedValues: customerDefinedValues,
+      snsTopicArn: snsTopicArn,
+      destinationS3Prefix: destinationS3Prefix,
+      destinationS3BucketName: destinationS3BucketName,
+      roleNameArn: roleNameArn,
+      fromDate: fromDate,
+      dataSetType: dataSetType,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GenerateDataSet = {
   type t
   @ocaml.doc("Container for the parameters to the GenerateDataSet operation.")
@@ -283,13 +284,13 @@ module GenerateDataSet = {
     (),
   ) =>
     new({
-      customerDefinedValues,
-      snsTopicArn,
-      destinationS3Prefix,
-      destinationS3BucketName,
-      roleNameArn,
-      dataSetPublicationDate,
-      dataSetType,
+      customerDefinedValues: customerDefinedValues,
+      snsTopicArn: snsTopicArn,
+      destinationS3Prefix: destinationS3Prefix,
+      destinationS3BucketName: destinationS3BucketName,
+      roleNameArn: roleNameArn,
+      dataSetPublicationDate: dataSetPublicationDate,
+      dataSetType: dataSetType,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

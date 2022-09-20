@@ -692,7 +692,7 @@ module PutMetadata = {
   }
   type response = {.}
   @module("@aws-sdk/client-ivs") @new external new: request => t = "PutMetadataCommand"
-  let make = (~metadata, ~channelArn, ()) => new({metadata, channelArn})
+  let make = (~metadata, ~channelArn, ()) => new({metadata: metadata, channelArn: channelArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
@@ -745,7 +745,7 @@ module UntagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-ivs") @new external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys, resourceArn})
+  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
@@ -758,7 +758,7 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-ivs") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceArn, ()) => new({tags, resourceArn})
+  let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
@@ -832,12 +832,12 @@ module UpdateChannel = {
     (),
   ) =>
     new({
-      recordingConfigurationArn,
-      authorized,
-      type_,
-      latencyMode,
-      name,
-      arn,
+      recordingConfigurationArn: recordingConfigurationArn,
+      authorized: authorized,
+      type_: type_,
+      latencyMode: latencyMode,
+      name: name,
+      arn: arn,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
@@ -861,7 +861,7 @@ module ListStreams = {
   }
   @module("@aws-sdk/client-ivs") @new external new: request => t = "ListStreamsCommand"
   let make = (~maxResults=?, ~nextToken=?, ~filterBy=?, ()) =>
-    new({maxResults, nextToken, filterBy})
+    new({maxResults: maxResults, nextToken: nextToken, filterBy: filterBy})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -883,7 +883,7 @@ module ListStreamSessions = {
   }
   @module("@aws-sdk/client-ivs") @new external new: request => t = "ListStreamSessionsCommand"
   let make = (~channelArn, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults, nextToken, channelArn})
+    new({maxResults: maxResults, nextToken: nextToken, channelArn: channelArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -899,7 +899,8 @@ module ImportPlaybackKeyPair = {
   }
   type response = {@ocaml.doc("<p/>") keyPair: option<playbackKeyPair>}
   @module("@aws-sdk/client-ivs") @new external new: request => t = "ImportPlaybackKeyPairCommand"
-  let make = (~publicKeyMaterial, ~tags=?, ~name=?, ()) => new({tags, name, publicKeyMaterial})
+  let make = (~publicKeyMaterial, ~tags=?, ~name=?, ()) =>
+    new({tags: tags, name: name, publicKeyMaterial: publicKeyMaterial})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -948,7 +949,7 @@ module CreateStreamKey = {
     streamKey: option<streamKey>,
   }
   @module("@aws-sdk/client-ivs") @new external new: request => t = "CreateStreamKeyCommand"
-  let make = (~channelArn, ~tags=?, ()) => new({tags, channelArn})
+  let make = (~channelArn, ~tags=?, ()) => new({tags: tags, channelArn: channelArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -1008,12 +1009,12 @@ module CreateChannel = {
     (),
   ) =>
     new({
-      tags,
-      recordingConfigurationArn,
-      authorized,
-      type_,
-      latencyMode,
-      name,
+      tags: tags,
+      recordingConfigurationArn: recordingConfigurationArn,
+      authorized: authorized,
+      type_: type_,
+      latencyMode: latencyMode,
+      name: name,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
@@ -1036,7 +1037,7 @@ module ListStreamKeys = {
   }
   @module("@aws-sdk/client-ivs") @new external new: request => t = "ListStreamKeysCommand"
   let make = (~channelArn, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults, nextToken, channelArn})
+    new({maxResults: maxResults, nextToken: nextToken, channelArn: channelArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -1055,7 +1056,8 @@ module ListPlaybackKeyPairs = {
     @ocaml.doc("<p>List of key pairs.</p>") keyPairs: playbackKeyPairList,
   }
   @module("@aws-sdk/client-ivs") @new external new: request => t = "ListPlaybackKeyPairsCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -1089,10 +1091,10 @@ module ListChannels = {
     (),
   ) =>
     new({
-      maxResults,
-      nextToken,
-      filterByRecordingConfigurationArn,
-      filterByName,
+      maxResults: maxResults,
+      nextToken: nextToken,
+      filterByRecordingConfigurationArn: filterByRecordingConfigurationArn,
+      filterByName: filterByName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
@@ -1131,10 +1133,10 @@ module CreateRecordingConfiguration = {
   external new: request => t = "CreateRecordingConfigurationCommand"
   let make = (~destinationConfiguration, ~thumbnailConfiguration=?, ~tags=?, ~name=?, ()) =>
     new({
-      thumbnailConfiguration,
-      tags,
-      destinationConfiguration,
-      name,
+      thumbnailConfiguration: thumbnailConfiguration,
+      tags: tags,
+      destinationConfiguration: destinationConfiguration,
+      name: name,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
@@ -1182,7 +1184,8 @@ module ListRecordingConfigurations = {
   }
   @module("@aws-sdk/client-ivs") @new
   external new: request => t = "ListRecordingConfigurationsCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -1199,6 +1202,6 @@ module GetStreamSession = {
     @ocaml.doc("<p>List of stream details.</p>") streamSession: option<streamSession>,
   }
   @module("@aws-sdk/client-ivs") @new external new: request => t = "GetStreamSessionCommand"
-  let make = (~channelArn, ~streamId=?, ()) => new({streamId, channelArn})
+  let make = (~channelArn, ~streamId=?, ()) => new({streamId: streamId, channelArn: channelArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

@@ -1191,9 +1191,10 @@ module StopJobRun = {
     @ocaml.doc("<p>The ID of the job run that you stopped.</p>") @as("RunId") runId: jobRunId,
   }
   @module("@aws-sdk/client-databrew") @new external new: request => t = "StopJobRunCommand"
-  let make = (~runId, ~name, ()) => new({runId, name})
+  let make = (~runId, ~name, ()) => new({runId: runId, name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module StartProjectSession = {
   type t
   type request = {
@@ -1209,9 +1210,10 @@ module StartProjectSession = {
     @ocaml.doc("<p>The name of the project to be acted upon.</p>") @as("Name") name: projectName,
   }
   @module("@aws-sdk/client-databrew") @new external new: request => t = "StartProjectSessionCommand"
-  let make = (~name, ~assumeControl=?, ()) => new({assumeControl, name})
+  let make = (~name, ~assumeControl=?, ()) => new({assumeControl: assumeControl, name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module StartJobRun = {
   type t
   type request = {@ocaml.doc("<p>The name of the job to be run.</p>") @as("Name") name: jobName}
@@ -1223,6 +1225,7 @@ module StartJobRun = {
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module PublishRecipe = {
   type t
   type request = {
@@ -1237,9 +1240,10 @@ module PublishRecipe = {
     @ocaml.doc("<p>The name of the recipe that you published.</p>") @as("Name") name: recipeName,
   }
   @module("@aws-sdk/client-databrew") @new external new: request => t = "PublishRecipeCommand"
-  let make = (~name, ~description=?, ()) => new({name, description})
+  let make = (~name, ~description=?, ()) => new({name: name, description: description})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteSchedule = {
   type t
   type request = {
@@ -1252,6 +1256,7 @@ module DeleteSchedule = {
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteRuleset = {
   type t
   type request = {
@@ -1264,6 +1269,7 @@ module DeleteRuleset = {
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteRecipeVersion = {
   type t
   type request = {
@@ -1280,9 +1286,10 @@ module DeleteRecipeVersion = {
     @ocaml.doc("<p>The name of the recipe that was deleted.</p>") @as("Name") name: recipeName,
   }
   @module("@aws-sdk/client-databrew") @new external new: request => t = "DeleteRecipeVersionCommand"
-  let make = (~recipeVersion, ~name, ()) => new({recipeVersion, name})
+  let make = (~recipeVersion, ~name, ()) => new({recipeVersion: recipeVersion, name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteProject = {
   type t
   type request = {
@@ -1295,6 +1302,7 @@ module DeleteProject = {
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteJob = {
   type t
   type request = {@ocaml.doc("<p>The name of the job to be deleted.</p>") @as("Name") name: jobName}
@@ -1305,6 +1313,7 @@ module DeleteJob = {
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteDataset = {
   type t
   type request = {
@@ -1317,6 +1326,7 @@ module DeleteDataset = {
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateSchedule = {
   type t
   type request = {
@@ -1335,9 +1345,11 @@ module UpdateSchedule = {
     @ocaml.doc("<p>The name of the schedule that was updated.</p>") @as("Name") name: scheduleName,
   }
   @module("@aws-sdk/client-databrew") @new external new: request => t = "UpdateScheduleCommand"
-  let make = (~name, ~cronExpression, ~jobNames=?, ()) => new({name, cronExpression, jobNames})
+  let make = (~name, ~cronExpression, ~jobNames=?, ()) =>
+    new({name: name, cronExpression: cronExpression, jobNames: jobNames})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateProject = {
   type t
   type request = {
@@ -1356,9 +1368,10 @@ module UpdateProject = {
     lastModifiedDate: option<date>,
   }
   @module("@aws-sdk/client-databrew") @new external new: request => t = "UpdateProjectCommand"
-  let make = (~name, ~roleArn, ~sample=?, ()) => new({name, roleArn, sample})
+  let make = (~name, ~roleArn, ~sample=?, ()) => new({name: name, roleArn: roleArn, sample: sample})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UntagResource = {
   type t
   type request = {
@@ -1371,9 +1384,10 @@ module UntagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-databrew") @new external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys, resourceArn})
+  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module TagResource = {
   type t
   type request = {
@@ -1386,9 +1400,10 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-databrew") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceArn, ()) => new({tags, resourceArn})
+  let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ListTagsForResource = {
   type t
   type request = {
@@ -1405,6 +1420,7 @@ module ListTagsForResource = {
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeSchedule = {
   type t
   type request = {
@@ -1440,6 +1456,7 @@ module DescribeSchedule = {
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeProject = {
   type t
   type request = {
@@ -1498,6 +1515,7 @@ module DescribeProject = {
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateSchedule = {
   type t
   type request = {
@@ -1520,9 +1538,10 @@ module CreateSchedule = {
   }
   @module("@aws-sdk/client-databrew") @new external new: request => t = "CreateScheduleCommand"
   let make = (~name, ~cronExpression, ~tags=?, ~jobNames=?, ()) =>
-    new({name, tags, cronExpression, jobNames})
+    new({name: name, tags: tags, cronExpression: cronExpression, jobNames: jobNames})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateProject = {
   type t
   type request = {
@@ -1548,9 +1567,17 @@ module CreateProject = {
   }
   @module("@aws-sdk/client-databrew") @new external new: request => t = "CreateProjectCommand"
   let make = (~roleArn, ~recipeName, ~name, ~datasetName, ~tags=?, ~sample=?, ()) =>
-    new({tags, roleArn, sample, recipeName, name, datasetName})
+    new({
+      tags: tags,
+      roleArn: roleArn,
+      sample: sample,
+      recipeName: recipeName,
+      name: name,
+      datasetName: datasetName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module BatchDeleteRecipeVersion = {
   type t
   type request = {
@@ -1572,9 +1599,10 @@ module BatchDeleteRecipeVersion = {
   }
   @module("@aws-sdk/client-databrew") @new
   external new: request => t = "BatchDeleteRecipeVersionCommand"
-  let make = (~recipeVersions, ~name, ()) => new({recipeVersions, name})
+  let make = (~recipeVersions, ~name, ()) => new({recipeVersions: recipeVersions, name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module SendProjectSessionAction = {
   type t
   type request = {
@@ -1613,9 +1641,18 @@ module SendProjectSessionAction = {
     ~recipeStep=?,
     ~preview=?,
     (),
-  ) => new({viewFrame, clientSessionId, stepIndex, recipeStep, name, preview})
+  ) =>
+    new({
+      viewFrame: viewFrame,
+      clientSessionId: clientSessionId,
+      stepIndex: stepIndex,
+      recipeStep: recipeStep,
+      name: name,
+      preview: preview,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListSchedules = {
   type t
   type request = {
@@ -1636,9 +1673,11 @@ module ListSchedules = {
     schedules: scheduleList,
   }
   @module("@aws-sdk/client-databrew") @new external new: request => t = "ListSchedulesCommand"
-  let make = (~nextToken=?, ~maxResults=?, ~jobName=?, ()) => new({nextToken, maxResults, jobName})
+  let make = (~nextToken=?, ~maxResults=?, ~jobName=?, ()) =>
+    new({nextToken: nextToken, maxResults: maxResults, jobName: jobName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListRulesets = {
   type t
   type request = {
@@ -1665,9 +1704,10 @@ module ListRulesets = {
   }
   @module("@aws-sdk/client-databrew") @new external new: request => t = "ListRulesetsCommand"
   let make = (~nextToken=?, ~maxResults=?, ~targetArn=?, ()) =>
-    new({nextToken, maxResults, targetArn})
+    new({nextToken: nextToken, maxResults: maxResults, targetArn: targetArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListProjects = {
   type t
   type request = {
@@ -1686,9 +1726,11 @@ module ListProjects = {
     projects: projectList,
   }
   @module("@aws-sdk/client-databrew") @new external new: request => t = "ListProjectsCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateRuleset = {
   type t
   type request = {
@@ -1704,9 +1746,11 @@ module UpdateRuleset = {
     @ocaml.doc("<p>The name of the updated ruleset.</p>") @as("Name") name: rulesetName,
   }
   @module("@aws-sdk/client-databrew") @new external new: request => t = "UpdateRulesetCommand"
-  let make = (~rules, ~name, ~description=?, ()) => new({rules, description, name})
+  let make = (~rules, ~name, ~description=?, ()) =>
+    new({rules: rules, description: description, name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateRecipeJob = {
   type t
   type request = {
@@ -1779,20 +1823,21 @@ module UpdateRecipeJob = {
     (),
   ) =>
     new({
-      timeout,
-      roleArn,
-      databaseOutputs,
-      dataCatalogOutputs,
-      outputs,
-      maxRetries,
-      maxCapacity,
-      logSubscription,
-      name,
-      encryptionMode,
-      encryptionKeyArn,
+      timeout: timeout,
+      roleArn: roleArn,
+      databaseOutputs: databaseOutputs,
+      dataCatalogOutputs: dataCatalogOutputs,
+      outputs: outputs,
+      maxRetries: maxRetries,
+      maxCapacity: maxCapacity,
+      logSubscription: logSubscription,
+      name: name,
+      encryptionMode: encryptionMode,
+      encryptionKeyArn: encryptionKeyArn,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateRecipe = {
   type t
   type request = {
@@ -1808,9 +1853,11 @@ module UpdateRecipe = {
     @ocaml.doc("<p>The name of the recipe that was updated.</p>") @as("Name") name: recipeName,
   }
   @module("@aws-sdk/client-databrew") @new external new: request => t = "UpdateRecipeCommand"
-  let make = (~name, ~steps=?, ~description=?, ()) => new({steps, name, description})
+  let make = (~name, ~steps=?, ~description=?, ()) =>
+    new({steps: steps, name: name, description: description})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeRuleset = {
   type t
   type request = {
@@ -1847,6 +1894,7 @@ module DescribeRuleset = {
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeRecipe = {
   type t
   type request = {
@@ -1889,9 +1937,10 @@ module DescribeRecipe = {
     createdBy: option<createdBy>,
   }
   @module("@aws-sdk/client-databrew") @new external new: request => t = "DescribeRecipeCommand"
-  let make = (~name, ~recipeVersion=?, ()) => new({recipeVersion, name})
+  let make = (~name, ~recipeVersion=?, ()) => new({recipeVersion: recipeVersion, name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateRuleset = {
   type t
   type request = {
@@ -1916,9 +1965,10 @@ module CreateRuleset = {
   }
   @module("@aws-sdk/client-databrew") @new external new: request => t = "CreateRulesetCommand"
   let make = (~rules, ~targetArn, ~name, ~tags=?, ~description=?, ()) =>
-    new({tags, rules, targetArn, description, name})
+    new({tags: tags, rules: rules, targetArn: targetArn, description: description, name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateRecipeJob = {
   type t
   type request = {
@@ -2006,24 +2056,25 @@ module CreateRecipeJob = {
     (),
   ) =>
     new({
-      timeout,
-      tags,
-      roleArn,
-      recipeReference,
-      projectName,
-      databaseOutputs,
-      dataCatalogOutputs,
-      outputs,
-      maxRetries,
-      maxCapacity,
-      logSubscription,
-      name,
-      encryptionMode,
-      encryptionKeyArn,
-      datasetName,
+      timeout: timeout,
+      tags: tags,
+      roleArn: roleArn,
+      recipeReference: recipeReference,
+      projectName: projectName,
+      databaseOutputs: databaseOutputs,
+      dataCatalogOutputs: dataCatalogOutputs,
+      outputs: outputs,
+      maxRetries: maxRetries,
+      maxCapacity: maxCapacity,
+      logSubscription: logSubscription,
+      name: name,
+      encryptionMode: encryptionMode,
+      encryptionKeyArn: encryptionKeyArn,
+      datasetName: datasetName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateRecipe = {
   type t
   type request = {
@@ -2043,9 +2094,11 @@ module CreateRecipe = {
     @ocaml.doc("<p>The name of the recipe that you created.</p>") @as("Name") name: recipeName,
   }
   @module("@aws-sdk/client-databrew") @new external new: request => t = "CreateRecipeCommand"
-  let make = (~steps, ~name, ~tags=?, ~description=?, ()) => new({tags, steps, name, description})
+  let make = (~steps, ~name, ~tags=?, ~description=?, ()) =>
+    new({tags: tags, steps: steps, name: name, description: description})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateDataset = {
   type t
   type request = {
@@ -2068,9 +2121,16 @@ module UpdateDataset = {
   }
   @module("@aws-sdk/client-databrew") @new external new: request => t = "UpdateDatasetCommand"
   let make = (~input, ~name, ~pathOptions=?, ~formatOptions=?, ~format=?, ()) =>
-    new({pathOptions, input, formatOptions, format, name})
+    new({
+      pathOptions: pathOptions,
+      input: input,
+      formatOptions: formatOptions,
+      format: format,
+      name: name,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeDataset = {
   type t
   type request = {
@@ -2112,6 +2172,7 @@ module DescribeDataset = {
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateDataset = {
   type t
   type request = {
@@ -2138,9 +2199,17 @@ module CreateDataset = {
   }
   @module("@aws-sdk/client-databrew") @new external new: request => t = "CreateDatasetCommand"
   let make = (~input, ~name, ~tags=?, ~pathOptions=?, ~formatOptions=?, ~format=?, ()) =>
-    new({tags, pathOptions, input, formatOptions, format, name})
+    new({
+      tags: tags,
+      pathOptions: pathOptions,
+      input: input,
+      formatOptions: formatOptions,
+      format: format,
+      name: name,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListRecipes = {
   type t
   type request = {
@@ -2167,9 +2236,10 @@ module ListRecipes = {
   }
   @module("@aws-sdk/client-databrew") @new external new: request => t = "ListRecipesCommand"
   let make = (~recipeVersion=?, ~nextToken=?, ~maxResults=?, ()) =>
-    new({recipeVersion, nextToken, maxResults})
+    new({recipeVersion: recipeVersion, nextToken: nextToken, maxResults: maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListRecipeVersions = {
   type t
   type request = {
@@ -2190,9 +2260,11 @@ module ListRecipeVersions = {
     nextToken: option<nextToken>,
   }
   @module("@aws-sdk/client-databrew") @new external new: request => t = "ListRecipeVersionsCommand"
-  let make = (~name, ~nextToken=?, ~maxResults=?, ()) => new({name, nextToken, maxResults})
+  let make = (~name, ~nextToken=?, ~maxResults=?, ()) =>
+    new({name: name, nextToken: nextToken, maxResults: maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListJobs = {
   type t
   type request = {
@@ -2221,9 +2293,15 @@ module ListJobs = {
   }
   @module("@aws-sdk/client-databrew") @new external new: request => t = "ListJobsCommand"
   let make = (~projectName=?, ~nextToken=?, ~maxResults=?, ~datasetName=?, ()) =>
-    new({projectName, nextToken, maxResults, datasetName})
+    new({
+      projectName: projectName,
+      nextToken: nextToken,
+      maxResults: maxResults,
+      datasetName: datasetName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListJobRuns = {
   type t
   type request = {
@@ -2243,9 +2321,11 @@ module ListJobRuns = {
     jobRuns: jobRunList,
   }
   @module("@aws-sdk/client-databrew") @new external new: request => t = "ListJobRunsCommand"
-  let make = (~name, ~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults, name})
+  let make = (~name, ~nextToken=?, ~maxResults=?, ()) =>
+    new({nextToken: nextToken, maxResults: maxResults, name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateProfileJob = {
   type t
   type request = {
@@ -2323,21 +2403,22 @@ module UpdateProfileJob = {
     (),
   ) =>
     new({
-      jobSample,
-      timeout,
-      roleArn,
-      validationConfigurations,
-      outputLocation,
-      maxRetries,
-      maxCapacity,
-      logSubscription,
-      name,
-      encryptionMode,
-      encryptionKeyArn,
-      configuration,
+      jobSample: jobSample,
+      timeout: timeout,
+      roleArn: roleArn,
+      validationConfigurations: validationConfigurations,
+      outputLocation: outputLocation,
+      maxRetries: maxRetries,
+      maxCapacity: maxCapacity,
+      logSubscription: logSubscription,
+      name: name,
+      encryptionMode: encryptionMode,
+      encryptionKeyArn: encryptionKeyArn,
+      configuration: configuration,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListDatasets = {
   type t
   type request = {
@@ -2355,9 +2436,11 @@ module ListDatasets = {
     @ocaml.doc("<p>A list of datasets that are defined.</p>") @as("Datasets") datasets: datasetList,
   }
   @module("@aws-sdk/client-databrew") @new external new: request => t = "ListDatasetsCommand"
-  let make = (~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults})
+  let make = (~nextToken=?, ~maxResults=?, ()) =>
+    new({nextToken: nextToken, maxResults: maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeJobRun = {
   type t
   type request = {
@@ -2428,9 +2511,10 @@ module DescribeJobRun = {
     attempt: option<attempt>,
   }
   @module("@aws-sdk/client-databrew") @new external new: request => t = "DescribeJobRunCommand"
-  let make = (~runId, ~name, ()) => new({runId, name})
+  let make = (~runId, ~name, ()) => new({runId: runId, name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeJob = {
   type t
   type request = {
@@ -2538,6 +2622,7 @@ module DescribeJob = {
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateProfileJob = {
   type t
   type request = {
@@ -2624,20 +2709,20 @@ module CreateProfileJob = {
     (),
   ) =>
     new({
-      jobSample,
-      timeout,
-      tags,
-      roleArn,
-      validationConfigurations,
-      configuration,
-      outputLocation,
-      maxRetries,
-      maxCapacity,
-      logSubscription,
-      name,
-      encryptionMode,
-      encryptionKeyArn,
-      datasetName,
+      jobSample: jobSample,
+      timeout: timeout,
+      tags: tags,
+      roleArn: roleArn,
+      validationConfigurations: validationConfigurations,
+      configuration: configuration,
+      outputLocation: outputLocation,
+      maxRetries: maxRetries,
+      maxCapacity: maxCapacity,
+      logSubscription: logSubscription,
+      name: name,
+      encryptionMode: encryptionMode,
+      encryptionKeyArn: encryptionKeyArn,
+      datasetName: datasetName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

@@ -329,6 +329,7 @@ module DeleteSafetyRule = {
   let make = (~safetyRuleArn, ()) => new({safetyRuleArn: safetyRuleArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteRoutingControl = {
   type t
   type request = {
@@ -342,6 +343,7 @@ module DeleteRoutingControl = {
   let make = (~routingControlArn, ()) => new({routingControlArn: routingControlArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteControlPanel = {
   type t
   type request = {
@@ -354,6 +356,7 @@ module DeleteControlPanel = {
   let make = (~controlPanelArn, ()) => new({controlPanelArn: controlPanelArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteCluster = {
   type t
   type request = {
@@ -367,6 +370,7 @@ module DeleteCluster = {
   let make = (~clusterArn, ()) => new({clusterArn: clusterArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateRoutingControl = {
   type t
   @ocaml.doc("<p>The details of the routing control that you're updating.</p>")
@@ -384,9 +388,10 @@ module UpdateRoutingControl = {
   @module("@aws-sdk/client-route53-recovery-control-config") @new
   external new: request => t = "UpdateRoutingControlCommand"
   let make = (~routingControlName, ~routingControlArn, ()) =>
-    new({routingControlName, routingControlArn})
+    new({routingControlName: routingControlName, routingControlArn: routingControlArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateControlPanel = {
   type t
   @ocaml.doc("<p>The details of the control panel that you're updating.</p>")
@@ -402,9 +407,11 @@ module UpdateControlPanel = {
   }
   @module("@aws-sdk/client-route53-recovery-control-config") @new
   external new: request => t = "UpdateControlPanelCommand"
-  let make = (~controlPanelName, ~controlPanelArn, ()) => new({controlPanelName, controlPanelArn})
+  let make = (~controlPanelName, ~controlPanelArn, ()) =>
+    new({controlPanelName: controlPanelName, controlPanelArn: controlPanelArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UntagResource = {
   type t
   type request = {
@@ -416,9 +423,10 @@ module UntagResource = {
   type response = {.}
   @module("@aws-sdk/client-route53-recovery-control-config") @new
   external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys, resourceArn})
+  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module TagResource = {
   type t
   @ocaml.doc("<p>Request of adding tag to the resource</p>")
@@ -432,9 +440,10 @@ module TagResource = {
   type response = {.}
   @module("@aws-sdk/client-route53-recovery-control-config") @new
   external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceArn, ()) => new({tags, resourceArn})
+  let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ListTagsForResource = {
   type t
   type request = {
@@ -451,6 +460,7 @@ module ListTagsForResource = {
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListAssociatedRoute53HealthChecks = {
   type t
   type request = {
@@ -473,9 +483,10 @@ module ListAssociatedRoute53HealthChecks = {
   @module("@aws-sdk/client-route53-recovery-control-config") @new
   external new: request => t = "ListAssociatedRoute53HealthChecksCommand"
   let make = (~routingControlArn, ~nextToken=?, ~maxResults=?, ()) =>
-    new({routingControlArn, nextToken, maxResults})
+    new({routingControlArn: routingControlArn, nextToken: nextToken, maxResults: maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeRoutingControl = {
   type t
   type request = {
@@ -492,6 +503,7 @@ module DescribeRoutingControl = {
   let make = (~routingControlArn, ()) => new({routingControlArn: routingControlArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeControlPanel = {
   type t
   type request = {
@@ -507,6 +519,7 @@ module DescribeControlPanel = {
   let make = (~controlPanelArn, ()) => new({controlPanelArn: controlPanelArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateRoutingControl = {
   type t
   @ocaml.doc("<p>The details of the routing control that you're creating.</p>")
@@ -536,9 +549,15 @@ module CreateRoutingControl = {
   @module("@aws-sdk/client-route53-recovery-control-config") @new
   external new: request => t = "CreateRoutingControlCommand"
   let make = (~routingControlName, ~clusterArn, ~controlPanelArn=?, ~clientToken=?, ()) =>
-    new({routingControlName, controlPanelArn, clusterArn, clientToken})
+    new({
+      routingControlName: routingControlName,
+      controlPanelArn: controlPanelArn,
+      clusterArn: clusterArn,
+      clientToken: clientToken,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateControlPanel = {
   type t
   @ocaml.doc("<p>The details of the control panel that you're creating.</p>")
@@ -563,9 +582,15 @@ module CreateControlPanel = {
   @module("@aws-sdk/client-route53-recovery-control-config") @new
   external new: request => t = "CreateControlPanelCommand"
   let make = (~controlPanelName, ~clusterArn, ~tags=?, ~clientToken=?, ()) =>
-    new({tags, controlPanelName, clusterArn, clientToken})
+    new({
+      tags: tags,
+      controlPanelName: controlPanelName,
+      clusterArn: clusterArn,
+      clientToken: clientToken,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateSafetyRule = {
   type t
   @ocaml.doc(
@@ -585,9 +610,10 @@ module UpdateSafetyRule = {
   @module("@aws-sdk/client-route53-recovery-control-config") @new
   external new: request => t = "UpdateSafetyRuleCommand"
   let make = (~gatingRuleUpdate=?, ~assertionRuleUpdate=?, ()) =>
-    new({gatingRuleUpdate, assertionRuleUpdate})
+    new({gatingRuleUpdate: gatingRuleUpdate, assertionRuleUpdate: assertionRuleUpdate})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListRoutingControls = {
   type t
   type request = {
@@ -610,9 +636,10 @@ module ListRoutingControls = {
   @module("@aws-sdk/client-route53-recovery-control-config") @new
   external new: request => t = "ListRoutingControlsCommand"
   let make = (~controlPanelArn, ~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken, maxResults, controlPanelArn})
+    new({nextToken: nextToken, maxResults: maxResults, controlPanelArn: controlPanelArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListControlPanels = {
   type t
   type request = {
@@ -635,9 +662,10 @@ module ListControlPanels = {
   @module("@aws-sdk/client-route53-recovery-control-config") @new
   external new: request => t = "ListControlPanelsCommand"
   let make = (~nextToken=?, ~maxResults=?, ~clusterArn=?, ()) =>
-    new({nextToken, maxResults, clusterArn})
+    new({nextToken: nextToken, maxResults: maxResults, clusterArn: clusterArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeSafetyRule = {
   type t
   type request = {
@@ -654,6 +682,7 @@ module DescribeSafetyRule = {
   let make = (~safetyRuleArn, ()) => new({safetyRuleArn: safetyRuleArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateSafetyRule = {
   type t
   @ocaml.doc("<p>The request body that you include when you create a safety rule.</p>")
@@ -678,9 +707,15 @@ module CreateSafetyRule = {
   @module("@aws-sdk/client-route53-recovery-control-config") @new
   external new: request => t = "CreateSafetyRuleCommand"
   let make = (~tags=?, ~gatingRule=?, ~clientToken=?, ~assertionRule=?, ()) =>
-    new({tags, gatingRule, clientToken, assertionRule})
+    new({
+      tags: tags,
+      gatingRule: gatingRule,
+      clientToken: clientToken,
+      assertionRule: assertionRule,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeCluster = {
   type t
   type request = {
@@ -696,6 +731,7 @@ module DescribeCluster = {
   let make = (~clusterArn, ()) => new({clusterArn: clusterArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateCluster = {
   type t
   @ocaml.doc("<p>Creates a cluster.</p>")
@@ -715,9 +751,11 @@ module CreateCluster = {
   }
   @module("@aws-sdk/client-route53-recovery-control-config") @new
   external new: request => t = "CreateClusterCommand"
-  let make = (~clusterName, ~tags=?, ~clientToken=?, ()) => new({tags, clusterName, clientToken})
+  let make = (~clusterName, ~tags=?, ~clientToken=?, ()) =>
+    new({tags: tags, clusterName: clusterName, clientToken: clientToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListSafetyRules = {
   type t
   type request = {
@@ -740,9 +778,10 @@ module ListSafetyRules = {
   @module("@aws-sdk/client-route53-recovery-control-config") @new
   external new: request => t = "ListSafetyRulesCommand"
   let make = (~controlPanelArn, ~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken, maxResults, controlPanelArn})
+    new({nextToken: nextToken, maxResults: maxResults, controlPanelArn: controlPanelArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListClusters = {
   type t
   type request = {
@@ -762,6 +801,7 @@ module ListClusters = {
   }
   @module("@aws-sdk/client-route53-recovery-control-config") @new
   external new: request => t = "ListClustersCommand"
-  let make = (~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults})
+  let make = (~nextToken=?, ~maxResults=?, ()) =>
+    new({nextToken: nextToken, maxResults: maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

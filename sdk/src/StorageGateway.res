@@ -1499,9 +1499,11 @@ module UpdateVTLDeviceType = {
   }
   @module("@aws-sdk/client-storagegateway") @new
   external new: request => t = "UpdateVTLDeviceTypeCommand"
-  let make = (~deviceType, ~vtldeviceARN, ()) => new({deviceType, vtldeviceARN})
+  let make = (~deviceType, ~vtldeviceARN, ()) =>
+    new({deviceType: deviceType, vtldeviceARN: vtldeviceARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateSnapshotSchedule = {
   type t
   @ocaml.doc("<p>A JSON object containing one or more of the following fields:</p>
@@ -1569,9 +1571,16 @@ module UpdateSnapshotSchedule = {
   @module("@aws-sdk/client-storagegateway") @new
   external new: request => t = "UpdateSnapshotScheduleCommand"
   let make = (~recurrenceInHours, ~startAt, ~volumeARN, ~tags=?, ~description=?, ()) =>
-    new({tags, description, recurrenceInHours, startAt, volumeARN})
+    new({
+      tags: tags,
+      description: description,
+      recurrenceInHours: recurrenceInHours,
+      startAt: startAt,
+      volumeARN: volumeARN,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateSMBSecurityStrategy = {
   type t
   type request = {
@@ -1597,9 +1606,11 @@ module UpdateSMBSecurityStrategy = {
   type response = {@as("GatewayARN") gatewayARN: option<gatewayARN>}
   @module("@aws-sdk/client-storagegateway") @new
   external new: request => t = "UpdateSMBSecurityStrategyCommand"
-  let make = (~smbsecurityStrategy, ~gatewayARN, ()) => new({smbsecurityStrategy, gatewayARN})
+  let make = (~smbsecurityStrategy, ~gatewayARN, ()) =>
+    new({smbsecurityStrategy: smbsecurityStrategy, gatewayARN: gatewayARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateSMBLocalGroups = {
   type t
   type request = {
@@ -1612,9 +1623,11 @@ module UpdateSMBLocalGroups = {
   type response = {@as("GatewayARN") gatewayARN: option<gatewayARN>}
   @module("@aws-sdk/client-storagegateway") @new
   external new: request => t = "UpdateSMBLocalGroupsCommand"
-  let make = (~smblocalGroups, ~gatewayARN, ()) => new({smblocalGroups, gatewayARN})
+  let make = (~smblocalGroups, ~gatewayARN, ()) =>
+    new({smblocalGroups: smblocalGroups, gatewayARN: gatewayARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateSMBFileShareVisibility = {
   type t
   type request = {
@@ -1626,9 +1639,11 @@ module UpdateSMBFileShareVisibility = {
   type response = {@as("GatewayARN") gatewayARN: option<gatewayARN>}
   @module("@aws-sdk/client-storagegateway") @new
   external new: request => t = "UpdateSMBFileShareVisibilityCommand"
-  let make = (~fileSharesVisible, ~gatewayARN, ()) => new({fileSharesVisible, gatewayARN})
+  let make = (~fileSharesVisible, ~gatewayARN, ()) =>
+    new({fileSharesVisible: fileSharesVisible, gatewayARN: gatewayARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateSMBFileShare = {
   type t
   @ocaml.doc("<p>UpdateSMBFileShareInput</p>")
@@ -1820,28 +1835,29 @@ module UpdateSMBFileShare = {
     (),
   ) =>
     new({
-      oplocksEnabled,
-      notificationPolicy,
-      cacheAttributes,
-      fileShareName,
-      caseSensitivity,
-      auditDestinationARN,
-      invalidUserList,
-      validUserList,
-      adminUserList,
-      accessBasedEnumeration,
-      smbaclenabled,
-      requesterPays,
-      guessMIMETypeEnabled,
-      readOnly,
-      objectACL,
-      defaultStorageClass,
-      kmskey,
-      kmsencrypted,
-      fileShareARN,
+      oplocksEnabled: oplocksEnabled,
+      notificationPolicy: notificationPolicy,
+      cacheAttributes: cacheAttributes,
+      fileShareName: fileShareName,
+      caseSensitivity: caseSensitivity,
+      auditDestinationARN: auditDestinationARN,
+      invalidUserList: invalidUserList,
+      validUserList: validUserList,
+      adminUserList: adminUserList,
+      accessBasedEnumeration: accessBasedEnumeration,
+      smbaclenabled: smbaclenabled,
+      requesterPays: requesterPays,
+      guessMIMETypeEnabled: guessMIMETypeEnabled,
+      readOnly: readOnly,
+      objectACL: objectACL,
+      defaultStorageClass: defaultStorageClass,
+      kmskey: kmskey,
+      kmsencrypted: kmsencrypted,
+      fileShareARN: fileShareARN,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateNFSFileShare = {
   type t
   @ocaml.doc("<p>UpdateNFSFileShareInput</p>")
@@ -2000,24 +2016,25 @@ module UpdateNFSFileShare = {
     (),
   ) =>
     new({
-      auditDestinationARN,
-      notificationPolicy,
-      cacheAttributes,
-      fileShareName,
-      requesterPays,
-      guessMIMETypeEnabled,
-      readOnly,
-      squash,
-      clientList,
-      objectACL,
-      defaultStorageClass,
-      nfsfileShareDefaults,
-      kmskey,
-      kmsencrypted,
-      fileShareARN,
+      auditDestinationARN: auditDestinationARN,
+      notificationPolicy: notificationPolicy,
+      cacheAttributes: cacheAttributes,
+      fileShareName: fileShareName,
+      requesterPays: requesterPays,
+      guessMIMETypeEnabled: guessMIMETypeEnabled,
+      readOnly: readOnly,
+      squash: squash,
+      clientList: clientList,
+      objectACL: objectACL,
+      defaultStorageClass: defaultStorageClass,
+      nfsfileShareDefaults: nfsfileShareDefaults,
+      kmskey: kmskey,
+      kmsencrypted: kmsencrypted,
+      fileShareARN: fileShareARN,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateMaintenanceStartTime = {
   type t
   @ocaml.doc("<p>A JSON object containing the following fields:</p>
@@ -2072,9 +2089,16 @@ module UpdateMaintenanceStartTime = {
   @module("@aws-sdk/client-storagegateway") @new
   external new: request => t = "UpdateMaintenanceStartTimeCommand"
   let make = (~minuteOfHour, ~hourOfDay, ~gatewayARN, ~dayOfMonth=?, ~dayOfWeek=?, ()) =>
-    new({dayOfMonth, dayOfWeek, minuteOfHour, hourOfDay, gatewayARN})
+    new({
+      dayOfMonth: dayOfMonth,
+      dayOfWeek: dayOfWeek,
+      minuteOfHour: minuteOfHour,
+      hourOfDay: hourOfDay,
+      gatewayARN: gatewayARN,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateGatewaySoftwareNow = {
   type t
   @ocaml.doc(
@@ -2089,6 +2113,7 @@ module UpdateGatewaySoftwareNow = {
   let make = (~gatewayARN, ()) => new({gatewayARN: gatewayARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateGatewayInformation = {
   type t
   type request = {
@@ -2123,9 +2148,17 @@ module UpdateGatewayInformation = {
     ~gatewayTimezone=?,
     ~gatewayName=?,
     (),
-  ) => new({gatewayCapacity, cloudWatchLogGroupARN, gatewayTimezone, gatewayName, gatewayARN})
+  ) =>
+    new({
+      gatewayCapacity: gatewayCapacity,
+      cloudWatchLogGroupARN: cloudWatchLogGroupARN,
+      gatewayTimezone: gatewayTimezone,
+      gatewayName: gatewayName,
+      gatewayARN: gatewayARN,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateFileSystemAssociation = {
   type t
   type request = {
@@ -2159,9 +2192,17 @@ module UpdateFileSystemAssociation = {
     ~password=?,
     ~userName=?,
     (),
-  ) => new({cacheAttributes, auditDestinationARN, password, userName, fileSystemAssociationARN})
+  ) =>
+    new({
+      cacheAttributes: cacheAttributes,
+      auditDestinationARN: auditDestinationARN,
+      password: password,
+      userName: userName,
+      fileSystemAssociationARN: fileSystemAssociationARN,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateChapCredentials = {
   type t
   @ocaml.doc("<p>A JSON object containing one or more of the following fields:</p>
@@ -2234,9 +2275,16 @@ module UpdateChapCredentials = {
     ~targetARN,
     ~secretToAuthenticateTarget=?,
     (),
-  ) => new({secretToAuthenticateTarget, initiatorName, secretToAuthenticateInitiator, targetARN})
+  ) =>
+    new({
+      secretToAuthenticateTarget: secretToAuthenticateTarget,
+      initiatorName: initiatorName,
+      secretToAuthenticateInitiator: secretToAuthenticateInitiator,
+      targetARN: targetARN,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateBandwidthRateLimit = {
   type t
   @ocaml.doc("<p>A JSON object containing one or more of the following fields:</p>
@@ -2272,9 +2320,15 @@ module UpdateBandwidthRateLimit = {
     ~averageDownloadRateLimitInBitsPerSec=?,
     ~averageUploadRateLimitInBitsPerSec=?,
     (),
-  ) => new({averageDownloadRateLimitInBitsPerSec, averageUploadRateLimitInBitsPerSec, gatewayARN})
+  ) =>
+    new({
+      averageDownloadRateLimitInBitsPerSec: averageDownloadRateLimitInBitsPerSec,
+      averageUploadRateLimitInBitsPerSec: averageUploadRateLimitInBitsPerSec,
+      gatewayARN: gatewayARN,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateAutomaticTapeCreationPolicy = {
   type t
   type request = {
@@ -2288,9 +2342,10 @@ module UpdateAutomaticTapeCreationPolicy = {
   @module("@aws-sdk/client-storagegateway") @new
   external new: request => t = "UpdateAutomaticTapeCreationPolicyCommand"
   let make = (~gatewayARN, ~automaticTapeCreationRules, ()) =>
-    new({gatewayARN, automaticTapeCreationRules})
+    new({gatewayARN: gatewayARN, automaticTapeCreationRules: automaticTapeCreationRules})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module StartGateway = {
   type t
   @ocaml.doc(
@@ -2304,6 +2359,7 @@ module StartGateway = {
   let make = (~gatewayARN, ()) => new({gatewayARN: gatewayARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module StartAvailabilityMonitorTest = {
   type t
   type request = {@as("GatewayARN") gatewayARN: gatewayARN}
@@ -2313,6 +2369,7 @@ module StartAvailabilityMonitorTest = {
   let make = (~gatewayARN, ()) => new({gatewayARN: gatewayARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ShutdownGateway = {
   type t
   @ocaml.doc("<p>A JSON object containing the Amazon Resource Name (ARN) of the gateway to shut
@@ -2326,6 +2383,7 @@ module ShutdownGateway = {
   let make = (~gatewayARN, ()) => new({gatewayARN: gatewayARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module SetSMBGuestPassword = {
   type t
   @ocaml.doc("<p>SetSMBGuestPasswordInput</p>")
@@ -2340,9 +2398,10 @@ module SetSMBGuestPassword = {
   type response = {@as("GatewayARN") gatewayARN: option<gatewayARN>}
   @module("@aws-sdk/client-storagegateway") @new
   external new: request => t = "SetSMBGuestPasswordCommand"
-  let make = (~password, ~gatewayARN, ()) => new({password, gatewayARN})
+  let make = (~password, ~gatewayARN, ()) => new({password: password, gatewayARN: gatewayARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module SetLocalConsolePassword = {
   type t
   @ocaml.doc("<p>SetLocalConsolePasswordInput</p>")
@@ -2355,9 +2414,11 @@ module SetLocalConsolePassword = {
   type response = {@as("GatewayARN") gatewayARN: option<gatewayARN>}
   @module("@aws-sdk/client-storagegateway") @new
   external new: request => t = "SetLocalConsolePasswordCommand"
-  let make = (~localConsolePassword, ~gatewayARN, ()) => new({localConsolePassword, gatewayARN})
+  let make = (~localConsolePassword, ~gatewayARN, ()) =>
+    new({localConsolePassword: localConsolePassword, gatewayARN: gatewayARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module RetrieveTapeRecoveryPoint = {
   type t
   @ocaml.doc("<p>RetrieveTapeRecoveryPointInput</p>")
@@ -2377,9 +2438,10 @@ module RetrieveTapeRecoveryPoint = {
   }
   @module("@aws-sdk/client-storagegateway") @new
   external new: request => t = "RetrieveTapeRecoveryPointCommand"
-  let make = (~gatewayARN, ~tapeARN, ()) => new({gatewayARN, tapeARN})
+  let make = (~gatewayARN, ~tapeARN, ()) => new({gatewayARN: gatewayARN, tapeARN: tapeARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module RetrieveTapeArchive = {
   type t
   @ocaml.doc("<p>RetrieveTapeArchiveInput</p>")
@@ -2405,9 +2467,10 @@ module RetrieveTapeArchive = {
   }
   @module("@aws-sdk/client-storagegateway") @new
   external new: request => t = "RetrieveTapeArchiveCommand"
-  let make = (~gatewayARN, ~tapeARN, ()) => new({gatewayARN, tapeARN})
+  let make = (~gatewayARN, ~tapeARN, ()) => new({gatewayARN: gatewayARN, tapeARN: tapeARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ResetCache = {
   type t
   type request = {@as("GatewayARN") gatewayARN: gatewayARN}
@@ -2416,6 +2479,7 @@ module ResetCache = {
   let make = (~gatewayARN, ()) => new({gatewayARN: gatewayARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module RemoveTagsFromResource = {
   type t
   @ocaml.doc("<p>RemoveTagsFromResourceInput</p>")
@@ -2440,9 +2504,10 @@ module RemoveTagsFromResource = {
   }
   @module("@aws-sdk/client-storagegateway") @new
   external new: request => t = "RemoveTagsFromResourceCommand"
-  let make = (~tagKeys, ~resourceARN, ()) => new({tagKeys, resourceARN})
+  let make = (~tagKeys, ~resourceARN, ()) => new({tagKeys: tagKeys, resourceARN: resourceARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module RefreshCache = {
   type t
   @ocaml.doc("<p>RefreshCacheInput</p>")
@@ -2475,9 +2540,10 @@ module RefreshCache = {
   }
   @module("@aws-sdk/client-storagegateway") @new external new: request => t = "RefreshCacheCommand"
   let make = (~fileShareARN, ~recursive=?, ~folderList=?, ()) =>
-    new({recursive, folderList, fileShareARN})
+    new({recursive: recursive, folderList: folderList, fileShareARN: fileShareARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module NotifyWhenUploaded = {
   type t
   type request = {@as("FileShareARN") fileShareARN: fileShareARN}
@@ -2490,6 +2556,7 @@ module NotifyWhenUploaded = {
   let make = (~fileShareARN, ()) => new({fileShareARN: fileShareARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListVolumes = {
   type t
   @ocaml.doc("<p>A JSON object that contains one or more of the following fields:</p>
@@ -2544,9 +2611,11 @@ module ListVolumes = {
     @as("GatewayARN") gatewayARN: option<gatewayARN>,
   }
   @module("@aws-sdk/client-storagegateway") @new external new: request => t = "ListVolumesCommand"
-  let make = (~limit=?, ~marker=?, ~gatewayARN=?, ()) => new({limit, marker, gatewayARN})
+  let make = (~limit=?, ~marker=?, ~gatewayARN=?, ()) =>
+    new({limit: limit, marker: marker, gatewayARN: gatewayARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListVolumeRecoveryPoints = {
   type t
   type request = {@as("GatewayARN") gatewayARN: gatewayARN}
@@ -2561,6 +2630,7 @@ module ListVolumeRecoveryPoints = {
   let make = (~gatewayARN, ()) => new({gatewayARN: gatewayARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListVolumeInitiators = {
   type t
   @ocaml.doc("<p>ListVolumeInitiatorsInput</p>")
@@ -2582,6 +2652,7 @@ module ListVolumeInitiators = {
   let make = (~volumeARN, ()) => new({volumeARN: volumeARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListTapes = {
   type t
   @ocaml.doc("<p>A JSON object that contains one or more of the following fields:</p>
@@ -2636,9 +2707,11 @@ module ListTapes = {
     @as("TapeInfos") tapeInfos: option<tapeInfos>,
   }
   @module("@aws-sdk/client-storagegateway") @new external new: request => t = "ListTapesCommand"
-  let make = (~limit=?, ~marker=?, ~tapeARNs=?, ()) => new({limit, marker, tapeARNs})
+  let make = (~limit=?, ~marker=?, ~tapeARNs=?, ()) =>
+    new({limit: limit, marker: marker, tapeARNs: tapeARNs})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListTapePools = {
   type t
   type request = {
@@ -2669,9 +2742,11 @@ module ListTapePools = {
     poolInfos: option<poolInfos>,
   }
   @module("@aws-sdk/client-storagegateway") @new external new: request => t = "ListTapePoolsCommand"
-  let make = (~limit=?, ~marker=?, ~poolARNs=?, ()) => new({limit, marker, poolARNs})
+  let make = (~limit=?, ~marker=?, ~poolARNs=?, ()) =>
+    new({limit: limit, marker: marker, poolARNs: poolARNs})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListTagsForResource = {
   type t
   @ocaml.doc("<p>ListTagsForResourceInput</p>")
@@ -2706,9 +2781,11 @@ module ListTagsForResource = {
   }
   @module("@aws-sdk/client-storagegateway") @new
   external new: request => t = "ListTagsForResourceCommand"
-  let make = (~resourceARN, ~limit=?, ~marker=?, ()) => new({limit, marker, resourceARN})
+  let make = (~resourceARN, ~limit=?, ~marker=?, ()) =>
+    new({limit: limit, marker: marker, resourceARN: resourceARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListGateways = {
   type t
   @ocaml.doc("<p>A JSON object containing zero or more of the following fields:</p>
@@ -2744,9 +2821,10 @@ module ListGateways = {
     gateways: option<gateways>,
   }
   @module("@aws-sdk/client-storagegateway") @new external new: request => t = "ListGatewaysCommand"
-  let make = (~limit=?, ~marker=?, ()) => new({limit, marker})
+  let make = (~limit=?, ~marker=?, ()) => new({limit: limit, marker: marker})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListFileSystemAssociations = {
   type t
   type request = {
@@ -2778,9 +2856,11 @@ module ListFileSystemAssociations = {
   }
   @module("@aws-sdk/client-storagegateway") @new
   external new: request => t = "ListFileSystemAssociationsCommand"
-  let make = (~marker=?, ~limit=?, ~gatewayARN=?, ()) => new({marker, limit, gatewayARN})
+  let make = (~marker=?, ~limit=?, ~gatewayARN=?, ()) =>
+    new({marker: marker, limit: limit, gatewayARN: gatewayARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListFileShares = {
   type t
   @ocaml.doc("<p>ListFileShareInput</p>")
@@ -2816,9 +2896,11 @@ module ListFileShares = {
   }
   @module("@aws-sdk/client-storagegateway") @new
   external new: request => t = "ListFileSharesCommand"
-  let make = (~marker=?, ~limit=?, ~gatewayARN=?, ()) => new({marker, limit, gatewayARN})
+  let make = (~marker=?, ~limit=?, ~gatewayARN=?, ()) =>
+    new({marker: marker, limit: limit, gatewayARN: gatewayARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module JoinDomain = {
   type t
   @ocaml.doc("<p>JoinDomainInput</p>")
@@ -2914,16 +2996,17 @@ module JoinDomain = {
     (),
   ) =>
     new({
-      password,
-      userName,
-      timeoutInSeconds,
-      domainControllers,
-      organizationalUnit,
-      domainName,
-      gatewayARN,
+      password: password,
+      userName: userName,
+      timeoutInSeconds: timeoutInSeconds,
+      domainControllers: domainControllers,
+      organizationalUnit: organizationalUnit,
+      domainName: domainName,
+      gatewayARN: gatewayARN,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DisassociateFileSystem = {
   type t
   type request = {
@@ -2947,9 +3030,10 @@ module DisassociateFileSystem = {
   @module("@aws-sdk/client-storagegateway") @new
   external new: request => t = "DisassociateFileSystemCommand"
   let make = (~fileSystemAssociationARN, ~forceDelete=?, ()) =>
-    new({forceDelete, fileSystemAssociationARN})
+    new({forceDelete: forceDelete, fileSystemAssociationARN: fileSystemAssociationARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DisableGateway = {
   type t
   @ocaml.doc("<p>DisableGatewayInput</p>") type request = {@as("GatewayARN") gatewayARN: gatewayARN}
@@ -2964,6 +3048,7 @@ module DisableGateway = {
   let make = (~gatewayARN, ()) => new({gatewayARN: gatewayARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DetachVolume = {
   type t
   @ocaml.doc("<p>AttachVolumeInput</p>")
@@ -2988,9 +3073,11 @@ module DetachVolume = {
     volumeARN: option<volumeARN>,
   }
   @module("@aws-sdk/client-storagegateway") @new external new: request => t = "DetachVolumeCommand"
-  let make = (~volumeARN, ~forceDetach=?, ()) => new({forceDetach, volumeARN})
+  let make = (~volumeARN, ~forceDetach=?, ()) =>
+    new({forceDetach: forceDetach, volumeARN: volumeARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeWorkingStorage = {
   type t
   @ocaml.doc("<p>A JSON object containing the Amazon Resource Name (ARN) of the gateway.</p>")
@@ -3018,6 +3105,7 @@ module DescribeWorkingStorage = {
   let make = (~gatewayARN, ()) => new({gatewayARN: gatewayARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeUploadBuffer = {
   type t
   type request = {@as("GatewayARN") gatewayARN: gatewayARN}
@@ -3041,6 +3129,7 @@ module DescribeUploadBuffer = {
   let make = (~gatewayARN, ()) => new({gatewayARN: gatewayARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeTapes = {
   type t
   @ocaml.doc("<p>DescribeTapesInput</p>")
@@ -3079,9 +3168,10 @@ module DescribeTapes = {
   }
   @module("@aws-sdk/client-storagegateway") @new external new: request => t = "DescribeTapesCommand"
   let make = (~gatewayARN, ~limit=?, ~marker=?, ~tapeARNs=?, ()) =>
-    new({limit, marker, tapeARNs, gatewayARN})
+    new({limit: limit, marker: marker, tapeARNs: tapeARNs, gatewayARN: gatewayARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeTapeRecoveryPoints = {
   type t
   @ocaml.doc("<p>DescribeTapeRecoveryPointsInput</p>")
@@ -3115,9 +3205,11 @@ module DescribeTapeRecoveryPoints = {
   }
   @module("@aws-sdk/client-storagegateway") @new
   external new: request => t = "DescribeTapeRecoveryPointsCommand"
-  let make = (~gatewayARN, ~limit=?, ~marker=?, ()) => new({limit, marker, gatewayARN})
+  let make = (~gatewayARN, ~limit=?, ~marker=?, ()) =>
+    new({limit: limit, marker: marker, gatewayARN: gatewayARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeTapeArchives = {
   type t
   @ocaml.doc("<p>DescribeTapeArchivesInput</p>")
@@ -3152,9 +3244,11 @@ module DescribeTapeArchives = {
   }
   @module("@aws-sdk/client-storagegateway") @new
   external new: request => t = "DescribeTapeArchivesCommand"
-  let make = (~limit=?, ~marker=?, ~tapeARNs=?, ()) => new({limit, marker, tapeARNs})
+  let make = (~limit=?, ~marker=?, ~tapeARNs=?, ()) =>
+    new({limit: limit, marker: marker, tapeARNs: tapeARNs})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeSnapshotSchedule = {
   type t
   @ocaml.doc("<p>A JSON object containing the <a>DescribeSnapshotScheduleInput$VolumeARN</a>
@@ -3193,6 +3287,7 @@ module DescribeSnapshotSchedule = {
   let make = (~volumeARN, ()) => new({volumeARN: volumeARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeSMBSettings = {
   type t
   type request = {@as("GatewayARN") gatewayARN: gatewayARN}
@@ -3288,6 +3383,7 @@ module DescribeSMBSettings = {
   let make = (~gatewayARN, ()) => new({gatewayARN: gatewayARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeMaintenanceStartTime = {
   type t
   @ocaml.doc("<p>A JSON object containing the Amazon Resource Name (ARN) of the gateway.</p>")
@@ -3353,6 +3449,7 @@ module DescribeMaintenanceStartTime = {
   let make = (~gatewayARN, ()) => new({gatewayARN: gatewayARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeGatewayInformation = {
   type t
   @ocaml.doc("<p>A JSON object containing the ID of the gateway.</p>")
@@ -3442,6 +3539,7 @@ module DescribeGatewayInformation = {
   let make = (~gatewayARN, ()) => new({gatewayARN: gatewayARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeChapCredentials = {
   type t
   @ocaml.doc("<p>A JSON object containing the Amazon Resource Name (ARN) of the iSCSI volume
@@ -3495,6 +3593,7 @@ module DescribeChapCredentials = {
   let make = (~targetARN, ()) => new({targetARN: targetARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeCache = {
   type t
   type request = {@as("GatewayARN") gatewayARN: gatewayARN}
@@ -3530,6 +3629,7 @@ module DescribeCache = {
   let make = (~gatewayARN, ()) => new({gatewayARN: gatewayARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeBandwidthRateLimit = {
   type t
   @ocaml.doc("<p>A JSON object containing the Amazon Resource Name (ARN) of the gateway.</p>")
@@ -3551,6 +3651,7 @@ module DescribeBandwidthRateLimit = {
   let make = (~gatewayARN, ()) => new({gatewayARN: gatewayARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeAvailabilityMonitorTest = {
   type t
   type request = {@as("GatewayARN") gatewayARN: gatewayARN}
@@ -3570,6 +3671,7 @@ module DescribeAvailabilityMonitorTest = {
   let make = (~gatewayARN, ()) => new({gatewayARN: gatewayARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteVolume = {
   type t
   @ocaml.doc("<p>A JSON object containing the <a>DeleteVolumeInput$VolumeARN</a> to
@@ -3592,6 +3694,7 @@ module DeleteVolume = {
   let make = (~volumeARN, ()) => new({volumeARN: volumeARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteTapePool = {
   type t
   type request = {
@@ -3609,6 +3712,7 @@ module DeleteTapePool = {
   let make = (~poolARN, ()) => new({poolARN: poolARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteTapeArchive = {
   type t
   @ocaml.doc("<p>DeleteTapeArchiveInput</p>")
@@ -3634,9 +3738,10 @@ module DeleteTapeArchive = {
   @module("@aws-sdk/client-storagegateway") @new
   external new: request => t = "DeleteTapeArchiveCommand"
   let make = (~tapeARN, ~bypassGovernanceRetention=?, ()) =>
-    new({bypassGovernanceRetention, tapeARN})
+    new({bypassGovernanceRetention: bypassGovernanceRetention, tapeARN: tapeARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteTape = {
   type t
   @ocaml.doc("<p>DeleteTapeInput</p>")
@@ -3663,9 +3768,14 @@ module DeleteTape = {
   }
   @module("@aws-sdk/client-storagegateway") @new external new: request => t = "DeleteTapeCommand"
   let make = (~tapeARN, ~gatewayARN, ~bypassGovernanceRetention=?, ()) =>
-    new({bypassGovernanceRetention, tapeARN, gatewayARN})
+    new({
+      bypassGovernanceRetention: bypassGovernanceRetention,
+      tapeARN: tapeARN,
+      gatewayARN: gatewayARN,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteSnapshotSchedule = {
   type t
   type request = {
@@ -3681,6 +3791,7 @@ module DeleteSnapshotSchedule = {
   let make = (~volumeARN, ()) => new({volumeARN: volumeARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteGateway = {
   type t
   @ocaml.doc("<p>A JSON object containing the ID of the gateway to delete.</p>")
@@ -3691,6 +3802,7 @@ module DeleteGateway = {
   let make = (~gatewayARN, ()) => new({gatewayARN: gatewayARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteFileShare = {
   type t
   @ocaml.doc("<p>DeleteFileShareInput</p>")
@@ -3716,9 +3828,11 @@ module DeleteFileShare = {
   }
   @module("@aws-sdk/client-storagegateway") @new
   external new: request => t = "DeleteFileShareCommand"
-  let make = (~fileShareARN, ~forceDelete=?, ()) => new({forceDelete, fileShareARN})
+  let make = (~fileShareARN, ~forceDelete=?, ()) =>
+    new({forceDelete: forceDelete, fileShareARN: fileShareARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteChapCredentials = {
   type t
   @ocaml.doc("<p>A JSON object containing one or more of the following fields:</p>
@@ -3752,9 +3866,11 @@ module DeleteChapCredentials = {
   }
   @module("@aws-sdk/client-storagegateway") @new
   external new: request => t = "DeleteChapCredentialsCommand"
-  let make = (~initiatorName, ~targetARN, ()) => new({initiatorName, targetARN})
+  let make = (~initiatorName, ~targetARN, ()) =>
+    new({initiatorName: initiatorName, targetARN: targetARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteBandwidthRateLimit = {
   type t
   @ocaml.doc("<p>A JSON object containing the following fields:</p>
@@ -3781,9 +3897,11 @@ module DeleteBandwidthRateLimit = {
   type response = {@as("GatewayARN") gatewayARN: option<gatewayARN>}
   @module("@aws-sdk/client-storagegateway") @new
   external new: request => t = "DeleteBandwidthRateLimitCommand"
-  let make = (~bandwidthType, ~gatewayARN, ()) => new({bandwidthType, gatewayARN})
+  let make = (~bandwidthType, ~gatewayARN, ()) =>
+    new({bandwidthType: bandwidthType, gatewayARN: gatewayARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteAutomaticTapeCreationPolicy = {
   type t
   type request = {@as("GatewayARN") gatewayARN: gatewayARN}
@@ -3793,6 +3911,7 @@ module DeleteAutomaticTapeCreationPolicy = {
   let make = (~gatewayARN, ()) => new({gatewayARN: gatewayARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateTapes = {
   type t
   @ocaml.doc("<p>CreateTapesInput</p>")
@@ -3889,19 +4008,20 @@ module CreateTapes = {
     (),
   ) =>
     new({
-      tags,
-      worm,
-      poolId,
-      kmskey,
-      kmsencrypted,
-      tapeBarcodePrefix,
-      numTapesToCreate,
-      clientToken,
-      tapeSizeInBytes,
-      gatewayARN,
+      tags: tags,
+      worm: worm,
+      poolId: poolId,
+      kmskey: kmskey,
+      kmsencrypted: kmsencrypted,
+      tapeBarcodePrefix: tapeBarcodePrefix,
+      numTapesToCreate: numTapesToCreate,
+      clientToken: clientToken,
+      tapeSizeInBytes: tapeSizeInBytes,
+      gatewayARN: gatewayARN,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateTapeWithBarcode = {
   type t
   @ocaml.doc("<p>CreateTapeWithBarcodeInput</p>")
@@ -3982,9 +4102,20 @@ module CreateTapeWithBarcode = {
     ~kmskey=?,
     ~kmsencrypted=?,
     (),
-  ) => new({tags, worm, poolId, kmskey, kmsencrypted, tapeBarcode, tapeSizeInBytes, gatewayARN})
+  ) =>
+    new({
+      tags: tags,
+      worm: worm,
+      poolId: poolId,
+      kmskey: kmskey,
+      kmsencrypted: kmsencrypted,
+      tapeBarcode: tapeBarcode,
+      tapeSizeInBytes: tapeSizeInBytes,
+      gatewayARN: gatewayARN,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateTapePool = {
   type t
   type request = {
@@ -4032,9 +4163,17 @@ module CreateTapePool = {
     ~retentionLockTimeInDays=?,
     ~retentionLockType=?,
     (),
-  ) => new({tags, retentionLockTimeInDays, retentionLockType, storageClass, poolName})
+  ) =>
+    new({
+      tags: tags,
+      retentionLockTimeInDays: retentionLockTimeInDays,
+      retentionLockType: retentionLockType,
+      storageClass: storageClass,
+      poolName: poolName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateStorediSCSIVolume = {
   type t
   @ocaml.doc("<p>A JSON object containing one or more of the following fields:</p>
@@ -4153,18 +4292,19 @@ module CreateStorediSCSIVolume = {
     (),
   ) =>
     new({
-      tags,
-      kmskey,
-      kmsencrypted,
-      networkInterfaceId,
-      targetName,
-      preserveExistingData,
-      snapshotId,
-      diskId,
-      gatewayARN,
+      tags: tags,
+      kmskey: kmskey,
+      kmsencrypted: kmsencrypted,
+      networkInterfaceId: networkInterfaceId,
+      targetName: targetName,
+      preserveExistingData: preserveExistingData,
+      snapshotId: snapshotId,
+      diskId: diskId,
+      gatewayARN: gatewayARN,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateSnapshotFromVolumeRecoveryPoint = {
   type t
   type request = {
@@ -4203,9 +4343,10 @@ module CreateSnapshotFromVolumeRecoveryPoint = {
   @module("@aws-sdk/client-storagegateway") @new
   external new: request => t = "CreateSnapshotFromVolumeRecoveryPointCommand"
   let make = (~snapshotDescription, ~volumeARN, ~tags=?, ()) =>
-    new({tags, snapshotDescription, volumeARN})
+    new({tags: tags, snapshotDescription: snapshotDescription, volumeARN: volumeARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateSnapshot = {
   type t
   @ocaml.doc("<p>A JSON object containing one or more of the following fields:</p>
@@ -4261,9 +4402,10 @@ module CreateSnapshot = {
   @module("@aws-sdk/client-storagegateway") @new
   external new: request => t = "CreateSnapshotCommand"
   let make = (~snapshotDescription, ~volumeARN, ~tags=?, ()) =>
-    new({tags, snapshotDescription, volumeARN})
+    new({tags: tags, snapshotDescription: snapshotDescription, volumeARN: volumeARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateSMBFileShare = {
   type t
   @ocaml.doc("<p>CreateSMBFileShareInput</p>")
@@ -4534,35 +4676,36 @@ module CreateSMBFileShare = {
     (),
   ) =>
     new({
-      oplocksEnabled,
-      bucketRegion,
-      vpcendpointDNSName,
-      notificationPolicy,
-      cacheAttributes,
-      fileShareName,
-      tags,
-      caseSensitivity,
-      authentication,
-      auditDestinationARN,
-      invalidUserList,
-      validUserList,
-      adminUserList,
-      accessBasedEnumeration,
-      smbaclenabled,
-      requesterPays,
-      guessMIMETypeEnabled,
-      readOnly,
-      objectACL,
-      defaultStorageClass,
-      locationARN,
-      role,
-      kmskey,
-      kmsencrypted,
-      gatewayARN,
-      clientToken,
+      oplocksEnabled: oplocksEnabled,
+      bucketRegion: bucketRegion,
+      vpcendpointDNSName: vpcendpointDNSName,
+      notificationPolicy: notificationPolicy,
+      cacheAttributes: cacheAttributes,
+      fileShareName: fileShareName,
+      tags: tags,
+      caseSensitivity: caseSensitivity,
+      authentication: authentication,
+      auditDestinationARN: auditDestinationARN,
+      invalidUserList: invalidUserList,
+      validUserList: validUserList,
+      adminUserList: adminUserList,
+      accessBasedEnumeration: accessBasedEnumeration,
+      smbaclenabled: smbaclenabled,
+      requesterPays: requesterPays,
+      guessMIMETypeEnabled: guessMIMETypeEnabled,
+      readOnly: readOnly,
+      objectACL: objectACL,
+      defaultStorageClass: defaultStorageClass,
+      locationARN: locationARN,
+      role: role,
+      kmskey: kmskey,
+      kmsencrypted: kmsencrypted,
+      gatewayARN: gatewayARN,
+      clientToken: clientToken,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateNFSFileShare = {
   type t
   @ocaml.doc("<p>CreateNFSFileShareInput</p>")
@@ -4790,30 +4933,31 @@ module CreateNFSFileShare = {
     (),
   ) =>
     new({
-      auditDestinationARN,
-      bucketRegion,
-      vpcendpointDNSName,
-      notificationPolicy,
-      cacheAttributes,
-      fileShareName,
-      tags,
-      requesterPays,
-      guessMIMETypeEnabled,
-      readOnly,
-      squash,
-      clientList,
-      objectACL,
-      defaultStorageClass,
-      locationARN,
-      role,
-      kmskey,
-      kmsencrypted,
-      gatewayARN,
-      nfsfileShareDefaults,
-      clientToken,
+      auditDestinationARN: auditDestinationARN,
+      bucketRegion: bucketRegion,
+      vpcendpointDNSName: vpcendpointDNSName,
+      notificationPolicy: notificationPolicy,
+      cacheAttributes: cacheAttributes,
+      fileShareName: fileShareName,
+      tags: tags,
+      requesterPays: requesterPays,
+      guessMIMETypeEnabled: guessMIMETypeEnabled,
+      readOnly: readOnly,
+      squash: squash,
+      clientList: clientList,
+      objectACL: objectACL,
+      defaultStorageClass: defaultStorageClass,
+      locationARN: locationARN,
+      role: role,
+      kmskey: kmskey,
+      kmsencrypted: kmsencrypted,
+      gatewayARN: gatewayARN,
+      nfsfileShareDefaults: nfsfileShareDefaults,
+      clientToken: clientToken,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateCachediSCSIVolume = {
   type t
   type request = {
@@ -4901,19 +5045,20 @@ module CreateCachediSCSIVolume = {
     (),
   ) =>
     new({
-      tags,
-      kmskey,
-      kmsencrypted,
-      clientToken,
-      networkInterfaceId,
-      sourceVolumeARN,
-      targetName,
-      snapshotId,
-      volumeSizeInBytes,
-      gatewayARN,
+      tags: tags,
+      kmskey: kmskey,
+      kmsencrypted: kmsencrypted,
+      clientToken: clientToken,
+      networkInterfaceId: networkInterfaceId,
+      sourceVolumeARN: sourceVolumeARN,
+      targetName: targetName,
+      snapshotId: snapshotId,
+      volumeSizeInBytes: volumeSizeInBytes,
+      gatewayARN: gatewayARN,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CancelRetrieval = {
   type t
   @ocaml.doc("<p>CancelRetrievalInput</p>")
@@ -4933,9 +5078,10 @@ module CancelRetrieval = {
   }
   @module("@aws-sdk/client-storagegateway") @new
   external new: request => t = "CancelRetrievalCommand"
-  let make = (~tapeARN, ~gatewayARN, ()) => new({tapeARN, gatewayARN})
+  let make = (~tapeARN, ~gatewayARN, ()) => new({tapeARN: tapeARN, gatewayARN: gatewayARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CancelArchival = {
   type t
   @ocaml.doc("<p>CancelArchivalInput</p>")
@@ -4955,9 +5101,10 @@ module CancelArchival = {
   }
   @module("@aws-sdk/client-storagegateway") @new
   external new: request => t = "CancelArchivalCommand"
-  let make = (~tapeARN, ~gatewayARN, ()) => new({tapeARN, gatewayARN})
+  let make = (~tapeARN, ~gatewayARN, ()) => new({tapeARN: tapeARN, gatewayARN: gatewayARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module AttachVolume = {
   type t
   @ocaml.doc("<p>AttachVolumeInput</p>")
@@ -5008,9 +5155,16 @@ module AttachVolume = {
   }
   @module("@aws-sdk/client-storagegateway") @new external new: request => t = "AttachVolumeCommand"
   let make = (~networkInterfaceId, ~volumeARN, ~gatewayARN, ~diskId=?, ~targetName=?, ()) =>
-    new({diskId, networkInterfaceId, volumeARN, targetName, gatewayARN})
+    new({
+      diskId: diskId,
+      networkInterfaceId: networkInterfaceId,
+      volumeARN: volumeARN,
+      targetName: targetName,
+      gatewayARN: gatewayARN,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module AssociateFileSystem = {
   type t
   type request = {
@@ -5067,18 +5221,19 @@ module AssociateFileSystem = {
     (),
   ) =>
     new({
-      endpointNetworkConfiguration,
-      cacheAttributes,
-      auditDestinationARN,
-      tags,
-      locationARN,
-      gatewayARN,
-      clientToken,
-      password,
-      userName,
+      endpointNetworkConfiguration: endpointNetworkConfiguration,
+      cacheAttributes: cacheAttributes,
+      auditDestinationARN: auditDestinationARN,
+      tags: tags,
+      locationARN: locationARN,
+      gatewayARN: gatewayARN,
+      clientToken: clientToken,
+      password: password,
+      userName: userName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module AssignTapePool = {
   type t
   type request = {
@@ -5116,9 +5271,10 @@ module AssignTapePool = {
   @module("@aws-sdk/client-storagegateway") @new
   external new: request => t = "AssignTapePoolCommand"
   let make = (~poolId, ~tapeARN, ~bypassGovernanceRetention=?, ()) =>
-    new({bypassGovernanceRetention, poolId, tapeARN})
+    new({bypassGovernanceRetention: bypassGovernanceRetention, poolId: poolId, tapeARN: tapeARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module AddWorkingStorage = {
   type t
   @ocaml.doc("<p>A JSON object containing one or more of the following fields:</p>
@@ -5143,9 +5299,10 @@ module AddWorkingStorage = {
   type response = {@as("GatewayARN") gatewayARN: option<gatewayARN>}
   @module("@aws-sdk/client-storagegateway") @new
   external new: request => t = "AddWorkingStorageCommand"
-  let make = (~diskIds, ~gatewayARN, ()) => new({diskIds, gatewayARN})
+  let make = (~diskIds, ~gatewayARN, ()) => new({diskIds: diskIds, gatewayARN: gatewayARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module AddUploadBuffer = {
   type t
   type request = {
@@ -5159,9 +5316,10 @@ module AddUploadBuffer = {
   type response = {@as("GatewayARN") gatewayARN: option<gatewayARN>}
   @module("@aws-sdk/client-storagegateway") @new
   external new: request => t = "AddUploadBufferCommand"
-  let make = (~diskIds, ~gatewayARN, ()) => new({diskIds, gatewayARN})
+  let make = (~diskIds, ~gatewayARN, ()) => new({diskIds: diskIds, gatewayARN: gatewayARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module AddTagsToResource = {
   type t
   @ocaml.doc("<p>AddTagsToResourceInput</p>")
@@ -5189,9 +5347,10 @@ module AddTagsToResource = {
   }
   @module("@aws-sdk/client-storagegateway") @new
   external new: request => t = "AddTagsToResourceCommand"
-  let make = (~tags, ~resourceARN, ()) => new({tags, resourceARN})
+  let make = (~tags, ~resourceARN, ()) => new({tags: tags, resourceARN: resourceARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module AddCache = {
   type t
   type request = {
@@ -5204,9 +5363,10 @@ module AddCache = {
   }
   type response = {@as("GatewayARN") gatewayARN: option<gatewayARN>}
   @module("@aws-sdk/client-storagegateway") @new external new: request => t = "AddCacheCommand"
-  let make = (~diskIds, ~gatewayARN, ()) => new({diskIds, gatewayARN})
+  let make = (~diskIds, ~gatewayARN, ()) => new({diskIds: diskIds, gatewayARN: gatewayARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ActivateGateway = {
   type t
   @ocaml.doc("<p>A JSON object containing one or more of the following fields:</p>
@@ -5346,17 +5506,18 @@ module ActivateGateway = {
     (),
   ) =>
     new({
-      tags,
-      mediumChangerType,
-      tapeDriveType,
-      gatewayType,
-      gatewayRegion,
-      gatewayTimezone,
-      gatewayName,
-      activationKey,
+      tags: tags,
+      mediumChangerType: mediumChangerType,
+      tapeDriveType: tapeDriveType,
+      gatewayType: gatewayType,
+      gatewayRegion: gatewayRegion,
+      gatewayTimezone: gatewayTimezone,
+      gatewayName: gatewayName,
+      activationKey: activationKey,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateBandwidthRateLimitSchedule = {
   type t
   type request = {
@@ -5370,9 +5531,10 @@ module UpdateBandwidthRateLimitSchedule = {
   @module("@aws-sdk/client-storagegateway") @new
   external new: request => t = "UpdateBandwidthRateLimitScheduleCommand"
   let make = (~bandwidthRateLimitIntervals, ~gatewayARN, ()) =>
-    new({bandwidthRateLimitIntervals, gatewayARN})
+    new({bandwidthRateLimitIntervals: bandwidthRateLimitIntervals, gatewayARN: gatewayARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListLocalDisks = {
   type t
   @ocaml.doc("<p>A JSON object containing the Amazon Resource Name (ARN) of the gateway.</p>")
@@ -5396,6 +5558,7 @@ module ListLocalDisks = {
   let make = (~gatewayARN, ()) => new({gatewayARN: gatewayARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeVTLDevices = {
   type t
   @ocaml.doc("<p>DescribeVTLDevicesInput</p>")
@@ -5436,9 +5599,10 @@ module DescribeVTLDevices = {
   @module("@aws-sdk/client-storagegateway") @new
   external new: request => t = "DescribeVTLDevicesCommand"
   let make = (~gatewayARN, ~limit=?, ~marker=?, ~vtldeviceARNs=?, ()) =>
-    new({limit, marker, vtldeviceARNs, gatewayARN})
+    new({limit: limit, marker: marker, vtldeviceARNs: vtldeviceARNs, gatewayARN: gatewayARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeStorediSCSIVolumes = {
   type t
   @ocaml.doc(
@@ -5543,6 +5707,7 @@ module DescribeStorediSCSIVolumes = {
   let make = (~volumeARNs, ()) => new({volumeARNs: volumeARNs})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeCachediSCSIVolumes = {
   type t
   type request = {
@@ -5564,6 +5729,7 @@ module DescribeCachediSCSIVolumes = {
   let make = (~volumeARNs, ()) => new({volumeARNs: volumeARNs})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeBandwidthRateLimitSchedule = {
   type t
   type request = {@as("GatewayARN") gatewayARN: gatewayARN}
@@ -5580,6 +5746,7 @@ module DescribeBandwidthRateLimitSchedule = {
   let make = (~gatewayARN, ()) => new({gatewayARN: gatewayARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListAutomaticTapeCreationPolicies = {
   type t
   type request = {@as("GatewayARN") gatewayARN: option<gatewayARN>}
@@ -5595,6 +5762,7 @@ module ListAutomaticTapeCreationPolicies = {
   let make = (~gatewayARN=?, ()) => new({gatewayARN: gatewayARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeSMBFileShares = {
   type t
   @ocaml.doc("<p>DescribeSMBFileSharesInput</p>")
@@ -5615,6 +5783,7 @@ module DescribeSMBFileShares = {
   let make = (~fileShareARNList, ()) => new({fileShareARNList: fileShareARNList})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeNFSFileShares = {
   type t
   @ocaml.doc("<p>DescribeNFSFileSharesInput</p>")
@@ -5635,6 +5804,7 @@ module DescribeNFSFileShares = {
   let make = (~fileShareARNList, ()) => new({fileShareARNList: fileShareARNList})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeFileSystemAssociations = {
   type t
   type request = {

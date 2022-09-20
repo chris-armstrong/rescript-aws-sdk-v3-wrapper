@@ -645,18 +645,19 @@ module UpdateReplicationJob = {
     (),
   ) =>
     new({
-      kmsKeyId,
-      encrypted,
-      numberOfRecentAmisToKeep,
-      description,
-      roleName,
-      licenseType,
-      nextReplicationRunStartTime,
-      frequency,
-      replicationJobId,
+      kmsKeyId: kmsKeyId,
+      encrypted: encrypted,
+      numberOfRecentAmisToKeep: numberOfRecentAmisToKeep,
+      description: description,
+      roleName: roleName,
+      licenseType: licenseType,
+      nextReplicationRunStartTime: nextReplicationRunStartTime,
+      frequency: frequency,
+      replicationJobId: replicationJobId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module TerminateApp = {
   type t
   type request = {@ocaml.doc("<p>The ID of the application.</p>") appId: option<appId>}
@@ -665,6 +666,7 @@ module TerminateApp = {
   let make = (~appId=?, ()) => new({appId: appId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module StopAppReplication = {
   type t
   type request = {@ocaml.doc("<p>The ID of the application.</p>") appId: option<appId>}
@@ -673,6 +675,7 @@ module StopAppReplication = {
   let make = (~appId=?, ()) => new({appId: appId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module StartOnDemandReplicationRun = {
   type t
   type request = {
@@ -684,9 +687,11 @@ module StartOnDemandReplicationRun = {
   }
   @module("@aws-sdk/client-sms") @new
   external new: request => t = "StartOnDemandReplicationRunCommand"
-  let make = (~replicationJobId, ~description=?, ()) => new({description, replicationJobId})
+  let make = (~replicationJobId, ~description=?, ()) =>
+    new({description: description, replicationJobId: replicationJobId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module StartOnDemandAppReplication = {
   type t
   type request = {
@@ -696,9 +701,10 @@ module StartOnDemandAppReplication = {
   type response = {.}
   @module("@aws-sdk/client-sms") @new
   external new: request => t = "StartOnDemandAppReplicationCommand"
-  let make = (~appId, ~description=?, ()) => new({description, appId})
+  let make = (~appId, ~description=?, ()) => new({description: description, appId: appId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module StartAppReplication = {
   type t
   type request = {@ocaml.doc("<p>The ID of the application.</p>") appId: option<appId>}
@@ -707,6 +713,7 @@ module StartAppReplication = {
   let make = (~appId=?, ()) => new({appId: appId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module LaunchApp = {
   type t
   type request = {@ocaml.doc("<p>The ID of the application.</p>") appId: option<appId>}
@@ -715,6 +722,7 @@ module LaunchApp = {
   let make = (~appId=?, ()) => new({appId: appId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ImportServerCatalog = {
   type t
   type request = {.}
@@ -723,6 +731,7 @@ module ImportServerCatalog = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ImportAppCatalog = {
   type t
   type request = {
@@ -736,6 +745,7 @@ module ImportAppCatalog = {
   let make = (~roleName=?, ()) => new({roleName: roleName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DisassociateConnector = {
   type t
   type request = {@ocaml.doc("<p>The ID of the connector.</p>") connectorId: connectorId}
@@ -744,6 +754,7 @@ module DisassociateConnector = {
   let make = (~connectorId, ()) => new({connectorId: connectorId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteServerCatalog = {
   type t
   type request = {.}
@@ -752,6 +763,7 @@ module DeleteServerCatalog = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteReplicationJob = {
   type t
   type request = {
@@ -762,6 +774,7 @@ module DeleteReplicationJob = {
   let make = (~replicationJobId, ()) => new({replicationJobId: replicationJobId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteAppValidationConfiguration = {
   type t
   type request = {@ocaml.doc("<p>The ID of the application.</p>") appId: appIdWithValidation}
@@ -771,6 +784,7 @@ module DeleteAppValidationConfiguration = {
   let make = (~appId, ()) => new({appId: appId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteAppReplicationConfiguration = {
   type t
   type request = {@ocaml.doc("<p>The ID of the application.</p>") appId: option<appId>}
@@ -780,6 +794,7 @@ module DeleteAppReplicationConfiguration = {
   let make = (~appId=?, ()) => new({appId: appId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteAppLaunchConfiguration = {
   type t
   type request = {@ocaml.doc("<p>The ID of the application.</p>") appId: option<appId>}
@@ -789,6 +804,7 @@ module DeleteAppLaunchConfiguration = {
   let make = (~appId=?, ()) => new({appId: appId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteApp = {
   type t
   type request = {
@@ -803,9 +819,14 @@ module DeleteApp = {
   type response = {.}
   @module("@aws-sdk/client-sms") @new external new: request => t = "DeleteAppCommand"
   let make = (~forceTerminateApp=?, ~forceStopAppReplication=?, ~appId=?, ()) =>
-    new({forceTerminateApp, forceStopAppReplication, appId})
+    new({
+      forceTerminateApp: forceTerminateApp,
+      forceStopAppReplication: forceStopAppReplication,
+      appId: appId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module CreateReplicationJob = {
   type t
   type request = {
@@ -865,19 +886,20 @@ module CreateReplicationJob = {
     (),
   ) =>
     new({
-      kmsKeyId,
-      encrypted,
-      numberOfRecentAmisToKeep,
-      description,
-      roleName,
-      licenseType,
-      runOnce,
-      frequency,
-      seedReplicationTime,
-      serverId,
+      kmsKeyId: kmsKeyId,
+      encrypted: encrypted,
+      numberOfRecentAmisToKeep: numberOfRecentAmisToKeep,
+      description: description,
+      roleName: roleName,
+      licenseType: licenseType,
+      runOnce: runOnce,
+      frequency: frequency,
+      seedReplicationTime: seedReplicationTime,
+      serverId: serverId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module NotifyAppValidationOutput = {
   type t
   type request = {
@@ -888,9 +910,11 @@ module NotifyAppValidationOutput = {
   type response = {.}
   @module("@aws-sdk/client-sms") @new
   external new: request => t = "NotifyAppValidationOutputCommand"
-  let make = (~appId, ~notificationContext=?, ()) => new({notificationContext, appId})
+  let make = (~appId, ~notificationContext=?, ()) =>
+    new({notificationContext: notificationContext, appId: appId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module GenerateTemplate = {
   type t
   type request = {
@@ -903,9 +927,11 @@ module GenerateTemplate = {
     @ocaml.doc("<p>The location of the Amazon S3 object.</p>") s3Location: option<s3Location>,
   }
   @module("@aws-sdk/client-sms") @new external new: request => t = "GenerateTemplateCommand"
-  let make = (~templateFormat=?, ~appId=?, ()) => new({templateFormat, appId})
+  let make = (~templateFormat=?, ~appId=?, ()) =>
+    new({templateFormat: templateFormat, appId: appId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GenerateChangeSet = {
   type t
   type request = {
@@ -917,9 +943,11 @@ module GenerateChangeSet = {
     @ocaml.doc("<p>The location of the Amazon S3 object.</p>") s3Location: option<s3Location>,
   }
   @module("@aws-sdk/client-sms") @new external new: request => t = "GenerateChangeSetCommand"
-  let make = (~changesetFormat=?, ~appId=?, ()) => new({changesetFormat, appId})
+  let make = (~changesetFormat=?, ~appId=?, ()) =>
+    new({changesetFormat: changesetFormat, appId: appId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListApps = {
   type t
   type request = {
@@ -937,9 +965,11 @@ module ListApps = {
     @ocaml.doc("<p>The application summaries.</p>") apps: option<apps>,
   }
   @module("@aws-sdk/client-sms") @new external new: request => t = "ListAppsCommand"
-  let make = (~maxResults=?, ~nextToken=?, ~appIds=?, ()) => new({maxResults, nextToken, appIds})
+  let make = (~maxResults=?, ~nextToken=?, ~appIds=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken, appIds: appIds})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetConnectors = {
   type t
   type request = {
@@ -957,9 +987,11 @@ module GetConnectors = {
     connectorList: option<connectorList>,
   }
   @module("@aws-sdk/client-sms") @new external new: request => t = "GetConnectorsCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetServers = {
   type t
   type request = {
@@ -982,9 +1014,10 @@ module GetServers = {
   }
   @module("@aws-sdk/client-sms") @new external new: request => t = "GetServersCommand"
   let make = (~vmServerAddressList=?, ~maxResults=?, ~nextToken=?, ()) =>
-    new({vmServerAddressList, maxResults, nextToken})
+    new({vmServerAddressList: vmServerAddressList, maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetReplicationRuns = {
   type t
   type request = {
@@ -1006,9 +1039,10 @@ module GetReplicationRuns = {
   }
   @module("@aws-sdk/client-sms") @new external new: request => t = "GetReplicationRunsCommand"
   let make = (~replicationJobId, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults, nextToken, replicationJobId})
+    new({maxResults: maxResults, nextToken: nextToken, replicationJobId: replicationJobId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetReplicationJobs = {
   type t
   type request = {
@@ -1028,9 +1062,10 @@ module GetReplicationJobs = {
   }
   @module("@aws-sdk/client-sms") @new external new: request => t = "GetReplicationJobsCommand"
   let make = (~maxResults=?, ~nextToken=?, ~replicationJobId=?, ()) =>
-    new({maxResults, nextToken, replicationJobId})
+    new({maxResults: maxResults, nextToken: nextToken, replicationJobId: replicationJobId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateApp = {
   type t
   type request = {
@@ -1054,9 +1089,17 @@ module UpdateApp = {
   }
   @module("@aws-sdk/client-sms") @new external new: request => t = "UpdateAppCommand"
   let make = (~tags=?, ~serverGroups=?, ~roleName=?, ~description=?, ~name=?, ~appId=?, ()) =>
-    new({tags, serverGroups, roleName, description, name, appId})
+    new({
+      tags: tags,
+      serverGroups: serverGroups,
+      roleName: roleName,
+      description: description,
+      name: name,
+      appId: appId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetAppValidationOutput = {
   type t
   type request = {@ocaml.doc("<p>The ID of the application.</p>") appId: appIdWithValidation}
@@ -1067,6 +1110,7 @@ module GetAppValidationOutput = {
   let make = (~appId, ()) => new({appId: appId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetApp = {
   type t
   type request = {@ocaml.doc("<p>The ID of the application.</p>") appId: option<appId>}
@@ -1080,6 +1124,7 @@ module GetApp = {
   let make = (~appId=?, ()) => new({appId: appId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateApp = {
   type t
   type request = {
@@ -1104,9 +1149,17 @@ module CreateApp = {
   }
   @module("@aws-sdk/client-sms") @new external new: request => t = "CreateAppCommand"
   let make = (~tags=?, ~serverGroups=?, ~clientToken=?, ~roleName=?, ~description=?, ~name=?, ()) =>
-    new({tags, serverGroups, clientToken, roleName, description, name})
+    new({
+      tags: tags,
+      serverGroups: serverGroups,
+      clientToken: clientToken,
+      roleName: roleName,
+      description: description,
+      name: name,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module PutAppValidationConfiguration = {
   type t
   type request = {
@@ -1120,9 +1173,14 @@ module PutAppValidationConfiguration = {
   @module("@aws-sdk/client-sms") @new
   external new: request => t = "PutAppValidationConfigurationCommand"
   let make = (~appId, ~serverGroupValidationConfigurations=?, ~appValidationConfigurations=?, ()) =>
-    new({serverGroupValidationConfigurations, appValidationConfigurations, appId})
+    new({
+      serverGroupValidationConfigurations: serverGroupValidationConfigurations,
+      appValidationConfigurations: appValidationConfigurations,
+      appId: appId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module PutAppReplicationConfiguration = {
   type t
   type request = {
@@ -1136,9 +1194,10 @@ module PutAppReplicationConfiguration = {
   @module("@aws-sdk/client-sms") @new
   external new: request => t = "PutAppReplicationConfigurationCommand"
   let make = (~serverGroupReplicationConfigurations=?, ~appId=?, ()) =>
-    new({serverGroupReplicationConfigurations, appId})
+    new({serverGroupReplicationConfigurations: serverGroupReplicationConfigurations, appId: appId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module PutAppLaunchConfiguration = {
   type t
   type request = {
@@ -1159,9 +1218,15 @@ module PutAppLaunchConfiguration = {
   @module("@aws-sdk/client-sms") @new
   external new: request => t = "PutAppLaunchConfigurationCommand"
   let make = (~serverGroupLaunchConfigurations=?, ~autoLaunch=?, ~roleName=?, ~appId=?, ()) =>
-    new({serverGroupLaunchConfigurations, autoLaunch, roleName, appId})
+    new({
+      serverGroupLaunchConfigurations: serverGroupLaunchConfigurations,
+      autoLaunch: autoLaunch,
+      roleName: roleName,
+      appId: appId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module GetAppValidationConfiguration = {
   type t
   type request = {@ocaml.doc("<p>The ID of the application.</p>") appId: appIdWithValidation}
@@ -1176,6 +1241,7 @@ module GetAppValidationConfiguration = {
   let make = (~appId, ()) => new({appId: appId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetAppReplicationConfiguration = {
   type t
   type request = {@ocaml.doc("<p>The ID of the application.</p>") appId: option<appId>}
@@ -1190,6 +1256,7 @@ module GetAppReplicationConfiguration = {
   let make = (~appId=?, ()) => new({appId: appId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetAppLaunchConfiguration = {
   type t
   type request = {@ocaml.doc("<p>The ID of the application.</p>") appId: option<appId>}

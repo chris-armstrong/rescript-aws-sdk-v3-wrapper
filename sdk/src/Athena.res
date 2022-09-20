@@ -804,9 +804,15 @@ module UpdatePreparedStatement = {
   @module("@aws-sdk/client-athena") @new
   external new: request => t = "UpdatePreparedStatementCommand"
   let make = (~queryStatement, ~workGroup, ~statementName, ~description=?, ()) =>
-    new({description, queryStatement, workGroup, statementName})
+    new({
+      description: description,
+      queryStatement: queryStatement,
+      workGroup: workGroup,
+      statementName: statementName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateNamedQuery = {
   type t
   type request = {
@@ -821,9 +827,15 @@ module UpdateNamedQuery = {
   type response = {.}
   @module("@aws-sdk/client-athena") @new external new: request => t = "UpdateNamedQueryCommand"
   let make = (~queryString, ~name, ~namedQueryId, ~description=?, ()) =>
-    new({queryString, description, name, namedQueryId})
+    new({
+      queryString: queryString,
+      description: description,
+      name: name,
+      namedQueryId: namedQueryId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module StopQueryExecution = {
   type t
   type request = {
@@ -835,6 +847,7 @@ module StopQueryExecution = {
   let make = (~queryExecutionId, ()) => new({queryExecutionId: queryExecutionId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteWorkGroup = {
   type t
   type request = {
@@ -847,9 +860,11 @@ module DeleteWorkGroup = {
   }
   type response = {.}
   @module("@aws-sdk/client-athena") @new external new: request => t = "DeleteWorkGroupCommand"
-  let make = (~workGroup, ~recursiveDeleteOption=?, ()) => new({recursiveDeleteOption, workGroup})
+  let make = (~workGroup, ~recursiveDeleteOption=?, ()) =>
+    new({recursiveDeleteOption: recursiveDeleteOption, workGroup: workGroup})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeletePreparedStatement = {
   type t
   type request = {
@@ -862,9 +877,11 @@ module DeletePreparedStatement = {
   type response = {.}
   @module("@aws-sdk/client-athena") @new
   external new: request => t = "DeletePreparedStatementCommand"
-  let make = (~workGroup, ~statementName, ()) => new({workGroup, statementName})
+  let make = (~workGroup, ~statementName, ()) =>
+    new({workGroup: workGroup, statementName: statementName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteNamedQuery = {
   type t
   type request = {
@@ -876,6 +893,7 @@ module DeleteNamedQuery = {
   let make = (~namedQueryId, ()) => new({namedQueryId: namedQueryId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteDataCatalog = {
   type t
   type request = {
@@ -887,6 +905,7 @@ module DeleteDataCatalog = {
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module CreatePreparedStatement = {
   type t
   type request = {
@@ -904,9 +923,15 @@ module CreatePreparedStatement = {
   @module("@aws-sdk/client-athena") @new
   external new: request => t = "CreatePreparedStatementCommand"
   let make = (~queryStatement, ~workGroup, ~statementName, ~description=?, ()) =>
-    new({description, queryStatement, workGroup, statementName})
+    new({
+      description: description,
+      queryStatement: queryStatement,
+      workGroup: workGroup,
+      statementName: statementName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module CreateNamedQuery = {
   type t
   type request = {
@@ -946,9 +971,18 @@ module CreateNamedQuery = {
     ~clientRequestToken=?,
     ~description=?,
     (),
-  ) => new({workGroup, clientRequestToken, queryString, database, description, name})
+  ) =>
+    new({
+      workGroup: workGroup,
+      clientRequestToken: clientRequestToken,
+      queryString: queryString,
+      database: database,
+      description: description,
+      name: name,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateDataCatalog = {
   type t
   type request = {
@@ -1010,9 +1044,10 @@ module UpdateDataCatalog = {
   type response = {.}
   @module("@aws-sdk/client-athena") @new external new: request => t = "UpdateDataCatalogCommand"
   let make = (~type_, ~name, ~parameters=?, ~description=?, ()) =>
-    new({parameters, description, type_, name})
+    new({parameters: parameters, description: description, type_: type_, name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UntagResource = {
   type t
   type request = {
@@ -1026,9 +1061,10 @@ module UntagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-athena") @new external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceARN, ()) => new({tagKeys, resourceARN})
+  let make = (~tagKeys, ~resourceARN, ()) => new({tagKeys: tagKeys, resourceARN: resourceARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ListQueryExecutions = {
   type t
   type request = {
@@ -1056,9 +1092,10 @@ module ListQueryExecutions = {
   }
   @module("@aws-sdk/client-athena") @new external new: request => t = "ListQueryExecutionsCommand"
   let make = (~workGroup=?, ~maxResults=?, ~nextToken=?, ()) =>
-    new({workGroup, maxResults, nextToken})
+    new({workGroup: workGroup, maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListNamedQueries = {
   type t
   type request = {
@@ -1086,9 +1123,10 @@ module ListNamedQueries = {
   }
   @module("@aws-sdk/client-athena") @new external new: request => t = "ListNamedQueriesCommand"
   let make = (~workGroup=?, ~maxResults=?, ~nextToken=?, ()) =>
-    new({workGroup, maxResults, nextToken})
+    new({workGroup: workGroup, maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetPreparedStatement = {
   type t
   type request = {
@@ -1104,9 +1142,11 @@ module GetPreparedStatement = {
     preparedStatement: option<preparedStatement>,
   }
   @module("@aws-sdk/client-athena") @new external new: request => t = "GetPreparedStatementCommand"
-  let make = (~workGroup, ~statementName, ()) => new({workGroup, statementName})
+  let make = (~workGroup, ~statementName, ()) =>
+    new({workGroup: workGroup, statementName: statementName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetNamedQuery = {
   type t
   type request = {
@@ -1123,6 +1163,7 @@ module GetNamedQuery = {
   let make = (~namedQueryId, ()) => new({namedQueryId: namedQueryId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module TagResource = {
   type t
   type request = {
@@ -1138,9 +1179,10 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-athena") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceARN, ()) => new({tags, resourceARN})
+  let make = (~tags, ~resourceARN, ()) => new({tags: tags, resourceARN: resourceARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module StartQueryExecution = {
   type t
   type request = {
@@ -1183,9 +1225,17 @@ module StartQueryExecution = {
     ~queryExecutionContext=?,
     ~clientRequestToken=?,
     (),
-  ) => new({workGroup, resultConfiguration, queryExecutionContext, clientRequestToken, queryString})
+  ) =>
+    new({
+      workGroup: workGroup,
+      resultConfiguration: resultConfiguration,
+      queryExecutionContext: queryExecutionContext,
+      clientRequestToken: clientRequestToken,
+      queryString: queryString,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListTagsForResource = {
   type t
   type request = {
@@ -1210,9 +1260,10 @@ module ListTagsForResource = {
   }
   @module("@aws-sdk/client-athena") @new external new: request => t = "ListTagsForResourceCommand"
   let make = (~resourceARN, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults, nextToken, resourceARN})
+    new({maxResults: maxResults, nextToken: nextToken, resourceARN: resourceARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListPreparedStatements = {
   type t
   type request = {
@@ -1239,9 +1290,10 @@ module ListPreparedStatements = {
   @module("@aws-sdk/client-athena") @new
   external new: request => t = "ListPreparedStatementsCommand"
   let make = (~workGroup, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults, nextToken, workGroup})
+    new({maxResults: maxResults, nextToken: nextToken, workGroup: workGroup})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListEngineVersions = {
   type t
   type request = {
@@ -1265,9 +1317,11 @@ module ListEngineVersions = {
     engineVersions: option<engineVersionsList>,
   }
   @module("@aws-sdk/client-athena") @new external new: request => t = "ListEngineVersionsCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListDataCatalogs = {
   type t
   type request = {
@@ -1289,9 +1343,11 @@ module ListDataCatalogs = {
     dataCatalogsSummary: option<dataCatalogSummaryList>,
   }
   @module("@aws-sdk/client-athena") @new external new: request => t = "ListDataCatalogsCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetDatabase = {
   type t
   type request = {
@@ -1305,9 +1361,11 @@ module GetDatabase = {
     @ocaml.doc("<p>The database returned.</p>") @as("Database") database: option<database>,
   }
   @module("@aws-sdk/client-athena") @new external new: request => t = "GetDatabaseCommand"
-  let make = (~databaseName, ~catalogName, ()) => new({databaseName, catalogName})
+  let make = (~databaseName, ~catalogName, ()) =>
+    new({databaseName: databaseName, catalogName: catalogName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetDataCatalog = {
   type t
   type request = {
@@ -1322,6 +1380,7 @@ module GetDataCatalog = {
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateDataCatalog = {
   type t
   type request = {
@@ -1415,9 +1474,10 @@ module CreateDataCatalog = {
   type response = {.}
   @module("@aws-sdk/client-athena") @new external new: request => t = "CreateDataCatalogCommand"
   let make = (~type_, ~name, ~tags=?, ~parameters=?, ~description=?, ()) =>
-    new({tags, parameters, description, type_, name})
+    new({tags: tags, parameters: parameters, description: description, type_: type_, name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module BatchGetNamedQuery = {
   type t
   type request = {
@@ -1434,6 +1494,7 @@ module BatchGetNamedQuery = {
   let make = (~namedQueryIds, ()) => new({namedQueryIds: namedQueryIds})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateWorkGroup = {
   type t
   type request = {
@@ -1451,9 +1512,15 @@ module UpdateWorkGroup = {
   type response = {.}
   @module("@aws-sdk/client-athena") @new external new: request => t = "UpdateWorkGroupCommand"
   let make = (~workGroup, ~state=?, ~configurationUpdates=?, ~description=?, ()) =>
-    new({state, configurationUpdates, description, workGroup})
+    new({
+      state: state,
+      configurationUpdates: configurationUpdates,
+      description: description,
+      workGroup: workGroup,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ListWorkGroups = {
   type t
   type request = {
@@ -1478,9 +1545,11 @@ module ListWorkGroups = {
     workGroups: option<workGroupsList>,
   }
   @module("@aws-sdk/client-athena") @new external new: request => t = "ListWorkGroupsCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListDatabases = {
   type t
   type request = {
@@ -1506,9 +1575,10 @@ module ListDatabases = {
   }
   @module("@aws-sdk/client-athena") @new external new: request => t = "ListDatabasesCommand"
   let make = (~catalogName, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults, nextToken, catalogName})
+    new({maxResults: maxResults, nextToken: nextToken, catalogName: catalogName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetTableMetadata = {
   type t
   type request = {
@@ -1528,9 +1598,10 @@ module GetTableMetadata = {
   }
   @module("@aws-sdk/client-athena") @new external new: request => t = "GetTableMetadataCommand"
   let make = (~tableName, ~databaseName, ~catalogName, ()) =>
-    new({tableName, databaseName, catalogName})
+    new({tableName: tableName, databaseName: databaseName, catalogName: catalogName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetQueryExecution = {
   type t
   type request = {
@@ -1545,6 +1616,7 @@ module GetQueryExecution = {
   let make = (~queryExecutionId, ()) => new({queryExecutionId: queryExecutionId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateWorkGroup = {
   type t
   type request = {
@@ -1567,9 +1639,10 @@ module CreateWorkGroup = {
   type response = {.}
   @module("@aws-sdk/client-athena") @new external new: request => t = "CreateWorkGroupCommand"
   let make = (~name, ~tags=?, ~description=?, ~configuration=?, ()) =>
-    new({tags, description, configuration, name})
+    new({tags: tags, description: description, configuration: configuration, name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ListTableMetadata = {
   type t
   type request = {
@@ -1602,9 +1675,16 @@ module ListTableMetadata = {
   }
   @module("@aws-sdk/client-athena") @new external new: request => t = "ListTableMetadataCommand"
   let make = (~databaseName, ~catalogName, ~maxResults=?, ~nextToken=?, ~expression=?, ()) =>
-    new({maxResults, nextToken, expression, databaseName, catalogName})
+    new({
+      maxResults: maxResults,
+      nextToken: nextToken,
+      expression: expression,
+      databaseName: databaseName,
+      catalogName: catalogName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetWorkGroup = {
   type t
   type request = {
@@ -1618,6 +1698,7 @@ module GetWorkGroup = {
   let make = (~workGroup, ()) => new({workGroup: workGroup})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module BatchGetQueryExecution = {
   type t
   type request = {
@@ -1636,6 +1717,7 @@ module BatchGetQueryExecution = {
   let make = (~queryExecutionIds, ()) => new({queryExecutionIds: queryExecutionIds})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetQueryResults = {
   type t
   type request = {
@@ -1665,6 +1747,6 @@ module GetQueryResults = {
   }
   @module("@aws-sdk/client-athena") @new external new: request => t = "GetQueryResultsCommand"
   let make = (~queryExecutionId, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults, nextToken, queryExecutionId})
+    new({maxResults: maxResults, nextToken: nextToken, queryExecutionId: queryExecutionId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

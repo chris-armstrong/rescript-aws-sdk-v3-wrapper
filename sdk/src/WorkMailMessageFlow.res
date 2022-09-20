@@ -82,6 +82,7 @@ module GetRawMessageContent = {
   let make = (~messageId, ()) => new({messageId: messageId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module PutRawMessageContent = {
   type t
   type request = {
@@ -93,6 +94,6 @@ module PutRawMessageContent = {
   type response = {.}
   @module("@aws-sdk/client-workmailmessageflow") @new
   external new: request => t = "PutRawMessageContentCommand"
-  let make = (~content, ~messageId, ()) => new({content, messageId})
+  let make = (~content, ~messageId, ()) => new({content: content, messageId: messageId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }

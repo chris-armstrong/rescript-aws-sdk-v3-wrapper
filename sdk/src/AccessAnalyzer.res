@@ -1047,9 +1047,16 @@ module UpdateFindings = {
   @module("@aws-sdk/client-access-analyzer") @new
   external new: request => t = "UpdateFindingsCommand"
   let make = (~status, ~analyzerArn, ~clientToken=?, ~resourceArn=?, ~ids=?, ()) =>
-    new({clientToken, resourceArn, ids, status, analyzerArn})
+    new({
+      clientToken: clientToken,
+      resourceArn: resourceArn,
+      ids: ids,
+      status: status,
+      analyzerArn: analyzerArn,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UntagResource = {
   type t
   @ocaml.doc("<p>Removes a tag from the specified resource.</p>")
@@ -1060,9 +1067,10 @@ module UntagResource = {
   type response = {.}
   @module("@aws-sdk/client-access-analyzer") @new
   external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys, resourceArn})
+  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module TagResource = {
   type t
   @ocaml.doc("<p>Adds a tag to the specified resource.</p>")
@@ -1072,9 +1080,10 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-access-analyzer") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceArn, ()) => new({tags, resourceArn})
+  let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module StartResourceScan = {
   type t
   @ocaml.doc("<p>Starts a scan of the policies applied to the specified resource.</p>")
@@ -1088,9 +1097,11 @@ module StartResourceScan = {
   type response = {.}
   @module("@aws-sdk/client-access-analyzer") @new
   external new: request => t = "StartResourceScanCommand"
-  let make = (~resourceArn, ~analyzerArn, ()) => new({resourceArn, analyzerArn})
+  let make = (~resourceArn, ~analyzerArn, ()) =>
+    new({resourceArn: resourceArn, analyzerArn: analyzerArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ListTagsForResource = {
   type t
   @ocaml.doc("<p>Retrieves a list of tags applied to the specified resource.</p>")
@@ -1106,6 +1117,7 @@ module ListTagsForResource = {
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetAnalyzedResource = {
   type t
   @ocaml.doc("<p>Retrieves an analyzed resource.</p>")
@@ -1124,9 +1136,11 @@ module GetAnalyzedResource = {
   }
   @module("@aws-sdk/client-access-analyzer") @new
   external new: request => t = "GetAnalyzedResourceCommand"
-  let make = (~resourceArn, ~analyzerArn, ()) => new({resourceArn, analyzerArn})
+  let make = (~resourceArn, ~analyzerArn, ()) =>
+    new({resourceArn: resourceArn, analyzerArn: analyzerArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteArchiveRule = {
   type t
   @ocaml.doc("<p>Deletes an archive rule.</p>")
@@ -1140,9 +1154,10 @@ module DeleteArchiveRule = {
   @module("@aws-sdk/client-access-analyzer") @new
   external new: request => t = "DeleteArchiveRuleCommand"
   let make = (~ruleName, ~analyzerName, ~clientToken=?, ()) =>
-    new({clientToken, ruleName, analyzerName})
+    new({clientToken: clientToken, ruleName: ruleName, analyzerName: analyzerName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteAnalyzer = {
   type t
   @ocaml.doc("<p>Deletes an analyzer.</p>")
@@ -1153,9 +1168,11 @@ module DeleteAnalyzer = {
   type response = {.}
   @module("@aws-sdk/client-access-analyzer") @new
   external new: request => t = "DeleteAnalyzerCommand"
-  let make = (~analyzerName, ~clientToken=?, ()) => new({clientToken, analyzerName})
+  let make = (~analyzerName, ~clientToken=?, ()) =>
+    new({clientToken: clientToken, analyzerName: analyzerName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module CancelPolicyGeneration = {
   type t
   type request = {
@@ -1171,6 +1188,7 @@ module CancelPolicyGeneration = {
   let make = (~jobId, ()) => new({jobId: jobId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ApplyArchiveRule = {
   type t
   @ocaml.doc("<p>Retroactively applies an archive rule.</p>")
@@ -1183,9 +1201,10 @@ module ApplyArchiveRule = {
   @module("@aws-sdk/client-access-analyzer") @new
   external new: request => t = "ApplyArchiveRuleCommand"
   let make = (~ruleName, ~analyzerArn, ~clientToken=?, ()) =>
-    new({clientToken, ruleName, analyzerArn})
+    new({clientToken: clientToken, ruleName: ruleName, analyzerArn: analyzerArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpdateArchiveRule = {
   type t
   @ocaml.doc("<p>Updates the specified archive rule.</p>")
@@ -1202,9 +1221,10 @@ module UpdateArchiveRule = {
   @module("@aws-sdk/client-access-analyzer") @new
   external new: request => t = "UpdateArchiveRuleCommand"
   let make = (~filter, ~ruleName, ~analyzerName, ~clientToken=?, ()) =>
-    new({clientToken, filter, ruleName, analyzerName})
+    new({clientToken: clientToken, filter: filter, ruleName: ruleName, analyzerName: analyzerName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ListPolicyGenerations = {
   type t
   type request = {
@@ -1225,9 +1245,10 @@ module ListPolicyGenerations = {
   @module("@aws-sdk/client-access-analyzer") @new
   external new: request => t = "ListPolicyGenerationsCommand"
   let make = (~nextToken=?, ~maxResults=?, ~principalArn=?, ()) =>
-    new({nextToken, maxResults, principalArn})
+    new({nextToken: nextToken, maxResults: maxResults, principalArn: principalArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListAnalyzedResources = {
   type t
   @ocaml.doc("<p>Retrieves a list of resources that have been analyzed.</p>")
@@ -1249,9 +1270,15 @@ module ListAnalyzedResources = {
   @module("@aws-sdk/client-access-analyzer") @new
   external new: request => t = "ListAnalyzedResourcesCommand"
   let make = (~analyzerArn, ~maxResults=?, ~nextToken=?, ~resourceType=?, ()) =>
-    new({maxResults, nextToken, resourceType, analyzerArn})
+    new({
+      maxResults: maxResults,
+      nextToken: nextToken,
+      resourceType: resourceType,
+      analyzerArn: analyzerArn,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetAnalyzer = {
   type t
   @ocaml.doc("<p>Retrieves an analyzer.</p>")
@@ -1266,6 +1293,7 @@ module GetAnalyzer = {
   let make = (~analyzerName, ()) => new({analyzerName: analyzerName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateArchiveRule = {
   type t
   @ocaml.doc("<p>Creates an archive rule.</p>")
@@ -1279,9 +1307,10 @@ module CreateArchiveRule = {
   @module("@aws-sdk/client-access-analyzer") @new
   external new: request => t = "CreateArchiveRuleCommand"
   let make = (~filter, ~ruleName, ~analyzerName, ~clientToken=?, ()) =>
-    new({clientToken, filter, ruleName, analyzerName})
+    new({clientToken: clientToken, filter: filter, ruleName: ruleName, analyzerName: analyzerName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module StartPolicyGeneration = {
   type t
   type request = {
@@ -1310,9 +1339,14 @@ module StartPolicyGeneration = {
   @module("@aws-sdk/client-access-analyzer") @new
   external new: request => t = "StartPolicyGenerationCommand"
   let make = (~policyGenerationDetails, ~clientToken=?, ~cloudTrailDetails=?, ()) =>
-    new({clientToken, cloudTrailDetails, policyGenerationDetails})
+    new({
+      clientToken: clientToken,
+      cloudTrailDetails: cloudTrailDetails,
+      policyGenerationDetails: policyGenerationDetails,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListAnalyzers = {
   type t
   @ocaml.doc("<p>Retrieves a list of analyzers.</p>")
@@ -1329,9 +1363,11 @@ module ListAnalyzers = {
   }
   @module("@aws-sdk/client-access-analyzer") @new
   external new: request => t = "ListAnalyzersCommand"
-  let make = (~type_=?, ~maxResults=?, ~nextToken=?, ()) => new({type_, maxResults, nextToken})
+  let make = (~type_=?, ~maxResults=?, ~nextToken=?, ()) =>
+    new({type_: type_, maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListAccessPreviews = {
   type t
   type request = {
@@ -1350,9 +1386,10 @@ module ListAccessPreviews = {
   @module("@aws-sdk/client-access-analyzer") @new
   external new: request => t = "ListAccessPreviewsCommand"
   let make = (~analyzerArn, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults, nextToken, analyzerArn})
+    new({maxResults: maxResults, nextToken: nextToken, analyzerArn: analyzerArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetFinding = {
   type t
   @ocaml.doc("<p>Retrieves a finding.</p>")
@@ -1368,9 +1405,10 @@ module GetFinding = {
     finding: option<finding>,
   }
   @module("@aws-sdk/client-access-analyzer") @new external new: request => t = "GetFindingCommand"
-  let make = (~id, ~analyzerArn, ()) => new({id, analyzerArn})
+  let make = (~id, ~analyzerArn, ()) => new({id: id, analyzerArn: analyzerArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetArchiveRule = {
   type t
   @ocaml.doc("<p>Retrieves an archive rule.</p>")
@@ -1382,9 +1420,10 @@ module GetArchiveRule = {
   type response = {archiveRule: archiveRuleSummary}
   @module("@aws-sdk/client-access-analyzer") @new
   external new: request => t = "GetArchiveRuleCommand"
-  let make = (~ruleName, ~analyzerName, ()) => new({ruleName, analyzerName})
+  let make = (~ruleName, ~analyzerName, ()) => new({ruleName: ruleName, analyzerName: analyzerName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListFindings = {
   type t
   @ocaml.doc("<p>Retrieves a list of findings generated by the specified analyzer.</p>")
@@ -1408,9 +1447,16 @@ module ListFindings = {
   }
   @module("@aws-sdk/client-access-analyzer") @new external new: request => t = "ListFindingsCommand"
   let make = (~analyzerArn, ~maxResults=?, ~nextToken=?, ~sort=?, ~filter=?, ()) =>
-    new({maxResults, nextToken, sort, filter, analyzerArn})
+    new({
+      maxResults: maxResults,
+      nextToken: nextToken,
+      sort: sort,
+      filter: filter,
+      analyzerArn: analyzerArn,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListArchiveRules = {
   type t
   @ocaml.doc("<p>Retrieves a list of archive rules created for the specified analyzer.</p>")
@@ -1429,9 +1475,10 @@ module ListArchiveRules = {
   @module("@aws-sdk/client-access-analyzer") @new
   external new: request => t = "ListArchiveRulesCommand"
   let make = (~analyzerName, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults, nextToken, analyzerName})
+    new({maxResults: maxResults, nextToken: nextToken, analyzerName: analyzerName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListAccessPreviewFindings = {
   type t
   type request = {
@@ -1453,9 +1500,16 @@ module ListAccessPreviewFindings = {
   @module("@aws-sdk/client-access-analyzer") @new
   external new: request => t = "ListAccessPreviewFindingsCommand"
   let make = (~analyzerArn, ~accessPreviewId, ~maxResults=?, ~nextToken=?, ~filter=?, ()) =>
-    new({maxResults, nextToken, filter, analyzerArn, accessPreviewId})
+    new({
+      maxResults: maxResults,
+      nextToken: nextToken,
+      filter: filter,
+      analyzerArn: analyzerArn,
+      accessPreviewId: accessPreviewId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateAnalyzer = {
   type t
   @ocaml.doc("<p>Creates an analyzer.</p>")
@@ -1480,9 +1534,16 @@ module CreateAnalyzer = {
   @module("@aws-sdk/client-access-analyzer") @new
   external new: request => t = "CreateAnalyzerCommand"
   let make = (~type_, ~analyzerName, ~clientToken=?, ~tags=?, ~archiveRules=?, ()) =>
-    new({clientToken, tags, archiveRules, type_, analyzerName})
+    new({
+      clientToken: clientToken,
+      tags: tags,
+      archiveRules: archiveRules,
+      type_: type_,
+      analyzerName: analyzerName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetGeneratedPolicy = {
   type t
   type request = {
@@ -1514,9 +1575,14 @@ module GetGeneratedPolicy = {
   @module("@aws-sdk/client-access-analyzer") @new
   external new: request => t = "GetGeneratedPolicyCommand"
   let make = (~jobId, ~includeServiceLevelTemplate=?, ~includeResourcePlaceholders=?, ()) =>
-    new({includeServiceLevelTemplate, includeResourcePlaceholders, jobId})
+    new({
+      includeServiceLevelTemplate: includeServiceLevelTemplate,
+      includeResourcePlaceholders: includeResourcePlaceholders,
+      jobId: jobId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ValidatePolicy = {
   type t
   type request = {
@@ -1561,9 +1627,18 @@ module ValidatePolicy = {
     ~maxResults=?,
     ~locale=?,
     (),
-  ) => new({validatePolicyResourceType, policyType, policyDocument, nextToken, maxResults, locale})
+  ) =>
+    new({
+      validatePolicyResourceType: validatePolicyResourceType,
+      policyType: policyType,
+      policyDocument: policyDocument,
+      nextToken: nextToken,
+      maxResults: maxResults,
+      locale: locale,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateAccessPreview = {
   type t
   type request = {
@@ -1583,9 +1658,10 @@ module CreateAccessPreview = {
   @module("@aws-sdk/client-access-analyzer") @new
   external new: request => t = "CreateAccessPreviewCommand"
   let make = (~configurations, ~analyzerArn, ~clientToken=?, ()) =>
-    new({clientToken, configurations, analyzerArn})
+    new({clientToken: clientToken, configurations: configurations, analyzerArn: analyzerArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetAccessPreview = {
   type t
   type request = {
@@ -1600,6 +1676,7 @@ module GetAccessPreview = {
   }
   @module("@aws-sdk/client-access-analyzer") @new
   external new: request => t = "GetAccessPreviewCommand"
-  let make = (~analyzerArn, ~accessPreviewId, ()) => new({analyzerArn, accessPreviewId})
+  let make = (~analyzerArn, ~accessPreviewId, ()) =>
+    new({analyzerArn: analyzerArn, accessPreviewId: accessPreviewId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

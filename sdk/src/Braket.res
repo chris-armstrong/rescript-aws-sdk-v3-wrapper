@@ -309,9 +309,10 @@ module UntagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-braket") @new external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys, resourceArn})
+  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module TagResource = {
   type t
   type request = {
@@ -323,9 +324,10 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-braket") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceArn, ()) => new({tags, resourceArn})
+  let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ListTagsForResource = {
   type t
   type request = {
@@ -342,6 +344,7 @@ module ListTagsForResource = {
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetQuantumTask = {
   type t
   type request = {
@@ -368,6 +371,7 @@ module GetQuantumTask = {
   let make = (~quantumTaskArn, ()) => new({quantumTaskArn: quantumTaskArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetDevice = {
   type t
   type request = {@ocaml.doc("<p>The ARN of the device to retrieve.</p>") deviceArn: deviceArn}
@@ -384,6 +388,7 @@ module GetDevice = {
   let make = (~deviceArn, ()) => new({deviceArn: deviceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateQuantumTask = {
   type t
   type request = {
@@ -420,18 +425,19 @@ module CreateQuantumTask = {
     (),
   ) =>
     new({
-      jobToken,
-      tags,
-      action,
-      outputS3KeyPrefix,
-      outputS3Bucket,
-      shots,
-      deviceParameters,
-      deviceArn,
-      clientToken,
+      jobToken: jobToken,
+      tags: tags,
+      action: action,
+      outputS3KeyPrefix: outputS3KeyPrefix,
+      outputS3Bucket: outputS3Bucket,
+      shots: shots,
+      deviceParameters: deviceParameters,
+      deviceArn: deviceArn,
+      clientToken: clientToken,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CancelQuantumTask = {
   type t
   type request = {
@@ -444,9 +450,11 @@ module CancelQuantumTask = {
     @ocaml.doc("<p>The ARN of the task.</p>") quantumTaskArn: quantumTaskArn,
   }
   @module("@aws-sdk/client-braket") @new external new: request => t = "CancelQuantumTaskCommand"
-  let make = (~clientToken, ~quantumTaskArn, ()) => new({clientToken, quantumTaskArn})
+  let make = (~clientToken, ~quantumTaskArn, ()) =>
+    new({clientToken: clientToken, quantumTaskArn: quantumTaskArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CancelJob = {
   type t
   type request = {@ocaml.doc("<p>The ARN of the Amazon Braket job to cancel.</p>") jobArn: jobArn}
@@ -459,6 +467,7 @@ module CancelJob = {
   let make = (~jobArn, ()) => new({jobArn: jobArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module SearchQuantumTasks = {
   type t
   type request = {
@@ -482,9 +491,11 @@ module SearchQuantumTasks = {
     quantumTasks: quantumTaskSummaryList,
   }
   @module("@aws-sdk/client-braket") @new external new: request => t = "SearchQuantumTasksCommand"
-  let make = (~filters, ~maxResults=?, ~nextToken=?, ()) => new({filters, maxResults, nextToken})
+  let make = (~filters, ~maxResults=?, ~nextToken=?, ()) =>
+    new({filters: filters, maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module SearchJobs = {
   type t
   type request = {
@@ -506,9 +517,11 @@ module SearchJobs = {
     jobs: jobSummaryList,
   }
   @module("@aws-sdk/client-braket") @new external new: request => t = "SearchJobsCommand"
-  let make = (~filters, ~maxResults=?, ~nextToken=?, ()) => new({filters, maxResults, nextToken})
+  let make = (~filters, ~maxResults=?, ~nextToken=?, ()) =>
+    new({filters: filters, maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module SearchDevices = {
   type t
   type request = {
@@ -532,9 +545,11 @@ module SearchDevices = {
     devices: deviceSummaryList,
   }
   @module("@aws-sdk/client-braket") @new external new: request => t = "SearchDevicesCommand"
-  let make = (~filters, ~maxResults=?, ~nextToken=?, ()) => new({filters, maxResults, nextToken})
+  let make = (~filters, ~maxResults=?, ~nextToken=?, ()) =>
+    new({filters: filters, maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetJob = {
   type t
   type request = {@ocaml.doc("<p>The ARN of the job to retrieve.</p>") jobArn: jobArn}
@@ -594,6 +609,7 @@ module GetJob = {
   let make = (~jobArn, ()) => new({jobArn: jobArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateJob = {
   type t
   type request = {
@@ -651,18 +667,18 @@ module CreateJob = {
     (),
   ) =>
     new({
-      tags,
-      deviceConfig,
-      hyperParameters,
-      instanceConfig,
-      stoppingCondition,
-      roleArn,
-      jobName,
-      checkpointConfig,
-      outputDataConfig,
-      inputDataConfig,
-      algorithmSpecification,
-      clientToken,
+      tags: tags,
+      deviceConfig: deviceConfig,
+      hyperParameters: hyperParameters,
+      instanceConfig: instanceConfig,
+      stoppingCondition: stoppingCondition,
+      roleArn: roleArn,
+      jobName: jobName,
+      checkpointConfig: checkpointConfig,
+      outputDataConfig: outputDataConfig,
+      inputDataConfig: inputDataConfig,
+      algorithmSpecification: algorithmSpecification,
+      clientToken: clientToken,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

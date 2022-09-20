@@ -442,6 +442,7 @@ module RebootBroker = {
   let make = (~brokerId, ()) => new({brokerId: brokerId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DescribeConfigurationRevision = {
   type t
   type request = {
@@ -465,9 +466,10 @@ module DescribeConfigurationRevision = {
   @module("@aws-sdk/client-mq") @new
   external new: request => t = "DescribeConfigurationRevisionCommand"
   let make = (~configurationRevision, ~configurationId, ()) =>
-    new({configurationRevision, configurationId})
+    new({configurationRevision: configurationRevision, configurationId: configurationId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteUser = {
   type t
   type request = {
@@ -481,9 +483,10 @@ module DeleteUser = {
   }
   type response = {.}
   @module("@aws-sdk/client-mq") @new external new: request => t = "DeleteUserCommand"
-  let make = (~username, ~brokerId, ()) => new({username, brokerId})
+  let make = (~username, ~brokerId, ()) => new({username: username, brokerId: brokerId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteBroker = {
   type t
   type request = {
@@ -498,6 +501,7 @@ module DeleteBroker = {
   let make = (~brokerId, ()) => new({brokerId: brokerId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateUser = {
   type t
   @ocaml.doc("<p>Updates the information for an ActiveMQ user.</p>")
@@ -526,9 +530,16 @@ module UpdateUser = {
   type response = {.}
   @module("@aws-sdk/client-mq") @new external new: request => t = "UpdateUserCommand"
   let make = (~username, ~brokerId, ~password=?, ~groups=?, ~consoleAccess=?, ()) =>
-    new({username, password, groups, consoleAccess, brokerId})
+    new({
+      username: username,
+      password: password,
+      groups: groups,
+      consoleAccess: consoleAccess,
+      brokerId: brokerId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ListTags = {
   type t
   type request = {
@@ -543,6 +554,7 @@ module ListTags = {
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeConfiguration = {
   type t
   type request = {
@@ -588,6 +600,7 @@ module DescribeConfiguration = {
   let make = (~configurationId, ()) => new({configurationId: configurationId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteTags = {
   type t
   type request = {
@@ -597,9 +610,10 @@ module DeleteTags = {
   }
   type response = {.}
   @module("@aws-sdk/client-mq") @new external new: request => t = "DeleteTagsCommand"
-  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys, resourceArn})
+  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module CreateUser = {
   type t
   @ocaml.doc("<p>Creates a new ActiveMQ user.</p>")
@@ -628,9 +642,16 @@ module CreateUser = {
   type response = {.}
   @module("@aws-sdk/client-mq") @new external new: request => t = "CreateUserCommand"
   let make = (~username, ~password, ~brokerId, ~groups=?, ~consoleAccess=?, ()) =>
-    new({username, password, groups, consoleAccess, brokerId})
+    new({
+      username: username,
+      password: password,
+      groups: groups,
+      consoleAccess: consoleAccess,
+      brokerId: brokerId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module CreateTags = {
   type t
   @ocaml.doc("<p>A map of the key-value pairs for the resource tag.</p>")
@@ -642,9 +663,10 @@ module CreateTags = {
   }
   type response = {.}
   @module("@aws-sdk/client-mq") @new external new: request => t = "CreateTagsCommand"
-  let make = (~resourceArn, ~tags=?, ()) => new({tags, resourceArn})
+  let make = (~resourceArn, ~tags=?, ()) => new({tags: tags, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module CreateConfiguration = {
   type t
   @ocaml.doc(
@@ -697,9 +719,16 @@ module CreateConfiguration = {
   }
   @module("@aws-sdk/client-mq") @new external new: request => t = "CreateConfigurationCommand"
   let make = (~name, ~engineVersion, ~engineType, ~tags=?, ~authenticationStrategy=?, ()) =>
-    new({tags, name, engineVersion, engineType, authenticationStrategy})
+    new({
+      tags: tags,
+      name: name,
+      engineVersion: engineVersion,
+      engineType: engineType,
+      authenticationStrategy: authenticationStrategy,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateConfiguration = {
   type t
   @ocaml.doc("<p>Updates the specified configuration.</p>")
@@ -734,9 +763,10 @@ module UpdateConfiguration = {
   }
   @module("@aws-sdk/client-mq") @new external new: request => t = "UpdateConfigurationCommand"
   let make = (~data, ~configurationId, ~description=?, ()) =>
-    new({description, data, configurationId})
+    new({description: description, data: data, configurationId: configurationId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateBroker = {
   type t
   @ocaml.doc("<p>Updates the broker using the specified properties.</p>")
@@ -839,19 +869,20 @@ module UpdateBroker = {
     (),
   ) =>
     new({
-      securityGroups,
-      maintenanceWindowStartTime,
-      logs,
-      ldapServerMetadata,
-      hostInstanceType,
-      engineVersion,
-      configuration,
-      brokerId,
-      autoMinorVersionUpgrade,
-      authenticationStrategy,
+      securityGroups: securityGroups,
+      maintenanceWindowStartTime: maintenanceWindowStartTime,
+      logs: logs,
+      ldapServerMetadata: ldapServerMetadata,
+      hostInstanceType: hostInstanceType,
+      engineVersion: engineVersion,
+      configuration: configuration,
+      brokerId: brokerId,
+      autoMinorVersionUpgrade: autoMinorVersionUpgrade,
+      authenticationStrategy: authenticationStrategy,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListUsers = {
   type t
   type request = {
@@ -889,9 +920,11 @@ module ListUsers = {
     brokerId: option<__string>,
   }
   @module("@aws-sdk/client-mq") @new external new: request => t = "ListUsersCommand"
-  let make = (~brokerId, ~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults, brokerId})
+  let make = (~brokerId, ~nextToken=?, ~maxResults=?, ()) =>
+    new({nextToken: nextToken, maxResults: maxResults, brokerId: brokerId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListConfigurationRevisions = {
   type t
   type request = {
@@ -929,9 +962,10 @@ module ListConfigurationRevisions = {
   @module("@aws-sdk/client-mq") @new
   external new: request => t = "ListConfigurationRevisionsCommand"
   let make = (~configurationId, ~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken, maxResults, configurationId})
+    new({nextToken: nextToken, maxResults: maxResults, configurationId: configurationId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListBrokers = {
   type t
   type request = {
@@ -956,9 +990,11 @@ module ListBrokers = {
     brokerSummaries: option<__listOfBrokerSummary>,
   }
   @module("@aws-sdk/client-mq") @new external new: request => t = "ListBrokersCommand"
-  let make = (~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults})
+  let make = (~nextToken=?, ~maxResults=?, ()) =>
+    new({nextToken: nextToken, maxResults: maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeUser = {
   type t
   type request = {
@@ -991,9 +1027,10 @@ module DescribeUser = {
     brokerId: option<__string>,
   }
   @module("@aws-sdk/client-mq") @new external new: request => t = "DescribeUserCommand"
-  let make = (~username, ~brokerId, ()) => new({username, brokerId})
+  let make = (~username, ~brokerId, ()) => new({username: username, brokerId: brokerId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListConfigurations = {
   type t
   type request = {
@@ -1024,9 +1061,11 @@ module ListConfigurations = {
     configurations: option<__listOfConfiguration>,
   }
   @module("@aws-sdk/client-mq") @new external new: request => t = "ListConfigurationsCommand"
-  let make = (~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults})
+  let make = (~nextToken=?, ~maxResults=?, ()) =>
+    new({nextToken: nextToken, maxResults: maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeBroker = {
   type t
   type request = {
@@ -1140,6 +1179,7 @@ module DescribeBroker = {
   let make = (~brokerId, ()) => new({brokerId: brokerId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateBroker = {
   type t
   @ocaml.doc("<p>Creates a broker using the specified properties.</p>")
@@ -1248,28 +1288,29 @@ module CreateBroker = {
     (),
   ) =>
     new({
-      users,
-      tags,
-      subnetIds,
-      storageType,
-      securityGroups,
-      publiclyAccessible,
-      maintenanceWindowStartTime,
-      logs,
-      ldapServerMetadata,
-      hostInstanceType,
-      engineVersion,
-      engineType,
-      encryptionOptions,
-      deploymentMode,
-      creatorRequestId,
-      configuration,
-      brokerName,
-      autoMinorVersionUpgrade,
-      authenticationStrategy,
+      users: users,
+      tags: tags,
+      subnetIds: subnetIds,
+      storageType: storageType,
+      securityGroups: securityGroups,
+      publiclyAccessible: publiclyAccessible,
+      maintenanceWindowStartTime: maintenanceWindowStartTime,
+      logs: logs,
+      ldapServerMetadata: ldapServerMetadata,
+      hostInstanceType: hostInstanceType,
+      engineVersion: engineVersion,
+      engineType: engineType,
+      encryptionOptions: encryptionOptions,
+      deploymentMode: deploymentMode,
+      creatorRequestId: creatorRequestId,
+      configuration: configuration,
+      brokerName: brokerName,
+      autoMinorVersionUpgrade: autoMinorVersionUpgrade,
+      authenticationStrategy: authenticationStrategy,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeBrokerInstanceOptions = {
   type t
   type request = {
@@ -1313,9 +1354,17 @@ module DescribeBrokerInstanceOptions = {
     ~hostInstanceType=?,
     ~engineType=?,
     (),
-  ) => new({storageType, nextToken, maxResults, hostInstanceType, engineType})
+  ) =>
+    new({
+      storageType: storageType,
+      nextToken: nextToken,
+      maxResults: maxResults,
+      hostInstanceType: hostInstanceType,
+      engineType: engineType,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeBrokerEngineTypes = {
   type t
   type request = {
@@ -1348,6 +1397,6 @@ module DescribeBrokerEngineTypes = {
   }
   @module("@aws-sdk/client-mq") @new external new: request => t = "DescribeBrokerEngineTypesCommand"
   let make = (~nextToken=?, ~maxResults=?, ~engineType=?, ()) =>
-    new({nextToken, maxResults, engineType})
+    new({nextToken: nextToken, maxResults: maxResults, engineType: engineType})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

@@ -66,9 +66,11 @@ module UpdateThingShadow = {
     @ocaml.doc("<p>The state information, in JSON format.</p>") payload: option<jsonDocument>,
   }
   @module("@aws-sdk/client-iotdata") @new external new: request => t = "UpdateThingShadowCommand"
-  let make = (~payload, ~thingName, ~shadowName=?, ()) => new({payload, shadowName, thingName})
+  let make = (~payload, ~thingName, ~shadowName=?, ()) =>
+    new({payload: payload, shadowName: shadowName, thingName: thingName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module Publish = {
   type t
   @ocaml.doc("<p>The input for the Publish operation.</p>")
@@ -89,9 +91,11 @@ module Publish = {
   }
   type response = {.}
   @module("@aws-sdk/client-iotdata") @new external new: request => t = "PublishCommand"
-  let make = (~topic, ~payload=?, ~retain=?, ~qos=?, ()) => new({payload, retain, qos, topic})
+  let make = (~topic, ~payload=?, ~retain=?, ~qos=?, ()) =>
+    new({payload: payload, retain: retain, qos: qos, topic: topic})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module GetThingShadow = {
   type t
   @ocaml.doc("<p>The input for the GetThingShadow operation.</p>")
@@ -104,9 +108,10 @@ module GetThingShadow = {
     @ocaml.doc("<p>The state information, in JSON format.</p>") payload: option<jsonDocument>,
   }
   @module("@aws-sdk/client-iotdata") @new external new: request => t = "GetThingShadowCommand"
-  let make = (~thingName, ~shadowName=?, ()) => new({shadowName, thingName})
+  let make = (~thingName, ~shadowName=?, ()) => new({shadowName: shadowName, thingName: thingName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetRetainedMessage = {
   type t
   @ocaml.doc("<p>The input for the GetRetainedMessage operation.</p>")
@@ -130,6 +135,7 @@ module GetRetainedMessage = {
   let make = (~topic, ()) => new({topic: topic})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteThingShadow = {
   type t
   @ocaml.doc("<p>The input for the DeleteThingShadow operation.</p>")
@@ -142,9 +148,10 @@ module DeleteThingShadow = {
     @ocaml.doc("<p>The state information, in JSON format.</p>") payload: jsonDocument,
   }
   @module("@aws-sdk/client-iotdata") @new external new: request => t = "DeleteThingShadowCommand"
-  let make = (~thingName, ~shadowName=?, ()) => new({shadowName, thingName})
+  let make = (~thingName, ~shadowName=?, ()) => new({shadowName: shadowName, thingName: thingName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListNamedShadowsForThing = {
   type t
   type request = {
@@ -165,9 +172,11 @@ module ListNamedShadowsForThing = {
   }
   @module("@aws-sdk/client-iotdata") @new
   external new: request => t = "ListNamedShadowsForThingCommand"
-  let make = (~thingName, ~pageSize=?, ~nextToken=?, ()) => new({pageSize, nextToken, thingName})
+  let make = (~thingName, ~pageSize=?, ~nextToken=?, ()) =>
+    new({pageSize: pageSize, nextToken: nextToken, thingName: thingName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListRetainedMessages = {
   type t
   type request = {
@@ -188,6 +197,7 @@ module ListRetainedMessages = {
     retainedTopics: option<retainedMessageList>,
   }
   @module("@aws-sdk/client-iotdata") @new external new: request => t = "ListRetainedMessagesCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) => new({maxResults, nextToken})
+  let make = (~maxResults=?, ~nextToken=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

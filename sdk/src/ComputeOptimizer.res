@@ -2266,9 +2266,11 @@ module UpdateEnrollmentStatus = {
   }
   @module("@aws-sdk/client-compute-optimizer") @new
   external new: request => t = "UpdateEnrollmentStatusCommand"
-  let make = (~status, ~includeMemberAccounts=?, ()) => new({includeMemberAccounts, status})
+  let make = (~status, ~includeMemberAccounts=?, ()) =>
+    new({includeMemberAccounts: includeMemberAccounts, status: status})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetEnrollmentStatus = {
   type t
   type request = {.}
@@ -2293,6 +2295,7 @@ module GetEnrollmentStatus = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetEffectiveRecommendationPreferences = {
   type t
   type request = {
@@ -2321,6 +2324,7 @@ module GetEffectiveRecommendationPreferences = {
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module PutRecommendationPreferences = {
   type t
   type request = {
@@ -2378,9 +2382,16 @@ module PutRecommendationPreferences = {
     ~enhancedInfrastructureMetrics=?,
     ~scope=?,
     (),
-  ) => new({inferredWorkloadTypes, enhancedInfrastructureMetrics, scope, resourceType})
+  ) =>
+    new({
+      inferredWorkloadTypes: inferredWorkloadTypes,
+      enhancedInfrastructureMetrics: enhancedInfrastructureMetrics,
+      scope: scope,
+      resourceType: resourceType,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteRecommendationPreferences = {
   type t
   type request = {
@@ -2406,9 +2417,14 @@ module DeleteRecommendationPreferences = {
   @module("@aws-sdk/client-compute-optimizer") @new
   external new: request => t = "DeleteRecommendationPreferencesCommand"
   let make = (~recommendationPreferenceNames, ~resourceType, ~scope=?, ()) =>
-    new({recommendationPreferenceNames, scope, resourceType})
+    new({
+      recommendationPreferenceNames: recommendationPreferenceNames,
+      scope: scope,
+      resourceType: resourceType,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module GetRecommendationPreferences = {
   type t
   type request = {
@@ -2444,9 +2460,10 @@ module GetRecommendationPreferences = {
   @module("@aws-sdk/client-compute-optimizer") @new
   external new: request => t = "GetRecommendationPreferencesCommand"
   let make = (~resourceType, ~maxResults=?, ~nextToken=?, ~scope=?, ()) =>
-    new({maxResults, nextToken, scope, resourceType})
+    new({maxResults: maxResults, nextToken: nextToken, scope: scope, resourceType: resourceType})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetEnrollmentStatusesForOrganization = {
   type t
   type request = {
@@ -2472,9 +2489,11 @@ module GetEnrollmentStatusesForOrganization = {
   }
   @module("@aws-sdk/client-compute-optimizer") @new
   external new: request => t = "GetEnrollmentStatusesForOrganizationCommand"
-  let make = (~maxResults=?, ~nextToken=?, ~filters=?, ()) => new({maxResults, nextToken, filters})
+  let make = (~maxResults=?, ~nextToken=?, ~filters=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken, filters: filters})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ExportLambdaFunctionRecommendations = {
   type t
   type request = {
@@ -2533,15 +2552,16 @@ module ExportLambdaFunctionRecommendations = {
     (),
   ) =>
     new({
-      includeMemberAccounts,
-      fileFormat,
-      s3DestinationConfig,
-      fieldsToExport,
-      filters,
-      accountIds,
+      includeMemberAccounts: includeMemberAccounts,
+      fileFormat: fileFormat,
+      s3DestinationConfig: s3DestinationConfig,
+      fieldsToExport: fieldsToExport,
+      filters: filters,
+      accountIds: accountIds,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ExportEC2InstanceRecommendations = {
   type t
   type request = {
@@ -2613,16 +2633,17 @@ module ExportEC2InstanceRecommendations = {
     (),
   ) =>
     new({
-      recommendationPreferences,
-      includeMemberAccounts,
-      fileFormat,
-      s3DestinationConfig,
-      fieldsToExport,
-      filters,
-      accountIds,
+      recommendationPreferences: recommendationPreferences,
+      includeMemberAccounts: includeMemberAccounts,
+      fileFormat: fileFormat,
+      s3DestinationConfig: s3DestinationConfig,
+      fieldsToExport: fieldsToExport,
+      filters: filters,
+      accountIds: accountIds,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ExportEBSVolumeRecommendations = {
   type t
   type request = {
@@ -2681,15 +2702,16 @@ module ExportEBSVolumeRecommendations = {
     (),
   ) =>
     new({
-      includeMemberAccounts,
-      fileFormat,
-      s3DestinationConfig,
-      fieldsToExport,
-      filters,
-      accountIds,
+      includeMemberAccounts: includeMemberAccounts,
+      fileFormat: fileFormat,
+      s3DestinationConfig: s3DestinationConfig,
+      fieldsToExport: fieldsToExport,
+      filters: filters,
+      accountIds: accountIds,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ExportAutoScalingGroupRecommendations = {
   type t
   type request = {
@@ -2763,16 +2785,17 @@ module ExportAutoScalingGroupRecommendations = {
     (),
   ) =>
     new({
-      recommendationPreferences,
-      includeMemberAccounts,
-      fileFormat,
-      s3DestinationConfig,
-      fieldsToExport,
-      filters,
-      accountIds,
+      recommendationPreferences: recommendationPreferences,
+      includeMemberAccounts: includeMemberAccounts,
+      fileFormat: fileFormat,
+      s3DestinationConfig: s3DestinationConfig,
+      fieldsToExport: fieldsToExport,
+      filters: filters,
+      accountIds: accountIds,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeRecommendationExportJobs = {
   type t
   type request = {
@@ -2801,9 +2824,10 @@ module DescribeRecommendationExportJobs = {
   @module("@aws-sdk/client-compute-optimizer") @new
   external new: request => t = "DescribeRecommendationExportJobsCommand"
   let make = (~maxResults=?, ~nextToken=?, ~filters=?, ~jobIds=?, ()) =>
-    new({maxResults, nextToken, filters, jobIds})
+    new({maxResults: maxResults, nextToken: nextToken, filters: filters, jobIds: jobIds})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetEC2RecommendationProjectedMetrics = {
   type t
   type request = {
@@ -2835,9 +2859,18 @@ module GetEC2RecommendationProjectedMetrics = {
     ~instanceArn,
     ~recommendationPreferences=?,
     (),
-  ) => new({recommendationPreferences, endTime, startTime, period, stat, instanceArn})
+  ) =>
+    new({
+      recommendationPreferences: recommendationPreferences,
+      endTime: endTime,
+      startTime: startTime,
+      period: period,
+      stat: stat,
+      instanceArn: instanceArn,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetRecommendationSummaries = {
   type t
   type request = {
@@ -2865,9 +2898,10 @@ module GetRecommendationSummaries = {
   @module("@aws-sdk/client-compute-optimizer") @new
   external new: request => t = "GetRecommendationSummariesCommand"
   let make = (~maxResults=?, ~nextToken=?, ~accountIds=?, ()) =>
-    new({maxResults, nextToken, accountIds})
+    new({maxResults: maxResults, nextToken: nextToken, accountIds: accountIds})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetLambdaFunctionRecommendations = {
   type t
   type request = {
@@ -2908,9 +2942,16 @@ module GetLambdaFunctionRecommendations = {
   @module("@aws-sdk/client-compute-optimizer") @new
   external new: request => t = "GetLambdaFunctionRecommendationsCommand"
   let make = (~maxResults=?, ~nextToken=?, ~filters=?, ~accountIds=?, ~functionArns=?, ()) =>
-    new({maxResults, nextToken, filters, accountIds, functionArns})
+    new({
+      maxResults: maxResults,
+      nextToken: nextToken,
+      filters: filters,
+      accountIds: accountIds,
+      functionArns: functionArns,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetEC2InstanceRecommendations = {
   type t
   type request = {
@@ -2958,9 +2999,18 @@ module GetEC2InstanceRecommendations = {
     ~nextToken=?,
     ~instanceArns=?,
     (),
-  ) => new({recommendationPreferences, accountIds, filters, maxResults, nextToken, instanceArns})
+  ) =>
+    new({
+      recommendationPreferences: recommendationPreferences,
+      accountIds: accountIds,
+      filters: filters,
+      maxResults: maxResults,
+      nextToken: nextToken,
+      instanceArns: instanceArns,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetEBSVolumeRecommendations = {
   type t
   type request = {
@@ -2998,9 +3048,16 @@ module GetEBSVolumeRecommendations = {
   @module("@aws-sdk/client-compute-optimizer") @new
   external new: request => t = "GetEBSVolumeRecommendationsCommand"
   let make = (~accountIds=?, ~filters=?, ~maxResults=?, ~nextToken=?, ~volumeArns=?, ()) =>
-    new({accountIds, filters, maxResults, nextToken, volumeArns})
+    new({
+      accountIds: accountIds,
+      filters: filters,
+      maxResults: maxResults,
+      nextToken: nextToken,
+      volumeArns: volumeArns,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetAutoScalingGroupRecommendations = {
   type t
   type request = {
@@ -3055,12 +3112,12 @@ module GetAutoScalingGroupRecommendations = {
     (),
   ) =>
     new({
-      recommendationPreferences,
-      filters,
-      maxResults,
-      nextToken,
-      autoScalingGroupArns,
-      accountIds,
+      recommendationPreferences: recommendationPreferences,
+      filters: filters,
+      maxResults: maxResults,
+      nextToken: nextToken,
+      autoScalingGroupArns: autoScalingGroupArns,
+      accountIds: accountIds,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

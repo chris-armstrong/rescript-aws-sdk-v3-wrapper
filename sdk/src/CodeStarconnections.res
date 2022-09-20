@@ -225,6 +225,7 @@ module DeleteHost = {
   let make = (~hostArn, ()) => new({hostArn: hostArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteConnection = {
   type t
   type request = {
@@ -241,6 +242,7 @@ module DeleteConnection = {
   let make = (~connectionArn, ()) => new({connectionArn: connectionArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UntagResource = {
   type t
   type request = {
@@ -254,9 +256,10 @@ module UntagResource = {
   type response = {.}
   @module("@aws-sdk/client-codestar-connections") @new
   external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys, resourceArn})
+  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module GetConnection = {
   type t
   type request = {
@@ -273,6 +276,7 @@ module GetConnection = {
   let make = (~connectionArn, ()) => new({connectionArn: connectionArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateHost = {
   type t
   type request = {
@@ -289,9 +293,10 @@ module UpdateHost = {
   @module("@aws-sdk/client-codestar-connections") @new
   external new: request => t = "UpdateHostCommand"
   let make = (~hostArn, ~vpcConfiguration=?, ~providerEndpoint=?, ()) =>
-    new({vpcConfiguration, providerEndpoint, hostArn})
+    new({vpcConfiguration: vpcConfiguration, providerEndpoint: providerEndpoint, hostArn: hostArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module TagResource = {
   type t
   type request = {
@@ -306,9 +311,10 @@ module TagResource = {
   type response = {.}
   @module("@aws-sdk/client-codestar-connections") @new
   external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceArn, ()) => new({tags, resourceArn})
+  let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ListTagsForResource = {
   type t
   type request = {
@@ -328,6 +334,7 @@ module ListTagsForResource = {
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListConnections = {
   type t
   type request = {
@@ -361,9 +368,15 @@ module ListConnections = {
   @module("@aws-sdk/client-codestar-connections") @new
   external new: request => t = "ListConnectionsCommand"
   let make = (~nextToken=?, ~maxResults=?, ~hostArnFilter=?, ~providerTypeFilter=?, ()) =>
-    new({nextToken, maxResults, hostArnFilter, providerTypeFilter})
+    new({
+      nextToken: nextToken,
+      maxResults: maxResults,
+      hostArnFilter: hostArnFilter,
+      providerTypeFilter: providerTypeFilter,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetHost = {
   type t
   type request = {
@@ -386,6 +399,7 @@ module GetHost = {
   let make = (~hostArn, ()) => new({hostArn: hostArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateHost = {
   type t
   type request = {
@@ -416,9 +430,16 @@ module CreateHost = {
   @module("@aws-sdk/client-codestar-connections") @new
   external new: request => t = "CreateHostCommand"
   let make = (~providerEndpoint, ~providerType, ~name, ~tags=?, ~vpcConfiguration=?, ()) =>
-    new({tags, vpcConfiguration, providerEndpoint, providerType, name})
+    new({
+      tags: tags,
+      vpcConfiguration: vpcConfiguration,
+      providerEndpoint: providerEndpoint,
+      providerType: providerType,
+      name: name,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateConnection = {
   type t
   type request = {
@@ -452,9 +473,10 @@ module CreateConnection = {
   @module("@aws-sdk/client-codestar-connections") @new
   external new: request => t = "CreateConnectionCommand"
   let make = (~connectionName, ~hostArn=?, ~tags=?, ~providerType=?, ()) =>
-    new({hostArn, tags, connectionName, providerType})
+    new({hostArn: hostArn, tags: tags, connectionName: connectionName, providerType: providerType})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListHosts = {
   type t
   type request = {
@@ -480,6 +502,7 @@ module ListHosts = {
   }
   @module("@aws-sdk/client-codestar-connections") @new
   external new: request => t = "ListHostsCommand"
-  let make = (~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults})
+  let make = (~nextToken=?, ~maxResults=?, ()) =>
+    new({nextToken: nextToken, maxResults: maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

@@ -1289,9 +1289,16 @@ module TestIdentityProvider = {
   @module("@aws-sdk/client-transfer") @new
   external new: request => t = "TestIdentityProviderCommand"
   let make = (~userName, ~serverId, ~userPassword=?, ~sourceIp=?, ~serverProtocol=?, ()) =>
-    new({userPassword, userName, sourceIp, serverProtocol, serverId})
+    new({
+      userPassword: userPassword,
+      userName: userName,
+      sourceIp: sourceIp,
+      serverProtocol: serverProtocol,
+      serverId: serverId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module StopServer = {
   type t
   type request = {
@@ -1304,6 +1311,7 @@ module StopServer = {
   let make = (~serverId, ()) => new({serverId: serverId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module StartServer = {
   type t
   type request = {
@@ -1316,6 +1324,7 @@ module StartServer = {
   let make = (~serverId, ()) => new({serverId: serverId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module SendWorkflowStepState = {
   type t
   type request = {
@@ -1335,9 +1344,10 @@ module SendWorkflowStepState = {
   @module("@aws-sdk/client-transfer") @new
   external new: request => t = "SendWorkflowStepStateCommand"
   let make = (~status, ~token, ~executionId, ~workflowId, ()) =>
-    new({status, token, executionId, workflowId})
+    new({status: status, token: token, executionId: executionId, workflowId: workflowId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ImportSshPublicKey = {
   type t
   type request = {
@@ -1364,9 +1374,10 @@ module ImportSshPublicKey = {
   }
   @module("@aws-sdk/client-transfer") @new external new: request => t = "ImportSshPublicKeyCommand"
   let make = (~userName, ~sshPublicKeyBody, ~serverId, ()) =>
-    new({userName, sshPublicKeyBody, serverId})
+    new({userName: userName, sshPublicKeyBody: sshPublicKeyBody, serverId: serverId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteWorkflow = {
   type t
   type request = {
@@ -1378,6 +1389,7 @@ module DeleteWorkflow = {
   let make = (~workflowId, ()) => new({workflowId: workflowId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteUser = {
   type t
   type request = {
@@ -1391,9 +1403,10 @@ module DeleteUser = {
   }
   type response = {.}
   @module("@aws-sdk/client-transfer") @new external new: request => t = "DeleteUserCommand"
-  let make = (~userName, ~serverId, ()) => new({userName, serverId})
+  let make = (~userName, ~serverId, ()) => new({userName: userName, serverId: serverId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteSshPublicKey = {
   type t
   type request = {
@@ -1411,9 +1424,10 @@ module DeleteSshPublicKey = {
   type response = {.}
   @module("@aws-sdk/client-transfer") @new external new: request => t = "DeleteSshPublicKeyCommand"
   let make = (~userName, ~sshPublicKeyId, ~serverId, ()) =>
-    new({userName, sshPublicKeyId, serverId})
+    new({userName: userName, sshPublicKeyId: sshPublicKeyId, serverId: serverId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteServer = {
   type t
   type request = {
@@ -1425,6 +1439,7 @@ module DeleteServer = {
   let make = (~serverId, ()) => new({serverId: serverId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteAccess = {
   type t
   type request = {
@@ -1451,9 +1466,10 @@ module DeleteAccess = {
   }
   type response = {.}
   @module("@aws-sdk/client-transfer") @new external new: request => t = "DeleteAccessCommand"
-  let make = (~externalId, ~serverId, ()) => new({externalId, serverId})
+  let make = (~externalId, ~serverId, ()) => new({externalId: externalId, serverId: serverId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UntagResource = {
   type t
   type request = {
@@ -1468,9 +1484,10 @@ module UntagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-transfer") @new external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~arn, ()) => new({tagKeys, arn})
+  let make = (~tagKeys, ~arn, ()) => new({tagKeys: tagKeys, arn: arn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ListSecurityPolicies = {
   type t
   type request = {
@@ -1496,9 +1513,11 @@ module ListSecurityPolicies = {
   }
   @module("@aws-sdk/client-transfer") @new
   external new: request => t = "ListSecurityPoliciesCommand"
-  let make = (~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults})
+  let make = (~nextToken=?, ~maxResults=?, ()) =>
+    new({nextToken: nextToken, maxResults: maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateUser = {
   type t
   type request = {
@@ -1611,17 +1630,18 @@ module UpdateUser = {
     (),
   ) =>
     new({
-      userName,
-      serverId,
-      role,
-      posixProfile,
-      policy,
-      homeDirectoryMappings,
-      homeDirectoryType,
-      homeDirectory,
+      userName: userName,
+      serverId: serverId,
+      role: role,
+      posixProfile: posixProfile,
+      policy: policy,
+      homeDirectoryMappings: homeDirectoryMappings,
+      homeDirectoryType: homeDirectoryType,
+      homeDirectory: homeDirectory,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateAccess = {
   type t
   type request = {
@@ -1723,17 +1743,18 @@ module UpdateAccess = {
     (),
   ) =>
     new({
-      externalId,
-      serverId,
-      role,
-      posixProfile,
-      policy,
-      homeDirectoryMappings,
-      homeDirectoryType,
-      homeDirectory,
+      externalId: externalId,
+      serverId: serverId,
+      role: role,
+      posixProfile: posixProfile,
+      policy: policy,
+      homeDirectoryMappings: homeDirectoryMappings,
+      homeDirectoryType: homeDirectoryType,
+      homeDirectory: homeDirectory,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module TagResource = {
   type t
   type request = {
@@ -1748,9 +1769,10 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-transfer") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~arn, ()) => new({tags, arn})
+  let make = (~tags, ~arn, ()) => new({tags: tags, arn: arn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ListWorkflows = {
   type t
   type request = {
@@ -1777,9 +1799,11 @@ module ListWorkflows = {
     nextToken: option<nextToken>,
   }
   @module("@aws-sdk/client-transfer") @new external new: request => t = "ListWorkflowsCommand"
-  let make = (~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults})
+  let make = (~nextToken=?, ~maxResults=?, ()) =>
+    new({nextToken: nextToken, maxResults: maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListUsers = {
   type t
   type request = {
@@ -1817,9 +1841,11 @@ module ListUsers = {
     nextToken: option<nextToken>,
   }
   @module("@aws-sdk/client-transfer") @new external new: request => t = "ListUsersCommand"
-  let make = (~serverId, ~nextToken=?, ~maxResults=?, ()) => new({serverId, nextToken, maxResults})
+  let make = (~serverId, ~nextToken=?, ~maxResults=?, ()) =>
+    new({serverId: serverId, nextToken: nextToken, maxResults: maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListTagsForResource = {
   type t
   type request = {
@@ -1851,9 +1877,11 @@ module ListTagsForResource = {
     @ocaml.doc("<p>The ARN you specified to list the tags of.</p>") @as("Arn") arn: option<arn>,
   }
   @module("@aws-sdk/client-transfer") @new external new: request => t = "ListTagsForResourceCommand"
-  let make = (~arn, ~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults, arn})
+  let make = (~arn, ~nextToken=?, ~maxResults=?, ()) =>
+    new({nextToken: nextToken, maxResults: maxResults, arn: arn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListServers = {
   type t
   type request = {
@@ -1878,9 +1906,11 @@ module ListServers = {
     nextToken: option<nextToken>,
   }
   @module("@aws-sdk/client-transfer") @new external new: request => t = "ListServersCommand"
-  let make = (~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults})
+  let make = (~nextToken=?, ~maxResults=?, ()) =>
+    new({nextToken: nextToken, maxResults: maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListAccesses = {
   type t
   type request = {
@@ -1916,9 +1946,11 @@ module ListAccesses = {
     nextToken: option<nextToken>,
   }
   @module("@aws-sdk/client-transfer") @new external new: request => t = "ListAccessesCommand"
-  let make = (~serverId, ~nextToken=?, ~maxResults=?, ()) => new({serverId, nextToken, maxResults})
+  let make = (~serverId, ~nextToken=?, ~maxResults=?, ()) =>
+    new({serverId: serverId, nextToken: nextToken, maxResults: maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeSecurityPolicy = {
   type t
   type request = {
@@ -1936,6 +1968,7 @@ module DescribeSecurityPolicy = {
   let make = (~securityPolicyName, ()) => new({securityPolicyName: securityPolicyName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateUser = {
   type t
   type request = {
@@ -2056,19 +2089,20 @@ module CreateUser = {
     (),
   ) =>
     new({
-      userName,
-      tags,
-      sshPublicKeyBody,
-      serverId,
-      role,
-      posixProfile,
-      policy,
-      homeDirectoryMappings,
-      homeDirectoryType,
-      homeDirectory,
+      userName: userName,
+      tags: tags,
+      sshPublicKeyBody: sshPublicKeyBody,
+      serverId: serverId,
+      role: role,
+      posixProfile: posixProfile,
+      policy: policy,
+      homeDirectoryMappings: homeDirectoryMappings,
+      homeDirectoryType: homeDirectoryType,
+      homeDirectory: homeDirectory,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateAccess = {
   type t
   type request = {
@@ -2169,17 +2203,18 @@ module CreateAccess = {
     (),
   ) =>
     new({
-      externalId,
-      serverId,
-      role,
-      posixProfile,
-      policy,
-      homeDirectoryMappings,
-      homeDirectoryType,
-      homeDirectory,
+      externalId: externalId,
+      serverId: serverId,
+      role: role,
+      posixProfile: posixProfile,
+      policy: policy,
+      homeDirectoryMappings: homeDirectoryMappings,
+      homeDirectoryType: homeDirectoryType,
+      homeDirectory: homeDirectory,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateServer = {
   type t
   type request = {
@@ -2374,22 +2409,23 @@ module UpdateServer = {
     (),
   ) =>
     new({
-      workflowDetails,
-      serverId,
-      securityPolicyName,
-      protocols,
-      preAuthenticationLoginBanner,
-      postAuthenticationLoginBanner,
-      loggingRole,
-      identityProviderDetails,
-      hostKey,
-      endpointType,
-      endpointDetails,
-      protocolDetails,
-      certificate,
+      workflowDetails: workflowDetails,
+      serverId: serverId,
+      securityPolicyName: securityPolicyName,
+      protocols: protocols,
+      preAuthenticationLoginBanner: preAuthenticationLoginBanner,
+      postAuthenticationLoginBanner: postAuthenticationLoginBanner,
+      loggingRole: loggingRole,
+      identityProviderDetails: identityProviderDetails,
+      hostKey: hostKey,
+      endpointType: endpointType,
+      endpointDetails: endpointDetails,
+      protocolDetails: protocolDetails,
+      certificate: certificate,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeUser = {
   type t
   type request = {
@@ -2415,9 +2451,10 @@ module DescribeUser = {
     serverId: serverId,
   }
   @module("@aws-sdk/client-transfer") @new external new: request => t = "DescribeUserCommand"
-  let make = (~userName, ~serverId, ()) => new({userName, serverId})
+  let make = (~userName, ~serverId, ()) => new({userName: userName, serverId: serverId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeAccess = {
   type t
   type request = {
@@ -2452,9 +2489,10 @@ module DescribeAccess = {
     serverId: serverId,
   }
   @module("@aws-sdk/client-transfer") @new external new: request => t = "DescribeAccessCommand"
-  let make = (~externalId, ~serverId, ()) => new({externalId, serverId})
+  let make = (~externalId, ~serverId, ()) => new({externalId: externalId, serverId: serverId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateServer = {
   type t
   type request = {
@@ -2674,24 +2712,25 @@ module CreateServer = {
     (),
   ) =>
     new({
-      workflowDetails,
-      tags,
-      securityPolicyName,
-      protocolDetails,
-      protocols,
-      preAuthenticationLoginBanner,
-      postAuthenticationLoginBanner,
-      loggingRole,
-      identityProviderType,
-      identityProviderDetails,
-      hostKey,
-      endpointType,
-      endpointDetails,
-      domain,
-      certificate,
+      workflowDetails: workflowDetails,
+      tags: tags,
+      securityPolicyName: securityPolicyName,
+      protocolDetails: protocolDetails,
+      protocols: protocols,
+      preAuthenticationLoginBanner: preAuthenticationLoginBanner,
+      postAuthenticationLoginBanner: postAuthenticationLoginBanner,
+      loggingRole: loggingRole,
+      identityProviderType: identityProviderType,
+      identityProviderDetails: identityProviderDetails,
+      hostKey: hostKey,
+      endpointType: endpointType,
+      endpointDetails: endpointDetails,
+      domain: domain,
+      certificate: certificate,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListExecutions = {
   type t
   type request = {
@@ -2761,9 +2800,10 @@ module ListExecutions = {
   }
   @module("@aws-sdk/client-transfer") @new external new: request => t = "ListExecutionsCommand"
   let make = (~workflowId, ~nextToken=?, ~maxResults=?, ()) =>
-    new({workflowId, nextToken, maxResults})
+    new({workflowId: workflowId, nextToken: nextToken, maxResults: maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeServer = {
   type t
   type request = {
@@ -2780,6 +2820,7 @@ module DescribeServer = {
   let make = (~serverId, ()) => new({serverId: serverId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeExecution = {
   type t
   type request = {
@@ -2796,9 +2837,11 @@ module DescribeExecution = {
     workflowId: workflowId,
   }
   @module("@aws-sdk/client-transfer") @new external new: request => t = "DescribeExecutionCommand"
-  let make = (~workflowId, ~executionId, ()) => new({workflowId, executionId})
+  let make = (~workflowId, ~executionId, ()) =>
+    new({workflowId: workflowId, executionId: executionId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateWorkflow = {
   type t
   type request = {
@@ -2855,9 +2898,10 @@ module CreateWorkflow = {
   }
   @module("@aws-sdk/client-transfer") @new external new: request => t = "CreateWorkflowCommand"
   let make = (~steps, ~tags=?, ~onExceptionSteps=?, ~description=?, ()) =>
-    new({tags, onExceptionSteps, steps, description})
+    new({tags: tags, onExceptionSteps: onExceptionSteps, steps: steps, description: description})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeWorkflow = {
   type t
   type request = {

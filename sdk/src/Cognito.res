@@ -209,9 +209,15 @@ module UnlinkDeveloperIdentity = {
   @module("@aws-sdk/client-cognito-identity") @new
   external new: request => t = "UnlinkDeveloperIdentityCommand"
   let make = (~developerUserIdentifier, ~developerProviderName, ~identityPoolId, ~identityId, ()) =>
-    new({developerUserIdentifier, developerProviderName, identityPoolId, identityId})
+    new({
+      developerUserIdentifier: developerUserIdentifier,
+      developerProviderName: developerProviderName,
+      identityPoolId: identityPoolId,
+      identityId: identityId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module MergeDeveloperIdentities = {
   type t
   @ocaml.doc("<p>Input to the <code>MergeDeveloperIdentities</code> action.</p>")
@@ -248,9 +254,16 @@ module MergeDeveloperIdentities = {
     ~destinationUserIdentifier,
     ~sourceUserIdentifier,
     (),
-  ) => new({identityPoolId, developerProviderName, destinationUserIdentifier, sourceUserIdentifier})
+  ) =>
+    new({
+      identityPoolId: identityPoolId,
+      developerProviderName: developerProviderName,
+      destinationUserIdentifier: destinationUserIdentifier,
+      sourceUserIdentifier: sourceUserIdentifier,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteIdentityPool = {
   type t
   @ocaml.doc("<p>Input to the DeleteIdentityPool action.</p>")
@@ -264,6 +277,7 @@ module DeleteIdentityPool = {
   let make = (~identityPoolId, ()) => new({identityPoolId: identityPoolId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UntagResource = {
   type t
   type request = {
@@ -275,9 +289,10 @@ module UntagResource = {
   type response = {.}
   @module("@aws-sdk/client-cognito-identity") @new
   external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys, resourceArn})
+  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UnlinkIdentity = {
   type t
   @ocaml.doc("<p>Input to the UnlinkIdentity action.</p>")
@@ -295,9 +310,10 @@ module UnlinkIdentity = {
   @module("@aws-sdk/client-cognito-identity") @new
   external new: request => t = "UnlinkIdentityCommand"
   let make = (~loginsToRemove, ~logins, ~identityId, ()) =>
-    new({loginsToRemove, logins, identityId})
+    new({loginsToRemove: loginsToRemove, logins: logins, identityId: identityId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module TagResource = {
   type t
   type request = {
@@ -308,9 +324,10 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-cognito-identity") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceArn, ()) => new({tags, resourceArn})
+  let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module SetPrincipalTagAttributeMap = {
   type t
   type request = {
@@ -349,9 +366,15 @@ module SetPrincipalTagAttributeMap = {
   @module("@aws-sdk/client-cognito-identity") @new
   external new: request => t = "SetPrincipalTagAttributeMapCommand"
   let make = (~identityProviderName, ~identityPoolId, ~principalTags=?, ~useDefaults=?, ()) =>
-    new({principalTags, useDefaults, identityProviderName, identityPoolId})
+    new({
+      principalTags: principalTags,
+      useDefaults: useDefaults,
+      identityProviderName: identityProviderName,
+      identityPoolId: identityPoolId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module LookupDeveloperIdentity = {
   type t
   @ocaml.doc("<p>Input to the <code>LookupDeveloperIdentityInput</code> action.</p>")
@@ -404,9 +427,17 @@ module LookupDeveloperIdentity = {
     ~developerUserIdentifier=?,
     ~identityId=?,
     (),
-  ) => new({nextToken, maxResults, developerUserIdentifier, identityId, identityPoolId})
+  ) =>
+    new({
+      nextToken: nextToken,
+      maxResults: maxResults,
+      developerUserIdentifier: developerUserIdentifier,
+      identityId: identityId,
+      identityPoolId: identityPoolId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListTagsForResource = {
   type t
   type request = {
@@ -424,6 +455,7 @@ module ListTagsForResource = {
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetPrincipalTagAttributeMap = {
   type t
   type request = {
@@ -456,9 +488,10 @@ module GetPrincipalTagAttributeMap = {
   @module("@aws-sdk/client-cognito-identity") @new
   external new: request => t = "GetPrincipalTagAttributeMapCommand"
   let make = (~identityProviderName, ~identityPoolId, ()) =>
-    new({identityProviderName, identityPoolId})
+    new({identityProviderName: identityProviderName, identityPoolId: identityPoolId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetOpenIdTokenForDeveloperIdentity = {
   type t
   @ocaml.doc("<p>Input to the <code>GetOpenIdTokenForDeveloperIdentity</code> action.</p>")
@@ -503,9 +536,16 @@ module GetOpenIdTokenForDeveloperIdentity = {
   @module("@aws-sdk/client-cognito-identity") @new
   external new: request => t = "GetOpenIdTokenForDeveloperIdentityCommand"
   let make = (~logins, ~identityPoolId, ~tokenDuration=?, ~principalTags=?, ~identityId=?, ()) =>
-    new({tokenDuration, principalTags, logins, identityId, identityPoolId})
+    new({
+      tokenDuration: tokenDuration,
+      principalTags: principalTags,
+      logins: logins,
+      identityId: identityId,
+      identityPoolId: identityPoolId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetOpenIdToken = {
   type t
   @ocaml.doc("<p>Input to the GetOpenIdToken action.</p>")
@@ -530,9 +570,10 @@ module GetOpenIdToken = {
   }
   @module("@aws-sdk/client-cognito-identity") @new
   external new: request => t = "GetOpenIdTokenCommand"
-  let make = (~identityId, ~logins=?, ()) => new({logins, identityId})
+  let make = (~identityId, ~logins=?, ()) => new({logins: logins, identityId: identityId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetId = {
   type t
   @ocaml.doc("<p>Input to the GetId action.</p>")
@@ -581,9 +622,10 @@ module GetId = {
   }
   @module("@aws-sdk/client-cognito-identity") @new external new: request => t = "GetIdCommand"
   let make = (~identityPoolId, ~logins=?, ~accountId=?, ()) =>
-    new({logins, identityPoolId, accountId})
+    new({logins: logins, identityPoolId: identityPoolId, accountId: accountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetCredentialsForIdentity = {
   type t
   @ocaml.doc("<p>Input to the <code>GetCredentialsForIdentity</code> action.</p>")
@@ -619,9 +661,10 @@ module GetCredentialsForIdentity = {
   @module("@aws-sdk/client-cognito-identity") @new
   external new: request => t = "GetCredentialsForIdentityCommand"
   let make = (~identityId, ~customRoleArn=?, ~logins=?, ()) =>
-    new({customRoleArn, logins, identityId})
+    new({customRoleArn: customRoleArn, logins: logins, identityId: identityId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeIdentity = {
   type t
   @ocaml.doc("<p>Input to the <code>DescribeIdentity</code> action.</p>")
@@ -635,6 +678,7 @@ module DescribeIdentity = {
   let make = (~identityId, ()) => new({identityId: identityId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateIdentityPool = {
   type t
   @ocaml.doc("<p>An object representing an Amazon Cognito identity pool.</p>")
@@ -721,19 +765,20 @@ module UpdateIdentityPool = {
     (),
   ) =>
     new({
-      identityPoolTags,
-      samlProviderARNs,
-      cognitoIdentityProviders,
-      openIdConnectProviderARNs,
-      developerProviderName,
-      supportedLoginProviders,
-      allowClassicFlow,
-      allowUnauthenticatedIdentities,
-      identityPoolName,
-      identityPoolId,
+      identityPoolTags: identityPoolTags,
+      samlProviderARNs: samlProviderARNs,
+      cognitoIdentityProviders: cognitoIdentityProviders,
+      openIdConnectProviderARNs: openIdConnectProviderARNs,
+      developerProviderName: developerProviderName,
+      supportedLoginProviders: supportedLoginProviders,
+      allowClassicFlow: allowClassicFlow,
+      allowUnauthenticatedIdentities: allowUnauthenticatedIdentities,
+      identityPoolName: identityPoolName,
+      identityPoolId: identityPoolId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListIdentityPools = {
   type t
   @ocaml.doc("<p>Input to the ListIdentityPools action.</p>")
@@ -751,9 +796,10 @@ module ListIdentityPools = {
   }
   @module("@aws-sdk/client-cognito-identity") @new
   external new: request => t = "ListIdentityPoolsCommand"
-  let make = (~maxResults, ~nextToken=?, ()) => new({nextToken, maxResults})
+  let make = (~maxResults, ~nextToken=?, ()) => new({nextToken: nextToken, maxResults: maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeIdentityPool = {
   type t
   @ocaml.doc("<p>Input to the DescribeIdentityPool action.</p>")
@@ -800,6 +846,7 @@ module DescribeIdentityPool = {
   let make = (~identityPoolId, ()) => new({identityPoolId: identityPoolId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteIdentities = {
   type t
   @ocaml.doc("<p>Input to the <code>DeleteIdentities</code> action.</p>")
@@ -821,6 +868,7 @@ module DeleteIdentities = {
   let make = (~identityIdsToDelete, ()) => new({identityIdsToDelete: identityIdsToDelete})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateIdentityPool = {
   type t
   @ocaml.doc("<p>Input to the CreateIdentityPool action.</p>")
@@ -911,18 +959,19 @@ module CreateIdentityPool = {
     (),
   ) =>
     new({
-      identityPoolTags,
-      samlProviderARNs,
-      cognitoIdentityProviders,
-      openIdConnectProviderARNs,
-      developerProviderName,
-      supportedLoginProviders,
-      allowClassicFlow,
-      allowUnauthenticatedIdentities,
-      identityPoolName,
+      identityPoolTags: identityPoolTags,
+      samlProviderARNs: samlProviderARNs,
+      cognitoIdentityProviders: cognitoIdentityProviders,
+      openIdConnectProviderARNs: openIdConnectProviderARNs,
+      developerProviderName: developerProviderName,
+      supportedLoginProviders: supportedLoginProviders,
+      allowClassicFlow: allowClassicFlow,
+      allowUnauthenticatedIdentities: allowUnauthenticatedIdentities,
+      identityPoolName: identityPoolName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListIdentities = {
   type t
   @ocaml.doc("<p>Input to the ListIdentities action.</p>")
@@ -949,9 +998,15 @@ module ListIdentities = {
   @module("@aws-sdk/client-cognito-identity") @new
   external new: request => t = "ListIdentitiesCommand"
   let make = (~maxResults, ~identityPoolId, ~hideDisabled=?, ~nextToken=?, ()) =>
-    new({hideDisabled, nextToken, maxResults, identityPoolId})
+    new({
+      hideDisabled: hideDisabled,
+      nextToken: nextToken,
+      maxResults: maxResults,
+      identityPoolId: identityPoolId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module SetIdentityPoolRoles = {
   type t
   @ocaml.doc("<p>Input to the <code>SetIdentityPoolRoles</code> action.</p>")
@@ -974,9 +1029,10 @@ module SetIdentityPoolRoles = {
   @module("@aws-sdk/client-cognito-identity") @new
   external new: request => t = "SetIdentityPoolRolesCommand"
   let make = (~roles, ~identityPoolId, ~roleMappings=?, ()) =>
-    new({roleMappings, roles, identityPoolId})
+    new({roleMappings: roleMappings, roles: roles, identityPoolId: identityPoolId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module GetIdentityPoolRoles = {
   type t
   @ocaml.doc("<p>Input to the <code>GetIdentityPoolRoles</code> action.</p>")

@@ -608,12 +608,12 @@ module UpdateTimelineEvent = {
     (),
   ) =>
     new({
-      eventData,
-      eventType,
-      eventTime,
-      eventId,
-      incidentRecordArn,
-      clientToken,
+      eventData: eventData,
+      eventType: eventType,
+      eventTime: eventTime,
+      eventId: eventId,
+      incidentRecordArn: incidentRecordArn,
+      clientToken: clientToken,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
@@ -634,7 +634,7 @@ module UpdateDeletionProtection = {
   @module("@aws-sdk/client-ssm-incidents") @new
   external new: request => t = "UpdateDeletionProtectionCommand"
   let make = (~deletionProtected, ~arn, ~clientToken=?, ()) =>
-    new({clientToken, deletionProtected, arn})
+    new({clientToken: clientToken, deletionProtected: deletionProtected, arn: arn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
@@ -649,7 +649,7 @@ module PutResourcePolicy = {
   type response = {@ocaml.doc("<p>The ID of the resource policy.</p>") policyId: policyId}
   @module("@aws-sdk/client-ssm-incidents") @new
   external new: request => t = "PutResourcePolicyCommand"
-  let make = (~policy, ~resourceArn, ()) => new({policy, resourceArn})
+  let make = (~policy, ~resourceArn, ()) => new({policy: policy, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -666,7 +666,8 @@ module DeleteTimelineEvent = {
 
   @module("@aws-sdk/client-ssm-incidents") @new
   external new: request => t = "DeleteTimelineEventCommand"
-  let make = (~eventId, ~incidentRecordArn, ()) => new({eventId, incidentRecordArn})
+  let make = (~eventId, ~incidentRecordArn, ()) =>
+    new({eventId: eventId, incidentRecordArn: incidentRecordArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
@@ -694,7 +695,7 @@ module DeleteResourcePolicy = {
 
   @module("@aws-sdk/client-ssm-incidents") @new
   external new: request => t = "DeleteResourcePolicyCommand"
-  let make = (~policyId, ~resourceArn, ()) => new({policyId, resourceArn})
+  let make = (~policyId, ~resourceArn, ()) => new({policyId: policyId, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
@@ -749,11 +750,11 @@ module CreateTimelineEvent = {
   external new: request => t = "CreateTimelineEventCommand"
   let make = (~eventData, ~eventType, ~eventTime, ~incidentRecordArn, ~clientToken, ()) =>
     new({
-      eventData,
-      eventType,
-      eventTime,
-      incidentRecordArn,
-      clientToken,
+      eventData: eventData,
+      eventType: eventType,
+      eventTime: eventTime,
+      incidentRecordArn: incidentRecordArn,
+      clientToken: clientToken,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
@@ -770,7 +771,7 @@ module UntagResource = {
   }
 
   @module("@aws-sdk/client-ssm-incidents") @new external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys, resourceArn})
+  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
@@ -785,7 +786,7 @@ module TagResource = {
   }
 
   @module("@aws-sdk/client-ssm-incidents") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceArn, ()) => new({tags, resourceArn})
+  let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
@@ -817,7 +818,8 @@ module ListReplicationSets = {
   }
   @module("@aws-sdk/client-ssm-incidents") @new
   external new: request => t = "ListReplicationSetsCommand"
-  let make = (~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults})
+  let make = (~nextToken=?, ~maxResults=?, ()) =>
+    new({nextToken: nextToken, maxResults: maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -836,7 +838,8 @@ module GetTimelineEvent = {
   type response = {@ocaml.doc("<p>Details about the timeline event.</p>") event: timelineEvent}
   @module("@aws-sdk/client-ssm-incidents") @new
   external new: request => t = "GetTimelineEventCommand"
-  let make = (~eventId, ~incidentRecordArn, ()) => new({eventId, incidentRecordArn})
+  let make = (~eventId, ~incidentRecordArn, ()) =>
+    new({eventId: eventId, incidentRecordArn: incidentRecordArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -914,14 +917,14 @@ module UpdateIncidentRecord = {
     (),
   ) =>
     new({
-      notificationTargets,
-      chatChannel,
-      status,
-      impact,
-      summary,
-      title,
-      arn,
-      clientToken,
+      notificationTargets: notificationTargets,
+      chatChannel: chatChannel,
+      status: status,
+      impact: impact,
+      summary: summary,
+      title: title,
+      arn: arn,
+      clientToken: clientToken,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
@@ -942,7 +945,8 @@ module ListResponsePlans = {
   }
   @module("@aws-sdk/client-ssm-incidents") @new
   external new: request => t = "ListResponsePlansCommand"
-  let make = (~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults})
+  let make = (~nextToken=?, ~maxResults=?, ()) =>
+    new({nextToken: nextToken, maxResults: maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -967,7 +971,7 @@ module GetResourcePolicies = {
   @module("@aws-sdk/client-ssm-incidents") @new
   external new: request => t = "GetResourcePoliciesCommand"
   let make = (~resourceArn, ~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken, maxResults, resourceArn})
+    new({nextToken: nextToken, maxResults: maxResults, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -987,7 +991,7 @@ module CreateReplicationSet = {
   }
   @module("@aws-sdk/client-ssm-incidents") @new
   external new: request => t = "CreateReplicationSetCommand"
-  let make = (~regions, ~clientToken=?, ()) => new({clientToken, regions})
+  let make = (~regions, ~clientToken=?, ()) => new({clientToken: clientToken, regions: regions})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -1005,7 +1009,8 @@ module UpdateReplicationSet = {
 
   @module("@aws-sdk/client-ssm-incidents") @new
   external new: request => t = "UpdateReplicationSetCommand"
-  let make = (~actions, ~arn, ~clientToken=?, ()) => new({clientToken, actions, arn})
+  let make = (~actions, ~arn, ~clientToken=?, ()) =>
+    new({clientToken: clientToken, actions: actions, arn: arn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
@@ -1118,17 +1123,17 @@ module UpdateResponsePlan = {
     (),
   ) =>
     new({
-      actions,
-      engagements,
-      chatChannel,
-      incidentTemplateNotificationTargets,
-      incidentTemplateDedupeString,
-      incidentTemplateSummary,
-      incidentTemplateImpact,
-      incidentTemplateTitle,
-      displayName,
-      arn,
-      clientToken,
+      actions: actions,
+      engagements: engagements,
+      chatChannel: chatChannel,
+      incidentTemplateNotificationTargets: incidentTemplateNotificationTargets,
+      incidentTemplateDedupeString: incidentTemplateDedupeString,
+      incidentTemplateSummary: incidentTemplateSummary,
+      incidentTemplateImpact: incidentTemplateImpact,
+      incidentTemplateTitle: incidentTemplateTitle,
+      displayName: displayName,
+      arn: arn,
+      clientToken: clientToken,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
@@ -1151,9 +1156,9 @@ module UpdateRelatedItems = {
   external new: request => t = "UpdateRelatedItemsCommand"
   let make = (~relatedItemsUpdate, ~incidentRecordArn, ~clientToken=?, ()) =>
     new({
-      relatedItemsUpdate,
-      incidentRecordArn,
-      clientToken,
+      relatedItemsUpdate: relatedItemsUpdate,
+      incidentRecordArn: incidentRecordArn,
+      clientToken: clientToken,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
@@ -1224,12 +1229,12 @@ module StartIncident = {
     (),
   ) =>
     new({
-      relatedItems,
-      triggerDetails,
-      impact,
-      title,
-      responsePlanArn,
-      clientToken,
+      relatedItems: relatedItems,
+      triggerDetails: triggerDetails,
+      impact: impact,
+      title: title,
+      responsePlanArn: responsePlanArn,
+      clientToken: clientToken,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
@@ -1280,12 +1285,12 @@ module ListTimelineEvents = {
     (),
   ) =>
     new({
-      nextToken,
-      maxResults,
-      sortOrder,
-      sortBy,
-      filters,
-      incidentRecordArn,
+      nextToken: nextToken,
+      maxResults: maxResults,
+      sortOrder: sortOrder,
+      sortBy: sortBy,
+      filters: filters,
+      incidentRecordArn: incidentRecordArn,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
@@ -1310,7 +1315,7 @@ module ListRelatedItems = {
   @module("@aws-sdk/client-ssm-incidents") @new
   external new: request => t = "ListRelatedItemsCommand"
   let make = (~incidentRecordArn, ~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken, maxResults, incidentRecordArn})
+    new({nextToken: nextToken, maxResults: maxResults, incidentRecordArn: incidentRecordArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -1354,7 +1359,8 @@ module ListIncidentRecords = {
   }
   @module("@aws-sdk/client-ssm-incidents") @new
   external new: request => t = "ListIncidentRecordsCommand"
-  let make = (~nextToken=?, ~maxResults=?, ~filters=?, ()) => new({nextToken, maxResults, filters})
+  let make = (~nextToken=?, ~maxResults=?, ~filters=?, ()) =>
+    new({nextToken: nextToken, maxResults: maxResults, filters: filters})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -1430,14 +1436,14 @@ module CreateResponsePlan = {
     (),
   ) =>
     new({
-      tags,
-      actions,
-      engagements,
-      chatChannel,
-      incidentTemplate,
-      displayName,
-      name,
-      clientToken,
+      tags: tags,
+      actions: actions,
+      engagements: engagements,
+      chatChannel: chatChannel,
+      incidentTemplate: incidentTemplate,
+      displayName: displayName,
+      name: name,
+      clientToken: clientToken,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

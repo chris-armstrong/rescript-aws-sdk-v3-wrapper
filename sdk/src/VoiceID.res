@@ -554,9 +554,10 @@ module DeleteSpeaker = {
   }
   type response = {.}
   @module("@aws-sdk/client-voiceid") @new external new: request => t = "DeleteSpeakerCommand"
-  let make = (~speakerId, ~domainId, ()) => new({speakerId, domainId})
+  let make = (~speakerId, ~domainId, ()) => new({speakerId: speakerId, domainId: domainId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteFraudster = {
   type t
   type request = {
@@ -567,9 +568,10 @@ module DeleteFraudster = {
   }
   type response = {.}
   @module("@aws-sdk/client-voiceid") @new external new: request => t = "DeleteFraudsterCommand"
-  let make = (~fraudsterId, ~domainId, ()) => new({fraudsterId, domainId})
+  let make = (~fraudsterId, ~domainId, ()) => new({fraudsterId: fraudsterId, domainId: domainId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module DeleteDomain = {
   type t
   type request = {
@@ -581,6 +583,7 @@ module DeleteDomain = {
   let make = (~domainId, ()) => new({domainId: domainId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UntagResource = {
   type t
   type request = {
@@ -595,9 +598,10 @@ module UntagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-voiceid") @new external new: request => t = "UntagResourceCommand"
-  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys, resourceArn})
+  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module OptOutSpeaker = {
   type t
   type request = {
@@ -611,9 +615,10 @@ module OptOutSpeaker = {
     speaker: option<speaker>,
   }
   @module("@aws-sdk/client-voiceid") @new external new: request => t = "OptOutSpeakerCommand"
-  let make = (~speakerId, ~domainId, ()) => new({speakerId, domainId})
+  let make = (~speakerId, ~domainId, ()) => new({speakerId: speakerId, domainId: domainId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeSpeaker = {
   type t
   type request = {
@@ -627,9 +632,10 @@ module DescribeSpeaker = {
     speaker: option<speaker>,
   }
   @module("@aws-sdk/client-voiceid") @new external new: request => t = "DescribeSpeakerCommand"
-  let make = (~speakerId, ~domainId, ()) => new({speakerId, domainId})
+  let make = (~speakerId, ~domainId, ()) => new({speakerId: speakerId, domainId: domainId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeFraudster = {
   type t
   type request = {
@@ -643,9 +649,10 @@ module DescribeFraudster = {
     fraudster: option<fraudster>,
   }
   @module("@aws-sdk/client-voiceid") @new external new: request => t = "DescribeFraudsterCommand"
-  let make = (~fraudsterId, ~domainId, ()) => new({fraudsterId, domainId})
+  let make = (~fraudsterId, ~domainId, ()) => new({fraudsterId: fraudsterId, domainId: domainId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateDomain = {
   type t
   type request = {
@@ -665,9 +672,15 @@ module UpdateDomain = {
   }
   @module("@aws-sdk/client-voiceid") @new external new: request => t = "UpdateDomainCommand"
   let make = (~serverSideEncryptionConfiguration, ~name, ~domainId, ~description=?, ()) =>
-    new({serverSideEncryptionConfiguration, description, name, domainId})
+    new({
+      serverSideEncryptionConfiguration: serverSideEncryptionConfiguration,
+      description: description,
+      name: name,
+      domainId: domainId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module TagResource = {
   type t
   type request = {
@@ -679,9 +692,10 @@ module TagResource = {
   }
   type response = {.}
   @module("@aws-sdk/client-voiceid") @new external new: request => t = "TagResourceCommand"
-  let make = (~tags, ~resourceArn, ()) => new({tags, resourceArn})
+  let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module StartFraudsterRegistrationJob = {
   type t
   type request = {
@@ -731,16 +745,17 @@ module StartFraudsterRegistrationJob = {
     (),
   ) =>
     new({
-      outputDataConfig,
-      inputDataConfig,
-      registrationConfig,
-      dataAccessRoleArn,
-      domainId,
-      jobName,
-      clientToken,
+      outputDataConfig: outputDataConfig,
+      inputDataConfig: inputDataConfig,
+      registrationConfig: registrationConfig,
+      dataAccessRoleArn: dataAccessRoleArn,
+      domainId: domainId,
+      jobName: jobName,
+      clientToken: clientToken,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListTagsForResource = {
   type t
   type request = {
@@ -758,6 +773,7 @@ module ListTagsForResource = {
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListSpeakers = {
   type t
   type request = {
@@ -787,9 +803,11 @@ module ListSpeakers = {
     speakerSummaries: option<speakerSummaries>,
   }
   @module("@aws-sdk/client-voiceid") @new external new: request => t = "ListSpeakersCommand"
-  let make = (~domainId, ~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults, domainId})
+  let make = (~domainId, ~nextToken=?, ~maxResults=?, ()) =>
+    new({nextToken: nextToken, maxResults: maxResults, domainId: domainId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeFraudsterRegistrationJob = {
   type t
   type request = {
@@ -806,9 +824,10 @@ module DescribeFraudsterRegistrationJob = {
   }
   @module("@aws-sdk/client-voiceid") @new
   external new: request => t = "DescribeFraudsterRegistrationJobCommand"
-  let make = (~jobId, ~domainId, ()) => new({jobId, domainId})
+  let make = (~jobId, ~domainId, ()) => new({jobId: jobId, domainId: domainId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeDomain = {
   type t
   type request = {
@@ -823,6 +842,7 @@ module DescribeDomain = {
   let make = (~domainId, ()) => new({domainId: domainId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateDomain = {
   type t
   type request = {
@@ -854,9 +874,17 @@ module CreateDomain = {
     ~clientToken=?,
     ~description=?,
     (),
-  ) => new({tags, clientToken, serverSideEncryptionConfiguration, description, name})
+  ) =>
+    new({
+      tags: tags,
+      clientToken: clientToken,
+      serverSideEncryptionConfiguration: serverSideEncryptionConfiguration,
+      description: description,
+      name: name,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module StartSpeakerEnrollmentJob = {
   type t
   type request = {
@@ -906,16 +934,17 @@ module StartSpeakerEnrollmentJob = {
     (),
   ) =>
     new({
-      outputDataConfig,
-      inputDataConfig,
-      enrollmentConfig,
-      dataAccessRoleArn,
-      domainId,
-      jobName,
-      clientToken,
+      outputDataConfig: outputDataConfig,
+      inputDataConfig: inputDataConfig,
+      enrollmentConfig: enrollmentConfig,
+      dataAccessRoleArn: dataAccessRoleArn,
+      domainId: domainId,
+      jobName: jobName,
+      clientToken: clientToken,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListSpeakerEnrollmentJobs = {
   type t
   type request = {
@@ -950,9 +979,10 @@ module ListSpeakerEnrollmentJobs = {
   @module("@aws-sdk/client-voiceid") @new
   external new: request => t = "ListSpeakerEnrollmentJobsCommand"
   let make = (~domainId, ~nextToken=?, ~maxResults=?, ~jobStatus=?, ()) =>
-    new({nextToken, maxResults, jobStatus, domainId})
+    new({nextToken: nextToken, maxResults: maxResults, jobStatus: jobStatus, domainId: domainId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListFraudsterRegistrationJobs = {
   type t
   type request = {
@@ -987,9 +1017,10 @@ module ListFraudsterRegistrationJobs = {
   @module("@aws-sdk/client-voiceid") @new
   external new: request => t = "ListFraudsterRegistrationJobsCommand"
   let make = (~domainId, ~nextToken=?, ~maxResults=?, ~jobStatus=?, ()) =>
-    new({nextToken, maxResults, jobStatus, domainId})
+    new({nextToken: nextToken, maxResults: maxResults, jobStatus: jobStatus, domainId: domainId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListDomains = {
   type t
   type request = {
@@ -1019,9 +1050,11 @@ module ListDomains = {
     domainSummaries: option<domainSummaries>,
   }
   @module("@aws-sdk/client-voiceid") @new external new: request => t = "ListDomainsCommand"
-  let make = (~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults})
+  let make = (~nextToken=?, ~maxResults=?, ()) =>
+    new({nextToken: nextToken, maxResults: maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module EvaluateSession = {
   type t
   type request = {
@@ -1059,9 +1092,11 @@ module EvaluateSession = {
     domainId: option<domainId>,
   }
   @module("@aws-sdk/client-voiceid") @new external new: request => t = "EvaluateSessionCommand"
-  let make = (~sessionNameOrId, ~domainId, ()) => new({sessionNameOrId, domainId})
+  let make = (~sessionNameOrId, ~domainId, ()) =>
+    new({sessionNameOrId: sessionNameOrId, domainId: domainId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeSpeakerEnrollmentJob = {
   type t
   type request = {
@@ -1078,6 +1113,6 @@ module DescribeSpeakerEnrollmentJob = {
   }
   @module("@aws-sdk/client-voiceid") @new
   external new: request => t = "DescribeSpeakerEnrollmentJobCommand"
-  let make = (~jobId, ~domainId, ()) => new({jobId, domainId})
+  let make = (~jobId, ~domainId, ()) => new({jobId: jobId, domainId: domainId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

@@ -1815,9 +1815,14 @@ module PurchaseReservedElasticsearchInstanceOffering = {
   @module("@aws-sdk/client-es") @new
   external new: request => t = "PurchaseReservedElasticsearchInstanceOfferingCommand"
   let make = (~reservationName, ~reservedElasticsearchInstanceOfferingId, ~instanceCount=?, ()) =>
-    new({instanceCount, reservationName, reservedElasticsearchInstanceOfferingId})
+    new({
+      instanceCount: instanceCount,
+      reservationName: reservationName,
+      reservedElasticsearchInstanceOfferingId: reservedElasticsearchInstanceOfferingId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetUpgradeStatus = {
   type t
   @ocaml.doc("<p>
@@ -1868,6 +1873,7 @@ module GetUpgradeStatus = {
   let make = (~domainName, ()) => new({domainName: domainName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteElasticsearchServiceRole = {
   type t
   type request = {.}
@@ -1877,6 +1883,7 @@ module DeleteElasticsearchServiceRole = {
   let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module UpgradeElasticsearchDomain = {
   type t
   @ocaml.doc("<p>
@@ -1921,9 +1928,10 @@ module UpgradeElasticsearchDomain = {
   @module("@aws-sdk/client-es") @new
   external new: request => t = "UpgradeElasticsearchDomainCommand"
   let make = (~targetVersion, ~domainName, ~performCheckOnly=?, ()) =>
-    new({performCheckOnly, targetVersion, domainName})
+    new({performCheckOnly: performCheckOnly, targetVersion: targetVersion, domainName: domainName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module StartElasticsearchServiceSoftwareUpdate = {
   type t
   @ocaml.doc(
@@ -1949,6 +1957,7 @@ module StartElasticsearchServiceSoftwareUpdate = {
   let make = (~domainName, ()) => new({domainName: domainName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module RemoveTags = {
   type t
   @ocaml.doc(
@@ -1968,9 +1977,10 @@ module RemoveTags = {
   }
   type response = {.}
   @module("@aws-sdk/client-es") @new external new: request => t = "RemoveTagsCommand"
-  let make = (~tagKeys, ~arn, ()) => new({tagKeys, arn})
+  let make = (~tagKeys, ~arn, ()) => new({tagKeys: tagKeys, arn: arn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module ListElasticsearchVersions = {
   type t
   @ocaml.doc("<p>
@@ -2017,9 +2027,11 @@ module ListElasticsearchVersions = {
     @as("ElasticsearchVersions") elasticsearchVersions: option<elasticsearchVersionList>,
   }
   @module("@aws-sdk/client-es") @new external new: request => t = "ListElasticsearchVersionsCommand"
-  let make = (~nextToken=?, ~maxResults=?, ()) => new({nextToken, maxResults})
+  let make = (~nextToken=?, ~maxResults=?, ()) =>
+    new({nextToken: nextToken, maxResults: maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListElasticsearchInstanceTypes = {
   type t
   @ocaml.doc("<p>
@@ -2079,9 +2091,15 @@ module ListElasticsearchInstanceTypes = {
   @module("@aws-sdk/client-es") @new
   external new: request => t = "ListElasticsearchInstanceTypesCommand"
   let make = (~elasticsearchVersion, ~nextToken=?, ~maxResults=?, ~domainName=?, ()) =>
-    new({nextToken, maxResults, domainName, elasticsearchVersion})
+    new({
+      nextToken: nextToken,
+      maxResults: maxResults,
+      domainName: domainName,
+      elasticsearchVersion: elasticsearchVersion,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateOutboundCrossClusterSearchConnection = {
   type t
   @ocaml.doc(
@@ -2137,9 +2155,14 @@ module CreateOutboundCrossClusterSearchConnection = {
   @module("@aws-sdk/client-es") @new
   external new: request => t = "CreateOutboundCrossClusterSearchConnectionCommand"
   let make = (~connectionAlias, ~destinationDomainInfo, ~sourceDomainInfo, ()) =>
-    new({connectionAlias, destinationDomainInfo, sourceDomainInfo})
+    new({
+      connectionAlias: connectionAlias,
+      destinationDomainInfo: destinationDomainInfo,
+      sourceDomainInfo: sourceDomainInfo,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CancelElasticsearchServiceSoftwareUpdate = {
   type t
   @ocaml.doc(
@@ -2165,6 +2188,7 @@ module CancelElasticsearchServiceSoftwareUpdate = {
   let make = (~domainName, ()) => new({domainName: domainName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdatePackage = {
   type t
   @ocaml.doc("<p>
@@ -2199,9 +2223,15 @@ module UpdatePackage = {
   }
   @module("@aws-sdk/client-es") @new external new: request => t = "UpdatePackageCommand"
   let make = (~packageSource, ~packageID, ~commitMessage=?, ~packageDescription=?, ()) =>
-    new({commitMessage, packageDescription, packageSource, packageID})
+    new({
+      commitMessage: commitMessage,
+      packageDescription: packageDescription,
+      packageSource: packageSource,
+      packageID: packageID,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module RejectInboundCrossClusterSearchConnection = {
   type t
   @ocaml.doc(
@@ -2228,6 +2258,7 @@ module RejectInboundCrossClusterSearchConnection = {
     new({crossClusterSearchConnectionId: crossClusterSearchConnectionId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListTags = {
   type t
   @ocaml.doc(
@@ -2252,6 +2283,7 @@ module ListTags = {
   let make = (~arn, ()) => new({arn: arn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListDomainNames = {
   type t
   @ocaml.doc(
@@ -2275,6 +2307,7 @@ module ListDomainNames = {
   let make = (~engineType=?, ()) => new({engineType: engineType})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetPackageVersionHistory = {
   type t
   @ocaml.doc("<p>
@@ -2311,9 +2344,10 @@ module GetPackageVersionHistory = {
   }
   @module("@aws-sdk/client-es") @new external new: request => t = "GetPackageVersionHistoryCommand"
   let make = (~packageID, ~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken, maxResults, packageID})
+    new({nextToken: nextToken, maxResults: maxResults, packageID: packageID})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DissociatePackage = {
   type t
   @ocaml.doc("<p>
@@ -2345,9 +2379,10 @@ module DissociatePackage = {
     domainPackageDetails: option<domainPackageDetails>,
   }
   @module("@aws-sdk/client-es") @new external new: request => t = "DissociatePackageCommand"
-  let make = (~domainName, ~packageID, ()) => new({domainName, packageID})
+  let make = (~domainName, ~packageID, ()) => new({domainName: domainName, packageID: packageID})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeletePackage = {
   type t
   @ocaml.doc("<p>
@@ -2379,6 +2414,7 @@ module DeletePackage = {
   let make = (~packageID, ()) => new({packageID: packageID})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteOutboundCrossClusterSearchConnection = {
   type t
   @ocaml.doc(
@@ -2405,6 +2441,7 @@ module DeleteOutboundCrossClusterSearchConnection = {
     new({crossClusterSearchConnectionId: crossClusterSearchConnectionId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteInboundCrossClusterSearchConnection = {
   type t
   @ocaml.doc(
@@ -2431,6 +2468,7 @@ module DeleteInboundCrossClusterSearchConnection = {
     new({crossClusterSearchConnectionId: crossClusterSearchConnectionId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreatePackage = {
   type t
   @ocaml.doc("<p>
@@ -2467,9 +2505,15 @@ module CreatePackage = {
   }
   @module("@aws-sdk/client-es") @new external new: request => t = "CreatePackageCommand"
   let make = (~packageSource, ~packageType, ~packageName, ~packageDescription=?, ()) =>
-    new({packageSource, packageDescription, packageType, packageName})
+    new({
+      packageSource: packageSource,
+      packageDescription: packageDescription,
+      packageType: packageType,
+      packageName: packageName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module AssociatePackage = {
   type t
   @ocaml.doc("<p>
@@ -2501,9 +2545,10 @@ module AssociatePackage = {
     domainPackageDetails: option<domainPackageDetails>,
   }
   @module("@aws-sdk/client-es") @new external new: request => t = "AssociatePackageCommand"
-  let make = (~domainName, ~packageID, ()) => new({domainName, packageID})
+  let make = (~domainName, ~packageID, ()) => new({domainName: domainName, packageID: packageID})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module AddTags = {
   type t
   @ocaml.doc(
@@ -2521,9 +2566,10 @@ module AddTags = {
   }
   type response = {.}
   @module("@aws-sdk/client-es") @new external new: request => t = "AddTagsCommand"
-  let make = (~tagList_, ~arn, ()) => new({tagList_, arn})
+  let make = (~tagList_, ~arn, ()) => new({tagList_: tagList_, arn: arn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
+
 module AcceptInboundCrossClusterSearchConnection = {
   type t
   @ocaml.doc(
@@ -2550,6 +2596,7 @@ module AcceptInboundCrossClusterSearchConnection = {
     new({crossClusterSearchConnectionId: crossClusterSearchConnectionId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListPackagesForDomain = {
   type t
   @ocaml.doc("<p>
@@ -2590,9 +2637,10 @@ module ListPackagesForDomain = {
   }
   @module("@aws-sdk/client-es") @new external new: request => t = "ListPackagesForDomainCommand"
   let make = (~domainName, ~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken, maxResults, domainName})
+    new({nextToken: nextToken, maxResults: maxResults, domainName: domainName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module ListDomainsForPackage = {
   type t
   @ocaml.doc("<p>
@@ -2628,9 +2676,10 @@ module ListDomainsForPackage = {
   }
   @module("@aws-sdk/client-es") @new external new: request => t = "ListDomainsForPackageCommand"
   let make = (~packageID, ~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken, maxResults, packageID})
+    new({nextToken: nextToken, maxResults: maxResults, packageID: packageID})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetCompatibleElasticsearchVersions = {
   type t
   @ocaml.doc("<p>
@@ -2664,6 +2713,7 @@ module GetCompatibleElasticsearchVersions = {
   let make = (~domainName=?, ()) => new({domainName: domainName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribePackages = {
   type t
   @ocaml.doc("<p>
@@ -2700,9 +2750,11 @@ module DescribePackages = {
     packageDetailsList: option<packageDetailsList>,
   }
   @module("@aws-sdk/client-es") @new external new: request => t = "DescribePackagesCommand"
-  let make = (~nextToken=?, ~maxResults=?, ~filters=?, ()) => new({nextToken, maxResults, filters})
+  let make = (~nextToken=?, ~maxResults=?, ~filters=?, ()) =>
+    new({nextToken: nextToken, maxResults: maxResults, filters: filters})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeOutboundCrossClusterSearchConnections = {
   type t
   @ocaml.doc(
@@ -2749,9 +2801,11 @@ module DescribeOutboundCrossClusterSearchConnections = {
   }
   @module("@aws-sdk/client-es") @new
   external new: request => t = "DescribeOutboundCrossClusterSearchConnectionsCommand"
-  let make = (~nextToken=?, ~maxResults=?, ~filters=?, ()) => new({nextToken, maxResults, filters})
+  let make = (~nextToken=?, ~maxResults=?, ~filters=?, ()) =>
+    new({nextToken: nextToken, maxResults: maxResults, filters: filters})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeInboundCrossClusterSearchConnections = {
   type t
   @ocaml.doc(
@@ -2798,9 +2852,11 @@ module DescribeInboundCrossClusterSearchConnections = {
   }
   @module("@aws-sdk/client-es") @new
   external new: request => t = "DescribeInboundCrossClusterSearchConnectionsCommand"
-  let make = (~nextToken=?, ~maxResults=?, ~filters=?, ()) => new({nextToken, maxResults, filters})
+  let make = (~nextToken=?, ~maxResults=?, ~filters=?, ()) =>
+    new({nextToken: nextToken, maxResults: maxResults, filters: filters})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeDomainChangeProgress = {
   type t
   @ocaml.doc("<p>Container for the parameters to the <code>DescribeDomainChangeProgress</code> operation. Specifies the
@@ -2827,9 +2883,10 @@ module DescribeDomainChangeProgress = {
   }
   @module("@aws-sdk/client-es") @new
   external new: request => t = "DescribeDomainChangeProgressCommand"
-  let make = (~domainName, ~changeId=?, ()) => new({changeId, domainName})
+  let make = (~domainName, ~changeId=?, ()) => new({changeId: changeId, domainName: domainName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeReservedElasticsearchInstances = {
   type t
   @ocaml.doc(
@@ -2865,9 +2922,14 @@ module DescribeReservedElasticsearchInstances = {
   @module("@aws-sdk/client-es") @new
   external new: request => t = "DescribeReservedElasticsearchInstancesCommand"
   let make = (~nextToken=?, ~maxResults=?, ~reservedElasticsearchInstanceId=?, ()) =>
-    new({nextToken, maxResults, reservedElasticsearchInstanceId})
+    new({
+      nextToken: nextToken,
+      maxResults: maxResults,
+      reservedElasticsearchInstanceId: reservedElasticsearchInstanceId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeReservedElasticsearchInstanceOfferings = {
   type t
   @ocaml.doc(
@@ -2903,9 +2965,14 @@ module DescribeReservedElasticsearchInstanceOfferings = {
   @module("@aws-sdk/client-es") @new
   external new: request => t = "DescribeReservedElasticsearchInstanceOfferingsCommand"
   let make = (~nextToken=?, ~maxResults=?, ~reservedElasticsearchInstanceOfferingId=?, ()) =>
-    new({nextToken, maxResults, reservedElasticsearchInstanceOfferingId})
+    new({
+      nextToken: nextToken,
+      maxResults: maxResults,
+      reservedElasticsearchInstanceOfferingId: reservedElasticsearchInstanceOfferingId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeElasticsearchDomain = {
   type t
   @ocaml.doc(
@@ -2928,6 +2995,7 @@ module DescribeElasticsearchDomain = {
   let make = (~domainName, ()) => new({domainName: domainName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeDomainAutoTunes = {
   type t
   @ocaml.doc(
@@ -2963,9 +3031,10 @@ module DescribeDomainAutoTunes = {
   }
   @module("@aws-sdk/client-es") @new external new: request => t = "DescribeDomainAutoTunesCommand"
   let make = (~domainName, ~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken, maxResults, domainName})
+    new({nextToken: nextToken, maxResults: maxResults, domainName: domainName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DeleteElasticsearchDomain = {
   type t
   @ocaml.doc(
@@ -2987,6 +3056,7 @@ module DeleteElasticsearchDomain = {
   let make = (~domainName, ()) => new({domainName: domainName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module CreateElasticsearchDomain = {
   type t
   type request = {
@@ -3080,25 +3150,26 @@ module CreateElasticsearchDomain = {
     (),
   ) =>
     new({
-      tagList_,
-      autoTuneOptions,
-      advancedSecurityOptions,
-      domainEndpointOptions,
-      logPublishingOptions,
-      advancedOptions,
-      nodeToNodeEncryptionOptions,
-      encryptionAtRestOptions,
-      cognitoOptions,
-      vpcoptions,
-      snapshotOptions,
-      accessPolicies,
-      ebsoptions,
-      elasticsearchClusterConfig,
-      elasticsearchVersion,
-      domainName,
+      tagList_: tagList_,
+      autoTuneOptions: autoTuneOptions,
+      advancedSecurityOptions: advancedSecurityOptions,
+      domainEndpointOptions: domainEndpointOptions,
+      logPublishingOptions: logPublishingOptions,
+      advancedOptions: advancedOptions,
+      nodeToNodeEncryptionOptions: nodeToNodeEncryptionOptions,
+      encryptionAtRestOptions: encryptionAtRestOptions,
+      cognitoOptions: cognitoOptions,
+      vpcoptions: vpcoptions,
+      snapshotOptions: snapshotOptions,
+      accessPolicies: accessPolicies,
+      ebsoptions: ebsoptions,
+      elasticsearchClusterConfig: elasticsearchClusterConfig,
+      elasticsearchVersion: elasticsearchVersion,
+      domainName: domainName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module GetUpgradeHistory = {
   type t
   @ocaml.doc("<p>
@@ -3142,9 +3213,10 @@ module GetUpgradeHistory = {
   }
   @module("@aws-sdk/client-es") @new external new: request => t = "GetUpgradeHistoryCommand"
   let make = (~domainName, ~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken, maxResults, domainName})
+    new({nextToken: nextToken, maxResults: maxResults, domainName: domainName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeElasticsearchDomains = {
   type t
   @ocaml.doc(
@@ -3170,6 +3242,7 @@ module DescribeElasticsearchDomains = {
   let make = (~domainNames, ()) => new({domainNames: domainNames})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module UpdateElasticsearchDomainConfig = {
   type t
   @ocaml.doc(
@@ -3263,24 +3336,25 @@ module UpdateElasticsearchDomainConfig = {
     (),
   ) =>
     new({
-      dryRun,
-      autoTuneOptions,
-      encryptionAtRestOptions,
-      nodeToNodeEncryptionOptions,
-      advancedSecurityOptions,
-      domainEndpointOptions,
-      logPublishingOptions,
-      accessPolicies,
-      advancedOptions,
-      cognitoOptions,
-      vpcoptions,
-      snapshotOptions,
-      ebsoptions,
-      elasticsearchClusterConfig,
-      domainName,
+      dryRun: dryRun,
+      autoTuneOptions: autoTuneOptions,
+      encryptionAtRestOptions: encryptionAtRestOptions,
+      nodeToNodeEncryptionOptions: nodeToNodeEncryptionOptions,
+      advancedSecurityOptions: advancedSecurityOptions,
+      domainEndpointOptions: domainEndpointOptions,
+      logPublishingOptions: logPublishingOptions,
+      accessPolicies: accessPolicies,
+      advancedOptions: advancedOptions,
+      cognitoOptions: cognitoOptions,
+      vpcoptions: vpcoptions,
+      snapshotOptions: snapshotOptions,
+      ebsoptions: ebsoptions,
+      elasticsearchClusterConfig: elasticsearchClusterConfig,
+      domainName: domainName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeElasticsearchDomainConfig = {
   type t
   @ocaml.doc(
@@ -3306,6 +3380,7 @@ module DescribeElasticsearchDomainConfig = {
   let make = (~domainName, ()) => new({domainName: domainName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
+
 module DescribeElasticsearchInstanceTypeLimits = {
   type t
   @ocaml.doc("<p>
@@ -3357,6 +3432,10 @@ module DescribeElasticsearchInstanceTypeLimits = {
   @module("@aws-sdk/client-es") @new
   external new: request => t = "DescribeElasticsearchInstanceTypeLimitsCommand"
   let make = (~elasticsearchVersion, ~instanceType, ~domainName=?, ()) =>
-    new({elasticsearchVersion, instanceType, domainName})
+    new({
+      elasticsearchVersion: elasticsearchVersion,
+      instanceType: instanceType,
+      domainName: domainName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
