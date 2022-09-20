@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "scripts": {
     "generate": "node generator/src/AwsGen.bs.js && cd sdk && yarn format",
-    "regenerate": "cd generator && yarn build && cd .. && yarn generate && cd sdk && yarn build && cd .."
+    "regenerate": "cd generator && yarn build && cd .. && yarn generate && cd sdk && yarn build && cd ..",
+    "format": "cd generator && yarn format && cd ../sdk && yarn format"
   },
   "keywords": [
     "rescript",

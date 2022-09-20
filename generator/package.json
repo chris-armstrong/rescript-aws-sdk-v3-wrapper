@@ -3,7 +3,8 @@
   "private": true,
   "version": "0.0.1",
   "scripts": {
-    "build": "rescript build -with-deps"
+    "build": "rescript build -with-deps",
+    "format": "rescript format -all"
   },
   "keywords": [
     "rescript",
