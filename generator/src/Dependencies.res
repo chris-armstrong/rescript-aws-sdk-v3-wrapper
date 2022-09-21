@@ -129,6 +129,7 @@ let rec findCycle = (chain: array<shapeWithTarget>, remaining: array<shapeWithTa
         Array.length(cycles) > 0 ? Some(Array.concatMany(cycles)) : None
       }
     }
+
   | None => None
   }
 }

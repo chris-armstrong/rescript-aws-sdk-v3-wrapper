@@ -3,7 +3,8 @@
   "private": true,
   "version": "0.0.1",
   "scripts": {
-    "build": "rescript build"
+    "build": "rescript build -with-deps",
+    "format": "rescript format -all"
   },
   "keywords": [
     "rescript",
@@ -14,7 +15,7 @@
   "license": "MIT",
   "devDependencies": {
     "@ryyppy/rescript-promise": "^2.1.0",
-    "rescript": "*",
-    "rescript-nodejs": "^14.2.0"
+    "rescript": "next",
+    "rescript-nodejs": "^14.3.1"
   }
 }
