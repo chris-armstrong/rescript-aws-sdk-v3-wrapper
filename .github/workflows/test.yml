@@ -33,13 +33,14 @@ jobs:
         run: yarn install --frozen-lockfile
 
       - name: Test generate
+        run: yarn regenerate
+
+      - name: Generated code is committed
         # Since none of the previous commands change any committed files, we can determine if generated files are up
         # to date by regenerating them and seeing if they have changed.
-        run: |
-          yarn regenerate
-          git diff --exit-code || (echo "Run 'yarn generate' and commit the changes." && exit 1)
+        run: git diff --exit-code || (echo "Run 'yarn generate' and commit the changes." && exit 1)
 
-      - name: Test formatting
+      - name: Formatting is committed
         run: |
           yarn format          
           git diff --exit-code || (echo "Run 'yarn format' and commit the changes." && exit 1)
