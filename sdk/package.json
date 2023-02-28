@@ -1,7 +1,7 @@
 {
   "name": "rescript-aws-sdk-v3",
   "description": "ReScript bindings against the AWS JavaScript SDK v3",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "scripts": {
     "build": "rescript build",
     "format": "rescript format -all"
