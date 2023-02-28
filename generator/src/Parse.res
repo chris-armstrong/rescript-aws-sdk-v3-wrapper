@@ -117,6 +117,7 @@ let parseTrait = (name, value: Result.t<jsonTreeRef, jsonParseError>) => {
       let max = optional(obj->field("max"))->mapOptional(parseInteger)
       map2(min, max, (min, max) => Trait.RangeTrait(min, max))
     }
+
   | "smithy.api#length" => {
       let record = value->parseObject
       map2(
@@ -125,6 +126,7 @@ let parseTrait = (name, value: Result.t<jsonTreeRef, jsonParseError>) => {
         (min, max) => Trait.LengthTrait(min, max),
       )
     }
+
   | "aws.protocols#awsJson1_0" => Ok(Trait.AwsProtocolAwsJson1_0Trait)
   | "aws.protocols#awsJson1_1" => Ok(Trait.AwsProtocolAwsJson1_1Trait)
   | "smithy.api#box" => Ok(Trait.BoxTrait)
@@ -148,6 +150,7 @@ let parseTrait = (name, value: Result.t<jsonTreeRef, jsonParseError>) => {
         error: error,
       }))
     }
+
   | "aws.protocols#ec2QueryName" =>
     value->parseString->map(queryName => Trait.AwsProtocolEc2QueryNameTrait(queryName))
   | "aws.protocols#ec2Query" => Ok(Trait.AwsProtocolEc2QueryTrait)
@@ -172,6 +175,7 @@ let parseTrait = (name, value: Result.t<jsonTreeRef, jsonParseError>) => {
       | (Error(x), Error(_)) => Error(x)
       }
     }
+
   | "smithy.api#eventPayload" => Ok(Trait.EventPayloadTrait)
   | "smithy.api#http" => Ok(Trait.HttpTrait)
   | "smithy.api#idempotent" => Ok(Trait.IdempotentTrait)
@@ -197,7 +201,8 @@ let parseTrait = (name, value: Result.t<jsonTreeRef, jsonParseError>) => {
   | "aws.iam#actionPermissionDescription" => Ok(Trait.AwsIamActionPermissionDescriptionTrait)
   | "aws.iam#conditionKeys" => Ok(Trait.AwsIamConditionKeysTrait)
   | "aws.protocols#httpChecksum" => Ok(Trait.AwsProtocolsHttpChecksumTrait)
-  | "aws.customizations#s3UnwrappedXmlOutput" => Ok(Trait.AwsCustomizationsS3UnwrappedXmlOutputTrait)
+  | "aws.customizations#s3UnwrappedXmlOutput" =>
+    Ok(Trait.AwsCustomizationsS3UnwrappedXmlOutputTrait)
   | _ => raise(UnknownTrait(name))
   }
   traitValue

@@ -80,10 +80,11 @@ let generateStringShape = (details: Shape.primitiveShapeDetails) => {
   switch enumTrait {
   | Some(Some(EnumTrait(pairs))) => {
       let enum = Belt.Array.map(pairs, pair =>
-        `@as("${pair.value}")` ++ " #" ++ safeVariantName(pair.value)
+        `@as("${pair.value}") #${safeVariantName(pair.value)}`
       )
       "[" ++ Belt.Array.joinWith(enum, " | ", x => x) ++ "]"
     }
+
   | _ => "string"
   }
 }
@@ -212,10 +213,10 @@ let generateOperationStructureType = (varName, opStruct) =>
       let docs = generateDoc(details.traits)
       docs ++ generateType(`#${varName}`, generateStructureShape(details))
     }
+
   | OperationStructureRef(name) => generateType(`#${varName}`, safeTypeName(name))
-  | OperationStructureNone => {
-    generateType(`#${varName}`, generateStructureShape({ traits: None, members: [] }))
-  } 
+  | OperationStructureNone =>
+    generateType(`#${varName}`, generateStructureShape({traits: None, members: []}))
   }
 
 /* Determine if the input request has a type, or is just `unit` */
@@ -239,10 +240,13 @@ let generateMake = input =>
       )
       let arguments =
         Array.concat(requiredArguments, optionalArguments)->Array.joinWith(", ", x => x)
-      let fields = Array.joinWith(members, ", ", member => safeMemberName(member.name) ++ ": " ++ safeMemberName(member.name))
+      let fields = Array.joinWith(members, ", ", member =>
+        safeMemberName(member.name) ++ ": " ++ safeMemberName(member.name)
+      )
       `let make = (${arguments}, ()) => new({ ${fields} })`
     }
-  | OperationStructureNone => { `let make = () => new(Js.Obj.empty())`}
+
+  | OperationStructureNone => `let make = () => new(Js.Obj.empty())`
   | OperationStructureRef(_) => // FIXME: ref is in the broader types, so generate nothing for now
     ""
   }
@@ -255,15 +259,23 @@ let generateOperationModule = (
   let request = generateOperationStructureType("request", input)
   let response = generateOperationStructureType("response", output)
   let inputType = "request"
-  let outputType = isOperationStructureNone(output) ? "Js.Promise.t<unit>" : "Js.Promise.t<response>"
+  let outputType = isOperationStructureNone(output)
+    ? "Js.Promise.t<unit>"
+    : "Js.Promise.t<response>"
   let make = generateMake(input)
-  `module ${symbolName(name)} = {\n` ++
-  `  type t;\n` ++
-  `  ${request}\n` ++
-  `  ${response}\n` ++
-  `  @module("@aws-sdk/client-${moduleName}") @new external new: (${inputType}) => t = "${commandName}";\n` ++
-  `  ${make}\n` ++
-  `  @send external send: (awsServiceClient, t) => ${outputType} = "send";\n` ++ `}\n`
+  Js.Array.joinWith(
+    "\n",
+    [
+      `module ${symbolName(name)} = {`,
+      `  type t;`,
+      `  ${request}`,
+      `  ${response}`,
+      `  @module("@aws-sdk/client-${moduleName}") @new external new: (${inputType}) => t = "${commandName}";`,
+      `  ${make}`,
+      `  @send external send: (awsServiceClient, t) => ${outputType} = "send";`,
+      `}`,
+    ],
+  )
 }
 
 let generateTypeTarget = descriptor => {
@@ -303,6 +315,7 @@ let generateTypeBlock = ({name, descriptor}: Shape.t) => {
       let shapeModule = generateUnionHelperModule(name, details)
       t ++ shapeModule
     }
+
   | _ => t
   }
 }
