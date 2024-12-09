@@ -11,7 +11,10 @@
     "aws",
     "aws-sdk-v3"
   ],
-  "workspaces": ["generator","sdk"],
+  "workspaces": [
+    "generator",
+    "sdk"
+  ],
   "author": "Chris Armstrong <chris-armstrong@github.com>",
   "license": "MIT",
   "private": true
